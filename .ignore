@@ -1,0 +1,29 @@
+# Python
+*.egg
+*.egg-info
+__pycache__
+*.pyc
+build/
+# dist/
+
+
+# Javascript
+node_modules/
+package-lock.json
+
+
+## Unit test / coverage reports
+.coverage
+
+
+# IDEs and Vagrant
+.idea
+.vscode
+.vagrant
+*~
+
+
+# Project
+
+
+# Formatter & Linters

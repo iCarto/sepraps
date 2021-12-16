@@ -1,0 +1,35 @@
+root = true
+
+# [*.{py,js,sh,sql,css,json,yml}]
+[*]
+charset=utf-8
+end_of_line=lf
+trim_trailing_whitespace=true
+insert_final_newline=true
+indent_style=space
+indent_size=4
+# Comentado porque el comportamiento es inconsistente entre editores
+# Idealmente avisar en 80, no hacer nunca soft wrap y prohibir más de 88
+# max_line_length = 88
+
+
+# Para evitar líneas demasiado largas
+# No usamos .htm porqué la regla sería usar siempre .html
+# Usamos .mak y .mako porqué no hay un criterio fijado
+[*.{html,xml,mak,mako,jinja2}]
+indent_size=2
+# max_line_length = 100
+
+
+# En Mardown las líneas en blanco y espacios adicionales tienen significados
+# especiales que hay que respetar
+[*.md]
+trim_trailing_whitespace = false
+insert_final_newline=false
+
+
+# El [tabulador es obligatorio](https://www.gnu.org/software/make/manual/make.html#Rule-Introduction)
+# en los Makefile. El tamaño 4 es lo habitual.
+[Makefile]
+indent_style = tab
+indent_size = 4
