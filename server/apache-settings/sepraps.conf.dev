@@ -1,0 +1,40 @@
+<VirtualHost *:80>
+
+  LoadModule wsgi_module "/home/vagrant/.virtualenvs/sepraps/lib/python3.9/site-packages/mod_wsgi/server/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so"
+
+  # ServerName localhost
+  # ServerAlias localhost
+  ServerAdmin dev@icarto.es
+
+  DocumentRoot /var/www
+
+  # Possible values include: debug, info, notice, warn, error, crit,
+  # alert, emerg.
+  LogLevel info
+  # ErrorLog ${APACHE_LOG_DIR}/error.log
+  # CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+  ## mod_wsgi ##
+  WSGIApplicationGroup %{GLOBAL}
+  WSGIPassAuthorization On
+  WSGIDaemonProcess sepraps user=vagrant group=www-data python-path=/var/www/sepraps python-home=/home/vagrant/.virtualenvs/sepraps/ lang='en_US.utf8' locale='en_US.utf8'
+  WSGIProcessGroup sepraps
+  WSGIScriptAlias / /var/www/sepraps/wsgi.py
+
+  <Directory /var/www/sepraps>
+    <Files wsgi.py>
+      Require all granted
+    </Files>
+  </Directory>
+
+
+  ## static files if served by Apache ##
+  Alias /static/ /var/www/sepraps/sepraps/static/
+
+
+  <Directory /var/www/sepraps/sepraps/static>
+    Require all granted
+  </Directory>
+
+  AddOutputFilterByType DEFLATE application/json
+</VirtualHost>

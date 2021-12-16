@@ -1,0 +1,50 @@
+\echo 'Custom commands:'
+\echo '\t:clear\t-- Clears the scream'
+\echo '\t:connected_users\t-- Users connected to the database'
+\echo '\t:running_queries\t-- Queries running in the database'
+\echo '\t:killdb\t-- Prints the sentence to terminate the clientes connected to a db'
+\echo '\t:show_slow_queries'
+\echo ''
+
+
+\set QUIET 1
+
+-- Desactiva el pager
+\pset pager off
+\setenv PAGER less
+-- \setenv LESS '-iMFXSx4R'
+\setenv LESS '-iMSx4 -FX'
+
+\setenv EDITOR emacs
+\set COMP_KEYWORD_CASE upper
+\x auto
+
+\pset linestyle unicode
+-- \pset border 2
+\pset unicode_border_linestyle single
+\pset unicode_column_linestyle single
+\pset unicode_header_linestyle double
+
+
+\pset null ¤
+\timing on
+\pset format wrapped
+\set clear '\\! clear;'
+\set VERBOSITY verbose
+\set HISTCONTROL ignoredups
+-- \set HISTFILE ~/.psql_history-:DBNAME
+
+\set PROMPT1 '\n%[%033[1;31;40m%] ➤ %[%033[36m%]%n%[%033[34m%]@%[%033[36m%]%m%[%033[33m%]/%/ %[%033[K%]%[%033[0m%]\n\n%[%033[1;33m%]%#%[%033[0m%] '
+\set PROMPT2 '.. #'
+-- \set PROMPT1 '%~%#%x '
+
+\set connected_users 'select datname, usename, application_name, client_addr from pg_stat_activity;'
+\set running_queries 'SELECT datname, pid, usename, client_addr, query_start, state, query FROM pg_stat_activity ;'
+\set killdb '\\echo select pg_terminate_backend(pid) from pg_stat_activity where datname=\'\'';
+\set show_slow_queries 'SELECT (total_time / 1000 / 60) as total_minutes, (total_time/calls) as average_time, query FROM pg_stat_statements ORDER BY 1 DESC LIMIT 100;'
+
+-- interactive
+\set ON_ERROR_STOP on
+-- \set ON_ERROR_ROLLBACK iteractive
+
+\unset QUIET

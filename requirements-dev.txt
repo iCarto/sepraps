@@ -6,12 +6,6 @@ webdriver-manager
 # Django
 django-debug-toolbar
 
-# Pyramid y SQLAlchemy
-# Para que pserve consuma menos recursos
-# https://docs.pylonsproject.org/projects/pyramid/en/1.8-branch/whatsnew-1.8.html
-# watchdog==0.10.2
-# pyramid-debugtoolbar==4.6.1
-
 # Linters y Formatters
 
 pre-commit==2.9.2
@@ -52,4 +46,4 @@ ipdb
 
 # Metakermit scaffolder
 honcho
-# Werkzeug
+Werkzeug # for runserver_plus
