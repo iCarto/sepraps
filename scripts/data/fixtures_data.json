@@ -1,0 +1,32 @@
+[
+    {
+        "model": "monitoring.financingfund",
+        "pk": 1,
+        "fields": {
+            "name": "BID (Banco Interamericano de Desarrollo"
+        }
+    },
+    {
+        "model": "monitoring.financingfund",
+        "pk": 2,
+        "fields": {
+            "name": "WB (Banco Mundial)"
+        }
+    },
+    {
+        "model": "monitoring.financingprogram",
+        "pk": 1,
+        "fields": {
+            "name": "SENASA-BID 2021-2025",
+            "financing_fund": 1
+        }
+    },
+    {
+        "model": "monitoring.financingprogram",
+        "pk": 2,
+        "fields": {
+            "name": "SENASA-WBN 2019-2022",
+            "financing_fund": 2
+        }
+    }
+]

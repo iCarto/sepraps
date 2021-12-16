@@ -1,0 +1,26 @@
+[tool.black]
+line-length = 88
+# Mejor ser explícitos con la versión de python y los strings
+target-version = ['py39']
+skip-string-normalization = false
+experimental-string-processing = true
+skip-magic-trailing-comma = true
+# extend-exclude = '''
+# /(
+#   some_folder_here
+#
+# )/
+# '''
+
+[tool.isort]
+py_version = "39"
+profile = "black"
+line_length = 88
+atomic = true # `true` cuando la versión de python target y que corre isort es la misma
+lines_after_imports = 2
+filter_files = true
+skip_glob = ["*.egg", "*.egg-info", "__pycache__"]
+skip_gitignore = true
+combine_as_imports = false # Revisar
+known_third_party = ["bcrypt", "django", "selenium"]
+known_first_party = [] # Ajustar en cada proyecto

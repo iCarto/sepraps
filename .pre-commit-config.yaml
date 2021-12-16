@@ -1,0 +1,66 @@
+repos:
+    - repo: local
+      hooks:
+          - id: black
+            name: black
+            entry: black
+            language: system
+            verbose: true
+            types: [python]
+
+          - id: isort
+            name: isort
+            entry: isort
+            language: system
+            verbose: true
+            types: [python]
+
+          - id: stylelint
+            name: stylelint
+            entry: npx stylelint
+            args: [--fix, --ignore-path, .ignore]
+            language: system
+            types: [file]
+            files: \.(vue|htm|html|css|sss|less|scss|sass|mak|mako|jinja2)$
+            verbose: true
+
+          - id: prettier
+            name: prettier
+            entry: npx prettier
+            args: [--write, --ignore-path, .ignore]
+            language: system
+            types: [file]
+            files: \.(js|json|md|vue|yaml|yml)$ # html
+            verbose: true
+
+          - id: html-beautify
+            name: html-beautify
+            entry: npx html-beautify
+            args: []
+            language: system
+            types: [file]
+            files: \.(htm|html|mak|mako|jinja2)$
+            verbose: true
+            stages: [manual]
+
+          - id: shfmt
+            name: shfmt
+            entry: shfmt
+            args: [-l, -w, -i, "4", -bn, -sr, -ci]
+            language: system
+            types: [shell]
+            verbose: true
+
+          - id: shellcheck
+            name: shellcheck
+            entry: shellcheck
+            language: system
+            types: [shell]
+            verbose: true
+
+          - id: flake8
+            name: flake8
+            entry: flake8
+            language: system
+            types: [python]
+            verbose: true

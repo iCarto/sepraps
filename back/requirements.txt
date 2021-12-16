@@ -1,0 +1,18 @@
+Django==3.2.10
+django-cors-headers==3.10.1
+django-environ==0.8.1
+django-extensions==3.1.5
+django-filter==21.1
+django-spa==0.3.6
+djangorestframework==3.13.0
+djangorestframework-simplejwt==5.0.0
+drf-extensions==0.7.1
+psycopg2==2.9.2
+
+
+# Pillow
+# celery
+# redis
+# django-backblazeb2-storage
+# gunicorn
+# django-anymail
