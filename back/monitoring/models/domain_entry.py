@@ -1,11 +1,11 @@
 from django.db import models
 
 
-class EntradaDominio(models.Model):
+class DomainEntry(models.Model):
 
     CATEGORY_CHOICES = [
-        ("tipo_proyecto", "Tipo de Proyecto"),
-        ("clase_proyecto", "Clase de Proyecto"),
+        ("project_type", "Tipo de Proyecto"),
+        ("project_class", "Clase de Proyecto"),
     ]
 
     id = models.AutoField(primary_key=True)
@@ -23,3 +23,10 @@ class EntradaDominio(models.Model):
 
     def __str__(self):
         return self.value
+
+
+def dominio_get_value(searched_key):
+    result = DomainEntry.objects.filter(key=searched_key)
+    if result:
+        return result[0].value
+    return searched_key

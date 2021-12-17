@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-class EntradaDominioAdmin(admin.ModelAdmin):
+class DomainEntryAdmin(admin.ModelAdmin):
     fields = ("category", "key", "value", "ordering")
     list_display = ("category", "key", "value", "ordering")
     list_display_links = ("key", "value")
