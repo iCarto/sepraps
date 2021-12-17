@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_extensions",
     "users",
+    "monitoring",
 ]
 
 MIDDLEWARE = [
