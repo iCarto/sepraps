@@ -36,13 +36,16 @@ export DJANGO_SUPERUSER_PASSWORD
 python manage.py createsuperuser --no-input --username admin
 
 if [[ -z "${CREATE_EMPTY}" ]]; then
+    python "${this_dir}/database.py" "${this_dir}/data/Barrios_Localidades_Paraguay_Codigos_DGEEC.csv" > "${this_dir}/data/fixtures_location.json"
+    python manage.py loaddata "${this_dir}/data/fixtures_location.json"
     python manage.py loaddata "${this_dir}/data/fixtures_data.json"
 fi
 
 # FIXME. How to link the back with the front should be worked, and taken in accound,
 # at least in the future how django-spa, and production will work
 # This should be here, in start.sh or in install.sh?
-mkdir -p "${this_dir}"/../front/build
+mkdir -p "${this_dir}/../back/monitoring/static"
+mkdir -p "${this_dir}/../front/build"
 rm -f back/static
 ln -s ../../front/build back/static
 python manage.py collectstatic

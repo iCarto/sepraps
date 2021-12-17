@@ -1,12 +1,11 @@
 from django.db import models
-
 from monitoring.models.financing_fund import FinancingFund
 
 
 class FinancingProgram(models.Model):
 
     id = models.AutoField(primary_key=True)
-    name = models.TextField("Nombre", null=True, max_length=100)
+    name = models.CharField("Nombre", null=True, max_length=100)
     financing_fund = models.ForeignKey(
         FinancingFund,
         on_delete=models.PROTECT,

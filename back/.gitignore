@@ -1,0 +1,7 @@
+# Python
+static
+back/static
+monitoring/static
+
+monitoring/migrations/
+users/migrations/
