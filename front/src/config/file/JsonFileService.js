@@ -1,28 +1,32 @@
-const get = (url = "", headers = {}) =>
-    fetch("/data" + url + ".json", {
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-        },
-    }).then(function(response) {
-        return response.json();
-    });
+const JsonFileService = {
+    get(url = "", headers = {}) {
+        url = url.replace(/\/$/, "");
+        console.log("Fetching /api_data" + url + ".json");
+        return fetch("/api_data" + url + ".json", {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+        }).then(function(response) {
+            return response.json();
+        });
+    },
 
-const post = (url = "", body = {}, contentType = "application/json", headers = {}) =>
-    Promise.resolve("Not yet implemented");
+    post(url = "", body = {}, contentType = "application/json", headers = {}) {
+        return this.get(url, headers);
+    },
 
-const put = (url = "", body = {}, headers = {}) =>
-    Promise.resolve("Not yet implemented");
+    put(url = "", body = {}, headers = {}) {
+        return Promise.resolve("Not yet implemented");
+    },
 
-const patch = (url = "", body = {}, headers = {}) =>
-    Promise.resolve("Not yet implemented");
+    patch(url = "", body = {}, headers = {}) {
+        return Promise.resolve("Not yet implemented");
+    },
 
-const del = (url = "", headers = {}) => Promise.resolve("Not yet implemented");
-
-export default {
-    get,
-    post,
-    put,
-    patch,
-    delete: del,
+    del(url = "", headers = {}) {
+        return Promise.resolve("Not yet implemented");
+    },
 };
+
+export default JsonFileService;

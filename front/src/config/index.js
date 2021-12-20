@@ -1,2 +1,2 @@
-export {default as dataService} from "./http/FetchService";
+export {default as dataService} from "./file/JsonFileService";
 export {default as Storage} from "./storage/Storage";
