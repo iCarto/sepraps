@@ -3,7 +3,13 @@ import {AuthProvider, AuthRequired} from "auth";
 
 import {BaseLayout} from "layout";
 import {LoginPage} from "components/user/container";
-import {ListProjectsPage} from "components/project/container";
+import {
+    ListProjectsPage,
+    ViewProjectPage,
+    ViewProjectInfoSubPage,
+    ViewProjectLocationSubPage,
+    ViewProjectFinancingSubPage,
+} from "components/project/container";
 
 export default function AppRoutes() {
     return (
@@ -20,6 +26,24 @@ export default function AppRoutes() {
                                 </AuthRequired>
                             }
                         />
+                        <Route
+                            path="/project/:id"
+                            element={
+                                <AuthRequired>
+                                    <ViewProjectPage />
+                                </AuthRequired>
+                            }
+                        >
+                            <Route path="" element={<ViewProjectInfoSubPage />} />
+                            <Route
+                                path="location"
+                                element={<ViewProjectLocationSubPage />}
+                            />
+                            <Route
+                                path="financing"
+                                element={<ViewProjectFinancingSubPage />}
+                            />
+                        </Route>
                     </Route>
                 </Routes>
             </AuthProvider>

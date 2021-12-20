@@ -1,9 +1,14 @@
 import {useState, useEffect} from "react";
 import {ProjectService} from "service/api";
+<<<<<<< HEAD
 import {ClosedProjectsOption, ProjectList} from "../presentational";
 import {ProjectFinder, SortProjectsSelect, ShowNoOfProjects} from "../presentational";
 import {useSortProjects, useSearchProjects} from "components/project/hook";
 
+=======
+import {ProjectList} from "../presentational";
+import Toolbar from "@mui/material/Toolbar";
+>>>>>>> New project detail page with a left menu and content in the layout
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
@@ -44,6 +49,12 @@ const ListProjectsPage = () => {
 
     return (
         <Box component="main" sx={{flexGrow: 1, bgcolor: "background.default", p: 3}}>
+        {
+            // Fixed header needs a fixed space between top margin and the top of the child component
+            // MUI examples add a empty toolbar to solve this problem
+            // TODO: Check if there is a good solution for this
+            <Toolbar />
+        }
             <Grid
                 container
                 sx={{mb: 4}}
