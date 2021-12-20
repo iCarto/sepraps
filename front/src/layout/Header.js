@@ -13,10 +13,9 @@ export default function Header() {
 
     return auth.user ? (
         <AppBar
-            position="static"
+            position="fixed"
             color="default"
-            elevation={0}
-            sx={{borderBottom: theme => `1px solid ${theme.palette.divider}`}}
+            sx={{zIndex: theme => theme.zIndex.drawer + 1}}
         >
             <Toolbar sx={{flexWrap: "wrap"}}>
                 <Typography variant="h6" color="inherit" noWrap sx={{flexGrow: 1}}>
