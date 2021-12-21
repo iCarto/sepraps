@@ -4,21 +4,15 @@ import PropTypes from "prop-types";
 const Icon = ({icon, size}) => {
     let imgSrc = "";
     let imgAlt = "";
-    let title = "";
-    let ariaLabel = "";
     let maxWidth = {};
     switch (`${icon}`) {
         case "Agua Potable":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
             imgAlt = "Grifo";
-            title = "Agua potable";
-            ariaLabel = "Agua";
             break;
         case "Saneamiento":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
             imgAlt = "Tubería";
-            title = "Saneamiento";
-            ariaLabel = "Saneamiento";
             break;
         default:
             imgSrc = "https://cdn-icons-png.flaticon.com/512/57/57108.png";
@@ -34,13 +28,7 @@ const Icon = ({icon, size}) => {
     }
     return (
         <Tooltip title={icon}>
-            <img
-                src={imgSrc}
-                alt={imgAlt}
-                style={maxWidth}
-                title={icon}
-                aria-label={icon}
-            />
+            <img src={imgSrc} alt={imgAlt} style={maxWidth} aria-label={icon} />
         </Tooltip>
     );
 };

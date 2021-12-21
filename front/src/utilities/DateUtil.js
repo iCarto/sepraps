@@ -2,6 +2,7 @@ import {format, parse} from "date-fns";
 
 export const DATE_FORMATS = {
     CLIENT_DATEFORMAT: "dd/MM/yyyy",
+    CLIENT_DATEMONTHFORMAT: "MM/yyyy",
     CLIENT_DATETIMEFORMAT: "dd/MM/yyyy HH:mm",
     CLIENT_TIMEFORMAT: "HH:mm",
     FILE_DATETIMEFORMAT: "yyyyMMddHHmmss",
@@ -10,6 +11,9 @@ export const DATE_FORMATS = {
 const DateUtil = {
     // Transform to UI format date DD/MM/YYYY
     formatDate(date, dateFormat = DATE_FORMATS.CLIENT_DATEFORMAT) {
+        return format(date, dateFormat);
+    },
+    formatDateMonth(date, dateFormat = DATE_FORMATS.CLIENT_DATEMONTHFORMAT) {
         return format(date, dateFormat);
     },
     formatDateTime(date, dateFormat = DATE_FORMATS.CLIENT_DATETIMEFORMAT) {
