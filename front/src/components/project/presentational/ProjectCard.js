@@ -107,7 +107,7 @@ const ProjectCard = ({project}) => {
                                 <DateRangeIcon fontSize="small" sx={{mr: 1}} />
                             </Tooltip>
                             <Typography variant="subtitle1" sx={{lineHeight: 1}}>
-                                {DateUtil.formatDate(project.init_date)}
+                                {DateUtil.formatDateMonth(project.init_date)}
                             </Typography>
                         </Box>
                         <ProgressBar barPhase={project.phase_name} />
