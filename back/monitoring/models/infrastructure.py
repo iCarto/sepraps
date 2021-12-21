@@ -15,6 +15,11 @@ class Infrastructure(models.Model):
         Locality, on_delete=models.PROTECT, verbose_name=Locality._meta.verbose_name
     )
 
+    # TODO: Review management of geo fields
+    latitude = models.DecimalField(max_digits=8, decimal_places=5)
+    longitude = models.DecimalField(max_digits=8, decimal_places=5)
+    altitude = models.IntegerField()
+
     class Meta:
         db_table = "infrastructure"
         verbose_name = "Infraestructura"

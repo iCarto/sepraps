@@ -5,6 +5,7 @@ from django.utils import timezone
 from monitoring.models.financing_fund import FinancingFund
 from monitoring.models.financing_program import FinancingProgram
 from monitoring.models.infrastructure import Infrastructure
+from monitoring.models.location import Locality
 from monitoring.models.provider import Provider
 
 
@@ -41,6 +42,7 @@ class Project(models.Model):
         verbose_name=Provider._meta.verbose_name,
         null=True,
     )
+    linked_localities = models.ManyToManyField(Locality)
     closed = models.BooleanField(blank=False, null=False, default=False)
 
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
