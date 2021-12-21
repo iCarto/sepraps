@@ -1,7 +1,10 @@
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.project import Project
-from monitoring.serializers.project_serializer import ProjectSerializer
+from monitoring.serializers.project_serializer import (
+    ProjectSerializer,
+    ProjectSummarySerializer,
+)
 from rest_framework import viewsets
 
 
@@ -24,6 +27,11 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return ProjectSummarySerializer
+        return super().get_serializer_class()
 
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user

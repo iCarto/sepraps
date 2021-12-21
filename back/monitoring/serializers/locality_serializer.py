@@ -1,19 +1,19 @@
-from monitoring.models.provider import Provider
+from monitoring.models.location import Locality
 from rest_framework import serializers
 
 
-class ProviderSerializer(serializers.ModelSerializer):
+class LocalitySerializer(serializers.ModelSerializer):
 
+    department = serializers.CharField(source="department.code")
     department_name = serializers.CharField(source="department.name")
+    district = serializers.CharField(source="district.code")
     district_name = serializers.CharField(source="district.name")
-    locality_name = serializers.CharField(source="locality.name")
+    locality = serializers.CharField(source="code")
+    locality_name = serializers.CharField(source="name")
 
     class Meta:
-        model = Provider
+        model = Locality
         fields = (
-            "id",
-            "name",
-            "area",
             "department",
             "department_name",
             "district",
