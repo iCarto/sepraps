@@ -22,6 +22,15 @@ const ProjectService = {
             return createProject(project_api_adapter(response));
         });
     },
+    getProjectsName() {
+        return AuthApiService.get(basePath).then(response => {
+            const projects = response.map(project => ({
+                id: project.id,
+                name: project.name,
+            }));
+            return projects;
+        });
+    },
 };
 
 export default ProjectService;

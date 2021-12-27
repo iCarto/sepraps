@@ -1,0 +1,18 @@
+{
+    "id": 2,
+    "name": "Ycua Porá - Cañada María 2",
+    "code": "2021-AP-001",
+    "featured_image": "https://images.unsplash.com/photo-1585318822320-300abf39f65d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXJlZ3VhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "department_name": "Presidente Hayes",
+    "district_name": "Tte. 1° Manuel Irala Fernández",
+    "locality_name": "Monte Verde",
+    "phase_name": "Ampliación",
+    "project_type_name": "Agua Potable",
+    "project_class_name": "Mejora",
+    "init_date": "2021-08-10",
+    "provider_name": "Junta de Saneamiento de Pruebas",
+    "financing_fund_name": "BID (Banco Interamericano de Desarrollo)",
+    "financing_program_name": "SENASA-BID 2021-2025",
+    "created_at": "2021-11-30T21:00:00-03:00",
+    "updated_at": "2021-11-30T21:00:00-03:00"
+}
