@@ -1,4 +1,7 @@
+import {useState} from "react";
 import {Link, useMatch, useParams, useResolvedPath} from "react-router-dom";
+import SelectProjectDropDown from "../container/SelectProjectDropDown";
+
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
@@ -7,6 +10,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
+import Typography from "@mui/material/Typography";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Toolbar from "@mui/material/Toolbar";
@@ -32,11 +36,18 @@ function MenuListItemLink({children, to, ...props}) {
 }
 
 const ProjectMenu = () => {
+    const [selectedProjectName, setSelectedProjectName] = useState("");
+
     const {id} = useParams();
+
+    const handleProjectData = name => {
+        setSelectedProjectName(name);
+    };
 
     return (
         <Drawer
             variant="permanent"
+            anchor="left"
             sx={{
                 width: drawerWidth,
                 flexShrink: 0,
@@ -44,8 +55,25 @@ const ProjectMenu = () => {
             }}
         >
             <Toolbar />
+            <Divider />
+            <Toolbar>
+                <SelectProjectDropDown
+                    handleProjectData={handleProjectData}
+                    MenuListItemLink={MenuListItemLink}
+                />
+            </Toolbar>{" "}
+            <Divider />
             <Box sx={{overflow: "auto"}}>
                 <List sx={{pt: 0}}>
+                    {selectedProjectName && (
+                        <ListItem sx={{bgcolor: "grey.200"}}>
+                            <ListItemText>
+                                <Typography variant="subtitle2">
+                                    {selectedProjectName}
+                                </Typography>
+                            </ListItemText>
+                        </ListItem>
+                    )}
                     <MenuListItemLink to={`/project/${id}`}>
                         <ListItemIcon>
                             <InfoIcon />
