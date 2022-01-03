@@ -23,9 +23,9 @@ const bull = (
 
 const ProjectCard = ({project}) => {
     return (
-        <Grid item component="li" xs={12} sm={6} md={4}>
+        <Grid item component="li" xs={12} sm={6} md={4} xl={2}>
             <Link href={`/proyecto/${project.id}`} underline="none" color="inherit">
-                <Card sx={{maxWidth: 345}} id={project.id}>
+                <Card id={project.id}>
                     <div style={{position: "relative"}}>
                         <CardMedia
                             component="img"
