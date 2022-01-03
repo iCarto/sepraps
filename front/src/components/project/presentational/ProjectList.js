@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import {ProjectCard} from ".";
+
+import {ProjectCard} from "./";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
