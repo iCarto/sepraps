@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import {ProjectService} from "service/api";
 import {ProjectList} from "../presentational";
 import {ProjectFinder, SortProjectsSelect, ShowNoOfProjects} from "../presentational";
-import {useSearchProjects} from "components/project/hook";
+import {useSortProjects, useSearchProjects} from "components/project/hook";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -10,21 +10,30 @@ import Grid from "@mui/material/Grid";
 const ListProjectsPage = () => {
     const [projects, setProjects] = useState([]);
     const [filteredProjects, setFilteredProjects] = useState([]);
+    const {attribute, setAttribute, order, setOrder, sortFunction} = useSortProjects(
+        "updated_at",
+        "desc"
+    );
     const {searchText, setSearchText, searchFunction} = useSearchProjects("");
 
     useEffect(() => {
         ProjectService.getProjects().then(data => {
             setProjects(data);
-            setFilteredProjects([...data].filter(searchFunction));
+            setFilteredProjects([...data].filter(searchFunction).sort(sortFunction));
         });
     }, []);
 
     useEffect(() => {
-        setFilteredProjects([...projects].filter(searchFunction));
-    }, [searchText]);
+        setFilteredProjects([...projects].filter(searchFunction).sort(sortFunction));
+    }, [attribute, order, searchText]);
 
     const handleSearch = data => {
         setSearchText(data);
+    };
+
+    const handleSortBy = (attribute, order) => {
+        setAttribute(attribute);
+        setOrder(order);
     };
 
     return (
@@ -45,6 +54,11 @@ const ListProjectsPage = () => {
                         <ProjectFinder
                             searchValue={searchText}
                             handleSearch={handleSearch}
+                        />
+                        <SortProjectsSelect
+                            attribute={attribute}
+                            order={order}
+                            handleSortBy={handleSortBy}
                         />
                     </Grid>
                 </Grid>
