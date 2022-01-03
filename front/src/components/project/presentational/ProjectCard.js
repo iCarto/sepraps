@@ -22,6 +22,7 @@ const bull = (
 );
 
 const ProjectCard = ({project}) => {
+    console.log(project);
     return (
         <Grid item component="li" xs={12} sm={6} md={4} xl={2}>
             <Link href={`/project/${project.id}`} underline="none" color="inherit">
@@ -92,8 +93,9 @@ const ProjectCard = ({project}) => {
                                 <LocationOnIcon fontSize="small" sx={{mr: 1}} />
                             </Tooltip>
                             <Typography variant="subtitle1" sx={{lineHeight: "normal"}}>
-                                {project.locality_name}, {project.district_name} (
-                                {project.department_name})
+                                {project.main_infrastructure.locality_name},{" "}
+                                {project.main_infrastructure.district_name} (
+                                {project.main_infrastructure.department_name})
                             </Typography>
                         </Box>
                         <Box
