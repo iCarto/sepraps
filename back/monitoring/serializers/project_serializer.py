@@ -60,7 +60,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     # Fake attribute
     def get_phase_name(self, obj):
-        phases = ["Nueva construcción", "Ampliación", "Mejora"]
+        phases = ["Diseño", "Ejecución", "Post-Construcción"]
         return phases[obj.id % 3]
 
     def get_project_type_name(self, obj):
