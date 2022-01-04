@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import {ProjectService} from "service/api";
-import {ProjectList} from "../presentational";
+import {ClosedProjectsOption, ProjectList} from "../presentational";
 import {ProjectFinder, SortProjectsSelect, ShowNoOfProjects} from "../presentational";
 import {useSortProjects, useSearchProjects} from "components/project/hook";
 
@@ -15,13 +15,14 @@ const ListProjectsPage = () => {
         "desc"
     );
     const {searchText, setSearchText, searchFunction} = useSearchProjects("");
+    const [showClosedProjects, setShowClosedProjects] = useState(false);
 
     useEffect(() => {
-        ProjectService.getProjects().then(data => {
+        ProjectService.getProjects(showClosedProjects).then(data => {
             setProjects(data);
             setFilteredProjects([...data].filter(searchFunction).sort(sortFunction));
         });
-    }, []);
+    }, [showClosedProjects]);
 
     useEffect(() => {
         setFilteredProjects([...projects].filter(searchFunction).sort(sortFunction));
@@ -36,33 +37,53 @@ const ListProjectsPage = () => {
         setOrder(order);
     };
 
+    const handleClosedProjects = showClosed => {
+        console.log("handleClosedProjects", showClosed);
+        setShowClosedProjects(showClosed);
+    };
+
     return (
         <Box component="main" sx={{flexGrow: 1, bgcolor: "background.default", p: 3}}>
-            <Grid container sx={{mb: 4}} spacing={2}>
-                <Grid
-                    item
-                    xs={12}
-                    sm={8}
-                    lg={6}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                    }}
-                >
-                    <Grid container spacing={2}>
-                        <ProjectFinder
-                            searchValue={searchText}
-                            handleSearch={handleSearch}
-                        />
-                        <SortProjectsSelect
-                            attribute={attribute}
-                            order={order}
-                            handleSortBy={handleSortBy}
-                        />
+            <Grid
+                container
+                sx={{mb: 4}}
+                spacing={2}
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+            >
+                <Grid item md={6}>
+                    <Grid
+                        container
+                        spacing={2}
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <Grid item xs={6}>
+                            <ProjectFinder
+                                searchValue={searchText}
+                                handleSearch={handleSearch}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <ClosedProjectsOption
+                                checked={showClosedProjects}
+                                handleChange={handleClosedProjects}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
-                <ShowNoOfProjects numberOfProjects={filteredProjects.length} />
+                <Grid item md={2}>
+                    <ShowNoOfProjects numberOfProjects={filteredProjects.length} />
+                </Grid>
+                <Grid item md={3}>
+                    <SortProjectsSelect
+                        attribute={attribute}
+                        order={order}
+                        handleSortBy={handleSortBy}
+                    />
+                </Grid>
             </Grid>
             <ProjectList projects={filteredProjects} />
         </Box>
