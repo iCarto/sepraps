@@ -55,8 +55,7 @@ const ProjectMenu = () => {
             }}
         >
             <Toolbar />
-            <Divider />
-            <Toolbar>
+            <Toolbar sx={{minHeight: "58px"}} variant="dense">
                 <SelectProjectDropDown
                     handleProjectData={handleProjectData}
                     MenuListItemLink={MenuListItemLink}
