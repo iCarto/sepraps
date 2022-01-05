@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 
 const ViewProjectLocationSubPage = () => {
     return (
-        <Container maxWidth="lg" sx={{mt: 4, mb: 4}}>
+        <Container maxWidth="lg" sx={{my: 3}}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <ProjectSectionCard>

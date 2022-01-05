@@ -50,16 +50,13 @@ const ViewProjectPage = () => {
                         <Typography
                             component="h1"
                             variant="h4"
-                            gutterBottom
                             sx={{
                                 pr: {sm: 2, md: 3},
                             }}
                         >
                             {project.name}
                         </Typography>
-                        <Typography variant="h5" gutterBottom>
-                            {project.code}
-                        </Typography>
+                        <Typography variant="h5">{project.code}</Typography>
                     </Box>
                     <Divider />
                     <Outlet context={[project]} />
