@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 
-const ProjectFinder = ({searchValue, handleSearch}) => {
+const SearchBox = ({searchValue, handleSearch}) => {
     const [isSearchActive, setIsSearchActive] = useState(false);
 
     const {register, handleSubmit, reset} = useForm();
@@ -48,10 +48,9 @@ const ProjectFinder = ({searchValue, handleSearch}) => {
                     </InputAdornment>
                 }
                 label="Buscar"
-                autoFocus
             />
         </FormControl>
     );
 };
 
-export default ProjectFinder;
+export default SearchBox;

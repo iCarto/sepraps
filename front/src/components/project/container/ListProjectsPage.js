@@ -1,8 +1,9 @@
 import {useState, useEffect} from "react";
 import {ProjectService} from "service/api";
+import {useSort, useSearch} from "hooks";
+import {SearchBox} from "components/common/presentational";
 import {ClosedProjectsOption, ProjectList} from "../presentational";
-import {ProjectFinder, SortProjectsSelect, ShowNoOfProjects} from "../presentational";
-import {useSortProjects, useSearchProjects} from "components/project/hook";
+import {SortProjectsSelect, ShowNoOfProjects} from "../presentational";
 
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
@@ -11,11 +12,11 @@ import Grid from "@mui/material/Grid";
 const ListProjectsPage = () => {
     const [projects, setProjects] = useState([]);
     const [filteredProjects, setFilteredProjects] = useState([]);
-    const {attribute, setAttribute, order, setOrder, sortFunction} = useSortProjects(
+    const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "updated_at",
         "desc"
     );
-    const {searchText, setSearchText, searchFunction} = useSearchProjects("");
+    const {searchText, setSearchText, searchFunction} = useSearch("");
     const [showClosedProjects, setShowClosedProjects] = useState(false);
 
     useEffect(() => {
@@ -68,7 +69,7 @@ const ListProjectsPage = () => {
                         alignItems="center"
                     >
                         <Grid item xs={6}>
-                            <ProjectFinder
+                            <SearchBox
                                 searchValue={searchText}
                                 handleSearch={handleSearch}
                             />

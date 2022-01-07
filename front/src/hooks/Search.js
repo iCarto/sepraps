@@ -1,14 +1,17 @@
 import {useState} from "react";
 
-function useSearchProjects(initialSearchTextValue) {
+/**Using the searchFunction, it searches for a given string (searchText) in an array of items by specific properties*/
+function useSearch(initialSearchTextValue) {
     const [searchText, setSearchText] = useState(initialSearchTextValue);
 
-    function searchFunction(project) {
+    function searchFunction(listOfItems) {
         return [
-            project.name,
-            project.department_name,
-            project.district_name,
-            project.locality_name,
+            listOfItems.name,
+            listOfItems.role,
+            listOfItems.email,
+            listOfItems.department_name,
+            listOfItems.district_name,
+            listOfItems.locality_name,
         ]
             .toString()
             .toUpperCase()
@@ -25,4 +28,4 @@ function useSearchProjects(initialSearchTextValue) {
     return {searchText, setSearchText, searchFunction};
 }
 
-export {useSearchProjects};
+export {useSearch};
