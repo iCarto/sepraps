@@ -1,6 +1,7 @@
 import {useState} from "react";
 
-function useSortProjects(initialAttributeValue, initialOrderValue) {
+/**Using the method sortFunction, it sorts an array by attribute in descending or ascending order depending on the order "asc"/"desc" received */
+function useSort(initialAttributeValue, initialOrderValue) {
     const [attribute, setAttribute] = useState(initialAttributeValue);
     const [order, setOrder] = useState(initialOrderValue);
 
@@ -26,4 +27,4 @@ function useSortProjects(initialAttributeValue, initialOrderValue) {
     return {attribute, setAttribute, order, setOrder, sortFunction};
 }
 
-export {useSortProjects};
+export {useSort};

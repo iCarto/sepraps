@@ -15,6 +15,7 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Toolbar from "@mui/material/Toolbar";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const drawerWidth = 240;
 
@@ -90,6 +91,12 @@ const ProjectMenu = () => {
                             <AccountBalanceIcon />
                         </ListItemIcon>
                         <ListItemText primary="Financiación" />
+                    </MenuListItemLink>
+                    <MenuListItemLink to={`/project/${id}/contacts`}>
+                        <ListItemIcon>
+                            <PermContactCalendarIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Contactos" />
                     </MenuListItemLink>
                     <Divider />
                     <MenuListItemLink to="/">

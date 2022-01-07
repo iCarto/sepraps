@@ -9,6 +9,7 @@ import {
     ViewProjectInfoSubPage,
     ViewProjectLocationSubPage,
     ViewProjectFinancingSubPage,
+    ViewProjectContactsSubPage,
 } from "components/project/container";
 
 export default function AppRoutes() {
@@ -42,6 +43,10 @@ export default function AppRoutes() {
                             <Route
                                 path="financing"
                                 element={<ViewProjectFinancingSubPage />}
+                            />
+                            <Route
+                                path="contacts"
+                                element={<ViewProjectContactsSubPage />}
                             />
                         </Route>
                     </Route>
