@@ -3,9 +3,7 @@ import {Outlet, useParams} from "react-router-dom";
 import {ProjectService} from "service/api";
 import {ProjectMenu} from "../presentational";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
-import Divider from "@mui/material/Divider";
 
 const ViewProjectPage = () => {
     const {id} = useParams();
@@ -39,26 +37,6 @@ const ViewProjectPage = () => {
                         // TODO: Check if there is a good solution for this
                         <Toolbar />
                     }
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            pt: {xs: 2, xl: 3},
-                            pl: {xs: 3},
-                        }}
-                    >
-                        <Typography
-                            component="h1"
-                            variant="h4"
-                            sx={{
-                                pr: {sm: 2, md: 3},
-                            }}
-                        >
-                            {project.name}
-                        </Typography>
-                        <Typography variant="h5">{project.code}</Typography>
-                    </Box>
-                    <Divider />
                     <Outlet context={[project]} />
                 </Box>
             </Fragment>
