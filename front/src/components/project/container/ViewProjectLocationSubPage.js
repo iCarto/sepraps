@@ -1,8 +1,7 @@
 import {
-    ProjectSectionInfrastructure,
-    ProjectSectionLinkedLocalities,
-} from "../presentational/locationSubPage";
-import {ProjectSectionCard} from "../presentational/subPageElements";
+    ProjectInfrastructureSection,
+    ProjectLinkedLocalitiesSection,
+} from "../presentational/location";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 
@@ -11,14 +10,10 @@ const ViewProjectLocationSubPage = () => {
         <Container maxWidth="lg" sx={{my: 3}}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <ProjectSectionCard>
-                        <ProjectSectionInfrastructure />
-                    </ProjectSectionCard>
+                    <ProjectInfrastructureSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ProjectSectionCard>
-                        <ProjectSectionLinkedLocalities />
-                    </ProjectSectionCard>
+                    <ProjectLinkedLocalitiesSection />
                 </Grid>
             </Grid>
         </Container>

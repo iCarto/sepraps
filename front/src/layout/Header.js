@@ -26,7 +26,7 @@ export default function Header() {
                 disableGutters
             >
                 <Box sx={{px: 2, backgroundColor: "white", height: "65px"}}>
-                    <img src="/logo/logo_senasa.jpg" alt="image" />
+                    <img src="/logo/logo_senasa.jpg" alt="Senasa logo" />
                 </Box>
                 <AccountMenu />
             </Toolbar>

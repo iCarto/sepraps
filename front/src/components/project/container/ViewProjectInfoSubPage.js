@@ -1,10 +1,9 @@
-import {ProjectSectionCard} from "../presentational/subPageElements";
 import {
-    ProjectSectionAudit,
-    ProjectSectionBasicInfo,
-    ProjectSectionMonitoring,
-    ProjectSectionProvider,
-} from "../presentational/infoSubPage";
+    ProjectAuditSection,
+    ProjectGeneralDataSection,
+    ProjectMonitoringSection,
+    ProjectProviderSection,
+} from "../presentational/generalData";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 
@@ -13,24 +12,16 @@ const ViewProjectInfoSubPage = () => {
         <Container maxWidth="lg" sx={{my: 3}}>
             <Grid container spacing={3}>
                 <Grid item xs={12} lg={8} xl={9}>
-                    <ProjectSectionCard>
-                        <ProjectSectionBasicInfo />
-                    </ProjectSectionCard>
+                    <ProjectGeneralDataSection />
                 </Grid>
                 <Grid item xs={12} lg={4} xl={3}>
-                    <ProjectSectionCard>
-                        <ProjectSectionMonitoring />
-                    </ProjectSectionCard>
+                    <ProjectMonitoringSection />
                 </Grid>
                 <Grid item xs={12} lg={7} xl={8}>
-                    <ProjectSectionCard>
-                        <ProjectSectionProvider />
-                    </ProjectSectionCard>
+                    <ProjectProviderSection />
                 </Grid>
                 <Grid item xs={12} lg={5} xl={4}>
-                    <ProjectSectionCard>
-                        <ProjectSectionAudit />
-                    </ProjectSectionCard>
+                    <ProjectAuditSection />
                 </Grid>
             </Grid>
         </Container>
