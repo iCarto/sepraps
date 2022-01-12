@@ -39,6 +39,24 @@
         "model": "monitoring.DomainEntry",
         "pk": null,
         "fields": {
+            "category": "provider_area",
+            "key": "rural",
+            "value": "Rural"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "provider_area",
+            "key": "urban",
+            "value": "Urbana"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
             "category": "contact_post",
             "key": "responsable_supervision_tecnica",
             "value": "Responsable supervisión técnica"
@@ -189,8 +207,14 @@
             "financing_fund": 1,
             "financing_program": 1,
             "provider": 1,
-            "linked_localities": ["1507620", "1507625"],
-            "contacts": [1, 2],
+            "linked_localities": [
+                "1507620",
+                "1507625"
+            ],
+            "contacts": [
+                1,
+                2
+            ],
             "closed": false,
             "creation_user": 1,
             "created_at": "2021-12-01T00:00:00Z",
@@ -210,7 +234,13 @@
             "financing_fund": 1,
             "financing_program": 1,
             "provider": 1,
-            "linked_localities": ["1507640", "1507645"],
+            "linked_localities": [
+                "1507640",
+                "1507645"
+            ],
+            "contacts": [
+                1
+            ],
             "closed": true,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",

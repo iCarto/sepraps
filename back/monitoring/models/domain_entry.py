@@ -7,6 +7,7 @@ class DomainEntry(models.Model):
         ("project_type", "Tipo de Proyecto"),
         ("project_class", "Clase de Proyecto"),
         ("contact_post", "Cargo del contacto"),
+        ("provider_area", "Área"),
     ]
 
     id = models.AutoField(primary_key=True)
