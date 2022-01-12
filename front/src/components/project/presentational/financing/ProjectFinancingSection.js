@@ -1,18 +1,19 @@
 import {useOutletContext} from "react-router-dom";
 
-import {DetailCard, SectionField} from "components/common/presentational";
+import {SectionCard, SectionField} from "components/common/presentational";
 
 const ProjectFinancingSection = () => {
-    const project = useOutletContext();
+    let project;
+    [project] = useOutletContext();
 
     return (
-        <DetailCard title="Programa">
+        <SectionCard title="Programa">
             <SectionField
                 label="Programa de financiación:"
-                value={project[0].financing_program_name}
+                value={project.financing_program_name}
             />
-            <SectionField label="Financiador:" value={project[0].financing_fund_name} />
-        </DetailCard>
+            <SectionField label="Financiador:" value={project.financing_fund_name} />
+        </SectionCard>
     );
 };
 
