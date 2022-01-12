@@ -4,12 +4,12 @@ from rest_framework import serializers
 
 class LocalitySerializer(serializers.ModelSerializer):
 
-    department = serializers.CharField(source="department.code")
-    department_name = serializers.CharField(source="department.name")
-    district = serializers.CharField(source="district.code")
-    district_name = serializers.CharField(source="district.name")
+    department = serializers.CharField(source="department.code", required=False)
+    department_name = serializers.CharField(source="department.name", required=False)
+    district = serializers.CharField(source="district.code", required=False)
+    district_name = serializers.CharField(source="district.name", required=False)
     locality = serializers.CharField(source="code")
-    locality_name = serializers.CharField(source="name")
+    locality_name = serializers.CharField(source="name", required=False)
 
     class Meta:
         model = Locality

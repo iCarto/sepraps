@@ -5,7 +5,9 @@ from monitoring.views import index
 from monitoring.views.domain_entry_viewset import DomainEntryViewSet
 from monitoring.views.financing_fund_viewset import FinancingFundViewSet
 from monitoring.views.financing_program_viewset import FinancingProgramViewSet
+from monitoring.views.locality_viewset import LocalityViewSet
 from monitoring.views.project_viewset import ProjectViewSet
+from monitoring.views.provider_viewset import ProviderViewSet
 from rest_framework import routers
 
 
@@ -13,7 +15,9 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"domainentries", DomainEntryViewSet)
 router.register(r"financingfunds", FinancingFundViewSet)
 router.register(r"financingprograms", FinancingProgramViewSet)
+router.register(r"localities", LocalityViewSet)
 router.register(r"projects", ProjectViewSet)
+router.register(r"providers", ProviderViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
