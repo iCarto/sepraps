@@ -1,6 +1,6 @@
 import {useOutletContext} from "react-router-dom";
 
-import {DetailCard} from "components/common/presentational";
+import {SectionCard} from "components/common/presentational";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,10 +10,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 const ProjectLinkedLocalitiesSection = () => {
-    const project = useOutletContext();
+    let project;
+    [project] = useOutletContext();
 
     return (
-        <DetailCard title="Localidades vinculadas">
+        <SectionCard title="Localidades vinculadas">
             <TableContainer>
                 <Table aria-label="localities table">
                     <TableHead>
@@ -30,7 +31,7 @@ const ProjectLinkedLocalitiesSection = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {project[0].linked_localities.map(locality => (
+                        {project.linked_localities.map(locality => (
                             <TableRow
                                 key={locality.locality_name}
                                 sx={{"&:last-child td, &:last-child th": {border: 0}}}
@@ -45,7 +46,7 @@ const ProjectLinkedLocalitiesSection = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </DetailCard>
+        </SectionCard>
     );
 };
 

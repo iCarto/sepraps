@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {SectionTitle} from ".";
 import Paper from "@mui/material/Paper";
 
-const DetailCard = ({title, ...props}) => {
+const SectionCard = ({title, ...props}) => {
     return (
         <Paper
             sx={{
@@ -20,9 +20,9 @@ const DetailCard = ({title, ...props}) => {
     );
 };
 
-DetailCard.propTypes = {
+SectionCard.propTypes = {
     children: PropTypes.node.isRequired,
     title: PropTypes.string.isRequired,
 };
 
-export default DetailCard;
+export default SectionCard;
