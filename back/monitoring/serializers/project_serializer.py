@@ -1,5 +1,7 @@
 from monitoring.models.domain_entry import dominio_get_value
+from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.project import Project, get_code_for_new_project
+from monitoring.models.provider import Provider
 from monitoring.serializers.contact_serlializer import ContactSerializer
 from monitoring.serializers.infraestructure_serializer import InfraestructureSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
@@ -8,17 +10,24 @@ from rest_framework import serializers
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    code = serializers.CharField(required=False)
     featured_image = serializers.SerializerMethodField()
-    phase_name = serializers.SerializerMethodField()
-    project_type_name = serializers.SerializerMethodField()
-    project_class_name = serializers.SerializerMethodField()
-    financing_fund_name = serializers.CharField(source="financing_fund.name")
-    financing_program_name = serializers.CharField(source="financing_program.name")
-    main_infrastructure = InfraestructureSerializer()
-    linked_localities = LocalitySerializer(many=True)
-    provider = ProviderSerializer()
-    contacts = ContactSerializer(many=True)
-    creation_user = serializers.CharField(source="creation_user.username")
+    phase_name = serializers.SerializerMethodField(required=False)
+    project_type_name = serializers.SerializerMethodField(required=False)
+    project_class_name = serializers.SerializerMethodField(required=False)
+    financing_fund_name = serializers.CharField(
+        source="financing_fund.name", required=False
+    )
+    financing_program_name = serializers.CharField(
+        source="financing_program.name", required=False
+    )
+    main_infrastructure = InfraestructureSerializer(required=False)
+    linked_localities = LocalitySerializer(many=True, required=False)
+    provider = ProviderSerializer(required=False)
+    contacts = ContactSerializer(many=True, required=False)
+    creation_user = serializers.CharField(
+        source="creation_user.username", required=False
+    )
 
     class Meta:
         model = Project
@@ -28,26 +37,23 @@ class ProjectSerializer(serializers.ModelSerializer):
             "code",
             "featured_image",
             "phase_name",
+            "project_type",
             "project_type_name",
+            "project_class",
             "project_class_name",
             "init_date",
             "main_infrastructure",
             "linked_localities",
             "provider",
+            "financing_fund",
             "financing_fund_name",
+            "financing_program",
             "financing_program_name",
             "contacts",
             "creation_user",
             "created_at",
             "updated_at",
         )
-        read_only_fields = ["creation_user", "created_at"]
-
-    def get_fields(self, *args, **kwargs):
-        fields = super().get_fields(*args, **kwargs)
-        for field in fields:
-            fields[field].read_only = True
-        return fields
 
     # ATTRIBUTES
 
@@ -79,7 +85,23 @@ class ProjectSerializer(serializers.ModelSerializer):
 
         validated_data["code"] = get_code_for_new_project()
 
-        project = Project.objects.create(**validated_data)
+        main_infrastructure = validated_data.pop("main_infrastructure")
+        infrastructure = Infrastructure.objects.create(**main_infrastructure)
+
+        provider_data = validated_data.pop("provider")
+        provider, _ = Provider.objects.get_or_create(**provider_data)
+
+        linked_localities_data = validated_data.pop("linked_localities")
+        linked_localities_for_project = []
+        for linked_locality_data in linked_localities_data:
+            for value in linked_locality_data.values():
+                linked_localities_for_project.append(value)
+
+        project = Project.objects.create(
+            main_infrastructure=infrastructure, provider=provider, **validated_data
+        )
+        project.linked_localities.set(linked_localities_for_project)
+
         return project
 
 
@@ -110,6 +132,12 @@ class ProjectSummarySerializer(ProjectSerializer):
             "created_at",
             "updated_at",
         )
+
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        for field in fields:
+            fields[field].read_only = True
+        return fields
 
 
 class ProjectShortSerializer(ProjectSerializer):
