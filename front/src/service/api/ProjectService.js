@@ -27,6 +27,7 @@ const ProjectService = {
             const projects = response.map(project => ({
                 id: project.id,
                 name: project.name,
+                code: project.code,
             }));
             return projects;
         });
