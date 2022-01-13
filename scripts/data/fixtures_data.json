@@ -36,6 +36,51 @@
         }
     },
     {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "responsable_supervision_tecnica",
+            "value": "Responsable supervisión técnica"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "responsable_supervision_social",
+            "value": "Responsable supervisión social"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "representante_comunidad_beneficiaria",
+            "value": "Representante de la comunidad beneficiaria"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "miembro_junta_saneamiento",
+            "value": "Miembro de la Junta de Saneamiento"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "otro_contacto",
+            "value": "Otro contacto"
+        }
+    },
+    {
         "model": "monitoring.financingfund",
         "pk": 1,
         "fields": {
@@ -101,7 +146,34 @@
         "fields": {
             "department": "15",
             "district": "1507",
-            "locality": "1507605"
+            "locality": "1507605",
+            "latitude": -23.37693,
+            "longitude": -57.66498,
+            "altitude": 200
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 1,
+        "fields": {
+            "name": "Pedro Pérez",
+            "post": "responsable_supervision_tecnica",
+            "gender": "M",
+            "phone": "+11 987987987",
+            "email": "pedro@perez.com",
+            "comments": "No tiene observaciones"
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 2,
+        "fields": {
+            "name": "Juana López",
+            "post": "miembro_junta_saneamiento",
+            "gender": "F",
+            "phone": "+11 789789789",
+            "email": "juana@lopez.com",
+            "comments": "Tiene una observación"
         }
     },
     {
@@ -117,10 +189,8 @@
             "financing_fund": 1,
             "financing_program": 1,
             "provider": 1,
-            "linked_localities": [
-                "1507620",
-                "1507625"
-            ],
+            "linked_localities": ["1507620", "1507625"],
+            "contacts": [1, 2],
             "closed": false,
             "creation_user": 1,
             "created_at": "2021-12-01T00:00:00Z",
@@ -140,10 +210,7 @@
             "financing_fund": 1,
             "financing_program": 1,
             "provider": 1,
-            "linked_localities": [
-                "1507640",
-                "1507645"
-            ],
+            "linked_localities": ["1507640", "1507645"],
             "closed": true,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",

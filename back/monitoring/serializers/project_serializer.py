@@ -1,5 +1,6 @@
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.project import Project, get_code_for_new_project
+from monitoring.serializers.contact_serlializer import ContactSerializer
 from monitoring.serializers.infraestructure_serializer import InfraestructureSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
 from monitoring.serializers.provider_serializer import ProviderSerializer
@@ -16,6 +17,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     main_infrastructure = InfraestructureSerializer()
     linked_localities = LocalitySerializer(many=True)
     provider = ProviderSerializer()
+    contacts = ContactSerializer(many=True)
     creation_user = serializers.CharField(source="creation_user.username")
 
     class Meta:
@@ -34,6 +36,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "provider",
             "financing_fund_name",
             "financing_program_name",
+            "contacts",
             "creation_user",
             "created_at",
             "updated_at",
