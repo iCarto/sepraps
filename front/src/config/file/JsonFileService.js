@@ -1,6 +1,7 @@
 const JsonFileService = {
     get(url = "", headers = {}) {
         url = url.replace(/\/$/, "");
+        url = url.split("?")[0];
         console.log("Fetching /api_data" + url + ".json");
         return fetch("/api_data" + url + ".json", {
             headers: {

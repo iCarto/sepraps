@@ -3,6 +3,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.project import Project
 from monitoring.serializers.project_serializer import (
     ProjectSerializer,
+    ProjectShortSerializer,
     ProjectSummarySerializer,
 )
 from rest_framework import viewsets
@@ -30,6 +31,9 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "list":
+            template = self.request.query_params.get("template")
+            if template == "short":
+                return ProjectShortSerializer
             return ProjectSummarySerializer
         return super().get_serializer_class()
 

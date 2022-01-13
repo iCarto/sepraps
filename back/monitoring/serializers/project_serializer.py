@@ -110,3 +110,8 @@ class ProjectSummarySerializer(ProjectSerializer):
             "created_at",
             "updated_at",
         )
+
+
+class ProjectShortSerializer(ProjectSerializer):
+    class Meta(ProjectSerializer.Meta):
+        fields = ("id", "name", "code")
