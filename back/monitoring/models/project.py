@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils import timezone
+from monitoring.models.contact import Contact
 from monitoring.models.financing_fund import FinancingFund
 from monitoring.models.financing_program import FinancingProgram
 from monitoring.models.infrastructure import Infrastructure
@@ -43,6 +44,7 @@ class Project(models.Model):
         null=True,
     )
     linked_localities = models.ManyToManyField(Locality)
+    contacts = models.ManyToManyField(Contact)
     closed = models.BooleanField(blank=False, null=False, default=False)
 
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
