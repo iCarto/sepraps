@@ -8,12 +8,14 @@ import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {MenuListItemLink} from "components/common/presentational";
+import Stack from "@mui/material/Stack";
 
-const SelectProjectDropDown = ({MenuListItemLink}) => {
-    const [projectInfo, setProjectInfo] = useState([]);
-    const [anchorEl, setAnchorEl] = useState(null);
+const SelectProjectDropDown = () => {
+    const [projects, setProjects] = useState([]);
+    const [anchorElement, setAnchorElement] = useState(null);
 
-    const open = Boolean(anchorEl);
+    const open = Boolean(anchorElement);
 
     const {id} = useParams();
 
@@ -23,14 +25,14 @@ const SelectProjectDropDown = ({MenuListItemLink}) => {
         });
     }, []);
 
-    let selectedProject = projectInfo.find(project => project.id == id);
+    let selectedProject = projects.find(project => project.id == id);
 
     const handleClick = event => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElement(null);
     };
 
     return (
@@ -46,7 +48,7 @@ const SelectProjectDropDown = ({MenuListItemLink}) => {
                     pt: 3,
                     pb: 2,
                     px: 2.25,
-                    // color: "white",
+                    color: "white",
                     alignItems: "flex-start",
                 }}
             >
@@ -71,6 +73,7 @@ const SelectProjectDropDown = ({MenuListItemLink}) => {
                             lineHeight: 0,
                             fontWeight: 500,
                             letterSpacing: "0.5px",
+                            color: "white",
                         }}
                     >
                         {selectedProject && selectedProject.code}
@@ -79,7 +82,7 @@ const SelectProjectDropDown = ({MenuListItemLink}) => {
             </Button>
             <Menu
                 id="lock-menu"
-                anchorEl={anchorEl}
+                anchorEl={anchorElement}
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{
@@ -95,7 +98,7 @@ const SelectProjectDropDown = ({MenuListItemLink}) => {
                     horizontal: "left",
                 }}
             >
-                {projectInfo.map(project => (
+                {projects.map(project => (
                     <MenuListItemLink
                         variant="menu"
                         key={project.id}
@@ -104,7 +107,12 @@ const SelectProjectDropDown = ({MenuListItemLink}) => {
                         selected={project === selectedProject.name}
                         onClick={handleClose}
                     >
-                        {project.name} - {project.code}
+                        <Stack>
+                            <Typography>{project.name}</Typography>
+                            <Typography variant="caption" sx={{ml: 1}}>
+                                {project.code}
+                            </Typography>
+                        </Stack>
                     </MenuListItemLink>
                 ))}
             </Menu>
