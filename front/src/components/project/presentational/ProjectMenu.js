@@ -1,11 +1,10 @@
-import {Link, useMatch, useParams, useResolvedPath} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import SelectProjectDropDown from "../container/SelectProjectDropDown";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
@@ -14,25 +13,9 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Toolbar from "@mui/material/Toolbar";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import {MenuListItemLink} from "components/common/presentational";
 
 const drawerWidth = 240;
-
-function MenuListItemLink({children, to, ...props}) {
-    let resolved = useResolvedPath(to);
-    let match = useMatch({path: resolved.pathname, end: true});
-
-    return (
-        <ListItem
-            button
-            component={Link}
-            to={to}
-            sx={{bgcolor: match ? "grey.100" : "inherit"}}
-            {...props}
-        >
-            {children}
-        </ListItem>
-    );
-}
 
 const ProjectMenu = () => {
     const {id} = useParams();
@@ -51,16 +34,16 @@ const ProjectMenu = () => {
             <Toolbar
                 sx={{
                     // -----  OPTION 1 - LIGHT GREY ------
-                    backgroundColor: "#E2F0FF",
+                    // backgroundColor: "#E2F0FF",
                     // -----  OPTION 2 - DARK BLUE (change button & code font color to white in SelectProjectDropDown) ------
                     // backgroundColor: "primary.dark",
                     // -----  OPTION 3 - DARK GREY (change button & code font color to white in SelectProjectDropDown) ------
-                    // backgroundColor: "grey.700",
+                    backgroundColor: "grey.700",
                 }}
                 variant="dense"
                 disableGutters
             >
-                <SelectProjectDropDown MenuListItemLink={MenuListItemLink} />
+                <SelectProjectDropDown />
             </Toolbar>{" "}
             <Divider />
             <Box sx={{overflow: "auto"}}>
