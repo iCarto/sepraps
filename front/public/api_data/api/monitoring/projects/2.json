@@ -50,6 +50,28 @@
     },
     "financing_fund_name": "BID (Banco Interamericano de Desarrollo)",
     "financing_program_name": "SENASA-BID 2021-2025",
+    "contacts": [
+        {
+            "id": 3,
+            "name": "Pedro Pérez",
+            "post": "responsable_supervision_tecnica",
+            "post_name": "Responsable supervisión técnica",
+            "gender": "M",
+            "phone": "+11 987987987",
+            "email": "pedro@perez.com",
+            "comments": "No tiene observaciones"
+        },
+        {
+            "id": 4,
+            "name": "Juana López",
+            "post": "miembro_junta_saneamiento",
+            "post_name": "Miembro de la Junta de Saneamiento",
+            "gender": "F",
+            "phone": "+11 789789789",
+            "email": "juana@lopez.com",
+            "comments": "Tiene una observación"
+        }
+    ],
     "creation_user": "admin",
     "created_at": "2021-11-30T21:00:00-03:00",
     "updated_at": "2021-11-30T21:00:00-03:00"
