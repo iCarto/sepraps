@@ -6,11 +6,18 @@ import {
 } from "model";
 import AuthApiService from "./AuthApiService";
 
+export const PROJECT_TEMPLATE = {
+    SHORT: "short",
+};
+
 const basePath = "/api/monitoring/projects";
 
 const ProjectService = {
-    getProjects(showClosed = false) {
-        const path = basePath + (showClosed ? "?status=all" : "?status=active");
+    getProjects(showClosed = false, template = null) {
+        const path =
+            basePath +
+            (showClosed ? "?status=all" : "?status=active") +
+            (template ? `&template=${template}` : "");
         console.log({showClosed}, {path});
         return AuthApiService.get(path).then(response => {
             return createProjects(projects_api_adapter(response));
@@ -20,16 +27,6 @@ const ProjectService = {
     getProject(id) {
         return AuthApiService.get(basePath + "/" + id).then(response => {
             return createProject(project_api_adapter(response));
-        });
-    },
-    getProjectsName() {
-        return AuthApiService.get(basePath).then(response => {
-            const projects = response.map(project => ({
-                id: project.id,
-                name: project.name,
-                code: project.code,
-            }));
-            return projects;
         });
     },
 };

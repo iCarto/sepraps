@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {ProjectService} from "service/api";
+import {ProjectService, PROJECT_TEMPLATE} from "service/api";
 import {useParams} from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -18,8 +18,8 @@ const SelectProjectDropDown = ({MenuListItemLink}) => {
     const {id} = useParams();
 
     useEffect(() => {
-        ProjectService.getProjectsName().then(projects => {
-            setProjectInfo(projects);
+        ProjectService.getProjects(false, PROJECT_TEMPLATE.SHORT).then(projects => {
+            setProjects(projects);
         });
     }, []);
 
