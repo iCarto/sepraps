@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 from monitoring.views import index
+from monitoring.views.contact_viewset import ContactViewSet
 from monitoring.views.domain_entry_viewset import DomainEntryViewSet
 from monitoring.views.financing_fund_viewset import FinancingFundViewSet
 from monitoring.views.financing_program_viewset import FinancingProgramViewSet
@@ -18,6 +19,8 @@ router.register(r"financingprograms", FinancingProgramViewSet)
 router.register(r"localities", LocalityViewSet)
 router.register(r"projects", ProjectViewSet)
 router.register(r"providers", ProviderViewSet)
+router.register(r"contacts", ContactViewSet)
+
 
 urlpatterns = [
     path("", include(router.urls)),
