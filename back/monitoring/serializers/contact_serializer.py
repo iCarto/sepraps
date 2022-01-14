@@ -5,6 +5,7 @@ from rest_framework import serializers
 
 class ContactSerializer(serializers.ModelSerializer):
 
+    id = serializers.IntegerField(allow_null=True)
     post_name = serializers.SerializerMethodField()
 
     class Meta:

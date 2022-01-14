@@ -1,8 +1,9 @@
+from monitoring.models.contact import Contact
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.project import Project, get_code_for_new_project
 from monitoring.models.provider import Provider
-from monitoring.serializers.contact_serlializer import ContactSerializer
+from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.infraestructure_serializer import InfraestructureSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
 from monitoring.serializers.provider_serializer import ProviderSerializer
@@ -97,10 +98,17 @@ class ProjectSerializer(serializers.ModelSerializer):
             for value in linked_locality_data.values():
                 linked_localities_for_project.append(value)
 
+        contacts_data = validated_data.pop("contacts")
+        contacts_for_project = []
+        for contact_data in contacts_data:
+            contact, _ = Contact.objects.get_or_create(**contact_data)
+            contacts_for_project.append(contact)
+
         project = Project.objects.create(
             main_infrastructure=infrastructure, provider=provider, **validated_data
         )
         project.linked_localities.set(linked_localities_for_project)
+        project.contacts.set(contacts_for_project)
 
         return project
 
