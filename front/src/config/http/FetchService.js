@@ -1,4 +1,4 @@
-const urlBase = "http://localhost:8000";
+const urlBase = process.env.REACT_APP_API_BASE_URL;
 
 /**
  * @param {string}  url url a la cual consultar
