@@ -8,7 +8,10 @@ from django.core.exceptions import ImproperlyConfigured
 
 
 env = environ.Env(  # set default values and casting
-    DEBUG=(bool, False), DEPLOYMENT=(str, "prod"), HTTPS=(bool, True)
+    DEBUG=(bool, False),
+    DEPLOYMENT=(str, "PROD"),
+    HTTPS=(bool, True),
+    ALLOWED_HOSTS=(list, []),
 )
 
 # Build paths inside the project like this: base('desired/local/path')
@@ -29,11 +32,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-# Allow all host headers
-# ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-# ALLOWED_HOSTS = ["127.0.0.1", "localhost", "[::1]", "192.168.0.99"]
-ALLOWED_HOSTS = []
+# https://stackoverflow.com/questions/54504142/
+# If in DEV is needed to access the app in a defined IP or URL fill .env with:
+# ALLOWED_HOSTS=.localhost,127.0.0.1,[::1],THE_IP_OR_URL
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 CSRF_COOKIE_SECURE = env("HTTPS")
 SESSION_COOKIE_SECURE = env("HTTPS")
@@ -121,7 +123,7 @@ DEPLOYMENT = env("DEPLOYMENT")
 if DEPLOYMENT == "dev":
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     ADMINS = (("admin", "admin@localhost"),)
-else:  # DEPLOYMENT == prod
+else:  # DEPLOYMENT == PROD
     # SECURE_SSL_REDIRECT = True
     # add extra apps
     # INSTALLED_APPS.append('raven.contrib.django.raven_compat')

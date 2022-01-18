@@ -22,7 +22,7 @@ The project is setup by default with strict linters that run on pre commit. By s
 # Pre-Requisites
 
 -   [VirtualBox and Vagrant](https://gitlab.com/icarto/ikdb/blob/master/configurar_equipo/linux/virtualbox_y_vagrant.md)
--   [nodejs y npm](https://gitlab.com/icarto/ikdb/blob/master/configurar_equipo/linux/instalar_y_actualizar_node_y_npm)
+-   [nodejs y npm](https://gitlab.com/icarto/ikdb/blob/master/configurar_equipo/linux/instalar_y_actualizar_node_y_npm.md)
 -   Virtualenwrapper
 
 ```shell
@@ -137,6 +137,22 @@ NOT READY YET
 ```shell
 ./scripts/deploy.sh
 ````
+
+Example
+
+```shell
+workon sepraps
+git ir a la rama buena y hacer fetch
+# git clean -fdx Not do it because remove the .env
+cd back && pip install -r requirements.txt && cd ..
+cd front && node install && node run build && cd ..
+rm -rf back/static && mkdir back/static
+cd back && python manage.py collectstatic && cd ..
+mv back/static/static/{js,css} back/static/
+rm -r back/static/static
+# Migrate BD ?
+systemctl restart apache2
+```
 
 # Automated Test
 

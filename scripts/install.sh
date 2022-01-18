@@ -25,10 +25,10 @@ if ! pyenv versions | grep "${PYTHON_VERSION}" > /dev/null 2>&1; then
     pyenv install "${PYTHON_VERSION}"
 fi
 
-PYTHON_VERSION_BYNARY_PATH="$(pyenv shell "${PYTHON_VERSION}" && pyenv which python)"
+PYTHON_VERSION_BINARY_PATH="$(pyenv shell "${PYTHON_VERSION}" && pyenv which python)"
 
 # https://github.com/pexpect/pexpect/commit/71bbdf52ac153c7eaca631637ec96e63de50c2c7
-mkvirtualenv -p "${PYTHON_VERSION_BYNARY_PATH}" -a . "${PROJECT_NAME}" || true
+mkvirtualenv -p "${PYTHON_VERSION_BINARY_PATH}" -a . "${PROJECT_NAME}" || true
 
 workon "${PROJECT_NAME}"
 pip install -r requirements-dev.txt
@@ -43,7 +43,7 @@ pre-commit install --install-hooks
 # create the .env file
 if [[ ! -f .env ]]; then
     echo "* creating initial .env file"
-    echo "DEPLOYMENT=dev
+    echo "DEPLOYMENT=DEV
 DEBUG=True
 SECRET_KEY=your-secret-key
 DATABASE_URL=psql://${DBOWNER}:${PG_POSTGRES_PASSWD}@localhost:${PG_PORT}/${DBNAME}

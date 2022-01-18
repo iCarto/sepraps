@@ -17,7 +17,7 @@ sudo -u postgres createdb "${DBNAME}"
 #
 # systemctl restart postgresql
 
-# if [[ ${ENTORNO} == "PROD" ]]; then
+# if [[ ${DEPLOYMENT} == "PROD" ]]; then
 #     apt-get install anacron
 #     cp "${SETTINGS}/other-settings/monthly_tasks" /etc/cron.daily/
 #     chmod a+x /etc/cron.daily/monthly_tasks

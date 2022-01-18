@@ -28,7 +28,7 @@
     unstage = reset HEAD
     st = status
     co = checkout
-    com = checkout master
+    com = checkout main
     br = branch
     bra = branch -a
     lograph = log --oneline --graph --decorate --all

@@ -41,7 +41,7 @@ a2enmod deflate
 a2enmod ssl
 a2dissite 000-default
 
-if [[ ${ENTORNO} == "DEV" ]]; then
+if [[ ${DEPLOYMENT} == "DEV" ]]; then
     cp "${SETTINGS}/apache-settings/${PROJECT_NAME}.conf.dev" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
     # cp ${SETTINGS}/apache-settings/${PROJECT_NAME}-ssl.conf.dev /etc/apache2/sites-available/${PROJECT_NAME}-ssl.conf
     a2ensite "${PROJECT_NAME}.conf"

@@ -47,6 +47,7 @@ grep -q 'lc_messages' "/etc/postgresql/${PG_VERSION}/main/postgresql.conf" || ec
 echo "host all all 0.0.0.0/0 md5" >> "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf"
 
 # https://stackoverflow.com/questions/1988249/how-do-i-use-su-to-execute-the-rest-of-the-bash-script-as-that-user
-sudo -u "${DEFAULT_USER}" -H ./config_postgres_dotfiles.sh
+# sudo -u "${DEFAULT_USER}" -H ./config_postgres_dotfiles.sh
+bash ./config_postgres_dotfiles.sh
 
 systemctl restart postgresql

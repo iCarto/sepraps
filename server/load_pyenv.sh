@@ -8,7 +8,7 @@ load_pyenv() {
     # But use a trick like `exec "${SHELL}"` in a script does not work. So we
     # use this workaround
     echo "Instalando pyenv"
-    PYENV_ROOT="$(getent passwd "${DEFAULT_USER}" | cut -d: -f6)/.pyenv"
+    PYENV_ROOT="${DEFAULT_USER_HOME}/.pyenv"
     export PYENV_ROOT
     export PATH="${PYENV_ROOT}/bin:${PATH}"
     eval "$("${PYENV_ROOT}"/bin/pyenv init --path)"
