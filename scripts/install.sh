@@ -75,7 +75,7 @@ if [[ ! -e ${BACKEND_FOLDER_NAME}/back/static && ! -L ${BACKEND_FOLDER_NAME}/bac
     echo "* linking Django app to the JS frontend"
     mkdir -p "${this_dir}"/../front/build
     cd "${BACKEND_FOLDER_NAME}/back"
-    ln -s ../../"${FRONTEND_FOLDER_NAME}"/build static
+    ln -s ../../"${FRONTEND_FOLDER_NAME}"/build front_build
     cd "${this_dir}"
 else
     echo "* frontend already linked"

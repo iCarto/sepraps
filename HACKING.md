@@ -146,10 +146,7 @@ git ir a la rama buena y hacer fetch
 # git clean -fdx Not do it because remove the .env
 cd back && pip install -r requirements.txt && cd ..
 cd front && node install && node run build && cd ..
-rm -rf back/static && mkdir back/static
-cd back && python manage.py collectstatic && cd ..
-mv back/static/static/{js,css} back/static/
-rm -r back/static/static
+cd back && echo -e "yes" | python manage.py collectstatic -c && cd ..
 # Migrate BD ?
 systemctl restart apache2
 ```

@@ -63,7 +63,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "spa.middleware.SPAMiddleware",
+    "back.spa.BackSPAMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",  # early, but after Gzip
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -170,9 +170,9 @@ USE_TZ = True
 
 # STATIC_ROOT = root("staticfiles")
 STATIC_ROOT = base("static")
-STATIC_URL = "/static/"
+STATIC_URL = "/staticfiles/"
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (root("static"), base("monitoring/static"))
+STATICFILES_DIRS = (root("static"), root("front_build"), base("monitoring/static"))
 
 # Django SPA - simple setup for serving modern SPAs from Django
 # https://github.com/metakermit/django-spa
