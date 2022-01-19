@@ -24,6 +24,12 @@ drop_db_and_kickout_users "${DBNAME}"
 
 create_db_from_template 'template1' "${DBNAME}"
 
+# Creamos los directorios necesarios para los estáticos
+mkdir -p "${this_dir}/../back/monitoring/static"
+mkdir -p "${this_dir}/../front/build"
+rm back/front_build
+ln -s ../../front/build back/front_build
+
 # Crea las migraciones. migrations/__ini__.py debe existir para que se cree la
 # migración inicial de una app o debe invocarse la app de forma concreta
 # python manage.py makemigrations users
@@ -41,11 +47,6 @@ if [[ -z "${CREATE_EMPTY}" ]]; then
     python manage.py loaddata "${this_dir}/data/fixtures_data.json"
 fi
 
-# FIXME. How to link the back with the front should be worked, and taken in accound,
-# at least in the future how django-spa, and production will work
-# This should be here, in start.sh or in install.sh?
-mkdir -p "${this_dir}/../back/monitoring/static"
-mkdir -p "${this_dir}/../front/build"
-rm -f back/static
-ln -s ../../front/build back/static
-python manage.py collectstatic
+# In install.sh static folders are created
+# At this point static assets are collected
+echo -e "yes" | python manage.py collectstatic -c
