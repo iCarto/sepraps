@@ -5,6 +5,7 @@ import {BaseLayout} from "layout";
 import {LoginPage} from "components/user/container";
 import {
     ListProjectsPage,
+    CreateProjectPage,
     ViewProjectPage,
     ViewProjectInfoSubPage,
     ViewProjectLocationSubPage,
@@ -24,6 +25,14 @@ export default function AppRoutes() {
                             element={
                                 <AuthRequired>
                                     <ListProjectsPage />
+                                </AuthRequired>
+                            }
+                        />
+                        <Route
+                            path="/project/new"
+                            element={
+                                <AuthRequired>
+                                    <CreateProjectPage />
                                 </AuthRequired>
                             }
                         />
