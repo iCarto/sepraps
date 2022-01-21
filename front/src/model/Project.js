@@ -1,3 +1,5 @@
+import {createProvider} from "model";
+
 class Projects extends Array {}
 
 const project_api_adapter = project => {
@@ -48,17 +50,7 @@ const createProject = ({
             locality_name: "",
         },
     ],
-    provider = {
-        id: -1,
-        name: "",
-        area: "",
-        department: -1,
-        department_name: "",
-        district: -1,
-        district_name: "",
-        locality: -1,
-        locality_name: "",
-    },
+    provider = createProvider(),
     financing_fund_name = "",
     financing_program_name = "",
     contacts = [],

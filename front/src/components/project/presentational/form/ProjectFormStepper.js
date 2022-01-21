@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useFormContext} from "react-hook-form";
 
 import ProjectFormGeneralDataSection from "./ProjectFormGeneralDataSection";
+import ProjectFormProviderSection from "./ProjectFormProviderSection";
 import ProjectFormLocationSection from "./ProjectFormLocationSection";
 import ProjectFormFinancingSection from "./ProjectFormFinancingSection";
 
@@ -13,7 +14,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 
 function getSteps() {
-    return ["Datos generales", "Ubicación", "Financiación"];
+    return ["Datos generales", "Prestador", "Ubicación", "Financiación"];
 }
 
 function getStepContent(step) {
@@ -21,8 +22,10 @@ function getStepContent(step) {
         case 0:
             return <ProjectFormGeneralDataSection />;
         case 1:
-            return <ProjectFormLocationSection />;
+            return <ProjectFormProviderSection />;
         case 2:
+            return <ProjectFormLocationSection />;
+        case 3:
             return <ProjectFormFinancingSection />;
         default:
             return "Unknown step";

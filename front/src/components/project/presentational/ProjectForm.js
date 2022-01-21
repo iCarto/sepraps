@@ -12,6 +12,14 @@ const ProjectForm = ({handleFormSubmit}) => {
             project_type: "",
             project_class: "",
             init_date: null,
+            provider_id: null,
+            provider_name: "",
+            provider_area: "",
+            provider_location: {
+                department: "",
+                district: "",
+                locality: "",
+            },
             main_infrastructure_location: {
                 department: "",
                 district: "",
@@ -44,6 +52,14 @@ const ProjectForm = ({handleFormSubmit}) => {
             ),
             project_type: data.project_type,
             project_class: data.project_class,
+            provider: {
+                id: data.provider_id,
+                name: data.provider_name,
+                area: data.provider_area,
+                department: data.provider_location.department,
+                district: data.provider_location.district,
+                locality: data.provider_location.locality,
+            },
             main_infrastructure: {
                 department: data.main_infrastructure_location.department,
                 district: data.main_infrastructure_location.district,
