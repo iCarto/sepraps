@@ -11,6 +11,8 @@ const NumberUtil = {
         if (value === "") {
             return 0;
         }
+        //TODO: This function should use i18n pattern to validate decimal numbers
+        value = value.replace(",", ".");
         if (isNaN(value)) {
             return value;
         }
