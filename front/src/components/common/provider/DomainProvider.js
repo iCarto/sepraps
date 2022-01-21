@@ -1,5 +1,10 @@
 import {useState, useEffect, createContext, useContext} from "react";
-import {DomainService, FinancingService, LocationService} from "service/api";
+import {
+    DomainService,
+    FinancingService,
+    LocationService,
+    ProviderService,
+} from "service/api";
 
 let DomainContext = createContext(null);
 
@@ -13,6 +18,7 @@ export default function DomainProvider({children}) {
     const [areas, setAreas] = useState([]);
     const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
+    const [providers, setProviders] = useState([]);
 
     useEffect(() => {
         Promise.all([
@@ -20,8 +26,15 @@ export default function DomainProvider({children}) {
             LocationService.getAdministrativeDivisions(),
             FinancingService.getFinancingFunds(),
             FinancingService.getFinancingPrograms(),
+            ProviderService.getProviders(),
         ]).then(
-            ([domain, administrativeDivisions, financingFunds, financingPrograms]) => {
+            ([
+                domain,
+                administrativeDivisions,
+                financingFunds,
+                financingPrograms,
+                providers,
+            ]) => {
                 const {
                     project_type,
                     project_class,
@@ -40,6 +53,8 @@ export default function DomainProvider({children}) {
 
                 setFinancingFunds(financingFunds);
                 setFinancingPrograms(financingPrograms);
+
+                setProviders(providers);
             }
         );
     }, []);
@@ -54,6 +69,7 @@ export default function DomainProvider({children}) {
         localities,
         financingFunds,
         financingPrograms,
+        providers,
     };
 
     return <DomainContext.Provider value={value}>{children}</DomainContext.Provider>;
