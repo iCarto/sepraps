@@ -5,6 +5,7 @@ import ProjectFormGeneralDataSection from "./ProjectFormGeneralDataSection";
 import ProjectFormProviderSection from "./ProjectFormProviderSection";
 import ProjectFormLocationSection from "./ProjectFormLocationSection";
 import ProjectFormFinancingSection from "./ProjectFormFinancingSection";
+import ProjectFormContactSection from "./ProjectFormContactSection";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -14,7 +15,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 
 function getSteps() {
-    return ["Datos generales", "Prestador", "Ubicación", "Financiación"];
+    return ["Datos generales", "Prestador", "Ubicación", "Financiación", "Contactos"];
 }
 
 function getStepContent(step) {
@@ -27,6 +28,8 @@ function getStepContent(step) {
             return <ProjectFormLocationSection />;
         case 3:
             return <ProjectFormFinancingSection />;
+        case 4:
+            return <ProjectFormContactSection />;
         default:
             return "Unknown step";
     }
