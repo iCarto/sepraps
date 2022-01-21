@@ -1,4 +1,5 @@
 export {default as ListProjectsPage} from "./ListProjectsPage";
+export {default as CreateProjectPage} from "./CreateProjectPage";
 export {default as ViewProjectPage} from "./ViewProjectPage";
 export {default as ViewProjectInfoSubPage} from "./ViewProjectInfoSubPage";
 export {default as ViewProjectLocationSubPage} from "./ViewProjectLocationSubPage";

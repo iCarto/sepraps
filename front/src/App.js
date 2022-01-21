@@ -3,6 +3,9 @@ import {AppRoutes} from "routes";
 import {ThemeProvider} from "@emotion/react";
 import {createTheme} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import DateAdapter from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import esLocale from "date-fns/locale/es";
 
 const customTheme = createTheme({
     palette: {
@@ -18,11 +21,13 @@ const customTheme = createTheme({
 function App() {
     return (
         <ThemeProvider theme={customTheme}>
-            <CssBaseline>
-                <div className="App">
-                    <AppRoutes />
-                </div>
-            </CssBaseline>
+            <LocalizationProvider dateAdapter={DateAdapter} locale={esLocale}>
+                <CssBaseline>
+                    <div className="App">
+                        <AppRoutes />
+                    </div>
+                </CssBaseline>
+            </LocalizationProvider>
         </ThemeProvider>
     );
 }

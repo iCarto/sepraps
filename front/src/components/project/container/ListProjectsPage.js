@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 import {ProjectService} from "service/api";
 import {useSort, useSearch} from "hooks";
 import {SearchBox} from "components/common/presentational";
@@ -8,8 +9,18 @@ import {SortProjectsSelect, ShowNoOfProjects} from "../presentational";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+
+const fabStyle = {
+    position: "absolute",
+    bottom: 16,
+    right: 16,
+};
 
 const ListProjectsPage = () => {
+    const navigate = useNavigate();
+
     const [projects, setProjects] = useState([]);
     const [filteredProjects, setFilteredProjects] = useState([]);
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
@@ -94,6 +105,14 @@ const ListProjectsPage = () => {
                 </Grid>
             </Grid>
             <ProjectList projects={filteredProjects} />
+            <Fab
+                sx={fabStyle}
+                color="primary"
+                aria-label="add"
+                onClick={() => navigate("/project/new")}
+            >
+                <AddIcon />
+            </Fab>
         </Box>
     );
 };
