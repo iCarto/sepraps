@@ -6,6 +6,7 @@ export const DATE_FORMATS = {
     CLIENT_DATETIMEFORMAT: "dd/MM/yyyy HH:mm",
     CLIENT_TIMEFORMAT: "HH:mm",
     FILE_DATETIMEFORMAT: "yyyyMMddHHmmss",
+    SERVER_DATEFORMAT: "yyyy-MM-dd",
 };
 
 const DateUtil = {
