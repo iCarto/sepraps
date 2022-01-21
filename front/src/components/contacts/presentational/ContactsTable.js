@@ -7,6 +7,8 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const headCells = [
     {
@@ -33,9 +35,13 @@ const headCells = [
         id: "comments",
         label: "Observaciones",
     },
+    {
+        id: "actions",
+        label: "Acciones",
+    },
 ];
 
-const ContactsTable = ({contacts}) => {
+const ContactsTable = ({contacts, handleRemove = null}) => {
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "name",
         "asc"
@@ -59,6 +65,7 @@ const ContactsTable = ({contacts}) => {
                     />
                     <TableBody>
                         {contacts.sort(sortFunction).map((row, index) => {
+                            console.log({row});
                             return (
                                 <TableRow
                                     hover
@@ -77,6 +84,18 @@ const ContactsTable = ({contacts}) => {
                                     <TableCell>{row.phone}</TableCell>
                                     <TableCell>{row.email}</TableCell>
                                     <TableCell>{row.comments}</TableCell>
+                                    <TableCell>
+                                        {handleRemove && (
+                                            <IconButton
+                                                aria-label="delete"
+                                                onClick={() => {
+                                                    handleRemove(index, row.id);
+                                                }}
+                                            >
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        )}
+                                    </TableCell>
                                 </TableRow>
                             );
                         })}

@@ -38,6 +38,16 @@ const ProjectForm = ({handleFormSubmit}) => {
                 financing_fund: "",
                 financing_program: "",
             },
+            contacts: [],
+            // Aux contact fields necessary to insert
+            // contacts in the list
+            contact_id: null,
+            contact_name: "",
+            contact_post: "",
+            contact_gender: "",
+            contact_phone: "",
+            contact_email: "",
+            contact_comments: "",
         },
         reValidateMode: "onSubmit",
     });
@@ -75,6 +85,17 @@ const ProjectForm = ({handleFormSubmit}) => {
             linked_localities: data.linked_localities.map(linked_locality => {
                 return {
                     locality: linked_locality.locality,
+                };
+            }),
+            contacts: data.contacts.map(contact => {
+                return {
+                    id: contact.id,
+                    name: contact.name,
+                    post: contact.post,
+                    gender: contact.gender,
+                    phone: contact.phone,
+                    email: contact.email,
+                    comments: contact.comments,
                 };
             }),
             financing_fund: data.financing.financing_fund,
