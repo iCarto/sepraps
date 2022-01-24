@@ -25,9 +25,10 @@ drop_db_and_kickout_users "${DBNAME}"
 create_db_from_template 'template1' "${DBNAME}"
 
 # Creamos los directorios necesarios para los estáticos
+mkdir -p "${this_dir}/../back/back/static"
 mkdir -p "${this_dir}/../back/monitoring/static"
 mkdir -p "${this_dir}/../front/build"
-rm back/front_build
+rm -f back/front_build
 ln -s ../../front/build back/front_build
 
 # Crea las migraciones. migrations/__ini__.py debe existir para que se cree la
