@@ -14,7 +14,7 @@ class MediaNode(models.Model):
     media_content_type = models.CharField(
         "Tipo de contenido", null=True, max_length=100
     )
-    media_path = models.CharField("Ruta de almacenamiento", null=True, max_length=512)
+    storage_path = models.CharField("Ruta de almacenamiento", null=True, max_length=512)
     parent = models.ForeignKey(
         "self", on_delete=models.CASCADE, blank=True, null=True, related_name="children"
     )
@@ -28,10 +28,10 @@ class MediaNode(models.Model):
         return self.media_name
 
     @property
-    def path(self):
+    def media_path(self):
         if not self.parent:
             return self.media_name
-        return self.parent.path + PATH_SEPARATOR + self.media_name
+        return self.parent.media_path + PATH_SEPARATOR + self.media_name
 
 
 class DocumentManager(models.Manager):
