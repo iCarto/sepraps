@@ -8,6 +8,7 @@ import {
     ViewProjectFinancingSubPage,
     ViewProjectContactsSubPage,
     UpdateProjectProviderPanel,
+    ViewProjectDocumentsSubPage,
 } from "components/project/container";
 import {UpdateProjectProviderContactPanel} from "components/provider/container";
 
@@ -28,6 +29,11 @@ const projectRoutes = [
             key="project-contacts"
             path="contacts"
             element={<ViewProjectContactsSubPage />}
+        />
+        <Route
+            key="project-documents"
+            path="documents"
+            element={<ViewProjectDocumentsSubPage />}
         />
         <Route key="project-info" path="" element={<ViewProjectInfoSubPage />}>
             <Route

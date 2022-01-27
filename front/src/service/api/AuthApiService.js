@@ -2,12 +2,12 @@ import {AuthService} from "auth";
 import ApiService from "./ApiService";
 
 export const AuthApiService = {
-    get(url) {
-        console.log("AUTH GET", url);
-        const headers = {
+    get(url, headers) {
+        console.log("AUTH GET", url, headers);
+        return ApiService.get(url, {
             Authorization: "Bearer " + AuthService.getAccessToken(),
-        };
-        return ApiService.get(url, headers);
+            ...headers,
+        });
     },
 
     post(url, data, contentType) {

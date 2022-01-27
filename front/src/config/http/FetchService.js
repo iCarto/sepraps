@@ -34,7 +34,10 @@ const FetchService = {
                         throw new Error(text);
                     });
                 }
-                return response.json();
+                if (response.headers.get("content-type") === "application/json") {
+                    return response.json();
+                }
+                return response;
             })
             .catch(() => {
                 throw new Error("Server problem connection");
@@ -57,7 +60,10 @@ const FetchService = {
                     throw new Error(text);
                 });
             }
-            return response.json();
+            if (response.headers.get("content-type") === "application/json") {
+                return response.json();
+            }
+            return response;
         });
     },
 
@@ -76,7 +82,10 @@ const FetchService = {
                     throw new Error(text);
                 });
             }
-            return response.json();
+            if (response.headers.get("content-type") === "application/json") {
+                return response.json();
+            }
+            return response;
         });
     },
 
@@ -98,7 +107,10 @@ const FetchService = {
             if (parseInt(response.headers.get("content-length")) === 0) {
                 return true;
             }
-            return response.json();
+            if (response.headers.get("content-type") === "application/json") {
+                return response.json();
+            }
+            return response;
         });
     },
 
