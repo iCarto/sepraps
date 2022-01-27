@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_extensions",
     "users",
+    "documents",
     "monitoring",
 ]
 

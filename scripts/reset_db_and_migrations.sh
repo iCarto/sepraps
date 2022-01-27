@@ -24,6 +24,9 @@ drop_db_and_kickout_users "${DBNAME}"
 
 create_db_from_template 'template1' "${DBNAME}"
 
+# Limpiamos el directorio media
+rm -rf "${this_dir}/../${BACKEND_FOLDER_NAME}/media/*"
+
 # Creamos los directorios necesarios para los estáticos
 mkdir -p "${this_dir}/../back/back/static"
 mkdir -p "${this_dir}/../back/monitoring/static"
@@ -46,6 +49,7 @@ if [[ -z "${CREATE_EMPTY}" ]]; then
     python "${this_dir}/database.py" "${this_dir}/data/Barrios_Localidades_Paraguay_Codigos_DGEEC_min.csv" > "${this_dir}/data/fixtures_location.json"
     python manage.py loaddata "${this_dir}/data/fixtures_location.json"
     python manage.py loaddata "${this_dir}/data/fixtures_data.json"
+    cp -r "${this_dir}/data/folder_data/"* "${this_dir}/../${BACKEND_FOLDER_NAME}/media/"
 fi
 
 # In install.sh static folders are created

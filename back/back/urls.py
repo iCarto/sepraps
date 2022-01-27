@@ -11,8 +11,9 @@ urlpatterns = [
     # - all /static/... files served on /...
     # Django REST Framework urls
     # other views still work too
+    path("api/documents/", include("documents.urls")),
+    path("api/users/", include("users.urls")),
     path("api/monitoring/", include("monitoring.urls")),
-    path("api/", include("users.urls")),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("gestion/", admin.site.urls),
 ]
