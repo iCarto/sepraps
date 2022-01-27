@@ -3,7 +3,7 @@ from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.contact import Contact
 from monitoring.serializers.contact_serializer import ContactSerializer
-from rest_framework import viewsets
+from rest_framework import permissions, viewsets
 
 
 class ContactFilter(filters.FilterSet):
@@ -27,3 +27,4 @@ class ContactViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = ContactFilter
     serializer_class = ContactSerializer
+    permission_classes = [permissions.DjangoModelPermissions]
