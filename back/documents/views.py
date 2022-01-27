@@ -6,12 +6,12 @@ from rest_framework import parsers, status, views
 from rest_framework.response import Response
 
 
-def get_filter(path):
-    path_nodes = path.split("/")
+def get_filter(media_path):
+    media_path_nodes = media_path.split("/")
     filter = {}
-    for idx, path_node in enumerate(path_nodes[::-1]):
+    for idx, media_path_node in enumerate(media_path_nodes[::-1]):
         parent_access = "parent__" * idx
-        filter[parent_access + "media_name"] = path_node
+        filter[parent_access + "media_name"] = media_path_node
     return filter
 
 
@@ -19,8 +19,8 @@ class MediaView(views.APIView):
     serializer_class = MediaNodeSerializer
     parser_classes = [parsers.FileUploadParser]
 
-    def get(self, request, path):
-        filter = get_filter(path)
+    def get(self, request, media_path):
+        filter = get_filter(media_path)
         media_node = MediaNode.objects.filter(**filter).first()
         if media_node.media_type == "FOLDER":
             serializer = MediaNodeSerializer(media_node, context={"request": request})
@@ -34,10 +34,10 @@ class MediaView(views.APIView):
         )
         return response
 
-    def post(self, request, path, format=None):
+    def post(self, request, media_path, format=None):
         file = request.data.get("file", None)
         if file:
-            path = save(path, file)
+            path = save(media_path, file)
 
             parent_path = "/".join(path.split("/")[:-1])
             parent_filter = get_filter(parent_path)
@@ -48,7 +48,7 @@ class MediaView(views.APIView):
                     "media_type": "DOCUMENT",
                     "media_name": file.name,
                     "media_content_type": file.content_type,
-                    "media_path": path,
+                    "storage_path": path,
                     "parent": parent.id,
                 }
                 serializer = MediaNodeSerializer(
