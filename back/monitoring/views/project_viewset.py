@@ -6,7 +6,7 @@ from monitoring.serializers.project_serializer import (
     ProjectShortSerializer,
     ProjectSummarySerializer,
 )
-from rest_framework import viewsets
+from rest_framework import permissions, viewsets
 
 
 class ProjectFilter(filters.FilterSet):
@@ -40,6 +40,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter
+    permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
         if self.action == "list":
