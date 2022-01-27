@@ -7,3 +7,4 @@ export {default as ProviderService} from "./ProviderService";
 export {default as ContactService} from "./ContactService";
 export {default as ContractService, TEMPLATE} from "./ContractService";
 export {default as ContractorService} from "./ContractorService";
+export {default as DocumentService} from "./DocumentService";

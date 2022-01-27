@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import TopicIcon from "@mui/icons-material/Topic";
 import Toolbar from "@mui/material/Toolbar";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import {MenuListItemLink} from "components/common/presentational";
@@ -54,6 +55,12 @@ const ProjectMenu = ({projectId}) => {
                             <PermContactCalendarIcon />
                         </ListItemIcon>
                         <ListItemText primary="Contactos" />
+                    </MenuListItemLink>
+                    <MenuListItemLink to={`/projects/${projectId}/documents`}>
+                        <ListItemIcon>
+                            <TopicIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Documents" />
                     </MenuListItemLink>
                 </List>
             </Box>

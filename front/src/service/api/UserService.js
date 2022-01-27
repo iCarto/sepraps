@@ -1,6 +1,6 @@
 import ApiService from "./ApiService";
 
-const basePath = "/api/token/";
+const basePath = "/api/users/token/";
 const userNotFoundMessage =
     "Usuario no encontrado. Inténtelo de nuevo o contacte con su administrador.";
 const passwordNotCorrectMessage =
