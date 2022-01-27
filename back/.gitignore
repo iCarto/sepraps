@@ -1,8 +1,11 @@
 # Python
 static
+media
 back/front_build
 back/static
 monitoring/static
 
 monitoring/migrations/
 users/migrations/
+documents/migrations/
+
