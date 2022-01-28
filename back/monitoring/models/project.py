@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils import timezone
 from monitoring.models.construction_contract import ConstructionContract
+from documents.models import MediaNode
 from monitoring.models.contact import Contact
 from monitoring.models.financing_fund import FinancingFund
 from monitoring.models.financing_program import FinancingProgram
@@ -54,6 +55,14 @@ class Project(models.Model):
     )
     linked_localities = models.ManyToManyField(Locality)
     contacts = models.ManyToManyField(Contact)
+
+    folder = models.ForeignKey(
+        MediaNode,
+        on_delete=models.PROTECT,
+        verbose_name=MediaNode._meta.verbose_name,
+        null=False,
+    )
+
     closed = models.BooleanField(blank=False, null=False, default=False)
 
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
