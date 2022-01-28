@@ -1,16 +1,26 @@
-import {folder_api_adapter, createFolder} from "model";
+import {
+    folder_api_adapter,
+    createFolder,
+    createDocument,
+    document_api_adapter,
+} from "model";
 import AuthApiService from "./AuthApiService";
 
 const basePath = "/api/documents/";
 
 const DocumentService = {
-    getFolder(path) {
+    get(path) {
         return AuthApiService.get(basePath + path).then(response => {
-            return createFolder(folder_api_adapter(response));
+            if (response.media_type === "FOLDER") {
+                return createFolder(folder_api_adapter(response));
+            }
+            return createDocument(document_api_adapter(response));
         });
     },
-    getDocument(path, contentType) {
-        return AuthApiService.get(basePath + path, {"Content-Type": contentType});
+    download(path, contentType) {
+        return AuthApiService.get(basePath + path + "?action=download", {
+            "Content-Type": contentType,
+        });
     },
 };
 
