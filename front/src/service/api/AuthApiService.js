@@ -41,6 +41,13 @@ export const AuthApiService = {
         };
         return ApiService.delete(url, headers);
     },
+
+    upload(file, url, ...rest) {
+        const headers = {
+            Authorization: "Bearer " + AuthService.getAccessToken(),
+        };
+        return ApiService.upload(file, url, headers, ...rest);
+    },
 };
 
 export default AuthApiService;

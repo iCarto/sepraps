@@ -11,6 +11,7 @@ import {
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import {useFolderView} from "../provider";
+import {FileUploadSection} from "../common";
 
 const ListFolder = ({path}) => {
     const {id: projectId} = useParams();
@@ -46,6 +47,12 @@ const ListFolder = ({path}) => {
         });
     }, [path]);
 
+    const reloadFolder = () => {
+        DocumentService.get(path).then(folder => {
+            setFolderElements(folder.children);
+        });
+    };
+
     const onSelectElement = element => {
         setSelectedElement(element);
     };
@@ -55,6 +62,9 @@ const ListFolder = ({path}) => {
             <Grid item container justifyContent="space-between" xs={12}>
                 <FolderBreadcrumb path={path} basePath={basePath} />
                 <FolderChangeView />
+            </Grid>
+            <Grid item container xs={12}>
+                <FileUploadSection path={path} onFinishUpload={reloadFolder} />
             </Grid>
             <Grid item container xs={12}>
                 {loading ? (
