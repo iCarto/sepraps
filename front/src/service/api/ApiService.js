@@ -1,4 +1,5 @@
 import {dataService} from "config";
+import {uploadService} from "config";
 
 const ApiService = {
     get(url, headers = {}) {
@@ -28,6 +29,19 @@ const ApiService = {
     delete(url, headers = {}) {
         console.log("DELETE", url);
         return dataService.del(url, headers);
+    },
+
+    upload(file, url, headers = {}, ...rest) {
+        console.log("UPLOAD", url);
+        return uploadService.upload(
+            file,
+            url,
+            {
+                ...headers,
+                "Content-Disposition": "attachment; filename=" + file.name,
+            },
+            ...rest
+        );
     },
 };
 

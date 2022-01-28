@@ -17,10 +17,20 @@ const DocumentService = {
             return createDocument(document_api_adapter(response));
         });
     },
+
     download(path, contentType) {
         return AuthApiService.get(basePath + path + "?action=download", {
             "Content-Type": contentType,
         });
+    },
+
+    upload(file, path, onFinish = () => {}, onProgress = () => {}) {
+        AuthApiService.upload(
+            file,
+            basePath + path + "/" + file.name,
+            onFinish,
+            onProgress
+        );
     },
 };
 
