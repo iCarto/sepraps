@@ -2,6 +2,7 @@ import locale
 from datetime import timedelta
 
 import environ
+from corsheaders.defaults import default_headers
 
 # from corsheaders.defaults import default_headers
 from django.core.exceptions import ImproperlyConfigured
@@ -215,6 +216,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://127.0.0.1:8000",
 # )
 CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_HEADERS = list(default_headers) + ["x-bulk-operation"]
+CORS_ALLOW_HEADERS = list(default_headers) + ["content-disposition"]
 
 AUTH_USER_MODEL = "users.User"
