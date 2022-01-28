@@ -17,10 +17,10 @@ const FolderChangeView = () => {
             exclusive
             onChange={handleChange}
         >
-            <ToggleButton value="list">
+            <ToggleButton value="table">
                 <FormatListBulletedOutlinedIcon fontSize="small" />
             </ToggleButton>
-            <ToggleButton value="detail">
+            <ToggleButton value="list">
                 <GridViewOutlinedIcon fontSize="small" />
             </ToggleButton>
         </ToggleButtonGroup>

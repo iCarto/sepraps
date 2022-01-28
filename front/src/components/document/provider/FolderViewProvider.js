@@ -3,7 +3,7 @@ import {useState, createContext, useContext} from "react";
 let FolderViewContext = createContext(null);
 
 export default function FolderViewProvider({children}) {
-    const [view, setView] = useState("detail");
+    const [view, setView] = useState("table");
 
     let value = {
         view,
