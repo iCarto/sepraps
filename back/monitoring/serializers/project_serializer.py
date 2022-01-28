@@ -34,6 +34,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
     )
+    folder = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -57,6 +58,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "financing_program_name",
             "construction_contract",
             "contacts",
+            "folder",
             "creation_user",
             "created_at",
             "updated_at",
@@ -104,6 +106,9 @@ class ProjectSerializer(serializers.ModelSerializer):
         if obj.construction_contract:
             return ConstructionContractSummarySerializer(obj.construction_contract).data
         return None
+
+    def get_folder(self, obj):
+        return obj.folder.media_path
 
     # OPERATIONS
 

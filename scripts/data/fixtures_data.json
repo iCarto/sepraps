@@ -144,6 +144,131 @@
         }
     },
     {
+        "model": "documents.medianode",
+        "pk": 1,
+        "fields": {
+            "media_name": "2022-AP-001",
+            "media_type": "FOLDER",
+            "storage_path": "2022-AP-001"
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 2,
+        "fields": {
+            "media_name": "1_Diseño",
+            "media_type": "FOLDER",
+            "storage_path": "2022-AP-001/1_Diseño",
+            "parent": 1
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 3,
+        "fields": {
+            "media_name": "2_Contratación",
+            "media_type": "FOLDER",
+            "storage_path": "2022-AP-001/2_Contratación",
+            "parent": 1
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 4,
+        "fields": {
+            "media_name": "3_Ejecución",
+            "media_type": "FOLDER",
+            "storage_path": "2022-AP-001/3_Ejecución",
+            "parent": 1
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 5,
+        "fields": {
+            "media_name": "4_Post_Construcción",
+            "media_type": "FOLDER",
+            "storage_path": "2022-AP-001/4_Post_Construcción",
+            "parent": 1
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 6,
+        "fields": {
+            "media_name": "Diseño1.jpg",
+            "media_type": "DOCUMENT",
+            "media_content_type": "image/jpg",
+            "storage_path": "2022-AP-001/1_Diseño/Diseño1.jpg",
+            "parent": 2
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 7,
+        "fields": {
+            "media_name": "Diseño2.jpg",
+            "media_type": "DOCUMENT",
+            "media_content_type": "image/jpg",
+            "storage_path": "2022-AP-001/1_Diseño/Diseño2.jpg",
+            "parent": 2
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 8,
+        "fields": {
+            "media_name": "Diseño3.jpg",
+            "media_type": "DOCUMENT",
+            "media_content_type": "image/jpg",
+            "storage_path": "2022-AP-001/1_Diseño/Diseño3.jpg",
+            "parent": 2
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 9,
+        "fields": {
+            "media_name": "DiseñoDocumento.txt",
+            "media_type": "DOCUMENT",
+            "media_content_type": "text/plain",
+            "storage_path": "2022-AP-001/1_Diseño/DiseñoDocumento.txt",
+            "parent": 2
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 10,
+        "fields": {
+            "media_name": "1_1_Carpeta_Técnica",
+            "media_type": "FOLDER",
+            "storage_path": "2022-AP-001/1_Diseño/1_1_Carpeta_Técnica",
+            "parent": 2
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 11,
+        "fields": {
+            "media_name": "CarpetaTecnica1.png",
+            "media_type": "DOCUMENT",
+            "media_content_type": "image/png",
+            "storage_path": "2022-AP-001/1_Diseño/1_1_Carpeta_Técnica/CarpetaTecnica1.png",
+            "parent": 10
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "pk": 12,
+        "fields": {
+            "media_name": "Ejecución1.png",
+            "media_type": "DOCUMENT",
+            "media_content_type": "image/png",
+            "storage_path": "2022-AP-001/3_Ejecución/Ejecución1.png",
+            "parent": 4
+        }
+    },
+    {
         "model": "monitoring.financingfund",
         "pk": 1,
         "fields": {
@@ -335,6 +460,7 @@
                 1,
                 2
             ],
+            "folder": 1,
             "closed": false,
             "creation_user": 1,
             "created_at": "2021-12-01T00:00:00Z",
@@ -362,135 +488,11 @@
             "contacts": [
                 1
             ],
+            "folder": 1,
             "closed": true,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 1,
-        "fields": {
-            "media_name": "2022-AP-001",
-            "media_type": "FOLDER",
-            "storage_path": "2022-AP-001"
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 2,
-        "fields": {
-            "media_name": "1_Diseño",
-            "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/1_Diseño",
-            "parent": 1
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 3,
-        "fields": {
-            "media_name": "2_Contratación",
-            "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/2_Contratación",
-            "parent": 1
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 4,
-        "fields": {
-            "media_name": "3_Ejecución",
-            "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/3_Ejecución",
-            "parent": 1
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 5,
-        "fields": {
-            "media_name": "4_Post_Construcción",
-            "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/4_Post_Construcción",
-            "parent": 1
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 6,
-        "fields": {
-            "media_name": "Diseño1.jpg",
-            "media_type": "DOCUMENT",
-            "media_content_type": "image/jpg",
-            "storage_path": "2022-AP-001/1_Diseño/Diseño1.jpg",
-            "parent": 2
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 7,
-        "fields": {
-            "media_name": "Diseño2.jpg",
-            "media_type": "DOCUMENT",
-            "media_content_type": "image/jpg",
-            "storage_path": "2022-AP-001/1_Diseño/Diseño2.jpg",
-            "parent": 2
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 8,
-        "fields": {
-            "media_name": "Diseño3.jpg",
-            "media_type": "DOCUMENT",
-            "media_content_type": "image/jpg",
-            "storage_path": "2022-AP-001/1_Diseño/Diseño3.jpg",
-            "parent": 2
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 9,
-        "fields": {
-            "media_name": "DiseñoDocumento.txt",
-            "media_type": "DOCUMENT",
-            "media_content_type": "text/plain",
-            "storage_path": "2022-AP-001/1_Diseño/DiseñoDocumento.txt",
-            "parent": 2
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 10,
-        "fields": {
-            "media_name": "1_1_Carpeta_Técnica",
-            "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/1_Diseño/1_1_Carpeta_Técnica",
-            "parent": 2
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 11,
-        "fields": {
-            "media_name": "CarpetaTecnica1.png",
-            "media_type": "DOCUMENT",
-            "media_content_type": "image/png",
-            "storage_path": "2022-AP-001/1_Diseño/1_1_Carpeta_Técnica/CarpetaTecnica1.png",
-            "parent": 10
-        }
-    },
-    {
-        "model": "documents.medianode",
-        "pk": 12,
-        "fields": {
-            "media_name": "Ejecución1.png",
-            "media_type": "DOCUMENT",
-            "media_content_type": "image/png",
-            "storage_path": "2022-AP-001/3_Ejecución/Ejecución1.png",
-            "parent": 4
         }
     }
 ]

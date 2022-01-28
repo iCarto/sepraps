@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from documents.models import MediaNode
-from documents.serializers import MediaNodeSerializer
+from documents.serializers import MediaLeafNodeSerializer, MediaNodeSerializer
 from documents.storage import open, save
 from rest_framework import parsers, status, views
 from rest_framework.response import Response
@@ -20,19 +20,40 @@ class MediaView(views.APIView):
     parser_classes = [parsers.FileUploadParser]
 
     def get(self, request, media_path):
+        action = self.request.query_params.get("action")
+
         filter = get_filter(media_path)
         media_node = MediaNode.objects.filter(**filter).first()
-        if media_node.media_type == "FOLDER":
-            serializer = MediaNodeSerializer(media_node, context={"request": request})
-            return Response(serializer.data, status=status.HTTP_200_OK)
 
-        file = open(media_node.media_path)
-        response = HttpResponse(file, content_type=media_node.media_content_type)
-        response["Content-Length"] = file.size
-        response["Content-Disposition"] = (
-            'attachment; filename="%s"' % media_node.media_name
-        )
-        return response
+        if media_node:
+            if action == "download":
+                if media_node.media_type == "DOCUMENT":
+                    file = open(media_node.media_path)
+                    response = HttpResponse(
+                        file, content_type=media_node.media_content_type
+                    )
+                    response["Content-Length"] = file.size
+                    response["Content-Disposition"] = (
+                        'attachment; filename="%s"' % media_node.media_name
+                    )
+                    return response
+                if media_node.media_type == "FOLDER":
+                    # TODO Zip folder action
+                    pass
+
+            if media_node.media_type == "DOCUMENT":
+                serializer = MediaLeafNodeSerializer(
+                    media_node, context={"request": request}
+                )
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            if media_node.media_type == "FOLDER":
+                serializer = MediaNodeSerializer(
+                    media_node, context={"request": request}
+                )
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request, media_path, format=None):
         file = request.data.get("file", None)
