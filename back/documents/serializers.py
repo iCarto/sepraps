@@ -18,6 +18,7 @@ class MediaNodeSerializer(serializers.ModelSerializer):
             "media_type",
             "media_name",
             "media_content_type",
+            "media_size",
             "media_path",
             "storage_path",
             "parent",
@@ -42,5 +43,6 @@ class MediaLeafNodeSerializer(MediaNodeSerializer):
             "media_type",
             "media_name",
             "media_content_type",
+            "media_size",
             "media_path",
         )

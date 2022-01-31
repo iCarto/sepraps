@@ -9,6 +9,7 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import {useSort} from "hooks";
+import {FileUtil} from "utilities";
 
 const headCells = [
     {
@@ -109,7 +110,10 @@ const FolderTable = ({folderElements, selectedElement, onSelectElement, basePath
                                     {folderElement.name}
                                 </TableCell>
                                 <TableCell>{folderElement.content_type}</TableCell>
-                                <TableCell>{folderElement.size}</TableCell>
+                                <TableCell>
+                                    {folderElement.size &&
+                                        FileUtil.formatBytes(folderElement.size)}
+                                </TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         );

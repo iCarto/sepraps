@@ -3,6 +3,7 @@ class Documents extends Array {}
 const document_api_adapter = document => {
     document["name"] = document.media_name;
     document["content_type"] = document.media_content_type;
+    document["size"] = document.media_size;
     document["path"] = document.media_path;
     return document;
 };

@@ -199,6 +199,7 @@
             "media_name": "Diseño1.jpg",
             "media_type": "DOCUMENT",
             "media_content_type": "image/jpg",
+            "media_size": 200000,
             "storage_path": "2022-AP-001/1_Diseño/Diseño1.jpg",
             "parent": 2
         }
@@ -210,6 +211,7 @@
             "media_name": "Diseño2.jpg",
             "media_type": "DOCUMENT",
             "media_content_type": "image/jpg",
+            "media_size": 300000,
             "storage_path": "2022-AP-001/1_Diseño/Diseño2.jpg",
             "parent": 2
         }
@@ -221,6 +223,7 @@
             "media_name": "Diseño3.jpg",
             "media_type": "DOCUMENT",
             "media_content_type": "image/jpg",
+            "media_size": 100000,
             "storage_path": "2022-AP-001/1_Diseño/Diseño3.jpg",
             "parent": 2
         }
@@ -232,6 +235,7 @@
             "media_name": "DiseñoDocumento.txt",
             "media_type": "DOCUMENT",
             "media_content_type": "text/plain",
+            "media_size": 2000,
             "storage_path": "2022-AP-001/1_Diseño/DiseñoDocumento.txt",
             "parent": 2
         }
@@ -253,6 +257,7 @@
             "media_name": "CarpetaTecnica1.png",
             "media_type": "DOCUMENT",
             "media_content_type": "image/png",
+            "media_size": 10000,
             "storage_path": "2022-AP-001/1_Diseño/1_1_Carpeta_Técnica/CarpetaTecnica1.png",
             "parent": 10
         }
@@ -264,6 +269,7 @@
             "media_name": "Ejecución1.png",
             "media_type": "DOCUMENT",
             "media_content_type": "image/png",
+            "media_size": 20000000,
             "storage_path": "2022-AP-001/3_Ejecución/Ejecución1.png",
             "parent": 4
         }
