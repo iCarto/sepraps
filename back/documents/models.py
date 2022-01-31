@@ -14,6 +14,7 @@ class MediaNode(models.Model):
     media_content_type = models.CharField(
         "Tipo de contenido", null=True, max_length=100
     )
+    media_size = models.BigIntegerField("Tamaño", null=True)
     storage_path = models.CharField("Ruta de almacenamiento", null=True, max_length=512)
     parent = models.ForeignKey(
         "self", on_delete=models.CASCADE, blank=True, null=True, related_name="children"

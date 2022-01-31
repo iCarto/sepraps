@@ -69,6 +69,7 @@ class MediaView(views.APIView):
                     "media_type": "DOCUMENT",
                     "media_name": file.name,
                     "media_content_type": file.content_type,
+                    "media_size": file.size,
                     "storage_path": path,
                     "parent": parent.id,
                 }
