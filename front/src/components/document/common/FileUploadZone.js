@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import InsertDriveFile from "@mui/icons-material/InsertDriveFile";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Alert from "@mui/material/Alert";
 
@@ -86,7 +86,7 @@ const FileUploadZone = ({name, auxProperty = null, rules}) => {
                 }
             >
                 <ListItemIcon>
-                    <InsertDriveFile />
+                    <InsertDriveFileIcon />
                 </ListItemIcon>
                 <ListItemText
                     primary={file.name}
