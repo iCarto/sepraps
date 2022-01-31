@@ -47,7 +47,7 @@ const ListFolder = ({path}) => {
         });
     }, [path]);
 
-    const reloadFolder = () => {
+    const reloadFolder = file => {
         DocumentService.get(path).then(folder => {
             setFolderElements(folder.children);
         });

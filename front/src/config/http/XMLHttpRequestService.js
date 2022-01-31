@@ -10,16 +10,26 @@ const readUrl = (url = "") =>
     url.startsWith("http://") || url.startsWith("https://") ? url : `${urlBase}${url}`;
 
 const XMLHttpRequestService = {
-    upload(file, url, headers = {}, onFinish = () => {}, onProgress = () => {}) {
+    upload(
+        file,
+        url,
+        headers = {},
+        onFinish = (file, event) => {},
+        onProgress = (file, progress, event) => {}
+    ) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", readUrl(url), true);
         Object.keys(headers).forEach(key => {
             xhr.setRequestHeader(key, headers[key]);
         });
-        xhr.onload = onFinish;
+        xhr.onload = e => {
+            onFinish(file, e);
+        };
 
         // Listen to the upload progress.
-        xhr.upload.onprogress = onProgress;
+        xhr.upload.onprogress = e => {
+            onProgress(file, (e.loaded * 100) / e.total, e);
+        };
 
         xhr.send(file);
     },
