@@ -22,9 +22,9 @@ class ProjectSerializer(serializers.ModelSerializer):
     financing_program_name = serializers.CharField(
         source="financing_program.name", required=False
     )
-    main_infrastructure = InfraestructureSerializer(required=False)
-    linked_localities = LocalitySerializer(many=True, required=False)
-    provider = ProviderSerializer(required=False)
+    main_infrastructure = InfraestructureSerializer()
+    linked_localities = LocalitySerializer(many=True)
+    provider = ProviderSerializer()
     contacts = ContactSerializer(many=True, required=False)
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
@@ -111,6 +111,87 @@ class ProjectSerializer(serializers.ModelSerializer):
         project.contacts.set(contacts_for_project)
 
         return project
+
+    def update_main_infrastructure(self, instance, validated_data):
+        main_infrastructure_data = validated_data.pop("main_infrastructure")
+
+        main_infrastructure = instance.main_infrastructure
+        for key in main_infrastructure_data.keys():
+            setattr(
+                main_infrastructure,
+                key,
+                main_infrastructure_data.get(key, getattr(main_infrastructure, key)),
+            )
+
+        main_infrastructure.save()
+        instance.main_infrastructure = main_infrastructure
+
+    def update_provider(self, instance, validated_data):
+        provider_data = validated_data.pop("provider")
+
+        if "id" in provider_data and provider_data["id"] is not None:
+            provider = Provider.objects.get(pk=provider_data["id"])
+            for key in provider_data.keys():
+                setattr(provider, key, provider_data.get(key, getattr(provider, key)))
+
+            provider.save()
+        else:
+            provider = Provider.objects.create(**provider_data)
+
+        instance.provider = provider
+
+    def update_linked_localities(self, instance, validated_data):
+        linked_localities_data_items = validated_data.pop("linked_localities")
+
+        linked_localities_for_project = []
+        for linked_locality_data in linked_localities_data_items:
+            for value in linked_locality_data.values():
+                linked_localities_for_project.append(value)
+
+        instance.linked_localities.set(linked_localities_for_project)
+
+    def update_contacts(self, instance, validated_data):
+        # get the nested objects list
+        contact_data_items = validated_data.pop("contacts", None)
+        if contact_data_items:
+            # get all nested objects related with this instance and make a dict(id, object)
+            contact_items_dict = dict((i.id, i) for i in instance.contacts.all())
+
+            contacts_for_project = []
+            for contact_data in contact_data_items:
+                if "id" in contact_data and contact_data["id"] is not None:
+                    # if exists id remove from the dict and update
+                    contact = contact_items_dict.pop(contact_data["id"], None)
+                    if not contact:
+                        contact = Contact.objects.get(pk=contact_data["id"])
+                    # update attributes with validated data
+                    for key in contact_data.keys():
+                        setattr(
+                            contact, key, contact_data.get(key, getattr(contact, key))
+                        )
+
+                    contact.save()
+                    contacts_for_project.append(contact)
+                else:
+                    # else create a new object
+                    contact = Contact.objects.create(**contact_data)
+                    contacts_for_project.append(contact)
+
+            instance.contacts.set(contacts_for_project)
+
+    def update(self, instance, validated_data):
+
+        self.update_main_infrastructure(instance, validated_data)
+        self.update_provider(instance, validated_data)
+        self.update_linked_localities(instance, validated_data)
+        self.update_contacts(instance, validated_data)
+
+        # nested entities properties were removed in previous methods
+        for key in validated_data.keys():
+            setattr(instance, key, validated_data.get(key, getattr(instance, key)))
+
+        instance.save()
+        return instance
 
 
 class ProjectSummarySerializer(ProjectSerializer):
