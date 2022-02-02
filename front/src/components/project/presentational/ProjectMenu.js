@@ -60,7 +60,7 @@ const ProjectMenu = ({projectId}) => {
                         <ListItemIcon>
                             <TopicIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Documents" />
+                        <ListItemText primary="Documentos" />
                     </MenuListItemLink>
                 </List>
             </Box>
