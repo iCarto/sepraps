@@ -1,7 +1,6 @@
 import {useState} from "react";
 
-import ProviderSearchAutocomplete from "./ProviderSearchAutocomplete";
-import ProviderSection from "./ProviderSection";
+import {ProviderSearchAutocomplete, ProviderSection} from "./";
 
 import Grid from "@mui/material/Grid";
 
@@ -16,14 +15,16 @@ const ProviderFormSearch = ({handleSelect}) => {
     };
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{mt: 0.25}}>
             <Grid item xs={12}>
                 <ProviderSearchAutocomplete
                     handleSelect={handleSelectExistingProvider}
                 />
             </Grid>
             <Grid item xs={12}>
-                {existingProvider && <ProviderSection provider={existingProvider} />}
+                {existingProvider && (
+                    <ProviderSection provider={existingProvider} hideButtons={true} />
+                )}
             </Grid>
         </Grid>
     );

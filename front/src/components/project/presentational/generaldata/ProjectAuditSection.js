@@ -12,17 +12,11 @@ const ProjectAuditSection = () => {
             <SectionField
                 label="Fecha creación:"
                 value={DateUtil.formatDate(project.created_at)}
-                containerWidth="short"
             />
-            <SectionField
-                label="Usuario creación:"
-                value={project.creation_user}
-                containerWidth="short"
-            />
+            <SectionField label="Usuario creación:" value={project.creation_user} />
             <SectionField
                 label="Fecha última modificación:"
                 value={DateUtil.formatDate(project.updated_at)}
-                containerWidth="short"
             />
         </SectionCard>
     );

@@ -35,6 +35,12 @@ const ProjectService = {
             return createProject(project_api_adapter(response));
         });
     },
+
+    updateProject(project, id) {
+        return AuthApiService.put(basePath + "/" + id, project).then(response => {
+            return createProject(project_api_adapter(response));
+        });
+    },
 };
 
 export default ProjectService;

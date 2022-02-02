@@ -16,12 +16,15 @@ const createProjects = (data = []) => {
     return projects;
 };
 
+// ----------- TO-DO: REVIEW & REPLACE project_type_name (& class, financing fund & financing program) BY project_type IN ALL COMPONENTS
 const createProject = ({
     id = -1,
     name = "",
     code = "",
     featured_image = "",
     phase_name = "",
+    project_type = "",
+    project_class = "",
     project_type_name = "",
     project_class_name = "",
     init_date = null,
@@ -51,6 +54,8 @@ const createProject = ({
         },
     ],
     provider = createProvider(),
+    financing_fund = null,
+    financing_program = null,
     financing_fund_name = "",
     financing_program_name = "",
     contacts = [],
@@ -64,6 +69,8 @@ const createProject = ({
         code,
         featured_image,
         phase_name,
+        project_type,
+        project_class,
         project_type_name,
         project_class_name,
         init_date,
@@ -73,6 +80,8 @@ const createProject = ({
         main_infrastructure,
         linked_localities,
         provider,
+        financing_fund,
+        financing_program,
         financing_fund_name,
         financing_program_name,
         contacts,

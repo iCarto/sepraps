@@ -14,13 +14,8 @@ const ProjectMonitoringSection = () => {
                 label="Fecha inicio:"
                 value={DateUtil.formatDate(project.init_date)}
                 labelIcon={DateRangeIcon}
-                containerWidth="short"
             />
-            <SectionField
-                label="Fase:"
-                value={project.phase_name}
-                containerWidth="short"
-            />
+            <SectionField label="Fase:" value={project.phase_name} />
             <ProgressBar barPhase={project.phase_name} />
         </SectionCard>
     );
