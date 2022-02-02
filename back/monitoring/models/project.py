@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils import timezone
+from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.contact import Contact
 from monitoring.models.financing_fund import FinancingFund
 from monitoring.models.financing_program import FinancingProgram
@@ -36,6 +37,13 @@ class Project(models.Model):
         on_delete=models.PROTECT,
         verbose_name=FinancingProgram._meta.verbose_name,
         null=True,
+    )
+    construction_contract = models.ForeignKey(
+        ConstructionContract,
+        on_delete=models.PROTECT,
+        verbose_name=ConstructionContract._meta.verbose_name,
+        null=True,
+        related_name="projects",
     )
     provider = models.ForeignKey(
         Provider,
