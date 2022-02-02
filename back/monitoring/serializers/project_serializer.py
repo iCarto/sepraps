@@ -1,4 +1,3 @@
-from monitoring.models.contact import Contact
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.location import Locality
@@ -28,6 +27,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         many=True, queryset=Locality.objects.all()
     )
     provider = ProviderSerializer(required=False, allow_null=True)
+    construction_contract = serializers.SerializerMethodField(required=False)
     contacts = ContactSerializer(many=True, required=False)
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
@@ -53,6 +53,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "financing_fund_name",
             "financing_program",
             "financing_program_name",
+            "construction_contract",
             "contacts",
             "creation_user",
             "created_at",
@@ -89,6 +90,15 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_project_class_name(self, obj):
         return dominio_get_value(obj.project_class)
+
+    def get_construction_contract(self, obj):
+        from monitoring.serializers.construction_contract_serializer import (
+            ConstructionContractSummarySerializer,
+        )
+
+        # TODO To avoid circular dependencies with serializers we have
+        # to load this inside a function
+        return ConstructionContractSummarySerializer(obj.construction_contract).data
 
     # OPERATIONS
 
@@ -198,7 +208,8 @@ class ProjectSummarySerializer(ProjectSerializer):
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
         for field in fields:
-            fields[field].read_only = True
+            if field != "id":
+                fields[field].read_only = True
         return fields
 
 
