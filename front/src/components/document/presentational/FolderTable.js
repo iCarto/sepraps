@@ -1,15 +1,16 @@
 import {useNavigate} from "react-router-dom";
-import {DocumentService} from "service/api";
+import {FileUtil} from "utilities";
+import {useSort, useDownloadDocument} from "hooks";
 
 import {TableSortingHead} from "components/common/presentational";
 import {FolderElementIcon} from ".";
+
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {useSort} from "hooks";
-import {FileUtil} from "utilities";
+import FolderTableRowMenu from "./FolderTableRowMenu";
 
 const headCells = [
     {
@@ -30,12 +31,13 @@ const headCells = [
     },
     {
         id: "actions",
-        label: "Acciones",
+        label: "",
     },
 ];
 
 const FolderTable = ({folderElements, selectedElement, onSelectElement, basePath}) => {
     const navigate = useNavigate();
+    const downloadDocument = useDownloadDocument();
 
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "name",
@@ -56,28 +58,17 @@ const FolderTable = ({folderElements, selectedElement, onSelectElement, basePath
 
     const handleDoubleClick = async folderElement => {
         if (folderElement.content_type) {
-            const result = await DocumentService.download(
+            downloadDocument(
+                folderElement.name,
                 folderElement.path,
                 folderElement.content_type
             );
-
-            let anchor = document.createElement("a");
-            document.body.appendChild(anchor);
-
-            const blob = await result.blob();
-            const objectUrl = window.URL.createObjectURL(blob);
-
-            anchor.download = folderElement.name;
-            anchor.href = objectUrl;
-
-            anchor.click();
-
-            window.URL.revokeObjectURL(objectUrl);
-            document.body.removeChild(anchor);
         } else {
             navigate(basePath + folderElement.path);
         }
     };
+
+    const noPointer = {cursor: "default"};
 
     return (
         <TableContainer>
@@ -106,15 +97,19 @@ const FolderTable = ({folderElements, selectedElement, onSelectElement, basePath
                                 <TableCell>
                                     <FolderElementIcon element={folderElement} />
                                 </TableCell>
-                                <TableCell component="th" scope="row">
+                                <TableCell component="th" scope="row" style={noPointer}>
                                     {folderElement.name}
                                 </TableCell>
-                                <TableCell>{folderElement.content_type}</TableCell>
-                                <TableCell>
+                                <TableCell style={noPointer}>
+                                    {folderElement.content_type}
+                                </TableCell>
+                                <TableCell style={noPointer}>
                                     {folderElement.size &&
                                         FileUtil.formatBytes(folderElement.size)}
                                 </TableCell>
-                                <TableCell></TableCell>
+                                <TableCell>
+                                    <FolderTableRowMenu folderElement={folderElement} />
+                                </TableCell>
                             </TableRow>
                         );
                     })}

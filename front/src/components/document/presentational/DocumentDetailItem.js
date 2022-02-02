@@ -1,6 +1,6 @@
 import {createRef} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {DocumentService} from "service/api";
+import {useNavigate} from "react-router-dom";
+import {useDownloadDocument} from "hooks";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -16,6 +16,7 @@ const DocumentDetailItem = ({
     const link = createRef();
 
     const navigate = useNavigate();
+    const downloadDocument = useDownloadDocument();
 
     const handleClick = async event => {
         event.preventDefault();
@@ -34,24 +35,11 @@ const DocumentDetailItem = ({
             onSelect(documentElement.path);
         }
 
-        const result = await DocumentService.download(
+        downloadDocument(
+            documentElement.name,
             documentElement.path,
             documentElement.content_type
         );
-
-        let anchor = document.createElement("a");
-        document.body.appendChild(anchor);
-
-        const blob = await result.blob();
-        const objectUrl = window.URL.createObjectURL(blob);
-
-        anchor.download = documentElement.name;
-        anchor.href = objectUrl;
-
-        anchor.click();
-
-        window.URL.revokeObjectURL(objectUrl);
-        document.body.removeChild(anchor);
     };
 
     return (
