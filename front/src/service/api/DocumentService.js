@@ -24,12 +24,21 @@ const DocumentService = {
         });
     },
 
-    upload(file, path, onFinish = () => {}, onProgress = () => {}) {
-        AuthApiService.upload(
+    upload(
+        file,
+        path,
+        onFinish = () => {},
+        onProgress = () => {},
+        onAbort = () => {},
+        onError = () => {}
+    ) {
+        return AuthApiService.upload(
             file,
             basePath + path + "/" + file.name,
             onFinish,
-            onProgress
+            onProgress,
+            onAbort,
+            onError
         );
     },
 };
