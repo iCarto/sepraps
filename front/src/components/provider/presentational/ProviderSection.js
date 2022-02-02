@@ -1,9 +1,17 @@
 import {SectionCard, SectionField} from "components/common/presentational";
+
 import LocationOn from "@mui/icons-material/LocationOn";
 
-const ProviderSection = ({provider}) => {
+const ProviderSection = ({provider, hideButtons = null, ...props}) => {
+    let actions = [];
+    if (!hideButtons && provider) {
+        actions.push("edit");
+    } else if (!hideButtons && !provider) {
+        actions.push("add");
+    } else actions = null;
+
     return (
-        <SectionCard title="Prestador">
+        <SectionCard title="Prestador" headerActions={actions} {...props}>
             <SectionField label="Nombre:" value={provider.name} />
             <SectionField
                 label="Ubicación:"

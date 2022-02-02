@@ -2,10 +2,11 @@ import {useEffect, useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {useSearch} from "hooks";
 
+import {ContactsTable} from "components/contacts/presentational";
+import {SearchBox, SectionCard, SubPageLayout} from "components/common/presentational";
+
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import {SearchBox, SectionCard} from "components/common/presentational";
-import {ContactsTable} from "components/contacts/presentational";
 
 const ViewProjectContactsSubPage = () => {
     let project;
@@ -23,23 +24,25 @@ const ViewProjectContactsSubPage = () => {
     };
 
     return (
-        <Container maxWidth="lg" sx={{my: 3}}>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <SectionCard title="Contactos del proyecto">
-                        <Grid container sx={{mb: 2}}>
-                            <Grid item xs={12} md={4}>
-                                <SearchBox
-                                    searchValue={searchText}
-                                    handleSearch={handleSearch}
-                                />
+        <SubPageLayout>
+            <Container maxWidth="lg" sx={{my: 3}}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <SectionCard title="Contactos del proyecto">
+                            <Grid container sx={{mb: 2}}>
+                                <Grid item xs={12} md={4}>
+                                    <SearchBox
+                                        searchValue={searchText}
+                                        handleSearch={handleSearch}
+                                    />
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <ContactsTable contacts={filteredContacts} />
-                    </SectionCard>
+                            <ContactsTable contacts={filteredContacts} />
+                        </SectionCard>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </SubPageLayout>
     );
 };
 

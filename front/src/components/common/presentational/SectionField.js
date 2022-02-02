@@ -1,9 +1,12 @@
-import PropTypes from "prop-types";
-
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const SectionField = ({label, value, labelIcon, containerWidth}) => {
+const SectionField = ({
+    label = null,
+    value = "",
+    labelIcon = null,
+    containerWidth = "",
+}) => {
     let labelWidth;
     let valueWidth;
 
@@ -13,18 +16,19 @@ const SectionField = ({label, value, labelIcon, containerWidth}) => {
             valueWidth = 6;
             break;
         default:
-            labelWidth = 3;
-            valueWidth = 9;
+            labelWidth = 4;
+            valueWidth = 8;
             break;
     }
 
     const LabelIcon = labelIcon;
+
     return (
         <Grid container spacing={1}>
             <Grid
                 item
                 xs="auto"
-                sm={3}
+                sm={5}
                 lg={labelWidth}
                 sx={{
                     display: "flex",
@@ -46,7 +50,7 @@ const SectionField = ({label, value, labelIcon, containerWidth}) => {
                     {label}
                 </Typography>
             </Grid>
-            <Grid item xs="auto" sm={9} lg={valueWidth}>
+            <Grid item xs="auto" sm={7} lg={valueWidth}>
                 <Typography
                     variant="subtitle1"
                     sx={{
@@ -59,13 +63,6 @@ const SectionField = ({label, value, labelIcon, containerWidth}) => {
             </Grid>
         </Grid>
     );
-};
-
-SectionField.propTypes = {
-    label: PropTypes.string.isRequired,
-    value: PropTypes.any,
-    labelIcon: PropTypes.any,
-    containerWidth: PropTypes.any,
 };
 
 export default SectionField;

@@ -1,10 +1,13 @@
-import {useOutletContext} from "react-router-dom";
+import {Outlet, useNavigate, useOutletContext} from "react-router-dom";
+
+import {SubPageLayout} from "components/common/presentational";
+import {ProviderSection} from "components/provider/presentational";
 import {
     ProjectAuditSection,
     ProjectGeneralDataSection,
     ProjectMonitoringSection,
 } from "../presentational/generaldata";
-import {ProviderSection} from "components/provider/presentational";
+
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 
@@ -12,23 +15,39 @@ const ViewProjectInfoSubPage = () => {
     let project;
     [project] = useOutletContext();
 
+    const navigate = useNavigate();
+
+    const handleSidebarOpen = (sectionTitle, action) => {
+        sectionTitle === "Prestador" &&
+            navigate(`/project/${project.id}/provider/${action}`);
+    };
+
     return (
-        <Container maxWidth="lg" sx={{my: 3}}>
-            <Grid container spacing={3}>
-                <Grid item xs={12} lg={7} xl={8}>
-                    <ProjectGeneralDataSection />
-                </Grid>
-                <Grid item xs={12} lg={5} xl={4}>
-                    <ProjectMonitoringSection />
-                </Grid>
-                <Grid item xs={12} lg={7} xl={8}>
-                    <ProviderSection provider={project.provider} />
-                </Grid>
-                <Grid item xs={12} lg={5} xl={4}>
-                    <ProjectAuditSection />
-                </Grid>
-            </Grid>
-        </Container>
+        <>
+            <SubPageLayout>
+                <Container maxWidth="lg" sx={{my: 3}}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <ProjectGeneralDataSection />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <ProviderSection
+                                provider={project.provider}
+                                handleSidebarOpen={handleSidebarOpen}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <ProjectMonitoringSection />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <ProjectAuditSection />
+                        </Grid>
+                    </Grid>
+                </Container>
+            </SubPageLayout>
+            <Outlet context={[project]} />
+        </>
     );
 };
 
