@@ -108,7 +108,10 @@ const FolderTable = ({folderElements, selectedElement, onSelectElement, basePath
                                         FileUtil.formatBytes(folderElement.size)}
                                 </TableCell>
                                 <TableCell>
-                                    <FolderTableRowMenu folderElement={folderElement} />
+                                    <FolderTableRowMenu
+                                        folderElement={folderElement}
+                                        basePath={basePath}
+                                    />
                                 </TableCell>
                             </TableRow>
                         );

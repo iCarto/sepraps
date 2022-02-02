@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useDownloadDocument} from "hooks";
+import {useDownloadDocument, useCopyToClipboard} from "hooks";
 
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -10,9 +10,11 @@ import ListItemText from "@mui/material/ListItemText";
 import DownloadIcon from "@mui/icons-material/Download";
 import FolderZipIcon from "@mui/icons-material/FolderZip";
 import DeleteIcon from "@mui/icons-material/Delete";
+import LinkIcon from "@mui/icons-material/Link";
 
-const FolderTableRowMenu = ({folderElement}) => {
+const FolderTableRowMenu = ({folderElement, basePath}) => {
     const downloadDocument = useDownloadDocument();
+    const copytToClipBoard = useCopyToClipboard();
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -32,6 +34,11 @@ const FolderTableRowMenu = ({folderElement}) => {
             folderElement.path,
             folderElement.content_type
         );
+        handleClose();
+    };
+
+    const handleCopyLink = () => {
+        copytToClipBoard(window.location.origin + basePath + folderElement.path);
         handleClose();
     };
 
@@ -69,11 +76,17 @@ const FolderTableRowMenu = ({folderElement}) => {
                     </ListItemIcon>
                     <ListItemText>Descargar</ListItemText>
                 </MenuItem>
+                <MenuItem onClick={handleCopyLink}>
+                    <ListItemIcon>
+                        <LinkIcon />
+                    </ListItemIcon>
+                    <ListItemText>Copiar enlace</ListItemText>
+                </MenuItem>
                 <MenuItem onClick={handleDelete}>
                     <ListItemIcon>
                         <DeleteIcon color="error" />
                     </ListItemIcon>
-                    <ListItemText color="error">Eliminar</ListItemText>
+                    <ListItemText>Eliminar</ListItemText>
                 </MenuItem>
             </Menu>
         </div>
