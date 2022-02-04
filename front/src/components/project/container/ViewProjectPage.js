@@ -1,10 +1,10 @@
 import {useState, useEffect} from "react";
 import {Outlet, useLocation, useParams} from "react-router-dom";
-
 import {ProjectService} from "service/api";
-import {DomainProvider} from "components/common/provider";
 
+import {PageWithMenuLayout} from "layout";
 import {ProjectMenu} from "../presentational";
+import {DomainProvider} from "components/common/provider";
 
 const ViewProjectPage = () => {
     const {id} = useParams();
@@ -19,12 +19,9 @@ const ViewProjectPage = () => {
     }, [id, location.state?.lastRefreshDate]);
 
     return (
-        project && (
-            <DomainProvider>
-                <ProjectMenu />
-                <Outlet context={[project]} />
-            </DomainProvider>
-        )
+        <PageWithMenuLayout menu={<ProjectMenu projectId={id} />}>
+            <DomainProvider>{project && <Outlet context={[project]} />}</DomainProvider>
+        </PageWithMenuLayout>
     );
 };
 
