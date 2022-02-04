@@ -1,3 +1,6 @@
+import {createProject} from "model";
+import {project_api_adapter} from "./Project";
+
 class Contracts extends Array {}
 
 const contract_api_adapter = contract => {
@@ -18,6 +21,12 @@ const contract_api_adapter = contract => {
     contract["execution_final_delivery_date"] = new Date(
         contract["execution_final_delivery_date"]
     );
+    if (contract.projects) {
+        contract["projects"] = contract.projects.map(project => {
+            return createProject(project_api_adapter(project));
+        });
+    }
+
     contract["created_at"] = new Date(contract["created_at"]);
     contract["updated_at"] = new Date(contract["updated_at"]);
     return contract;
@@ -47,6 +56,7 @@ const createContract = ({
     execution_certificate_start_date = null,
     execution_expected_delivery_date = null,
     execution_final_delivery_date = null,
+    projects = [],
     created_at = null,
     updated_at = null,
 } = {}) => {
@@ -67,6 +77,7 @@ const createContract = ({
         execution_certificate_start_date,
         execution_expected_delivery_date,
         execution_final_delivery_date,
+        projects,
         created_at,
         updated_at,
     };
