@@ -109,7 +109,7 @@ const ListProjectsPage = () => {
                 sx={fabStyle}
                 color="primary"
                 aria-label="add"
-                onClick={() => navigate("/project/new")}
+                onClick={() => navigate("/projects/new")}
             >
                 <AddIcon />
             </Fab>

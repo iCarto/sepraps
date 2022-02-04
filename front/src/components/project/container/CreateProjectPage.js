@@ -18,7 +18,7 @@ const CreateProjectPage = () => {
     const handleFormSubmit = project => {
         ProjectService.createProject(project)
             .then(createdProject => {
-                navigate(`/project/${createdProject.id}`);
+                navigate(`/projects/${createdProject.id}`);
             })
             .catch(error => {
                 console.log(error);

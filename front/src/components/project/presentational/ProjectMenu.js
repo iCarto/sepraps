@@ -48,32 +48,32 @@ const ProjectMenu = () => {
             <Divider />
             <Box sx={{overflow: "auto"}}>
                 <List sx={{pt: 0}}>
-                    <MenuListItemLink to={`/project/${id}`}>
+                    <MenuListItemLink to={`/projects/${id}`}>
                         <ListItemIcon>
                             <InfoIcon />
                         </ListItemIcon>
                         <ListItemText primary="Información" />
                     </MenuListItemLink>
-                    <MenuListItemLink to={`/project/${id}/location`}>
+                    <MenuListItemLink to={`/projects/${id}/location`}>
                         <ListItemIcon>
                             <LocationOnIcon />
                         </ListItemIcon>
                         <ListItemText primary="Ubicación" />
                     </MenuListItemLink>
-                    <MenuListItemLink to={`/project/${id}/financing`}>
+                    <MenuListItemLink to={`/projects/${id}/financing`}>
                         <ListItemIcon>
                             <AccountBalanceIcon />
                         </ListItemIcon>
                         <ListItemText primary="Financiación" />
                     </MenuListItemLink>
-                    <MenuListItemLink to={`/project/${id}/contacts`}>
+                    <MenuListItemLink to={`/projects/${id}/contacts`}>
                         <ListItemIcon>
                             <PermContactCalendarIcon />
                         </ListItemIcon>
                         <ListItemText primary="Contactos" />
                     </MenuListItemLink>
                     <Divider />
-                    <MenuListItemLink to="/">
+                    <MenuListItemLink to="/projects">
                         <ListItemIcon>
                             <ArrowBack />
                         </ListItemIcon>
