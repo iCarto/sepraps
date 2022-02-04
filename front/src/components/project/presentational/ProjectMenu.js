@@ -2,7 +2,6 @@ import {useParams} from "react-router-dom";
 import SelectProjectDropDown from "../container/SelectProjectDropDown";
 
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -11,26 +10,12 @@ import InfoIcon from "@mui/icons-material/Info";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Toolbar from "@mui/material/Toolbar";
-import ArrowBack from "@mui/icons-material/ArrowBack";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import {MenuListItemLink} from "components/common/presentational";
 
-const drawerWidth = 240;
-
-const ProjectMenu = () => {
-    const {id} = useParams();
-
+const ProjectMenu = ({projectId}) => {
     return (
-        <Drawer
-            variant="permanent"
-            anchor="left"
-            sx={{
-                width: drawerWidth,
-                flexShrink: 0,
-                [`& .MuiDrawer-paper`]: {width: drawerWidth, boxSizing: "border-box"},
-            }}
-        >
-            <Toolbar />
+        <Box>
             <Toolbar
                 sx={{
                     // -----  OPTION 1 - LIGHT GREY ------
@@ -44,44 +29,37 @@ const ProjectMenu = () => {
                 disableGutters
             >
                 <SelectProjectDropDown />
-            </Toolbar>{" "}
+            </Toolbar>
             <Divider />
-            <Box sx={{overflow: "auto"}}>
+            <Box>
                 <List sx={{pt: 0}}>
-                    <MenuListItemLink to={`/projects/${id}`}>
+                    <MenuListItemLink to={`/projects/${projectId}`}>
                         <ListItemIcon>
                             <InfoIcon />
                         </ListItemIcon>
                         <ListItemText primary="Información" />
                     </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${id}/location`}>
+                    <MenuListItemLink to={`/projects/${projectId}/location`}>
                         <ListItemIcon>
                             <LocationOnIcon />
                         </ListItemIcon>
                         <ListItemText primary="Ubicación" />
                     </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${id}/financing`}>
+                    <MenuListItemLink to={`/projects/${projectId}/financing`}>
                         <ListItemIcon>
                             <AccountBalanceIcon />
                         </ListItemIcon>
                         <ListItemText primary="Financiación" />
                     </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${id}/contacts`}>
+                    <MenuListItemLink to={`/projects/${projectId}/contacts`}>
                         <ListItemIcon>
                             <PermContactCalendarIcon />
                         </ListItemIcon>
                         <ListItemText primary="Contactos" />
                     </MenuListItemLink>
-                    <Divider />
-                    <MenuListItemLink to="/projects">
-                        <ListItemIcon>
-                            <ArrowBack />
-                        </ListItemIcon>
-                        <ListItemText primary="Volver al listado" />
-                    </MenuListItemLink>
                 </List>
             </Box>
-        </Drawer>
+        </Box>
     );
 };
 

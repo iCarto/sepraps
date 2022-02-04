@@ -2,12 +2,12 @@ import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {ProjectService} from "service/api";
 import {useSort, useSearch} from "hooks";
+
+import {PageLayout} from "layout";
 import {SearchBox} from "components/common/presentational";
 import {ClosedProjectsOption, ProjectList} from "../presentational";
 import {SortProjectsSelect, ShowNoOfProjects} from "../presentational";
 
-import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -56,13 +56,7 @@ const ListProjectsPage = () => {
     };
 
     return (
-        <Box component="main" sx={{flexGrow: 1, bgcolor: "background.default", p: 3}}>
-            {
-                // Fixed header needs a fixed space between top margin and the top of the child component
-                // MUI examples add a empty toolbar to solve this problem
-                // TODO: Check if there is a good solution for this
-                <Toolbar />
-            }
+        <PageLayout>
             <Grid
                 container
                 sx={{mb: 4}}
@@ -113,7 +107,7 @@ const ListProjectsPage = () => {
             >
                 <AddIcon />
             </Fab>
-        </Box>
+        </PageLayout>
     );
 };
 
