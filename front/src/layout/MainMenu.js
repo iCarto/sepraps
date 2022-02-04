@@ -7,6 +7,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import {MenuListItemLink} from "components/common/presentational";
 
 const drawerWidth = 240;
@@ -69,6 +70,12 @@ const MainMenu = ({drowerOpened, onDrawerToggle}) => {
                         <FactCheckOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary="Proyectos" />
+                </MenuListItemLink>
+                <MenuListItemLink to={`/contracts`}>
+                    <ListItemIcon>
+                        <WorkOutlineOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Contratos" />
                 </MenuListItemLink>
             </List>
             {drowerOpened && (

@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import {PageLayout} from "layout";
 
 const fabStyle = {
     position: "absolute",
@@ -55,13 +56,7 @@ const ListContractsPage = () => {
     };
 
     return (
-        <Box component="main" sx={{flexGrow: 1, bgcolor: "background.default", p: 3}}>
-            {
-                // Fixed header needs a fixed space between top margin and the top of the child component
-                // MUI examples add a empty toolbar to solve this problem
-                // TODO: Check if there is a good solution for this
-                <Toolbar />
-            }
+        <PageLayout>
             <Grid
                 container
                 sx={{mb: 4}}
@@ -110,7 +105,7 @@ const ListContractsPage = () => {
             >
                 <AddIcon />
             </Fab>
-        </Box>
+        </PageLayout>
     );
 };
 

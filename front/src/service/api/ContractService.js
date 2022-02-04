@@ -26,7 +26,7 @@ const ContractService = {
 
     getContract(id) {
         return AuthApiService.get(basePath + "/" + id).then(response => {
-            return createContracts(contract_api_adapter(response));
+            return createContract(contract_api_adapter(response));
         });
     },
 
