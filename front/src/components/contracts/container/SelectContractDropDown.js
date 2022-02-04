@@ -1,0 +1,122 @@
+import {useState, useEffect} from "react";
+import {ContractService, TEMPLATE} from "service/api";
+import {useParams} from "react-router-dom";
+
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import {MenuListItemLink} from "components/common/presentational";
+import Stack from "@mui/material/Stack";
+
+const SelectContractDropDown = () => {
+    const [contracts, setContracts] = useState([]);
+    const [anchorElement, setAnchorElement] = useState(null);
+
+    const open = Boolean(anchorElement);
+
+    const {id} = useParams();
+
+    useEffect(() => {
+        ContractService.getContracts(false, TEMPLATE.SHORT).then(contracts => {
+            setContracts(contracts);
+        });
+    }, []);
+
+    let selectedContract = contracts.find(contract => contract.id == id);
+
+    const handleClick = event => {
+        setAnchorElement(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorElement(null);
+    };
+
+    return (
+        <>
+            <Button
+                id="positioned-button"
+                aria-controls="positioned-menu"
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+                sx={{
+                    pt: 3,
+                    pb: 2,
+                    px: 2.25,
+                    color: "white",
+                    alignItems: "flex-start",
+                }}
+            >
+                <Box
+                    sx={{
+                        textAlign: "left",
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontWeight: 800,
+                            lineHeight: 1.25,
+                        }}
+                    >
+                        {selectedContract && selectedContract.number}
+                    </Typography>
+                    <Typography
+                        variant="overline"
+                        color="grey.900"
+                        sx={{
+                            pt: 1.5,
+                            lineHeight: 0,
+                            fontWeight: 500,
+                            letterSpacing: "0.5px",
+                            color: "white",
+                        }}
+                    >
+                        {selectedContract && selectedContract.bid_request_number}
+                    </Typography>
+                </Box>
+            </Button>
+            <Menu
+                id="lock-menu"
+                anchorEl={anchorElement}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    "aria-labelledby": "lock-button",
+                    role: "listbox",
+                }}
+                anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                }}
+            >
+                {contracts.map(contract => (
+                    <MenuListItemLink
+                        variant="menu"
+                        key={contract.id}
+                        id={contract.id}
+                        to={`/contracts/${contract.id}`}
+                        selected={contract === selectedContract.number}
+                        onClick={handleClose}
+                    >
+                        <Stack>
+                            <Typography>{contract.number}</Typography>
+                            <Typography variant="caption" sx={{ml: 1}}>
+                                {contract.bid_request_number}
+                            </Typography>
+                        </Stack>
+                    </MenuListItemLink>
+                ))}
+            </Menu>
+        </>
+    );
+};
+
+export default SelectContractDropDown;
