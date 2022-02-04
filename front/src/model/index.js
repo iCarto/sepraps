@@ -28,3 +28,9 @@ export {
     infrastructure_api_adapter,
     infrastructures_api_adapter,
 } from "./Infrastructure";
+export {
+    default as createContract,
+    createContracts,
+    contract_api_adapter,
+    contracts_api_adapter,
+} from "./Contract";

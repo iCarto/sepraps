@@ -5,3 +5,4 @@ export {default as FinancingService} from "./FinancingService";
 export {default as UserService} from "./UserService";
 export {default as ProviderService} from "./ProviderService";
 export {default as ContactService} from "./ContactService";
+export {default as ContractService} from "./ContractService";
