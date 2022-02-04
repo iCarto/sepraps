@@ -6,11 +6,18 @@ import {
     locality_api_adapter,
 } from "./Locality";
 import {provider_api_adapter} from "./Provider";
+import {createContract, createProvider} from "model";
+import {contract_api_adapter} from "./Contract";
 
 class Projects extends Array {}
 
 const project_api_adapter = project => {
     project["init_date"] = new Date(project["init_date"]);
+    if (project.construction_contract) {
+        project["construction_contract"] = createContract(
+            contract_api_adapter(project.construction_contract)
+        );
+    }
     project["created_at"] = new Date(project["created_at"]);
     project["updated_at"] = new Date(project["updated_at"]);
     if (project["linked_localities"]) {
@@ -59,6 +66,7 @@ const createProject = ({
     financing_program = null,
     financing_fund_name = "",
     financing_program_name = "",
+    construction_contract = null,
     contacts = [],
     creation_user = "",
     created_at = null,
@@ -83,6 +91,7 @@ const createProject = ({
         financing_program,
         financing_fund_name,
         financing_program_name,
+        construction_contract,
         contacts,
         creation_user,
         created_at,
