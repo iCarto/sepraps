@@ -17,7 +17,7 @@ const LoginPage = () => {
 
     const [error, setError] = useState("");
 
-    let from = location.state?.from?.pathname || "/";
+    let from = location.state?.from?.pathname || "/projects";
 
     function validateLogin(username, password) {
         auth.login(username, password, () => {})

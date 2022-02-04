@@ -19,18 +19,10 @@ export default function AppRoutes() {
         <Router>
             <AuthProvider>
                 <Routes>
-                    <Route element={<BaseLayout />}>
-                        <Route path="/login" element={<LoginPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="" element={<BaseLayout />}>
                         <Route
-                            path="/"
-                            element={
-                                <AuthRequired>
-                                    <ListProjectsPage />
-                                </AuthRequired>
-                            }
-                        />
-                        <Route
-                            path="/project/new"
+                            path="/projects/new"
                             element={
                                 <AuthRequired>
                                     <CreateProjectPage />
@@ -38,7 +30,7 @@ export default function AppRoutes() {
                             }
                         />
                         <Route
-                            path="/project/:id"
+                            path="/projects/:id"
                             element={
                                 <AuthRequired>
                                     <ViewProjectPage />
@@ -63,7 +55,16 @@ export default function AppRoutes() {
                                 path="contacts"
                                 element={<ViewProjectContactsSubPage />}
                             />
+                            <Route path="" element={<ViewProjectInfoSubPage />} />
                         </Route>
+                        <Route
+                            path="/projects"
+                            element={
+                                <AuthRequired>
+                                    <ListProjectsPage />
+                                </AuthRequired>
+                            }
+                        />
                     </Route>
                 </Routes>
             </AuthProvider>
