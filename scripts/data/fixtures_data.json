@@ -141,8 +141,6 @@
         "fields": {
             "name": "Junta de Saneamiento de Pruebas",
             "area": "rural",
-            "department": "15",
-            "district": "1507",
             "locality": "1507600"
         }
     },
@@ -150,8 +148,6 @@
         "model": "monitoring.infrastructure",
         "pk": 1,
         "fields": {
-            "department": "15",
-            "district": "1507",
             "locality": "1507600",
             "latitude": -23.37693,
             "longitude": -57.66498,
@@ -162,8 +158,6 @@
         "model": "monitoring.infrastructure",
         "pk": 2,
         "fields": {
-            "department": "15",
-            "district": "1507",
             "locality": "1507605",
             "latitude": -23.37693,
             "longitude": -57.66498,
@@ -207,14 +201,8 @@
             "financing_fund": 1,
             "financing_program": 1,
             "provider": 1,
-            "linked_localities": [
-                "1507620",
-                "1507625"
-            ],
-            "contacts": [
-                1,
-                2
-            ],
+            "linked_localities": ["1507620", "1507625"],
+            "contacts": [1, 2],
             "closed": false,
             "creation_user": 1,
             "created_at": "2021-12-01T00:00:00Z",
@@ -234,13 +222,8 @@
             "financing_fund": 1,
             "financing_program": 1,
             "provider": 1,
-            "linked_localities": [
-                "1507640",
-                "1507645"
-            ],
-            "contacts": [
-                1
-            ],
+            "linked_localities": ["1507640", "1507645"],
+            "contacts": [1],
             "closed": true,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
