@@ -1,6 +1,7 @@
 from monitoring.models.contact import Contact
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
+from monitoring.models.location import Locality
 from monitoring.models.project import Project, get_code_for_new_project
 from monitoring.models.provider import Provider
 from monitoring.serializers.contact_serializer import ContactSerializer
@@ -24,7 +25,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     )
     main_infrastructure = InfraestructureSerializer()
     linked_localities = LocalitySerializer(many=True)
-    provider = ProviderSerializer()
+    provider = ProviderSerializer(required=False, allow_null=True)
     contacts = ContactSerializer(many=True, required=False)
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
@@ -86,11 +87,23 @@ class ProjectSerializer(serializers.ModelSerializer):
 
         validated_data["code"] = get_code_for_new_project()
 
-        main_infrastructure = validated_data.pop("main_infrastructure")
-        infrastructure = Infrastructure.objects.create(**main_infrastructure)
+        main_infrastructure_data = validated_data.pop("main_infrastructure")
+
+        main_inf_locality_data = main_infrastructure_data.pop("locality")
+        main_inf_locality = Locality.objects.get(pk=main_inf_locality_data["code"])
+
+        infrastructure = Infrastructure.objects.create(
+            **main_infrastructure_data, locality=main_inf_locality
+        )
 
         provider_data = validated_data.pop("provider")
-        provider, _ = Provider.objects.get_or_create(**provider_data)
+
+        provider_locality_data = provider_data.pop("locality")
+        provider_locality = Locality.objects.get(pk=provider_locality_data["code"])
+
+        provider, _ = Provider.objects.get_or_create(
+            **provider_data, locality=provider_locality
+        )
 
         linked_localities_data = validated_data.pop("linked_localities")
         linked_localities_for_project = []
@@ -115,6 +128,9 @@ class ProjectSerializer(serializers.ModelSerializer):
     def update_main_infrastructure(self, instance, validated_data):
         main_infrastructure_data = validated_data.pop("main_infrastructure")
 
+        main_inf_locality_data = main_infrastructure_data.pop("locality")
+        main_inf_locality = Locality.objects.get(pk=main_inf_locality_data["code"])
+
         main_infrastructure = instance.main_infrastructure
         for key in main_infrastructure_data.keys():
             setattr(
@@ -122,6 +138,7 @@ class ProjectSerializer(serializers.ModelSerializer):
                 key,
                 main_infrastructure_data.get(key, getattr(main_infrastructure, key)),
             )
+        main_infrastructure.locality = main_inf_locality
 
         main_infrastructure.save()
         instance.main_infrastructure = main_infrastructure
@@ -129,14 +146,22 @@ class ProjectSerializer(serializers.ModelSerializer):
     def update_provider(self, instance, validated_data):
         provider_data = validated_data.pop("provider")
 
-        if "id" in provider_data and provider_data["id"] is not None:
-            provider = Provider.objects.get(pk=provider_data["id"])
-            for key in provider_data.keys():
-                setattr(provider, key, provider_data.get(key, getattr(provider, key)))
+        provider = None
+        if provider_data:
+            locality_data = provider_data.pop("locality")
+            locality = Locality.objects.get(pk=locality_data["code"])
 
-            provider.save()
-        else:
-            provider = Provider.objects.create(**provider_data)
+            if "id" in provider_data and provider_data["id"] is not None:
+                provider = Provider.objects.get(pk=provider_data["id"])
+                for key in provider_data.keys():
+                    setattr(
+                        provider, key, provider_data.get(key, getattr(provider, key))
+                    )
+                provider.locality = locality
+
+                provider.save()
+            else:
+                provider = Provider.objects.create(**provider_data, locality=locality)
 
         instance.provider = provider
 
@@ -195,11 +220,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(ProjectSerializer):
-    department_name = serializers.CharField(
-        source="main_infrastructure.department.name"
-    )
-    district_name = serializers.CharField(source="main_infrastructure.district.name")
-    locality_name = serializers.CharField(source="main_infrastructure.locality.name")
+    locality = LocalitySerializer(source="main_infrastructure.locality")
     provider_name = serializers.CharField(source="provider.name", allow_null=True)
 
     class Meta(ProjectSerializer.Meta):
@@ -208,9 +229,7 @@ class ProjectSummarySerializer(ProjectSerializer):
             "name",
             "code",
             "featured_image",
-            "department_name",
-            "district_name",
-            "locality_name",
+            "locality",
             "phase_name",
             "project_type_name",
             "project_class_name",
