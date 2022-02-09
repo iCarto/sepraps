@@ -1,4 +1,3 @@
-from monitoring.models.contact import Contact
 from monitoring.models.location import Locality
 from monitoring.models.project import Project
 from monitoring.models.provider import Provider
@@ -10,7 +9,7 @@ from rest_framework import serializers
 class ProviderSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(allow_null=True, required=False)
-    locality = LocalitySerializer()
+    locality = serializers.PrimaryKeyRelatedField(queryset=Locality.objects.all())
     project = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=Project.objects.all(), required=False
     )
@@ -21,16 +20,18 @@ class ProviderSerializer(serializers.ModelSerializer):
         fields = ("id", "name", "area", "locality", "project", "contacts")
         extra_kwargs = {"project": {"write_only": True}}
 
-    def create(self, validated_data):
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response["locality"] = LocalitySerializer(instance.locality).data
+        return response
 
-        locality_data = validated_data.pop("locality")
-        locality = Locality.objects.get(pk=locality_data["code"])
+    def create(self, validated_data):
 
         contacts_data = validated_data.pop("contacts", None)
 
         project = validated_data.pop("project")
 
-        provider = Provider.objects.create(**validated_data, locality=locality)
+        provider = Provider.objects.create(**validated_data)
 
         provider.contacts.set(self.fields["contacts"].update([], contacts_data))
 
@@ -48,10 +49,6 @@ class ProviderSerializer(serializers.ModelSerializer):
                 instance.contacts.all(), validated_data.pop("contacts", None)
             )
         )
-
-        locality_data = validated_data.pop("locality")
-        locality = Locality.objects.get(pk=locality_data["code"])
-        instance.locality = locality
 
         project = validated_data.pop("project")
 
