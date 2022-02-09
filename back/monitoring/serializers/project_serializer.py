@@ -111,17 +111,13 @@ class ProjectSerializer(serializers.ModelSerializer):
             for value in linked_locality_data.values():
                 linked_localities_for_project.append(value)
 
-        contacts_data = validated_data.pop("contacts")
-        contacts_for_project = []
-        for contact_data in contacts_data:
-            contact, _ = Contact.objects.get_or_create(**contact_data)
-            contacts_for_project.append(contact)
+        contacts_data = validated_data.pop("contacts", None)
 
         project = Project.objects.create(
             main_infrastructure=infrastructure, provider=provider, **validated_data
         )
         project.linked_localities.set(linked_localities_for_project)
-        project.contacts.set(contacts_for_project)
+        project.contacts.set(self.fields["contacts"].update([], contacts_data))
 
         return project
 
@@ -176,33 +172,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         instance.linked_localities.set(linked_localities_for_project)
 
     def update_contacts(self, instance, validated_data):
-        # get the nested objects list
-        contact_data_items = validated_data.pop("contacts", None)
-        if contact_data_items:
-            # get all nested objects related with this instance and make a dict(id, object)
-            contact_items_dict = dict((i.id, i) for i in instance.contacts.all())
-
-            contacts_for_project = []
-            for contact_data in contact_data_items:
-                if "id" in contact_data and contact_data["id"] is not None:
-                    # if exists id remove from the dict and update
-                    contact = contact_items_dict.pop(contact_data["id"], None)
-                    if not contact:
-                        contact = Contact.objects.get(pk=contact_data["id"])
-                    # update attributes with validated data
-                    for key in contact_data.keys():
-                        setattr(
-                            contact, key, contact_data.get(key, getattr(contact, key))
-                        )
-
-                    contact.save()
-                    contacts_for_project.append(contact)
-                else:
-                    # else create a new object
-                    contact = Contact.objects.create(**contact_data)
-                    contacts_for_project.append(contact)
-
-            instance.contacts.set(contacts_for_project)
+        instance.contacts.set(
+            self.fields["contacts"].update(
+                instance.contacts.all(), validated_data.pop("contacts", None)
+            )
+        )
 
     def update(self, instance, validated_data):
 
