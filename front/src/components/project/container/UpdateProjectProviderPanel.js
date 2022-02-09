@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 import {useNavigateWithReload} from "hooks";
-import {createLocality, createProvider} from "model";
+import {createProvider} from "model";
 import {ProviderService} from "service/api";
 
 import {
@@ -62,11 +62,7 @@ const UpdateProjectProviderPanel = () => {
             id: data.provider_id,
             name: data.provider_name,
             area: data.provider_area,
-            locality: createLocality({
-                code: data.provider_location.locality,
-                district: data.provider_location.district,
-                department: data.provider_location.department,
-            }),
+            locality: data.provider_location.locality,
             project: project.id,
         });
         handleFormSubmit(updatedProvider);
