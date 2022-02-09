@@ -22,7 +22,7 @@ class ContactFilter(filters.FilterSet):
         fields = ("search",)
 
 
-class ContactViewSet(viewsets.ReadOnlyModelViewSet):
+class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_class = ContactFilter

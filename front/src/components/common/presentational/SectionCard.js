@@ -14,7 +14,11 @@ const SectionCard = ({title = "", headerActions = [], ...props}) => {
         >
             <CardHeader
                 title={<SectionTitle>{title}</SectionTitle>}
-                action={<CardActions disableSpacing>{headerActions}</CardActions>}
+                action={
+                    <CardActions disableSpacing sx={{pt: 0, pb: 0}}>
+                        {headerActions}
+                    </CardActions>
+                }
             />
             <CardContent>{props.children}</CardContent>
         </Card>

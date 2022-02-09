@@ -9,6 +9,7 @@ import {
     ViewProjectContactsSubPage,
     UpdateProjectProviderPanel,
 } from "components/project/container";
+import {UpdateProjectProviderContactPanel} from "components/provider/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -33,6 +34,11 @@ const projectRoutes = [
                 key="project-provider"
                 path="provider/:action"
                 element={<UpdateProjectProviderPanel />}
+            />
+            <Route
+                key="project-provider-contact"
+                path="provider/contact/:contactId/:action"
+                element={<UpdateProjectProviderContactPanel />}
             />
         </Route>
     </Route>,

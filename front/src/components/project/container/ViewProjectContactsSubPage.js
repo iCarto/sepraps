@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {useOutletContext} from "react-router-dom";
 import {useSearch} from "hooks";
+import {ContactService} from "service/api";
 
 import {SubPageLayout} from "layout";
 import {ContactsTable} from "components/contacts/presentational";
@@ -10,15 +10,19 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 
 const ViewProjectContactsSubPage = () => {
-    let project;
-    [project] = useOutletContext();
-
-    const [filteredContacts, setFilteredContacts] = useState(project.contacts);
+    const [contacts, setContacts] = useState([]);
+    const [filteredContacts, setFilteredContacts] = useState([]);
     const {searchText, setSearchText, searchFunction} = useSearch("");
 
     useEffect(() => {
-        setFilteredContacts([...project.contacts].filter(searchFunction));
-    }, [project.contacts, searchText]);
+        ContactService.getContacts().then(data => {
+            setContacts(data);
+        });
+    }, []);
+
+    useEffect(() => {
+        setFilteredContacts([...contacts].filter(searchFunction));
+    }, [contacts, searchText]);
 
     const handleSearch = data => {
         setSearchText(data);
