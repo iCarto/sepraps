@@ -1,12 +1,14 @@
 import {Fragment, useState} from "react";
 
+import {ContactService} from "service/api";
+import {useDomain} from "components/common/provider";
+
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
-import {ContactService} from "service/api";
 
 const WAIT_INTERVAL = 500;
 let timerID;
@@ -23,6 +25,8 @@ const ContactSearchAutocomplete = ({handleSelect}) => {
         loading: false,
         contacts: [],
     });
+
+    const {contacts} = useDomain();
 
     const handleSelectOption = (event, value) => {
         handleSelect(value);
@@ -50,12 +54,10 @@ const ContactSearchAutocomplete = ({handleSelect}) => {
         }, WAIT_INTERVAL);
     };
 
-    console.log("contacts", state.contacts);
-
     return (
         <Autocomplete
             id="project-contact-check-autocomplete"
-            options={state.contacts}
+            options={contacts}
             onChange={handleSelectOption}
             getOptionLabel={contact => contact.name}
             renderOption={(props, contact, {selected}) => (

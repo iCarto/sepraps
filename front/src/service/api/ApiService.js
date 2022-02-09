@@ -27,7 +27,7 @@ const ApiService = {
 
     delete(url, headers = {}) {
         console.log("DELETE", url);
-        return dataService.delete(url, headers);
+        return dataService.del(url, headers);
     },
 };
 

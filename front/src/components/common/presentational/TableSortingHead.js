@@ -15,7 +15,7 @@ function TableSortingHead({order, attribute, onRequestSort, headCells}) {
     return (
         <TableHead>
             <TableRow>
-                {headCells.map(headCell => (
+                {headCells.slice(0, -1).map(headCell => (
                     <TableCell
                         key={headCell.id}
                         sortDirection={attribute === headCell.id ? order : false}
@@ -37,6 +37,7 @@ function TableSortingHead({order, attribute, onRequestSort, headCells}) {
                         </TableSortLabel>
                     </TableCell>
                 ))}
+                <TableCell key="actions"></TableCell>
             </TableRow>
         </TableHead>
     );

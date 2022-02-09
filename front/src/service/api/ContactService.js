@@ -14,6 +14,11 @@ const ContactService = {
             return createContacts(contacts_api_adapter(response));
         });
     },
+    deleteContact(contactId) {
+        return AuthApiService.delete(basePath + "/" + contactId).then(response => {
+            console.log(response);
+        });
+    },
 };
 
 export default ContactService;

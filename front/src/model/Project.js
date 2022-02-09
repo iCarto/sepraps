@@ -28,8 +28,13 @@ const project_api_adapter = project => {
         );
     }
     project["provider"] = createProvider(
-        project["provider"] ? provider_api_adapter(project["provider"]) : {}
+        project["provider"]
+            ? provider_api_adapter({...project["provider"], project: project["id"]})
+            : {}
     );
+    // project["provider"] = createProvider(
+    //     project["provider"] ? provider_api_adapter(project["provider"]) : {}
+    // );
     if (project["main_infrastructure"]) {
         project["main_infrastructure"] = createInfrastructure(
             infrastructure_api_adapter(project["main_infrastructure"])

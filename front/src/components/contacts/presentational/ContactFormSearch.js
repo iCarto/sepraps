@@ -16,7 +16,7 @@ const ContactFormSearch = ({handleSelect}) => {
     };
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{mt: 0.25}}>
             <Grid item xs={12}>
                 <ContactSearchAutocomplete handleSelect={handleSelectExistingContact} />
             </Grid>

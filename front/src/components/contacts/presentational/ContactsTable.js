@@ -1,14 +1,16 @@
 import {useSort} from "hooks";
 
-import {TableSortingHead} from "components/common/presentational";
-import Box from "@mui/material/Box";
+import {TableAction, TableSortingHead} from "components/common/presentational";
+import {ActionsMenu} from "components/common/presentational";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
-import IconButton from "@mui/material/IconButton";
+import TableCell from "@mui/material/TableCell";
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const headCells = [
     {
@@ -37,15 +39,20 @@ const headCells = [
     },
     {
         id: "actions",
-        label: "Acciones",
     },
 ];
 
-const ContactsTable = ({contacts, handleRemove = null}) => {
+const ContactsTable = ({contacts, handleAction = null}) => {
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "name",
         "asc"
     );
+
+    const tableRowStyle = {
+        "&:last-child td, &:last-child th": {
+            border: 0,
+        },
+    };
 
     const handleRequestSort = (event, property) => {
         const isAsc = attribute === property && order === "asc";
@@ -53,56 +60,64 @@ const ContactsTable = ({contacts, handleRemove = null}) => {
         setAttribute(property);
     };
 
+    const handleClick = (rowId, buttonName) => {
+        handleAction(rowId, buttonName.split("-")[0]);
+    };
+
     return (
-        <Box sx={{width: "100%"}}>
-            <TableContainer>
-                <Table sx={{minWidth: 750}} aria-labelledby="tableTitle">
-                    <TableSortingHead
-                        order={order}
-                        attribute={attribute}
-                        onRequestSort={handleRequestSort}
-                        headCells={headCells}
-                    />
-                    <TableBody>
-                        {contacts.sort(sortFunction).map((row, index) => {
-                            console.log({row});
-                            return (
-                                <TableRow
-                                    hover
-                                    key={index}
-                                    sx={{
-                                        "&:last-child td, &:last-child th": {
-                                            border: 0,
-                                        },
-                                    }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {row.name}
-                                    </TableCell>
-                                    <TableCell>{row.post_name}</TableCell>
-                                    <TableCell>{row.gender}</TableCell>
-                                    <TableCell>{row.phone}</TableCell>
-                                    <TableCell>{row.email}</TableCell>
-                                    <TableCell>{row.comments}</TableCell>
-                                    <TableCell>
-                                        {handleRemove && (
-                                            <IconButton
-                                                aria-label="delete"
-                                                onClick={() => {
-                                                    handleRemove(index, row.id);
-                                                }}
-                                            >
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        )}
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Box>
+        <TableContainer>
+            <Table sx={{minWidth: 750}} aria-labelledby="tableTitle">
+                <TableSortingHead
+                    order={order}
+                    attribute={attribute}
+                    onRequestSort={handleRequestSort}
+                    headCells={headCells}
+                />
+                <TableBody>
+                    {contacts.sort(sortFunction).map((row, index) => {
+                        return (
+                            <TableRow hover key={index} sx={tableRowStyle}>
+                                <TableCell component="th" scope="row">
+                                    {row.name}
+                                </TableCell>
+                                <TableCell>{row.post_name}</TableCell>
+                                <TableCell>{row.gender}</TableCell>
+                                <TableCell>{row.phone}</TableCell>
+                                <TableCell>{row.email}</TableCell>
+                                <TableCell>{row.comments}</TableCell>
+                                <TableCell>
+                                    {handleAction ? (
+                                        <ActionsMenu>
+                                            <TableAction
+                                                name="edit-contact"
+                                                icon={<EditIcon />}
+                                                text="Editar contacto"
+                                                rowId={row.id}
+                                                handleClick={handleClick}
+                                            />
+                                            <TableAction
+                                                name="remove-contact"
+                                                icon={<DeleteIcon />}
+                                                text="Quitar contacto"
+                                                rowId={row.id}
+                                                handleClick={handleClick}
+                                            />
+                                            <TableAction
+                                                name="delete-contact"
+                                                icon={<ClearIcon />}
+                                                text="Eliminar contacto"
+                                                rowId={row.id}
+                                                handleClick={handleClick}
+                                            />
+                                        </ActionsMenu>
+                                    ) : null}
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 };
 
