@@ -42,6 +42,7 @@ class Project(models.Model):
         on_delete=models.PROTECT,
         verbose_name=Provider._meta.verbose_name,
         null=True,
+        related_name="project",
     )
     linked_localities = models.ManyToManyField(Locality)
     contacts = models.ManyToManyField(Contact)
