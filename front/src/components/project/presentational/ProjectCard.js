@@ -93,8 +93,9 @@ const ProjectCard = ({project}) => {
                                 <LocationOnIcon fontSize="small" sx={{mr: 1}} />
                             </Tooltip>
                             <Typography variant="subtitle1" sx={{lineHeight: "normal"}}>
-                                {project.locality_name}, {project.district_name} (
-                                {project.department_name})
+                                {project.locality.locality_name},{" "}
+                                {project.locality.district_name} (
+                                {project.locality.department_name})
                             </Typography>
                         </Box>
                         <Box

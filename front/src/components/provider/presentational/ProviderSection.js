@@ -15,7 +15,7 @@ const ProviderSection = ({provider, hideButtons = null, ...props}) => {
             <SectionField label="Nombre:" value={provider.name} />
             <SectionField
                 label="Ubicación:"
-                value={`${provider.locality_name}, ${provider.department_name} (${provider.district_name})`}
+                value={`${provider.locality.locality_name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
                 labelIcon={LocationOn}
             />
         </SectionCard>

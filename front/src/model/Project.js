@@ -1,4 +1,11 @@
-import {createProvider} from "model";
+import {createInfrastructure, createLocality, createProvider} from "model";
+import {infrastructure_api_adapter} from "./Infrastructure";
+import {
+    createLocalities,
+    localities_api_adapter,
+    locality_api_adapter,
+} from "./Locality";
+import {provider_api_adapter} from "./Provider";
 
 class Projects extends Array {}
 
@@ -6,6 +13,22 @@ const project_api_adapter = project => {
     project["init_date"] = new Date(project["init_date"]);
     project["created_at"] = new Date(project["created_at"]);
     project["updated_at"] = new Date(project["updated_at"]);
+    if (project["linked_localities"]) {
+        project["linked_localities"] = createLocalities(
+            localities_api_adapter(project["linked_localities"])
+        );
+    }
+    if (project["provider"]) {
+        project["provider"] = createProvider(provider_api_adapter(project["provider"]));
+    }
+    if (project["main_infrastructure"]) {
+        project["main_infrastructure"] = createInfrastructure(
+            infrastructure_api_adapter(project["main_infrastructure"])
+        );
+    }
+    if (project["locality"]) {
+        project["locality"] = createLocality(locality_api_adapter(project["locality"]));
+    }
     return project;
 };
 
@@ -28,31 +51,9 @@ const createProject = ({
     project_type_name = "",
     project_class_name = "",
     init_date = null,
-    department_name = "",
-    district_name = "",
-    locality_name = "",
-    main_infrastructure = {
-        id: -1,
-        department: -1,
-        department_name: "",
-        district: -1,
-        district_name: "",
-        locality: -1,
-        locality_name: "",
-        latitude: -1,
-        longitude: -1,
-        altitude: -1,
-    },
-    linked_localities = [
-        {
-            department: -1,
-            department_name: "",
-            district: -1,
-            district_name: "",
-            locality: -1,
-            locality_name: "",
-        },
-    ],
+    locality = createLocality(),
+    main_infrastructure = createInfrastructure(),
+    linked_localities = [],
     provider = createProvider(),
     financing_fund = null,
     financing_program = null,
@@ -74,9 +75,7 @@ const createProject = ({
         project_type_name,
         project_class_name,
         init_date,
-        department_name,
-        district_name,
-        locality_name,
+        locality,
         main_infrastructure,
         linked_localities,
         provider,
