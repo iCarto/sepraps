@@ -66,13 +66,9 @@ const ProjectForm = ({handleFormSubmit}) => {
                 id: data.provider_id,
                 name: data.provider_name,
                 area: data.provider_area,
-                department: data.provider_location.department,
-                district: data.provider_location.district,
                 locality: data.provider_location.locality,
             },
             main_infrastructure: {
-                department: data.main_infrastructure_location.department,
-                district: data.main_infrastructure_location.district,
                 locality: data.main_infrastructure_location.locality,
                 latitude: NumberUtil.parseFloatOrNull(
                     data.main_infrastructure_latitude
@@ -83,9 +79,7 @@ const ProjectForm = ({handleFormSubmit}) => {
                 altitude: NumberUtil.parseIntOrNull(data.main_infrastructure_altitude),
             },
             linked_localities: data.linked_localities.map(linked_locality => {
-                return {
-                    locality: linked_locality.locality,
-                };
+                return linked_locality.locality;
             }),
             contacts: data.contacts.map(contact => {
                 return {
@@ -101,6 +95,7 @@ const ProjectForm = ({handleFormSubmit}) => {
             financing_fund: data.financing.financing_fund,
             financing_program: data.financing.financing_program,
         };
+        console.log({project});
         handleFormSubmit(project);
     };
 

@@ -10,15 +10,15 @@ const ProjectInfrastructureSection = () => {
         <SectionCard title="Infraestructura principal">
             <SectionField
                 label="Departamento:"
-                value={project.main_infrastructure.department_name}
+                value={project.main_infrastructure.locality.department_name}
             />
             <SectionField
                 label="Distrito:"
-                value={project.main_infrastructure.district_name}
+                value={project.main_infrastructure.locality.district_name}
             />
             <SectionField
                 label="Localidad:"
-                value={project.main_infrastructure.locality_name}
+                value={project.main_infrastructure.locality.locality_name}
             />
             <SectionField
                 label="Ubicación:"

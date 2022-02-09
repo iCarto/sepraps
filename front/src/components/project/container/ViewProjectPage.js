@@ -13,6 +13,7 @@ const ViewProjectPage = () => {
 
     useEffect(() => {
         ProjectService.getProject(id).then(data => {
+            console.log({data});
             setProject(data);
         });
     }, [id, location.state?.lastRefreshDate]);

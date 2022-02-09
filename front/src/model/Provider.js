@@ -1,4 +1,5 @@
 import {createLocality} from "model";
+import {contacts_api_adapter, createContacts} from "./Contact";
 import {locality_api_adapter} from "./Locality";
 
 class Providers extends Array {}
@@ -7,6 +8,11 @@ const provider_api_adapter = provider => {
     if (provider["locality"]) {
         provider["locality"] = createLocality(
             locality_api_adapter(provider["locality"])
+        );
+    }
+    if (provider["contacts"]) {
+        provider["contacts"] = createContacts(
+            contacts_api_adapter(provider["contacts"])
         );
     }
     return provider;
@@ -25,6 +31,7 @@ const createProvider = ({
     area = "",
     locality = createLocality(),
     project = -1, // project id
+    contacts = [],
 } = {}) => {
     const publicApi = {
         id,
@@ -32,6 +39,7 @@ const createProvider = ({
         area,
         locality,
         project,
+        contacts,
     };
 
     return Object.freeze(publicApi);
