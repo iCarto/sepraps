@@ -1,4 +1,4 @@
-import {Outlet, useNavigate, useOutletContext} from "react-router-dom";
+import {Outlet, useOutletContext} from "react-router-dom";
 
 import {SubPageLayout} from "components/common/presentational";
 import {ProviderSection} from "components/provider/presentational";
@@ -15,13 +15,6 @@ const ViewProjectInfoSubPage = () => {
     let project;
     [project] = useOutletContext();
 
-    const navigate = useNavigate();
-
-    const handleSidebarOpen = (sectionTitle, action) => {
-        sectionTitle === "Prestador" &&
-            navigate(`/project/${project.id}/provider/${action}`);
-    };
-
     return (
         <>
             <SubPageLayout>
@@ -32,10 +25,7 @@ const ViewProjectInfoSubPage = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <ProviderSection
-                                provider={project.provider}
-                                handleSidebarOpen={handleSidebarOpen}
-                            />
+                            <ProviderSection provider={project.provider} />
                         </Grid>
                         <Grid item xs={12}>
                             <ProjectMonitoringSection />

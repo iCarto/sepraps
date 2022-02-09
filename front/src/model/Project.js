@@ -18,9 +18,9 @@ const project_api_adapter = project => {
             localities_api_adapter(project["linked_localities"])
         );
     }
-    if (project["provider"]) {
-        project["provider"] = createProvider(provider_api_adapter(project["provider"]));
-    }
+    project["provider"] = createProvider(
+        project["provider"] ? provider_api_adapter(project["provider"]) : {}
+    );
     if (project["main_infrastructure"]) {
         project["main_infrastructure"] = createInfrastructure(
             infrastructure_api_adapter(project["main_infrastructure"])

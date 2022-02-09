@@ -11,11 +11,8 @@ import {
     ViewProjectLocationSubPage,
     ViewProjectFinancingSubPage,
     ViewProjectContactsSubPage,
+    UpdateProjectProviderPanel,
 } from "components/project/container";
-import {
-    ProviderSidebarAdd,
-    ProviderSidebarEdit,
-} from "components/provider/presentational";
 
 export default function AppRoutes() {
     return (
@@ -50,12 +47,8 @@ export default function AppRoutes() {
                         >
                             <Route path="" element={<ViewProjectInfoSubPage />}>
                                 <Route
-                                    path="provider/add"
-                                    element={<ProviderSidebarAdd />}
-                                />
-                                <Route
-                                    path="provider/edit"
-                                    element={<ProviderSidebarEdit />}
+                                    path="provider/:action"
+                                    element={<UpdateProjectProviderPanel />}
                                 />
                             </Route>
                             <Route

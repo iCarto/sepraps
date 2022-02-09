@@ -6,3 +6,4 @@ export {default as ViewProjectLocationSubPage} from "./ViewProjectLocationSubPag
 export {default as ViewProjectFinancingSubPage} from "./ViewProjectFinancingSubPage";
 export {default as ViewProjectContactsSubPage} from "./ViewProjectContactsSubPage";
 export {default as SelectProjectDropDown} from "./SelectProjectDropDown";
+export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPanel";

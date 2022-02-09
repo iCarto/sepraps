@@ -24,12 +24,14 @@ const createProvider = ({
     name = "",
     area = "",
     locality = createLocality(),
+    project = -1, // project id
 } = {}) => {
     const publicApi = {
         id,
         name,
         area,
         locality,
+        project,
     };
 
     return Object.freeze(publicApi);
