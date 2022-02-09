@@ -33,7 +33,7 @@ const LocationService = {
                     });
                 }
                 administrativeDivisions.localities.push({
-                    value: locality.locality,
+                    value: locality.code,
                     label: locality.locality_name,
                     district_code: locality.district,
                     department_code: locality.department,
