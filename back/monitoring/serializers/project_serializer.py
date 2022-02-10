@@ -24,10 +24,12 @@ class ProjectSerializer(serializers.ModelSerializer):
     )
     main_infrastructure = InfraestructureSerializer()
     linked_localities = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Locality.objects.all()
+        many=True, queryset=Locality.objects.prefetch_related("department", "district")
     )
     provider = ProviderSerializer(required=False, allow_null=True)
-    construction_contract = serializers.SerializerMethodField(required=False)
+    construction_contract = serializers.SerializerMethodField(
+        required=False, allow_null=True
+    )
     contacts = ContactSerializer(many=True, required=False)
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
@@ -62,9 +64,10 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response["linked_localities"] = LocalitySerializer(
-            instance.linked_localities, many=True
-        ).data
+        if "linked_localities" in response:
+            response["linked_localities"] = LocalitySerializer(
+                instance.linked_localities, many=True
+            ).data
         return response
 
     # ATTRIBUTES
@@ -98,7 +101,9 @@ class ProjectSerializer(serializers.ModelSerializer):
 
         # TODO To avoid circular dependencies with serializers we have
         # to load this inside a function
-        return ConstructionContractSummarySerializer(obj.construction_contract).data
+        if obj.construction_contract:
+            return ConstructionContractSummarySerializer(obj.construction_contract).data
+        return None
 
     # OPERATIONS
 
@@ -195,8 +200,8 @@ class ProjectSummarySerializer(ProjectSerializer):
             "featured_image",
             "locality",
             "phase_name",
-            "project_type_name",
-            "project_class_name",
+            "project_type",
+            "project_class",
             "init_date",
             "provider_name",
             "financing_fund_name",

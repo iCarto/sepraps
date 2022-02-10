@@ -15,5 +15,6 @@ class InfraestructureSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response["locality"] = LocalitySerializer(instance.locality).data
+        if "locality" in response:
+            response["locality"] = LocalitySerializer(instance.locality).data
         return response
