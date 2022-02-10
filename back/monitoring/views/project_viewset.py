@@ -24,10 +24,50 @@ class ProjectFilter(filters.FilterSet):
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all()
+    queryset = Project.objects.select_related(
+        "main_infrastructure",
+        "main_infrastructure__locality",
+        "main_infrastructure__locality__department",
+        "main_infrastructure__locality__district",
+        "provider",
+        "provider__locality",
+        "provider__locality__department",
+        "provider__locality__district",
+        "construction_contract",
+        "financing_fund",
+        "financing_program",
+    ).prefetch_related("contacts")
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter
+
+    def get_queryset(self):
+        if self.action == "list":
+            template = self.request.query_params.get("template")
+            if template == "short":
+                return Project.objects.all()
+            return Project.objects.select_related(
+                "main_infrastructure",
+                "main_infrastructure__locality",
+                "main_infrastructure__locality__department",
+                "main_infrastructure__locality__district",
+                "provider",
+                "financing_fund",
+                "financing_program",
+            )
+        return Project.objects.select_related(
+            "main_infrastructure",
+            "main_infrastructure__locality",
+            "main_infrastructure__locality__department",
+            "main_infrastructure__locality__district",
+            "provider",
+            "provider__locality",
+            "provider__locality__department",
+            "provider__locality__district",
+            "construction_contract",
+            "financing_fund",
+            "financing_program",
+        ).prefetch_related("linked_localities", "contacts", "provider__contacts")
 
     def get_serializer_class(self):
         if self.action == "list":

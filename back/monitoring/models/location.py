@@ -32,7 +32,16 @@ class District(models.Model):
         return self.name
 
 
+class LocalityManager(models.Manager):
+    use_for_related_fields = True
+
+    def get_queryset(self):
+        return super().get_queryset().select_related("department", "district")
+
+
 class Locality(models.Model):
+
+    objects = LocalityManager()
 
     code = models.CharField("Código", primary_key=True, max_length=10)
     name = models.CharField("Nombre", max_length=255)
