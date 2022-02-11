@@ -30,6 +30,7 @@ class ContactSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(allow_null=True)
     post_name = serializers.SerializerMethodField()
+    comments = serializers.CharField(allow_blank=True)
 
     class Meta:
         model = Contact
