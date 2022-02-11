@@ -4,6 +4,7 @@ import {
     ViewContractPage,
     ViewContractInfoSubPage,
     ViewContractProjectsSubPage,
+    UpdateContractPanel,
 } from "../container";
 
 const contractRoutes = [
@@ -13,7 +14,13 @@ const contractRoutes = [
             path="projects"
             element={<ViewContractProjectsSubPage />}
         />
-        <Route key="contract-info" path="" element={<ViewContractInfoSubPage />} />
+        <Route key="contract-info" path="" element={<ViewContractInfoSubPage />}>
+            <Route
+                key="contract-general-data"
+                path=":section/:action"
+                element={<UpdateContractPanel />}
+            />
+        </Route>
     </Route>,
     <Route key="contract-list" path="" element={<ListContractsPage />} />,
 ];

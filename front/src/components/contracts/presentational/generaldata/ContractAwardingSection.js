@@ -1,14 +1,33 @@
-import {useOutletContext} from "react-router-dom";
+import {useOutletContext, useNavigate} from "react-router-dom";
 import {DateUtil} from "utilities";
-
-import {SectionCard, SectionField} from "components/common/presentational";
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "components/common/presentational";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ContractAwardingSection = () => {
+    const navigate = useNavigate();
+
     let contract;
     [contract] = useOutletContext();
 
     return (
-        <SectionCard title="Adjudicación">
+        <SectionCard
+            title="Adjudicación"
+            headerActions={[
+                <SectionCardHeaderAction
+                    key="edit"
+                    name="edit"
+                    title="Modificar"
+                    icon={<EditIcon />}
+                    onClick={() => {
+                        navigate("awarding/edit");
+                    }}
+                />,
+            ]}
+        >
             <SectionField label="Presupuesto:" value={contract.awarding_budget} />
             <SectionField
                 label="Porcentaje de baja:"
