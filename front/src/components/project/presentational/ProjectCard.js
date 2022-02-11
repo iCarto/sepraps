@@ -47,9 +47,9 @@ const ProjectCard = ({project}) => {
                                 opacity: 0.8,
                             }}
                         >
-                            <Icon icon={project.project_type_name} size="medium" />
+                            <Icon icon={project.project_type} size="medium" />
                         </Box>
-                        <Tooltip title={`Clase: ${project.project_class_name}`}>
+                        <Tooltip title={`Clase: ${project.project_class}`}>
                             <Box
                                 sx={{
                                     position: "absolute",
@@ -64,7 +64,7 @@ const ProjectCard = ({project}) => {
                                 }}
                             >
                                 <Typography variant="button">
-                                    {project.project_class_name}
+                                    {project.project_class}
                                 </Typography>
                             </Box>
                         </Tooltip>

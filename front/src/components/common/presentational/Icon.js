@@ -6,11 +6,11 @@ const Icon = ({icon, size}) => {
     let imgAlt = "";
     let maxWidth = {};
     switch (`${icon}`) {
-        case "Agua Potable":
+        case "agua":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
             imgAlt = "Grifo";
             break;
-        case "Saneamiento":
+        case "saneamiento":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
             imgAlt = "Tubería";
             break;

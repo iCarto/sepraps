@@ -7,17 +7,36 @@ import {
     ViewProjectLocationSubPage,
     ViewProjectFinancingSubPage,
     ViewProjectContactsSubPage,
+    UpdateProjectProviderPanel,
 } from "components/project/container";
 
 const projectRoutes = [
-    <Route path="new" element={<CreateProjectPage />} />,
-    <Route path=":id" element={<ViewProjectPage />}>
-        <Route path="location" element={<ViewProjectLocationSubPage />} />
-        <Route path="financing" element={<ViewProjectFinancingSubPage />} />
-        <Route path="contacts" element={<ViewProjectContactsSubPage />} />
-        <Route path="" element={<ViewProjectInfoSubPage />} />
+    <Route key="project-new" path="new" element={<CreateProjectPage />} />,
+    <Route key="project-detail" path=":id" element={<ViewProjectPage />}>
+        <Route
+            key="project-location"
+            path="location"
+            element={<ViewProjectLocationSubPage />}
+        />
+        <Route
+            key="project-financing"
+            path="financing"
+            element={<ViewProjectFinancingSubPage />}
+        />
+        <Route
+            key="project-contacts"
+            path="contacts"
+            element={<ViewProjectContactsSubPage />}
+        />
+        <Route key="project-info" path="" element={<ViewProjectInfoSubPage />}>
+            <Route
+                key="project-provider"
+                path="provider/:action"
+                element={<UpdateProjectProviderPanel />}
+            />
+        </Route>
     </Route>,
-    <Route path="" element={<ListProjectsPage />} />,
+    <Route key="project-list" path="" element={<ListProjectsPage />} />,
 ];
 
 export default projectRoutes;

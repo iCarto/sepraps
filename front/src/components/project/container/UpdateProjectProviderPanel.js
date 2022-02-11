@@ -74,7 +74,7 @@ const UpdateProjectProviderPanel = () => {
             : ProviderService.createProvider;
         serviceAction(provider)
             .then(() => {
-                navigate(`/project/${project.id}`, true);
+                navigate(`/projects/${project.id}`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -83,7 +83,7 @@ const UpdateProjectProviderPanel = () => {
     };
 
     const handleCancel = () => {
-        navigate(`/project/${project.id}`);
+        navigate(`/projects/${project.id}`);
     };
 
     const changeProviderFormValues = provider => {

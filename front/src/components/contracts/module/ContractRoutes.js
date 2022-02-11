@@ -7,11 +7,15 @@ import {
 } from "../container";
 
 const contractRoutes = [
-    <Route path=":id" element={<ViewContractPage />}>
-        <Route path="projects" element={<ViewContractProjectsSubPage />} />
-        <Route path="" element={<ViewContractInfoSubPage />} />
+    <Route key="contract-detail" path=":id" element={<ViewContractPage />}>
+        <Route
+            key="contract-projects"
+            path="projects"
+            element={<ViewContractProjectsSubPage />}
+        />
+        <Route key="contract-info" path="" element={<ViewContractInfoSubPage />} />
     </Route>,
-    <Route path="" element={<ListContractsPage />} />,
+    <Route key="contract-list" path="" element={<ListContractsPage />} />,
 ];
 
 export default contractRoutes;

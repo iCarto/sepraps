@@ -1,13 +1,15 @@
-import {createInfrastructure, createLocality, createProvider} from "model";
-import {infrastructure_api_adapter} from "./Infrastructure";
 import {
+    createInfrastructure,
+    createLocality,
+    createProvider,
+    createContract,
+    infrastructure_api_adapter,
     createLocalities,
     localities_api_adapter,
     locality_api_adapter,
-} from "./Locality";
-import {provider_api_adapter} from "./Provider";
-import {createContract, createProvider} from "model";
-import {contract_api_adapter} from "./Contract";
+    provider_api_adapter,
+    contract_api_adapter,
+} from "model";
 
 class Projects extends Array {}
 
