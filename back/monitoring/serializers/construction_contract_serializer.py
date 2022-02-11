@@ -5,7 +5,9 @@ from rest_framework import serializers
 
 class ConstructionContractSerializer(serializers.ModelSerializer):
 
-    projects = serializers.SerializerMethodField(required=False)
+    projects = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Project.objects.all()
+    )
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
     )
@@ -37,23 +39,17 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
     # ATTRIBUTES
 
-    def get_projects(self, obj):
-        from monitoring.serializers.project_serializer import ProjectSummarySerializer
-
+    def to_representation(self, instance):
         # TODO To avoid circular dependencies with serializers we have
         # to load this inside a function
-        return ProjectSummarySerializer(obj.projects, many=True).data
+        from monitoring.serializers.project_serializer import ProjectSummarySerializer
 
-    def get_fields(self, *args, **kwargs):
-        fields = super().get_fields(*args, **kwargs)
-
-        # Changing "projects" serializer only for create and update method
-        if self.context.get("action", None) in ["create", "update"]:
-            fields["projects"] = serializers.PrimaryKeyRelatedField(
-                many=True, queryset=Project.objects.all()
-            )
-
-        return fields
+        response = super().to_representation(instance)
+        if "projects" in response:
+            response["projects"] = ProjectSummarySerializer(
+                instance.projects, many=True
+            ).data
+        return response
 
     # OPERATIONS
 
