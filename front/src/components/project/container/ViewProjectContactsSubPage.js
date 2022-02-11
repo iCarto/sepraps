@@ -2,8 +2,9 @@ import {useEffect, useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {useSearch} from "hooks";
 
+import {SubPageLayout} from "layout";
 import {ContactsTable} from "components/contacts/presentational";
-import {SearchBox, SectionCard, SubPageLayout} from "components/common/presentational";
+import {SearchBox, SectionCard} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";

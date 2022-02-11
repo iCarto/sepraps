@@ -5,11 +5,12 @@ import {useNavigateWithReload} from "hooks";
 import {createProvider} from "model";
 import {ProviderService} from "service/api";
 
+import {SidebarPanel} from "layout";
+import {DomainProvider} from "components/common/provider";
 import {
     ProviderFormFields,
     ProviderFormSearch,
 } from "components/provider/presentational";
-import {SidebarContainer} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
@@ -111,59 +112,63 @@ const UpdateProjectProviderPanel = () => {
     };
 
     return (
-        <SidebarContainer>
-            <FormProvider {...formMethods}>
-                <Box component="form" width="90%" margin={3}>
-                    <Grid container>
-                        <Grid item xs={12} sx={{mb: 2}}>
-                            <Typography variant="h5">Añadir prestador</Typography>
-                        </Grid>
-                        {/* {error && (
+        <SidebarPanel>
+            <DomainProvider>
+                <FormProvider {...formMethods}>
+                    <Box component="form" width="90%" margin={3}>
+                        <Grid container>
+                            <Grid item xs={12} sx={{mb: 2}}>
+                                <Typography variant="h5">Añadir prestador</Typography>
+                            </Grid>
+                            {/* {error && (
                                 <Alert severity="error">
                                     {error} sx={{mb: 2}}
                                 </Alert>
                             )} */}
-                        <Grid item container justifyContent="center" xs={12}>
-                            <ToggleButtonGroup
+                            <Grid item container justifyContent="center" xs={12}>
+                                <ToggleButtonGroup
+                                    color="primary"
+                                    value={selectedOption}
+                                    exclusive
+                                    onChange={handleChange}
+                                >
+                                    <ToggleButton value="form">
+                                        {action === "edit"
+                                            ? "Modificar"
+                                            : "Crear nuevo"}
+                                    </ToggleButton>
+                                    <ToggleButton value="existing">
+                                        Seleccionar existente
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </Grid>
+                            <Grid item container xs={12}>
+                                {selectedOption === "form" ? (
+                                    <ProviderFormFields />
+                                ) : (
+                                    <ProviderFormSearch
+                                        handleSelect={handleSelectExistingProvider}
+                                    />
+                                )}
+                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent="flex-end" sx={{mt: 2}}>
+                            <Button color="inherit" onClick={handleCancel}>
+                                Cancelar
+                            </Button>
+                            <Button
+                                variant="contained"
                                 color="primary"
-                                value={selectedOption}
-                                exclusive
-                                onChange={handleChange}
+                                sx={{ml: 2}}
+                                onClick={formMethods.handleSubmit(onSubmit)}
                             >
-                                <ToggleButton value="form">
-                                    {action === "edit" ? "Modificar" : "Crear nuevo"}
-                                </ToggleButton>
-                                <ToggleButton value="existing">
-                                    Seleccionar existente
-                                </ToggleButton>
-                            </ToggleButtonGroup>
+                                Guardar
+                            </Button>
                         </Grid>
-                        <Grid item xs={12}>
-                            {selectedOption === "form" ? (
-                                <ProviderFormFields />
-                            ) : (
-                                <ProviderFormSearch
-                                    handleSelect={handleSelectExistingProvider}
-                                />
-                            )}
-                        </Grid>
-                    </Grid>
-                    <Grid container justifyContent="flex-end" sx={{mt: 2}}>
-                        <Button color="inherit" onClick={handleCancel}>
-                            Cancelar
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{ml: 2}}
-                            onClick={formMethods.handleSubmit(onSubmit)}
-                        >
-                            Guardar
-                        </Button>
-                    </Grid>
-                </Box>
-            </FormProvider>
-        </SidebarContainer>
+                    </Box>
+                </FormProvider>
+            </DomainProvider>
+        </SidebarPanel>
     );
 };
 

@@ -1,4 +1,4 @@
-import {SubPageLayout} from "components/common/presentational";
+import {SubPageLayout} from "layout";
 import {
     ProjectContractSection,
     ProjectFinancingSection,
