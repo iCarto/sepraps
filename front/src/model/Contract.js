@@ -17,23 +17,34 @@ const contract_api_adapter = contract => {
         contract["awarding_percentage_drop"],
         2
     );
-    contract["bid_request_date"] = new Date(contract["bid_request_date"]);
-    contract["awarding_date"] = new Date(contract["awarding_date"]);
-    contract["execution_signature_date"] = new Date(
-        contract["execution_signature_date"]
-    );
-    contract["execution_order_start_date"] = new Date(
-        contract["execution_order_start_date"]
-    );
-    contract["execution_certificate_start_date"] = new Date(
-        contract["execution_certificate_start_date"]
-    );
-    contract["execution_expected_delivery_date"] = new Date(
-        contract["execution_expected_delivery_date"]
-    );
-    contract["execution_final_delivery_date"] = new Date(
-        contract["execution_final_delivery_date"]
-    );
+    // in back-end falsy values are null
+    contract["bid_request_date"] = contract["bid_request_date"]
+        ? new Date(contract["bid_request_date"])
+        : null;
+    contract["awarding_date"] = contract["awarding_date"]
+        ? new Date(contract["awarding_date"])
+        : null;
+    contract["execution_signature_date"] = contract["execution_signature_date"]
+        ? new Date(contract["execution_signature_date"])
+        : null;
+    contract["execution_order_start_date"] = contract["execution_order_start_date"]
+        ? new Date(contract["execution_order_start_date"])
+        : null;
+    contract["execution_certificate_start_date"] = contract[
+        "execution_certificate_start_date"
+    ]
+        ? new Date(contract["execution_certificate_start_date"])
+        : null;
+    contract["execution_expected_delivery_date"] = contract[
+        "execution_expected_delivery_date"
+    ]
+        ? new Date(contract["execution_expected_delivery_date"])
+        : null;
+    contract["execution_final_delivery_date"] = contract[
+        "execution_final_delivery_date"
+    ]
+        ? new Date(contract["execution_final_delivery_date"])
+        : null;
     if (contract.projects) {
         contract["projects"] = contract.projects.map(project => {
             return createProject(project_api_adapter(project));
@@ -46,46 +57,66 @@ const contract_api_adapter = contract => {
 };
 
 const contract_view_adapter = contract => {
-    contract["bid_request_budget"] = NumberUtil.parseFloatOrNull(
-        contract["bid_request_budget"]
-    );
-    contract["bid_request_deadline"] = NumberUtil.parseIntOrNull(
-        contract["bid_request_deadline"]
-    );
-    contract["awarding_budget"] = NumberUtil.parseFloatOrNull(
-        contract["awarding_budget"]
-    );
-    contract["awarding_percentage_drop"] = NumberUtil.parseFloatOrNull(
-        contract["awarding_percentage_drop"]
-    );
-    contract["bid_request_date"] = DateUtil.formatDate(
-        contract["bid_request_date"],
-        DATE_FORMATS.SERVER_DATEFORMAT
-    );
-    contract["awarding_date"] = DateUtil.formatDate(
-        contract["awarding_date"],
-        DATE_FORMATS.SERVER_DATEFORMAT
-    );
-    contract["execution_signature_date"] = DateUtil.formatDate(
-        contract["execution_signature_date"],
-        DATE_FORMATS.SERVER_DATEFORMAT
-    );
-    contract["execution_order_start_date"] = DateUtil.formatDate(
-        contract["execution_order_start_date"],
-        DATE_FORMATS.SERVER_DATEFORMAT
-    );
-    contract["execution_certificate_start_date"] = DateUtil.formatDate(
-        contract["execution_certificate_start_date"],
-        DATE_FORMATS.SERVER_DATEFORMAT
-    );
-    contract["execution_expected_delivery_date"] = DateUtil.formatDate(
-        contract["execution_expected_delivery_date"],
-        DATE_FORMATS.SERVER_DATEFORMAT
-    );
-    contract["execution_final_delivery_date"] = DateUtil.formatDate(
-        contract["execution_final_delivery_date"],
-        DATE_FORMATS.SERVER_DATEFORMAT
-    );
+    // in front-end falsy values are "" or undefined or null
+    contract["bid_request_budget"] = !!contract["bid_request_budget"]
+        ? NumberUtil.parseFloatOrNull(contract["bid_request_budget"])
+        : null;
+    contract["bid_request_deadline"] = !!contract["bid_request_deadline"]
+        ? NumberUtil.parseIntOrNull(contract["bid_request_deadline"])
+        : null;
+    contract["awarding_budget"] = !!contract["awarding_budget"]
+        ? NumberUtil.parseFloatOrNull(contract["awarding_budget"])
+        : null;
+    contract["awarding_percentage_drop"] = !!contract["awarding_percentage_drop"]
+        ? NumberUtil.parseFloatOrNull(contract["awarding_percentage_drop"])
+        : null;
+    contract["bid_request_date"] = !!contract["bid_request_date"]
+        ? DateUtil.formatDate(
+              contract["bid_request_date"],
+              DATE_FORMATS.SERVER_DATEFORMAT
+          )
+        : null;
+    contract["awarding_date"] = !!contract["awarding_date"]
+        ? DateUtil.formatDate(contract["awarding_date"], DATE_FORMATS.SERVER_DATEFORMAT)
+        : null;
+    contract["execution_signature_date"] = !!contract[
+        "bid_requexecution_signature_dateest_budget"
+    ]
+        ? DateUtil.formatDate(
+              contract["execution_signature_date"],
+              DATE_FORMATS.SERVER_DATEFORMAT
+          )
+        : null;
+    contract["execution_order_start_date"] = !!contract["execution_order_start_date"]
+        ? DateUtil.formatDate(
+              contract["execution_order_start_date"],
+              DATE_FORMATS.SERVER_DATEFORMAT
+          )
+        : null;
+    contract["execution_certificate_start_date"] = !!contract[
+        "execution_certificate_start_date"
+    ]
+        ? DateUtil.formatDate(
+              contract["execution_certificate_start_date"],
+              DATE_FORMATS.SERVER_DATEFORMAT
+          )
+        : null;
+    contract["execution_expected_delivery_date"] = !!contract[
+        "execution_expected_delivery_date"
+    ]
+        ? DateUtil.formatDate(
+              contract["execution_expected_delivery_date"],
+              DATE_FORMATS.SERVER_DATEFORMAT
+          )
+        : null;
+    contract["execution_final_delivery_date"] = !!contract[
+        "execution_final_delivery_date"
+    ]
+        ? DateUtil.formatDate(
+              contract["execution_final_delivery_date"],
+              DATE_FORMATS.SERVER_DATEFORMAT
+          )
+        : null;
 
     return contract;
 };

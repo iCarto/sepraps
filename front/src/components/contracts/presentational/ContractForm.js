@@ -11,30 +11,36 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 const ContractForm = ({section = null, onSubmit, onCancel}) => {
+    // TODO: Review how to manage outlet context to extract contract properly
     let contract;
-    [contract] = useOutletContext();
+    const outletContext = useOutletContext();
+    if (outletContext) {
+        contract = outletContext[0];
+    }
+
+    const defaultFormValues = {
+        id: contract?.id || "",
+        number: contract?.number || "",
+        comments: contract?.comments || "",
+        bid_request_number: contract?.bid_request_number || "",
+        bid_request_id: contract?.bid_request_id || "",
+        bid_request_date: contract?.bid_request_date || "",
+        bid_request_budget: contract?.bid_request_budget || "",
+        bid_request_deadline: contract?.bid_request_deadline || "",
+        awarding_budget: contract?.awarding_budget || "",
+        awarding_percentage_drop: contract?.awarding_percentage_drop || "",
+        awarding_date: contract?.awarding_date || "",
+        execution_signature_date: contract?.execution_signature_date || "",
+        execution_order_start_date: contract?.execution_order_start_date || "",
+        execution_certificate_start_date:
+            contract?.execution_certificate_start_date || "",
+        execution_expected_delivery_date:
+            contract?.execution_expected_delivery_date || "",
+        execution_final_delivery_date: contract?.execution_final_delivery_date || "",
+    };
 
     const formMethods = useForm({
-        defaultValues: {
-            id: contract?.id,
-            number: contract?.number,
-            comments: contract?.comments,
-            bid_request_number: contract?.bid_request_number,
-            bid_request_id: contract?.bid_request_id,
-            bid_request_date: contract?.bid_request_date,
-            bid_request_budget: contract?.bid_request_budget,
-            bid_request_deadline: contract?.bid_request_deadline,
-            awarding_budget: contract?.awarding_budget,
-            awarding_percentage_drop: contract?.awarding_percentage_drop,
-            awarding_date: contract?.awarding_date,
-            execution_signature_date: contract?.execution_signature_date,
-            execution_order_start_date: contract?.execution_order_start_date,
-            execution_certificate_start_date:
-                contract?.execution_certificate_start_date,
-            execution_expected_delivery_date:
-                contract?.execution_expected_delivery_date,
-            execution_final_delivery_date: contract?.execution_final_delivery_date,
-        },
+        defaultValues: defaultFormValues,
         reValidateMode: "onSubmit",
     });
 
@@ -56,7 +62,7 @@ const ContractForm = ({section = null, onSubmit, onCancel}) => {
             execution_certificate_start_date: data.execution_certificate_start_date,
             execution_expected_delivery_date: data.execution_expected_delivery_date,
             execution_final_delivery_date: data.execution_final_delivery_date,
-            projects: contract.projects.map(project => project.id),
+            projects: contract ? contract.projects.map(project => project.id) : [],
         });
         onSubmit(updatedProvider);
     };
