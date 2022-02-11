@@ -3,6 +3,7 @@ import {
     createContract,
     contracts_api_adapter,
     contract_api_adapter,
+    contract_view_adapter,
 } from "model";
 import AuthApiService from "./AuthApiService";
 
@@ -32,6 +33,15 @@ const ContractService = {
 
     createContract(contract) {
         return AuthApiService.post(basePath, contract).then(response => {
+            return createContract(contract_api_adapter(response));
+        });
+    },
+
+    updateContract(contract) {
+        return AuthApiService.put(
+            basePath + "/" + contract.id,
+            createContract(contract_view_adapter({...contract}))
+        ).then(response => {
             return createContract(contract_api_adapter(response));
         });
     },

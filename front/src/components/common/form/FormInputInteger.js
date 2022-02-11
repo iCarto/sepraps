@@ -4,20 +4,20 @@ import TextField from "@mui/material/TextField";
 const FormInputInteger = ({name: propsName, label, rules = {}}) => {
     const {control} = useFormContext();
 
-    const validate = value => {
-        const matches = value.match(/^\d+$/);
-        return (
-            matches?.length > 0 || "El valor del campo no cumple el formato correcto"
-        );
-    };
-
     const {
         field: {onChange, onBlur, name, value, ref},
         fieldState: {error},
     } = useController({
         name: propsName,
         control,
-        rules: {...rules, validate},
+        rules: {
+            ...rules,
+            pattern: {
+                //TODO: This function should use i18n pattern to validate decimal numbers
+                value: /^\d+$/,
+                message: "El valor del campo no cumple el formato correcto",
+            },
+        },
     });
 
     return (

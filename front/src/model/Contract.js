@@ -1,9 +1,22 @@
 import {createProject} from "model";
+import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 import {project_api_adapter} from "./Project";
 
 class Contracts extends Array {}
 
 const contract_api_adapter = contract => {
+    contract["bid_request_budget"] = NumberUtil.formatDecimal(
+        contract["bid_request_budget"],
+        2
+    );
+    contract["awarding_budget"] = NumberUtil.formatDecimal(
+        contract["awarding_budget"],
+        2
+    );
+    contract["awarding_percentage_drop"] = NumberUtil.formatDecimal(
+        contract["awarding_percentage_drop"],
+        2
+    );
     contract["bid_request_date"] = new Date(contract["bid_request_date"]);
     contract["awarding_date"] = new Date(contract["awarding_date"]);
     contract["execution_signature_date"] = new Date(
@@ -29,6 +42,51 @@ const contract_api_adapter = contract => {
 
     contract["created_at"] = new Date(contract["created_at"]);
     contract["updated_at"] = new Date(contract["updated_at"]);
+    return contract;
+};
+
+const contract_view_adapter = contract => {
+    contract["bid_request_budget"] = NumberUtil.parseFloatOrNull(
+        contract["bid_request_budget"]
+    );
+    contract["bid_request_deadline"] = NumberUtil.parseIntOrNull(
+        contract["bid_request_deadline"]
+    );
+    contract["awarding_budget"] = NumberUtil.parseFloatOrNull(
+        contract["awarding_budget"]
+    );
+    contract["awarding_percentage_drop"] = NumberUtil.parseFloatOrNull(
+        contract["awarding_percentage_drop"]
+    );
+    contract["bid_request_date"] = DateUtil.formatDate(
+        contract["bid_request_date"],
+        DATE_FORMATS.SERVER_DATEFORMAT
+    );
+    contract["awarding_date"] = DateUtil.formatDate(
+        contract["awarding_date"],
+        DATE_FORMATS.SERVER_DATEFORMAT
+    );
+    contract["execution_signature_date"] = DateUtil.formatDate(
+        contract["execution_signature_date"],
+        DATE_FORMATS.SERVER_DATEFORMAT
+    );
+    contract["execution_order_start_date"] = DateUtil.formatDate(
+        contract["execution_order_start_date"],
+        DATE_FORMATS.SERVER_DATEFORMAT
+    );
+    contract["execution_certificate_start_date"] = DateUtil.formatDate(
+        contract["execution_certificate_start_date"],
+        DATE_FORMATS.SERVER_DATEFORMAT
+    );
+    contract["execution_expected_delivery_date"] = DateUtil.formatDate(
+        contract["execution_expected_delivery_date"],
+        DATE_FORMATS.SERVER_DATEFORMAT
+    );
+    contract["execution_final_delivery_date"] = DateUtil.formatDate(
+        contract["execution_final_delivery_date"],
+        DATE_FORMATS.SERVER_DATEFORMAT
+    );
+
     return contract;
 };
 
@@ -90,4 +148,5 @@ export {
     createContracts,
     contract_api_adapter,
     contracts_api_adapter,
+    contract_view_adapter,
 };

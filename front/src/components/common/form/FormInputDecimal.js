@@ -1,18 +1,16 @@
 import {useController, useFormContext} from "react-hook-form";
 import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import {NumberUtil} from "utilities";
+import {useEffect, useState} from "react";
 
-const FormInputDecimal = ({name: propsName, label, rules = {}}) => {
+const FormInputDecimal = ({
+    name: propsName,
+    label,
+    endAdornment = null,
+    rules = {},
+}) => {
     const {control} = useFormContext();
-
-    //TODO: This function should use i18n pattern to validate decimal numbers
-    const validate = value => {
-        const matches = value.match(
-            /^(?:0\.(?:0[0-9]|[0-9]\d?)|[0-9]\d*(?:,\d{1,2})?)(?:e[+-]?\d+)?$/
-        );
-        return (
-            matches?.length > 0 || "El valor del campo no cumple el formato correcto"
-        );
-    };
 
     const {
         field: {onChange, onBlur, name, value, ref},
@@ -20,8 +18,23 @@ const FormInputDecimal = ({name: propsName, label, rules = {}}) => {
     } = useController({
         name: propsName,
         control,
-        rules: {...rules, validate},
+        rules: {
+            ...rules,
+            pattern: {
+                //TODO: This function should use i18n pattern to validate decimal numbers
+                value: /^(?:0\.(?:0[0-9]|[0-9]\d?)|[0-9]\d*(?:,\d{1,2})?)(?:e[+-]?\d+)?$/,
+                message: "El valor del campo no cumple el formato correcto",
+            },
+        },
     });
+
+    let inputProps = {};
+    if (endAdornment) {
+        inputProps = {
+            ...inputProps,
+            endAdornment: <InputAdornment position="start">{"$"}</InputAdornment>,
+        };
+    }
 
     return (
         <TextField
@@ -35,6 +48,7 @@ const FormInputDecimal = ({name: propsName, label, rules = {}}) => {
             fullWidth
             error={Boolean(error)}
             helperText={error?.message}
+            InputProps={inputProps}
         />
     );
 };

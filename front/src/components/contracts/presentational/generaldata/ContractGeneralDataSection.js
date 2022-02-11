@@ -1,13 +1,33 @@
-import {useOutletContext} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
-import {SectionCard, SectionField} from "components/common/presentational";
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "components/common/presentational";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ContractGeneralDataSection = () => {
+    const navigate = useNavigate();
+
     let contract;
     [contract] = useOutletContext();
 
     return (
-        <SectionCard title="Datos generales">
+        <SectionCard
+            title="Datos generales"
+            headerActions={[
+                <SectionCardHeaderAction
+                    key="edit"
+                    name="edit"
+                    title="Modificar"
+                    icon={<EditIcon />}
+                    onClick={() => {
+                        navigate("generaldata/edit");
+                    }}
+                />,
+            ]}
+        >
             <SectionField label="Número:" value={contract.number} />
             <SectionField label="Observaciones:" value={contract.comments} />
         </SectionCard>

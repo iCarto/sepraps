@@ -1,14 +1,34 @@
-import {useOutletContext} from "react-router-dom";
+import {useOutletContext, useNavigate} from "react-router-dom";
 import {DateUtil} from "utilities";
 
-import {SectionCard, SectionField} from "components/common/presentational";
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "components/common/presentational";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ContractExecutionSection = () => {
+    const navigate = useNavigate();
+
     let contract;
     [contract] = useOutletContext();
 
     return (
-        <SectionCard title="Ejecución">
+        <SectionCard
+            title="Ejecución"
+            headerActions={[
+                <SectionCardHeaderAction
+                    key="edit"
+                    name="edit"
+                    title="Modificar"
+                    icon={<EditIcon />}
+                    onClick={() => {
+                        navigate("execution/edit");
+                    }}
+                />,
+            ]}
+        >
             <SectionField
                 label="Fecha de firma del contrato:"
                 value={DateUtil.formatDate(contract.execution_signature_date)}
