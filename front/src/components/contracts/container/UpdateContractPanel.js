@@ -15,8 +15,8 @@ const UpdateContractPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const handleSubmit = provider => {
-        ContractService.updateContract(provider)
+    const handleSubmit = contract => {
+        ContractService.updateContract(contract)
             .then(() => {
                 navigate(`/contracts/${contract.id}`, true);
             })

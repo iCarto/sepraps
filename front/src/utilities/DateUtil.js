@@ -12,6 +12,9 @@ export const DATE_FORMATS = {
 const DateUtil = {
     // Transform to UI format date DD/MM/YYYY
     formatDate(date, dateFormat = DATE_FORMATS.CLIENT_DATEFORMAT) {
+        if (!date) {
+            return "";
+        }
         return format(date, dateFormat);
     },
     formatDateMonth(date, dateFormat = DATE_FORMATS.CLIENT_DATEMONTHFORMAT) {

@@ -1,5 +1,8 @@
 const NumberUtil = {
     formatDecimal(number, decimalSize) {
+        if (!number) {
+            return "";
+        }
         const floatNumber = parseFloat(number);
         return floatNumber.toFixed(decimalSize).replace(".", ",");
     },

@@ -32,7 +32,10 @@ const ContractService = {
     },
 
     createContract(contract) {
-        return AuthApiService.post(basePath, contract).then(response => {
+        return AuthApiService.post(
+            basePath,
+            createContract(contract_view_adapter({...contract}))
+        ).then(response => {
             return createContract(contract_api_adapter(response));
         });
     },

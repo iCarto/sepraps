@@ -4,7 +4,11 @@ import {FormInputText} from "components/common/form";
 const ContractGeneralDataFormFields = () => {
     return (
         <Fragment>
-            <FormInputText name="number" label="Número de contrato" />
+            <FormInputText
+                name="number"
+                label="Número de contrato"
+                rules={{required: "El campo es obligatorio"}}
+            />
             <FormInputText name="comments" label="Observaciones" />
         </Fragment>
     );
