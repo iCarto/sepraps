@@ -6,8 +6,6 @@ import {SearchBox} from "components/common/presentational";
 import {ClosedContractsOption, ContractList} from "../presentational";
 import {SortContractsSelect} from "../presentational";
 
-import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
