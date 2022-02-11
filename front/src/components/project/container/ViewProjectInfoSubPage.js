@@ -1,6 +1,6 @@
-import {Outlet, useOutletContext} from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 
-import {SubPageLayout} from "components/common/presentational";
+import {SubPageLayout} from "layout";
 import {ProviderSection} from "components/provider/presentational";
 import {
     ProjectAuditSection,
@@ -16,28 +16,25 @@ const ViewProjectInfoSubPage = () => {
     [project] = useOutletContext();
 
     return (
-        <>
-            <SubPageLayout>
-                <Container maxWidth="lg" sx={{my: 3}}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <ProjectGeneralDataSection />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <ProviderSection provider={project.provider} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <ProjectMonitoringSection />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <ProjectAuditSection />
-                        </Grid>
+        <SubPageLayout outletContext={[project]}>
+            <Container maxWidth="lg" sx={{my: 3}}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <ProjectGeneralDataSection />
                     </Grid>
-                </Container>
-            </SubPageLayout>
-            <Outlet context={[project]} />
-        </>
+
+                    <Grid item xs={12}>
+                        <ProviderSection provider={project.provider} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <ProjectMonitoringSection />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <ProjectAuditSection />
+                    </Grid>
+                </Grid>
+            </Container>
+        </SubPageLayout>
     );
 };
 
