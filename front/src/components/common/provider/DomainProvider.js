@@ -1,12 +1,5 @@
 import {useState, useEffect, createContext, useContext} from "react";
-import {
-    ContactService,
-    ContractorService,
-    DomainService,
-    FinancingService,
-    LocationService,
-    ProviderService,
-} from "service/api";
+import {DomainService, FinancingService, LocationService} from "service/api";
 
 let DomainContext = createContext(null);
 
@@ -21,9 +14,6 @@ export default function DomainProvider({children}) {
     const [areas, setAreas] = useState([]);
     const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
-    const [providers, setProviders] = useState([]);
-    const [contacts, setContacts] = useState([]);
-    const [contractors, setContractors] = useState([]);
 
     useEffect(() => {
         Promise.all([
@@ -31,19 +21,8 @@ export default function DomainProvider({children}) {
             LocationService.getAdministrativeDivisions(),
             FinancingService.getFinancingFunds(),
             FinancingService.getFinancingPrograms(),
-            ProviderService.getProviders(),
-            ContactService.getContacts(),
-            ContractorService.getContractors(),
         ]).then(
-            ([
-                domain,
-                administrativeDivisions,
-                financingFunds,
-                financingPrograms,
-                providers,
-                contacts,
-                contractors,
-            ]) => {
+            ([domain, administrativeDivisions, financingFunds, financingPrograms]) => {
                 const {
                     project_type,
                     project_class,
@@ -64,11 +43,6 @@ export default function DomainProvider({children}) {
 
                 setFinancingFunds(financingFunds);
                 setFinancingPrograms(financingPrograms);
-
-                setProviders(providers);
-
-                setContacts(contacts);
-                setContractors(contractors);
             }
         );
     }, []);
@@ -84,9 +58,6 @@ export default function DomainProvider({children}) {
         localities,
         financingFunds,
         financingPrograms,
-        providers,
-        contacts,
-        contractors,
     };
 
     return <DomainContext.Provider value={value}>{children}</DomainContext.Provider>;

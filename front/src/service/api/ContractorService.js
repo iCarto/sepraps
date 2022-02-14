@@ -15,6 +15,12 @@ const ContractorService = {
         });
     },
 
+    getContractorsBySearchText(searchText) {
+        return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
+            return createContractors(contractors_api_adapter(response));
+        });
+    },
+
     createContractor(contractor) {
         return AuthApiService.post(basePath, contractor).then(response => {
             return createContractor(contractor_api_adapter(response));

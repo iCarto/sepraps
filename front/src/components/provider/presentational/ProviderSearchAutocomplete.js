@@ -1,42 +1,29 @@
-import {useDomain} from "components/common/provider";
+import {ProviderService} from "service/api";
+import {SearchAutocomplete} from "components/common/presentational";
 
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 const ProviderSearchAutocomplete = ({handleSelect}) => {
-    const {providers} = useDomain();
-
-    const handleChange = (event, newValue) => {
-        handleSelect(newValue);
+    const optionComponent = option => {
+        return (
+            <Stack>
+                <Typography>{option.name}</Typography>
+                <Typography variant="caption" sx={{ml: 1}}>
+                    ({option.locality.locality_name} - {option.locality.district_name} -{" "}
+                    {option.locality.department_name})
+                </Typography>
+            </Stack>
+        );
     };
 
     return (
-        <Autocomplete
-            id="project-provider-check-autocomplete"
-            options={providers}
-            onChange={handleChange}
-            getOptionLabel={option => option.name}
-            renderOption={(props, option, {selected}) => (
-                <Box component="li" {...props} key={option.id}>
-                    <Stack>
-                        <Typography>{option.name}</Typography>
-                        <Typography variant="caption" sx={{ml: 1}}>
-                            ({option.locality_name} - {option.district_name} -{" "}
-                            {option.department_name})
-                        </Typography>
-                    </Stack>
-                </Box>
-            )}
-            renderInput={params => (
-                <TextField
-                    {...params}
-                    label="Prestador"
-                    placeholder="Buscar un prestador"
-                />
-            )}
+        <SearchAutocomplete
+            label="Buscar un prestador"
+            optionLabel="name"
+            optionComponent={optionComponent}
+            search={ProviderService.getProvidersBySearchText}
+            handleSelect={handleSelect}
         />
     );
 };
