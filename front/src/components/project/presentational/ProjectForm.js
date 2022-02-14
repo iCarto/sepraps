@@ -66,7 +66,7 @@ const ProjectForm = ({handleFormSubmit}) => {
                 id: data.provider_id,
                 name: data.provider_name,
                 area: data.provider_area,
-                locality: data.provider_location.locality,
+                locality: data.provider_location.locality.code,
             },
             main_infrastructure: {
                 locality: data.main_infrastructure_location.locality,

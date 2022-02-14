@@ -12,3 +12,4 @@ export {default as MenuListItemLink} from "./MenuListItemLink";
 export {default as ButtonLink} from "./ButtonLink";
 export {default as AccordionLayout} from "./AccordionLayout";
 export {default as DialogLayout} from "./DialogLayout";
+export {default as SearchAutocomplete} from "./SearchAutocomplete";

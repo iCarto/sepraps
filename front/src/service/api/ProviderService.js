@@ -15,6 +15,12 @@ const ProviderService = {
         });
     },
 
+    getProvidersBySearchText(searchText) {
+        return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
+            return createProviders(providers_api_adapter(response));
+        });
+    },
+
     createProvider(provider) {
         return AuthApiService.post(basePath, provider).then(response => {
             return createProvider(provider_api_adapter(response));
