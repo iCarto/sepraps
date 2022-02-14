@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from monitoring.models.contractor import Contractor
 
 
 class ConstructionContract(models.Model):
@@ -24,6 +25,13 @@ class ConstructionContract(models.Model):
     )
     awarding_date = models.DateField("Fecha de adjudicación", null=True)
 
+    contractor = models.ForeignKey(
+        Contractor,
+        on_delete=models.PROTECT,
+        verbose_name=Contractor._meta.verbose_name,
+        null=True,
+        related_name="contract",
+    )
     execution_signature_date = models.DateField(
         "Fecha de firma del contrato", null=True
     )

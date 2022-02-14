@@ -94,6 +94,51 @@
         "pk": null,
         "fields": {
             "category": "contact_post",
+            "key": "responsable_contratista",
+            "value": "Responsable del contratista"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "residente_obra",
+            "value": "Residente de obra"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contractor_type",
+            "key": "company",
+            "value": "Empresa"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contractor_type",
+            "key": "ngo",
+            "value": "ONG"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contractor_type",
+            "key": "consultant",
+            "value": "Consultor/a"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
             "key": "otro_contacto",
             "value": "Otro contacto"
         }
@@ -192,16 +237,48 @@
         }
     },
     {
+        "model": "monitoring.contact",
+        "pk": 4,
+        "fields": {
+            "name": "Contacto del contratista 1",
+            "post": "responsable_contratista",
+            "gender": "M",
+            "phone": "+11 111111111",
+            "email": "contacto1@contratista.com",
+            "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 5,
+        "fields": {
+            "name": "Contacto del contratista 2",
+            "post": "residente_obra",
+            "gender": "M",
+            "phone": "+11 222333444",
+            "email": "contacto2@contratista.com",
+            "comments": ""
+        }
+    },
+    {
         "model": "monitoring.provider",
         "pk": 1,
         "fields": {
             "name": "Junta de Saneamiento de Pruebas",
             "area": "rural",
             "locality": "1507600",
-            "contacts": [
-                2,
-                3
-            ]
+            "contacts": [2, 3]
+        }
+    },
+    {
+        "model": "monitoring.contractor",
+        "pk": 1,
+        "fields": {
+            "name": "Contratista de pruebas",
+            "contractor_type": "company",
+            "phone": "+11 456456456",
+            "email": "contacto2@junta.com",
+            "contacts": [4, 5]
         }
     },
     {
@@ -218,6 +295,7 @@
             "awarding_budget": 80000,
             "awarding_percentage_drop": 20.5,
             "awarding_date": "2022-01-02",
+            "contractor": 1,
             "execution_signature_date": "2022-01-03",
             "execution_order_start_date": "2022-01-04",
             "execution_certificate_start_date": "2022-01-05",
@@ -243,14 +321,8 @@
             "financing_program": 1,
             "provider": 1,
             "construction_contract": 1,
-            "linked_localities": [
-                "1507620",
-                "1507625"
-            ],
-            "contacts": [
-                1,
-                2
-            ],
+            "linked_localities": ["1507620", "1507625"],
+            "contacts": [1, 2],
             "closed": false,
             "creation_user": 1,
             "created_at": "2021-12-01T00:00:00Z",
@@ -271,13 +343,8 @@
             "financing_program": 1,
             "provider": 1,
             "construction_contract": 1,
-            "linked_localities": [
-                "1507640",
-                "1507645"
-            ],
-            "contacts": [
-                1
-            ],
+            "linked_localities": ["1507640", "1507645"],
+            "contacts": [1],
             "closed": true,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
