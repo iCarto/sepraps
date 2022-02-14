@@ -1,6 +1,7 @@
 import {useState, useEffect, createContext, useContext} from "react";
 import {
     ContactService,
+    ContractorService,
     DomainService,
     FinancingService,
     LocationService,
@@ -13,6 +14,7 @@ export default function DomainProvider({children}) {
     const [projectTypes, setProjectTypes] = useState([]);
     const [projectClasses, setProjectClasses] = useState([]);
     const [contactPosts, setContactPosts] = useState([]);
+    const [contractorTypes, setContractorTypes] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [localities, setLocalities] = useState([]);
@@ -21,6 +23,7 @@ export default function DomainProvider({children}) {
     const [financingPrograms, setFinancingPrograms] = useState([]);
     const [providers, setProviders] = useState([]);
     const [contacts, setContacts] = useState([]);
+    const [contractors, setContractors] = useState([]);
 
     useEffect(() => {
         Promise.all([
@@ -30,6 +33,7 @@ export default function DomainProvider({children}) {
             FinancingService.getFinancingPrograms(),
             ProviderService.getProviders(),
             ContactService.getContacts(),
+            ContractorService.getContractors(),
         ]).then(
             ([
                 domain,
@@ -38,17 +42,20 @@ export default function DomainProvider({children}) {
                 financingPrograms,
                 providers,
                 contacts,
+                contractors,
             ]) => {
                 const {
                     project_type,
                     project_class,
                     provider_area,
                     contact_post,
+                    contractor_type,
                 } = domain;
                 setProjectTypes(project_type);
                 setProjectClasses(project_class);
                 setAreas(provider_area);
                 setContactPosts(contact_post);
+                setContractorTypes(contractor_type);
 
                 const {departments, districts, localities} = administrativeDivisions;
                 setDepartments(departments);
@@ -61,6 +68,7 @@ export default function DomainProvider({children}) {
                 setProviders(providers);
 
                 setContacts(contacts);
+                setContractors(contractors);
             }
         );
     }, []);
@@ -70,6 +78,7 @@ export default function DomainProvider({children}) {
         projectClasses,
         areas,
         contactPosts,
+        contractorTypes,
         departments,
         districts,
         localities,
@@ -77,6 +86,7 @@ export default function DomainProvider({children}) {
         financingPrograms,
         providers,
         contacts,
+        contractors,
     };
 
     return <DomainContext.Provider value={value}>{children}</DomainContext.Provider>;

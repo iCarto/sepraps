@@ -6,6 +6,7 @@ import {
     ViewContractProjectsSubPage,
     UpdateContractPanel,
     CreateContractPage,
+    UpdateContractContractorPanel,
 } from "../container";
 
 const contractRoutes = [
@@ -17,6 +18,11 @@ const contractRoutes = [
             element={<ViewContractProjectsSubPage />}
         />
         <Route key="contract-info" path="" element={<ViewContractInfoSubPage />}>
+            <Route
+                key="contract-contractor"
+                path="contractor/:action"
+                element={<UpdateContractContractorPanel />}
+            />
             <Route
                 key="contract-general-data"
                 path=":section/:action"
