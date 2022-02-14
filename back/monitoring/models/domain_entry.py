@@ -9,6 +9,7 @@ class DomainEntry(models.Model):
         ("contact_post", "Cargo del contacto"),
         ("provider_area", "Área"),
         ("contact_post", "Cargos"),
+        ("contactor_type", "Tipo de Contratista"),
     ]
 
     id = models.AutoField(primary_key=True)

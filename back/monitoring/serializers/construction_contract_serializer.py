@@ -1,10 +1,13 @@
 from monitoring.models.construction_contract import ConstructionContract
+from monitoring.models.contractor import Contractor
 from monitoring.models.project import Project
+from monitoring.serializers.contractor_serializer import ContractorSerializer
 from rest_framework import serializers
 
 
 class ConstructionContractSerializer(serializers.ModelSerializer):
 
+    contractor = ContractorSerializer(required=False, allow_null=True)
     projects = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Project.objects.all()
     )
@@ -26,6 +29,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "awarding_budget",
             "awarding_percentage_drop",
             "awarding_date",
+            "contractor",
             "execution_signature_date",
             "execution_order_start_date",
             "execution_certificate_start_date",
@@ -63,14 +67,44 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
+        contractor_data = validated_data.pop("contractor", None)
+        contractor = None
+        if contractor_data:
+            contractor, _ = Contractor.objects.get_or_create(**contractor_data)
+
         projects_for_contract = validated_data.pop("projects")
 
-        construction_contract = ConstructionContract.objects.create(**validated_data)
+        construction_contract = ConstructionContract.objects.create(
+            **validated_data, contractor=contractor
+        )
         construction_contract.projects.set(projects_for_contract)
 
         return construction_contract
 
+    def update_contractor(self, instance, validated_data):
+        contractor_data = validated_data.pop("contractor")
+
+        contractor = None
+        if contractor_data:
+
+            if "id" in contractor_data and contractor_data["id"] is not None:
+                contractor = Contractor.objects.get(pk=contractor_data["id"])
+                for key in contractor_data.keys():
+                    setattr(
+                        contractor,
+                        key,
+                        contractor_data.get(key, getattr(contractor, key)),
+                    )
+
+                contractor.save()
+            else:
+                contractor = Contractor.objects.create(**contractor_data)
+
+        instance.contractor = contractor
+
     def update(self, instance, validated_data):
+
+        self.update_contractor(instance, validated_data)
 
         projects_for_contract = validated_data.pop("projects")
         instance.projects.set(projects_for_contract)
