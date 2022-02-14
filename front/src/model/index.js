@@ -35,3 +35,9 @@ export {
     contracts_api_adapter,
     contract_view_adapter,
 } from "./Contract";
+export {
+    default as createContractor,
+    createContractors,
+    contractor_api_adapter,
+    contractors_api_adapter,
+} from "./Contractor";

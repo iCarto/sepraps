@@ -6,6 +6,7 @@ import {
     ContractExecutionSection,
     ContractGeneralDataSection,
 } from "../presentational/generaldata";
+import {ContractorSection} from "components/contractor/presentational";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 
@@ -25,6 +26,9 @@ const ViewContractInfoSubPage = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <ContractAwardingSection />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <ContractorSection contractor={contract.contractor} />
                     </Grid>
                     <Grid item xs={12}>
                         <ContractExecutionSection />

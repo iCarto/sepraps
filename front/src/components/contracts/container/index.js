@@ -4,3 +4,6 @@ export {default as ViewContractInfoSubPage} from "./ViewContractInfoSubPage";
 export {default as ViewContractProjectsSubPage} from "./ViewContractProjectsSubPage";
 export {default as CreateContractPage} from "./CreateContractPage";
 export {default as UpdateContractPanel} from "./UpdateContractPanel";
+export {
+    default as UpdateContractContractorPanel,
+} from "./UpdateContractContractorPanel";
