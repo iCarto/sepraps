@@ -500,5 +500,137 @@
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
         }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 1,
+        "fields": {
+            "category": "funding_allocation",
+            "compliance_date": "2022-02-10",
+            "project": 1,
+            "ordering": 1
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 2,
+        "fields": {
+            "category": "approval_technical_folder",
+            "compliance_date": "2022-02-11",
+            "project": 1,
+            "ordering": 2
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 3,
+        "fields": {
+            "category": "call_for_tenders_works_contract",
+            "compliance_date": "2022-02-12",
+            "project": 1,
+            "ordering": 3
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 4,
+        "fields": {
+            "category": "award_works_contract",
+            "compliance_date": "2022-02-13",
+            "project": 1,
+            "ordering": 4
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 5,
+        "fields": {
+            "category": "contract_signing",
+            "compliance_date": "2022-02-14",
+            "project": 1,
+            "ordering": 5
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 6,
+        "fields": {
+            "category": "start_of_works",
+            "compliance_date": "2022-02-15",
+            "project": 1,
+            "ordering": 6
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 7,
+        "fields": {
+            "category": "definitive_reception",
+            "compliance_date": null,
+            "project": 1,
+            "ordering": 7
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 8,
+        "fields": {
+            "category": "technical_validation",
+            "compliance_date": null,
+            "project": 1,
+            "ordering": 8
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 9,
+        "fields": {
+            "category": "technical_validation_drilling",
+            "compliance_date": null,
+            "project": 1,
+            "ordering": 1,
+            "parent": 8
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 10,
+        "fields": {
+            "category": "technical_validation_pump_test",
+            "compliance_date": null,
+            "project": 1,
+            "ordering": 2,
+            "parent": 8
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 11,
+        "fields": {
+            "category": "system_delivery",
+            "compliance_date": null,
+            "project": 1,
+            "ordering": 8
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 12,
+        "fields": {
+            "category": "final_settlement",
+            "compliance_date": null,
+            "project": 1,
+            "ordering": 9
+        }
+    },
+    {
+        "model": "monitoring.milestone",
+        "pk": 13,
+        "fields": {
+            "category": "end_of_warranty",
+            "compliance_date": null,
+            "project": 1,
+            "ordering": 10
+        }
     }
 ]
