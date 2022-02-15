@@ -9,6 +9,7 @@ from monitoring.views.domain_entry_viewset import DomainEntryViewSet
 from monitoring.views.financing_fund_viewset import FinancingFundViewSet
 from monitoring.views.financing_program_viewset import FinancingProgramViewSet
 from monitoring.views.locality_viewset import LocalityViewSet
+from monitoring.views.milestone_viewset import MilestoneViewSet
 from monitoring.views.project_viewset import ProjectViewSet
 from monitoring.views.provider_viewset import ProviderViewSet
 from rest_framework import routers
@@ -24,6 +25,7 @@ router.register(r"providers", ProviderViewSet)
 router.register(r"contacts", ContactViewSet)
 router.register(r"constructioncontracts", ConstructionContractViewSet)
 router.register(r"contractors", ContractorViewSet)
+router.register(r"milestones", MilestoneViewSet)
 
 
 urlpatterns = [

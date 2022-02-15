@@ -1,3 +1,4 @@
+from django.db.models import F
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.location import Locality
@@ -6,6 +7,7 @@ from monitoring.models.provider import Provider
 from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.infraestructure_serializer import InfraestructureSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
+from monitoring.serializers.milestone_serializer import MilestoneSerializer
 from monitoring.serializers.provider_serializer import ProviderSerializer
 from rest_framework import serializers
 
@@ -31,6 +33,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         required=False, allow_null=True
     )
     contacts = ContactSerializer(many=True, required=False)
+    active_milestone = serializers.SerializerMethodField()
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
     )
@@ -57,6 +60,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "financing_program",
             "financing_program_name",
             "construction_contract",
+            "active_milestone",
             "contacts",
             "folder",
             "creation_user",
@@ -109,6 +113,24 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_folder(self, obj):
         return obj.folder.media_path
+
+    def get_active_milestone(self, obj):
+        # Retrieve first milestone without compliance date
+        # TODO Check if this approximation is valid for the client
+        active_milestone = (
+            obj.milestones.filter(compliance_date__isnull=True, parent__isnull=True)
+            .order_by("ordering")
+            .first()
+        )
+        if active_milestone.children:
+            active_child = (
+                active_milestone.children.filter(compliance_date__isnull=True)
+                .order_by("ordering")
+                .first()
+            )
+            if active_child:
+                active_milestone = active_child
+        return MilestoneSerializer(active_milestone).data
 
     # OPERATIONS
 

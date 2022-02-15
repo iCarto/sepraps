@@ -1,12 +1,17 @@
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
+from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project
+from monitoring.serializers.milestone_serializer import MilestoneSerializer
 from monitoring.serializers.project_serializer import (
     ProjectSerializer,
     ProjectShortSerializer,
     ProjectSummarySerializer,
 )
 from rest_framework import permissions, viewsets
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 
 class ProjectFilter(filters.FilterSet):
@@ -43,6 +48,9 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
+        # Query optimizations for different actions
+        if self.action == "milestones":
+            return Project.objects.all()
         if self.action == "list":
             template = self.request.query_params.get("template")
             if template == "short":
@@ -81,3 +89,21 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user
         return super().perform_create(serializer)
+
+    @action(detail=True)
+    def milestones(self, request, pk=None):
+        """
+        Returns a list of all the milestones for the project
+        """
+        project = self.get_object()
+        milestones = (
+            Milestone.objects.filter(project=project)
+            .exclude(parent__isnull=False)
+            .prefetch_related("children")
+        )
+
+        return Response(
+            MilestoneSerializer(
+                milestones, many=True, context={"request": request}
+            ).data
+        )
