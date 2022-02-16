@@ -30,7 +30,12 @@ const contract_api_adapter = contract => {
         ? new Date(contract["awarding_date"])
         : null;
     contract["contractor"] = createContractor(
-        contract["contractor"] ? contractor_api_adapter(contract["contractor"]) : {}
+        contract["contractor"]
+            ? contractor_api_adapter({
+                  ...contract["contractor"],
+                  contract: contract["id"],
+              })
+            : {}
     );
     contract["execution_signature_date"] = contract["execution_signature_date"]
         ? new Date(contract["execution_signature_date"])
