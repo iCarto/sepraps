@@ -32,9 +32,6 @@ const project_api_adapter = project => {
             ? provider_api_adapter({...project["provider"], project: project["id"]})
             : {}
     );
-    // project["provider"] = createProvider(
-    //     project["provider"] ? provider_api_adapter(project["provider"]) : {}
-    // );
     if (project["main_infrastructure"]) {
         project["main_infrastructure"] = createInfrastructure(
             infrastructure_api_adapter(project["main_infrastructure"])
@@ -53,7 +50,6 @@ const createProjects = (data = []) => {
     return projects;
 };
 
-// ----------- TO-DO: REVIEW & REPLACE project_type_name (& class, financing fund & financing program) BY project_type IN ALL COMPONENTS
 const createProject = ({
     id = -1,
     name = "",
