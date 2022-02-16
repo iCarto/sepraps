@@ -4,6 +4,7 @@ export {default as ViewProjectPage} from "./ViewProjectPage";
 export {default as ViewProjectInfoSubPage} from "./ViewProjectInfoSubPage";
 export {default as ViewProjectLocationSubPage} from "./ViewProjectLocationSubPage";
 export {default as ViewProjectFinancingSubPage} from "./ViewProjectFinancingSubPage";
+export {default as ViewProjectMilestonesSubPage} from "./ViewProjectMilestonesSubPage";
 export {default as ViewProjectContactsSubPage} from "./ViewProjectContactsSubPage";
 export {default as ViewProjectDocumentsSubPage} from "./ViewProjectDocumentsSubPage";
 export {default as SelectProjectDropDown} from "./SelectProjectDropDown";
