@@ -54,3 +54,10 @@ export {
     document_api_adapter,
     documents_api_adapter,
 } from "./Document";
+export {
+    default as createMilestone,
+    createMilestones,
+    milestone_api_adapter,
+    milestones_api_adapter,
+    milestone_view_adapter,
+} from "./Milestone";
