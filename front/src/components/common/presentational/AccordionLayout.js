@@ -5,7 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 
-const AccordionLayout = ({accordionDetails, accordionTitle}) => {
+const AccordionLayout = ({accordionTitle, children}) => {
     return (
         <Accordion
             disableGutters
@@ -44,7 +44,7 @@ const AccordionLayout = ({accordionDetails, accordionTitle}) => {
                     {accordionTitle}
                 </Typography>
             </AccordionSummary>
-            <AccordionDetails>{accordionDetails}</AccordionDetails>
+            <AccordionDetails>{children}</AccordionDetails>
         </Accordion>
     );
 };

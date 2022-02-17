@@ -1,5 +1,6 @@
 import {styled} from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
 
 const drawerWidth = 440;
 
@@ -27,7 +28,7 @@ const SidebarPanel = ({children}) => {
             open={true}
         >
             <DrawerHeader />
-            {children}
+            <Box sx={{p: 3}}>{children}</Box>
         </Drawer>
     );
 };

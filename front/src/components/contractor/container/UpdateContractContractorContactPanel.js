@@ -1,12 +1,16 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import {useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
-import {createContractor} from "model";
 import {ContractorService} from "service/api";
+import {createContractor} from "model";
 
-import {FormContactPanel} from "components/common/form";
+import {SidebarPanel} from "layout";
+import {ContactForm, ContactFormSearch} from "components/contacts/presentational";
+import Alert from "@mui/material/Alert";
 
 const UpdateContractContractorContactPanel = () => {
+    const {action, contactId} = useParams();
+
     const [error, setError] = useState("");
 
     const navigate = useNavigateWithReload();
@@ -14,14 +18,9 @@ const UpdateContractContractorContactPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const handleFormData = data => {
+    const handleSubmit = data => {
         const updatedContractor = createContractor({
-            id: contract.contractor.id,
-            name: contract.contractor.name,
-            contractor_type: contract.contractor.contractor_type,
-            contractor_type_name: contract.contractor.contractor_type_name,
-            phone: contract.contractor.phone,
-            email: contract.contractor.email,
+            ...contract.contractor,
             contract: contract.id,
             contacts: [
                 ...contract.contractor.contacts,
@@ -40,6 +39,25 @@ const UpdateContractContractorContactPanel = () => {
         handleFormSubmit(updatedContractor);
     };
 
+    const handleSelectExistingContact = contact => {
+        const updatedContractor = createContractor({
+            ...contract.contractor,
+            contacts: [
+                ...contract.contractor.contacts,
+                {
+                    id: contact.id,
+                    name: contact.name,
+                    post: contact.post,
+                    gender: contact.gender,
+                    phone: contact.phone,
+                    email: contact.email,
+                    comments: contact.comments,
+                },
+            ],
+        });
+        handleFormSubmit(updatedContractor);
+    };
+
     const handleFormSubmit = contractor => {
         ContractorService.updateContractor(contractor)
             .then(() => {
@@ -51,12 +69,37 @@ const UpdateContractContractorContactPanel = () => {
             });
     };
 
+    const handleCancel = () => {
+        navigate(`/contracts/${contract.id}`);
+    };
+
+    const selectedContact =
+        action === "edit"
+            ? contract.contractor.contacts.find(
+                  contact => contact.id === parseInt(contactId)
+              )
+            : null;
+
     return (
-        <FormContactPanel
-            contextData={contract}
-            handleFormData={handleFormData}
-            error={error}
-        />
+        <SidebarPanel>
+            {error && (
+                <Alert severity="error" sx={{mb: 2}}>
+                    {error}
+                </Alert>
+            )}
+            {action === "search" ? (
+                <ContactFormSearch
+                    onSelect={handleSelectExistingContact}
+                    onCancel={handleCancel}
+                />
+            ) : (
+                <ContactForm
+                    contact={selectedContact}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancel}
+                />
+            )}
+        </SidebarPanel>
     );
 };
 

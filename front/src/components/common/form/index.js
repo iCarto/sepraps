@@ -7,4 +7,3 @@ export {default as FormSelectMultiple} from "./FormSelectMultiple";
 export {default as FormFinancingSelect} from "./FormFinancingSelect";
 export {default as FormLocationSelect} from "./FormLocationSelect";
 export {default as FormSection} from "./FormSection";
-export {default as FormContactPanel} from "./FormContactPanel";
