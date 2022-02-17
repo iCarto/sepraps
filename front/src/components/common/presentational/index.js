@@ -4,7 +4,7 @@ export {default as SectionCard} from "./SectionCard";
 export {default as SectionCardHeaderAction} from "./SectionCardHeaderAction";
 export {default as SectionTitle} from "./SectionTitle";
 export {default as SectionField} from "./SectionField";
-export {default as TableAction} from "./TableAction";
+export {default as MenuAction} from "./MenuAction";
 export {default as TableSortingHead} from "./TableSortingHead";
 export {default as ActionsMenu} from "./ActionsMenu";
 export {default as SearchBox} from "./SearchBox";
