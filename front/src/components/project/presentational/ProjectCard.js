@@ -24,7 +24,7 @@ const bull = (
 const ProjectCard = ({project}) => {
     console.log(project);
     return (
-        <Grid item component="li" xs={12} sm={6} md={4} xl={2}>
+        <Grid item component="li" xs={12} sm={6} md={4} xl={3}>
             <Link href={`/projects/${project.id}`} underline="none" color="inherit">
                 <Card id={project.id}>
                     <div style={{position: "relative"}}>
