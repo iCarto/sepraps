@@ -18,6 +18,13 @@ const provider_api_adapter = provider => {
     return provider;
 };
 
+const provider_view_adapter = provider => {
+    if (provider["locality"]) {
+        provider["locality"] = provider["locality"].code;
+    }
+    return provider;
+};
+
 const providers_api_adapter = providers => providers.map(provider_api_adapter);
 
 const createProviders = (data = []) => {
@@ -50,4 +57,5 @@ export {
     createProviders,
     provider_api_adapter,
     providers_api_adapter,
+    provider_view_adapter,
 };

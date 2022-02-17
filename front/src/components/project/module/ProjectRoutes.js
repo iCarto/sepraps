@@ -36,7 +36,7 @@ const projectRoutes = [
                 element={<UpdateProjectProviderPanel />}
             />
             <Route
-                key="project-provider-contact"
+                key="project-provider-contact-edit"
                 path="provider/contact/:contactId/:action"
                 element={<UpdateProjectProviderContactPanel />}
             />
