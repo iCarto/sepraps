@@ -6,7 +6,7 @@ import {ContractorService} from "service/api";
 
 import {FormContactPanel} from "components/common/form";
 
-const UpdateProjectContractorContactPanel = () => {
+const UpdateContractContractorContactPanel = () => {
     const [error, setError] = useState("");
 
     const navigate = useNavigateWithReload();
@@ -60,4 +60,4 @@ const UpdateProjectContractorContactPanel = () => {
     );
 };
 
-export default UpdateProjectContractorContactPanel;
+export default UpdateContractContractorContactPanel;
