@@ -17,7 +17,7 @@ const ProviderContactSection = ({provider}) => {
     const [actionToPerform, setActionToPerform] = useState("");
     const [error, setError] = useState("");
 
-    const handleAction = (contactId, action) => {
+    const handleActions = (contactId, action) => {
         setActionToPerform(action);
         switch (action) {
             case "remove":
@@ -89,7 +89,7 @@ const ProviderContactSection = ({provider}) => {
                     <Grid item xs={12}>
                         <ContactsTable
                             contacts={provider.contacts}
-                            handleAction={handleAction}
+                            handleActions={handleActions}
                         />
                     </Grid>
                     <Grid item container xs={12} justifyContent="flex-end">

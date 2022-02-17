@@ -1,7 +1,7 @@
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
 
-const TableAction = ({name, icon, text, rowId = null, handleClick = null}) => {
+const MenuAction = ({name, icon, text, rowId = null, handleClick = null}) => {
     const onClick = rowId => {
         handleClick(rowId, name);
     };
@@ -18,4 +18,4 @@ const TableAction = ({name, icon, text, rowId = null, handleClick = null}) => {
     );
 };
 
-export default TableAction;
+export default MenuAction;

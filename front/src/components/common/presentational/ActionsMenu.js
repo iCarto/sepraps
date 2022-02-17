@@ -10,7 +10,7 @@ const ActionsMenu = ({children}) => {
     const openSettingsMenu = Boolean(anchorEl);
 
     const handleOpenActionsMenu = event => {
-        setAnchorEl(event.currentTarget);
+        setAnchorEl(event.target);
     };
 
     const handleCloseActionsMenu = () => {
@@ -23,7 +23,6 @@ const ActionsMenu = ({children}) => {
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-
             "&:before": {
                 content: '""',
                 display: "block",

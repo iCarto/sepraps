@@ -1,5 +1,6 @@
 import {DateUtil} from "utilities";
-import {Icon, ProgressBar} from "../../common/presentational";
+import {useNavigate} from "react-router-dom";
+import {ActionsMenu, Icon, MenuAction, ProgressBar} from "../../common/presentational";
 import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -11,6 +12,13 @@ import Typography from "@mui/material/Typography";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import Tooltip from "@mui/material/Tooltip";
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const bull = (
     <Box
@@ -21,12 +29,24 @@ const bull = (
     </Box>
 );
 
+var handleActions = true;
+
 const ProjectCard = ({project}) => {
+    const navigate = useNavigate();
+
+    const handleClick = (projectId, buttonName) => {
+        const action = buttonName.split("-")[0];
+
+        action === "add" && navigate("/projects/new");
+
+        console.log(projectId, buttonName);
+    };
+
     console.log(project);
     return (
         <Grid item component="li" xs={12} sm={6} md={4} xl={3}>
-            <Link href={`/projects/${project.id}`} underline="none" color="inherit">
-                <Card id={project.id}>
+            <Card id={project.id}>
+                <Link href={`/projects/${project.id}`} underline="none" color="inherit">
                     <div style={{position: "relative"}}>
                         <CardMedia
                             component="img"
@@ -114,8 +134,8 @@ const ProjectCard = ({project}) => {
                         </Box>
                         <ProgressBar barPhase={project.phase_name} />
                     </CardContent>
-                </Card>
-            </Link>
+                </Link>
+            </Card>
         </Grid>
     );
 };

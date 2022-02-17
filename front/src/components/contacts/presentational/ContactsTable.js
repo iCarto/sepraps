@@ -1,6 +1,6 @@
 import {useSort} from "hooks";
 
-import {TableAction, TableSortingHead} from "components/common/presentational";
+import {MenuAction, TableSortingHead} from "components/common/presentational";
 import {ActionsMenu} from "components/common/presentational";
 
 import Table from "@mui/material/Table";
@@ -42,7 +42,7 @@ const headCells = [
     },
 ];
 
-const ContactsTable = ({contacts, handleAction = null}) => {
+const ContactsTable = ({contacts, handleActions = null}) => {
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "name",
         "asc"
@@ -61,7 +61,7 @@ const ContactsTable = ({contacts, handleAction = null}) => {
     };
 
     const handleClick = (rowId, buttonName) => {
-        handleAction(rowId, buttonName.split("-")[0]);
+        handleActions(rowId, buttonName.split("-")[0]);
     };
 
     return (
@@ -89,23 +89,23 @@ const ContactsTable = ({contacts, handleAction = null}) => {
                                 <TableCell>{row.email}</TableCell>
                                 <TableCell>{row.comments}</TableCell>
                                 <TableCell>
-                                    {handleAction ? (
+                                    {handleActions ? (
                                         <ActionsMenu>
-                                            <TableAction
+                                            <MenuAction
                                                 name="edit-contact"
                                                 icon={<EditIcon />}
                                                 text="Editar contacto"
                                                 rowId={row.id}
                                                 handleClick={handleClick}
                                             />
-                                            <TableAction
+                                            <MenuAction
                                                 name="remove-contact"
                                                 icon={<DeleteIcon />}
                                                 text="Quitar contacto"
                                                 rowId={row.id}
                                                 handleClick={handleClick}
                                             />
-                                            <TableAction
+                                            <MenuAction
                                                 name="delete-contact"
                                                 icon={<ClearIcon />}
                                                 text="Eliminar contacto"
