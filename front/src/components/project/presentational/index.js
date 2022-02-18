@@ -5,3 +5,7 @@ export {default as ShowNoOfProjects} from "./ShowNoOfProjects";
 export {default as ClosedProjectsOption} from "./ClosedProjectsOption";
 export {default as ProjectMenu} from "./ProjectMenu";
 export {default as ProjectForm} from "./ProjectForm";
+export {default as AddProjectButton} from "./AddProjectButton";
+export {default as ProjectSearchAutocomplete} from "./ProjectSearchAutocomplete";
+export {default as ProjectSection} from "./ProjectSection";
+export {default as ProjectFormSearch} from "./ProjectFormSearch";
