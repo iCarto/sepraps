@@ -14,20 +14,37 @@ const ContractMenu = ({contract}) => {
     return (
         contract && (
             <Box>
-                <List sx={{pt: 0}}>
-                    <MenuListItemLink to={`/contracts/${contractId}`}>
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Información" />
-                    </MenuListItemLink>
-                    <MenuListItemLink to={`/contracts/${contractId}/projects`}>
-                        <ListItemIcon>
-                            <FactCheckOutlinedIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Proyectos" />
-                    </MenuListItemLink>
-                </List>
+                <Toolbar
+                    sx={{
+                        // -----  OPTION 1 - LIGHT GREY ------
+                        // backgroundColor: "#E2F0FF",
+                        // -----  OPTION 2 - DARK BLUE (change button & code font color to white in SelectProjectDropDown) ------
+                        // backgroundColor: "primary.dark",
+                        // -----  OPTION 3 - DARK GREY (change button & code font color to white in SelectProjectDropDown) ------
+                        backgroundColor: "grey.700",
+                    }}
+                    variant="dense"
+                    disableGutters
+                >
+                    <SelectContractDropDown selectedContract={contract} />
+                </Toolbar>
+                <Divider />
+                <Box>
+                    <List sx={{pt: 0}}>
+                        <MenuListItemLink to={`/contracts/${contract.id}`}>
+                            <ListItemIcon>
+                                <InfoIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Información" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/contracts/${contract.id}/projects`}>
+                            <ListItemIcon>
+                                <FactCheckOutlinedIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Proyectos" />
+                        </MenuListItemLink>
+                    </List>
+                </Box>
             </Box>
         )
     );

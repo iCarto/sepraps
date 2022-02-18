@@ -1,7 +1,8 @@
 import {DateUtil} from "utilities";
-import {useNavigate} from "react-router-dom";
-import {ActionsMenu, Icon, MenuAction, ProgressBar} from "../../common/presentational";
 import PropTypes from "prop-types";
+
+import {Icon, ProgressBar} from "../../common/presentational";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -9,16 +10,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import Tooltip from "@mui/material/Tooltip";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ClearIcon from "@mui/icons-material/Clear";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const bull = (
     <Box
@@ -29,20 +23,31 @@ const bull = (
     </Box>
 );
 
-var handleActions = true;
+const projectTypeIconBoxStyle = {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    display: "flex",
+    m: 1.5,
+    p: 0.75,
+    borderRadius: "50%",
+    bgcolor: "white",
+    opacity: 0.8,
+};
+
+const projectClassBoxStyle = {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    display: "flex",
+    m: 1.5,
+    px: 0.5,
+    borderRadius: 1,
+    bgcolor: "white",
+    opacity: 0.8,
+};
 
 const ProjectCard = ({project}) => {
-    const navigate = useNavigate();
-
-    const handleClick = (projectId, buttonName) => {
-        const action = buttonName.split("-")[0];
-
-        action === "add" && navigate("/projects/new");
-
-        console.log(projectId, buttonName);
-    };
-
-    console.log(project);
     return (
         <Grid item component="li" xs={12} sm={6} md={4} xl={3}>
             <Card id={project.id}>
@@ -54,35 +59,11 @@ const ProjectCard = ({project}) => {
                             image={project.featured_image}
                             alt={project.name}
                         />
-                        <Box
-                            sx={{
-                                position: "absolute",
-                                bottom: 0,
-                                right: 0,
-                                display: "flex",
-                                m: 1.5,
-                                p: 0.75,
-                                borderRadius: "50%",
-                                bgcolor: "white",
-                                opacity: 0.8,
-                            }}
-                        >
+                        <Box sx={projectTypeIconBoxStyle}>
                             <Icon icon={project.project_type} size="medium" />
                         </Box>
                         <Tooltip title={`Clase: ${project.project_class}`}>
-                            <Box
-                                sx={{
-                                    position: "absolute",
-                                    bottom: 0,
-                                    left: 0,
-                                    display: "flex",
-                                    m: 1.5,
-                                    px: 0.5,
-                                    bgcolor: "white",
-                                    opacity: 0.8,
-                                    borderRadius: 1,
-                                }}
-                            >
+                            <Box sx={projectClassBoxStyle}>
                                 <Typography variant="button">
                                     {project.project_class}
                                 </Typography>

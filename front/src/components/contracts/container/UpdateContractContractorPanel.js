@@ -112,11 +112,11 @@ const UpdateContractContractorPanel = () => {
                             <Grid item xs={12} sx={{mb: 2}}>
                                 <Typography variant="h5">Contratista</Typography>
                             </Grid>
-                            {/* {error && (
-                                <Alert severity="error">
-                                    {error} sx={{mb: 2}}
+                            {error && (
+                                <Alert severity="error" sx={{mb: 2}}>
+                                    {error}
                                 </Alert>
-                            )} */}
+                            )}
                             <Grid item container justifyContent="center" xs={12}>
                                 <ToggleButtonGroup
                                     color="primary"
