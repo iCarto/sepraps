@@ -12,7 +12,7 @@ const maxFileSize = value => {
     let valid = true;
     let message = "";
     for (const file of files) {
-        if (file.size > 20000000000) {
+        if (file.size > 2000000) {
             message += `El archivo ${file.name} tiene un tamaño superior a 2Mb\n`;
             valid = false;
         }

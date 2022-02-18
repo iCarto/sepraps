@@ -18,6 +18,10 @@ const DocumentService = {
         });
     },
 
+    delete(path) {
+        return AuthApiService.delete(basePath + path);
+    },
+
     download(path, contentType) {
         return AuthApiService.get(basePath + path + "?action=download", {
             "Content-Type": contentType,

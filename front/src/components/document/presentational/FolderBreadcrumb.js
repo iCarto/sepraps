@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
+import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
+import Button from "@mui/material/Button";
 
 const FolderBreadcrumb = ({path, basePath = ""}) => {
     const [breadcrumbFolders, setBreadcrumbFolders] = useState([]);
@@ -26,22 +28,26 @@ const FolderBreadcrumb = ({path, basePath = ""}) => {
     }, [path]);
 
     return (
-        <Stack
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
-            divider={<ChevronRightOutlinedIcon />}
-        >
-            {breadcrumbFolders.map(breadcrumbFolder => (
-                <Typography
-                    component={Link}
-                    to={basePath + breadcrumbFolder.path}
-                    style={{color: "inherit", textDecoration: "inherit"}}
-                    key={breadcrumbFolder.path}
-                >
-                    {breadcrumbFolder.name}
-                </Typography>
-            ))}
+        <Stack direction="row" justifyContent="flex-start" alignItems="center">
+            <FolderOutlinedIcon />
+            <Stack
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                divider={<ChevronRightOutlinedIcon />}
+            >
+                {breadcrumbFolders.map((breadcrumbFolder, index, {length}) => (
+                    <Button
+                        component={Link}
+                        to={basePath + breadcrumbFolder.path}
+                        variant="text"
+                        color={index === length - 1 ? "inherit" : "primary"}
+                        key={breadcrumbFolder.path}
+                    >
+                        {breadcrumbFolder.name}
+                    </Button>
+                ))}
+            </Stack>
         </Stack>
     );
 };
