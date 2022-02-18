@@ -7,3 +7,7 @@ def open(file):
 
 def save(path, file):
     return default_storage.save(path, file)
+
+
+def delete(path):
+    return default_storage.delete(path)

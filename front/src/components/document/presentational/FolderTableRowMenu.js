@@ -11,12 +11,15 @@ import DownloadIcon from "@mui/icons-material/Download";
 import FolderZipIcon from "@mui/icons-material/FolderZip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LinkIcon from "@mui/icons-material/Link";
+import {DocumentService} from "service/api";
+import {DialogLayout} from "components/common/presentational";
 
-const FolderTableRowMenu = ({folderElement, basePath}) => {
+const FolderTableRowMenu = ({folderElement, basePath, onUpdate}) => {
     const downloadDocument = useDownloadDocument();
     const copytToClipBoard = useCopyToClipboard();
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
     const open = Boolean(anchorEl);
 
@@ -43,7 +46,15 @@ const FolderTableRowMenu = ({folderElement, basePath}) => {
     };
 
     const handleDelete = () => {
+        setIsDeleteDialogOpen(false);
+        DocumentService.delete(folderElement.path).then(() => {
+            onUpdate();
+        });
         handleClose();
+    };
+
+    const handleDeleteDialog = isOpen => {
+        setIsDeleteDialogOpen(isOpen);
     };
 
     return (
@@ -82,13 +93,26 @@ const FolderTableRowMenu = ({folderElement, basePath}) => {
                     </ListItemIcon>
                     <ListItemText>Copiar enlace</ListItemText>
                 </MenuItem>
-                <MenuItem onClick={handleDelete}>
+                <MenuItem
+                    onClick={() => {
+                        setIsDeleteDialogOpen(true);
+                    }}
+                >
                     <ListItemIcon>
                         <DeleteIcon color="error" />
                     </ListItemIcon>
                     <ListItemText>Eliminar</ListItemText>
                 </MenuItem>
             </Menu>
+            <DialogLayout
+                dialogLabel="Eliminar documento"
+                dialogTitle="¿Quiere eliminar este documento?"
+                dialogContentText="Si hace clic en Eliminar, el documento se eliminará definitivamente del sistema."
+                mainActionClick={handleDelete}
+                mainActionText="Eliminar"
+                handleDialog={handleDeleteDialog}
+                isDialogOpen={isDeleteDialogOpen}
+            />
         </div>
     );
 };

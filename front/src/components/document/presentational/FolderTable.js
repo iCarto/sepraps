@@ -35,7 +35,13 @@ const headCells = [
     },
 ];
 
-const FolderTable = ({folderElements, selectedElement, onSelectElement, basePath}) => {
+const FolderTable = ({
+    basePath,
+    folderElements,
+    selectedElement,
+    onSelectElement,
+    onUpdate,
+}) => {
     const navigate = useNavigate();
     const downloadDocument = useDownloadDocument();
 
@@ -111,6 +117,7 @@ const FolderTable = ({folderElements, selectedElement, onSelectElement, basePath
                                     <FolderTableRowMenu
                                         folderElement={folderElement}
                                         basePath={basePath}
+                                        onUpdate={onUpdate}
                                     />
                                 </TableCell>
                             </TableRow>

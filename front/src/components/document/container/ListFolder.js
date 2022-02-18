@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useParams, useLocation} from "react-router-dom";
 import {DocumentService} from "service/api";
 
 import {
@@ -15,7 +15,9 @@ import {FileUploadSection} from "../common";
 
 const ListFolder = ({path}) => {
     const {id: projectId} = useParams();
-    const basePath = `/project/${projectId}/documents/`;
+    const location = useLocation();
+
+    const basePath = `/projects/${projectId}/documents/`;
 
     const {view} = useFolderView();
 
@@ -45,7 +47,7 @@ const ListFolder = ({path}) => {
                 setLoading(false);
             }
         });
-    }, [path]);
+    }, [path, location.state?.lastRefreshDate]);
 
     const reloadFolder = file => {
         console.log("reloadFolder", {file});
@@ -64,9 +66,12 @@ const ListFolder = ({path}) => {
                 <FolderBreadcrumb path={path} basePath={basePath} />
                 <FolderChangeView />
             </Grid>
-            <Grid item container xs={12}>
-                <FileUploadSection path={path} onFinishUpload={reloadFolder} />
-            </Grid>
+            {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
+            {path.indexOf("/") >= 0 && (
+                <Grid item container xs={12}>
+                    <FileUploadSection path={path} onFinishUpload={reloadFolder} />
+                </Grid>
+            )}
             <Grid item container xs={12}>
                 {loading ? (
                     <Grid item container justifyContent="center" xs={12}>
@@ -81,10 +86,11 @@ const ListFolder = ({path}) => {
                     />
                 ) : (
                     <FolderTable
+                        basePath={basePath}
                         folderElements={folderElements}
                         selectedElement={selectedElement}
                         onSelectElement={onSelectElement}
-                        basePath={basePath}
+                        onUpdate={reloadFolder}
                     />
                 )}
             </Grid>

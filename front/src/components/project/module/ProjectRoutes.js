@@ -32,7 +32,7 @@ const projectRoutes = [
         />
         <Route
             key="project-documents"
-            path="documents"
+            path="documents/*"
             element={<ViewProjectDocumentsSubPage />}
         />
         <Route key="project-info" path="" element={<ViewProjectInfoSubPage />}>
