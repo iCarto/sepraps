@@ -29,14 +29,14 @@ const contract_api_adapter = contract => {
     contract["awarding_date"] = contract["awarding_date"]
         ? new Date(contract["awarding_date"])
         : null;
-    contract["contractor"] = createContractor(
-        contract["contractor"]
-            ? contractor_api_adapter({
+    contract["contractor"] = contract["contractor"]
+        ? createContractor(
+              contractor_api_adapter({
                   ...contract["contractor"],
                   contract: contract["id"],
               })
-            : {}
-    );
+          )
+        : null;
     contract["execution_signature_date"] = contract["execution_signature_date"]
         ? new Date(contract["execution_signature_date"])
         : null;
@@ -92,12 +92,7 @@ const contract_view_adapter = contract => {
     contract["awarding_date"] = !!contract["awarding_date"]
         ? DateUtil.formatDate(contract["awarding_date"], DATE_FORMATS.SERVER_DATEFORMAT)
         : null;
-    contract["contractor"] = !!contract["contractor"]
-        ? contract["contractor"].id
-        : null;
-    contract["execution_signature_date"] = !!contract[
-        "bid_requexecution_signature_dateest_budget"
-    ]
+    contract["execution_signature_date"] = !!contract["execution_signature_date"]
         ? DateUtil.formatDate(
               contract["execution_signature_date"],
               DATE_FORMATS.SERVER_DATEFORMAT

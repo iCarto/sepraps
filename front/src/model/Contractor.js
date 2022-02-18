@@ -28,7 +28,7 @@ const createContractor = ({
     phone = "",
     email = "",
     contract = -1, // contract id
-    contacts = [],
+    contacts = null,
 } = {}) => {
     const publicApi = {
         id,
