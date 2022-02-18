@@ -10,7 +10,7 @@ const ContractorFormFields = () => {
             <FormInputText name="name" label="Nombre del contratista" />
             <FormSelect
                 name="contractor_type"
-                label="Área del prestador"
+                label="Tipo de contratista"
                 options={contractorTypes}
             />
             <FormInputText name="phone" label="Teléfono" />

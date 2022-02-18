@@ -12,7 +12,7 @@ class ContractorSerializer(serializers.ModelSerializer):
     contract = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=ConstructionContract.objects.all(), required=False
     )
-    contacts = ContactSerializer(many=True, required=False)
+    contacts = ContactSerializer(many=True, allow_null=True, required=False)
 
     class Meta:
         model = Contractor
@@ -56,7 +56,7 @@ class ContractorSerializer(serializers.ModelSerializer):
             )
         )
 
-        contract = validated_data.pop("contract")
+        contract = validated_data.pop("contract", None)
 
         # nested entities properties were removed in previous methods
         for key in validated_data.keys():
@@ -64,7 +64,8 @@ class ContractorSerializer(serializers.ModelSerializer):
 
         instance.save()
 
-        contract.contractor = instance
-        contract.save()
+        if contract:
+            contract.contractor = instance
+            contract.save()
 
         return instance

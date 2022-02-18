@@ -17,6 +17,7 @@ const ContractForm = ({section = null, onSubmit, onCancel}) => {
     if (outletContext) {
         contract = outletContext[0];
     }
+    console.log({contract});
 
     const defaultFormValues = {
         id: contract?.id || "",
@@ -45,6 +46,7 @@ const ContractForm = ({section = null, onSubmit, onCancel}) => {
     });
 
     const onFormSubmit = data => {
+        console.log("submit", {contract});
         const updatedProvider = createContract({
             id: data.id,
             number: data.number,
@@ -57,6 +59,7 @@ const ContractForm = ({section = null, onSubmit, onCancel}) => {
             awarding_budget: data.awarding_budget,
             awarding_percentage_drop: data.awarding_percentage_drop,
             awarding_date: data.awarding_date,
+            contractor: contract?.contractor,
             execution_signature_date: data.execution_signature_date,
             execution_order_start_date: data.execution_order_start_date,
             execution_certificate_start_date: data.execution_certificate_start_date,

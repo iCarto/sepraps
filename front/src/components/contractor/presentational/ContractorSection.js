@@ -14,7 +14,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 const ContractorSection = ({contractor, hideButtons = null}) => {
     const navigate = useNavigate();
 
-    const headerActions = contractor.id
+    const headerActions = contractor?.id
         ? [
               <SectionCardHeaderAction
                   key="edit"
@@ -43,7 +43,7 @@ const ContractorSection = ({contractor, hideButtons = null}) => {
             title="Contratista"
             headerActions={!hideButtons ? headerActions : null}
         >
-            {contractor.id ? (
+            {contractor?.id ? (
                 <>
                     <SectionField label="Nombre:" value={contractor.name} />
                     <SectionField
