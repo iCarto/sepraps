@@ -198,7 +198,9 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=24),
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        days=365
+    ),  # TODO: Change to logout user and login again
     "USER_ID_FIELD": "username",
     "USER_ID_CLAIM": "username",
 }
