@@ -10,41 +10,43 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Toolbar from "@mui/material/Toolbar";
 import {MenuListItemLink} from "components/common/presentational";
 
-const ContractMenu = ({contractId}) => {
+const ContractMenu = ({contract}) => {
     return (
-        <Box>
-            <Toolbar
-                sx={{
-                    // -----  OPTION 1 - LIGHT GREY ------
-                    // backgroundColor: "#E2F0FF",
-                    // -----  OPTION 2 - DARK BLUE (change button & code font color to white in SelectProjectDropDown) ------
-                    // backgroundColor: "primary.dark",
-                    // -----  OPTION 3 - DARK GREY (change button & code font color to white in SelectProjectDropDown) ------
-                    backgroundColor: "grey.700",
-                }}
-                variant="dense"
-                disableGutters
-            >
-                <SelectContractDropDown />
-            </Toolbar>
-            <Divider />
+        contract && (
             <Box>
-                <List sx={{pt: 0}}>
-                    <MenuListItemLink to={`/contracts/${contractId}`}>
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Información" />
-                    </MenuListItemLink>
-                    <MenuListItemLink to={`/contracts/${contractId}/projects`}>
-                        <ListItemIcon>
-                            <LocationOnIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Proyectos" />
-                    </MenuListItemLink>
-                </List>
+                <Toolbar
+                    sx={{
+                        // -----  OPTION 1 - LIGHT GREY ------
+                        // backgroundColor: "#E2F0FF",
+                        // -----  OPTION 2 - DARK BLUE (change button & code font color to white in SelectProjectDropDown) ------
+                        // backgroundColor: "primary.dark",
+                        // -----  OPTION 3 - DARK GREY (change button & code font color to white in SelectProjectDropDown) ------
+                        backgroundColor: "grey.700",
+                    }}
+                    variant="dense"
+                    disableGutters
+                >
+                    <SelectContractDropDown selectedContract={contract} />
+                </Toolbar>
+                <Divider />
+                <Box>
+                    <List sx={{pt: 0}}>
+                        <MenuListItemLink to={`/contracts/${contract.id}`}>
+                            <ListItemIcon>
+                                <InfoIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Información" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/contracts/${contract.id}/projects`}>
+                            <ListItemIcon>
+                                <LocationOnIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Proyectos" />
+                        </MenuListItemLink>
+                    </List>
+                </Box>
             </Box>
-        </Box>
+        )
     );
 };
 

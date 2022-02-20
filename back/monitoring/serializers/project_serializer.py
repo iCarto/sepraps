@@ -122,7 +122,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             .order_by("ordering")
             .first()
         )
-        if active_milestone.children:
+        if active_milestone and active_milestone.children:
             active_child = (
                 active_milestone.children.filter(compliance_date__isnull=True)
                 .order_by("ordering")

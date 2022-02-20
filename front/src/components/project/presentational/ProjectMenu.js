@@ -13,65 +13,67 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GradingIcon from "@mui/icons-material/Grading";
 import {MenuListItemLink} from "components/common/presentational";
 
-const ProjectMenu = ({projectId}) => {
+const ProjectMenu = ({project}) => {
     return (
-        <Box>
-            <Toolbar
-                sx={{
-                    // -----  OPTION 1 - LIGHT GREY ------
-                    // backgroundColor: "#E2F0FF",
-                    // -----  OPTION 2 - DARK BLUE (change button & code font color to white in SelectProjectDropDown) ------
-                    // backgroundColor: "primary.dark",
-                    // -----  OPTION 3 - DARK GREY (change button & code font color to white in SelectProjectDropDown) ------
-                    backgroundColor: "grey.700",
-                }}
-                variant="dense"
-                disableGutters
-            >
-                <SelectProjectDropDown />
-            </Toolbar>
-            <Divider />
+        project && (
             <Box>
-                <List sx={{pt: 0}}>
-                    <MenuListItemLink to={`/projects/${projectId}`}>
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Información" />
-                    </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${projectId}/location`}>
-                        <ListItemIcon>
-                            <LocationOnIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Ubicación" />
-                    </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${projectId}/financing`}>
-                        <ListItemIcon>
-                            <AccountBalanceIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Financiación" />
-                    </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${projectId}/milestones`}>
-                        <ListItemIcon>
-                            <GradingIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Hitos" />
-                    </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${projectId}/contacts`}>
-                        <ListItemIcon>
-                            <PermContactCalendarIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Contactos" />
-                    </MenuListItemLink>
-                    <MenuListItemLink to={`/projects/${projectId}/documents`}>
-                        <ListItemIcon>
-                            <TopicIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Documentos" />
-                    </MenuListItemLink>
-                </List>
+                <Toolbar
+                    sx={{
+                        // -----  OPTION 1 - LIGHT GREY ------
+                        // backgroundColor: "#E2F0FF",
+                        // -----  OPTION 2 - DARK BLUE (change button & code font color to white in SelectProjectDropDown) ------
+                        // backgroundColor: "primary.dark",
+                        // -----  OPTION 3 - DARK GREY (change button & code font color to white in SelectProjectDropDown) ------
+                        backgroundColor: "grey.700",
+                    }}
+                    variant="dense"
+                    disableGutters
+                >
+                    <SelectProjectDropDown selectedProject={project} />
+                </Toolbar>
+                <Divider />
+                <Box>
+                    <List sx={{pt: 0}}>
+                        <MenuListItemLink to={`/projects/${project.id}`}>
+                            <ListItemIcon>
+                                <InfoIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Información" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/projects/${project.id}/location`}>
+                            <ListItemIcon>
+                                <LocationOnIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Ubicación" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/projects/${project.id}/financing`}>
+                            <ListItemIcon>
+                                <AccountBalanceIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Financiación" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/projects/${project.id}/milestones`}>
+                            <ListItemIcon>
+                                <GradingIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Hitos" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/projects/${project.id}/contacts`}>
+                            <ListItemIcon>
+                                <PermContactCalendarIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Contactos" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/projects/${project.id}/documents`}>
+                            <ListItemIcon>
+                                <TopicIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Documentos" />
+                        </MenuListItemLink>
+                    </List>
+                </Box>
             </Box>
-        </Box>
+        )
     );
 };
 
