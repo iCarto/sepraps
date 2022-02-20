@@ -6,7 +6,7 @@ import ContactSection from "./ContactSection";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ContactFormSearch = ({onSelect, onCancel}) => {
+const ContactFormSearch = ({onSelect = null, onCancel = null}) => {
     const [existingContact, setExistingContact] = useState(null);
 
     const handleSelectExistingContact = contact => {
@@ -23,19 +23,23 @@ const ContactFormSearch = ({onSelect, onCancel}) => {
             </Grid>
             <Grid container justifyContent="center" sx={{mt: 2}}>
                 <Grid>
-                    <Button color="inherit" onClick={onCancel}>
-                        Cancelar
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{ml: 2}}
-                        onClick={() => {
-                            onSelect(existingContact);
-                        }}
-                    >
-                        Añadir
-                    </Button>
+                    {onCancel && (
+                        <Button color="inherit" onClick={onCancel}>
+                            Cancelar
+                        </Button>
+                    )}
+                    {onSelect && (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{ml: 2}}
+                            onClick={() => {
+                                onSelect(existingContact);
+                            }}
+                        >
+                            Añadir
+                        </Button>
+                    )}
                 </Grid>
             </Grid>
         </Grid>
