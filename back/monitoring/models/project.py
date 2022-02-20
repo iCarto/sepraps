@@ -2,8 +2,8 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils import timezone
-from monitoring.models.construction_contract import ConstructionContract
 from documents.models import MediaNode
+from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.contact import Contact
 from monitoring.models.financing_fund import FinancingFund
 from monitoring.models.financing_program import FinancingProgram
@@ -79,6 +79,17 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        from documents.models import create_project_folder_structure
+        from monitoring.models.milestone import create_project_milestones_structure
+
+        root_folder = create_project_folder_structure(self.code)
+        self.folder = root_folder
+
+        super(Project, self).save(*args, **kwargs)
+
+        create_project_milestones_structure(self)
+
 
 def get_code_for_new_project():
     """
@@ -95,7 +106,7 @@ def get_code_for_new_project():
         )
         new_code = (str(int(last_code[-3:]) + 1)).zfill(3)
     except ObjectDoesNotExist:
-        new_code = "000"
+        new_code = "001"
 
     # TODO change AP for project type code
     return str(year) + "-AP-" + new_code
