@@ -18,7 +18,7 @@ const ViewContractPage = () => {
     }, [id, location.state?.lastRefreshDate]);
 
     return (
-        <PageWithMenuLayout menu={<ContractMenu contractId={id} />}>
+        <PageWithMenuLayout menu={<ContractMenu contract={contract} />}>
             {contract && <Outlet context={[contract]} />}
         </PageWithMenuLayout>
     );

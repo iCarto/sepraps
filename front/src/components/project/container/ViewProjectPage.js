@@ -18,7 +18,7 @@ const ViewProjectPage = () => {
     }, [id, location.state?.lastRefreshDate]);
 
     return (
-        <PageWithMenuLayout menu={<ProjectMenu projectId={id} />}>
+        <PageWithMenuLayout menu={<ProjectMenu project={project} />}>
             {project && <Outlet context={[project]} />}
         </PageWithMenuLayout>
     );

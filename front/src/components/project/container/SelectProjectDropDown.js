@@ -1,31 +1,26 @@
 import {useState, useEffect} from "react";
 import {ProjectService, PROJECT_TEMPLATE} from "service/api";
-import {useParams} from "react-router-dom";
 import PropTypes from "prop-types";
 
+import {MenuListItemLink} from "components/common/presentational";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import {MenuListItemLink} from "components/common/presentational";
 import Stack from "@mui/material/Stack";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const SelectProjectDropDown = () => {
+const SelectProjectDropDown = ({selectedProject}) => {
     const [projects, setProjects] = useState([]);
     const [anchorElement, setAnchorElement] = useState(null);
 
     const open = Boolean(anchorElement);
-
-    const {id} = useParams();
 
     useEffect(() => {
         ProjectService.getProjects(false, PROJECT_TEMPLATE.SHORT).then(projects => {
             setProjects(projects);
         });
     }, []);
-
-    let selectedProject = projects.find(project => project.id == id);
 
     const handleClick = event => {
         setAnchorElement(event.currentTarget);

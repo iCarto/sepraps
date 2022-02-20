@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import {ContractService, TEMPLATE} from "service/api";
-import {useParams} from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -10,21 +9,17 @@ import Box from "@mui/material/Box";
 import {MenuListItemLink} from "components/common/presentational";
 import Stack from "@mui/material/Stack";
 
-const SelectContractDropDown = () => {
+const SelectContractDropDown = ({selectedContract}) => {
     const [contracts, setContracts] = useState([]);
     const [anchorElement, setAnchorElement] = useState(null);
 
     const open = Boolean(anchorElement);
-
-    const {id} = useParams();
 
     useEffect(() => {
         ContractService.getContracts(false, TEMPLATE.SHORT).then(contracts => {
             setContracts(contracts);
         });
     }, []);
-
-    let selectedContract = contracts.find(contract => contract.id == id);
 
     const handleClick = event => {
         setAnchorElement(event.currentTarget);
