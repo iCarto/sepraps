@@ -147,9 +147,9 @@
         "model": "documents.medianode",
         "pk": 1,
         "fields": {
-            "media_name": "2022-AP-001",
+            "media_name": "2021-AP-001",
             "media_type": "FOLDER",
-            "storage_path": "2022-AP-001"
+            "storage_path": "2021-AP-001"
         }
     },
     {
@@ -158,7 +158,7 @@
         "fields": {
             "media_name": "1_Diseño",
             "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/1_Diseño",
+            "storage_path": "2021-AP-001/1_Diseño",
             "parent": 1
         }
     },
@@ -168,7 +168,7 @@
         "fields": {
             "media_name": "2_Contratación",
             "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/2_Contratación",
+            "storage_path": "2021-AP-001/2_Contratación",
             "parent": 1
         }
     },
@@ -178,7 +178,7 @@
         "fields": {
             "media_name": "3_Ejecución",
             "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/3_Ejecución",
+            "storage_path": "2021-AP-001/3_Ejecución",
             "parent": 1
         }
     },
@@ -188,7 +188,7 @@
         "fields": {
             "media_name": "4_Post_Construcción",
             "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/4_Post_Construcción",
+            "storage_path": "2021-AP-001/4_Post_Construcción",
             "parent": 1
         }
     },
@@ -200,7 +200,7 @@
             "media_type": "DOCUMENT",
             "media_content_type": "image/jpg",
             "media_size": 200000,
-            "storage_path": "2022-AP-001/1_Diseño/Diseño1.jpg",
+            "storage_path": "2021-AP-001/1_Diseño/Diseño1.jpg",
             "parent": 2
         }
     },
@@ -212,7 +212,7 @@
             "media_type": "DOCUMENT",
             "media_content_type": "image/jpg",
             "media_size": 300000,
-            "storage_path": "2022-AP-001/1_Diseño/Diseño2.jpg",
+            "storage_path": "2021-AP-001/1_Diseño/Diseño2.jpg",
             "parent": 2
         }
     },
@@ -224,7 +224,7 @@
             "media_type": "DOCUMENT",
             "media_content_type": "image/jpg",
             "media_size": 100000,
-            "storage_path": "2022-AP-001/1_Diseño/Diseño3.jpg",
+            "storage_path": "2021-AP-001/1_Diseño/Diseño3.jpg",
             "parent": 2
         }
     },
@@ -236,7 +236,7 @@
             "media_type": "DOCUMENT",
             "media_content_type": "text/plain",
             "media_size": 2000,
-            "storage_path": "2022-AP-001/1_Diseño/DiseñoDocumento.txt",
+            "storage_path": "2021-AP-001/1_Diseño/DiseñoDocumento.txt",
             "parent": 2
         }
     },
@@ -246,7 +246,7 @@
         "fields": {
             "media_name": "1_1_Carpeta_Técnica",
             "media_type": "FOLDER",
-            "storage_path": "2022-AP-001/1_Diseño/1_1_Carpeta_Técnica",
+            "storage_path": "2021-AP-001/1_Diseño/1_1_Carpeta_Técnica",
             "parent": 2
         }
     },
@@ -258,7 +258,7 @@
             "media_type": "DOCUMENT",
             "media_content_type": "image/png",
             "media_size": 10000,
-            "storage_path": "2022-AP-001/1_Diseño/1_1_Carpeta_Técnica/CarpetaTecnica1.png",
+            "storage_path": "2021-AP-001/1_Diseño/1_1_Carpeta_Técnica/CarpetaTecnica1.png",
             "parent": 10
         }
     },
@@ -270,7 +270,7 @@
             "media_type": "DOCUMENT",
             "media_content_type": "image/png",
             "media_size": 20000000,
-            "storage_path": "2022-AP-001/3_Ejecución/Ejecución1.png",
+            "storage_path": "2021-AP-001/3_Ejecución/Ejecución1.png",
             "parent": 4
         }
     },
@@ -398,10 +398,7 @@
             "name": "Junta de Saneamiento de Pruebas",
             "area": "rural",
             "locality": "1507600",
-            "contacts": [
-                2,
-                3
-            ]
+            "contacts": [2, 3]
         }
     },
     {
@@ -412,10 +409,7 @@
             "contractor_type": "company",
             "phone": "+11 456456456",
             "email": "contacto2@junta.com",
-            "contacts": [
-                4,
-                5
-            ]
+            "contacts": [4, 5]
         }
     },
     {
@@ -458,14 +452,8 @@
             "financing_program": 1,
             "provider": 1,
             "construction_contract": 1,
-            "linked_localities": [
-                "1507620",
-                "1507625"
-            ],
-            "contacts": [
-                1,
-                2
-            ],
+            "linked_localities": ["1507620", "1507625"],
+            "contacts": [1, 2],
             "folder": 1,
             "closed": false,
             "creation_user": 1,
@@ -487,13 +475,8 @@
             "financing_program": 1,
             "provider": 1,
             "construction_contract": 1,
-            "linked_localities": [
-                "1507640",
-                "1507645"
-            ],
-            "contacts": [
-                1
-            ],
+            "linked_localities": ["1507640", "1507645"],
+            "contacts": [1],
             "folder": 1,
             "closed": true,
             "creation_user": 1,

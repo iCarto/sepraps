@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 from monitoring.models.project import Project
 
@@ -49,3 +51,24 @@ class Milestone(models.Model):
 
     def __str__(self):
         return self.value
+
+
+def create_project_milestones(project, children, parent=None):
+    for index, milestone_data in enumerate(children):
+        milestone = Milestone(
+            category=milestone_data.get("category"),
+            project=project,
+            parent=parent,
+            ordering=index,
+        )
+        milestone.save()
+
+        create_project_milestones(
+            project, milestone_data.get("children", []), milestone
+        )
+
+
+def create_project_milestones_structure(project):
+    with open("monitoring/data/project.json", "r") as f:
+        data = json.load(f)
+        create_project_milestones(project, data.get("milestones", []))

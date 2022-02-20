@@ -1,3 +1,5 @@
+import json
+
 from django.db import models
 
 
@@ -57,3 +59,31 @@ class Folder(MediaNode):
 
     class Meta:
         proxy = True
+
+
+def create_folder_children(folder_parent, children):
+    for folder_child_data in children:
+        folder_child = Folder(
+            media_type="FOLDER",
+            media_name=folder_child_data.get("name"),
+            storage_path=folder_parent.storage_path
+            + PATH_SEPARATOR
+            + folder_child_data.get("name"),
+            parent=folder_parent,
+        )
+        folder_child.save()
+
+        create_folder_children(folder_child, folder_child_data.get("children", []))
+
+
+def create_project_folder_structure(project_code):
+    root_folder = Folder(
+        media_type="FOLDER", media_name=project_code, storage_path=project_code
+    )
+    root_folder.save()
+
+    with open("monitoring/data/project.json", "r") as f:
+        data = json.load(f)
+        create_folder_children(root_folder, data.get("folders", []))
+
+    return root_folder

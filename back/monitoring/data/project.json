@@ -1,0 +1,64 @@
+{
+    "folders": [
+        {
+            "name": "1_Diseño",
+            "children": [
+                {
+                    "name": "1_1_Carpeta_Técnica"
+                }
+            ]
+        },
+        {
+            "name": "2_Contratación"
+        },
+        {
+            "name": "3_Ejecución"
+        },
+        {
+            "name": "4_Post_Construcción"
+        }
+    ],
+    "milestones": [
+        {
+            "category": "funding_allocation"
+        },
+        {
+            "category": "approval_technical_folder"
+        },
+        {
+            "category": "call_for_tenders_works_contract"
+        },
+        {
+            "category": "award_works_contract"
+        },
+        {
+            "category": "contract_signing"
+        },
+        {
+            "category": "start_of_works"
+        },
+        {
+            "category": "definitive_reception"
+        },
+        {
+            "category": "technical_validation",
+            "children": [
+                {
+                    "category": "technical_validation_drilling"
+                },
+                {
+                    "category": "technical_validation_pump_test"
+                }
+            ]
+        },
+        {
+            "category": "system_delivery"
+        },
+        {
+            "category": "final_settlement"
+        },
+        {
+            "category": "end_of_warranty"
+        }
+    ]
+}
