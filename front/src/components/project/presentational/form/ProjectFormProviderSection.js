@@ -46,7 +46,18 @@ const ProjectFormProviderSection = () => {
     };
 
     const handleSelectExistingProvider = selectedExistingProvider => {
-        changeProviderFormValues(selectedExistingProvider);
+        const values = getValues();
+        values["provider_id"] = selectedExistingProvider.id;
+        values["provider_name"] = selectedExistingProvider.name;
+        values["provider_area"] = selectedExistingProvider.area;
+        values["provider_location"] = {
+            department: selectedExistingProvider.locality.department,
+            district: selectedExistingProvider.locality.district,
+            locality: selectedExistingProvider.locality.code,
+        };
+        reset({
+            ...values,
+        });
     };
 
     return (
