@@ -68,7 +68,7 @@ const AddContactButtonGroup = ({basePath}) => {
                         <SearchIcon fontSize="small" />
                     </ListItemIcon>
                     <Typography style={{textTransform: "uppercase"}}>
-                        Buscar contacto
+                        Añadir contacto existente
                     </Typography>
                 </MenuItem>
             </Menu>

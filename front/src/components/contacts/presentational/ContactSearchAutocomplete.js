@@ -4,7 +4,7 @@ import {SearchAutocomplete} from "components/common/presentational";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const ContactSearchAutocomplete = ({handleSelect}) => {
+const ContactSearchAutocomplete = ({allowedPosts = null, handleSelect}) => {
     const optionComponent = option => {
         return (
             <Stack>
@@ -19,12 +19,16 @@ const ContactSearchAutocomplete = ({handleSelect}) => {
         );
     };
 
+    const searchContacts = textValue => {
+        return ContactService.findContacts(textValue, allowedPosts);
+    };
+
     return (
         <SearchAutocomplete
             label="Buscar un contacto"
             optionLabel="name"
             optionComponent={optionComponent}
-            search={ContactService.getContactsBySearchText}
+            search={searchContacts}
             handleSelect={handleSelect}
         />
     );
