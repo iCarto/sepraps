@@ -8,6 +8,7 @@ import {ProjectForm} from "../presentational";
 
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
+import Container from "@mui/material/Container";
 
 const CreateProjectPage = () => {
     const navigate = useNavigate();
@@ -27,13 +28,15 @@ const CreateProjectPage = () => {
 
     return (
         <PageLayout>
-            <Typography variant="h6" sx={{mb: 2}}>
-                Registro de proyecto
-            </Typography>
-            {error && <Alert severity="error">{error}</Alert>}
-            <DomainProvider>
-                <ProjectForm handleFormSubmit={handleFormSubmit} />
-            </DomainProvider>
+            <Container maxWidth="md">
+                <Typography variant="h6" sx={{mb: 2}}>
+                    Registro de proyecto
+                </Typography>
+                {error && <Alert severity="error">{error}</Alert>}
+                <DomainProvider>
+                    <ProjectForm handleFormSubmit={handleFormSubmit} />
+                </DomainProvider>
+            </Container>
         </PageLayout>
     );
 };

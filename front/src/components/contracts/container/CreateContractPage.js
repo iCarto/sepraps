@@ -7,6 +7,7 @@ import {ContractForm} from "../presentational";
 
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
+import Container from "@mui/material/Container";
 
 const CreateContractPage = () => {
     const navigate = useNavigate();
@@ -30,11 +31,13 @@ const CreateContractPage = () => {
 
     return (
         <PageLayout>
-            <Typography variant="h6" sx={{mb: 2}}>
-                Añadir contrato
-            </Typography>
-            {error && <Alert severity="error">{error}</Alert>}
-            <ContractForm onSubmit={handleSubmit} onCancel={handleCancel} />
+            <Container maxWidth="md">
+                <Typography variant="h6" sx={{mb: 2}}>
+                    Añadir contrato
+                </Typography>
+                {error && <Alert severity="error">{error}</Alert>}
+                <ContractForm onSubmit={handleSubmit} onCancel={handleCancel} />
+            </Container>
         </PageLayout>
     );
 };
