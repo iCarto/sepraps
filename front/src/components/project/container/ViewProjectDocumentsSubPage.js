@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
+import {SubPageLayout} from "layout";
 import {SectionCard} from "components/common/presentational";
 import {ListFolder} from "components/document/container";
 import {FolderViewProvider} from "components/document/provider";
+import Grid from "@mui/material/Grid";
 
 const ViewProjectDocumentsSubPage = () => {
     let project;
@@ -24,7 +24,7 @@ const ViewProjectDocumentsSubPage = () => {
     }, [params]);
 
     return (
-        <Container maxWidth="lg" sx={{my: 3}}>
+        <SubPageLayout>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     {path && (
@@ -36,7 +36,7 @@ const ViewProjectDocumentsSubPage = () => {
                     )}
                 </Grid>
             </Grid>
-        </Container>
+        </SubPageLayout>
     );
 };
 
