@@ -58,7 +58,11 @@ const ViewProjectPanel = () => {
 
         const updatedContract = createContract({
             ...contract,
-            projects: [...contract.projects],
+            projects: [
+                ...contract.projects.map(project => {
+                    return project.id;
+                }),
+            ],
         });
 
         handleUpdateContract(updatedContract);
@@ -75,6 +79,8 @@ const ViewProjectPanel = () => {
                 setError(error.toString());
             });
     };
+
+    console.log(project, "Project en ViewProjectPanel");
 
     const headerActions = project && (
         <ActionsMenu>
@@ -128,7 +134,6 @@ const ViewProjectPanel = () => {
                     Cerrar
                 </Button>
             </Grid>
-
             <DialogLayout
                 dialogLabel="Remove project"
                 dialogTitle="¿Quiere quitar este proyecto del contrato?"

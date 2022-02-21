@@ -4,3 +4,5 @@ export {default as ContractList} from "./ContractList";
 export {default as ContractCard} from "./ContractCard";
 export {default as ContractMenu} from "./ContractMenu";
 export {default as ContractForm} from "./ContractForm";
+export {default as ContractFormSearch} from "./ContractFormSearch";
+export {default as ContractSearchAutocomplete} from "./ContractSearchAutocomplete";

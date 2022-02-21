@@ -1,8 +1,6 @@
 import {useController, useFormContext} from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import {NumberUtil} from "utilities";
-import {useEffect, useState} from "react";
 
 const FormInputDecimal = ({
     name: propsName,

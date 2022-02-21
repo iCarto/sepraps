@@ -11,7 +11,7 @@ const AddProjectButton = ({basePath}) => {
             id="basic-button"
             color="primary"
             variant="contained"
-            sx={{mt: 2}}
+            sx={{mt: 1}}
             onClick={() => {
                 navigate(basePath + "/new/add");
             }}

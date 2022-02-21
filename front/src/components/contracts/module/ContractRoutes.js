@@ -26,7 +26,7 @@ const contractRoutes = [
             />
             <Route
                 key="contract-project-view"
-                path=":projectId"
+                path="project/:projectId"
                 element={<ViewProjectPanel />}
             />
         </Route>

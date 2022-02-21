@@ -1,4 +1,3 @@
-import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {DateUtil} from "utilities";
 
 import {Icon, ProgressBar} from "../../common/presentational";
@@ -46,24 +45,9 @@ const projectClassBoxStyle = {
     opacity: 0.8,
 };
 
-const ProjectCard = ({project}) => {
-    const navigate = useNavigate();
-
-    let location = useLocation();
-
-    const {id} = useParams();
-    const {projectId} = useParams();
-
+const ProjectCard = ({project, onClick}) => {
     const handleClick = () => {
-        if (location.pathname === "/projects") {
-            navigate(`/projects/${project.id}`);
-        }
-        if (
-            location.pathname === `/contracts/${id}/projects` ||
-            location.pathname === `/contracts/${id}/projects/${projectId}`
-        ) {
-            navigate(`/contracts/${id}/projects/${project.id}`);
-        }
+        onClick(project.id);
     };
 
     return (
