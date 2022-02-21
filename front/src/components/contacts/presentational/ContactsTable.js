@@ -66,13 +66,10 @@ const ContactsTable = ({contacts, handleAction = null}) => {
 
     return (
         <TableContainer>
-            <Table sx={{minWidth: 750}} aria-labelledby="tableTitle">
-                <TableSortingHead
-                    order={order}
-                    attribute={attribute}
-                    onRequestSort={handleRequestSort}
-                    headCells={headCells}
-                />
+            <Table
+                aria-labelledby="tableTitle"
+                sx={{tableLayout: "fixed", overflowWrap: "break-word"}}
+            >
                 <TableBody>
                     {contacts.sort(sortFunction).map((row, index) => {
                         return (

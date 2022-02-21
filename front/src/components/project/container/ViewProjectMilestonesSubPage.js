@@ -6,7 +6,6 @@ import {ProjectService} from "service/api";
 import {SubPageLayout} from "layout";
 import {SectionCard} from "components/common/presentational";
 import {MilestonePath} from "components/milestone/presentational";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 const ViewProjectMilestonesSubPage = () => {
@@ -25,19 +24,17 @@ const ViewProjectMilestonesSubPage = () => {
 
     return (
         <SubPageLayout outletContext={[project]}>
-            <Container maxWidth="lg" sx={{my: 3}}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <SectionCard title="Hitos del proyecto">
-                            <MilestonePath
-                                milestones={milestones}
-                                level={0}
-                                activeMilestone={project.active_milestone}
-                            />
-                        </SectionCard>
-                    </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <SectionCard title="Hitos del proyecto">
+                        <MilestonePath
+                            milestones={milestones}
+                            level={0}
+                            activeMilestone={project.active_milestone}
+                        />
+                    </SectionCard>
                 </Grid>
-            </Container>
+            </Grid>
         </SubPageLayout>
     );
 };

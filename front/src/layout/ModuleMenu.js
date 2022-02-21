@@ -10,10 +10,10 @@ import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import {MenuListItemLink} from "components/common/presentational";
 
-const drawerWidth = 240;
+const moduleMenuDrawerWidth = 240;
 
 const openedMixin = theme => ({
-    width: drawerWidth,
+    width: moduleMenuDrawerWidth,
     transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -44,7 +44,7 @@ const DrawerHeader = styled("div")(({theme}) => ({
 
 const Drawer = styled(MuiDrawer, {shouldForwardProp: prop => prop !== "open"})(
     ({theme, open}) => ({
-        width: drawerWidth,
+        width: moduleMenuDrawerWidth,
         flexShrink: 0,
         whiteSpace: "nowrap",
         boxSizing: "border-box",
@@ -59,9 +59,9 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: prop => prop !== "open"})(
     })
 );
 
-const MainMenu = ({drowerOpened, onDrawerToggle}) => {
+const ModuleMenu = ({open, onToggle}) => {
     return (
-        <Drawer variant="permanent" open={drowerOpened}>
+        <Drawer variant="permanent" open={open}>
             <DrawerHeader />
             <Divider />
             <List>
@@ -78,10 +78,10 @@ const MainMenu = ({drowerOpened, onDrawerToggle}) => {
                     <ListItemText primary="Contratos" />
                 </MenuListItemLink>
             </List>
-            {drowerOpened && (
+            {open && (
                 <>
                     <Divider />
-                    <ListItem button key="close" onClick={onDrawerToggle}>
+                    <ListItem button key="close" onClick={onToggle}>
                         <ListItemIcon>
                             <ChevronLeftIcon />
                         </ListItemIcon>
@@ -93,4 +93,4 @@ const MainMenu = ({drowerOpened, onDrawerToggle}) => {
     );
 };
 
-export {MainMenu as default, DrawerHeader};
+export {ModuleMenu as default, DrawerHeader};

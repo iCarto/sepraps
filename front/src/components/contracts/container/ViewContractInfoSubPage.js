@@ -16,25 +16,23 @@ const ViewContractInfoSubPage = () => {
 
     return (
         <SubPageLayout outletContext={[contract]}>
-            <Container maxWidth="lg" sx={{my: 3}}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <ContractGeneralDataSection />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ContractBidRequestSection />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ContractAwardingSection />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ContractorSection contractor={contract.contractor} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ContractExecutionSection />
-                    </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <ContractGeneralDataSection />
                 </Grid>
-            </Container>
+                <Grid item xs={12}>
+                    <ContractBidRequestSection />
+                </Grid>
+                <Grid item xs={12}>
+                    <ContractAwardingSection />
+                </Grid>
+                <Grid item xs={12}>
+                    <ContractorSection contractor={contract.contractor} />
+                </Grid>
+                <Grid item xs={12}>
+                    <ContractExecutionSection />
+                </Grid>
+            </Grid>
         </SubPageLayout>
     );
 };

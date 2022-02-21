@@ -10,9 +10,7 @@ const ViewContractProjectsSubPage = () => {
 
     return (
         <SubPageLayout>
-            <Container maxWidth="lg" sx={{my: 3}}>
-                <ProjectList projects={contract.projects} />
-            </Container>
+            <ProjectList projects={contract.projects} />
         </SubPageLayout>
     );
 };
