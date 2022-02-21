@@ -1,13 +1,11 @@
-import {useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {DomainProvider} from "components/common/provider";
 import {ContactFormFields} from "components/contacts/presentational";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-const ContactForm = ({contact = null, onSubmit, onCancel}) => {
+const ContactForm = ({contact = null, allowedPosts = null, onSubmit, onCancel}) => {
     const formMethods = useForm({
         defaultValues: contact
             ? {
@@ -39,7 +37,7 @@ const ContactForm = ({contact = null, onSubmit, onCancel}) => {
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <Grid container component="form">
-                    <ContactFormFields />
+                    <ContactFormFields allowedPosts={allowedPosts} />
                 </Grid>
                 <Grid container justifyContent="center" sx={{mt: 2}}>
                     <Grid>

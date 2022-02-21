@@ -2,13 +2,19 @@ import {Fragment} from "react";
 import {useDomain} from "components/common/provider";
 import {FormInputText, FormSelect} from "components/common/form";
 
-const ContactFormFields = () => {
+const ContactFormFields = ({allowedPosts = null}) => {
     const {contactPosts} = useDomain();
+
+    // TODO post.value is a dependency with a back-end domain value
+    // We should remove this dependency in the future
+    const posts = allowedPosts
+        ? contactPosts.filter(post => allowedPosts.includes(post.value))
+        : [...contactPosts];
 
     return (
         <Fragment>
             <FormInputText name="contact_name" label="Nombre del contacto" />
-            <FormSelect name="contact_post" label="Cargo" options={contactPosts} />
+            <FormSelect name="contact_post" label="Cargo" options={posts} />
             <FormSelect
                 name="contact_gender"
                 label="Género"

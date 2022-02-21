@@ -80,6 +80,8 @@ const UpdateContractContractorContactPanel = () => {
               )
             : null;
 
+    const allowedPosts = ["responsable_contratista", "residente_obra"];
+
     return (
         <SidebarPanel>
             {error && (
@@ -89,12 +91,14 @@ const UpdateContractContractorContactPanel = () => {
             )}
             {action === "search" ? (
                 <ContactFormSearch
+                    allowedPosts={allowedPosts}
                     onSelect={handleSelectExistingContact}
                     onCancel={handleCancel}
                 />
             ) : (
                 <ContactForm
                     contact={selectedContact}
+                    allowedPosts={allowedPosts}
                     onSubmit={handleSubmit}
                     onCancel={handleCancel}
                 />

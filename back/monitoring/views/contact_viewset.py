@@ -8,6 +8,7 @@ from rest_framework import permissions, viewsets
 
 class ContactFilter(filters.FilterSet):
     search = filters.CharFilter(method="filter_by_search_text")
+    posts = filters.CharFilter(method="filter_by_posts")
 
     def filter_by_search_text(self, queryset, name, search_text):
 
@@ -16,6 +17,10 @@ class ContactFilter(filters.FilterSet):
             | Q(email__icontains=search_text)
             | Q(phone__icontains=search_text)
         )
+
+    def filter_by_posts(self, queryset, name, posts):
+        posts = posts.split(",")
+        return queryset.filter(post__in=posts)
 
     class Meta:
         model = Contact

@@ -83,6 +83,8 @@ const UpdateProjectProviderContactPanel = () => {
               )
             : null;
 
+    const allowedPosts = ["miembro_junta_saneamiento"];
+
     return (
         <SidebarPanel>
             {error && (
@@ -92,12 +94,14 @@ const UpdateProjectProviderContactPanel = () => {
             )}
             {action === "search" ? (
                 <ContactFormSearch
+                    allowedPosts={allowedPosts}
                     onSelect={handleSelectExistingContact}
                     onCancel={handleCancel}
                 />
             ) : (
                 <ContactForm
                     contact={selectedContact}
+                    allowedPosts={allowedPosts}
                     onSubmit={handleSubmit}
                     onCancel={handleCancel}
                 />
