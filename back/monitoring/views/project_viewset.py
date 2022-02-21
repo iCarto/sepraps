@@ -130,6 +130,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         milestones = (
             Milestone.objects.filter(project=project)
             .exclude(parent__isnull=False)
+            .order_by("ordering")
             .prefetch_related("children")
         )
 
