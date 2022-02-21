@@ -72,7 +72,7 @@ const UpdateMilestonePanel = () => {
     return (
         <SidebarPanel>
             <FormProvider {...formMethods}>
-                <Box component="form" width="90%" margin={3}>
+                <Box component="form">
                     <Grid container>
                         <Grid item xs={12} sx={{mb: 2}}>
                             <Typography variant="h6" color="primary">
@@ -88,7 +88,7 @@ const UpdateMilestonePanel = () => {
                             <MilestoneFormFields />
                         </Grid>
                     </Grid>
-                    <Grid container justifyContent="flex-end" sx={{mt: 2}}>
+                    <Grid container justifyContent="center" sx={{mt: 2}}>
                         <Button color="inherit" onClick={handleCancel}>
                             Cancelar
                         </Button>

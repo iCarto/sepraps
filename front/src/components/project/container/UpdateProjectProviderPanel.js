@@ -116,7 +116,7 @@ const UpdateProjectProviderPanel = () => {
         <SidebarPanel>
             <DomainProvider>
                 <FormProvider {...formMethods}>
-                    <Box component="form" width="90%" margin={3}>
+                    <Box component="form">
                         <Grid container>
                             <Grid item xs={12} sx={{mb: 2}}>
                                 <Typography variant="h5">Añadir prestador</Typography>
@@ -154,7 +154,7 @@ const UpdateProjectProviderPanel = () => {
                                 {error}
                             </Alert>
                         )}
-                        <Grid container justifyContent="flex-end" sx={{mt: 2}}>
+                        <Grid container justifyContent="center" sx={{mt: 2}}>
                             <Button color="inherit" onClick={handleCancel}>
                                 Cancelar
                             </Button>

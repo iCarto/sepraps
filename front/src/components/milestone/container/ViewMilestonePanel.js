@@ -29,7 +29,7 @@ const ViewMilestonePanel = () => {
 
     return (
         <SidebarPanel>
-            <Box component="form" width="90%" margin={3}>
+            <Box component="form">
                 <Grid container>
                     <Grid item xs={12} sx={{mb: 2}}>
                         <MilestoneSection milestone={milestone} />

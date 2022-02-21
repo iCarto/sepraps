@@ -72,7 +72,7 @@ const ContractForm = ({section = null, onSubmit, onCancel}) => {
 
     return (
         <FormProvider {...formMethods}>
-            <Box component="form" margin={3}>
+            <Box component="form">
                 <Grid container>
                     <Grid item container xs={12}>
                         {!section || section === "generaldata" ? (
@@ -89,7 +89,7 @@ const ContractForm = ({section = null, onSubmit, onCancel}) => {
                         ) : null}
                     </Grid>
                 </Grid>
-                <Grid container justifyContent="flex-end" sx={{mt: 2}}>
+                <Grid container justifyContent="center" sx={{mt: 2}}>
                     <Button color="inherit" onClick={() => onCancel()}>
                         Cancelar
                     </Button>
