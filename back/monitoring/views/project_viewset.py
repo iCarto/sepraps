@@ -1,7 +1,10 @@
+from itertools import chain
+
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project
+from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.milestone_serializer import MilestoneSerializer
 from monitoring.serializers.project_serializer import (
     ProjectSerializer,
@@ -9,7 +12,6 @@ from monitoring.serializers.project_serializer import (
     ProjectSummarySerializer,
 )
 from rest_framework import permissions, viewsets
-from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -89,6 +91,35 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user
         return super().perform_create(serializer)
+
+    @action(detail=True)
+    def contacts(self, request, pk=None):
+        """
+        Returns a list of all the contacts for the project
+        """
+        # TODO optimize query
+        project = self.get_object()
+
+        provider_contacts = []
+        if project.provider:
+            provider_contacts = project.provider.contacts.all()
+
+        contractor_contacts = []
+        if project.construction_contract and project.construction_contract.contractor:
+            contractor_contacts = (
+                project.construction_contract.contractor.contacts.all()
+            )
+
+        return Response(
+            ContactSerializer(
+                sorted(
+                    chain(provider_contacts, contractor_contacts),
+                    key=lambda contact: contact.name,
+                ),
+                many=True,
+                context={"request": request},
+            ).data
+        )
 
     @action(detail=True)
     def milestones(self, request, pk=None):

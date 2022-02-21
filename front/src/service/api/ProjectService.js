@@ -5,6 +5,8 @@ import {
     project_api_adapter,
     createMilestones,
     milestones_api_adapter,
+    createContacts,
+    contacts_api_adapter,
 } from "model";
 import AuthApiService from "./AuthApiService";
 
@@ -29,6 +31,12 @@ const ProjectService = {
     getProject(id) {
         return AuthApiService.get(basePath + "/" + id).then(response => {
             return createProject(project_api_adapter(response));
+        });
+    },
+
+    getProjectContacts(id) {
+        return AuthApiService.get(basePath + "/" + id + "/contacts").then(response => {
+            return createContacts(contacts_api_adapter(response));
         });
     },
 
