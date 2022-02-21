@@ -3,7 +3,6 @@ import {ProjectService} from "service/api";
 import {useNavigate} from "react-router-dom";
 
 import {PageLayout} from "layout";
-import {DomainProvider} from "components/common/provider";
 import {ProjectForm} from "../presentational";
 
 import Typography from "@mui/material/Typography";
@@ -33,9 +32,7 @@ const CreateProjectPage = () => {
                     Registro de proyecto
                 </Typography>
                 {error && <Alert severity="error">{error}</Alert>}
-                <DomainProvider>
-                    <ProjectForm handleFormSubmit={handleFormSubmit} />
-                </DomainProvider>
+                <ProjectForm handleFormSubmit={handleFormSubmit} />
             </Container>
         </PageLayout>
     );

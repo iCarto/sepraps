@@ -1,6 +1,7 @@
 import {FormProvider, useForm} from "react-hook-form";
 import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 
+import {DomainProvider, LocationProvider} from "components/common/provider";
 import {ProjectFormStepper} from "./form";
 
 import Box from "@mui/material/Box";
@@ -100,11 +101,15 @@ const ProjectForm = ({handleFormSubmit}) => {
     };
 
     return (
-        <FormProvider {...formMethods}>
-            <Box component="form">
-                <ProjectFormStepper onSubmit={onSubmit} />
-            </Box>
-        </FormProvider>
+        <LocationProvider>
+            <DomainProvider>
+                <FormProvider {...formMethods}>
+                    <Box component="form">
+                        <ProjectFormStepper onSubmit={onSubmit} />
+                    </Box>
+                </FormProvider>
+            </DomainProvider>
+        </LocationProvider>
     );
 };
 

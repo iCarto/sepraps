@@ -1,5 +1,5 @@
 import {useState, useEffect, createContext, useContext} from "react";
-import {DomainService, FinancingService, LocationService} from "service/api";
+import {DomainService, FinancingService} from "service/api";
 
 let DomainContext = createContext(null);
 
@@ -8,9 +8,6 @@ export default function DomainProvider({children}) {
     const [projectClasses, setProjectClasses] = useState([]);
     const [contactPosts, setContactPosts] = useState([]);
     const [contractorTypes, setContractorTypes] = useState([]);
-    const [departments, setDepartments] = useState([]);
-    const [districts, setDistricts] = useState([]);
-    const [localities, setLocalities] = useState([]);
     const [areas, setAreas] = useState([]);
     const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
@@ -18,33 +15,25 @@ export default function DomainProvider({children}) {
     useEffect(() => {
         Promise.all([
             DomainService.getDomain(),
-            LocationService.getAdministrativeDivisions(),
             FinancingService.getFinancingFunds(),
             FinancingService.getFinancingPrograms(),
-        ]).then(
-            ([domain, administrativeDivisions, financingFunds, financingPrograms]) => {
-                const {
-                    project_type,
-                    project_class,
-                    provider_area,
-                    contact_post,
-                    contractor_type,
-                } = domain;
-                setProjectTypes(project_type);
-                setProjectClasses(project_class);
-                setAreas(provider_area);
-                setContactPosts(contact_post);
-                setContractorTypes(contractor_type);
+        ]).then(([domain, financingFunds, financingPrograms]) => {
+            const {
+                project_type,
+                project_class,
+                provider_area,
+                contact_post,
+                contractor_type,
+            } = domain;
+            setProjectTypes(project_type);
+            setProjectClasses(project_class);
+            setAreas(provider_area);
+            setContactPosts(contact_post);
+            setContractorTypes(contractor_type);
 
-                const {departments, districts, localities} = administrativeDivisions;
-                setDepartments(departments);
-                setDistricts(districts);
-                setLocalities(localities);
-
-                setFinancingFunds(financingFunds);
-                setFinancingPrograms(financingPrograms);
-            }
-        );
+            setFinancingFunds(financingFunds);
+            setFinancingPrograms(financingPrograms);
+        });
     }, []);
 
     let value = {
@@ -53,9 +42,6 @@ export default function DomainProvider({children}) {
         areas,
         contactPosts,
         contractorTypes,
-        departments,
-        districts,
-        localities,
         financingFunds,
         financingPrograms,
     };
