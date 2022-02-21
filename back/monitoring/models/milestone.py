@@ -66,9 +66,3 @@ def create_project_milestones(project, children, parent=None):
         create_project_milestones(
             project, milestone_data.get("children", []), milestone
         )
-
-
-def create_project_milestones_structure(project):
-    with open("monitoring/data/project.json", "r") as f:
-        data = json.load(f)
-        create_project_milestones(project, data.get("milestones", []))

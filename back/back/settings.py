@@ -221,3 +221,5 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + ["content-disposition"]
 
 AUTH_USER_MODEL = "users.User"
+
+MONITORING_TEMPLATES_FOLDER = env("MONITORING_TEMPLATES_FOLDER")

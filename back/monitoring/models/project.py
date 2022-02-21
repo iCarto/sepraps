@@ -1,3 +1,6 @@
+import json
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
@@ -80,15 +83,22 @@ class Project(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        from documents.models import create_project_folder_structure
-        from monitoring.models.milestone import create_project_milestones_structure
+        """
+        Create project with default structures for folders and milestones
+        """
+        from documents.models import create_folder_structure
+        from monitoring.models.milestone import create_project_milestones
 
-        root_folder = create_project_folder_structure(self.code)
+        data = {}
+        with open(settings.MONITORING_TEMPLATES_FOLDER + "/project.json", "r") as f:
+            data = json.load(f)
+
+        root_folder = create_folder_structure(self.code, data.get("folders", []))
         self.folder = root_folder
 
         super(Project, self).save(*args, **kwargs)
 
-        create_project_milestones_structure(self)
+        create_project_milestones(self, data.get("milestones", []))
 
 
 def get_code_for_new_project():

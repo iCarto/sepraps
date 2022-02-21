@@ -76,14 +76,12 @@ def create_folder_children(folder_parent, children):
         create_folder_children(folder_child, folder_child_data.get("children", []))
 
 
-def create_project_folder_structure(project_code):
+def create_folder_structure(root_path, children_data):
     root_folder = Folder(
-        media_type="FOLDER", media_name=project_code, storage_path=project_code
+        media_type="FOLDER", media_name=root_path, storage_path=root_path
     )
     root_folder.save()
 
-    with open("monitoring/data/project.json", "r") as f:
-        data = json.load(f)
-        create_folder_children(root_folder, data.get("folders", []))
+    create_folder_children(root_folder, children_data)
 
     return root_folder
