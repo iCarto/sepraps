@@ -23,7 +23,10 @@ const ProviderFormSearch = ({handleSelect}) => {
             </Grid>
             <Grid item xs={12}>
                 {existingProvider && (
-                    <ProviderSection provider={existingProvider} hideButtons={true} />
+                    <ProviderSection
+                        provider={existingProvider}
+                        showOnlySummary={true}
+                    />
                 )}
             </Grid>
         </Grid>

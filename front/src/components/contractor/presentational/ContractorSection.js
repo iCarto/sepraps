@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-const ContractorSection = ({contractor, hideButtons = null}) => {
+const ContractorSection = ({contractor, showOnlySummary = false}) => {
     const navigate = useNavigate();
 
     const headerActions = contractor?.id
@@ -41,7 +41,7 @@ const ContractorSection = ({contractor, hideButtons = null}) => {
     return (
         <SectionCard
             title="Contratista"
-            headerActions={!hideButtons ? headerActions : null}
+            headerActions={!showOnlySummary ? headerActions : null}
         >
             {contractor?.id ? (
                 <>
@@ -55,7 +55,9 @@ const ContractorSection = ({contractor, hideButtons = null}) => {
                         label="Correo electrónico:"
                         value={contractor.email}
                     />
-                    <ContractorContactsSection contractor={contractor} />
+                    {!showOnlySummary && (
+                        <ContractorContactsSection contractor={contractor} />
+                    )}
                 </>
             ) : (
                 <Typography style={{fontStyle: "italic"}}>

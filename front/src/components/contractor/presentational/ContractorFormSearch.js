@@ -25,7 +25,7 @@ const ContractorFormSearch = ({handleSelect}) => {
                 {existingContractor && (
                     <ContractorSection
                         contractor={existingContractor}
-                        hideButtons={true}
+                        showOnlySummary={true}
                     />
                 )}
             </Grid>

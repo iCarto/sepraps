@@ -11,7 +11,7 @@ import LocationOn from "@mui/icons-material/LocationOn";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-const ProviderSection = ({provider, hideButtons = null}) => {
+const ProviderSection = ({provider, showOnlySummary = false}) => {
     const navigate = useNavigate();
 
     const headerActions = provider.id
@@ -41,7 +41,7 @@ const ProviderSection = ({provider, hideButtons = null}) => {
     return (
         <SectionCard
             title="Prestador"
-            headerActions={!hideButtons ? headerActions : null}
+            headerActions={!showOnlySummary ? headerActions : null}
         >
             {provider.id ? (
                 <>
@@ -51,7 +51,7 @@ const ProviderSection = ({provider, hideButtons = null}) => {
                         value={`${provider.locality.locality_name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
                         labelIcon={LocationOn}
                     />
-                    <ProviderContactSection provider={provider} />
+                    {!showOnlySummary && <ProviderContactSection provider={provider} />}
                 </>
             ) : (
                 <Typography style={{fontStyle: "italic"}}>
