@@ -4,6 +4,7 @@ import {ProjectService} from "service/api";
 
 import {PageWithMenuLayout} from "layout";
 import {ProjectMenu} from "../presentational";
+import {LocationProvider} from "components/common/provider";
 
 const ViewProjectPage = () => {
     const {id} = useParams();
@@ -19,7 +20,9 @@ const ViewProjectPage = () => {
 
     return (
         <PageWithMenuLayout menu={<ProjectMenu project={project} />}>
-            {project && <Outlet context={[project]} />}
+            <LocationProvider>
+                {project && <Outlet context={[project]} />}
+            </LocationProvider>
         </PageWithMenuLayout>
     );
 };

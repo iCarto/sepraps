@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 
-import {useDomain} from "components/common/provider";
 import {FormSelect} from "components/common/form";
 
 import Grid from "@mui/material/Grid";
+import {useAdministrativeDivisions} from "components/common/provider";
 
 const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     const {reset, getValues} = useFormContext();
-    const {departments, districts, localities} = useDomain();
+    const {departments, districts, localities} = useAdministrativeDivisions();
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
     const [districtLocalities, setDistrictLocalities] = useState([]);
 
