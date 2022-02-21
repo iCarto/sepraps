@@ -40,11 +40,10 @@ const ActionsMenu = ({children}) => {
 
     return (
         <>
-            <Tooltip title="Acciones">
+            <Tooltip title="Acciones" followCursor>
                 <IconButton
                     onClick={handleOpenActionsMenu}
                     size="small"
-                    sx={{ml: 2}}
                     aria-controls={openSettingsMenu ? "actions" : undefined}
                     aria-haspopup="true"
                     aria-expanded={openSettingsMenu ? "true" : undefined}

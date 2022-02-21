@@ -5,7 +5,7 @@ import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 
-const SectionCard = ({title = "", headerActions = [], ...props}) => {
+const SectionCard = ({title = "", headerActions = null, ...props}) => {
     return (
         <Card
             sx={{
