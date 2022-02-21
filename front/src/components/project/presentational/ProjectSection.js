@@ -1,7 +1,7 @@
 import {SectionCard, SectionField} from "components/common/presentational";
 import Typography from "@mui/material/Typography";
 
-const ProjectSection = ({project, headerActions}) => {
+const ProjectSection = ({project, headerActions = null}) => {
     return (
         <SectionCard title="Proyecto" headerActions={headerActions}>
             <SectionField label="Nombre:" value={project?.name} />

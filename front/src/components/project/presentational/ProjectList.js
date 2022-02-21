@@ -5,12 +5,13 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-const ProjectList = ({projects}) => {
+const ProjectList = ({projects, onClick}) => {
     const noProjectFound = projects.length === 0 || !projects;
 
     const projectItems = projects.map(project => {
-        return <ProjectCard key={project.id} project={project} />;
+        return <ProjectCard key={project.id} project={project} onClick={onClick} />;
     });
+
     return (
         <Grid
             component="ul"

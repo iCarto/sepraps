@@ -85,7 +85,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                     role: "listbox",
                 }}
                 anchorOrigin={{
-                    vertical: "top",
+                    vertical: "bottom",
                     horizontal: "left",
                 }}
                 transformOrigin={{

@@ -1,5 +1,4 @@
 import {styled} from "@mui/material/styles";
-import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import {useEffect} from "react";
 import {useOutletContext} from "react-router-dom";

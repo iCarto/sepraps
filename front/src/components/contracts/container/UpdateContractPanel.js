@@ -5,6 +5,7 @@ import {ContractService} from "service/api";
 
 import {SidebarPanel} from "layout";
 import {ContractForm} from "../presentational";
+import Alert from "@mui/material/Alert";
 
 const UpdateContractPanel = () => {
     const {section} = useParams();
@@ -37,6 +38,11 @@ const UpdateContractPanel = () => {
                 onSubmit={handleSubmit}
                 onCancel={handleCancel}
             />
+            {error && (
+                <Alert severity="error" sx={{mt: 2}}>
+                    {error}
+                </Alert>
+            )}
         </SidebarPanel>
     );
 };

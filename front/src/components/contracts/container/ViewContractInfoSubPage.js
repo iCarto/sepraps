@@ -8,7 +8,6 @@ import {
 } from "../presentational/generaldata";
 import {ContractorSection} from "components/contractor/presentational";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 
 const ViewContractInfoSubPage = () => {
     let contract;

@@ -1,26 +1,29 @@
 import {useState} from "react";
 
-import {ProjectSearchAutocomplete, ProjectSection} from ".";
+import {ContractSearchAutocomplete} from ".";
+import {ProjectContractSection} from "components/project/presentational/financing";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ProjectFormSearch = ({onSelect, onCancel}) => {
-    const [existingProject, setExistingProject] = useState(null);
+const ContractFormSearch = ({onSelect, onCancel}) => {
+    const [existingContract, setExistingContract] = useState(null);
 
-    const handleSelectExistingProject = project => {
-        setExistingProject(project);
+    const handleSelectExistingContract = contract => {
+        setExistingContract(contract);
     };
-
-    console.log(existingProject, "Existing project en ProjectFormSearch");
 
     return (
         <Grid container spacing={2} sx={{mt: 0.25}}>
             <Grid item xs={12}>
-                <ProjectSearchAutocomplete handleSelect={handleSelectExistingProject} />
+                <ContractSearchAutocomplete
+                    handleSelect={handleSelectExistingContract}
+                />
             </Grid>
             <Grid item xs={12}>
-                {existingProject && <ProjectSection project={existingProject} />}
+                {existingContract && (
+                    <ProjectContractSection contract={existingContract} />
+                )}
             </Grid>
             <Grid container justifyContent="center" sx={{mt: 2}}>
                 <Grid>
@@ -32,7 +35,7 @@ const ProjectFormSearch = ({onSelect, onCancel}) => {
                         color="primary"
                         sx={{ml: 2}}
                         onClick={() => {
-                            onSelect(existingProject);
+                            onSelect(existingContract);
                         }}
                     >
                         Añadir
@@ -43,4 +46,4 @@ const ProjectFormSearch = ({onSelect, onCancel}) => {
     );
 };
 
-export default ProjectFormSearch;
+export default ContractFormSearch;

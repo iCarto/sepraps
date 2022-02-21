@@ -55,6 +55,10 @@ const ListProjectsPage = () => {
         setShowClosedProjects(showClosed);
     };
 
+    const handleClickOnCard = orojectId => {
+        navigate(`/projects/${orojectId}`);
+    };
+
     return (
         <PageLayout>
             <Grid
@@ -98,7 +102,7 @@ const ListProjectsPage = () => {
                     />
                 </Grid>
             </Grid>
-            <ProjectList projects={filteredProjects} />
+            <ProjectList projects={filteredProjects} onClick={handleClickOnCard} />
             <Fab
                 sx={fabStyle}
                 color="primary"

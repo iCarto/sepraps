@@ -1,45 +1,64 @@
-import {useOutletContext} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-import {ButtonLink, SectionCard, SectionField} from "components/common/presentational";
 import {DateUtil} from "utilities";
+import {ButtonLink, SectionCard, SectionField} from "components/common/presentational";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
 
-const ProjectContractSection = () => {
-    let project;
-    [project] = useOutletContext();
+const ProjectContractSection = ({contract}) => {
+    const navigate = useNavigate();
 
     return (
-        project.construction_contract && (
-            <SectionCard title="Contrato de obras">
-                <SectionField
-                    label="Número de contrato:"
-                    value={project.construction_contract.number}
-                />
-                <SectionField
-                    label="Número de licitación:"
-                    value={project.construction_contract.bid_request_number}
-                />
-                <SectionField
-                    label="Fecha de licitación:"
-                    value={DateUtil.formatDate(
-                        project.construction_contract.bid_request_date
-                    )}
-                />
-                <SectionField
-                    label="Fecha de adjudicación:"
-                    value={DateUtil.formatDate(
-                        project.construction_contract.awarding_date
-                    )}
-                />
-                <SectionField
-                    label="Presupuesto adjudicado:"
-                    value={project.construction_contract.awarding_budget}
-                />
-                <ButtonLink
-                    text="Ver contrato"
-                    to={"/contracts/" + project.construction_contract.id}
-                />
-            </SectionCard>
-        )
+        <SectionCard title="Contrato de obras">
+            {contract ? (
+                <>
+                    <SectionField label="Número de contrato:" value={contract.number} />
+                    <SectionField
+                        label="Número de licitación:"
+                        value={contract.bid_request_number}
+                    />
+                    <SectionField
+                        label="Fecha de licitación:"
+                        value={DateUtil.formatDate(contract.bid_request_date)}
+                    />
+                    <SectionField
+                        label="Fecha de adjudicación:"
+                        value={DateUtil.formatDate(contract.awarding_date)}
+                    />
+                    <SectionField
+                        label="Presupuesto adjudicado:"
+                        value={contract.awarding_budget}
+                    />
+                    <ButtonLink text="Ver contrato" to={"/contracts/" + contract.id} />
+                </>
+            ) : (
+                <Grid container justifyContent="center">
+                    <Grid item xs={12}>
+                        <Typography
+                            sx={{
+                                fontStyle: "italic",
+                                mb: {xs: 0, sm: 1.5},
+                                textAlign: "center",
+                            }}
+                        >
+                            Todavía no hay ningún contrato asociado a este proyecto.
+                        </Typography>
+                    </Grid>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<AddIcon />}
+                        onClick={() => {
+                            navigate("contract/new/add");
+                        }}
+                    >
+                        Asociar contrato
+                    </Button>
+                </Grid>
+            )}
+        </SectionCard>
     );
 };
 
