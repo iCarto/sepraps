@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 from django.utils import timezone
 from documents.models import MediaNode
 from monitoring.models.construction_contract import ConstructionContract
@@ -63,7 +65,7 @@ class Project(models.Model):
         MediaNode,
         on_delete=models.PROTECT,
         verbose_name=MediaNode._meta.verbose_name,
-        null=False,
+        null=True,
     )
 
     closed = models.BooleanField(blank=False, null=False, default=False)
@@ -82,23 +84,33 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        """
-        Create project with default structures for folders and milestones
-        """
-        from documents.models import create_folder_structure
-        from monitoring.models.milestone import create_project_milestones
 
-        data = {}
-        with open(settings.MONITORING_TEMPLATES_FOLDER + "/project.json", "r") as f:
-            data = json.load(f)
+@receiver(post_save, sender=Project)
+def post_create(sender, instance, created, *args, **kwargs):
+    """
+    Create project folder structure and project milestones from template
+    """
+    from documents.models import create_folder_structure
+    from monitoring.models.milestone import create_project_milestones
 
-        root_folder = create_folder_structure(self.code, data.get("folders", []))
-        self.folder = root_folder
+    if not created:
+        return
 
-        super(Project, self).save(*args, **kwargs)
+    data = {}
+    with open(
+        settings.MONITORING_TEMPLATES_FOLDER
+        + "/project/"
+        + instance.project_type
+        + ".json",
+        "r",
+    ) as f:
+        data = json.load(f)
 
-        create_project_milestones(self, data.get("milestones", []))
+    root_folder = create_folder_structure(instance.code, data.get("folders", []))
+    instance.folder = root_folder
+    instance.save()
+
+    create_project_milestones(instance, data.get("milestones", []))
 
 
 def get_code_for_new_project():
