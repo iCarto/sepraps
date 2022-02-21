@@ -79,11 +79,11 @@ const UpdateMilestonePanel = () => {
                                 {milestone?.category_name}
                             </Typography>
                         </Grid>
-                        {/* {error && (
-                                <Alert severity="error">
-                                    {error} sx={{mb: 2}}
-                                </Alert>
-                            )} */}
+                        {error && (
+                            <Alert severity="error" sx={{mb: 2}}>
+                                {error}
+                            </Alert>
+                        )}
                         <Grid item container justifyContent="center" xs={12}>
                             <MilestoneFormFields />
                         </Grid>

@@ -1,5 +1,5 @@
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {DateUtil} from "utilities";
-import PropTypes from "prop-types";
 
 import {Icon, ProgressBar} from "../../common/presentational";
 
@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -48,10 +47,29 @@ const projectClassBoxStyle = {
 };
 
 const ProjectCard = ({project}) => {
+    const navigate = useNavigate();
+
+    let location = useLocation();
+
+    const {id} = useParams();
+    const {projectId} = useParams();
+
+    const handleClick = () => {
+        if (location.pathname === "/projects") {
+            navigate(`/projects/${project.id}`);
+        }
+        if (
+            location.pathname === `/contracts/${id}/projects` ||
+            location.pathname === `/contracts/${id}/projects/${projectId}`
+        ) {
+            navigate(`/contracts/${id}/projects/${project.id}`);
+        }
+    };
+
     return (
         <Grid item component="li" xs={12} sm={6} md={4} xl={3}>
             <Card id={project.id}>
-                <Link href={`/projects/${project.id}`} underline="none" color="inherit">
+                <Box onClick={handleClick} sx={{cursor: "pointer"}}>
                     <div style={{position: "relative"}}>
                         <CardMedia
                             component="img"
@@ -115,14 +133,10 @@ const ProjectCard = ({project}) => {
                         </Box>
                         <ProgressBar barPhase={project.phase_name} />
                     </CardContent>
-                </Link>
+                </Box>
             </Card>
         </Grid>
     );
-};
-
-ProjectCard.propTypes = {
-    project: PropTypes.object.isRequired,
 };
 
 export default ProjectCard;

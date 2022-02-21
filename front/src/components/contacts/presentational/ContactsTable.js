@@ -95,21 +95,21 @@ const ContactsTable = ({contacts, handleActions = null}) => {
                                                 name="edit-contact"
                                                 icon={<EditIcon />}
                                                 text="Editar contacto"
-                                                rowId={row.id}
+                                                itemId={row.id}
                                                 handleClick={handleClick}
                                             />
                                             <MenuAction
                                                 name="remove-contact"
                                                 icon={<DeleteIcon />}
                                                 text="Quitar contacto"
-                                                rowId={row.id}
+                                                itemId={row.id}
                                                 handleClick={handleClick}
                                             />
                                             <MenuAction
                                                 name="delete-contact"
                                                 icon={<ClearIcon />}
                                                 text="Eliminar contacto"
-                                                rowId={row.id}
+                                                itemId={row.id}
                                                 handleClick={handleClick}
                                             />
                                         </ActionsMenu>

@@ -24,7 +24,7 @@ const SectionField = ({
     const LabelIcon = labelIcon;
 
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={3}>
             <Grid
                 item
                 xs="auto"
@@ -45,6 +45,7 @@ const SectionField = ({
                         lineHeight: {xs: 1.5, sm: 1.25},
                         mb: {xs: 0, sm: 1.5},
                         textTransform: "uppercase",
+                        hyphens: "auto",
                     }}
                 >
                     {label}
@@ -56,7 +57,6 @@ const SectionField = ({
                     sx={{
                         lineHeight: {xs: 1.5, sm: 1.25},
                         mb: {xs: 0, sm: 1.5},
-                        textTransform: "capitalize",
                     }}
                 >
                     {value}

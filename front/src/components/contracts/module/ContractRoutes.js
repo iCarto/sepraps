@@ -1,5 +1,5 @@
 import {UpdateContractContractorContactPanel} from "components/contractor/container";
-import {UpdateProjectPanel} from "components/project/container";
+import {UpdateProjectPanel, ViewProjectPanel} from "components/project/container";
 import {Route} from "react-router-dom";
 import {
     ListContractsPage,
@@ -21,8 +21,13 @@ const contractRoutes = [
         >
             <Route
                 key="contract-project-update"
-                path=":contractId/:action"
+                path=":projectId/:action"
                 element={<UpdateProjectPanel />}
+            />
+            <Route
+                key="contract-project-view"
+                path=":projectId"
+                element={<ViewProjectPanel />}
             />
         </Route>
 
