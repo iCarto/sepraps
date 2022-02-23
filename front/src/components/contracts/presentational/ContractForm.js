@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-const ContractForm = ({section = null, onSubmit, onCancel}) => {
+const ContractForm = ({section = null, onSubmit}) => {
     // TODO: Review how to manage outlet context to extract contract properly
     let contract;
     const outletContext = useOutletContext();
@@ -90,9 +90,6 @@ const ContractForm = ({section = null, onSubmit, onCancel}) => {
                     </Grid>
                 </Grid>
                 <Grid container justifyContent="center" sx={{mt: 2}}>
-                    <Button color="inherit" onClick={() => onCancel()}>
-                        Cancelar
-                    </Button>
                     <Button
                         variant="contained"
                         color="primary"

@@ -4,13 +4,13 @@ import {ContractSearchAutocomplete} from ".";
 import {ProjectContractSection} from "components/project/presentational/financing";
 
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 
-const ContractFormSearch = ({onSelect, onCancel}) => {
+const ContractFormSearch = ({onSelect}) => {
     const [existingContract, setExistingContract] = useState(null);
 
     const handleSelectExistingContract = contract => {
         setExistingContract(contract);
+        onSelect(contract);
     };
 
     return (
@@ -22,25 +22,11 @@ const ContractFormSearch = ({onSelect, onCancel}) => {
             </Grid>
             <Grid item xs={12}>
                 {existingContract && (
-                    <ProjectContractSection contract={existingContract} />
+                    <ProjectContractSection
+                        contract={existingContract}
+                        hideLinkToContract={true}
+                    />
                 )}
-            </Grid>
-            <Grid container justifyContent="center" sx={{mt: 2}}>
-                <Grid>
-                    <Button color="inherit" onClick={onCancel}>
-                        Cerrar
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{ml: 2}}
-                        onClick={() => {
-                            onSelect(existingContract);
-                        }}
-                    >
-                        Añadir
-                    </Button>
-                </Grid>
             </Grid>
         </Grid>
     );

@@ -13,11 +13,10 @@ import {
 } from "components/contractor/presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import Alert from "@mui/material/Alert";
 
 // TO-DO: REFACTOR
 // action === "edit" conditionals (use constants?)
@@ -78,10 +77,6 @@ const UpdateContractContractorPanel = () => {
             });
     };
 
-    const handleCancel = () => {
-        navigate(`/contracts/${contract.id}`);
-    };
-
     const changeContractorFormValues = contractor => {
         const values = formMethods.getValues();
         values["id"] = contractor.id;
@@ -103,15 +98,21 @@ const UpdateContractContractorPanel = () => {
         changeContractorFormValues(selectedExistingContractor);
     };
 
+    const handleCloseSidebar = () => {
+        navigate(`/contracts/${contract.id}`);
+    };
+
     return (
-        <SidebarPanel>
+        <SidebarPanel
+            sidebarTitle={
+                action === "edit" ? "Modificar contratista" : "Crear nuevo contratista"
+            }
+            closeSidebarClick={handleCloseSidebar}
+        >
             <DomainProvider>
                 <FormProvider {...formMethods}>
                     <Box component="form">
                         <Grid container>
-                            <Grid item xs={12} sx={{mb: 2}}>
-                                <Typography variant="h5">Contratista</Typography>
-                            </Grid>
                             {error && (
                                 <Alert severity="error" sx={{mb: 2}}>
                                     {error}
@@ -145,9 +146,6 @@ const UpdateContractContractorPanel = () => {
                             </Grid>
                         </Grid>
                         <Grid container justifyContent="center" sx={{mt: 2}}>
-                            <Button color="inherit" onClick={handleCancel}>
-                                Cancelar
-                            </Button>
                             <Button
                                 variant="contained"
                                 color="primary"

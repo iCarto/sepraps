@@ -13,11 +13,10 @@ import {
 } from "components/provider/presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import Alert from "@mui/material/Alert";
 
 // TO-DO: REFACTOR
 // action === "edit" conditionals (use constants?)
@@ -84,10 +83,6 @@ const UpdateProjectProviderPanel = () => {
             });
     };
 
-    const handleCancel = () => {
-        navigate(`/projects/${project.id}`);
-    };
-
     const changeProviderFormValues = provider => {
         const values = formMethods.getValues();
         values["provider_id"] = provider.id;
@@ -112,16 +107,26 @@ const UpdateProjectProviderPanel = () => {
         changeProviderFormValues(selectedExistingProvider);
     };
 
+    const handleCloseSidebar = () => {
+        navigate(`/projects/${project.id}`);
+    };
+
     return (
-        <SidebarPanel>
+        <SidebarPanel
+            sidebarTitle={
+                action === "edit" ? "Modificar prestador" : "Crear nuevo prestador"
+            }
+            closeSidebarClick={handleCloseSidebar}
+        >
             <DomainProvider>
                 <FormProvider {...formMethods}>
                     <Box component="form">
                         <Grid container>
-                            <Grid item xs={12} sx={{mb: 2}}>
-                                <Typography variant="h5">Añadir prestador</Typography>
-                            </Grid>
-
+                            {error && (
+                                <Alert severity="error" sx={{mb: 2}}>
+                                    {error}
+                                </Alert>
+                            )}
                             <Grid item container justifyContent="center" xs={12}>
                                 <ToggleButtonGroup
                                     color="primary"
@@ -139,7 +144,7 @@ const UpdateProjectProviderPanel = () => {
                                     </ToggleButton>
                                 </ToggleButtonGroup>
                             </Grid>
-                            <Grid item container xs={12}>
+                            <Grid item container xs={12} mt={3}>
                                 {selectedOption === "form" ? (
                                     <ProviderFormFields />
                                 ) : (
@@ -149,15 +154,7 @@ const UpdateProjectProviderPanel = () => {
                                 )}
                             </Grid>
                         </Grid>
-                        {error && (
-                            <Alert severity="error" sx={{mb: 2}}>
-                                {error}
-                            </Alert>
-                        )}
                         <Grid container justifyContent="center" sx={{mt: 2}}>
-                            <Button color="inherit" onClick={handleCancel}>
-                                Cancelar
-                            </Button>
                             <Button
                                 variant="contained"
                                 color="primary"

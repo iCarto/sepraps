@@ -6,7 +6,7 @@ import ContactSection from "./ContactSection";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ContactFormSearch = ({allowedPosts = null, onSelect = null, onCancel = null}) => {
+const ContactFormSearch = ({allowedPosts = null, onSelect = null}) => {
     const [existingContact, setExistingContact] = useState(null);
 
     const handleSelectExistingContact = contact => {
@@ -14,7 +14,7 @@ const ContactFormSearch = ({allowedPosts = null, onSelect = null, onCancel = nul
     };
 
     return (
-        <Grid container spacing={2} sx={{mt: 0.25}}>
+        <Grid container component="form" spacing={2} sx={{mt: 0.25}}>
             <Grid item xs={12}>
                 <ContactSearchAutocomplete
                     allowedPosts={allowedPosts}
@@ -26,11 +26,6 @@ const ContactFormSearch = ({allowedPosts = null, onSelect = null, onCancel = nul
             </Grid>
             <Grid container justifyContent="center" sx={{mt: 2}}>
                 <Grid>
-                    {onCancel && (
-                        <Button color="inherit" onClick={onCancel}>
-                            Cancelar
-                        </Button>
-                    )}
                     {onSelect && (
                         <Button
                             variant="contained"

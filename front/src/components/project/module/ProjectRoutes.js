@@ -13,7 +13,7 @@ import {
 } from "components/project/container";
 import {UpdateProjectProviderContactPanel} from "components/provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "components/milestone/container";
-import {UpdateProjectContractPanel} from "components/contracts/container";
+import {AddProjectContractPanel} from "components/contracts/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -31,7 +31,7 @@ const projectRoutes = [
             <Route
                 key="project-contract-update"
                 path="contract/:contractId/:action"
-                element={<UpdateProjectContractPanel />}
+                element={<AddProjectContractPanel />}
             />
         </Route>
         <Route

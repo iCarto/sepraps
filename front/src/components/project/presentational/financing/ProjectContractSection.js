@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 
-const ProjectContractSection = ({contract}) => {
+const ProjectContractSection = ({contract, hideLinkToContract = false}) => {
     const navigate = useNavigate();
 
     return (
@@ -31,7 +31,12 @@ const ProjectContractSection = ({contract}) => {
                         label="Presupuesto adjudicado:"
                         value={contract.awarding_budget}
                     />
-                    <ButtonLink text="Ver contrato" to={"/contracts/" + contract.id} />
+                    {!hideLinkToContract && (
+                        <ButtonLink
+                            text="Ver contrato"
+                            to={"/contracts/" + contract.id}
+                        />
+                    )}
                 </>
             ) : (
                 <Grid container justifyContent="center">

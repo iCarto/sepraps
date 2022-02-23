@@ -4,16 +4,11 @@ import {useNavigateWithReload} from "hooks";
 import {ContractService, ProjectService} from "service/api";
 import {createContract} from "model";
 
-import {SidebarPanel} from "layout";
+import {SidebarAction, SidebarPanel} from "layout";
 import {ProjectSection} from "../presentational";
-import {ActionsMenu, DialogLayout} from "components/common/presentational";
+import {DialogLayout} from "components/common/presentational";
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LaunchIcon from "@mui/icons-material/Launch";
 
@@ -36,7 +31,7 @@ const ViewProjectPanel = () => {
         });
     }, [projectId]);
 
-    const handleClosePanel = () => {
+    const handleCloseSidebar = () => {
         navigate(`/contracts/${id}/projects`);
     };
 
@@ -80,60 +75,39 @@ const ViewProjectPanel = () => {
             });
     };
 
-    console.log(project, "Project en ViewProjectPanel");
-
-    const headerActions = project && (
-        <ActionsMenu>
-            <MenuItem
-                key="go-to-project"
-                name="go-to-project"
-                aria-label="Go to project"
-                onClick={() => {
-                    navigate(`/projects/${project.id}`);
-                }}
-            >
-                <ListItemIcon>
-                    <LaunchIcon />
-                </ListItemIcon>
-                Ir al proyecto
-            </MenuItem>
-            <MenuItem
-                key="remove-project"
-                name="remove-project"
-                aria-label="Remove project"
-                onClick={handleRemoveProject}
-            >
-                <ListItemIcon>
-                    <DeleteIcon />
-                </ListItemIcon>
-                Quitar proyecto
-            </MenuItem>
-        </ActionsMenu>
-    );
+    const sidebarActions = project
+        ? [
+              <SidebarAction
+                  key="go-to"
+                  name="go to project"
+                  text="Ir al proyecto"
+                  icon={<LaunchIcon />}
+                  onClick={() => {
+                      navigate(`/projects/${project.id}`);
+                  }}
+              />,
+              <SidebarAction
+                  key="remove"
+                  name="remove-project"
+                  text="Quitar proyecto"
+                  icon={<DeleteIcon />}
+                  onClick={handleRemoveProject}
+              />,
+          ]
+        : null;
 
     return (
-        <SidebarPanel>
-            <Box
-                width="90%"
-                margin={3}
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                }}
-            >
-                <ProjectSection project={project} headerActions={headerActions} />
-                {error && (
-                    <Alert severity="error" sx={{mt: 2}}>
-                        {error}
-                    </Alert>
-                )}
-            </Box>
-            <Grid container justifyContent="center">
-                <Button variant="contained" onClick={handleClosePanel}>
-                    Cerrar
-                </Button>
-            </Grid>
+        <SidebarPanel
+            sidebarTitle="Datos básicos del proyecto"
+            sidebarActions={sidebarActions}
+            closeSidebarClick={handleCloseSidebar}
+        >
+            {error && (
+                <Alert severity="error" sx={{mb: 2}}>
+                    {error}
+                </Alert>
+            )}
+            <ProjectSection project={project} />
             <DialogLayout
                 dialogLabel="Remove project"
                 dialogTitle="¿Quiere quitar este proyecto del contrato?"

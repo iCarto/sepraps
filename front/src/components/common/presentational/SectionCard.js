@@ -10,6 +10,7 @@ const SectionCard = ({title = "", headerActions = null, ...props}) => {
         <Card
             sx={{
                 overflow: "auto",
+                width: "100%",
             }}
         >
             <CardHeader

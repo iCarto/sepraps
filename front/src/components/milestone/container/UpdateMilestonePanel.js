@@ -9,8 +9,8 @@ import {SidebarPanel} from "layout";
 import {MilestoneFormFields} from "../presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 
 const UpdateMilestonePanel = () => {
@@ -65,37 +65,35 @@ const UpdateMilestonePanel = () => {
             });
     };
 
-    const handleCancel = () => {
+    const handleCloseSidebar = () => {
         navigate(`/projects/${project.id}/milestones`);
     };
 
     return (
-        <SidebarPanel>
+        <SidebarPanel
+            sidebarTitle="Confirmar fecha de cumplimiento"
+            closeSidebarClick={handleCloseSidebar}
+        >
             <FormProvider {...formMethods}>
-                <Box component="form">
-                    <Grid container>
-                        <Grid item xs={12} sx={{mb: 2}}>
-                            <Typography variant="h6" color="primary">
-                                {milestone?.category_name}
-                            </Typography>
-                        </Grid>
-                        {error && (
-                            <Alert severity="error" sx={{mb: 2}}>
-                                {error}
-                            </Alert>
-                        )}
-                        <Grid item container justifyContent="center" xs={12}>
-                            <MilestoneFormFields />
-                        </Grid>
-                    </Grid>
+                <Box
+                    component="form"
+                    sx={{
+                        width: "100%",
+                    }}
+                >
+                    {error && (
+                        <Alert severity="error" sx={{mb: 2}}>
+                            {error}
+                        </Alert>
+                    )}
+                    <Typography sx={{fontWeight: "medium"}}>
+                        {milestone?.category_name}
+                    </Typography>
+                    <MilestoneFormFields />
                     <Grid container justifyContent="center" sx={{mt: 2}}>
-                        <Button color="inherit" onClick={handleCancel}>
-                            Cancelar
-                        </Button>
                         <Button
                             variant="contained"
                             color="primary"
-                            sx={{ml: 2}}
                             onClick={formMethods.handleSubmit(onSubmit)}
                         >
                             Guardar

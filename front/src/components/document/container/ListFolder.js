@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {useParams, useLocation} from "react-router-dom";
 import {DocumentService} from "service/api";
+import {useNavigateWithReload} from "hooks";
 
 import {
     FolderBreadcrumb,

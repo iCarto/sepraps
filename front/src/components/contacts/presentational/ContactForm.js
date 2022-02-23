@@ -5,7 +5,7 @@ import {ContactFormFields} from "components/contacts/presentational";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ContactForm = ({contact = null, allowedPosts = null, onSubmit, onCancel}) => {
+const ContactForm = ({contact = null, allowedPosts = null, onSubmit}) => {
     const formMethods = useForm({
         defaultValues: contact
             ? {
@@ -41,9 +41,6 @@ const ContactForm = ({contact = null, allowedPosts = null, onSubmit, onCancel}) 
                 </Grid>
                 <Grid container justifyContent="center" sx={{mt: 2}}>
                     <Grid>
-                        <Button color="inherit" onClick={onCancel}>
-                            Cancelar
-                        </Button>
                         <Button
                             variant="contained"
                             color="primary"
