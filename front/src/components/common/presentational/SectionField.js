@@ -12,8 +12,8 @@ const SectionField = ({
 
     switch (`${containerWidth}`) {
         case "short":
-            labelWidth = 6;
-            valueWidth = 6;
+            labelWidth = 5;
+            valueWidth = 7;
             break;
         default:
             labelWidth = 4;

@@ -21,7 +21,6 @@ const createInfrastructures = (data = []) => {
     return infrastructures;
 };
 
-// ----------- TO-DO: REVIEW & REPLACE infrastructure_type_name (& class, financing fund & financing program) BY infrastructure_type IN ALL COMPONENTS
 const createInfrastructure = ({
     id = -1,
     locality = createLocality(),

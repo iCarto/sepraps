@@ -8,5 +8,5 @@ export {
     default as UpdateContractContractorPanel,
 } from "./UpdateContractContractorPanel";
 export {
-    default as UpdateProjectContractPanel,
-} from "../../contracts/container/UpdateProjectContractPanel";
+    default as AddProjectContractPanel,
+} from "../../contracts/container/AddProjectContractPanel";

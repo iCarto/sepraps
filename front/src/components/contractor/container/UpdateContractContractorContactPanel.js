@@ -69,7 +69,7 @@ const UpdateContractContractorContactPanel = () => {
             });
     };
 
-    const handleCancel = () => {
+    const handleCloseSidebar = () => {
         navigate(`/contracts/${contract.id}`);
     };
 
@@ -83,7 +83,10 @@ const UpdateContractContractorContactPanel = () => {
     const allowedPosts = ["responsable_contratista", "residente_obra"];
 
     return (
-        <SidebarPanel>
+        <SidebarPanel
+            sidebarTitle="Añadir contacto"
+            closeSidebarClick={handleCloseSidebar}
+        >
             {error && (
                 <Alert severity="error" sx={{mb: 2}}>
                     {error}
@@ -93,14 +96,12 @@ const UpdateContractContractorContactPanel = () => {
                 <ContactFormSearch
                     allowedPosts={allowedPosts}
                     onSelect={handleSelectExistingContact}
-                    onCancel={handleCancel}
                 />
             ) : (
                 <ContactForm
                     contact={selectedContact}
                     allowedPosts={allowedPosts}
                     onSubmit={handleSubmit}
-                    onCancel={handleCancel}
                 />
             )}
         </SidebarPanel>

@@ -1,7 +1,18 @@
-import {styled} from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import {useEffect} from "react";
 import {useOutletContext} from "react-router-dom";
+
+import {styled} from "@mui/material/styles";
+
+import {ActionsMenu} from "components/common/presentational";
+
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import CancelIcon from "@mui/icons-material/Cancel";
+import Divider from "@mui/material/Divider";
 
 const DrawerHeader = styled("div")(({theme}) => ({
     display: "flex",
@@ -12,7 +23,14 @@ const DrawerHeader = styled("div")(({theme}) => ({
     ...theme.mixins.toolbar,
 }));
 
-const SidebarPanel = ({children}) => {
+const SidebarPanel = ({
+    sidebarTitle,
+    mainActionText = "",
+    mainActionClick = null,
+    sidebarActions = null,
+    closeSidebarClick,
+    children,
+}) => {
     // setOpen function is allways the last element in the context array
     let setOpen;
     const outletContext = useOutletContext();
@@ -29,7 +47,69 @@ const SidebarPanel = ({children}) => {
         };
     });
 
-    return <Box sx={{p: 3}}>{children}</Box>;
+    const onClose = () => {
+        closeSidebarClick();
+    };
+
+    const onMainActionClick = () => {
+        mainActionClick();
+    };
+
+    return (
+        <Box>
+            <Grid
+                container
+                p={2}
+                pb={1}
+                sx={{justifyContent: "space-between", alignItems: "center"}}
+            >
+                <Grid item xs={sidebarActions ? 9 : 10}>
+                    <Box
+                        sx={{display: "flex", justifyContent: "flex-start"}}
+                        p={1}
+                        pl={0}
+                    >
+                        <Typography
+                            variant="h6"
+                            color="primary"
+                            align="left"
+                            sx={{
+                                lineHeight: 1.25,
+                                letterSpacing: 0,
+                            }}
+                        >
+                            {sidebarTitle}
+                        </Typography>
+                    </Box>
+                </Grid>
+                {sidebarActions && (
+                    <Grid item xs="auto">
+                        <ActionsMenu>{sidebarActions}</ActionsMenu>
+                    </Grid>
+                )}
+                <Grid item xs="auto">
+                    <Tooltip title="Cerrar">
+                        <IconButton onClick={onClose}>
+                            <CancelIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Grid>
+            </Grid>
+            <Divider></Divider>
+            <Box p={3}>
+                <Grid container mt={3}>
+                    {children}
+                </Grid>
+                {mainActionClick && (
+                    <Grid container justifyContent="center" mt={2}>
+                        <Button variant="contained" onClick={onMainActionClick}>
+                            {mainActionText}
+                        </Button>
+                    </Grid>
+                )}
+            </Box>
+        </Box>
+    );
 };
 
 export {SidebarPanel as default, DrawerHeader};

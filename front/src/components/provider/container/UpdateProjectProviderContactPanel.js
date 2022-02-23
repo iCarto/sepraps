@@ -72,7 +72,7 @@ const UpdateProjectProviderContactPanel = () => {
             });
     };
 
-    const handleCancel = () => {
+    const handleCloseSidebar = () => {
         navigate(`/projects/${project.id}`);
     };
 
@@ -86,7 +86,14 @@ const UpdateProjectProviderContactPanel = () => {
     const allowedPosts = ["miembro_junta_saneamiento"];
 
     return (
-        <SidebarPanel>
+        <SidebarPanel
+            sidebarTitle={
+                action === "edit"
+                    ? "Modificar contacto del prestador"
+                    : "Añadir contacto del prestador"
+            }
+            closeSidebarClick={handleCloseSidebar}
+        >
             {error && (
                 <Alert severity="error" sx={{mb: 2}}>
                     {error}
@@ -96,14 +103,12 @@ const UpdateProjectProviderContactPanel = () => {
                 <ContactFormSearch
                     allowedPosts={allowedPosts}
                     onSelect={handleSelectExistingContact}
-                    onCancel={handleCancel}
                 />
             ) : (
                 <ContactForm
                     contact={selectedContact}
                     allowedPosts={allowedPosts}
                     onSubmit={handleSubmit}
-                    onCancel={handleCancel}
                 />
             )}
         </SidebarPanel>

@@ -27,22 +27,21 @@ const UpdateContractPanel = () => {
             });
     };
 
-    const handleCancel = () => {
+    const handleCloseSidebar = () => {
         navigate(`/contracts/${contract.id}`);
     };
 
     return (
-        <SidebarPanel>
-            <ContractForm
-                section={section}
-                onSubmit={handleSubmit}
-                onCancel={handleCancel}
-            />
+        <SidebarPanel
+            sidebarTitle="Modificar contrato"
+            closeSidebarClick={handleCloseSidebar}
+        >
             {error && (
-                <Alert severity="error" sx={{mt: 2}}>
+                <Alert severity="error" sx={{mb: 2}}>
                     {error}
                 </Alert>
             )}
+            <ContractForm section={section} onSubmit={handleSubmit} />
         </SidebarPanel>
     );
 };

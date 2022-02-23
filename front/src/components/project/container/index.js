@@ -9,5 +9,5 @@ export {default as ViewProjectContactsSubPage} from "./ViewProjectContactsSubPag
 export {default as ViewProjectDocumentsSubPage} from "./ViewProjectDocumentsSubPage";
 export {default as SelectProjectDropDown} from "./SelectProjectDropDown";
 export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPanel";
-export {default as UpdateProjectPanel} from "./UpdateProjectPanel";
+export {default as AddProjectPanel} from "./AddProjectPanel";
 export {default as ViewProjectPanel} from "./ViewProjectPanel";
