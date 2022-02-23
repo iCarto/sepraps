@@ -1,5 +1,5 @@
 import {Fragment} from "react";
-import {FormDatePicker, FormInputText} from "components/common/form";
+import {FormDatePicker} from "components/common/form";
 
 const MilestoneFormFields = () => {
     return (

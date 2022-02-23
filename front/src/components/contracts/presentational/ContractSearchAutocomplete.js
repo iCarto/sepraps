@@ -23,7 +23,7 @@ const ContractSearchAutocomplete = ({handleSelect}) => {
             label="Buscar un contrato"
             optionLabel="number"
             optionComponent={optionComponent}
-            search={ContractService.getContracts}
+            search={ContractService.getContractsBySearchText}
             handleSelect={handleSelect}
         />
     );

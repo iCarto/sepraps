@@ -24,14 +24,18 @@ const ProjectService = {
             (template ? `&template=${template}` : "");
         console.log({showClosed}, {path});
         return AuthApiService.get(path).then(response => {
-            console.log({response});
+            return createProjects(projects_api_adapter(response));
+        });
+    },
+
+    getProjectsBySearchText(searchText) {
+        return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
             return createProjects(projects_api_adapter(response));
         });
     },
 
     getProject(id) {
         return AuthApiService.get(basePath + "/" + id).then(response => {
-            console.log({response});
             return createProject(project_api_adapter(response));
         });
     },
