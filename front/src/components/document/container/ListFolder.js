@@ -2,20 +2,22 @@ import {useState, useEffect} from "react";
 import {useParams, useLocation} from "react-router-dom";
 import {DocumentService} from "service/api";
 
+import {useFolderView} from "../provider";
 import {
     FolderBreadcrumb,
     FolderChangeView,
     FolderList,
     FolderTable,
 } from "../presentational";
+import {FileUploadSection} from "../common";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
-import {useFolderView} from "../provider";
-import {FileUploadSection} from "../common";
 
 const ListFolder = ({path}) => {
     const {id: projectId} = useParams();
     const location = useLocation();
+
+    const navigate = useNavigateWithReload();
 
     const basePath = `/projects/${projectId}/documents/`;
 
@@ -29,9 +31,7 @@ const ListFolder = ({path}) => {
     useEffect(() => {
         setLoading(true);
         DocumentService.get(path).then(element => {
-            console.log({element});
             if (element.content_type) {
-                // is a file
                 setSelectedElement(element);
                 const folderPath = element.path
                     .split("/")
@@ -42,7 +42,6 @@ const ListFolder = ({path}) => {
                     setLoading(false);
                 });
             } else {
-                // is a folder
                 setFolderElements(element.children);
                 setLoading(false);
             }
@@ -56,8 +55,11 @@ const ListFolder = ({path}) => {
         });
     };
 
-    const onSelectElement = element => {
-        setSelectedElement(element);
+    const onSelectElement = folderElement => {
+        setSelectedElement(folderElement);
+        if (folderElement.content_type) {
+            navigate(basePath + "detail/" + folderElement.path);
+        }
     };
 
     return (

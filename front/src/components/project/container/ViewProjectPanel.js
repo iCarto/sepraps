@@ -23,7 +23,7 @@ const ViewProjectPanel = () => {
     [contract] = useOutletContext();
 
     const {projectId} = useParams();
-    const {id} = useParams();
+    const {id: contractId} = useParams();
 
     useEffect(() => {
         ProjectService.getProject(projectId).then(project => {
@@ -32,7 +32,7 @@ const ViewProjectPanel = () => {
     }, [projectId]);
 
     const handleCloseSidebar = () => {
-        navigate(`/contracts/${id}/projects`);
+        navigate(`/contracts/${contractId}/projects`);
     };
 
     const handleDialog = isOpen => {
@@ -63,7 +63,7 @@ const ViewProjectPanel = () => {
     const handleUpdateContract = updatedContract => {
         ContractService.updateContract(contract_view_adapter({...updatedContract}))
             .then(() => {
-                navigate(`/contracts/${id}/projects`, true);
+                navigate(`/contracts/${contractId}/projects`, true);
             })
             .catch(error => {
                 console.log(error);

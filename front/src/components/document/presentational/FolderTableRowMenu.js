@@ -1,6 +1,9 @@
 import {useState} from "react";
 import {useDownloadDocument, useCopyToClipboard} from "hooks";
 
+import {DocumentService} from "service/api";
+
+import {DialogLayout} from "components/common/presentational";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
@@ -11,8 +14,6 @@ import DownloadIcon from "@mui/icons-material/Download";
 import FolderZipIcon from "@mui/icons-material/FolderZip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LinkIcon from "@mui/icons-material/Link";
-import {DocumentService} from "service/api";
-import {DialogLayout} from "components/common/presentational";
 
 const FolderTableRowMenu = ({folderElement, basePath, onUpdate}) => {
     const downloadDocument = useDownloadDocument();
