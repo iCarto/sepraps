@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import ChevronRightOutlinedIcon from "@mui/icons-material/ChevronRightOutlined";
 import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 import Button from "@mui/material/Button";

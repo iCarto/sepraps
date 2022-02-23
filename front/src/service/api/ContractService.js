@@ -25,6 +25,12 @@ const ContractService = {
         });
     },
 
+    getContractsBySearchText(searchText) {
+        return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
+            return createContracts(contracts_api_adapter(response));
+        });
+    },
+
     getContract(id) {
         return AuthApiService.get(basePath + "/" + id).then(response => {
             return createContract(contract_api_adapter(response));

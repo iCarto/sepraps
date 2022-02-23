@@ -24,7 +24,7 @@ const ProjectSearchAutocomplete = ({handleSelect}) => {
             label="Buscar un proyecto"
             optionLabel="name"
             optionComponent={optionComponent}
-            search={ProjectService.getProjects}
+            search={ProjectService.getProjectsBySearchText}
             handleSelect={handleSelect}
         />
     );

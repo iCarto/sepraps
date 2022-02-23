@@ -1,5 +1,6 @@
 from itertools import chain
 
+from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.milestone import Milestone
@@ -18,6 +19,7 @@ from rest_framework.response import Response
 
 class ProjectFilter(filters.FilterSet):
     status = filters.CharFilter(method="filter_by_status")
+    search = filters.CharFilter(method="filter_by_search_text")
 
     def filter_by_status(self, queryset, name, status):
         if status == "active":
@@ -25,9 +27,15 @@ class ProjectFilter(filters.FilterSet):
 
         return queryset
 
+    def filter_by_search_text(self, queryset, name, search_text):
+
+        return queryset.filter(
+            Q(name__icontains=search_text) | Q(code__icontains=search_text)
+        )
+
     class Meta:
         model = Project
-        fields = ("status",)
+        fields = ("search",)
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

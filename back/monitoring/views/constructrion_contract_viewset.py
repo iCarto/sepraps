@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.construction_contract import ConstructionContract
@@ -11,6 +12,7 @@ from rest_framework import viewsets
 
 class ConstructionContractFilter(filters.FilterSet):
     status = filters.CharFilter(method="filter_by_status")
+    search = filters.CharFilter(method="filter_by_search_text")
 
     def filter_by_status(self, queryset, name, status):
         if status == "active":
@@ -18,9 +20,13 @@ class ConstructionContractFilter(filters.FilterSet):
 
         return queryset
 
+    def filter_by_search_text(self, queryset, name, search_text):
+
+        return queryset.filter(Q(number__icontains=search_text))
+
     class Meta:
         model = ConstructionContract
-        fields = ("status",)
+        fields = ("search",)
 
 
 class ConstructionContractViewSet(viewsets.ModelViewSet):
