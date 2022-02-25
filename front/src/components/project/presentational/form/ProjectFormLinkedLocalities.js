@@ -1,5 +1,5 @@
 import {useFormContext} from "react-hook-form";
-import {useDomain} from "components/common/provider";
+import {useAdministrativeDivisions, useDomain} from "components/common/provider";
 import {FormLocationSelect} from "components/common/form";
 import Grid from "@mui/material/Grid";
 import TableContainer from "@mui/material/TableContainer";
@@ -16,7 +16,7 @@ import Paper from "@mui/material/Paper";
 
 const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
     const {getValues, reset} = useFormContext();
-    const {departments, districts, localities} = useDomain();
+    const {departments, districts, localities} = useAdministrativeDivisions();
 
     const handleAdd = () => {
         const values = getValues();

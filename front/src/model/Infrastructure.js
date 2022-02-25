@@ -1,4 +1,5 @@
 import {createLocality, locality_api_adapter} from "model";
+import {NumberUtil} from "utilities";
 
 class Infrastructures extends Array {}
 
@@ -7,6 +8,23 @@ const infrastructure_api_adapter = infrastructure => {
         infrastructure["locality"] = createLocality(
             locality_api_adapter(infrastructure["locality"])
         );
+    }
+    return infrastructure;
+};
+
+const infraestructure_view_adapter = infrastructure => {
+    // in front-end falsy values are "" or undefined or null
+    infrastructure["latitude"] = !!infrastructure["latitude"]
+        ? NumberUtil.parseFloatOrNull(infrastructure["latitude"])
+        : null;
+    infrastructure["longitude"] = !!infrastructure["longitude"]
+        ? NumberUtil.parseFloatOrNull(infrastructure["longitude"])
+        : null;
+    infrastructure["altitude"] = !!infrastructure["altitude"]
+        ? NumberUtil.parseIntOrNull(infrastructure["altitude"])
+        : null;
+    if (infrastructure["locality"]) {
+        infrastructure["locality"] = infrastructure["locality"].code;
     }
     return infrastructure;
 };
@@ -44,4 +62,5 @@ export {
     createInfrastructures,
     infrastructure_api_adapter,
     infrastructures_api_adapter,
+    infraestructure_view_adapter,
 };

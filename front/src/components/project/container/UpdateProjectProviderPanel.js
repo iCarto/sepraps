@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 import {useNavigateWithReload} from "hooks";
-import {createProvider} from "model";
+import {createLocality, createProvider} from "model";
 import {ProviderService} from "service/api";
 
 import {SidebarPanel} from "layout";
@@ -62,7 +62,11 @@ const UpdateProjectProviderPanel = () => {
             id: data.provider_id,
             name: data.provider_name,
             area: data.provider_area,
-            locality: data.provider_location.locality,
+            locality: createLocality({
+                code: data.provider_location.locality,
+                district: data.provider_location.locality,
+                department: data.provider_location.department,
+            }),
             project: project.id,
             contacts: [...project.provider.contacts],
         });

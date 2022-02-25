@@ -3,6 +3,7 @@ export {
     createProjects,
     project_api_adapter,
     projects_api_adapter,
+    project_view_adapter,
 } from "./Project";
 export {
     default as createProvider,
@@ -28,6 +29,7 @@ export {
     createInfrastructures,
     infrastructure_api_adapter,
     infrastructures_api_adapter,
+    infraestructure_view_adapter,
 } from "./Infrastructure";
 export {
     default as createContract,
