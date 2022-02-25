@@ -8,6 +8,7 @@ import {ProjectForm} from "../presentational";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import Container from "@mui/material/Container";
+import {project_view_adapter} from "model";
 
 const CreateProjectPage = () => {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ const CreateProjectPage = () => {
     const [error, setError] = useState("");
 
     const handleFormSubmit = project => {
-        ProjectService.createProject(project)
+        ProjectService.createProject(project_view_adapter({...project}))
             .then(createdProject => {
                 navigate(`/projects/${createdProject.id}`);
             })

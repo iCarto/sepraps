@@ -10,6 +10,9 @@ import {
     provider_api_adapter,
     contract_api_adapter,
 } from "model";
+import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
+import {infraestructure_view_adapter} from "./Infrastructure";
+import {provider_view_adapter} from "./Provider";
 
 class Projects extends Array {}
 
@@ -45,6 +48,35 @@ const project_api_adapter = project => {
 
 const projects_api_adapter = projects => projects.map(project_api_adapter);
 
+const project_view_adapter = project => {
+    console.log("linked", project["linked_localities"]);
+    // in front-end falsy values are "" or undefined or null
+    project["init_date"] = !!project["init_date"]
+        ? DateUtil.formatDate(project["init_date"], DATE_FORMATS.SERVER_DATEFORMAT)
+        : null;
+    // we must destructure object before its adapation because
+    // nested objects are still inmutable inside project object
+    if (!!project["provider"]) {
+        project["provider"] = provider_view_adapter({...project["provider"]});
+        // provider project and contacts fields are not necessary when processing a project
+        delete project["provider"]["project"];
+        delete project["provider"]["contacts"];
+    } else {
+        project["provider"] = null;
+    }
+    project["main_infrastructure"] = !!project["main_infrastructure"]
+        ? infraestructure_view_adapter({...project["main_infrastructure"]})
+        : null;
+    project["linked_localities"] = project["linked_localities"].map(linked_locality => {
+        return linked_locality.code;
+    });
+    delete project["creation_user"];
+    delete project["created_at"];
+    delete project["updated_at"];
+
+    return project;
+};
+
 const createProjects = (data = []) => {
     const projects = Projects.from(data, project => createProject(project));
     return projects;
@@ -53,7 +85,7 @@ const createProjects = (data = []) => {
 const createProject = ({
     id = -1,
     name = "",
-    code = "",
+    code = null,
     featured_image = "",
     phase_name = "",
     project_type = "",
@@ -71,7 +103,6 @@ const createProject = ({
     financing_program_name = "",
     construction_contract = null,
     active_milestone = "",
-    contacts = [],
     folder = "",
     creation_user = "",
     created_at = null,
@@ -98,7 +129,6 @@ const createProject = ({
         financing_program_name,
         construction_contract,
         active_milestone,
-        contacts,
         folder,
         creation_user,
         created_at,
@@ -113,4 +143,5 @@ export {
     createProjects,
     project_api_adapter,
     projects_api_adapter,
+    project_view_adapter,
 };

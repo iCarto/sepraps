@@ -30,14 +30,15 @@ class ProviderSerializer(serializers.ModelSerializer):
 
         contacts_data = validated_data.pop("contacts", None)
 
-        project = validated_data.pop("project")
+        project = validated_data.pop("project", None)
 
         provider = Provider.objects.create(**validated_data)
 
         provider.contacts.set(self.fields["contacts"].update([], contacts_data))
 
-        project.provider = provider
-        project.save()
+        if project:
+            project.provider = provider
+            project.save()
 
         return provider
 
@@ -51,7 +52,7 @@ class ProviderSerializer(serializers.ModelSerializer):
             )
         )
 
-        project = validated_data.pop("project")
+        project = validated_data.pop("project", None)
 
         # nested entities properties were removed in previous methods
         for key in validated_data.keys():
@@ -59,7 +60,8 @@ class ProviderSerializer(serializers.ModelSerializer):
 
         instance.save()
 
-        project.provider = instance
-        project.save()
+        if project:
+            project.provider = instance
+            project.save()
 
         return instance

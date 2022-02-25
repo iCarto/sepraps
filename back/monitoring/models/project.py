@@ -9,7 +9,6 @@ from django.dispatch import receiver
 from django.utils import timezone
 from documents.models import MediaNode
 from monitoring.models.construction_contract import ConstructionContract
-from monitoring.models.contact import Contact
 from monitoring.models.financing_fund import FinancingFund
 from monitoring.models.financing_program import FinancingProgram
 from monitoring.models.infrastructure import Infrastructure
@@ -59,7 +58,6 @@ class Project(models.Model):
         related_name="project",
     )
     linked_localities = models.ManyToManyField(Locality)
-    contacts = models.ManyToManyField(Contact)
 
     folder = models.ForeignKey(
         MediaNode,

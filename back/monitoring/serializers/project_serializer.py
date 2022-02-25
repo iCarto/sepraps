@@ -1,10 +1,13 @@
 from django.db.models import F
+from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.location import Locality
 from monitoring.models.project import Project, get_code_for_new_project
 from monitoring.models.provider import Provider
-from monitoring.serializers.contact_serializer import ContactSerializer
+from monitoring.serializers.construction_contract_serializer import (
+    ConstructionContractSummarySerializer,
+)
 from monitoring.serializers.infraestructure_serializer import InfraestructureSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
 from monitoring.serializers.milestone_serializer import MilestoneSerializer
@@ -13,26 +16,25 @@ from rest_framework import serializers
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    code = serializers.CharField(required=False)
+    code = serializers.CharField(required=False, read_only=True)
     featured_image = serializers.SerializerMethodField()
     phase_name = serializers.SerializerMethodField(required=False)
     project_type_name = serializers.SerializerMethodField(required=False)
     project_class_name = serializers.SerializerMethodField(required=False)
     financing_fund_name = serializers.CharField(
-        source="financing_fund.name", required=False
+        source="financing_fund.name", required=False, read_only=True
     )
     financing_program_name = serializers.CharField(
-        source="financing_program.name", required=False
+        source="financing_program.name", required=False, read_only=True
     )
     main_infrastructure = InfraestructureSerializer()
     linked_localities = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Locality.objects.prefetch_related("department", "district")
     )
     provider = ProviderSerializer(required=False, allow_null=True)
-    construction_contract = serializers.SerializerMethodField(
-        required=False, allow_null=True
+    construction_contract = serializers.PrimaryKeyRelatedField(
+        required=False, allow_null=True, queryset=ConstructionContract.objects.all()
     )
-    contacts = ContactSerializer(many=True, required=False)
     active_milestone = serializers.SerializerMethodField()
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
@@ -61,7 +63,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             "financing_program_name",
             "construction_contract",
             "active_milestone",
-            "contacts",
             "folder",
             "creation_user",
             "created_at",
@@ -74,6 +75,14 @@ class ProjectSerializer(serializers.ModelSerializer):
             response["linked_localities"] = LocalitySerializer(
                 instance.linked_localities, many=True
             ).data
+        if "construction_contract" in response:
+            response["construction_contract"] = (
+                ConstructionContractSummarySerializer(
+                    instance.construction_contract
+                ).data
+                if instance.construction_contract is not None
+                else None
+            )
         return response
 
     # ATTRIBUTES
@@ -99,17 +108,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_project_class_name(self, obj):
         return dominio_get_value(obj.project_class)
-
-    def get_construction_contract(self, obj):
-        from monitoring.serializers.construction_contract_serializer import (
-            ConstructionContractSummarySerializer,
-        )
-
-        # TODO To avoid circular dependencies with serializers we have
-        # to load this inside a function
-        if obj.construction_contract:
-            return ConstructionContractSummarySerializer(obj.construction_contract).data
-        return None
 
     def get_folder(self, obj):
         return obj.folder.media_path
@@ -142,17 +140,15 @@ class ProjectSerializer(serializers.ModelSerializer):
         infrastructure = Infrastructure.objects.create(**main_infrastructure_data)
 
         provider_data = validated_data.pop("provider")
+        print(provider_data)
         provider, _ = Provider.objects.get_or_create(**provider_data)
 
         linked_localities = validated_data.pop("linked_localities")
-
-        contacts_data = validated_data.pop("contacts", None)
 
         project = Project.objects.create(
             main_infrastructure=infrastructure, provider=provider, **validated_data
         )
         project.linked_localities.set(linked_localities)
-        project.contacts.set(self.fields["contacts"].update([], contacts_data))
 
         return project
 
@@ -178,12 +174,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
             if "id" in provider_data and provider_data["id"] is not None:
                 provider = Provider.objects.get(pk=provider_data["id"])
-                for key in provider_data.keys():
-                    setattr(
-                        provider, key, provider_data.get(key, getattr(provider, key))
-                    )
-
-                provider.save()
+                self.fields["provider"].update(provider, provider_data)
             else:
                 provider = Provider.objects.create(**provider_data)
 
@@ -193,19 +184,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         linked_localities = validated_data.pop("linked_localities")
         instance.linked_localities.set(linked_localities)
 
-    def update_contacts(self, instance, validated_data):
-        instance.contacts.set(
-            self.fields["contacts"].update(
-                instance.contacts.all(), validated_data.pop("contacts", None)
-            )
-        )
-
     def update(self, instance, validated_data):
 
         self.update_main_infrastructure(instance, validated_data)
         self.update_provider(instance, validated_data)
         self.update_linked_localities(instance, validated_data)
-        self.update_contacts(instance, validated_data)
 
         # nested entities properties were removed in previous methods
         for key in validated_data.keys():

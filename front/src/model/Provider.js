@@ -37,7 +37,7 @@ const createProvider = ({
     name = "",
     area = "",
     locality = createLocality(),
-    project = -1, // project id
+    project = null, // project id
     contacts = [],
 } = {}) => {
     const publicApi = {

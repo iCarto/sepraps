@@ -1,10 +1,15 @@
 import {FormProvider, useForm} from "react-hook-form";
-import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 
 import {DomainProvider, LocationProvider} from "components/common/provider";
 import {ProjectFormStepper} from "./form";
 
 import Box from "@mui/material/Box";
+import {
+    createInfrastructure,
+    createLocality,
+    createProject,
+    createProvider,
+} from "model";
 
 const ProjectForm = ({handleFormSubmit}) => {
     const formMethods = useForm({
@@ -55,47 +60,41 @@ const ProjectForm = ({handleFormSubmit}) => {
 
     const onSubmit = data => {
         console.log({data});
-        const project = {
+        const project = createProject({
             name: data.name,
-            init_date: DateUtil.formatDate(
-                data.init_date,
-                DATE_FORMATS.SERVER_DATEFORMAT
-            ),
+            init_date: data.init_date,
             project_type: data.project_type,
             project_class: data.project_class,
-            provider: {
+            provider: createProvider({
                 id: data.provider_id,
                 name: data.provider_name,
                 area: data.provider_area,
-                locality: data.provider_location.locality,
-            },
-            main_infrastructure: {
-                locality: data.main_infrastructure_location.locality,
-                latitude: NumberUtil.parseFloatOrNull(
-                    data.main_infrastructure_latitude
-                ),
-                longitude: NumberUtil.parseFloatOrNull(
-                    data.main_infrastructure_longitude
-                ),
-                altitude: NumberUtil.parseIntOrNull(data.main_infrastructure_altitude),
-            },
-            linked_localities: data.linked_localities.map(linked_locality => {
-                return linked_locality.locality;
+                locality: createLocality({
+                    code: data.provider_location.locality,
+                    district: data.provider_location.locality,
+                    department: data.provider_location.department,
+                }),
             }),
-            contacts: data.contacts.map(contact => {
-                return {
-                    id: contact.id,
-                    name: contact.name,
-                    post: contact.post,
-                    gender: contact.gender,
-                    phone: contact.phone,
-                    email: contact.email,
-                    comments: contact.comments,
-                };
+            main_infrastructure: createInfrastructure({
+                locality: createLocality({
+                    code: data.main_infrastructure_location.locality,
+                    district: data.main_infrastructure_location.locality,
+                    department: data.main_infrastructure_location.department,
+                }),
+                latitude: data.main_infrastructure_latitude,
+                longitude: data.main_infrastructure_longitude,
+                altitude: data.main_infrastructure_altitude,
+            }),
+            linked_localities: data.linked_localities.map(linked_locality => {
+                return createLocality({
+                    code: linked_locality.locality,
+                    district: linked_locality.district,
+                    department: linked_locality.department,
+                });
             }),
             financing_fund: data.financing.financing_fund,
             financing_program: data.financing.financing_program,
-        };
+        });
         console.log({project});
         handleFormSubmit(project);
     };

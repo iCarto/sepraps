@@ -51,7 +51,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         "construction_contract",
         "financing_fund",
         "financing_program",
-    ).prefetch_related("contacts")
+    )
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter
@@ -86,7 +86,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
             "construction_contract",
             "financing_fund",
             "financing_program",
-        ).prefetch_related("linked_localities", "contacts", "provider__contacts")
+        ).prefetch_related("linked_localities", "provider__contacts")
 
     def get_serializer_class(self):
         if self.action == "list":
