@@ -9,7 +9,7 @@ import {AddContactButtonGroup, ContactsTable} from "components/contacts/presenta
 import Alert from "@mui/material/Alert";
 import Grid from "@mui/material/Grid";
 
-const ProviderContactSection = ({provider}) => {
+const ProviderContactsSection = ({provider}) => {
     const navigate = useNavigateWithReload();
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -130,4 +130,4 @@ const ProviderContactSection = ({provider}) => {
     );
 };
 
-export default ProviderContactSection;
+export default ProviderContactsSection;

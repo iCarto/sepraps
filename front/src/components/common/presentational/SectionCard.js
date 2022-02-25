@@ -4,8 +4,9 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
+import SectionActionsMenu from "./SectionActionsMenu";
 
-const SectionCard = ({title = "", headerActions = null, ...props}) => {
+const SectionCard = ({title = "", secondaryActions = null, ...props}) => {
     return (
         <Card
             sx={{
@@ -16,9 +17,9 @@ const SectionCard = ({title = "", headerActions = null, ...props}) => {
             <CardHeader
                 title={<SectionHeading>{title}</SectionHeading>}
                 action={
-                    <CardActions disableSpacing sx={{pt: 0, pb: 0}}>
-                        {headerActions}
-                    </CardActions>
+                    secondaryActions ? (
+                        <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>
+                    ) : null
                 }
             />
             <CardContent>{props.children}</CardContent>

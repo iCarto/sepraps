@@ -1,17 +1,15 @@
 import {useState} from "react";
 
-import {ProviderSearchAutocomplete, ProviderSection} from "./";
+import {ProviderSearchAutocomplete, ProviderSummary} from "./";
 
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 
-const ProviderFormSearch = ({handleSelect}) => {
+const ProviderFormSearch = ({onSelect = null, onCancel = null}) => {
     const [existingProvider, setExistingProvider] = useState(null);
 
     const handleSelectExistingProvider = provider => {
         setExistingProvider(provider);
-        if (provider) {
-            handleSelect(provider);
-        }
     };
 
     return (
@@ -22,12 +20,28 @@ const ProviderFormSearch = ({handleSelect}) => {
                 />
             </Grid>
             <Grid item xs={12}>
-                {existingProvider && (
-                    <ProviderSection
-                        provider={existingProvider}
-                        showOnlySummary={true}
-                    />
-                )}
+                {existingProvider && <ProviderSummary provider={existingProvider} />}
+            </Grid>
+            <Grid container justifyContent="center" sx={{mt: 2}}>
+                <Grid>
+                    {onCancel && (
+                        <Button color="inherit" onClick={onCancel}>
+                            Cancelar
+                        </Button>
+                    )}
+                    {onSelect && (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{ml: 2}}
+                            onClick={() => {
+                                onSelect(existingProvider);
+                            }}
+                        >
+                            Añadir
+                        </Button>
+                    )}
+                </Grid>
             </Grid>
         </Grid>
     );

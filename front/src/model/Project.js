@@ -70,6 +70,9 @@ const project_view_adapter = project => {
     project["linked_localities"] = project["linked_localities"].map(linked_locality => {
         return linked_locality.code;
     });
+    project["construction_contract"] = !!project["construction_contract"]
+        ? project["construction_contract"].id
+        : null;
     delete project["creation_user"];
     delete project["created_at"];
     delete project["updated_at"];

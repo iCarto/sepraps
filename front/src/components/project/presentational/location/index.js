@@ -3,3 +3,4 @@ export {default as ProjectLinkedLocalitiesTable} from "./ProjectLinkedLocalities
 export {
     default as ProjectLinkedLocalitiesSection,
 } from "./ProjectLinkedLocalitiesSection";
+export {default as ProjectProviderSection} from "./ProjectProviderSection";
