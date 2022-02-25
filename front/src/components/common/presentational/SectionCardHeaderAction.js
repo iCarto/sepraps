@@ -1,13 +1,14 @@
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
-const SectionCardHeaderAction = ({name, title, icon, onClick}) => {
+const SectionCardHeaderAction = ({name, text, icon, onClick}) => {
     return (
-        <Tooltip title={title}>
-            <IconButton aria-label={name} name={name} onClick={onClick}>
+        <MenuItem onClick={onClick}>
+            <ListItemIcon aria-label={name} name={name}>
                 {icon}
-            </IconButton>
-        </Tooltip>
+            </ListItemIcon>
+            {text}
+        </MenuItem>
     );
 };
 
