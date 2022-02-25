@@ -67,7 +67,7 @@ const ProviderContactSection = ({provider}) => {
     const handleUpdateProvider = updatedProvider => {
         ProviderService.updateProvider(updatedProvider)
             .then(() => {
-                navigate(`/projects/${provider.project}`, true);
+                navigate(`/projects/${provider.project}/location`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -78,7 +78,7 @@ const ProviderContactSection = ({provider}) => {
     const handleConfirmDeletion = () => {
         setIsDialogOpen(false);
         ContactService.deleteContact(contactToRemove).then(() => {
-            navigate(`/projects/${provider.project}`, true);
+            navigate(`/projects/${provider.project}/location`, true);
         });
     };
 

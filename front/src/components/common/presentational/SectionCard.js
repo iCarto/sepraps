@@ -1,4 +1,4 @@
-import {SectionTitle} from ".";
+import {SectionHeading} from ".";
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -14,7 +14,7 @@ const SectionCard = ({title = "", headerActions = null, ...props}) => {
             }}
         >
             <CardHeader
-                title={<SectionTitle>{title}</SectionTitle>}
+                title={<SectionHeading>{title}</SectionHeading>}
                 action={
                     <CardActions disableSpacing sx={{pt: 0, pb: 0}}>
                         {headerActions}

@@ -1,15 +1,15 @@
 import Typography from "@mui/material/Typography";
 
-const SectionTitle = props => {
+const SectionHeading = ({children}) => {
     return (
         <Typography
             variant="h6"
             color="grey.700"
             sx={{textTransform: "uppercase", fontWeight: "bold"}}
         >
-            {props.children}
+            {children}
         </Typography>
     );
 };
 
-export default SectionTitle;
+export default SectionHeading;

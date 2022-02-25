@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 
 const SectionCardHeaderAction = ({name, title, icon, onClick}) => {
     return (
-        <Tooltip key={name} title={title}>
+        <Tooltip title={title}>
             <IconButton aria-label={name} name={name} onClick={onClick}>
                 {icon}
             </IconButton>
