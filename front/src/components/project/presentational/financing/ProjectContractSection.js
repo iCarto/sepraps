@@ -1,17 +1,33 @@
 import {useNavigate} from "react-router-dom";
 
 import {DateUtil} from "utilities";
-import {ButtonLink, SectionCard, SectionField} from "components/common/presentational";
-import Typography from "@mui/material/Typography";
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const ProjectContractSection = ({contract, hideLinkToContract = false}) => {
     const navigate = useNavigate();
 
+    const headerActions = [
+        <SectionCardHeaderAction
+            name="go-to-location-subpage"
+            title="Ir a la página de Ubicación"
+            icon={<LaunchIcon />}
+            onClick={() => {
+                navigate(`/contracts/${contract.id}`);
+            }}
+        />,
+    ];
+
     return (
-        <SectionCard title="Contrato de obras">
+        <SectionCard title="Contrato de obras" headerActions={headerActions}>
             {contract ? (
                 <>
                     <SectionField label="Número de contrato:" value={contract.number} />
@@ -31,12 +47,6 @@ const ProjectContractSection = ({contract, hideLinkToContract = false}) => {
                         label="Presupuesto adjudicado:"
                         value={contract.awarding_budget}
                     />
-                    {!hideLinkToContract && (
-                        <ButtonLink
-                            text="Ver contrato"
-                            to={"/contracts/" + contract.id}
-                        />
-                    )}
                 </>
             ) : (
                 <Grid container justifyContent="center">

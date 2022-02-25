@@ -38,7 +38,7 @@ const ProjectMenu = ({project}) => {
                             <ListItemIcon>
                                 <InfoIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Información" />
+                            <ListItemText primary="Resumen" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/location`}>
                             <ListItemIcon>

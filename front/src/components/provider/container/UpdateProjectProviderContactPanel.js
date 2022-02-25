@@ -73,7 +73,7 @@ const UpdateProjectProviderContactPanel = () => {
     };
 
     const handleCloseSidebar = () => {
-        navigate(`/projects/${project.id}`);
+        navigate(`/projects/${project.id}/location`);
     };
 
     const selectedContact =

@@ -1,5 +1,8 @@
-import {SectionCard, SectionField} from "components/common/presentational";
-import Typography from "@mui/material/Typography";
+import {
+    SectionCard,
+    SectionField,
+    SectionSubheading,
+} from "components/common/presentational";
 
 const ProjectSection = ({project, headerActions = null}) => {
     return (
@@ -22,9 +25,7 @@ const ProjectSection = ({project, headerActions = null}) => {
                         : `${project?.main_infrastructure.locality.locality_name}, ${project?.main_infrastructure.locality.district_name} (${project?.main_infrastructure.locality.department_name})`
                 }
             />
-            <Typography variant="h6" color="text.secondary" mt={1.5} mb={1}>
-                Financiación
-            </Typography>
+            <SectionSubheading heading="Financiación" />
             <SectionField label="Fondo:" value={project?.financing_fund_name} />
             <SectionField label="Programa:" value={project?.financing_program_name} />
         </SectionCard>

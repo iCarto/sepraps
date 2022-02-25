@@ -3,7 +3,7 @@ import {
     ListProjectsPage,
     CreateProjectPage,
     ViewProjectPage,
-    ViewProjectInfoSubPage,
+    ViewProjectSummarySubPage,
     ViewProjectLocationSubPage,
     ViewProjectFinancingSubPage,
     ViewProjectMilestonesSubPage,
@@ -22,7 +22,18 @@ const projectRoutes = [
             key="project-location"
             path="location"
             element={<ViewProjectLocationSubPage />}
-        />
+        >
+            <Route
+                key="project-provider"
+                path="provider/:action"
+                element={<UpdateProjectProviderPanel />}
+            />
+            <Route
+                key="project-provider-contact-update"
+                path="provider/contact/:contactId/:action"
+                element={<UpdateProjectProviderContactPanel />}
+            />
+        </Route>
         <Route
             key="project-financing"
             path="financing"
@@ -60,18 +71,11 @@ const projectRoutes = [
             path="documents/*"
             element={<ViewProjectDocumentsSubPage />}
         />
-        <Route key="project-info" path="" element={<ViewProjectInfoSubPage />}>
-            <Route
-                key="project-provider"
-                path="provider/:action"
-                element={<UpdateProjectProviderPanel />}
-            />
-            <Route
-                key="project-provider-contact-update"
-                path="provider/contact/:contactId/:action"
-                element={<UpdateProjectProviderContactPanel />}
-            />
-        </Route>
+        <Route
+            key="project-info"
+            path=""
+            element={<ViewProjectSummarySubPage />}
+        ></Route>
     </Route>,
     <Route key="project-list" path="" element={<ListProjectsPage />} />,
 ];

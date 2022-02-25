@@ -2,7 +2,7 @@ import {useOutletContext} from "react-router-dom";
 
 import {SectionCard, SectionField} from "components/common/presentational";
 
-const ProjectFinancingSection = () => {
+const ProjectFinancingDataSection = () => {
     let project;
     [project] = useOutletContext();
 
@@ -17,4 +17,4 @@ const ProjectFinancingSection = () => {
     );
 };
 
-export default ProjectFinancingSection;
+export default ProjectFinancingDataSection;

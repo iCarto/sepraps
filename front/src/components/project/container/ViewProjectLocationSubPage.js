@@ -1,4 +1,7 @@
+import {useOutletContext} from "react-router-dom";
+
 import {SubPageLayout} from "layout";
+import {ProviderSection} from "components/provider/presentational";
 import {
     ProjectInfrastructureSection,
     ProjectLinkedLocalitiesSection,
@@ -7,11 +10,17 @@ import {
 import Grid from "@mui/material/Grid";
 
 const ViewProjectLocationSubPage = () => {
+    let project;
+    [project] = useOutletContext();
+
     return (
-        <SubPageLayout>
+        <SubPageLayout outletContext={[project]}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <ProjectInfrastructureSection />
+                </Grid>
+                <Grid item xs={12}>
+                    <ProviderSection provider={project.provider} />
                 </Grid>
                 <Grid item xs={12}>
                     <ProjectLinkedLocalitiesSection />

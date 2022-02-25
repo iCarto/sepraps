@@ -1,16 +1,16 @@
 import {useOutletContext} from "react-router-dom";
 
 import {SubPageLayout} from "layout";
-import {ProviderSection} from "components/provider/presentational";
 import {
     ProjectAuditSection,
+    ProjectFinancingSection,
     ProjectGeneralDataSection,
-    ProjectMonitoringSection,
+    ProjectLocationSection,
 } from "../presentational/generaldata";
 
 import Grid from "@mui/material/Grid";
 
-const ViewProjectInfoSubPage = () => {
+const ViewProjectSummarySubPage = () => {
     let project;
     [project] = useOutletContext();
 
@@ -20,12 +20,11 @@ const ViewProjectInfoSubPage = () => {
                 <Grid item xs={12}>
                     <ProjectGeneralDataSection />
                 </Grid>
-
                 <Grid item xs={12}>
-                    <ProviderSection provider={project.provider} />
+                    <ProjectLocationSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ProjectMonitoringSection />
+                    <ProjectFinancingSection />
                 </Grid>
                 <Grid item xs={12}>
                     <ProjectAuditSection />
@@ -35,4 +34,4 @@ const ViewProjectInfoSubPage = () => {
     );
 };
 
-export default ViewProjectInfoSubPage;
+export default ViewProjectSummarySubPage;
