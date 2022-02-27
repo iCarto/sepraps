@@ -1,6 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 
 import {SectionCard, SectionField} from "components/common/presentational";
+import {Map} from "components/common/geo";
 
 const ProjectInfrastructureSection = () => {
     let project;
@@ -22,7 +23,18 @@ const ProjectInfrastructureSection = () => {
             />
             <SectionField
                 label="Ubicación:"
-                value={`${project.main_infrastructure.latitude}, ${project.main_infrastructure.longitude} (${project.main_infrastructure.altitude})`}
+                value={`${project.main_infrastructure.latitude}, ${project.main_infrastructure.longitude}`}
+            />
+            <SectionField
+                label="Altitud:"
+                value={`${project.main_infrastructure.altitude} metros`}
+            />
+            <Map
+                markerPosition={{
+                    lat: project.main_infrastructure.latitude,
+                    lng: project.main_infrastructure.longitude,
+                }}
+                text={`${project.main_infrastructure.locality.locality_name}, ${project.main_infrastructure.locality.district_name}`}
             />
         </SectionCard>
     );
