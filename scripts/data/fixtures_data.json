@@ -184,20 +184,20 @@
         "model": "monitoring.infrastructure",
         "pk": 1,
         "fields": {
-            "locality": "1507600",
-            "latitude": -23.37693,
-            "longitude": -57.66498,
-            "altitude": 200
+            "locality": "1009210",
+            "latitude": -25.343762,
+            "longitude": -54.90921,
+            "altitude": 311
         }
     },
     {
         "model": "monitoring.infrastructure",
         "pk": 2,
         "fields": {
-            "locality": "1507605",
-            "latitude": -23.37693,
-            "longitude": -57.66498,
-            "altitude": 200
+            "locality": "1011460",
+            "latitude": -25.463711,
+            "longitude": -54.856361,
+            "altitude": 223
         }
     },
     {
@@ -311,7 +311,7 @@
         "model": "monitoring.project",
         "pk": 1,
         "fields": {
-            "name": "Ycua Porá - Cañada Lourdes",
+            "name": "Nueva Esperanza - Iguazú",
             "code": "2021-AP-001",
             "project_type": "agua",
             "project_class": "mejora",
@@ -321,7 +321,7 @@
             "financing_program": 1,
             "provider": 1,
             "construction_contract": 1,
-            "linked_localities": ["1507620", "1507625"],
+            "linked_localities": ["1009210", "1009230", "1009240"],
             "closed": false,
             "creation_user": 1,
             "created_at": "2021-12-01T00:00:00Z",
@@ -332,7 +332,7 @@
         "model": "monitoring.project",
         "pk": 2,
         "fields": {
-            "name": "Loma Porá - Cañada Lourdes",
+            "name": "Cristo Rey - Minga Guazú",
             "code": "2021-AP-002",
             "project_type": "agua",
             "project_class": "ampliacion",
@@ -342,7 +342,7 @@
             "financing_program": 1,
             "provider": 1,
             "construction_contract": 1,
-            "linked_localities": ["1507640", "1507645"],
+            "linked_localities": ["1011460"],
             "closed": true,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
