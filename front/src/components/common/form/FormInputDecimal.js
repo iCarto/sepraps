@@ -7,6 +7,7 @@ const FormInputDecimal = ({
     label,
     endAdornment = null,
     rules = {},
+    disabled = false,
 }) => {
     const {control} = useFormContext();
 
@@ -48,6 +49,7 @@ const FormInputDecimal = ({
             error={Boolean(error)}
             helperText={error?.message}
             InputProps={inputProps}
+            disabled={disabled}
         />
     );
 };
