@@ -1,9 +1,10 @@
 from itertools import chain
 
+from django.db import connection
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from monitoring.models.milestone import Milestone
+from monitoring.models.milestone import CATEGORY_CHOICES, Milestone
 from monitoring.models.project import Project
 from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.milestone_serializer import MilestoneSerializer
@@ -147,3 +148,43 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 milestones, many=True, context={"request": request}
             ).data
         )
+
+    @action(detail=False)
+    def projects_with_current_milestone(self, request):
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+            WITH vals (project_id, project_name, project_latitude, project_longitude, category) AS (
+                select p.id, p.name, mi.latitude, mi.longitude, m.category from project p
+                    left join milestone m on m.project_id = p.id and m.compliance_date is not null
+                    left join infrastructure mi on mi.id = p.main_infrastructure_id
+                where m.parent_id is null
+                order by p.name, m.ordering desc
+            )
+            SELECT
+                project_id,
+                project_name,
+                project_latitude,
+                project_longitude,
+                COALESCE((ARRAY_AGG(category) FILTER (WHERE category IS NOT NULL))[1], 'no_started') as milestone
+            FROM vals
+            GROUP BY
+                project_id,
+                project_name,
+                project_latitude,
+                project_longitude
+            """
+            )
+            projects = dictfetchall(cursor)
+            for project in projects:
+                project["milestone_name"] = dict(CATEGORY_CHOICES).get(
+                    project["milestone"], project["milestone"]
+                )
+            return Response(projects)
+
+
+def dictfetchall(cursor):
+    "Return all rows from a cursor as a dict"
+    columns = [col[0] for col in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor.fetchall()]

@@ -38,9 +38,6 @@
             "category": "start_of_works"
         },
         {
-            "category": "definitive_reception"
-        },
-        {
             "category": "technical_validation",
             "children": [
                 {
@@ -50,6 +47,9 @@
                     "category": "technical_validation_pump_test"
                 }
             ]
+        },
+        {
+            "category": "definitive_reception"
         },
         {
             "category": "system_delivery"
