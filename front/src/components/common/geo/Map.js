@@ -2,22 +2,16 @@ import {useEffect} from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-import icon from "leaflet/dist/images/marker-icon.png";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import {useMapIcon} from "./hooks/MapIconHook";
 
 const style = {
     width: "100%",
     height: "300px",
 };
 
-let DefaultIcon = L.icon({
-    iconUrl: icon,
-    shadowUrl: iconShadow,
-});
-
-L.Marker.prototype.options.icon = DefaultIcon;
-
 const Map = ({markerPosition, text}) => {
+    const getIcon = useMapIcon();
+
     let map;
 
     useEffect(() => {
@@ -31,8 +25,7 @@ const Map = ({markerPosition, text}) => {
                 }),
             ],
         });
-        const marker = L.marker(markerPosition).addTo(map);
-        marker.bindTooltip(text).openTooltip();
+        const marker = L.marker(markerPosition, {icon: getIcon()}).addTo(map);
 
         return () => {
             map.off();

@@ -8,6 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import {MenuListItemLink} from "components/common/presentational";
 
 const moduleMenuDrawerWidth = 240;
@@ -76,6 +77,12 @@ const ModuleMenu = ({open, onToggle}) => {
                         <WorkOutlineOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary="Contratos" />
+                </MenuListItemLink>
+                <MenuListItemLink to={`/stats`}>
+                    <ListItemIcon>
+                        <QueryStatsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Resultados" />
                 </MenuListItemLink>
             </List>
             {open && (
