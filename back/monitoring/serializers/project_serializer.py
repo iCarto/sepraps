@@ -140,7 +140,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         infrastructure = Infrastructure.objects.create(**main_infrastructure_data)
 
         provider_data = validated_data.pop("provider")
-        print(provider_data)
         provider, _ = Provider.objects.get_or_create(**provider_data)
 
         linked_localities = validated_data.pop("linked_localities")

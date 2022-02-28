@@ -71,7 +71,7 @@ const project_view_adapter = project => {
         return linked_locality.code;
     });
     project["construction_contract"] = !!project["construction_contract"]
-        ? project["construction_contract"].id
+        ? project["construction_contract"]
         : null;
     delete project["creation_user"];
     delete project["created_at"];
