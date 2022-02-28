@@ -7,6 +7,8 @@ import {
     SectionCardHeaderAction,
     SectionField,
 } from "components/common/presentational";
+import {ViewMilestoneTimeline} from "components/milestone/container";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
@@ -81,6 +83,9 @@ const ProjectGeneralDataSection = () => {
                         label="Fecha de inicio:"
                         value={DateUtil.formatDate(project.init_date)}
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    <ViewMilestoneTimeline />
                 </Grid>
             </Grid>
         </SectionCard>
