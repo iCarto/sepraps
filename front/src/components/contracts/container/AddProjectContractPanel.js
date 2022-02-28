@@ -1,9 +1,12 @@
 import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
+import {ProjectService} from "service/api";
+import {project_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ContractFormSearch} from "../presentational";
+import Alert from "@mui/material/Alert";
 
 const AddProjectContractPanel = () => {
     const [selectedContract, setSelectedContract] = useState(null);
@@ -19,8 +22,19 @@ const AddProjectContractPanel = () => {
     };
 
     const handleContractToAdd = () => {
-        // TO-DO: COMPLETE
-        console.log(selectedContract);
+        const updatedProject = project_view_adapter({
+            ...project,
+            construction_contract: selectedContract.id,
+        });
+        console.log({updatedProject});
+        ProjectService.updateProject(updatedProject)
+            .then(project => {
+                navigate(`/projects/${project.id}/financing`, true);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error.toString());
+            });
     };
 
     const handleCloseSidebar = () => {
@@ -33,8 +47,12 @@ const AddProjectContractPanel = () => {
             mainActionText="Añadir"
             mainActionClick={handleContractToAdd}
             closeSidebarClick={handleCloseSidebar}
-            error={error}
         >
+            {error && (
+                <Alert severity="error" sx={{mb: 2}}>
+                    {error}
+                </Alert>
+            )}
             <ContractFormSearch onSelect={handleSelectedContract} />
         </SidebarPanel>
     );
