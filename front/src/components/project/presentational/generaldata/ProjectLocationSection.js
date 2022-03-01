@@ -20,8 +20,8 @@ const ProjectLocationSection = () => {
     const headerActions = [
         <SectionCardHeaderAction
             key="go-to-location-subpage"
-            name="Go to location subpage"
-            title="Ir a la página de Ubicación"
+            name="go-to-location-subpage"
+            text="Ir a la página de Ubicación"
             icon={<LaunchIcon />}
             onClick={() => {
                 navigate(`location`);
@@ -30,7 +30,7 @@ const ProjectLocationSection = () => {
     ];
 
     return (
-        <SectionCard title="Ubicación" headerActions={headerActions}>
+        <SectionCard title="Ubicación" secondaryActions={headerActions}>
             <Grid container>
                 <Grid item xs={12} lg={7}>
                     <SectionField

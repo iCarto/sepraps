@@ -16,8 +16,9 @@ const ProjectContractSection = ({contract}) => {
 
     const headerActions = [
         <SectionCardHeaderAction
+            key="go-to-location-subpage"
             name="go-to-location-subpage"
-            text="Ir a la página de Ubicación"
+            text="Ir a la página del Contrato"
             icon={<LaunchIcon />}
             onClick={() => {
                 navigate(`/contracts/${contract.id}`);
@@ -26,7 +27,7 @@ const ProjectContractSection = ({contract}) => {
     ];
 
     return (
-        <SectionCard title="Contrato de obras" headerActions={headerActions}>
+        <SectionCard title="Contrato de obras" secondaryActions={headerActions}>
             {contract ? (
                 <>
                     <SectionField label="Número de contrato:" value={contract.number} />

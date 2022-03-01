@@ -3,7 +3,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 
 const SectionCardHeaderAction = ({name, text, icon, onClick}) => {
     return (
-        <MenuItem onClick={onClick}>
+        <MenuItem key={name} onClick={onClick}>
             <ListItemIcon aria-label={name} name={name}>
                 {icon}
             </ListItemIcon>
