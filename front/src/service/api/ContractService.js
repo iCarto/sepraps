@@ -3,7 +3,6 @@ import {
     createContract,
     contracts_api_adapter,
     contract_api_adapter,
-    contract_view_adapter,
 } from "model";
 import AuthApiService from "./AuthApiService";
 

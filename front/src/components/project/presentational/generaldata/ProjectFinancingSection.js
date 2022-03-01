@@ -1,5 +1,4 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
-import {DateUtil} from "utilities";
 
 import {
     SectionCard,
@@ -17,9 +16,9 @@ const ProjectFinancingSection = () => {
 
     const headerActions = [
         <SectionCardHeaderAction
-            key="go-to-financing-subpage"
+            key="Go to financing subpage"
             name="Go to financing subpage"
-            title="Ir a la página de Financiación"
+            text="Ir a la página de Financiación"
             icon={<LaunchIcon />}
             onClick={() => {
                 navigate(`financing`);
@@ -28,7 +27,7 @@ const ProjectFinancingSection = () => {
     ];
 
     return (
-        <SectionCard title="Financiación" headerActions={headerActions}>
+        <SectionCard title="Financiación" secondaryActions={headerActions}>
             <SectionField label="Programa:" value={project.financing_fund_name} />
             <SectionField label="Financiador:" value={project.financing_program_name} />
             <SectionSubheading heading="Contrato" />

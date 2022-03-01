@@ -25,9 +25,19 @@ const projectRoutes = [
             element={<ViewProjectLocationSubPage />}
         >
             <Route
-                key="project-provider"
-                path="provider/:action"
+                key="project-provider-edit"
+                path="provider/:providerId/edit"
                 element={<UpdateProjectProviderPanel />}
+            />
+            <Route
+                key="project-provider-new-add"
+                path="provider/new/:action"
+                element={<AddProjectProviderPanel />}
+            />
+            <Route
+                key="project-provider-contact-update"
+                path="provider/contact/:contactId/:action"
+                element={<UpdateProjectProviderContactPanel />}
             />
             <Route
                 key="project-provider-contact-update"
@@ -72,23 +82,7 @@ const projectRoutes = [
             path="documents/*"
             element={<ViewProjectDocumentsSubPage />}
         />
-        <Route key="project-info" path="" element={<ViewProjectSummarySubPage />}>
-            <Route
-                key="project-provider-edit"
-                path="provider/:providerId/edit"
-                element={<UpdateProjectProviderPanel />}
-            />
-            <Route
-                key="project-provider-new-add"
-                path="provider/new/:action"
-                element={<AddProjectProviderPanel />}
-            />
-            <Route
-                key="project-provider-contact-update"
-                path="provider/contact/:contactId/:action"
-                element={<UpdateProjectProviderContactPanel />}
-            />
-        </Route>
+        <Route key="project-info" path="" element={<ViewProjectSummarySubPage />} />
     </Route>,
     <Route key="project-list" path="" element={<ListProjectsPage />} />,
 ];

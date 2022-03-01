@@ -64,7 +64,7 @@ const UpdateProjectProviderContactPanel = () => {
     const handleFormSubmit = provider => {
         ProviderService.updateProvider(provider)
             .then(() => {
-                navigate(`/projects/${project.id}`, true);
+                navigate(`/projects/${project.id}/location`, true);
             })
             .catch(error => {
                 console.log(error);

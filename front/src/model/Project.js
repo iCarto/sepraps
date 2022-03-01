@@ -10,7 +10,7 @@ import {
     provider_api_adapter,
     contract_api_adapter,
 } from "model";
-import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
+import {DateUtil, DATE_FORMATS} from "utilities";
 import {infraestructure_view_adapter} from "./Infrastructure";
 import {provider_view_adapter} from "./Provider";
 
