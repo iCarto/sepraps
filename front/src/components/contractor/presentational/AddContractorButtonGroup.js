@@ -11,7 +11,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
-const AddProviderButtonGroup = () => {
+const AddContractorButtonGroup = () => {
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -49,28 +49,28 @@ const AddProviderButtonGroup = () => {
                 <MenuItem
                     onClick={() => {
                         handleClose();
-                        navigate("provider/new/add");
+                        navigate("contractor/new/add");
                     }}
                 >
                     <ListItemIcon>
                         <AddIcon fontSize="small" />
                     </ListItemIcon>
-                    <Typography>Nuevo Prestador</Typography>
+                    <Typography>Nuevo Contratista</Typography>
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
                         handleClose();
-                        navigate("provider/new/search");
+                        navigate("contractor/new/search");
                     }}
                 >
                     <ListItemIcon>
                         <SearchIcon fontSize="small" />
                     </ListItemIcon>
-                    <Typography>Prestador Existente</Typography>
+                    <Typography>Contratista Existente</Typography>
                 </MenuItem>
             </Menu>
         </Box>
     );
 };
 
-export default AddProviderButtonGroup;
+export default AddContractorButtonGroup;

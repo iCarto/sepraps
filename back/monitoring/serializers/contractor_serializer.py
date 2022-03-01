@@ -35,14 +35,15 @@ class ContractorSerializer(serializers.ModelSerializer):
 
         contacts_data = validated_data.pop("contacts", None)
 
-        contract = validated_data.pop("contract")
+        contract = validated_data.pop("contract", None)
 
         contractor = Contractor.objects.create(**validated_data)
 
         contractor.contacts.set(self.fields["contacts"].update([], contacts_data))
 
-        contract.contractor = contractor
-        contract.save()
+        if contract:
+            contract.contractor = contractor
+            contract.save()
 
         return contractor
 

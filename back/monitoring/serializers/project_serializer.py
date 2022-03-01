@@ -139,8 +139,10 @@ class ProjectSerializer(serializers.ModelSerializer):
         main_infrastructure_data = validated_data.pop("main_infrastructure")
         infrastructure = Infrastructure.objects.create(**main_infrastructure_data)
 
-        provider_data = validated_data.pop("provider")
-        provider, _ = Provider.objects.get_or_create(**provider_data)
+        provider_data = validated_data.pop("provider", None)
+        provider = None
+        if provider_data:
+            provider, _ = Provider.objects.get_or_create(**provider_data)
 
         linked_localities = validated_data.pop("linked_localities")
 
@@ -175,7 +177,7 @@ class ProjectSerializer(serializers.ModelSerializer):
                 provider = Provider.objects.get(pk=provider_data["id"])
                 self.fields["provider"].update(provider, provider_data)
             else:
-                provider = Provider.objects.create(**provider_data)
+                provider = self.fields["provider"].create(provider_data)
 
         instance.provider = provider
 

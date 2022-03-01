@@ -6,19 +6,18 @@ import {
     SectionCardHeaderAction,
     SectionField,
 } from "components/common/presentational";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import AddIcon from "@mui/icons-material/Add";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import LaunchIcon from "@mui/icons-material/Launch";
 
-const ProjectContractSection = ({contract, hideLinkToContract = false}) => {
+const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
 
     const headerActions = [
         <SectionCardHeaderAction
             name="go-to-location-subpage"
-            title="Ir a la página de Ubicación"
+            text="Ir a la página de Ubicación"
             icon={<LaunchIcon />}
             onClick={() => {
                 navigate(`/contracts/${contract.id}`);
@@ -49,29 +48,20 @@ const ProjectContractSection = ({contract, hideLinkToContract = false}) => {
                     />
                 </>
             ) : (
-                <Grid container justifyContent="center">
-                    <Grid item xs={12}>
-                        <Typography
-                            sx={{
-                                fontStyle: "italic",
-                                mb: {xs: 0, sm: 1.5},
-                                textAlign: "center",
-                            }}
-                        >
-                            Todavía no hay ningún contrato asociado a este proyecto.
-                        </Typography>
-                    </Grid>
+                <Stack alignItems="center" spacing={2}>
+                    <Typography style={{fontStyle: "italic"}}>
+                        El proyecto no tiene un contrato asignado
+                    </Typography>
                     <Button
                         variant="contained"
                         color="primary"
-                        startIcon={<AddIcon />}
                         onClick={() => {
                             navigate("contract/new/add");
                         }}
                     >
-                        Asociar contrato
+                        Asignar
                     </Button>
-                </Grid>
+                </Stack>
             )}
         </SectionCard>
     );

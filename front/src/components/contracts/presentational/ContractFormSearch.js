@@ -1,7 +1,6 @@
 import {useState} from "react";
 
-import {ContractSearchAutocomplete} from ".";
-import {ProjectContractSection} from "components/project/presentational/financing";
+import {ContractSearchAutocomplete, ContractSummary} from ".";
 
 import Grid from "@mui/material/Grid";
 
@@ -21,12 +20,7 @@ const ContractFormSearch = ({onSelect}) => {
                 />
             </Grid>
             <Grid item xs={12}>
-                {existingContract && (
-                    <ProjectContractSection
-                        contract={existingContract}
-                        hideLinkToContract={true}
-                    />
-                )}
+                {existingContract && <ContractSummary contract={existingContract} />}
             </Grid>
         </Grid>
     );

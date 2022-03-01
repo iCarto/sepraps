@@ -13,6 +13,10 @@ const contractor_api_adapter = contractor => {
 
 const contractors_api_adapter = contractors => contractors.map(contractor_api_adapter);
 
+const contractor_view_adapter = contractor => {
+    return contractor;
+};
+
 const createContractors = (data = []) => {
     const contractors = Contractors.from(data, contractor =>
         createContractor(contractor)
@@ -27,8 +31,8 @@ const createContractor = ({
     contractor_type_name = "",
     phone = "",
     email = "",
-    contract = -1, // contract id
-    contacts = null,
+    contract = null, // contract id
+    contacts = [],
 } = {}) => {
     const publicApi = {
         id,
@@ -49,4 +53,5 @@ export {
     createContractors,
     contractor_api_adapter,
     contractors_api_adapter,
+    contractor_view_adapter,
 };

@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ContractService} from "service/api";
-import {createContract} from "model";
+import {contract_view_adapter, createContract} from "model";
 
 import {SidebarPanel} from "layout";
 import {ProjectFormSearch} from "../presentational";
@@ -25,19 +25,14 @@ const AddProjectPanel = () => {
     const handleProjectToAdd = () => {
         const updatedContract = createContract({
             ...contract,
-            projects: [
-                ...contract.projects.map(project => {
-                    return project.id;
-                }),
-                selectedProject.id,
-            ],
+            projects: [...contract.projects, selectedProject],
         });
         handleFormSubmit(updatedContract);
     };
 
     //TO-DO REVIEW FUNCTION NAME - "handleContractUpdate"?
     const handleFormSubmit = contract => {
-        ContractService.updateContract(contract)
+        ContractService.updateContract(contract_view_adapter({...contract}))
             .then(() => {
                 navigate(`/contracts/${contract.id}/projects`, true);
             })

@@ -17,11 +17,11 @@ const ContractBidRequestSection = () => {
     return (
         <SectionCard
             title="Licitación"
-            headerActions={[
+            secondaryActions={[
                 <SectionCardHeaderAction
                     key="edit"
                     name="edit"
-                    title="Modificar"
+                    text="Modificar"
                     icon={<EditIcon />}
                     onClick={() => {
                         navigate("bidrequest/edit");

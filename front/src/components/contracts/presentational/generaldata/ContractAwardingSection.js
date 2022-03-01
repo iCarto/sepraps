@@ -16,11 +16,11 @@ const ContractAwardingSection = () => {
     return (
         <SectionCard
             title="Adjudicación"
-            headerActions={[
+            secondaryActions={[
                 <SectionCardHeaderAction
                     key="edit"
                     name="edit"
-                    title="Modificar"
+                    text="Modificar"
                     icon={<EditIcon />}
                     onClick={() => {
                         navigate("awarding/edit");

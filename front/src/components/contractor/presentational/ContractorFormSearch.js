@@ -1,17 +1,15 @@
 import {useState} from "react";
 
-import {ContractorSearchAutocomplete, ContractorSection} from ".";
+import {ContractorSearchAutocomplete, ContractorSummary} from ".";
 
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 
-const ContractorFormSearch = ({handleSelect}) => {
+const ContractorFormSearch = ({onSelect = null, onCancel = null}) => {
     const [existingContractor, setExistingContractor] = useState(null);
 
     const handleSelectExistingContractor = contractor => {
         setExistingContractor(contractor);
-        if (contractor) {
-            handleSelect(contractor);
-        }
     };
 
     return (
@@ -23,11 +21,29 @@ const ContractorFormSearch = ({handleSelect}) => {
             </Grid>
             <Grid item xs={12}>
                 {existingContractor && (
-                    <ContractorSection
-                        contractor={existingContractor}
-                        showOnlySummary={true}
-                    />
+                    <ContractorSummary contractor={existingContractor} />
                 )}
+            </Grid>
+            <Grid container justifyContent="center" sx={{mt: 2}}>
+                <Grid>
+                    {onCancel && (
+                        <Button color="inherit" onClick={onCancel}>
+                            Cancelar
+                        </Button>
+                    )}
+                    {onSelect && (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{ml: 2}}
+                            onClick={() => {
+                                onSelect(existingContractor);
+                            }}
+                        >
+                            Añadir
+                        </Button>
+                    )}
+                </Grid>
             </Grid>
         </Grid>
     );

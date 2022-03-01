@@ -65,7 +65,7 @@ const ContractForm = ({section = null, onSubmit}) => {
             execution_certificate_start_date: data.execution_certificate_start_date,
             execution_expected_delivery_date: data.execution_expected_delivery_date,
             execution_final_delivery_date: data.execution_final_delivery_date,
-            projects: contract ? contract.projects.map(project => project.id) : [],
+            projects: contract ? contract.projects : [],
         });
         onSubmit(updatedProvider);
     };

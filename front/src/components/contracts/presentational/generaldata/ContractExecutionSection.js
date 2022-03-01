@@ -17,11 +17,11 @@ const ContractExecutionSection = () => {
     return (
         <SectionCard
             title="Ejecución"
-            headerActions={[
+            secondaryActions={[
                 <SectionCardHeaderAction
                     key="edit"
                     name="edit"
-                    title="Modificar"
+                    text="Modificar"
                     icon={<EditIcon />}
                     onClick={() => {
                         navigate("execution/edit");
