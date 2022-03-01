@@ -9,7 +9,7 @@ const style = {
     height: "300px",
 };
 
-const Map = ({markerPosition, text}) => {
+const Map = ({markerPosition, text = null}) => {
     const getIcon = useMapIcon();
 
     let map;

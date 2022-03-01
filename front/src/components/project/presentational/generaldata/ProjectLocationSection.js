@@ -10,6 +10,7 @@ import {ProjectLinkedLocalitiesTable} from "../location";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LaunchIcon from "@mui/icons-material/Launch";
+import {Map} from "components/common/geo";
 
 const ProjectLocationSection = () => {
     const navigate = useNavigate();
@@ -31,8 +32,8 @@ const ProjectLocationSection = () => {
 
     return (
         <SectionCard title="Ubicación" secondaryActions={headerActions}>
-            <Grid container>
-                <Grid item xs={12} lg={7}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} lg={8}>
                     <SectionField
                         label="Nombre del prestador:"
                         value={project.provider.name}
@@ -42,7 +43,7 @@ const ProjectLocationSection = () => {
                         <ProjectLinkedLocalitiesTable />
                     </Box>
                 </Grid>
-                <Grid item container xs={12} lg={5}>
+                <Grid item container xs={12} lg={4}>
                     <Grid
                         item
                         xs={12}
@@ -52,23 +53,20 @@ const ProjectLocationSection = () => {
                     >
                         <SectionLabel label="Infraestructura principal:" />
                     </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        sx={{
-                            backgroundImage:
-                                "url(https://via.placeholder.com/300x120/a9dec3/FFFFFF/?text=Map-placeholder)",
-                            backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                            borderRadius: 1,
-                            minHeight: 200,
-                        }}
-                    />
+                    <Grid item xs={12}>
+                        <Map
+                            markerPosition={{
+                                lat: project.main_infrastructure.latitude,
+                                lng: project.main_infrastructure.longitude,
+                            }}
+                        />
+                    </Grid>
                 </Grid>
             </Grid>
         </SectionCard>
     );
 };
+{
+}
 
 export default ProjectLocationSection;
