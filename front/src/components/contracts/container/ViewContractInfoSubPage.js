@@ -3,10 +3,10 @@ import {SubPageLayout} from "layout";
 import {
     ContractAwardingSection,
     ContractBidRequestSection,
+    ContractContractorSection,
     ContractExecutionSection,
     ContractGeneralDataSection,
 } from "../presentational/generaldata";
-import {ContractorSection} from "components/contractor/presentational";
 import Grid from "@mui/material/Grid";
 
 const ViewContractInfoSubPage = () => {
@@ -26,7 +26,7 @@ const ViewContractInfoSubPage = () => {
                     <ContractAwardingSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractorSection contractor={contract.contractor} />
+                    <ContractContractorSection />
                 </Grid>
                 <Grid item xs={12}>
                     <ContractExecutionSection />

@@ -16,11 +16,11 @@ const ContractGeneralDataSection = () => {
     return (
         <SectionCard
             title="Datos generales"
-            headerActions={[
+            secondaryActions={[
                 <SectionCardHeaderAction
                     key="edit"
                     name="edit"
-                    title="Modificar"
+                    text="Modificar"
                     icon={<EditIcon />}
                     onClick={() => {
                         navigate("generaldata/edit");

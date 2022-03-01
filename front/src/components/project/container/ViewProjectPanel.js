@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ContractService, ProjectService} from "service/api";
-import {createContract} from "model";
+import {contract_view_adapter, createContract} from "model";
 
 import {SidebarAction, SidebarPanel} from "layout";
 import {ProjectSection} from "../presentational";
@@ -53,11 +53,7 @@ const ViewProjectPanel = () => {
 
         const updatedContract = createContract({
             ...contract,
-            projects: [
-                ...contract.projects.map(project => {
-                    return project.id;
-                }),
-            ],
+            projects: [...contract.projects],
         });
 
         handleUpdateContract(updatedContract);
@@ -65,7 +61,7 @@ const ViewProjectPanel = () => {
     };
 
     const handleUpdateContract = updatedContract => {
-        ContractService.updateContract(updatedContract)
+        ContractService.updateContract(contract_view_adapter({...updatedContract}))
             .then(() => {
                 navigate(`/contracts/${id}/projects`, true);
             })

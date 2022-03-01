@@ -37,19 +37,16 @@ const AddProjectProviderPanel = () => {
     };
 
     return (
-        <SidebarPanel>
+        <SidebarPanel sidebarTitle="Añadir prestador" closeSidebarClick={handleCancel}>
             {error && (
                 <Alert severity="error" sx={{mb: 2}}>
                     {error}
                 </Alert>
             )}
             {action === "search" ? (
-                <ProviderFormSearch
-                    onSelect={handleSelectExistingProvider}
-                    onCancel={handleCancel}
-                />
+                <ProviderFormSearch onSelect={handleSelectExistingProvider} />
             ) : (
-                <ProviderForm onSubmit={handleSubmit} onCancel={handleCancel} />
+                <ProviderForm onSubmit={handleSubmit} />
             )}
         </SidebarPanel>
     );

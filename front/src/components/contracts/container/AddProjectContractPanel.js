@@ -24,7 +24,7 @@ const AddProjectContractPanel = () => {
     const handleContractToAdd = () => {
         const updatedProject = project_view_adapter({
             ...project,
-            construction_contract: selectedContract.id,
+            construction_contract: selectedContract,
         });
         console.log({updatedProject});
         ProjectService.updateProject(updatedProject)

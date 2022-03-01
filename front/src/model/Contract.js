@@ -5,7 +5,7 @@ import {
     project_api_adapter,
 } from "model";
 import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
-import {} from "./Contractor";
+import {contractor_view_adapter} from "./Contractor";
 
 class Contracts extends Array {}
 
@@ -98,6 +98,18 @@ const contract_view_adapter = contract => {
               DATE_FORMATS.SERVER_DATEFORMAT
           )
         : null;
+
+    // we must destructure object before its adapation because
+    // nested objects are still inmutable inside contract object
+    if (!!contract["contractor"]) {
+        contract["contractor"] = contractor_view_adapter({...contract["contractor"]});
+        // contractor contract and contacts fields are not necessary when processing a contract
+        delete contract["contractor"]["contract"];
+        delete contract["contractor"]["contacts"];
+    } else {
+        contract["contractor"] = null;
+    }
+
     contract["execution_order_start_date"] = !!contract["execution_order_start_date"]
         ? DateUtil.formatDate(
               contract["execution_order_start_date"],
@@ -128,7 +140,9 @@ const contract_view_adapter = contract => {
               DATE_FORMATS.SERVER_DATEFORMAT
           )
         : null;
-
+    contract["projects"] = contract["projects"].map(project => {
+        return project.id;
+    });
     return contract;
 };
 

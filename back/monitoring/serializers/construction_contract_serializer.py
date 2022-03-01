@@ -86,7 +86,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
         contractor = None
         if contractor_data:
-            contractor_data.pop("contract", None)
+
             if "id" in contractor_data and contractor_data["id"] is not None:
                 contractor = self.fields["contractor"].update(
                     Contractor.objects.get(pk=contractor_data["id"]), contractor_data

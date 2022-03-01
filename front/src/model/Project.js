@@ -30,11 +30,11 @@ const project_api_adapter = project => {
             localities_api_adapter(project["linked_localities"])
         );
     }
-    project["provider"] = createProvider(
-        project["provider"]
-            ? provider_api_adapter({...project["provider"], project: project["id"]})
-            : {}
-    );
+    project["provider"] = project["provider"]
+        ? createProvider(
+              provider_api_adapter({...project["provider"], project: project["id"]})
+          )
+        : null;
     if (project["main_infrastructure"]) {
         project["main_infrastructure"] = createInfrastructure(
             infrastructure_api_adapter(project["main_infrastructure"])
@@ -49,7 +49,6 @@ const project_api_adapter = project => {
 const projects_api_adapter = projects => projects.map(project_api_adapter);
 
 const project_view_adapter = project => {
-    console.log("linked", project["linked_localities"]);
     // in front-end falsy values are "" or undefined or null
     project["init_date"] = !!project["init_date"]
         ? DateUtil.formatDate(project["init_date"], DATE_FORMATS.SERVER_DATEFORMAT)
@@ -71,7 +70,7 @@ const project_view_adapter = project => {
         return linked_locality.code;
     });
     project["construction_contract"] = !!project["construction_contract"]
-        ? project["construction_contract"]
+        ? project["construction_contract"].id
         : null;
     delete project["creation_user"];
     delete project["created_at"];

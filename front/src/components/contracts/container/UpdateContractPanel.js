@@ -6,6 +6,7 @@ import {ContractService} from "service/api";
 import {SidebarPanel} from "layout";
 import {ContractForm} from "../presentational";
 import Alert from "@mui/material/Alert";
+import {contract_view_adapter} from "model";
 
 const UpdateContractPanel = () => {
     const {section} = useParams();
@@ -17,7 +18,7 @@ const UpdateContractPanel = () => {
     [contract] = useOutletContext();
 
     const handleSubmit = contract => {
-        ContractService.updateContract(contract)
+        ContractService.updateContract(contract_view_adapter({...contract}))
             .then(() => {
                 navigate(`/contracts/${contract.id}`, true);
             })

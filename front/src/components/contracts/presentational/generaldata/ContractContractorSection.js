@@ -5,27 +5,24 @@ import {
     SectionCardHeaderAction,
     SectionField,
 } from "components/common/presentational";
-import {RemoveProjectProviderDialog} from "components/provider/container";
-import {
-    AddProviderButtonGroup,
-    ProviderContactsSection,
-} from "components/provider/presentational";
+import {AddContractorButtonGroup} from "components/contractor/presentational";
 
+import ContractorContactsSection from "components/contractor/presentational/ContractorContactsSection";
+import {RemoveContractContractorDialog} from "components/contractor/container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import LocationOn from "@mui/icons-material/LocationOn";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ProviderSection = () => {
+const ContractContractorSection = () => {
     const navigate = useNavigate();
-    let project;
-    [project] = useOutletContext();
-    const provider = project.provider;
+    let contract;
+    [contract] = useOutletContext();
+    const contractor = contract.contractor;
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
 
-    const headerActions = provider?.id
+    const headerActions = contractor?.id
         ? [
               <SectionCardHeaderAction
                   key="edit"
@@ -33,7 +30,7 @@ const ProviderSection = () => {
                   text="Modificar"
                   icon={<EditIcon />}
                   onClick={() => {
-                      navigate("provider/" + provider.id + "/edit");
+                      navigate("contractor/" + contractor.id + "/edit");
                   }}
               />,
               <SectionCardHeaderAction
@@ -49,18 +46,22 @@ const ProviderSection = () => {
         : null;
 
     return (
-        <SectionCard title="Prestador" secondaryActions={headerActions}>
-            {provider?.id ? (
+        <SectionCard title="Contratista" secondaryActions={headerActions}>
+            {contractor?.id ? (
                 <>
-                    <SectionField label="Nombre:" value={provider.name} />
+                    <SectionField label="Nombre:" value={contractor.name} />
                     <SectionField
-                        label="Ubicación:"
-                        value={`${provider.locality.locality_name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
-                        labelIcon={LocationOn}
+                        label="Tipo:"
+                        value={contractor.contractor_type_name}
                     />
-                    <ProviderContactsSection provider={provider} />
-                    <RemoveProjectProviderDialog
-                        project={project}
+                    <SectionField label="Teléfono:" value={contractor.phone} />
+                    <SectionField
+                        label="Correo electrónico:"
+                        value={contractor.email}
+                    />
+                    <ContractorContactsSection contractor={contractor} />
+                    <RemoveContractContractorDialog
+                        contract={contract}
                         isDialogOpen={isRemoveDialogOpen}
                         setIsDialogOpen={setIsRemoveDialogOpen}
                     />
@@ -68,13 +69,13 @@ const ProviderSection = () => {
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography style={{fontStyle: "italic"}}>
-                        El proyecto no tiene un prestador asignado
+                        El contrato no tiene un contratista asignado
                     </Typography>
-                    <AddProviderButtonGroup />
+                    <AddContractorButtonGroup />
                 </Stack>
             )}
         </SectionCard>
     );
 };
 
-export default ProviderSection;
+export default ContractContractorSection;
