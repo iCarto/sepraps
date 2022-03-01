@@ -2,7 +2,6 @@ import {createRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import Box from "@mui/material/Box";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -25,39 +24,39 @@ const AddContactButtonGroup = ({basePath}) => {
     };
 
     return (
-        <Box sx={{mt: 2}}>
-            <ToggleButtonGroup color="primary">
-                <Button
-                    id="basic-button"
-                    color="primary"
-                    variant="contained"
-                    onClick={() => {
-                        navigate(basePath + "/new/add");
-                    }}
-                    startIcon={<AddIcon />}
-                    ref={ref}
-                >
-                    Nuevo contacto
-                </Button>
-                <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={() => {
-                        setAnchorEl(ref.current);
-                    }}
-                >
-                    <ArrowDropDownIcon />
-                </Button>
-            </ToggleButtonGroup>
+        <Box>
+            <Button
+                id="menu-button"
+                color="primary"
+                variant="contained"
+                onClick={() => {
+                    setAnchorEl(ref.current);
+                }}
+                endIcon={<ArrowDropDownIcon />}
+                ref={ref}
+            >
+                Añadir Contacto
+            </Button>
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{
-                    "aria-labelledby": "basic-button",
+                    "aria-labelledby": "menu-button",
                 }}
             >
+                <MenuItem
+                    onClick={() => {
+                        handleClose();
+                        navigate(basePath + "/new/add");
+                    }}
+                >
+                    <ListItemIcon>
+                        <AddIcon fontSize="small" />
+                    </ListItemIcon>
+                    <Typography>Nuevo Contacto</Typography>
+                </MenuItem>
                 <MenuItem
                     onClick={() => {
                         handleClose();
@@ -67,9 +66,7 @@ const AddContactButtonGroup = ({basePath}) => {
                     <ListItemIcon>
                         <SearchIcon fontSize="small" />
                     </ListItemIcon>
-                    <Typography style={{textTransform: "uppercase"}}>
-                        Añadir contacto existente
-                    </Typography>
+                    <Typography>Contacto Existente</Typography>
                 </MenuItem>
             </Menu>
         </Box>
