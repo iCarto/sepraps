@@ -85,14 +85,14 @@ const ProviderContactsSection = ({provider}) => {
     return (
         <Fragment>
             <AccordionLayout accordionTitle="Contactos">
-                <Grid container>
+                <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <ContactsTable
                             contacts={provider.contacts}
                             handleActions={handleActions}
                         />
                     </Grid>
-                    <Grid item container xs={12} justifyContent="flex-end">
+                    <Grid item container xs={12} justifyContent="center">
                         <AddContactButtonGroup basePath="provider/contact" />
                     </Grid>
                     <Grid item xs={12}>
