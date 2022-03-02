@@ -59,7 +59,6 @@ const ProjectForm = ({handleFormSubmit}) => {
     });
 
     const onSubmit = data => {
-        console.log({data});
         const project = createProject({
             name: data.name,
             init_date: data.init_date,
@@ -95,7 +94,6 @@ const ProjectForm = ({handleFormSubmit}) => {
             financing_fund: data.financing.financing_fund,
             financing_program: data.financing.financing_program,
         });
-        console.log({project});
         handleFormSubmit(project);
     };
 

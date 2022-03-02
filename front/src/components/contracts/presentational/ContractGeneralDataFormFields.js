@@ -5,7 +5,7 @@ const ContractGeneralDataFormFields = () => {
     return (
         <Fragment>
             <FormInputText
-                name="number"
+                name="contract_number"
                 label="Número de contrato"
                 rules={{required: "El campo es obligatorio"}}
             />

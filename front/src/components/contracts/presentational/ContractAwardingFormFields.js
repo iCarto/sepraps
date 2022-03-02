@@ -12,6 +12,7 @@ const ContractAwardingFormFields = () => {
             <FormInputDecimal
                 name="awarding_percentage_drop"
                 label="Porcentaje de baja"
+                endAdornment="%"
             />
             <FormDatePicker name="awarding_date" label="Fecha de adjudicación" />
         </Fragment>

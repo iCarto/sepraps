@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-const ContractForm = ({section = null, onSubmit}) => {
+const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
     // TODO: Review how to manage outlet context to extract contract properly
     let contract;
     const outletContext = useOutletContext();
@@ -21,7 +21,7 @@ const ContractForm = ({section = null, onSubmit}) => {
 
     const defaultFormValues = {
         id: contract?.id || "",
-        number: contract?.number || "",
+        contract_number: contract?.number || "",
         comments: contract?.comments || "",
         bid_request_number: contract?.bid_request_number || "",
         bid_request_id: contract?.bid_request_id || "",
@@ -49,7 +49,7 @@ const ContractForm = ({section = null, onSubmit}) => {
         console.log("submit", {contract});
         const updatedProvider = createContract({
             id: data.id,
-            number: data.number,
+            number: data.contract_number,
             comments: data.comments,
             bid_request_number: data.bid_request_number,
             bid_request_id: data.bid_request_id,
@@ -70,6 +70,10 @@ const ContractForm = ({section = null, onSubmit}) => {
         onSubmit(updatedProvider);
     };
 
+    const handleCancel = () => {
+        onCancel();
+    };
+
     return (
         <FormProvider {...formMethods}>
             <Box component="form">
@@ -81,15 +85,18 @@ const ContractForm = ({section = null, onSubmit}) => {
                         {!section || section === "bidrequest" ? (
                             <ContractBidRequestFormFields />
                         ) : null}
-                        {!section || section === "awarding" ? (
-                            <ContractAwardingFormFields />
-                        ) : null}
-                        {!section || section === "execution" ? (
+                        {section === "awarding" ? <ContractAwardingFormFields /> : null}
+                        {section === "execution" ? (
                             <ContractExecutionFormFields />
                         ) : null}
                     </Grid>
                 </Grid>
                 <Grid container justifyContent="center" sx={{mt: 2}}>
+                    {onCancel && (
+                        <Button sx={{ml: 2}} onClick={handleCancel}>
+                            Cancelar
+                        </Button>
+                    )}
                     <Button
                         variant="contained"
                         color="primary"

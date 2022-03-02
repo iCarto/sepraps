@@ -2,11 +2,11 @@ import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ContractService} from "service/api";
+import {contract_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ContractForm} from "../presentational";
 import Alert from "@mui/material/Alert";
-import {contract_view_adapter} from "model";
 
 const UpdateContractPanel = () => {
     const {section} = useParams();

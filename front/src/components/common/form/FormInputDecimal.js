@@ -32,7 +32,9 @@ const FormInputDecimal = ({
     if (endAdornment) {
         inputProps = {
             ...inputProps,
-            endAdornment: <InputAdornment position="start">{"$"}</InputAdornment>,
+            endAdornment: (
+                <InputAdornment position="start">{endAdornment}</InputAdornment>
+            ),
         };
     }
 

@@ -1,7 +1,13 @@
 import {useController, useFormContext} from "react-hook-form";
 import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 
-const FormInputInteger = ({name: propsName, label, rules = {}}) => {
+const FormInputInteger = ({
+    name: propsName,
+    label,
+    endAdornment = null,
+    rules = {},
+}) => {
     const {control} = useFormContext();
 
     const {
@@ -20,6 +26,16 @@ const FormInputInteger = ({name: propsName, label, rules = {}}) => {
         },
     });
 
+    let inputProps = {};
+    if (endAdornment) {
+        inputProps = {
+            ...inputProps,
+            endAdornment: (
+                <InputAdornment position="start">{endAdornment}</InputAdornment>
+            ),
+        };
+    }
+
     return (
         <TextField
             onChange={onChange}
@@ -32,6 +48,7 @@ const FormInputInteger = ({name: propsName, label, rules = {}}) => {
             fullWidth
             error={Boolean(error)}
             helperText={error?.message}
+            InputProps={inputProps}
         />
     );
 };

@@ -35,10 +35,18 @@ const ContractBidRequestSection = () => {
                 label="Fecha:"
                 value={DateUtil.formatDate(contract.bid_request_date)}
             />
-            <SectionField label="Presupuesto:" value={contract.bid_request_budget} />
+            <SectionField
+                label="Presupuesto:"
+                value={
+                    contract.bid_request_budget && contract.bid_request_budget + " $"
+                }
+            />
             <SectionField
                 label="Plazo previsto:"
-                value={contract.bid_request_deadline + " meses"}
+                value={
+                    contract.bid_request_deadline &&
+                    contract.bid_request_deadline + " meses"
+                }
             />
         </SectionCard>
     );
