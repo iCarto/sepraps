@@ -1,6 +1,7 @@
 import {useState} from "react";
-import {ContractService} from "service/api";
 import {useNavigate} from "react-router-dom";
+import {ContractService} from "service/api";
+import {contract_view_adapter} from "model";
 
 import {PageLayout} from "layout";
 import {ContractForm} from "../presentational";
@@ -15,7 +16,7 @@ const CreateContractPage = () => {
     const [error, setError] = useState("");
 
     const handleSubmit = contract => {
-        ContractService.createContract(contract)
+        ContractService.createContract(contract_view_adapter({...contract}))
             .then(createdContract => {
                 navigate(`/contracts/${createdContract.id}`);
             })

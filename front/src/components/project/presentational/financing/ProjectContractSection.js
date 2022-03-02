@@ -45,13 +45,15 @@ const ProjectContractSection = ({contract}) => {
                     />
                     <SectionField
                         label="Presupuesto adjudicado:"
-                        value={contract.awarding_budget}
+                        value={
+                            contract.awarding_budget && contract.awarding_budget + "$"
+                        }
                     />
                 </>
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography style={{fontStyle: "italic"}}>
-                        El proyecto no tiene un contrato asignado
+                        El proyecto no tiene ningún contrato asignado
                     </Typography>
                     <Button
                         variant="contained"

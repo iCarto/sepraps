@@ -68,7 +68,7 @@ const ProviderSection = () => {
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography style={{fontStyle: "italic"}}>
-                        El proyecto no tiene un prestador asignado
+                        El proyecto no tiene ningún prestador asignado
                     </Typography>
                     <AddProviderButtonGroup />
                 </Stack>

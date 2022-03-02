@@ -28,10 +28,16 @@ const ContractAwardingSection = () => {
                 />,
             ]}
         >
-            <SectionField label="Presupuesto:" value={contract.awarding_budget} />
+            <SectionField
+                label="Presupuesto:"
+                value={contract.awarding_budget && contract.awarding_budget + " $"}
+            />
             <SectionField
                 label="Porcentaje de baja:"
-                value={contract.awarding_percentage_drop + "%"}
+                value={
+                    contract.awarding_percentage_drop &&
+                    contract.awarding_percentage_drop + "%"
+                }
             />
             <SectionField
                 label="Fecha:"

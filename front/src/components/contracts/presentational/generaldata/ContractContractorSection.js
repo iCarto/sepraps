@@ -69,7 +69,7 @@ const ContractContractorSection = () => {
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography style={{fontStyle: "italic"}}>
-                        El contrato no tiene un contratista asignado
+                        El contrato no tiene ningún contratista asignado
                     </Typography>
                     <AddContractorButtonGroup />
                 </Stack>
