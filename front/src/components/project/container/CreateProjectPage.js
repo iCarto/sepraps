@@ -2,13 +2,13 @@ import {useState} from "react";
 import {ProjectService} from "service/api";
 import {useNavigate} from "react-router-dom";
 
+import {project_view_adapter} from "model";
 import {PageLayout} from "layout";
 import {ProjectForm} from "../presentational";
 
+import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
-import Container from "@mui/material/Container";
-import {project_view_adapter} from "model";
 
 const CreateProjectPage = () => {
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ const CreateProjectPage = () => {
                     Registro de proyecto
                 </Typography>
                 {error && <Alert severity="error">{error}</Alert>}
-                <ProjectForm handleFormSubmit={handleFormSubmit} />
+                <ProjectForm onSubmit={handleFormSubmit} />
             </Container>
         </PageLayout>
     );

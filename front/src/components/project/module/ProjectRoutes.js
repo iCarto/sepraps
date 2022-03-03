@@ -11,6 +11,7 @@ import {
     UpdateProjectProviderPanel,
     ViewProjectDocumentsSubPage,
     AddProjectProviderPanel,
+    UpdateProjectPanel,
 } from "components/project/container";
 import {UpdateProjectProviderContactPanel} from "components/provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "components/milestone/container";
@@ -20,6 +21,13 @@ import {ViewDocumentPanel} from "components/document/container";
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
     <Route key="project-detail" path=":id" element={<ViewProjectPage />}>
+        <Route key="project-info" path="" element={<ViewProjectSummarySubPage />}>
+            <Route
+                key="project-general-data"
+                path=":section/edit"
+                element={<UpdateProjectPanel />}
+            />
+        </Route>
         <Route
             key="project-location"
             path="location"

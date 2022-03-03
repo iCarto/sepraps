@@ -7,6 +7,7 @@ import {
     SectionSubheading,
 } from "components/common/presentational";
 import LaunchIcon from "@mui/icons-material/Launch";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectFinancingSection = () => {
     const navigate = useNavigate();
@@ -22,6 +23,15 @@ const ProjectFinancingSection = () => {
             icon={<LaunchIcon />}
             onClick={() => {
                 navigate(`financing`);
+            }}
+        />,
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Modificar financiador"
+            icon={<EditIcon />}
+            onClick={() => {
+                navigate("financing/edit");
             }}
         />,
     ];
@@ -41,7 +51,10 @@ const ProjectFinancingSection = () => {
             />
             <SectionField
                 label="Presupuesto:"
-                value={project.construction_contract?.awarding_budget + " $"}
+                value={
+                    project.construction_contract &&
+                    project.construction_contract.awarding_budget + " $"
+                }
             />
         </SectionCard>
     );

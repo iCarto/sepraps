@@ -1,7 +1,9 @@
 import {useFormContext} from "react-hook-form";
+
 import {useAdministrativeDivisions} from "components/common/provider";
-import {FormLocationSelect} from "components/common/form";
+import {FormLocationSelect, FormSection} from "components/common/form";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -11,8 +13,6 @@ import TableBody from "@mui/material/TableBody";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 
 const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
     const {getValues, reset} = useFormContext();
@@ -49,76 +49,63 @@ const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
     };
 
     return (
-        <Paper sx={{mt: 3, p: 3}} elevation={3}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography>Localidades vinculadas</Typography>
-                </Grid>
-                <Grid
-                    container
-                    item
-                    xs={12}
-                    spacing={2}
-                    alignItems="center"
-                    justify="center"
-                >
-                    <Grid item xs={11}>
-                        <FormLocationSelect
-                            name={auxPropertyName}
-                            orientation="horizontal"
-                        />
-                    </Grid>
-                    <Grid item xs={1}>
-                        <IconButton
-                            aria-label="add"
-                            onClick={handleAdd}
-                            color="primary"
-                            size="large"
-                        >
-                            <AddCircleIcon fontSize="inherit" />
-                        </IconButton>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                    <TableContainer>
-                        <Table aria-labelledby="tableTitle">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Código</TableCell>
-                                    <TableCell>Localidad</TableCell>
-                                    <TableCell>Distrito</TableCell>
-                                    <TableCell>Departamento</TableCell>
-                                    <TableCell></TableCell>
-                                </TableRow>
-                            </TableHead>
-
-                            <TableBody>
-                                {getValues()[name].map((row, index) => {
-                                    return (
-                                        <TableRow hover key={row.locality}>
-                                            <TableCell>{row.locality}</TableCell>
-                                            <TableCell>{row.locality_name}</TableCell>
-                                            <TableCell>{row.district_name}</TableCell>
-                                            <TableCell>{row.department_name}</TableCell>
-                                            <TableCell>
-                                                <IconButton
-                                                    aria-label="delete"
-                                                    onClick={() => {
-                                                        handleRemove(row.locality);
-                                                    }}
-                                                >
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Grid>
+        <FormSection>
+            <Grid item xs={12}>
+                <Typography>Localidades vinculadas</Typography>
             </Grid>
-        </Paper>
+            <Grid item xs={11}>
+                <FormLocationSelect name={auxPropertyName} orientation="horizontal" />
+            </Grid>
+            <Grid item xs={1}>
+                <IconButton
+                    aria-label="add"
+                    onClick={handleAdd}
+                    color="primary"
+                    size="large"
+                >
+                    <AddCircleIcon fontSize="inherit" />
+                </IconButton>
+            </Grid>
+
+            <Grid item xs={12}>
+                <TableContainer>
+                    <Table aria-labelledby="tableTitle">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Código</TableCell>
+                                <TableCell>Localidad</TableCell>
+                                <TableCell>Distrito</TableCell>
+                                <TableCell>Departamento</TableCell>
+                                <TableCell></TableCell>
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                            {getValues()[name].map((row, index) => {
+                                return (
+                                    <TableRow hover key={row.locality}>
+                                        <TableCell>{row.locality}</TableCell>
+                                        <TableCell>{row.locality_name}</TableCell>
+                                        <TableCell>{row.district_name}</TableCell>
+                                        <TableCell>{row.department_name}</TableCell>
+                                        <TableCell>
+                                            <IconButton
+                                                aria-label="delete"
+                                                onClick={() => {
+                                                    handleRemove(row.locality);
+                                                }}
+                                            >
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Grid>
+        </FormSection>
     );
 };
 
