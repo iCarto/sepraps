@@ -10,6 +10,7 @@ import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import {MenuListItemLink} from "components/common/presentational";
+import Tooltip from "@mui/material/Tooltip";
 
 const moduleMenuDrawerWidth = 240;
 
@@ -67,21 +68,27 @@ const ModuleMenu = ({open, onToggle}) => {
             <Divider />
             <List>
                 <MenuListItemLink to={`/projects`}>
-                    <ListItemIcon>
-                        <FactCheckOutlinedIcon />
-                    </ListItemIcon>
+                    <Tooltip title="Proyectos" placement="bottom-end">
+                        <ListItemIcon>
+                            <FactCheckOutlinedIcon />
+                        </ListItemIcon>
+                    </Tooltip>
                     <ListItemText primary="Proyectos" />
                 </MenuListItemLink>
                 <MenuListItemLink to={`/contracts`}>
-                    <ListItemIcon>
-                        <WorkOutlineOutlinedIcon />
-                    </ListItemIcon>
+                    <Tooltip title="Contratos" placement="bottom-end">
+                        <ListItemIcon>
+                            <WorkOutlineOutlinedIcon />
+                        </ListItemIcon>
+                    </Tooltip>
                     <ListItemText primary="Contratos" />
                 </MenuListItemLink>
                 <MenuListItemLink to={`/stats`}>
-                    <ListItemIcon>
-                        <QueryStatsIcon />
-                    </ListItemIcon>
+                    <Tooltip title="Resultados" placement="bottom-end">
+                        <ListItemIcon>
+                            <QueryStatsIcon />
+                        </ListItemIcon>
+                    </Tooltip>
                     <ListItemText primary="Resultados" />
                 </MenuListItemLink>
             </List>
