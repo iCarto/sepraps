@@ -83,16 +83,18 @@ const FolderTableRowMenu = ({folderElement, basePath, onUpdate}) => {
                     </ListItemIcon>
                     <ListItemText>Copiar enlace</ListItemText>
                 </MenuItem>
-                <MenuItem
-                    onClick={() => {
-                        setIsDeleteDialogOpen(true);
-                    }}
-                >
-                    <ListItemIcon>
-                        <DeleteIcon color="error" />
-                    </ListItemIcon>
-                    <ListItemText>Eliminar</ListItemText>
-                </MenuItem>
+                {folderElement.content_type && (
+                    <MenuItem
+                        onClick={() => {
+                            setIsDeleteDialogOpen(true);
+                        }}
+                    >
+                        <ListItemIcon>
+                            <DeleteIcon color="error" />
+                        </ListItemIcon>
+                        <ListItemText>Eliminar</ListItemText>
+                    </MenuItem>
+                )}
             </Menu>
             <RemoveDocumentDialog
                 folderElement={folderElement}
