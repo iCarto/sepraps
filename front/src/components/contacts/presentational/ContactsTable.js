@@ -67,7 +67,7 @@ const ContactsTable = ({contacts, handleActions = null}) => {
     return (
         <TableContainer>
             <Table
-                aria-labelledby="tableTitle"
+                aria-labelledby="Contacts table"
                 sx={{tableLayout: "fixed", overflowWrap: "break-word"}}
             >
                 <TableSortingHead
@@ -75,6 +75,7 @@ const ContactsTable = ({contacts, handleActions = null}) => {
                     attribute={attribute}
                     onRequestSort={handleRequestSort}
                     headCells={headCells}
+                    actionsHeadcell={handleActions}
                 />
                 <TableBody>
                     {contacts.sort(sortFunction).map((row, index) => {
@@ -88,8 +89,8 @@ const ContactsTable = ({contacts, handleActions = null}) => {
                                 <TableCell>{row.phone}</TableCell>
                                 <TableCell>{row.email}</TableCell>
                                 <TableCell>{row.comments}</TableCell>
-                                <TableCell>
-                                    {handleActions ? (
+                                {handleActions ? (
+                                    <TableCell>
                                         <ActionsMenu>
                                             <MenuAction
                                                 name="edit-contact"
@@ -113,8 +114,8 @@ const ContactsTable = ({contacts, handleActions = null}) => {
                                                 handleClick={handleClick}
                                             />
                                         </ActionsMenu>
-                                    ) : null}
-                                </TableCell>
+                                    </TableCell>
+                                ) : null}
                             </TableRow>
                         );
                     })}
