@@ -11,6 +11,7 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import FolderTableRowMenu from "./FolderTableRowMenu";
+import Typography from "@mui/material/Typography";
 
 const headCells = [
     {
@@ -70,57 +71,76 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
 
     const noPointer = {cursor: "default"};
 
+    console.log({folderElements});
+
     return (
         <TableContainer>
-            <Table sx={{minWidth: 750}} aria-labelledby="tableTitle">
-                <TableSortingHead
-                    order={order}
-                    attribute={attribute}
-                    onRequestSort={handleRequestSort}
-                    headCells={headCells}
-                />
-                <TableBody>
-                    {folderElements.sort(sortFunction).map((folderElement, index) => {
-                        return (
-                            <TableRow
-                                hover
-                                key={index}
-                                sx={{
-                                    "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                    },
-                                }}
-                                onClick={() => handleClick(folderElement)}
-                                onDoubleClick={() => handleDoubleClick(folderElement)}
-                                selected={selectedElement?.name === folderElement.name}
-                            >
-                                <TableCell>
-                                    <FolderElementIcon element={folderElement} />
-                                </TableCell>
-                                <TableCell
-                                    component="th"
-                                    scope="row"
-                                    style={noPointer}
-                                    sx={{
-                                        color: folderElement.content_type
-                                            ? "inherit"
-                                            : "primary.main",
-                                    }}
-                                >
-                                    {folderElement.name}
-                                </TableCell>
-                                <TableCell style={noPointer}>
-                                    {folderElement.content_type}
-                                </TableCell>
-                                <TableCell style={noPointer}>
-                                    {folderElement.size &&
-                                        FileUtil.formatBytes(folderElement.size)}
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
+            {folderElements.length !== 0 ? (
+                <Table sx={{minWidth: 750}} aria-labelledby="tableTitle">
+                    <TableSortingHead
+                        order={order}
+                        attribute={attribute}
+                        onRequestSort={handleRequestSort}
+                        headCells={headCells}
+                    />
+                    <TableBody>
+                        {folderElements
+                            .sort(sortFunction)
+                            .map((folderElement, index) => {
+                                return (
+                                    <TableRow
+                                        hover
+                                        key={index}
+                                        sx={{
+                                            "&:last-child td, &:last-child th": {
+                                                border: 0,
+                                            },
+                                        }}
+                                        onClick={() => handleClick(folderElement)}
+                                        onDoubleClick={() =>
+                                            handleDoubleClick(folderElement)
+                                        }
+                                        selected={
+                                            selectedElement?.name === folderElement.name
+                                        }
+                                    >
+                                        <TableCell>
+                                            <FolderElementIcon
+                                                element={folderElement}
+                                            />
+                                        </TableCell>
+                                        <TableCell
+                                            component="th"
+                                            scope="row"
+                                            style={noPointer}
+                                        >
+                                            {folderElement.name}
+                                        </TableCell>
+                                        <TableCell style={noPointer}>
+                                            {folderElement.content_type}
+                                        </TableCell>
+                                        <TableCell style={noPointer}>
+                                            {folderElement.size &&
+                                                FileUtil.formatBytes(
+                                                    folderElement.size
+                                                )}
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                    </TableBody>
+                </Table>
+            ) : (
+                <Typography
+                    style={{
+                        marginTop: "24px",
+                        textAlign: "center",
+                        fontStyle: "italic",
+                    }}
+                >
+                    Aún no se ha subido ningún documento
+                </Typography>
+            )}
         </TableContainer>
     );
 };
