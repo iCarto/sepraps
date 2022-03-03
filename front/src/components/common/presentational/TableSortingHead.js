@@ -7,7 +7,13 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import {visuallyHidden} from "@mui/utils";
 
-function TableSortingHead({order, attribute, onRequestSort, headCells}) {
+function TableSortingHead({
+    order,
+    attribute,
+    onRequestSort,
+    headCells,
+    actionsHeadcell = null,
+}) {
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
@@ -37,7 +43,9 @@ function TableSortingHead({order, attribute, onRequestSort, headCells}) {
                         </TableSortLabel>
                     </TableCell>
                 ))}
-                <TableCell key="actions"></TableCell>
+                {actionsHeadcell && (
+                    <TableCell key="actions" sx={{width: "62px"}}></TableCell>
+                )}
             </TableRow>
         </TableHead>
     );
