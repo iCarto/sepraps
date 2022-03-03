@@ -38,7 +38,7 @@ const ProjectGeneralDataSection = () => {
                                 opacity: 0.8,
                             }}
                         >
-                            <Icon icon={project.project_type} size="medium" />
+                            <Icon icon={project.project_type_name} size="medium" />
                         </Box>
                     </div>
                 </Grid>
