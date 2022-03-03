@@ -6,11 +6,11 @@ const Icon = ({icon, size}) => {
     let imgAlt = "";
     let maxWidth = {};
     switch (`${icon}`) {
-        case "agua":
+        case "Agua Potable":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
             imgAlt = "Grifo";
             break;
-        case "saneamiento":
+        case "Saneamiento":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
             imgAlt = "Tubería";
             break;
@@ -27,7 +27,7 @@ const Icon = ({icon, size}) => {
             break;
     }
     return (
-        <Tooltip title={icon}>
+        <Tooltip title={`Tipo: ${icon}`}>
             <img src={imgSrc} alt={imgAlt} style={maxWidth} aria-label={icon} />
         </Tooltip>
     );

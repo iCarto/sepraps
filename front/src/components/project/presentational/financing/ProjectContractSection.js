@@ -46,7 +46,7 @@ const ProjectContractSection = ({contract}) => {
                     <SectionField
                         label="Presupuesto adjudicado:"
                         value={
-                            contract.awarding_budget && contract.awarding_budget + "$"
+                            contract.awarding_budget && contract.awarding_budget + " $"
                         }
                     />
                 </>

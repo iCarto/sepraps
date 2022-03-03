@@ -41,7 +41,7 @@ const ProjectFinancingSection = () => {
             />
             <SectionField
                 label="Presupuesto:"
-                value={project.construction_contract?.awarding_budget}
+                value={project.construction_contract?.awarding_budget + " $"}
             />
         </SectionCard>
     );
