@@ -10,10 +10,19 @@ const Icon = ({icon, size}) => {
             imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
             imgAlt = "Grifo";
             break;
+        case "agua":
+            imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
+            imgAlt = "Grifo";
+            break;
         case "Saneamiento":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
             imgAlt = "Tubería";
             break;
+        case "saneamiento":
+            imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
+            imgAlt = "Tubería";
+            break;
+
         default:
             imgSrc = "https://cdn-icons-png.flaticon.com/512/57/57108.png";
             imgAlt = "Desconocido";
