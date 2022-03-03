@@ -1,19 +1,39 @@
-import {useOutletContext} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
 import {DateUtil} from "utilities";
-import {Icon, SectionCard, SectionField} from "components/common/presentational";
+import {
+    Icon,
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectGeneralDataSection = () => {
+    const navigate = useNavigate();
+
     let project;
     [project] = useOutletContext();
 
     return (
-        <SectionCard>
-            <Grid container columnSpacing={2}>
+        <SectionCard
+            secondaryActions={[
+                <SectionCardHeaderAction
+                    key="edit"
+                    name="edit"
+                    text="Modificar"
+                    icon={<EditIcon />}
+                    onClick={() => {
+                        navigate("generaldata/edit");
+                    }}
+                />,
+            ]}
+        >
+            <Grid container columnSpacing={2} sx={{marginTop: "-48px"}}>
                 <Grid item sm={3} md={4}>
                     <div style={{position: "relative"}}>
                         <CardMedia

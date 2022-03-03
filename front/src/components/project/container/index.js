@@ -12,3 +12,4 @@ export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPane
 export {default as AddProjectPanel} from "./AddProjectPanel";
 export {default as AddProjectProviderPanel} from "./AddProjectProviderPanel";
 export {default as ViewProjectPanel} from "./ViewProjectPanel";
+export {default as UpdateProjectPanel} from "./UpdateProjectPanel";

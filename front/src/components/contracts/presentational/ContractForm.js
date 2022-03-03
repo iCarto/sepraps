@@ -46,8 +46,8 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
     });
 
     const onFormSubmit = data => {
-        console.log("submit", {contract});
-        const updatedProvider = createContract({
+        console.log("submit", {data});
+        const updatedContract = createContract({
             id: data.id,
             number: data.contract_number,
             comments: data.comments,
@@ -67,7 +67,8 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
             execution_final_delivery_date: data.execution_final_delivery_date,
             projects: contract ? contract.projects : [],
         });
-        onSubmit(updatedProvider);
+        onSubmit(updatedContract);
+        console.log({updatedContract});
     };
 
     const handleCancel = () => {
