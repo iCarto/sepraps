@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const PendingFile = ({file, onRemove}) => {
     return (
         <ListItem
-            divider
+            sx={{border: "1px dotted grey", borderRadius: "8px", mb: "6px"}}
             secondaryAction={
                 <IconButton
                     edge="end"

@@ -65,7 +65,7 @@ const ProviderForm = ({provider = null, onSubmit = null, onCancel = null}) => {
                                 <Button
                                     variant="contained"
                                     color="primary"
-                                    sx={{ml: 2}}
+                                    sx={{ml: 3}}
                                     onClick={formMethods.handleSubmit(handleFormSubmit)}
                                 >
                                     Guardar

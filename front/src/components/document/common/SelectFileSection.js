@@ -64,6 +64,11 @@ const SelectFileSection = ({formFilesName, formFileInputName, rules}) => {
         trigger([formFilesName]);
     };
 
+    const handleCancel = () => {
+        const updatedFileList = [];
+        onChange(updatedFileList);
+    };
+
     const fileList = getValues()[formFilesName];
 
     return (
@@ -73,7 +78,7 @@ const SelectFileSection = ({formFilesName, formFileInputName, rules}) => {
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDropFile}
-                    backgroundColor={isDropAreaActive ? "grey.200" : "none"}
+                    backgroundColor={isDropAreaActive ? "none" : "grey.200"}
                     height="200px"
                     sx={{
                         display: "flex",
@@ -129,14 +134,18 @@ const SelectFileSection = ({formFilesName, formFileInputName, rules}) => {
                             })}
                         </List>
                     </Grid>
-                    <Grid item>
+                    <Grid item justifyContent="center">
+                        <Button color="inherit" onClick={handleCancel}>
+                            Cancelar
+                        </Button>
                         <Button
                             type="submit"
                             variant="contained"
                             disabled={errors[formFilesName] != null}
                             startIcon={<UploadIcon />}
+                            sx={{ml: 3}}
                         >
-                            Guardar
+                            Subir
                         </Button>
                     </Grid>
                 </Grid>

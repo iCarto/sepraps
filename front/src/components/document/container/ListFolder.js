@@ -47,15 +47,6 @@ const ListFolder = ({
                 <FolderBreadcrumb path={folderPath} basePath={basePath} />
                 <FolderChangeView />
             </Grid>
-            {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
-            {folderPath.indexOf("/") >= 0 && (
-                <Grid item container xs={12}>
-                    <FileUploadSection
-                        path={folderPath}
-                        onFinishUpload={reloadFolder}
-                    />
-                </Grid>
-            )}
             <Grid item container xs={12}>
                 {loading ? (
                     <Grid item container justifyContent="center" xs={12}>
@@ -74,10 +65,18 @@ const ListFolder = ({
                         folderElements={folderElements}
                         selectedElement={selectedElement}
                         onSelectElement={onSelectElement}
-                        onUpdate={reloadFolder}
                     />
                 )}
             </Grid>
+            {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
+            {folderPath.indexOf("/") >= 0 && (
+                <Grid item container xs={12} mt={8}>
+                    <FileUploadSection
+                        path={folderPath}
+                        onFinishUpload={reloadFolder}
+                    />
+                </Grid>
+            )}
         </Grid>
     );
 };

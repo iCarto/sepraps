@@ -100,7 +100,7 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
                     <Button
                         variant="contained"
                         color="primary"
-                        sx={{ml: 2}}
+                        sx={{ml: 3}}
                         onClick={formMethods.handleSubmit(onFormSubmit)}
                     >
                         Guardar
