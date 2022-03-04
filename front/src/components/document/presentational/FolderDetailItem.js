@@ -34,12 +34,14 @@ const FolderDetailItem = ({
             alignItems="center"
             sx={{
                 p: 2,
-                backgroundColor: selected ? "grey.200" : "inherit",
+                backgroundColor: selected ? "grey.100" : "inherit",
                 borderRadius: 3,
             }}
         >
-            <FolderOutlinedIcon sx={{fontSize: 50}} />
-            <Typography color="primary">{folder.name}</Typography>
+            <FolderOutlinedIcon sx={{fontSize: 50}} color="primary" />
+            <Typography sx={{color: "primary.main", fontWeight: "500"}}>
+                {folder.name}
+            </Typography>
         </Stack>
     );
 };

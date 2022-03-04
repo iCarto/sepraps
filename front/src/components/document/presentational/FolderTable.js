@@ -113,6 +113,14 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                                             component="th"
                                             scope="row"
                                             style={noPointer}
+                                            sx={{
+                                                color: folderElement.content_type
+                                                    ? "inherit"
+                                                    : "primary.main",
+                                                fontWeight: folderElement.content_type
+                                                    ? "inherit"
+                                                    : "500",
+                                            }}
                                         >
                                             {folderElement.name}
                                         </TableCell>
