@@ -12,6 +12,7 @@ const SectionCard = ({title = "", secondaryActions = null, ...props}) => {
                 overflow: "auto",
                 width: "100%",
             }}
+            variant="outlined"
         >
             <CardHeader
                 title={<SectionHeading>{title}</SectionHeading>}

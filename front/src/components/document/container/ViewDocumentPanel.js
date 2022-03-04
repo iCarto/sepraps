@@ -3,13 +3,10 @@ import {useParams} from "react-router-dom";
 import {useCopyToClipboard, useDownloadDocument, useNavigateWithReload} from "hooks";
 import {DocumentService} from "service/api";
 
-import {SidebarPanel} from "layout";
+import {SidebarAction, SidebarPanel} from "layout";
 import {DocumentSection} from "../presentational";
 import {DialogLayout} from "components/common/presentational";
 
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -34,7 +31,7 @@ const ViewDocumentPanel = () => {
     }, [params]);
 
     const downloadDocument = useDownloadDocument();
-    const copytToClipBoard = useCopyToClipboard();
+    const copyToClipBoard = useCopyToClipboard();
 
     const handleDownload = async () => {
         downloadDocument(
@@ -42,12 +39,10 @@ const ViewDocumentPanel = () => {
             folderElement.path,
             folderElement.content_type
         );
-        handleCloseSidebar();
     };
 
     const handleCopyLink = () => {
-        copytToClipBoard(window.location.origin + folderElement.path);
-        handleCloseSidebar();
+        copyToClipBoard(window.location);
     };
 
     const handleDelete = () => {
@@ -72,46 +67,32 @@ const ViewDocumentPanel = () => {
 
     // SIDEBAR ACTIONS TO BE USED IN SIDEBARPANEL WHEN COMMON STRUCTURE IS IMPLEMENTED
     const sidebarActions = [
-        <MenuItem
+        <SidebarAction
             key="copy-link-to-file"
             name="copy link to file"
-            aria-label="Copy link to file"
+            text="Copiar enlace"
+            icon={<LinkIcon />}
             onClick={handleCopyLink}
-        >
-            <ListItemIcon>
-                <LinkIcon />
-            </ListItemIcon>
-            Copiar enlace
-        </MenuItem>,
-        <MenuItem
-            key="remove-Document"
-            name="remove-Document"
-            aria-label="Remove Document"
+        />,
+        <SidebarAction
+            key="remove-document"
+            name="remove-document"
+            text="Eliminar archivo"
+            icon={<DeleteIcon />}
             onClick={handleDeleteDialog}
-        >
-            <ListItemIcon>
-                <DeleteIcon />
-            </ListItemIcon>
-            Eliminar archivo
-        </MenuItem>,
+        />,
     ];
 
     return (
         <SidebarPanel
             sidebarTitle="Detalle del documento"
             closeSidebarClick={handleCloseSidebar}
+            mainActionText="Descargar"
+            mainActionClick={handleDownload}
+            mainActionIcon={<DownloadIcon />}
             sidebarActions={sidebarActions}
         >
             <DocumentSection folderElement={folderElement} />
-            <Button
-                variant="contained"
-                color="primary"
-                sx={{ml: 2}}
-                endIcon={<DownloadIcon />}
-                onClick={handleDownload}
-            >
-                Descargar
-            </Button>
             <DialogLayout
                 dialogLabel="Delete document"
                 dialogTitle="¿Quiere eliminar este archivo?"
