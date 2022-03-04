@@ -78,7 +78,7 @@ const SelectFileSection = ({formFilesName, formFileInputName, rules}) => {
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDropFile}
-                    backgroundColor={isDropAreaActive ? "none" : "grey.200"}
+                    backgroundColor={isDropAreaActive ? "none" : "grey.100"}
                     height="200px"
                     sx={{
                         display: "flex",

@@ -52,7 +52,7 @@ const DocumentDetailItem = ({
             alignItems="center"
             sx={{
                 p: 2,
-                backgroundColor: selected ? "grey.200" : "inherit",
+                backgroundColor: selected ? "grey.100" : "inherit",
                 borderRadius: 3,
             }}
         >
