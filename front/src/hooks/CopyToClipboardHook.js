@@ -1,5 +1,5 @@
 export function useCopyToClipboard() {
-    let copytToClipBoard = textToCopy => {
+    let copyToClipBoard = textToCopy => {
         if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(textToCopy);
         } else {
@@ -12,5 +12,5 @@ export function useCopyToClipboard() {
         }
     };
 
-    return copytToClipBoard;
+    return copyToClipBoard;
 }

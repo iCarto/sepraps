@@ -27,6 +27,7 @@ const SidebarPanel = ({
     sidebarTitle,
     mainActionText = "",
     mainActionClick = null,
+    mainActionIcon = null,
     sidebarActions = null,
     closeSidebarClick,
     children,
@@ -102,7 +103,11 @@ const SidebarPanel = ({
                 </Grid>
                 {mainActionClick && (
                     <Grid container justifyContent="center" mt={2}>
-                        <Button variant="contained" onClick={onMainActionClick}>
+                        <Button
+                            variant="contained"
+                            onClick={onMainActionClick}
+                            startIcon={mainActionIcon ? mainActionIcon : null}
+                        >
                             {mainActionText}
                         </Button>
                     </Grid>

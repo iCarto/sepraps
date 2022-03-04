@@ -3,8 +3,7 @@ import {FileUtil} from "utilities";
 
 const DocumentSection = ({folderElement}) => {
     return (
-        <SectionCard>
-            <SectionField label="Nombre:" value={folderElement?.name} />
+        <SectionCard title={folderElement?.name}>
             <SectionField
                 label="Tamaño del archivo:"
                 value={FileUtil.formatBytes(folderElement?.size)}
