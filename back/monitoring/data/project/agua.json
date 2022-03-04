@@ -20,45 +20,58 @@
     ],
     "milestones": [
         {
-            "category": "funding_allocation"
+            "category": "funding_allocation",
+            "phase": "design"
         },
         {
-            "category": "approval_technical_folder"
+            "category": "approval_technical_folder",
+            "phase": "design"
         },
         {
-            "category": "call_for_tenders_works_contract"
+            "category": "call_for_tenders_works_contract",
+            "phase": "contracting"
         },
         {
-            "category": "award_works_contract"
+            "category": "award_works_contract",
+            "phase": "contracting"
         },
         {
-            "category": "contract_signing"
+            "category": "contract_signing",
+            "phase": "contracting"
         },
         {
-            "category": "start_of_works"
+            "category": "start_of_works",
+            "phase": "execution"
         },
         {
             "category": "technical_validation",
+            "phase": "execution",
             "children": [
                 {
-                    "category": "technical_validation_drilling"
+                    "category": "technical_validation_drilling",
+                    "phase": "execution"
                 },
                 {
-                    "category": "technical_validation_pump_test"
+                    "category": "technical_validation_pump_test",
+                    "phase": "execution"
                 }
             ]
         },
         {
-            "category": "definitive_reception"
+            "category": "definitive_reception",
+            "phase": "execution"
         },
         {
-            "category": "system_delivery"
+            "category": "system_delivery",
+            "phase": "execution"
         },
         {
-            "category": "final_settlement"
+            "category": "final_settlement",
+            "phase": "execution"
         },
         {
-            "category": "end_of_warranty"
+            "category": "end_of_warranty",
+            "phase": "post-execution"
         }
     ]
 }

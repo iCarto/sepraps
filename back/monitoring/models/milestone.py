@@ -24,11 +24,19 @@ CATEGORY_CHOICES = [
     ("end_of_warranty", "Fin del periodo de garantía"),
 ]
 
+PHASE_CHOICES = [
+    ("design", "Diseño"),
+    ("contracting", "Contratación"),
+    ("execution", "Ejecución"),
+    ("post-execution", "Post-construcción"),
+]
+
 
 class Milestone(models.Model):
 
     id = models.AutoField(primary_key=True)
     category = models.CharField("Categoría", max_length=50, choices=CATEGORY_CHOICES)
+    phase = models.CharField("Fase", max_length=50, choices=PHASE_CHOICES)
     compliance_date = models.DateField("Fecha de cumplimiento", blank=True, null=True)
     project = models.ForeignKey(
         Project,
@@ -49,6 +57,9 @@ class Milestone(models.Model):
     def get_category_name(self):
         return dict(CATEGORY_CHOICES).get(self.category, self.category)
 
+    def get_phase_name(self):
+        return dict(PHASE_CHOICES).get(self.phase, self.phase)
+
     def __str__(self):
         return self.value
 
@@ -57,6 +68,7 @@ def create_project_milestones(project, children, parent=None):
     for index, milestone_data in enumerate(children):
         milestone = Milestone(
             category=milestone_data.get("category"),
+            phase=milestone_data.get("phase"),
             project=project,
             parent=parent,
             ordering=index,
