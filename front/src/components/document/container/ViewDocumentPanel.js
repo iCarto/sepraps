@@ -5,11 +5,11 @@ import {DocumentService} from "service/api";
 
 import {SidebarAction, SidebarPanel} from "layout";
 import {DocumentSection} from "../presentational";
-import {DialogLayout} from "components/common/presentational";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {RemoveDocumentDialog} from ".";
 
 const ViewDocumentPanel = () => {
     const navigate = useNavigateWithReload();
@@ -45,23 +45,18 @@ const ViewDocumentPanel = () => {
         copyToClipBoard(window.location);
     };
 
-    const handleDelete = () => {
-        setIsDeleteDialogOpen(false);
-        DocumentService.delete(folderElement.path);
-        handleCloseSidebar();
-    };
-
     const handleDeleteDialog = isOpen => {
         setIsDeleteDialogOpen(isOpen);
     };
 
-    const handleCloseSidebar = () => {
+    const handleCloseSidebar = (refresh = false) => {
         navigate(
             `/projects/${projectId}/documents/` +
                 folderElement.path
                     .split("/")
                     .slice(0, -1)
-                    .join("/")
+                    .join("/"),
+            refresh
         );
     };
 
@@ -77,8 +72,8 @@ const ViewDocumentPanel = () => {
         <SidebarAction
             key="remove-document"
             name="remove-document"
-            text="Eliminar archivo"
-            icon={<DeleteIcon />}
+            text="Eliminar"
+            icon={<DeleteIcon color="error" />}
             onClick={handleDeleteDialog}
         />,
     ];
@@ -93,14 +88,11 @@ const ViewDocumentPanel = () => {
             sidebarActions={sidebarActions}
         >
             <DocumentSection folderElement={folderElement} />
-            <DialogLayout
-                dialogLabel="Delete document"
-                dialogTitle="¿Quiere eliminar este archivo?"
-                dialogContentText="Si hace clic en Eliminar, el archivo se eliminará y no se podrá recuperar."
-                mainActionClick={handleDelete}
-                mainActionText="Eliminar"
-                handleDialog={handleDeleteDialog}
+            <RemoveDocumentDialog
+                folderElement={folderElement}
+                onDeletedFolderElement={() => handleCloseSidebar(true)}
                 isDialogOpen={isDeleteDialogOpen}
+                setIsDialogOpen={setIsDeleteDialogOpen}
             />
         </SidebarPanel>
     );
