@@ -8,6 +8,9 @@ class MediaNodeSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         lookup_field="media_path", view_name="media-view"
     )
+    creation_user = serializers.CharField(
+        source="creation_user.username", required=False
+    )
     children = serializers.SerializerMethodField()
 
     class Meta(object):
@@ -22,6 +25,8 @@ class MediaNodeSerializer(serializers.ModelSerializer):
             "media_path",
             "storage_path",
             "parent",
+            "creation_user",
+            "created_at",
             "children",
         )
         extra_kwargs = {
@@ -45,4 +50,6 @@ class MediaLeafNodeSerializer(MediaNodeSerializer):
             "media_content_type",
             "media_size",
             "media_path",
+            "creation_user",
+            "created_at",
         )

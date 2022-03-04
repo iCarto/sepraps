@@ -16,6 +16,9 @@ const FileUtil = {
     },
 
     formatBytes(bytes, decimals = 2) {
+        if (!bytes) {
+            return "";
+        }
         if (bytes === 0) return "0 Bytes";
         const k = 1024;
         const dm = decimals < 0 ? 0 : decimals;
