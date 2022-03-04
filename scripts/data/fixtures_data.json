@@ -312,7 +312,7 @@
         "pk": 1,
         "fields": {
             "name": "Nueva Esperanza - Iguazú",
-            "code": "2021-AP-001",
+            "code": "2022-AP-001",
             "project_type": "agua",
             "project_class": "mejora",
             "init_date": "2021-08-10",
@@ -333,7 +333,7 @@
         "pk": 2,
         "fields": {
             "name": "Cristo Rey - Minga Guazú",
-            "code": "2021-AP-002",
+            "code": "2022-AP-002",
             "project_type": "agua",
             "project_class": "ampliacion",
             "init_date": "2020-08-10",

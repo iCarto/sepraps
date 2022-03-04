@@ -1,5 +1,4 @@
-import json
-
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -21,6 +20,8 @@ class MediaNode(models.Model):
     parent = models.ForeignKey(
         "self", on_delete=models.CASCADE, blank=True, null=True, related_name="children"
     )
+    creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
+    created_at = models.DateTimeField("Fecha de creación", null=True, auto_now_add=True)
 
     class Meta:
         db_table = "media_node"
@@ -70,6 +71,7 @@ def create_folder_children(folder_parent, children):
             + PATH_SEPARATOR
             + folder_child_data.get("name"),
             parent=folder_parent,
+            creation_user=get_user_model().objects.get(username="admin"),
         )
         folder_child.save()
 
@@ -78,7 +80,10 @@ def create_folder_children(folder_parent, children):
 
 def create_folder_structure(root_path, children_data):
     root_folder = Folder(
-        media_type="FOLDER", media_name=root_path, storage_path=root_path
+        media_type="FOLDER",
+        media_name=root_path,
+        storage_path=root_path,
+        creation_user=get_user_model().objects.get(username="admin"),
     )
     root_folder.save()
 

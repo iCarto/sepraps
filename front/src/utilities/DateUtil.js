@@ -18,12 +18,21 @@ const DateUtil = {
         return format(date, dateFormat);
     },
     formatDateMonth(date, dateFormat = DATE_FORMATS.CLIENT_DATEMONTHFORMAT) {
+        if (!date) {
+            return "";
+        }
         return format(date, dateFormat);
     },
     formatDateTime(date, dateFormat = DATE_FORMATS.CLIENT_DATETIMEFORMAT) {
+        if (!date) {
+            return "";
+        }
         return format(date, dateFormat);
     },
     formatTime(date) {
+        if (!date) {
+            return "";
+        }
         return format(date, DATE_FORMATS.CLIENT_TIMEFORMAT);
     },
     formatHoursAndMinutes(millis) {

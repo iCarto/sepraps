@@ -5,6 +5,7 @@ const document_api_adapter = document => {
     document["content_type"] = document.media_content_type;
     document["size"] = document.media_size;
     document["path"] = document.media_path;
+    document["created_at"] = new Date(document["created_at"]);
     return document;
 };
 
@@ -22,6 +23,8 @@ const createDocument = ({
     size = null,
     path = "",
     url = "",
+    creation_user = "",
+    created_at = null,
 } = {}) => {
     const publicApi = {
         id,
@@ -30,6 +33,8 @@ const createDocument = ({
         path,
         size,
         url,
+        creation_user,
+        created_at,
     };
 
     return Object.freeze(publicApi);

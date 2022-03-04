@@ -1,5 +1,5 @@
 import {SectionCard, SectionField} from "components/common/presentational";
-import {FileUtil} from "utilities";
+import {DateUtil, FileUtil} from "utilities";
 
 const DocumentSection = ({folderElement}) => {
     return (
@@ -12,8 +12,11 @@ const DocumentSection = ({folderElement}) => {
                 label="Tipo de archivo:"
                 value={folderElement?.content_type}
             />
-            <SectionField label="Fecha de subida:" value="01/01/01" />
-            <SectionField label="Subido por:" value="Usuaria" />
+            <SectionField
+                label="Fecha de subida:"
+                value={DateUtil.formatDateTime(folderElement?.created_at)}
+            />
+            <SectionField label="Subido por:" value={folderElement?.creation_user} />
         </SectionCard>
     );
 };
