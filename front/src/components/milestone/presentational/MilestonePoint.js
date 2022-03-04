@@ -2,15 +2,30 @@ import {Fragment} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {DateUtil} from "utilities";
 
-import Chip from "@mui/material/Chip";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CircleIcon from "@mui/icons-material/Circle";
+import PendingIcon from "@mui/icons-material/Pending";
 import Typography from "@mui/material/Typography";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import {useColorMilestone} from "../hooks";
 
-const MilestonePoint = ({milestone, level, isActiveMilestone = false}) => {
+const MilestonePoint = ({
+    milestone,
+    level,
+    isFirst,
+    isLast,
+    isActiveMilestone = false,
+}) => {
     const navigate = useNavigate();
+    const getMilestoneColor = useColorMilestone();
     let project;
     [project] = useOutletContext();
 
@@ -22,43 +37,65 @@ const MilestonePoint = ({milestone, level, isActiveMilestone = false}) => {
         }
     };
 
+    const getTimelineDot = () => {
+        const color = getMilestoneColor(milestone.category);
+        if (isActiveMilestone) {
+            return (
+                <TimelineDot variant="outlined">
+                    <PendingIcon sx={{color: color}} />
+                </TimelineDot>
+            );
+        } else if (milestone.compliance_date) {
+            return (
+                <TimelineDot sx={{backgroundColor: color}}>
+                    <CheckCircleIcon />
+                </TimelineDot>
+            );
+        }
+        return (
+            <TimelineDot variant="outlined">
+                <CircleIcon color="disabled" />
+            </TimelineDot>
+        );
+    };
+
+    const isDisabled = () => {
+        return (
+            milestone.category !== project.active_milestone.category &&
+            milestone.compliance_date === null
+        );
+    };
+
     return (
-        <Grid
-            container
-            key={milestone.category}
-            alignItems="center"
-            spacing={2}
-            justifyContent="space-between"
+        <TimelineItem
+            onClick={() => {
+                if (!isDisabled()) {
+                    handleClick();
+                }
+            }}
+            sx={{
+                cursor: !isDisabled() ? "pointer" : "inherit",
+            }}
         >
-            <Grid item>
-                <Chip
-                    sx={{ml: level * 6}}
-                    label={milestone.category_name}
-                    color={
-                        milestone.compliance_date || isActiveMilestone
-                            ? "primary"
-                            : "default"
-                    }
-                    variant={!milestone.compliance_date ? "outlined" : "filled"}
-                    icon={milestone.compliance_date ? <CheckCircleIcon /> : null}
-                    onClick={handleClick}
-                    disabled={!milestone.compliance_date && !isActiveMilestone}
-                />
-            </Grid>
-            {milestone.compliance_date && (
-                <Fragment>
-                    <Grid item xs>
-                        <Divider />
-                    </Grid>
-                    <Grid item xs={3} container alignItems="center">
-                        <EventAvailableIcon fontSize="small" />
-                        <Typography component="span" size="small" sx={{ml: 1}}>
-                            {DateUtil.formatDate(milestone.compliance_date)}
-                        </Typography>
-                    </Grid>
-                </Fragment>
-            )}
-        </Grid>
+            <TimelineOppositeContent
+                sx={{m: "auto 0", flex: 0.25}}
+                align="right"
+                variant="body2"
+                color="text.secondary"
+            >
+                {DateUtil.formatDate(milestone.compliance_date)}
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+                {!isFirst && <TimelineConnector />}
+                {getTimelineDot()}
+                {!isLast && <TimelineConnector />}
+            </TimelineSeparator>
+            <TimelineContent sx={{m: "auto 0"}}>
+                <Typography color={isDisabled() ? "grey.500" : "inherit"}>
+                    {milestone.category_name}
+                </Typography>
+            </TimelineContent>
+        </TimelineItem>
     );
 };
 

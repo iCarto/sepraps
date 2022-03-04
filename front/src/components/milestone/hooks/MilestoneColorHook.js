@@ -1,9 +1,9 @@
 const phaseColors = {
     other: "#ff0a0a",
-    design: "#f2ce02",
-    contracting: "#ebff0a",
-    execution: "#85e62c",
-    "post-execution": "#209c05",
+    design: "#ff9800",
+    contracting: "#ffeb3b",
+    execution: "#cddc39",
+    "post-execution": "#8bc34a",
 };
 
 export function useColorMilestone() {
