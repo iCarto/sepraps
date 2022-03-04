@@ -35,13 +35,7 @@ const headCells = [
     },
 ];
 
-const FolderTable = ({
-    basePath,
-    folderElements,
-    selectedElement,
-    onSelectElement,
-    onUpdate,
-}) => {
+const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement}) => {
     const navigate = useNavigate();
     const downloadDocument = useDownloadDocument();
 
@@ -103,7 +97,16 @@ const FolderTable = ({
                                 <TableCell>
                                     <FolderElementIcon element={folderElement} />
                                 </TableCell>
-                                <TableCell component="th" scope="row" style={noPointer}>
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    style={noPointer}
+                                    sx={{
+                                        color: folderElement.content_type
+                                            ? "inherit"
+                                            : "primary.main",
+                                    }}
+                                >
                                     {folderElement.name}
                                 </TableCell>
                                 <TableCell style={noPointer}>
@@ -112,13 +115,6 @@ const FolderTable = ({
                                 <TableCell style={noPointer}>
                                     {folderElement.size &&
                                         FileUtil.formatBytes(folderElement.size)}
-                                </TableCell>
-                                <TableCell>
-                                    <FolderTableRowMenu
-                                        folderElement={folderElement}
-                                        basePath={basePath}
-                                        onUpdate={onUpdate}
-                                    />
                                 </TableCell>
                             </TableRow>
                         );

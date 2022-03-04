@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
-import {useParams, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {DocumentService} from "service/api";
-import {useNavigateWithReload} from "hooks";
 
 import {useFolderView} from "../provider";
 import {
@@ -11,68 +10,50 @@ import {
     FolderTable,
 } from "../presentational";
 import {FileUploadSection} from "../common";
+
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const ListFolder = ({path}) => {
-    const {id: projectId} = useParams();
+const ListFolder = ({
+    folderPath,
+    basePath,
+    selectedElement = null,
+    onSelectElement = null,
+}) => {
     const location = useLocation();
-
-    const navigate = useNavigateWithReload();
-
-    const basePath = `/projects/${projectId}/documents/`;
 
     const {view} = useFolderView();
 
     const [folderElements, setFolderElements] = useState([]);
-    const [selectedElement, setSelectedElement] = useState(null);
-
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        DocumentService.get(path).then(element => {
-            if (element.content_type) {
-                setSelectedElement(element);
-                const folderPath = element.path
-                    .split("/")
-                    .slice(0, -1)
-                    .join("/");
-                DocumentService.get(folderPath).then(folder => {
-                    setFolderElements(folder.children);
-                    setLoading(false);
-                });
-            } else {
-                setFolderElements(element.children);
-                setLoading(false);
-            }
+        DocumentService.get(folderPath).then(element => {
+            setFolderElements(element.children);
+            setLoading(false);
         });
-    }, [path, location.state?.lastRefreshDate]);
+    }, [folderPath, location.state?.lastRefreshDate]);
 
     const reloadFolder = file => {
-        console.log("reloadFolder", {file});
-        DocumentService.get(path).then(folder => {
+        DocumentService.get(folderPath).then(folder => {
             setFolderElements(folder.children);
         });
-    };
-
-    const onSelectElement = folderElement => {
-        setSelectedElement(folderElement);
-        if (folderElement.content_type) {
-            navigate(basePath + "detail/" + folderElement.path);
-        }
     };
 
     return (
         <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
             <Grid item container justifyContent="space-between" xs={12}>
-                <FolderBreadcrumb path={path} basePath={basePath} />
+                <FolderBreadcrumb path={folderPath} basePath={basePath} />
                 <FolderChangeView />
             </Grid>
             {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
-            {path.indexOf("/") >= 0 && (
+            {folderPath.indexOf("/") >= 0 && (
                 <Grid item container xs={12}>
-                    <FileUploadSection path={path} onFinishUpload={reloadFolder} />
+                    <FileUploadSection
+                        path={folderPath}
+                        onFinishUpload={reloadFolder}
+                    />
                 </Grid>
             )}
             <Grid item container xs={12}>

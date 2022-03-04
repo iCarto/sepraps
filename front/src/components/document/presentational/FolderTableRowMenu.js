@@ -14,6 +14,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import FolderZipIcon from "@mui/icons-material/FolderZip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LinkIcon from "@mui/icons-material/Link";
+import {RemoveDocumentDialog} from "../container";
 
 const FolderTableRowMenu = ({folderElement, basePath, onUpdate}) => {
     const downloadDocument = useDownloadDocument();
@@ -44,18 +45,6 @@ const FolderTableRowMenu = ({folderElement, basePath, onUpdate}) => {
     const handleCopyLink = () => {
         copytToClipBoard(window.location.origin + basePath + folderElement.path);
         handleClose();
-    };
-
-    const handleDelete = () => {
-        setIsDeleteDialogOpen(false);
-        DocumentService.delete(folderElement.path).then(() => {
-            onUpdate();
-        });
-        handleClose();
-    };
-
-    const handleDeleteDialog = isOpen => {
-        setIsDeleteDialogOpen(isOpen);
     };
 
     return (
@@ -105,14 +94,14 @@ const FolderTableRowMenu = ({folderElement, basePath, onUpdate}) => {
                     <ListItemText>Eliminar</ListItemText>
                 </MenuItem>
             </Menu>
-            <DialogLayout
-                dialogLabel="Eliminar documento"
-                dialogTitle="¿Quiere eliminar este documento?"
-                dialogContentText="Si hace clic en Eliminar, el documento se eliminará definitivamente del sistema."
-                mainActionClick={handleDelete}
-                mainActionText="Eliminar"
-                handleDialog={handleDeleteDialog}
+            <RemoveDocumentDialog
+                folderElement={folderElement}
+                onDeletedFolderElement={() => {
+                    onUpdate();
+                    handleClose();
+                }}
                 isDialogOpen={isDeleteDialogOpen}
+                setIsDialogOpen={setIsDeleteDialogOpen}
             />
         </div>
     );

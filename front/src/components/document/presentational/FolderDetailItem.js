@@ -39,7 +39,7 @@ const FolderDetailItem = ({
             }}
         >
             <FolderOutlinedIcon sx={{fontSize: 50}} />
-            <Typography>{folder.name}</Typography>
+            <Typography color="primary">{folder.name}</Typography>
         </Stack>
     );
 };
