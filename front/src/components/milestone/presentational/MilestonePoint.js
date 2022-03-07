@@ -10,17 +10,16 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import styled from "@mui/material/styles/styled";
 
-const MilestoneTimelineDot = styled(TimelineDot)(
-    ({milestone, current = false, disabled = false, theme}) => ({
-        width: "35px",
-        height: "35px",
-        backgroundColor:
-            !disabled && !current ? theme.palette[milestone.phase].main : "inherit",
-        border:
-            "2px solid " +
-            (!disabled ? theme.palette[milestone.phase].dark : "inherit"),
-    })
-);
+const MilestoneTimelineDot = styled(TimelineDot, {
+    shouldForwardProp: prop => prop !== "current",
+})(({milestone, current = false, disabled = false, theme}) => ({
+    width: "35px",
+    height: "35px",
+    backgroundColor:
+        !disabled && !current ? theme.palette[milestone.phase].main : "inherit",
+    border:
+        "2px solid " + (!disabled ? theme.palette[milestone.phase].dark : "inherit"),
+}));
 
 const MilestonePoint = ({
     milestone,

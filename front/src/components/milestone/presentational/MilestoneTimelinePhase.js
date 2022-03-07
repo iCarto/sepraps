@@ -1,4 +1,5 @@
 import styled from "@mui/material/styles/styled";
+import {MilestoneTimelineItem} from ".";
 
 const TimelinePhase = styled("li")(({phase, theme}) => ({
     display: "grid",
@@ -27,32 +28,23 @@ const TimelineBase = styled("ul")(({phase, theme}) => ({
     backgroundColor: `${theme.palette[phase].dark}`,
 }));
 
-const MilestoneTimelinePhase = ({phase = "", milestones}) => {
-    let phaseName;
-
-    switch (`${phase}`) {
-        case "design":
-            phaseName = "Diseño";
-            break;
-        case "contracting":
-            phaseName = "Contratación";
-            break;
-        case "execution":
-            phaseName = "Ejecución";
-            break;
-        case "post-execution":
-            phaseName = "Post-construcción";
-            break;
-
-        default:
-            break;
-    }
-
+const MilestoneTimelinePhase = ({phase}) => {
     return (
         <>
-            <TimelinePhase phase={phase}>
-                <TimelinePhaseName phase={phase}>{phaseName}</TimelinePhaseName>
-                <TimelineBase phase={phase}>{milestones}</TimelineBase>
+            <TimelinePhase phase={phase.code}>
+                <TimelinePhaseName phase={phase.code}>{phase.name}</TimelinePhaseName>
+                <TimelineBase phase={phase.code}>
+                    {phase.milestones.map(milestone => {
+                        return (
+                            <MilestoneTimelineItem
+                                key={milestone.category}
+                                phase={phase.code}
+                                categoryName={milestone.category_name}
+                                completionDate={milestone.compliance_date}
+                            />
+                        );
+                    })}
+                </TimelineBase>
             </TimelinePhase>
         </>
     );

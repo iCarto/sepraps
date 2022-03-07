@@ -6,7 +6,6 @@ import {ProjectService} from "service/api";
 import {SubPageLayout} from "layout";
 import {SectionCard} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
-import {useColorMilestone} from "components/milestone/hooks";
 import {MilestonePhase} from "components/milestone/presentational";
 
 const ViewProjectMilestonesSubPage = () => {
@@ -15,37 +14,25 @@ const ViewProjectMilestonesSubPage = () => {
     let project;
     [project] = useOutletContext();
 
-    const [milestones, setMilestones] = useState([]);
+    const [milestonesPhases, setMilestonesPhases] = useState([]);
 
     useEffect(() => {
-        ProjectService.getProjectMilestones(id).then(milestones => {
-            setMilestones(milestones);
+        ProjectService.getProjectMilestones(id).then(milestonesPhases => {
+            setMilestonesPhases(milestonesPhases);
         });
     }, [id, location.state?.lastRefreshDate]);
 
-    let phases = [];
-    milestones.forEach(milestone => {
-        let phase = phases.find(phase => phase.code === milestone["phase"]);
-        if (!phase) {
-            phase = {
-                code: milestone["phase"],
-                name: milestone["phase_name"],
-                milestones: [],
-            };
-            phases.push(phase);
-        }
-        phase.milestones.push(milestone);
-    });
-    console.log({phases});
+    console.log({milestonesPhases});
 
     return (
         <SubPageLayout outletContext={[project]}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <SectionCard title="Hitos del proyecto">
-                        {phases.map(phase => {
+                        {milestonesPhases.map(phase => {
                             return (
                                 <MilestonePhase
+                                    key={phase.code}
                                     phase={phase}
                                     activeMilestone={project.active_milestone}
                                 />
