@@ -6,7 +6,7 @@ import {Timeline} from "@mui/lab";
 
 const MilestonePath = ({milestones, level, activeMilestone}) => {
     return (
-        <Timeline sx={{ml: level * 5}}>
+        <Timeline sx={{ml: level * 0.5}}>
             {milestones.map((milestone, index) => {
                 if (milestone.children.length) {
                     return (

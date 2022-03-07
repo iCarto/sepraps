@@ -1,4 +1,4 @@
-import {styled} from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";

@@ -1,21 +1,26 @@
-import {Fragment} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {DateUtil} from "utilities";
 
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CircleIcon from "@mui/icons-material/Circle";
-import PendingIcon from "@mui/icons-material/Pending";
 import Typography from "@mui/material/Typography";
-import EventAvailableIcon from "@mui/icons-material/EventAvailable";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
-import {useColorMilestone} from "../hooks";
+import styled from "@mui/material/styles/styled";
+
+const MilestoneTimelineDot = styled(TimelineDot)(
+    ({milestone, current = false, disabled = false, theme}) => ({
+        width: "35px",
+        height: "35px",
+        backgroundColor:
+            !disabled && !current ? theme.palette[milestone.phase].main : "inherit",
+        border:
+            "2px solid " +
+            (!disabled ? theme.palette[milestone.phase].dark : "inherit"),
+    })
+);
 
 const MilestonePoint = ({
     milestone,
@@ -25,7 +30,6 @@ const MilestonePoint = ({
     isActiveMilestone = false,
 }) => {
     const navigate = useNavigate();
-    const getMilestoneColor = useColorMilestone();
     let project;
     [project] = useOutletContext();
 
@@ -38,24 +42,24 @@ const MilestonePoint = ({
     };
 
     const getTimelineDot = () => {
-        const color = getMilestoneColor(milestone.category);
+        console.log("milestone.phase", milestone.phase);
         if (isActiveMilestone) {
             return (
-                <TimelineDot variant="outlined">
-                    <PendingIcon sx={{color: color}} />
-                </TimelineDot>
+                <MilestoneTimelineDot
+                    variant="outlined"
+                    milestone={milestone}
+                    current={true}
+                ></MilestoneTimelineDot>
             );
         } else if (milestone.compliance_date) {
-            return (
-                <TimelineDot sx={{backgroundColor: color}}>
-                    <CheckCircleIcon />
-                </TimelineDot>
-            );
+            return <MilestoneTimelineDot milestone={milestone}></MilestoneTimelineDot>;
         }
         return (
-            <TimelineDot variant="outlined">
-                <CircleIcon color="disabled" />
-            </TimelineDot>
+            <MilestoneTimelineDot
+                variant="outlined"
+                milestone={milestone}
+                disabled={true}
+            ></MilestoneTimelineDot>
         );
     };
 

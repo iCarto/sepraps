@@ -16,14 +16,14 @@ const customTheme = createTheme({
             contrastText: "#fff",
         },
         // COLORS FOR PROJECT PHASES
-        phaseOne: {
+        design: {
             // ORANGE
             main: "#ff9800",
             light: "#ffefc2",
             lighter: "#ffefc2",
             dark: "#b26a00",
         },
-        phaseTwo: {
+        contracting: {
             // YELLOW
             main: "#fdd835",
             light: "#fff391",
@@ -31,7 +31,7 @@ const customTheme = createTheme({
 
             dark: "#b2a429",
         },
-        phaseThree: {
+        execution: {
             // LIME
             main: "#c0ca33",
             light: "#e3eb90",
@@ -39,7 +39,7 @@ const customTheme = createTheme({
 
             dark: "#8f9a27",
         },
-        phaseFour: {
+        "post-execution": {
             // GREEN
             main: "#8bc34a",
             light: "#bedd9a",

@@ -1,6 +1,6 @@
 import {usePhaseMilestone} from "../hooks";
 
-import {styled} from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
 import {MilestoneTimelinePhase, MilestoneTimelineItem} from ".";
 
 const TimelineContainer = styled("ul")(({theme}) => ({
@@ -34,24 +34,24 @@ const MilestoneTimeline = ({milestones}) => {
         );
     });
 
-    const phaseOneMilestones = [];
-    const phaseTwoMilestones = [];
-    const phaseThreeMilestones = [];
-    const phaseFourMilestones = [];
+    const designMilestones = [];
+    const contractingMilestones = [];
+    const executionMilestones = [];
+    const postExecutionMilestones = [];
 
     allPhaseMilestones.map(milestone => {
         switch (milestone.props.phase) {
-            case "phaseOne":
-                phaseOneMilestones.push(milestone);
+            case "design":
+                designMilestones.push(milestone);
                 break;
-            case "phaseTwo":
-                phaseTwoMilestones.push(milestone);
+            case "contracting":
+                contractingMilestones.push(milestone);
                 break;
-            case "phaseThree":
-                phaseThreeMilestones.push(milestone);
+            case "execution":
+                executionMilestones.push(milestone);
                 break;
-            case "phaseFour":
-                phaseFourMilestones.push(milestone);
+            case "post-execution":
+                postExecutionMilestones.push(milestone);
                 break;
             default:
                 break;
@@ -60,15 +60,18 @@ const MilestoneTimeline = ({milestones}) => {
 
     return (
         <TimelineContainer>
-            <MilestoneTimelinePhase phase="phaseOne" milestones={phaseOneMilestones} />
-            <MilestoneTimelinePhase phase="phaseTwo" milestones={phaseTwoMilestones} />
+            <MilestoneTimelinePhase phase="design" milestones={designMilestones} />
             <MilestoneTimelinePhase
-                phase="phaseThree"
-                milestones={phaseThreeMilestones}
+                phase="contracting"
+                milestones={contractingMilestones}
             />
             <MilestoneTimelinePhase
-                phase="phaseFour"
-                milestones={phaseFourMilestones}
+                phase="execution"
+                milestones={executionMilestones}
+            />
+            <MilestoneTimelinePhase
+                phase="post-execution"
+                milestones={postExecutionMilestones}
             />
         </TimelineContainer>
     );

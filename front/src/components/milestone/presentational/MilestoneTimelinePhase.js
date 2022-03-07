@@ -1,4 +1,4 @@
-import {styled} from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
 
 const TimelinePhase = styled("li")(({phase, theme}) => ({
     display: "grid",
@@ -6,45 +6,41 @@ const TimelinePhase = styled("li")(({phase, theme}) => ({
     position: "relative",
     alignItems: "center",
     height: "40px",
-    background: `${theme.palette[phase].light}`,
     padding: "10px 0",
-    borderTop: `2px solid ${theme.palette[phase].lighter}`,
-    borderBottom: `2px solid ${theme.palette[phase].lighter}`,
 }));
 
-const TimelinePhaseName = styled("span")(() => ({
+const TimelinePhaseName = styled("span")(({phase, theme}) => ({
     position: "absolute",
     bottom: "40px",
     fontSize: "12px",
     lineHeight: "1",
     paddingLeft: "3px",
-    color: "grey",
+    color: `${theme.palette[phase].dark}`,
     textTransform: "uppercase",
 }));
 
-const TimelineBase = styled("ul")(() => ({
+const TimelineBase = styled("ul")(({phase, theme}) => ({
     display: "flex",
-    flexWrap: "wrap",
     padding: 0,
-    height: "10px",
+    height: "2px",
     listStyle: "none",
-    background: "#e0e0e0",
+    backgroundColor: `${theme.palette[phase].dark}`,
 }));
 
 const MilestoneTimelinePhase = ({phase = "", milestones}) => {
     let phaseName;
 
     switch (`${phase}`) {
-        case "phaseOne":
+        case "design":
             phaseName = "Diseño";
             break;
-        case "phaseTwo":
+        case "contracting":
             phaseName = "Contratación";
             break;
-        case "phaseThree":
+        case "execution":
             phaseName = "Ejecución";
             break;
-        case "phaseFour":
+        case "post-execution":
             phaseName = "Post-construcción";
             break;
 
@@ -55,8 +51,8 @@ const MilestoneTimelinePhase = ({phase = "", milestones}) => {
     return (
         <>
             <TimelinePhase phase={phase}>
-                <TimelinePhaseName>{phaseName}</TimelinePhaseName>
-                <TimelineBase>{milestones}</TimelineBase>
+                <TimelinePhaseName phase={phase}>{phaseName}</TimelinePhaseName>
+                <TimelineBase phase={phase}>{milestones}</TimelineBase>
             </TimelinePhase>
         </>
     );
