@@ -1,7 +1,7 @@
 export function usePhaseMilestone() {
     let getMilestonePhase = (milestone = null) => {
         if (["funding_allocation", "approval_technical_folder"].includes(milestone)) {
-            return "phaseOne";
+            return "design";
         }
         if (
             [
@@ -10,7 +10,7 @@ export function usePhaseMilestone() {
                 "contract_signing",
             ].includes(milestone)
         ) {
-            return "phaseTwo";
+            return "contracting";
         }
         if (
             [
@@ -21,10 +21,10 @@ export function usePhaseMilestone() {
                 "final_settlement",
             ].includes(milestone)
         ) {
-            return "phaseThree";
+            return "execution";
         }
         if (["end_of_warranty"].includes(milestone)) {
-            return "phaseFour";
+            return "post-execution";
         }
         return "other";
     };

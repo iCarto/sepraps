@@ -1,4 +1,4 @@
-import {styled} from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
 import Tooltip, {tooltipClasses} from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
