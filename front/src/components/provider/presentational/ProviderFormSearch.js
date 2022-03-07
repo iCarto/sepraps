@@ -5,10 +5,17 @@ import {ProviderSearchAutocomplete, ProviderSummary} from "./";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ProviderFormSearch = ({onSelect = null, onCancel = null}) => {
+const ProviderFormSearch = ({
+    onClickSelected = null,
+    onSelect = null,
+    onCancel = null,
+}) => {
     const [existingProvider, setExistingProvider] = useState(null);
 
     const handleSelectExistingProvider = provider => {
+        if (onClickSelected) {
+            onClickSelected(provider);
+        }
         setExistingProvider(provider);
     };
 
