@@ -7,6 +7,8 @@ import {
     milestones_api_adapter,
     createContacts,
     contacts_api_adapter,
+    createPhases,
+    phases_api_adapter,
 } from "model";
 import AuthApiService from "./AuthApiService";
 
@@ -48,8 +50,21 @@ const ProjectService = {
 
     getProjectMilestones(id) {
         return AuthApiService.get(basePath + "/" + id + "/milestones").then(
-            response => {
-                return createMilestones(milestones_api_adapter(response));
+            milestones => {
+                let phases = [];
+                milestones.forEach(milestone => {
+                    let phase = phases.find(phase => phase.code === milestone["phase"]);
+                    if (!phase) {
+                        phase = {
+                            code: milestone["phase"],
+                            name: milestone["phase_name"],
+                            milestones: [],
+                        };
+                        phases.push(phase);
+                    }
+                    phase.milestones.push(milestone);
+                });
+                return createPhases(phases_api_adapter(phases));
             }
         );
     },

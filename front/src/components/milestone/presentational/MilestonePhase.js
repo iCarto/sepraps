@@ -11,15 +11,13 @@ const MilestonePhaseText = styled(Typography)(({code, theme}) => ({
 }));
 
 const MilestonePhaseDivider = styled(Divider)(({code, theme}) => ({
-    backgroundColor: theme.palette[code].dark,
+    backgroundColor: theme.palette[code].main,
 }));
 
 const MilestonePhase = ({phase, activeMilestone}) => {
     return (
         <Box key={phase.code}>
-            <MilestonePhaseText sx={{}} code={phase.code}>
-                {phase.name}
-            </MilestonePhaseText>
+            <MilestonePhaseText code={phase.code}>{phase.name}</MilestonePhaseText>
             <MilestonePhaseDivider code={phase.code} />
             <MilestonePath
                 milestones={phase.milestones}
