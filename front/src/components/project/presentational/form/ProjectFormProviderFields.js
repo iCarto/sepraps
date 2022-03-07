@@ -76,7 +76,9 @@ const ProjectFormProviderFields = () => {
                 {selectedOption === "new" ? (
                     <ProviderFormFields />
                 ) : (
-                    <ProviderFormSearch onSelect={handleSelectExistingProvider} />
+                    <ProviderFormSearch
+                        onClickSelected={handleSelectExistingProvider}
+                    />
                 )}
             </Grid>
         </Grid>

@@ -40,9 +40,9 @@ const ProjectForm = ({onSubmit, section = null}) => {
         provider_name: project?.provider.name || "",
         provider_area: project?.provider.area || "",
         provider_location: {
-            department: project?.provider.department || "",
-            district: project?.provider.district || "",
-            locality: project?.provider.locality || "",
+            department: project?.provider.locality.department || "",
+            district: project?.provider.locality.district || "",
+            locality: project?.provider.locality.code || "",
         },
         main_infrastructure_location: {
             department: project?.main_infrastructure.locality.department || "",
@@ -87,7 +87,11 @@ const ProjectForm = ({onSubmit, section = null}) => {
                 id: data.provider_id,
                 name: data.provider_name,
                 area: data.provider_area,
-                locality: data.provider_location.locality,
+                locality: createLocality({
+                    code: data.provider_location.locality,
+                    district: data.provider_location.district,
+                    department: data.provider_location.department,
+                }),
             }),
             main_infrastructure: createInfrastructure({
                 locality: createLocality({
