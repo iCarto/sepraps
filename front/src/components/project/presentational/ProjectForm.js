@@ -124,7 +124,7 @@ const ProjectForm = ({onSubmit, section = null}) => {
                     <Box component="form" width="100%">
                         {!section && <ProjectFormStepper onSubmit={onFormSubmit} />}
                         {section === "generaldata" && <ProjectFormGeneralDataFields />}
-                        {section === "location" && (
+                        {section === "main_infrastructure" && (
                             <ProjectFormLocationFields isMapDisplayed={false} />
                         )}
                         {section === "financing" && (

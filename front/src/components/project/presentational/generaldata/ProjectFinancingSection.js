@@ -25,15 +25,6 @@ const ProjectFinancingSection = () => {
                 navigate(`financing`);
             }}
         />,
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar financiador"
-            icon={<EditIcon />}
-            onClick={() => {
-                navigate("financing/edit");
-            }}
-        />,
     ];
 
     return (

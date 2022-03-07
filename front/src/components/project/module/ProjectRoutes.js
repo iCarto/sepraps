@@ -12,6 +12,8 @@ import {
     ViewProjectDocumentsSubPage,
     AddProjectProviderPanel,
     UpdateProjectPanel,
+    UpdateProjectMainInfrastructurePanel,
+    UpdateProjectFinancingPanel,
 } from "components/project/container";
 import {UpdateProjectProviderContactPanel} from "components/provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "components/milestone/container";
@@ -24,7 +26,7 @@ const projectRoutes = [
         <Route key="project-info" path="" element={<ViewProjectSummarySubPage />}>
             <Route
                 key="project-general-data"
-                path=":section/edit"
+                path="edit"
                 element={<UpdateProjectPanel />}
             />
         </Route>
@@ -53,6 +55,11 @@ const projectRoutes = [
                 path="provider/contact/:contactId/:action"
                 element={<UpdateProjectProviderContactPanel />}
             />
+            <Route
+                key="project-general-data"
+                path="main_infrastructure/edit"
+                element={<UpdateProjectMainInfrastructurePanel />}
+            />
         </Route>
         <Route
             key="project-financing"
@@ -63,6 +70,11 @@ const projectRoutes = [
                 key="project-contract-update"
                 path="contract/:contractId/:action"
                 element={<AddProjectContractPanel />}
+            />
+            <Route
+                key="project-general-data"
+                path="edit"
+                element={<UpdateProjectFinancingPanel />}
             />
         </Route>
         <Route

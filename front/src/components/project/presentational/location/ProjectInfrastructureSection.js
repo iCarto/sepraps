@@ -1,14 +1,33 @@
-import {useOutletContext} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
-import {SectionCard, SectionField} from "components/common/presentational";
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "components/common/presentational";
 import {Map} from "components/common/geo";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectInfrastructureSection = () => {
+    const navigate = useNavigate();
+
     let project;
     [project] = useOutletContext();
 
+    const headerActions = [
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Modificar"
+            icon={<EditIcon />}
+            onClick={() => {
+                navigate("main_infrastructure/edit");
+            }}
+        />,
+    ];
+
     return (
-        <SectionCard title="Infraestructura principal">
+        <SectionCard title="Infraestructura principal" secondaryActions={headerActions}>
             <SectionField
                 label="Departamento:"
                 value={project.main_infrastructure.locality.department_name}

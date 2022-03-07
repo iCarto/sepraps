@@ -13,3 +13,7 @@ export {default as AddProjectPanel} from "./AddProjectPanel";
 export {default as AddProjectProviderPanel} from "./AddProjectProviderPanel";
 export {default as ViewProjectPanel} from "./ViewProjectPanel";
 export {default as UpdateProjectPanel} from "./UpdateProjectPanel";
+export {
+    default as UpdateProjectMainInfrastructurePanel,
+} from "./UpdateProjectMainInfrastructurePanel";
+export {default as UpdateProjectFinancingPanel} from "./UpdateProjectFinancingPanel";

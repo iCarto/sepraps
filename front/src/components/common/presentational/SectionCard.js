@@ -17,7 +17,7 @@ const SectionCard = ({title = "", secondaryActions = null, ...props}) => {
             <CardHeader
                 title={<SectionHeading>{title}</SectionHeading>}
                 action={
-                    secondaryActions ? (
+                    secondaryActions && secondaryActions.length ? (
                         <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>
                     ) : null
                 }
