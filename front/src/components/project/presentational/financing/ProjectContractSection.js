@@ -25,9 +25,11 @@ const ProjectContractSection = ({contract}) => {
             }}
         />,
     ];
-
     return (
-        <SectionCard title="Contrato de obras" secondaryActions={headerActions}>
+        <SectionCard
+            title="Contrato de obras"
+            secondaryActions={contract ? headerActions : []}
+        >
             {contract ? (
                 <>
                     <SectionField label="Número de contrato:" value={contract.number} />

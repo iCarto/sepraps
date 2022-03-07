@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useOutletContext, useParams} from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ProjectService} from "service/api";
 import {project_view_adapter} from "model";
@@ -8,7 +8,7 @@ import {SidebarPanel} from "layout";
 import {ProjectForm} from "../presentational";
 import Alert from "@mui/material/Alert";
 
-const UpdateProjectPanel = () => {
+const UpdateProjectFinancingPanel = () => {
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
 
@@ -18,7 +18,7 @@ const UpdateProjectPanel = () => {
     const handleSubmit = project => {
         ProjectService.updateProject(project_view_adapter({...project}))
             .then(() => {
-                navigate(`/projects/${project.id}`, true);
+                navigate(`/projects/${project.id}/financing`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -27,12 +27,12 @@ const UpdateProjectPanel = () => {
     };
 
     const handleCloseSidebar = () => {
-        navigate(`/projects/${project.id}`);
+        navigate(`/projects/${project.id}/financing`);
     };
 
     return (
         <SidebarPanel
-            sidebarTitle="Modificar proyecto"
+            sidebarTitle="Modificar financiador"
             closeSidebarClick={handleCloseSidebar}
         >
             {error && (
@@ -40,9 +40,9 @@ const UpdateProjectPanel = () => {
                     {error}
                 </Alert>
             )}
-            <ProjectForm section="generaldata" onSubmit={handleSubmit} />
+            <ProjectForm section="financing" onSubmit={handleSubmit} />
         </SidebarPanel>
     );
 };
 
-export default UpdateProjectPanel;
+export default UpdateProjectFinancingPanel;

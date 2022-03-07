@@ -11,7 +11,6 @@ import {Map} from "components/common/geo";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LaunchIcon from "@mui/icons-material/Launch";
-import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectLocationSection = () => {
     const navigate = useNavigate();
@@ -27,15 +26,6 @@ const ProjectLocationSection = () => {
             icon={<LaunchIcon />}
             onClick={() => {
                 navigate(`location`);
-            }}
-        />,
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar infraestructura"
-            icon={<EditIcon />}
-            onClick={() => {
-                navigate("location/edit");
             }}
         />,
     ];
