@@ -10,8 +10,8 @@ const ProjectList = ({projects, onClick}) => {
 
     const projectItems = projects.map(project => {
         return (
-            <Grid item xs={12} sm={6} md={4} xl={3}>
-                <ProjectCard key={project.id} project={project} onClick={onClick} />
+            <Grid key={project.id} item xs={12} sm={6} md={4} xl={3}>
+                <ProjectCard project={project} onClick={onClick} />
             </Grid>
         );
     });

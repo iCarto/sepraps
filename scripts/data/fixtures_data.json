@@ -184,20 +184,20 @@
         "model": "monitoring.infrastructure",
         "pk": 1,
         "fields": {
-            "locality": "1009210",
-            "latitude": -25.343762,
-            "longitude": -54.90921,
-            "altitude": 311
+            "locality": "1011460",
+            "latitude": -25.463711,
+            "longitude": -54.856361,
+            "altitude": 223
         }
     },
     {
         "model": "monitoring.infrastructure",
         "pk": 2,
         "fields": {
-            "locality": "1011460",
-            "latitude": -25.463711,
-            "longitude": -54.856361,
-            "altitude": 223
+            "locality": "1009210",
+            "latitude": -25.343762,
+            "longitude": -54.90921,
+            "altitude": 311
         }
     },
     {
@@ -264,7 +264,17 @@
         "model": "monitoring.provider",
         "pk": 1,
         "fields": {
-            "name": "Junta de Saneamiento de Pruebas",
+            "name": "Junta de Saneamiento de Cristo Rey",
+            "area": "rural",
+            "locality": "1507600",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 2,
+        "fields": {
+            "name": "Junta de Saneamiento de Nueva Esperanza",
             "area": "rural",
             "locality": "1507600",
             "contacts": [2, 3]
@@ -316,7 +326,7 @@
             "project_type": "agua",
             "project_class": "nueva_construccion",
             "init_date": "2020-08-10",
-            "main_infrastructure": 2,
+            "main_infrastructure": 1,
             "financing_fund": 1,
             "financing_program": 1,
             "provider": 1,
@@ -337,10 +347,10 @@
             "project_type": "agua",
             "project_class": "mejora",
             "init_date": "2021-08-10",
-            "main_infrastructure": 1,
+            "main_infrastructure": 2,
             "financing_fund": 1,
             "financing_program": 1,
-            "provider": 1,
+            "provider": 2,
             "construction_contract": 1,
             "linked_localities": ["1009210", "1009230", "1009240"],
             "closed": false,
