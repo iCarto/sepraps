@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import {MilestoneTimelineShort} from "components/milestone/presentational";
 
 const bull = (
     <Box
@@ -83,6 +84,9 @@ const ProjectCard = ({project, onClick}) => {
                                 {project.financing_fund_name}
                             </Typography>
                         </Box>
+                        <Box sx={{mt: 2}}>
+                            <MilestoneTimelineShort milestones={project.milestones} />
+                        </Box>
                     </CardContent>
                     <CardContent sx={{bgcolor: "grey.200"}}>
                         <Box
@@ -115,7 +119,6 @@ const ProjectCard = ({project, onClick}) => {
                                 {DateUtil.formatDateMonth(project.init_date)}
                             </Typography>
                         </Box>
-                        <ProgressBar barPhase={project.phase_name} />
                     </CardContent>
                 </Box>
             </Card>

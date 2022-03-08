@@ -74,7 +74,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 "provider",
                 "financing_fund",
                 "financing_program",
-            )
+            ).prefetch_related("milestones")
         return Project.objects.select_related(
             "main_infrastructure",
             "main_infrastructure__locality",
@@ -87,7 +87,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
             "construction_contract",
             "financing_fund",
             "financing_program",
-        ).prefetch_related("linked_localities", "provider__contacts")
+        ).prefetch_related("linked_localities", "provider__contacts", "milestones")
 
     def get_serializer_class(self):
         if self.action == "list":

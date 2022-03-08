@@ -61,7 +61,7 @@ class Milestone(models.Model):
         return dict(PHASE_CHOICES).get(self.phase, self.phase)
 
     def __str__(self):
-        return self.value
+        return self.category
 
 
 def create_project_milestones(project, children, parent=None):

@@ -14,11 +14,9 @@ const MilestonePath = ({milestones, level, activeMilestone}) => {
                             <MilestonePoint
                                 milestone={milestone}
                                 level={level}
+                                activeMilestone={activeMilestone}
                                 isFirst={index === 0}
                                 isLast={index === milestones.length - 1}
-                                isActiveMilestone={
-                                    activeMilestone.category === milestone.category
-                                }
                             />
                             <MilestonePath
                                 milestones={milestone.children}
@@ -33,11 +31,9 @@ const MilestonePath = ({milestones, level, activeMilestone}) => {
                         key={milestone.category}
                         milestone={milestone}
                         level={level}
+                        activeMilestone={activeMilestone}
                         isFirst={index === 0}
                         isLast={index === milestones.length - 1}
-                        isActiveMilestone={
-                            activeMilestone.category === milestone.category
-                        }
                     />
                 );
             })}

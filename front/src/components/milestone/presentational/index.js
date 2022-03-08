@@ -7,3 +7,4 @@ export {default as MilestoneTimeline} from "./MilestoneTimeline";
 export {default as MilestoneTimelinePhase} from "./MilestoneTimelinePhase";
 export {default as MilestoneTimelineItem} from "./MilestoneTimelineItem";
 export {default as MilestoneTimelineTooltip} from "./MilestoneTimelineTooltip";
+export {default as MilestoneTimelineShort} from "./MilestoneTimelineShort";

@@ -21,28 +21,19 @@ const MilestoneTimelineDot = styled(TimelineDot, {
         "2px solid " + (!disabled ? theme.palette[milestone.phase].dark : "inherit"),
 }));
 
-const MilestonePoint = ({
-    milestone,
-    level,
-    isFirst,
-    isLast,
-    isActiveMilestone = false,
-}) => {
+const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) => {
     const navigate = useNavigate();
-    let project;
-    [project] = useOutletContext();
 
     const handleClick = () => {
-        if (isActiveMilestone) {
-            navigate(`/projects/${project.id}/milestones/${milestone.id}/edit`);
+        if (milestone.category === activeMilestone?.category) {
+            navigate(`${milestone.id}/edit`);
         } else {
-            navigate(`/projects/${project.id}/milestones/${milestone.id}`);
+            navigate(`${milestone.id}`);
         }
     };
 
     const getTimelineDot = () => {
-        console.log("milestone.phase", milestone.phase);
-        if (isActiveMilestone) {
+        if (milestone.category === activeMilestone?.category) {
             return (
                 <MilestoneTimelineDot
                     variant="outlined"
@@ -64,7 +55,7 @@ const MilestonePoint = ({
 
     const isDisabled = () => {
         return (
-            milestone.category !== project.active_milestone.category &&
+            milestone.category !== activeMilestone?.category &&
             milestone.compliance_date === null
         );
     };
