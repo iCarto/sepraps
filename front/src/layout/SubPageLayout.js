@@ -36,6 +36,7 @@ const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
         height: "calc(100vh - 64px);",
+        minHeight: "100%",
     })
 );
 
