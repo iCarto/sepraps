@@ -3,7 +3,9 @@ import {Fragment, useState} from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from "@mui/material/CircularProgress";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const WAIT_INTERVAL = 500;
 let timerID;
@@ -53,8 +55,6 @@ const SearchAutocomplete = ({
         }, WAIT_INTERVAL);
     };
 
-    console.log("search data", state.data);
-
     return (
         <Autocomplete
             id="check-autocomplete"
@@ -66,6 +66,7 @@ const SearchAutocomplete = ({
                     {optionComponent(option)}
                 </Box>
             )}
+            forcePopupIcon={false}
             noOptionsText="No se han encontrado resultados"
             loading={state.loading}
             renderInput={params => (
@@ -81,6 +82,13 @@ const SearchAutocomplete = ({
                     }}
                     InputProps={{
                         ...params.InputProps,
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                {" "}
+                                <SearchIcon />
+                            </InputAdornment>
+                        ),
+                        disableUnderline: true,
                         endAdornment: (
                             <Fragment>
                                 {state.loading ? (
