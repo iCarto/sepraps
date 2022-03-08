@@ -3,9 +3,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {cloneElement} from "react";
 
-const AccordionLayout = ({accordionTitle, children}) => {
+const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
     return (
         <Accordion
             disableGutters
@@ -19,19 +20,23 @@ const AccordionLayout = ({accordionTitle, children}) => {
             <AccordionSummary
                 expandIcon={
                     <Tooltip title="Clic para desplegar">
-                        <ArrowForwardIosSharpIcon sx={{fontSize: "1.2rem"}} />
+                        <ExpandMoreIcon />
                     </Tooltip>
                 }
                 aria-controls="accordion-content"
                 id="accordion-header"
                 sx={{
-                    pl: 0,
-                    flexDirection: "row-reverse",
-                    "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-                        transform: "rotate(90deg)",
-                    },
+                    borderBottom: "1px solid #ccc",
+                    padding: 0,
+                    display: "flex",
+                    alignItems: "center",
                 }}
             >
+                {accordionIcon &&
+                    cloneElement(accordionIcon, {
+                        fontSize: "small",
+                        sx: {color: "text.secondary"},
+                    })}
                 <Typography
                     variant="subtitle1"
                     color="text.secondary"

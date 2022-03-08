@@ -8,6 +8,7 @@ import {AddContactButtonGroup, ContactsTable} from "components/contacts/presenta
 
 import Alert from "@mui/material/Alert";
 import Grid from "@mui/material/Grid";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ProviderContactsSection = ({provider}) => {
     const navigate = useNavigateWithReload();
@@ -84,7 +85,10 @@ const ProviderContactsSection = ({provider}) => {
 
     return (
         <Fragment>
-            <AccordionLayout accordionTitle="Contactos">
+            <AccordionLayout
+                accordionTitle="Contactos"
+                accordionIcon={<PermContactCalendarIcon />}
+            >
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <ContactsTable
