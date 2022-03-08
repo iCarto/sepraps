@@ -9,9 +9,11 @@ import {
     locality_api_adapter,
     provider_api_adapter,
     contract_api_adapter,
+    createMilestone,
 } from "model";
 import {DateUtil, DATE_FORMATS} from "utilities";
 import {infraestructure_view_adapter} from "./Infrastructure";
+import {createMilestones, milestones_api_adapter} from "./Milestone";
 import {provider_view_adapter} from "./Provider";
 
 class Projects extends Array {}
@@ -43,6 +45,11 @@ const project_api_adapter = project => {
     if (project["locality"]) {
         project["locality"] = createLocality(locality_api_adapter(project["locality"]));
     }
+    if (project["milestones"]) {
+        project["milestones"] = createMilestones(
+            milestones_api_adapter(project["milestones"])
+        );
+    }
     return project;
 };
 
@@ -72,6 +79,8 @@ const project_view_adapter = project => {
     project["construction_contract"] = !!project["construction_contract"]
         ? project["construction_contract"].id
         : null;
+    delete project["milestones"];
+    delete project["active_milestone"];
     delete project["creation_user"];
     delete project["created_at"];
     delete project["updated_at"];
@@ -89,7 +98,6 @@ const createProject = ({
     name = "",
     code = null,
     featured_image = "",
-    phase_name = "",
     project_type = "",
     project_class = "",
     project_type_name = "",
@@ -104,8 +112,8 @@ const createProject = ({
     financing_fund_name = "",
     financing_program_name = "",
     construction_contract = null,
-    active_milestone = "",
     folder = "",
+    milestones = [],
     creation_user = "",
     created_at = null,
     updated_at = null,
@@ -115,7 +123,6 @@ const createProject = ({
         name,
         code,
         featured_image,
-        phase_name,
         project_type,
         project_class,
         project_type_name,
@@ -130,8 +137,8 @@ const createProject = ({
         financing_fund_name,
         financing_program_name,
         construction_contract,
-        active_milestone,
         folder,
+        milestones,
         creation_user,
         created_at,
         updated_at,

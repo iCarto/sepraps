@@ -22,7 +22,7 @@ const MilestoneTimeline = ({milestonesPhases}) => {
     return (
         <TimelineContainer>
             {milestonesPhases.map(phase => {
-                return <MilestoneTimelinePhase phase={phase} />;
+                return <MilestoneTimelinePhase key={phase.code} phase={phase} />;
             })}
         </TimelineContainer>
     );

@@ -10,7 +10,10 @@ from monitoring.serializers.construction_contract_serializer import (
 )
 from monitoring.serializers.infraestructure_serializer import InfraestructureSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
-from monitoring.serializers.milestone_serializer import MilestoneSerializer
+from monitoring.serializers.milestone_serializer import (
+    MilestoneSerializer,
+    MilestoneSummarySerializer,
+)
 from monitoring.serializers.provider_serializer import ProviderSerializer
 from rest_framework import serializers
 
@@ -18,7 +21,6 @@ from rest_framework import serializers
 class ProjectSerializer(serializers.ModelSerializer):
     code = serializers.CharField(required=False, read_only=True)
     featured_image = serializers.SerializerMethodField()
-    phase_name = serializers.SerializerMethodField(required=False)
     project_type_name = serializers.SerializerMethodField(required=False)
     project_class_name = serializers.SerializerMethodField(required=False)
     financing_fund_name = serializers.CharField(
@@ -35,7 +37,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     construction_contract = serializers.PrimaryKeyRelatedField(
         required=False, allow_null=True, queryset=ConstructionContract.objects.all()
     )
-    active_milestone = serializers.SerializerMethodField()
+    milestones = serializers.SerializerMethodField(required=False, read_only=True)
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
     )
@@ -48,7 +50,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             "name",
             "code",
             "featured_image",
-            "phase_name",
             "project_type",
             "project_type_name",
             "project_class",
@@ -62,7 +63,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "financing_program",
             "financing_program_name",
             "construction_contract",
-            "active_milestone",
+            "milestones",
             "folder",
             "creation_user",
             "created_at",
@@ -98,11 +99,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         ]
         return images[obj.id % 5]
 
-    # Fake attribute
-    def get_phase_name(self, obj):
-        phases = ["Diseño", "Ejecución", "Post-Construcción"]
-        return phases[obj.id % 3]
-
     def get_project_type_name(self, obj):
         return dominio_get_value(obj.project_type)
 
@@ -112,23 +108,10 @@ class ProjectSerializer(serializers.ModelSerializer):
     def get_folder(self, obj):
         return obj.folder.media_path
 
-    def get_active_milestone(self, obj):
-        # Retrieve first milestone without compliance date
-        # TODO Check if this approximation is valid for the client
-        active_milestone = (
-            obj.milestones.filter(compliance_date__isnull=True, parent__isnull=True)
-            .order_by("ordering")
-            .first()
-        )
-        if active_milestone and active_milestone.children:
-            active_child = (
-                active_milestone.children.filter(compliance_date__isnull=True)
-                .order_by("ordering")
-                .first()
-            )
-            if active_child:
-                active_milestone = active_child
-        return MilestoneSerializer(active_milestone).data
+    def get_milestones(self, obj):
+        return MilestoneSummarySerializer(
+            obj.milestones.exclude(parent__isnull=False).order_by("ordering"), many=True
+        ).data
 
     # OPERATIONS
 
@@ -210,13 +193,13 @@ class ProjectSummarySerializer(ProjectSerializer):
             "code",
             "featured_image",
             "locality",
-            "phase_name",
             "project_type",
             "project_class",
             "init_date",
             "provider_name",
             "financing_fund_name",
             "financing_program_name",
+            "milestones",
             "created_at",
             "updated_at",
         )

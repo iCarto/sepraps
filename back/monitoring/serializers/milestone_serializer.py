@@ -30,3 +30,16 @@ class MilestoneSerializer(serializers.ModelSerializer):
 
     def get_phase_name(self, obj):
         return obj.get_phase_name()
+
+
+class MilestoneSummarySerializer(MilestoneSerializer):
+    class Meta(MilestoneSerializer.Meta):
+        fields = ("category", "category_name", "phase", "phase_name", "compliance_date")
+
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        del fields["children"]
+        for field in fields:
+            if field != "id":
+                fields[field].read_only = True
+        return fields

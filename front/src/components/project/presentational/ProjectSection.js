@@ -16,7 +16,6 @@ const ProjectSection = ({project, headerActions = null}) => {
                     project?.project_type.slice(1)
                 }
             />
-            <SectionField label="Fase:" value={project?.phase_name} />
             <SectionField
                 label="Ubicación:"
                 value={

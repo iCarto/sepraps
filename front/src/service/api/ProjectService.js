@@ -3,8 +3,6 @@ import {
     createProject,
     projects_api_adapter,
     project_api_adapter,
-    createMilestones,
-    milestones_api_adapter,
     createContacts,
     contacts_api_adapter,
     createPhases,
@@ -62,7 +60,7 @@ const ProjectService = {
                         };
                         phases.push(phase);
                     }
-                    phase.milestones.push(milestone);
+                    phase["milestones"].push(milestone);
                 });
                 return createPhases(phases_api_adapter(phases));
             }

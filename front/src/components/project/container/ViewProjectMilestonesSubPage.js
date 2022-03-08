@@ -8,6 +8,23 @@ import {SectionCard} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import {MilestonePhase} from "components/milestone/presentational";
 
+const findActiveMilestone = milestones => {
+    let activeMilestone = null;
+    console.log({milestones});
+    for (let milestone of milestones) {
+        console.log({milestone});
+        if (milestone["children"].length) {
+            activeMilestone = findActiveMilestone(milestone["children"]);
+            if (activeMilestone) {
+                return activeMilestone;
+            }
+        }
+        if (!milestone["compliance_date"]) {
+            return milestone;
+        }
+    }
+};
+
 const ViewProjectMilestonesSubPage = () => {
     const {id} = useParams();
     const location = useLocation();
@@ -18,11 +35,14 @@ const ViewProjectMilestonesSubPage = () => {
 
     useEffect(() => {
         ProjectService.getProjectMilestones(id).then(milestonesPhases => {
+            console.log({milestonesPhases});
             setMilestonesPhases(milestonesPhases);
         });
     }, [id, location.state?.lastRefreshDate]);
 
-    console.log({milestonesPhases});
+    const activeMilestone = findActiveMilestone(
+        milestonesPhases.map(phase => phase["milestones"]).flat()
+    );
 
     return (
         <SubPageLayout outletContext={[project]}>
@@ -34,7 +54,7 @@ const ViewProjectMilestonesSubPage = () => {
                                 <MilestonePhase
                                     key={phase.code}
                                     phase={phase}
-                                    activeMilestone={project.active_milestone}
+                                    activeMilestone={activeMilestone}
                                 />
                             );
                         })}
