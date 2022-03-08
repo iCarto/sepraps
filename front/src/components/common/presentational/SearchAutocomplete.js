@@ -88,7 +88,6 @@ const SearchAutocomplete = ({
                                 <SearchIcon />
                             </InputAdornment>
                         ),
-                        disableUnderline: true,
                         endAdornment: (
                             <Fragment>
                                 {state.loading ? (

@@ -52,21 +52,19 @@ const ProjectForm = ({onSubmit, section = null}) => {
         main_infrastructure_latitude: project?.main_infrastructure.latitude || "",
         main_infrastructure_longitude: project?.main_infrastructure.longitude || "",
         main_infrastructure_altitude: project?.main_infrastructure.altitude || "",
-        linked_localities: [],
+        linked_localities: project
+            ? project.linked_localities.map(linked_locality => {
+                  return {
+                      locality: linked_locality.code,
+                      district: linked_locality.district,
+                      department: linked_locality.department,
+                  };
+              })
+            : [],
         financing: {
             financing_fund: project?.financing_fund || "",
             financing_program: project?.financing_program || "",
         },
-        contacts: [],
-        // Aux contact fields necessary to insert
-        // contacts in the list
-        contact_id: project?.contact_id || null,
-        contact_name: project?.contact_name || "",
-        contact_post: project?.contact_post || "",
-        contact_gender: project?.contact_gender || "",
-        contact_phone: project?.contact_phone || "",
-        contact_email: project?.contact_email || "",
-        contact_comments: project?.contact_comments || "",
     };
 
     const formMethods = useForm({
