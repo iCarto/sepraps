@@ -23,7 +23,7 @@ const ContractGeneralDataSection = () => {
                     text="Modificar"
                     icon={<EditIcon />}
                     onClick={() => {
-                        navigate("edit");
+                        navigate("generaldata/edit");
                     }}
                 />,
             ]}
