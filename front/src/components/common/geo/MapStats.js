@@ -6,7 +6,7 @@ import {useMapIcon} from "./hooks/MapIconHook";
 
 const style = {
     width: "100%",
-    height: "calc(100vh - 130px)",
+    height: "calc(100vh - 150px)",
 };
 
 const MapStats = ({projects}) => {

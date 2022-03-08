@@ -3,7 +3,7 @@ import L from "leaflet";
 export function useMapIcon() {
     const getIcon = (color = null) => {
         const markerHtmlStyles = `
-    background-color: ${color || "#ff0a0a"};
+    background-color: ${color || "#025eaa"};
     width: 30px;
     height: 30px;
     display: block;
