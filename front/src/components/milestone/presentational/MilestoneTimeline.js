@@ -13,7 +13,7 @@ const TimelineContainer = styled("ul")(({theme}) => ({
         padding: "42px 0 20px",
     },
     [theme.breakpoints.down("xl")]: {
-        padding: "42px 0 62px",
+        padding: "42px 0 20px",
     },
     listStyle: "none",
 }));
