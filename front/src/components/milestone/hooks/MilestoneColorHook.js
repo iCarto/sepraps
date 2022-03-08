@@ -1,8 +1,8 @@
 const phaseColors = {
-    other: "#ff0a0a",
+    other: "#ff9800",
     design: "#ff9800",
-    contracting: "#ffeb3b",
-    execution: "#cddc39",
+    contracting: "#fdd835",
+    execution: "#e3eb90",
     "post-execution": "#8bc34a",
 };
 
