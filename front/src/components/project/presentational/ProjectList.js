@@ -9,16 +9,15 @@ const ProjectList = ({projects, onClick}) => {
     const noProjectFound = projects.length === 0 || !projects;
 
     const projectItems = projects.map(project => {
-        return <ProjectCard key={project.id} project={project} onClick={onClick} />;
+        return (
+            <Grid item xs={12} sm={6} md={4} xl={3}>
+                <ProjectCard key={project.id} project={project} onClick={onClick} />
+            </Grid>
+        );
     });
 
     return (
-        <Grid
-            component="ul"
-            container
-            spacing={3}
-            sx={{display: "flex", justifyContent: "left", p: 0, listStyleType: "none"}}
-        >
+        <Grid container spacing={3}>
             {noProjectFound ? (
                 <Container sx={{mt: 3, textAlign: "center"}}>
                     <Typography variant="h5">
