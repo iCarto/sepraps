@@ -19,6 +19,9 @@ import {provider_view_adapter} from "./Provider";
 class Projects extends Array {}
 
 const project_api_adapter = project => {
+    // Fake image loaded from public folder in front-end
+    project["featured_image"] = "/images/senasa" + (project["id"] % 5) + ".png";
+
     project["init_date"] = new Date(project["init_date"]);
     if (project.construction_contract) {
         project["construction_contract"] = createContract(

@@ -52,77 +52,74 @@ const ProjectCard = ({project, onClick}) => {
     };
 
     return (
-        <Grid item component="li" xs={12} sm={6} md={4} xl={3}>
-            <Card id={project.id}>
-                <Box onClick={handleClick} sx={{cursor: "pointer"}}>
-                    <div style={{position: "relative"}}>
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image={project.featured_image}
-                            alt={project.name}
-                        />
-                        <Box sx={projectTypeIconBoxStyle}>
-                            <Icon icon={project.project_type} size="medium" />
+        <Card id={project.id} variant="outlined">
+            <Box onClick={handleClick} sx={{cursor: "pointer"}}>
+                <div style={{position: "relative"}}>
+                    <CardMedia
+                        component="img"
+                        height="140"
+                        image={project.featured_image}
+                        alt={project.name}
+                    />
+                    <Box sx={projectTypeIconBoxStyle}>
+                        <Icon icon={project.project_type} size="medium" />
+                    </Box>
+                    <Tooltip title={`Clase: ${project.project_class}`}>
+                        <Box sx={projectClassBoxStyle}>
+                            <Typography variant="button">
+                                {project.project_class}
+                            </Typography>
                         </Box>
-                        <Tooltip title={`Clase: ${project.project_class}`}>
-                            <Box sx={projectClassBoxStyle}>
-                                <Typography variant="button">
-                                    {project.project_class}
-                                </Typography>
-                            </Box>
+                    </Tooltip>
+                </div>
+                <CardContent>
+                    <Typography variant="h5" gutterBottom color="primary">
+                        {project.name}
+                    </Typography>
+                    <Typography variant="body2">{project.code}</Typography>
+                    <Typography variant="subtitle2" sx={{lineHeight: "normal"}}>
+                        {project.financing_program_name}
+                    </Typography>
+                    <Typography variant="subtitle2" sx={{lineHeight: "normal"}}>
+                        {project.financing_fund_name}
+                    </Typography>
+                    <Box sx={{mt: 2}}>
+                        <MilestoneTimelineShort milestones={project.milestones} />
+                    </Box>
+                </CardContent>
+                <CardContent sx={{bgcolor: "grey.200"}}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            mb: 1.75,
+                        }}
+                    >
+                        <Tooltip title="Ubicación">
+                            <LocationOnIcon fontSize="small" sx={{mr: 1}} />
                         </Tooltip>
-                    </div>
-                    <CardContent>
-                        <Typography variant="h5" gutterBottom>
-                            {project.name}
-                            <Typography variant="body2">{project.code}</Typography>
+                        <Typography variant="subtitle1" sx={{lineHeight: "normal"}}>
+                            {project.locality.locality_name},{" "}
+                            {project.locality.district_name} (
+                            {project.locality.department_name})
                         </Typography>
-                        <Box sx={{display: "flex", alignItems: "center"}}>
-                            <Typography variant="subtitle2" sx={{lineHeight: "normal"}}>
-                                {project.financing_program_name} {bull}{" "}
-                                {project.financing_fund_name}
-                            </Typography>
-                        </Box>
-                        <Box sx={{mt: 2}}>
-                            <MilestoneTimelineShort milestones={project.milestones} />
-                        </Box>
-                    </CardContent>
-                    <CardContent sx={{bgcolor: "grey.200"}}>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                mb: 1.75,
-                            }}
-                        >
-                            <Tooltip title="Ubicación">
-                                <LocationOnIcon fontSize="small" sx={{mr: 1}} />
-                            </Tooltip>
-                            <Typography variant="subtitle1" sx={{lineHeight: "normal"}}>
-                                {project.locality.locality_name},{" "}
-                                {project.locality.district_name} (
-                                {project.locality.department_name})
-                            </Typography>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                mb: 2,
-                            }}
-                        >
-                            <Tooltip title="Fecha de inicio">
-                                <DateRangeIcon fontSize="small" sx={{mr: 1}} />
-                            </Tooltip>
-                            <Typography variant="subtitle1" sx={{lineHeight: 1}}>
-                                {DateUtil.formatDateMonth(project.init_date)}
-                            </Typography>
-                        </Box>
-                    </CardContent>
-                </Box>
-            </Card>
-        </Grid>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Tooltip title="Fecha de inicio">
+                            <DateRangeIcon fontSize="small" sx={{mr: 1}} />
+                        </Tooltip>
+                        <Typography variant="subtitle1" sx={{lineHeight: 1}}>
+                            {DateUtil.formatDateMonth(project.init_date)}
+                        </Typography>
+                    </Box>
+                </CardContent>
+            </Box>
+        </Card>
     );
 };
 

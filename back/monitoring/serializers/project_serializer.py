@@ -20,7 +20,6 @@ from rest_framework import serializers
 
 class ProjectSerializer(serializers.ModelSerializer):
     code = serializers.CharField(required=False, read_only=True)
-    featured_image = serializers.SerializerMethodField()
     project_type_name = serializers.SerializerMethodField(required=False)
     project_class_name = serializers.SerializerMethodField(required=False)
     financing_fund_name = serializers.CharField(
@@ -49,7 +48,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "code",
-            "featured_image",
             "project_type",
             "project_type_name",
             "project_class",
@@ -87,17 +85,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         return response
 
     # ATTRIBUTES
-
-    # Fake attribute
-    def get_featured_image(self, obj):
-        images = [
-            "https://cdn.pixabay.com/photo/2017/04/22/16/00/water-resources-2251633_1280.jpg",
-            "https://images.unsplash.com/photo-1585318822320-300abf39f65d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXJlZ3VhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-            "https://images.unsplash.com/photo-1538300342682-cf57afb97285?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2574&q=80",
-            "https://cdn.pixabay.com/photo/2013/09/21/18/36/river-184611__340.jpg",
-            "https://cdn.pixabay.com/photo/2016/11/13/14/24/pipe-1821109__480.jpg",
-        ]
-        return images[obj.id % 5]
 
     def get_project_type_name(self, obj):
         return dominio_get_value(obj.project_type)
@@ -191,7 +178,6 @@ class ProjectSummarySerializer(ProjectSerializer):
             "id",
             "name",
             "code",
-            "featured_image",
             "locality",
             "project_type",
             "project_class",

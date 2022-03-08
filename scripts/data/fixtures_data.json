@@ -285,14 +285,14 @@
         "model": "monitoring.ConstructionContract",
         "pk": 1,
         "fields": {
-            "number": "CO-000001",
+            "number": "Contrato 19/2019",
             "comments": "Observaciones al contrato",
-            "bid_request_number": "BRN-000001",
-            "bid_request_id": "BRId-000001",
-            "bid_request_date": "2022-01-01",
-            "bid_request_budget": 10000,
-            "bid_request_deadline": 12,
-            "awarding_budget": 80000,
+            "bid_request_number": "BRN-19/2019",
+            "bid_request_id": "BRI-19/2019",
+            "bid_request_date": "2019-01-01",
+            "bid_request_budget": 800000,
+            "bid_request_deadline": 48,
+            "awarding_budget": 725490.25,
             "awarding_percentage_drop": 20.5,
             "awarding_date": "2022-01-02",
             "contractor": 1,
@@ -311,7 +311,28 @@
         "model": "monitoring.project",
         "pk": 1,
         "fields": {
-            "name": "Nueva Esperanza - Iguazú",
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
+            "code": "2021-AP-001",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2020-08-10",
+            "main_infrastructure": 2,
+            "financing_fund": 1,
+            "financing_program": 1,
+            "provider": 1,
+            "construction_contract": 1,
+            "linked_localities": ["1011460"],
+            "closed": true,
+            "creation_user": 1,
+            "created_at": "2021-12-01T00:00:00Z",
+            "updated_at": "2021-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 2,
+        "fields": {
+            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2022-AP-001",
             "project_type": "agua",
             "project_class": "mejora",
@@ -326,27 +347,6 @@
             "creation_user": 1,
             "created_at": "2022-02-01T00:00:00Z",
             "updated_at": "2022-02-01T00:00:00Z"
-        }
-    },
-    {
-        "model": "monitoring.project",
-        "pk": 2,
-        "fields": {
-            "name": "Cristo Rey - Minga Guazú",
-            "code": "2021-AP-001",
-            "project_type": "agua",
-            "project_class": "ampliacion",
-            "init_date": "2020-08-10",
-            "main_infrastructure": 2,
-            "financing_fund": 1,
-            "financing_program": 1,
-            "provider": 1,
-            "construction_contract": 1,
-            "linked_localities": ["1011460"],
-            "closed": true,
-            "creation_user": 1,
-            "created_at": "2021-12-01T00:00:00Z",
-            "updated_at": "2021-12-01T00:00:00Z"
         }
     }
 ]

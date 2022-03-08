@@ -7,7 +7,11 @@ const ContractList = ({contracts}) => {
     const noContractFound = contracts.length === 0 || !contracts;
 
     const contractItems = contracts.map(contract => {
-        return <ContractCard key={contract.id} contract={contract} />;
+        return (
+            <Grid item component="li" xs={12} sm={6} md={4} xl={2}>
+                <ContractCard key={contract.id} contract={contract} />
+            </Grid>
+        );
     });
     return (
         <Grid

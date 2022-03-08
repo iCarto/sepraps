@@ -121,6 +121,7 @@ class ConstructionContractSummarySerializer(ConstructionContractSerializer):
             "bid_request_id",
             "bid_request_date",
             "bid_request_budget",
+            "bid_request_deadline",
             "awarding_budget",
             "awarding_date",
             "execution_signature_date",
