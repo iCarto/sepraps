@@ -9,8 +9,8 @@ import {ProjectSection} from "../presentational";
 import {DialogLayout} from "components/common/presentational";
 
 import Alert from "@mui/material/Alert";
-import DeleteIcon from "@mui/icons-material/Delete";
 import LaunchIcon from "@mui/icons-material/Launch";
+import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const ViewProjectPanel = () => {
     const navigate = useNavigateWithReload();
@@ -86,7 +86,7 @@ const ViewProjectPanel = () => {
                   key="remove"
                   name="remove-project"
                   text="Quitar proyecto"
-                  icon={<DeleteIcon />}
+                  icon={<LinkOffIcon />}
                   onClick={handleRemoveProject}
               />,
           ]

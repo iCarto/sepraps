@@ -5,7 +5,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const PendingFile = ({file, onRemove}) => {
     return (
@@ -14,10 +14,10 @@ const PendingFile = ({file, onRemove}) => {
             secondaryAction={
                 <IconButton
                     edge="end"
-                    aria-label="delete"
+                    aria-label="remove"
                     onClick={() => onRemove(file)}
                 >
-                    <DeleteIcon />
+                    <ClearIcon />
                 </IconButton>
             }
         >

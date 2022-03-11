@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import ClearIcon from "@mui/icons-material/Clear";
+import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const headCells = [
     {
@@ -101,14 +101,14 @@ const ContactsTable = ({contacts, handleActions = null}) => {
                                             />
                                             <MenuAction
                                                 name="remove-contact"
-                                                icon={<DeleteIcon />}
+                                                icon={<LinkOffIcon />}
                                                 text="Quitar contacto"
                                                 itemId={row.id}
                                                 handleClick={handleClick}
                                             />
                                             <MenuAction
                                                 name="delete-contact"
-                                                icon={<ClearIcon />}
+                                                icon={<DeleteIcon color="error" />}
                                                 text="Eliminar contacto"
                                                 itemId={row.id}
                                                 handleClick={handleClick}

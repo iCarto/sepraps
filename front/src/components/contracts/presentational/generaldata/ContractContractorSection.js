@@ -12,7 +12,7 @@ import {RemoveContractContractorDialog} from "components/contractor/container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const ContractContractorSection = () => {
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ const ContractContractorSection = () => {
                   key="remove"
                   name="remove"
                   text="Quitar"
-                  icon={<DeleteIcon />}
+                  icon={<LinkOffIcon />}
                   onClick={() => {
                       setIsRemoveDialogOpen(true);
                   }}
