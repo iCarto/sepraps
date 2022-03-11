@@ -5,11 +5,11 @@ import {DocumentService} from "service/api";
 
 import {SidebarAction, SidebarPanel} from "layout";
 import {DocumentSection} from "../presentational";
+import {RemoveDocumentDialog} from ".";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {RemoveDocumentDialog} from ".";
 
 const ViewDocumentPanel = () => {
     const navigate = useNavigateWithReload();
@@ -52,10 +52,7 @@ const ViewDocumentPanel = () => {
     const handleCloseSidebar = (refresh = false) => {
         navigate(
             `/projects/${projectId}/documents/` +
-                folderElement.path
-                    .split("/")
-                    .slice(0, -1)
-                    .join("/"),
+                folderElement.path.split("/").slice(0, -1).join("/"),
             refresh
         );
     };

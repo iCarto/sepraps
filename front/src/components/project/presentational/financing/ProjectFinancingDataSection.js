@@ -6,6 +6,9 @@ import {
     SectionField,
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const ProjectFinancingDataSection = () => {
     const navigate = useNavigate();
@@ -26,12 +29,37 @@ const ProjectFinancingDataSection = () => {
     ];
 
     return (
-        <SectionCard title="Programa" secondaryActions={headerActions}>
-            <SectionField
-                label="Programa de financiación:"
-                value={project.financing_program_name}
-            />
-            <SectionField label="Financiador:" value={project.financing_fund_name} />
+        <SectionCard
+            title="Programa"
+            secondaryActions={project.financing_program_name ? headerActions : []}
+        >
+            {project.financing_program_name ? (
+                <>
+                    <SectionField
+                        label="Programa de financiación:"
+                        value={project.financing_program_name}
+                    />
+                    <SectionField
+                        label="Financiador:"
+                        value={project.financing_fund_name}
+                    />
+                </>
+            ) : (
+                <Stack alignItems="center" spacing={2}>
+                    <Typography style={{fontStyle: "italic"}}>
+                        Este proyecto aún no tiene financiador
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            navigate("add");
+                        }}
+                    >
+                        Añadir
+                    </Button>
+                </Stack>
+            )}
         </SectionCard>
     );
 };

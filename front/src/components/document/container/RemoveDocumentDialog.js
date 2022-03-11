@@ -1,4 +1,3 @@
-import {useNavigateWithReload} from "hooks";
 import {DialogLayout} from "components/common/presentational";
 import {DocumentService} from "service/api";
 
@@ -29,6 +28,7 @@ const RemoveDocumentDialog = ({
             dialogContentText="Si hace clic en Eliminar, el archivo se eliminará y no se podrá recuperar."
             mainActionClick={handleConfirmRemoval}
             mainActionText="Eliminar"
+            mainActionColor="error"
             handleDialog={handleDialog}
             isDialogOpen={isDialogOpen}
         />

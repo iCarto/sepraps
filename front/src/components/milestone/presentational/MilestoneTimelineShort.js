@@ -1,9 +1,7 @@
 import {DateUtil} from "utilities";
 import styled from "@mui/material/styles/styled";
-import makeStyles from "@mui/material/styles/makeStyles";
 import {MilestoneTimelineTooltip} from ".";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 
 const MilestoneBox = styled("div")(({theme}) => ({
     textAlign: "center",

@@ -1,7 +1,8 @@
 import {useNavigateWithReload} from "hooks";
-import {DialogLayout} from "components/common/presentational";
 import {ContractService} from "service/api";
 import {contract_view_adapter} from "model";
+
+import {DialogLayout} from "components/common/presentational";
 
 const RemoveContractContractorDialog = ({contract, isDialogOpen, setIsDialogOpen}) => {
     const navigate = useNavigateWithReload();

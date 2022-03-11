@@ -14,7 +14,7 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
 
     useEffect(() => {
         const values = getValues();
-        if (values[propsName].department !== "") {
+        if (values[propsName]?.department !== "") {
             setDepartmentDistricts(
                 districts.filter(
                     district =>
@@ -26,7 +26,7 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
 
     useEffect(() => {
         const values = getValues();
-        if (values[propsName].district !== "") {
+        if (values[propsName]?.district !== "") {
             setDistrictLocalities(
                 localities.filter(
                     locality => locality.district_code === values[propsName].district

@@ -4,3 +4,4 @@ export {default as ContractorSearchAutocomplete} from "./ContractorSearchAutocom
 export {default as ContractorSummary} from "./ContractorSummary";
 export {default as ContractorForm} from "./ContractorForm";
 export {default as AddContractorButtonGroup} from "./AddContractorButtonGroup";
+export {default as ContractorContactsSection} from "./ContractorContactsSection";

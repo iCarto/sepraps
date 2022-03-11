@@ -32,7 +32,11 @@ const UpdateProjectFinancingPanel = () => {
 
     return (
         <SidebarPanel
-            sidebarTitle="Modificar financiador"
+            sidebarTitle={
+                project.financing_fund_name
+                    ? "Modificar financiador"
+                    : "Añadir financiador"
+            }
             closeSidebarClick={handleCloseSidebar}
         >
             {error && (

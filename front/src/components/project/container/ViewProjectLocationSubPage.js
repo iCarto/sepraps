@@ -23,7 +23,9 @@ const ViewProjectLocationSubPage = () => {
                     <ProjectProviderSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ProjectLinkedLocalitiesSection />
+                    <ProjectLinkedLocalitiesSection
+                        linkedLocalities={project.linked_localities.length}
+                    />
                 </Grid>
             </Grid>
         </SubPageLayout>

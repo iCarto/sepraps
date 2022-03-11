@@ -55,7 +55,7 @@ const ProjectContractSection = ({contract}) => {
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography style={{fontStyle: "italic"}}>
-                        El proyecto no tiene ningún contrato asignado
+                        Este proyecto aún no ha sido asignado a ningún contrato
                     </Typography>
                     <Button
                         variant="contained"

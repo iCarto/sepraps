@@ -10,6 +10,7 @@ const DialogLayout = ({
     dialogLabel = "",
     dialogContentText = "",
     mainActionClick = null,
+    mainActionColor = "info",
     mainActionText = "",
     handleDialog = null,
     isDialogOpen = null,
@@ -35,7 +36,11 @@ const DialogLayout = ({
                 <Button onClick={handleCloseDialog} autoFocus>
                     Cancelar
                 </Button>
-                <Button onClick={mainActionClick} color="info" variant="contained">
+                <Button
+                    onClick={mainActionClick}
+                    color={mainActionColor}
+                    variant="contained"
+                >
                     {mainActionText}
                 </Button>
             </DialogActions>
