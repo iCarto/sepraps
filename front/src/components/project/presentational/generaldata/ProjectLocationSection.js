@@ -30,6 +30,23 @@ const ProjectLocationSection = () => {
         />,
     ];
 
+    const linkedLocalities = (
+        <>
+            <SectionLabel label="Localidades vinculadas:" />
+            <Box pr={3}>
+                <ProjectLinkedLocalitiesTable />
+            </Box>
+        </>
+    );
+
+    const noLinkedLocalities = (
+        <SectionField
+            label="Localidades vinculadas:"
+            value="Este proyecto aún no tiene localidades vinculadas"
+            valueFontStyle="italic"
+        />
+    );
+
     return (
         <SectionCard title="Ubicación" secondaryActions={headerActions}>
             <Grid container spacing={2}>
@@ -38,10 +55,9 @@ const ProjectLocationSection = () => {
                         label="Nombre del prestador:"
                         value={project.provider.name}
                     />
-                    <SectionLabel label="Localidades vinculadas:" />
-                    <Box pr={3}>
-                        <ProjectLinkedLocalitiesTable />
-                    </Box>
+                    {project.linked_localities.length !== 0
+                        ? linkedLocalities
+                        : noLinkedLocalities}
                 </Grid>
                 <Grid item container xs={12} lg={4}>
                     <Grid
@@ -66,7 +82,5 @@ const ProjectLocationSection = () => {
         </SectionCard>
     );
 };
-{
-}
 
 export default ProjectLocationSection;

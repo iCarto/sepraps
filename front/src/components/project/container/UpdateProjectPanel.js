@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useOutletContext, useParams} from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ProjectService} from "service/api";
 import {project_view_adapter} from "model";

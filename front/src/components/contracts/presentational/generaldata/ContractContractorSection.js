@@ -5,10 +5,12 @@ import {
     SectionCardHeaderAction,
     SectionField,
 } from "components/common/presentational";
-import {AddContractorButtonGroup} from "components/contractor/presentational";
-
-import ContractorContactsSection from "components/contractor/presentational/ContractorContactsSection";
+import {
+    AddContractorButtonGroup,
+    ContractorContactsSection,
+} from "components/contractor/presentational";
 import {RemoveContractContractorDialog} from "components/contractor/container";
+
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";

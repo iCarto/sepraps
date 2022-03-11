@@ -8,6 +8,7 @@ import {AddContactButtonGroup, ContactsTable} from "components/contacts/presenta
 
 import Alert from "@mui/material/Alert";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ProviderContactsSection = ({provider}) => {
@@ -90,13 +91,19 @@ const ProviderContactsSection = ({provider}) => {
                 accordionIcon={<PermContactCalendarIcon />}
             >
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <ContactsTable
-                            contacts={provider.contacts}
-                            handleActions={handleActions}
-                        />
-                    </Grid>
                     <Grid item container xs={12} justifyContent="center">
+                        {provider.contacts.length !== 0 ? (
+                            <ContactsTable
+                                contacts={provider.contacts}
+                                handleActions={handleActions}
+                            />
+                        ) : (
+                            <Typography pt={3} style={{fontStyle: "italic"}}>
+                                Este prestador aún no tiene contactos
+                            </Typography>
+                        )}
+                    </Grid>
+                    <Grid item container xs={12} mt={3} justifyContent="center">
                         <AddContactButtonGroup basePath="provider/contact" />
                     </Grid>
                     <Grid item xs={12}>
@@ -126,6 +133,7 @@ const ProviderContactsSection = ({provider}) => {
                     dialogContentText="Si hace clic en Eliminar, el contacto se borrará definitivamente. Este contacto no se podrá recuperar."
                     mainActionClick={handleConfirmDeletion}
                     mainActionText="Eliminar"
+                    mainActionColor="error"
                     handleDialog={handleDialog}
                     isDialogOpen={isDialogOpen}
                 />

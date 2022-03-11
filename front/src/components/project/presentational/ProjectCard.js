@@ -1,8 +1,8 @@
 import {DateUtil} from "utilities";
 
-import {Icon, ProgressBar} from "../../common/presentational";
+import {Icon} from "../../common/presentational";
+import {MilestoneTimelineShort} from "components/milestone/presentational";
 
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,16 +11,6 @@ import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-import {MilestoneTimelineShort} from "components/milestone/presentational";
-
-const bull = (
-    <Box
-        component="span"
-        sx={{display: "inline-block", mx: "2px", transform: "scale(0.8)"}}
-    >
-        •
-    </Box>
-);
 
 const projectTypeIconBoxStyle = {
     position: "absolute",

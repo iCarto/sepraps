@@ -7,7 +7,6 @@ import {
     SectionSubheading,
 } from "components/common/presentational";
 import LaunchIcon from "@mui/icons-material/Launch";
-import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectFinancingSection = () => {
     const navigate = useNavigate();
@@ -27,18 +26,26 @@ const ProjectFinancingSection = () => {
         />,
     ];
 
-    return (
-        <SectionCard title="Financiación" secondaryActions={headerActions}>
+    const financingInfo = (
+        <>
             <SectionField label="Programa:" value={project.financing_fund_name} />
             <SectionField label="Financiador:" value={project.financing_program_name} />
-            <SectionSubheading heading="Contrato" />
+        </>
+    );
+
+    const noFinancingInfo = (
+        <SectionField
+            label="Programa:"
+            value="Este proyecto aún no tiene financiador"
+            valueFontStyle="italic"
+        />
+    );
+
+    const contractInfo = (
+        <>
             <SectionField
                 label="Número:"
-                value={
-                    project.construction_contract
-                        ? project.construction_contract?.number
-                        : "Este proyecto aún no se ha asignado a ningún contrato"
-                }
+                value={project.construction_contract?.number}
             />
             <SectionField
                 label="Presupuesto:"
@@ -47,6 +54,22 @@ const ProjectFinancingSection = () => {
                     project.construction_contract.awarding_budget + " $"
                 }
             />
+        </>
+    );
+
+    const noContractInfo = (
+        <SectionField
+            label="Número:"
+            value="Este proyecto aún no se ha asignado a ningún contrato"
+            valueFontStyle="italic"
+        />
+    );
+
+    return (
+        <SectionCard title="Financiación" secondaryActions={headerActions}>
+            {project.financing_fund_name ? financingInfo : noFinancingInfo}
+            <SectionSubheading heading="Contrato" />
+            {project.construction_contract ? contractInfo : noContractInfo}
         </SectionCard>
     );
 };

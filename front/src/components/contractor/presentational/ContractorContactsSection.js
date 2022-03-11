@@ -122,6 +122,7 @@ const ContractorContactsSection = ({contractor}) => {
                     dialogContentText="Si hace clic en Eliminar, el contacto se borrará definitivamente. Este contacto no se podrá recuperar."
                     mainActionClick={handleConfirmDeletion}
                     mainActionText="Eliminar"
+                    mainActionColor="error"
                     handleDialog={handleDialog}
                     isDialogOpen={isDialogOpen}
                 />
