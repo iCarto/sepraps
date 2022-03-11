@@ -11,7 +11,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import LinkOffIcon from "@mui/icons-material/LinkOff";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
@@ -90,12 +90,12 @@ const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
                                         <TableCell>{row.department_name}</TableCell>
                                         <TableCell>
                                             <IconButton
-                                                aria-label="delete"
+                                                aria-label="clear"
                                                 onClick={() => {
                                                     handleRemove(row.locality);
                                                 }}
                                             >
-                                                <DeleteIcon />
+                                                <LinkOffIcon />
                                             </IconButton>
                                         </TableCell>
                                     </TableRow>

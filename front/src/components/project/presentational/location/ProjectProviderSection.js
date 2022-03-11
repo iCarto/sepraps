@@ -15,7 +15,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import LocationOn from "@mui/icons-material/LocationOn";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const ProviderSection = () => {
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ const ProviderSection = () => {
                   key="remove"
                   name="remove"
                   text="Quitar"
-                  icon={<DeleteIcon />}
+                  icon={<LinkOffIcon />}
                   onClick={() => {
                       setIsRemoveDialogOpen(true);
                   }}
