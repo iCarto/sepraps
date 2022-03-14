@@ -57,7 +57,7 @@ const SidebarPanel = ({
     };
 
     return (
-        <Box>
+        <Box component="aside">
             <Grid
                 container
                 p={2}

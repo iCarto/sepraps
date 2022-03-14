@@ -33,8 +33,7 @@ const AccountMenu = () => {
         <>
             <Box
                 sx={{
-                    my: 1,
-                    mx: 1.5,
+                    margin: "1 1.5",
                 }}
             >
                 <Tooltip title="Perfil de usuario">
