@@ -1,22 +1,24 @@
-import SelectProjectDropDown from "../container/SelectProjectDropDown";
+import {MenuListItemLink} from "components/common/presentational";
+import {SelectProjectDropDown} from "../container";
+
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
+import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
 import InfoIcon from "@mui/icons-material/Info";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import TopicIcon from "@mui/icons-material/Topic";
-import Toolbar from "@mui/material/Toolbar";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import LinearScaleIcon from "@mui/icons-material/LinearScale";
-import {MenuListItemLink} from "components/common/presentational";
+
 
 const ProjectMenu = ({project}) => {
     return (
         project && (
-            <Box>
+            <Box sx={{height: "100%", backgroundColor: "grey.200"}}>
                 <Toolbar
                     sx={{
                         // -----  OPTION 1 - LIGHT GREY ------

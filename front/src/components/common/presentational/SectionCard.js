@@ -13,11 +13,14 @@ const SectionCard = ({
 }) => {
     const cardStyle = {
         overflow: "auto",
-        width: "calc(100% - 230px)",
+        width: {xs: 0, sm: "20%", md: "40%", lg: "68%", xl: "100%"},
     };
 
     return (
-        <Card sx={isSidePanelOpen === true && cardStyle} variant="outlined">
+        <Card
+            sx={isSidePanelOpen === true ? cardStyle : {width: "100%"}}
+            variant="outlined"
+        >
             <CardHeader
                 title={<SectionHeading>{title}</SectionHeading>}
                 action={
