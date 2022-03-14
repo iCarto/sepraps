@@ -60,7 +60,7 @@ const ProjectFinancingSection = () => {
     const noContractInfo = (
         <SectionField
             label="Número:"
-            value="Este proyecto aún no se ha asignado a ningún contrato"
+            value="Este proyecto aún no ha sido asignado a ningún contrato"
             valueFontStyle="italic"
         />
     );

@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {SubPageLayout} from "layout";
 import {
@@ -10,26 +11,35 @@ import {
 import Grid from "@mui/material/Grid";
 
 const ViewContractInfoSubPage = () => {
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
     let contract;
     [contract] = useOutletContext();
 
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
+    };
+
     return (
-        <SubPageLayout outletContext={[contract]}>
+        <SubPageLayout
+            outletContext={[contract]}
+            getIsSidePanelOpen={getIsSidePanelOpen}
+        >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <ContractGeneralDataSection />
+                    <ContractGeneralDataSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractBidRequestSection />
+                    <ContractBidRequestSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractAwardingSection />
+                    <ContractAwardingSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractContractorSection />
+                    <ContractContractorSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractExecutionSection />
+                    <ContractExecutionSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
             </Grid>
         </SubPageLayout>

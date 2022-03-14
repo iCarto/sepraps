@@ -52,6 +52,7 @@ const ContactsTable = ({contacts, handleActions = null}) => {
         "&:last-child td, &:last-child th": {
             border: 0,
         },
+        paddingRight: "12px",
     };
 
     const handleRequestSort = (event, property) => {
@@ -65,11 +66,8 @@ const ContactsTable = ({contacts, handleActions = null}) => {
     };
 
     return (
-        <TableContainer>
-            <Table
-                aria-labelledby="Contacts table"
-                sx={{tableLayout: "fixed", overflowWrap: "break-word"}}
-            >
+        <TableContainer sx={{overflowX: "auto"}}>
+            <Table aria-labelledby="Contacts table" sx={{tableLayout: "fixed"}}>
                 <TableSortingHead
                     order={order}
                     attribute={attribute}

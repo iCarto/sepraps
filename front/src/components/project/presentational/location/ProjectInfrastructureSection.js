@@ -8,7 +8,7 @@ import {
 import {Map} from "components/common/geo";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ProjectInfrastructureSection = () => {
+const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
 
     let project;
@@ -27,7 +27,11 @@ const ProjectInfrastructureSection = () => {
     ];
 
     return (
-        <SectionCard title="Infraestructura principal" secondaryActions={headerActions}>
+        <SectionCard
+            title="Infraestructura principal"
+            secondaryActions={headerActions}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             <SectionField
                 label="Departamento:"
                 value={project.main_infrastructure.locality.department_name}

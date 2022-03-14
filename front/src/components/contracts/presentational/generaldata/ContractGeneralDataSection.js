@@ -7,26 +7,29 @@ import {
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ContractGeneralDataSection = () => {
+const ContractGeneralDataSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
 
     let contract;
     [contract] = useOutletContext();
 
+    const secondaryActions = [
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Modificar"
+            icon={<EditIcon />}
+            onClick={() => {
+                navigate("generaldata/edit");
+            }}
+        />,
+    ];
+
     return (
         <SectionCard
             title="Datos generales"
-            secondaryActions={[
-                <SectionCardHeaderAction
-                    key="edit"
-                    name="edit"
-                    text="Modificar"
-                    icon={<EditIcon />}
-                    onClick={() => {
-                        navigate("generaldata/edit");
-                    }}
-                />,
-            ]}
+            secondaryActions={secondaryActions}
+            isSidePanelOpen={isSidePanelOpen}
         >
             <SectionField label="Número:" value={contract.number} />
             <SectionField label="Observaciones:" value={contract.comments} />

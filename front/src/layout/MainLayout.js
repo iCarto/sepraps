@@ -9,7 +9,7 @@ const MainLayout = () => {
         <Box sx={{display: "flex"}}>
             <Header />
             <ModuleMenu />
-            <Box component="main" sx={{flexGrow: 1}}>
+            <Box sx={{flexGrow: 1}}>
                 <DrawerHeader />
                 <Outlet />
             </Box>

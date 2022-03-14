@@ -25,6 +25,7 @@ function TableSortingHead({
                     <TableCell
                         key={headCell.id}
                         sortDirection={attribute === headCell.id ? order : false}
+                        sx={{width: "100px"}}
                     >
                         <TableSortLabel
                             sx={{textTransform: "uppercase"}}

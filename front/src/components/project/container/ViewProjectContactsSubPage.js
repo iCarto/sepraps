@@ -15,6 +15,7 @@ const ViewProjectContactsSubPage = () => {
 
     const [contacts, setContacts] = useState([]);
     const [filteredContacts, setFilteredContacts] = useState([]);
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
     const {searchText, setSearchText, searchFunction} = useSearch("");
 
     useEffect(() => {
@@ -31,11 +32,18 @@ const ViewProjectContactsSubPage = () => {
         setSearchText(data);
     };
 
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
+    };
+
     return (
-        <SubPageLayout>
+        <SubPageLayout getIsSidePanelOpen={getIsSidePanelOpen}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <SectionCard title="Contactos del proyecto">
+                    <SectionCard
+                        title="Contactos del proyecto"
+                        isSidePanelOpen={isSidePanelOpen}
+                    >
                         <Grid container sx={{mb: 2}}>
                             <Grid item xs={12} md={4}>
                                 <SearchBox

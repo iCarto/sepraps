@@ -5,15 +5,19 @@ import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import SectionActionsMenu from "./SectionActionsMenu";
 
-const SectionCard = ({title = "", secondaryActions = null, ...props}) => {
+const SectionCard = ({
+    isSidePanelOpen = null,
+    title = "",
+    secondaryActions = null,
+    ...props
+}) => {
+    const cardStyle = {
+        overflow: "auto",
+        width: "calc(100% - 230px)",
+    };
+
     return (
-        <Card
-            sx={{
-                overflow: "auto",
-                width: "100%",
-            }}
-            variant="outlined"
-        >
+        <Card sx={isSidePanelOpen === true && cardStyle} variant="outlined">
             <CardHeader
                 title={<SectionHeading>{title}</SectionHeading>}
                 action={

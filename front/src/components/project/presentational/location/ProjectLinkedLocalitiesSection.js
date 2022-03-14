@@ -6,9 +6,12 @@ import {useNavigate} from "react-router-dom";
 
 import {ProjectLinkedLocalitiesTable} from ".";
 
-const ProjectLinkedLocalitiesSection = ({linkedLocalities = null}) => {
+const ProjectLinkedLocalitiesSection = ({
+    isSidePanelOpen = null,
+    linkedLocalities = null,
+}) => {
     return (
-        <SectionCard title="Localidades vinculadas">
+        <SectionCard title="Localidades vinculadas" isSidePanelOpen={isSidePanelOpen}>
             <Grid item container xs={12} justifyContent="center">
                 {linkedLocalities !== 0 ? (
                     <ProjectLinkedLocalitiesTable />
