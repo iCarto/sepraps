@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ContractContractorSection = () => {
+const ContractContractorSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
     let contract;
     [contract] = useOutletContext();
@@ -48,7 +48,11 @@ const ContractContractorSection = () => {
         : null;
 
     return (
-        <SectionCard title="Contratista" secondaryActions={headerActions}>
+        <SectionCard
+            title="Contratista"
+            secondaryActions={headerActions}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             {contractor?.id ? (
                 <>
                     <SectionField label="Nombre:" value={contractor.name} />

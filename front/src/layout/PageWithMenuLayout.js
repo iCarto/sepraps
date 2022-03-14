@@ -1,14 +1,17 @@
 import Grid from "@mui/material/Grid";
 
 const PageWithMenuLayout = ({menu, children}) => {
+    const leftMenuWidth = "210px";
+
     return (
         <Grid container>
             <Grid
+                component="nav"
                 item
                 sx={{
                     position: "fixed",
                     zIndex: 1,
-                    width: "210px",
+                    width: leftMenuWidth,
                     height: "100vh",
                     backgroundColor: "white",
                     borderRight: 1,
@@ -17,7 +20,7 @@ const PageWithMenuLayout = ({menu, children}) => {
             >
                 {menu}
             </Grid>
-            <Grid item xs style={{marginLeft: "210px"}}>
+            <Grid item xs style={{marginLeft: `${leftMenuWidth}`}}>
                 {children}
             </Grid>
         </Grid>

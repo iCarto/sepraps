@@ -8,26 +8,29 @@ import {
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ContractBidRequestSection = () => {
+const ContractBidRequestSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
 
     let contract;
     [contract] = useOutletContext();
 
+    const secondaryActions = [
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Modificar"
+            icon={<EditIcon />}
+            onClick={() => {
+                navigate("bidrequest/edit");
+            }}
+        />,
+    ];
+
     return (
         <SectionCard
             title="Licitación"
-            secondaryActions={[
-                <SectionCardHeaderAction
-                    key="edit"
-                    name="edit"
-                    text="Modificar"
-                    icon={<EditIcon />}
-                    onClick={() => {
-                        navigate("bidrequest/edit");
-                    }}
-                />,
-            ]}
+            secondaryActions={secondaryActions}
+            isSidePanelOpen={isSidePanelOpen}
         >
             <SectionField label="Número:" value={contract.bid_request_number} />
             <SectionField label="Identificador:" value={contract.bid_request_id} />

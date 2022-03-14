@@ -32,7 +32,7 @@ const SidebarPanel = ({
     closeSidebarClick,
     children,
 }) => {
-    // setOpen function is allways the last element in the context array
+    // setOpen function is always the last element in the context array
     let setOpen;
     const outletContext = useOutletContext();
     if (outletContext) {

@@ -49,7 +49,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: prop => prop !== "open"})(
 
 const ModuleMenu = () => {
     return (
-        <Drawer variant="permanent">
+        <Drawer component="nav" variant="permanent">
             <DrawerHeader />
             <Divider />
             <List>

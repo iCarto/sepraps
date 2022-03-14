@@ -17,7 +17,7 @@ import LocationOn from "@mui/icons-material/LocationOn";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ProviderSection = () => {
+const ProjectProviderSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
     let project;
     [project] = useOutletContext();
@@ -49,7 +49,11 @@ const ProviderSection = () => {
         : null;
 
     return (
-        <SectionCard title="Prestador" secondaryActions={headerActions}>
+        <SectionCard
+            title="Prestador"
+            secondaryActions={headerActions}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             {provider?.id ? (
                 <>
                     <SectionField label="Nombre:" value={provider.name} />
@@ -77,4 +81,4 @@ const ProviderSection = () => {
     );
 };
 
-export default ProviderSection;
+export default ProjectProviderSection;
