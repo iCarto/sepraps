@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {useFormContext} from "react-hook-form";
 
 import ProjectFormGeneralDataSection from "./ProjectFormGeneralDataSection";
@@ -33,6 +34,7 @@ function getStepContent(step) {
 }
 
 const ProjectFormStepper = ({onSubmit}) => {
+    const navigate = useNavigate();
     const {handleSubmit, trigger} = useFormContext();
 
     const [activeStep, setActiveStep] = useState(0);
@@ -63,13 +65,15 @@ const ProjectFormStepper = ({onSubmit}) => {
             </Stepper>
             <Container sx={{p: 3}}>{getStepContent(activeStep)}</Container>
             <Box sx={{display: "flex", flexDirection: "row", pt: 2}}>
-                <Button
-                    color="inherit"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                >
-                    Atrás
-                </Button>
+                {activeStep === 0 ? (
+                    <Button color="primary" onClick={() => navigate("/projects")}>
+                        Cancelar
+                    </Button>
+                ) : (
+                    <Button color="primary" onClick={handleBack}>
+                        Atrás
+                    </Button>
+                )}
                 <Box sx={{flex: "1 1 auto"}} />
                 {activeStep === steps.length - 1 ? (
                     <Button
