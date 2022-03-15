@@ -2,9 +2,9 @@ import {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 
 import {FormSelect} from "components/common/form";
+import {useAdministrativeDivisions} from "components/common/provider";
 
 import Grid from "@mui/material/Grid";
-import {useAdministrativeDivisions} from "components/common/provider";
 
 const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     const {reset, getValues} = useFormContext();

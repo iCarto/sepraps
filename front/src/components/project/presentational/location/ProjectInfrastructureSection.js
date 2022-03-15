@@ -52,13 +52,13 @@ const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
                 label="Altitud:"
                 value={`${project.main_infrastructure.altitude} metros`}
             />
-            <Map
+            {/* <Map
                 markerPosition={{
                     lat: project.main_infrastructure.latitude,
                     lng: project.main_infrastructure.longitude,
                 }}
                 text={`${project.main_infrastructure.locality.locality_name}, ${project.main_infrastructure.locality.district_name}`}
-            />
+            /> */}
         </SectionCard>
     );
 };
