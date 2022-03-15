@@ -10,7 +10,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import TopicIcon from "@mui/icons-material/Topic";
 import Toolbar from "@mui/material/Toolbar";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import GradingIcon from "@mui/icons-material/Grading";
+import LinearScaleIcon from "@mui/icons-material/LinearScale";
 import {MenuListItemLink} from "components/common/presentational";
 
 const ProjectMenu = ({project}) => {
@@ -54,7 +54,7 @@ const ProjectMenu = ({project}) => {
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/milestones`}>
                             <ListItemIcon>
-                                <GradingIcon />
+                                <LinearScaleIcon />
                             </ListItemIcon>
                             <ListItemText primary="Hitos" />
                         </MenuListItemLink>

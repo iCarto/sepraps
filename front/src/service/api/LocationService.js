@@ -39,6 +39,15 @@ const LocationService = {
                     department_code: locality.department,
                 });
             });
+            administrativeDivisions.departments.sort((a, b) =>
+                a.label.localeCompare(b.label)
+            );
+            administrativeDivisions.districts.sort((a, b) =>
+                a.label.localeCompare(b.label)
+            );
+            administrativeDivisions.localities.sort((a, b) =>
+                a.label.localeCompare(b.label)
+            );
             return administrativeDivisions;
         });
     },
