@@ -30,6 +30,23 @@ const ProjectLocationSection = () => {
         />,
     ];
 
+    const providerInfo = (
+        <>
+            <SectionField
+                label="Nombre del prestador:"
+                value={project.provider?.name}
+            />
+        </>
+    );
+
+    const noProviderInfo = (
+        <SectionField
+            label="Nombre del prestador:"
+            value="Este proyecto aún no tiene prestador"
+            valueFontStyle="italic"
+        />
+    );
+
     const linkedLocalities = (
         <>
             <SectionLabel label="Localidades vinculadas:" />
@@ -51,10 +68,7 @@ const ProjectLocationSection = () => {
         <SectionCard title="Ubicación" secondaryActions={headerActions}>
             <Grid container spacing={2}>
                 <Grid item xs={12} lg={8}>
-                    <SectionField
-                        label="Nombre del prestador:"
-                        value={project.provider.name}
-                    />
+                    {project.provider ? providerInfo : noProviderInfo}
                     {project.linked_localities.length !== 0
                         ? linkedLocalities
                         : noLinkedLocalities}
