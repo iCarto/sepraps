@@ -49,10 +49,7 @@ const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
     };
 
     return (
-        <FormSection>
-            <Grid item xs={12}>
-                <Typography>Localidades vinculadas</Typography>
-            </Grid>
+        <Grid container>
             <Grid item xs={11}>
                 <FormLocationSelect name={auxPropertyName} orientation="horizontal" />
             </Grid>
@@ -105,7 +102,7 @@ const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
                     </Table>
                 </TableContainer>
             </Grid>
-        </FormSection>
+        </Grid>
     );
 };
 
