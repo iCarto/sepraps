@@ -11,7 +11,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
-const AddProviderButtonGroup = () => {
+const AddProviderButtonGroup = ({onAdd = null, onSearch = null}) => {
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -49,7 +49,7 @@ const AddProviderButtonGroup = () => {
                 <MenuItem
                     onClick={() => {
                         handleClose();
-                        navigate("provider/new/add");
+                        onAdd ? onAdd() : navigate("provider/new/add");
                     }}
                 >
                     <ListItemIcon>
@@ -60,7 +60,7 @@ const AddProviderButtonGroup = () => {
                 <MenuItem
                     onClick={() => {
                         handleClose();
-                        navigate("provider/new/search");
+                        onSearch ? onSearch() : navigate("provider/new/search");
                     }}
                 >
                     <ListItemIcon>

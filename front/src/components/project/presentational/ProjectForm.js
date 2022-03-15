@@ -36,13 +36,13 @@ const ProjectForm = ({onSubmit, section = null}) => {
         project_type: project?.project_type || "",
         project_class: project?.project_class || "",
         init_date: project?.init_date || null,
-        provider_id: project?.provider.id || null,
-        provider_name: project?.provider.name || "",
-        provider_area: project?.provider.area || "",
+        provider_id: project?.provider?.id || null,
+        provider_name: project?.provider?.name || "",
+        provider_area: project?.provider?.area || "",
         provider_location: {
-            department: project?.provider.locality.department || "",
-            district: project?.provider.locality.district || "",
-            locality: project?.provider.locality.code || "",
+            department: project?.provider?.locality.department || "",
+            district: project?.provider?.locality.district || "",
+            locality: project?.provider?.locality.code || "",
         },
         main_infrastructure_location: {
             department: project?.main_infrastructure.locality.department || "",
@@ -52,6 +52,11 @@ const ProjectForm = ({onSubmit, section = null}) => {
         main_infrastructure_latitude: project?.main_infrastructure.latitude || "",
         main_infrastructure_longitude: project?.main_infrastructure.longitude || "",
         main_infrastructure_altitude: project?.main_infrastructure.altitude || "",
+        linked_locality: {
+            locality: "",
+            district: "",
+            department: "",
+        },
         linked_localities: project
             ? project.linked_localities.map(linked_locality => {
                   return {
@@ -81,16 +86,18 @@ const ProjectForm = ({onSubmit, section = null}) => {
             init_date: data.init_date,
             project_type: data.project_type,
             project_class: data.project_class,
-            provider: createProvider({
-                id: data.provider_id,
-                name: data.provider_name,
-                area: data.provider_area,
-                locality: createLocality({
-                    code: data.provider_location.locality,
-                    district: data.provider_location.district,
-                    department: data.provider_location.department,
-                }),
-            }),
+            provider: data.provider_name
+                ? createProvider({
+                      id: data.provider_id,
+                      name: data.provider_name,
+                      area: data.provider_area,
+                      locality: createLocality({
+                          code: data.provider_location.locality,
+                          district: data.provider_location.district,
+                          department: data.provider_location.department,
+                      }),
+                  })
+                : null,
             main_infrastructure: createInfrastructure({
                 locality: createLocality({
                     code: data.main_infrastructure_location.locality,

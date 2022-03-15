@@ -29,7 +29,7 @@ const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
         values[auxPropertyName].locality_name = localities.find(
             locality => locality.value === values[auxPropertyName].locality
         ).label;
-        values[name] = [...values[name], values.linked_locality];
+        values[name] = [...values[name], values[auxPropertyName]];
         reset({
             ...values,
         });
