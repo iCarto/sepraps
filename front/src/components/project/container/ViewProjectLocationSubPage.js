@@ -33,10 +33,7 @@ const ViewProjectLocationSubPage = () => {
                     <ProjectProviderSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ProjectLinkedLocalitiesSection
-                        linkedLocalities={project.linked_localities.length}
-                        isSidePanelOpen={isSidePanelOpen}
-                    />
+                    <ProjectLinkedLocalitiesSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
             </Grid>
         </SubPageLayout>

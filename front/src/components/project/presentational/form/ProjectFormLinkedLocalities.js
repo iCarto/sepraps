@@ -51,7 +51,7 @@ const ProjectFormLinkedLocalities = ({name, auxPropertyName}) => {
     return (
         <Grid container>
             <Grid item xs={11}>
-                <FormLocationSelect name={auxPropertyName} orientation="horizontal" />
+                <FormLocationSelect name={auxPropertyName} orientation="vertical" />
             </Grid>
             <Grid item xs={1}>
                 <IconButton

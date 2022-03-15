@@ -19,6 +19,7 @@ import {
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import ProjectFormLinkedLocalities from "./form/ProjectFormLinkedLocalities";
 
 const ProjectForm = ({onSubmit, section = null}) => {
     let project;
@@ -131,6 +132,12 @@ const ProjectForm = ({onSubmit, section = null}) => {
                         {section === "generaldata" && <ProjectFormGeneralDataFields />}
                         {section === "main_infrastructure" && (
                             <ProjectFormLocationFields isMapDisplayed={false} />
+                        )}
+                        {section === "linked_localities" && (
+                            <ProjectFormLinkedLocalities
+                                name="linked_localities"
+                                auxPropertyName="linked_locality"
+                            />
                         )}
                         {section === "financing" && (
                             <FormFinancingSelect name="financing" />
