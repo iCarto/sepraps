@@ -70,11 +70,6 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
         });
     };
 
-    const emptyOption = {
-        value: "",
-        label: "-",
-    };
-
     return (
         <Grid container>
             <Grid item md={orientation === "vertical" ? 12 : 4} xs={12}>
@@ -82,8 +77,9 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                     name={`${propsName}.department`}
                     label="Departamento"
                     rules={null}
-                    options={[emptyOption, ...departments]}
+                    options={departments}
                     onChangeHandler={onChangeDepartment}
+                    showEmptyOption={true}
                 />
             </Grid>
             <Grid item md={orientation === "vertical" ? 12 : 4} xs={12}>
@@ -91,15 +87,17 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                     name={`${propsName}.district`}
                     label="Distrito"
                     rules={null}
-                    options={[emptyOption, ...departmentDistricts]}
+                    options={departmentDistricts}
                     onChangeHandler={onChangeDistrict}
+                    showEmptyOption={true}
                 />
             </Grid>
             <Grid item md={orientation === "vertical" ? 12 : 4} xs={12}>
                 <FormSelect
                     name={`${propsName}.locality`}
                     label="Localidad"
-                    options={[emptyOption, ...districtLocalities]}
+                    options={districtLocalities}
+                    showEmptyOption={true}
                 />
             </Grid>
         </Grid>
