@@ -2,21 +2,21 @@ import {useEffect, useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ContractService, ProjectService} from "service/api";
-import {contract_view_adapter, createContract} from "model";
+import {contract_view_adapter} from "model";
 
+import {ProjectSection} from "../../project/presentational";
 import {SidebarAction, SidebarPanel} from "layout";
-import {ProjectSection} from "../presentational";
-import {DialogLayout} from "components/common/presentational";
+import {RemoveContractProjectDialog} from ".";
 
 import Alert from "@mui/material/Alert";
 import LaunchIcon from "@mui/icons-material/Launch";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ViewProjectPanel = () => {
+const ViewContractProjectPanel = () => {
     const navigate = useNavigateWithReload();
     const [project, setProject] = useState(null);
     const [projectToRemove, setProjectToRemove] = useState(null);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [error, setError] = useState("");
 
     let contract;
@@ -35,29 +35,9 @@ const ViewProjectPanel = () => {
         navigate(`/contracts/${contractId}/projects`);
     };
 
-    const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
-    };
-
     const handleRemoveProject = () => {
         setProjectToRemove(project.id);
-        setIsDialogOpen(true);
-    };
-
-    const handleConfirmRemoval = () => {
-        let projectToRemoveIndex = contract.projects.findIndex(
-            project => project.id === projectToRemove
-        );
-
-        contract.projects.splice(projectToRemoveIndex, 1);
-
-        const updatedContract = createContract({
-            ...contract,
-            projects: [...contract.projects],
-        });
-
-        handleUpdateContract(updatedContract);
-        setIsDialogOpen(false);
+        setIsRemoveDialogOpen(true);
     };
 
     const handleUpdateContract = updatedContract => {
@@ -104,17 +84,15 @@ const ViewProjectPanel = () => {
                 </Alert>
             )}
             <ProjectSection project={project} />
-            <DialogLayout
-                dialogLabel="Remove project"
-                dialogTitle="¿Quiere quitar este proyecto del contrato?"
-                dialogContentText="Si hace clic en Quitar, el proyecto se borrará de la lista de proyectos de este contrato."
-                mainActionClick={handleConfirmRemoval}
-                mainActionText="Quitar"
-                handleDialog={handleDialog}
-                isDialogOpen={isDialogOpen}
+            <RemoveContractProjectDialog
+                projectToRemove={projectToRemove}
+                contract={contract}
+                onRemoval={handleUpdateContract}
+                isDialogOpen={isRemoveDialogOpen}
+                setIsDialogOpen={setIsRemoveDialogOpen}
             />
         </SidebarPanel>
     );
 };
 
-export default ViewProjectPanel;
+export default ViewContractProjectPanel;

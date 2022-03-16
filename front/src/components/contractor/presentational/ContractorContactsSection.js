@@ -1,33 +1,35 @@
 import {Fragment, useState} from "react";
 import {useNavigateWithReload} from "hooks";
-import {ContactService, ContractorService} from "service/api";
-import {createContractor} from "model";
+import {ContractorService} from "service/api";
 
-import {AccordionLayout, DialogLayout} from "components/common/presentational";
+import {AccordionLayout} from "components/common/presentational";
 import {AddContactButtonGroup, ContactsTable} from "components/contacts/presentational";
+import {
+    DeleteContractorContactDialog,
+    RemoveContractorContactDialog,
+} from "../container";
 
-import Alert from "@mui/material/Alert";
 import Grid from "@mui/material/Grid";
+import Alert from "@mui/material/Alert";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ContractorContactsSection = ({contractor}) => {
     const navigate = useNavigateWithReload();
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [contactToRemove, setContactToRemove] = useState(null);
-    const [actionToPerform, setActionToPerform] = useState("");
     const [error, setError] = useState("");
 
     const handleActions = (contactId, action) => {
-        setActionToPerform(action);
         switch (action) {
             case "remove":
                 setContactToRemove(contactId);
-                setIsDialogOpen(true);
+                setIsRemoveDialogOpen(true);
                 break;
             case "delete":
                 setContactToRemove(contactId);
-                setIsDialogOpen(true);
+                setIsDeleteDialogOpen(true);
                 break;
             case "edit":
                 handleEdit(contactId);
@@ -37,28 +39,8 @@ const ContractorContactsSection = ({contractor}) => {
         }
     };
 
-    const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
-    };
-
     const handleEdit = contactId => {
         navigate(`contractor/contact/${contactId}/edit`);
-    };
-
-    const handleConfirmRemoval = () => {
-        let contactToRemoveIndex = contractor.contacts.findIndex(
-            contact => contact.id === contactToRemove
-        );
-
-        contractor.contacts.splice(contactToRemoveIndex, 1);
-
-        const updatedContractor = createContractor({
-            ...contractor,
-            contacts: [...contractor.contacts],
-        });
-
-        handleUpdateContractor(updatedContractor);
-        setIsDialogOpen(false);
     };
 
     const handleUpdateContractor = updatedContractor => {
@@ -70,13 +52,6 @@ const ContractorContactsSection = ({contractor}) => {
                 console.log(error);
                 setError(error.toString());
             });
-    };
-
-    const handleConfirmDeletion = () => {
-        setIsDialogOpen(false);
-        ContactService.deleteContact(contactToRemove).then(() => {
-            navigate(`/contracts/${contractor.contract}`, true);
-        });
     };
 
     return (
@@ -104,29 +79,19 @@ const ContractorContactsSection = ({contractor}) => {
                     </Grid>
                 </Grid>
             </AccordionLayout>
-            {actionToPerform === "remove" && (
-                <DialogLayout
-                    dialogLabel="Remove contact"
-                    dialogTitle="¿Quiere quitar este contacto de la lista?"
-                    dialogContentText="Si hace clic en Quitar, el contacto se borrará de la lista de contactos del contratista."
-                    mainActionClick={handleConfirmRemoval}
-                    mainActionText="Quitar"
-                    handleDialog={handleDialog}
-                    isDialogOpen={isDialogOpen}
-                />
-            )}
-            {actionToPerform === "delete" && (
-                <DialogLayout
-                    dialogLabel="Delete contact"
-                    dialogTitle="¿Quiere eliminar este contacto definitivamente?"
-                    dialogContentText="Si hace clic en Eliminar, el contacto se borrará definitivamente. Este contacto no se podrá recuperar."
-                    mainActionClick={handleConfirmDeletion}
-                    mainActionText="Eliminar"
-                    mainActionColor="error"
-                    handleDialog={handleDialog}
-                    isDialogOpen={isDialogOpen}
-                />
-            )}
+            <RemoveContractorContactDialog
+                contractor={contractor}
+                contactToRemove={contactToRemove}
+                onRemoval={handleUpdateContractor}
+                isDialogOpen={isRemoveDialogOpen}
+                setIsDialogOpen={setIsRemoveDialogOpen}
+            />
+            <DeleteContractorContactDialog
+                contractor={contractor}
+                contactToDelete={contactToRemove}
+                isDialogOpen={isDeleteDialogOpen}
+                setIsDialogOpen={setIsDeleteDialogOpen}
+            />
         </Fragment>
     );
 };

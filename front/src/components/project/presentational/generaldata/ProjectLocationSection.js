@@ -20,8 +20,8 @@ const ProjectLocationSection = () => {
 
     const headerActions = [
         <SectionCardHeaderAction
-            key="go-to-location-subpage"
-            name="go-to-location-subpage"
+            key="navigate-to-location-subpage"
+            name="navigate-to-location-subpage"
             text="Ir a la página de Ubicación"
             icon={<LaunchIcon />}
             onClick={() => {
@@ -83,14 +83,14 @@ const ProjectLocationSection = () => {
                     >
                         <SectionLabel label="Infraestructura principal:" />
                     </Grid>
-                    {/* <Grid item xs={12}>
+                    <Grid item xs={12}>
                         <Map
                             markerPosition={{
                                 lat: project.main_infrastructure.latitude,
                                 lng: project.main_infrastructure.longitude,
                             }}
                         />
-                    </Grid> */}
+                    </Grid>
                 </Grid>
             </Grid>
         </SectionCard>

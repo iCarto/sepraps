@@ -5,10 +5,10 @@ import {ContractService} from "service/api";
 import {contract_view_adapter, createContract} from "model";
 
 import {SidebarPanel} from "layout";
-import {ProjectFormSearch} from "../presentational";
+import {ProjectFormSearch} from "../../project/presentational";
 import Alert from "@mui/material/Alert";
 
-const AddProjectPanel = () => {
+const AddContractProjectPanel = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [error, setError] = useState("");
 
@@ -63,4 +63,4 @@ const AddProjectPanel = () => {
     );
 };
 
-export default AddProjectPanel;
+export default AddContractProjectPanel;

@@ -1,3 +1,4 @@
+import {useOutletContext} from "react-router-dom";
 import {ActionsMenu, MenuAction} from "components/common/presentational";
 
 import TableContainer from "@mui/material/TableContainer";
@@ -8,7 +9,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
-import {useOutletContext} from "react-router-dom";
 
 const ProjectLinkedLocalitiesTable = ({handleActions = null}) => {
     let project;
