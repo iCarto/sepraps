@@ -11,6 +11,7 @@ const FormSelect = ({
     options,
     rules = {},
     onChangeHandler = null,
+    showEmptyOption = false,
 }) => {
     const {control} = useFormContext();
     const {
@@ -21,6 +22,11 @@ const FormSelect = ({
         control,
         rules,
     });
+
+    const emptyOption = {
+        value: "",
+        label: "‌‌", // This is not an empty character. It's U+200C unicode character.
+    };
 
     return (
         <FormControl fullWidth error={Boolean(error)} margin="normal">
@@ -38,11 +44,13 @@ const FormSelect = ({
                     onChange(event);
                 }}
             >
-                {options.map(({label, value}) => (
-                    <MenuItem key={value} value={value}>
-                        {label}
-                    </MenuItem>
-                ))}
+                {(showEmptyOption ? [emptyOption, ...options] : options).map(
+                    ({label, value}) => (
+                        <MenuItem key={value} value={value}>
+                            {label}
+                        </MenuItem>
+                    )
+                )}
             </Select>
             <FormHelperText>{error?.message}</FormHelperText>
         </FormControl>
