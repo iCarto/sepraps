@@ -139,8 +139,8 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                 </Table>
             ) : (
                 <Typography
-                    style={{
-                        marginTop: "24px",
+                    pt={6}
+                    sx={{
                         textAlign: "center",
                         fontStyle: "italic",
                     }}

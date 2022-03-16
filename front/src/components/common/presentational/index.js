@@ -15,3 +15,4 @@ export {default as ButtonLink} from "./ButtonLink";
 export {default as AccordionLayout} from "./AccordionLayout";
 export {default as DialogLayout} from "./DialogLayout";
 export {default as SearchAutocomplete} from "./SearchAutocomplete";
+export {default as DropdownMenuItemLink} from "./DropdownMenuItemLink";

@@ -3,11 +3,11 @@ import SelectContractDropDown from "../container/SelectContractDropDown";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
-import List from "@mui/material/List";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InfoIcon from "@mui/icons-material/Info";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
+import MenuList from "@mui/material/MenuList";
 
 const ContractMenu = ({contract}) => {
     return (
@@ -29,7 +29,7 @@ const ContractMenu = ({contract}) => {
                 </Toolbar>
                 <Divider />
                 <Box>
-                    <List sx={{pt: 0}}>
+                    <MenuList sx={{pt: 0}}>
                         <MenuListItemLink to={`/contracts/${contract?.id}`}>
                             <ListItemIcon>
                                 <InfoIcon />
@@ -42,7 +42,7 @@ const ContractMenu = ({contract}) => {
                             </ListItemIcon>
                             <ListItemText primary="Proyectos" />
                         </MenuListItemLink>
-                    </List>
+                    </MenuList>
                 </Box>
             </Box>
         )

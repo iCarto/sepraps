@@ -58,7 +58,7 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
                 {project.linked_localities.length !== 0 ? (
                     <ProjectLinkedLocalitiesTable handleActions={handleActions} />
                 ) : (
-                    <Typography pt={3} style={{fontStyle: "italic"}}>
+                    <Typography p={3} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene localidades vinculadas
                     </Typography>
                 )}

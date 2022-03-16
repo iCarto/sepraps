@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import {ProjectService, PROJECT_TEMPLATE} from "service/api";
 import PropTypes from "prop-types";
 
-import {MenuListItemLink} from "components/common/presentational";
+import {DropdownMenuItemLink} from "components/common/presentational";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
@@ -62,7 +62,6 @@ const SelectProjectDropDown = ({selectedProject}) => {
                     </Typography>
                     <Typography
                         variant="overline"
-                        color="grey.900"
                         sx={{
                             pt: 1.5,
                             lineHeight: 0,
@@ -94,7 +93,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                 }}
             >
                 {projects.map(project => (
-                    <MenuListItemLink
+                    <DropdownMenuItemLink
                         variant="menu"
                         key={project.id}
                         id={project.id}
@@ -108,7 +107,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                                 {project.code}
                             </Typography>
                         </Stack>
-                    </MenuListItemLink>
+                    </DropdownMenuItemLink>
                 ))}
             </Menu>
         </>

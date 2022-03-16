@@ -14,6 +14,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 const fabStyle = {
     position: "absolute",
+    zIndex: 2,
     bottom: 16,
     right: 16,
 };

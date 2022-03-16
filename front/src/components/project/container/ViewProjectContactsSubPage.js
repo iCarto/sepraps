@@ -8,6 +8,7 @@ import {ContactsTable} from "components/contacts/presentational";
 import {SearchBox, SectionCard} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 const ViewProjectContactsSubPage = () => {
     let project;
@@ -44,15 +45,26 @@ const ViewProjectContactsSubPage = () => {
                         title="Contactos del proyecto"
                         isSidePanelOpen={isSidePanelOpen}
                     >
-                        <Grid container sx={{mb: 2}}>
-                            <Grid item xs={12} md={4}>
-                                <SearchBox
-                                    searchValue={searchText}
-                                    handleSearch={handleSearch}
-                                />
-                            </Grid>
-                        </Grid>
-                        <ContactsTable contacts={filteredContacts} />
+                        {project.contacts ? (
+                            <>
+                                <Grid container sx={{mb: 2}}>
+                                    <Grid item xs={12} md={4}>
+                                        <SearchBox
+                                            searchValue={searchText}
+                                            handleSearch={handleSearch}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <ContactsTable contacts={filteredContacts} />
+                            </>
+                        ) : (
+                            <Typography
+                                py={6}
+                                sx={{fontStyle: "italic", textAlign: "center"}}
+                            >
+                                Este proyecto aún no tiene contactos
+                            </Typography>
+                        )}
                     </SectionCard>
                 </Grid>
             </Grid>

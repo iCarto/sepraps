@@ -46,7 +46,7 @@ const ProjectFinancingDataSection = () => {
                 </>
             ) : (
                 <Stack alignItems="center" spacing={2}>
-                    <Typography style={{fontStyle: "italic"}}>
+                    <Typography p={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene financiador
                     </Typography>
                     <Button
