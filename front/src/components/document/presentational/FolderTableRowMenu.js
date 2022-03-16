@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useDownloadDocument, useCopyToClipboard} from "hooks";
 
-import {RemoveDocumentDialog} from "../container";
+import {DeleteDocumentDialog} from "../container";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
@@ -93,7 +93,7 @@ const FolderTableRowMenu = ({folderElement, basePath, onUpdate}) => {
                     </MenuItem>
                 )}
             </Menu>
-            <RemoveDocumentDialog
+            <DeleteDocumentDialog
                 folderElement={folderElement}
                 onDeletedFolderElement={() => {
                     onUpdate();

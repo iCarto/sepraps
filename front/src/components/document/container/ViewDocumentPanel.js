@@ -5,7 +5,7 @@ import {DocumentService} from "service/api";
 
 import {SidebarAction, SidebarPanel} from "layout";
 import {DocumentSection} from "../presentational";
-import {RemoveDocumentDialog} from ".";
+import {DeleteDocumentDialog} from ".";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
@@ -57,7 +57,6 @@ const ViewDocumentPanel = () => {
         );
     };
 
-    // SIDEBAR ACTIONS TO BE USED IN SIDEBARPANEL WHEN COMMON STRUCTURE IS IMPLEMENTED
     const sidebarActions = [
         <SidebarAction
             key="copy-link-to-file"
@@ -85,7 +84,7 @@ const ViewDocumentPanel = () => {
             sidebarActions={sidebarActions}
         >
             <DocumentSection folderElement={folderElement} />
-            <RemoveDocumentDialog
+            <DeleteDocumentDialog
                 folderElement={folderElement}
                 onDeletedFolderElement={() => handleCloseSidebar(true)}
                 isDialogOpen={isDeleteDialogOpen}

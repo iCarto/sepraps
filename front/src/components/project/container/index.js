@@ -9,10 +9,9 @@ export {default as ViewProjectContactsSubPage} from "./ViewProjectContactsSubPag
 export {default as ViewProjectDocumentsSubPage} from "./ViewProjectDocumentsSubPage";
 export {default as SelectProjectDropDown} from "./SelectProjectDropDown";
 export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPanel";
-export {default as AddProjectPanel} from "./AddProjectPanel";
 export {default as AddProjectProviderPanel} from "./AddProjectProviderPanel";
-export {default as ViewProjectPanel} from "./ViewProjectPanel";
 export {default as UpdateProjectPanel} from "./UpdateProjectPanel";
 export {default as UpdateProjectMainInfrastructurePanel} from "./UpdateProjectMainInfrastructurePanel";
 export {default as UpdateProjectFinancingPanel} from "./UpdateProjectFinancingPanel";
 export {default as UpdateProjectLinkedLocalitiesPanel} from "./UpdateProjectLinkedLocalitiesPanel";
+export {default as RemoveProjectLinkedLocalityDialog} from "./RemoveProjectLinkedLocalityDialog";

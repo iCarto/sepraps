@@ -1,10 +1,10 @@
 import {Fragment, useState} from "react";
 import {useNavigateWithReload} from "hooks";
-import {ContactService, ProviderService} from "service/api";
-import {createProvider} from "model";
+import {ProviderService} from "service/api";
 
-import {AccordionLayout, DialogLayout} from "components/common/presentational";
+import {AccordionLayout} from "components/common/presentational";
 import {AddContactButtonGroup, ContactsTable} from "components/contacts/presentational";
+import {DeleteProviderContactDialog, RemoveProviderContactDialog} from "../container";
 
 import Alert from "@mui/material/Alert";
 import Grid from "@mui/material/Grid";
@@ -14,21 +14,20 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 const ProviderContactsSection = ({provider}) => {
     const navigate = useNavigateWithReload();
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [contactToRemove, setContactToRemove] = useState(null);
-    const [actionToPerform, setActionToPerform] = useState("");
     const [error, setError] = useState("");
 
     const handleActions = (contactId, action) => {
-        setActionToPerform(action);
         switch (action) {
             case "remove":
                 setContactToRemove(contactId);
-                setIsDialogOpen(true);
+                setIsRemoveDialogOpen(true);
                 break;
             case "delete":
                 setContactToRemove(contactId);
-                setIsDialogOpen(true);
+                setIsDeleteDialogOpen(true);
                 break;
             case "edit":
                 handleEdit(contactId);
@@ -38,32 +37,8 @@ const ProviderContactsSection = ({provider}) => {
         }
     };
 
-    const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
-    };
-
     const handleEdit = contactId => {
         navigate(`provider/contact/${contactId}/edit`);
-    };
-
-    const handleConfirmRemoval = () => {
-        let contactToRemoveIndex = provider.contacts.findIndex(
-            contact => contact.id === contactToRemove
-        );
-
-        provider.contacts.splice(contactToRemoveIndex, 1);
-
-        const updatedProvider = createProvider({
-            id: provider.id,
-            name: provider.name,
-            area: provider.area,
-            locality: provider.locality.code,
-            project: provider.project,
-            contacts: provider.contacts,
-        });
-
-        handleUpdateProvider(updatedProvider);
-        setIsDialogOpen(false);
     };
 
     const handleUpdateProvider = updatedProvider => {
@@ -75,13 +50,6 @@ const ProviderContactsSection = ({provider}) => {
                 console.log(error);
                 setError(error.toString());
             });
-    };
-
-    const handleConfirmDeletion = () => {
-        setIsDialogOpen(false);
-        ContactService.deleteContact(contactToRemove).then(() => {
-            navigate(`/projects/${provider.project}/location`, true);
-        });
     };
 
     return (
@@ -115,29 +83,19 @@ const ProviderContactsSection = ({provider}) => {
                     </Grid>
                 </Grid>
             </AccordionLayout>
-            {actionToPerform === "remove" && (
-                <DialogLayout
-                    dialogLabel="Remove contact"
-                    dialogTitle="¿Quiere quitar este contacto de la lista?"
-                    dialogContentText="Si hace clic en Quitar, el contacto se borrará de la lista de contactos del proveedor."
-                    mainActionClick={handleConfirmRemoval}
-                    mainActionText="Quitar"
-                    handleDialog={handleDialog}
-                    isDialogOpen={isDialogOpen}
-                />
-            )}
-            {actionToPerform === "delete" && (
-                <DialogLayout
-                    dialogLabel="Delete contact"
-                    dialogTitle="¿Quiere eliminar este contacto definitivamente?"
-                    dialogContentText="Si hace clic en Eliminar, el contacto se borrará definitivamente. Este contacto no se podrá recuperar."
-                    mainActionClick={handleConfirmDeletion}
-                    mainActionText="Eliminar"
-                    mainActionColor="error"
-                    handleDialog={handleDialog}
-                    isDialogOpen={isDialogOpen}
-                />
-            )}
+            <RemoveProviderContactDialog
+                provider={provider}
+                contactToRemove={contactToRemove}
+                onRemoval={handleUpdateProvider}
+                isDialogOpen={isRemoveDialogOpen}
+                setIsDialogOpen={setIsRemoveDialogOpen}
+            />
+            <DeleteProviderContactDialog
+                provider={provider}
+                contactToDelete={contactToRemove}
+                isDialogOpen={isDeleteDialogOpen}
+                setIsDialogOpen={setIsDeleteDialogOpen}
+            />
         </Fragment>
     );
 };

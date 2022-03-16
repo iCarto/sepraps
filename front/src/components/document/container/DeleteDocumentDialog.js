@@ -1,7 +1,7 @@
 import {DialogLayout} from "components/common/presentational";
 import {DocumentService} from "service/api";
 
-const RemoveDocumentDialog = ({
+const DeleteDocumentDialog = ({
     folderElement,
     onDeletedFolderElement = null,
     isDialogOpen,
@@ -11,7 +11,7 @@ const RemoveDocumentDialog = ({
         setIsDialogOpen(isOpen);
     };
 
-    const handleConfirmRemoval = () => {
+    const handleConfirmDeletion = () => {
         setIsDialogOpen(false);
 
         DocumentService.delete(folderElement.path).then(() => {
@@ -26,7 +26,7 @@ const RemoveDocumentDialog = ({
             dialogLabel="Delete document"
             dialogTitle="¿Quiere eliminar este archivo?"
             dialogContentText="Si hace clic en Eliminar, el archivo se eliminará y no se podrá recuperar."
-            mainActionClick={handleConfirmRemoval}
+            mainActionClick={handleConfirmDeletion}
             mainActionText="Eliminar"
             mainActionColor="error"
             handleDialog={handleDialog}
@@ -35,4 +35,4 @@ const RemoveDocumentDialog = ({
     );
 };
 
-export default RemoveDocumentDialog;
+export default DeleteDocumentDialog;

@@ -2,10 +2,11 @@ import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ProjectService} from "service/api";
-import {createProject, project_view_adapter} from "model";
+import {project_view_adapter} from "model";
 
+import {SectionCard} from "components/common/presentational";
 import {ProjectLinkedLocalitiesTable} from ".";
-import {DialogLayout, SectionCard} from "components/common/presentational";
+import {RemoveProjectLinkedLocalityDialog} from "components/project/container";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -17,17 +18,15 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
 
     const navigate = useNavigateWithReload();
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [localityToRemove, setLocalityToRemove] = useState(null);
-    const [actionToPerform, setActionToPerform] = useState("");
     const [error, setError] = useState("");
 
     const handleActions = (localityId, action) => {
-        setActionToPerform(action);
         switch (action) {
             case "remove":
                 setLocalityToRemove(localityId);
-                setIsDialogOpen(true);
+                setIsRemoveDialogOpen(true);
                 break;
             case "edit":
                 handleEdit(localityId);
@@ -37,28 +36,8 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
         }
     };
 
-    const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
-    };
-
     const handleEdit = localityCode => {
         navigate(`linked_localities/${localityCode}/edit`);
-    };
-
-    const handleConfirmRemoval = () => {
-        let localityToRemoveIndex = project.linked_localities.findIndex(
-            locality => locality.code === localityToRemove
-        );
-
-        project.linked_localities.splice(localityToRemoveIndex, 1);
-
-        const updatedProject = createProject({
-            ...project,
-            linked_localities: [...project.linked_localities],
-        });
-
-        handleUpdateProject(updatedProject);
-        setIsDialogOpen(false);
     };
 
     const handleUpdateProject = updatedProject => {
@@ -70,6 +49,7 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
                 console.log(error);
                 setError(error.toString());
             });
+        setIsRemoveDialogOpen(false);
     };
 
     return (
@@ -101,17 +81,13 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
                     </Alert>
                 )}
             </Grid>
-            {actionToPerform === "remove" && (
-                <DialogLayout
-                    dialogLabel="Remove linked locality"
-                    dialogTitle="¿Quiere desvincular esta localidad del proyecto?"
-                    dialogContentText="Si hace clic en Quitar, el contacto se borrará de la lista de localidades vinculadas al proyecto."
-                    mainActionClick={handleConfirmRemoval}
-                    mainActionText="Quitar"
-                    handleDialog={handleDialog}
-                    isDialogOpen={isDialogOpen}
-                />
-            )}
+            <RemoveProjectLinkedLocalityDialog
+                project={project}
+                localityToRemove={localityToRemove}
+                onRemoval={handleUpdateProject}
+                isDialogOpen={isRemoveDialogOpen}
+                setIsDialogOpen={setIsRemoveDialogOpen}
+            />
         </SectionCard>
     );
 };

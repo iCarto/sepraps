@@ -6,8 +6,6 @@ import {project_view_adapter} from "model";
 const RemoveProjectProviderDialog = ({project, isDialogOpen, setIsDialogOpen}) => {
     const navigate = useNavigateWithReload();
 
-    console.log({isDialogOpen});
-
     const handleDialog = isOpen => {
         setIsDialogOpen(isOpen);
     };
