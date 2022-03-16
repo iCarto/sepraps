@@ -27,7 +27,7 @@ const MilestoneCircleDiv = styled("div", {
     minWidth: "20px",
     minHeight: "20px",
     borderRadius: "50%",
-    zIndex: "100",
+    zIndex: "1",
     border: `2px solid ${theme.palette[milestone.phase].main}`,
     background: "white",
     ...(milestone.compliance_date && {

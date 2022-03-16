@@ -31,9 +31,7 @@ const FolderList = ({folderElements, selectedElement, onSelectElement, basePath}
         })
     ) : (
         <Grid item xs={12}>
-            <Typography
-                style={{marginTop: "24px", textAlign: "center", fontStyle: "italic"}}
-            >
+            <Typography pt={6} sx={{textAlign: "center", fontStyle: "italic"}}>
                 Aún no se ha subido ningún documento
             </Typography>
         </Grid>

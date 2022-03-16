@@ -6,7 +6,7 @@ import Menu from "@mui/material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import {MenuListItemLink} from "components/common/presentational";
+import {DropdownMenuItemLink} from "components/common/presentational";
 import Stack from "@mui/material/Stack";
 
 const SelectContractDropDown = ({selectedContract}) => {
@@ -43,6 +43,7 @@ const SelectContractDropDown = ({selectedContract}) => {
                     pb: 2,
                     px: 2.25,
                     color: "white",
+                    justifyContent: "space-between",
                     alignItems: "flex-start",
                 }}
             >
@@ -53,6 +54,7 @@ const SelectContractDropDown = ({selectedContract}) => {
                 >
                     <Typography
                         sx={{
+                            pr: 6,
                             fontWeight: 800,
                             lineHeight: 1.25,
                         }}
@@ -61,7 +63,6 @@ const SelectContractDropDown = ({selectedContract}) => {
                     </Typography>
                     <Typography
                         variant="overline"
-                        color="grey.900"
                         sx={{
                             pt: 1.5,
                             lineHeight: 0,
@@ -84,7 +85,7 @@ const SelectContractDropDown = ({selectedContract}) => {
                     role: "listbox",
                 }}
                 anchorOrigin={{
-                    vertical: "top",
+                    vertical: "bottom",
                     horizontal: "left",
                 }}
                 transformOrigin={{
@@ -93,7 +94,7 @@ const SelectContractDropDown = ({selectedContract}) => {
                 }}
             >
                 {contracts.map(contract => (
-                    <MenuListItemLink
+                    <DropdownMenuItemLink
                         variant="menu"
                         key={contract.id}
                         id={contract.id}
@@ -107,7 +108,7 @@ const SelectContractDropDown = ({selectedContract}) => {
                                 {contract.bid_request_number}
                             </Typography>
                         </Stack>
-                    </MenuListItemLink>
+                    </DropdownMenuItemLink>
                 ))}
             </Menu>
         </>

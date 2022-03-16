@@ -13,7 +13,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import TopicIcon from "@mui/icons-material/Topic";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import LinearScaleIcon from "@mui/icons-material/LinearScale";
-
+import MenuList from "@mui/material/MenuList";
 
 const ProjectMenu = ({project}) => {
     return (
@@ -35,7 +35,7 @@ const ProjectMenu = ({project}) => {
                 </Toolbar>
                 <Divider />
                 <Box>
-                    <List sx={{pt: 0}}>
+                    <MenuList sx={{pt: 0}}>
                         <MenuListItemLink to={`/projects/${project.id}`}>
                             <ListItemIcon>
                                 <InfoIcon />
@@ -72,7 +72,7 @@ const ProjectMenu = ({project}) => {
                             </ListItemIcon>
                             <ListItemText primary="Documentos" />
                         </MenuListItemLink>
-                    </List>
+                    </MenuList>
                 </Box>
             </Box>
         )

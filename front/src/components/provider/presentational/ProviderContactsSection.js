@@ -66,7 +66,7 @@ const ProviderContactsSection = ({provider}) => {
                                 handleActions={handleActions}
                             />
                         ) : (
-                            <Typography pt={3} style={{fontStyle: "italic"}}>
+                            <Typography pt={3} sx={{fontStyle: "italic"}}>
                                 Este prestador aún no tiene contactos
                             </Typography>
                         )}

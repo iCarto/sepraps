@@ -1,4 +1,4 @@
-import {Fragment, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 
 import {useDomain} from "components/common/provider";
@@ -7,22 +7,27 @@ import {FormSelect} from "components/common/form";
 const FormFinancingSelect = ({name: propsName}) => {
     const {reset, getValues} = useFormContext();
     const {financingFunds, financingPrograms} = useDomain();
+    const [financingFundsPrograms, setFinancingFundsPrograms] = useState([]);
 
-    const [financingFundPrograms, setFinancingFundsPrograms] = useState(() => {
+    useEffect(() => {
         const values = getValues();
-        if (values[propsName].financing_fund !== "") {
-            return financingPrograms.filter(
-                district => district.financing_fund === values[propsName].financing_fund
+        if (values[propsName]?.financing_fund !== "") {
+            setFinancingFundsPrograms(
+                financingPrograms.filter(
+                    financingProgram =>
+                        financingProgram.financing_fund ===
+                        values[propsName].financing_fund
+                )
             );
         }
-        return [];
-    });
+    }, [financingPrograms]);
 
     const onChangeFinancingFund = selectedFinancingFund => {
-        console.log("selectedFinancingFund", {selectedFinancingFund});
-        const financingFundPrograms = financingPrograms.filter(
-            financingProgram =>
-                financingProgram.financing_fund === selectedFinancingFund
+        setFinancingFundsPrograms(
+            financingPrograms.filter(
+                financingProgram =>
+                    financingProgram.financing_fund === selectedFinancingFund
+            )
         );
         const values = getValues();
         values[propsName] = {
@@ -32,7 +37,6 @@ const FormFinancingSelect = ({name: propsName}) => {
         reset({
             ...values,
         });
-        setFinancingFundsPrograms(financingFundPrograms);
     };
 
     return (
@@ -46,7 +50,7 @@ const FormFinancingSelect = ({name: propsName}) => {
             <FormSelect
                 name={`${propsName}.financing_program`}
                 label="Programa de financiación"
-                options={financingFundPrograms}
+                options={financingFundsPrograms}
             />
         </Fragment>
     );
