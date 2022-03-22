@@ -4,10 +4,9 @@ import {ActionsMenu, MenuAction} from "components/common/presentational";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import EditIcon from "@mui/icons-material/Edit";
+import TableCell from "@mui/material/TableCell";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const ProjectLinkedLocalitiesTable = ({handleActions = null}) => {
@@ -54,13 +53,6 @@ const ProjectLinkedLocalitiesTable = ({handleActions = null}) => {
                             {handleActions ? (
                                 <TableCell>
                                     <ActionsMenu>
-                                        <MenuAction
-                                            name="edit-contact"
-                                            icon={<EditIcon />}
-                                            text="Editar localidad"
-                                            itemId={locality.code}
-                                            handleClick={handleClick}
-                                        />
                                         <MenuAction
                                             name="remove-contact"
                                             icon={<LinkOffIcon />}

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useOutletContext, useParams} from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ProjectService} from "service/api";
 import {project_view_adapter} from "model";
@@ -10,7 +10,6 @@ import Alert from "@mui/material/Alert";
 
 const UpdateProjectLinkedLocalitiesPanel = () => {
     const [error, setError] = useState("");
-    const {action, localityCode} = useParams();
     const navigate = useNavigateWithReload();
 
     let project;
@@ -31,20 +30,9 @@ const UpdateProjectLinkedLocalitiesPanel = () => {
         navigate(`/projects/${project.id}/location`);
     };
 
-    const selectedLocality =
-        action === "edit"
-            ? project.linked_localities.find(
-                  linked_locality => linked_locality.code === localityCode
-              )
-            : null;
-
     return (
         <SidebarPanel
-            sidebarTitle={
-                project.linked_localities.length !== 0
-                    ? "Modificar localidad"
-                    : "Añadir localidad"
-            }
+            sidebarTitle="Añadir localidad"
             closeSidebarClick={handleCloseSidebar}
         >
             {error && (
@@ -52,11 +40,7 @@ const UpdateProjectLinkedLocalitiesPanel = () => {
                     {error}
                 </Alert>
             )}
-            <ProjectLinkedLocalitiesForm
-                project={project}
-                onSubmit={handleSubmit}
-                locality={selectedLocality}
-            />
+            <ProjectLinkedLocalitiesForm project={project} onSubmit={handleSubmit} />
         </SidebarPanel>
     );
 };
