@@ -1,13 +1,16 @@
 import {MenuListItemLink} from "components/common/presentational";
 import SelectContractDropDown from "../container/SelectContractDropDown";
+
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
-import ListItemIcon from "@mui/material/ListItemIcon";
+import MenuList from "@mui/material/MenuList";
 import ListItemText from "@mui/material/ListItemText";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import InfoIcon from "@mui/icons-material/Info";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
-import MenuList from "@mui/material/MenuList";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ContractMenu = ({contract}) => {
     return (
@@ -35,6 +38,12 @@ const ContractMenu = ({contract}) => {
                                 <InfoOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Información" />
+                        </MenuListItemLink>
+                        <MenuListItemLink to={`/contracts/${contract?.id}/monitoring`}>
+                            <ListItemIcon>
+                                <PermContactCalendarIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Supervisión" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/contracts/${contract?.id}/projects`}>
                             <ListItemIcon>

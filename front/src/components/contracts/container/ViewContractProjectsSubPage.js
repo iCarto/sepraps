@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
 
 import {SubPageLayout} from "layout";
@@ -9,8 +10,14 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 const ViewContractProjectsSubPage = () => {
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
     let contract;
     [contract] = useOutletContext();
+
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
+    };
 
     const navigate = useNavigate();
 

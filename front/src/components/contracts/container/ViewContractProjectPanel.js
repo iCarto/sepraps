@@ -73,17 +73,19 @@ const ViewContractProjectPanel = () => {
         : null;
 
     return (
-        <SidebarPanel
-            sidebarTitle="Datos básicos del proyecto"
-            sidebarActions={sidebarActions}
-            closeSidebarClick={handleCloseSidebar}
-        >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
-            <ProjectSection project={project} />
+        <>
+            <SidebarPanel
+                sidebarTitle="Datos básicos del proyecto"
+                sidebarActions={sidebarActions}
+                closeSidebarClick={handleCloseSidebar}
+            >
+                {error ? (
+                    <Alert severity="error" sx={{mb: 2}}>
+                        {error}
+                    </Alert>
+                ) : null}
+                <ProjectSection project={project} />
+            </SidebarPanel>
             <RemoveContractProjectDialog
                 projectToRemove={projectToRemove}
                 contract={contract}
@@ -91,7 +93,7 @@ const ViewContractProjectPanel = () => {
                 isDialogOpen={isRemoveDialogOpen}
                 setIsDialogOpen={setIsRemoveDialogOpen}
             />
-        </SidebarPanel>
+        </>
     );
 };
 

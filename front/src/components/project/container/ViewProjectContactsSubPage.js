@@ -38,7 +38,10 @@ const ViewProjectContactsSubPage = () => {
     };
 
     return (
-        <SubPageLayout getIsSidePanelOpen={getIsSidePanelOpen}>
+        <SubPageLayout
+            getIsSidePanelOpen={getIsSidePanelOpen}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <SectionCard

@@ -72,10 +72,17 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
 
     console.log({folderElements});
 
+    const tableRowStyle = {
+        "&:last-child td, &:last-child th": {
+            border: 0,
+        },
+        paddingRight: "12px",
+    };
+
     return (
-        <TableContainer>
+        <TableContainer sx={{overflowX: "auto"}}>
             {folderElements.length !== 0 ? (
-                <Table sx={{minWidth: 750}} aria-labelledby="tableTitle">
+                <Table sx={{tableLayout: "fixed"}} aria-labelledby="Files table">
                     <TableSortingHead
                         order={order}
                         attribute={attribute}
@@ -90,11 +97,7 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                                     <TableRow
                                         hover
                                         key={index}
-                                        sx={{
-                                            "&:last-child td, &:last-child th": {
-                                                border: 0,
-                                            },
-                                        }}
+                                        sx={tableRowStyle}
                                         onClick={() => handleClick(folderElement)}
                                         onDoubleClick={() =>
                                             handleDoubleClick(folderElement)

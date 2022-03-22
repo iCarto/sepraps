@@ -68,15 +68,18 @@ const ContractorContactsSection = ({contractor}) => {
                         />
                     </Grid>
                     <Grid item container xs={12} justifyContent="center">
-                        <AddContactButtonGroup basePath="contractor/contact" />
+                        <AddContactButtonGroup
+                            basePath="contractor/contact"
+                            btnName="Añadir contacto"
+                        />
                     </Grid>
-                    <Grid item xs={12}>
-                        {error && (
+                    {error && (
+                        <Grid item xs={12}>
                             <Alert severity="error" sx={{mt: 2, mb: 2}}>
                                 {error}
                             </Alert>
-                        )}
-                    </Grid>
+                        </Grid>
+                    )}
                 </Grid>
             </AccordionLayout>
             <RemoveContractorContactDialog

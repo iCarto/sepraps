@@ -5,8 +5,9 @@ import {ProjectService} from "service/api";
 
 import {SubPageLayout} from "layout";
 import {SectionCard} from "components/common/presentational";
-import Grid from "@mui/material/Grid";
 import {MilestonePhase} from "components/milestone/presentational";
+
+import Grid from "@mui/material/Grid";
 
 const findActiveMilestone = milestones => {
     let activeMilestone = null;
@@ -32,6 +33,11 @@ const ViewProjectMilestonesSubPage = () => {
     [project] = useOutletContext();
 
     const [milestonesPhases, setMilestonesPhases] = useState([]);
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
+    };
 
     useEffect(() => {
         ProjectService.getProjectMilestones(id).then(milestonesPhases => {
@@ -45,7 +51,11 @@ const ViewProjectMilestonesSubPage = () => {
     );
 
     return (
-        <SubPageLayout outletContext={[project]}>
+        <SubPageLayout
+            outletContext={[project]}
+            getIsSidePanelOpen={getIsSidePanelOpen}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <SectionCard title="Hitos del proyecto">

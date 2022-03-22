@@ -96,7 +96,7 @@ const SidebarPanel = ({
                     </Tooltip>
                 </Grid>
             </Grid>
-            <Divider></Divider>
+            <Divider />
             <Box p={3}>
                 <Grid container mt={3}>
                     {children}

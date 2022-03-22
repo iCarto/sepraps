@@ -16,10 +16,5 @@ export {
     default as UpdateProjectMainInfrastructurePanel,
 } from "./UpdateProjectMainInfrastructurePanel";
 export {default as UpdateProjectFinancingPanel} from "./UpdateProjectFinancingPanel";
-export {
-    default as UpdateProjectLinkedLocalitiesPanel,
-} from "./UpdateProjectLinkedLocalitiesPanel";
-export {
-    default as RemoveProjectLinkedLocalityDialog,
-} from "./RemoveProjectLinkedLocalityDialog";
-export {default as ViewProjectPanel} from "./ViewProjectPanel";
+export {default as AddProjectLinkedLocalitiesPanel} from "./AddProjectLinkedLocalitiesPanel";
+export {default as RemoveProjectLinkedLocalityDialog} from "./RemoveProjectLinkedLocalityDialog";

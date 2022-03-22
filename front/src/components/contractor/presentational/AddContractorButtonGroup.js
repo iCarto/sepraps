@@ -34,6 +34,7 @@ const AddContractorButtonGroup = () => {
                 }}
                 endIcon={<ArrowDropDownIcon />}
                 ref={ref}
+                mt={0}
             >
                 Asignar
             </Button>

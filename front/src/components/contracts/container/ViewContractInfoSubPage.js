@@ -24,6 +24,7 @@ const ViewContractInfoSubPage = () => {
         <SubPageLayout
             outletContext={[contract]}
             getIsSidePanelOpen={getIsSidePanelOpen}
+            isSidePanelOpen={isSidePanelOpen}
         >
             <Grid container spacing={3}>
                 <Grid item xs={12}>

@@ -21,7 +21,7 @@ const ContractorForm = ({contractor = null, onSubmit = null, onCancel = null}) =
                   name: "",
                   contractor_type: "",
                   phone: "",
-                  emial: "",
+                  email: "",
               },
         reValidateMode: "onSubmit",
     });

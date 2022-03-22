@@ -8,6 +8,7 @@ import {
 } from "components/common/presentational";
 import {ProjectLinkedLocalitiesTable} from "../location";
 import {Map} from "components/common/geo";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -31,12 +32,7 @@ const ProjectLocationSection = () => {
     ];
 
     const providerInfo = (
-        <>
-            <SectionField
-                label="Nombre del prestador:"
-                value={project.provider?.name}
-            />
-        </>
+        <SectionField label="Nombre del prestador:" value={project.provider?.name} />
     );
 
     const noProviderInfo = (
@@ -66,7 +62,7 @@ const ProjectLocationSection = () => {
 
     return (
         <SectionCard title="Ubicación" secondaryActions={headerActions}>
-            <Grid container spacing={2}>
+            <Grid container>
                 <Grid item xs={12} lg={8}>
                     {project.provider ? providerInfo : noProviderInfo}
                     {project.linked_localities.length !== 0

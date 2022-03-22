@@ -15,8 +15,8 @@ import {
     UpdateProjectPanel,
     UpdateProjectMainInfrastructurePanel,
     UpdateProjectFinancingPanel,
-    UpdateProjectLinkedLocalitiesPanel,
     ViewProjectPanel,
+    AddProjectLinkedLocalitiesPanel,
 } from "components/project/container";
 import {UpdateProjectProviderContactPanel} from "components/provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "components/milestone/container";
@@ -60,7 +60,7 @@ const projectRoutes = [
                 <Route
                     key="project-linked-localities-update"
                     path="linked_localities/:localityCode/:action"
-                    element={<UpdateProjectLinkedLocalitiesPanel />}
+                    element={<AddProjectLinkedLocalitiesPanel />}
                 />
             </Route>
             <Route

@@ -50,7 +50,7 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                     </Typography>
                 </Grid>
             </AccordionSummary>
-            <AccordionDetails>{children}</AccordionDetails>
+            <AccordionDetails sx={{pb: 0}}>{children}</AccordionDetails>
         </Accordion>
     );
 };
