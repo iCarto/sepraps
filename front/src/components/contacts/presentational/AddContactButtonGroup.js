@@ -11,7 +11,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
-const AddContactButtonGroup = ({basePath}) => {
+const AddContactButtonGroup = ({basePath, btnName}) => {
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -24,7 +24,7 @@ const AddContactButtonGroup = ({basePath}) => {
     };
 
     return (
-        <Box>
+        <>
             <Button
                 id="menu-button"
                 color="primary"
@@ -34,12 +34,21 @@ const AddContactButtonGroup = ({basePath}) => {
                 }}
                 endIcon={<ArrowDropDownIcon />}
                 ref={ref}
+                mt={0}
             >
-                Añadir Contacto
+                {btnName}
             </Button>
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                }}
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{
@@ -55,7 +64,7 @@ const AddContactButtonGroup = ({basePath}) => {
                     <ListItemIcon>
                         <AddIcon fontSize="small" />
                     </ListItemIcon>
-                    <Typography>Nuevo Contacto</Typography>
+                    <Typography>Nuevo</Typography>
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
@@ -66,10 +75,10 @@ const AddContactButtonGroup = ({basePath}) => {
                     <ListItemIcon>
                         <SearchIcon fontSize="small" />
                     </ListItemIcon>
-                    <Typography>Contacto Existente</Typography>
+                    <Typography>Existente</Typography>
                 </MenuItem>
             </Menu>
-        </Box>
+        </>
     );
 };
 

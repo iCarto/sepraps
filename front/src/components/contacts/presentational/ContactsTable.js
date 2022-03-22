@@ -42,7 +42,7 @@ const headCells = [
     },
 ];
 
-const ContactsTable = ({contacts, handleActions = null}) => {
+const ContactsTable = ({contacts = [], handleActions = null}) => {
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "name",
         "asc"

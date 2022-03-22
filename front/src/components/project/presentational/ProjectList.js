@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-const ProjectList = ({projects, onClick}) => {
+const ProjectList = ({projects, onClick, isSidebarPanelOpen = false}) => {
     const noProjectFound = projects.length === 0 || !projects;
 
     const projectItems = projects.map(project => {

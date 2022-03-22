@@ -58,12 +58,12 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
                 {project.linked_localities.length !== 0 ? (
                     <ProjectLinkedLocalitiesTable handleActions={handleActions} />
                 ) : (
-                    <Typography p={3} sx={{fontStyle: "italic"}}>
+                    <Typography pt={3} pb={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene localidades vinculadas
                     </Typography>
                 )}
             </Grid>
-            <Grid item container xs={12} mt={3} justifyContent="center">
+            <Grid item container xs={12} justifyContent="center">
                 <Button
                     variant="contained"
                     color="primary"
@@ -74,13 +74,13 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
                     Añadir
                 </Button>
             </Grid>
-            <Grid item xs={12}>
-                {error && (
+            {error && (
+                <Grid item xs={12}>
                     <Alert severity="error" sx={{mt: 2, mb: 2}}>
                         {error}
                     </Alert>
-                )}
-            </Grid>
+                </Grid>
+            )}
             <RemoveProjectLinkedLocalityDialog
                 project={project}
                 localityToRemove={localityToRemove}

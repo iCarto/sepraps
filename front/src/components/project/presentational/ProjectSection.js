@@ -12,8 +12,10 @@ const ProjectSection = ({project, headerActions = null}) => {
             <SectionField
                 label="Tipo:"
                 value={
-                    project?.project_type.charAt(0).toUpperCase() +
-                    project?.project_type.slice(1)
+                    project?.project_type
+                        ? project.project_type.charAt(0).toUpperCase() +
+                          project?.project_type.slice(1)
+                        : ""
                 }
             />
             <SectionField

@@ -8,19 +8,24 @@ import {FolderViewProvider} from "components/document/provider";
 import Grid from "@mui/material/Grid";
 
 const ViewProjectDocumentsSubPage = () => {
+    const [folderPath, setFolderPath] = useState(null);
+    const [selectedElement, setSelectedElement] = useState(null);
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+
+    const params = useParams();
+    const {pathname} = useLocation();
+    const navigate = useNavigate();
+
     let project;
     [project] = useOutletContext();
-    const navigate = useNavigate();
-    const {pathname} = useLocation();
-    console.log({pathname});
 
     const basePath = `/projects/${project.id}/documents/`;
 
-    const [folderPath, setFolderPath] = useState(null);
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
+    };
 
-    const [selectedElement, setSelectedElement] = useState(null);
-
-    const params = useParams();
+    console.log({pathname});
 
     useEffect(() => {
         let path = params["*"];
@@ -29,12 +34,7 @@ const ViewProjectDocumentsSubPage = () => {
         }
         if (pathname.startsWith(basePath + "detail")) {
             // If we are in detail view
-            setFolderPath(
-                path
-                    .split("/")
-                    .slice(0, -1)
-                    .join("/")
-            );
+            setFolderPath(path.split("/").slice(0, -1).join("/"));
         } else {
             setFolderPath(path);
         }
@@ -50,7 +50,10 @@ const ViewProjectDocumentsSubPage = () => {
     };
 
     return (
-        <SubPageLayout>
+        <SubPageLayout
+            getIsSidePanelOpen={getIsSidePanelOpen}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     {folderPath && (

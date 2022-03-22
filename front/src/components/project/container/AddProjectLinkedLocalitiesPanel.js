@@ -8,12 +8,16 @@ import {SidebarPanel} from "layout";
 import {ProjectLinkedLocalitiesForm} from "../presentational/location";
 import Alert from "@mui/material/Alert";
 
-const UpdateProjectLinkedLocalitiesPanel = () => {
+const AddProjectLinkedLocalitiesPanel = () => {
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
 
     let project;
     [project] = useOutletContext();
+
+    let context = useOutletContext();
+
+    console.log({context});
 
     const handleSubmit = project => {
         ProjectService.updateProject(project_view_adapter({...project}))
@@ -45,4 +49,4 @@ const UpdateProjectLinkedLocalitiesPanel = () => {
     );
 };
 
-export default UpdateProjectLinkedLocalitiesPanel;
+export default AddProjectLinkedLocalitiesPanel;

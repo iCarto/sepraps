@@ -24,6 +24,7 @@ const ViewProjectLocationSubPage = () => {
         <SubPageLayout
             outletContext={[project]}
             getIsSidePanelOpen={getIsSidePanelOpen}
+            isSidePanelOpen={isSidePanelOpen}
         >
             <Grid container spacing={3}>
                 <Grid item xs={12}>

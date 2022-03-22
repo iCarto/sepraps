@@ -7,7 +7,6 @@ const DropdownMenuItemLink = ({children, to, ...props}) => {
 
     return (
         <MenuItem
-            button
             component={Link}
             to={to}
             sx={{bgcolor: match ? "grey.100" : "inherit"}}

@@ -1,11 +1,10 @@
-import {useState} from "react";
 import {Outlet} from "react-router-dom";
 
 import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
 import styled from "@mui/material/styles/styled";
 
-const rightPanelDrawerWidth = 440;
+const sidebarPanelWidth = 440;
 
 const DrawerHeader = styled("div")(({theme}) => ({
     display: "flex",
@@ -29,7 +28,7 @@ const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,
             }),
-            marginRight: rightPanelDrawerWidth,
+            marginRight: sidebarPanelWidth,
         }),
         backgroundColor:
             theme.palette.mode === "light"
@@ -40,19 +39,14 @@ const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
     })
 );
 
-const SubPageLayout = ({outletContext = [], getIsSidePanelOpen = null, ...props}) => {
-    const [rightPanelDrawerOpened, setRightPanelDrawerOpened] = useState(false);
-
-    const getRightPanelDrawerStatus = () => {
-        getIsSidePanelOpen(rightPanelDrawerOpened);
-    };
-
-    if (getIsSidePanelOpen) {
-        getRightPanelDrawerStatus();
-    }
-
+const SubPageLayout = ({
+    outletContext = [],
+    getIsSidePanelOpen = null,
+    isSidePanelOpen = null,
+    ...props
+}) => {
     return (
-        <Main open={rightPanelDrawerOpened}>
+        <Main open={isSidePanelOpen}>
             <Container
                 maxWidth="lg"
                 sx={{
@@ -67,24 +61,18 @@ const SubPageLayout = ({outletContext = [], getIsSidePanelOpen = null, ...props}
             </Container>
             <Drawer
                 sx={{
-                    width: rightPanelDrawerWidth,
+                    width: sidebarPanelWidth,
                     flexShrink: 0,
                     "& .MuiDrawer-paper": {
-                        width: rightPanelDrawerWidth,
+                        width: sidebarPanelWidth,
                     },
                 }}
                 variant="persistent"
                 anchor="right"
-                open={rightPanelDrawerOpened}
+                open={isSidePanelOpen}
             >
                 <DrawerHeader />
-                <Outlet
-                    context={[
-                        ...outletContext,
-                        getIsSidePanelOpen,
-                        setRightPanelDrawerOpened,
-                    ]}
-                />
+                <Outlet context={[...outletContext, getIsSidePanelOpen]} />
             </Drawer>
         </Main>
     );

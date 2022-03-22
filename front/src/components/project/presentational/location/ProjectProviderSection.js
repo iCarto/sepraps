@@ -71,7 +71,7 @@ const ProjectProviderSection = ({isSidePanelOpen = null}) => {
                 </>
             ) : (
                 <Stack alignItems="center" spacing={2}>
-                    <Typography p={6} sx={{fontStyle: "italic"}}>
+                    <Typography pb={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene prestador
                     </Typography>
                     <AddProviderButtonGroup />

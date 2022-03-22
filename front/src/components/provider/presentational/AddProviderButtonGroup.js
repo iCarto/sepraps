@@ -34,6 +34,7 @@ const AddProviderButtonGroup = ({onAdd = null, onSearch = null}) => {
                 }}
                 endIcon={<ArrowDropDownIcon />}
                 ref={ref}
+                mt={0}
             >
                 Asignar
             </Button>
