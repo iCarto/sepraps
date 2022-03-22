@@ -1,29 +1,18 @@
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import {FormLocationSelect} from "components/common/form";
-import {DomainProvider, LocationProvider} from "components/common/provider";
-import {createLocality, createProject} from "model";
 import {FormProvider, useForm} from "react-hook-form";
+import {createLocality, createProject} from "model";
+import {DomainProvider, LocationProvider} from "components/common/provider";
+import {FormLocationSelect} from "components/common/form";
 
-const ProjectLinkedLocalitiesForm = ({
-    project = null,
-    locality = null,
-    onSubmit = null,
-}) => {
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+
+const ProjectLinkedLocalitiesForm = ({project = null, onSubmit = null}) => {
     const formMethods = useForm({
-        defaultValues: locality
-            ? {
-                  linked_locality: {
-                      department: locality.department,
-                      district: locality.district,
-                      locality: locality.code,
-                  },
-              }
-            : {
-                  locality: null,
-                  district: "",
-                  department: "",
-              },
+        defaultValues: {
+            locality: null,
+            district: "",
+            department: "",
+        },
         reValidateMode: "onSubmit",
     });
 
