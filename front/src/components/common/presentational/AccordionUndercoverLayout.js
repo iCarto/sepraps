@@ -4,10 +4,12 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Grid from "@mui/material/Grid";
 
-const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
+const AccordionUndercoverLayout = ({
+    accordionTitle,
+    accordionIcon = null,
+    children,
+}) => {
     return (
         <Accordion
             disableGutters
@@ -19,19 +21,16 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                 "&:before": {
                     display: "none",
                 },
-                borderBottom: "1px solid #ccc",
-                borderRadius: "0px !important",
             }}
         >
             <Tooltip title="Desplegar/Ocultar" followCursor>
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
                     aria-controls="accordion-content"
                     id="accordion-header"
                     sx={{
+                        padding: "0 12px 0 6px",
                         display: "flex",
-                        padding: 0,
-                        borderBottom: "1px solid #ccc",
+                        width: "min-content",
                         "& .MuiAccordionSummary-content": {
                             alignItems: "center",
                         },
@@ -55,9 +54,9 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                     </Typography>
                 </AccordionSummary>
             </Tooltip>
-            <AccordionDetails sx={{pb: 0}}>{children}</AccordionDetails>
+            <AccordionDetails sx={{padding: 0}}>{children}</AccordionDetails>
         </Accordion>
     );
 };
 
-export default AccordionLayout;
+export default AccordionUndercoverLayout;

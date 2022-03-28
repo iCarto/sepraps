@@ -18,20 +18,17 @@ const SortProjectsSelect = ({attribute, order, handleSortBy}) => {
             <InputLabel id="sortBy">Ordenar por</InputLabel>
             <Select
                 labelId="sortBy"
-                id="sortByDate"
+                id="sortBy"
+                defaultValue=""
                 value={sortValue}
                 name="sortBy"
                 label="Ordenar"
                 onChange={handleInputChange}
             >
-                <MenuItem value="name-asc">Nombre - ascendente</MenuItem>
-                <MenuItem value="name-desc">Nombre - descendente</MenuItem>
-
                 <MenuItem value="init_date-asc">Fecha de inicio - ascendente</MenuItem>
                 <MenuItem value="init_date-desc">
                     Fecha de inicio - descendente
                 </MenuItem>
-
                 <MenuItem value="updated_at-asc">
                     Fecha de modificación - ascendente
                 </MenuItem>
