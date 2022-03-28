@@ -1,0 +1,310 @@
+[
+    {
+        "model": "monitoring.contact",
+        "pk": 3,
+        "fields": {
+            "name": "Ing. Ricardo Díaz Martínez",
+            "post": "responsable_contratista",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "comments": "CI Nº 310.695"
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 4,
+        "fields": {
+            "name": "Ing. Fernando Marcial Moreno Martínez",
+            "post": "responsable_contratista",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "comments": "CI Nº 421.518"
+        }
+    },
+    {
+        "model": "monitoring.contractor",
+        "pk": 2,
+        "fields": {
+            "name": "CONSORCIO TAPE RORY",
+            "contractor_type": "company",
+            "address": "John F. Kennedy nº 1083, c/ José A. Flores, Asunción",
+            "phone": "(021) 207-699",
+            "email": "",
+            "comments": "RUC Nº 80055403-3",
+            "contacts": [3, 4]
+        }
+    },
+    {
+        "model": "monitoring.ConstructionContract",
+        "pk": 2,
+        "fields": {
+            "number": "14/2019",
+            "comments": "Contrato LI-12008-19-183446 correspondiente al Grupo 2: Caaguazú Centro Nor Oeste de la licitación Nº 01/2019 (364644) asociada al contrato de préstamo 3601/OC-PR",
+            "bid_request_number": "LPI - 01/2019",
+            "bid_request_id": "364644",
+            "bid_request_date": "2019-06-04",
+            "bid_request_budget": 4967676437,
+            "bid_request_deadline": 8,
+            "awarding_budget": 4452386597,
+            "awarding_percentage_drop": 10.37,
+            "awarding_date": "2019-11-15",
+            "contractor": 2,
+            "execution_signature_date": "2019-12-11",
+            "execution_order_start_date": "2019-12-11",
+            "execution_certificate_start_date": "2019-12-11",
+            "execution_expected_delivery_date": "2020-12-31",
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 5,
+        "fields": {
+            "locality": "0518001",
+            "latitude": -25.232337,
+            "longitude": -55.777968,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 5,
+        "fields": {
+            "name": "Junta de Saneamiento 3 de Febrero",
+            "area": "rural",
+            "locality": "0518001",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 5,
+        "fields": {
+            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-005",
+            "project_type": "agua",
+            "project_class": "mejora",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 5,
+            "provider": 5,
+            "construction_contract": 2,
+            "linked_localities": ["0518001"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 6,
+        "fields": {
+            "locality": "0503100",
+            "latitude": -25.108355,
+            "longitude": -56.548956,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 6,
+        "fields": {
+            "name": "Junta de Saneamiento Cleto Romero",
+            "area": "rural",
+            "locality": "0503100",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 6,
+        "fields": {
+            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-006",
+            "project_type": "agua",
+            "project_class": "mejora",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 6,
+            "provider": 6,
+            "construction_contract": 2,
+            "linked_localities": ["0503100"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 7,
+        "fields": {
+            "locality": "0518310",
+            "latitude": -25.540492,
+            "longitude": -56.776596,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 7,
+        "fields": {
+            "name": "Junta de Saneamiento Ko'e Rory",
+            "area": "rural",
+            "locality": "0518310",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 7,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
+            "code": "2019-AP-007",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 7,
+            "provider": 7,
+            "construction_contract": 2,
+            "linked_localities": ["0518310"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 8,
+        "fields": {
+            "locality": "0502140",
+            "latitude": -25.302632,
+            "longitude": -56.050267,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 8,
+        "fields": {
+            "name": "Junta de Saneamiento Jakarei 3 Bocas",
+            "area": "rural",
+            "locality": "0502140",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 8,
+        "fields": {
+            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-008",
+            "project_type": "agua",
+            "project_class": "mejora",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 8,
+            "provider": 8,
+            "construction_contract": 2,
+            "linked_localities": ["0502140"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 9,
+        "fields": {
+            "locality": "0519100",
+            "latitude": -25.302632,
+            "longitude": -56.050267,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 9,
+        "fields": {
+            "name": "Junta de Saneamiento Torin Cue",
+            "area": "rural",
+            "locality": "0519100",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 9,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-009",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 9,
+            "provider": 9,
+            "construction_contract": 2,
+            "linked_localities": ["0502140"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 10,
+        "fields": {
+            "locality": "0511485",
+            "latitude": -24.908617,
+            "longitude": -55.894753,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 10,
+        "fields": {
+            "name": "Junta de Saneamiento Ka'iho 3ra Línea",
+            "area": "rural",
+            "locality": "0511485",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 10,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-010",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 10,
+            "provider": 10,
+            "construction_contract": 2,
+            "linked_localities": ["0511485"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    }
+]

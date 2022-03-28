@@ -147,13 +147,6 @@
         "model": "monitoring.financingfund",
         "pk": 1,
         "fields": {
-            "name": "BID (Banco Interamericano de Desarrollo"
-        }
-    },
-    {
-        "model": "monitoring.financingfund",
-        "pk": 1,
-        "fields": {
             "name": "BID (Banco Interamericano de Desarrollo)"
         }
     },
@@ -161,14 +154,14 @@
         "model": "monitoring.financingfund",
         "pk": 2,
         "fields": {
-            "name": "WB (Banco Mundial)"
+            "name": "MERCOSUR"
         }
     },
     {
         "model": "monitoring.financingprogram",
         "pk": 1,
         "fields": {
-            "name": "SENASA-BID 2021-2025",
+            "name": "Contrato de Préstamo 3601/OC-PR - BID AECID/FONPRODE",
             "financing_fund": 1
         }
     },
@@ -176,187 +169,8 @@
         "model": "monitoring.financingprogram",
         "pk": 2,
         "fields": {
-            "name": "SENASA-WBN 2019-2022",
+            "name": "COF 01/08 - FOCEM",
             "financing_fund": 2
-        }
-    },
-    {
-        "model": "monitoring.infrastructure",
-        "pk": 1,
-        "fields": {
-            "locality": "1011460",
-            "latitude": -25.463711,
-            "longitude": -54.856361,
-            "altitude": 223
-        }
-    },
-    {
-        "model": "monitoring.infrastructure",
-        "pk": 2,
-        "fields": {
-            "locality": "1009210",
-            "latitude": -25.343762,
-            "longitude": -54.90921,
-            "altitude": 311
-        }
-    },
-    {
-        "model": "monitoring.contact",
-        "pk": 1,
-        "fields": {
-            "name": "Pedro Pérez",
-            "post": "responsable_supervision_tecnica",
-            "gender": "M",
-            "phone": "+11 987987987",
-            "email": "pedro@perez.com",
-            "comments": "No tiene observaciones"
-        }
-    },
-    {
-        "model": "monitoring.contact",
-        "pk": 2,
-        "fields": {
-            "name": "Contacto Junta 1",
-            "post": "miembro_junta_saneamiento",
-            "gender": "F",
-            "phone": "+11 789789789",
-            "email": "contacto1@junta.com",
-            "comments": "Tiene una observación"
-        }
-    },
-    {
-        "model": "monitoring.contact",
-        "pk": 3,
-        "fields": {
-            "name": "Contacto Junta 2",
-            "post": "miembro_junta_saneamiento",
-            "gender": "M",
-            "phone": "+11 456456456",
-            "email": "contacto2@junta.com",
-            "comments": ""
-        }
-    },
-    {
-        "model": "monitoring.contact",
-        "pk": 4,
-        "fields": {
-            "name": "Contacto del contratista 1",
-            "post": "responsable_contratista",
-            "gender": "M",
-            "phone": "+11 111111111",
-            "email": "contacto1@contratista.com",
-            "comments": ""
-        }
-    },
-    {
-        "model": "monitoring.contact",
-        "pk": 5,
-        "fields": {
-            "name": "Contacto del contratista 2",
-            "post": "residente_obra",
-            "gender": "M",
-            "phone": "+11 222333444",
-            "email": "contacto2@contratista.com",
-            "comments": ""
-        }
-    },
-    {
-        "model": "monitoring.provider",
-        "pk": 1,
-        "fields": {
-            "name": "Junta de Saneamiento de Cristo Rey",
-            "area": "rural",
-            "locality": "1507600",
-            "contacts": []
-        }
-    },
-    {
-        "model": "monitoring.provider",
-        "pk": 2,
-        "fields": {
-            "name": "Junta de Saneamiento de Nueva Esperanza",
-            "area": "rural",
-            "locality": "1507600",
-            "contacts": [2, 3]
-        }
-    },
-    {
-        "model": "monitoring.contractor",
-        "pk": 1,
-        "fields": {
-            "name": "Contratista de pruebas",
-            "contractor_type": "company",
-            "phone": "+11 456456456",
-            "email": "contacto2@junta.com",
-            "contacts": [4, 5]
-        }
-    },
-    {
-        "model": "monitoring.ConstructionContract",
-        "pk": 1,
-        "fields": {
-            "number": "Contrato 19/2019",
-            "comments": "Observaciones al contrato",
-            "bid_request_number": "BRN-19/2019",
-            "bid_request_id": "BRI-19/2019",
-            "bid_request_date": "2019-01-01",
-            "bid_request_budget": 800000,
-            "bid_request_deadline": 48,
-            "awarding_budget": 725490.25,
-            "awarding_percentage_drop": 20.5,
-            "awarding_date": "2022-01-02",
-            "contractor": 1,
-            "execution_signature_date": "2022-01-03",
-            "execution_order_start_date": "2022-01-04",
-            "execution_certificate_start_date": "2022-01-05",
-            "execution_expected_delivery_date": "2022-01-06",
-            "execution_final_delivery_date": "2022-01-07",
-            "closed": false,
-            "creation_user": 1,
-            "created_at": "2019-12-01T00:00:00Z",
-            "updated_at": "2019-12-01T00:00:00Z"
-        }
-    },
-    {
-        "model": "monitoring.project",
-        "pk": 1,
-        "fields": {
-            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
-            "code": "2021-AP-001",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
-            "init_date": "2020-08-10",
-            "main_infrastructure": 1,
-            "financing_fund": 1,
-            "financing_program": 1,
-            "provider": 1,
-            "construction_contract": 1,
-            "linked_localities": ["1011460"],
-            "closed": true,
-            "creation_user": 1,
-            "created_at": "2021-12-01T00:00:00Z",
-            "updated_at": "2021-12-01T00:00:00Z"
-        }
-    },
-    {
-        "model": "monitoring.project",
-        "pk": 2,
-        "fields": {
-            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
-            "code": "2022-AP-001",
-            "project_type": "agua",
-            "project_class": "mejora",
-            "init_date": "2021-08-10",
-            "main_infrastructure": 2,
-            "financing_fund": 1,
-            "financing_program": 1,
-            "provider": 2,
-            "construction_contract": 1,
-            "linked_localities": ["1009210", "1009230", "1009240"],
-            "closed": false,
-            "creation_user": 1,
-            "created_at": "2022-02-01T00:00:00Z",
-            "updated_at": "2022-02-01T00:00:00Z"
         }
     }
 ]
