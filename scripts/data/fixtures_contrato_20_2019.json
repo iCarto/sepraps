@@ -1,0 +1,273 @@
+[
+    {
+        "model": "monitoring.ConstructionContract",
+        "pk": 3,
+        "fields": {
+            "number": "20/2019",
+            "comments": "Contrato LI-12008-19-183448 correspondiente al Grupo 3: Guairá - Itapúa - Alto Paraná (Sur) de la licitación Nº 01/2019 (364644) asociada al contrato de préstamo 3601/OC-PR",
+            "bid_request_number": "LPI - 01/2019",
+            "bid_request_id": "364644",
+            "bid_request_date": "2019-06-04",
+            "bid_request_budget": 7035842072,
+            "bid_request_deadline": 12,
+            "awarding_budget": 7015942974,
+            "awarding_percentage_drop": 0.28,
+            "awarding_date": "2019-12-06",
+            "contractor": 2,
+            "execution_signature_date": "2019-12-11",
+            "execution_order_start_date": "2019-12-11",
+            "execution_certificate_start_date": "2019-12-11",
+            "execution_expected_delivery_date": "2020-12-31",
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 11,
+        "fields": {
+            "locality": "0401200",
+            "latitude": -25.786785,
+            "longitude": -56.396352,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 11,
+        "fields": {
+            "name": "Junta de Saneamiento Portrerito",
+            "area": "rural",
+            "locality": "0401200",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 11,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-011",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 11,
+            "provider": 11,
+            "construction_contract": 3,
+            "linked_localities": ["0401200"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 12,
+        "fields": {
+            "locality": "0407500",
+            "latitude": -25.817139,
+            "longitude": -56.169216,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 12,
+        "fields": {
+            "name": "Junta de Saneamiento Mayor Cue",
+            "area": "rural",
+            "locality": "0407500",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 12,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)S)",
+            "code": "2019-AP-012",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 12,
+            "provider": 12,
+            "construction_contract": 3,
+            "linked_localities": ["0407500"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 13,
+        "fields": {
+            "locality": "0407450",
+            "latitude": -25.791799,
+            "longitude": -56.22063,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 13,
+        "fields": {
+            "name": "Junta de Saneamiento Cerro Corá",
+            "area": "rural",
+            "locality": "0407450",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 13,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
+            "code": "2019-AP-013",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 13,
+            "provider": 13,
+            "construction_contract": 3,
+            "linked_localities": ["0407450"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 14,
+        "fields": {
+            "locality": "0401170",
+            "latitude": -25.765106,
+            "longitude": -56.383727,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 14,
+        "fields": {
+            "name": "Junta de Saneamiento Pisadera",
+            "area": "rural",
+            "locality": "0401170",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 14,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-014",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 14,
+            "provider": 14,
+            "construction_contract": 3,
+            "linked_localities": ["0401170"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 15,
+        "fields": {
+            "locality": "0730270",
+            "latitude": -26.5929073,
+            "longitude": -55.6354899,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 15,
+        "fields": {
+            "name": "Junta de Saneamiento Taguato ́i",
+            "area": "rural",
+            "locality": "0519100",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 15,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-015",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 15,
+            "provider": 15,
+            "construction_contract": 3,
+            "linked_localities": ["0519100"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "monitoring.infrastructure",
+        "pk": 16,
+        "fields": {
+            "locality": "1008200",
+            "latitude": -26.092182,
+            "longitude": -54.672142,
+            "altitude": 100
+        }
+    },
+    {
+        "model": "monitoring.provider",
+        "pk": 16,
+        "fields": {
+            "name": "Junta de Saneamiento Torocua í – Torocua",
+            "area": "rural",
+            "locality": "1008200",
+            "contacts": []
+        }
+    },
+    {
+        "model": "monitoring.project",
+        "pk": 16,
+        "fields": {
+            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "code": "2019-AP-016",
+            "project_type": "agua",
+            "project_class": "nueva_construccion",
+            "init_date": "2019-11-12",
+            "main_infrastructure": 16,
+            "provider": 16,
+            "construction_contract": 3,
+            "linked_localities": ["1008200", "1008205"],
+            "financing_fund": 1,
+            "financing_program": 1,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2019-12-01T00:00:00Z",
+            "updated_at": "2019-12-01T00:00:00Z"
+        }
+    }
+]
