@@ -13,6 +13,7 @@ export {default as MenuListItemLink} from "./MenuListItemLink";
 export {default as MenuAction} from "./MenuAction";
 export {default as ButtonLink} from "./ButtonLink";
 export {default as AccordionLayout} from "./AccordionLayout";
+export {default as AccordionUndercoverLayout} from "./AccordionUndercoverLayout";
 export {default as DialogLayout} from "./DialogLayout";
 export {default as SearchAutocomplete} from "./SearchAutocomplete";
 export {default as DropdownMenuItemLink} from "./DropdownMenuItemLink";

@@ -1,6 +1,6 @@
 import {FormProvider, useForm} from "react-hook-form";
 import {createLocality, createProject} from "model";
-import {DomainProvider, LocationProvider} from "components/common/provider";
+import {LocationProvider} from "components/common/provider";
 import {FormLocationSelect} from "components/common/form";
 
 import Grid from "@mui/material/Grid";
@@ -48,27 +48,25 @@ const ProjectLinkedLocalitiesForm = ({project = null, onSubmit = null}) => {
 
     return (
         <LocationProvider>
-            <DomainProvider>
-                <FormProvider {...formMethods}>
-                    <Grid container component="form">
-                        <FormLocationSelect name="linked_locality" />
+            <FormProvider {...formMethods}>
+                <Grid container component="form">
+                    <FormLocationSelect name="linked_locality" />
+                </Grid>
+                <Grid container justifyContent="center" sx={{mt: 2}}>
+                    <Grid>
+                        {onSubmit && (
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                sx={{ml: 3}}
+                                onClick={formMethods.handleSubmit(handleFormSubmit)}
+                            >
+                                Guardar
+                            </Button>
+                        )}
                     </Grid>
-                    <Grid container justifyContent="center" sx={{mt: 2}}>
-                        <Grid>
-                            {onSubmit && (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ml: 3}}
-                                    onClick={formMethods.handleSubmit(handleFormSubmit)}
-                                >
-                                    Guardar
-                                </Button>
-                            )}
-                        </Grid>
-                    </Grid>
-                </FormProvider>
-            </DomainProvider>
+                </Grid>
+            </FormProvider>
         </LocationProvider>
     );
 };

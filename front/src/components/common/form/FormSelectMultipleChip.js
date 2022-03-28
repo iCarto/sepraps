@@ -8,53 +8,84 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import ClearIcon from "@mui/icons-material/Clear";
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
+const item_height = 48;
+const item_padding_top = 8;
+const menuprops = {
     PaperProps: {
         style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            maxHeight: item_height * 4.5 + item_padding_top,
             width: 250,
         },
     },
 };
 
-const departments = ["Itapúa", "Asunción", "Alto Paraná", "Central"];
-
-function getStyles(department, deptName, theme) {
+const getStyles = (option, optionName, theme) => {
     return {
         fontWeight:
-            deptName.indexOf(department) === -1
+            optionName.indexOf(option) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
     };
-}
+};
 
-const FormSelectMultipleChip = () => {
+const FormSelectMultipleChip = ({
+    name: propsName,
+    label = "",
+    options,
+    onFilter = null,
+}) => {
+    const [optionNames, setOptionNames] = useState([]);
+    const [isFilterActive, setIsFilterActive] = useState(false);
     const theme = useTheme();
-    const [deptName, setDeptName] = useState([]);
 
     const handleChange = event => {
-        const {
-            target: {value},
-        } = event;
-        setDeptName(
+        const optionValues = event.target.value;
+
+        optionValues.length !== 0 ? setIsFilterActive(true) : setIsFilterActive(false);
+
+        setOptionNames(
             // On autofill we get a stringified value.
-            typeof value === "string" ? value.split(",") : value
+            typeof optionValues === "string" ? optionValues.split(",") : optionValues
         );
+        onFilter(optionValues);
+    };
+
+    const clearFilterValues = () => {
+        setOptionNames([]);
+        setIsFilterActive(false);
+        onFilter("");
     };
 
     return (
         <FormControl fullWidth>
-            <InputLabel id="multiple-chip-label">Filtrar por departamento</InputLabel>
+            <InputLabel id="multiple-chip-label">{label}</InputLabel>
             <Select
                 labelId="multiple-chip-label"
-                id="multiple-chip"
-                multiple
-                value={deptName}
+                id="multiple-chip-select"
+                // multiple
+                value={optionNames}
                 onChange={handleChange}
-                input={<OutlinedInput id="select-multiple-chip" label="Departamento" />}
+                input={
+                    <OutlinedInput
+                        id="multiple-chip-input"
+                        label={label}
+                        endAdornment={
+                            <InputAdornment position="end" sx={{mr: 3}}>
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    edge="end"
+                                    onClick={clearFilterValues}
+                                >
+                                    {isFilterActive && <ClearIcon />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                }
                 renderValue={selected => (
                     <Box sx={{display: "flex", flexWrap: "wrap", gap: 0.5}}>
                         {selected.map(value => (
@@ -62,15 +93,16 @@ const FormSelectMultipleChip = () => {
                         ))}
                     </Box>
                 )}
-                MenuProps={MenuProps}
+                menuprops={menuprops}
             >
-                {departments.map(department => (
+                {options?.map(option => (
                     <MenuItem
-                        key={department}
-                        value={department}
-                        style={getStyles(department, deptName, theme)}
+                        key={option.value}
+                        name={option.label}
+                        value={option.label}
+                        style={getStyles(option, optionNames, theme)}
                     >
-                        {department}
+                        {option.label}
                     </MenuItem>
                 ))}
             </Select>
