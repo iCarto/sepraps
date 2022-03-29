@@ -10,3 +10,4 @@ export {default as AddProjectButton} from "./AddProjectButton";
 export {default as ProjectSearchAutocomplete} from "./ProjectSearchAutocomplete";
 export {default as ProjectSection} from "./ProjectSection";
 export {default as ProjectFormSearch} from "./ProjectFormSearch";
+export {default as ProjectListChangeView} from "./ProjectListChangeView";
