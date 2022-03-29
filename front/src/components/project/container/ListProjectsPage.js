@@ -5,7 +5,7 @@ import {useSort, useSearch} from "hooks";
 
 import {PageLayout} from "layout";
 import {SearchBox} from "components/common/presentational";
-import {ClosedProjectsOption, ProjectList} from "../presentational";
+import {ClosedProjectsOption, ProjectList, ProjectsTable} from "../presentational";
 import {SortProjectsSelect, ShowNoOfProjects} from "../presentational";
 
 import Grid from "@mui/material/Grid";
@@ -30,6 +30,7 @@ const ListProjectsPage = () => {
     );
     const {searchText, setSearchText, searchFunction} = useSearch("");
     const [showClosedProjects, setShowClosedProjects] = useState(false);
+    const [selectedElement, setSelectedElement] = useState(null);
 
     useEffect(() => {
         ProjectService.getProjects(showClosedProjects).then(data => {
@@ -58,6 +59,10 @@ const ListProjectsPage = () => {
 
     const handleClickOnCard = orojectId => {
         navigate(`/projects/${orojectId}`);
+    };
+
+    const onSelectProject = project => {
+        setSelectedElement(project);
     };
 
     return (
@@ -103,7 +108,14 @@ const ListProjectsPage = () => {
                     />
                 </Grid>
             </Grid>
+            {/**
             <ProjectList projects={filteredProjects} onClick={handleClickOnCard} />
+            */}
+            <ProjectsTable
+                projects={filteredProjects}
+                selectedElement={selectedElement}
+                onSelectElement={onSelectProject}
+            />
             <Fab
                 sx={fabStyle}
                 color="primary"

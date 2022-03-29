@@ -1,5 +1,11 @@
 import {useState} from "react";
 
+function getDescendantProp(obj, desc) {
+    var arr = desc.split(".");
+    while (arr.length && (obj = obj[arr.shift()]));
+    return obj;
+}
+
 /**Using the method sortFunction, it sorts an array by attribute in descending or ascending order depending on the order "asc"/"desc" received */
 function useSort(initialAttributeValue, initialOrderValue) {
     const [attribute, setAttribute] = useState(initialAttributeValue);
@@ -7,17 +13,17 @@ function useSort(initialAttributeValue, initialOrderValue) {
 
     function sortFunction(a, b) {
         if (order === "desc") {
-            if (a[attribute] > b[attribute]) {
+            if (getDescendantProp(a, attribute) > getDescendantProp(b, attribute)) {
                 return -1;
             }
-            if (b[attribute] < a[attribute]) {
+            if (getDescendantProp(b, attribute) < getDescendantProp(a, attribute)) {
                 return 1;
             }
         } else if (order === "asc") {
-            if (a[attribute] < b[attribute]) {
+            if (getDescendantProp(a, attribute) < getDescendantProp(b, attribute)) {
                 return -1;
             }
-            if (b[attribute] > a[attribute]) {
+            if (getDescendantProp(b, attribute) > getDescendantProp(a, attribute)) {
                 return 1;
             }
         }
