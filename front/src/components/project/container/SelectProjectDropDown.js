@@ -74,42 +74,44 @@ const SelectProjectDropDown = ({selectedProject}) => {
                     </Typography>
                 </Box>
             </Button>
-            <Menu
-                id="lock-menu"
-                anchorEl={anchorElement}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    "aria-labelledby": "lock-button",
-                    role: "listbox",
-                }}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                }}
-            >
-                {filteredProjects.map(project => (
-                    <DropdownMenuItemLink
-                        variant="menu"
-                        key={project.id}
-                        id={project.id}
-                        to={`/projects/${project.id}`}
-                        selected={project === selectedProject.name}
-                        onClick={handleClose}
-                    >
-                        <Stack>
-                            <Typography>{project.code}</Typography>
-                            <Typography variant="caption" sx={{ml: 1}}>
-                                {`${project.locality.locality_name}, ${project.locality.district_name} (${project.locality.department_name})`}
-                            </Typography>
-                        </Stack>
-                    </DropdownMenuItemLink>
-                ))}
-            </Menu>
+            {filteredProjects.length > 0 && (
+                <Menu
+                    id="lock-menu"
+                    anchorEl={anchorElement}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        "aria-labelledby": "lock-button",
+                        role: "listbox",
+                    }}
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                    }}
+                    transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                    }}
+                >
+                    {filteredProjects.map(project => (
+                        <DropdownMenuItemLink
+                            variant="menu"
+                            key={project.id}
+                            id={project.id}
+                            to={`/projects/${project.id}`}
+                            selected={project === selectedProject.name}
+                            onClick={handleClose}
+                        >
+                            <Stack>
+                                <Typography>{project.code}</Typography>
+                                <Typography variant="caption" sx={{ml: 1}}>
+                                    {`${project.locality.locality_name}, ${project.locality.district_name} (${project.locality.department_name})`}
+                                </Typography>
+                            </Stack>
+                        </DropdownMenuItemLink>
+                    ))}
+                </Menu>
+            )}
         </>
     );
 };

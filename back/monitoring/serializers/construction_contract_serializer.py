@@ -125,6 +125,7 @@ class ConstructionContractSummarySerializer(ConstructionContractSerializer):
             "bid_request_deadline",
             "awarding_budget",
             "awarding_date",
+            "contractor",
             "execution_signature_date",
             "created_at",
             "updated_at",

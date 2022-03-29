@@ -1,4 +1,4 @@
-import {DateUtil} from "utilities";
+import {DateUtil, NumberUtil} from "utilities";
 import {SectionCard, SectionField} from "components/common/presentational";
 
 const ContractSummary = ({contract}) => {
@@ -18,8 +18,8 @@ const ContractSummary = ({contract}) => {
                 value={DateUtil.formatDate(contract.awarding_date)}
             />
             <SectionField
-                label="Presupuesto adjudicado:"
-                value={contract.awarding_budget && contract.awarding_budget + " $"}
+                label="Monto adjudicado:"
+                value={NumberUtil.formatCurrency(contract.awarding_budget)}
             />
         </SectionCard>
     );

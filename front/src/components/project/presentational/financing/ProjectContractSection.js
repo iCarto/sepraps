@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 
-import {DateUtil} from "utilities";
+import {DateUtil, NumberUtil} from "utilities";
 import {
     SectionCard,
     SectionCardHeaderAction,
@@ -46,10 +46,12 @@ const ProjectContractSection = ({contract}) => {
                         value={DateUtil.formatDate(contract.awarding_date)}
                     />
                     <SectionField
-                        label="Presupuesto adjudicado:"
-                        value={
-                            contract.awarding_budget && contract.awarding_budget + " $"
-                        }
+                        label="Contratista:"
+                        value={contract.contractor.name}
+                    />
+                    <SectionField
+                        label="Monto adjudicado:"
+                        value={NumberUtil.formatCurrency(contract.awarding_budget)}
                     />
                 </>
             ) : (

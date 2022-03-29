@@ -1,12 +1,14 @@
 import {useEffect, useState} from "react";
-import {useOutletContext, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ProjectService} from "service/api";
 
-import {ProjectSection} from "../presentational";
-import {SidebarAction, SidebarPanel} from "layout";
+import {ProjectCard} from "../presentational";
+import {SidebarPanel} from "layout";
 
 import LaunchIcon from "@mui/icons-material/Launch";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 
 const ViewProjectPanel = () => {
     const navigate = useNavigateWithReload();
@@ -24,27 +26,27 @@ const ViewProjectPanel = () => {
         navigate(`/projects`);
     };
 
-    const sidebarActions = project
-        ? [
-              <SidebarAction
-                  key="go-to"
-                  name="go to project"
-                  text="Ir al proyecto"
-                  icon={<LaunchIcon />}
-                  onClick={() => {
-                      navigate(`/projects/${project.id}`);
-                  }}
-              />,
-          ]
-        : null;
-
     return (
         <SidebarPanel
             sidebarTitle="Resumen del proyecto"
-            sidebarActions={sidebarActions}
             closeSidebarClick={handleCloseSidebar}
         >
-            <ProjectSection project={project} />
+            {project && (
+                <>
+                    <ProjectCard project={project} />
+                    <Grid container justifyContent="center" sx={{mt: 2}}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{ml: 3}}
+                            onClick={() => navigate(`/projects/${project?.id}`)}
+                            startIcon={<LaunchIcon />}
+                        >
+                            Ir al proyecto
+                        </Button>
+                    </Grid>
+                </>
+            )}
         </SidebarPanel>
     );
 };

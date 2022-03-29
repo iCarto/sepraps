@@ -13,22 +13,27 @@ const headCells = [
     {
         id: "code",
         label: "Código",
+        width: 10,
     },
     {
         id: "locality.locality_name",
         label: "Localidad",
+        width: 15,
     },
     {
         id: "locality.district_name",
         label: "Distrito",
+        width: 15,
     },
     {
         id: "locality.department_name",
         label: "Departamento",
+        width: 15,
     },
     {
         id: "name",
-        label: "Nombre",
+        label: "Descripción",
+        width: 25,
     },
     {
         id: "milestones",
@@ -85,7 +90,11 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                 selected={selectedElement?.id === project.id}
                                 style={noPointer}
                             >
-                                <TableCell component="th" scope="row">
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    sx={{width: "100%"}}
+                                >
                                     {project.code}
                                 </TableCell>
                                 <TableCell>{project.locality.locality_name}</TableCell>

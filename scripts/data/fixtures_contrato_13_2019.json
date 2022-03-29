@@ -198,7 +198,7 @@
         "model": "monitoring.provider",
         "pk": 4,
         "fields": {
-            "name": "Junta de Saneamiento Ycua Porá – Cañada Lourdeso",
+            "name": "Junta de Saneamiento San Miguel del Norte",
             "area": "rural",
             "locality": "0218880",
             "contacts": []

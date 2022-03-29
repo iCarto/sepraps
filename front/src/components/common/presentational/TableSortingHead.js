@@ -19,36 +19,43 @@ function TableSortingHead({
     };
 
     return (
-        <TableHead>
-            <TableRow>
+        <>
+            <colgroup>
                 {headCells.slice(0, -1).map(headCell => (
-                    <TableCell
-                        key={headCell.id}
-                        sortDirection={attribute === headCell.id ? order : false}
-                        sx={{width: "100px"}}
-                    >
-                        <TableSortLabel
-                            sx={{textTransform: "uppercase"}}
-                            active={attribute === headCell.id}
-                            direction={attribute === headCell.id ? order : "asc"}
-                            onClick={createSortHandler(headCell.id)}
-                        >
-                            {headCell.label}
-                            {attribute === headCell.id ? (
-                                <Box component="span" sx={visuallyHidden}>
-                                    {order === "desc"
-                                        ? "sorted descending"
-                                        : "sorted ascending"}
-                                </Box>
-                            ) : null}
-                        </TableSortLabel>
-                    </TableCell>
+                    <col width={headCell.width + "%"} />
                 ))}
-                {actionsHeadcell && (
-                    <TableCell key="actions" sx={{width: "62px"}}></TableCell>
-                )}
-            </TableRow>
-        </TableHead>
+            </colgroup>
+            <TableHead>
+                <TableRow>
+                    {headCells.slice(0, -1).map(headCell => (
+                        <TableCell
+                            key={headCell.id}
+                            sortDirection={attribute === headCell.id ? order : false}
+                            sx={{width: "100px"}}
+                        >
+                            <TableSortLabel
+                                sx={{textTransform: "uppercase"}}
+                                active={attribute === headCell.id}
+                                direction={attribute === headCell.id ? order : "asc"}
+                                onClick={createSortHandler(headCell.id)}
+                            >
+                                {headCell.label}
+                                {attribute === headCell.id ? (
+                                    <Box component="span" sx={visuallyHidden}>
+                                        {order === "desc"
+                                            ? "sorted descending"
+                                            : "sorted ascending"}
+                                    </Box>
+                                ) : null}
+                            </TableSortLabel>
+                        </TableCell>
+                    ))}
+                    {actionsHeadcell && (
+                        <TableCell key="actions" sx={{width: "62px"}}></TableCell>
+                    )}
+                </TableRow>
+            </TableHead>
+        </>
     );
 }
 
