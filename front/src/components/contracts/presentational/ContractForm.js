@@ -1,11 +1,12 @@
 import {useOutletContext} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
+import {NumberUtil} from "utilities";
 import {createContract} from "model";
 
-import ContractGeneralDataFormFields from "./ContractGeneralDataFormFields";
-import ContractAwardingFormFields from "./ContractAwardingFormFields";
-import ContractExecutionFormFields from "./ContractExecutionFormFields";
-import ContractBidRequestFormFields from "./ContractBidRequestFormFields";
+import ContractGeneralDataFormFields from "./form/ContractGeneralDataFormFields";
+import ContractAwardingFormFields from "./form/ContractAwardingFormFields";
+import ContractExecutionFormFields from "./form/ContractExecutionFormFields";
+import ContractBidRequestFormFields from "./form/ContractBidRequestFormFields";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -26,10 +27,15 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
         bid_request_number: contract?.bid_request_number || "",
         bid_request_id: contract?.bid_request_id || "",
         bid_request_date: contract?.bid_request_date || "",
-        bid_request_budget: contract?.bid_request_budget || "",
+        // TODO Guaranies don't have decimal fraction, but we have
+        // to keep budgets as numbers with decimals
+        bid_request_budget: contract?.bid_request_budget
+            ? NumberUtil.formatDecimal(contract.bid_request_budget, 0)
+            : "",
         bid_request_deadline: contract?.bid_request_deadline || "",
-        awarding_budget: contract?.awarding_budget || "",
-        awarding_percentage_drop: contract?.awarding_percentage_drop || "",
+        awarding_budget: contract?.awarding_budget
+            ? NumberUtil.formatDecimal(contract.awarding_budget, 0)
+            : "",
         awarding_date: contract?.awarding_date || "",
         execution_signature_date: contract?.execution_signature_date || "",
         execution_order_start_date: contract?.execution_order_start_date || "",
@@ -57,7 +63,13 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
             bid_request_budget: data.bid_request_budget,
             bid_request_deadline: data.bid_request_deadline,
             awarding_budget: data.awarding_budget,
-            awarding_percentage_drop: data.awarding_percentage_drop,
+            awarding_percentage_drop:
+                data.bid_request_budget && data.awarding_budget
+                    ? (
+                          100 -
+                          (data.awarding_budget * 100) / data.bid_request_budget
+                      ).toFixed(2)
+                    : null,
             awarding_date: data.awarding_date,
             contractor: contract?.contractor,
             execution_signature_date: data.execution_signature_date,

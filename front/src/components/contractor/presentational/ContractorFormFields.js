@@ -13,8 +13,10 @@ const ContractorFormFields = () => {
                 label="Tipo de contratista"
                 options={contractorTypes}
             />
+            <FormInputText name="address" label="Dirección" />
             <FormInputText name="phone" label="Teléfono" />
             <FormInputText name="email" label="Correo electrónico" />
+            <FormInputText name="comments" label="Observaciones" />
         </Fragment>
     );
 };

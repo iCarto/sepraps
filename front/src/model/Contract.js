@@ -10,18 +10,6 @@ import {contractor_view_adapter} from "./Contractor";
 class Contracts extends Array {}
 
 const contract_api_adapter = contract => {
-    contract["bid_request_budget"] = NumberUtil.formatDecimal(
-        contract["bid_request_budget"],
-        2
-    );
-    contract["awarding_budget"] = NumberUtil.formatDecimal(
-        contract["awarding_budget"],
-        2
-    );
-    contract["awarding_percentage_drop"] = NumberUtil.formatDecimal(
-        contract["awarding_percentage_drop"],
-        2
-    );
     // in back-end falsy values are null
     contract["bid_request_date"] = contract["bid_request_date"]
         ? new Date(contract["bid_request_date"])
@@ -79,9 +67,6 @@ const contract_view_adapter = contract => {
         : null;
     contract["awarding_budget"] = !!contract["awarding_budget"]
         ? NumberUtil.parseFloatOrNull(contract["awarding_budget"])
-        : null;
-    contract["awarding_percentage_drop"] = !!contract["awarding_percentage_drop"]
-        ? NumberUtil.parseFloatOrNull(contract["awarding_percentage_drop"])
         : null;
     contract["bid_request_date"] = !!contract["bid_request_date"]
         ? DateUtil.formatDate(

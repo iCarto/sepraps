@@ -36,6 +36,8 @@ const ContractExecutionSection = ({isSidePanelOpen = null}) => {
                 label="Fecha de firma del contrato:"
                 value={DateUtil.formatDate(contract.execution_signature_date)}
             />
+            {/**
+             * Hidden fields until we know which entity they are associated with
             <SectionField
                 label="Fecha de la orden de inicio:"
                 value={DateUtil.formatDate(contract.execution_order_start_date)}
@@ -52,6 +54,7 @@ const ContractExecutionSection = ({isSidePanelOpen = null}) => {
                 label="Fecha de recepción definitiva:"
                 value={DateUtil.formatDate(contract.execution_final_delivery_date)}
             />
+            */}
         </SectionCard>
     );
 };

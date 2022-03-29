@@ -1,5 +1,5 @@
 import {useOutletContext, useNavigate} from "react-router-dom";
-import {DateUtil} from "utilities";
+import {DateUtil, NumberUtil} from "utilities";
 
 import {
     SectionCard,
@@ -35,17 +35,15 @@ const ContractBidRequestSection = ({isSidePanelOpen = null}) => {
             <SectionField label="Número:" value={contract.bid_request_number} />
             <SectionField label="Identificador:" value={contract.bid_request_id} />
             <SectionField
-                label="Fecha:"
+                label="Fecha de Publicación:"
                 value={DateUtil.formatDate(contract.bid_request_date)}
             />
             <SectionField
-                label="Presupuesto:"
-                value={
-                    contract.bid_request_budget && contract.bid_request_budget + " $"
-                }
+                label="Monto Estimado:"
+                value={NumberUtil.formatCurrency(contract?.bid_request_budget)}
             />
             <SectionField
-                label="Plazo previsto:"
+                label="Plazo Previsto:"
                 value={
                     contract.bid_request_deadline &&
                     contract.bid_request_deadline + " meses"

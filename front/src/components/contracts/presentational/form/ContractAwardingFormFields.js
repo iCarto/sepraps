@@ -7,12 +7,7 @@ const ContractAwardingFormFields = () => {
             <FormInputDecimal
                 name="awarding_budget"
                 label="Monto total de adjudicación"
-                endAdornment="$"
-            />
-            <FormInputDecimal
-                name="awarding_percentage_drop"
-                label="Porcentaje de baja"
-                endAdornment="%"
+                endAdornment="Gs."
             />
             <FormDatePicker name="awarding_date" label="Fecha de adjudicación" />
         </Fragment>
