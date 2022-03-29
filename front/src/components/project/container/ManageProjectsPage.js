@@ -1,8 +1,8 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import {Outlet} from "react-router-dom";
 import {useSort, useSearch} from "hooks";
 
-import Box from "@mui/material/Box";
+import {ProjectListViewProvider} from "../provider";
 
 /**
  * High Order Component that stores filter and project list
@@ -17,17 +17,19 @@ const ManageProjectsPage = () => {
     const {searchText, setSearchText, searchFunction} = useSearch("");
 
     return (
-        <Outlet
-            context={[
-                {
-                    searchText,
-                    setSearchText,
-                    searchFunction,
-                    filteredProjects,
-                    setFilteredProjects,
-                },
-            ]}
-        />
+        <ProjectListViewProvider>
+            <Outlet
+                context={[
+                    {
+                        searchText,
+                        setSearchText,
+                        searchFunction,
+                        filteredProjects,
+                        setFilteredProjects,
+                    },
+                ]}
+            />
+        </ProjectListViewProvider>
     );
 };
 

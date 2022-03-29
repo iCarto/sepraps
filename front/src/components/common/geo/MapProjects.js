@@ -6,16 +6,18 @@ import {useMapIcon} from "./hooks/MapIconHook";
 
 const style = {
     width: "100%",
-    height: "calc(100vh - 250px)",
+    height: "calc(100vh - 300px)",
 };
+
+let map;
+let markersGroup;
 
 const MapProjects = ({projects, selectedElement = null, onSelectElement = null}) => {
     const getMilestoneColor = useColorMilestone();
     const getIcon = useMapIcon();
 
-    let map;
-
     useEffect(() => {
+        console.log("enter useEffect");
         map = L.map("map", {
             center: [-23.5, -58],
             zoom: 7,
@@ -27,16 +29,33 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
             ],
         });
 
+        return () => {
+            map.off();
+            map.remove();
+        };
+    }, [projects]);
+
+    useEffect(() => {
+        console.log({markersGroup});
+        if (markersGroup) {
+            markersGroup.eachLayer(layer => {
+                layer.remove();
+            });
+        }
+
         const markers = [];
         projects.forEach(project => {
-            console.log({project});
             const marker = L.marker(
                 {
                     lat: project.main_infrastructure.latitude,
                     lng: project.main_infrastructure.longitude,
                 },
                 {
-                    icon: getIcon(getMilestoneColor(project.milestone)),
+                    icon: getIcon(
+                        selectedElement?.id === project.id
+                            ? null
+                            : getMilestoneColor(project.milestone)
+                    ),
                     offset: L.point(0, -50),
                 }
             ).addTo(map);
@@ -48,22 +67,20 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
                 this.closeTooltip();
             });
             marker.on("click", function(e) {
-                onSelectElement(project);
+                if (onSelectElement) {
+                    onSelectElement(project);
+                }
             });
             markers.push(marker);
         });
 
         if (markers.length) {
-            map.fitBounds(L.featureGroup(markers).getBounds(), {
+            markersGroup = L.featureGroup(markers);
+            map.fitBounds(markersGroup.getBounds(), {
                 padding: L.point(10, 10),
             });
         }
-
-        return () => {
-            map.off();
-            map.remove();
-        };
-    }, [projects]);
+    }, [selectedElement]);
 
     return <div id="map" style={style} />;
 };

@@ -6,12 +6,17 @@ import {useSort, useSearch} from "hooks";
 import {PageLayoutWithPanel} from "layout";
 import {SearchBox} from "components/common/presentational";
 import {ClosedProjectsOption, ProjectList, ProjectsTable} from "../presentational";
-import {SortProjectsSelect, ShowNoOfProjects} from "../presentational";
+import {
+    SortProjectsSelect,
+    ShowNoOfProjects,
+    ProjectListChangeView,
+} from "../presentational";
 
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import {MapProjects} from "components/common/geo";
+import {useProjectListView} from "../provider";
 
 const fabStyle = {
     position: "absolute",
@@ -32,6 +37,8 @@ const ListProjectsPage = () => {
         filteredProjects,
         setFilteredProjects,
     } = context;
+
+    const {view} = useProjectListView();
 
     const [projects, setProjects] = useState([]);
 
@@ -77,6 +84,30 @@ const ListProjectsPage = () => {
         navigate(`info/${project.id}`);
     };
 
+    const getViewComponent = view => {
+        if (view === "map") {
+            return (
+                <MapProjects
+                    projects={filteredProjects}
+                    selectedElement={selectedElement}
+                    onSelectElement={onSelectProject}
+                />
+            );
+        }
+        if (view === "list") {
+            return (
+                <ProjectList projects={filteredProjects} onClick={handleClickOnCard} />
+            );
+        }
+        return (
+            <ProjectsTable
+                projects={filteredProjects}
+                selectedElement={selectedElement}
+                onSelectElement={onSelectProject}
+            />
+        );
+    };
+
     return (
         <PageLayoutWithPanel>
             <Grid
@@ -120,9 +151,17 @@ const ListProjectsPage = () => {
                     />
                 </Grid>
             </Grid>
-            {/**
-            <ProjectList projects={filteredProjects} onClick={handleClickOnCard} />
-            */}
+            <Grid
+                container
+                sx={{mb: 2}}
+                spacing={2}
+                direction="row"
+                justifyContent="flex-end"
+                alignItems="center"
+            >
+                <ProjectListChangeView />
+            </Grid>
+            {getViewComponent(view)}
             {/**
             <ProjectsTable
                 projects={filteredProjects}
@@ -130,11 +169,6 @@ const ListProjectsPage = () => {
                 onSelectElement={onSelectProject}
             />
             */}
-            <MapProjects
-                projects={filteredProjects}
-                selectedElement={selectedElement}
-                onSelectElement={onSelectProject}
-            />
             <Fab
                 sx={fabStyle}
                 color="primary"
