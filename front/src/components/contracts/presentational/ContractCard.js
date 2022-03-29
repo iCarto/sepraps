@@ -20,6 +20,7 @@ const ContractCard = ({contract}) => {
                     <Typography variant="body2">
                         {contract.bid_request_number}
                     </Typography>
+                    <Typography variant="body2">{contract.contractor?.name}</Typography>
                 </CardContent>
                 <CardContent sx={{bgcolor: "grey.200"}}>
                     <Box
@@ -29,11 +30,8 @@ const ContractCard = ({contract}) => {
                             mb: 1.75,
                         }}
                     >
-                        <Tooltip title="Ubicación">
-                            <AttachMoneyIcon fontSize="small" sx={{mr: 1}} />
-                        </Tooltip>
                         <Typography variant="subtitle1" sx={{lineHeight: "normal"}}>
-                            {NumberUtil.formatDecimal(contract.bid_request_budget)}
+                            {NumberUtil.formatCurrency(contract.awarding_budget)}
                         </Typography>
                     </Box>
                     <Box
@@ -46,7 +44,7 @@ const ContractCard = ({contract}) => {
                             <DateRangeIcon fontSize="small" sx={{mr: 1}} />
                         </Tooltip>
                         <Typography variant="subtitle1" sx={{lineHeight: 1}}>
-                            {DateUtil.formatDateMonth(contract.bid_request_date)} (
+                            {DateUtil.formatDate(contract.awarding_date)} (
                             {contract.bid_request_deadline} meses)
                         </Typography>
                     </Box>
