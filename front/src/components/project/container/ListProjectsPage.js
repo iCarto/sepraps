@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 import {ProjectService} from "service/api";
 import {useSort, useSearch} from "hooks";
 
-import {PageLayout} from "layout";
+import {PageLayoutWithPanel} from "layout";
 import {SearchBox} from "components/common/presentational";
 import {ClosedProjectsOption, ProjectList, ProjectsTable} from "../presentational";
 import {SortProjectsSelect, ShowNoOfProjects} from "../presentational";
@@ -22,13 +22,23 @@ const fabStyle = {
 const ListProjectsPage = () => {
     const navigate = useNavigate();
 
+    let context;
+    [context] = useOutletContext();
+    const {
+        searchText,
+        setSearchText,
+        searchFunction,
+        filteredProjects,
+        setFilteredProjects,
+    } = context;
+
     const [projects, setProjects] = useState([]);
-    const [filteredProjects, setFilteredProjects] = useState([]);
+
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "updated_at",
         "desc"
     );
-    const {searchText, setSearchText, searchFunction} = useSearch("");
+
     const [showClosedProjects, setShowClosedProjects] = useState(false);
     const [selectedElement, setSelectedElement] = useState(null);
 
@@ -63,10 +73,11 @@ const ListProjectsPage = () => {
 
     const onSelectProject = project => {
         setSelectedElement(project);
+        navigate(`info/${project.id}`);
     };
 
     return (
-        <PageLayout>
+        <PageLayoutWithPanel>
             <Grid
                 container
                 sx={{mb: 4}}
@@ -124,7 +135,7 @@ const ListProjectsPage = () => {
             >
                 <AddIcon />
             </Fab>
-        </PageLayout>
+        </PageLayoutWithPanel>
     );
 };
 

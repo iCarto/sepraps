@@ -1,5 +1,4 @@
-import {useState, useEffect} from "react";
-import {ProjectService, PROJECT_TEMPLATE} from "service/api";
+import {useState} from "react";
 import PropTypes from "prop-types";
 
 import {DropdownMenuItemLink} from "components/common/presentational";
@@ -9,18 +8,18 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import {useOutletContext} from "react-router-dom";
 
 const SelectProjectDropDown = ({selectedProject}) => {
-    const [projects, setProjects] = useState([]);
     const [anchorElement, setAnchorElement] = useState(null);
 
-    const open = Boolean(anchorElement);
+    let context;
+    [context] = useOutletContext();
+    const {filteredProjects} = context;
 
-    useEffect(() => {
-        ProjectService.getProjects(false, PROJECT_TEMPLATE.SHORT).then(projects => {
-            setProjects(projects);
-        });
-    }, []);
+    console.log({selectedProject});
+
+    const open = Boolean(anchorElement);
 
     const handleClick = event => {
         setAnchorElement(event.currentTarget);
@@ -58,7 +57,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                             lineHeight: 1.25,
                         }}
                     >
-                        {selectedProject && selectedProject.name}
+                        {selectedProject && selectedProject.code}
                     </Typography>
                     <Typography
                         variant="overline"
@@ -70,7 +69,8 @@ const SelectProjectDropDown = ({selectedProject}) => {
                             color: "white",
                         }}
                     >
-                        {selectedProject && selectedProject.code}
+                        {selectedProject &&
+                            `${selectedProject.locality.locality_name}, ${selectedProject.locality.district_name} (${selectedProject.locality.department_name})`}
                     </Typography>
                 </Box>
             </Button>
@@ -92,7 +92,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                     horizontal: "left",
                 }}
             >
-                {projects.map(project => (
+                {filteredProjects.map(project => (
                     <DropdownMenuItemLink
                         variant="menu"
                         key={project.id}
@@ -102,9 +102,9 @@ const SelectProjectDropDown = ({selectedProject}) => {
                         onClick={handleClose}
                     >
                         <Stack>
-                            <Typography>{project.name}</Typography>
+                            <Typography>{project.code}</Typography>
                             <Typography variant="caption" sx={{ml: 1}}>
-                                {project.code}
+                                {`${project.locality.locality_name}, ${project.locality.district_name} (${project.locality.department_name})`}
                             </Typography>
                         </Stack>
                     </DropdownMenuItemLink>

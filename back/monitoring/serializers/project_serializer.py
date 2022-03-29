@@ -29,6 +29,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         source="financing_program.name", required=False, read_only=True
     )
     main_infrastructure = InfraestructureSerializer()
+    locality = LocalitySerializer(source="main_infrastructure.locality")
     linked_localities = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Locality.objects.prefetch_related("department", "district")
     )
@@ -54,6 +55,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "project_class_name",
             "init_date",
             "main_infrastructure",
+            "locality",
             "linked_localities",
             "provider",
             "financing_fund",
@@ -170,7 +172,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(ProjectSerializer):
-    locality = LocalitySerializer(source="main_infrastructure.locality")
     provider_name = serializers.CharField(source="provider.name", allow_null=True)
 
     class Meta(ProjectSerializer.Meta):
