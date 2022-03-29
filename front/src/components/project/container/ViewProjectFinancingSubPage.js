@@ -15,10 +15,10 @@ const ViewProjectFinancingSubPage = () => {
         <SubPageLayout outletContext={[project]}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <ProjectFinancingDataSection />
+                    <ProjectContractSection contract={project.construction_contract} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ProjectContractSection contract={project.construction_contract} />
+                    <ProjectFinancingDataSection />
                 </Grid>
             </Grid>
         </SubPageLayout>

@@ -66,11 +66,16 @@ const ProjectGeneralDataSection = () => {
                 </Grid>
                 <Grid item sm={9} md={8}>
                     <Typography variant="h4" color="grey.700" sx={{fontWeight: "bold"}}>
-                        {project.name}
+                        {project.locality.locality_name}
                     </Typography>
-                    <Typography variant="h5" color="grey.700" mb={3}>
-                        {project.code}
+                    <Typography
+                        variant="h5"
+                        color="grey.700"
+                        sx={{fontWeight: "bold", mb: 3}}
+                    >
+                        {`${project.locality.district_name} (${project.locality.department_name})`}
                     </Typography>
+                    <SectionField label="Código:" value={project.code} />
                     <SectionField
                         label="Tipo de proyecto:"
                         value={project.project_type_name}
@@ -79,6 +84,7 @@ const ProjectGeneralDataSection = () => {
                         label="Clase de proyecto:"
                         value={project.project_class_name}
                     />
+                    <SectionField label="Descripción:" value={project.name} />
                     <SectionField
                         label="Fecha de inicio:"
                         value={DateUtil.formatDate(project.init_date)}

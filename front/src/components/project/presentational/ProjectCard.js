@@ -36,14 +36,16 @@ const projectClassBoxStyle = {
     opacity: 0.8,
 };
 
-const ProjectCard = ({project, onClick}) => {
+const ProjectCard = ({project, onClick = null}) => {
     const handleClick = () => {
-        onClick(project.id);
+        if (onClick) {
+            onClick(project.id);
+        }
     };
 
     return (
         <Card id={project.id} variant="outlined">
-            <Box onClick={handleClick} sx={{cursor: "pointer"}}>
+            <Box onClick={handleClick} sx={{cursor: onClick ? "pointer" : "inherit"}}>
                 <div style={{position: "relative"}}>
                     <CardMedia
                         component="img"

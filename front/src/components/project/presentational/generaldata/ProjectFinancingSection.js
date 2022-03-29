@@ -7,6 +7,7 @@ import {
     SectionSubheading,
 } from "components/common/presentational";
 import LaunchIcon from "@mui/icons-material/Launch";
+import {NumberUtil} from "utilities";
 
 const ProjectFinancingSection = () => {
     const navigate = useNavigate();
@@ -48,10 +49,12 @@ const ProjectFinancingSection = () => {
                 value={project.construction_contract?.number}
             />
             <SectionField
-                label="Presupuesto:"
+                label="Monto adjudicado:"
                 value={
                     project.construction_contract &&
-                    project.construction_contract.awarding_budget + " $"
+                    NumberUtil.formatCurrency(
+                        project.construction_contract.awarding_budget
+                    )
                 }
             />
         </>
@@ -67,9 +70,10 @@ const ProjectFinancingSection = () => {
 
     return (
         <SectionCard title="Financiación" secondaryActions={headerActions}>
-            {project.financing_fund_name ? financingInfo : noFinancingInfo}
             <SectionSubheading heading="Contrato" />
             {project.construction_contract ? contractInfo : noContractInfo}
+            <SectionSubheading heading="Programa" />
+            {project.financing_fund_name ? financingInfo : noFinancingInfo}
         </SectionCard>
     );
 };
