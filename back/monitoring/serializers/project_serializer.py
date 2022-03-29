@@ -183,6 +183,7 @@ class ProjectSummarySerializer(ProjectSerializer):
             "project_type",
             "project_class",
             "init_date",
+            "main_infrastructure",
             "provider_name",
             "financing_fund_name",
             "financing_program_name",

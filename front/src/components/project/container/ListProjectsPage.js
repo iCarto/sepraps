@@ -11,6 +11,7 @@ import {SortProjectsSelect, ShowNoOfProjects} from "../presentational";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import {MapProjects} from "components/common/geo";
 
 const fabStyle = {
     position: "absolute",
@@ -122,7 +123,14 @@ const ListProjectsPage = () => {
             {/**
             <ProjectList projects={filteredProjects} onClick={handleClickOnCard} />
             */}
+            {/**
             <ProjectsTable
+                projects={filteredProjects}
+                selectedElement={selectedElement}
+                onSelectElement={onSelectProject}
+            />
+            */}
+            <MapProjects
                 projects={filteredProjects}
                 selectedElement={selectedElement}
                 onSelectElement={onSelectProject}
