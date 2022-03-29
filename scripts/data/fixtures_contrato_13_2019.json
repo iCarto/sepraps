@@ -126,7 +126,7 @@
         "model": "monitoring.project",
         "pk": 2,
         "fields": {
-            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-002",
             "project_type": "agua",
             "project_class": "mejora",
@@ -208,7 +208,7 @@
         "model": "monitoring.project",
         "pk": 4,
         "fields": {
-            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria(UBS)",
+            "name": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-004",
             "project_type": "agua",
             "project_class": "mejora",
