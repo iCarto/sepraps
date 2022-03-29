@@ -1,3 +1,8 @@
+var formatter = new Intl.NumberFormat("es-PY", {
+    style: "currency",
+    currency: "PYG",
+});
+
 const NumberUtil = {
     formatDecimal(number, decimalSize) {
         if (!number) {
@@ -5,6 +10,13 @@ const NumberUtil = {
         }
         const floatNumber = parseFloat(number);
         return floatNumber.toFixed(decimalSize).replace(".", ",");
+    },
+
+    formatCurrency(number) {
+        if (!number) {
+            return "";
+        }
+        return formatter.format(number);
     },
 
     parseFloatOrNull(value) {

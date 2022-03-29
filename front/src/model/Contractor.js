@@ -29,8 +29,10 @@ const createContractor = ({
     name = "",
     contractor_type = "",
     contractor_type_name = "",
+    address = "",
     phone = "",
     email = "",
+    comments = "",
     contract = null, // contract id
     contacts = [],
 } = {}) => {
@@ -39,8 +41,10 @@ const createContractor = ({
         name,
         contractor_type,
         contractor_type_name,
+        address,
         phone,
         email,
+        comments,
         contract,
         contacts,
     };

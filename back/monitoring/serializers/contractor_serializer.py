@@ -21,12 +21,21 @@ class ContractorSerializer(serializers.ModelSerializer):
             "name",
             "contractor_type",
             "contractor_type_name",
+            "address",
             "phone",
             "email",
+            "comments",
             "contract",
             "contacts",
         )
-        extra_kwargs = {"contract": {"write_only": True}}
+        extra_kwargs = {
+            "address": {"allow_null": True, "allow_blank": True},
+            "phone": {"allow_null": True, "allow_blank": True},
+            "email": {"allow_null": True, "allow_blank": True},
+            "address": {"allow_null": True, "allow_blank": True},
+            "comments": {"allow_null": True, "allow_blank": True},
+            "contract": {"write_only": True},
+        }
 
     def get_contractor_type_name(self, obj):
         return dominio_get_value(obj.contractor_type)

@@ -1,5 +1,5 @@
 import {useOutletContext, useNavigate} from "react-router-dom";
-import {DateUtil} from "utilities";
+import {DateUtil, NumberUtil} from "utilities";
 import {
     SectionCard,
     SectionCardHeaderAction,
@@ -32,19 +32,19 @@ const ContractAwardingSection = ({isSidePanelOpen = null}) => {
             isSidePanelOpen={isSidePanelOpen}
         >
             <SectionField
-                label="Presupuesto:"
-                value={contract.awarding_budget && contract.awarding_budget + " $"}
+                label="Fecha de adjudicación:"
+                value={DateUtil.formatDate(contract.awarding_date)}
+            />
+            <SectionField
+                label="Monto adjudicado:"
+                value={NumberUtil.formatCurrency(contract?.awarding_budget)}
             />
             <SectionField
                 label="Porcentaje de baja:"
                 value={
                     contract.awarding_percentage_drop &&
-                    contract.awarding_percentage_drop + "%"
+                    NumberUtil.formatDecimal(contract.awarding_percentage_drop, 2) + "%"
                 }
-            />
-            <SectionField
-                label="Fecha:"
-                value={DateUtil.formatDate(contract.awarding_date)}
             />
         </SectionCard>
     );

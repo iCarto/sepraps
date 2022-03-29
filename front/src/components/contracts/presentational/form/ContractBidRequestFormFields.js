@@ -11,23 +11,23 @@ const ContractBidRequestFormFields = () => {
         <Fragment>
             <FormInputText
                 name="bid_request_number"
-                label="Número de llamado"
+                label="Número de licitación"
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputText
                 name="bid_request_id"
-                label="ID llamado"
+                label="Identificador de licitación"
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormDatePicker
                 name="bid_request_date"
-                label="Fecha de llamado"
+                label="Fecha de publicacón de licitación"
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputDecimal
                 name="bid_request_budget"
-                label="Monto total"
-                endAdornment="$"
+                label="Monto estimado"
+                endAdornment="Gs."
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputInteger

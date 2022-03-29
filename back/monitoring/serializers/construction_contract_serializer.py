@@ -42,6 +42,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         )
         extra_kwargs = {
             "number": {"required": True},
+            "comments": {"allow_null": True, "allow_blank": True},
             "bid_request_number": {"required": True},
             "bid_request_id": {"required": True},
             "bid_request_date": {"required": True},
