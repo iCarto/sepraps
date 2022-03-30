@@ -9,7 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PaidIcon from "@mui/icons-material/Paid";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 
 const projectTypeIconBoxStyle = {
@@ -49,7 +49,7 @@ const ProjectCard = ({project, onClick}) => {
                         component="img"
                         height="140"
                         image={project.featured_image}
-                        alt={project.name}
+                        alt={project.locality.locality_name}
                     />
                     <Box sx={projectTypeIconBoxStyle}>
                         <Icon icon={project.project_type} size="medium" />
@@ -63,37 +63,54 @@ const ProjectCard = ({project, onClick}) => {
                     </Tooltip>
                 </div>
                 <CardContent>
-                    <Typography variant="h5" gutterBottom color="primary">
-                        {project.name}
+                    <Typography variant="h5" color="primary">
+                        {project.locality.locality_name}
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        gutterBottom
+                        color="primary"
+                        sx={{textTransform: "uppercase", lineHeight: 1}}
+                    >
+                        {project.locality.district_name} (
+                        {project.locality.department_name})
                     </Typography>
                     <Typography variant="body2">{project.code}</Typography>
                     <Typography variant="subtitle2" sx={{lineHeight: "normal"}}>
-                        {project.financing_program_name}
-                    </Typography>
-                    <Typography variant="subtitle2" sx={{lineHeight: "normal"}}>
-                        {project.financing_fund_name}
+                        {project.name}
                     </Typography>
                     <Box sx={{mt: 2}}>
                         <MilestoneTimelineShort milestones={project.milestones} />
                     </Box>
                 </CardContent>
                 <CardContent sx={{bgcolor: "grey.200"}}>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            mb: 1.75,
-                        }}
-                    >
-                        <Tooltip title="Ubicación">
-                            <LocationOnIcon fontSize="small" sx={{mr: 1}} />
-                        </Tooltip>
-                        <Typography variant="subtitle1" sx={{lineHeight: "normal"}}>
-                            {project.locality.locality_name},{" "}
-                            {project.locality.district_name} (
-                            {project.locality.department_name})
-                        </Typography>
-                    </Box>
+                    {project.financing_fund_name && (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                mb: 1.75,
+                            }}
+                        >
+                            <Tooltip title="Financiación">
+                                <PaidIcon fontSize="small" sx={{mr: 1}} />
+                            </Tooltip>
+                            <div>
+                                <Typography
+                                    variant="subtitle1"
+                                    sx={{lineHeight: "normal"}}
+                                >
+                                    {project.financing_program_name}
+                                </Typography>
+                                <Typography
+                                    variant="subtitle1"
+                                    sx={{lineHeight: "normal"}}
+                                >
+                                    {project.financing_fund_name}
+                                </Typography>
+                            </div>
+                        </Box>
+                    )}
                     <Box
                         sx={{
                             display: "flex",
