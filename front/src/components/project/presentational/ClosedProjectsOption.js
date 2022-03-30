@@ -9,7 +9,7 @@ const ClosedProjectsOption = ({checked, handleChange}) => {
     return (
         <FormControlLabel
             control={<Switch checked={checked} onChange={handleSwitchChange} />}
-            label="Incluir archivados"
+            label="Ver archivados"
         />
     );
 };
