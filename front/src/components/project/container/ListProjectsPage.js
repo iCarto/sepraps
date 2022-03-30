@@ -96,21 +96,17 @@ const ListProjectsPage = () => {
 
     return (
         <PageLayoutWithPanel>
-            <Paper sx={{p: 3}}>
-                <Grid
-                    container
-                    sx={{mb: 4}}
-                    spacing={2}
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                >
-                    <Grid
-                        item
-                        container
-                        alignItems="center"
-                        justifyContent="space-between"
-                    >
+            <Paper>
+            <Grid
+                container
+                sx={{mb: 4}}
+                spacing={2}
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+            >
+                <Grid item container xs={12} spacing={2}>
+                    <Grid item xs={6} md={4}>
                         <SearchBox
                             searchValue={searchText}
                             handleSearch={handleSearch}
@@ -123,11 +119,34 @@ const ListProjectsPage = () => {
                         </Stack>
                     </Grid>
                     <Grid item xs={12} rowSpacing={1}>
-                        {/* Space for future filters */}
+                    <Grid item xs={6} md={4}>
+                        <SortProjectsSelect
+                            attribute={attribute}
+                            order={order}
+                            handleSortBy={handleSortBy}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <FormSelectMultipleChip />
+                    </Grid>
+                    <Grid item container xs={12} spacing={2}>
+                    <Grid item xs={6} md={3} lg={2}>
+                        <ShowNoOfProjects numberOfProjects={filteredProjects.length} />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <ClosedProjectsOption
+                            checked={showClosedProjects}
+                            handleChange={handleClosedProjects}
+                        />
                     </Grid>
                 </Grid>
-                {getViewComponent(view)}
+                    </Grid>
+                </Grid>
+                    {getViewComponent(view)}
+                    </Grid>
             </Paper>
+
+                   
             <Fab
                 sx={fabStyle}
                 color="primary"
@@ -138,6 +157,7 @@ const ListProjectsPage = () => {
             </Fab>
         </PageLayoutWithPanel>
     );
-};
+}
+    ;
 
 export default ListProjectsPage;

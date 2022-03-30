@@ -9,3 +9,4 @@ export {default as FormLocationSelect} from "./FormLocationSelect";
 export {default as FormSection} from "./FormSection";
 export {default as FormCheckbox} from "./FormCheckbox";
 export {default as FormTextArea} from "./FormTextArea";
+export {default as FormSelectMultipleChip} from "./FormSelectMultipleChip";
