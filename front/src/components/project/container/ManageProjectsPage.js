@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Outlet} from "react-router-dom";
-import {useSearch} from "hooks";
+import {useSort, useSearch, useFilter} from "hooks";
 
 import {ProjectListViewProvider} from "../provider";
 
@@ -11,6 +11,7 @@ import {ProjectListViewProvider} from "../provider";
 const ManageProjectsPage = () => {
     const [filteredProjects, setFilteredProjects] = useState([]);
     const {searchText, setSearchText, searchFunction} = useSearch("");
+    const {filterItems, setFilterItems, filterFunction} = useFilter([]);
 
     return (
         <ProjectListViewProvider>
@@ -20,6 +21,9 @@ const ManageProjectsPage = () => {
                         searchText,
                         setSearchText,
                         searchFunction,
+                        filterItems,
+                        setFilterItems,
+                        filterFunction,
                         filteredProjects,
                         setFilteredProjects,
                     },
