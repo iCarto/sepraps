@@ -8,7 +8,7 @@ const ContractList = ({contracts}) => {
 
     const contractItems = contracts.map(contract => {
         return (
-            <Grid item component="li" key={contract.id} xs={12} sm={6} md={4} xl={2}>
+            <Grid item component="li" key={contract.id} xs={12} sm={6} md={3} xl={3}>
                 <ContractCard key={contract.id} contract={contract} />
             </Grid>
         );

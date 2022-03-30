@@ -18,11 +18,11 @@ const ProjectListChangeView = () => {
             exclusive
             onChange={handleChange}
         >
-            <ToggleButton value="table">
-                <FormatListBulletedOutlinedIcon fontSize="small" />
-            </ToggleButton>
             <ToggleButton value="list">
                 <GridViewOutlinedIcon fontSize="small" />
+            </ToggleButton>
+            <ToggleButton value="table">
+                <FormatListBulletedOutlinedIcon fontSize="small" />
             </ToggleButton>
             <ToggleButton value="map">
                 <MapOutlinedIcon fontSize="small" />

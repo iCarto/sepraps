@@ -3,7 +3,7 @@ import {useState, createContext, useContext} from "react";
 let ProjectListViewContext = createContext(null);
 
 export default function ProjectListViewProvider({children}) {
-    const [view, setView] = useState("table");
+    const [view, setView] = useState("list");
 
     let value = {
         view,

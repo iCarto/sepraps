@@ -9,7 +9,7 @@ import {SortContractsSelect} from "../presentational";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import {PageLayout} from "layout";
+import {PageLayoutWithPanel} from "layout";
 
 const fabStyle = {
     position: "absolute",
@@ -54,7 +54,7 @@ const ListContractsPage = () => {
     };
 
     return (
-        <PageLayout>
+        <PageLayoutWithPanel>
             <Grid
                 container
                 sx={{mb: 4}}
@@ -103,7 +103,7 @@ const ListContractsPage = () => {
             >
                 <AddIcon />
             </Fab>
-        </PageLayout>
+        </PageLayoutWithPanel>
     );
 };
 
