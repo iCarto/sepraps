@@ -8,7 +8,7 @@ const ProjectFormGeneralDataFields = () => {
         <>
             <FormInputText
                 name="name"
-                label="Nombre del proyecto"
+                label="Descripción del proyecto"
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormSelect

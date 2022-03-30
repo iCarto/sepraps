@@ -32,7 +32,7 @@ const ContractGeneralDataSection = ({isSidePanelOpen = null}) => {
             isSidePanelOpen={isSidePanelOpen}
         >
             <SectionField label="Número:" value={contract.number} />
-            <SectionField label="Observaciones:" value={contract.comments} />
+            <SectionField label="Descripción:" value={contract.comments} />
         </SectionCard>
     );
 };

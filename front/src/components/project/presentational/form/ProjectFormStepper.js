@@ -15,7 +15,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 
 function getSteps() {
-    return ["Datos generales", "Prestador", "Ubicación", "Financiación"];
+    return ["Datos generales", "Ubicación", "Prestador"];
 }
 
 function getStepContent(step) {
@@ -23,11 +23,11 @@ function getStepContent(step) {
         case 0:
             return <ProjectFormGeneralDataSection />;
         case 1:
-            return <ProjectFormProviderSection />;
-        case 2:
             return <ProjectFormLocationSection />;
-        case 3:
-            return <ProjectFormFinancingSection />;
+        case 2:
+            return <ProjectFormProviderSection />;
+        /*case 3:
+            return <ProjectFormFinancingSection />;*/
         default:
             return "Unknown step";
     }
