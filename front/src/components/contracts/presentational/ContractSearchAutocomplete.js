@@ -11,7 +11,7 @@ const ContractSearchAutocomplete = ({handleSelect}) => {
             <Stack>
                 <Typography>{option.number}</Typography>
                 <Typography variant="caption" sx={{ml: 1}}>
-                    ({option.bid_request_id} -{" "}
+                    ({option.bid_request_number} -{" "}
                     {DateUtil.formatDate(option.awarding_date)})
                 </Typography>
             </Stack>

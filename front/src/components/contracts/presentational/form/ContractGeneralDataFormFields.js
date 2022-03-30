@@ -9,7 +9,7 @@ const ContractGeneralDataFormFields = () => {
                 label="Número de contrato"
                 rules={{required: "El campo es obligatorio"}}
             />
-            <FormInputText name="comments" label="Observaciones" />
+            <FormInputText name="comments" label="Descripción" />
         </Fragment>
     );
 };

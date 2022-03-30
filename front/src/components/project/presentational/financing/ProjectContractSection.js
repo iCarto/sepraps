@@ -47,7 +47,7 @@ const ProjectContractSection = ({contract}) => {
                     />
                     <SectionField
                         label="Contratista:"
-                        value={contract.contractor.name}
+                        value={contract.contractor?.name}
                     />
                     <SectionField
                         label="Monto adjudicado:"
