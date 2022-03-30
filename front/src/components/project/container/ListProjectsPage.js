@@ -2,29 +2,29 @@ import {useNavigate, useOutletContext} from "react-router-dom";
 import {useState, useEffect, useMemo} from "react";
 import {ProjectService} from "service/api";
 
-import {useProjectListView} from "../provider";
-import {PageLayoutWithPanel} from "layout";
-import {
-    ProjectList,
-    ProjectsTable,
-    ShowNoOfProjects,
-    ProjectListChangeView,
-    SortProjectsSelect,
-    ClosedProjectsOption
-} from "../presentational";
-import {MapProjects} from "components/common/geo";
-
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import {useSort, useSearch, useFilter} from "hooks";
-import {PageLayout} from "layout";
+
+import {useProjectListView} from "../provider";
+import {LocationProvider} from "components/common/provider";
+import {PageLayoutWithPanel} from "layout";
+import {
+    ClosedProjectsOption,
+    ProjectList,
+    ProjectsTable,
+    SortProjectsSelect,
+    ShowNoOfProjects,
+    ProjectListChangeView,
+} from "../presentational";
 import {AccordionUndercoverLayout, SearchBox} from "components/common/presentational";
+import {FormContractFilter, FormLocationFilters} from "components/common/form";
+import {MapProjects} from "components/common/geo";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import {FormLocationFilter, FormSelectMultipleChip} from "components/common/form";
-import {LocationProvider, useAdministrativeDivisions} from "components/common/provider";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 const fabStyle = {
@@ -39,27 +39,26 @@ const ListProjectsPage = () => {
 
     let context;
     [context] = useOutletContext();
+
     const {
         searchText,
         setSearchText,
         searchFunction,
-        // filteredProjects,
-        setFilteredProjects,
+        filterItems,
+        setFilterItems,
+        filterFunction,
     } = context;
 
     const {view} = useProjectListView();
 
-    const divisions = useAdministrativeDivisions();
-    const [projects, setProjects] = useState([]);
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "updated_at",
         "desc"
     );
 
-    const [filters, setFilters] = useState([]);
-    const {filterItem, setFilterItem, filterFunction} = useFilter("");
-    const [showClosedProjects, setShowClosedProjects] = useState(false);
+    const [projects, setProjects] = useState([]);
     const [selectedElement, setSelectedElement] = useState(null);
+    const [showClosedProjects, setShowClosedProjects] = useState(false);
 
     useEffect(() => {
         ProjectService.getProjects(showClosedProjects).then(data => {
@@ -72,19 +71,23 @@ const ListProjectsPage = () => {
             .filter(filterFunction)
             .filter(searchFunction)
             .sort(sortFunction);
-    }, [attribute, order, searchText, filterItem, projects]);
+    }, [attribute, order, searchText, filterItems, projects]);
+
+    console.log({filteredProjects});
 
     const handleSearch = data => {
         setSearchText(data);
     };
 
+    const handleFilter = (filterValue, filterName) => {
+        setFilterItems([...filterItems, {value: filterValue, key: filterName}]);
+    };
+
+    console.log(filterItems);
+
     const handleSortBy = (attribute, order) => {
         setAttribute(attribute);
         setOrder(order);
-    };
-
-    const handleFilter = filterCriteria => {
-        setFilterItem(filterCriteria);
     };
 
     const handleClosedProjects = showClosed => {
@@ -127,90 +130,70 @@ const ListProjectsPage = () => {
 
     return (
         <PageLayoutWithPanel>
-            <LocationProvider>
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    spacing={2}
-                    mb={1}
-                >
-                    <Grid item container xs={12} spacing={2}>
-                        <Grid item xs={6} md={4} xl={3}>
-                            <SearchBox
-                                searchValue={searchText}
-                                handleSearch={handleSearch}
-                            />
-                        </Grid>
-                        <Grid item xs={6} md={4} xl={3}>
-                            <SortProjectsSelect
-                                attribute={attribute}
-                                order={order}
-                                handleSortBy={handleSortBy}
-                            />
-                        </Grid>
-                        <Grid item container xs={6} md={2} xl={3}>
-                            <ClosedProjectsOption
-                                checked={showClosedProjects}
-                                handleChange={handleClosedProjects}
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            xs={6}
-                            md={2}
-                            xl={3}
-                            justifyContent="flex-end"
-                            alignItems="center"
-                        >
-                            <Box>
-                                <ShowNoOfProjects
-                                    numberOfProjects={filteredProjects.length}
-                                />
-                            </Box>
-                        </Grid>
+            <Grid container spacing={2} mb={1}>
+                <Grid item container xs={12} spacing={2}>
+                    <Grid item xs={6} md={4} xl={3}>
+                        <SearchBox
+                            searchValue={searchText}
+                            handleSearch={handleSearch}
+                        />
                     </Grid>
-
-                    <Grid item container xs={12} rowSpacing={1}>
-                        <AccordionUndercoverLayout
-                            accordionTitle="Filtros"
-                            accordionIcon={<FilterListIcon />}
-                        >
-                            <Grid item container columnSpacing={2} mb={2}>
-                                <Grid item xs={12} md={3} xl={2}>
-                                    <FormLocationFilter onFilter={handleFilter} />
-                                </Grid>
-                                {/* <Grid item xs={12} md={3} xl={2}>
-                                    <FormLocationFilter onFilter={handleFilter} />
-                                </Grid>
-                                <Grid item xs={12} md={3} xl={2}>
-                                    <FormLocationFilter onFilter={handleFilter} />
-                                </Grid> */}
-                            </Grid>
-                        </AccordionUndercoverLayout>
+                    <Grid item xs={6} md={4} xl={3}>
+                        <SortProjectsSelect
+                            attribute={attribute}
+                            order={order}
+                            handleSortBy={handleSortBy}
+                        />
+                    </Grid>
+                    <Grid item container xs={6} md={2} xl={3}>
+                        <ClosedProjectsOption
+                            checked={showClosedProjects}
+                            handleChange={handleClosedProjects}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        justifyContent="flex-end"
+                        alignItems="center"
+                        xs={6}
+                        md={2}
+                        xl={3}
+                    >
+                        <Box>
+                            <ShowNoOfProjects
+                                numberOfProjects={filteredProjects.length}
+                            />
+                        </Box>
                     </Grid>
                 </Grid>
-                </LocationProvider>
-            <Grid
-                container
-                sx={{mb: 2}}
-                spacing={2}
-                direction="row"
-                justifyContent="flex-end"
-                alignItems="center"
-            >
+
+                <Grid item container xs={12} rowSpacing={1}>
+                    <AccordionUndercoverLayout
+                        accordionTitle="Filtros"
+                        accordionIcon={<FilterListIcon />}
+                    >
+                        <LocationProvider>
+                            <Grid container columnSpacing={2}>
+                                <Grid item container columnSpacing={2} xs={8} mb={2}>
+                                    <FormLocationFilters
+                                        onFilter={handleFilter}
+                                        name="department"
+                                    />
+                                </Grid>
+                                <Grid item container xs={4} mb={2}>
+                                    <FormContractFilter onFilter={handleFilter} />
+                                </Grid>
+                            </Grid>
+                        </LocationProvider>
+                    </AccordionUndercoverLayout>
+                </Grid>
+            </Grid>
+            <Grid container justifyContent="flex-end" spacing={2} mb={2}>
                 <ProjectListChangeView />
             </Grid>
             {getViewComponent(view)}
-            {/**
-            <ProjectsTable
-                projects={filteredProjects}
-                selectedElement={selectedElement}
-                onSelectElement={onSelectProject}
-            />
-            */}
+
             <Fab
                 sx={fabStyle}
                 color="primary"

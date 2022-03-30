@@ -1,24 +1,29 @@
 import {useState} from "react";
 
-/**Using the filterFunction, it filteres for a given string (filterItem) in an array of items by specific properties; if filterItem is an empty string, it does not filter the array.*/
+/**Using the filterFunction, it filteres for a given string (filterItems) in an array of items by specific properties; if filterItems is an empty string, it does not filter the array.*/
 function useFilter(filters) {
-    const [filterItem, setFilterItem] = useState(filters);
+    const [filterItems, setFilterItems] = useState(filters);
 
     function filterFunction(item) {
-        return (
-            filterItem === "" ||
-            [
-                item.name,
-                item.role,
-                item.email,
-                item.locality?.department_name,
-                item.locality?.district_name,
-                item.locality?.locality_name,
-            ].includes(filterItem)
-        );
+        console.log({filterItems});
+
+        // const propertiesToCheck = [
+        //     item.name,
+        //     item.role,
+        //     item.email,
+        //     item.construction_contract,
+        //     item.locality?.department,
+        //     item.locality?.district,
+        //     item.locality?.locality_name,
+        // ];
+
+        // return (
+        //     filterItems.length === 0 ||
+        //     filterItems.every(element => propertiesToCheck.indexOf(element) > -1)
+        // );
     }
 
-    return {filterItem, setFilterItem, filterFunction};
+    return {filterItems, setFilterItems, filterFunction};
 }
 
 export {useFilter};
