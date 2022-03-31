@@ -1,8 +1,9 @@
-from django.db.models import F
+from django.db.models import F, Prefetch
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.location import Locality
+from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project, get_code_for_new_project
 from monitoring.models.provider import Provider
 from monitoring.serializers.construction_contract_serializer import (
@@ -10,10 +11,7 @@ from monitoring.serializers.construction_contract_serializer import (
 )
 from monitoring.serializers.infraestructure_serializer import InfraestructureSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
-from monitoring.serializers.milestone_serializer import (
-    MilestoneSerializer,
-    MilestoneSummarySerializer,
-)
+from monitoring.serializers.milestone_serializer import MilestoneSummarySerializer
 from monitoring.serializers.provider_serializer import ProviderSerializer
 from rest_framework import serializers
 
@@ -70,6 +68,33 @@ class ProjectSerializer(serializers.ModelSerializer):
             "updated_at",
         )
 
+    def setup_eager_loading(queryset):
+        """Perform necessary eager loading of data."""
+        return queryset.select_related(
+            "main_infrastructure",
+            "main_infrastructure__locality",
+            "main_infrastructure__locality__department",
+            "main_infrastructure__locality__district",
+            "provider",
+            "provider__locality",
+            "provider__locality__department",
+            "provider__locality__district",
+            "construction_contract",
+            "construction_contract__contractor",
+            "financing_fund",
+            "financing_program",
+        ).prefetch_related(
+            "linked_localities",
+            "provider__contacts",
+            "construction_contract__contractor__contacts",
+            Prefetch(
+                "milestones",
+                queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
+                    "ordering"
+                ),
+            ),
+        )
+
     def to_representation(self, instance):
         response = super().to_representation(instance)
         if "linked_localities" in response:
@@ -79,7 +104,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         if "construction_contract" in response:
             response["construction_contract"] = (
                 ConstructionContractSummarySerializer(
-                    instance.construction_contract
+                    instance.construction_contract, context=self.context
                 ).data
                 if instance.construction_contract is not None
                 else None
@@ -89,10 +114,10 @@ class ProjectSerializer(serializers.ModelSerializer):
     # ATTRIBUTES
 
     def get_project_type_name(self, obj):
-        return dominio_get_value(obj.project_type)
+        return dominio_get_value(obj.project_type, self.context["domain"])
 
     def get_project_class_name(self, obj):
-        return dominio_get_value(obj.project_class)
+        return dominio_get_value(obj.project_class, self.context["domain"])
 
     def get_folder(self, obj):
         return obj.folder.media_path
@@ -171,25 +196,98 @@ class ProjectSerializer(serializers.ModelSerializer):
         return instance
 
 
-class ProjectSummarySerializer(ProjectSerializer):
-    provider_name = serializers.CharField(source="provider.name", allow_null=True)
+class ProjectSummarySerializer(serializers.ModelSerializer):
+    locality = serializers.IntegerField(
+        source="main_infrastructure.locality.code", default=None
+    )
+    locality_name = serializers.CharField(
+        source="main_infrastructure.locality.name", default=None
+    )
+    district = serializers.IntegerField(
+        source="main_infrastructure.locality.district.code", default=None
+    )
+    district_name = serializers.CharField(
+        source="main_infrastructure.locality.district.name", default=None
+    )
+    department = serializers.IntegerField(
+        source="main_infrastructure.locality.department.code", default=None
+    )
+    department_name = serializers.CharField(
+        source="main_infrastructure.locality.department.name", default=None
+    )
+    project_type_name = serializers.SerializerMethodField()
+    project_class_name = serializers.SerializerMethodField()
+    provider_name = serializers.CharField(source="provider.name", default=None)
+    construction_contract_number = serializers.CharField(
+        source="construction_contract.number", default=None
+    )
+    construction_contract_bid_request_number = serializers.CharField(
+        source="construction_contract.bid_request_number", default=None
+    )
+    financing_fund_name = serializers.CharField(
+        source="financing_fund.name", default=None
+    )
+    financing_program_name = serializers.CharField(
+        source="financing_program.name", default=None
+    )
+    milestones = serializers.SerializerMethodField()
+    latitude = serializers.CharField(
+        source="main_infrastructure.latitude", default=None
+    )
+    longitude = serializers.CharField(
+        source="main_infrastructure.longitude", default=None
+    )
 
     class Meta(ProjectSerializer.Meta):
         fields = (
             "id",
+            "locality",
+            "locality_name",
+            "district",
+            "district_name",
+            "department",
+            "department_name",
             "name",
             "code",
-            "locality",
             "project_type",
+            "project_type_name",
             "project_class",
+            "project_class_name",
             "init_date",
-            "main_infrastructure",
+            "provider",
             "provider_name",
+            "construction_contract",
+            "construction_contract_number",
+            "construction_contract_bid_request_number",
+            "financing_fund",
             "financing_fund_name",
+            "financing_program",
             "financing_program_name",
             "milestones",
+            "latitude",
+            "longitude",
             "created_at",
             "updated_at",
+        )
+
+    def setup_eager_loading(queryset):
+        """Perform necessary eager loading of data."""
+        return queryset.select_related(
+            "main_infrastructure",
+            "main_infrastructure__locality",
+            "main_infrastructure__locality__department",
+            "main_infrastructure__locality__district",
+            "provider",
+            "financing_fund",
+            "financing_program",
+            "construction_contract",
+        ).prefetch_related(
+            Prefetch(
+                "milestones",
+                queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
+                    "ordering"
+                ),
+            )
         )
 
     def get_fields(self, *args, **kwargs):
@@ -199,7 +297,11 @@ class ProjectSummarySerializer(ProjectSerializer):
                 fields[field].read_only = True
         return fields
 
+    def get_project_type_name(self, obj):
+        return dominio_get_value(obj.project_type, self.context.get("domain"))
 
-class ProjectShortSerializer(ProjectSerializer):
-    class Meta(ProjectSerializer.Meta):
-        fields = ("id", "name", "code")
+    def get_project_class_name(self, obj):
+        return dominio_get_value(obj.project_class, self.context.get("domain"))
+
+    def get_milestones(self, obj):
+        return MilestoneSummarySerializer(obj.milestones, many=True).data

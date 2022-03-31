@@ -53,4 +53,4 @@ class ContactSerializer(serializers.ModelSerializer):
         return ContactListSerializer(*args, **kwargs)
 
     def get_post_name(self, obj):
-        return dominio_get_value(obj.post)
+        return dominio_get_value(obj.post, self.context.get("domain"))

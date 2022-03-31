@@ -4,13 +4,13 @@ from django.db import connection
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
+from monitoring.models.domain_entry import DomainEntry
 from monitoring.models.milestone import CATEGORY_CHOICES, Milestone
 from monitoring.models.project import Project
 from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.milestone_serializer import MilestoneSerializer
 from monitoring.serializers.project_serializer import (
     ProjectSerializer,
-    ProjectShortSerializer,
     ProjectSummarySerializer,
 )
 from rest_framework import permissions, viewsets
@@ -59,43 +59,20 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
-        # Query optimizations for different actions
+        queryset = Project.objects.all()
         if self.action == "milestones":
-            return Project.objects.all()
-        if self.action == "list":
-            template = self.request.query_params.get("template")
-            if template == "short":
-                return Project.objects.all()
-            return Project.objects.select_related(
-                "main_infrastructure",
-                "main_infrastructure__locality",
-                "main_infrastructure__locality__department",
-                "main_infrastructure__locality__district",
-                "provider",
-                "financing_fund",
-                "financing_program",
-            ).prefetch_related("milestones")
-        return Project.objects.select_related(
-            "main_infrastructure",
-            "main_infrastructure__locality",
-            "main_infrastructure__locality__department",
-            "main_infrastructure__locality__district",
-            "provider",
-            "provider__locality",
-            "provider__locality__department",
-            "provider__locality__district",
-            "construction_contract",
-            "financing_fund",
-            "financing_program",
-        ).prefetch_related("linked_localities", "provider__contacts", "milestones")
+            return queryset
+        return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_class(self):
         if self.action == "list":
-            template = self.request.query_params.get("template")
-            if template == "short":
-                return ProjectShortSerializer
             return ProjectSummarySerializer
         return super().get_serializer_class()
+
+    def get_serializer_context(self):
+        context = super(ProjectViewSet, self).get_serializer_context()
+        context.update({"domain": DomainEntry.objects.all()})
+        return context
 
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user

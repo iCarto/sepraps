@@ -38,7 +38,7 @@ class ContractorSerializer(serializers.ModelSerializer):
         }
 
     def get_contractor_type_name(self, obj):
-        return dominio_get_value(obj.contractor_type)
+        return dominio_get_value(obj.contractor_type, self.context.get("domain"))
 
     def create(self, validated_data):
 
