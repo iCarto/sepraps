@@ -2,6 +2,7 @@ from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.construction_contract import ConstructionContract
+from monitoring.models.domain_entry import DomainEntry
 from monitoring.serializers.construction_contract_serializer import (
     ConstructionContractSerializer,
     ConstructionContractShortSerializer,
@@ -37,7 +38,8 @@ class ConstructionContractViewSet(viewsets.ModelViewSet):
 
     def get_serializer_context(self):
         context = super(ConstructionContractViewSet, self).get_serializer_context()
-        context["action"] = self.action
+        context.update({"action": self.action})
+        context.update({"domain": DomainEntry.objects.all()})
         return context
 
     def get_serializer_class(self):

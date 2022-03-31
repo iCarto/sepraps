@@ -29,7 +29,12 @@ class DomainEntry(models.Model):
         return self.value
 
 
-def dominio_get_value(searched_key):
+def dominio_get_value(searched_key, cached_domain=None):
+    """Try to replace in future to work only for cached results"""
+    if cached_domain:
+        for domain_entry in cached_domain:
+            if domain_entry.key == searched_key:
+                return domain_entry.value
     result = DomainEntry.objects.filter(key=searched_key)
     if result:
         return result[0].value
