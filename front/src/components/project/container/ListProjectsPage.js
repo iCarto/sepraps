@@ -9,6 +9,8 @@ import {useSort, useSearch, useFilter} from "hooks";
 import {useProjectListView} from "../provider";
 import {LocationProvider} from "components/common/provider";
 import {PageLayoutWithPanel} from "layout";
+import {AccordionUndercoverLayout, SearchBox} from "components/common/presentational";
+import {FormContractFilter, FormLocationFilters} from "components/common/form";
 import {
     ClosedProjectsOption,
     ProjectList,
@@ -17,8 +19,6 @@ import {
     ShowNoOfProjects,
     ProjectListChangeView,
 } from "../presentational";
-import {AccordionUndercoverLayout, SearchBox} from "components/common/presentational";
-import {FormContractFilter, FormLocationFilters} from "components/common/form";
 import {MapProjects} from "components/common/geo";
 
 import Grid from "@mui/material/Grid";
@@ -73,17 +73,27 @@ const ListProjectsPage = () => {
             .sort(sortFunction);
     }, [attribute, order, searchText, filterItems, projects]);
 
-    console.log({filteredProjects});
-
     const handleSearch = data => {
         setSearchText(data);
     };
 
     const handleFilter = (filterValue, filterName) => {
-        setFilterItems([...filterItems, {value: filterValue, key: filterName}]);
+        filterValue !== ""
+            ? setFilterItems([...filterItems, {value: filterValue, key: filterName}])
+            : handleClearFilter(filterName);
     };
 
-    console.log(filterItems);
+    const handleClearFilter = filterName => {
+        const itemToRemoveIndex = filterItems.findIndex(
+            item => item.key === filterName
+        );
+
+        filterItems.splice(itemToRemoveIndex, 1);
+
+        const updatedFilterItems = [...filterItems];
+
+        setFilterItems(updatedFilterItems);
+    };
 
     const handleSortBy = (attribute, order) => {
         setAttribute(attribute);
@@ -91,7 +101,7 @@ const ListProjectsPage = () => {
     };
 
     const handleClosedProjects = showClosed => {
-        console.log("handleClosedProjects", showClosed);
+        // console.log("handleClosedProjects", showClosed);
         setShowClosedProjects(showClosed);
     };
 
@@ -169,24 +179,24 @@ const ListProjectsPage = () => {
                 </Grid>
 
                 <Grid item container xs={12} rowSpacing={1}>
-                    <AccordionUndercoverLayout
+                    {/* <AccordionUndercoverLayout
                         accordionTitle="Filtros"
                         accordionIcon={<FilterListIcon />}
-                    >
-                        <LocationProvider>
-                            <Grid container columnSpacing={2}>
-                                <Grid item container columnSpacing={2} xs={8} mb={2}>
-                                    <FormLocationFilters
-                                        onFilter={handleFilter}
-                                        name="department"
-                                    />
-                                </Grid>
-                                <Grid item container xs={4} mb={2}>
-                                    <FormContractFilter onFilter={handleFilter} />
-                                </Grid>
+                    > */}
+                    <LocationProvider>
+                        <Grid container columnSpacing={2}>
+                            <Grid item container columnSpacing={2} xs={8} mb={2}>
+                                <FormLocationFilters
+                                    onFilter={handleFilter}
+                                    name="department"
+                                />
                             </Grid>
-                        </LocationProvider>
-                    </AccordionUndercoverLayout>
+                            <Grid item container xs={4} mb={2}>
+                                <FormContractFilter onFilter={handleFilter} />
+                            </Grid>
+                        </Grid>
+                    </LocationProvider>
+                    {/* </AccordionUndercoverLayout> */}
                 </Grid>
             </Grid>
             <Grid container justifyContent="flex-end" spacing={2} mb={2}>

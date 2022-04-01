@@ -36,21 +36,22 @@ const FormSelectMultipleChip = ({
     name,
     label = "",
     options,
+    activeFilter,
     onFilter = null,
-    onClear = null,
 }) => {
     const [optionCodes, setOptionCodes] = useState([]);
-    const [isFilterActive, setIsFilterActive] = useState(false);
     const theme = useTheme();
 
     options?.map(option => option.value.toString());
 
+    let isFilterActive = activeFilter?.length !== 0 ? true : false;
+
     const getOptionLabels = optionValues => {
-        if (optionValues) {
+        if (optionValues.length !== 0) {
             return optionValues
                 .map(
                     optionValue =>
-                        options.find(option => option.value == optionValue).label
+                        options?.find(option => option.value == optionValue)?.label
                 )
                 .join(", ");
         }
@@ -59,22 +60,19 @@ const FormSelectMultipleChip = ({
 
     const handleChange = event => {
         const optionValue = event.target.value.toString();
-        optionValue.length !== 0 ? setIsFilterActive(true) : setIsFilterActive(false);
+        optionValue.length !== 0 ? (isFilterActive = true) : (isFilterActive = false);
 
         setOptionCodes(
             // On autofill we get a stringified value.
             typeof optionValue === "string" ? optionValue.split(",") : optionValue
         );
-        console.log({optionValue});
         onFilter(optionValue, name);
     };
 
     const clearFilterValues = () => {
         setOptionCodes([]);
-        setIsFilterActive(false);
-        // ------> TO-DO Remove filterItem from filterItems array
-        onFilter([]);
-        onClear(name);
+        isFilterActive = false;
+        onFilter("", name);
     };
 
     return (
@@ -84,7 +82,7 @@ const FormSelectMultipleChip = ({
                 labelId={`${name}-label`}
                 id={`${name}-select`}
                 // multiple
-                value={optionCodes}
+                value={activeFilter || optionCodes}
                 onChange={handleChange}
                 input={
                     <OutlinedInput
