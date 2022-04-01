@@ -7,24 +7,18 @@ import {
     contacts_api_adapter,
     createPhases,
     phases_api_adapter,
+    createProjectsSummaries,
+    projects_summaries_api_adapter,
 } from "model";
 import AuthApiService from "./AuthApiService";
-
-export const PROJECT_TEMPLATE = {
-    SHORT: "short",
-};
 
 const basePath = "/api/monitoring/projects";
 
 const ProjectService = {
-    getProjects(showClosed = false, template = null) {
-        const path =
-            basePath +
-            (showClosed ? "?status=all" : "?status=active") +
-            (template ? `&template=${template}` : "");
-        console.log({showClosed}, {path});
+    getProjects(showClosed = false) {
+        const path = basePath + (showClosed ? "?status=all" : "?status=active");
         return AuthApiService.get(path).then(response => {
-            return createProjects(projects_api_adapter(response));
+            return createProjectsSummaries(projects_summaries_api_adapter(response));
         });
     },
 

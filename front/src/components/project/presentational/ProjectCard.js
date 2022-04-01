@@ -1,6 +1,6 @@
 import {DateUtil} from "utilities";
 
-import {Icon} from "../../common/presentational";
+import {ProjectTypeIcon} from "components/common/presentational";
 import {MilestoneTimelineShort} from "components/milestone/presentational";
 
 import Box from "@mui/material/Box";
@@ -54,19 +54,24 @@ const ProjectCard = ({project, onClick = null}) => {
                         alt={project.locality.locality_name}
                     />
                     <Box sx={projectTypeIconBoxStyle}>
-                        <Icon icon={project.project_type} size="medium" />
+                        <ProjectTypeIcon
+                            projectType={project.project_type}
+                            projectTypeName={project.project_type_name}
+                            size="medium"
+                        />
                     </Box>
                     <Tooltip title={`Clase: ${project.project_class}`}>
                         <Box sx={projectClassBoxStyle}>
                             <Typography variant="button">
-                                {project.project_class}
+                                {project.project_class_name}
                             </Typography>
                         </Box>
                     </Tooltip>
                 </div>
                 <CardContent>
+                    <Typography variant="body2">{project.code}</Typography>
                     <Typography variant="h5" color="primary">
-                        {project.locality.locality_name}
+                        {project.locality_name}
                     </Typography>
                     <Typography
                         variant="h6"
@@ -74,10 +79,8 @@ const ProjectCard = ({project, onClick = null}) => {
                         color="primary"
                         sx={{textTransform: "uppercase", lineHeight: 1}}
                     >
-                        {project.locality.district_name} (
-                        {project.locality.department_name})
+                        {project.district_name} ({project.department_name})
                     </Typography>
-                    <Typography variant="body2">{project.code}</Typography>
                     <Typography variant="subtitle2" sx={{lineHeight: "normal"}}>
                         {project.name}
                     </Typography>

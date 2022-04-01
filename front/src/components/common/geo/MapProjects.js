@@ -47,8 +47,8 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
         projects.forEach(project => {
             const marker = L.marker(
                 {
-                    lat: project.main_infrastructure.latitude,
-                    lng: project.main_infrastructure.longitude,
+                    lat: project.latitude,
+                    lng: project.longitude,
                 },
                 {
                     icon: getIcon(
@@ -59,7 +59,7 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
                     offset: L.point(0, -50),
                 }
             ).addTo(map);
-            marker.bindTooltip(project.locality.locality_name);
+            marker.bindTooltip(project.locality_name);
             marker.on("mouseover", function(e) {
                 this.openTooltip();
             });

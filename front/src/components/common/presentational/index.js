@@ -1,4 +1,4 @@
-export {default as Icon} from "./Icon";
+export {default as ProjectTypeIcon} from "./ProjectTypeIcon";
 export {default as ProgressBar} from "./ProgressBar";
 export {default as SectionCard} from "./SectionCard";
 export {default as SectionCardHeaderAction} from "./SectionCardHeaderAction";

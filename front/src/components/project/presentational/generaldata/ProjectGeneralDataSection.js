@@ -2,7 +2,7 @@ import {useNavigate, useOutletContext} from "react-router-dom";
 
 import {DateUtil} from "utilities";
 import {
-    Icon,
+    ProjectTypeIcon,
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
@@ -60,7 +60,11 @@ const ProjectGeneralDataSection = () => {
                                 opacity: 0.8,
                             }}
                         >
-                            <Icon icon={project.project_type_name} size="medium" />
+                            <ProjectTypeIcon
+                                projectType={project.project_type}
+                                projectTypeName={project.project_type_name}
+                                size="medium"
+                            />
                         </Box>
                     </div>
                 </Grid>
