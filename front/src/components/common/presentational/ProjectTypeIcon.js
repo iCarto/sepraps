@@ -1,24 +1,15 @@
 import Tooltip from "@mui/material/Tooltip";
-import PropTypes from "prop-types";
 
-const Icon = ({icon, size}) => {
+const ProjectTypeIcon = ({projectType, projectTypeName, size}) => {
     let imgSrc = "";
     let imgAlt = "";
     let maxWidth = {};
-    switch (`${icon}`) {
-        case "Agua Potable":
-            imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
-            imgAlt = "Grifo";
-            break;
+    switch (`${projectType}`) {
         case "agua":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
             imgAlt = "Grifo";
             break;
         case "Saneamiento":
-            imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
-            imgAlt = "Tubería";
-            break;
-        case "saneamiento":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
             imgAlt = "Tubería";
             break;
@@ -36,15 +27,10 @@ const Icon = ({icon, size}) => {
             break;
     }
     return (
-        <Tooltip title={`Tipo: ${icon}`}>
-            <img src={imgSrc} alt={imgAlt} style={maxWidth} aria-label={icon} />
+        <Tooltip title={`Tipo: ${projectTypeName}`}>
+            <img src={imgSrc} alt={imgAlt} style={maxWidth} aria-label={projectType} />
         </Tooltip>
     );
 };
 
-Icon.propTypes = {
-    icon: PropTypes.string.isRequired,
-    size: PropTypes.string,
-};
-
-export default Icon;
+export default ProjectTypeIcon;
