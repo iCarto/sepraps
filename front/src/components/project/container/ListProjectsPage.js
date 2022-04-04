@@ -15,7 +15,6 @@ import {
     ClosedProjectsOption,
     ProjectList,
     ProjectsTable,
-    SortProjectsSelect,
     ShowNoOfProjects,
     ProjectListChangeView,
 } from "../presentational";
@@ -52,11 +51,6 @@ const ListProjectsPage = () => {
 
     const {view} = useProjectListView();
 
-    const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
-        "updated_at",
-        "desc"
-    );
-
     const [projects, setProjects] = useState([]);
     const [selectedElement, setSelectedElement] = useState(null);
     const [showClosedProjects, setShowClosedProjects] = useState(false);
@@ -68,11 +62,8 @@ const ListProjectsPage = () => {
     }, [showClosedProjects]);
 
     const filteredProjects = useMemo(() => {
-        return projects
-            .filter(filterFunction)
-            .filter(searchFunction)
-            .sort(sortFunction);
-    }, [attribute, order, searchText, filterItems, projects]);
+        return projects.filter(filterFunction).filter(searchFunction);
+    }, [searchText, filterItems, projects]);
 
     const handleSearch = data => {
         setSearchText(data);
@@ -96,17 +87,12 @@ const ListProjectsPage = () => {
         setFilterItems(updatedFilterItems);
     };
 
-    const handleClearAll = () => {
+    const handleClearAllFilters = () => {
         setFilterItems([]);
     };
 
-    const handleSortBy = (attribute, order) => {
-        setAttribute(attribute);
-        setOrder(order);
-    };
-
     const handleClosedProjects = showClosed => {
-        // console.log("handleClosedProjects", showClosed);
+        console.log("handleClosedProjects", showClosed);
         setShowClosedProjects(showClosed);
     };
 
@@ -153,13 +139,6 @@ const ListProjectsPage = () => {
                             handleSearch={handleSearch}
                         />
                     </Grid>
-                    <Grid item xs={6} md={4} xl={3}>
-                        <SortProjectsSelect
-                            attribute={attribute}
-                            order={order}
-                            handleSortBy={handleSortBy}
-                        />
-                    </Grid>
                     <Grid item container xs={6} md={2} xl={3}>
                         <ClosedProjectsOption
                             checked={showClosedProjects}
@@ -172,8 +151,8 @@ const ListProjectsPage = () => {
                         justifyContent="flex-end"
                         alignItems="center"
                         xs={6}
-                        md={2}
-                        xl={3}
+                        md={6}
+                        xl={6}
                     >
                         <Box>
                             <ShowNoOfProjects
@@ -210,7 +189,7 @@ const ListProjectsPage = () => {
                                     <Button
                                         color="primary"
                                         fullWidth
-                                        onClick={handleClearAll}
+                                        onClick={handleClearAllFilters}
                                     >
                                         Borrar
                                     </Button>
