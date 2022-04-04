@@ -1,6 +1,8 @@
 from monitoring.models.construction_contract import ConstructionContract
+from monitoring.models.contact import Contact
 from monitoring.models.contractor import Contractor
 from monitoring.models.project import Project
+from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.contractor_serializer import ContractorSerializer
 from rest_framework import serializers
 
@@ -8,6 +10,12 @@ from rest_framework import serializers
 class ConstructionContractSerializer(serializers.ModelSerializer):
 
     contractor = ContractorSerializer(required=False, allow_null=True)
+    field_manager = ContactSerializer(required=False, allow_null=True)
+    construction_inspector = ContactSerializer(required=False, allow_null=True)
+    construction_supervisor = ContactSerializer(required=False, allow_null=True)
+    social_coordinator = ContactSerializer(required=False, allow_null=True)
+    social_inspector = ContactSerializer(required=False, allow_null=True)
+    social_supervisor = ContactSerializer(required=False, allow_null=True)
     projects = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Project.objects.all()
     )
@@ -30,6 +38,12 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "awarding_percentage_drop",
             "awarding_date",
             "contractor",
+            "field_manager",
+            "construction_inspector",
+            "construction_supervisor",
+            "social_coordinator",
+            "social_inspector",
+            "social_supervisor",
             "execution_signature_date",
             "execution_order_start_date",
             "execution_certificate_start_date",
@@ -66,6 +80,17 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
     # OPERATIONS
 
+    def create_monitoring_profile(self, monitoring_profile_key, validated_data):
+
+        monitoring_profile_data = validated_data.pop(monitoring_profile_key, None)
+        monitoring_profile = None
+        if monitoring_profile_data:
+            monitoring_profile, _ = Contact.objects.get_or_create(
+                **monitoring_profile_data
+            )
+
+        return monitoring_profile
+
     def create(self, validated_data):
 
         contractor_data = validated_data.pop("contractor", None)
@@ -75,15 +100,39 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
         projects_for_contract = validated_data.pop("projects")
 
+        field_manager = self.create_monitoring_profile("field_manager", validated_data)
+        construction_inspector = self.create_monitoring_profile(
+            "construction_inspector", validated_data
+        )
+        construction_supervisor = self.create_monitoring_profile(
+            "construction_supervisor", validated_data
+        )
+        social_coordinator = self.create_monitoring_profile(
+            "social_coordinator", validated_data
+        )
+        social_inspector = self.create_monitoring_profile(
+            "social_inspector", validated_data
+        )
+        social_supervisor = self.create_monitoring_profile(
+            "social_supervisor", validated_data
+        )
+
         construction_contract = ConstructionContract.objects.create(
-            **validated_data, contractor=contractor
+            **validated_data,
+            contractor=contractor,
+            field_manager=field_manager,
+            construction_inspector=construction_inspector,
+            construction_supervisor=construction_supervisor,
+            social_coordinator=social_coordinator,
+            social_inspector=social_inspector,
+            social_supervisor=social_supervisor,
         )
         construction_contract.projects.set(projects_for_contract)
 
         return construction_contract
 
     def update_contractor(self, instance, validated_data):
-        contractor_data = validated_data.pop("contractor")
+        contractor_data = validated_data.pop("contractor", None)
 
         contractor = None
         if contractor_data:
@@ -97,9 +146,42 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
         instance.contractor = contractor
 
+    def update_monitoring_profiles(
+        self, monitoring_profile_key, instance, validated_data
+    ):
+        monitoring_profile_data = validated_data.pop(monitoring_profile_key, None)
+
+        monitoring_profile = None
+        if monitoring_profile_data:
+
+            if (
+                "id" in monitoring_profile_data
+                and monitoring_profile_data["id"] is not None
+            ):
+                monitoring_profile = self.fields[monitoring_profile_key].update(
+                    Contact.objects.get(pk=monitoring_profile_data["id"]),
+                    monitoring_profile_data,
+                )
+            else:
+                monitoring_profile = self.fields[monitoring_profile_key].create(
+                    monitoring_profile_data
+                )
+
+        setattr(instance, monitoring_profile_key, monitoring_profile)
+
     def update(self, instance, validated_data):
 
         self.update_contractor(instance, validated_data)
+        self.update_monitoring_profiles("field_manager", instance, validated_data)
+        self.update_monitoring_profiles(
+            "construction_inspector", instance, validated_data
+        )
+        self.update_monitoring_profiles(
+            "construction_supervisor", instance, validated_data
+        )
+        self.update_monitoring_profiles("social_coordinator", instance, validated_data)
+        self.update_monitoring_profiles("social_inspector", instance, validated_data)
+        self.update_monitoring_profiles("social_supervisor", instance, validated_data)
 
         projects_for_contract = validated_data.pop("projects")
         instance.projects.set(projects_for_contract)
