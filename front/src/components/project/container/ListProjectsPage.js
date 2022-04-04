@@ -26,6 +26,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const fabStyle = {
     position: "fixed",
@@ -53,11 +54,14 @@ const ListProjectsPage = () => {
 
     const [projects, setProjects] = useState([]);
     const [selectedElement, setSelectedElement] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [showClosedProjects, setShowClosedProjects] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         ProjectService.getProjects(showClosedProjects).then(data => {
             setProjects(data);
+            setLoading(false);
         });
     }, [showClosedProjects]);
 
@@ -202,7 +206,13 @@ const ListProjectsPage = () => {
             <Grid container justifyContent="flex-end" spacing={2} mb={2}>
                 <ProjectListChangeView />
             </Grid>
-            {getViewComponent(view)}
+            {loading ? (
+                <Grid item container justifyContent="center" my={6} xs={12}>
+                    <CircularProgress color="inherit" size={40} />
+                </Grid>
+            ) : (
+                getViewComponent(view)
+            )}
 
             <Fab
                 sx={fabStyle}
