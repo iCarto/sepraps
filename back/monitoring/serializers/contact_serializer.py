@@ -30,7 +30,6 @@ class ContactSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(allow_null=True)
     post_name = serializers.SerializerMethodField()
-    comments = serializers.CharField(allow_blank=True)
 
     class Meta:
         model = Contact
@@ -43,7 +42,14 @@ class ContactSerializer(serializers.ModelSerializer):
             "phone",
             "email",
             "comments",
+            "is_staff",
         )
+        extra_kwargs = {
+            "phone": {"allow_null": True, "allow_blank": True},
+            "email": {"allow_null": True, "allow_blank": True},
+            "comments": {"allow_null": True, "allow_blank": True},
+            "is_staff": {"allow_null": True},
+        }
         list_serializer_class = ContactListSerializer
 
     @classmethod

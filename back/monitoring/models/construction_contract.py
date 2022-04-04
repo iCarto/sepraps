@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from monitoring.models.contact import Contact
 from monitoring.models.contractor import Contractor
 
 
@@ -31,6 +32,24 @@ class ConstructionContract(models.Model):
         verbose_name=Contractor._meta.verbose_name,
         null=True,
         related_name="contract",
+    )
+    field_manager = models.ForeignKey(
+        Contact, on_delete=models.PROTECT, null=True, related_name="+"
+    )
+    construction_inspector = models.ForeignKey(
+        Contact, on_delete=models.PROTECT, null=True, related_name="+"
+    )
+    construction_supervisor = models.ForeignKey(
+        Contact, on_delete=models.PROTECT, null=True, related_name="+"
+    )
+    social_coordinator = models.ForeignKey(
+        Contact, on_delete=models.PROTECT, null=True, related_name="+"
+    )
+    social_inspector = models.ForeignKey(
+        Contact, on_delete=models.PROTECT, null=True, related_name="+"
+    )
+    social_supervisor = models.ForeignKey(
+        Contact, on_delete=models.PROTECT, null=True, related_name="+"
     )
     execution_signature_date = models.DateField(
         "Fecha de firma del contrato", null=True
