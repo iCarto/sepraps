@@ -1,4 +1,6 @@
-from django.db.models import F, Prefetch
+from django.db.models import Prefetch
+
+# from django.db.models import F, Prefetch
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
@@ -200,7 +202,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(serializers.ModelSerializer):
-
     project_type_name = serializers.SerializerMethodField()
     project_class_name = serializers.SerializerMethodField()
     linked_localities = LocalitySerializer(many=True)
