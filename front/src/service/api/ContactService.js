@@ -12,7 +12,7 @@ const ContactService = {
     findContacts(searchText, allowedPosts) {
         let searchString = `?search=${searchText}`;
         if (allowedPosts && allowedPosts.length) {
-            searchString += "&posts=" + allowedPosts.join(",");
+            searchString = searchString + "&posts=" + allowedPosts.join(",");
         }
         return AuthApiService.get(basePath + searchString).then(response => {
             return createContacts(contacts_api_adapter(response));

@@ -1,13 +1,19 @@
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {ContractService} from "service/api";
 import {useSort, useSearch} from "hooks";
+import {ContractService} from "service/api";
+
+import {PageLayout} from "layout";
 import {SearchBox} from "components/common/presentational";
-import {ClosedContractsOption, ContractList} from "../presentational";
-import {SortContractsSelect} from "../presentational";
+import {
+    ClosedContractsOption,
+    ContractList,
+    SortContractsSelect,
+} from "../presentational";
 
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import {PageLayoutWithPanel} from "layout";
@@ -23,6 +29,7 @@ const ListContractsPage = () => {
 
     const [contracts, setContracts] = useState([]);
     const [filteredContracts, setFilteredContracts] = useState([]);
+    const [loading, setLoading] = useState(false);
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "updated_at",
         "desc"
@@ -31,9 +38,11 @@ const ListContractsPage = () => {
     const [showClosedContracts, setShowClosedContracts] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         ContractService.getContracts(showClosedContracts).then(data => {
             setContracts(data);
             setFilteredContracts([...data].filter(searchFunction).sort(sortFunction));
+            setLoading(false);
         });
     }, [showClosedContracts]);
 
@@ -96,8 +105,23 @@ const ListContractsPage = () => {
                         />
                     </Grid>
                 </Grid>
+                <Grid item md={2}></Grid>
+                <Grid item md={3}>
+                    <SortContractsSelect
+                        attribute={attribute}
+                        order={order}
+                        handleSortBy={handleSortBy}
+                    />
+                </Grid>
+            {loading ? (
+                <Grid container justifyContent="center" my={6} xs={12}>
+                    <CircularProgress size={40} />
+                </Grid>
+            ) : (
                 <ContractList contracts={filteredContracts} />
+            )}
             </Paper>
+
             <Fab
                 sx={fabStyle}
                 color="primary"

@@ -17,15 +17,14 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 
 const ContractMonitoringContactSection = ({
     sectionName,
+    postName,
     contact = null,
     showIsStaff = true,
     onOpenRemoveDialog = null,
 }) => {
-    // TO-DO: sectionName MAY NOT BE NECESSARY IF WE USE THE DATA IN CONTACT. WATCH OUT FOR EMPTY/NON-EXISTING CONTACTS
-
     const navigate = useNavigate();
 
-    let isStaff = contact?.staff ? "Sí" : "No";
+    let isStaff = contact?.is_staff ? "Sí" : "No";
     let genderValue;
 
     switch (`${contact?.gender}`) {
@@ -40,11 +39,6 @@ const ContractMonitoringContactSection = ({
             break;
     }
 
-    const sectionNameForPath = sectionName
-        .toLowerCase()
-        .replace(/ de /g, " ")
-        .replace(/ /g, "_");
-
     const secondaryActions = [
         <SectionCardHeaderAction
             key="edit"
@@ -53,7 +47,7 @@ const ContractMonitoringContactSection = ({
             icon={<EditIcon />}
             onClick={() => {
                 // TO-DO UPDATE PATH
-                navigate(`${sectionNameForPath}/existing/edit`);
+                navigate(`${postName}/existing/edit`);
             }}
         />,
         <SectionCardHeaderAction
@@ -62,7 +56,7 @@ const ContractMonitoringContactSection = ({
             text="Quitar"
             icon={<LinkOffIcon />}
             onClick={() => {
-                onOpenRemoveDialog(true, contact.role);
+                onOpenRemoveDialog(true, sectionName);
             }}
         />,
     ];
@@ -101,7 +95,7 @@ const ContractMonitoringContactSection = ({
                     </Typography>
                     <Grid item container xs={12} mt={3} justifyContent="center">
                         <AddContactButtonGroup
-                            basePath={sectionNameForPath}
+                            basePath={postName}
                             btnName={`Asignar ${sectionName}`}
                         />
                     </Grid>

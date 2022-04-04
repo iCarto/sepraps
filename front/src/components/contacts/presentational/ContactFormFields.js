@@ -1,8 +1,12 @@
 import {Fragment} from "react";
 import {useDomain} from "components/common/provider";
-import {FormInputText, FormSelect} from "components/common/form";
+import {FormCheckbox, FormInputText, FormSelect} from "components/common/form";
 
-const ContactFormFields = ({allowedPosts = null}) => {
+const ContactFormFields = ({
+    allowedPosts = null,
+    isMonitoringProfile = false,
+    showIsStaff = false,
+}) => {
     const {contactPosts} = useDomain();
 
     // TODO post.value is a dependency with a back-end domain value
@@ -14,7 +18,9 @@ const ContactFormFields = ({allowedPosts = null}) => {
     return (
         <Fragment>
             <FormInputText name="contact_name" label="Nombre del contacto" />
-            <FormSelect name="contact_post" label="Cargo" options={posts} />
+            {!isMonitoringProfile && (
+                <FormSelect name="contact_post" label="Cargo" options={posts} />
+            )}
             <FormSelect
                 name="contact_gender"
                 label="Género"
@@ -32,6 +38,9 @@ const ContactFormFields = ({allowedPosts = null}) => {
             <FormInputText name="contact_phone" label="Celular" />
             <FormInputText name="contact_email" label="Correo electrónico" />
             <FormInputText name="contact_comments" label="Observaciones" />
+            {showIsStaff && (
+                <FormCheckbox name="contact_staff" label="Personal interno" />
+            )}
         </Fragment>
     );
 };

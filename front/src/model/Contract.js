@@ -6,6 +6,7 @@ import {
 } from "model";
 import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 import {contractor_view_adapter} from "./Contractor";
+import createProjectSummary, {project_summary_api_adapter} from "./ProjectSummary";
 
 class Contracts extends Array {}
 
@@ -151,6 +152,12 @@ const createContract = ({
     awarding_percentage_drop = null,
     awarding_date = null,
     contractor = null,
+    field_manager = null,
+    construction_inspector = null,
+    construction_supervisor = null,
+    social_coordinator = null,
+    social_inspector = null,
+    social_supervisor = null,
     execution_signature_date = null,
     execution_order_start_date = null,
     execution_certificate_start_date = null,
@@ -173,6 +180,12 @@ const createContract = ({
         awarding_percentage_drop,
         awarding_date,
         contractor,
+        field_manager,
+        construction_inspector,
+        construction_supervisor,
+        social_coordinator,
+        social_inspector,
+        social_supervisor,
         execution_signature_date,
         execution_order_start_date,
         execution_certificate_start_date,
