@@ -19,6 +19,7 @@ const createContact = ({
     gender = "",
     phone = "",
     email = "",
+    is_staff = "",
     comments = "",
 } = {}) => {
     const publicApi = {
@@ -29,6 +30,7 @@ const createContact = ({
         gender,
         phone,
         email,
+        is_staff,
         comments,
     };
 

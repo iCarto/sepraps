@@ -1,11 +1,10 @@
 import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {ContractService} from "service/api";
-import {createContract} from "model";
+import {contract_view_adapter, createContact, createContract} from "model";
 import {useNavigateWithReload} from "hooks";
 
-import {ContractMonitoringContactForm} from "components/contracts/presentational/monitoring";
-import {ContactFormSearch} from "components/contacts/presentational";
+import {ContactForm, ContactFormSearch} from "components/contacts/presentational";
 import {SidebarPanel} from "layout";
 import Alert from "@mui/material/Alert";
 
@@ -18,73 +17,74 @@ const UpdateContractMonitoringProfilePanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const fakeContractContacts = [
-        // TO-DO: FOR TESTING PURPOSES ONLY - REMOVE WHEN API & ENDPOINTS ARE READY
-        {
-            id: 1,
-            role: "Residente de obra",
-            name: "María Rodríguez Rodríguez",
-            gender: "F",
-            phone: "+11 123 456 789",
-            email: "maría@rodriguez.com",
-            staff: false,
-            comments: "Tiene una observación",
-        },
-        {
-            id: 2,
-            role: "Fiscal constructivo",
-            name: "Clara Pérez Pérez",
-            gender: "F",
-            phone: "+11 123 456 789",
-            email: "clara@perez.com",
-            staff: true,
-            comments: "",
-        },
-    ];
+    const allowedPosts = [sectionName];
 
-    // TO-DO: UPDATE WHEN API & ENDPOINTS ARE READY
-    const selectedContact =
-        action === "edit"
-            ? fakeContractContacts.find(
-                  contact =>
-                      contact.role
-                          .toLowerCase()
-                          .replace(/ de /g, " ")
-                          .replace(/ /g, "_") === sectionName
-              )
-            : null;
+    let sectionNameForTitle = "";
 
-    const allowedPosts = [{sectionName}];
+    switch (sectionName) {
+        case "field_manager":
+            sectionNameForTitle = "Residente de obra";
+            break;
+        case "construction_inspector":
+            sectionNameForTitle = "Fiscal constructivo";
+            break;
+        case "construction_supervisor":
+            sectionNameForTitle = "supervisor_constructivo";
+            break;
+        case "social_coordinator":
+            sectionNameForTitle = "Coordinador social";
+            break;
+        case "social_inspector":
+            sectionNameForTitle = "Fiscal social";
+            break;
+        case "social_supervisor":
+            sectionNameForTitle = "Supervisor social";
+            break;
+        default:
+            break;
+    }
 
-    const sectionNameForTitle = sectionName.split("_").join(" ");
+    console.log({sectionName});
+
+    /// NECESITAMOS EL NOMBRE DE LA PROPIEDAD (QUE ESTÁ EN INGLÉS) PARA EL PATH - EL POST PARA EL CONTACT FORM Y EL CONTACT FORM SEARCH Y PARA EL DEFAULT - EL POST_NAME PARA EL TÍTULO DE LA SECCIÓN Y PARA EL DEFAULT POST_NAME
+
+    let showIsStaff =
+        sectionName === "construction_inspector" ||
+        sectionName === "construction_supervisor" ||
+        sectionName === "social_inspector" ||
+        sectionName === "social_supervisor"
+            ? true
+            : false;
 
     const handleCloseSidebar = () => {
         navigate(`/contracts/${contract.id}/monitoring`);
     };
 
     const handleSubmit = data => {
-        console.log(data);
-        // const updatedContract = createContract({
-        //     ...contract,
-        //     contract: contract.id,
-        //     contacts: [
-        //         ...contract.contacts,
-        //         {
-        //             id: data.contact_id,
-        //             name: data.contact_name,
-        //             post: data.sectionName,
-        //             // post_name: data.contact_post_name,
-        //             gender: data.contact_gender,
-        //             phone: data.contact_phone,
-        //             email: data.contact_email,
-        //             comments: data.contact_comments,
-        //             staff: data.contact.isStaff
-        //         },
-        //     ],
-        // });
-        // handleFormSubmit(updatedContract);
+        console.log({data});
+        const updatedContract = createContract({
+            ...contract,
+            contract: contract.id,
+            [sectionName]: {
+                id: data.contact_id,
+                name: data.contact_name,
+                post: sectionName,
+                post_name: sectionNameForTitle,
+                gender: data.contact_gender,
+                phone: data.contact_phone,
+                email: data.contact_email,
+                comments: data.contact_comments,
+                is_staff:
+                    sectionName === "field_manager" ||
+                    sectionName === "social_coordinator"
+                        ? true
+                        : data.contact_is_staff,
+            },
+        });
+        handleFormSubmit(updatedContract);
     };
 
+    // ------------> TO-DO: UPDATE THIS
     const handleSelectExistingContact = contact => {
         const updatedContract = createContract({
             ...contract,
@@ -98,17 +98,19 @@ const UpdateContractMonitoringProfilePanel = () => {
                     phone: contact.phone,
                     email: contact.email,
                     comments: contact.comments,
-                    staff: contact.isStaff,
+                    is_staff: contact.is_staff,
                 },
             ],
         });
         handleFormSubmit(updatedContract);
     };
 
-    const handleFormSubmit = contract => {
-        ContractService.updateContract(contract)
+    const handleFormSubmit = updatedContract => {
+        ContractService.updateContract(
+            contract_view_adapter({...updatedContract, updatedContract})
+        )
             .then(() => {
-                navigate(`/contracts/${contract.id}`, true);
+                navigate(`/contracts/${contract.id}/monitoring`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -132,13 +134,15 @@ const UpdateContractMonitoringProfilePanel = () => {
             )}
             {action === "search" ? (
                 <ContactFormSearch
-                    allowedPosts={allowedPosts}
+                    allowedPosts={[contract?.post]}
                     onSelect={handleSelectExistingContact}
                 />
             ) : (
-                <ContractMonitoringContactForm
-                    contact={selectedContact}
+                <ContactForm
+                    contact={contract[sectionName]}
+                    isMonitoringProfile={true}
                     onSubmit={handleSubmit}
+                    showIsStaff={showIsStaff}
                 />
             )}
         </SidebarPanel>

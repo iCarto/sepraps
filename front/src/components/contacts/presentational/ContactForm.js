@@ -5,7 +5,13 @@ import {ContactFormFields} from "components/contacts/presentational";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ContactForm = ({contact = null, allowedPosts = null, onSubmit}) => {
+const ContactForm = ({
+    contact = null,
+    allowedPosts = null,
+    onSubmit,
+    isMonitoringProfile = false,
+    showIsStaff = false,
+}) => {
     const formMethods = useForm({
         defaultValues: contact
             ? {
@@ -37,7 +43,11 @@ const ContactForm = ({contact = null, allowedPosts = null, onSubmit}) => {
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <Grid container component="form">
-                    <ContactFormFields allowedPosts={allowedPosts} />
+                    <ContactFormFields
+                        allowedPosts={allowedPosts}
+                        isMonitoringProfile={isMonitoringProfile}
+                        showIsStaff={showIsStaff}
+                    />
                 </Grid>
                 <Grid container justifyContent="center" sx={{mt: 2}}>
                     <Grid>
