@@ -111,6 +111,60 @@
         "model": "monitoring.DomainEntry",
         "pk": null,
         "fields": {
+            "category": "contact_post",
+            "key": "fiscal_constructivo",
+            "value": "Fiscal constructivo"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "supervisor_constructivo",
+            "value": "Supervisor constructivo"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "coordinador_social",
+            "value": "Coordinador de apoyo social"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "fiscal_social",
+            "value": "Fiscal social"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "supervisor_social",
+            "value": "Supervisor social"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "otro_contacto",
+            "value": "Otro contacto"
+        }
+    },
+    {
+        "model": "monitoring.DomainEntry",
+        "pk": null,
+        "fields": {
             "category": "contractor_type",
             "key": "company",
             "value": "Empresa"
@@ -132,15 +186,6 @@
             "category": "contractor_type",
             "key": "consultant",
             "value": "Consultor/a"
-        }
-    },
-    {
-        "model": "monitoring.DomainEntry",
-        "pk": null,
-        "fields": {
-            "category": "contact_post",
-            "key": "otro_contacto",
-            "value": "Otro contacto"
         }
     },
     {

@@ -1,7 +1,7 @@
 [
     {
         "model": "monitoring.contact",
-        "pk": 3,
+        "pk": 9,
         "fields": {
             "name": "Ing. Ricardo Díaz Martínez",
             "post": "responsable_contratista",
@@ -13,7 +13,7 @@
     },
     {
         "model": "monitoring.contact",
-        "pk": 4,
+        "pk": 10,
         "fields": {
             "name": "Ing. Fernando Marcial Moreno Martínez",
             "post": "responsable_contratista",
