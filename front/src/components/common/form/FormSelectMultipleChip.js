@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useController, useFormContext} from "react-hook-form";
 
 import {useTheme} from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -33,18 +34,23 @@ const getStyles = (option, optionName, theme) => {
 };
 
 const FormSelectMultipleChip = ({
-    name,
+    name: propsName,
     label = "",
     options,
-    activeFilter,
-    onFilter = null,
+    onChangeHandler = null,
 }) => {
+    const {control} = useFormContext();
+    const {
+        field: {onChange, name, value, ref},
+    } = useController({
+        name: propsName,
+        control,
+    });
+
     const [optionCodes, setOptionCodes] = useState([]);
     const theme = useTheme();
 
     options?.map(option => option.value.toString());
-
-    let isFilterActive = activeFilter?.length !== 0 ? true : false;
 
     const getOptionLabels = optionValues => {
         if (optionValues.length !== 0) {
@@ -58,22 +64,16 @@ const FormSelectMultipleChip = ({
         return "";
     };
 
-    const handleChange = event => {
-        const optionValue = event.target.value.toString();
-        optionValue.length !== 0 ? (isFilterActive = true) : (isFilterActive = false);
+    // const handleChange = event => {
+    //     const optionValue = event.target.value.toString();
+    //     optionValue.length !== 0 ? (isFilterActive = true) : (isFilterActive = false);
 
-        setOptionCodes(
-            // On autofill we get a stringified value.
-            typeof optionValue === "string" ? optionValue.split(",") : optionValue
-        );
-        onFilter(optionValue, name);
-    };
-
-    const clearFilterValues = () => {
-        setOptionCodes([]);
-        isFilterActive = false;
-        onFilter("", name);
-    };
+    //     setOptionCodes(
+    //         // On autofill we get a stringified value.
+    //         typeof optionValue === "string" ? optionValue.split(",") : optionValue
+    //     );
+    //     onFilter(optionValue, name);
+    // };
 
     return (
         <FormControl fullWidth>
@@ -82,30 +82,51 @@ const FormSelectMultipleChip = ({
                 labelId={`${name}-label`}
                 id={`${name}-select`}
                 // multiple
-                value={activeFilter || optionCodes}
-                onChange={handleChange}
+                inputRef={ref}
+                value={[value]}
+                onChange={event => {
+                    onChange(event);
+                    if (onChangeHandler) {
+                        onChangeHandler(event.target.value);
+                    }
+                }}
                 input={
                     <OutlinedInput
                         id={`${name}-input`}
                         label={label}
                         endAdornment={
-                            <InputAdornment position="end" sx={{mr: 3}}>
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    edge="end"
-                                    onClick={clearFilterValues}
-                                >
-                                    {isFilterActive && <ClearIcon />}
-                                </IconButton>
-                            </InputAdornment>
+                            value !== "" && (
+                                <InputAdornment position="end" sx={{mr: 3}}>
+                                    <IconButton
+                                        aria-label="clear filter"
+                                        edge="end"
+                                        onClick={event => {
+                                            onChange((event.target.value = ""));
+                                            if (onChangeHandler) {
+                                                onChangeHandler(
+                                                    (event.target.value = "")
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        <ClearIcon />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
                         }
                     />
                 }
                 renderValue={selected => (
                     <Box sx={{display: "flex", flexWrap: "wrap", gap: 0.5}}>
-                        {selected.map(value => (
-                            <Chip key={value} label={getOptionLabels(selected)} />
-                        ))}
+                        {selected.map(
+                            value =>
+                                value !== "" && (
+                                    <Chip
+                                        key={value}
+                                        label={getOptionLabels(selected)}
+                                    />
+                                )
+                        )}
                     </Box>
                 )}
                 menuprops={menuprops}

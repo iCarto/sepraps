@@ -5,15 +5,7 @@ function useFilter(filters) {
     const [filterItems, setFilterItems] = useState(filters);
 
     function filterFunction(item) {
-        const propertiesToCheck = [
-            item.name,
-            item.role,
-            item.email,
-            item.construction_contract,
-            item.locality?.department,
-            item.locality?.district,
-            item.locality?.locality_name,
-        ];
+        const propertiesToCheck = [item.name, item.role, item.email];
 
         return (
             filterItems.length === 0 ||

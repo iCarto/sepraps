@@ -10,5 +10,3 @@ export {default as FormSection} from "./FormSection";
 export {default as FormCheckbox} from "./FormCheckbox";
 export {default as FormTextArea} from "./FormTextArea";
 export {default as FormSelectMultipleChip} from "./FormSelectMultipleChip";
-export {default as FormLocationFilters} from "./FormLocationFilters";
-export {default as FormContractFilter} from "./FormContractFilter";
