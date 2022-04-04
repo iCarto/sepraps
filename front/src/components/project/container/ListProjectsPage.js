@@ -26,6 +26,7 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import Button from "@mui/material/Button";
 
 const fabStyle = {
     position: "fixed",
@@ -93,6 +94,10 @@ const ListProjectsPage = () => {
         const updatedFilterItems = [...filterItems];
 
         setFilterItems(updatedFilterItems);
+    };
+
+    const handleClearAll = () => {
+        setFilterItems([]);
     };
 
     const handleSortBy = (attribute, order) => {
@@ -179,24 +184,40 @@ const ListProjectsPage = () => {
                 </Grid>
 
                 <Grid item container xs={12} rowSpacing={1}>
-                    {/* <AccordionUndercoverLayout
+                    <AccordionUndercoverLayout
                         accordionTitle="Filtros"
                         accordionIcon={<FilterListIcon />}
-                    > */}
-                    <LocationProvider>
-                        <Grid container columnSpacing={2}>
-                            <Grid item container columnSpacing={2} xs={8} mb={2}>
-                                <FormLocationFilters
-                                    onFilter={handleFilter}
-                                    name="department"
-                                />
+                    >
+                        <LocationProvider>
+                            <Grid container columnSpacing={2}>
+                                <Grid
+                                    item
+                                    container
+                                    columnSpacing={2}
+                                    xs={6}
+                                    md={7.3}
+                                    mb={2}
+                                >
+                                    <FormLocationFilters
+                                        onFilter={handleFilter}
+                                        name="department"
+                                    />
+                                </Grid>
+                                <Grid item container xs={3} md={3.6} mb={2}>
+                                    <FormContractFilter onFilter={handleFilter} />
+                                </Grid>
+                                <Grid item container xs={2} md={1} mb={2}>
+                                    <Button
+                                        color="primary"
+                                        fullWidth
+                                        onClick={handleClearAll}
+                                    >
+                                        Borrar
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Grid item container xs={4} mb={2}>
-                                <FormContractFilter onFilter={handleFilter} />
-                            </Grid>
-                        </Grid>
-                    </LocationProvider>
-                    {/* </AccordionUndercoverLayout> */}
+                        </LocationProvider>
+                    </AccordionUndercoverLayout>
                 </Grid>
             </Grid>
             <Grid container justifyContent="flex-end" spacing={2} mb={2}>
