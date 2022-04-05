@@ -21,8 +21,8 @@ function TableSortingHead({
     return (
         <>
             <colgroup>
-                {headCells.slice(0, -1).map(headCell => (
-                    <col key={headCell.id} width={headCell.width + "%"} />
+                {headCells.slice(0, -1).map((headCell, index) => (
+                    <col key={index} width={headCell.width + "%"} />
                 ))}
             </colgroup>
             <TableHead>

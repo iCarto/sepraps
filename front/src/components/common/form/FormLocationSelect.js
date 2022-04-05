@@ -72,7 +72,7 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
 
     return (
         <Grid container>
-            <Grid item md={orientation === "vertical" ? 12 : 4} xs={12}>
+            <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
                 <FormSelect
                     name={`${propsName}.department`}
                     label="Departamento"
@@ -82,7 +82,7 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                     showEmptyOption={true}
                 />
             </Grid>
-            <Grid item md={orientation === "vertical" ? 12 : 4} xs={12}>
+            <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
                 <FormSelect
                     name={`${propsName}.district`}
                     label="Distrito"
@@ -92,7 +92,7 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                     showEmptyOption={true}
                 />
             </Grid>
-            <Grid item md={orientation === "vertical" ? 12 : 4} xs={12}>
+            <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
                 <FormSelect
                     name={`${propsName}.locality`}
                     label="Localidad"

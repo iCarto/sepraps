@@ -1,16 +1,13 @@
-import PropTypes from "prop-types";
-
 import {ProjectCard} from "./";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 
-const ProjectList = ({projects, onClick, isSidebarPanelOpen = false}) => {
+const ProjectList = ({projects = [], onClick}) => {
     const noProjectFound = projects.length === 0 || !projects;
 
     const projectItems = projects.map(project => {
         return (
-            <Grid key={project.id} item xs={12} sm={6} md={4} xl={3}>
+            <Grid item xs={12} sm={6} md={4} xl={3} key={project.id}>
                 <ProjectCard project={project} onClick={onClick} />
             </Grid>
         );
@@ -25,10 +22,6 @@ const ProjectList = ({projects, onClick, isSidebarPanelOpen = false}) => {
             )}
         </Grid>
     );
-};
-
-ProjectList.propTypes = {
-    projects: PropTypes.array,
 };
 
 export default ProjectList;

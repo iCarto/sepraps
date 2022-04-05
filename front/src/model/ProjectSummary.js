@@ -1,7 +1,4 @@
-import {DateUtil, DATE_FORMATS} from "utilities";
-import {infraestructure_view_adapter} from "./Infrastructure";
 import {createMilestones, milestones_api_adapter} from "./Milestone";
-import {provider_view_adapter} from "./Provider";
 
 class Projects extends Array {}
 

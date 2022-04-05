@@ -4,7 +4,7 @@ import {FormCheckbox, FormInputText, FormSelect} from "components/common/form";
 
 const ContactFormFields = ({
     allowedPosts = null,
-    isMonitoringProfile = false,
+    showPostField = false,
     showIsStaff = false,
 }) => {
     const {contactPosts} = useDomain();
@@ -18,9 +18,7 @@ const ContactFormFields = ({
     return (
         <Fragment>
             <FormInputText name="name" label="Nombre del contacto" />
-            {!isMonitoringProfile && (
-                <FormSelect name="post" label="Cargo" options={posts} />
-            )}
+            {!showPostField && <FormSelect name="post" label="Cargo" options={posts} />}
             <FormSelect
                 name="gender"
                 label="Género"

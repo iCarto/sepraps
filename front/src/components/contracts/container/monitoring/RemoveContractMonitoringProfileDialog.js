@@ -29,8 +29,8 @@ const RemoveContractMonitoringProfileDialog = ({
     return (
         <DialogLayout
             dialogLabel="Remove monitoring profile data"
-            dialogTitle={`Quiere quitar este ${postName} del contrato?`}
-            dialogContentText={`Si hace clic en Quitar, este ${postName} se eliminará del contrato.`}
+            dialogTitle={`Quiere quitar este ${postName.toLowerCase()} del contrato?`}
+            dialogContentText={`Si hace clic en Quitar, este ${postName.toLowerCase()} se eliminará del contrato.`}
             mainActionClick={handleConfirmRemoval}
             mainActionText="Quitar"
             handleDialog={handleDialog}

@@ -26,7 +26,7 @@ const contractRoutes = [
             />
             <Route
                 key="contract-contractor-new-add"
-                path="contractor/new/add"
+                path="contractor/new/:action"
                 element={<AddContractContractorPanel />}
             />
             <Route

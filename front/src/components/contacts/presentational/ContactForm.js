@@ -9,7 +9,7 @@ const ContactForm = ({
     contact = null,
     allowedPosts = null,
     onSubmit,
-    isMonitoringProfile = false,
+    showPostField = false,
     showIsStaff = false,
 }) => {
     const formMethods = useForm({
@@ -41,15 +41,13 @@ const ContactForm = ({
         onSubmit(data);
     };
 
-    console.log(contact.is_staff);
-
     return (
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <Grid container component="form">
                     <ContactFormFields
                         allowedPosts={allowedPosts}
-                        isMonitoringProfile={isMonitoringProfile}
+                        showPostField={showPostField}
                         showIsStaff={showIsStaff}
                     />
                 </Grid>

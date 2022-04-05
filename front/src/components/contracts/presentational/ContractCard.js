@@ -4,7 +4,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Stack from "@mui/material/Stack";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";

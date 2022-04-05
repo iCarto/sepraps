@@ -2,18 +2,22 @@ import {useState, useEffect} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {ProjectService} from "service/api";
 
+import {useProjectListView} from "../provider";
 import {PageLayoutWithPanel} from "layout";
+import {
+    ProjectList,
+    ProjectsTable,
+    ShowNoOfProjects,
+    ProjectListChangeView,
+} from "../presentational";
 import {SearchBox} from "components/common/presentational";
-import {ProjectList, ProjectsTable} from "../presentational";
-import {ShowNoOfProjects, ProjectListChangeView} from "../presentational";
+import {MapProjects} from "components/common/geo";
 
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import {MapProjects} from "components/common/geo";
-import {useProjectListView} from "../provider";
 
 const fabStyle = {
     position: "absolute",
