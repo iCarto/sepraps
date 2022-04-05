@@ -16,8 +16,8 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 
 const ContractMonitoringContactSection = ({
-    sectionName,
     postName,
+    sectionName,
     contact = null,
     showIsStaff = true,
     onOpenRemoveDialog = null,
@@ -33,7 +33,7 @@ const ContractMonitoringContactSection = ({
             text="Modificar"
             icon={<EditIcon />}
             onClick={() => {
-                navigate(`${postName}/existing/edit`);
+                navigate(`${sectionName}/existing/edit`);
             }}
         />,
         <SectionCardHeaderAction
@@ -42,14 +42,14 @@ const ContractMonitoringContactSection = ({
             text="Quitar"
             icon={<LinkOffIcon />}
             onClick={() => {
-                onOpenRemoveDialog(true, sectionName);
+                onOpenRemoveDialog(true, sectionName, postName);
             }}
         />,
     ];
 
     return (
         <SectionCard
-            title={sectionName}
+            title={postName}
             secondaryActions={contact ? secondaryActions : []}
         >
             {contact ? (
@@ -77,12 +77,12 @@ const ContractMonitoringContactSection = ({
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography p={6} sx={{fontStyle: "italic"}}>
-                        Este contrato aún no tiene ningún {sectionName} asignado
+                        Este contrato aún no tiene ningún {postName} asignado
                     </Typography>
                     <Grid item container xs={12} mt={3} justifyContent="center">
                         <AddContactButtonGroup
-                            basePath={postName}
-                            btnName={`Asignar ${sectionName}`}
+                            basePath={sectionName}
+                            btnName={`Asignar ${postName}`}
                         />
                     </Grid>
                 </Stack>

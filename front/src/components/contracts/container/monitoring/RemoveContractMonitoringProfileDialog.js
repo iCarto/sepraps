@@ -7,6 +7,7 @@ import {DialogLayout} from "components/common/presentational";
 const RemoveContractMonitoringProfileDialog = ({
     contract = null,
     profileToRemove,
+    postName,
     isDialogOpen,
     setIsDialogOpen,
 }) => {
@@ -16,11 +17,10 @@ const RemoveContractMonitoringProfileDialog = ({
         setIsDialogOpen(isOpen);
     };
 
-    /// TO-DO: UPDATE WHEN API & MODEL ARE READY
     const handleConfirmRemoval = () => {
         setIsDialogOpen(false);
         ContractService.updateContract(
-            contract_view_adapter({...contract, contractor: null})
+            contract_view_adapter({...contract, [profileToRemove]: null})
         ).then(() => {
             navigate("/contracts/" + contract.id + "/monitoring", true);
         });
@@ -29,8 +29,8 @@ const RemoveContractMonitoringProfileDialog = ({
     return (
         <DialogLayout
             dialogLabel="Remove monitoring profile data"
-            dialogTitle={`Quiere quitar este ${profileToRemove} del contrato?`}
-            dialogContentText={`Si hace clic en Quitar, este ${profileToRemove} se eliminará del contrato.`}
+            dialogTitle={`Quiere quitar este ${postName} del contrato?`}
+            dialogContentText={`Si hace clic en Quitar, este ${postName} se eliminará del contrato.`}
             mainActionClick={handleConfirmRemoval}
             mainActionText="Quitar"
             handleDialog={handleDialog}

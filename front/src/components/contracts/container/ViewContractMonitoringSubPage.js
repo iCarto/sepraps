@@ -10,23 +10,25 @@ import Grid from "@mui/material/Grid";
 const ViewContractMonitoringSubPage = () => {
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [profileToRemove, setProfileToRemove] = useState("");
+    const [profileNameToRemove, setProfileNameToRemove] = useState("");
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
     let project;
     [project] = useOutletContext();
-
-    const getIsSidePanelOpen = isOpen => {
-        setIsSidePanelOpen(isOpen);
-    };
 
     let contract;
     [contract] = useOutletContext();
 
     console.log({contract});
 
-    const handleOpenDialog = (isOpen, selectedProfile) => {
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
+    };
+
+    const handleOpenDialog = (isOpen, selectedProfile, selectedPostName) => {
         setIsRemoveDialogOpen(isOpen);
         setProfileToRemove(selectedProfile);
+        setProfileNameToRemove(selectedPostName);
     };
 
     return (
@@ -39,8 +41,8 @@ const ViewContractMonitoringSubPage = () => {
                 <Grid item xs={12}>
                     <ContractMonitoringContactSection
                         contact={contract?.field_manager}
-                        postName="field_manager"
-                        sectionName="Residente de obra"
+                        sectionName="field_manager"
+                        postName="Residente de obra"
                         showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />
@@ -48,24 +50,24 @@ const ViewContractMonitoringSubPage = () => {
                 <Grid item xs={12}>
                     <ContractMonitoringContactSection
                         contact={contract?.construction_inspector}
-                        postName="construction_inspector"
-                        sectionName="Fiscal constructivo"
+                        sectionName="construction_inspector"
+                        postName="Fiscal constructivo"
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <ContractMonitoringContactSection
                         contact={contract?.construction_supervisor}
-                        postName="construction_supervisor"
-                        sectionName="Supervisor constructivo"
+                        sectionName="construction_supervisor"
+                        postName="Supervisor constructivo"
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <ContractMonitoringContactSection
                         contact={contract?.social_coordinator}
-                        postName="social_coordinator"
-                        sectionName="Coordinador de apoyo social"
+                        sectionName="social_coordinator"
+                        postName="Coordinador de apoyo social"
                         showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />
@@ -73,16 +75,16 @@ const ViewContractMonitoringSubPage = () => {
                 <Grid item xs={12}>
                     <ContractMonitoringContactSection
                         contact={contract?.social_inspector}
-                        postName="social_inspector"
-                        sectionName="Fiscal social"
+                        sectionName="social_inspector"
+                        postName="Fiscal social"
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <ContractMonitoringContactSection
                         contact={contract?.social_supervisor}
-                        postName="social_supervisor"
-                        sectionName="Supervisor social"
+                        sectionName="social_supervisor"
+                        postName="Supervisor social"
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
@@ -90,6 +92,7 @@ const ViewContractMonitoringSubPage = () => {
                 <RemoveContractMonitoringProfileDialog
                     contract={contract}
                     profileToRemove={profileToRemove}
+                    postName={profileNameToRemove}
                     isDialogOpen={isRemoveDialogOpen}
                     setIsDialogOpen={setIsRemoveDialogOpen}
                 />

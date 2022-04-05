@@ -6,7 +6,7 @@ import {
 } from "model";
 import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 import {contractor_view_adapter} from "./Contractor";
-import createProjectSummary, {project_summary_api_adapter} from "./ProjectSummary";
+
 
 class Contracts extends Array {}
 
