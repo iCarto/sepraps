@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {useSort, useSearch} from "hooks";
 import {ContractService} from "service/api";
 
-import {PageLayout} from "layout";
 import {SearchBox} from "components/common/presentational";
 import {
     ClosedContractsOption,
@@ -106,20 +105,13 @@ const ListContractsPage = () => {
                     </Grid>
                 </Grid>
                 <Grid item md={2}></Grid>
-                <Grid item md={3}>
-                    <SortContractsSelect
-                        attribute={attribute}
-                        order={order}
-                        handleSortBy={handleSortBy}
-                    />
-                </Grid>
-            {loading ? (
-                <Grid container justifyContent="center" my={6} xs={12}>
-                    <CircularProgress size={40} />
-                </Grid>
-            ) : (
-                <ContractList contracts={filteredContracts} />
-            )}
+                {loading ? (
+                    <Grid item container xs={12} justifyContent="center" my={6}>
+                        <CircularProgress size={40} />
+                    </Grid>
+                ) : (
+                    <ContractList contracts={filteredContracts} />
+                )}
             </Paper>
 
             <Fab

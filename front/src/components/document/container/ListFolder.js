@@ -43,13 +43,13 @@ const ListFolder = ({
 
     return (
         <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
-            <Grid item container justifyContent="space-between" xs={12}>
+            <Grid item container xs={12} justifyContent="space-between">
                 <FolderBreadcrumb path={folderPath} basePath={basePath} />
                 <FolderChangeView />
             </Grid>
             <Grid item container xs={12}>
                 {loading ? (
-                    <Grid item container justifyContent="center" xs={12}>
+                    <Grid item container xs={12} justifyContent="center">
                         <CircularProgress color="inherit" size={20} />
                     </Grid>
                 ) : view === "list" ? (

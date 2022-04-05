@@ -10,8 +10,6 @@ const ViewContractPage = () => {
     const [contract, setContract] = useState(null);
     const location = useLocation();
 
-    console.log({contract});
-
     useEffect(() => {
         ContractService.getContract(id).then(data => {
             console.log({data});

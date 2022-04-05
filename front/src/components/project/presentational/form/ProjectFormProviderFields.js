@@ -56,7 +56,7 @@ const ProjectFormProviderFields = () => {
 
     return (
         <Grid container spacing={2}>
-            <Grid item container justifyContent="center" xs={12}>
+            <Grid item container xs={12} justifyContent="center">
                 {!selectedOption ? (
                     <AddProviderButtonGroup
                         onAdd={() => handleChange("add")}

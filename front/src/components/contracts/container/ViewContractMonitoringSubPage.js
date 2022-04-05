@@ -19,8 +19,6 @@ const ViewContractMonitoringSubPage = () => {
     let contract;
     [contract] = useOutletContext();
 
-    console.log({contract});
-
     const getIsSidePanelOpen = isOpen => {
         setIsSidePanelOpen(isOpen);
     };
@@ -60,6 +58,7 @@ const ViewContractMonitoringSubPage = () => {
                         contact={contract?.construction_supervisor}
                         sectionName="construction_supervisor"
                         postName="Supervisor constructivo"
+                        showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
@@ -85,6 +84,7 @@ const ViewContractMonitoringSubPage = () => {
                         contact={contract?.social_supervisor}
                         sectionName="social_supervisor"
                         postName="Supervisor social"
+                        showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>

@@ -5,7 +5,6 @@ import {useFormContext} from "react-hook-form";
 import ProjectFormGeneralDataSection from "./ProjectFormGeneralDataSection";
 import ProjectFormProviderSection from "./ProjectFormProviderSection";
 import ProjectFormLocationSection from "./ProjectFormLocationSection";
-import ProjectFormFinancingSection from "./ProjectFormFinancingSection";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";

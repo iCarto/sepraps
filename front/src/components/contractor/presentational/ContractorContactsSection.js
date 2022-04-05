@@ -12,6 +12,7 @@ import {
 import Grid from "@mui/material/Grid";
 import Alert from "@mui/material/Alert";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import Typography from "@mui/material/Typography";
 
 const ContractorContactsSection = ({contractor}) => {
     const navigate = useNavigateWithReload();
@@ -61,13 +62,19 @@ const ContractorContactsSection = ({contractor}) => {
                 accordionIcon={<PermContactCalendarIcon />}
             >
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <ContactsTable
-                            contacts={contractor.contacts}
-                            handleActions={handleActions}
-                        />
-                    </Grid>
                     <Grid item container xs={12} justifyContent="center">
+                        {contractor.contacts.length !== 0 ? (
+                            <ContactsTable
+                                contacts={contractor.contacts}
+                                handleActions={handleActions}
+                            />
+                        ) : (
+                            <Typography pt={3} sx={{fontStyle: "italic"}}>
+                                Este prestador aún no tiene contactos
+                            </Typography>
+                        )}
+                    </Grid>
+                    <Grid item container xs={12} mt={3} justifyContent="center">
                         <AddContactButtonGroup
                             basePath="contractor/contact"
                             btnName="Añadir contacto"

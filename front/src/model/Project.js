@@ -9,7 +9,6 @@ import {
     locality_api_adapter,
     provider_api_adapter,
     contract_api_adapter,
-    createMilestone,
 } from "model";
 import {DateUtil, DATE_FORMATS} from "utilities";
 import {infraestructure_view_adapter} from "./Infrastructure";

@@ -8,7 +8,6 @@ import MenuList from "@mui/material/MenuList";
 import ListItemText from "@mui/material/ListItemText";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import InfoIcon from "@mui/icons-material/Info";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 

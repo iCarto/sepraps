@@ -38,15 +38,14 @@ const UpdateContractMonitoringProfilePanel = () => {
         case "social_supervisor":
             postName = "Supervisor social";
             break;
+        default:
+            break;
     }
 
     let post = postName.toLowerCase().replace(/ de /g, " ").replace(/ /g, "_");
 
     let showIsStaff =
-        sectionName === "construction_inspector" ||
-        sectionName === "construction_supervisor" ||
-        sectionName === "social_inspector" ||
-        sectionName === "social_supervisor"
+        sectionName === "construction_inspector" || sectionName === "social_inspector"
             ? true
             : false;
 
@@ -55,6 +54,16 @@ const UpdateContractMonitoringProfilePanel = () => {
     };
 
     const handleSubmit = data => {
+        let is_staff;
+        if (sectionName === "field_manager" || sectionName === "social_coordinator") {
+            is_staff = false;
+        } else if (
+            sectionName === "social_supervisor" ||
+            sectionName === "construction_supervisor"
+        ) {
+            is_staff = true;
+        } else is_staff = data.is_staff;
+
         const updatedContract = createContract({
             ...contract,
             contract: contract.id,
@@ -67,11 +76,7 @@ const UpdateContractMonitoringProfilePanel = () => {
                 phone: data.phone,
                 email: data.email,
                 comments: data.comments,
-                is_staff:
-                    sectionName === "field_manager" ||
-                    sectionName === "social_coordinator"
-                        ? true
-                        : data.is_staff,
+                is_staff: is_staff,
             },
         });
         handleFormSubmit(updatedContract);
@@ -93,7 +98,9 @@ const UpdateContractMonitoringProfilePanel = () => {
     return (
         <SidebarPanel
             sidebarTitle={
-                action === "edit" ? `Modificar ${postName}` : `Asignar ${postName}`
+                action === "edit"
+                    ? `Modificar ${postName.toLowerCase()}`
+                    : `Asignar ${postName.toLowerCase()}`
             }
             closeSidebarClick={handleCloseSidebar}
         >
@@ -107,7 +114,7 @@ const UpdateContractMonitoringProfilePanel = () => {
             ) : (
                 <ContactForm
                     contact={contract[sectionName]}
-                    isMonitoringProfile={true}
+                    showPostField={true}
                     onSubmit={handleSubmit}
                     showIsStaff={showIsStaff}
                 />

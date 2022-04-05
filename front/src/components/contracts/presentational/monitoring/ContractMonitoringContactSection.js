@@ -33,7 +33,7 @@ const ContractMonitoringContactSection = ({
             text="Modificar"
             icon={<EditIcon />}
             onClick={() => {
-                navigate(`${sectionName}/existing/edit`);
+                navigate(`${sectionName}/${contact.id}/edit`);
             }}
         />,
         <SectionCardHeaderAction
@@ -77,7 +77,8 @@ const ContractMonitoringContactSection = ({
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography p={6} sx={{fontStyle: "italic"}}>
-                        Este contrato aún no tiene ningún {postName} asignado
+                        Este contrato aún no tiene ningún {postName.toLowerCase()}{" "}
+                        asignado
                     </Typography>
                     <Grid item container xs={12} mt={3} justifyContent="center">
                         <AddContactButtonGroup

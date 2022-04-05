@@ -6,10 +6,9 @@ import {
     FormLocationSelect,
 } from "components/common/form";
 import {MapForm} from "components/common/geo";
-import ProjectFormLinkedLocalities from "./ProjectFormLinkedLocalities";
 
 const ProjectFormLocationFields = ({isMapDisplayed = null}) => {
-    const {getValues, reset, control} = useFormContext();
+    const {getValues, reset} = useFormContext();
 
     const handleSetLocation = (lat, lng) => {
         const values = getValues();
