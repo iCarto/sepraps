@@ -1,1 +1,2 @@
-export {default as StatsPage} from "./StatsPage";
+export {default as ViewStatsPage} from "./ViewStatsPage";
+export {default as ViewStatsByPhaseSubPage} from "./ViewStatsByPhaseSubPage";

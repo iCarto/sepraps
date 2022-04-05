@@ -38,10 +38,10 @@ const FormSelect = ({
                 value={value}
                 label={label}
                 onChange={event => {
+                    onChange(event);
                     if (onChangeHandler) {
                         onChangeHandler(event.target.value);
                     }
-                    onChange(event);
                 }}
             >
                 {(showEmptyOption ? [emptyOption, ...options] : options).map(

@@ -1,6 +1,14 @@
 import {Route} from "react-router-dom";
-import {StatsPage} from "../container";
+import {ViewStatsByPhaseSubPage, ViewStatsPage} from "../container";
 
-const statsRoutes = [<Route key="contract-list" path="" element={<StatsPage />} />];
+const statsRoutes = [
+    <Route key="stats" path="" element={<ViewStatsPage />}>
+        <Route
+            key="stats-by-phase"
+            path="phase"
+            element={<ViewStatsByPhaseSubPage />}
+        ></Route>
+    </Route>,
+];
 
 export default statsRoutes;

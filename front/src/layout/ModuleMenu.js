@@ -68,7 +68,7 @@ const ModuleMenu = () => {
                         </ListItemIcon>
                     </Tooltip>
                 </MenuListItemLink>
-                <MenuListItemLink to={`/stats`}>
+                <MenuListItemLink to={`/stats/phase`}>
                     <Tooltip title="Resultados" placement="bottom-end">
                         <ListItemIcon>
                             <QueryStatsIcon />
