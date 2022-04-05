@@ -5,6 +5,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {cloneElement} from "react";
+import Grid from "@mui/material/Grid";
 
 const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
     return (
@@ -15,6 +16,8 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                 "&:before": {
                     display: "none",
                 },
+                borderBottom: "1px solid #ccc",
+                borderRadius: "0px !important",
             }}
         >
             <AccordionSummary
@@ -26,28 +29,26 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                 aria-controls="accordion-content"
                 id="accordion-header"
                 sx={{
-                    borderBottom: "1px solid #ccc",
-                    padding: 0,
-                    display: "flex",
-                    alignItems: "center",
+                    p: 0,
                 }}
             >
-                {accordionIcon &&
-                    cloneElement(accordionIcon, {
-                        fontSize: "small",
-                        sx: {color: "text.secondary"},
-                    })}
-                <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    sx={{
-                        pl: 1,
-                        lineHeight: 1,
-                        textTransform: "uppercase",
-                    }}
-                >
-                    {accordionTitle}
-                </Typography>
+                <Grid container alignItems="center">
+                    {accordionIcon &&
+                        cloneElement(accordionIcon, {
+                            fontSize: "small",
+                            sx: {color: "text.secondary"},
+                        })}
+                    <Typography
+                        variant="subtitle1"
+                        color="text.secondary"
+                        sx={{
+                            pl: 1,
+                            textTransform: "uppercase",
+                        }}
+                    >
+                        {accordionTitle}
+                    </Typography>
+                </Grid>
             </AccordionSummary>
             <AccordionDetails>{children}</AccordionDetails>
         </Accordion>
