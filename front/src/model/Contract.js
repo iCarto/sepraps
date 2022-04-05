@@ -1,8 +1,8 @@
 import {
     createContractor,
     contractor_api_adapter,
-    createProject,
-    project_api_adapter,
+    createProjectSummary,
+    project_summary_api_adapter,
 } from "model";
 import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 import {contractor_view_adapter} from "./Contractor";
@@ -48,7 +48,7 @@ const contract_api_adapter = contract => {
         : null;
     if (contract.projects) {
         contract["projects"] = contract.projects.map(project => {
-            return createProject(project_api_adapter(project));
+            return createProjectSummary(project_summary_api_adapter(project));
         });
     }
 
