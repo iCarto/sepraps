@@ -1,9 +1,8 @@
 import {useFormContext} from "react-hook-form";
 
 import {useAdministrativeDivisions} from "components/common/provider";
-import {FormLocationSelect, FormSection} from "components/common/form";
+import {FormLocationSelect} from "components/common/form";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
