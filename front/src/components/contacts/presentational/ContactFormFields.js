@@ -17,12 +17,12 @@ const ContactFormFields = ({
 
     return (
         <Fragment>
-            <FormInputText name="contact_name" label="Nombre del contacto" />
+            <FormInputText name="name" label="Nombre del contacto" />
             {!isMonitoringProfile && (
-                <FormSelect name="contact_post" label="Cargo" options={posts} />
+                <FormSelect name="post" label="Cargo" options={posts} />
             )}
             <FormSelect
-                name="contact_gender"
+                name="gender"
                 label="Género"
                 options={[
                     {
@@ -35,12 +35,10 @@ const ContactFormFields = ({
                     },
                 ]}
             />
-            <FormInputText name="contact_phone" label="Celular" />
-            <FormInputText name="contact_email" label="Correo electrónico" />
-            <FormInputText name="contact_comments" label="Observaciones" />
-            {showIsStaff && (
-                <FormCheckbox name="contact_staff" label="Personal interno" />
-            )}
+            <FormInputText name="phone" label="Celular" />
+            <FormInputText name="email" label="Correo electrónico" />
+            <FormInputText name="comments" label="Observaciones" />
+            {showIsStaff && <FormCheckbox name="is_staff" label="Personal interno" />}
         </Fragment>
     );
 };

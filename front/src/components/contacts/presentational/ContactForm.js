@@ -15,22 +15,24 @@ const ContactForm = ({
     const formMethods = useForm({
         defaultValues: contact
             ? {
-                  contact_id: contact?.id,
-                  contact_name: contact?.name,
-                  contact_post: contact?.post,
-                  contact_gender: contact?.gender,
-                  contact_phone: contact?.phone,
-                  contact_email: contact?.email,
-                  contact_comments: contact?.comments,
+                  id: contact?.id,
+                  name: contact?.name,
+                  post: contact?.post,
+                  gender: contact?.gender,
+                  phone: contact?.phone,
+                  email: contact?.email,
+                  comments: contact?.comments,
+                  is_staff: contact?.is_staff,
               }
             : {
-                  contact_id: null,
-                  contact_name: "",
-                  contact_post: "",
-                  contact_gender: "",
-                  contact_phone: "",
-                  contact_email: "",
-                  contact_comments: "",
+                  id: null,
+                  name: "",
+                  post: "",
+                  gender: "",
+                  phone: "",
+                  email: "",
+                  comments: "",
+                  is_staff: false,
               },
         reValidateMode: "onSubmit",
     });
@@ -38,6 +40,8 @@ const ContactForm = ({
     const handleSubmit = data => {
         onSubmit(data);
     };
+
+    console.log(contact.is_staff);
 
     return (
         <DomainProvider>

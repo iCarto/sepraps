@@ -25,19 +25,6 @@ const ContractMonitoringContactSection = ({
     const navigate = useNavigate();
 
     let isStaff = contact?.is_staff ? "Sí" : "No";
-    let genderValue;
-
-    switch (`${contact?.gender}`) {
-        case "F":
-            genderValue = "Mujer";
-            break;
-        case "M":
-            genderValue = "Hombre";
-            break;
-        default:
-            genderValue = null;
-            break;
-    }
 
     const secondaryActions = [
         <SectionCardHeaderAction
@@ -46,7 +33,6 @@ const ContractMonitoringContactSection = ({
             text="Modificar"
             icon={<EditIcon />}
             onClick={() => {
-                // TO-DO UPDATE PATH
                 navigate(`${postName}/existing/edit`);
             }}
         />,
@@ -69,7 +55,7 @@ const ContractMonitoringContactSection = ({
             {contact ? (
                 <>
                     <SectionField label="Nombre:" value={contact.name} />
-                    <SectionField label="Género:" value={genderValue} />
+                    <SectionField label="Género:" value={contact.gender} />
                     {showIsStaff && (
                         <SectionField label="Personal interno:" value={isStaff} />
                     )}

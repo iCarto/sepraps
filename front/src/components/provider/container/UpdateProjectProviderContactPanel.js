@@ -25,35 +25,14 @@ const UpdateProjectProviderContactPanel = () => {
                 contacts: [
                     ...project.provider.contacts,
                     {
-                        id: data.contact_id,
-                        name: data.contact_name,
-                        post: data.contact_post,
-                        post_name: data.contact_post_name,
-                        gender: data.contact_gender,
-                        phone: data.contact_phone,
-                        email: data.contact_email,
-                        comments: data.contact_comments,
-                    },
-                ],
-            })
-        );
-        handleFormSubmit(updatedProvider);
-    };
-
-    const handleSelectExistingContact = contact => {
-        const updatedProvider = createProvider(
-            provider_view_adapter({
-                ...project.provider,
-                contacts: [
-                    ...project.provider.contacts,
-                    {
-                        id: contact.id,
-                        name: contact.name,
-                        post: contact.post,
-                        gender: contact.gender,
-                        phone: contact.phone,
-                        email: contact.email,
-                        comments: contact.comments,
+                        id: data.id,
+                        name: data.name,
+                        post: data.post,
+                        post_name: data.post_name,
+                        gender: data.gender,
+                        phone: data.phone,
+                        email: data.email,
+                        comments: data.comments,
                     },
                 ],
             })
@@ -102,7 +81,7 @@ const UpdateProjectProviderContactPanel = () => {
             {action === "search" ? (
                 <ContactFormSearch
                     allowedPosts={allowedPosts}
-                    onSelect={handleSelectExistingContact}
+                    onSelect={handleSubmit}
                 />
             ) : (
                 <ContactForm

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {ContractService} from "service/api";
-import {contract_view_adapter, createContact, createContract} from "model";
+import {contract_view_adapter, createContract} from "model";
 import {useNavigateWithReload} from "hooks";
 
 import {ContactForm, ContactFormSearch} from "components/contacts/presentational";
@@ -17,36 +17,30 @@ const UpdateContractMonitoringProfilePanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const allowedPosts = [sectionName];
-
-    let sectionNameForTitle = "";
+    let postName = "";
 
     switch (sectionName) {
         case "field_manager":
-            sectionNameForTitle = "Residente de obra";
+            postName = "Residente de obra";
             break;
         case "construction_inspector":
-            sectionNameForTitle = "Fiscal constructivo";
+            postName = "Fiscal constructivo";
             break;
         case "construction_supervisor":
-            sectionNameForTitle = "supervisor_constructivo";
+            postName = "Supervisor constructivo";
             break;
         case "social_coordinator":
-            sectionNameForTitle = "Coordinador social";
+            postName = "Coordinador social";
             break;
         case "social_inspector":
-            sectionNameForTitle = "Fiscal social";
+            postName = "Fiscal social";
             break;
         case "social_supervisor":
-            sectionNameForTitle = "Supervisor social";
-            break;
-        default:
+            postName = "Supervisor social";
             break;
     }
 
-    console.log({sectionName});
-
-    /// NECESITAMOS EL NOMBRE DE LA PROPIEDAD (QUE ESTÁ EN INGLÉS) PARA EL PATH - EL POST PARA EL CONTACT FORM Y EL CONTACT FORM SEARCH Y PARA EL DEFAULT - EL POST_NAME PARA EL TÍTULO DE LA SECCIÓN Y PARA EL DEFAULT POST_NAME
+    let post = postName.toLowerCase().replace(/ de /g, " ").replace(/ /g, "_");
 
     let showIsStaff =
         sectionName === "construction_inspector" ||
@@ -61,46 +55,24 @@ const UpdateContractMonitoringProfilePanel = () => {
     };
 
     const handleSubmit = data => {
-        console.log({data});
         const updatedContract = createContract({
             ...contract,
             contract: contract.id,
             [sectionName]: {
-                id: data.contact_id,
-                name: data.contact_name,
-                post: sectionName,
-                post_name: sectionNameForTitle,
-                gender: data.contact_gender,
-                phone: data.contact_phone,
-                email: data.contact_email,
-                comments: data.contact_comments,
+                id: data.id,
+                name: data.name,
+                post: post,
+                post_name: postName,
+                gender: data.gender,
+                phone: data.phone,
+                email: data.email,
+                comments: data.comments,
                 is_staff:
                     sectionName === "field_manager" ||
                     sectionName === "social_coordinator"
                         ? true
-                        : data.contact_is_staff,
+                        : data.is_staff,
             },
-        });
-        handleFormSubmit(updatedContract);
-    };
-
-    // ------------> TO-DO: UPDATE THIS
-    const handleSelectExistingContact = contact => {
-        const updatedContract = createContract({
-            ...contract,
-            contacts: [
-                ...contract.contacts,
-                {
-                    id: contact.id,
-                    name: contact.name,
-                    post: contact.post,
-                    gender: contact.gender,
-                    phone: contact.phone,
-                    email: contact.email,
-                    comments: contact.comments,
-                    is_staff: contact.is_staff,
-                },
-            ],
         });
         handleFormSubmit(updatedContract);
     };
@@ -121,9 +93,7 @@ const UpdateContractMonitoringProfilePanel = () => {
     return (
         <SidebarPanel
             sidebarTitle={
-                action === "edit"
-                    ? `Modificar ${sectionNameForTitle}`
-                    : `Asignar ${sectionNameForTitle}`
+                action === "edit" ? `Modificar ${postName}` : `Asignar ${postName}`
             }
             closeSidebarClick={handleCloseSidebar}
         >
@@ -133,10 +103,7 @@ const UpdateContractMonitoringProfilePanel = () => {
                 </Alert>
             )}
             {action === "search" ? (
-                <ContactFormSearch
-                    allowedPosts={[contract?.post]}
-                    onSelect={handleSelectExistingContact}
-                />
+                <ContactFormSearch allowedPosts={[post]} onSelect={handleSubmit} />
             ) : (
                 <ContactForm
                     contact={contract[sectionName]}
