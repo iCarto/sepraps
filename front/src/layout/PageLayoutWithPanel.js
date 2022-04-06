@@ -61,7 +61,7 @@ const PageLayoutWithPanel = ({
                 maxWidth="lg"
                 sx={{
                     p: 3,
-                    backgroundColor: "white",
+                    backgroundColor: "grey.100",
                 }}
             >
                 {props.children}

@@ -7,12 +7,13 @@ import {SearchBox} from "components/common/presentational";
 import {ProjectList, ProjectsTable} from "../presentational";
 import {ShowNoOfProjects, ProjectListChangeView} from "../presentational";
 
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import {MapProjects} from "components/common/geo";
 import {useProjectListView} from "../provider";
-import Stack from "@mui/material/Stack";
 
 const fabStyle = {
     position: "absolute",
@@ -91,26 +92,38 @@ const ListProjectsPage = () => {
 
     return (
         <PageLayoutWithPanel>
-            <Grid
-                container
-                sx={{mb: 4}}
-                spacing={2}
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-            >
-                <Grid item container alignItems="center" justifyContent="space-between">
-                    <SearchBox searchValue={searchText} handleSearch={handleSearch} />
-                    <Stack direction="row" spacing={2}>
-                        <ShowNoOfProjects numberOfProjects={filteredProjects.length} />
-                        <ProjectListChangeView />
-                    </Stack>
+            <Paper sx={{p: 3}}>
+                <Grid
+                    container
+                    sx={{mb: 4}}
+                    spacing={2}
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Grid
+                        item
+                        container
+                        alignItems="center"
+                        justifyContent="space-between"
+                    >
+                        <SearchBox
+                            searchValue={searchText}
+                            handleSearch={handleSearch}
+                        />
+                        <Stack direction="row" spacing={2}>
+                            <ShowNoOfProjects
+                                numberOfProjects={filteredProjects.length}
+                            />
+                            <ProjectListChangeView />
+                        </Stack>
+                    </Grid>
+                    <Grid item xs={12} rowSpacing={1}>
+                        {/* Space for future filters */}
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} rowSpacing={1}>
-                    {/* Space for future filters */}
-                </Grid>
-            </Grid>
-            {getViewComponent(view)}
+                {getViewComponent(view)}
+            </Paper>
             <Fab
                 sx={fabStyle}
                 color="primary"

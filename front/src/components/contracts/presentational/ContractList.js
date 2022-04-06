@@ -21,15 +21,7 @@ const ContractList = ({contracts}) => {
             sx={{display: "flex", justifyContent: "left", p: 0, listStyleType: "none"}}
         >
             {noContractFound ? (
-                <Container sx={{mt: 3, textAlign: "center"}}>
-                    <Typography variant="h5">
-                        Lo sentimos, no se han encontrado contratos que coincidan con su
-                        búsqueda.
-                    </Typography>
-                    <Typography variant="h5">
-                        Introduzca otro texto para buscar de nuevo.
-                    </Typography>
-                </Container>
+                <Container sx={{mt: 3, textAlign: "center"}}></Container>
             ) : (
                 contractItems
             )}

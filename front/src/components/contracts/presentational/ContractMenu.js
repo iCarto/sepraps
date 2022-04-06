@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InfoIcon from "@mui/icons-material/Info";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import MenuList from "@mui/material/MenuList";
 
@@ -32,7 +32,7 @@ const ContractMenu = ({contract}) => {
                     <MenuList sx={{pt: 0}}>
                         <MenuListItemLink to={`/contracts/${contract?.id}`}>
                             <ListItemIcon>
-                                <InfoIcon />
+                                <InfoOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Información" />
                         </MenuListItemLink>

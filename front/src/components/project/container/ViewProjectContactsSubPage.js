@@ -45,7 +45,7 @@ const ViewProjectContactsSubPage = () => {
                         title="Contactos del proyecto"
                         isSidePanelOpen={isSidePanelOpen}
                     >
-                        {project.contacts ? (
+                        {contacts ? (
                             <>
                                 <Grid container sx={{mb: 2}}>
                                     <Grid item xs={12} md={4}>

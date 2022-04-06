@@ -6,6 +6,7 @@ import {project_view_adapter} from "model";
 import {PageLayout} from "layout";
 import {ProjectForm} from "../presentational";
 
+import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
@@ -29,11 +30,13 @@ const CreateProjectPage = () => {
     return (
         <PageLayout>
             <Container maxWidth="md">
-                <Typography variant="h6" sx={{mb: 2}}>
-                    Registro de proyecto
-                </Typography>
-                {error && <Alert severity="error">{error}</Alert>}
-                <ProjectForm onSubmit={handleFormSubmit} />
+                <Paper sx={{p: 3}}>
+                    <Typography variant="h6" sx={{mb: 2}}>
+                        Registro de proyecto
+                    </Typography>
+                    {error && <Alert severity="error">{error}</Alert>}
+                    <ProjectForm onSubmit={handleFormSubmit} />
+                </Paper>
             </Container>
         </PageLayout>
     );
