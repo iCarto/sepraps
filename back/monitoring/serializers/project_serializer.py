@@ -225,10 +225,10 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
         source="construction_contract.bid_request_number", default=None
     )
     financing_fund_name = serializers.CharField(
-        source="financing_fund.name", default=None
+        source="financing_fund.short_name", default=None
     )
     financing_program_name = serializers.CharField(
-        source="financing_program.name", default=None
+        source="financing_program.short_name", default=None
     )
     milestones = serializers.SerializerMethodField()
     latitude = serializers.CharField(

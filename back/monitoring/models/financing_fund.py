@@ -4,7 +4,8 @@ from django.db import models
 class FinancingFund(models.Model):
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField("Nombre", null=True, max_length=100)
+    short_name = models.CharField("Nombre corto", max_length=30)
+    name = models.CharField("Nombre", max_length=100)
 
     class Meta:
         db_table = "financing_fund"
