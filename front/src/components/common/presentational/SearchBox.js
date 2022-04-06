@@ -29,7 +29,7 @@ const SearchBox = ({searchValue, handleSearch}) => {
     };
 
     return (
-        <FormControl variant="outlined" fullWidth onChange={handleSubmit(handleForm)}>
+        <FormControl variant="outlined" onChange={handleSubmit(handleForm)}>
             <InputLabel htmlFor="searchText">Buscar</InputLabel>
             <OutlinedInput
                 id="searchText"

@@ -16,17 +16,17 @@ const headCells = [
         width: 10,
     },
     {
-        id: "locality.locality_name",
+        id: "locality_name",
         label: "Localidad",
         width: 15,
     },
     {
-        id: "locality.district_name",
+        id: "district_name",
         label: "Distrito",
         width: 15,
     },
     {
-        id: "locality.department_name",
+        id: "department_name",
         label: "Departamento",
         width: 15,
     },
@@ -97,11 +97,9 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                 >
                                     {project.code}
                                 </TableCell>
-                                <TableCell>{project.locality.locality_name}</TableCell>
-                                <TableCell>{project.locality.district_name}</TableCell>
-                                <TableCell>
-                                    {project.locality.department_name}
-                                </TableCell>
+                                <TableCell>{project.locality_name}</TableCell>
+                                <TableCell>{project.district_name}</TableCell>
+                                <TableCell>{project.department_name}</TableCell>
                                 <TableCell>{project.name}</TableCell>
                                 <TableCell>
                                     <MilestoneTimelineShort

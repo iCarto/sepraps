@@ -4,14 +4,18 @@ import {useState} from "react";
 function useSearch(initialSearchTextValue) {
     const [searchText, setSearchText] = useState(initialSearchTextValue);
 
-    function searchFunction(listOfItems) {
+    function searchFunction(item) {
         return [
-            listOfItems.name,
-            listOfItems.role,
-            listOfItems.email,
-            listOfItems.department_name,
-            listOfItems.district_name,
-            listOfItems.locality_name,
+            item.name,
+            item.role,
+            item.email,
+            item.department_name,
+            item.district_name,
+            item.locality_name,
+            item.construction_contract_number,
+            item.construction_contract_bid_request_number,
+            item.financing_program_name,
+            item.financing_fund_name,
         ]
             .toString()
             .toUpperCase()

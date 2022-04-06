@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Outlet} from "react-router-dom";
-import {useSort, useSearch} from "hooks";
+import {useSearch} from "hooks";
 
 import {ProjectListViewProvider} from "../provider";
 
@@ -10,10 +10,6 @@ import {ProjectListViewProvider} from "../provider";
  */
 const ManageProjectsPage = () => {
     const [filteredProjects, setFilteredProjects] = useState([]);
-    const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
-        "updated_at",
-        "desc"
-    );
     const {searchText, setSearchText, searchFunction} = useSearch("");
 
     return (
