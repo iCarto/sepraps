@@ -22,6 +22,9 @@ const ViewStatsByPhaseSubPage = () => {
 
     useEffect(() => {
         StatsService.getStatsByPhase(filterAttributes).then(result => {
+            result.sort((a, b) =>
+                a.phase_name > b.phase_name ? 1 : b.phase_name > a.phase_name ? -1 : 0
+            );
             setStatsByPhaseData(result);
         });
     }, [filterAttributes]);

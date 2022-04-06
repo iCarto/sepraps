@@ -25,10 +25,10 @@ CATEGORY_CHOICES = [
 ]
 
 PHASE_CHOICES = [
-    ("design", "Diseño"),
-    ("contracting", "Contratación"),
-    ("execution", "Ejecución"),
-    ("post-execution", "Post-construcción"),
+    ("design", "1. Diseño"),
+    ("contracting", "2. Contratación"),
+    ("execution", "3. Ejecución"),
+    ("post-execution", "4. Post-construcción"),
 ]
 
 

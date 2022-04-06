@@ -3,8 +3,10 @@ import {useNavigate, useOutletContext} from "react-router-dom";
 import {SubPageLayout} from "layout";
 import {AddProjectButton, ProjectList} from "components/project/presentational";
 
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 const ViewContractProjectsSubPage = () => {
     let contract;
@@ -18,19 +20,19 @@ const ViewContractProjectsSubPage = () => {
 
     return (
         <SubPageLayout outletContext={[contract]}>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-end",
-                    mb: 4,
-                    mr: 3,
-                }}
-            >
-                <AddProjectButton basePath={`/contracts/${contract.id}/projects`} />
-            </Box>
-            <Container maxWidth="lg" sx={{my: 3}}>
-                <ProjectList projects={contract.projects} onClick={handleClickOnCard} />
+            <Container maxWidth="lg">
+                <Paper sx={{p: 3}}>
+                    <Stack direction="row" justifyContent="space-between" sx={{mb: 3}}>
+                        <Typography variant="h6">Proyectos del contrato</Typography>
+                        <AddProjectButton
+                            basePath={`/contracts/${contract.id}/projects`}
+                        />
+                    </Stack>
+                    <ProjectList
+                        projects={contract.projects}
+                        onClick={handleClickOnCard}
+                    />
+                </Paper>
             </Container>
         </SubPageLayout>
     );
