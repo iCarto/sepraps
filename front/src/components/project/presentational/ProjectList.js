@@ -19,15 +19,7 @@ const ProjectList = ({projects, onClick}) => {
     return (
         <Grid container spacing={3}>
             {noProjectFound ? (
-                <Container sx={{mt: 3, textAlign: "center"}}>
-                    <Typography variant="h5">
-                        Lo sentimos, no se han encontrado proyectos que coincidan con su
-                        búsqueda.
-                    </Typography>
-                    <Typography variant="h5">
-                        Introduzca otro texto para buscar de nuevo.
-                    </Typography>
-                </Container>
+                <Container sx={{mt: 3, textAlign: "center"}}></Container>
             ) : (
                 projectItems
             )}

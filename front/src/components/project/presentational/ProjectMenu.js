@@ -7,12 +7,12 @@ import List from "@mui/material/List";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
-import InfoIcon from "@mui/icons-material/Info";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import TopicIcon from "@mui/icons-material/Topic";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import LinearScaleIcon from "@mui/icons-material/LinearScale";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import TopicOutlinedIcon from "@mui/icons-material/TopicOutlined";
+import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
+import LinearScaleOutlinedIcon from "@mui/icons-material/LinearScaleOutlined";
 import MenuList from "@mui/material/MenuList";
 
 const ProjectMenu = ({project}) => {
@@ -38,37 +38,37 @@ const ProjectMenu = ({project}) => {
                     <MenuList sx={{pt: 0}}>
                         <MenuListItemLink to={`/projects/${project.id}`}>
                             <ListItemIcon>
-                                <InfoIcon />
+                                <InfoOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Resumen" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/location`}>
                             <ListItemIcon>
-                                <LocationOnIcon />
+                                <LocationOnOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Ubicación" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/financing`}>
                             <ListItemIcon>
-                                <AccountBalanceIcon />
+                                <AccountBalanceOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Financiación" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/milestones`}>
                             <ListItemIcon>
-                                <LinearScaleIcon />
+                                <LinearScaleOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Hitos" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/contacts`}>
                             <ListItemIcon>
-                                <PermContactCalendarIcon />
+                                <PermContactCalendarOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Contactos" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/documents`}>
                             <ListItemIcon>
-                                <TopicIcon />
+                                <TopicOutlinedIcon />
                             </ListItemIcon>
                             <ListItemText primary="Documentos" />
                         </MenuListItemLink>

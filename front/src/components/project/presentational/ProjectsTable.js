@@ -13,7 +13,7 @@ const headCells = [
     {
         id: "code",
         label: "Código",
-        width: 10,
+        width: 12,
     },
     {
         id: "locality_name",
@@ -33,7 +33,7 @@ const headCells = [
     {
         id: "name",
         label: "Descripción",
-        width: 25,
+        width: 23,
     },
     {
         id: "milestones",

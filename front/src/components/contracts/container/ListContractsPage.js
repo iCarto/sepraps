@@ -6,6 +6,7 @@ import {SearchBox} from "components/common/presentational";
 import {ClosedContractsOption, ContractList} from "../presentational";
 import {SortContractsSelect} from "../presentational";
 
+import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
@@ -55,46 +56,48 @@ const ListContractsPage = () => {
 
     return (
         <PageLayoutWithPanel>
-            <Grid
-                container
-                sx={{mb: 4}}
-                spacing={2}
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-            >
-                <Grid item md={6}>
-                    <Grid
-                        container
-                        spacing={2}
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <Grid item xs={6}>
-                            <SearchBox
-                                searchValue={searchText}
-                                handleSearch={handleSearch}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <ClosedContractsOption
-                                checked={showClosedContracts}
-                                handleChange={handleClosedContracts}
-                            />
+            <Paper sx={{p: 3}}>
+                <Grid
+                    container
+                    sx={{mb: 4}}
+                    spacing={2}
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Grid item md={6}>
+                        <Grid
+                            container
+                            spacing={2}
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            <Grid item xs={6}>
+                                <SearchBox
+                                    searchValue={searchText}
+                                    handleSearch={handleSearch}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <ClosedContractsOption
+                                    checked={showClosedContracts}
+                                    handleChange={handleClosedContracts}
+                                />
+                            </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item md={2}></Grid>
+                    <Grid item md={3}>
+                        <SortContractsSelect
+                            attribute={attribute}
+                            order={order}
+                            handleSortBy={handleSortBy}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item md={2}></Grid>
-                <Grid item md={3}>
-                    <SortContractsSelect
-                        attribute={attribute}
-                        order={order}
-                        handleSortBy={handleSortBy}
-                    />
-                </Grid>
-            </Grid>
-            <ContractList contracts={filteredContracts} />
+                <ContractList contracts={filteredContracts} />
+            </Paper>
             <Fab
                 sx={fabStyle}
                 color="primary"

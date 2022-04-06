@@ -147,6 +147,7 @@
         "model": "monitoring.financingfund",
         "pk": 1,
         "fields": {
+            "short_name": "BID",
             "name": "BID (Banco Interamericano de Desarrollo)"
         }
     },
@@ -154,13 +155,15 @@
         "model": "monitoring.financingfund",
         "pk": 2,
         "fields": {
-            "name": "MERCOSUR"
+            "short_name": "MERCOSUR",
+            "name": "MERCOSUR (Mercado Común del Sur)"
         }
     },
     {
         "model": "monitoring.financingprogram",
         "pk": 1,
         "fields": {
+            "short_name": "3601/OC-PR",
             "name": "Contrato de Préstamo 3601/OC-PR - BID AECID/FONPRODE",
             "financing_fund": 1
         }
@@ -169,6 +172,7 @@
         "model": "monitoring.financingprogram",
         "pk": 2,
         "fields": {
+            "short_name": "COF 01/08",
             "name": "COF 01/08 - FOCEM",
             "financing_fund": 2
         }
