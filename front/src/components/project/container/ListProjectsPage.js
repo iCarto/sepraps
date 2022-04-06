@@ -1,22 +1,18 @@
 import {useState, useEffect} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {ProjectService} from "service/api";
-import {useSort, useSearch} from "hooks";
 
 import {PageLayoutWithPanel} from "layout";
 import {SearchBox} from "components/common/presentational";
-import {ClosedProjectsOption, ProjectList, ProjectsTable} from "../presentational";
-import {
-    SortProjectsSelect,
-    ShowNoOfProjects,
-    ProjectListChangeView,
-} from "../presentational";
+import {ProjectList, ProjectsTable} from "../presentational";
+import {ShowNoOfProjects, ProjectListChangeView} from "../presentational";
 
 import Grid from "@mui/material/Grid";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import {MapProjects} from "components/common/geo";
 import {useProjectListView} from "../provider";
+import Stack from "@mui/material/Stack";
 
 const fabStyle = {
     position: "absolute",
@@ -42,37 +38,22 @@ const ListProjectsPage = () => {
 
     const [projects, setProjects] = useState([]);
 
-    const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
-        "updated_at",
-        "desc"
-    );
-
     const [showClosedProjects, setShowClosedProjects] = useState(false);
     const [selectedElement, setSelectedElement] = useState(null);
 
     useEffect(() => {
         ProjectService.getProjects(showClosedProjects).then(data => {
             setProjects(data);
-            setFilteredProjects([...data].filter(searchFunction).sort(sortFunction));
+            setFilteredProjects([...data].filter(searchFunction));
         });
     }, [showClosedProjects]);
 
     useEffect(() => {
-        setFilteredProjects([...projects].filter(searchFunction).sort(sortFunction));
-    }, [attribute, order, searchText]);
+        setFilteredProjects([...projects].filter(searchFunction));
+    }, [searchText]);
 
     const handleSearch = data => {
         setSearchText(data);
-    };
-
-    const handleSortBy = (attribute, order) => {
-        setAttribute(attribute);
-        setOrder(order);
-    };
-
-    const handleClosedProjects = showClosed => {
-        console.log("handleClosedProjects", showClosed);
-        setShowClosedProjects(showClosed);
     };
 
     const handleClickOnCard = orojectId => {
@@ -118,57 +99,18 @@ const ListProjectsPage = () => {
                 justifyContent="space-between"
                 alignItems="center"
             >
-                <Grid item md={6}>
-                    <Grid
-                        container
-                        spacing={2}
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <Grid item xs={6}>
-                            <SearchBox
-                                searchValue={searchText}
-                                handleSearch={handleSearch}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <ClosedProjectsOption
-                                checked={showClosedProjects}
-                                handleChange={handleClosedProjects}
-                            />
-                        </Grid>
-                    </Grid>
+                <Grid item container alignItems="center" justifyContent="space-between">
+                    <SearchBox searchValue={searchText} handleSearch={handleSearch} />
+                    <Stack direction="row" spacing={2}>
+                        <ShowNoOfProjects numberOfProjects={filteredProjects.length} />
+                        <ProjectListChangeView />
+                    </Stack>
                 </Grid>
-                <Grid item md={2}>
-                    <ShowNoOfProjects numberOfProjects={filteredProjects.length} />
+                <Grid item xs={12} rowSpacing={1}>
+                    {/* Space for future filters */}
                 </Grid>
-                <Grid item md={3}>
-                    <SortProjectsSelect
-                        attribute={attribute}
-                        order={order}
-                        handleSortBy={handleSortBy}
-                    />
-                </Grid>
-            </Grid>
-            <Grid
-                container
-                sx={{mb: 2}}
-                spacing={2}
-                direction="row"
-                justifyContent="flex-end"
-                alignItems="center"
-            >
-                <ProjectListChangeView />
             </Grid>
             {getViewComponent(view)}
-            {/**
-            <ProjectsTable
-                projects={filteredProjects}
-                selectedElement={selectedElement}
-                onSelectElement={onSelectProject}
-            />
-            */}
             <Fab
                 sx={fabStyle}
                 color="primary"

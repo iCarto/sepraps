@@ -105,7 +105,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                             <Stack>
                                 <Typography>{project.code}</Typography>
                                 <Typography variant="caption" sx={{ml: 1}}>
-                                    {`${project.locality.locality_name}, ${project.locality.district_name} (${project.locality.department_name})`}
+                                    {`${project.locality_name}, ${project.district_name} (${project.department_name})`}
                                 </Typography>
                             </Stack>
                         </DropdownMenuItemLink>

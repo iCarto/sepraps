@@ -22,7 +22,7 @@ function TableSortingHead({
         <>
             <colgroup>
                 {headCells.slice(0, -1).map(headCell => (
-                    <col width={headCell.width + "%"} />
+                    <col key={headCell.id} width={headCell.width + "%"} />
                 ))}
             </colgroup>
             <TableHead>
