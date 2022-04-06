@@ -5,4 +5,4 @@ from rest_framework import serializers
 class FinancingFundSerializer(serializers.ModelSerializer):
     class Meta:
         model = FinancingFund
-        fields = ("id", "name")
+        fields = ("id", "short_name", "name")
