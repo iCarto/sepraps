@@ -5,7 +5,6 @@ function useSearch(initialSearchTextValue) {
     const [searchText, setSearchText] = useState(initialSearchTextValue);
 
     function searchFunction(item) {
-        console.log({item});
         return [
             item.name,
             item.post,
