@@ -8,9 +8,9 @@ const ShowNoOfProjects = ({numberOfProjects}) => {
                 display: "flex",
                 alignItems: "center",
                 px: 1,
-                backgroundColor: "grey.600",
+                border: 1,
                 borderRadius: 1,
-                color: "grey.100",
+                color: "grey.700",
                 textTransform: "uppercase",
             }}
         >

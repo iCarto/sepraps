@@ -6,7 +6,7 @@ function useProjectsFilter(filters) {
 
     function filterProjectsFunction(item) {
         return Object.keys(filterItems)
-            .filter(key => filterItems[key])
+            .filter(key => key !== "showClosedProjects" && filterItems[key])
             .every(key => filterItems[key] === item[key]);
     }
 
