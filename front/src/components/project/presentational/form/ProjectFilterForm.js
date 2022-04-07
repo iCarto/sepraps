@@ -7,6 +7,8 @@ import {FormSelectMultipleChip} from "components/common/form";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import ClearIcon from "@mui/icons-material/Clear";
+import {ClosedProjectsOption} from "..";
 
 const ProjectFilterForm = ({onChange = null}) => {
     const [contracts, setContracts] = useState([]);
@@ -28,12 +30,14 @@ const ProjectFilterForm = ({onChange = null}) => {
             department: "",
             district: "",
             construction_contract: "",
+            showClosedProjects: false,
         },
     });
 
-    const handleChange = value => {
-        onChange(formMethods.getValues());
-    };
+    useEffect(() => {
+        const subscription = formMethods.watch(() => onChange(formMethods.getValues()));
+        return () => subscription.unsubscribe();
+    }, [formMethods.watch]);
 
     const handleChangeDepartment = selectedDepartment => {
         setDepartmentDistricts(
@@ -54,13 +58,14 @@ const ProjectFilterForm = ({onChange = null}) => {
             department: "",
             district: "",
             construction_contract: "",
+            showClosedProjects: false,
         });
     };
 
     return (
         <FormProvider {...formMethods}>
             <Grid container columnSpacing={2} my={2}>
-                <Grid item xs={3.5}>
+                <Grid item xs={3}>
                     <FormSelectMultipleChip
                         name="department"
                         label="Departamento"
@@ -68,25 +73,27 @@ const ProjectFilterForm = ({onChange = null}) => {
                         onChangeHandler={handleChangeDepartment}
                     />
                 </Grid>
-                <Grid item xs={3.5}>
+                <Grid item xs={3}>
                     <FormSelectMultipleChip
                         name="district"
                         label="Distrito"
                         options={departmentDistricts}
-                        onChangeHandler={handleChange}
                     />
                 </Grid>
-                <Grid item xs={3.5}>
+                <Grid item xs={3}>
                     <FormSelectMultipleChip
                         name="construction_contract"
                         label="Contrato"
                         options={contracts}
-                        onChangeHandler={handleChange}
                     />
                 </Grid>
-                <Grid item container xs>
+                <Grid item container xs={1.5}>
+                    <ClosedProjectsOption name="showClosedProjects" />
+                </Grid>
+
+                <Grid item container xs={1.5}>
                     <Button color="primary" fullWidth onClick={handleClearAllFilters}>
-                        Borrar
+                        <ClearIcon /> Borrar
                     </Button>
                 </Grid>
             </Grid>
