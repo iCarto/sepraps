@@ -17,3 +17,4 @@ export {default as AccordionUndercoverLayout} from "./AccordionUndercoverLayout"
 export {default as DialogLayout} from "./DialogLayout";
 export {default as SearchAutocomplete} from "./SearchAutocomplete";
 export {default as DropdownMenuItemLink} from "./DropdownMenuItemLink";
+export {default as SearchBoxControlled} from "./SearchBoxControlled";

@@ -4,11 +4,16 @@ import {ContractService, TEMPLATE} from "service/api";
 
 import {useAdministrativeDivisions} from "components/common/provider";
 import {FormSelectMultipleChip} from "components/common/form";
+import {ClosedProjectsOption} from "..";
+import {
+    AccordionUndercoverLayout,
+    SearchBoxControlled,
+} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
-import {ClosedProjectsOption} from "..";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const ProjectFilterForm = ({onChange = null}) => {
     const [contracts, setContracts] = useState([]);
@@ -31,6 +36,7 @@ const ProjectFilterForm = ({onChange = null}) => {
             district: "",
             construction_contract: "",
             showClosedProjects: false,
+            searchText: "",
         },
     });
 
@@ -59,44 +65,59 @@ const ProjectFilterForm = ({onChange = null}) => {
             district: "",
             construction_contract: "",
             showClosedProjects: false,
+            searchText: "",
         });
     };
 
     return (
         <FormProvider {...formMethods}>
-            <Grid container columnSpacing={2} my={2}>
-                <Grid item xs={3}>
-                    <FormSelectMultipleChip
-                        name="department"
-                        label="Departamento"
-                        options={departments}
-                        onChangeHandler={handleChangeDepartment}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <FormSelectMultipleChip
-                        name="district"
-                        label="Distrito"
-                        options={departmentDistricts}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <FormSelectMultipleChip
-                        name="construction_contract"
-                        label="Contrato"
-                        options={contracts}
-                    />
-                </Grid>
-                <Grid item container xs={1.5}>
-                    <ClosedProjectsOption name="showClosedProjects" />
-                </Grid>
+            <SearchBoxControlled name="searchText" />
 
-                <Grid item container xs={1.5}>
-                    <Button color="primary" fullWidth onClick={handleClearAllFilters}>
-                        <ClearIcon /> Borrar
-                    </Button>
+            {/* ------> TO-DO: CHANGE POSITION OF ACCORDION TITLE+ICON */}
+            <AccordionUndercoverLayout
+                accordionTitle="Filtros"
+                accordionIcon={<FilterListIcon />}
+            >
+                <Grid container columnSpacing={2} my={2}>
+                    <Grid item xs={4}>
+                        <FormSelectMultipleChip
+                            name="department"
+                            label="Departamento"
+                            options={departments}
+                            onChangeHandler={handleChangeDepartment}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <FormSelectMultipleChip
+                            name="district"
+                            label="Distrito"
+                            options={departmentDistricts}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <FormSelectMultipleChip
+                            name="construction_contract"
+                            label="Contrato"
+                            options={contracts}
+                        />
+                    </Grid>
+                    <Grid item container xs={12} justifyContent="space-between">
+                        <Grid item container xs={2} mt={2}>
+                            <ClosedProjectsOption name="showClosedProjects" />
+                        </Grid>
+                        <Grid item container xs={2} mt={2}>
+                            <Button
+                                color="primary"
+                                fullWidth
+                                onClick={handleClearAllFilters}
+                                sx={{lineHeight: 1}}
+                            >
+                                <ClearIcon /> Borrar filtros
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </AccordionUndercoverLayout>
         </FormProvider>
     );
 };

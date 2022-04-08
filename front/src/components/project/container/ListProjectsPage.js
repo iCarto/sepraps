@@ -2,13 +2,9 @@ import {useNavigate, useOutletContext} from "react-router-dom";
 import {useState, useEffect, useMemo} from "react";
 import {ProjectService} from "service/api";
 
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-
 import {useProjectListView} from "../provider";
 import {LocationProvider} from "components/common/provider";
 import {PageLayoutWithPanel} from "layout";
-import {AccordionUndercoverLayout, SearchBox} from "components/common/presentational";
 import {ProjectFilterForm} from "../presentational/form";
 import {
     ProjectList,
@@ -19,9 +15,10 @@ import {
 import {MapProjects} from "components/common/geo";
 
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const fabStyle = {
@@ -39,11 +36,9 @@ const ListProjectsPage = () => {
     [context] = useOutletContext();
 
     const {
-        searchText,
-        setSearchText,
         searchFunction,
-        filterItems,
-        setFilterItems,
+        filter,
+        setFilter,
         filterProjectsFunction,
         setFilteredProjects,
     } = context;
@@ -56,25 +51,22 @@ const ListProjectsPage = () => {
 
     useEffect(() => {
         setLoading(true);
-        ProjectService.getProjects(filterItems.showClosedProjects).then(data => {
+        ProjectService.getProjects(filter.showClosedProjects).then(data => {
             setProjects(data);
             setLoading(false);
         });
-    }, [filterItems.showClosedProjects]);
+    }, [filter.showClosedProjects]);
 
-    const filteredOnTheGoProjects = useMemo(() => {
+    const filteredProjects = useMemo(() => {
         setFilteredProjects(
             projects.filter(filterProjectsFunction).filter(searchFunction)
         );
         return projects.filter(filterProjectsFunction).filter(searchFunction);
-    }, [searchText, filterItems, projects]);
-
-    const handleSearch = data => {
-        setSearchText(data);
-    };
+    }, [filter, projects]);
 
     const handleFilterChange = filterAttributes => {
-        setFilterItems(filterAttributes);
+        console.log({filterAttributes});
+        setFilter(filterAttributes);
     };
 
     const handleClickOnCard = projectId => {
@@ -90,7 +82,7 @@ const ListProjectsPage = () => {
         if (view === "map") {
             return (
                 <MapProjects
-                    projects={filteredOnTheGoProjects}
+                    projects={filteredProjects}
                     selectedElement={selectedElement}
                     onSelectElement={onSelectProject}
                 />
@@ -98,15 +90,12 @@ const ListProjectsPage = () => {
         }
         if (view === "list") {
             return (
-                <ProjectList
-                    projects={filteredOnTheGoProjects}
-                    onClick={handleClickOnCard}
-                />
+                <ProjectList projects={filteredProjects} onClick={handleClickOnCard} />
             );
         }
         return (
             <ProjectsTable
-                projects={filteredOnTheGoProjects}
+                projects={filteredProjects}
                 selectedElement={selectedElement}
                 onSelectElement={onSelectProject}
             />
@@ -119,48 +108,40 @@ const ListProjectsPage = () => {
                 <Grid
                     container
                     sx={{mb: 4}}
-                    spacing={2}
-                    direction="row"
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid
-                        item
-                        container
-                        alignItems="center"
-                        justifyContent="space-between"
-                    >
-                        <SearchBox
-                            searchValue={searchText}
-                            handleSearch={handleSearch}
-                        />
-                        <Stack direction="row" spacing={2}>
-                            <ShowNoOfProjects
-                                numberOfProjects={filteredOnTheGoProjects.length}
-                            />
-                            <ProjectListChangeView />
-                        </Stack>
-                    </Grid>
-
-                    <Grid item container xs={12} rowSpacing={1}>
-                        <AccordionUndercoverLayout
-                            accordionTitle="Filtros"
-                            accordionIcon={<FilterListIcon />}
-                        >
+                    <Grid item container direction="row">
+                        <Grid item container xs={8}>
                             <LocationProvider>
                                 <ProjectFilterForm onChange={handleFilterChange} />
                             </LocationProvider>
-                        </AccordionUndercoverLayout>
-                    </Grid>
-                </Grid>
+                        </Grid>
 
-                {loading ? (
-                    <Grid container justifyContent="center" my={6}>
-                        <CircularProgress size={40} />
+                        <Grid
+                            item
+                            container
+                            xs={4}
+                            alignItems="flex-start"
+                            justifyContent="flex-end"
+                        >
+                            <Stack direction="row" spacing={2}>
+                                <ShowNoOfProjects
+                                    numberOfProjects={filteredProjects.length}
+                                />
+                                <ProjectListChangeView />
+                            </Stack>
+                        </Grid>
                     </Grid>
-                ) : (
-                    getViewComponent(view)
-                )}
+
+                    {loading ? (
+                        <Grid container justifyContent="center" my={6}>
+                            <CircularProgress size={40} />
+                        </Grid>
+                    ) : (
+                        getViewComponent(view)
+                    )}
+                </Grid>
             </Paper>
 
             <Fab
