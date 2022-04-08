@@ -1,7 +1,5 @@
-import {useState} from "react";
 import {useController, useFormContext} from "react-hook-form";
 
-import {useTheme} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -24,15 +22,6 @@ const menuprops = {
     },
 };
 
-const getStyles = (option, optionName, theme) => {
-    return {
-        fontWeight:
-            [optionName].indexOf(option) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    };
-};
-
 const FormSelectMultipleChip = ({
     name: propsName,
     label = "",
@@ -46,9 +35,6 @@ const FormSelectMultipleChip = ({
         name: propsName,
         control,
     });
-
-    const [optionCodes, setOptionCodes] = useState([]);
-    const theme = useTheme();
 
     options?.map(option => option.value.toString());
 
@@ -64,22 +50,11 @@ const FormSelectMultipleChip = ({
         return "";
     };
 
-    // const handleChange = event => {
-    //     const optionValue = event.target.value.toString();
-    //     optionValue.length !== 0 ? (isFilterActive = true) : (isFilterActive = false);
-
-    //     setOptionCodes(
-    //         // On autofill we get a stringified value.
-    //         typeof optionValue === "string" ? optionValue.split(",") : optionValue
-    //     );
-    //     onFilter(optionValue, name);
-    // };
-
     return (
         <FormControl fullWidth>
             <InputLabel id={`${name}-label`}>{label}</InputLabel>
             <Select
-                labelId={`${name}-label`}
+                labelId={`${name}-select-label`}
                 id={`${name}-select`}
                 // multiple
                 inputRef={ref}
@@ -132,11 +107,7 @@ const FormSelectMultipleChip = ({
                 menuprops={menuprops}
             >
                 {options?.map(option => (
-                    <MenuItem
-                        key={option.value}
-                        value={option.value}
-                        style={getStyles(option, optionCodes, theme)}
-                    >
+                    <MenuItem key={option.value} value={option.value}>
                         {option.label}
                     </MenuItem>
                 ))}

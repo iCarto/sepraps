@@ -15,6 +15,7 @@ const AccordionUndercoverLayout = ({
             disableGutters
             elevation={0}
             sx={{
+                mt: 1,
                 display: "flex",
                 flexDirection: "column",
                 width: "100%",
