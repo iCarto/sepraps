@@ -15,8 +15,8 @@ import AuthApiService from "./AuthApiService";
 const basePath = "/api/monitoring/projects";
 
 const ProjectService = {
-    getProjects(showClosed = false) {
-        const path = basePath + (showClosed ? "?status=all" : "?status=active");
+    getProjects(filter) {
+        const path = basePath + "?status=" + filter.status;
         return AuthApiService.get(path).then(response => {
             return createProjectsSummaries(projects_summaries_api_adapter(response));
         });
