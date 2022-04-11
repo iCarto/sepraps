@@ -57,7 +57,6 @@ const ListProjectsPage = () => {
     }, [filter, projects]);
 
     const handleFilterChange = filterAttributes => {
-        console.log({filterAttributes});
         setFilter(filterAttributes);
     };
 
