@@ -36,6 +36,12 @@ const ListContractsPage = () => {
     const {searchText, setSearchText, searchFunction} = useSearch("");
     const [showClosedContracts, setShowClosedContracts] = useState(false);
 
+    /* ---------> TO-DO: IMPLEMENT CHANGES FROM ListProjectsPage:
+     - Change ClosedContractsOption to ClosedContractsSwitch with FormSwitch inside
+     - Make showClosedContracts into a filter object including status "all"/"active"
+     - Wrap switch & search box into form    
+    */
+
     useEffect(() => {
         setLoading(true);
         ContractService.getContracts(showClosedContracts).then(data => {

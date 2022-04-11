@@ -9,6 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 
+// ---------> TO-DO: IMPLEMENT CONTROLLED SEARCH (SearchBoxControlled COMPONENT)
+
 const SearchBox = ({searchValue, handleSearch}) => {
     const [isSearchActive, setIsSearchActive] = useState(false);
 
