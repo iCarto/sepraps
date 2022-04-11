@@ -4,7 +4,7 @@ import {ContractService, TEMPLATE} from "service/api";
 
 import {useAdministrativeDivisions} from "components/common/provider";
 import {FormSelectMultipleChip} from "components/common/form";
-import {ClosedProjectsOption} from "..";
+import {ClosedProjectsSwitch} from "..";
 import {
     AccordionUndercoverLayout,
     SearchBoxControlled,
@@ -35,7 +35,8 @@ const ProjectFilterForm = ({onChange = null}) => {
             department: "",
             district: "",
             construction_contract: "",
-            showClosedProjects: false,
+            status: "active",
+            switchStatus: false,
             searchText: "",
         },
     });
@@ -64,7 +65,8 @@ const ProjectFilterForm = ({onChange = null}) => {
             department: "",
             district: "",
             construction_contract: "",
-            showClosedProjects: false,
+            status: "active",
+            switchStatus: false,
             searchText: "",
         });
     };
@@ -103,7 +105,7 @@ const ProjectFilterForm = ({onChange = null}) => {
                     </Grid>
                     <Grid item container xs={12} justifyContent="space-between">
                         <Grid item container xs={2} mt={2}>
-                            <ClosedProjectsOption name="showClosedProjects" />
+                            <ClosedProjectsSwitch />
                         </Grid>
                         <Grid item container xs={2} mt={2}>
                             <Button

@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-/**The filterProjectFunction receives an object of properties (project), which includes the property keys in the object filter. It filters out the properties "showClosedProjects" and "searchText"(not present in the project object) and then returns only those objects that match all key values.
+/**filterProjectFunction receives an object of properties (project), which includes the property keys in the object filter. It filters out the properties "status" and "searchText"(not present in the project object) and then returns only those objects that match all key values.
  The searchFunction receives an array made of specific properties from the project object, and returns true when the searchText property is empty or when it is contained in the assessed project. */
 
 function useProjectsFilter(filters) {
@@ -40,7 +40,8 @@ function useProjectsFilter(filters) {
             Object.keys(filter)
                 .filter(
                     key =>
-                        key !== "showClosedProjects" &&
+                        key !== "status" &&
+                        key !== "switchStatus" &&
                         key !== "searchText" &&
                         filter[key]
                 )

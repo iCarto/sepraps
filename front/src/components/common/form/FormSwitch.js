@@ -3,7 +3,7 @@ import {useController, useFormContext} from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-const ClosedProjectsOption = ({name: propsName}) => {
+const FormSwitch = ({name: propsName, onChangeHandler = null}) => {
     const {control} = useFormContext();
     const {
         field: {onChange, name, value, ref},
@@ -23,6 +23,9 @@ const ClosedProjectsOption = ({name: propsName}) => {
                     inputRef={ref}
                     onChange={event => {
                         onChange(event);
+                        if (onChangeHandler) {
+                            onChangeHandler(event);
+                        }
                     }}
                 />
             }
@@ -30,4 +33,4 @@ const ClosedProjectsOption = ({name: propsName}) => {
     );
 };
 
-export default ClosedProjectsOption;
+export default FormSwitch;

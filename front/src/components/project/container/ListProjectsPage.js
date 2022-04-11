@@ -35,13 +35,7 @@ const ListProjectsPage = () => {
     let context;
     [context] = useOutletContext();
 
-    const {
-        searchFunction,
-        filter,
-        setFilter,
-        filterProjectsFunction,
-        setFilteredProjects,
-    } = context;
+    const {filter, setFilter, filterProjectsFunction, setFilteredProjects} = context;
 
     const {view} = useProjectListView();
 
@@ -51,17 +45,15 @@ const ListProjectsPage = () => {
 
     useEffect(() => {
         setLoading(true);
-        ProjectService.getProjects(filter.showClosedProjects).then(data => {
+        ProjectService.getProjects(filter).then(data => {
             setProjects(data);
             setLoading(false);
         });
-    }, [filter.showClosedProjects]);
+    }, [filter.status]);
 
     const filteredProjects = useMemo(() => {
-        setFilteredProjects(
-            projects.filter(filterProjectsFunction).filter(searchFunction)
-        );
-        return projects.filter(filterProjectsFunction).filter(searchFunction);
+        setFilteredProjects(projects.filter(filterProjectsFunction));
+        return projects.filter(filterProjectsFunction);
     }, [filter, projects]);
 
     const handleFilterChange = filterAttributes => {
