@@ -1,9 +1,9 @@
 import {useEffect} from "react";
 import {useOutletContext} from "react-router-dom";
 
-import styled from "@mui/material/styles/styled";
-
 import {ActionsMenu} from "components/common/presentational";
+
+import styled from "@mui/material/styles/styled";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
