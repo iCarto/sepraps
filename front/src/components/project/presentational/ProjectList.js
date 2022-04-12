@@ -5,6 +5,8 @@ import Container from "@mui/material/Container";
 const ProjectList = ({projects = [], onClick}) => {
     const noProjectFound = projects.length === 0 || !projects;
 
+    console.log({projects});
+
     const projectItems = projects.map(project => {
         return (
             <Grid item xs={12} sm={6} md={4} xl={3} key={project.id}>

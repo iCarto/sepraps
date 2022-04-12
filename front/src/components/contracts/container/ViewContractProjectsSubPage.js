@@ -20,6 +20,7 @@ const ViewContractProjectsSubPage = () => {
     [contract] = useOutletContext();
 
     const [selectedElement, setSelectedElement] = useState(null);
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
     const {view} = useProjectListView();
 
@@ -32,6 +33,10 @@ const ViewContractProjectsSubPage = () => {
     const onSelectProject = project => {
         setSelectedElement(project);
         navigate(`info/${project.id}`);
+    };
+
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
     };
 
     const getViewComponent = view => {
@@ -59,11 +64,19 @@ const ViewContractProjectsSubPage = () => {
     };
 
     return (
-        <SubPageLayout outletContext={[contract]}>
+        <SubPageLayout
+            outletContext={[contract]}
+            getIsSidePanelOpen={getIsSidePanelOpen}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             <Paper sx={{p: 3}}>
                 <Stack direction="row" justifyContent="space-between" sx={{mb: 3}}>
                     <SectionHeading>Proyectos del contrato</SectionHeading>
-                    <Stack direction="row" justifyContent="flex-end">
+                    <Stack
+                        direction="row"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                    >
                         <AddProjectButton
                             basePath={`/contracts/${contract.id}/projects`}
                         />
