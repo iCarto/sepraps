@@ -1,6 +1,6 @@
 import {Fragment} from "react";
 import {useDomain} from "components/common/provider";
-import {FormInputText, FormSelect} from "components/common/form";
+import {FormInputText, FormSelect, FormTextArea} from "components/common/form";
 
 const ContractorFormFields = () => {
     const {contractorTypes} = useDomain();
@@ -16,7 +16,7 @@ const ContractorFormFields = () => {
             <FormInputText name="address" label="Dirección" />
             <FormInputText name="phone" label="Teléfono" />
             <FormInputText name="email" label="Correo electrónico" />
-            <FormInputText name="comments" label="Observaciones" />
+            <FormTextArea name="comments" label="Observaciones" />
         </Fragment>
     );
 };

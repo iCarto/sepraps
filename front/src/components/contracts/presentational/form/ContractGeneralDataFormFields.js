@@ -1,5 +1,5 @@
 import {Fragment} from "react";
-import {FormInputText} from "components/common/form";
+import {FormInputText, FormTextArea} from "components/common/form";
 
 const ContractGeneralDataFormFields = () => {
     return (
@@ -9,7 +9,7 @@ const ContractGeneralDataFormFields = () => {
                 label="Número de contrato"
                 rules={{required: "El campo es obligatorio"}}
             />
-            <FormInputText name="comments" label="Descripción" />
+            <FormTextArea name="comments" label="Descripción" />
         </Fragment>
     );
 };

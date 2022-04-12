@@ -1,6 +1,11 @@
 import {Fragment} from "react";
 import {useDomain} from "components/common/provider";
-import {FormCheckbox, FormInputText, FormSelect} from "components/common/form";
+import {
+    FormCheckbox,
+    FormInputText,
+    FormSelect,
+    FormTextArea,
+} from "components/common/form";
 
 const ContactFormFields = ({
     allowedPosts = null,
@@ -35,7 +40,7 @@ const ContactFormFields = ({
             />
             <FormInputText name="phone" label="Celular" />
             <FormInputText name="email" label="Correo electrónico" />
-            <FormInputText name="comments" label="Observaciones" />
+            <FormTextArea name="comments" label="Observaciones" />
             {showIsStaff && <FormCheckbox name="is_staff" label="Personal interno" />}
         </Fragment>
     );
