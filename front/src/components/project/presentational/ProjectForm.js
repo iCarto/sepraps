@@ -29,8 +29,6 @@ const ProjectForm = ({onSubmit, section = null}) => {
         project = outletContext[0];
     }
 
-    console.log({project});
-
     const defaultFormValues = {
         id: project?.id || null,
         code: project?.code || null,
@@ -112,7 +110,6 @@ const ProjectForm = ({onSubmit, section = null}) => {
             financing_fund: data.financing.financing_fund,
             financing_program: data.financing.financing_program,
         });
-        console.log({updatedProject});
         onSubmit(updatedProject);
     };
 

@@ -17,6 +17,8 @@ import {MapProjects} from "components/common/geo";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -93,6 +95,11 @@ const ListProjectsPage = () => {
         );
     };
 
+    let noProjectsMessage =
+        filter.length === 0
+            ? "No existen proyectos para mostrar"
+            : "No se ha encontrado ningún proyecto que coincida con su búsqueda. Por favor, intente realizar otra búsqueda o borre los filtros activos.";
+
     return (
         <PageLayoutWithPanel>
             <Paper sx={{p: 3}}>
@@ -129,8 +136,14 @@ const ListProjectsPage = () => {
                         <Grid container justifyContent="center" my={6}>
                             <CircularProgress size={40} />
                         </Grid>
-                    ) : (
+                    ) : filteredProjects.length !== 0 ? (
                         getViewComponent(view)
+                    ) : (
+                        <Container sx={{textAlign: "center"}}>
+                            <Typography py={12} sx={{fontStyle: "italic"}}>
+                                {noProjectsMessage}
+                            </Typography>
+                        </Container>
                     )}
                 </Grid>
             </Paper>

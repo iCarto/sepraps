@@ -26,7 +26,6 @@ const AddProjectContractPanel = () => {
             ...project,
             construction_contract: selectedContract,
         });
-        console.log({updatedProject});
         ProjectService.updateProject(updatedProject)
             .then(project => {
                 navigate(`/projects/${project.id}/financing`, true);

@@ -17,8 +17,6 @@ const SelectProjectDropDown = ({selectedProject}) => {
     [context] = useOutletContext();
     const {filteredProjects} = context;
 
-    console.log({selectedProject});
-
     const open = Boolean(anchorElement);
 
     const handleClick = event => {
