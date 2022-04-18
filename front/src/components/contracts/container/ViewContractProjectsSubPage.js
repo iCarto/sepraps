@@ -14,6 +14,8 @@ import {MapProjects} from "components/common/geo";
 
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 const ViewContractProjectsSubPage = () => {
     let contract;
@@ -83,7 +85,15 @@ const ViewContractProjectsSubPage = () => {
                         <ProjectListChangeView />
                     </Stack>
                 </Stack>
-                {getViewComponent(view)}
+                {contract.projects.length !== 0 ? (
+                    getViewComponent(view)
+                ) : (
+                    <Container sx={{textAlign: "center"}}>
+                        <Typography py={12} sx={{fontStyle: "italic"}}>
+                            Este contrato aún no tiene proyectos asignados.
+                        </Typography>
+                    </Container>
+                )}
             </Paper>
         </SubPageLayout>
     );

@@ -26,8 +26,6 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
     const [districtLocalities, setDistrictLocalities] = useState([]);
 
-    console.log({departments});
-
     useEffect(() => {
         const values = getValues();
         const valuesDepartment = getValueByPath(values, `${propsName}.department`);

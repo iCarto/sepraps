@@ -52,7 +52,6 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
     });
 
     const onFormSubmit = data => {
-        console.log("submit", {data});
         const updatedContract = createContract({
             id: data.id,
             number: data.contract_number,
@@ -80,7 +79,6 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
             projects: contract ? contract.projects : [],
         });
         onSubmit(updatedContract);
-        console.log({updatedContract});
     };
 
     const handleCancel = () => {
