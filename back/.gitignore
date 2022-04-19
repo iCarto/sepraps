@@ -8,4 +8,5 @@ monitoring/static
 monitoring/migrations/
 users/migrations/
 documents/migrations/
+questionnaires/migrations/
 

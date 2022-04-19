@@ -73,5 +73,13 @@
             "category": "end_of_warranty",
             "phase": "post-execution"
         }
+    ],
+    "questionnaires": [
+        {
+            "code": "certificacion_mensual"
+        },
+        {
+            "code": "tendido_red_mensual"
+        }
     ]
 }
