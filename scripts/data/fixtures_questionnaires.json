@@ -1,0 +1,26 @@
+[
+    {
+        "model": "questionnaires.Questionnaire",
+        "pk": "certificacion_mensual",
+        "fields": {
+            "category": "monthly",
+            "version": 1,
+            "name": "Certificación mensual",
+            "fields": {
+                "campo": "A"
+            }
+        }
+    },
+    {
+        "model": "questionnaires.Questionnaire",
+        "pk": "tendido_red_mensual",
+        "fields": {
+            "category": "monthly",
+            "version": 1,
+            "name": "Tendido de red",
+            "fields": {
+                "campo": "A"
+            }
+        }
+    }
+]

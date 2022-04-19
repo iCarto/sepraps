@@ -12,6 +12,7 @@ from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.location import Locality
 from monitoring.models.provider import Provider
+from questionnaires.models import Questionnaire
 
 
 class Project(models.Model):
@@ -51,6 +52,8 @@ class Project(models.Model):
         verbose_name=MediaNode._meta.verbose_name,
         null=True,
     )
+
+    questionnaires = models.ManyToManyField(Questionnaire)
 
     closed = models.BooleanField(blank=False, null=False, default=False)
 
@@ -92,6 +95,18 @@ def post_create(sender, instance, created, *args, **kwargs):
 
     root_folder = create_folder_structure(instance.code, data.get("folders", []))
     instance.folder = root_folder
+
+    instance.questionnaires.set(
+        Questionnaire.objects.filter(
+            code__in=list(
+                map(
+                    lambda questionnaire: questionnaire.get("code"),
+                    data.get("questionnaires", []),
+                )
+            )
+        )
+    )
+
     instance.save()
 
     create_project_milestones(instance, data.get("milestones", []))
