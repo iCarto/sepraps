@@ -13,19 +13,23 @@ class MonthlyQuestionnaireInstanceListSerializer(serializers.ListSerializer):
             return instances
 
         instance_mapping = {instance.id: instance for instance in instances}
-        data_mapping = {item["id"]: item for item in validated_data}
+        print(validated_data)
 
         ret = []
-        for instance_id, data in data_mapping.items():
-            instance = instance_mapping.get(instance_id, None)
+        for instance_data in validated_data:
+            instance = instance_mapping.get(instance_data.get("id"), None)
+            print(instance)
+            print(instance_data)
 
-            if instance_id is None:
-                ret.append(self.child.create(data))
+            if instance_data.get("id") is None:
+                ret.append(self.child.create(instance_data))
                 continue
 
             if instance is None:
-                instance = MonthlyQuestionnaireInstance.objects.get(pk=instance_id)
-            ret.append(self.child.update(instance, data))
+                instance = MonthlyQuestionnaireInstance.objects.get(
+                    pk=instance_data.get("id")
+                )
+            ret.append(self.child.update(instance, instance_data))
 
         return ret
 
@@ -64,7 +68,7 @@ class MonthlyQuestionnaireInstanceSerializer(serializers.ModelSerializer):
         validated_data["creation_user"] = self.context["request"].user
         instance = MonthlyQuestionnaireInstance.objects.create(**validated_data)
 
-        instance.values.set(self.fields["values"].update([], values_data))
+        instance.values.set(self.fields["values"].create(values_data))
 
         return instance
 
