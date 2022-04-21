@@ -21,6 +21,7 @@ from monitoring.serializers.project_serializer import (
     ProjectSerializer,
     ProjectSummarySerializer,
 )
+from questionnaires import services as questtionnaire_services
 from questionnaires.models.questionnaire import Questionnaire
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
@@ -163,6 +164,29 @@ class ProjectViewSet(viewsets.ModelViewSet):
             MilestoneSerializer(
                 milestones, many=True, context={"request": request}
             ).data
+        )
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path=(
+            "questionnaire_instances/(?P<questionnaire_code>\w+)/(?P<field_code>\w+)"
+        ),
+    )
+    def questionnaire_instances_chart_data(
+        self, request, questionnaire_code, field_code, pk=None
+    ):
+        instances = ProjectQuestionnaireInstance.objects.filter(
+            project=pk, questionnaire__code=questionnaire_code
+        ).prefetch_related("questionnaire_instance__values")
+        questionnaire_instances = [
+            instance.questionnaire_instance for instance in instances
+        ]
+
+        return Response(
+            questtionnaire_services.get_monthly_questionnaire_instances_dataframe(
+                questionnaire_code, field_code, questionnaire_instances
+            )
         )
 
     @action(
