@@ -5,6 +5,7 @@ import {ProjectService} from "service/api";
 import {useQuestionnaireInstanceView} from "../provider";
 import {
     QuestionnaireInstanceChangeView,
+    QuestionnaireFieldTable,
     QuestionnaireExpectedVsRealFieldChart,
     QuestionnaireExpectedVsRealFieldTable,
 } from "../presentational";
@@ -41,12 +42,18 @@ const ViewQuestionnaireInstanceFieldData = ({
     const getViewComponent = () => {
         if (data) {
             if (view === "table") {
-                return (
-                    <QuestionnaireExpectedVsRealFieldTable
-                        fieldLabel={fieldLabel}
-                        data={data}
-                    />
-                );
+                if (data["expected_values"]) {
+                    return (
+                        <QuestionnaireExpectedVsRealFieldTable
+                            fieldLabel={fieldLabel}
+                            data={data}
+                        />
+                    );
+                } else {
+                    return (
+                        <QuestionnaireFieldTable fieldLabel={fieldLabel} data={data} />
+                    );
+                }
             }
             if (view === "chart") {
                 return (
@@ -60,7 +67,7 @@ const ViewQuestionnaireInstanceFieldData = ({
     };
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} sx={{mb: 5}}>
             <Grid item container justifyContent="space-between">
                 <Typography variant="h6">{fieldLabel}</Typography>
                 <QuestionnaireInstanceChangeView />
