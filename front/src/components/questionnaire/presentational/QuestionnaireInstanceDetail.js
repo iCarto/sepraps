@@ -1,20 +1,36 @@
-import {SectionField} from "components/common/presentational";
-import Paper from "@mui/material/Paper";
+import {useNavigate} from "react-router-dom";
+
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "components/common/presentational";
 import {DateUtil} from "utilities";
+
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import EditIcon from "@mui/icons-material/Edit";
 
 const QuestionnaireInstanceDetail = ({instance}) => {
+    const navigate = useNavigate();
+
+    const secondaryActions = [
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Modificar"
+            icon={<EditIcon />}
+            onClick={() => {
+                navigate("edit");
+            }}
+        />,
+    ];
+
+    const fecha = DateUtil.getMonthName(instance.month) + " / " + instance.year;
     return (
         instance && (
-            <Paper elevation={2} sx={{p: 3}}>
-                <SectionField
-                    label="Fecha:"
-                    value={
-                        DateUtil.getMonthName(instance.month) + " / " + instance.year
-                    }
-                />
+            <SectionCard title={fecha} secondaryActions={secondaryActions}>
                 <SectionField label="Observaciones:" value={instance.comments} />
                 <Divider sx={{mb: 3}} />
                 {instance.values.map(fieldValue => (
@@ -37,7 +53,7 @@ const QuestionnaireInstanceDetail = ({instance}) => {
                         </Grid>
                     </Grid>
                 ))}
-            </Paper>
+            </SectionCard>
         )
     );
 };

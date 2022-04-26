@@ -1,6 +1,4 @@
-import {useState, useEffect} from "react";
-import {useLocation} from "react-router-dom";
-import {ProjectService} from "service/api";
+import {useState} from "react";
 
 import {
     QuestionnaireInstanceList,
@@ -41,24 +39,8 @@ function a11yProps(index) {
     };
 }
 
-const ViewQuestionnaireInstance = ({projectId, questionnaireCode}) => {
-    const location = useLocation();
-
-    const [projectQuestionnaire, setProjectQuestionnaire] = useState(null);
+const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
     const [tabValue, setTabValue] = useState(0);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        setLoading(true);
-        ProjectService.getProjectsQuestionnaireInstances(
-            projectId,
-            questionnaireCode
-        ).then(projectQuestionnaire => {
-            console.log({projectQuestionnaire});
-            setLoading(false);
-            setProjectQuestionnaire(projectQuestionnaire);
-        });
-    }, [projectId, questionnaireCode, location.state?.lastRefreshDate]);
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
@@ -82,27 +64,18 @@ const ViewQuestionnaireInstance = ({projectId, questionnaireCode}) => {
                         <Tab label="Seguimiento" {...a11yProps(1)} />
                     </Tabs>
                 </Box>
-                {loading && (
-                    <Grid item container justifyContent="center" xs={12}>
-                        <CircularProgress color="inherit" size={20} />
-                    </Grid>
-                )}
-                {projectQuestionnaire && (
-                    <>
-                        <TabPanel value={tabValue} index={0}>
-                            <QuestionnaireInstanceList
-                                projectQuestionnaire={projectQuestionnaire}
-                            />
-                        </TabPanel>
-                        <TabPanel value={tabValue} index={1}>
-                            <QuestionnaireInstanceViewProvider>
-                                <QuestionnaireInstanceSummary
-                                    projectQuestionnaire={projectQuestionnaire}
-                                />
-                            </QuestionnaireInstanceViewProvider>
-                        </TabPanel>
-                    </>
-                )}
+                <TabPanel value={tabValue} index={0}>
+                    <QuestionnaireInstanceList
+                        projectQuestionnaire={projectQuestionnaire}
+                    />
+                </TabPanel>
+                <TabPanel value={tabValue} index={1}>
+                    <QuestionnaireInstanceViewProvider>
+                        <QuestionnaireInstanceSummary
+                            projectQuestionnaire={projectQuestionnaire}
+                        />
+                    </QuestionnaireInstanceViewProvider>
+                </TabPanel>
             </Paper>
         </Container>
     );

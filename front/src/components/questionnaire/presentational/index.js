@@ -12,3 +12,4 @@ export {
 export {
     default as QuestionnaireExpectedVsRealFieldTable,
 } from "./QuestionnaireExpectedVsRealFieldTable";
+export {default as QuestionnaireInstanceForm} from "./QuestionnaireInstanceForm";

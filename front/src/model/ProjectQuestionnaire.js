@@ -27,6 +27,13 @@ const project_questionnaire_api_adapter = project_questionnaire => {
 const project_questionnaires_api_adapter = project_questionnaires =>
     project_questionnaires.map(project_questionnaire_api_adapter);
 
+const project_questionnaire_view_adapter = project_questionnaire => {
+    project_questionnaire["project"] = project_questionnaire["projectId"];
+
+    delete project_questionnaire["projectId"];
+    return project_questionnaire;
+};
+
 const createProjectQuestionnaires = (data = []) => {
     const project_questionnaires = ProjectQuestionnaires.from(
         data,
@@ -54,4 +61,5 @@ export {
     createProjectQuestionnaires,
     project_questionnaire_api_adapter,
     project_questionnaires_api_adapter,
+    project_questionnaire_view_adapter,
 };

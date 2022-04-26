@@ -99,4 +99,5 @@ export {
     createProjectQuestionnaires,
     project_questionnaire_api_adapter,
     project_questionnaires_api_adapter,
+    project_questionnaire_view_adapter,
 } from "./ProjectQuestionnaire";
