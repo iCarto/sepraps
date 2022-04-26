@@ -1,9 +1,6 @@
 class MQInstanceValues extends Array {}
 
 const mq_instance_value_api_adapter = mq_instance_value => {
-    mq_instance_value["created_at"] = mq_instance_value["created_at"]
-        ? new Date(mq_instance_value["created_at"])
-        : null;
     return mq_instance_value;
 };
 
@@ -28,8 +25,6 @@ const createMQInstanceValue = ({
     label = "",
     expected_value = "",
     value = "",
-    created_at = "",
-    creation_user = "",
 } = {}) => {
     const publicApi = {
         id,
@@ -38,8 +33,6 @@ const createMQInstanceValue = ({
         label,
         expected_value,
         value,
-        created_at,
-        creation_user,
     };
 
     return Object.freeze(publicApi);

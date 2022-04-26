@@ -17,6 +17,7 @@ import {
     UpdateProjectMainInfrastructurePanel,
     ViewProjectPanel,
     AddProjectLinkedLocalitiesPanel,
+    UpdateProjectQuestionnaireInstancePanel,
 } from "components/project/container";
 import {UpdateProjectProviderContactPanel} from "components/provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "components/milestone/container";
@@ -113,7 +114,13 @@ const projectRoutes = [
                 <Route
                     path=":instanceId"
                     element={<ViewProjectQuestionnairesSubPage />}
-                />
+                >
+                    <Route
+                        key="project-questionnaire-instance-edit"
+                        path=":action"
+                        element={<UpdateProjectQuestionnaireInstancePanel />}
+                    />
+                </Route>
                 <Route path="" element={<ViewProjectQuestionnairesSubPage />} />
             </Route>
             <Route key="project-info" path="" element={<ViewProjectSummarySubPage />}>

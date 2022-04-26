@@ -97,6 +97,17 @@ const ProjectService = {
         });
     },
 
+    updateProjectQuestionnaireInstances(projectQuestionnaire) {
+        return AuthApiService.put(
+            `${basePath}/${projectQuestionnaire.project}/questionnaire_instances/${projectQuestionnaire.questionnaire.code}`,
+            projectQuestionnaire
+        ).then(response => {
+            return createProjectQuestionnaire(
+                project_questionnaire_api_adapter(response)
+            );
+        });
+    },
+
     getProjectsQuestionnaireInstancesFieldData(id, questionnaireCode, fieldCode) {
         return AuthApiService.get(
             `${basePath}/${id}/questionnaire_instances/${questionnaireCode}/${fieldCode}`
