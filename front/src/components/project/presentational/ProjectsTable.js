@@ -16,22 +16,17 @@ const headCells = [
         width: 12,
     },
     {
-        id: "locality_name",
+        id: "name",
         label: "Localidad",
         width: 15,
     },
     {
-        id: "district_name",
-        label: "Distrito",
-        width: 15,
+        id: "location",
+        label: "Ubicación",
+        width: 30,
     },
     {
-        id: "department_name",
-        label: "Departamento",
-        width: 15,
-    },
-    {
-        id: "name",
+        id: "description",
         label: "Descripción",
         width: 23,
     },
@@ -80,11 +75,11 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                     headCells={headCells}
                 />
                 <TableBody>
-                    {projects.sort(sortFunction).map((project, index) => {
+                    {projects.sort(sortFunction).map(project => {
                         return (
                             <TableRow
                                 hover
-                                key={index}
+                                key={project.id}
                                 sx={tableRowStyle}
                                 onClick={() => handleClick(project)}
                                 selected={selectedElement?.id === project.id}
@@ -97,10 +92,9 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                 >
                                     {project.code}
                                 </TableCell>
-                                <TableCell>{project.locality_name}</TableCell>
-                                <TableCell>{project.district_name}</TableCell>
-                                <TableCell>{project.department_name}</TableCell>
                                 <TableCell>{project.name}</TableCell>
+                                <TableCell>{project.location}</TableCell>
+                                <TableCell>{project.description}</TableCell>
                                 <TableCell>
                                     <MilestoneTimelineShort
                                         milestones={project.milestones}

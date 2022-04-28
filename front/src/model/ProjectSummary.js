@@ -1,6 +1,11 @@
-import {createMilestones, milestones_api_adapter} from "./Milestone";
+import {
+    createLocalities,
+    localities_api_adapter,
+    createMilestones,
+    milestones_api_adapter,
+} from "./";
 
-class Projects extends Array {}
+class ProjectsSummaries extends Array {}
 
 const project_summary_api_adapter = project => {
     // Fake image loaded from public folder in front-end
@@ -8,6 +13,23 @@ const project_summary_api_adapter = project => {
 
     project["init_date"] = new Date(project["init_date"]);
     project["created_at"] = new Date(project["created_at"]);
+
+    if (project["linked_localities"]) {
+        project["linked_localities"] = createLocalities(
+            localities_api_adapter(project["linked_localities"])
+        );
+    }
+
+    project["name"] = project["linked_localities"]
+        .map(locality => locality.locality_name)
+        .join(" - ");
+    project["location"] = Array.from(
+        new Set(
+            project["linked_localities"].map(
+                locality => `${locality.district_name} (${locality.department_name})`
+            )
+        )
+    ).join(", ");
 
     if (project["milestones"]) {
         project["milestones"] = createMilestones(
@@ -24,7 +46,7 @@ const projects_summaries_api_adapter = projectsSummaries =>
     projectsSummaries.map(project_summary_api_adapter);
 
 const createProjectsSummaries = (data = []) => {
-    const projectsSummaries = Projects.from(data, projectSummary =>
+    const projectsSummaries = ProjectsSummaries.from(data, projectSummary =>
         createProjectSummary(projectSummary)
     );
     return projectsSummaries;
@@ -33,19 +55,16 @@ const createProjectsSummaries = (data = []) => {
 const createProjectSummary = ({
     id = -1,
     featured_image = null,
-    locality = null,
-    locality_name = null,
-    district = null,
-    district_name = null,
-    department = null,
-    department_name = null,
-    name = null,
     code = null,
+    name = null,
+    location = null,
     project_type = null,
     project_type_name = null,
     project_class = null,
     project_class_name = null,
+    description = null,
     init_date = null,
+    linked_localities = [],
     provider = null,
     provider_name = null,
     construction_contract = null,
@@ -64,19 +83,16 @@ const createProjectSummary = ({
     const publicApi = {
         id,
         featured_image,
-        locality,
-        locality_name,
-        district,
-        district_name,
-        department,
-        department_name,
-        name,
         code,
+        name,
+        location,
         project_type,
         project_type_name,
         project_class,
         project_class_name,
+        description,
         init_date,
+        linked_localities,
         provider,
         provider_name,
         construction_contract,

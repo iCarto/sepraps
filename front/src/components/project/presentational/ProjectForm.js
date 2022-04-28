@@ -32,10 +32,10 @@ const ProjectForm = ({onSubmit, section = null}) => {
 
     const defaultFormValues = {
         id: project?.id || null,
-        name: project?.name || "",
         code: project?.code || null,
         project_type: project?.project_type || "",
         project_class: project?.project_class || "",
+        description: project?.description || "",
         init_date: project?.init_date || null,
         provider_id: project?.provider?.id || null,
         provider_name: project?.provider?.name || "",
@@ -82,8 +82,8 @@ const ProjectForm = ({onSubmit, section = null}) => {
         console.log("submit", {data});
         const updatedProject = createProject({
             id: data.id,
-            name: data.name,
             code: data.code,
+            description: data.description,
             init_date: data.init_date,
             project_type: data.project_type,
             project_class: data.project_class,
