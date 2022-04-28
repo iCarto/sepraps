@@ -48,7 +48,7 @@
         "model": "monitoring.project",
         "pk": 11,
         "fields": {
-            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
+            "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-011",
             "project_type": "agua",
             "project_class": "nueva_construccion",
@@ -89,7 +89,7 @@
         "model": "monitoring.project",
         "pk": 12,
         "fields": {
-            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
+            "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-012",
             "project_type": "agua",
             "project_class": "nueva_construccion",
@@ -130,7 +130,7 @@
         "model": "monitoring.project",
         "pk": 13,
         "fields": {
-            "name": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
+            "description": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
             "code": "2019-AP-013",
             "project_type": "agua",
             "project_class": "nueva_construccion",
@@ -171,7 +171,7 @@
         "model": "monitoring.project",
         "pk": 14,
         "fields": {
-            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
+            "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-014",
             "project_type": "agua",
             "project_class": "nueva_construccion",
@@ -212,7 +212,7 @@
         "model": "monitoring.project",
         "pk": 15,
         "fields": {
-            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
+            "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-015",
             "project_type": "agua",
             "project_class": "nueva_construccion",
@@ -253,7 +253,7 @@
         "model": "monitoring.project",
         "pk": 16,
         "fields": {
-            "name": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
+            "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-016",
             "project_type": "agua",
             "project_class": "nueva_construccion",

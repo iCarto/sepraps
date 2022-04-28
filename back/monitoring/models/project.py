@@ -19,10 +19,10 @@ from monitoring.models.provider import Provider
 class Project(models.Model):
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField("Nombre", max_length=255)
     code = models.CharField("Código", unique=True, max_length=30)
     project_type = models.CharField("Tipo de proyecto", max_length=50, null=True)
     project_class = models.CharField("Clase de proyecto", max_length=50, null=True)
+    description = models.CharField("Descripción", max_length=255)
     init_date = models.DateField("Fecha de inicio")
 
     main_infrastructure = models.OneToOneField(
