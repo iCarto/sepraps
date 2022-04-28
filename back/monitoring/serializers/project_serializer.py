@@ -45,12 +45,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = (
             "id",
-            "name",
             "code",
             "project_type",
             "project_type_name",
             "project_class",
             "project_class_name",
+            "description",
             "init_date",
             "main_infrastructure",
             "locality",
@@ -197,24 +197,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(serializers.ModelSerializer):
-    locality = serializers.IntegerField(
-        source="main_infrastructure.locality.code", default=None
-    )
-    locality_name = serializers.CharField(
-        source="main_infrastructure.locality.name", default=None
-    )
-    district = serializers.IntegerField(
-        source="main_infrastructure.locality.district.code", default=None
-    )
-    district_name = serializers.CharField(
-        source="main_infrastructure.locality.district.name", default=None
-    )
-    department = serializers.IntegerField(
-        source="main_infrastructure.locality.department.code", default=None
-    )
-    department_name = serializers.CharField(
-        source="main_infrastructure.locality.department.name", default=None
-    )
+
     project_type_name = serializers.SerializerMethodField()
     project_class_name = serializers.SerializerMethodField()
     provider_name = serializers.CharField(source="provider.name", default=None)
@@ -241,19 +224,14 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
     class Meta(ProjectSerializer.Meta):
         fields = (
             "id",
-            "locality",
-            "locality_name",
-            "district",
-            "district_name",
-            "department",
-            "department_name",
-            "name",
             "code",
             "project_type",
             "project_type_name",
             "project_class",
             "project_class_name",
+            "description",
             "init_date",
+            "linked_localities",
             "provider",
             "provider_name",
             "construction_contract",
@@ -274,21 +252,27 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
         """Perform necessary eager loading of data."""
         return queryset.select_related(
             "main_infrastructure",
-            "main_infrastructure__locality",
-            "main_infrastructure__locality__department",
-            "main_infrastructure__locality__district",
             "provider",
             "financing_fund",
             "financing_program",
             "construction_contract",
         ).prefetch_related(
+            "linked_localities",
             Prefetch(
                 "milestones",
                 queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
                     "ordering"
                 ),
-            )
+            ),
         )
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        if "linked_localities" in response:
+            response["linked_localities"] = LocalitySerializer(
+                instance.linked_localities, many=True
+            ).data
+        return response
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
