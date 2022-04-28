@@ -11,6 +11,7 @@ const ViewProjectQuestionnairesSubPage = () => {
     const {id, questionnaireCode} = useParams();
     const location = useLocation();
 
+    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
     const [projectQuestionnaire, setProjectQuestionnaire] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -25,8 +26,16 @@ const ViewProjectQuestionnairesSubPage = () => {
         );
     }, [id, questionnaireCode, location.state?.lastRefreshDate]);
 
+    const getIsSidePanelOpen = isOpen => {
+        setIsSidePanelOpen(isOpen);
+    };
+
     return (
-        <SubPageLayout outletContext={[projectQuestionnaire]}>
+        <SubPageLayout
+            outletContext={[projectQuestionnaire]}
+            getIsSidePanelOpen={getIsSidePanelOpen}
+            isSidePanelOpen={isSidePanelOpen}
+        >
             {loading && (
                 <Grid item container justifyContent="center" xs={12}>
                     <CircularProgress color="inherit" size={20} />

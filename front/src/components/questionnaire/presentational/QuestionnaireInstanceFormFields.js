@@ -7,7 +7,7 @@ const QuestionnaireInstanceFormFields = ({questionnaireFields}) => {
             <FormDatePicker
                 name="year_month"
                 label="Mes y año"
-                views={["year", "month"]}
+                views={["month", "year"]}
             />
             <FormInputText name="comments" label="Observaciones" />
             {questionnaireFields.map(field => {

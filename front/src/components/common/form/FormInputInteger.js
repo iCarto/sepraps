@@ -7,6 +7,8 @@ const FormInputInteger = ({
     label,
     endAdornment = null,
     rules = {},
+    onBlurHandler = null,
+    disabled = false,
 }) => {
     const {control} = useFormContext();
 
@@ -39,11 +41,17 @@ const FormInputInteger = ({
     return (
         <TextField
             onChange={onChange}
-            onBlur={onBlur}
+            onBlur={event => {
+                onBlur();
+                if (onBlurHandler) {
+                    onBlurHandler(event);
+                }
+            }}
             value={value}
             name={name}
             inputRef={ref}
             label={label}
+            disabled={disabled}
             margin="normal"
             error={Boolean(error)}
             helperText={error?.message}

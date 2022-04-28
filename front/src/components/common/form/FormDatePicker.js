@@ -8,6 +8,7 @@ const FormDatePicker = ({
     rules = {},
     onChangeHandler = null,
     views = ["year", "month", "day"],
+    disabled = false,
 }) => {
     const {control} = useFormContext();
     const {
@@ -31,6 +32,7 @@ const FormDatePicker = ({
             inputRef={ref}
             label={label}
             views={views}
+            disabled={disabled}
             renderInput={params => (
                 <TextField
                     {...params}
