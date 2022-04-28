@@ -59,7 +59,7 @@ const ProjectCard = ({project, onClick = null}) => {
                         component="img"
                         height="140"
                         image={project.featured_image}
-                        alt={project.locality.locality_name}
+                        alt={project.name}
                     />
                     <Box sx={projectTypeIconBoxStyle}>
                         <ProjectTypeIcon
@@ -78,10 +78,7 @@ const ProjectCard = ({project, onClick = null}) => {
                 </div>
                 <CardContent>
                     <Typography variant="h5" color="primary">
-                        {/* TODO Fix different accesor from project summary or project detail */}
-                        {typeof project.locality === "object"
-                            ? project.locality.locality_name
-                            : project.locality_name}
+                        {project.name}
                     </Typography>
                     <Typography variant="body1">{project.code}</Typography>
                     <Box sx={{mt: 2}}>
@@ -94,16 +91,7 @@ const ProjectCard = ({project, onClick = null}) => {
                             <Tooltip title="Ubicación">
                                 <LocationOnOutlinedIcon fontSize="small" />
                             </Tooltip>
-                            <Typography variant="body2">
-                                {typeof project.locality === "object"
-                                    ? project.locality.district_name
-                                    : project.district_name}{" "}
-                                (
-                                {typeof project.locality === "object"
-                                    ? project.locality.department_name
-                                    : project.department_name}
-                                )
-                            </Typography>
+                            <Typography variant="body2">{project.location}</Typography>
                         </Stack>
                         <Stack direction="row" spacing={2}>
                             <Tooltip title="Fecha de inicio">
@@ -113,33 +101,37 @@ const ProjectCard = ({project, onClick = null}) => {
                                 {DateUtil.formatDate(project.init_date)}
                             </Typography>
                         </Stack>
-                        {project.construction_contract_number && (
-                            <Stack direction="row" spacing={2}>
-                                <Tooltip title="Contrato">
-                                    <WorkOutlineOutlinedIcon fontSize="small" />
-                                </Tooltip>
+
+                        <Stack direction="row" spacing={2}>
+                            <Tooltip title="Contrato">
+                                <WorkOutlineOutlinedIcon fontSize="small" />
+                            </Tooltip>
+                            {project.construction_contract_number && (
                                 <Typography variant="body2">
                                     {project.construction_contract_number} (
                                     {project.construction_contract_bid_request_number})
                                 </Typography>
-                            </Stack>
-                        )}
-                        {project.financing_program_name && (
-                            <Stack direction="row" spacing={2}>
-                                <Tooltip title="Financiación">
-                                    <AccountBalanceOutlinedIcon fontSize="small" />
-                                </Tooltip>
+                            )}
+                        </Stack>
+
+                        <Stack direction="row" spacing={2}>
+                            <Tooltip title="Financiación">
+                                <AccountBalanceOutlinedIcon fontSize="small" />
+                            </Tooltip>
+                            {project.financing_program_name && (
                                 <Typography variant="body2">
                                     {project.financing_program_name} (
                                     {project.financing_fund_name})
                                 </Typography>
-                            </Stack>
-                        )}
+                            )}
+                        </Stack>
                         <Stack direction="row" spacing={2}>
                             <Tooltip title="Trabajos">
                                 <FactCheckOutlinedIcon fontSize="small" />
                             </Tooltip>
-                            <Typography variant="body2">{project.name}</Typography>
+                            <Typography variant="body2">
+                                {project.description}
+                            </Typography>
                         </Stack>
                     </Stack>
                 </CardContent>

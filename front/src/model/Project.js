@@ -34,6 +34,18 @@ const project_api_adapter = project => {
             localities_api_adapter(project["linked_localities"])
         );
     }
+
+    project["name"] = project["linked_localities"]
+        .map(locality => locality.locality_name)
+        .join(" - ");
+    project["location"] = Array.from(
+        new Set(
+            project["linked_localities"].map(
+                locality => `${locality.district_name} (${locality.department_name})`
+            )
+        )
+    ).join(", ");
+
     project["provider"] = project["provider"]
         ? createProvider(
               provider_api_adapter({...project["provider"], project: project["id"]})
@@ -81,6 +93,9 @@ const project_view_adapter = project => {
     project["construction_contract"] = !!project["construction_contract"]
         ? project["construction_contract"].id
         : null;
+
+    delete project["name"];
+    delete project["location"];
     delete project["milestones"];
     delete project["active_milestone"];
     delete project["creation_user"];
@@ -97,13 +112,15 @@ const createProjects = (data = []) => {
 
 const createProject = ({
     id = -1,
-    name = "",
     code = null,
+    name = "",
+    location = "",
     featured_image = "",
     project_type = "",
     project_class = "",
     project_type_name = "",
     project_class_name = "",
+    description = "",
     init_date = null,
     locality = createLocality(),
     main_infrastructure = createInfrastructure(),
@@ -122,13 +139,15 @@ const createProject = ({
 } = {}) => {
     const publicApi = {
         id,
-        name,
         code,
+        name,
+        location,
         featured_image,
         project_type,
         project_class,
         project_type_name,
         project_class_name,
+        description,
         init_date,
         locality,
         main_infrastructure,

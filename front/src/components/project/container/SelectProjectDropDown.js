@@ -70,7 +70,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                         }}
                     >
                         {selectedProject &&
-                            `${selectedProject.locality.locality_name}, ${selectedProject.locality.district_name} (${selectedProject.locality.department_name})`}
+                            `${selectedProject.name}, ${selectedProject.location}`}
                     </Typography>
                 </Box>
             </Button>
@@ -105,7 +105,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                             <Stack>
                                 <Typography>{project.code}</Typography>
                                 <Typography variant="caption" sx={{ml: 1}}>
-                                    {`${project.locality_name}, ${project.district_name} (${project.department_name})`}
+                                    {`${project.name}, ${project.location}`}
                                 </Typography>
                             </Stack>
                         </DropdownMenuItemLink>

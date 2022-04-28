@@ -59,7 +59,7 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
                     offset: L.point(0, -50),
                 }
             ).addTo(map);
-            marker.bindTooltip(project.locality_name);
+            marker.bindTooltip(project.name);
             marker.on("mouseover", function(e) {
                 this.openTooltip();
             });
