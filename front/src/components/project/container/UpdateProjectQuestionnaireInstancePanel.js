@@ -36,7 +36,9 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
         )
             .then(() => {
                 navigate(
-                    `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/${questionnaireInstance.id}`,
+                    selectedQuestionnaireInstance
+                        ? `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/${questionnaireInstance.id}`
+                        : `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
                     true
                 );
             })

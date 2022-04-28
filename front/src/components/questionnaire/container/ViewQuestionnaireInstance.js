@@ -3,6 +3,7 @@ import {useState} from "react";
 import {
     QuestionnaireInstanceList,
     QuestionnaireInstanceSummary,
+    QuestionnaireInstanceExpectedTable,
 } from "../presentational";
 import {QuestionnaireInstanceViewProvider} from "components/questionnaire/provider";
 
@@ -10,8 +11,6 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -61,7 +60,8 @@ const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
                         aria-label="tab-questionnaire-instance"
                     >
                         <Tab label="Datos" {...a11yProps(0)} />
-                        <Tab label="Seguimiento" {...a11yProps(1)} />
+                        <Tab label="Previsión" {...a11yProps(1)} />
+                        <Tab label="Seguimiento" {...a11yProps(2)} />
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
@@ -70,6 +70,11 @@ const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
                     />
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
+                    <QuestionnaireInstanceExpectedTable
+                        projectQuestionnaire={projectQuestionnaire}
+                    />
+                </TabPanel>
+                <TabPanel value={tabValue} index={2}>
                     <QuestionnaireInstanceViewProvider>
                         <QuestionnaireInstanceSummary
                             projectQuestionnaire={projectQuestionnaire}

@@ -16,7 +16,7 @@ const QuestionnaireInstanceList = ({projectQuestionnaire}) => {
     useEffect(() => {
         if (instanceId) {
             setInstanceSelectedById(parseInt(instanceId));
-        } else {
+        } else if (projectQuestionnaire.questionnaire_instances.length) {
             setInstanceSelectedById(
                 projectQuestionnaire.questionnaire_instances[
                     projectQuestionnaire.questionnaire_instances.length - 1
@@ -44,20 +44,24 @@ const QuestionnaireInstanceList = ({projectQuestionnaire}) => {
         <Grid container spacing={2}>
             <Grid item>
                 <Stack alignItems="center">
-                    <QuestionnaireInstanceTree
-                        projectQuestionnaire={projectQuestionnaire}
-                        instanceSelectedId={instanceId}
-                        onInstanceSelected={handleInstanceSelected}
-                    />
+                    {projectQuestionnaire.questionnaire_instances.length !== 0 && (
+                        <QuestionnaireInstanceTree
+                            projectQuestionnaire={projectQuestionnaire}
+                            instanceSelectedId={instanceId}
+                            onInstanceSelected={handleInstanceSelected}
+                        />
+                    )}
                     <ButtonLink
                         text="Añadir"
                         to={`/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/new/add`}
                     />
                 </Stack>
             </Grid>
-            <Grid item xs>
-                <QuestionnaireInstanceDetail instance={instanceSelected} />
-            </Grid>
+            {instanceSelected && (
+                <Grid item xs>
+                    <QuestionnaireInstanceDetail instance={instanceSelected} />
+                </Grid>
+            )}
         </Grid>
     );
 };

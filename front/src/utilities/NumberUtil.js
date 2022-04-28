@@ -8,7 +8,7 @@ var localNumberFormatter = new Intl.NumberFormat("es-PY");
 
 const NumberUtil = {
     formatDecimal(value, decimalSize = 2) {
-        if (!value) {
+        if (!value || isNaN(value)) {
             return "";
         }
         const floatNumber = parseFloat(value);
