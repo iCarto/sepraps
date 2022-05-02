@@ -32,7 +32,6 @@ const ProjectFormLocationFields = ({isMapDisplayed = null}) => {
             />
             {isMapDisplayed && <MapForm onClick={handleSetLocation} />}
             <FormInputInteger name="main_infrastructure_altitude" label="Altitud" />
-            <FormLocationSelect name="main_infrastructure_location" />
         </>
     );
 };

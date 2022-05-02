@@ -33,18 +33,6 @@ const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
             isSidePanelOpen={isSidePanelOpen}
         >
             <SectionField
-                label="Departamento:"
-                value={project.main_infrastructure.locality.department_name}
-            />
-            <SectionField
-                label="Distrito:"
-                value={project.main_infrastructure.locality.district_name}
-            />
-            <SectionField
-                label="Localidad:"
-                value={project.main_infrastructure.locality.locality_name}
-            />
-            <SectionField
                 label="Ubicación:"
                 value={`${project.main_infrastructure.latitude}, ${project.main_infrastructure.longitude}`}
             />
@@ -57,7 +45,7 @@ const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
                     lat: project.main_infrastructure.latitude,
                     lng: project.main_infrastructure.longitude,
                 }}
-                text={`${project.main_infrastructure.locality.locality_name}, ${project.main_infrastructure.locality.district_name}`}
+                text={`${project.name}, ${project.location}`}
             />
         </SectionCard>
     );
