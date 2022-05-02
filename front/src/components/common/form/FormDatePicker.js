@@ -24,7 +24,6 @@ const FormDatePicker = ({name: propsName, label, rules = {}}) => {
                     {...params}
                     name={name}
                     margin="normal"
-                    fullWidth
                     error={Boolean(error)}
                     helperText={error?.message}
                 />
