@@ -6,7 +6,10 @@ class Infrastructure(models.Model):
 
     id = models.AutoField(primary_key=True)
     locality = models.ForeignKey(
-        Locality, on_delete=models.PROTECT, verbose_name=Locality._meta.verbose_name
+        Locality,
+        on_delete=models.PROTECT,
+        verbose_name=Locality._meta.verbose_name,
+        null=True,
     )
 
     # TODO: Review management of geo fields
