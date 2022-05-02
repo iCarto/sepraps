@@ -6,6 +6,18 @@ import {useAdministrativeDivisions} from "components/common/provider";
 
 import Grid from "@mui/material/Grid";
 
+const getValueByPath = (object, path) => {
+    return path.split(".").reduce((p, c) => (p && p[c]) || null, object);
+};
+
+const setValueByPath = (object, path, value) =>
+    path
+        .split(".")
+        .reduce(
+            (o, p, i) => (o[p] = path.split(".").length === ++i ? value : o[p] || {}),
+            object
+        );
+
 const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     const {reset, getValues} = useFormContext();
     const {departments, districts, localities} = useAdministrativeDivisions();
@@ -14,11 +26,11 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
 
     useEffect(() => {
         const values = getValues();
-        if (values[propsName]?.department !== "") {
+        const valuesDepartment = getValueByPath(values, `${propsName}.department`);
+        if (valuesDepartment !== "") {
             setDepartmentDistricts(
                 districts.filter(
-                    district =>
-                        district.department_code === values[propsName].department
+                    district => district.department_code === valuesDepartment
                 )
             );
         }
@@ -26,11 +38,10 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
 
     useEffect(() => {
         const values = getValues();
-        if (values[propsName]?.district !== "") {
+        const valuesDistrict = getValueByPath(values, `${propsName}.district`);
+        if (valuesDistrict !== "") {
             setDistrictLocalities(
-                localities.filter(
-                    locality => locality.district_code === values[propsName].district
-                )
+                localities.filter(locality => locality.district_code === valuesDistrict)
             );
         }
     }, [localities]);
@@ -43,11 +54,11 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
             )
         );
         const values = getValues();
-        values[propsName] = {
+        setValueByPath(values, propsName, {
             department: selectedDepartment,
             district: "",
             locality: "",
-        };
+        });
         reset({
             ...values,
         });
@@ -60,18 +71,18 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
             localities.filter(locality => locality.district_code === selectedDistrict)
         );
         const values = getValues();
-        values[propsName] = {
-            department: values[propsName].department,
+        setValueByPath(values, propsName, {
+            department: getValueByPath(values, `${propsName}.department`),
             district: selectedDistrict,
             locality: "",
-        };
+        });
         reset({
             ...values,
         });
     };
 
     return (
-        <Grid container>
+        <Grid container spacing={1}>
             <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
                 <FormSelect
                     name={`${propsName}.department`}

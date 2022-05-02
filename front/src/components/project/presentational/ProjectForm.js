@@ -1,4 +1,4 @@
-import {useOutletContext} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {DomainProvider, LocationProvider} from "components/common/provider";
@@ -11,17 +11,18 @@ import {
 
 import {FormFinancingSelect} from "components/common/form";
 import {
+    ProjectCreationForm,
     ProjectFormGeneralDataFields,
     ProjectFormLocationFields,
-    ProjectFormStepper,
 } from "./form";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import ProjectFormLinkedLocalities from "./form/ProjectFormLinkedLocalities";
 
 const ProjectForm = ({onSubmit, section = null}) => {
+    const navigate = useNavigate();
+
     let project;
     const outletContext = useOutletContext();
     if (outletContext) {
@@ -45,19 +46,9 @@ const ProjectForm = ({onSubmit, section = null}) => {
             district: project?.provider?.locality.district || "",
             locality: project?.provider?.locality.code || "",
         },
-        main_infrastructure_location: {
-            department: project?.main_infrastructure.locality.department || "",
-            district: project?.main_infrastructure.locality.district || "",
-            locality: project?.main_infrastructure.locality.code || "",
-        },
         main_infrastructure_latitude: project?.main_infrastructure.latitude || "",
         main_infrastructure_longitude: project?.main_infrastructure.longitude || "",
         main_infrastructure_altitude: project?.main_infrastructure.altitude || "",
-        linked_locality: {
-            locality: "",
-            district: "",
-            department: "",
-        },
         linked_localities: project
             ? project.linked_localities.map(linked_locality => {
                   return {
@@ -66,7 +57,13 @@ const ProjectForm = ({onSubmit, section = null}) => {
                       department: linked_locality.department,
                   };
               })
-            : [],
+            : [
+                  {
+                      locality: "",
+                      district: "",
+                      department: "",
+                  },
+              ],
         financing: {
             financing_fund: project?.financing_fund || "",
             financing_program: project?.financing_program || "",
@@ -77,6 +74,10 @@ const ProjectForm = ({onSubmit, section = null}) => {
         defaultValues: defaultFormValues,
         reValidateMode: "onSubmit",
     });
+
+    const handleCancel = () => {
+        navigate("/projects");
+    };
 
     const onFormSubmit = data => {
         console.log("submit", {data});
@@ -100,11 +101,6 @@ const ProjectForm = ({onSubmit, section = null}) => {
                   })
                 : null,
             main_infrastructure: createInfrastructure({
-                locality: createLocality({
-                    code: data.main_infrastructure_location.locality,
-                    district: data.main_infrastructure_location.district,
-                    department: data.main_infrastructure_location.department,
-                }),
                 latitude: data.main_infrastructure_latitude,
                 longitude: data.main_infrastructure_longitude,
                 altitude: data.main_infrastructure_altitude,
@@ -128,16 +124,17 @@ const ProjectForm = ({onSubmit, section = null}) => {
             <DomainProvider>
                 <FormProvider {...formMethods}>
                     <Box component="form" width="100%">
-                        {!section && <ProjectFormStepper onSubmit={onFormSubmit} />}
-                        {section === "generaldata" && <ProjectFormGeneralDataFields />}
+                        {!section && (
+                            <ProjectCreationForm
+                                onCancel={handleCancel}
+                                onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                            />
+                        )}
+                        {section === "generaldata" && (
+                            <ProjectFormGeneralDataFields layout="column" />
+                        )}
                         {section === "main_infrastructure" && (
                             <ProjectFormLocationFields isMapDisplayed={false} />
-                        )}
-                        {section === "linked_localities" && (
-                            <ProjectFormLinkedLocalities
-                                name="linked_localities"
-                                auxPropertyName="linked_locality"
-                            />
                         )}
                         {section === "financing" && (
                             <FormFinancingSelect name="financing" />
