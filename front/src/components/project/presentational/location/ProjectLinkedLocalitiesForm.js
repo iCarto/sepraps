@@ -9,9 +9,15 @@ import Button from "@mui/material/Button";
 const ProjectLinkedLocalitiesForm = ({project = null, onSubmit = null}) => {
     const formMethods = useForm({
         defaultValues: {
-            locality: null,
-            district: "",
-            department: "",
+            linked_locality: {
+                non_existent: false,
+                code: "",
+                name: "",
+                district: "",
+                district_name: "",
+                department: "",
+                department_name: "",
+            },
         },
         reValidateMode: "onSubmit",
     });
@@ -23,9 +29,16 @@ const ProjectLinkedLocalitiesForm = ({project = null, onSubmit = null}) => {
                 ? [
                       ...project.linked_localities,
                       createLocality({
-                          code: data.linked_locality.locality,
+                          code:
+                              data.linked_locality.code &&
+                              data.linked_locality.code !== ""
+                                  ? data.linked_locality.code
+                                  : null,
+                          name: data.linked_locality.name,
                           district: data.linked_locality.district,
+                          district_name: data.linked_locality.district_name,
                           department: data.linked_locality.department,
+                          department_name: data.linked_locality.department_name,
                       }),
                   ]
                 : [],

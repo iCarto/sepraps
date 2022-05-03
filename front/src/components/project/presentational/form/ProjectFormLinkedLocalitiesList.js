@@ -66,7 +66,7 @@ const ProjectFormLinkedLocalitiesList = ({name: propsName}) => {
                     startIcon={<AddIcon />}
                     onClick={handleClickAppend}
                 >
-                    Añadir localidad
+                    Añadir otra localidad
                 </Button>
             </Grid>
         </Grid>
