@@ -38,7 +38,11 @@ const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
             />
             <SectionField
                 label="Altitud:"
-                value={`${project.main_infrastructure.altitude} metros`}
+                value={
+                    project.main_infrastructure.altitude
+                        ? `${project.main_infrastructure.altitude} metros`
+                        : ""
+                }
             />
             <Map
                 markerPosition={{

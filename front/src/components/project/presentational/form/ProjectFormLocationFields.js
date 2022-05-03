@@ -45,7 +45,10 @@ const ProjectFormLocationFields = ({isMapDisplayed = null}) => {
                     )}
                 />
             )}
-            <FormInputInteger name="main_infrastructure_altitude" label="Altitud" />
+            <FormInputInteger
+                name="main_infrastructure_position.altitude"
+                label="Altitud"
+            />
         </>
     );
 };

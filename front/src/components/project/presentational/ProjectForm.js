@@ -49,8 +49,8 @@ const ProjectForm = ({onSubmit, section = null}) => {
         main_infrastructure_position: {
             latitude: project?.main_infrastructure.latitude || "",
             longitude: project?.main_infrastructure.longitude || "",
+            altitude: project?.main_infrastructure.altitude || "",
         },
-        main_infrastructure_altitude: project?.main_infrastructure.altitude || "",
         linked_localities: project
             ? project.linked_localities.map(linked_locality => {
                   return {
@@ -105,7 +105,7 @@ const ProjectForm = ({onSubmit, section = null}) => {
             main_infrastructure: createInfrastructure({
                 latitude: data.main_infrastructure_position.latitude,
                 longitude: data.main_infrastructure_position.longitude,
-                altitude: data.main_infrastructure_altitude,
+                altitude: data.main_infrastructure_position.altitude,
             }),
             linked_localities: data.linked_localities.map(linked_locality => {
                 return createLocality({

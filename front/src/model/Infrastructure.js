@@ -32,9 +32,9 @@ const createInfrastructures = (data = []) => {
 
 const createInfrastructure = ({
     id = -1,
-    latitude = -1,
-    longitude = -1,
-    altitude = -1,
+    latitude = null,
+    longitude = null,
+    altitude = null,
 } = {}) => {
     const publicApi = {
         id,
