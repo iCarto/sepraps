@@ -12,7 +12,6 @@ function useSearch(initialSearchTextValue) {
             item.email,
             item.department_name,
             item.district_name,
-            item.locality_name,
             item.construction_contract_number,
             item.construction_contract_bid_request_number,
             item.financing_program_name,

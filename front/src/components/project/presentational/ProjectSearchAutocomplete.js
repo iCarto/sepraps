@@ -12,8 +12,7 @@ const ProjectSearchAutocomplete = ({handleSelect}) => {
                     {option.name} - {option.code}
                 </Typography>
                 <Typography variant="caption" sx={{ml: 1}}>
-                    ({option.locality.locality_name} - {option.locality.district_name} -{" "}
-                    {option.locality.department_name})
+                    {option.location}
                 </Typography>
             </Stack>
         );

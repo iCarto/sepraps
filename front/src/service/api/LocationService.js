@@ -34,7 +34,7 @@ const LocationService = {
                 }
                 administrativeDivisions.localities.push({
                     value: locality.code,
-                    label: locality.locality_name,
+                    label: locality.name,
                     district_code: locality.district,
                     department_code: locality.department,
                 });

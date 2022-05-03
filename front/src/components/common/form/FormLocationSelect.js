@@ -56,9 +56,15 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
         const values = getValues();
         setValueByPath(values, propsName, {
             department: selectedDepartment,
+            department_name: departments.find(
+                department => department.value === selectedDepartment
+            ).label,
             district: "",
-            locality: "",
+            district_name: "",
+            code: "",
+            name: "",
         });
+        console.log({values});
         reset({
             ...values,
         });
@@ -73,8 +79,31 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
         const values = getValues();
         setValueByPath(values, propsName, {
             department: getValueByPath(values, `${propsName}.department`),
+            department_name: getValueByPath(values, `${propsName}.department_name`),
             district: selectedDistrict,
-            locality: "",
+            district_name: districts.find(
+                district => district.value === selectedDistrict
+            ).label,
+            code: "",
+            name: "",
+        });
+        reset({
+            ...values,
+        });
+    };
+
+    const onChangeLocality = selectedLocality => {
+        console.log("onChangeLocality", {selectedLocality});
+        const values = getValues();
+        setValueByPath(values, propsName, {
+            department: getValueByPath(values, `${propsName}.department`),
+            department_name: getValueByPath(values, `${propsName}.department_name`),
+            district: getValueByPath(values, `${propsName}.district`),
+            district_name: getValueByPath(values, `${propsName}.district_name`),
+            code: selectedLocality,
+            name: districtLocalities.find(
+                district => district.value === selectedLocality
+            ).label,
         });
         reset({
             ...values,
@@ -105,9 +134,10 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
             </Grid>
             <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
                 <FormSelect
-                    name={`${propsName}.locality`}
+                    name={`${propsName}.code`}
                     label="Localidad"
                     options={districtLocalities}
+                    onChangeHandler={onChangeLocality}
                     showEmptyOption={true}
                 />
             </Grid>

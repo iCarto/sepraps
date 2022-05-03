@@ -13,7 +13,7 @@ const createLocalities = (data = []) => {
 
 const createLocality = ({
     code = "",
-    locality_name = "",
+    name = "",
     district = "",
     district_name = "",
     department = "",
@@ -21,7 +21,7 @@ const createLocality = ({
 } = {}) => {
     const publicApi = {
         code,
-        locality_name,
+        name,
         district,
         district_name,
         department,
