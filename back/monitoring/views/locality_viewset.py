@@ -11,6 +11,6 @@ class LocalityViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
 
     # TODO review caching methodology when content changes
-    @method_decorator(cache_page(60 * 2))
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
+    # @method_decorator(cache_page(60 * 2))
+    # def dispatch(self, request, *args, **kwargs):
+    #    return super().dispatch(request, *args, **kwargs)

@@ -1,5 +1,6 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 
 class Department(models.Model):
@@ -78,3 +79,12 @@ def get_code_for_new_locality(department, district):
     else:
         new_code = "001"
     return "#" + district.code + new_code
+
+
+@receiver(pre_save, sender=Locality)
+def locality_pre_save(sender, instance, *args, **kwargs):
+    if not instance.code:
+        instance.code = get_code_for_new_locality(
+            instance.department, instance.district
+        )
+    return instance
