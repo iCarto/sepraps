@@ -10,7 +10,7 @@ const ProviderSearchAutocomplete = ({handleSelect}) => {
             <Stack>
                 <Typography>{option.name}</Typography>
                 <Typography variant="caption" sx={{ml: 1}}>
-                    ({option.locality.locality_name} - {option.locality.district_name} -{" "}
+                    ({option.locality.name} - {option.locality.district_name} -{" "}
                     {option.locality.department_name})
                 </Typography>
             </Stack>

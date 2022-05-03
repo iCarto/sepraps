@@ -20,11 +20,7 @@ const ProjectSection = ({project, headerActions = null}) => {
             />
             <SectionField
                 label="Ubicación:"
-                value={
-                    project?.locality.code !== ""
-                        ? `${project?.locality.locality_name}, ${project?.locality.district_name} (${project?.locality.department_name})`
-                        : `${project?.main_infrastructure.locality.locality_name}, ${project?.main_infrastructure.locality.district_name} (${project?.main_infrastructure.locality.department_name})`
-                }
+                value={`${project?.name}, ${project?.location}`}
             />
             <SectionSubheading heading="Financiación" />
             <SectionField label="Fondo:" value={project?.financing_fund_name} />

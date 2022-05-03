@@ -54,16 +54,22 @@ const ProjectForm = ({onSubmit, section = null}) => {
         linked_localities: project
             ? project.linked_localities.map(linked_locality => {
                   return {
-                      locality: linked_locality.code,
+                      code: linked_locality.code,
+                      name: linked_locality.name,
                       district: linked_locality.district,
+                      district_name: linked_locality.district_name,
                       department: linked_locality.department,
+                      department_name: linked_locality.department_name,
                   };
               })
             : [
                   {
-                      locality: "",
+                      code: "",
+                      name: "",
                       district: "",
+                      district_name: "",
                       department: "",
+                      department_name: "",
                   },
               ],
         financing: {
@@ -109,9 +115,12 @@ const ProjectForm = ({onSubmit, section = null}) => {
             }),
             linked_localities: data.linked_localities.map(linked_locality => {
                 return createLocality({
-                    code: linked_locality.locality,
+                    code: linked_locality.code,
+                    name: linked_locality.name,
                     district: linked_locality.district,
+                    district_name: linked_locality.district_name,
                     department: linked_locality.department,
+                    department_name: linked_locality.department_name,
                 });
             }),
             financing_fund: data.financing.financing_fund,

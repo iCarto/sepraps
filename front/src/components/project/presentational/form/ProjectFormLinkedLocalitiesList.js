@@ -20,14 +20,20 @@ const ProjectFormLinkedLocalitiesList = ({name: propsName}) => {
         append(
             values[propsName][0]
                 ? {
-                      locality: "",
+                      code: "",
+                      name: "",
                       district: values[propsName][0].district,
+                      district_name: values[propsName][0].district_name,
                       department: values[propsName][0].department,
+                      department_name: values[propsName][0].department_name,
                   }
                 : {
-                      locality: "",
+                      code: "",
+                      name: "",
                       district: "",
+                      district_name: "",
                       department: "",
+                      department_name: "",
                   }
         );
     };

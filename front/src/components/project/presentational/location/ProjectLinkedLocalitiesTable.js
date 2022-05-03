@@ -46,7 +46,7 @@ const ProjectLinkedLocalitiesTable = ({handleActions = null}) => {
                     {localities?.map(locality => (
                         <TableRow key={locality.code} sx={tableRowStyle}>
                             <TableCell component="th" scope="row">
-                                {locality.locality_name}
+                                {locality.name}
                             </TableCell>
                             <TableCell>{locality.district_name}</TableCell>
                             <TableCell>{locality.department_name}</TableCell>

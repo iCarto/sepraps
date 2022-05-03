@@ -59,7 +59,7 @@ const ProjectProviderSection = ({isSidePanelOpen = null}) => {
                     <SectionField label="Nombre:" value={provider.name} />
                     <SectionField
                         label="Ubicación:"
-                        value={`${provider.locality.locality_name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
+                        value={`${provider.locality.name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
                         labelIcon={LocationOn}
                     />
                     <ProviderContactsSection provider={provider} />

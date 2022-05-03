@@ -21,7 +21,7 @@ const project_summary_api_adapter = project => {
     }
 
     project["name"] = project["linked_localities"]
-        .map(locality => locality.locality_name)
+        .map(locality => locality.name)
         .join(" - ");
     project["location"] = Array.from(
         new Set(

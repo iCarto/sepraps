@@ -1,12 +1,10 @@
 import {
     createInfrastructure,
-    createLocality,
     createProvider,
     createContract,
     infrastructure_api_adapter,
     createLocalities,
     localities_api_adapter,
-    locality_api_adapter,
     provider_api_adapter,
     contract_api_adapter,
 } from "model";
@@ -36,7 +34,7 @@ const project_api_adapter = project => {
     }
 
     project["name"] = project["linked_localities"]
-        .map(locality => locality.locality_name)
+        .map(locality => locality.name)
         .join(" - ");
     project["location"] = Array.from(
         new Set(
@@ -55,9 +53,6 @@ const project_api_adapter = project => {
         project["main_infrastructure"] = createInfrastructure(
             infrastructure_api_adapter(project["main_infrastructure"])
         );
-    }
-    if (project["locality"]) {
-        project["locality"] = createLocality(locality_api_adapter(project["locality"]));
     }
     if (project["milestones"]) {
         project["milestones"] = createMilestones(
@@ -87,9 +82,6 @@ const project_view_adapter = project => {
     project["main_infrastructure"] = !!project["main_infrastructure"]
         ? infraestructure_view_adapter({...project["main_infrastructure"]})
         : null;
-    project["linked_localities"] = project["linked_localities"].map(linked_locality => {
-        return linked_locality.code;
-    });
     project["construction_contract"] = !!project["construction_contract"]
         ? project["construction_contract"].id
         : null;
@@ -122,7 +114,6 @@ const createProject = ({
     project_class_name = "",
     description = "",
     init_date = null,
-    locality = createLocality(),
     main_infrastructure = createInfrastructure(),
     linked_localities = [],
     provider = createProvider(),
@@ -149,7 +140,6 @@ const createProject = ({
         project_class_name,
         description,
         init_date,
-        locality,
         main_infrastructure,
         linked_localities,
         provider,
