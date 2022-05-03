@@ -1,4 +1,6 @@
 const urlBase = process.env.REACT_APP_API_BASE_URL;
+// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#sending_a_request_with_credentials_included
+const apiCredentials = process.env.REACT_APP_API_CREDENTIALS; // To include or not cookies in the request
 
 /**
  * @param {string}  url url a la cual consultar
@@ -13,7 +15,11 @@ const API_TIMEOUT = 20000;
 
 const fetchTimeout = (url, {...options} = {}) => {
     const controller = new AbortController();
-    const promise = fetch(url, {signal: controller.signal, ...options});
+    const promise = fetch(url, {
+        signal: controller.signal,
+        credentials: apiCredentials,
+        ...options,
+    });
     const timeout = setTimeout(() => controller.abort(), API_TIMEOUT);
     return promise.finally(() => clearTimeout(timeout));
 };
