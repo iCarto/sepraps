@@ -1,7 +1,7 @@
 import {useFormContext} from "react-hook-form";
 import {FormSwitch} from "components/common/form";
 
-const ClosedProjectsSwitch = () => {
+const ClosedProjectsSwitch = ({onChangeHandler = null}) => {
     const {reset, getValues} = useFormContext();
 
     const handleChangeStatus = event => {
@@ -10,6 +10,9 @@ const ClosedProjectsSwitch = () => {
         reset({
             ...values,
         });
+        if (onChangeHandler) {
+            onChangeHandler(values["status"]);
+        }
     };
 
     return <FormSwitch name="switchStatus" onChangeHandler={handleChangeStatus} />;

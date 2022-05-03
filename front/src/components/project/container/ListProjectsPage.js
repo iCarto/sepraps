@@ -1,17 +1,11 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
-import {useState, useEffect, useMemo} from "react";
+import {useState, useEffect} from "react";
 import {ProjectService} from "service/api";
 
 import {useProjectListView} from "../provider";
-import {LocationProvider} from "components/common/provider";
 import {PageLayoutWithPanel} from "layout";
 import {ProjectFilterForm} from "../presentational/form";
-import {
-    ProjectList,
-    ProjectsTable,
-    ShowNoOfProjects,
-    ProjectListChangeView,
-} from "../presentational";
+import {ProjectList, ProjectsTable, ProjectListChangeView} from "../presentational";
 import {MapProjects} from "components/common/geo";
 
 import Grid from "@mui/material/Grid";
@@ -19,7 +13,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Fab from "@mui/material/Fab";
+import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -37,7 +31,13 @@ const ListProjectsPage = () => {
     let context;
     [context] = useOutletContext();
 
-    const {filter, setFilter, filterProjectsFunction, setFilteredProjects} = context;
+    const {
+        filter,
+        setFilter,
+        filterProjectsFunction,
+        filteredProjects,
+        setFilteredProjects,
+    } = context;
 
     const {view} = useProjectListView();
 
@@ -49,17 +49,21 @@ const ListProjectsPage = () => {
         setLoading(true);
         ProjectService.getProjects(filter).then(data => {
             setProjects(data);
+            setFilteredProjects([...data].filter(filterProjectsFunction));
             setLoading(false);
         });
     }, [filter.status]);
 
-    const filteredProjects = useMemo(() => {
+    useEffect(() => {
         setFilteredProjects(projects.filter(filterProjectsFunction));
-        return projects.filter(filterProjectsFunction);
-    }, [filter, projects]);
+    }, [filter]);
 
-    const handleFilterChange = filterAttributes => {
-        setFilter(filterAttributes);
+    const handleFilterChange = (attribute, value) => {
+        setFilter({...filter, [attribute]: value});
+    };
+
+    const handleFilterClear = () => {
+        setFilter({});
     };
 
     const handleClickOnCard = projectId => {
@@ -111,9 +115,12 @@ const ListProjectsPage = () => {
                 >
                     <Grid item container direction="row">
                         <Grid item container xs={8}>
-                            <LocationProvider>
-                                <ProjectFilterForm onChange={handleFilterChange} />
-                            </LocationProvider>
+                            <ProjectFilterForm
+                                filter={filter}
+                                filteredNumber={filteredProjects.length}
+                                onChange={handleFilterChange}
+                                onClear={handleFilterClear}
+                            />
                         </Grid>
 
                         <Grid
@@ -124,9 +131,18 @@ const ListProjectsPage = () => {
                             justifyContent="flex-end"
                         >
                             <Stack direction="row" spacing={2}>
-                                <ShowNoOfProjects
-                                    numberOfProjects={filteredProjects.length}
-                                />
+                                <Button
+                                    id="basic-button"
+                                    color="primary"
+                                    variant="contained"
+                                    sx={{mr: 2, py: 1, lineHeight: 1.25}}
+                                    onClick={() => {
+                                        navigate("/projects/new");
+                                    }}
+                                    startIcon={<AddIcon />}
+                                >
+                                    Nuevo proyecto
+                                </Button>
                                 <ProjectListChangeView />
                             </Stack>
                         </Grid>
@@ -147,15 +163,6 @@ const ListProjectsPage = () => {
                     )}
                 </Grid>
             </Paper>
-
-            <Fab
-                sx={fabStyle}
-                color="primary"
-                aria-label="add"
-                onClick={() => navigate("/projects/new")}
-            >
-                <AddIcon />
-            </Fab>
         </PageLayoutWithPanel>
     );
 };
