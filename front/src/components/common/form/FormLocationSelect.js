@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
-import {useFormContext} from "react-hook-form";
+import {useFormContext, useWatch} from "react-hook-form";
 
 import {FormSelect} from "components/common/form";
 import {useAdministrativeDivisions} from "components/common/provider";
 
 import Grid from "@mui/material/Grid";
+import FormCheckbox from "./FormCheckbox";
+import FormInputText from "./FormInputText";
 
 const getValueByPath = (object, path) => {
     return path.split(".").reduce((p, c) => (p && p[c]) || null, object);
@@ -19,7 +21,7 @@ const setValueByPath = (object, path, value) =>
         );
 
 const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
-    const {reset, getValues} = useFormContext();
+    const {control, reset, getValues} = useFormContext();
     const {departments, districts, localities} = useAdministrativeDivisions();
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
     const [districtLocalities, setDistrictLocalities] = useState([]);
@@ -53,18 +55,18 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                 district => district.department_code === selectedDepartment
             )
         );
+        const department = departments.find(
+            department => department.value === selectedDepartment
+        );
         const values = getValues();
         setValueByPath(values, propsName, {
             department: selectedDepartment,
-            department_name: departments.find(
-                department => department.value === selectedDepartment
-            ).label,
+            department_name: department ? department.label : "",
             district: "",
             district_name: "",
             code: "",
             name: "",
         });
-        console.log({values});
         reset({
             ...values,
         });
@@ -76,14 +78,15 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
         setDistrictLocalities(
             localities.filter(locality => locality.district_code === selectedDistrict)
         );
+        const district = districts.find(
+            district => district.value === selectedDistrict
+        );
         const values = getValues();
         setValueByPath(values, propsName, {
             department: getValueByPath(values, `${propsName}.department`),
             department_name: getValueByPath(values, `${propsName}.department_name`),
             district: selectedDistrict,
-            district_name: districts.find(
-                district => district.value === selectedDistrict
-            ).label,
+            district_name: district ? district.label : "",
             code: "",
             name: "",
         });
@@ -95,24 +98,55 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     const onChangeLocality = selectedLocality => {
         console.log("onChangeLocality", {selectedLocality});
         const values = getValues();
+        const locality = districtLocalities.find(
+            district => district.value === selectedLocality
+        );
         setValueByPath(values, propsName, {
             department: getValueByPath(values, `${propsName}.department`),
             department_name: getValueByPath(values, `${propsName}.department_name`),
             district: getValueByPath(values, `${propsName}.district`),
             district_name: getValueByPath(values, `${propsName}.district_name`),
             code: selectedLocality,
-            name: districtLocalities.find(
-                district => district.value === selectedLocality
-            ).label,
+            name: locality ? locality.label : "",
         });
         reset({
             ...values,
         });
     };
 
+    const onChangeNonExistent = nonExistent => {
+        if (nonExistent) {
+            const values = getValues();
+            setValueByPath(values, propsName, {
+                non_existent: true,
+                department: getValueByPath(values, `${propsName}.department`),
+                department_name: getValueByPath(values, `${propsName}.department_name`),
+                district: getValueByPath(values, `${propsName}.district`),
+                district_name: getValueByPath(values, `${propsName}.district_name`),
+                code: "",
+                name: "",
+            });
+        }
+    };
+
+    const department = useWatch({
+        control,
+        name: `${propsName}.department`,
+    });
+
+    const district = useWatch({
+        control,
+        name: `${propsName}.district`,
+    });
+
+    const nonExistent = useWatch({
+        control,
+        name: `${propsName}.non_existent`,
+    });
+
     return (
         <Grid container spacing={1}>
-            <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
+            <Grid item xs={12} md={orientation === "vertical" ? 12 : 3}>
                 <FormSelect
                     name={`${propsName}.department`}
                     label="Departamento"
@@ -122,7 +156,7 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                     showEmptyOption={true}
                 />
             </Grid>
-            <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
+            <Grid item xs={12} md={orientation === "vertical" ? 12 : 3}>
                 <FormSelect
                     name={`${propsName}.district`}
                     label="Distrito"
@@ -130,15 +164,33 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                     options={departmentDistricts}
                     onChangeHandler={onChangeDistrict}
                     showEmptyOption={true}
+                    disabled={department === ""}
                 />
             </Grid>
             <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
-                <FormSelect
-                    name={`${propsName}.code`}
-                    label="Localidad"
-                    options={districtLocalities}
-                    onChangeHandler={onChangeLocality}
-                    showEmptyOption={true}
+                {nonExistent ? (
+                    <FormInputText
+                        name={`${propsName}.name`}
+                        label="Localidad"
+                        disabled={district === ""}
+                    />
+                ) : (
+                    <FormSelect
+                        name={`${propsName}.code`}
+                        label="Localidad"
+                        options={districtLocalities}
+                        onChangeHandler={onChangeLocality}
+                        showEmptyOption={true}
+                        disabled={district === ""}
+                    />
+                )}
+            </Grid>
+            <Grid item xs={12} md={orientation === "vertical" ? 12 : 2}>
+                <FormCheckbox
+                    name={`${propsName}.non_existent`}
+                    label="No existe"
+                    disabled={district === ""}
+                    onChangeHandler={onChangeNonExistent}
                 />
             </Grid>
         </Grid>

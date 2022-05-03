@@ -12,6 +12,7 @@ const FormSelect = ({
     rules = {},
     onChangeHandler = null,
     showEmptyOption = false,
+    disabled = false,
 }) => {
     const {control} = useFormContext();
     const {
@@ -43,6 +44,7 @@ const FormSelect = ({
                         onChangeHandler(event.target.value);
                     }
                 }}
+                disabled={disabled}
             >
                 {(showEmptyOption ? [emptyOption, ...options] : options).map(
                     ({label, value}) => (

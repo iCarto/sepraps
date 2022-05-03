@@ -1,7 +1,7 @@
 import {useController, useFormContext} from "react-hook-form";
 import TextField from "@mui/material/TextField";
 
-const FormInputText = ({name: propsName, label, rules = {}}) => {
+const FormInputText = ({name: propsName, label, rules = {}, disabled = false}) => {
     const {control} = useFormContext();
 
     const {
@@ -25,6 +25,7 @@ const FormInputText = ({name: propsName, label, rules = {}}) => {
             fullWidth
             error={Boolean(error)}
             helperText={error?.message}
+            disabled={disabled}
         />
     );
 };

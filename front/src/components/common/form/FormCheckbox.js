@@ -5,7 +5,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 
-const FormCheckbox = ({name: propsName, label, rules = {}, onChangeHandler = null}) => {
+const FormCheckbox = ({
+    name: propsName,
+    label,
+    rules = {},
+    onChangeHandler = null,
+    disabled = false,
+}) => {
     const {control} = useFormContext();
     const {
         field: {onChange, name, value, ref},
@@ -33,6 +39,7 @@ const FormCheckbox = ({name: propsName, label, rules = {}, onChangeHandler = nul
                             }
                             onChange(event);
                         }}
+                        disabled={disabled}
                     />
                 }
             />

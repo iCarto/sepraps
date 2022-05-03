@@ -36,7 +36,7 @@ const AddProjectLinkedLocalitiesPanel = () => {
 
     return (
         <SidebarPanel
-            sidebarTitle="Añadir localidad"
+            sidebarTitle="Añadir otra localidad"
             closeSidebarClick={handleCloseSidebar}
         >
             {error && (

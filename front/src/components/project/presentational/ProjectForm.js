@@ -54,6 +54,7 @@ const ProjectForm = ({onSubmit, section = null}) => {
         linked_localities: project
             ? project.linked_localities.map(linked_locality => {
                   return {
+                      non_existent: false,
                       code: linked_locality.code,
                       name: linked_locality.name,
                       district: linked_locality.district,
@@ -64,6 +65,7 @@ const ProjectForm = ({onSubmit, section = null}) => {
               })
             : [
                   {
+                      non_existent: false,
                       code: "",
                       name: "",
                       district: "",
@@ -115,7 +117,10 @@ const ProjectForm = ({onSubmit, section = null}) => {
             }),
             linked_localities: data.linked_localities.map(linked_locality => {
                 return createLocality({
-                    code: linked_locality.code,
+                    code:
+                        linked_locality.code && linked_locality.code !== ""
+                            ? linked_locality.code
+                            : null,
                     name: linked_locality.name,
                     district: linked_locality.district,
                     district_name: linked_locality.district_name,
