@@ -46,8 +46,10 @@ const ProjectForm = ({onSubmit, section = null}) => {
             district: project?.provider?.locality.district || "",
             locality: project?.provider?.locality.code || "",
         },
-        main_infrastructure_latitude: project?.main_infrastructure.latitude || "",
-        main_infrastructure_longitude: project?.main_infrastructure.longitude || "",
+        main_infrastructure_position: {
+            latitude: project?.main_infrastructure.latitude || "",
+            longitude: project?.main_infrastructure.longitude || "",
+        },
         main_infrastructure_altitude: project?.main_infrastructure.altitude || "",
         linked_localities: project
             ? project.linked_localities.map(linked_locality => {
@@ -101,8 +103,8 @@ const ProjectForm = ({onSubmit, section = null}) => {
                   })
                 : null,
             main_infrastructure: createInfrastructure({
-                latitude: data.main_infrastructure_latitude,
-                longitude: data.main_infrastructure_longitude,
+                latitude: data.main_infrastructure_position.latitude,
+                longitude: data.main_infrastructure_position.longitude,
                 altitude: data.main_infrastructure_altitude,
             }),
             linked_localities: data.linked_localities.map(linked_locality => {
