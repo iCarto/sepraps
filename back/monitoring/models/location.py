@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 
@@ -59,3 +60,21 @@ class Locality(models.Model):
 
     def __str__(self):
         return self.name
+
+
+def get_code_for_new_locality(department, district):
+    """
+    Returns a new code with format #departmentcodedistrictcode000
+    """
+    last_created_locality = (
+        Locality.objects.filter(
+            department=department, district=district, code__startswith="#"
+        )
+        .order_by("-code")
+        .first()
+    )
+    if last_created_locality:
+        new_code = (str(int(last_created_locality.code[-3:]) + 1)).zfill(3)
+    else:
+        new_code = "001"
+    return "#" + district.code + new_code
