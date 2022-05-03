@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -9,14 +9,14 @@ const style = {
     height: "300px",
 };
 
-const Map = ({onClick, markerPosition = null}) => {
+const MapForm = ({onClick, latitude = null, longitude = null}) => {
     const getIcon = useMapIcon();
 
-    let map;
-    let marker;
+    const mapRef = useRef(null);
+    const markerRef = useRef(null);
 
     useEffect(() => {
-        map = L.map("map", {
+        mapRef.current = L.map("map", {
             center: [-24, -56],
             zoom: 5,
             layers: [
@@ -26,23 +26,34 @@ const Map = ({onClick, markerPosition = null}) => {
                 }),
             ],
         });
-        map.on("click", setMarker);
+        mapRef.current.on("click", handleClickOnMap);
 
         return () => {
-            map.off();
-            map.remove();
+            mapRef.current.off();
+            mapRef.current.remove();
         };
-    }, [markerPosition]);
+    }, []);
 
-    const setMarker = e => {
-        if (marker) {
-            map.removeLayer(marker);
+    useEffect(() => {
+        if (latitude && longitude) {
+            if (markerRef.current) {
+                mapRef.current.removeLayer(markerRef.current);
+            }
+            markerRef.current = L.marker(
+                {lat: latitude, lng: longitude},
+                {icon: getIcon()}
+            ).addTo(mapRef.current);
+            if (!mapRef.current.getBounds().contains(markerRef.current.getLatLng())) {
+                mapRef.current.panTo(markerRef.current.getLatLng(), {animate: true});
+            }
         }
-        marker = L.marker(e.latlng, {icon: getIcon()}).addTo(map);
+    }, [latitude, longitude]);
+
+    const handleClickOnMap = e => {
         onClick(e.latlng.lat, e.latlng.lng);
     };
 
     return <div id="map" style={style} />;
 };
 
-export default Map;
+export default MapForm;
