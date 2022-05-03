@@ -9,13 +9,9 @@ const ProviderFormFields = () => {
 
     return (
         <Fragment>
-            <FormInputText name="provider_name" label="Nombre del prestador" />
-            <FormSelect
-                name="provider_area"
-                label="Área del prestador"
-                options={areas}
-            />
-            <FormLocationSelect name="provider_location" />
+            <FormInputText name="name" label="Nombre del prestador" />
+            <FormSelect name="area" label="Área del prestador" options={areas} />
+            <FormLocationSelect name="locality" />
         </Fragment>
     );
 };

@@ -38,14 +38,6 @@ const ProjectForm = ({onSubmit, section = null}) => {
         project_class: project?.project_class || "",
         description: project?.description || "",
         init_date: project?.init_date || null,
-        provider_id: project?.provider?.id || null,
-        provider_name: project?.provider?.name || "",
-        provider_area: project?.provider?.area || "",
-        provider_location: {
-            department: project?.provider?.locality.department || "",
-            district: project?.provider?.locality.district || "",
-            locality: project?.provider?.locality.code || "",
-        },
         main_infrastructure_position: {
             latitude: project?.main_infrastructure.latitude || "",
             longitude: project?.main_infrastructure.longitude || "",
@@ -98,18 +90,7 @@ const ProjectForm = ({onSubmit, section = null}) => {
             init_date: data.init_date,
             project_type: data.project_type,
             project_class: data.project_class,
-            provider: data.provider_name
-                ? createProvider({
-                      id: data.provider_id,
-                      name: data.provider_name,
-                      area: data.provider_area,
-                      locality: createLocality({
-                          code: data.provider_location.locality,
-                          district: data.provider_location.district,
-                          department: data.provider_location.department,
-                      }),
-                  })
-                : null,
+            provider: project?.provider || null,
             main_infrastructure: createInfrastructure({
                 latitude: data.main_infrastructure_position.latitude,
                 longitude: data.main_infrastructure_position.longitude,

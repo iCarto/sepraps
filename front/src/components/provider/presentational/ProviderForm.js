@@ -10,40 +10,56 @@ const ProviderForm = ({provider = null, onSubmit = null, onCancel = null}) => {
     const formMethods = useForm({
         defaultValues: provider
             ? {
-                  provider_id: provider.id,
-                  provider_name: provider.name,
-                  provider_area: provider.area,
-                  provider_location: {
-                      locality: provider.locality.code,
+                  id: provider.id,
+                  name: provider.name,
+                  area: provider.area,
+                  locality: {
+                      non_existent: false,
+                      code: provider.locality.code,
+                      name: provider.locality.name,
                       district: provider.locality.district,
+                      district_name: provider.locality.district_name,
                       department: provider.locality.department,
+                      department_name: provider.locality.department_name,
                   },
               }
             : {
-                  provider_id: null,
-                  provider_name: "",
-                  provider_area: "",
-                  provider_location: {
-                      department: "",
+                  id: null,
+                  name: "",
+                  area: "",
+                  locality: {
+                      non_existent: false,
+                      code: "",
+                      name: "",
                       district: "",
-                      locality: "",
+                      district_name: "",
+                      department: "",
+                      department_name: "",
                   },
               },
         reValidateMode: "onSubmit",
     });
 
     const handleFormSubmit = data => {
+        console.log({data});
         const updatedProvider = createProvider({
-            id: data.provider_id,
-            name: data.provider_name,
-            area: data.provider_area,
+            id: data.id,
+            name: data.name,
+            area: data.area,
             locality: createLocality({
-                code: data.provider_location.locality,
-                district: data.provider_location.locality,
-                department: data.provider_location.department,
+                code:
+                    data.locality.code && data.locality.code !== ""
+                        ? data.locality.code
+                        : null,
+                name: data.locality.name,
+                district: data.locality.district,
+                district_name: data.locality.district_name,
+                department: data.locality.department,
+                department_name: data.locality.department_name,
             }),
             contacts: provider ? [...provider.contacts] : [],
         });
+        console.log({updatedProvider});
         onSubmit(updatedProvider);
     };
 
