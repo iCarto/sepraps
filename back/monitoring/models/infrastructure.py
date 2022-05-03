@@ -15,7 +15,7 @@ class Infrastructure(models.Model):
     # TODO: Review management of geo fields
     latitude = models.DecimalField(max_digits=8, decimal_places=5)
     longitude = models.DecimalField(max_digits=8, decimal_places=5)
-    altitude = models.IntegerField()
+    altitude = models.IntegerField(null=True)
 
     class Meta:
         db_table = "infrastructure"

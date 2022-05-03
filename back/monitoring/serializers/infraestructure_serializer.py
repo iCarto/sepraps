@@ -10,6 +10,7 @@ class InfraestructureSerializer(serializers.ModelSerializer):
     locality = serializers.PrimaryKeyRelatedField(
         queryset=Locality.objects.all(), required=False
     )
+    altitude = serializers.IntegerField(allow_null=True)
 
     class Meta:
         model = Infrastructure
