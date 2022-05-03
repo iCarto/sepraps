@@ -115,6 +115,7 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     };
 
     const onChangeNonExistent = nonExistent => {
+        console.log({nonExistent});
         if (nonExistent) {
             const values = getValues();
             setValueByPath(values, propsName, {
@@ -125,6 +126,9 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
                 district_name: getValueByPath(values, `${propsName}.district_name`),
                 code: "",
                 name: "",
+            });
+            reset({
+                ...values,
             });
         }
     };

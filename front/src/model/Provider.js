@@ -19,9 +19,6 @@ const provider_api_adapter = provider => {
 };
 
 const provider_view_adapter = provider => {
-    if (provider["locality"]) {
-        provider["locality"] = provider["locality"].code;
-    }
     return provider;
 };
 

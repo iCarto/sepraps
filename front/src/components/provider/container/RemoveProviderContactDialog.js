@@ -23,7 +23,7 @@ const RemoveProviderContactDialog = ({
             id: provider.id,
             name: provider.name,
             area: provider.area,
-            locality: provider.locality.code,
+            locality: provider.locality,
             project: provider.project,
             contacts: provider.contacts,
         });
