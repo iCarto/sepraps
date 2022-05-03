@@ -9,16 +9,14 @@ function useProjectsFilter(filters) {
     function filterProjectsFunction(project) {
         const propertiesForSearchFilter = [
             project.name,
-            project.department_name,
-            project.district_name,
-            project.locality_name,
+            project.location,
             project.construction_contract_number,
             project.construction_contract_bid_request_number,
             project.financing_program_name,
             project.financing_fund_name,
         ];
 
-        const searchFunction = item => {
+        const searchFunction = (item, searchText) => {
             if (!item || !filter?.searchText || filter?.searchText.length < 2) {
                 return true;
             } else {
@@ -28,7 +26,7 @@ function useProjectsFilter(filters) {
                     .normalize("NFD")
                     .replace(/[\u0300-\u036f]/g, "")
                     .includes(
-                        filter.searchText
+                        searchText
                             .toUpperCase()
                             .normalize("NFD")
                             .replace(/[\u0300-\u036f]/g, "")
@@ -36,7 +34,39 @@ function useProjectsFilter(filters) {
             }
         };
 
-        return (
+        let filtered = true;
+
+        if (filter.searchText) {
+            filtered =
+                filtered &&
+                propertiesForSearchFilter.some(item =>
+                    searchFunction(item, filter.searchText)
+                );
+        }
+
+        if (filter.construction_contract) {
+            filtered =
+                filtered &&
+                project.construction_contract === filter.construction_contract;
+        }
+
+        if (filter.department) {
+            filtered =
+                filtered &&
+                project.linked_localities.some(
+                    locality => locality.department === filter.department
+                );
+        }
+
+        if (filter.district) {
+            filtered =
+                filtered &&
+                project.linked_localities.some(
+                    locality => locality.district === filter.district
+                );
+        }
+
+        /*return (
             Object.keys(filter)
                 .filter(
                     key =>
@@ -47,7 +77,9 @@ function useProjectsFilter(filters) {
                 )
                 .every(key => filter[key] === project[key]) &&
             searchFunction(propertiesForSearchFilter)
-        );
+        );*/
+
+        return filtered;
     }
 
     return {filter, setFilter, filterProjectsFunction};

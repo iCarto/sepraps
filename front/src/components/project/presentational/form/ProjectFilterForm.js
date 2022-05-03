@@ -1,50 +1,72 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {ContractService, TEMPLATE} from "service/api";
+import {ContractService, LocationService, TEMPLATE} from "service/api";
 
-import {useAdministrativeDivisions} from "components/common/provider";
-import {FormSelectMultipleChip} from "components/common/form";
-import {ClosedProjectsSwitch} from "..";
-import {
-    AccordionUndercoverLayout,
-    SearchBoxControlled,
-} from "components/common/presentational";
+import {FormSelect} from "components/common/form";
+import {ClosedProjectsSwitch, ShowNoOfProjects} from "..";
+import {SearchBoxControlled} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import Stack from "@mui/material/Stack";
+import Collapse from "@mui/material/Collapse";
 
-const ProjectFilterForm = ({onChange = null}) => {
+const ProjectFilterForm = ({
+    filter,
+    filteredNumber,
+    onChange = null,
+    onClear = null,
+}) => {
+    const [expanded, setExpanded] = useState(() => {
+        return (
+            Object.keys(filter).length != 0 &&
+            (filter?.department !== "" &&
+                filter?.district !== "" &&
+                filter?.construction_contract !== "")
+        );
+    });
+
+    const toggleAccordion = () => {
+        setExpanded(oldExpanded => !oldExpanded);
+    };
+
+    const [loadedDomains, setLoadedDomains] = useState(false);
     const [contracts, setContracts] = useState([]);
-    const {departments, districts} = useAdministrativeDivisions();
+    const [departments, setDepartments] = useState([]);
+    const [districts, setDistricts] = useState([]);
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
 
     useEffect(() => {
-        ContractService.getContracts(false, TEMPLATE.SHORT).then(contracts => {
-            setContracts(
-                contracts.map(contract => {
-                    return {value: contract.id, label: contract.number};
-                })
-            );
-        });
-    }, []);
+        if (expanded && !loadedDomains) {
+            Promise.all([
+                ContractService.getContracts(false, TEMPLATE.SHORT),
+                LocationService.getAdministrativeDivisions(),
+            ]).then(([contracts, administrativeDivisions]) => {
+                setContracts(
+                    contracts.map(contract => {
+                        return {value: contract.id, label: contract.number};
+                    })
+                );
+                const {departments, districts} = administrativeDivisions;
+                setDepartments(departments);
+                setDistricts(districts);
+                setLoadedDomains(true);
+            });
+        }
+    }, [expanded]);
 
     const formMethods = useForm({
         defaultValues: {
-            department: "",
-            district: "",
-            construction_contract: "",
-            status: "active",
-            switchStatus: false,
-            searchText: "",
+            department: filter?.department || "",
+            district: filter?.district || "",
+            construction_contract: filter?.construction_contract || "",
+            status: filter?.status || "active",
+            switchStatus: filter?.switchStatus || false,
+            searchText: filter?.searchText || "",
         },
     });
-
-    useEffect(() => {
-        const subscription = formMethods.watch(() => onChange(formMethods.getValues()));
-        return () => subscription.unsubscribe();
-    }, [formMethods.watch]);
 
     const handleChangeDepartment = selectedDepartment => {
         setDepartmentDistricts(
@@ -57,7 +79,7 @@ const ProjectFilterForm = ({onChange = null}) => {
         formMethods.reset({
             ...values,
         });
-        onChange(values);
+        onChange("department", selectedDepartment);
     };
 
     const handleClearAllFilters = () => {
@@ -69,57 +91,90 @@ const ProjectFilterForm = ({onChange = null}) => {
             switchStatus: false,
             searchText: "",
         });
+        if (onClear) {
+            onClear();
+        }
     };
 
     return (
         <FormProvider {...formMethods}>
-            <SearchBoxControlled name="searchText" />
-
-            {/* ------> TO-DO: CHANGE POSITION OF ACCORDION TITLE+ICON */}
-            <AccordionUndercoverLayout
-                accordionTitle="Filtros"
-                accordionIcon={<FilterListIcon />}
+            <Grid
+                container
+                sx={{
+                    mb: 3,
+                }}
             >
-                <Grid container columnSpacing={2} my={2}>
-                    <Grid item xs={4}>
-                        <FormSelectMultipleChip
-                            name="department"
-                            label="Departamento"
-                            options={departments}
-                            onChangeHandler={handleChangeDepartment}
+                <Grid item container spacing={2} xs={12}>
+                    <Grid item>
+                        <SearchBoxControlled
+                            name="searchText"
+                            onChangeHandler={value => onChange("searchText", value)}
                         />
                     </Grid>
-                    <Grid item xs={4}>
-                        <FormSelectMultipleChip
-                            name="district"
-                            label="Distrito"
-                            options={departmentDistricts}
-                        />
+                    <Grid item xs>
+                        <Button
+                            onClick={toggleAccordion}
+                            sx={{color: "text.secondary"}}
+                            startIcon={<FilterListIcon />}
+                        >
+                            Más Filtros
+                        </Button>
                     </Grid>
-                    <Grid item xs={4}>
-                        <FormSelectMultipleChip
-                            name="construction_contract"
-                            label="Contrato"
-                            options={contracts}
-                        />
-                    </Grid>
-                    <Grid item container xs={12} justifyContent="space-between">
-                        <Grid item container xs={2} mt={2}>
-                            <ClosedProjectsSwitch />
-                        </Grid>
-                        <Grid item container xs={2} mt={2}>
-                            <Button
-                                color="primary"
-                                fullWidth
-                                onClick={handleClearAllFilters}
-                                sx={{lineHeight: 1}}
-                            >
-                                <ClearIcon /> Borrar filtros
-                            </Button>
-                        </Grid>
+                    <Grid item>
+                        <ShowNoOfProjects numberOfProjects={filteredNumber} />
                     </Grid>
                 </Grid>
-            </AccordionUndercoverLayout>
+                <Grid item xs={12}>
+                    <Collapse in={expanded} timeout="auto">
+                        <Grid container columnSpacing={2} my={2}>
+                            <Grid item xs={4}>
+                                <FormSelect
+                                    name="construction_contract"
+                                    label="Contrato"
+                                    options={contracts}
+                                    showEmptyOption={true}
+                                    onChangeHandler={value =>
+                                        onChange("construction_contract", value)
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <FormSelect
+                                    name="department"
+                                    label="Departamento"
+                                    options={departments}
+                                    onChangeHandler={handleChangeDepartment}
+                                    showEmptyOption={true}
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <FormSelect
+                                    name="district"
+                                    label="Distrito"
+                                    options={departmentDistricts}
+                                    onChangeHandler={value =>
+                                        onChange("district", value)
+                                    }
+                                    showEmptyOption={true}
+                                />
+                            </Grid>
+                            <Grid item container xs justifyContent="space-between">
+                                <ClosedProjectsSwitch
+                                    onChangeHandler={value => onChange("status", value)}
+                                />
+                                <Button
+                                    color="primary"
+                                    variant="outlined"
+                                    onClick={handleClearAllFilters}
+                                    sx={{lineHeight: 1}}
+                                >
+                                    <ClearIcon /> Borrar filtros
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Collapse>
+                </Grid>
+            </Grid>
         </FormProvider>
     );
 };

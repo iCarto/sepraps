@@ -10,7 +10,10 @@ import ClearIcon from "@mui/icons-material/Clear";
 
 // ---------> TO-DO: IMPLEMENT CONTROLLED SEARCH IN SEARCHBOX COMPONENT (USED IN ListContractsPage & ViewProjectContractsSubPage) AND MERGE
 
-const SearchBoxControlled = ({name: propsName}) => {
+const WAIT_INTERVAL = 500;
+let timerID;
+
+const SearchBoxControlled = ({name: propsName, onChangeHandler = null}) => {
     const {control} = useFormContext();
     const {
         field: {onChange, name, value, ref},
@@ -19,8 +22,22 @@ const SearchBoxControlled = ({name: propsName}) => {
         control,
     });
 
+    const handleSearchChange = async value => {
+        if (onChangeHandler) {
+            clearTimeout(timerID);
+
+            timerID = setTimeout(() => {
+                console.log("onChangeHandler", value);
+                onChangeHandler(value);
+            }, WAIT_INTERVAL);
+        }
+    };
+
     const clearSearchValue = value => {
         onChange(value);
+        if (onChangeHandler) {
+            onChangeHandler(value);
+        }
     };
 
     return (
@@ -29,7 +46,10 @@ const SearchBoxControlled = ({name: propsName}) => {
             <OutlinedInput
                 id={`${name}-input`}
                 type="text"
-                onChange={onChange}
+                onChange={ev => {
+                    onChange(ev);
+                    handleSearchChange(ev.target.value);
+                }}
                 inputRef={ref}
                 value={value}
                 endAdornment={

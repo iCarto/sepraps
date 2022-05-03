@@ -10,7 +10,7 @@ import {ProjectListViewProvider} from "../provider";
  */
 const ManageProjectsPage = () => {
     const [filteredProjects, setFilteredProjects] = useState([]);
-    const {filter, setFilter, filterProjectsFunction} = useProjectsFilter([]);
+    const {filter, setFilter, filterProjectsFunction} = useProjectsFilter({});
 
     return (
         <ProjectListViewProvider>

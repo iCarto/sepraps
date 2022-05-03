@@ -37,8 +37,6 @@ const MilestoneCircleDiv = styled("div", {
 }));
 
 const MilestoneTimelineShort = ({milestones}) => {
-    console.log({milestones});
-
     return (
         <MilestoneBox>
             <Stack direction="row" justifyContent="space-around">
