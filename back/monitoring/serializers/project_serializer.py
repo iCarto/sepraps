@@ -131,7 +131,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         provider_data = validated_data.pop("provider", None)
         provider = None
         if provider_data:
-            provider, _ = Provider.objects.get_or_create(**provider_data)
+            if provider_data.get("id"):
+                provider = Provider.objects.get(pk=provider_data["id"])
+                self.fields["provider"].update(provider, provider_data)
+            else:
+                provider = self.fields["provider"].create(provider_data)
 
         linked_localities_data = validated_data.pop("linked_localities")
 
