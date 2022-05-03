@@ -27,10 +27,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         source="financing_program.name", required=False, read_only=True
     )
     main_infrastructure = InfraestructureSerializer()
-    locality = LocalitySerializer(source="main_infrastructure.locality", read_only=True)
-    linked_localities = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Locality.objects.prefetch_related("department", "district")
-    )
+    linked_localities = LocalitySerializer(many=True)
     provider = ProviderSerializer(required=False, allow_null=True)
     construction_contract = serializers.PrimaryKeyRelatedField(
         required=False, allow_null=True, queryset=ConstructionContract.objects.all()
@@ -52,9 +49,8 @@ class ProjectSerializer(serializers.ModelSerializer):
             "project_class_name",
             "description",
             "init_date",
-            "main_infrastructure",
-            "locality",
             "linked_localities",
+            "main_infrastructure",
             "provider",
             "financing_fund",
             "financing_fund_name",
@@ -97,10 +93,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        if "linked_localities" in response:
-            response["linked_localities"] = LocalitySerializer(
-                instance.linked_localities, many=True
-            ).data
         if "construction_contract" in response:
             response["construction_contract"] = (
                 ConstructionContractSummarySerializer(
@@ -141,12 +133,15 @@ class ProjectSerializer(serializers.ModelSerializer):
         if provider_data:
             provider, _ = Provider.objects.get_or_create(**provider_data)
 
-        linked_localities = validated_data.pop("linked_localities")
+        linked_localities_data = validated_data.pop("linked_localities")
 
         project = Project.objects.create(
             main_infrastructure=infrastructure, provider=provider, **validated_data
         )
-        project.linked_localities.set(linked_localities)
+
+        project.linked_localities.set(
+            self.fields["linked_localities"].update([], linked_localities_data)
+        )
 
         return project
 
@@ -179,8 +174,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         instance.provider = provider
 
     def update_linked_localities(self, instance, validated_data):
-        linked_localities = validated_data.pop("linked_localities")
-        instance.linked_localities.set(linked_localities)
+        instance.linked_localities.set(
+            self.fields["linked_localities"].update(
+                instance.linked_localities.all(),
+                validated_data.pop("linked_localities", None),
+            )
+        )
 
     def update(self, instance, validated_data):
 
@@ -200,6 +199,7 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
 
     project_type_name = serializers.SerializerMethodField()
     project_class_name = serializers.SerializerMethodField()
+    linked_localities = LocalitySerializer(many=True)
     provider_name = serializers.CharField(source="provider.name", default=None)
     construction_contract_number = serializers.CharField(
         source="construction_contract.number", default=None
@@ -265,14 +265,6 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
                 ),
             ),
         )
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        if "linked_localities" in response:
-            response["linked_localities"] = LocalitySerializer(
-                instance.linked_localities, many=True
-            ).data
-        return response
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
