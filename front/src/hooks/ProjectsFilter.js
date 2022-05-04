@@ -10,6 +10,7 @@ function useProjectsFilter(filters) {
         const propertiesForSearchFilter = [
             project.name,
             project.location,
+            project.description,
             project.construction_contract_number,
             project.construction_contract_bid_request_number,
             project.financing_program_name,
@@ -17,21 +18,20 @@ function useProjectsFilter(filters) {
         ];
 
         const searchFunction = (item, searchText) => {
-            if (!item || !filter?.searchText || filter?.searchText.length < 2) {
-                return true;
-            } else {
-                return item
-                    .toString()
-                    .toUpperCase()
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "")
-                    .includes(
-                        searchText
-                            .toUpperCase()
-                            .normalize("NFD")
-                            .replace(/[\u0300-\u036f]/g, "")
-                    );
+            if (!item) {
+                return false;
             }
+            return item
+                .toString()
+                .toUpperCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .includes(
+                    searchText
+                        .toUpperCase()
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "")
+                );
         };
 
         let filtered = true;
