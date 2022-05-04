@@ -126,7 +126,7 @@ const ProjectFilterForm = ({
                 </Grid>
                 <Grid item xs={12}>
                     <Collapse in={expanded} timeout="auto">
-                        <Grid container columnSpacing={2} my={2}>
+                        <Grid container columnSpacing={2}>
                             <Grid item xs={4}>
                                 <FormSelect
                                     name="construction_contract"
