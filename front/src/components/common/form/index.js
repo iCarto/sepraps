@@ -11,3 +11,4 @@ export {default as FormCheckbox} from "./FormCheckbox";
 export {default as FormTextArea} from "./FormTextArea";
 export {default as FormSelectMultipleChip} from "./FormSelectMultipleChip";
 export {default as FormSwitch} from "./FormSwitch";
+export {default as FormInputCurrency} from "./FormInputCurrency";

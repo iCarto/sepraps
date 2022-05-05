@@ -2,7 +2,7 @@ import {Fragment} from "react";
 import {
     FormInputText,
     FormDatePicker,
-    FormInputDecimal,
+    FormInputCurrency,
     FormInputInteger,
 } from "components/common/form";
 
@@ -24,10 +24,9 @@ const ContractBidRequestFormFields = () => {
                 label="Fecha de publicacón de licitación"
                 rules={{required: "El campo es obligatorio"}}
             />
-            <FormInputDecimal
+            <FormInputCurrency
                 name="bid_request_budget"
                 label="Monto estimado"
-                endAdornment="Gs."
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputInteger

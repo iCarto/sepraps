@@ -1,22 +1,31 @@
-var formatter = new Intl.NumberFormat("es-PY", {
+import {TrendingUpRounded} from "@mui/icons-material";
+
+var localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
     style: "currency",
     currency: "PYG",
 });
+var localNumberFormatter = new Intl.NumberFormat("es-PY");
 
 const NumberUtil = {
-    formatDecimal(number, decimalSize) {
-        if (!number) {
+    formatDecimal(value, decimalSize) {
+        if (!value) {
             return "";
         }
-        const floatNumber = parseFloat(number);
+        const floatNumber = parseFloat(value);
         return floatNumber.toFixed(decimalSize).replace(".", ",");
     },
 
-    formatCurrency(number) {
-        if (!number) {
+    formatCurrency(value, showCurrencySymbol = true) {
+        if (!value) {
             return "";
         }
-        return formatter.format(number);
+        if (isNaN(value)) {
+            return value;
+        }
+        var formatter = showCurrencySymbol
+            ? localCurrencyFormatter
+            : localNumberFormatter;
+        return formatter.format(value);
     },
 
     parseFloatOrNull(value) {
