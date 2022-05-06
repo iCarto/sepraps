@@ -31,10 +31,13 @@ class ConstructionContractFilter(filters.FilterSet):
 
 
 class ConstructionContractViewSet(viewsets.ModelViewSet):
-    queryset = ConstructionContract.objects.all().order_by("-number")
     serializer_class = ConstructionContractSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ConstructionContractFilter
+
+    def get_queryset(self):
+        queryset = ConstructionContract.objects.all().order_by("-number")
+        return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_context(self):
         context = super(ConstructionContractViewSet, self).get_serializer_context()

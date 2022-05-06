@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from monitoring.models.contact import Contact
 from monitoring.models.contractor import Contractor
+from monitoring.models.financing_program import FinancingProgram
 
 
 class ConstructionContract(models.Model):
@@ -25,6 +26,13 @@ class ConstructionContract(models.Model):
         "Monto total de adjudicación", max_digits=5, decimal_places=2, null=True
     )
     awarding_date = models.DateField("Fecha de adjudicación", null=True)
+
+    financing_program = models.ForeignKey(
+        FinancingProgram,
+        on_delete=models.PROTECT,
+        verbose_name=FinancingProgram._meta.verbose_name,
+        null=True,
+    )
 
     contractor = models.ForeignKey(
         Contractor,

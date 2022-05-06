@@ -50,8 +50,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
         "provider__locality__department",
         "provider__locality__district",
         "construction_contract",
-        "financing_fund",
-        "financing_program",
     )
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]

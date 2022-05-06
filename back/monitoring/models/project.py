@@ -9,8 +9,6 @@ from django.dispatch import receiver
 from django.utils import timezone
 from documents.models import MediaNode
 from monitoring.models.construction_contract import ConstructionContract
-from monitoring.models.financing_fund import FinancingFund
-from monitoring.models.financing_program import FinancingProgram
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.location import Locality
 from monitoring.models.provider import Provider
@@ -31,18 +29,6 @@ class Project(models.Model):
         verbose_name=Infrastructure._meta.verbose_name,
     )
 
-    financing_fund = models.ForeignKey(
-        FinancingFund,
-        on_delete=models.PROTECT,
-        verbose_name=FinancingFund._meta.verbose_name,
-        null=True,
-    )
-    financing_program = models.ForeignKey(
-        FinancingProgram,
-        on_delete=models.PROTECT,
-        verbose_name=FinancingProgram._meta.verbose_name,
-        null=True,
-    )
     construction_contract = models.ForeignKey(
         ConstructionContract,
         on_delete=models.PROTECT,
