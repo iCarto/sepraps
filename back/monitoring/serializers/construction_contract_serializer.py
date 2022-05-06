@@ -1,14 +1,24 @@
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.contact import Contact
 from monitoring.models.contractor import Contractor
+from monitoring.models.financing_program import FinancingProgram
 from monitoring.models.project import Project
 from monitoring.serializers.contact_serializer import ContactSerializer
-from monitoring.serializers.contractor_serializer import ContractorSerializer
+from monitoring.serializers.contractor_serializer import (
+    ContractorSerializer,
+    ContractorSummarySerializer,
+)
+from monitoring.serializers.financing_program_serializer import (
+    FinancingProgramSerializer,
+)
 from rest_framework import serializers
 
 
 class ConstructionContractSerializer(serializers.ModelSerializer):
 
+    financing_program = serializers.PrimaryKeyRelatedField(
+        required=False, allow_null=True, queryset=FinancingProgram.objects.all()
+    )
     contractor = ContractorSerializer(required=False, allow_null=True)
     field_manager = ContactSerializer(required=False, allow_null=True)
     construction_inspector = ContactSerializer(required=False, allow_null=True)
@@ -37,6 +47,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "awarding_budget",
             "awarding_percentage_drop",
             "awarding_date",
+            "financing_program",
             "contractor",
             "field_manager",
             "construction_inspector",
@@ -64,7 +75,11 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "bid_request_deadline": {"required": True},
         }
 
-    # ATTRIBUTES
+    def setup_eager_loading(queryset):
+        """Perform necessary eager loading of data."""
+        return queryset.select_related(
+            "contractor", "financing_program"
+        ).prefetch_related("contractor__contacts", "financing_program__financing_funds")
 
     def to_representation(self, instance):
         # TODO To avoid circular dependencies with serializers we have
@@ -76,7 +91,17 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             response["projects"] = ProjectSummarySerializer(
                 instance.projects, many=True
             ).data
+        if "financing_program" in response:
+            response["financing_program"] = (
+                FinancingProgramSerializer(
+                    instance.financing_program, context=self.context
+                ).data
+                if instance.financing_program is not None
+                else None
+            )
         return response
+
+    # ATTRIBUTES
 
     # OPERATIONS
 
@@ -194,7 +219,11 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         return instance
 
 
-class ConstructionContractSummarySerializer(ConstructionContractSerializer):
+class ConstructionContractSummarySerializer(serializers.ModelSerializer):
+
+    financing_program = FinancingProgramSerializer()
+    contractor = ContractorSummarySerializer()
+
     class Meta(ConstructionContractSerializer.Meta):
         fields = (
             "id",
@@ -207,11 +236,18 @@ class ConstructionContractSummarySerializer(ConstructionContractSerializer):
             "bid_request_deadline",
             "awarding_budget",
             "awarding_date",
+            "financing_program",
             "contractor",
             "execution_signature_date",
             "created_at",
             "updated_at",
         )
+
+    def setup_eager_loading(queryset):
+        """Perform necessary eager loading of data."""
+        return queryset.select_related(
+            "contractor", "financing_program"
+        ).prefetch_related("financing_program__financing_funds")
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)

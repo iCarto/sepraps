@@ -22,12 +22,6 @@ class ProjectSerializer(serializers.ModelSerializer):
     code = serializers.CharField(required=False, read_only=True)
     project_type_name = serializers.SerializerMethodField(required=False)
     project_class_name = serializers.SerializerMethodField(required=False)
-    financing_fund_name = serializers.CharField(
-        source="financing_fund.name", required=False, read_only=True
-    )
-    financing_program_name = serializers.CharField(
-        source="financing_program.name", required=False, read_only=True
-    )
     main_infrastructure = InfraestructureSerializer()
     linked_localities = LocalitySerializer(many=True)
     provider = ProviderSerializer(required=False, allow_null=True)
@@ -54,10 +48,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             "linked_localities",
             "main_infrastructure",
             "provider",
-            "financing_fund",
-            "financing_fund_name",
-            "financing_program",
-            "financing_program_name",
             "construction_contract",
             "milestones",
             "folder",
@@ -78,12 +68,12 @@ class ProjectSerializer(serializers.ModelSerializer):
             "provider__locality__department",
             "provider__locality__district",
             "construction_contract",
+            "construction_contract__financing_program",
             "construction_contract__contractor",
-            "financing_fund",
-            "financing_program",
         ).prefetch_related(
             "linked_localities",
             "provider__contacts",
+            "construction_contract__financing_program__financing_funds",
             "construction_contract__contractor__contacts",
             Prefetch(
                 "milestones",
@@ -212,11 +202,11 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
     construction_contract_bid_request_number = serializers.CharField(
         source="construction_contract.bid_request_number", default=None
     )
-    financing_fund_name = serializers.CharField(
-        source="financing_fund.short_name", default=None
+    financing_program = serializers.IntegerField(
+        source="construction_contract.financing_program.id", required=False
     )
     financing_program_name = serializers.CharField(
-        source="financing_program.short_name", default=None
+        source="construction_contract.financing_program.short_name", required=False
     )
     milestones = serializers.SerializerMethodField()
     latitude = serializers.CharField(
@@ -242,8 +232,6 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             "construction_contract",
             "construction_contract_number",
             "construction_contract_bid_request_number",
-            "financing_fund",
-            "financing_fund_name",
             "financing_program",
             "financing_program_name",
             "milestones",
@@ -258,9 +246,8 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
         return queryset.select_related(
             "main_infrastructure",
             "provider",
-            "financing_fund",
-            "financing_program",
             "construction_contract",
+            "construction_contract__financing_program",
         ).prefetch_related(
             "linked_localities",
             Prefetch(

@@ -79,3 +79,23 @@ class ContractorSerializer(serializers.ModelSerializer):
             contract.save()
 
         return instance
+
+
+class ContractorSummarySerializer(ContractorSerializer):
+    class Meta(ContractorSerializer.Meta):
+        fields = (
+            "id",
+            "name",
+            "contractor_type",
+            "contractor_type_name",
+            "address",
+            "phone",
+            "email",
+            "comments",
+        )
+
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        for field in fields:
+            fields[field].read_only = True
+        return fields

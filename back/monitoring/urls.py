@@ -23,7 +23,11 @@ router.register(r"localities", LocalityViewSet)
 router.register(r"projects", ProjectViewSet)
 router.register(r"providers", ProviderViewSet)
 router.register(r"contacts", ContactViewSet)
-router.register(r"constructioncontracts", ConstructionContractViewSet)
+router.register(
+    r"constructioncontracts",
+    ConstructionContractViewSet,
+    basename="constructioncontracts",
+)
 router.register(r"contractors", ContractorViewSet)
 router.register(r"milestones", MilestoneViewSet)
 
