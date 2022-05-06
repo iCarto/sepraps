@@ -189,6 +189,24 @@
         }
     },
     {
+        "model": "monitoring.financingprogram",
+        "pk": 1,
+        "fields": {
+            "short_name": "3601/OC-PR",
+            "name": "Contrato de Préstamo 3601/OC-PR - BID AECID/FONPRODE",
+            "financing_funds": [1, 3]
+        }
+    },
+    {
+        "model": "monitoring.financingprogram",
+        "pk": 2,
+        "fields": {
+            "short_name": "COF 01/08",
+            "name": "COF 01/08 - FOCEM",
+            "financing_funds": [2]
+        }
+    },
+    {
         "model": "monitoring.financingfund",
         "pk": 1,
         "fields": {
@@ -205,21 +223,19 @@
         }
     },
     {
-        "model": "monitoring.financingprogram",
-        "pk": 1,
+        "model": "monitoring.financingfund",
+        "pk": 3,
         "fields": {
-            "short_name": "3601/OC-PR",
-            "name": "Contrato de Préstamo 3601/OC-PR - BID AECID/FONPRODE",
-            "financing_fund": 1
+            "short_name": "AECID",
+            "name": "AECID (Agencia Española de Cooperación Internacional para el Desarrollo)"
         }
     },
     {
-        "model": "monitoring.financingprogram",
-        "pk": 2,
+        "model": "monitoring.financingfund",
+        "pk": 4,
         "fields": {
-            "short_name": "COF 01/08",
-            "name": "COF 01/08 - FOCEM",
-            "financing_fund": 2
+            "short_name": "Fondos locales",
+            "name": "Fondos locales de SENASA"
         }
     }
 ]
