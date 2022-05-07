@@ -12,7 +12,7 @@ const FormSection = ({title = "", ...props}) => {
                 <Grid
                     item
                     container
-                    justifyContent="center"
+                    justifyContent="flex-start"
                     alignItems="center"
                     xs={12}
                 >

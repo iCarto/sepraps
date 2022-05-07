@@ -27,19 +27,15 @@ const CreateContractPage = () => {
             });
     };
 
-    const handleCancel = () => {
-        navigate(`/contracts`);
-    };
-
     return (
         <PageLayout>
             <Container maxWidth="md">
                 <Paper sx={{p: 3}}>
                     <Typography variant="h6" sx={{mb: 2}}>
-                        Añadir contrato
+                        Registro de contrato
                     </Typography>
                     {error && <Alert severity="error">{error}</Alert>}
-                    <ContractForm onSubmit={handleSubmit} onCancel={handleCancel} />
+                    <ContractForm onSubmit={handleSubmit} />
                 </Paper>
             </Container>
         </PageLayout>

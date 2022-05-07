@@ -1,3 +1,4 @@
+import {createFinancingPrograms, financing_programs_api_adapter} from "model";
 import AuthApiService from "./AuthApiService";
 
 const basePathFinancingFunds = "/api/monitoring/financingfunds";
@@ -17,13 +18,7 @@ const FinancingService = {
 
     getFinancingPrograms() {
         return AuthApiService.get(basePathFinancingPrograms).then(response => {
-            return response.map(financingProgram => {
-                return {
-                    value: financingProgram.id,
-                    label: financingProgram.name,
-                    financing_fund: financingProgram.financing_fund,
-                };
-            });
+            return createFinancingPrograms(financing_programs_api_adapter(response));
         });
     },
 };

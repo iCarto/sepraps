@@ -10,7 +10,7 @@ import {
 const ProjectFormSection = ({onSubmit, onCancel = null}) => {
     return (
         <>
-            <FormSection title="Información general del proyecto">
+            <FormSection title="Información general">
                 <ProjectFormGeneralDataFields />
             </FormSection>
             <FormSection title="Localidad">

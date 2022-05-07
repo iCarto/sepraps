@@ -2,14 +2,8 @@ import {useNavigate, useOutletContext} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {DomainProvider, LocationProvider} from "components/common/provider";
-import {
-    createInfrastructure,
-    createLocality,
-    createProject,
-    createProvider,
-} from "model";
+import {createInfrastructure, createLocality, createProject} from "model";
 
-import {FormFinancingSelect} from "components/common/form";
 import {
     ProjectCreationForm,
     ProjectFormGeneralDataFields,
@@ -20,7 +14,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ProjectForm = ({onSubmit, section = null}) => {
+const ProjectForm = ({onSubmit, updatedSection = null}) => {
     const navigate = useNavigate();
 
     let project;
@@ -64,10 +58,6 @@ const ProjectForm = ({onSubmit, section = null}) => {
                       department_name: "",
                   },
               ],
-        financing: {
-            financing_fund: project?.financing_fund || "",
-            financing_program: project?.financing_program || "",
-        },
     };
 
     const formMethods = useForm({
@@ -107,10 +97,18 @@ const ProjectForm = ({onSubmit, section = null}) => {
                     department_name: linked_locality.department_name,
                 });
             }),
-            financing_fund: data.financing.financing_fund,
-            financing_program: data.financing.financing_program,
         });
         onSubmit(updatedProject);
+    };
+
+    const getFormBySection = section => {
+        if (section === "generaldata") {
+            return <ProjectFormGeneralDataFields layout="column" />;
+        }
+        if (section === "main_infrastructure") {
+            return <ProjectFormLocationFields isMapDisplayed={false} />;
+        }
+        return null;
     };
 
     return (
@@ -118,32 +116,25 @@ const ProjectForm = ({onSubmit, section = null}) => {
             <DomainProvider>
                 <FormProvider {...formMethods}>
                     <Box component="form" width="100%">
-                        {!section && (
+                        {updatedSection ? (
+                            <>
+                                {getFormBySection(updatedSection)}
+                                <Grid container justifyContent="center" sx={{mt: 2}}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        sx={{ml: 2}}
+                                        onClick={formMethods.handleSubmit(onFormSubmit)}
+                                    >
+                                        Guardar
+                                    </Button>
+                                </Grid>
+                            </>
+                        ) : (
                             <ProjectCreationForm
                                 onCancel={handleCancel}
                                 onSubmit={formMethods.handleSubmit(onFormSubmit)}
                             />
-                        )}
-                        {section === "generaldata" && (
-                            <ProjectFormGeneralDataFields layout="column" />
-                        )}
-                        {section === "main_infrastructure" && (
-                            <ProjectFormLocationFields isMapDisplayed={false} />
-                        )}
-                        {section === "financing" && (
-                            <FormFinancingSelect name="financing" />
-                        )}
-                        {section && (
-                            <Grid container justifyContent="center" sx={{mt: 2}}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ml: 2}}
-                                    onClick={formMethods.handleSubmit(onFormSubmit)}
-                                >
-                                    Guardar
-                                </Button>
-                            </Grid>
                         )}
                     </Box>
                 </FormProvider>

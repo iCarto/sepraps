@@ -12,8 +12,13 @@ export {default as SelectProjectDropDown} from "./SelectProjectDropDown";
 export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPanel";
 export {default as AddProjectProviderPanel} from "./AddProjectProviderPanel";
 export {default as UpdateProjectPanel} from "./UpdateProjectPanel";
-export {default as UpdateProjectMainInfrastructurePanel} from "./UpdateProjectMainInfrastructurePanel";
-export {default as UpdateProjectFinancingPanel} from "./UpdateProjectFinancingPanel";
-export {default as AddProjectLinkedLocalitiesPanel} from "./AddProjectLinkedLocalitiesPanel";
-export {default as RemoveProjectLinkedLocalityDialog} from "./RemoveProjectLinkedLocalityDialog";
+export {
+    default as UpdateProjectMainInfrastructurePanel,
+} from "./UpdateProjectMainInfrastructurePanel";
+export {
+    default as AddProjectLinkedLocalitiesPanel,
+} from "./AddProjectLinkedLocalitiesPanel";
+export {
+    default as RemoveProjectLinkedLocalityDialog,
+} from "./RemoveProjectLinkedLocalityDialog";
 export {default as ViewProjectPanel} from "./ViewProjectPanel";

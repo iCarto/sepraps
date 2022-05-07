@@ -42,7 +42,7 @@ const UpdateContractPanel = () => {
                     {error}
                 </Alert>
             )}
-            <ContractForm section={section} onSubmit={handleSubmit} />
+            <ContractForm updatedSection={section} onSubmit={handleSubmit} />
         </SidebarPanel>
     );
 };

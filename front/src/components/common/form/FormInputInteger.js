@@ -45,7 +45,6 @@ const FormInputInteger = ({
             inputRef={ref}
             label={label}
             margin="normal"
-            fullWidth
             error={Boolean(error)}
             helperText={error?.message}
             InputProps={inputProps}
