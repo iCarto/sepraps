@@ -7,6 +7,7 @@ import {
     ContractContractorSection,
     ContractExecutionSection,
     ContractGeneralDataSection,
+    ContractFinancingProgramSection,
 } from "../presentational/generaldata";
 import Grid from "@mui/material/Grid";
 
@@ -29,6 +30,11 @@ const ViewContractInfoSubPage = () => {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <ContractGeneralDataSection isSidePanelOpen={isSidePanelOpen} />
+                </Grid>
+                <Grid item xs={12}>
+                    <ContractFinancingProgramSection
+                        isSidePanelOpen={isSidePanelOpen}
+                    />
                 </Grid>
                 <Grid item xs={12}>
                     <ContractBidRequestSection isSidePanelOpen={isSidePanelOpen} />

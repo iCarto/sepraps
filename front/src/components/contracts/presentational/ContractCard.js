@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 
 const ContractCard = ({contract}) => {
     return (
@@ -25,11 +26,12 @@ const ContractCard = ({contract}) => {
                 <CardContent sx={{bgcolor: "grey.100"}}>
                     <Stack spacing={1}>
                         <Stack direction="row" spacing={2}>
-                            <Tooltip title="Contratista">
-                                <WorkOutlineOutlinedIcon fontSize="small" />
+                            <Tooltip title="Fecha de inicio">
+                                <DateRangeOutlinedIcon fontSize="small" />
                             </Tooltip>
                             <Typography variant="body2">
-                                {contract.contractor?.name}
+                                {DateUtil.formatDate(contract.awarding_date)} (
+                                {contract.bid_request_deadline} meses)
                             </Typography>
                         </Stack>
                         <Stack direction="row" spacing={2}>
@@ -41,13 +43,22 @@ const ContractCard = ({contract}) => {
                             </Typography>
                         </Stack>
                         <Stack direction="row" spacing={2}>
-                            <Tooltip title="Fecha de inicio">
-                                <DateRangeOutlinedIcon fontSize="small" />
+                            <Tooltip title="Contratista">
+                                <WorkOutlineOutlinedIcon fontSize="small" />
                             </Tooltip>
                             <Typography variant="body2">
-                                {DateUtil.formatDate(contract.awarding_date)} (
-                                {contract.bid_request_deadline} meses)
+                                {contract.contractor?.name}
                             </Typography>
+                        </Stack>
+                        <Stack direction="row" spacing={2}>
+                            <Tooltip title="Financiación">
+                                <AccountBalanceOutlinedIcon fontSize="small" />
+                            </Tooltip>
+                            {contract.financing_program && (
+                                <Typography variant="body2">
+                                    {contract.financing_program?.short_name}
+                                </Typography>
+                            )}
                         </Stack>
                     </Stack>
                 </CardContent>

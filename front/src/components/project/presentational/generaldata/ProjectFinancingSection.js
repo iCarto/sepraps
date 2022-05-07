@@ -27,40 +27,49 @@ const ProjectFinancingSection = () => {
         />,
     ];
 
-    const financingInfo = (
+    const getFinancingInfo = () => (
         <>
-            <SectionField label="Programa:" value={project.financing_fund_name} />
-            <SectionField label="Financiador:" value={project.financing_program_name} />
+            <SectionField
+                label="Programa:"
+                value={project.construction_contract.financing_program.name}
+            />
+            <SectionField
+                label="Financiador/es:"
+                value={project.construction_contract.financing_program.financing_funds
+                    .map(financing_fund => financing_fund.name)
+                    .join(", ")}
+            />
         </>
     );
 
-    const noFinancingInfo = (
+    const getNoFinancingInfo = () => (
         <SectionField
             label="Programa:"
-            value="Este proyecto aún no tiene financiador"
+            value="Este proyecto aún no tiene programa de financiación"
             valueFontStyle="italic"
         />
     );
 
-    const contractInfo = (
+    const getContractInfo = () => (
         <>
             <SectionField
                 label="Número:"
-                value={project.construction_contract?.number}
+                value={project.construction_contract.number}
             />
             <SectionField
                 label="Monto adjudicado:"
-                value={
-                    project.construction_contract &&
-                    NumberUtil.formatCurrency(
-                        project.construction_contract.awarding_budget
-                    )
-                }
+                value={NumberUtil.formatCurrency(
+                    project.construction_contract.awarding_budget
+                )}
+            />
+            <SectionField
+                label="Contratista:"
+                value={project.construction_contract.contractor?.name}
             />
         </>
     );
 
-    const noContractInfo = (
+    const getNoContractInfo = () => (
         <SectionField
             label="Número:"
             value="Este proyecto aún no ha sido asignado a ningún contrato"
@@ -71,9 +80,11 @@ const ProjectFinancingSection = () => {
     return (
         <SectionCard title="Financiación" secondaryActions={headerActions}>
             <SectionSubheading heading="Contrato" />
-            {project.construction_contract ? contractInfo : noContractInfo}
+            {project.construction_contract ? getContractInfo() : getNoContractInfo()}
             <SectionSubheading heading="Programa" />
-            {project.financing_fund_name ? financingInfo : noFinancingInfo}
+            {project.construction_contract?.financing_program
+                ? getFinancingInfo()
+                : getNoFinancingInfo()}
         </SectionCard>
     );
 };
