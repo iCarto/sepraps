@@ -3,10 +3,11 @@ import {
     contractor_api_adapter,
     createProjectSummary,
     project_summary_api_adapter,
+    createFinancingProgram,
+    financing_program_api_adapter,
 } from "model";
 import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 import {contractor_view_adapter} from "./Contractor";
-
 
 class Contracts extends Array {}
 
@@ -23,6 +24,13 @@ const contract_api_adapter = contract => {
               contractor_api_adapter({
                   ...contract["contractor"],
                   contract: contract["id"],
+              })
+          )
+        : null;
+    contract["financing_program"] = contract["financing_program"]
+        ? createFinancingProgram(
+              financing_program_api_adapter({
+                  ...contract["financing_program"],
               })
           )
         : null;
@@ -96,6 +104,10 @@ const contract_view_adapter = contract => {
         contract["contractor"] = null;
     }
 
+    contract["financing_program"] = !!contract["financing_program"]
+        ? contract["financing_program"].id
+        : null;
+
     contract["execution_order_start_date"] = !!contract["execution_order_start_date"]
         ? DateUtil.formatDate(
               contract["execution_order_start_date"],
@@ -151,6 +163,7 @@ const createContract = ({
     awarding_budget = null,
     awarding_percentage_drop = null,
     awarding_date = null,
+    financing_program = null,
     contractor = null,
     field_manager = null,
     construction_inspector = null,
@@ -179,6 +192,7 @@ const createContract = ({
         awarding_budget,
         awarding_percentage_drop,
         awarding_date,
+        financing_program,
         contractor,
         field_manager,
         construction_inspector,

@@ -120,8 +120,7 @@ const ProjectCard = ({project, onClick = null}) => {
                             </Tooltip>
                             {project.financing_program_name && (
                                 <Typography variant="body2">
-                                    {project.financing_program_name} (
-                                    {project.financing_fund_name})
+                                    {project.financing_program_name}
                                 </Typography>
                             )}
                         </Stack>

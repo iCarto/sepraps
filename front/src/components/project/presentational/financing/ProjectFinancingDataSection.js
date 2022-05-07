@@ -33,15 +33,17 @@ const ProjectFinancingDataSection = () => {
             title="Programa"
             secondaryActions={project.financing_program_name ? headerActions : []}
         >
-            {project.financing_program_name ? (
+            {project.construction_contract?.financing_program ? (
                 <>
                     <SectionField
                         label="Programa de financiación:"
-                        value={project.financing_program_name}
+                        value={project.construction_contract.financing_program.name}
                     />
                     <SectionField
                         label="Financiador:"
-                        value={project.financing_fund_name}
+                        value={project.construction_contract.financing_program.financing_funds
+                            .map(financing_fund => financing_fund.name)
+                            .join(", ")}
                     />
                 </>
             ) : (
