@@ -21,7 +21,7 @@ const ContractBidRequestFormFields = () => {
             />
             <FormDatePicker
                 name="bid_request_date"
-                label="Fecha de publicacón de licitación"
+                label="Fecha de publicación"
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputCurrency

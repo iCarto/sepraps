@@ -14,7 +14,6 @@ import {
     AddProjectProviderPanel,
     UpdateProjectPanel,
     UpdateProjectMainInfrastructurePanel,
-    UpdateProjectFinancingPanel,
     ViewProjectPanel,
     AddProjectLinkedLocalitiesPanel,
 } from "components/project/container";
@@ -72,11 +71,6 @@ const projectRoutes = [
                     key="project-contract-update"
                     path="contract/:contractId/:action"
                     element={<AddProjectContractPanel />}
-                />
-                <Route
-                    key="project-financing-data"
-                    path=":action"
-                    element={<UpdateProjectFinancingPanel />}
                 />
             </Route>
             <Route

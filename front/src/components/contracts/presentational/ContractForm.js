@@ -1,17 +1,25 @@
-import {useOutletContext} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 import {NumberUtil} from "utilities";
 import {createContract} from "model";
+import {DomainProvider} from "components/common/provider";
 
-import ContractGeneralDataFormFields from "./form/ContractGeneralDataFormFields";
-import ContractAwardingFormFields from "./form/ContractAwardingFormFields";
-import ContractExecutionFormFields from "./form/ContractExecutionFormFields";
-import ContractBidRequestFormFields from "./form/ContractBidRequestFormFields";
+import {
+    ContractCreationForm,
+    ContractGeneralDataFormFields,
+    ContractAwardingFormFields,
+    ContractExecutionFormFields,
+    ContractBidRequestFormFields,
+    ContractFinancingFormFields,
+} from "./form";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
+const ContractForm = ({onSubmit, updatedSection = null}) => {
+    const navigate = useNavigate();
+
     // TODO: Review how to manage outlet context to extract contract properly
     let contract;
     const outletContext = useOutletContext();
@@ -24,6 +32,7 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
         id: contract?.id || "",
         contract_number: contract?.number || "",
         comments: contract?.comments || "",
+        financing_program: contract?.financing_program || null,
         bid_request_number: contract?.bid_request_number || "",
         bid_request_id: contract?.bid_request_id || "",
         bid_request_date: contract?.bid_request_date || "",
@@ -56,6 +65,7 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
             id: data.id,
             number: data.contract_number,
             comments: data.comments,
+            financing_program: data.financing_program,
             bid_request_number: data.bid_request_number,
             bid_request_id: data.bid_request_id,
             bid_request_date: data.bid_request_date,
@@ -78,47 +88,60 @@ const ContractForm = ({section = null, onSubmit, onCancel = null}) => {
             execution_final_delivery_date: data.execution_final_delivery_date,
             projects: contract ? contract.projects : [],
         });
+        console.log({updatedContract});
         onSubmit(updatedContract);
     };
 
     const handleCancel = () => {
-        onCancel();
+        navigate(`/contracts`);
+    };
+
+    const getFormBySection = section => {
+        if (section === "generaldata") {
+            return <ContractGeneralDataFormFields />;
+        }
+        if (section === "financing_program") {
+            return <ContractFinancingFormFields />;
+        }
+        if (section === "bidrequest") {
+            return <ContractBidRequestFormFields />;
+        }
+        if (section === "awarding") {
+            return <ContractAwardingFormFields />;
+        }
+        if (section === "execution") {
+            return <ContractExecutionFormFields />;
+        }
+        return null;
     };
 
     return (
-        <FormProvider {...formMethods}>
-            <Box component="form">
-                <Grid container>
-                    <Grid item container xs={12}>
-                        {!section || section === "generaldata" ? (
-                            <ContractGeneralDataFormFields />
-                        ) : null}
-                        {!section || section === "bidrequest" ? (
-                            <ContractBidRequestFormFields />
-                        ) : null}
-                        {section === "awarding" ? <ContractAwardingFormFields /> : null}
-                        {section === "execution" ? (
-                            <ContractExecutionFormFields />
-                        ) : null}
-                    </Grid>
-                </Grid>
-                <Grid container justifyContent="center" sx={{mt: 2}}>
-                    {onCancel && (
-                        <Button sx={{ml: 2}} onClick={handleCancel}>
-                            Cancelar
-                        </Button>
+        <DomainProvider>
+            <FormProvider {...formMethods}>
+                <Box component="form" width="100%">
+                    {updatedSection ? (
+                        <>
+                            {getFormBySection(updatedSection)}
+                            <Grid container justifyContent="center" sx={{mt: 2}}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    sx={{ml: 2}}
+                                    onClick={formMethods.handleSubmit(onFormSubmit)}
+                                >
+                                    Guardar
+                                </Button>
+                            </Grid>
+                        </>
+                    ) : (
+                        <ContractCreationForm
+                            onCancel={handleCancel}
+                            onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        />
                     )}
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{ml: 3}}
-                        onClick={formMethods.handleSubmit(onFormSubmit)}
-                    >
-                        Guardar
-                    </Button>
-                </Grid>
-            </Box>
-        </FormProvider>
+                </Box>
+            </FormProvider>
+        </DomainProvider>
     );
 };
 

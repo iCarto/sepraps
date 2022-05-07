@@ -93,6 +93,10 @@ const contract_view_adapter = contract => {
           )
         : null;
 
+    contract["financing_program"] = !!contract["financing_program"]
+        ? contract["financing_program"].id
+        : null;
+
     // we must destructure object before its adapation because
     // nested objects are still inmutable inside contract object
     if (!!contract["contractor"]) {
@@ -103,10 +107,6 @@ const contract_view_adapter = contract => {
     } else {
         contract["contractor"] = null;
     }
-
-    contract["financing_program"] = !!contract["financing_program"]
-        ? contract["financing_program"].id
-        : null;
 
     contract["execution_order_start_date"] = !!contract["execution_order_start_date"]
         ? DateUtil.formatDate(
