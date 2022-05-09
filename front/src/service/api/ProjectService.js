@@ -1,7 +1,5 @@
 import {
-    createProjects,
     createProject,
-    projects_api_adapter,
     project_api_adapter,
     createContacts,
     contacts_api_adapter,
@@ -24,7 +22,7 @@ const ProjectService = {
 
     getProjectsBySearchText(searchText) {
         return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
-            return createProjects(projects_api_adapter(response));
+            return createProjectsSummaries(projects_summaries_api_adapter(response));
         });
     },
 

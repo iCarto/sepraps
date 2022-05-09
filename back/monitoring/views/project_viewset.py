@@ -31,8 +31,9 @@ class ProjectFilter(filters.FilterSet):
     def filter_by_search_text(self, queryset, name, search_text):
 
         return queryset.filter(
-            Q(name__icontains=search_text) | Q(code__icontains=search_text)
-        )
+            Q(linked_localities__name__icontains=search_text)
+            | Q(code__icontains=search_text)
+        ).distinct()
 
     class Meta:
         model = Project
@@ -63,6 +64,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_class(self):
+        print(self.action)
         if self.action == "list":
             return ProjectSummarySerializer
         return super().get_serializer_class()
