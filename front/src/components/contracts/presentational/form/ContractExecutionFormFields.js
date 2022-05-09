@@ -5,7 +5,7 @@ const ContractExecutionFormFields = () => {
     return (
         <Fragment>
             <FormDatePicker name="execution_signature_date" label="Fecha de firma" />
-            <FormDatePicker
+            {/*<FormDatePicker
                 name="execution_order_start_date"
                 label="Fecha de orden de inicio"
             />
@@ -20,7 +20,7 @@ const ContractExecutionFormFields = () => {
             <FormDatePicker
                 name="execution_final_delivery_date"
                 label="Fecha de recepción definitiva"
-            />
+    />*/}
         </Fragment>
     );
 };
