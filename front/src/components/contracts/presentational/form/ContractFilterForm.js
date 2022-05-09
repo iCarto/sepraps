@@ -205,7 +205,7 @@ const ContractFilterForm = ({
                                     }
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={4} container justifyContent="flex-end">
                                 <Button
                                     color="primary"
                                     variant="outlined"
