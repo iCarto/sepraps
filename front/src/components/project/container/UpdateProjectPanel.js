@@ -40,7 +40,7 @@ const UpdateProjectPanel = () => {
                     {error}
                 </Alert>
             )}
-            <ProjectForm section="generaldata" onSubmit={handleSubmit} />
+            <ProjectForm updatedSection="generaldata" onSubmit={handleSubmit} />
         </SidebarPanel>
     );
 };

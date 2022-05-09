@@ -11,6 +11,8 @@ import {RemoveContractProjectDialog} from ".";
 import Alert from "@mui/material/Alert";
 import LaunchIcon from "@mui/icons-material/Launch";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 
 const ViewContractProjectPanel = () => {
     const navigate = useNavigateWithReload();
@@ -54,15 +56,6 @@ const ViewContractProjectPanel = () => {
     const sidebarActions = project
         ? [
               <SidebarAction
-                  key="go-to"
-                  name="go to project"
-                  text="Ir al proyecto"
-                  icon={<LaunchIcon />}
-                  onClick={() => {
-                      navigate(`/projects/${project.id}`);
-                  }}
-              />,
-              <SidebarAction
                   key="remove"
                   name="remove-project"
                   text="Quitar proyecto"
@@ -85,6 +78,17 @@ const ViewContractProjectPanel = () => {
                     </Alert>
                 ) : null}
                 <ProjectSection project={project} />
+                <Grid container justifyContent="center" sx={{mt: 2}}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ml: 3}}
+                        onClick={() => navigate(`/projects/${project?.id}`)}
+                        startIcon={<LaunchIcon />}
+                    >
+                        Ir al proyecto
+                    </Button>
+                </Grid>
             </SidebarPanel>
             <RemoveContractProjectDialog
                 projectToRemove={projectToRemove}
