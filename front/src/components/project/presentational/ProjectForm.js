@@ -97,6 +97,7 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
                     department_name: linked_locality.department_name,
                 });
             }),
+            construction_contract: project?.construction_contract,
         });
         onSubmit(updatedProject);
     };
@@ -110,6 +111,8 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
         }
         return null;
     };
+
+    console.log({updatedSection});
 
     return (
         <LocationProvider>

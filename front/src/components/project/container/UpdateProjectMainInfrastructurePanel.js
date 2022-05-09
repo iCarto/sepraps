@@ -40,7 +40,7 @@ const UpdateProjectMainInfrastructurePanel = () => {
                     {error}
                 </Alert>
             )}
-            <ProjectForm section="main_infrastructure" onSubmit={handleSubmit} />
+            <ProjectForm updatedSection="main_infrastructure" onSubmit={handleSubmit} />
         </SidebarPanel>
     );
 };
