@@ -7,3 +7,5 @@ export {default as ContractForm} from "./ContractForm";
 export {default as ContractFormSearch} from "./ContractFormSearch";
 export {default as ContractSearchAutocomplete} from "./ContractSearchAutocomplete";
 export {default as ContractSummary} from "./ContractSummary";
+export {default as ContractsTable} from "./ContractsTable";
+export {default as ContractListChangeView} from "./ContractListChangeView";

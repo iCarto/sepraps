@@ -5,3 +5,4 @@ export * from "./ProjectsFilter";
 export * from "./NavigateAndReload.js";
 export * from "./DownloadDocumentHook";
 export * from "./CopyToClipboardHook";
+export * from "./ContractsFilter";

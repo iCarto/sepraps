@@ -113,7 +113,7 @@ const ListProjectsPage = () => {
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid item container direction="row">
+                    <Grid item container spacing={2}>
                         <Grid item container xs={8}>
                             <ProjectFilterForm
                                 filter={filter}
