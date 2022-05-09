@@ -1,5 +1,5 @@
-import {useState, useEffect} from "react";
-import {ContractService, TEMPLATE} from "service/api";
+import {useState} from "react";
+import {useOutletContext} from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -10,16 +10,13 @@ import {DropdownMenuItemLink} from "components/common/presentational";
 import Stack from "@mui/material/Stack";
 
 const SelectContractDropDown = ({selectedContract}) => {
-    const [contracts, setContracts] = useState([]);
     const [anchorElement, setAnchorElement] = useState(null);
 
-    const open = Boolean(anchorElement);
+    let context;
+    [context] = useOutletContext();
+    const {filteredContracts} = context;
 
-    useEffect(() => {
-        ContractService.getContracts(false, TEMPLATE.SHORT).then(contracts => {
-            setContracts(contracts);
-        });
-    }, []);
+    const open = Boolean(anchorElement);
 
     const handleClick = event => {
         setAnchorElement(event.currentTarget);
@@ -75,42 +72,44 @@ const SelectContractDropDown = ({selectedContract}) => {
                     </Typography>
                 </Box>
             </Button>
-            <Menu
-                id="lock-menu"
-                anchorEl={anchorElement}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    "aria-labelledby": "lock-button",
-                    role: "listbox",
-                }}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                }}
-            >
-                {contracts.map(contract => (
-                    <DropdownMenuItemLink
-                        variant="menu"
-                        key={contract.id}
-                        id={contract.id}
-                        to={`/contracts/${contract.id}`}
-                        selected={contract === selectedContract.number}
-                        onClick={handleClose}
-                    >
-                        <Stack>
-                            <Typography>{contract.number}</Typography>
-                            <Typography variant="caption" sx={{ml: 1}}>
-                                {contract.bid_request_number}
-                            </Typography>
-                        </Stack>
-                    </DropdownMenuItemLink>
-                ))}
-            </Menu>
+            {filteredContracts.length > 0 && (
+                <Menu
+                    id="lock-menu"
+                    anchorEl={anchorElement}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        "aria-labelledby": "lock-button",
+                        role: "listbox",
+                    }}
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                    }}
+                    transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                    }}
+                >
+                    {filteredContracts.map(contract => (
+                        <DropdownMenuItemLink
+                            variant="menu"
+                            key={contract.id}
+                            id={contract.id}
+                            to={`/contracts/${contract.id}`}
+                            selected={contract === selectedContract.number}
+                            onClick={handleClose}
+                        >
+                            <Stack>
+                                <Typography>{contract.number}</Typography>
+                                <Typography variant="caption" sx={{ml: 1}}>
+                                    {contract.bid_request_number}
+                                </Typography>
+                            </Stack>
+                        </DropdownMenuItemLink>
+                    ))}
+                </Menu>
+            )}
         </>
     );
 };

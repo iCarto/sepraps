@@ -2,7 +2,12 @@ import {useController, useFormContext} from "react-hook-form";
 import DatePicker from "@mui/lab/DatePicker";
 import TextField from "@mui/material/TextField";
 
-const FormDatePicker = ({name: propsName, label, rules = {}}) => {
+const FormDatePicker = ({
+    name: propsName,
+    label,
+    rules = {},
+    onChangeHandler = null,
+}) => {
     const {control} = useFormContext();
     const {
         field: {onChange, name, value, ref},
@@ -15,7 +20,12 @@ const FormDatePicker = ({name: propsName, label, rules = {}}) => {
 
     return (
         <DatePicker
-            onChange={onChange}
+            onChange={event => {
+                onChange(event);
+                if (onChangeHandler) {
+                    onChangeHandler(event);
+                }
+            }}
             value={value}
             inputRef={ref}
             label={label}

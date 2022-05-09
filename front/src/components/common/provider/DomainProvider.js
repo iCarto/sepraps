@@ -9,15 +9,13 @@ export default function DomainProvider({children}) {
     const [contactPosts, setContactPosts] = useState([]);
     const [contractorTypes, setContractorTypes] = useState([]);
     const [areas, setAreas] = useState([]);
-    const [financingFunds, setFinancingFunds] = useState([]);
-    const [financingPrograms, setFinancingPrograms] = useState([]);
 
     useEffect(() => {
         Promise.all([
             DomainService.getDomain(),
             FinancingService.getFinancingFunds(),
             FinancingService.getFinancingPrograms(),
-        ]).then(([domain, financingFunds, financingPrograms]) => {
+        ]).then(([domain]) => {
             const {
                 project_type,
                 project_class,
@@ -30,9 +28,6 @@ export default function DomainProvider({children}) {
             setAreas(provider_area);
             setContactPosts(contact_post);
             setContractorTypes(contractor_type);
-
-            setFinancingFunds(financingFunds);
-            setFinancingPrograms(financingPrograms);
         });
     }, []);
 
@@ -42,8 +37,6 @@ export default function DomainProvider({children}) {
         areas,
         contactPosts,
         contractorTypes,
-        financingFunds,
-        financingPrograms,
     };
 
     return <DomainContext.Provider value={value}>{children}</DomainContext.Provider>;

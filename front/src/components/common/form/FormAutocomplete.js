@@ -5,7 +5,14 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
-const FormAutocomplete = ({name: propsName, label, options, rules = {}}) => {
+const FormAutocomplete = ({
+    name: propsName,
+    label,
+    options,
+    optionLabelAttribute = "name",
+    rules = {},
+    onChangeHandler = null,
+}) => {
     const {control} = useFormContext();
 
     const {
@@ -22,16 +29,25 @@ const FormAutocomplete = ({name: propsName, label, options, rules = {}}) => {
             id={`${propsName}-form-autocomplete`}
             onChange={(event, option) => {
                 onChange(option);
+                if (onChangeHandler) {
+                    onChangeHandler(option);
+                }
             }}
             value={value}
             options={options}
-            getOptionLabel={option => (option ? option.name : "")}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
+            getOptionLabel={option =>
+                option && option[optionLabelAttribute]
+                    ? option[optionLabelAttribute]
+                    : ""
+            }
+            isOptionEqualToValue={(option, value) =>
+                value && value != "" && option.id === value.id
+            }
             fullWidth
             renderOption={(props, option, {selected}) => (
                 <Box component="li" {...props} key={option.id}>
                     <Stack>
-                        <Typography>{option.name}</Typography>
+                        <Typography>{option[optionLabelAttribute]}</Typography>
                     </Stack>
                 </Box>
             )}
