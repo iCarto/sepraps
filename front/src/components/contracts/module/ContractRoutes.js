@@ -13,69 +13,79 @@ import {
     ViewContractProjectPanel,
     AddContractProjectPanel,
     ViewContractMonitoringSubPage,
+    ManageContractsPage,
+    ViewContractPanel,
 } from "../container";
 import {UpdateContractMonitoringProfilePanel} from "../container/monitoring";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
-    <Route key="contract-detail" path=":id" element={<ViewContractPage />}>
-        <Route key="contract-info" path="" element={<ViewContractInfoSubPage />}>
-            <Route
-                key="contract-contractor"
-                path="contractor/:contractorId/edit"
-                element={<UpdateContractContractorPanel />}
-            />
-            <Route
-                key="contract-contractor-new-add"
-                path="contractor/new/:action"
-                element={<AddContractContractorPanel />}
-            />
-            <Route
-                key="contract-contractor-contact"
-                path="contractor/contact/:contactId/:action"
-                element={<UpdateContractContractorContactPanel />}
-            />
-            <Route
-                key="contract-general-data"
-                path=":section/:action"
-                element={<UpdateContractPanel />}
-            />
-        </Route>
+    <Route key="contract-manage" path="" element={<ManageContractsPage />}>
+        <Route key="contract-detail" path=":id" element={<ViewContractPage />}>
+            <Route key="contract-info" path="" element={<ViewContractInfoSubPage />}>
+                <Route
+                    key="contract-contractor"
+                    path="contractor/:contractorId/edit"
+                    element={<UpdateContractContractorPanel />}
+                />
+                <Route
+                    key="contract-contractor-new-add"
+                    path="contractor/new/:action"
+                    element={<AddContractContractorPanel />}
+                />
+                <Route
+                    key="contract-contractor-contact"
+                    path="contractor/contact/:contactId/:action"
+                    element={<UpdateContractContractorContactPanel />}
+                />
+                <Route
+                    key="contract-general-data"
+                    path=":section/:action"
+                    element={<UpdateContractPanel />}
+                />
+            </Route>
 
-        <Route
-            key="contract-monitoring"
-            path="monitoring"
-            element={<ViewContractMonitoringSubPage />}
-        >
             <Route
-                key="contract-monitoring-profile-edit"
-                path=":sectionName/:contactId/:action"
-                element={<UpdateContractMonitoringProfilePanel />}
-            />
-        </Route>
+                key="contract-monitoring"
+                path="monitoring"
+                element={<ViewContractMonitoringSubPage />}
+            >
+                <Route
+                    key="contract-monitoring-profile-edit"
+                    path=":sectionName/:contactId/:action"
+                    element={<UpdateContractMonitoringProfilePanel />}
+                />
+            </Route>
 
-        <Route
-            key="contract-projects"
-            path="projects"
-            element={
-                <ProjectListViewProvider>
-                    <ViewContractProjectsSubPage />
-                </ProjectListViewProvider>
-            }
-        >
             <Route
-                key="contract-project-add"
-                path="new/add"
-                element={<AddContractProjectPanel />}
-            />
+                key="contract-projects"
+                path="projects"
+                element={
+                    <ProjectListViewProvider>
+                        <ViewContractProjectsSubPage />
+                    </ProjectListViewProvider>
+                }
+            >
+                <Route
+                    key="contract-project-add"
+                    path="new/add"
+                    element={<AddContractProjectPanel />}
+                />
+                <Route
+                    key="contract-project-view"
+                    path="project/:projectId"
+                    element={<ViewContractProjectPanel />}
+                />
+            </Route>
+        </Route>
+        <Route key="contract-list" path="" element={<ListContractsPage />}>
             <Route
-                key="contract-project-view"
-                path="project/:projectId"
-                element={<ViewContractProjectPanel />}
+                key="contract-info"
+                path="info/:contractId"
+                element={<ViewContractPanel />}
             />
         </Route>
     </Route>,
-    <Route key="contract-list" path="" element={<ListContractsPage />} />,
 ];
 
 export default contractRoutes;

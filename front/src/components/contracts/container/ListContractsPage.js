@@ -1,24 +1,25 @@
+import {useNavigate, useOutletContext} from "react-router-dom";
 import {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import {useSort, useSearch} from "hooks";
 import {ContractService} from "service/api";
 
-import {SearchBox} from "components/common/presentational";
-import {
-    ClosedContractsOption,
-    ContractList,
-    SortContractsSelect,
-} from "../presentational";
-
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
+import {useContractListView} from "../provider";
 import {PageLayoutWithPanel} from "layout";
+import {ContractFilterForm} from "../presentational/form";
+import {ContractList, ContractsTable, ContractListChangeView} from "../presentational";
+
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const fabStyle = {
-    position: "absolute",
+    position: "fixed",
+    // Leaflet CSS stylesheet is setting map elements' Z-index from 100 to 1000
+    zIndex: 1001,
     bottom: 16,
     right: 16,
 };
@@ -26,47 +27,75 @@ const fabStyle = {
 const ListContractsPage = () => {
     const navigate = useNavigate();
 
-    const [contracts, setContracts] = useState([]);
-    const [filteredContracts, setFilteredContracts] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
-        "updated_at",
-        "desc"
-    );
-    const {searchText, setSearchText, searchFunction} = useSearch("");
-    const [showClosedContracts, setShowClosedContracts] = useState(false);
+    let context;
+    [context] = useOutletContext();
 
-    /* ---------> TO-DO: IMPLEMENT CHANGES FROM ListProjectsPage:
-     - Change ClosedContractsOption to ClosedContractsSwitch with FormSwitch inside
-     - Make showClosedContracts into a filter object including status "all"/"active"
-     - Wrap switch & search box into form    
-    */
+    const {
+        filter,
+        setFilter,
+        filterContractsFunction,
+        filteredContracts,
+        setFilteredContracts,
+    } = context;
+
+    const {view} = useContractListView();
+
+    const [contracts, setContracts] = useState([]);
+    const [selectedElement, setSelectedElement] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        ContractService.getContracts(showClosedContracts).then(data => {
+        ContractService.getContracts(false).then(data => {
             setContracts(data);
-            setFilteredContracts([...data].filter(searchFunction).sort(sortFunction));
+            setFilteredContracts([...data].filter(filterContractsFunction));
             setLoading(false);
         });
-    }, [showClosedContracts]);
+    }, [filter.status]);
 
     useEffect(() => {
-        setFilteredContracts([...contracts].filter(searchFunction).sort(sortFunction));
-    }, [attribute, order, searchText]);
+        setFilteredContracts(contracts.filter(filterContractsFunction));
+    }, [filter]);
 
-    const handleSearch = data => {
-        setSearchText(data);
+    const handleFilterChange = (attribute, value) => {
+        setFilter({...filter, [attribute]: value});
     };
 
-    const handleSortBy = (attribute, order) => {
-        setAttribute(attribute);
-        setOrder(order);
+    const handleFilterClear = () => {
+        setFilter({});
     };
 
-    const handleClosedContracts = showClosed => {
-        setShowClosedContracts(showClosed);
+    const handleClickOnCard = contractId => {
+        navigate(`/contracts/${contractId}`);
     };
+
+    const onSelectContract = contract => {
+        setSelectedElement(contract);
+        navigate(`info/${contract.id}`);
+    };
+
+    const getViewComponent = view => {
+        if (view === "list") {
+            return (
+                <ContractList
+                    contracts={filteredContracts}
+                    onClick={handleClickOnCard}
+                />
+            );
+        }
+        return (
+            <ContractsTable
+                contracts={filteredContracts}
+                selectedElement={selectedElement}
+                onSelectElement={onSelectContract}
+            />
+        );
+    };
+
+    let noContractsMessage =
+        filter.length === 0
+            ? "No existen contractos para mostrar"
+            : "No se ha encontrado ningún contrato que coincida con su búsqueda. Por favor, intente realizar otra búsqueda o borre los filtros activos.";
 
     return (
         <PageLayoutWithPanel>
@@ -74,62 +103,60 @@ const ListContractsPage = () => {
                 <Grid
                     container
                     sx={{mb: 4}}
-                    spacing={2}
-                    direction="row"
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid item md={6}>
+                    <Grid item container spacing={2}>
+                        <Grid item container xs={8}>
+                            <ContractFilterForm
+                                filter={filter}
+                                filteredNumber={filteredContracts.length}
+                                onChange={handleFilterChange}
+                                onClear={handleFilterClear}
+                            />
+                        </Grid>
+
                         <Grid
+                            item
                             container
-                            spacing={2}
-                            direction="row"
-                            justifyContent="center"
-                            alignItems="center"
+                            xs={4}
+                            alignItems="flex-start"
+                            justifyContent="flex-end"
                         >
-                            <Grid item xs={6}>
-                                <SearchBox
-                                    searchValue={searchText}
-                                    handleSearch={handleSearch}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <ClosedContractsOption
-                                    checked={showClosedContracts}
-                                    handleChange={handleClosedContracts}
-                                />
-                            </Grid>
+                            <Stack direction="row" spacing={2}>
+                                <Button
+                                    id="basic-button"
+                                    color="primary"
+                                    variant="contained"
+                                    sx={{mr: 2, py: 1, lineHeight: 1.25}}
+                                    onClick={() => {
+                                        navigate("/contracts/new");
+                                    }}
+                                    startIcon={<AddIcon />}
+                                >
+                                    Nuevo contrato
+                                </Button>
+                                <ContractListChangeView />
+                            </Stack>
                         </Grid>
                     </Grid>
-                    <Grid item md={2}></Grid>
-                    <Grid item md={3}>
-                        <SortContractsSelect
-                            attribute={attribute}
-                            order={order}
-                            handleSortBy={handleSortBy}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid item md={2}></Grid>
-                {loading ? (
-                    <Grid item container xs={12} justifyContent="center" my={6}>
-                        <CircularProgress size={40} />
-                    </Grid>
-                ) : (
-                    <ContractList contracts={filteredContracts} />
-                )}
-            </Paper>
 
-            <Fab
-                sx={fabStyle}
-                color="primary"
-                aria-label="add"
-                onClick={() => navigate("/contracts/new")}
-            >
-                <AddIcon />
-            </Fab>
+                    {loading ? (
+                        <Grid container justifyContent="center" my={6}>
+                            <CircularProgress size={40} />
+                        </Grid>
+                    ) : filteredContracts.length !== 0 ? (
+                        getViewComponent(view)
+                    ) : (
+                        <Container sx={{textAlign: "center"}}>
+                            <Typography py={12} sx={{fontStyle: "italic"}}>
+                                {noContractsMessage}
+                            </Typography>
+                        </Container>
+                    )}
+                </Grid>
+            </Paper>
         </PageLayoutWithPanel>
     );
 };
-
 export default ListContractsPage;

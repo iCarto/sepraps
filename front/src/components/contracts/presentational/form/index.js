@@ -6,3 +6,4 @@ export {default as ContractFinancingFormFields} from "./ContractFinancingFormFie
 export {
     default as ContractGeneralDataFormFields,
 } from "./ContractGeneralDataFormFields";
+export {default as ContractFilterForm} from "./ContractFilterForm";
