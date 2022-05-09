@@ -1,15 +1,20 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {ContractService, LocationService, TEMPLATE} from "service/api";
+import {
+    ContractorService,
+    ContractService,
+    FinancingService,
+    LocationService,
+    TEMPLATE,
+} from "service/api";
 
-import {FormSelect} from "components/common/form";
+import {FormAutocomplete, FormDatePicker, FormSelect} from "components/common/form";
 import {SearchBoxControlled} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import Stack from "@mui/material/Stack";
 import Collapse from "@mui/material/Collapse";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -34,25 +39,21 @@ const ContractFilterForm = ({
     };
 
     const [loadedDomains, setLoadedDomains] = useState(false);
-    const [contracts, setContracts] = useState([]);
-    const [departments, setDepartments] = useState([]);
-    const [districts, setDistricts] = useState([]);
-    const [departmentDistricts, setDepartmentDistricts] = useState([]);
+
+    const [financingFunds, setFinancingFunds] = useState([]);
+    const [financingPrograms, setFinancingPrograms] = useState([]);
+    const [contractors, setContractors] = useState([]);
 
     useEffect(() => {
         if (expanded && !loadedDomains) {
             Promise.all([
-                ContractService.getContracts(false, TEMPLATE.SHORT),
-                LocationService.getAdministrativeDivisions(),
-            ]).then(([contracts, administrativeDivisions]) => {
-                setContracts(
-                    contracts.map(contract => {
-                        return {value: contract.id, label: contract.number};
-                    })
-                );
-                const {departments, districts} = administrativeDivisions;
-                setDepartments(departments);
-                setDistricts(districts);
+                FinancingService.getFinancingFunds(),
+                FinancingService.getFinancingPrograms(),
+                ContractorService.getContractors(),
+            ]).then(([financingFunds, financingPrograms, contractors]) => {
+                setFinancingFunds(financingFunds);
+                setFinancingPrograms(financingPrograms);
+                setContractors(contractors);
                 setLoadedDomains(true);
             });
         }
@@ -60,34 +61,24 @@ const ContractFilterForm = ({
 
     const formMethods = useForm({
         defaultValues: {
-            department: filter?.department || "",
-            district: filter?.district || "",
-            construction_contract: filter?.construction_contract || "",
+            financing_fund: filter?.financing_fund || "",
+            financing_program: filter?.financing_program || "",
+            contractor: filter?.contractor || "",
+            awarding_date_min: filter?.awarding_date_min || null,
+            awarding_date_max: filter?.awarding_date_max || null,
             status: filter?.status || "active",
             switchStatus: filter?.switchStatus || false,
             searchText: filter?.searchText || "",
         },
     });
 
-    const handleChangeDepartment = selectedDepartment => {
-        setDepartmentDistricts(
-            districts.filter(
-                district => district.department_code === selectedDepartment
-            )
-        );
-        const values = formMethods.getValues();
-        values["district"] = "";
-        formMethods.reset({
-            ...values,
-        });
-        onChange("department", selectedDepartment);
-    };
-
     const handleClearAllFilters = () => {
         formMethods.reset({
-            department: "",
-            district: "",
-            construction_contract: "",
+            financing_fund: "",
+            financing_program: "",
+            contractor: "",
+            awarding_date_min: null,
+            awarding_date_max: null,
             status: "active",
             switchStatus: false,
             searchText: "",
@@ -104,6 +95,7 @@ const ContractFilterForm = ({
                 sx={{
                     mb: 3,
                 }}
+                spacing={2}
             >
                 <Grid item container spacing={2} xs={12}>
                     <Grid item>
@@ -148,44 +140,76 @@ const ContractFilterForm = ({
                 </Grid>
                 <Grid item xs={12}>
                     <Collapse in={expanded} timeout="auto">
-                        <Grid container columnSpacing={2}>
+                        <Grid
+                            container
+                            columnSpacing={2}
+                            rowSpacing={2}
+                            alignItems="center"
+                        >
                             <Grid item xs={4}>
-                                <FormSelect
-                                    name="construction_contract"
-                                    label="Contrato"
-                                    options={contracts}
-                                    showEmptyOption={true}
-                                    onChangeHandler={value =>
-                                        onChange("construction_contract", value)
+                                <FormAutocomplete
+                                    name="financing_fund"
+                                    label="Fondo de financiación"
+                                    options={financingFunds}
+                                    optionLabelAttribute="short_name"
+                                    onChangeHandler={option =>
+                                        onChange(
+                                            "financing_fund",
+                                            option ? option.id : null
+                                        )
                                     }
                                 />
                             </Grid>
                             <Grid item xs={4}>
-                                <FormSelect
-                                    name="department"
-                                    label="Departamento"
-                                    options={departments}
-                                    onChangeHandler={handleChangeDepartment}
-                                    showEmptyOption={true}
+                                <FormAutocomplete
+                                    name="financing_program"
+                                    label="Programa de financiación"
+                                    options={financingPrograms}
+                                    optionLabelAttribute="short_name"
+                                    onChangeHandler={option =>
+                                        onChange(
+                                            "financing_program",
+                                            option ? option.id : null
+                                        )
+                                    }
                                 />
                             </Grid>
                             <Grid item xs={4}>
-                                <FormSelect
-                                    name="district"
-                                    label="Distrito"
-                                    options={departmentDistricts}
-                                    onChangeHandler={value =>
-                                        onChange("district", value)
+                                <FormAutocomplete
+                                    name="contractor"
+                                    label="Contratista"
+                                    options={contractors}
+                                    onChangeHandler={option =>
+                                        onChange(
+                                            "contractor",
+                                            option ? option.id : null
+                                        )
                                     }
-                                    showEmptyOption={true}
                                 />
                             </Grid>
-                            <Grid item container xs justifyContent="space-between">
+                            <Grid item xs={4}>
+                                <FormDatePicker
+                                    name="awarding_date_min"
+                                    label="Fecha adj. mayor que"
+                                    onChangeHandler={date =>
+                                        onChange("awarding_date_min", date)
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <FormDatePicker
+                                    name="awarding_date_max"
+                                    label="Fecha adj. menor que"
+                                    onChangeHandler={date =>
+                                        onChange("awarding_date_max", date)
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
                                 <Button
                                     color="primary"
                                     variant="outlined"
                                     onClick={handleClearAllFilters}
-                                    sx={{lineHeight: 1}}
                                 >
                                     <ClearIcon /> Borrar filtros
                                 </Button>

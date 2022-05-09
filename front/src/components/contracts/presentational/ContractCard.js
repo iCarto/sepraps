@@ -18,12 +18,17 @@ const ContractCard = ({contract, onClick = null}) => {
     };
 
     return (
-        <Card id={contract.id} variant="outlined" onClick={handleClick}>
+        <Card
+            id={contract.id}
+            variant="outlined"
+            onClick={handleClick}
+            sx={{cursor: onClick ? "pointer" : "inherit"}}
+        >
             <CardContent>
                 <Typography variant="h5" gutterBottom color="primary">
                     {contract.number}
                 </Typography>
-                <Typography variant="body1">{contract.bid_request_number}</Typography>
+                <Typography variant="body2">{contract.comments}</Typography>
             </CardContent>
             <CardContent sx={{bgcolor: "grey.100"}}>
                 <Stack spacing={1}>

@@ -54,6 +54,7 @@ const ListContractsPage = () => {
     }, [filter.status]);
 
     useEffect(() => {
+        console.log({filter});
         setFilteredContracts(contracts.filter(filterContractsFunction));
     }, [filter]);
 
