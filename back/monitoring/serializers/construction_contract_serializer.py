@@ -1,7 +1,9 @@
+from django.db.models import Prefetch
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.contact import Contact
 from monitoring.models.contractor import Contractor
 from monitoring.models.financing_program import FinancingProgram
+from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project
 from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.contractor_serializer import (
@@ -79,7 +81,16 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         """Perform necessary eager loading of data."""
         return queryset.select_related(
             "contractor", "financing_program"
-        ).prefetch_related("contractor__contacts", "financing_program__financing_funds")
+        ).prefetch_related(
+            "contractor__contacts",
+            "financing_program__financing_funds",
+            Prefetch(
+                "projects__milestones",
+                queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
+                    "ordering"
+                ),
+            ),
+        )
 
     def to_representation(self, instance):
         # TODO To avoid circular dependencies with serializers we have

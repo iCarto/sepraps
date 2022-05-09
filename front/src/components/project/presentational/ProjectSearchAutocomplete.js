@@ -8,11 +8,9 @@ const ProjectSearchAutocomplete = ({handleSelect}) => {
     const optionComponent = option => {
         return (
             <Stack>
-                <Typography>
-                    {option.name} - {option.code}
-                </Typography>
+                <Typography>{option.name}</Typography>
                 <Typography variant="caption" sx={{ml: 1}}>
-                    {option.location}
+                    {option.code} - {option.location}
                 </Typography>
             </Stack>
         );

@@ -1,30 +1,13 @@
-import {
-    SectionCard,
-    SectionField,
-    SectionSubheading,
-} from "components/common/presentational";
+import {SectionCard, SectionField} from "components/common/presentational";
 
 const ProjectSection = ({project, headerActions = null}) => {
     return (
-        <SectionCard title="Proyecto" headerActions={headerActions}>
-            <SectionField label="Nombre:" value={project?.name} />
+        <SectionCard title={project?.name} headerActions={headerActions}>
             <SectionField label="Código:" value={project?.code} />
-            <SectionField
-                label="Tipo:"
-                value={
-                    project?.project_type
-                        ? project.project_type.charAt(0).toUpperCase() +
-                          project?.project_type.slice(1)
-                        : ""
-                }
-            />
-            <SectionField
-                label="Ubicación:"
-                value={`${project?.name}, ${project?.location}`}
-            />
-            <SectionSubheading heading="Financiación" />
-            <SectionField label="Fondo:" value={project?.financing_fund_name} />
-            <SectionField label="Programa:" value={project?.financing_program_name} />
+            <SectionField label="Ubicación:" value={project?.location} />
+            <SectionField label="Tipo:" value={project?.project_type_name} />
+            <SectionField label="Clase:" value={project?.project_class_name} />
+            <SectionField label="Descripción:" value={project?.description} />
         </SectionCard>
     );
 };
