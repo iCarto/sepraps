@@ -50,6 +50,13 @@ function useProjectsFilter(filters) {
                 project.construction_contract === filter.construction_contract;
         }
 
+        if (filter.financing_program) {
+            filtered =
+                filtered &&
+                project.financing_program &&
+                project.financing_program === filter.financing_program;
+        }
+
         if (filter.department) {
             filtered =
                 filtered &&

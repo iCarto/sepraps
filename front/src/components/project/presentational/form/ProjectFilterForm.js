@@ -1,8 +1,13 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {ContractService, LocationService, TEMPLATE} from "service/api";
+import {
+    ContractService,
+    FinancingService,
+    LocationService,
+    TEMPLATE,
+} from "service/api";
 
-import {FormSelect} from "components/common/form";
+import {FormAutocomplete, FormSelect} from "components/common/form";
 import {ClosedProjectsSwitch, ShowNoOfProjects} from "..";
 import {SearchBoxControlled} from "components/common/presentational";
 
@@ -37,21 +42,20 @@ const ProjectFilterForm = ({
     const [departments, setDepartments] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
+    const [financingPrograms, setFinancingPrograms] = useState([]);
 
     useEffect(() => {
         if (expanded && !loadedDomains) {
             Promise.all([
                 ContractService.getContracts(false, TEMPLATE.SHORT),
                 LocationService.getAdministrativeDivisions(),
-            ]).then(([contracts, administrativeDivisions]) => {
-                setContracts(
-                    contracts.map(contract => {
-                        return {value: contract.id, label: contract.number};
-                    })
-                );
+                FinancingService.getFinancingPrograms(),
+            ]).then(([contracts, administrativeDivisions, financingPrograms]) => {
+                setContracts(contracts);
                 const {departments, districts} = administrativeDivisions;
                 setDepartments(departments);
                 setDistricts(districts);
+                setFinancingPrograms(financingPrograms);
                 setLoadedDomains(true);
             });
         }
@@ -62,6 +66,7 @@ const ProjectFilterForm = ({
             department: filter?.department || "",
             district: filter?.district || "",
             construction_contract: filter?.construction_contract || "",
+            financing_program: filter?.financing_program || "",
             status: filter?.status || "active",
             switchStatus: filter?.switchStatus || false,
             searchText: filter?.searchText || "",
@@ -87,6 +92,7 @@ const ProjectFilterForm = ({
             department: "",
             district: "",
             construction_contract: "",
+            financing_program: "",
             status: "active",
             switchStatus: false,
             searchText: "",
@@ -126,18 +132,12 @@ const ProjectFilterForm = ({
                 </Grid>
                 <Grid item xs={12}>
                     <Collapse in={expanded} timeout="auto">
-                        <Grid container columnSpacing={2}>
-                            <Grid item xs={4}>
-                                <FormSelect
-                                    name="construction_contract"
-                                    label="Contrato"
-                                    options={contracts}
-                                    showEmptyOption={true}
-                                    onChangeHandler={value =>
-                                        onChange("construction_contract", value)
-                                    }
-                                />
-                            </Grid>
+                        <Grid
+                            container
+                            columnSpacing={2}
+                            rowSpacing={2}
+                            alignItems="center"
+                        >
                             <Grid item xs={4}>
                                 <FormSelect
                                     name="department"
@@ -158,10 +158,42 @@ const ProjectFilterForm = ({
                                     showEmptyOption={true}
                                 />
                             </Grid>
-                            <Grid item container xs justifyContent="space-between">
+                            <Grid item xs />
+                            <Grid item xs={4}>
+                                <FormAutocomplete
+                                    name="construction_contract"
+                                    label="Contrato"
+                                    options={contracts}
+                                    optionLabelAttribute="number"
+                                    onChangeHandler={option =>
+                                        onChange(
+                                            "construction_contract",
+                                            option ? option.id : null
+                                        )
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <FormAutocomplete
+                                    name="financing_program"
+                                    label="Programa de financiación"
+                                    options={financingPrograms}
+                                    optionLabelAttribute="short_name"
+                                    onChangeHandler={option =>
+                                        onChange(
+                                            "financing_program",
+                                            option ? option.id : null
+                                        )
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs />
+                            <Grid item xs={4}>
                                 <ClosedProjectsSwitch
                                     onChangeHandler={value => onChange("status", value)}
                                 />
+                            </Grid>
+                            <Grid item xs={4} container justifyContent="flex-end">
                                 <Button
                                     color="primary"
                                     variant="outlined"
