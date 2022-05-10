@@ -1,0 +1,7 @@
+-- Verify create_owner
+
+BEGIN;
+
+ SELECT 1/count(*) FROM pg_roles WHERE rolname=:'owner';
+
+ROLLBACK;

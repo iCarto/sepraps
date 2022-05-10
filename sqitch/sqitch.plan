@@ -1,0 +1,6 @@
+%syntax-version=1.0.0
+%project=sepraps
+%uri=https://gitlab.com/icarto-private/sepraps/-/tree/development
+
+create_tables_django_admin 2022-05-09T17:39:50Z Elías Gago <egago@icarto.es> # Create Django Admin tables
+create_tables_sepraps 2022-05-10T06:26:33Z Elías Gago <egago@icarto.es> # Create tables for SEPRAPS model

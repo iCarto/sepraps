@@ -1,0 +1,43 @@
+-- Test [% change %]
+
+\set ECHO none
+\set QUIET 1
+-- Turn off echo and keep things quiet.
+
+-- Format the output for nice TAP.
+\pset format unaligned
+\pset tuples_only true
+\pset pager
+
+-- Revert all changes on failure.
+\set ON_ERROR_ROLLBACK 1
+\set ON_ERROR_STOP true
+\set QUIET 1
+
+-- Load the TAP functions.
+SET client_min_messages TO warning;
+CREATE EXTENSION IF NOT EXISTS pgtap;
+RESET client_min_messages;
+
+BEGIN;
+SELECT no_plan();
+-- SELECT plan(1);
+
+SET search_path TO [% IF schema %][% schema %],[% END %]public;
+
+SELECT columns_are(
+       [% IF schema %]'[% schema %]',[% END %]
+       '[% table or change %]',
+	ARRAY[
+	'[% column %]',
+	], 'Found expected columns for [% IF schema %][% schema %].[% END %][% table or change %]'
+);
+
+SELECT has_column(        '[% table or change %]', '[% column %]' );
+SELECT col_type_is(       '[% table or change %]', '[% column %]', '[% type %]' );
+[%IF notnull %]SELECT col_not_null( '[% table or change %]', '[% column %]' );[%END%]
+[%IF default %]SELECT col_has_default(   '[% table or change %]', '[% column %]' );[%ELSE%]SELECT col_hasnt_default( '[% table or change %]', '[% column %]' );[%END%]
+
+SELECT finish();
+
+ROLLBACK;

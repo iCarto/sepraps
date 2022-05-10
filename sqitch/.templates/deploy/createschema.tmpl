@@ -1,0 +1,14 @@
+-- Deploy [% change %]
+[% FOREACH item IN requires -%]
+-- requires: [% item %]
+[% END -%]
+[% FOREACH item IN conflicts -%]
+-- conflicts: [% item %]
+[% END -%]
+
+BEGIN;
+
+CREATE SCHEMA [% schema %] AUTHORIZATION :"owner";
+REVOKE ALL ON SCHEMA [% schema %] from PUBLIC;
+
+COMMIT;

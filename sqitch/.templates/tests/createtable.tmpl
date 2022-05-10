@@ -1,0 +1,66 @@
+-- Test [% change %]
+
+\set ECHO none
+\set QUIET 1
+-- Turn off echo and keep things quiet.
+
+-- Format the output for nice TAP.
+\pset format unaligned
+\pset tuples_only true
+\pset pager
+
+-- Revert all changes on failure.
+\set ON_ERROR_ROLLBACK 1
+\set ON_ERROR_STOP true
+\set QUIET 1
+
+-- Load the TAP functions.
+SET client_min_messages TO warning;
+CREATE EXTENSION IF NOT EXISTS pgtap;
+RESET client_min_messages;
+
+BEGIN;
+SELECT no_plan();
+-- SELECT plan(1);
+
+SET search_path TO [% IF schema %][% schema %],[% END %]public;
+
+SELECT columns_are(
+       [% IF schema %]'[% schema %]',[% END %]
+       '[% table %]',
+	ARRAY[
+	[% FOREACH col IN column -%]
+	'[% col %]',[% END %]
+	], 'Found expected columns for [% IF schema %][% schema %].[% END %][% table %]'
+);
+
+SELECT has_table('[% table %]');
+SELECT has_pk( '[% table %]' );
+
+[% FOREACH col IN column -%]
+
+[%- IF col == 'gid' -%]
+SELECT has_column( '[% table %]', 'gid' );
+SELECT col_type_is( '[% schema %]', '[% table %]', 'gid', 'integer',
+	'Column [% schema %].[% table %].gid is type integer' );
+SELECT col_not_null( '[% schema %]', '[% table %]', 'gid',
+	'Column utentes.actividades_agricultura_rega.gid is not nullable' );
+SELECT col_has_default( '[% schema %]', '[% table %]', 'gid',
+	'Column utentes.actividades_agricultura_rega.gid has default value');
+SELECT col_is_pk( '[% table %]', 'gid', 'Column gid should be the pk');
+[% ELSE %]
+
+SELECT has_column(        '[% table %]', '[% col %]' );
+SELECT col_type_is(       '[% table %]', '[% col %]', '[% type.item( loop.index ) or 'text' %]' );
+[%IF notnull.item( loop.index ) == 'true'%]SELECT col_not_null( '[% table %]', '[% col %]' );[%ELSE%]SELECT col_is_null('[% table %]', '[% col %]' );[%END%]
+[%- IF unique.item( loop.index ) == 'true'%]SELECT col_is_unique( '[% table %]', '[% col %]', 'Column [%IF schema %][% schema %][%ELSE%]!!schema!![%END%].[%IF table %][% table %][%ELSE%]!!table!![%END%].[% col %] should be unique' );[%END%]
+[%IF default.item( loop.index )%]SELECT col_has_default(   '[% table %]', '[% col %]' );[%ELSE%]SELECT col_hasnt_default( '[% table %]', '[% col %]' );[%END%]
+[%IF primarykey.item( loop.index ) == 'true'%]SELECT col_is_pk( '[% table %]', '[% col %]', 'Column [% col %] should be the pk');[%END%]
+[% END %]
+
+[% END %]
+
+SELECT table_owner_is ( [% IF schema %]'[% schema %]',[% END %] '[% table %]', '[%IF owner %][% owner %][%ELSE%]!!owner!![%END%]' , '[% IF schema %][% schema %].[% END %][% table %] owner is [%IF owner %][% owner %][%ELSE%]!!owner!![%END%]');
+SELECT finish();
+
+ROLLBACK;

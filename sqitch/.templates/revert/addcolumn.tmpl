@@ -1,0 +1,7 @@
+-- Revert [% change %]
+
+BEGIN;
+
+ALTER TABLE [%IF schema %][% schema %].[%END%][%IF table %][% table %][%ELSE%][% change %][%END%] DROP COLUMN [%column%];
+
+COMMIT;

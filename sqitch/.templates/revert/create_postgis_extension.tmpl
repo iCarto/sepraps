@@ -1,0 +1,7 @@
+-- Revert create_postgis_extension
+
+BEGIN;
+
+DROP EXTENSION postgis;
+
+COMMIT;

@@ -1,0 +1,54 @@
+-- Test [% change %]
+
+\set ECHO none
+\set QUIET 1
+-- Turn off echo and keep things quiet.
+
+-- Format the output for nice TAP.
+\pset format unaligned
+\pset tuples_only true
+\pset pager
+
+-- Revert all changes on failure.
+\set ON_ERROR_ROLLBACK 1
+\set ON_ERROR_STOP true
+\set QUIET 1
+
+-- Load the TAP functions.
+SET client_min_messages TO warning;
+CREATE EXTENSION IF NOT EXISTS pgtap;
+RESET client_min_messages;
+
+BEGIN;
+SELECT no_plan();
+-- SELECT plan(1);
+
+SELECT has_schema(
+        '[%IF schema %][% schema %][%ELSE%]!!schema!![%END%]',
+        'Has schema [%IF schema %][% schema %][%ELSE%]!!schema!![%END%]'
+);
+
+SELECT schema_owner_is( '[%IF schema %][% schema %][%ELSE%]!!schema!![%END%]', '[%IF owner %][% owner %][%ELSE%]!!owner!![%END%]', '[%IF schema %][% schema %][%ELSE%]!!schema!![%END%] should be owned by [%IF owner %][% owner %][%ELSE%]!!owner!![%END%]' );
+
+SELECT tables_are(
+  '[%IF schema %][% schema %][%ELSE%]!!schema!![%END%]',
+   ARRAY[
+        '!!table!!',
+	'!!table!!'
+	], 'Found expected tables for schema [%IF schema %][% schema %][%ELSE%]!!schema!![%END%]'
+);
+
+SELECT table_owner_is ( '[%IF schema %][% schema %][%ELSE%]!!schema!![%END%]', '!!table!!', '[%IF owner %][% owner %][%ELSE%]!!owner!![%END%]', ' ' );
+
+SELECT views_are(
+  '[%IF schema %][% schema %][%ELSE%]!!schema!![%END%]',
+  ARRAY[
+       '!!view!!',
+       '!!view!!'
+  ], 'Found expected views for schema [%IF schema %][% schema %][%ELSE%]!!schema!![%END%]'
+);
+
+-- Finish the tests and clean up.
+SELECT * FROM finish();
+
+ROLLBACK;

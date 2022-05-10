@@ -1,0 +1,17 @@
+-- Deploy create_postgis_extension
+
+BEGIN;
+
+CREATE EXTENSION IF NOT EXISTS postgis;
+
+REVOKE ALL FROM public.geometry_columns;
+REVOKE ALL FROM public.geography_columns;
+REVOKE ALL FROM public.spatial_ref_sys;
+
+ALTER VIEW public.geometry_columns OWNER TO :"owner"
+ALTER VIEW public.geography_columns OWNER TO :"owner"
+ALTER TABLE public.spatial_ref_sys OWNER TO :"owner";
+
+
+
+COMMIT;

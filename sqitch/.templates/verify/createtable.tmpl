@@ -1,0 +1,9 @@
+-- Verify [% change %]
+
+BEGIN;
+
+SELECT [% column.join(', ') %]
+FROM [% schema %].[% table %]
+WHERE FALSE;
+
+ROLLBACK;

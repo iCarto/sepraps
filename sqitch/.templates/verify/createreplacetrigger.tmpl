@@ -1,0 +1,10 @@
+-- Verify [% change %]
+
+BEGIN;
+
+SELECT '[% schema %].[% trigger %]()'::regprocedure;
+
+SELECT 1/count(*) FROM information_schema.triggers
+	WHERE event_object_schema = '[% schema %]' AND event_object_table = '[% table %]' AND trigger_name = '[% trigger %]';
+
+ROLLBACK;

@@ -1,0 +1,11 @@
+-- Verify [% change %]
+
+BEGIN;
+
+SELECT 1/COUNT(*) FROM information_schema.constraint_column_usage
+WHERE
+	table_name = '!!fk_table!!' AND
+	column_name='!!fk_column!!' AND
+	constraint_name = '[%IF table %][% table %][%ELSE%]!!table!![%END%]_[%IF column %][% column %][%ELSE%]!!column!![%END%]_fkey';
+
+ROLLBACK;
