@@ -1,0 +1,8 @@
+-- Verify [% change %]
+
+BEGIN;
+
+SELECT 1/count(*) FROM information_schema.schemata
+WHERE schema_name = '[% schema %]' AND schema_owner = :'owner';
+
+ROLLBACK;

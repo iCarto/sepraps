@@ -1,0 +1,23 @@
+-- Deploy [% change %]
+[% FOREACH item IN requires -%]
+-- requires: [% item %]
+[% END -%]
+[% FOREACH item IN conflicts -%]
+-- conflicts: [% item %]
+[% END -%]
+
+BEGIN;
+
+CREATE OR REPLACE FUNCTION [% schema %].[% trigger %]() RETURNS TRIGGER AS $[% trigger %]$
+BEGIN
+
+END;
+$[% trigger %]$ LANGUAGE plpgsql;
+
+ALTER FUNCTION [% schema %].[% trigger %]() OWNER TO FOO_USER;
+
+CREATE TRIGGER [% trigger %] AFTER INSERT OR UPDATE OR DELETE ON [% schema %].[% table %]
+	FOR EACH ROW
+	EXECUTE PROCEDURE [% schema %].[% trigger %]();
+
+COMMIT;

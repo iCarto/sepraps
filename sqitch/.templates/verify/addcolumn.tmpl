@@ -1,0 +1,7 @@
+-- Verify [% change %]
+
+BEGIN;
+
+SELECT [%column%] FROM [%IF schema %][% schema %].[%END%][%IF table %][% table %][%ELSE%][% change %][%END%] WHERE FALSE;
+
+ROLLBACK;

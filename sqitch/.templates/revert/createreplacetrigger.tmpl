@@ -1,0 +1,12 @@
+-- Revert [% change %]
+
+-- Remember that if the trigger already exists
+-- here you must write the previous trigger
+
+BEGIN;
+
+DROP TRIGGER [% trigger %] ON [% schema %].[% table %];
+
+DROP FUNCTION [% schema %].[% trigger %]();
+
+COMMIT;

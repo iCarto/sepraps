@@ -1,0 +1,8 @@
+-- Revert create_owner
+
+BEGIN;
+
+ALTER DATABASE :"database" OWNER TO postgres;
+DROP ROLE :"owner";
+
+COMMIT;

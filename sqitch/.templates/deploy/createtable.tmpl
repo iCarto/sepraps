@@ -1,0 +1,25 @@
+-- Deploy [% change %]
+[% FOREACH item IN requires -%]
+-- requires: [% item %]
+[% END -%]
+[% FOREACH item IN conflicts -%]
+-- conflicts: [% item %]
+[% END -%]
+
+BEGIN;
+
+CREATE TABLE [% schema %].[% table %] (
+[%FOREACH col IN column -%]
+[%- IF col == 'gid' %]
+    gid SERIAL PRIMARY KEY,
+[%- ELSE %]
+    [% col %] [% type.item( loop.index ) or 'TEXt' %][%IF notnull.item( loop.index ) == 'true'%] NOT NULL[%END%][%IF unique.item( loop.index ) == 'true'%] UNIQUE[%END%][%IF default.item( loop.index )%] DEFAULT [% default.item( loop.index ) %][%END%][%IF primarykey.item( loop.index ) == 'true'%] PRIMARY KEY[%END%][% loop.last ? '' : ',' %]
+[%- END %]
+[%END%]);
+
+ALTER TABLE [% schema %].[% table %] OWNER TO :"owner";
+GRANT ALL ON TABLE [% schema %].[% table %] TO :"owner";
+REVOKE ALL ON TABLE [% schema %].[% table %] FROM PUBLIC;
+
+
+COMMIT;

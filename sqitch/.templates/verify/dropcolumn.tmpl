@@ -1,0 +1,10 @@
+-- Verify [% change %]
+
+BEGIN;
+
+SELECT 1/(count(*)-1)
+FROM information_schema.columns
+WHERE table_schema = '[% schema %]' AND table_name='[% table %]' AND column_name='[%column%]';
+
+
+ROLLBACK;

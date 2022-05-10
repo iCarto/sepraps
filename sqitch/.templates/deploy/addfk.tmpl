@@ -1,0 +1,19 @@
+-- Deploy [% change %]
+[% FOREACH item IN requires -%]
+-- requires: [% item %]
+[% END -%]
+[% FOREACH item IN conflicts -%]
+-- conflicts: [% item %]
+[% END -%]
+
+BEGIN;
+
+-- ALTER TABLE  [%IF schema %][% schema %][%ELSE%]!!schema!![%END%].[%IF table %][% table %][%ELSE%]!!table!![%END%] DROP CONSTRAINT [%IF table %][% table %][%ELSE%]!!table!![%END%]_[%IF column %][% column %][%ELSE%]!!column!![%END%]_fkey;
+
+-- ALTER TABLE [%IF schema %][% schema %][%ELSE%]!!schema!![%END%].[%IF table %][% table %][%ELSE%]!!table!![%END%] ALTER COLUMN [%IF column %][% column %][%ELSE%]!!column!![%END%];
+
+ALTER TABLE [%IF owner %][% schema %][%ELSE%]!!schema!![%END%].[%IF table %][% table %][%ELSE%]!!table!![%END%] ADD CONSTRAINT [%IF table %][% table %][%ELSE%]!!table!![%END%]_[%IF column %][% column %][%ELSE%]!!column!![%END%]_fkey FOREIGN KEY ([%IF column %][% column %][%ELSE%]!!column!![%END%]) REFERENCES !!fk_schema!!.!!fk_table!! (!!fk_column!!)
+-- ON UPDATE CASCADE ON DELETE SET NULL;
+-- ON UPDATE CASCADE ON DELETE CASCADE;
+
+COMMIT;

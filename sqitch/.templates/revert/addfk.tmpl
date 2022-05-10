@@ -1,0 +1,7 @@
+-- Revert [% change %]
+
+BEGIN;
+
+ALTER TABLE DROP CONSTRAINT [%IF table %][% table %][%ELSE%]!!table!![%END%]_[%IF column %][% column %][%ELSE%]!!column!![%END%]_fkey;
+
+COMMIT;
