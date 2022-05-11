@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {ContractService, TEMPLATE} from "service/api";
+import {ContractService, FinancingService, TEMPLATE} from "service/api";
 import {useAdministrativeDivisions, useDomain} from "components/common/provider";
 import Grid from "@mui/material/Grid";
 import {FormSelect} from "components/common/form";
@@ -9,7 +9,8 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 
 const StatsByPhaseFilter = ({onChange = null}) => {
     const [contracts, setContracts] = useState([]);
-    const {financingFunds, financingPrograms} = useDomain();
+    const [financingFunds, setFinancingFunds] = useState([]);
+    const [financingPrograms, setFinancingPrograms] = useState([]);
     const {departments, districts} = useAdministrativeDivisions();
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
 
@@ -24,10 +25,27 @@ const StatsByPhaseFilter = ({onChange = null}) => {
     });
 
     useEffect(() => {
-        ContractService.getContracts(false, TEMPLATE.SHORT).then(contracts => {
+        Promise.all([
+            ContractService.getContracts(false, TEMPLATE.SHORT),
+            FinancingService.getFinancingFunds(),
+            FinancingService.getFinancingPrograms(),
+        ]).then(([contracts, financingFunds, financingPrograms]) => {
             setContracts(
                 contracts.map(contract => {
                     return {value: contract.id, label: contract.number};
+                })
+            );
+            setFinancingFunds(
+                financingFunds.map(financingFund => {
+                    return {value: financingFund.id, label: financingFund.short_name};
+                })
+            );
+            setFinancingPrograms(
+                financingPrograms.map(financingProgram => {
+                    return {
+                        value: financingProgram.id,
+                        label: financingProgram.short_name,
+                    };
                 })
             );
         });
@@ -60,6 +78,24 @@ const StatsByPhaseFilter = ({onChange = null}) => {
                 <Grid container component="form" spacing={2}>
                     <Grid item xs={4}>
                         <FormSelect
+                            name="financing_fund"
+                            label="Fondo de financiación"
+                            options={financingFunds}
+                            onChangeHandler={handleChange}
+                            showEmptyOption={true}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <FormSelect
+                            name="financing_program"
+                            label="Programa de financiación"
+                            options={financingPrograms}
+                            onChangeHandler={handleChange}
+                            showEmptyOption={true}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <FormSelect
                             name="construction_contract"
                             label="Contrato"
                             options={contracts}
@@ -83,22 +119,6 @@ const StatsByPhaseFilter = ({onChange = null}) => {
                             options={departmentDistricts}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <FormSelect
-                            name="financing_fund"
-                            label="Fondo de financiación"
-                            options={financingFunds}
-                            onChangeHandler={handleChange}
-                        />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <FormSelect
-                            name="financing_program"
-                            label="Programa de financiación"
-                            options={financingPrograms}
-                            onChangeHandler={handleChange}
                         />
                     </Grid>
                 </Grid>
