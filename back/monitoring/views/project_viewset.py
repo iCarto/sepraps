@@ -192,8 +192,11 @@ class ProjectViewSet(viewsets.ModelViewSet):
                     p.id as project_id, category, phase
                 from project p
                     inner join milestone m on p.id = m.project_id
-                    left join infrastructure i on i.id = p.main_infrastructure_id
-                    left join locality l on l.code = i.locality_id
+                    left join project_linked_localities pll on pll.project_id = p.id
+                    left join locality l on l.code = pll.locality_id
+                    left join construction_contract cc on cc.id = p.construction_contract_id
+                    left join financing_program fp on fp.id = cc.financing_program_id
+                    left join financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
                 where m.compliance_date is null
                 {project_filter_conditions}
                 order by p.id, m.id asc
@@ -225,13 +228,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 )
             if request.GET.get("financing_program"):
                 project_filter_conditions.append(
-                    "and p.financing_program_id = {}".format(
+                    "and cc.financing_program_id = {}".format(
                         request.GET.get("financing_program")
                     )
                 )
             if request.GET.get("financing_fund"):
                 project_filter_conditions.append(
-                    " and p.financing_fund_id = {}".format(
+                    " and fpff.financingfund_id = {}".format(
                         request.GET.get("financing_fund")
                     )
                 )
@@ -264,8 +267,12 @@ class ProjectViewSet(viewsets.ModelViewSet):
                         phase
                 from project p
                     inner join milestone m on p.id = m.project_id
+                    left join construction_contract cc on cc.id = p.construction_contract_id
+                    left join financing_program fp on fp.id = cc.financing_program_id
+                    left join financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
                     left join infrastructure i on i.id = p.main_infrastructure_id
-                    left join locality l on l.code = i.locality_id
+                    left join project_linked_localities pll on pll.project_id = p.id
+                    left join locality l on l.code = pll.locality_id
                     inner join district di on di.code = l.district_id
                     inner join department de on de.code = l.department_id
                 where m.compliance_date is null
@@ -290,13 +297,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 )
             if request.GET.get("financing_program"):
                 project_filter_conditions.append(
-                    "and p.financing_program_id = {}".format(
+                    "and cc.financing_program_id = {}".format(
                         request.GET.get("financing_program")
                     )
                 )
             if request.GET.get("financing_fund"):
                 project_filter_conditions.append(
-                    " and p.financing_fund_id = {}".format(
+                    " and fpff.financingfund_id = {}".format(
                         request.GET.get("financing_fund")
                     )
                 )
