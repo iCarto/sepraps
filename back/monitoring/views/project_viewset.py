@@ -58,7 +58,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
-        queryset = Project.objects.all().order_by("-created_at")
+        queryset = Project.objects.filter(closed=False).order_by("-created_at")
         if self.action == "milestones":
             return queryset
         return self.get_serializer_class().setup_eager_loading(queryset)

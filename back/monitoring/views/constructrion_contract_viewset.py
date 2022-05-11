@@ -36,7 +36,9 @@ class ConstructionContractViewSet(viewsets.ModelViewSet):
     filterset_class = ConstructionContractFilter
 
     def get_queryset(self):
-        queryset = ConstructionContract.objects.all().order_by("-created_at")
+        queryset = ConstructionContract.objects.filter(closed=False).order_by(
+            "-created_at"
+        )
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_context(self):
