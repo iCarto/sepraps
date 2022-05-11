@@ -1,6 +1,6 @@
 import {Fragment, useState} from "react";
 
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, {createFilterOptions} from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,6 +14,7 @@ const SearchAutocomplete = ({
     label,
     optionLabel,
     optionComponent,
+    getFilterOption = null,
     search,
     handleSelect,
 }) => {
@@ -61,6 +62,10 @@ const SearchAutocomplete = ({
             options={state.data}
             onChange={handleSelectOption}
             getOptionLabel={data => data[optionLabel]}
+            filterOptions={createFilterOptions({
+                stringify: option =>
+                    getFilterOption ? getFilterOption(option) : option[optionLabel],
+            })}
             renderOption={(props, option, {selected}) => (
                 <Box component="li" {...props} key={option.id}>
                     {optionComponent(option)}

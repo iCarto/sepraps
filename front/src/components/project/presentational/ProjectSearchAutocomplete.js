@@ -16,11 +16,16 @@ const ProjectSearchAutocomplete = ({handleSelect}) => {
         );
     };
 
+    const getFilterOption = option => {
+        return option.name + " - " + option.code;
+    };
+
     return (
         <SearchAutocomplete
             label="Buscar un proyecto"
             optionLabel="name"
             optionComponent={optionComponent}
+            getFilterOption={getFilterOption}
             search={ProjectService.getProjectsBySearchText}
             handleSelect={handleSelect}
         />
