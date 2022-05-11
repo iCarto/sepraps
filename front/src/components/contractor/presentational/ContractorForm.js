@@ -13,15 +13,19 @@ const ContractorForm = ({contractor = null, onSubmit = null, onCancel = null}) =
                   id: contractor.id,
                   name: contractor.name,
                   contractor_type: contractor.contractor_type,
+                  address: contractor.address,
                   phone: contractor.phone,
                   email: contractor.email,
+                  comments: contractor.comments,
               }
             : {
                   id: null,
                   name: "",
                   contractor_type: "",
+                  address: "",
                   phone: "",
                   email: "",
+                  comments: "",
               },
         reValidateMode: "onSubmit",
     });
@@ -31,8 +35,10 @@ const ContractorForm = ({contractor = null, onSubmit = null, onCancel = null}) =
             id: data.id,
             name: data.name,
             contractor_type: data.contractor_type,
+            address: data.address,
             phone: data.phone,
             email: data.email,
+            comments: data.comments,
             contacts: contractor ? [...contractor.contacts] : [],
         });
         onSubmit(updatedContractor);
