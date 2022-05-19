@@ -1,3 +1,4 @@
+# from cmath import log
 from itertools import chain
 
 from django.db import connection
@@ -25,11 +26,9 @@ class ProjectFilter(filters.FilterSet):
     def filter_by_status(self, queryset, name, status):
         if status == "active":
             return queryset.filter(closed=False)
-
         return queryset
 
     def filter_by_search_text(self, queryset, name, search_text):
-
         return queryset.filter(
             Q(linked_localities__name__icontains=search_text)
             | Q(code__icontains=search_text)
@@ -58,7 +57,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
-        queryset = Project.objects.filter(closed=False).order_by("-created_at")
+        # queryset = Project.objects.filter(closed=False).order_by("-created_at")
+        queryset = Project.objects.order_by("-created_at")
         if self.action == "milestones":
             return queryset
         return self.get_serializer_class().setup_eager_loading(queryset)

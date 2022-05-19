@@ -27,7 +27,6 @@ const SearchBoxControlled = ({name: propsName, onChangeHandler = null}) => {
             clearTimeout(timerID);
 
             timerID = setTimeout(() => {
-                console.log("onChangeHandler", value);
                 onChangeHandler(value);
             }, WAIT_INTERVAL);
         }
@@ -47,6 +46,7 @@ const SearchBoxControlled = ({name: propsName, onChangeHandler = null}) => {
                 id={`${name}-input`}
                 type="text"
                 onChange={ev => {
+                    ev.preventDefault();
                     onChange(ev);
                     handleSearchChange(ev.target.value);
                 }}
@@ -60,6 +60,7 @@ const SearchBoxControlled = ({name: propsName, onChangeHandler = null}) => {
                             onClick={
                                 value !== ""
                                     ? event => {
+                                          event.preventDefault();
                                           clearSearchValue((event.target.value = ""));
                                       }
                                     : undefined

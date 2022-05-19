@@ -4,7 +4,6 @@ from django.db.models import Prefetch
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
-from monitoring.models.location import Locality
 from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project, get_code_for_new_project
 from monitoring.models.provider import Provider
@@ -20,6 +19,7 @@ from rest_framework import serializers
 
 class ProjectSerializer(serializers.ModelSerializer):
     code = serializers.CharField(required=False, read_only=True)
+    closed = serializers.BooleanField(required=False)
     project_type_name = serializers.SerializerMethodField(required=False)
     project_class_name = serializers.SerializerMethodField(required=False)
     main_infrastructure = InfraestructureSerializer()
@@ -39,6 +39,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "code",
+            "closed",
             "project_type",
             "project_type_name",
             "project_class",
@@ -194,6 +195,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 class ProjectSummarySerializer(serializers.ModelSerializer):
     project_type_name = serializers.SerializerMethodField()
     project_class_name = serializers.SerializerMethodField()
+    closed = serializers.BooleanField()
     linked_localities = LocalitySerializer(many=True)
     provider_name = serializers.CharField(source="provider.name", default=None)
     construction_contract_number = serializers.CharField(
@@ -220,6 +222,7 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "code",
+            "closed",
             "project_type",
             "project_type_name",
             "project_class",
