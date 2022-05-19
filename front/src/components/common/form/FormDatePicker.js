@@ -33,6 +33,7 @@ const FormDatePicker = ({
                 <TextField
                     {...params}
                     name={name}
+                    fullWidth
                     margin="normal"
                     error={Boolean(error)}
                     helperText={error?.message}
