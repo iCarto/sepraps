@@ -1,20 +1,23 @@
-import {useNavigateWithReload} from "hooks";
 import {DialogLayout} from "components/common/presentational";
-import {ProjectService} from "service/api";
-import {project_view_adapter} from "model";
+import {createProject} from "model";
 
-const CloseProjectDialog = ({project, isDialogOpen, setIsDialogOpen}) => {
-    const navigate = useNavigateWithReload();
-
+const CloseProjectDialog = ({
+    project,
+    onClosure = null,
+    isDialogOpen,
+    setIsDialogOpen,
+}) => {
     const handleDialog = isOpen => {
         setIsDialogOpen(isOpen);
     };
 
-    //-------- TO-DO UPDATE FUNCTION
     const handleConfirmClosure = () => {
-        console.log("Projecto cerrado");
-        setIsDialogOpen(false);
-        navigate("/projects/" + project.id + "/milestones", true);
+        const updatedProject = createProject({
+            ...project,
+            closed: true,
+        });
+
+        onClosure(updatedProject);
     };
 
     return (

@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import {useLocation, useOutletContext, useParams} from "react-router-dom";
 
 import {ProjectService} from "service/api";
+import {project_view_adapter} from "model/Project";
+import {useNavigateWithReload} from "hooks";
 
 import {SubPageLayout} from "layout";
 import {SectionCard} from "components/common/presentational";
@@ -33,9 +35,12 @@ const ViewProjectMilestonesSubPage = () => {
     let project;
     [project] = useOutletContext();
 
+    const navigate = useNavigateWithReload();
+
     const [milestonesPhases, setMilestonesPhases] = useState([]);
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
     const [isCloseProjectDialogOpen, setIsCloseProjectDialogOpen] = useState(false);
+    const [error, setError] = useState("");
 
     const getIsSidePanelOpen = isOpen => {
         setIsSidePanelOpen(isOpen);
@@ -47,7 +52,7 @@ const ViewProjectMilestonesSubPage = () => {
 
     useEffect(() => {
         ProjectService.getProjectMilestones(id).then(milestonesPhases => {
-            console.log({milestonesPhases});
+            // console.log({milestonesPhases});
             setMilestonesPhases(milestonesPhases);
         });
     }, [id, location.state?.lastRefreshDate]);
@@ -59,6 +64,19 @@ const ViewProjectMilestonesSubPage = () => {
     let allMilestonesCompleted = project.milestones.every(milestone => {
         return milestone.compliance_date !== null;
     });
+
+    const handleCloseProject = updatedProject => {
+        console.log({updatedProject});
+        ProjectService.updateProject(project_view_adapter({...updatedProject}))
+            .then(() => {
+                navigate(`/projects/${project.id}/milestones`, true);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error.toString());
+            });
+        setIsCloseProjectDialogOpen(false);
+    };
 
     return (
         <SubPageLayout
@@ -88,6 +106,7 @@ const ViewProjectMilestonesSubPage = () => {
                 </Grid>
                 <CloseProjectDialog
                     project={project}
+                    onClosure={handleCloseProject}
                     isDialogOpen={isCloseProjectDialogOpen}
                     setIsDialogOpen={setIsCloseProjectDialogOpen}
                 />

@@ -1,14 +1,15 @@
 import {useState} from "react";
 
-/**filterProjectFunction receives an object of properties (project), which includes the same property keys as in the object filter. It filters out the properties "status", "searchText" and "switchStatus" (not present in the project object) and then returns only those objects that match all key values.
+/* filterProjectFunction receives an object of properties (project), which includes the same property keys as in the object filter. It filters out the properties "status", "searchText" and "switchStatus" (not present in the project object) and then returns only those objects that match all key values.
  The searchFunction receives an array made of specific properties from the project object, and returns true when the searchText property is empty or when it is contained in the assessed project. */
 
 function useProjectsFilter(filters) {
-    const [filter, setFilter] = useState(filters);
+    const [filter, setFilter] = useState({...filters, ["status"]: "active"});
 
     function filterProjectsFunction(project) {
         const propertiesForSearchFilter = [
             project.name,
+            project.code,
             project.location,
             project.description,
             project.construction_contract_number,

@@ -15,6 +15,7 @@ const basePath = "/api/monitoring/projects";
 const ProjectService = {
     getProjects(filter) {
         const path = basePath + "?status=" + filter.status;
+        console.log({filter});
         return AuthApiService.get(path).then(response => {
             return createProjectsSummaries(projects_summaries_api_adapter(response));
         });

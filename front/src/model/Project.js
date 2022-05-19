@@ -105,6 +105,7 @@ const createProjects = (data = []) => {
 const createProject = ({
     id = -1,
     code = null,
+    closed = false,
     name = "",
     location = "",
     featured_image = "",
@@ -127,6 +128,7 @@ const createProject = ({
     const publicApi = {
         id,
         code,
+        closed,
         name,
         location,
         featured_image,

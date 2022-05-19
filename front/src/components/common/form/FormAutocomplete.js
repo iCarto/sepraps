@@ -29,6 +29,7 @@ const FormAutocomplete = ({
             id={`${propsName}-form-autocomplete`}
             onChange={(event, option) => {
                 onChange(option);
+                event.preventDefault();
                 if (onChangeHandler) {
                     onChangeHandler(option);
                 }

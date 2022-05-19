@@ -1,5 +1,5 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useCallback, useMemo} from "react";
 import {ProjectService} from "service/api";
 
 import {useProjectListView} from "../provider";
@@ -16,14 +16,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
-
-const fabStyle = {
-    position: "fixed",
-    // Leaflet CSS stylesheet is setting map elements' Z-index from 100 to 1000
-    zIndex: 1001,
-    bottom: 16,
-    right: 16,
-};
 
 const ListProjectsPage = () => {
     const navigate = useNavigate();
@@ -58,13 +50,16 @@ const ListProjectsPage = () => {
         setFilteredProjects(projects.filter(filterProjectsFunction));
     }, [filter]);
 
-    const handleFilterChange = (attribute, value) => {
-        setFilter({...filter, [attribute]: value});
-    };
+    const handleFilterChange = useCallback(
+        (attribute, value) => {
+            setFilter({...filter, [attribute]: value});
+        },
+        [filter]
+    );
 
-    const handleFilterClear = () => {
-        setFilter({});
-    };
+    const handleFilterClear = useCallback(() => {
+        setFilter({["status"]: "active"});
+    }, [filter]);
 
     const handleClickOnCard = projectId => {
         navigate(`/projects/${projectId}`);

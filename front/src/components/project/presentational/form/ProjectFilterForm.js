@@ -15,7 +15,6 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import Stack from "@mui/material/Stack";
 import Collapse from "@mui/material/Collapse";
 
 const ProjectFilterForm = ({
@@ -26,12 +25,14 @@ const ProjectFilterForm = ({
 }) => {
     const [expanded, setExpanded] = useState(() => {
         return (
-            Object.keys(filter).length != 0 &&
-            (filter?.department !== "" &&
-                filter?.district !== "" &&
-                filter?.construction_contract !== "")
+            filter?.department ||
+            filter?.district ||
+            filter?.construction_contract ||
+            filter?.financing_program
         );
     });
+
+    console.log(Object.keys(filter));
 
     const toggleAccordion = () => {
         setExpanded(oldExpanded => !oldExpanded);

@@ -39,6 +39,7 @@ const FormSelect = ({
                 value={value}
                 label={label}
                 onChange={event => {
+                    event.preventDefault();
                     onChange(event);
                     if (onChangeHandler) {
                         onChangeHandler(event.target.value);
