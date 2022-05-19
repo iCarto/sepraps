@@ -6,14 +6,15 @@ import {ProjectService} from "service/api";
 import {SubPageLayout} from "layout";
 import {SectionCard} from "components/common/presentational";
 import {MilestonePhase} from "components/milestone/presentational";
+import {CloseProjectButton, CloseProjectDialog} from ".";
 
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 const findActiveMilestone = milestones => {
     let activeMilestone = null;
-    console.log({milestones});
+    // console.log({milestones});
     for (let milestone of milestones) {
-        console.log({milestone});
         if (milestone["children"].length) {
             activeMilestone = findActiveMilestone(milestone["children"]);
             if (activeMilestone) {
@@ -34,9 +35,14 @@ const ViewProjectMilestonesSubPage = () => {
 
     const [milestonesPhases, setMilestonesPhases] = useState([]);
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+    const [isCloseProjectDialogOpen, setIsCloseProjectDialogOpen] = useState(false);
 
     const getIsSidePanelOpen = isOpen => {
         setIsSidePanelOpen(isOpen);
+    };
+
+    const openDialog = () => {
+        setIsCloseProjectDialogOpen(true);
     };
 
     useEffect(() => {
@@ -49,6 +55,10 @@ const ViewProjectMilestonesSubPage = () => {
     const activeMilestone = findActiveMilestone(
         milestonesPhases.map(phase => phase["milestones"]).flat()
     );
+
+    let allMilestonesCompleted = project.milestones.every(milestone => {
+        return milestone.compliance_date !== null;
+    });
 
     return (
         <SubPageLayout
@@ -69,7 +79,18 @@ const ViewProjectMilestonesSubPage = () => {
                             );
                         })}
                     </SectionCard>
+                    <Box display="flex" justifyContent="right" my={3}>
+                        <CloseProjectButton
+                            allMilestonesCompleted={allMilestonesCompleted}
+                            openDialog={openDialog}
+                        />
+                    </Box>
                 </Grid>
+                <CloseProjectDialog
+                    project={project}
+                    isDialogOpen={isCloseProjectDialogOpen}
+                    setIsDialogOpen={setIsCloseProjectDialogOpen}
+                />
             </Grid>
         </SubPageLayout>
     );
