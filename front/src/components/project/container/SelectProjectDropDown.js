@@ -1,14 +1,14 @@
 import {useState} from "react";
-import PropTypes from "prop-types";
+import {useOutletContext} from "react-router-dom";
 
 import {DropdownMenuItemLink} from "components/common/presentational";
+
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import {useOutletContext} from "react-router-dom";
 
 const SelectProjectDropDown = ({selectedProject}) => {
     const [anchorElement, setAnchorElement] = useState(null);
@@ -70,6 +70,19 @@ const SelectProjectDropDown = ({selectedProject}) => {
                         {selectedProject &&
                             `${selectedProject.name}, ${selectedProject.location}`}
                     </Typography>
+                    {selectedProject.closed && (
+                        <Typography
+                            sx={{
+                                pt: 2,
+                                pb: 1.5,
+                                lineHeight: 0,
+                                fontWeight: 900,
+                                color: "error.light",
+                            }}
+                        >
+                            Archivado
+                        </Typography>
+                    )}
                 </Box>
             </Button>
             {filteredProjects.length > 0 && (
@@ -104,6 +117,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                                 <Typography>{project.code}</Typography>
                                 <Typography variant="caption" sx={{ml: 1}}>
                                     {`${project.name}, ${project.location}`}
+                                    {project.closed === true && " - ARCHIVADO"}
                                 </Typography>
                             </Stack>
                         </DropdownMenuItemLink>
@@ -112,10 +126,6 @@ const SelectProjectDropDown = ({selectedProject}) => {
             )}
         </>
     );
-};
-
-SelectProjectDropDown.propTypes = {
-    children: PropTypes.node,
 };
 
 export default SelectProjectDropDown;

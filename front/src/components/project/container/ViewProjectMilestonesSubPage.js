@@ -100,6 +100,7 @@ const ViewProjectMilestonesSubPage = () => {
                     <Box display="flex" justifyContent="right" my={3}>
                         <CloseProjectButton
                             allMilestonesCompleted={allMilestonesCompleted}
+                            projectIsClosed={project.closed}
                             openDialog={openDialog}
                         />
                     </Box>
