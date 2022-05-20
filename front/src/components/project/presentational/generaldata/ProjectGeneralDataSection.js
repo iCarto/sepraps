@@ -15,6 +15,30 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 
+const imgBoxStyle = {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    display: {xs: "none", md: "flex"},
+    m: 1.5,
+    p: 0.75,
+    borderRadius: "50%",
+    bgcolor: "white",
+    opacity: 0.8,
+};
+
+const closedBoxStyle = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    display: {xs: "none", md: "flex"},
+    m: 1.5,
+    p: 0.75,
+    borderRadius: "5%",
+    bgcolor: "error.main",
+    opacity: 0.8,
+};
+
 const ProjectGeneralDataSection = () => {
     const navigate = useNavigate();
 
@@ -45,27 +69,27 @@ const ProjectGeneralDataSection = () => {
                             sx={{
                                 display: {xs: "none", sm: "block"},
                                 borderRadius: 1,
+                                opacity: project.closed === true ? 0.4 : 1,
                             }}
                         />
-                        <Box
-                            sx={{
-                                position: "absolute",
-                                bottom: 0,
-                                right: 0,
-                                display: {xs: "none", md: "flex"},
-                                m: 1.5,
-                                p: 0.75,
-                                borderRadius: "50%",
-                                bgcolor: "white",
-                                opacity: 0.8,
-                            }}
-                        >
+                        <Box sx={imgBoxStyle}>
                             <ProjectTypeIcon
                                 projectType={project.project_type}
                                 projectTypeName={project.project_type_name}
                                 size="medium"
                             />
                         </Box>
+                        {project.closed && (
+                            <Box sx={closedBoxStyle}>
+                                <Typography
+                                    component="span"
+                                    variant="button"
+                                    sx={{fontWeight: 800, color: "#fff"}}
+                                >
+                                    Archivado
+                                </Typography>
+                            </Box>
+                        )}
                     </div>
                 </Grid>
                 <Grid item sm={9} md={8}>
