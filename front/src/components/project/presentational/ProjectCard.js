@@ -57,9 +57,9 @@ const ProjectCard = ({project, onClick = null}) => {
                 <div style={{position: "relative"}}>
                     <CardMedia
                         component="img"
-                        sx={project.closed === true && {opacity: 0.4}}
                         height="140"
                         image={project.featured_image}
+                        sx={project.closed === true && {opacity: 0.4}}
                         alt={project.name}
                     />
                     <Box sx={projectTypeIconBoxStyle}>

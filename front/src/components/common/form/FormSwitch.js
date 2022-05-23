@@ -22,7 +22,6 @@ const FormSwitch = ({name: propsName, onChangeHandler = null}) => {
                     checked={value}
                     inputRef={ref}
                     onChange={event => {
-                        event.preventDefault();
                         onChange(event);
                         if (onChangeHandler) {
                             onChangeHandler(event);

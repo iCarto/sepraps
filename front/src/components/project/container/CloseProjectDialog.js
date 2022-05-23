@@ -1,5 +1,5 @@
-import {DialogLayout} from "components/common/presentational";
 import {createProject} from "model";
+import {DialogLayout} from "components/common/presentational";
 
 const CloseProjectDialog = ({
     project,
