@@ -4,6 +4,7 @@ import {
     QuestionnaireInstanceList,
     QuestionnaireInstanceSummary,
     QuestionnaireInstanceExpectedTable,
+    QuestionnaireInstanceHistoricalTable,
 } from "../presentational";
 import {QuestionnaireInstanceViewProvider} from "components/questionnaire/provider";
 
@@ -39,7 +40,7 @@ function a11yProps(index) {
 }
 
 const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
-    const [tabValue, setTabValue] = useState(0);
+    const [tabValue, setTabValue] = useState(1);
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
@@ -59,18 +60,19 @@ const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
                         onChange={handleTabChange}
                         aria-label="tab-questionnaire-instance"
                     >
-                        <Tab label="Datos" {...a11yProps(0)} />
-                        <Tab label="Previsión" {...a11yProps(1)} />
+                        <Tab label="Previsión" {...a11yProps(0)} />
+                        <Tab label="Datos" {...a11yProps(1)} />
                         <Tab label="Seguimiento" {...a11yProps(2)} />
+                        <Tab label="Histórico" {...a11yProps(3)} />
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
-                    <QuestionnaireInstanceList
+                    <QuestionnaireInstanceExpectedTable
                         projectQuestionnaire={projectQuestionnaire}
                     />
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    <QuestionnaireInstanceExpectedTable
+                    <QuestionnaireInstanceList
                         projectQuestionnaire={projectQuestionnaire}
                     />
                 </TabPanel>
@@ -80,6 +82,11 @@ const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
                             projectQuestionnaire={projectQuestionnaire}
                         />
                     </QuestionnaireInstanceViewProvider>
+                </TabPanel>
+                <TabPanel value={tabValue} index={3}>
+                    <QuestionnaireInstanceHistoricalTable
+                        projectQuestionnaire={projectQuestionnaire}
+                    />
                 </TabPanel>
             </Paper>
         </Container>

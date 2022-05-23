@@ -16,3 +16,6 @@ export {default as QuestionnaireInstanceForm} from "./QuestionnaireInstanceForm"
 export {
     default as QuestionnaireInstanceExpectedTable,
 } from "./QuestionnaireInstanceExpectedTable";
+export {
+    default as QuestionnaireInstanceHistoricalTable,
+} from "./QuestionnaireInstanceHistoricalTable";
