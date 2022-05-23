@@ -25,14 +25,13 @@ const ProjectFilterForm = ({
 }) => {
     const [expanded, setExpanded] = useState(() => {
         return (
+            filter?.status === "all" ||
             filter?.department ||
             filter?.district ||
             filter?.construction_contract ||
             filter?.financing_program
         );
     });
-
-    console.log(Object.keys(filter));
 
     const toggleAccordion = () => {
         setExpanded(oldExpanded => !oldExpanded);
@@ -69,7 +68,7 @@ const ProjectFilterForm = ({
             construction_contract: filter?.construction_contract || "",
             financing_program: filter?.financing_program || "",
             status: filter?.status || "active",
-            switchStatus: filter?.switchStatus || false,
+            switchStatus: filter?.status === "all",
             searchText: filter?.searchText || "",
         },
     });

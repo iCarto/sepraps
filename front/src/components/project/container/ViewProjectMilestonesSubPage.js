@@ -52,7 +52,7 @@ const ViewProjectMilestonesSubPage = () => {
 
     useEffect(() => {
         ProjectService.getProjectMilestones(id).then(milestonesPhases => {
-            // console.log({milestonesPhases});
+            console.log({milestonesPhases});
             setMilestonesPhases(milestonesPhases);
         });
     }, [id, location.state?.lastRefreshDate]);
@@ -66,7 +66,6 @@ const ViewProjectMilestonesSubPage = () => {
     });
 
     const handleCloseProject = updatedProject => {
-        console.log({updatedProject});
         ProjectService.updateProject(project_view_adapter({...updatedProject}))
             .then(() => {
                 navigate(`/projects/${project.id}/milestones`, true);

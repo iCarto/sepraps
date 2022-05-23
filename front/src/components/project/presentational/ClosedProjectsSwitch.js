@@ -6,7 +6,7 @@ const ClosedProjectsSwitch = ({onChangeHandler = null}) => {
 
     const handleChangeStatus = () => {
         const values = getValues();
-        values["status"] = values["switchStatus"] === true ? "all" : "active";
+        values["status"] = values["switchStatus"] ? "all" : "active";
         reset({
             ...values,
         });
