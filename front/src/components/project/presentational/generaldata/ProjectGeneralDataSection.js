@@ -27,7 +27,7 @@ const imgBoxStyle = {
     opacity: 0.8,
 };
 
-const closedBoxStyle = {
+const closedProjectTagStyle = {
     position: "absolute",
     top: 0,
     left: 0,
@@ -80,7 +80,7 @@ const ProjectGeneralDataSection = () => {
                             />
                         </Box>
                         {project.closed && (
-                            <Box sx={closedBoxStyle}>
+                            <Box sx={closedProjectTagStyle}>
                                 <Typography
                                     component="span"
                                     variant="button"

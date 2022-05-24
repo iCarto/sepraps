@@ -40,6 +40,18 @@ const projectClassBoxStyle = {
     opacity: 0.8,
 };
 
+const closedProjectTagStyle = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    display: {xs: "none", md: "flex"},
+    m: 1.5,
+    px: 0.5,
+    borderRadius: "5%",
+    bgcolor: "error.main",
+    opacity: 0.8,
+};
+
 const ProjectCard = ({project, onClick = null}) => {
     const handleClick = () => {
         if (onClick) {
@@ -59,8 +71,8 @@ const ProjectCard = ({project, onClick = null}) => {
                         component="img"
                         height="140"
                         image={project.featured_image}
-                        sx={project.closed === true && {opacity: 0.4}}
                         alt={project.name}
+                        sx={project.closed === true && {opacity: 0.4}}
                     />
                     <Box sx={projectTypeIconBoxStyle}>
                         <ProjectTypeIcon
@@ -69,6 +81,17 @@ const ProjectCard = ({project, onClick = null}) => {
                             size="medium"
                         />
                     </Box>
+                    {project.closed && (
+                        <Box sx={closedProjectTagStyle}>
+                            <Typography
+                                component="span"
+                                variant="button"
+                                sx={{fontWeight: 800, color: "#fff"}}
+                            >
+                                Archivado
+                            </Typography>
+                        </Box>
+                    )}
                     <Tooltip title={`Clase: ${project.project_class}`}>
                         <Box sx={projectClassBoxStyle}>
                             <Typography variant="button">
