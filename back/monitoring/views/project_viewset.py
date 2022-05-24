@@ -3,6 +3,7 @@ from itertools import chain
 
 from django.db import connection
 from django.db.models import Q
+from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.domain_entry import DomainEntry
@@ -57,7 +58,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
-        # queryset = Project.objects.filter(closed=False).order_by("-created_at")
         queryset = Project.objects.order_by("-created_at")
         if self.action == "milestones":
             return queryset
@@ -76,6 +76,16 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user
         return super().perform_create(serializer)
+
+    @action(detail=True, methods=["put"], url_path="close")
+    def close_project(self, request, pk=None):
+        project = self.get_object()
+
+        project.closed = True
+
+        project.save()
+
+        return HttpResponse(status=200)
 
     @action(detail=True)
     def contacts(self, request, pk=None):
