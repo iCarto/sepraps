@@ -26,6 +26,7 @@ const FormAutocomplete = ({
 
     return (
         <Autocomplete
+            fullWidth
             id={`${propsName}-form-autocomplete`}
             onChange={(event, option) => {
                 onChange(option);
@@ -44,7 +45,6 @@ const FormAutocomplete = ({
             isOptionEqualToValue={(option, value) =>
                 value && value != "" && option.id === value.id
             }
-            fullWidth
             renderOption={(props, option, {selected}) => (
                 <Box component="li" {...props} key={option.id}>
                     <Stack>
