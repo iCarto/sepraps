@@ -178,8 +178,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             )
         )
 
-    # TO-DO: CELIA: CREAREMOS UN MÉTODO QUE SE LLAME update_closed
-
     def update(self, instance, validated_data):
 
         self.update_main_infrastructure(instance, validated_data)

@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {useLocation, useOutletContext, useParams} from "react-router-dom";
 
 import {ProjectService} from "service/api";
-import {project_view_adapter} from "model/Project";
 import {useNavigateWithReload} from "hooks";
 
 import {SubPageLayout} from "layout";
@@ -65,8 +64,8 @@ const ViewProjectMilestonesSubPage = () => {
         return milestone.compliance_date !== null;
     });
 
-    const handleCloseProject = updatedProject => {
-        ProjectService.updateProject(project_view_adapter({...updatedProject}))
+    const handleCloseProject = () => {
+        ProjectService.closeProject(project.id)
             .then(() => {
                 navigate(`/projects/${project.id}/milestones`, true);
             })
@@ -105,7 +104,6 @@ const ViewProjectMilestonesSubPage = () => {
                     </Box>
                 </Grid>
                 <CloseProjectDialog
-                    project={project}
                     onClosure={handleCloseProject}
                     isDialogOpen={isCloseProjectDialogOpen}
                     setIsDialogOpen={setIsCloseProjectDialogOpen}
