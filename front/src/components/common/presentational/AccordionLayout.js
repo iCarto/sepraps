@@ -18,8 +18,6 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                 "&:before": {
                     display: "none",
                 },
-                borderBottom: "1px solid #ccc",
-                borderRadius: "0px !important",
             }}
         >
             <Tooltip title="Desplegar/Ocultar" followCursor>

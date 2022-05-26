@@ -46,7 +46,7 @@ const ViewContractMonitoringSubPage = () => {
                     <ContractMonitoringContactSection
                         contact={contract?.construction_inspector}
                         sectionName="construction_inspector"
-                        postName="Fiscal constructivo"
+                        postName="Fiscal de obra"
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
@@ -54,7 +54,7 @@ const ViewContractMonitoringSubPage = () => {
                     <ContractMonitoringContactSection
                         contact={contract?.construction_supervisor}
                         sectionName="construction_supervisor"
-                        postName="Supervisor constructivo"
+                        postName="Supervisor de obra"
                         showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />

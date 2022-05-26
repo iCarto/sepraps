@@ -52,24 +52,24 @@
         "model": "monitoring.contact",
         "pk": 4,
         "fields": {
-            "name": "Prueba Fiscal Constructivo",
-            "post": "fiscal_constructivo",
+            "name": "Prueba Fiscal de Obra",
+            "post": "fiscal_obra",
             "gender": "M",
             "phone": "(021) 234-234",
-            "email": "fiscal_constructivo@test.com",
-            "comments": "Fiscal constructivo de pruebas"
+            "email": "fiscal_obra@test.com",
+            "comments": "Fiscal de obra de pruebas"
         }
     },
     {
         "model": "monitoring.contact",
         "pk": 5,
         "fields": {
-            "name": "Prueba Supervisor Constructivo",
-            "post": "supervisor_constructivo",
+            "name": "Prueba Supervisor de Obra",
+            "post": "supervisor_obra",
             "gender": "M",
             "phone": "(021) 345-345",
-            "email": "supervisor_constructivo@test.com",
-            "comments": "Supervisor constructivo de pruebas",
+            "email": "supervisor_obra@test.com",
+            "comments": "Supervisor de obra de pruebas",
             "is_staff": true
         }
     },
