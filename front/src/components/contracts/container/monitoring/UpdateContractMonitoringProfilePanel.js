@@ -24,10 +24,10 @@ const UpdateContractMonitoringProfilePanel = () => {
             postName = "Residente de obra";
             break;
         case "construction_inspector":
-            postName = "Fiscal constructivo";
+            postName = "Fiscal de obra";
             break;
         case "construction_supervisor":
-            postName = "Supervisor constructivo";
+            postName = "Supervisor de obra";
             break;
         case "social_coordinator":
             postName = "Coordinador social";

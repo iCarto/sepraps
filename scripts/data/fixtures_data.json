@@ -121,8 +121,8 @@
         "pk": null,
         "fields": {
             "category": "contact_post",
-            "key": "fiscal_constructivo",
-            "value": "Fiscal constructivo"
+            "key": "fiscal_obra",
+            "value": "Fiscal de obra"
         }
     },
     {
@@ -130,8 +130,8 @@
         "pk": null,
         "fields": {
             "category": "contact_post",
-            "key": "supervisor_constructivo",
-            "value": "Supervisor constructivo"
+            "key": "supervisor_obra",
+            "value": "Supervisor de obra"
         }
     },
     {
