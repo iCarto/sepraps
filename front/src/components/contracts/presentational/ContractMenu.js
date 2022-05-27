@@ -1,5 +1,6 @@
 import {MenuListItemLink} from "components/common/presentational";
 import SelectContractDropDown from "../container/SelectContractDropDown";
+import {QuestionnairesMenu} from "components/questionnaire/presentational";
 
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -50,6 +51,10 @@ const ContractMenu = ({contract}) => {
                             </ListItemIcon>
                             <ListItemText primary="Proyectos" />
                         </MenuListItemLink>
+                        <QuestionnairesMenu
+                            questionnaires={contract.questionnaires}
+                            basePath={`/contracts/${contract?.id}`}
+                        />
                     </MenuList>
                 </Box>
             </Box>

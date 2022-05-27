@@ -19,3 +19,4 @@ export {
 export {
     default as QuestionnaireInstanceHistoricalTable,
 } from "./QuestionnaireInstanceHistoricalTable";
+export {default as QuestionnairesMenu} from "./QuestionnairesMenu";
