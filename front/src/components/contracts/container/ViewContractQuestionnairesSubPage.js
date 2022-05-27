@@ -23,6 +23,14 @@ const ViewContractQuestionnairesSubPage = () => {
         questionnaire => questionnaire.code === questionnaireCode
     );
 
+    const getDataService = (id, questionnaireCode, fieldCode) => {
+        return ContractService.getContractsQuestionnaireInstancesFieldData(
+            id,
+            questionnaireCode,
+            fieldCode
+        );
+    };
+
     return (
         <SubPageLayout
             getIsSidePanelOpen={getIsSidePanelOpen}
@@ -36,12 +44,13 @@ const ViewContractQuestionnairesSubPage = () => {
                     {questionnaire?.fields.map(field => (
                         <ViewQuestionnaireInstanceFieldData
                             key={field.code}
-                            service={
-                                ContractService.getContractsQuestionnaireInstancesFieldData
-                            }
-                            id={id}
-                            questionnaireCode={questionnaireCode}
-                            fieldCode={field.code}
+                            getDataService={() => {
+                                return getDataService(
+                                    id,
+                                    questionnaireCode,
+                                    field.code
+                                );
+                            }}
                             fieldLabel={field.label}
                         />
                     ))}

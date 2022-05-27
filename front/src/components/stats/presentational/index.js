@@ -4,3 +4,4 @@ export {default as StatsByPhaseTable} from "./StatsByPhaseTable";
 export {default as StatsByPhaseChart} from "./StatsByPhaseChart";
 export {default as StatsByPhaseMapView} from "./StatsByPhaseMapView";
 export {default as StatsByPhaseFilter} from "./StatsByPhaseFilter";
+export {default as StatsFilterForm} from "./StatsFilterForm";
