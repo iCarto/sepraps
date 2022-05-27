@@ -1,3 +1,4 @@
+import {createQuestionnaires, questionnaires_api_adapter} from "model/questionnaires";
 import {
     createContractor,
     contractor_api_adapter,
@@ -59,6 +60,11 @@ const contract_api_adapter = contract => {
         contract["projects"] = contract.projects.map(project => {
             return createProjectSummary(project_summary_api_adapter(project));
         });
+    }
+    if (contract["questionnaires"]) {
+        contract["questionnaires"] = createQuestionnaires(
+            questionnaires_api_adapter(contract["questionnaires"])
+        );
     }
 
     contract["created_at"] = new Date(contract["created_at"]);
@@ -177,6 +183,7 @@ const createContract = ({
     execution_expected_delivery_date = null,
     execution_final_delivery_date = null,
     projects = [],
+    questionnaires = [],
     created_at = null,
     updated_at = null,
 } = {}) => {
@@ -206,6 +213,7 @@ const createContract = ({
         execution_expected_delivery_date,
         execution_final_delivery_date,
         projects,
+        questionnaires,
         created_at,
         updated_at,
     };

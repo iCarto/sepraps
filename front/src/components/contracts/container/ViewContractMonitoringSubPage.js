@@ -13,9 +13,6 @@ const ViewContractMonitoringSubPage = () => {
     const [profileNameToRemove, setProfileNameToRemove] = useState("");
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
-    let project;
-    [project] = useOutletContext();
-
     let contract;
     [contract] = useOutletContext();
 

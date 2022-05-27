@@ -13,7 +13,7 @@ import TopicOutlinedIcon from "@mui/icons-material/TopicOutlined";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import LinearScaleOutlinedIcon from "@mui/icons-material/LinearScaleOutlined";
 import MenuList from "@mui/material/MenuList";
-import ProjectMenuQuestionnaires from "./ProjectMenuQuestionnaires";
+import {QuestionnairesMenu} from "components/questionnaire/presentational";
 
 const ProjectMenu = ({project}) => {
     return (
@@ -55,7 +55,10 @@ const ProjectMenu = ({project}) => {
                             </ListItemIcon>
                             <ListItemText primary="Hitos" />
                         </MenuListItemLink>
-                        <ProjectMenuQuestionnaires project={project} />
+                        <QuestionnairesMenu
+                            questionnaires={project.questionnaires}
+                            basePath={`/projects/${project.id}`}
+                        />
                         <MenuListItemLink to={`/projects/${project.id}/contacts`}>
                             <ListItemIcon>
                                 <PermContactCalendarOutlinedIcon />

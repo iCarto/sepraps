@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
-import {ProjectService} from "service/api";
 
 import {useQuestionnaireInstanceView} from "../provider";
 import {
@@ -15,7 +14,8 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
 const ViewQuestionnaireInstanceFieldData = ({
-    projectId,
+    service,
+    id,
     questionnaireCode,
     fieldCode,
     fieldLabel,
@@ -28,16 +28,12 @@ const ViewQuestionnaireInstanceFieldData = ({
 
     useEffect(() => {
         setLoading(true);
-        ProjectService.getProjectsQuestionnaireInstancesFieldData(
-            projectId,
-            questionnaireCode,
-            fieldCode
-        ).then(data => {
+        service(id, questionnaireCode, fieldCode).then(data => {
             console.log({data});
             setData(data);
             setLoading(false);
         });
-    }, [projectId, questionnaireCode, location.state?.lastRefreshDate]);
+    }, [id, questionnaireCode, location.state?.lastRefreshDate]);
 
     const getViewComponent = () => {
         if (data) {
