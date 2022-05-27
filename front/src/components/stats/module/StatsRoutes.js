@@ -1,5 +1,9 @@
 import {Route} from "react-router-dom";
-import {ViewStatsByPhaseSubPage, ViewStatsPage} from "../container";
+import {
+    ViewStatsByPhaseSubPage,
+    ViewStatsPage,
+    ViewStatsByQuestionnairesSubPage,
+} from "../container";
 
 const statsRoutes = [
     <Route key="stats" path="" element={<ViewStatsPage />}>
@@ -7,6 +11,11 @@ const statsRoutes = [
             key="stats-by-phase"
             path="phase"
             element={<ViewStatsByPhaseSubPage />}
+        ></Route>
+        <Route
+            key="stats-by-questionnaires"
+            path="questionnaires/:questionnaireCode"
+            element={<ViewStatsByQuestionnairesSubPage />}
         ></Route>
     </Route>,
 ];

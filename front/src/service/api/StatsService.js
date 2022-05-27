@@ -32,6 +32,20 @@ const StatsService = {
             return response;
         });
     },
+
+    getStatsByQuestionnaires(questionnaireCode, fieldCode, filter = {}) {
+        const queryString = Object.keys(filter)
+            .filter(key => filter[key])
+            .map(key => {
+                return key + "=" + filter[key];
+            })
+            .join("&");
+        return AuthApiService.get(
+            `/api/monitoring/stats/monthlyquestionnaires/${questionnaireCode}/${fieldCode}?${queryString}`
+        ).then(response => {
+            return response;
+        });
+    },
 };
 
 export default StatsService;

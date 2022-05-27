@@ -9,6 +9,7 @@ const FormAutocomplete = ({
     name: propsName,
     label,
     options,
+    optionIdAttribute = "id",
     optionLabelAttribute = "name",
     rules = {},
     onChangeHandler = null,
@@ -43,10 +44,12 @@ const FormAutocomplete = ({
                     : ""
             }
             isOptionEqualToValue={(option, value) =>
-                value && value != "" && option.id === value.id
+                value &&
+                value != "" &&
+                option[optionIdAttribute] === value[optionIdAttribute]
             }
             renderOption={(props, option, {selected}) => (
-                <Box component="li" {...props} key={option.id}>
+                <Box component="li" {...props} key={option[optionIdAttribute]}>
                     <Stack>
                         <Typography>{option[optionLabelAttribute]}</Typography>
                     </Stack>

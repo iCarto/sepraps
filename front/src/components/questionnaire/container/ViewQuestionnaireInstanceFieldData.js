@@ -13,13 +13,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
-const ViewQuestionnaireInstanceFieldData = ({
-    service,
-    id,
-    questionnaireCode,
-    fieldCode,
-    fieldLabel,
-}) => {
+const ViewQuestionnaireInstanceFieldData = ({getDataService, fieldLabel}) => {
     const {view} = useQuestionnaireInstanceView();
     const location = useLocation();
 
@@ -28,12 +22,12 @@ const ViewQuestionnaireInstanceFieldData = ({
 
     useEffect(() => {
         setLoading(true);
-        service(id, questionnaireCode, fieldCode).then(data => {
+        getDataService().then(data => {
             console.log({data});
             setData(data);
             setLoading(false);
         });
-    }, [id, questionnaireCode, location.state?.lastRefreshDate]);
+    }, [getDataService, location.state?.lastRefreshDate]);
 
     const getViewComponent = () => {
         if (data) {
