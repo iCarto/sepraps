@@ -87,7 +87,6 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
             warranty_end_date: data.warranty_end_date,
             projects: contract ? contract.projects : [],
         });
-        console.log({updatedContract});
         onSubmit(updatedContract);
     };
 
