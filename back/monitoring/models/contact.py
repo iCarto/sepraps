@@ -1,16 +1,17 @@
 from django.db import models
 
 
-class Contact(models.Model):
+# TODO: Review gender options
+GENDER_CHOICES = [
+    ("M", "Hombre"),
+    ("F", "Mujer"),
+    ("OS", "Otra específica"),
+    ("NK", "No conocida"),
+    ("NS", "No especificada"),
+]
 
-    # TODO: Review gender options
-    GENDER_CHOICES = [
-        ("M", "Hombre"),
-        ("F", "Mujer"),
-        ("OS", "Otra específica"),
-        ("NK", "No conocida"),
-        ("NS", "No especificada"),
-    ]
+
+class Contact(models.Model):
 
     id = models.AutoField(primary_key=True)
     name = models.CharField("Nombre", max_length=255)

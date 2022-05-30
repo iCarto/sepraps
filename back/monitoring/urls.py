@@ -38,4 +38,5 @@ urlpatterns = [
         "stats/monthlyquestionnaires/<str:questionnaire_code>/<str:field_code>",
         stats_views.get_monthly_questionnaire_stats,
     ),
+    path("stats/contacts/gender", stats_views.get_provider_gender_stats),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

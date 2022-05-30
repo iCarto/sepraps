@@ -154,13 +154,61 @@
         }
     },
     {
+        "model": "monitoring.contact",
+        "pk": 9,
+        "fields": {
+            "name": "María Flores",
+            "post": "presidencia_junta_saneamiento",
+            "gender": "F",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 10,
+        "fields": {
+            "name": "Rodrigo García",
+            "post": "tesoreria_junta_saneamiento",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 11,
+        "fields": {
+            "name": "Mercedes Sánchez",
+            "post": "secretaria_junta_saneamiento",
+            "gender": "F",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 12,
+        "fields": {
+            "name": "Paula Álvarez",
+            "post": "otra_junta_saneamiento",
+            "gender": "F",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
         "model": "monitoring.provider",
         "pk": 1,
         "fields": {
             "name": "Junta de Saneamiento Loma Florida Costa Florida",
             "area": "rural",
             "locality": "0104330",
-            "contacts": []
+            "contacts": [9, 10, 11, 12]
         }
     },
     {
