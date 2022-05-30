@@ -18,11 +18,6 @@ const ContractMenu = ({contract}) => {
             <Box sx={{height: "100%", backgroundColor: "grey.200"}}>
                 <Toolbar
                     sx={{
-                        // -----  OPTION 1 - LIGHT GREY ------
-                        // backgroundColor: "#E2F0FF",
-                        // -----  OPTION 2 - DARK BLUE (change button & code font color to white in SelectProjectDropDown) ------
-                        // backgroundColor: "primary.dark",
-                        // -----  OPTION 3 - DARK GREY (change button & code font color to white in SelectProjectDropDown) ------
                         backgroundColor: "grey.700",
                     }}
                     variant="dense"
@@ -40,9 +35,9 @@ const ContractMenu = ({contract}) => {
                             <ListItemText primary="Información" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/contracts/${contract?.id}/phases`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <EventNoteIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Fases" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/contracts/${contract?.id}/monitoring`}>
