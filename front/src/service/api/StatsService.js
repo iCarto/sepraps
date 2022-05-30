@@ -1,5 +1,14 @@
 import AuthApiService from "./AuthApiService";
 
+const getQueryStringByFilter = filter => {
+    return Object.keys(filter)
+        .filter(key => filter[key])
+        .map(key => {
+            return key + "=" + filter[key];
+        })
+        .join("&");
+};
+
 const StatsService = {
     getStatsByPhase(filter) {
         const queryString = filter
@@ -34,14 +43,18 @@ const StatsService = {
     },
 
     getStatsByQuestionnaires(questionnaireCode, fieldCode, filter = {}) {
-        const queryString = Object.keys(filter)
-            .filter(key => filter[key])
-            .map(key => {
-                return key + "=" + filter[key];
-            })
-            .join("&");
         return AuthApiService.get(
-            `/api/monitoring/stats/monthlyquestionnaires/${questionnaireCode}/${fieldCode}?${queryString}`
+            `/api/monitoring/stats/monthlyquestionnaires/${questionnaireCode}/${fieldCode}?${getQueryStringByFilter(
+                filter
+            )}`
+        ).then(response => {
+            return response;
+        });
+    },
+
+    getStatsByGender(filter = {}) {
+        return AuthApiService.get(
+            `/api/monitoring/stats/contacts/gender?${getQueryStringByFilter(filter)}`
         ).then(response => {
             return response;
         });

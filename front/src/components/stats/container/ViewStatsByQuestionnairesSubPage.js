@@ -58,6 +58,14 @@ const ViewStatsByQuestionnairesSubPage = () => {
                         </Typography>
                         <StatsFilterForm
                             filter={filter}
+                            views={[
+                                "financingFunds",
+                                "financingPrograms",
+                                "contracts",
+                                "contractors",
+                                "administrativeDivisions",
+                                "dates",
+                            ]}
                             onChange={handleFilterChange}
                             onClear={handleFilterClear}
                         />
