@@ -7,6 +7,7 @@ import MenuList from "@mui/material/MenuList";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import LinearScaleIcon from "@mui/icons-material/LinearScale";
+import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import {useEffect, useState} from "react";
 import {QuestionnaireService} from "service/api/questionnaires";
 
@@ -34,6 +35,12 @@ const StatsMenu = () => {
                         questionnaires={questionnaires}
                         basePath={`/stats`}
                     />
+                    <MenuListItemLink to={`/stats/gender`}>
+                        <ListItemIcon>
+                            <PermContactCalendarOutlinedIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Género" />
+                    </MenuListItemLink>
                 </MenuList>
             </Box>
         </Box>

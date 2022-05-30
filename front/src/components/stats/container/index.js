@@ -3,3 +3,4 @@ export {default as ViewStatsByPhaseSubPage} from "./ViewStatsByPhaseSubPage";
 export {
     default as ViewStatsByQuestionnairesSubPage,
 } from "./ViewStatsByQuestionnairesSubPage";
+export {default as ViewStatsByGenderSubPage} from "./ViewStatsByGenderSubPage";

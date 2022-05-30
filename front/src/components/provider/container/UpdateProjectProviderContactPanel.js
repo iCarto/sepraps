@@ -62,7 +62,12 @@ const UpdateProjectProviderContactPanel = () => {
               )
             : null;
 
-    const allowedPosts = ["miembro_junta_saneamiento"];
+    const allowedPosts = [
+        "presidencia_junta_saneamiento",
+        "tesoreria_junta_saneamiento",
+        "secretaria_junta_saneamiento",
+        "otra_junta_saneamiento",
+    ];
 
     return (
         <SidebarPanel
