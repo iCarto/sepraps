@@ -26,7 +26,7 @@ const StatsMenu = () => {
             <Box>
                 <MenuList sx={{pt: 0}}>
                     <MenuListItemLink to={`/stats/phase`}>
-                        <ListItemIcon>
+                        <ListItemIcon style={{minWidth: "40px"}}>
                             <LinearScaleIcon />
                         </ListItemIcon>
                         <ListItemText primary="Fases" />
@@ -36,7 +36,7 @@ const StatsMenu = () => {
                         basePath={`/stats`}
                     />
                     <MenuListItemLink to={`/stats/gender`}>
-                        <ListItemIcon>
+                        <ListItemIcon style={{minWidth: "40px"}}>
                             <PermContactCalendarOutlinedIcon />
                         </ListItemIcon>
                         <ListItemText primary="Género" />

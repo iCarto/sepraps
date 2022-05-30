@@ -1,4 +1,4 @@
-import {MenuListItemLink} from "components/common/presentational";
+import {MenuListItemLink, MenuListItemIcon} from "components/common/presentational";
 import SelectContractDropDown from "../container/SelectContractDropDown";
 import {QuestionnairesMenu} from "components/questionnaire/presentational";
 
@@ -8,7 +8,6 @@ import Divider from "@mui/material/Divider";
 import MenuList from "@mui/material/MenuList";
 import ListItemText from "@mui/material/ListItemText";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
@@ -33,22 +32,22 @@ const ContractMenu = ({contract}) => {
                 <Divider />
                 <Box>
                     <MenuList sx={{pt: 0}}>
-                        <MenuListItemLink to={`/contracts/${contract?.id}`}>
-                            <ListItemIcon>
+                        <MenuListItemLink to={`/contracts/${contract?.id}/summary`}>
+                            <MenuListItemIcon>
                                 <InfoOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Información" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/contracts/${contract?.id}/monitoring`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <PermContactCalendarIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Supervisión" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/contracts/${contract?.id}/projects`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <FactCheckOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Proyectos" />
                         </MenuListItemLink>
                         <QuestionnairesMenu

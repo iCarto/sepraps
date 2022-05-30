@@ -18,7 +18,7 @@ const UpdateProjectPanel = () => {
     const handleSubmit = project => {
         ProjectService.updateProject(project_view_adapter({...project}))
             .then(() => {
-                navigate(`/projects/${project.id}`, true);
+                navigate(`/projects/${project.id}/summary`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -27,7 +27,7 @@ const UpdateProjectPanel = () => {
     };
 
     const handleCloseSidebar = () => {
-        navigate(`/projects/${project.id}`);
+        navigate(`/projects/${project.id}/summary`);
     };
 
     return (

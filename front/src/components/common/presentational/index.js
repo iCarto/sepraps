@@ -10,6 +10,7 @@ export {default as TableSortingHead} from "./TableSortingHead";
 export {default as ActionsMenu} from "./ActionsMenu";
 export {default as SearchBox} from "./SearchBox";
 export {default as MenuListItemLink} from "./MenuListItemLink";
+export {default as MenuListItemIcon} from "./MenuListItemIcon";
 export {default as MenuAction} from "./MenuAction";
 export {default as ButtonLink} from "./ButtonLink";
 export {default as AccordionLayout} from "./AccordionLayout";

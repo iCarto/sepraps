@@ -41,7 +41,7 @@ const UpdateContractContractorContactPanel = () => {
     const handleFormSubmit = contractor => {
         ContractorService.updateContractor(contractor)
             .then(() => {
-                navigate(`/contracts/${contract.id}`, true);
+                navigate(`/contracts/${contract.id}/summary`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -50,7 +50,7 @@ const UpdateContractContractorContactPanel = () => {
     };
 
     const handleCloseSidebar = () => {
-        navigate(`/contracts/${contract.id}`);
+        navigate(`/contracts/${contract.id}/summary`);
     };
 
     const selectedContact =
