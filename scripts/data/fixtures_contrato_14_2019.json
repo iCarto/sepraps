@@ -1,7 +1,7 @@
 [
     {
         "model": "monitoring.contact",
-        "pk": 9,
+        "pk": 13,
         "fields": {
             "name": "Ing. Ricardo Díaz Martínez",
             "post": "responsable_contratista",
@@ -13,7 +13,7 @@
     },
     {
         "model": "monitoring.contact",
-        "pk": 10,
+        "pk": 14,
         "fields": {
             "name": "Ing. Fernando Marcial Moreno Martínez",
             "post": "responsable_contratista",
@@ -33,7 +33,7 @@
             "phone": "(021) 207-699",
             "email": "",
             "comments": "RUC Nº 80055403-3",
-            "contacts": [3, 4]
+            "contacts": [13, 14]
         }
     },
     {
@@ -112,13 +112,49 @@
         }
     },
     {
+        "model": "monitoring.contact",
+        "pk": 15,
+        "fields": {
+            "name": "Juana Costa",
+            "post": "presidencia_junta_saneamiento",
+            "gender": "F",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 16,
+        "fields": {
+            "name": "Estela Pradera",
+            "post": "tesoreria_junta_saneamiento",
+            "gender": "F",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.contact",
+        "pk": 17,
+        "fields": {
+            "name": "Marcos López",
+            "post": "secretaria_junta_saneamiento",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
         "model": "monitoring.provider",
         "pk": 6,
         "fields": {
             "name": "Junta de Saneamiento Cleto Romero",
             "area": "rural",
             "locality": "0503100",
-            "contacts": []
+            "contacts": [15, 16, 17]
         }
     },
     {

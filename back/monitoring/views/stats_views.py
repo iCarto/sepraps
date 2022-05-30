@@ -1,4 +1,6 @@
-from monitoring.models.construction_contract import ConstructionContract
+from django.db import connection
+from monitoring.models.contact import GENDER_CHOICES
+from monitoring.util import dictfetchall
 from questionnaires import services as questtionnaire_services
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
@@ -66,3 +68,50 @@ def get_monthly_questionnaire_stats(
             questionnaire_code, field_code, questionnaire_instances
         )
     )
+
+
+@api_view(["GET"])
+def get_provider_gender_stats(request, format=None):
+    with connection.cursor() as cursor:
+        query = """
+            SELECT cg.gender, count(*) as total FROM (
+                SELECT distinct c.id, c.gender
+                FROM provider_contacts pc
+                    INNER JOIN contact c ON c.id = pc.contact_id
+                    LEFT JOIN project p ON p.provider_id = pc.provider_id
+                    LEFT JOIN construction_contract cc on cc.id = p.construction_contract_id
+                    LEFT JOIN financing_program fp on fp.id = cc.financing_program_id
+                    LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
+                    LEFT JOIN project_linked_localities pll on pll.project_id = p.id
+                    LEFT JOIN locality l on l.code = pll.locality_id
+                    INNER JOIN district di on di.code = l.district_id
+                    INNER JOIN department de on de.code = l.department_id
+                WHERE 1 = 1
+                {filter_conditions}
+            ) cg
+            GROUP BY cg.gender
+            """
+        filter_conditions = []
+        if filter := request.GET.get("provider"):
+            filter_conditions.append("and pc.provider_id = {}".format(filter))
+        if filter := request.GET.get("project"):
+            filter_conditions.append("and p.id = {}".format(filter))
+        if filter := request.GET.get("construction_contract"):
+            filter_conditions.append(
+                "and p.construction_contract_id = {}".format(filter)
+            )
+        if filter := request.GET.get("district"):
+            filter_conditions.append("and l.district_id = '{}'".format(filter))
+        if filter := request.GET.get("department"):
+            filter_conditions.append("and l.department_id = '{}'".format(filter))
+        if filter := request.GET.get("financing_program"):
+            filter_conditions.append("and cc.financing_program_id = {}".format(filter))
+        if filter := request.GET.get("financing_fund"):
+            filter_conditions.append("and fpff.financingfund_id = {}".format(filter))
+
+        cursor.execute(query.format(filter_conditions=" ".join(filter_conditions)))
+
+        data = dictfetchall(cursor)
+        for row in data:
+            row["gender_name"] = dict(GENDER_CHOICES).get(row["gender"], row["gender"])
+        return Response(data)

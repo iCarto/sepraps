@@ -21,6 +21,7 @@ from monitoring.serializers.project_serializer import (
     ProjectSerializer,
     ProjectSummarySerializer,
 )
+from monitoring.util import dictfetchall
 from questionnaires import services as questtionnaire_services
 from questionnaires.models.questionnaire import Questionnaire
 from rest_framework import permissions, status, viewsets
@@ -411,9 +412,3 @@ class ProjectViewSet(viewsets.ModelViewSet):
                     phase["phase"], phase["phase"]
                 )
             return Response(phases)
-
-
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [dict(zip(columns, row)) for row in cursor.fetchall()]
