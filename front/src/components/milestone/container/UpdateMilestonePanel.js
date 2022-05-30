@@ -19,6 +19,7 @@ const UpdateMilestonePanel = () => {
     [project] = useOutletContext();
 
     const [milestone, setMilestone] = useState(null);
+    const [allItemsChecked, setAllItemsChecked] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
 
@@ -69,9 +70,13 @@ const UpdateMilestonePanel = () => {
         navigate(`/projects/${project.id}/milestones`);
     };
 
+    const handleChecklist = checklist => {
+        setAllItemsChecked(checklist);
+    };
+
     return (
         <SidebarPanel
-            sidebarTitle="Confirmar fecha de cumplimiento"
+            sidebarTitle="Fecha de cumplimiento"
             closeSidebarClick={handleCloseSidebar}
         >
             <FormProvider {...formMethods}>
@@ -85,12 +90,21 @@ const UpdateMilestonePanel = () => {
                     <Typography sx={{fontWeight: "medium"}}>
                         {milestone?.name}
                     </Typography>
-                    <MilestoneFormFields />
+                    <Typography variant="body2" py={3}>
+                        Antes de confirmar la fecha de cumplimiento de este hito, por
+                        favor realice las siguientes comprobaciones:
+                    </Typography>
+                    <MilestoneFormFields
+                        checklist={milestone?.checklist}
+                        handleChecklist={handleChecklist}
+                        areAllItemsChecked={allItemsChecked}
+                    />
                     <Grid container justifyContent="center" sx={{mt: 2}}>
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={formMethods.handleSubmit(onSubmit)}
+                            disabled={!allItemsChecked}
                         >
                             Guardar
                         </Button>
