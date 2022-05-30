@@ -19,7 +19,7 @@ const CreateContractPage = () => {
     const handleSubmit = contract => {
         ContractService.createContract(contract_view_adapter({...contract}))
             .then(createdContract => {
-                navigate(`/contracts/${createdContract.id}`);
+                navigate(`/contracts/${createdContract.id}/summary`);
             })
             .catch(error => {
                 console.log(error);

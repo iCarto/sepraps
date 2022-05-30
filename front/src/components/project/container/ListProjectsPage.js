@@ -62,7 +62,7 @@ const ListProjectsPage = () => {
     }, [filter]);
 
     const handleClickOnCard = projectId => {
-        navigate(`/projects/${projectId}`);
+        navigate(`/projects/${projectId}/summary`);
     };
 
     const onSelectProject = project => {

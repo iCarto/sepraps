@@ -67,7 +67,7 @@ const ListContractsPage = () => {
     };
 
     const handleClickOnCard = contractId => {
-        navigate(`/contracts/${contractId}`);
+        navigate(`/contracts/${contractId}/summary`);
     };
 
     const onSelectContract = contract => {

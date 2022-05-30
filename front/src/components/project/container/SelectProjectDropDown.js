@@ -109,7 +109,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                             variant="menu"
                             key={project.id}
                             id={project.id}
-                            to={`/projects/${project.id}`}
+                            to={`/projects/${project.id}/summary`}
                             selected={project === selectedProject.name}
                             onClick={handleClose}
                         >

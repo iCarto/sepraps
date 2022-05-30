@@ -123,7 +123,11 @@ const projectRoutes = [
                 </Route>
                 <Route path="" element={<ViewProjectQuestionnairesSubPage />} />
             </Route>
-            <Route key="project-info" path="" element={<ViewProjectSummarySubPage />}>
+            <Route
+                key="project-info"
+                path="summary"
+                element={<ViewProjectSummarySubPage />}
+            >
                 <Route
                     key="project-general-data"
                     path="edit"

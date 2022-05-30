@@ -23,7 +23,7 @@ const AddContractContractorPanel = () => {
             contract_view_adapter({...contract, contractor: contractor})
         )
             .then(() => {
-                navigate(`/contracts/${contract.id}`, true);
+                navigate(`/contracts/${contract.id}/summary`, true);
             })
             .catch(error => {
                 console.log({error});
@@ -32,7 +32,7 @@ const AddContractContractorPanel = () => {
     };
 
     const handleCancel = () => {
-        navigate(`/contracts/${contract.id}`);
+        navigate(`/contracts/${contract.id}/summary`);
     };
 
     const handleSelectExistingContractor = selectedExistingContractor => {

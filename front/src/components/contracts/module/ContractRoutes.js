@@ -23,7 +23,11 @@ const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
     <Route key="contract-manage" path="" element={<ManageContractsPage />}>
         <Route key="contract-detail" path=":id" element={<ViewContractPage />}>
-            <Route key="contract-info" path="" element={<ViewContractInfoSubPage />}>
+            <Route
+                key="contract-info"
+                path="summary"
+                element={<ViewContractInfoSubPage />}
+            >
                 <Route
                     key="contract-contractor"
                     path="contractor/:contractorId/edit"

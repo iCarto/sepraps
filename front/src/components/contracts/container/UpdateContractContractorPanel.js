@@ -20,7 +20,7 @@ const UpdateContractContractorPanel = () => {
             contractor_view_adapter({...contractor, contract: contract.id})
         )
             .then(() => {
-                navigate("/contracts/" + contract.id, true);
+                navigate("/contracts/" + contract.id + "/summary", true);
             })
             .catch(error => {
                 console.log({error});
@@ -29,7 +29,7 @@ const UpdateContractContractorPanel = () => {
     };
 
     const handleCancel = () => {
-        navigate(`/contracts/${contract.id}`);
+        navigate(`/contracts/${contract.id}/summary`);
     };
 
     return (

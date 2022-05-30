@@ -20,7 +20,7 @@ const UpdateContractPanel = () => {
     const handleSubmit = contract => {
         ContractService.updateContract(contract_view_adapter({...contract}))
             .then(() => {
-                navigate(`/contracts/${contract.id}`, true);
+                navigate(`/contracts/${contract.id}/summary`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -29,7 +29,7 @@ const UpdateContractPanel = () => {
     };
 
     const handleCloseSidebar = () => {
-        navigate(`/contracts/${contract.id}`);
+        navigate(`/contracts/${contract.id}/summary`);
     };
 
     return (

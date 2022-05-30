@@ -21,7 +21,7 @@ const ProjectContractSection = ({contract}) => {
             text="Ir a la página del Contrato"
             icon={<LaunchIcon />}
             onClick={() => {
-                navigate(`/contracts/${contract.id}`);
+                navigate(`/contracts/${contract.id}/summary`);
             }}
         />,
     ];

@@ -16,7 +16,7 @@ const RemoveContractContractorDialog = ({contract, isDialogOpen, setIsDialogOpen
         ContractService.updateContract(
             contract_view_adapter({...contract, contractor: null})
         ).then(() => {
-            navigate("/contracts/" + contract.id, true);
+            navigate("/contracts/" + contract.id + "/summary", true);
         });
     };
 

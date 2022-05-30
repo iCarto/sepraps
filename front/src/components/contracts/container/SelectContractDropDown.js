@@ -96,7 +96,7 @@ const SelectContractDropDown = ({selectedContract}) => {
                             variant="menu"
                             key={contract.id}
                             id={contract.id}
-                            to={`/contracts/${contract.id}`}
+                            to={`/contracts/${contract.id}/summary`}
                             selected={contract === selectedContract.number}
                             onClick={handleClose}
                         >

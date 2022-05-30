@@ -1,10 +1,9 @@
-import {MenuListItemLink} from "components/common/presentational";
+import {MenuListItemLink, MenuListItemIcon} from "components/common/presentational";
 import {SelectProjectDropDown} from "../container";
 
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
@@ -31,28 +30,28 @@ const ProjectMenu = ({project}) => {
                 <Divider />
                 <Box>
                     <MenuList sx={{pt: 0}}>
-                        <MenuListItemLink to={`/projects/${project.id}`}>
-                            <ListItemIcon>
+                        <MenuListItemLink to={`/projects/${project.id}/summary`}>
+                            <MenuListItemIcon>
                                 <InfoOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Resumen" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/location`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <LocationOnOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Ubicación" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/financing`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <AccountBalanceOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Financiación" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/milestones`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <LinearScaleOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Hitos" />
                         </MenuListItemLink>
                         <QuestionnairesMenu
@@ -60,15 +59,15 @@ const ProjectMenu = ({project}) => {
                             basePath={`/projects/${project.id}`}
                         />
                         <MenuListItemLink to={`/projects/${project.id}/contacts`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <PermContactCalendarOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Contactos" />
                         </MenuListItemLink>
                         <MenuListItemLink to={`/projects/${project.id}/documents`}>
-                            <ListItemIcon>
+                            <MenuListItemIcon>
                                 <TopicOutlinedIcon />
-                            </ListItemIcon>
+                            </MenuListItemIcon>
                             <ListItemText primary="Documentos" />
                         </MenuListItemLink>
                     </MenuList>
