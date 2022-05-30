@@ -74,6 +74,10 @@ const UpdateMilestonePanel = () => {
         setAllItemsChecked(checklist);
     };
 
+    const checklistItems = milestone?.checklist.map(
+        checklistItem => checklistItem["definition"]
+    );
+
     return (
         <SidebarPanel
             sidebarTitle="Fecha de cumplimiento"
@@ -95,7 +99,7 @@ const UpdateMilestonePanel = () => {
                         favor realice las siguientes comprobaciones:
                     </Typography>
                     <MilestoneFormFields
-                        checklist={milestone?.checklist}
+                        checklistItems={checklistItems}
                         handleChecklist={handleChecklist}
                         areAllItemsChecked={allItemsChecked}
                     />

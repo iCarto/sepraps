@@ -14,7 +14,7 @@ const FormChecklist = ({
     rules = {},
     onChangeHandler = null,
     disabled = false,
-    checklist = [],
+    checklistItems = [],
 }) => {
     const {control} = useFormContext();
     const {
@@ -40,12 +40,12 @@ const FormChecklist = ({
 
         setChecked(newChecked);
 
-        const areAllItemsChecked = newChecked.length === checklist.length + 1;
+        const areAllItemsChecked = newChecked.length === checklistItems.length + 1;
 
         onChangeHandler(areAllItemsChecked);
     };
 
-    const ListTaskItems = checklist.map((value, index) => {
+    const listItems = checklistItems.map((value, index) => {
         const labelId = `checkbox-list-label-${index}`;
 
         return (
@@ -69,9 +69,7 @@ const FormChecklist = ({
         );
     });
 
-    return (
-        <List sx={{width: "100%", bgcolor: "background.paper"}}>{ListTaskItems}</List>
-    );
+    return <List sx={{width: "100%", bgcolor: "background.paper"}}>{listItems}</List>;
 };
 
 export default FormChecklist;
