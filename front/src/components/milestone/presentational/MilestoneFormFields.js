@@ -1,7 +1,7 @@
 import {FormChecklist, FormDatePicker} from "components/common/form";
 
 const MilestoneFormFields = ({
-    checklist = [],
+    checklistItems = [],
     handleChecklist = null,
     areAllItemsChecked = false,
 }) => {
@@ -14,7 +14,7 @@ const MilestoneFormFields = ({
             <FormChecklist
                 name="milestone_checklist"
                 onChangeHandler={onCheck}
-                checklist={checklist}
+                checklistItems={checklistItems}
             />
             <FormDatePicker
                 name="compliance_date"

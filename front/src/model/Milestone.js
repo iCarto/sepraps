@@ -12,9 +12,7 @@ const milestone_api_adapter = milestone => {
         );
     }
     if (milestone["checklist"]) {
-        milestone["checklist"] = milestone["checklist"]?.map(
-            checkItem => checkItem.definition
-        );
+        milestone["checklist"] = milestone["checklist"]?.map(checkItem => checkItem);
     }
     return milestone;
 };
