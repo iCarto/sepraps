@@ -1,4 +1,4 @@
-import {format, parse, add} from "date-fns";
+import {format, parse, add, addDays} from "date-fns";
 import {es} from "date-fns/locale";
 
 export const DATE_FORMATS = {
@@ -51,7 +51,10 @@ const DateUtil = {
         return format(new Date(null, month - 1), "LLLL", {locale: es});
     },
     addMonths(date, months) {
-        return add(date, {months});
+        return add(date, { months });
+    },
+    getDateAfterDays(date, amountOfDays) {
+        return addDays(date, amountOfDays);
     },
 };
 

@@ -66,7 +66,9 @@ class ConstructionContract(models.Model):
     execution_final_delivery_date = models.DateField(
         "Fecha de recepción definitiva", null=True
     )
-    expected_execution_period = models.IntegerField("Plazo previsto")
+    expected_execution_period = models.IntegerField(
+        "Plazo previsto de ejecución", null=True
+    )
 
     closed = models.BooleanField(blank=False, null=False, default=False)
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)

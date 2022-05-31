@@ -55,11 +55,20 @@ const ContractExecutionSection = ({isSidePanelOpen = null}) => {
                       contract.execution_certificate_start_date
                   )
                 : getNoDatetInfo("Fecha del acta de inicio:")}
-            {/* TO-DO: AÑADIR FECHA AUTOCALCULADA */}
-            <SectionField
-                label="Plazo previsto de ejecución:"
-                value={contract.expected_execution_period + " días"}
-            />
+            {contract.expected_execution_period ? (
+                <SectionField
+                    label="Plazo previsto de ejecución:"
+                    value={contract.expected_execution_period + " días"}
+                />
+            ) : (
+                getNoDatetInfo("Plazo previsto de ejecución:")
+            )}
+            {contract.expected_execution_end_date
+                ? getDatetInfo(
+                      "Fecha prevista de fin de ejecución:",
+                      contract.expected_execution_end_date
+                  )
+                : getNoDatetInfo("Fecha prevista de fin de ejecución:")}
             {contract.execution_final_delivery_date
                 ? getDatetInfo(
                       "Fecha de recepción definitiva:",
