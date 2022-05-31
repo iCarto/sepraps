@@ -22,12 +22,12 @@ pwd
 
 # Eliminamos también las migraciones de los paquetes de django que utilicemos
 # para que no se creen migraciones intermedias
-find "$SITE_PACKAGES/django/contrib/auth" -path "*/migrations/*.py" -not -name "__init__.py" -delete
-find "$SITE_PACKAGES/django/contrib/auth" -path "*/migrations/*.pyc" -delete
-find "$SITE_PACKAGES/django/contrib/admin" -path "*/migrations/*.py" -not -name "__init__.py" -delete
-find "$SITE_PACKAGES/django/contrib/admin" -path "*/migrations/*.pyc" -delete
-find "$SITE_PACKAGES/django/contrib/contenttypes" -path "*/migrations/*.py" -not -name "__init__.py" -delete
-find "$SITE_PACKAGES/django/contrib/contenttypes" -path "*/migrations/*.pyc" -delete
+find "${SITE_PACKAGES}/django/contrib/auth" -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find "${SITE_PACKAGES}/django/contrib/auth" -path "*/migrations/*.pyc" -delete
+find "${SITE_PACKAGES}/django/contrib/admin" -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find "${SITE_PACKAGES}/django/contrib/admin" -path "*/migrations/*.pyc" -delete
+find "${SITE_PACKAGES}/django/contrib/contenttypes" -path "*/migrations/*.py" -not -name "__init__.py" -delete
+find "${SITE_PACKAGES}/django/contrib/contenttypes" -path "*/migrations/*.pyc" -delete
 
 drop_db_and_kickout_users "${DBNAME}"
 
@@ -43,12 +43,12 @@ mkdir -p "${this_dir}/../front/build"
 rm -f back/front_build
 ln -s ../../front/build back/front_build
 
-if [[ "$DATABASE_CONTROL_CHANGES_MODE" == "sqitch" ]]; then
-    cd "${this_dir}/../sqitch"
+if [[ "${DATABASE_CONTROL_CHANGES_MODE}" == "sqitch" ]]; then
+    cd "${this_dir}/../sqitch" || exit
     sqitch deploy
-    cd "${this_dir}/../${BACKEND_FOLDER_NAME}"
+    cd "${this_dir}/../${BACKEND_FOLDER_NAME}" || exit
 else
-    cd "${this_dir}/../${BACKEND_FOLDER_NAME}"
+    cd "${this_dir}/../${BACKEND_FOLDER_NAME}" || exit
     # Crea las migraciones. migrations/__ini__.py debe existir para que se cree la
     # migración inicial de una app o debe invocarse la app de forma concreta
     # python manage.py makemigrations users
@@ -62,6 +62,10 @@ python manage.py createsuperuser --no-input --username admin
 
 if [[ -z "${CREATE_EMPTY}" ]]; then
     python "${this_dir}/database.py" "${this_dir}/data/Barrios_Localidades_Paraguay_Codigos_DGEEC.csv" > "${this_dir}/data/fixtures_location.json"
+    # To generate fixtures auth
+    # python manage.py dumpdata auth.Group users.User --natural-foreign --natural-primary --indent 4 > fixtures_auth.json
+    # And remove admin user inside file
+    python manage.py loaddata "${this_dir}/data/fixtures_auth.json"
     python manage.py loaddata "${this_dir}/data/fixtures_location.json"
     python manage.py loaddata "${this_dir}/data/fixtures_data.json"
     python manage.py loaddata "${this_dir}/data/fixtures_questionnaires.json"

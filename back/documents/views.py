@@ -3,6 +3,7 @@ from documents.models import MediaNode
 from documents.serializers import MediaLeafNodeSerializer, MediaNodeSerializer
 from documents.storage import delete, open, save
 from rest_framework import parsers, status, views
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 
@@ -18,6 +19,7 @@ def get_filter(media_path):
 class MediaView(views.APIView):
     serializer_class = MediaNodeSerializer
     parser_classes = [parsers.FileUploadParser]
+    queryset = MediaNode.objects.all()
 
     def get(self, request, media_path):
         action = self.request.query_params.get("action")

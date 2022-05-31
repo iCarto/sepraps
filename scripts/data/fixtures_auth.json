@@ -1,0 +1,455 @@
+[
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "edicion",
+            "permissions": [
+                ["add_document", "documents", "document"],
+                ["change_document", "documents", "document"],
+                ["delete_document", "documents", "document"],
+                ["view_document", "documents", "document"],
+                ["add_folder", "documents", "folder"],
+                ["change_folder", "documents", "folder"],
+                ["delete_folder", "documents", "folder"],
+                ["view_folder", "documents", "folder"],
+                ["add_medianode", "documents", "medianode"],
+                ["change_medianode", "documents", "medianode"],
+                ["delete_medianode", "documents", "medianode"],
+                ["view_medianode", "documents", "medianode"],
+                ["change_constructioncontract", "monitoring", "constructioncontract"],
+                ["view_constructioncontract", "monitoring", "constructioncontract"],
+                ["add_contact", "monitoring", "contact"],
+                ["change_contact", "monitoring", "contact"],
+                ["delete_contact", "monitoring", "contact"],
+                ["view_contact", "monitoring", "contact"],
+                ["add_contractor", "monitoring", "contractor"],
+                ["change_contractor", "monitoring", "contractor"],
+                ["delete_contractor", "monitoring", "contractor"],
+                ["view_contractor", "monitoring", "contractor"],
+                ["view_department", "monitoring", "department"],
+                ["view_district", "monitoring", "district"],
+                ["view_domainentry", "monitoring", "domainentry"],
+                ["view_financingfund", "monitoring", "financingfund"],
+                ["view_financingprogram", "monitoring", "financingprogram"],
+                ["view_infrastructure", "monitoring", "infrastructure"],
+                ["add_locality", "monitoring", "locality"],
+                ["view_locality", "monitoring", "locality"],
+                ["change_milestone", "monitoring", "milestone"],
+                ["view_milestone", "monitoring", "milestone"],
+                ["change_project", "monitoring", "project"],
+                ["view_project", "monitoring", "project"],
+                [
+                    "add_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "change_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "delete_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "view_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                ["add_provider", "monitoring", "provider"],
+                ["change_provider", "monitoring", "provider"],
+                ["delete_provider", "monitoring", "provider"],
+                ["view_provider", "monitoring", "provider"],
+                [
+                    "add_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "change_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "delete_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "view_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "add_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "change_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "delete_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "view_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                ["view_questionnaire", "questionnaires", "questionnaire"]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "gestion",
+            "permissions": [
+                ["add_document", "documents", "document"],
+                ["change_document", "documents", "document"],
+                ["delete_document", "documents", "document"],
+                ["view_document", "documents", "document"],
+                ["view_folder", "documents", "folder"],
+                ["add_medianode", "documents", "medianode"],
+                ["change_medianode", "documents", "medianode"],
+                ["delete_medianode", "documents", "medianode"],
+                ["view_medianode", "documents", "medianode"],
+                ["add_constructioncontract", "monitoring", "constructioncontract"],
+                ["change_constructioncontract", "monitoring", "constructioncontract"],
+                ["delete_constructioncontract", "monitoring", "constructioncontract"],
+                ["view_constructioncontract", "monitoring", "constructioncontract"],
+                ["add_contact", "monitoring", "contact"],
+                ["change_contact", "monitoring", "contact"],
+                ["delete_contact", "monitoring", "contact"],
+                ["view_contact", "monitoring", "contact"],
+                ["add_contractor", "monitoring", "contractor"],
+                ["change_contractor", "monitoring", "contractor"],
+                ["delete_contractor", "monitoring", "contractor"],
+                ["view_contractor", "monitoring", "contractor"],
+                ["view_department", "monitoring", "department"],
+                ["view_district", "monitoring", "district"],
+                ["view_domainentry", "monitoring", "domainentry"],
+                ["view_financingfund", "monitoring", "financingfund"],
+                ["view_financingprogram", "monitoring", "financingprogram"],
+                ["add_infrastructure", "monitoring", "infrastructure"],
+                ["change_infrastructure", "monitoring", "infrastructure"],
+                ["delete_infrastructure", "monitoring", "infrastructure"],
+                ["view_infrastructure", "monitoring", "infrastructure"],
+                ["add_locality", "monitoring", "locality"],
+                ["view_locality", "monitoring", "locality"],
+                ["change_milestone", "monitoring", "milestone"],
+                ["view_milestone", "monitoring", "milestone"],
+                ["add_project", "monitoring", "project"],
+                ["change_project", "monitoring", "project"],
+                ["delete_project", "monitoring", "project"],
+                ["view_project", "monitoring", "project"],
+                [
+                    "add_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "change_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "delete_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "view_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                ["add_provider", "monitoring", "provider"],
+                ["change_provider", "monitoring", "provider"],
+                ["delete_provider", "monitoring", "provider"],
+                ["view_provider", "monitoring", "provider"],
+                [
+                    "add_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "change_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "delete_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "view_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "add_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "change_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "delete_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "view_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                ["view_questionnaire", "questionnaires", "questionnaire"]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "visualizacion",
+            "permissions": [
+                ["view_document", "documents", "document"],
+                ["view_folder", "documents", "folder"],
+                ["view_medianode", "documents", "medianode"],
+                ["view_constructioncontract", "monitoring", "constructioncontract"],
+                ["view_contact", "monitoring", "contact"],
+                ["view_contractor", "monitoring", "contractor"],
+                ["view_department", "monitoring", "department"],
+                ["view_district", "monitoring", "district"],
+                ["view_domainentry", "monitoring", "domainentry"],
+                ["view_financingfund", "monitoring", "financingfund"],
+                ["view_financingprogram", "monitoring", "financingprogram"],
+                ["view_infrastructure", "monitoring", "infrastructure"],
+                ["view_locality", "monitoring", "locality"],
+                ["view_milestone", "monitoring", "milestone"],
+                ["view_project", "monitoring", "project"],
+                [
+                    "view_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                ["view_provider", "monitoring", "provider"],
+                [
+                    "view_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "view_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                ["view_questionnaire", "questionnaires", "questionnaire"]
+            ]
+        }
+    },
+    {
+        "model": "auth.group",
+        "fields": {
+            "name": "supervision",
+            "permissions": [
+                ["add_document", "documents", "document"],
+                ["change_document", "documents", "document"],
+                ["delete_document", "documents", "document"],
+                ["view_document", "documents", "document"],
+                ["view_folder", "documents", "folder"],
+                ["add_medianode", "documents", "medianode"],
+                ["change_medianode", "documents", "medianode"],
+                ["delete_medianode", "documents", "medianode"],
+                ["view_medianode", "documents", "medianode"],
+                ["add_constructioncontract", "monitoring", "constructioncontract"],
+                ["change_constructioncontract", "monitoring", "constructioncontract"],
+                ["delete_constructioncontract", "monitoring", "constructioncontract"],
+                ["view_constructioncontract", "monitoring", "constructioncontract"],
+                ["add_contact", "monitoring", "contact"],
+                ["change_contact", "monitoring", "contact"],
+                ["delete_contact", "monitoring", "contact"],
+                ["view_contact", "monitoring", "contact"],
+                ["add_contractor", "monitoring", "contractor"],
+                ["change_contractor", "monitoring", "contractor"],
+                ["delete_contractor", "monitoring", "contractor"],
+                ["view_contractor", "monitoring", "contractor"],
+                ["view_department", "monitoring", "department"],
+                ["view_district", "monitoring", "district"],
+                ["view_domainentry", "monitoring", "domainentry"],
+                ["view_financingfund", "monitoring", "financingfund"],
+                ["view_financingprogram", "monitoring", "financingprogram"],
+                ["add_infrastructure", "monitoring", "infrastructure"],
+                ["change_infrastructure", "monitoring", "infrastructure"],
+                ["delete_infrastructure", "monitoring", "infrastructure"],
+                ["view_infrastructure", "monitoring", "infrastructure"],
+                ["view_locality", "monitoring", "locality"],
+                ["change_milestone", "monitoring", "milestone"],
+                ["view_milestone", "monitoring", "milestone"],
+                ["add_project", "monitoring", "project"],
+                ["change_project", "monitoring", "project"],
+                ["delete_project", "monitoring", "project"],
+                ["view_project", "monitoring", "project"],
+                [
+                    "add_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "change_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "delete_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                [
+                    "view_projectquestionnaireinstance",
+                    "monitoring",
+                    "projectquestionnaireinstance"
+                ],
+                ["add_provider", "monitoring", "provider"],
+                ["change_provider", "monitoring", "provider"],
+                ["delete_provider", "monitoring", "provider"],
+                ["view_provider", "monitoring", "provider"],
+                [
+                    "add_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "change_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "delete_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "view_monthlyquestionnaireinstance",
+                    "questionnaires",
+                    "monthlyquestionnaireinstance"
+                ],
+                [
+                    "add_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "change_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "delete_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                [
+                    "view_monthlyquestionnairevalue",
+                    "questionnaires",
+                    "monthlyquestionnairevalue"
+                ],
+                ["view_questionnaire", "questionnaires", "questionnaire"]
+            ]
+        }
+    },
+    {
+        "model": "users.user",
+        "fields": {
+            "password": "pbkdf2_sha256$260000$ERJtg3HSnynG4Bpivz9BLM$vg7kuzl5OMIrR0C0vUZJlfsgineWLuluDCTVhyX7DqA=",
+            "last_login": "2022-05-31T14:40:55.747Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "Administración",
+            "last_name": "SENASA",
+            "email": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2022-05-31T14:40:21.485Z",
+            "groups": [["edicion"], ["gestion"], ["visualizacion"], ["supervision"]],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.user",
+        "fields": {
+            "password": "pbkdf2_sha256$260000$R8Y1bsedpRt2CRjxDCSq6b$WdAiNv0/P87W3O8XC4SaAgKXnzD0R0g31XUDXDZLmQY=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "edicion",
+            "first_name": "Edición",
+            "last_name": "SENASA",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-05-31T05:56:32Z",
+            "groups": [["edicion"]],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.user",
+        "fields": {
+            "password": "pbkdf2_sha256$260000$WpHtKA0ajsGiNAtvvPQn9N$jra0GtR+iHIK2JqWL8AmKE9uh/fG3wkHpQ7AceAQOOk=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "gestion",
+            "first_name": "Gestión",
+            "last_name": "SENASA",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-05-31T06:14:40Z",
+            "groups": [["gestion"]],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.user",
+        "fields": {
+            "password": "pbkdf2_sha256$260000$VmhbLNupqnIH79Mj8AkkLA$f7x3EexJmZRT3clDzhhl2sT7EjLgD4lidVZ6cX6zNng=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "visualizacion",
+            "first_name": "Visualización",
+            "last_name": "SENASA",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-05-31T06:15:39Z",
+            "groups": [["visualizacion"]],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.user",
+        "fields": {
+            "password": "pbkdf2_sha256$260000$q9ppFlciofh2Ck9QBPNGow$KyBJ9KV2EIo1lOPiXdCdr5eEvqICKr0ppYRURqqX3/I=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "supervision",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2022-05-31T14:36:43Z",
+            "groups": [["supervision"]],
+            "user_permissions": []
+        }
+    }
+]
