@@ -70,7 +70,13 @@ const AuthService = {
             return null;
         }
         let tokenData = JSON.parse(atob(accessToken.split(".")[1]));
-        return tokenData.username;
+        return {
+            username: tokenData.username,
+            name: tokenData.first_name
+                ? `${tokenData.first_name} ${tokenData.last_name}`
+                : tokenData.username,
+            is_superuser: tokenData.is_superuser,
+        };
     },
 };
 

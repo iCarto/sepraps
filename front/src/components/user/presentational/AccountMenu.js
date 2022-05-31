@@ -93,7 +93,7 @@ const AccountMenu = () => {
             >
                 <ListItem>
                     <Avatar />
-                    {auth.user}
+                    {auth.user.name}
                 </ListItem>
                 <Divider />
                 <MenuItem

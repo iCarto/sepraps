@@ -33,21 +33,17 @@ const FetchService = {
                 "Content-Type": "application/json",
                 ...headers,
             },
-        })
-            .then(response => {
-                if (response.status !== 200 && response.status !== 201) {
-                    return response.text().then(text => {
-                        throw new Error(text);
-                    });
-                }
-                if (response.headers.get("content-type") === "application/json") {
-                    return response.json();
-                }
-                return response;
-            })
-            .catch(() => {
-                throw new Error("Server problem connection");
-            });
+        }).then(response => {
+            if (response.status !== 200 && response.status !== 201) {
+                return response.text().then(text => {
+                    throw new Error(text);
+                });
+            }
+            if (response.headers.get("content-type") === "application/json") {
+                return response.json();
+            }
+            return response;
+        });
     },
 
     post(url = "", body = {}, contentType = "application/json", headers = {}) {
