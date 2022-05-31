@@ -1,5 +1,6 @@
 import {useOutletContext} from "react-router-dom";
 import {ActionsMenu, MenuAction} from "components/common/presentational";
+import {AuthAction, useAuth} from "auth";
 
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -10,6 +11,8 @@ import TableCell from "@mui/material/TableCell";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const ProjectLinkedLocalitiesTable = ({handleActions = null}) => {
+    const {ROLES} = useAuth();
+
     let project;
     [project] = useOutletContext();
     const localities = project?.linked_localities;
@@ -52,15 +55,17 @@ const ProjectLinkedLocalitiesTable = ({handleActions = null}) => {
                             <TableCell>{locality.department_name}</TableCell>
                             {handleActions ? (
                                 <TableCell>
-                                    <ActionsMenu>
-                                        <MenuAction
-                                            name="remove-contact"
-                                            icon={<LinkOffIcon />}
-                                            text="Quitar localidad"
-                                            itemId={locality.code}
-                                            handleClick={handleClick}
-                                        />
-                                    </ActionsMenu>
+                                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                                        <ActionsMenu>
+                                            <MenuAction
+                                                name="remove-contact"
+                                                icon={<LinkOffIcon />}
+                                                text="Quitar localidad"
+                                                itemId={locality.code}
+                                                handleClick={handleClick}
+                                            />
+                                        </ActionsMenu>
+                                    </AuthAction>
                                 </TableCell>
                             ) : null}
                         </TableRow>

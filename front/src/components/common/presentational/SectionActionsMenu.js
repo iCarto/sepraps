@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useAuth} from "auth";
 
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
@@ -6,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const SectionActionsMenu = ({children}) => {
+    const {hasRole} = useAuth();
     const [anchorEl, setAnchorEl] = useState(null);
     const openSettingsMenu = Boolean(anchorEl);
 
@@ -38,38 +40,50 @@ const SectionActionsMenu = ({children}) => {
         },
     };
 
+    // Review if some of the children has permissions
+    const hasPermission = children => {
+        const roles = children.flatMap((child, i) => {
+            return child.props.roles ? child.props.roles : [];
+        });
+        return roles.length === 0 || roles.some(role => hasRole(role));
+    };
+
     return (
-        <>
-            <Tooltip title="Acciones">
-                <IconButton
-                    onClick={handleOpenActionsMenu}
-                    size="small"
-                    aria-controls={openSettingsMenu ? "actions" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={openSettingsMenu ? "true" : undefined}
+        children &&
+        children.length &&
+        hasPermission(children) && (
+            <>
+                <Tooltip title="Acciones">
+                    <IconButton
+                        onClick={handleOpenActionsMenu}
+                        size="small"
+                        aria-controls={openSettingsMenu ? "actions" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={openSettingsMenu ? "true" : undefined}
+                    >
+                        <MoreVertIcon />
+                    </IconButton>
+                </Tooltip>
+                <Menu
+                    anchorEl={anchorEl}
+                    id="actions"
+                    open={openSettingsMenu}
+                    onClose={handleCloseActionsMenu}
+                    onClick={handleCloseActionsMenu}
+                    PaperProps={paperProps}
+                    transformOrigin={{
+                        horizontal: "right",
+                        vertical: "top",
+                    }}
+                    anchorOrigin={{
+                        horizontal: "right",
+                        vertical: "bottom",
+                    }}
                 >
-                    <MoreVertIcon />
-                </IconButton>
-            </Tooltip>
-            <Menu
-                anchorEl={anchorEl}
-                id="actions"
-                open={openSettingsMenu}
-                onClose={handleCloseActionsMenu}
-                onClick={handleCloseActionsMenu}
-                PaperProps={paperProps}
-                transformOrigin={{
-                    horizontal: "right",
-                    vertical: "top",
-                }}
-                anchorOrigin={{
-                    horizontal: "right",
-                    vertical: "bottom",
-                }}
-            >
-                {children}
-            </Menu>
-        </>
+                    {children}
+                </Menu>
+            </>
+        )
     );
 };
 

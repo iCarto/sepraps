@@ -16,7 +16,7 @@ import Logout from "@mui/icons-material/Logout";
 const AccountMenu = () => {
     const [anchorEl, setAnchorEl] = useState(null);
 
-    let auth = useAuth();
+    const {user, logout} = useAuth();
 
     let navigate = useNavigate();
 
@@ -93,12 +93,12 @@ const AccountMenu = () => {
             >
                 <ListItem>
                     <Avatar />
-                    {auth.user.name}
+                    {user.name}
                 </ListItem>
                 <Divider />
                 <MenuItem
                     onClick={() => {
-                        auth.logout(() => navigate("/"));
+                        logout(() => navigate("/"));
                     }}
                 >
                     <ListItemIcon>

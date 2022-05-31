@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "auth";
 
 import {
     SectionCard,
@@ -14,6 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const QuestionnaireInstanceDetail = ({instance}) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     const secondaryActions = [
         <SectionCardHeaderAction
@@ -24,6 +26,7 @@ const QuestionnaireInstanceDetail = ({instance}) => {
             onClick={() => {
                 navigate("edit");
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
 

@@ -1,6 +1,7 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
-
+import {useAuth} from "auth";
 import {DateUtil} from "utilities";
+
 import {
     ProjectTypeIcon,
     SectionCard,
@@ -41,6 +42,7 @@ const closedProjectTagStyle = {
 
 const ProjectGeneralDataSection = () => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let project;
     [project] = useOutletContext();
@@ -56,6 +58,7 @@ const ProjectGeneralDataSection = () => {
                     onClick={() => {
                         navigate("edit");
                     }}
+                    roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
                 />,
             ]}
         >

@@ -1,6 +1,7 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {ContractService} from "service/api";
+import {AuthAction, useAuth} from "auth";
 
 import {useContractListView} from "../provider";
 import {PageLayoutWithPanel} from "layout";
@@ -26,6 +27,7 @@ const fabStyle = {
 
 const ListContractsPage = () => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let context;
     [context] = useOutletContext();
@@ -125,18 +127,20 @@ const ListContractsPage = () => {
                             justifyContent="flex-end"
                         >
                             <Stack direction="row" spacing={2}>
-                                <Button
-                                    id="basic-button"
-                                    color="primary"
-                                    variant="contained"
-                                    sx={{mr: 2, py: 1, lineHeight: 1.25}}
-                                    onClick={() => {
-                                        navigate("/contracts/new");
-                                    }}
-                                    startIcon={<AddIcon />}
-                                >
-                                    Nuevo contrato
-                                </Button>
+                                <AuthAction roles={[ROLES.MANAGEMENT]}>
+                                    <Button
+                                        id="basic-button"
+                                        color="primary"
+                                        variant="contained"
+                                        sx={{mr: 2, py: 1, lineHeight: 1.25}}
+                                        onClick={() => {
+                                            navigate("/contracts/new");
+                                        }}
+                                        startIcon={<AddIcon />}
+                                    >
+                                        Nuevo contrato
+                                    </Button>
+                                </AuthAction>
                                 <ContractListChangeView />
                             </Stack>
                         </Grid>

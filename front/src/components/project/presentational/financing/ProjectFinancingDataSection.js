@@ -1,4 +1,5 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 
 import {
     SectionCard,
@@ -12,27 +13,13 @@ import Button from "@mui/material/Button";
 
 const ProjectFinancingDataSection = () => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let project;
     [project] = useOutletContext();
 
-    const headerActions = [
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar"
-            icon={<EditIcon />}
-            onClick={() => {
-                navigate("edit");
-            }}
-        />,
-    ];
-
     return (
-        <SectionCard
-            title="Programa"
-            secondaryActions={project.financing_program_name ? headerActions : []}
-        >
+        <SectionCard title="Programa">
             {project.construction_contract?.financing_program ? (
                 <>
                     <SectionField
@@ -51,15 +38,17 @@ const ProjectFinancingDataSection = () => {
                     <Typography p={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene financiador
                     </Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                            navigate("add");
-                        }}
-                    >
-                        Añadir
-                    </Button>
+                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                navigate("add");
+                            }}
+                        >
+                            Añadir
+                        </Button>
+                    </AuthAction>
                 </Stack>
             )}
         </SectionCard>

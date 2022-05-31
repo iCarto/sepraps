@@ -1,5 +1,6 @@
+import {useState, useEffect} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
-import {useState, useEffect, useCallback, useMemo} from "react";
+import {AuthAction, useAuth} from "auth";
 import {ProjectService} from "service/api";
 
 import {useProjectListView} from "../provider";
@@ -19,6 +20,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const ListProjectsPage = () => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let context;
     [context] = useOutletContext();
@@ -126,18 +128,20 @@ const ListProjectsPage = () => {
                             justifyContent="flex-end"
                         >
                             <Stack direction="row" spacing={2}>
-                                <Button
-                                    id="basic-button"
-                                    color="primary"
-                                    variant="contained"
-                                    sx={{mr: 2, py: 1, lineHeight: 1.25}}
-                                    onClick={() => {
-                                        navigate("/projects/new");
-                                    }}
-                                    startIcon={<AddIcon />}
-                                >
-                                    Nuevo proyecto
-                                </Button>
+                                <AuthAction roles={[ROLES.MANAGEMENT]}>
+                                    <Button
+                                        id="basic-button"
+                                        color="primary"
+                                        variant="contained"
+                                        sx={{mr: 2, py: 1, lineHeight: 1.25}}
+                                        onClick={() => {
+                                            navigate("/projects/new");
+                                        }}
+                                        startIcon={<AddIcon />}
+                                    >
+                                        Nuevo proyecto
+                                    </Button>
+                                </AuthAction>
                                 <ProjectListChangeView />
                             </Stack>
                         </Grid>

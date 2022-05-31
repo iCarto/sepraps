@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useFieldArray, useForm} from "react-hook-form";
+import {useAuth} from "auth";
 import {ProjectService} from "service/api";
 import {project_questionnaire_view_adapter} from "model";
 import {createMQInstance, createMQInstanceValue} from "model/questionnaires";
@@ -15,6 +16,8 @@ import Typography from "@mui/material/Typography";
 
 const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
     const navigate = useNavigateWithReload();
+    const {ROLES, hasRole} = useAuth();
+
     const [error, setError] = useState("");
 
     const questionnaireInstances = projectQuestionnaire.questionnaire_instances;
@@ -136,6 +139,11 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
             });
     };
 
+    const hasEditPermission = [ROLES.EDIT, ROLES.MANAGEMENT].some(role =>
+        hasRole(role)
+    );
+    const isDisabled = hasInstances || !hasEditPermission;
+
     return (
         <FormProvider {...formMethods}>
             <Grid container spacing={2}>
@@ -145,7 +153,7 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
                         name="expected_month_from"
                         views={["month", "year"]}
                         onChangeHandler={refreshForm}
-                        disabled={hasInstances}
+                        disabled={isDisabled}
                     />
                 </Grid>
                 <Grid item xs={2}>
@@ -153,7 +161,7 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
                         label="Meses previstos"
                         name="expected_months"
                         onBlurHandler={refreshForm}
-                        disabled={hasInstances}
+                        disabled={isDisabled}
                     />
                 </Grid>
             </Grid>
@@ -188,14 +196,14 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
                                         label={questionnaireField.label}
                                         name={`expected_months_values.${index}.${questionnaireField.code}`}
                                         rules={{required: "Valor obligatorio"}}
-                                        disabled={hasInstances}
+                                        disabled={isDisabled}
                                     />
                                 </Grid>
                             )
                         )}
                     </Grid>
                 ))}
-                {!hasInstances && (
+                {!isDisabled && (
                     <Grid container justifyContent="center" sx={{mt: 2}}>
                         <Button
                             variant="contained"

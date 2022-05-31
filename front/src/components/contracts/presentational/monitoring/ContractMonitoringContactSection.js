@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 
 import {
     SectionCard,
@@ -23,6 +24,7 @@ const ContractMonitoringContactSection = ({
     onOpenRemoveDialog = null,
 }) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let isStaff = contact?.is_staff ? "Sí" : "No";
 
@@ -35,6 +37,7 @@ const ContractMonitoringContactSection = ({
             onClick={() => {
                 navigate(`${sectionName}/${contact.id}/edit`);
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
         <SectionCardHeaderAction
             key="remove"
@@ -44,6 +47,7 @@ const ContractMonitoringContactSection = ({
             onClick={() => {
                 onOpenRemoveDialog(true, sectionName, postName);
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
 
@@ -80,12 +84,14 @@ const ContractMonitoringContactSection = ({
                         Este contrato aún no tiene ningún {postName.toLowerCase()}{" "}
                         asignado
                     </Typography>
-                    <Grid item container xs={12} mt={3} justifyContent="center">
-                        <AddContactButtonGroup
-                            basePath={sectionName}
-                            btnName={`Asignar ${postName}`}
-                        />
-                    </Grid>
+                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                        <Grid item container xs={12} mt={3} justifyContent="center">
+                            <AddContactButtonGroup
+                                basePath={sectionName}
+                                btnName={`Asignar ${postName}`}
+                            />
+                        </Grid>
+                    </AuthAction>
                 </Stack>
             )}
         </SectionCard>
