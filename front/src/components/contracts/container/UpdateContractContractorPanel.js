@@ -5,7 +5,7 @@ import {ContractorService} from "service/api";
 import {contractor_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 import {ContractorForm} from "components/contractor/presentational";
 
 const UpdateContractContractorPanel = () => {
@@ -37,11 +37,7 @@ const UpdateContractContractorPanel = () => {
             sidebarTitle="Actualizar contratista"
             closeSidebarClick={handleCancel}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             <ContractorForm contractor={contract.contractor} onSubmit={handleSubmit} />
         </SidebarPanel>
     );

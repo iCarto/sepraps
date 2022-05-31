@@ -9,7 +9,7 @@ import {ProjectForm} from "../presentational";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const CreateProjectPage = () => {
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ const CreateProjectPage = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -34,7 +34,7 @@ const CreateProjectPage = () => {
                     <Typography variant="h6" sx={{mb: 2}}>
                         Registro de proyecto
                     </Typography>
-                    {error && <Alert severity="error">{error}</Alert>}
+                    <AlertError error={error} />
                     <ProjectForm onSubmit={handleFormSubmit} />
                 </Paper>
             </Container>

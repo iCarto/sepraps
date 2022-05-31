@@ -6,7 +6,7 @@ import {createProvider, provider_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ContactForm, ContactFormSearch} from "components/contacts/presentational";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const UpdateProjectProviderContactPanel = () => {
     const {action, contactId} = useParams();
@@ -47,7 +47,7 @@ const UpdateProjectProviderContactPanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -78,11 +78,7 @@ const UpdateProjectProviderContactPanel = () => {
             }
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             {action === "search" ? (
                 <ContactFormSearch
                     allowedPosts={allowedPosts}

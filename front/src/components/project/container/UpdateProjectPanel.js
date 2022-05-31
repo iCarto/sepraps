@@ -6,7 +6,7 @@ import {project_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ProjectForm} from "../presentational";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const UpdateProjectPanel = () => {
     const [error, setError] = useState("");
@@ -22,7 +22,7 @@ const UpdateProjectPanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -35,11 +35,7 @@ const UpdateProjectPanel = () => {
             sidebarTitle="Modificar proyecto"
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             <ProjectForm updatedSection="generaldata" onSubmit={handleSubmit} />
         </SidebarPanel>
     );

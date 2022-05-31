@@ -7,10 +7,10 @@ import {MilestoneService} from "service/api";
 
 import {SidebarPanel} from "layout";
 import {MilestoneFormFields} from "../presentational";
+import {AlertError} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 
 const UpdateMilestonePanel = () => {
@@ -61,7 +61,7 @@ const UpdateMilestonePanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -81,11 +81,7 @@ const UpdateMilestonePanel = () => {
                         width: "100%",
                     }}
                 >
-                    {error && (
-                        <Alert severity="error" sx={{mb: 2}}>
-                            {error}
-                        </Alert>
-                    )}
+                    <AlertError error={error} />
                     <Typography sx={{fontWeight: "medium"}}>
                         {milestone?.category_name}
                     </Typography>

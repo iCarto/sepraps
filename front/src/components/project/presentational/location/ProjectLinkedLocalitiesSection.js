@@ -7,10 +7,10 @@ import {project_view_adapter} from "model";
 import {SectionCard} from "components/common/presentational";
 import {ProjectLinkedLocalitiesTable} from ".";
 import {RemoveProjectLinkedLocalityDialog} from "components/project/container";
+import {AlertError} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
 
 const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
     let project;
@@ -47,7 +47,7 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
         setIsRemoveDialogOpen(false);
     };
@@ -74,13 +74,7 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
                     Añadir
                 </Button>
             </Grid>
-            {error && (
-                <Grid item xs={12}>
-                    <Alert severity="error" sx={{mt: 2, mb: 2}}>
-                        {error}
-                    </Alert>
-                </Grid>
-            )}
+            <AlertError error={error} />
             <RemoveProjectLinkedLocalityDialog
                 project={project}
                 localityToRemove={localityToRemove}

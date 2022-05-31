@@ -6,7 +6,7 @@ import {contract_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ContractForm} from "../presentational";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const UpdateContractPanel = () => {
     const {section} = useParams();
@@ -24,7 +24,7 @@ const UpdateContractPanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -37,11 +37,7 @@ const UpdateContractPanel = () => {
             sidebarTitle="Modificar contrato"
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             <ContractForm updatedSection={section} onSubmit={handleSubmit} />
         </SidebarPanel>
     );

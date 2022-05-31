@@ -6,7 +6,7 @@ import {project_questionnaire_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {QuestionnaireInstanceForm} from "components/questionnaire/presentational";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const UpdateProjectQuestionnaireInstancePanel = () => {
     const navigate = useNavigateWithReload();
@@ -44,7 +44,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -70,11 +70,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
             }
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             {projectQuestionnaire && (
                 <QuestionnaireInstanceForm
                     questionnaireInstance={selectedQuestionnaireInstance}

@@ -7,11 +7,11 @@ import {DateUtil} from "utilities";
 import {useNavigateWithReload} from "hooks";
 
 import {FormDatePicker, FormInputInteger, FormInputText} from "components/common/form";
+import {AlertError} from "components/common/presentational";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Alert from "@mui/material/Alert";
 
 const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
     const navigate = useNavigateWithReload();
@@ -161,7 +161,7 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
                 <Typography variant="h6" sx={{mb: 2}}>
                     Datos de previsión
                 </Typography>
-                {error && <Alert severity="error">{error}</Alert>}
+                <AlertError error={error} />
                 {fields.map((field, index) => (
                     <Grid
                         container
