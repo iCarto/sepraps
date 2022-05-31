@@ -7,7 +7,7 @@ const MilestoneSection = ({milestone}) => {
             <SectionCard title="Detalle del hito">
                 <SectionField
                     label="Categoría:"
-                    value={milestone.category_name}
+                    value={milestone.name}
                     containerWidth="short"
                 />
                 <SectionField

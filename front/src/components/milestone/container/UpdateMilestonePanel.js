@@ -83,7 +83,7 @@ const UpdateMilestonePanel = () => {
                 >
                     <AlertError error={error} />
                     <Typography sx={{fontWeight: "medium"}}>
-                        {milestone?.category_name}
+                        {milestone?.name}
                     </Typography>
                     <MilestoneFormFields />
                     <Grid container justifyContent="center" sx={{mt: 2}}>

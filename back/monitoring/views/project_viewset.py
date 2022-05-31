@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.domain_entry import DomainEntry
-from monitoring.models.milestone import CATEGORY_CHOICES, PHASE_CHOICES, Milestone
+from monitoring.models.milestone import PHASE_CHOICES, Milestone
 from monitoring.models.project import Project
 from monitoring.models.project_questionnaire_instance import (
     ProjectQuestionnaireInstance,
@@ -269,10 +269,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
             """
             )
             projects = dictfetchall(cursor)
-            for project in projects:
-                project["milestone_name"] = dict(CATEGORY_CHOICES).get(
-                    project["milestone"], project["milestone"]
-                )
             return Response(projects)
 
     @action(detail=False)

@@ -20,57 +20,99 @@
     ],
     "milestones": [
         {
-            "category": "funding_allocation",
+            "code": "approval_technical_folder",
+            "name": "Aprobación de la carpeta técnica",
+            "checklist": [{"definition": "Se ha aprobado la carpeta técnica"}],
             "phase": "design"
         },
         {
-            "category": "approval_technical_folder",
-            "phase": "design"
-        },
-        {
-            "category": "call_for_tenders_works_contract",
+            "code": "funding_allocation",
+            "name": "Asignación de financiación",
+            "checklist": [
+                {"definition": "Se ha rellenado el programa de financiación"},
+                {"definition": "Se ha rellenado el financiador"}
+            ],
             "phase": "contracting"
         },
         {
-            "category": "award_works_contract",
+            "code": "contract_signing",
+            "name": "Firma del contrato",
+            "checklist": [
+                {"definition": "Se ha subido una copia del contrato al repositorio"}
+            ],
             "phase": "contracting"
         },
         {
-            "category": "contract_signing",
-            "phase": "contracting"
-        },
-        {
-            "category": "start_of_works",
+            "code": "start_of_works",
+            "name": "Inicio de las obras",
+            "checklist": [
+                {"definition": "Se ha subido la orden de inicio al repositorio"},
+                {"definition": "Se ha subido el acta de inicio al repositorio"}
+            ],
             "phase": "execution"
         },
         {
-            "category": "technical_validation",
+            "code": "technical_validation",
+            "name": "Validación del checklist técnico",
+            "checklist": [
+                {"definition": "Se han completado los puntos técnicos de este hito"}
+            ],
             "phase": "execution",
             "children": [
                 {
-                    "category": "technical_validation_drilling",
+                    "code": "technical_validation_drilling",
+                    "checklist": [{"definition": "Se ha completado la perforación"}],
+                    "name": "Perforación",
                     "phase": "execution"
                 },
                 {
-                    "category": "technical_validation_pump_test",
+                    "code": "technical_validation_pump_test",
+                    "checklist": [
+                        {"definition": "Se ha completado la prueba de bombeo"}
+                    ],
+                    "name": "Prueba de bombeo",
                     "phase": "execution"
                 }
             ]
         },
         {
-            "category": "definitive_reception",
+            "code": "provisional_reception",
+            "name": "Recepción provisoria por la administración",
+            "checklist": [
+                {
+                    "definition": "Se ha subido el acta de recepción provisoria al repositorio"
+                }
+            ],
             "phase": "execution"
         },
         {
-            "category": "system_delivery",
+            "code": "definitive_reception",
+            "name": "Recepción definitiva por la administración",
+            "checklist": [
+                {
+                    "definition": "Se ha subido el acta de recepción definitiva al repositorio"
+                }
+            ],
             "phase": "execution"
         },
         {
-            "category": "final_settlement",
+            "code": "system_delivery",
+            "name": "Entrega del sistema a la comunidad y transferencia de operación y mantenimiento",
+            "checklist": [
+                {"definition": "Se ha subido el acta de entrega al repositorio"}
+            ],
             "phase": "execution"
         },
         {
-            "category": "end_of_warranty",
+            "code": "final_settlement",
+            "name": "Liquidación final",
+            "checklist": [{"definition": "Se ha cerrado la ejecución del proyecto"}],
+            "phase": "execution"
+        },
+        {
+            "code": "end_of_warranty",
+            "name": "Fin del periodo de garantía",
+            "checklist": [{"definition": "Ha finalizado el periodo de garantía"}],
             "phase": "post-execution"
         }
     ],

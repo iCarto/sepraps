@@ -43,8 +43,8 @@ const MilestoneTimelineShort = ({milestones}) => {
                 {milestones.map(milestone => {
                     return (
                         <MilestoneTimelineTooltip
-                            key={milestone.category}
-                            milestone={milestone.category_name}
+                            key={milestone.code}
+                            milestone={milestone.name}
                             completionDate={DateUtil.formatDate(
                                 milestone.compliance_date
                             )}
