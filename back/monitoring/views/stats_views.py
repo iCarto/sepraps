@@ -5,11 +5,14 @@ from questionnaires import services as questtionnaire_services
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
 )
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from users.permissions import GestionPermission, SupervisionPermission
 
 
 @api_view(["GET"])
+@permission_classes([IsAuthenticated, SupervisionPermission | GestionPermission])
 def get_monthly_questionnaire_stats(
     request, questionnaire_code, field_code, format=None
 ):
@@ -71,6 +74,7 @@ def get_monthly_questionnaire_stats(
 
 
 @api_view(["GET"])
+@permission_classes([IsAuthenticated, SupervisionPermission | GestionPermission])
 def get_provider_gender_stats(request, format=None):
     with connection.cursor() as cursor:
         query = """
