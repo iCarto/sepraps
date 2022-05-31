@@ -4,18 +4,17 @@ import AuthService from "./AuthService";
 let AuthContext = createContext(null);
 
 export default function AuthProvider({children}) {
-    let [user, setUser] = useState(() => {
-        let username = AuthService.getUsername();
-        return username;
+    const [user, setUser] = useState(() => {
+        return AuthService.getUsername();
     });
 
-    let login = (username, password) => {
+    const login = (username, password) => {
         return AuthService.login(username, password).then(userData => {
-            setUser(userData);
+            setUser(AuthService.getUsername());
         });
     };
 
-    let logout = () => {
+    const logout = () => {
         return AuthService.logout().then(() => {
             setUser(null);
         });
