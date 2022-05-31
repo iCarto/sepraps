@@ -29,6 +29,7 @@ const ContractExecutionSection = ({isSidePanelOpen = null}) => {
         />,
     ];
 
+    // TO-DO: REFACTOR
     const getDatetInfo = (label, date) => (
         <SectionField label={label} value={DateUtil.formatDate(date)} />
     );

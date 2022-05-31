@@ -55,6 +55,9 @@ const contract_api_adapter = contract => {
               contract["expected_execution_period"]
           )
         : null;
+    contract["warranty_end_date"] = contract["warranty_end_date"]
+        ? new Date(contract["warranty_end_date"])
+        : null;
     if (contract.projects) {
         contract["projects"] = contract.projects.map(project => {
             return createProjectSummary(project_summary_api_adapter(project));
@@ -96,6 +99,12 @@ const contract_view_adapter = contract => {
         : null;
     contract["expected_execution_period"] = !!contract["expected_execution_period"]
         ? NumberUtil.parseIntOrNull(contract["expected_execution_period"])
+        : null;
+    contract["warranty_end_date"] = !!contract["warranty_end_date"]
+        ? DateUtil.formatDate(
+              contract["warranty_end_date"],
+              DATE_FORMATS.SERVER_DATEFORMAT
+          )
         : null;
 
     contract["financing_program"] = !!contract["financing_program"]
@@ -165,6 +174,7 @@ const createContract = ({
     execution_final_delivery_date = null,
     expected_execution_period = null,
     expected_execution_end_date = null,
+    warranty_end_date = null,
     projects = [],
     questionnaires = [],
     created_at = null,
@@ -194,6 +204,7 @@ const createContract = ({
         execution_certificate_start_date,
         execution_final_delivery_date,
         expected_execution_end_date,
+        warranty_end_date,
         projects,
         questionnaires,
         created_at,

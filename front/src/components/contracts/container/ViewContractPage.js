@@ -12,7 +12,7 @@ const ViewContractPage = () => {
 
     useEffect(() => {
         ContractService.getContract(id).then(data => {
-            console.log({data});
+            // console.log({data});
             setContract(data);
         });
     }, [id, location.state?.lastRefreshDate]);

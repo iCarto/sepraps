@@ -11,6 +11,7 @@ import {
     ContractExecutionFormFields,
     ContractBidRequestFormFields,
     ContractFinancingFormFields,
+    ContractPostConstructionFormFields,
 } from "./form";
 
 import Grid from "@mui/material/Grid";
@@ -26,7 +27,7 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
     if (outletContext) {
         contract = outletContext[0];
     }
-    console.log({contract});
+    // console.log({contract});
 
     const defaultFormValues = {
         id: contract?.id || "",
@@ -50,6 +51,7 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
             contract?.execution_certificate_start_date || "",
         execution_final_delivery_date: contract?.execution_final_delivery_date || "",
         expected_execution_period: contract?.expected_execution_period || "",
+        warranty_end_date: contract?.warranty_end_date || "",
     };
 
     const formMethods = useForm({
@@ -58,6 +60,7 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
     });
 
     const onFormSubmit = data => {
+        console.log({data}, "del formulario");
         const updatedContract = createContract({
             id: data.id,
             number: data.contract_number,
@@ -81,8 +84,10 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
             execution_certificate_start_date: data.execution_certificate_start_date,
             execution_final_delivery_date: data.execution_final_delivery_date,
             expected_execution_period: data.expected_execution_period,
+            warranty_end_date: data.warranty_end_date,
             projects: contract ? contract.projects : [],
         });
+        console.log({updatedContract});
         onSubmit(updatedContract);
     };
 
@@ -105,6 +110,9 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
         }
         if (section === "execution") {
             return <ContractExecutionFormFields />;
+        }
+        if (section === "postconstruction") {
+            return <ContractPostConstructionFormFields />;
         }
         return null;
     };

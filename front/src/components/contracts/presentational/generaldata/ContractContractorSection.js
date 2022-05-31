@@ -26,7 +26,7 @@ const ContractContractorSection = ({isSidePanelOpen = null}) => {
     [contract] = useOutletContext();
     const contractor = contract.contractor;
 
-    console.log({contract});
+    // console.log({contract});
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
 

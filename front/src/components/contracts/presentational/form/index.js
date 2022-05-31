@@ -3,7 +3,6 @@ export {default as ContractBidRequestFormFields} from "./ContractBidRequestFormF
 export {default as ContractCreationForm} from "./ContractCreationForm";
 export {default as ContractExecutionFormFields} from "./ContractExecutionFormFields";
 export {default as ContractFinancingFormFields} from "./ContractFinancingFormFields";
-export {
-    default as ContractGeneralDataFormFields,
-} from "./ContractGeneralDataFormFields";
+export {default as ContractGeneralDataFormFields} from "./ContractGeneralDataFormFields";
 export {default as ContractFilterForm} from "./ContractFilterForm";
+export {default as ContractPostConstructionFormFields} from "./ContractPostConstructionFormFields";
