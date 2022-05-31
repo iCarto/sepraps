@@ -46,7 +46,7 @@ const ViewContractMonitoringSubPage = () => {
                     <ContractMonitoringContactSection
                         contact={contract?.construction_inspector}
                         sectionName="construction_inspector"
-                        postName="Fiscal de obra"
+                        postName="Fiscalización de obra"
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
@@ -54,7 +54,7 @@ const ViewContractMonitoringSubPage = () => {
                     <ContractMonitoringContactSection
                         contact={contract?.construction_supervisor}
                         sectionName="construction_supervisor"
-                        postName="Supervisor de obra"
+                        postName="Supervisión de obra"
                         showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />
@@ -63,7 +63,7 @@ const ViewContractMonitoringSubPage = () => {
                     <ContractMonitoringContactSection
                         contact={contract?.social_coordinator}
                         sectionName="social_coordinator"
-                        postName="Coordinador de apoyo social"
+                        postName="Coordinación de apoyo social"
                         showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />
@@ -72,7 +72,7 @@ const ViewContractMonitoringSubPage = () => {
                     <ContractMonitoringContactSection
                         contact={contract?.social_inspector}
                         sectionName="social_inspector"
-                        postName="Fiscal social"
+                        postName="Fiscalización social"
                         onOpenRemoveDialog={handleOpenDialog}
                     />
                 </Grid>
@@ -80,7 +80,7 @@ const ViewContractMonitoringSubPage = () => {
                     <ContractMonitoringContactSection
                         contact={contract?.social_supervisor}
                         sectionName="social_supervisor"
-                        postName="Supervisor social"
+                        postName="Supervisión social"
                         showIsStaff={false}
                         onOpenRemoveDialog={handleOpenDialog}
                     />
