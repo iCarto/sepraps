@@ -72,7 +72,7 @@ const ProjectCard = ({project, onClick = null}) => {
                         height="140"
                         image={project.featured_image}
                         alt={project.name}
-                        sx={project.closed === true && {opacity: 0.4}}
+                        sx={project.closed === true ? {opacity: 0.4} : {opacity: 1}}
                     />
                     <Box sx={projectTypeIconBoxStyle}>
                         <ProjectTypeIcon

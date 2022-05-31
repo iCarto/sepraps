@@ -51,7 +51,6 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "bid_request_id",
             "bid_request_date",
             "bid_request_budget",
-            # "bid_request_deadline",
             "awarding_budget",
             "awarding_percentage_drop",
             "awarding_date",
@@ -64,11 +63,10 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "social_inspector",
             "social_supervisor",
             "execution_signature_date",
-            # "execution_order_start_date",
-            # "execution_expected_delivery_date",
             "execution_certificate_start_date",
             "execution_final_delivery_date",
             "expected_execution_period",
+            "warranty_end_date",
             "projects",
             "questionnaires",
             "creation_user",
@@ -82,7 +80,6 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "bid_request_id": {"required": True},
             "bid_request_date": {"required": True},
             "bid_request_budget": {"required": True},
-            # "bid_request_deadline": {"required": True},
         }
 
     def setup_eager_loading(queryset):
@@ -259,7 +256,6 @@ class ConstructionContractSummarySerializer(serializers.ModelSerializer):
             "bid_request_id",
             "bid_request_date",
             "bid_request_budget",
-            # "bid_request_deadline",
             "awarding_budget",
             "awarding_date",
             "financing_program",
