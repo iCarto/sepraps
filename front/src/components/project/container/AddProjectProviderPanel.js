@@ -5,7 +5,7 @@ import {project_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ProviderForm, ProviderFormSearch} from "components/provider/presentational";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 import {ProjectService} from "service/api";
 
 const AddProjectProviderPanel = () => {
@@ -38,11 +38,7 @@ const AddProjectProviderPanel = () => {
 
     return (
         <SidebarPanel sidebarTitle="Añadir prestador" closeSidebarClick={handleCancel}>
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             {action === "search" ? (
                 <ProviderFormSearch onSelect={handleSelectExistingProvider} />
             ) : (

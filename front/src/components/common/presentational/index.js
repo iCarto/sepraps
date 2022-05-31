@@ -19,3 +19,4 @@ export {default as DialogLayout} from "./DialogLayout";
 export {default as SearchAutocomplete} from "./SearchAutocomplete";
 export {default as DropdownMenuItemLink} from "./DropdownMenuItemLink";
 export {default as SearchBoxControlled} from "./SearchBoxControlled";
+export {default as AlertError} from "./AlertError";

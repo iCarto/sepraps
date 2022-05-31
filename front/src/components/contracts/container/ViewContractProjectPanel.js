@@ -7,8 +7,8 @@ import {contract_view_adapter} from "model";
 import {ProjectSection} from "../../project/presentational";
 import {SidebarAction, SidebarPanel} from "layout";
 import {RemoveContractProjectDialog} from ".";
+import {AlertError} from "components/common/presentational";
 
-import Alert from "@mui/material/Alert";
 import LaunchIcon from "@mui/icons-material/Launch";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 import Grid from "@mui/material/Grid";
@@ -49,7 +49,7 @@ const ViewContractProjectPanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -72,11 +72,7 @@ const ViewContractProjectPanel = () => {
                 sidebarActions={sidebarActions}
                 closeSidebarClick={handleCloseSidebar}
             >
-                {error ? (
-                    <Alert severity="error" sx={{mb: 2}}>
-                        {error}
-                    </Alert>
-                ) : null}
+                <AlertError error={error} />
                 <ProjectSection project={project} />
                 <Grid container justifyContent="center" sx={{mt: 2}}>
                     <Button

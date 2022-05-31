@@ -6,7 +6,7 @@ import {project_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ProjectLinkedLocalitiesForm} from "../presentational/location";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const AddProjectLinkedLocalitiesPanel = () => {
     const [error, setError] = useState("");
@@ -24,7 +24,7 @@ const AddProjectLinkedLocalitiesPanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -37,11 +37,7 @@ const AddProjectLinkedLocalitiesPanel = () => {
             sidebarTitle="Añadir otra localidad"
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             <ProjectLinkedLocalitiesForm project={project} onSubmit={handleSubmit} />
         </SidebarPanel>
     );

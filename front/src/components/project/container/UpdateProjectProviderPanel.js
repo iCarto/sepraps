@@ -6,7 +6,7 @@ import {provider_view_adapter} from "model";
 
 import {SidebarPanel} from "layout";
 import {ProviderForm} from "components/provider/presentational";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const UpdateProjectProviderPanel = () => {
     const [error, setError] = useState("");
@@ -37,11 +37,7 @@ const UpdateProjectProviderPanel = () => {
             sidebarTitle="Actualizar prestador"
             closeSidebarClick={handleCancel}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             <ProviderForm provider={project.provider} onSubmit={handleSubmit} />
         </SidebarPanel>
     );

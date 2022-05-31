@@ -3,10 +3,10 @@ import {useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ContractorService} from "service/api";
 import {createContractor} from "model";
+import {AlertError} from "components/common/presentational";
 
 import {SidebarPanel} from "layout";
 import {ContactForm, ContactFormSearch} from "components/contacts/presentational";
-import Alert from "@mui/material/Alert";
 
 const UpdateContractContractorContactPanel = () => {
     const {action, contactId} = useParams();
@@ -45,7 +45,7 @@ const UpdateContractContractorContactPanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -67,11 +67,7 @@ const UpdateContractContractorContactPanel = () => {
             sidebarTitle="Añadir contacto"
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             {action === "search" ? (
                 <ContactFormSearch
                     allowedPosts={allowedPosts}

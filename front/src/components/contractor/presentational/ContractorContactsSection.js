@@ -10,7 +10,7 @@ import {
 } from "../container";
 
 import Grid from "@mui/material/Grid";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import Typography from "@mui/material/Typography";
 
@@ -51,7 +51,7 @@ const ContractorContactsSection = ({contractor}) => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -80,13 +80,7 @@ const ContractorContactsSection = ({contractor}) => {
                             btnName="Añadir contacto"
                         />
                     </Grid>
-                    {error && (
-                        <Grid item xs={12}>
-                            <Alert severity="error" sx={{mt: 2, mb: 2}}>
-                                {error}
-                            </Alert>
-                        </Grid>
-                    )}
+                    <AlertError error={error} />
                 </Grid>
             </AccordionLayout>
             <RemoveContractorContactDialog

@@ -6,7 +6,7 @@ import {contract_view_adapter, createContract} from "model";
 
 import {SidebarPanel} from "layout";
 import {ProjectFormSearch} from "../../project/presentational";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const AddContractProjectPanel = () => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -38,7 +38,7 @@ const AddContractProjectPanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -53,11 +53,7 @@ const AddContractProjectPanel = () => {
             mainActionClick={handleProjectToAdd}
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             <ProjectFormSearch onSelect={handleSelectedProject} />
         </SidebarPanel>
     );

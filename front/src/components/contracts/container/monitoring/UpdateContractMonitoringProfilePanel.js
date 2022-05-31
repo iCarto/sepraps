@@ -6,7 +6,7 @@ import {useNavigateWithReload} from "hooks";
 
 import {ContactForm, ContactFormSearch} from "components/contacts/presentational";
 import {SidebarPanel} from "layout";
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 
 const UpdateContractMonitoringProfilePanel = () => {
     const [error, setError] = useState("");
@@ -42,7 +42,10 @@ const UpdateContractMonitoringProfilePanel = () => {
             break;
     }
 
-    let post = postName.toLowerCase().replace(/ de /g, " ").replace(/ /g, "_");
+    let post = postName
+        .toLowerCase()
+        .replace(/ de /g, " ")
+        .replace(/ /g, "_");
 
     let showIsStaff =
         sectionName === "construction_inspector" || sectionName === "social_inspector"
@@ -91,7 +94,7 @@ const UpdateContractMonitoringProfilePanel = () => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -104,11 +107,7 @@ const UpdateContractMonitoringProfilePanel = () => {
             }
             closeSidebarClick={handleCloseSidebar}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             {action === "search" ? (
                 <ContactFormSearch allowedPosts={[post]} onSelect={handleSubmit} />
             ) : (

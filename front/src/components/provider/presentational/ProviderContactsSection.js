@@ -6,7 +6,7 @@ import {AccordionLayout} from "components/common/presentational";
 import {AddContactButtonGroup, ContactsTable} from "components/contacts/presentational";
 import {DeleteProviderContactDialog, RemoveProviderContactDialog} from "../container";
 
-import Alert from "@mui/material/Alert";
+import {AlertError} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
@@ -48,7 +48,7 @@ const ProviderContactsSection = ({provider}) => {
             })
             .catch(error => {
                 console.log(error);
-                setError(error.toString());
+                setError(error);
             });
     };
 
@@ -77,13 +77,7 @@ const ProviderContactsSection = ({provider}) => {
                             btnName="Añadir contacto"
                         />
                     </Grid>
-                    {error && (
-                        <Grid item xs={12}>
-                            <Alert severity="error" sx={{mt: 2, mb: 2}}>
-                                {error}
-                            </Alert>
-                        </Grid>
-                    )}
+                    <AlertError error={error} />
                 </Grid>
             </AccordionLayout>
             <RemoveProviderContactDialog

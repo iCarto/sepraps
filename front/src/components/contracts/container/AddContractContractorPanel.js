@@ -6,8 +6,8 @@ import {contract_view_adapter} from "model";
 
 import {ContractorFormSearch} from "components/contractor/presentational";
 import {ContractorForm} from "components/contractor/presentational";
+import {AlertError} from "components/common/presentational";
 import {SidebarPanel} from "layout";
-import Alert from "@mui/material/Alert";
 
 const AddContractContractorPanel = () => {
     const {action} = useParams();
@@ -44,11 +44,7 @@ const AddContractContractorPanel = () => {
             sidebarTitle="Añadir contratista"
             closeSidebarClick={handleCancel}
         >
-            {error && (
-                <Alert severity="error" sx={{mb: 2}}>
-                    {error}
-                </Alert>
-            )}
+            <AlertError error={error} />
             {action === "search" ? (
                 <ContractorFormSearch onSelect={handleSelectExistingContractor} />
             ) : (
