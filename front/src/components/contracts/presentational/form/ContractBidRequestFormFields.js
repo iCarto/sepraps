@@ -1,10 +1,5 @@
 import {Fragment} from "react";
-import {
-    FormInputText,
-    FormDatePicker,
-    FormInputCurrency,
-    FormInputInteger,
-} from "components/common/form";
+import {FormInputText, FormDatePicker, FormInputCurrency} from "components/common/form";
 
 const ContractBidRequestFormFields = () => {
     return (
@@ -29,12 +24,6 @@ const ContractBidRequestFormFields = () => {
                 label="Monto estimado"
                 rules={{required: "El campo es obligatorio"}}
             />
-            {/* <FormInputInteger
-                name="bid_request_deadline"
-                label="Plazo previsto"
-                endAdornment="meses"
-                rules={{required: "El campo es obligatorio"}}
-            /> */}
         </Fragment>
     );
 };

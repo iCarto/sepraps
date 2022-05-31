@@ -30,7 +30,7 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
         const hasEditPermission = [ROLES.EDIT, ROLES.MANAGEMENT].some(role =>
             hasRole(role)
         );
-        if (hasEditPermission && milestone.category === activeMilestone?.category) {
+        if (hasEditPermission && milestone.code === activeMilestone?.code) {
             navigate(`${milestone.id}/edit`);
         } else {
             navigate(`${milestone.id}`);
@@ -38,7 +38,7 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
     };
 
     const getTimelineDot = () => {
-        if (milestone.category === activeMilestone?.category) {
+        if (milestone.code === activeMilestone?.code) {
             return (
                 <MilestoneTimelineDot
                     variant="outlined"
@@ -60,7 +60,7 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
 
     const isDisabled = () => {
         return (
-            milestone.category !== activeMilestone?.category &&
+            milestone.code !== activeMilestone?.code &&
             milestone.compliance_date === null
         );
     };
@@ -91,7 +91,7 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
             </TimelineSeparator>
             <TimelineContent sx={{m: "auto 0"}}>
                 <Typography color={isDisabled() ? "grey.500" : "inherit"}>
-                    {milestone.category_name}
+                    {milestone.name}
                 </Typography>
             </TimelineContent>
         </TimelineItem>

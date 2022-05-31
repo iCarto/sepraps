@@ -44,7 +44,7 @@ const ContractCard = ({contract, onClick = null}) => {
                         )}
                     </Stack>
                     <Stack direction="row" spacing={2}>
-                        <Tooltip title="Plazo previsto">
+                        <Tooltip title="Plazo previsto de ejecución">
                             <DateRangeOutlinedIcon fontSize="small" />
                         </Tooltip>
                         <Typography variant="body2">

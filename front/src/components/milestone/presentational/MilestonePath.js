@@ -10,7 +10,7 @@ const MilestonePath = ({milestones, level, activeMilestone}) => {
             {milestones.map((milestone, index) => {
                 if (milestone.children.length) {
                     return (
-                        <Fragment key={milestone.category}>
+                        <Fragment key={milestone.code}>
                             <MilestonePoint
                                 milestone={milestone}
                                 level={level}
@@ -28,7 +28,7 @@ const MilestonePath = ({milestones, level, activeMilestone}) => {
                 }
                 return (
                     <MilestonePoint
-                        key={milestone.category}
+                        key={milestone.code}
                         milestone={milestone}
                         level={level}
                         activeMilestone={activeMilestone}

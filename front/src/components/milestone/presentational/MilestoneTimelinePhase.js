@@ -37,9 +37,9 @@ const MilestoneTimelinePhase = ({phase}) => {
                     {phase.milestones.map(milestone => {
                         return (
                             <MilestoneTimelineItem
-                                key={milestone.category}
+                                key={milestone.code}
                                 phase={phase.code}
-                                categoryName={milestone.category_name}
+                                categoryName={milestone.name}
                                 completionDate={milestone.compliance_date}
                             />
                         );

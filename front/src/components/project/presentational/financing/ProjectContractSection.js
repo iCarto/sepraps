@@ -41,12 +41,16 @@ const ProjectContractSection = ({contract}) => {
                         value={contract.bid_request_number}
                     />
                     <SectionField
-                        label="Fecha de licitación:"
-                        value={DateUtil.formatDate(contract.bid_request_date)}
+                        label="Fecha de firma del contrato:"
+                        value={DateUtil.formatDate(contract.execution_signature_date)}
                     />
+                    {/* TO-DO: AÑADIR FECHA AUTOCALCULADA */}
                     <SectionField
-                        label="Fecha de adjudicación:"
-                        value={DateUtil.formatDate(contract.awarding_date)}
+                        label="Plazo de ejecución del contrato:"
+                        value={
+                            contract.expected_execution_period +
+                            " días (FECHA AUTOCALCULADA)"
+                        }
                     />
                     <SectionField
                         label="Contratista:"

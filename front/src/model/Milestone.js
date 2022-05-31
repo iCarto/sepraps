@@ -11,6 +11,11 @@ const milestone_api_adapter = milestone => {
             milestones_api_adapter(milestone["children"])
         );
     }
+    if (milestone["checklist"]) {
+        milestone["checklist"] = milestone["checklist"]?.map(
+            checkItem => checkItem.definition
+        );
+    }
     return milestone;
 };
 
@@ -34,8 +39,9 @@ const createMilestones = (data = []) => {
 
 const createMilestone = ({
     id = null,
-    category = "",
-    category_name = "",
+    code = "",
+    name = "",
+    checklist = [],
     phase = "",
     phase_name = "",
     compliance_date = "",
@@ -44,8 +50,9 @@ const createMilestone = ({
 } = {}) => {
     const publicApi = {
         id,
-        category,
-        category_name,
+        code,
+        name,
+        checklist,
         phase,
         phase_name,
         compliance_date,
