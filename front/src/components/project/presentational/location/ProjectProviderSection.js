@@ -1,5 +1,7 @@
 import {useState} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
+import {useAuth} from "auth";
+
 import {
     SectionCard,
     SectionCardHeaderAction,
@@ -19,6 +21,8 @@ import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const ProjectProviderSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
+
     let project;
     [project] = useOutletContext();
     const provider = project.provider;
@@ -35,6 +39,7 @@ const ProjectProviderSection = ({isSidePanelOpen = null}) => {
                   onClick={() => {
                       navigate("provider/" + provider.id + "/edit");
                   }}
+                  roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
               />,
               <SectionCardHeaderAction
                   key="remove"
@@ -44,6 +49,7 @@ const ProjectProviderSection = ({isSidePanelOpen = null}) => {
                   onClick={() => {
                       setIsRemoveDialogOpen(true);
                   }}
+                  roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
               />,
           ]
         : null;

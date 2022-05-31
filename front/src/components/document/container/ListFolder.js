@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 import {DocumentService} from "service/api";
 
 import {useFolderView} from "../provider";
@@ -21,6 +22,7 @@ const ListFolder = ({
     onSelectElement = null,
 }) => {
     const location = useLocation();
+    const {ROLES} = useAuth();
 
     const {view} = useFolderView();
 
@@ -70,12 +72,14 @@ const ListFolder = ({
             </Grid>
             {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
             {folderPath.indexOf("/") >= 0 && (
-                <Grid item container xs={12} mt={8}>
-                    <FileUploadSection
-                        path={folderPath}
-                        onFinishUpload={reloadFolder}
-                    />
-                </Grid>
+                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                    <Grid item container xs={12} mt={8}>
+                        <FileUploadSection
+                            path={folderPath}
+                            onFinishUpload={reloadFolder}
+                        />
+                    </Grid>
+                </AuthAction>
             )}
         </Grid>
     );

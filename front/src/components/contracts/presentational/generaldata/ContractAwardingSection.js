@@ -1,4 +1,5 @@
 import {useOutletContext, useNavigate} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 import {DateUtil, NumberUtil} from "utilities";
 import {
     SectionCard,
@@ -9,6 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const ContractAwardingSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let contract;
     [contract] = useOutletContext();
@@ -22,6 +24,7 @@ const ContractAwardingSection = ({isSidePanelOpen = null}) => {
             onClick={() => {
                 navigate("awarding/edit");
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
 

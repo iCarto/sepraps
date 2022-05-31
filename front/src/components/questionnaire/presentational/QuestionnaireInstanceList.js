@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 
 import Grid from "@mui/material/Grid";
 import QuestionnaireInstanceDetail from "./QuestionnaireInstanceDetail";
@@ -10,6 +11,7 @@ import Stack from "@mui/material/Stack";
 const QuestionnaireInstanceList = ({projectQuestionnaire}) => {
     const {instanceId} = useParams();
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     const [instanceSelected, setInstanceSelected] = useState(null);
 
@@ -51,10 +53,12 @@ const QuestionnaireInstanceList = ({projectQuestionnaire}) => {
                             onInstanceSelected={handleInstanceSelected}
                         />
                     )}
-                    <ButtonLink
-                        text="Añadir"
-                        to={`/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/new/add`}
-                    />
+                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                        <ButtonLink
+                            text="Añadir"
+                            to={`/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/new/add`}
+                        />
+                    </AuthAction>
                 </Stack>
             </Grid>
             {instanceSelected && (

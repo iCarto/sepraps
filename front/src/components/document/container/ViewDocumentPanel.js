@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 import {useCopyToClipboard, useDownloadDocument, useNavigateWithReload} from "hooks";
 import {DocumentService} from "service/api";
 
@@ -13,6 +14,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewDocumentPanel = () => {
     const navigate = useNavigateWithReload();
+    const {ROLES} = useAuth();
+
     const params = useParams();
 
     const [folderElement, setFolderElement] = useState(null);
@@ -52,7 +55,10 @@ const ViewDocumentPanel = () => {
     const handleCloseSidebar = (refresh = false) => {
         navigate(
             `/projects/${projectId}/documents/` +
-                folderElement.path.split("/").slice(0, -1).join("/"),
+                folderElement.path
+                    .split("/")
+                    .slice(0, -1)
+                    .join("/"),
             refresh
         );
     };
@@ -65,13 +71,15 @@ const ViewDocumentPanel = () => {
             icon={<LinkIcon />}
             onClick={handleCopyLink}
         />,
-        <SidebarAction
-            key="remove-document"
-            name="remove-document"
-            text="Eliminar"
-            icon={<DeleteIcon color="error" />}
-            onClick={handleDeleteDialog}
-        />,
+        <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+            <SidebarAction
+                key="remove-document"
+                name="remove-document"
+                text="Eliminar"
+                icon={<DeleteIcon color="error" />}
+                onClick={handleDeleteDialog}
+            />
+        </AuthAction>,
     ];
 
     return (

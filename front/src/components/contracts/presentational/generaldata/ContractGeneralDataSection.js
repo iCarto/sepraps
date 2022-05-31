@@ -1,4 +1,5 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
+import {useAuth} from "auth";
 
 import {
     SectionCard,
@@ -9,6 +10,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const ContractGeneralDataSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let contract;
     [contract] = useOutletContext();
@@ -22,6 +24,7 @@ const ContractGeneralDataSection = ({isSidePanelOpen = null}) => {
             onClick={() => {
                 navigate("generaldata/edit");
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
 

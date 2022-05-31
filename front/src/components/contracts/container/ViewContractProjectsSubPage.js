@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useNavigate, useOutletContext} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 
 import {useProjectListView} from "components/project/provider";
 import {SubPageLayout} from "layout";
@@ -18,6 +19,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 const ViewContractProjectsSubPage = () => {
+    const {ROLES} = useAuth();
+
     let contract;
     [contract] = useOutletContext();
 
@@ -79,9 +82,11 @@ const ViewContractProjectsSubPage = () => {
                         justifyContent="flex-end"
                         alignItems="center"
                     >
-                        <AddProjectButton
-                            basePath={`/contracts/${contract.id}/projects`}
-                        />
+                        <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                            <AddProjectButton
+                                basePath={`/contracts/${contract.id}/projects`}
+                            />
+                        </AuthAction>
                         <ProjectListChangeView />
                     </Stack>
                 </Stack>

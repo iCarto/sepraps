@@ -1,6 +1,7 @@
-import {MenuListItemLink} from "components/common/presentational";
-
+import {AuthAction, useAuth} from "auth";
 import styled from "@mui/material/styles/styled";
+
+import {MenuListItemLink} from "components/common/presentational";
 
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -49,6 +50,8 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: prop => prop !== "open"})(
 );
 
 const ModuleMenu = () => {
+    const {ROLES} = useAuth();
+
     return (
         <Drawer component="nav" variant="permanent">
             <DrawerHeader />
@@ -68,13 +71,15 @@ const ModuleMenu = () => {
                         </ListItemIcon>
                     </Tooltip>
                 </MenuListItemLink>
-                <MenuListItemLink to={`/stats/phase`}>
-                    <Tooltip title="Resultados" placement="bottom-end">
-                        <ListItemIcon>
-                            <QueryStatsIcon />
-                        </ListItemIcon>
-                    </Tooltip>
-                </MenuListItemLink>
+                <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                    <MenuListItemLink to={`/stats/phase`}>
+                        <Tooltip title="Resultados" placement="bottom-end">
+                            <ListItemIcon>
+                                <QueryStatsIcon />
+                            </ListItemIcon>
+                        </Tooltip>
+                    </MenuListItemLink>
+                </AuthAction>
             </List>
         </Drawer>
     );

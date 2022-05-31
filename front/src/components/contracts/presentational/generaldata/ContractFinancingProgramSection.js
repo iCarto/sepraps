@@ -1,4 +1,6 @@
 import {useOutletContext, useNavigate} from "react-router-dom";
+import {useAuth} from "auth";
+
 import {
     SectionCard,
     SectionCardHeaderAction,
@@ -10,6 +12,7 @@ import Typography from "@mui/material/Typography";
 
 const ContractFinancingProgramSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let contract;
     [contract] = useOutletContext();
@@ -23,6 +26,7 @@ const ContractFinancingProgramSection = ({isSidePanelOpen = null}) => {
             onClick={() => {
                 navigate("financing_program/edit");
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
 

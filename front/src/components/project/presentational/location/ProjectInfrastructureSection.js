@@ -1,4 +1,5 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
+import {useAuth} from "auth";
 
 import {
     SectionCard,
@@ -10,6 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     let project;
     [project] = useOutletContext();
@@ -23,6 +25,7 @@ const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
             onClick={() => {
                 navigate("main_infrastructure/edit");
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
 

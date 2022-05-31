@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "auth";
 
 import {DateUtil, NumberUtil} from "utilities";
 import {
@@ -13,6 +14,7 @@ import LaunchIcon from "@mui/icons-material/Launch";
 
 const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
+    const {ROLES} = useAuth();
 
     const headerActions = [
         <SectionCardHeaderAction
@@ -23,6 +25,7 @@ const ProjectContractSection = ({contract}) => {
             onClick={() => {
                 navigate(`/contracts/${contract.id}/summary`);
             }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
     return (

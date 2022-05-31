@@ -1,5 +1,6 @@
 import {Fragment, useState} from "react";
 import {useNavigateWithReload} from "hooks";
+import {AuthAction, useAuth} from "auth";
 import {ContractorService} from "service/api";
 
 import {AccordionLayout} from "components/common/presentational";
@@ -16,6 +17,7 @@ import Typography from "@mui/material/Typography";
 
 const ContractorContactsSection = ({contractor}) => {
     const navigate = useNavigateWithReload();
+    const {ROLES} = useAuth();
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -74,12 +76,14 @@ const ContractorContactsSection = ({contractor}) => {
                             </Typography>
                         )}
                     </Grid>
-                    <Grid item container xs={12} mt={3} justifyContent="center">
-                        <AddContactButtonGroup
-                            basePath="contractor/contact"
-                            btnName="Añadir contacto"
-                        />
-                    </Grid>
+                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                        <Grid item container xs={12} mt={3} justifyContent="center">
+                            <AddContactButtonGroup
+                                basePath="contractor/contact"
+                                btnName="Añadir contacto"
+                            />
+                        </Grid>
+                    </AuthAction>
                     <AlertError error={error} />
                 </Grid>
             </AccordionLayout>

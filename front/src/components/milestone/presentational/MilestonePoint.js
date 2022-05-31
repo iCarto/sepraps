@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "auth";
 import {DateUtil} from "utilities";
 
 import Typography from "@mui/material/Typography";
@@ -23,9 +24,13 @@ const MilestoneTimelineDot = styled(TimelineDot, {
 
 const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) => {
     const navigate = useNavigate();
+    const {ROLES, hasRole} = useAuth();
 
     const handleClick = () => {
-        if (milestone.category === activeMilestone?.category) {
+        const hasEditPermission = [ROLES.EDIT, ROLES.MANAGEMENT].some(role =>
+            hasRole(role)
+        );
+        if (hasEditPermission && milestone.category === activeMilestone?.category) {
             navigate(`${milestone.id}/edit`);
         } else {
             navigate(`${milestone.id}`);

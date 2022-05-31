@@ -1,5 +1,6 @@
 import {Fragment, useState} from "react";
 import {useNavigateWithReload} from "hooks";
+import {AuthAction, useAuth} from "auth";
 import {ProviderService} from "service/api";
 
 import {AccordionLayout} from "components/common/presentational";
@@ -13,6 +14,7 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ProviderContactsSection = ({provider}) => {
     const navigate = useNavigateWithReload();
+    const {ROLES} = useAuth();
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -71,12 +73,14 @@ const ProviderContactsSection = ({provider}) => {
                             </Typography>
                         )}
                     </Grid>
-                    <Grid item container xs={12} mt={3} justifyContent="center">
-                        <AddContactButtonGroup
-                            basePath="provider/contact"
-                            btnName="Añadir contacto"
-                        />
-                    </Grid>
+                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                        <Grid item container xs={12} mt={3} justifyContent="center">
+                            <AddContactButtonGroup
+                                basePath="provider/contact"
+                                btnName="Añadir contacto"
+                            />
+                        </Grid>
+                    </AuthAction>
                     <AlertError error={error} />
                 </Grid>
             </AccordionLayout>

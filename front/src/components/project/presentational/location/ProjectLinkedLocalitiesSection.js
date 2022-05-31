@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
+import {AuthAction, useAuth} from "auth";
 import {useNavigateWithReload} from "hooks";
 import {ProjectService} from "service/api";
 import {project_view_adapter} from "model";
@@ -13,6 +14,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
+    const {ROLES} = useAuth();
+
     let project;
     [project] = useOutletContext();
 
@@ -63,17 +66,19 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
                     </Typography>
                 )}
             </Grid>
-            <Grid item container xs={12} justifyContent="center">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                        navigate("linked_localities/new/add");
-                    }}
-                >
-                    Añadir
-                </Button>
-            </Grid>
+            <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                <Grid item container xs={12} justifyContent="center">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            navigate("linked_localities/new/add");
+                        }}
+                    >
+                        Añadir
+                    </Button>
+                </Grid>
+            </AuthAction>
             <AlertError error={error} />
             <RemoveProjectLinkedLocalityDialog
                 project={project}
