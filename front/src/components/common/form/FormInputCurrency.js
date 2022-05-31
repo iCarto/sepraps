@@ -42,6 +42,7 @@ const FormInputCurrency = ({name: propsName, label, rules = {}, disabled = false
 
     return (
         <TextField
+            fullWidth
             onChange={onChange}
             onBlur={handleBlur}
             onFocus={handleFocus}

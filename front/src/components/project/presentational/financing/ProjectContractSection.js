@@ -28,6 +28,7 @@ const ProjectContractSection = ({contract}) => {
             roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
         />,
     ];
+
     return (
         <SectionCard
             title="Contrato de obras"
@@ -44,14 +45,19 @@ const ProjectContractSection = ({contract}) => {
                         label="Fecha de firma del contrato:"
                         value={DateUtil.formatDate(contract.execution_signature_date)}
                     />
-                    {/* TO-DO: AÑADIR FECHA AUTOCALCULADA */}
+                    {/* TO-DO: FIX THESE 2 FIELDS */}
                     <SectionField
-                        label="Plazo de ejecución del contrato:"
-                        value={
-                            contract.expected_execution_period +
-                            " días (FECHA AUTOCALCULADA)"
-                        }
+                        label="Plazo previsto de ejecución del contrato:"
+                        value={contract.expected_execution_period}
                     />
+                    {contract.expected_execution_end_date && (
+                        <SectionField
+                            label="Fecha prevista de fin de ejecución:"
+                            value={DateUtil.formatDate(
+                                contract.expected_execution_end_date
+                            )}
+                        />
+                    )}
                     <SectionField
                         label="Contratista:"
                         value={contract.contractor?.name}

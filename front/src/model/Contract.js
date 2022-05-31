@@ -49,6 +49,12 @@ const contract_api_adapter = contract => {
     ]
         ? new Date(contract["execution_final_delivery_date"])
         : null;
+    contract["expected_execution_end_date"] = contract["expected_execution_period"]
+        ? DateUtil.getDateAfterDays(
+              new Date(contract["execution_certificate_start_date"]),
+              contract["expected_execution_period"]
+          )
+        : null;
     if (contract.projects) {
         contract["projects"] = contract.projects.map(project => {
             return createProjectSummary(project_summary_api_adapter(project));
@@ -158,6 +164,7 @@ const createContract = ({
     execution_certificate_start_date = null,
     execution_final_delivery_date = null,
     expected_execution_period = null,
+    expected_execution_end_date = null,
     projects = [],
     questionnaires = [],
     created_at = null,
@@ -186,6 +193,7 @@ const createContract = ({
         expected_execution_period,
         execution_certificate_start_date,
         execution_final_delivery_date,
+        expected_execution_end_date,
         projects,
         questionnaires,
         created_at,
