@@ -81,8 +81,9 @@ const ContractMonitoringContactSection = ({
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography p={6} sx={{fontStyle: "italic"}}>
-                        Este contrato aún no tiene ningún {postName.toLowerCase()}{" "}
-                        asignado
+                        {postName === "Residente de obra"
+                            ? `Este contrato aún no tiene ${postName.toLowerCase()}`
+                            : `Este contrato aún no tiene responsable de ${postName.toLowerCase()}`}
                     </Typography>
                     <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
                         <Grid item container xs={12} mt={3} justifyContent="center">
