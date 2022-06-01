@@ -261,6 +261,7 @@ class ConstructionContractSummarySerializer(serializers.ModelSerializer):
             "financing_program",
             "contractor",
             "execution_signature_date",
+            "execution_certificate_start_date",
             "expected_execution_period",
             "created_at",
             "updated_at",

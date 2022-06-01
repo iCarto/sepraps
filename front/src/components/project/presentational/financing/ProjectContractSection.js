@@ -3,9 +3,9 @@ import {useAuth} from "auth";
 
 import {DateUtil, NumberUtil} from "utilities";
 import {SectionCard, SectionField} from "components/common/presentational";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
@@ -41,19 +41,17 @@ const ProjectContractSection = ({contract}) => {
                         label="Fecha de firma del contrato:"
                         value={DateUtil.formatDate(contract.execution_signature_date)}
                     />
-                    {/* TO-DO: FIX THESE 2 FIELDS */}
                     <SectionField
                         label="Plazo previsto de ejecución del contrato:"
-                        value={`${contract.expected_execution_period} días`}
-                    />
-                    {contract.expected_execution_end_date && (
-                        <SectionField
-                            label="Fecha prevista de fin de ejecución:"
-                            value={DateUtil.formatDate(
+                        value={
+                            contract.expected_execution_period &&
+                            `${
+                                contract.expected_execution_period
+                            } días (hasta el ${DateUtil.formatDate(
                                 contract.expected_execution_end_date
-                            )}
-                        />
-                    )}
+                            )})`
+                        }
+                    />
                     <SectionField
                         label="Contratista:"
                         value={contract.contractor?.name}
