@@ -7,6 +7,8 @@ import {
     phases_api_adapter,
     createProjectsSummaries,
     projects_summaries_api_adapter,
+    createProjectQuestionnaire,
+    project_questionnaire_api_adapter,
 } from "model";
 import AuthApiService from "./AuthApiService";
 
@@ -83,6 +85,24 @@ const ProjectService = {
 
     closeProject(projectId) {
         return AuthApiService.put(basePath + "/" + projectId + "/close");
+    },
+
+    getProjectsQuestionnaireInstances(id, questionnaireCode) {
+        return AuthApiService.get(
+            `${basePath}/${id}/questionnaire_instances/${questionnaireCode}`
+        ).then(response => {
+            return createProjectQuestionnaire(
+                project_questionnaire_api_adapter(response)
+            );
+        });
+    },
+
+    getProjectsQuestionnaireInstancesFieldData(id, questionnaireCode, fieldCode) {
+        return AuthApiService.get(
+            `${basePath}/${id}/questionnaire_instances/${questionnaireCode}/${fieldCode}`
+        ).then(response => {
+            return response;
+        });
     },
 };
 

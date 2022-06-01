@@ -8,6 +8,7 @@ import {
     provider_api_adapter,
     contract_api_adapter,
 } from "model";
+import {createQuestionnaires, questionnaires_api_adapter} from "model/questionnaires";
 import {DateUtil, DATE_FORMATS} from "utilities";
 import {infraestructure_view_adapter} from "./Infrastructure";
 import {createMilestones, milestones_api_adapter} from "./Milestone";
@@ -57,6 +58,11 @@ const project_api_adapter = project => {
     if (project["milestones"]) {
         project["milestones"] = createMilestones(
             milestones_api_adapter(project["milestones"])
+        );
+    }
+    if (project["questionnaires"]) {
+        project["questionnaires"] = createQuestionnaires(
+            questionnaires_api_adapter(project["questionnaires"])
         );
     }
     return project;
@@ -121,6 +127,7 @@ const createProject = ({
     construction_contract = null,
     folder = "",
     milestones = [],
+    questionnaires = [],
     creation_user = "",
     created_at = null,
     updated_at = null,
@@ -144,6 +151,7 @@ const createProject = ({
         construction_contract,
         folder,
         milestones,
+        questionnaires,
         creation_user,
         created_at,
         updated_at,
