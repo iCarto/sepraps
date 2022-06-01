@@ -11,19 +11,6 @@ const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
-    const headerActions = [
-        <SectionCardHeaderAction
-            key="go-to-location-subpage"
-            name="go-to-location-subpage"
-            text="Ir a la página del Contrato"
-            icon={<LaunchIcon />}
-            onClick={() => {
-                navigate(`/contracts/${contract.id}/summary`);
-            }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
-        />,
-    ];
-
     return (
         <SectionCard title="Contrato de obras">
             {contract ? (
