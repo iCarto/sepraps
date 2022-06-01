@@ -32,7 +32,7 @@ const ViewContractProjectsSubPage = () => {
     const navigate = useNavigate();
 
     const handleClickOnCard = projectId => {
-        navigate(`project/${projectId}/summary`);
+        navigate(`/projects/${projectId}/summary`);
     };
 
     const onSelectProject = project => {

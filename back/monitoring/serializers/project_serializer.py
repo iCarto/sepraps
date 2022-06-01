@@ -36,7 +36,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         source="creation_user.username", required=False
     )
     folder = serializers.SerializerMethodField()
-    questionnaires = QuestionnaireShortSerializer(many=True)
+    questionnaires = QuestionnaireShortSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project
