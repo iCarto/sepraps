@@ -65,6 +65,7 @@ if [[ -z "${CREATE_EMPTY}" ]]; then
     python manage.py loaddata "${this_dir}/data/fixtures_location.json"
     python manage.py loaddata "${this_dir}/data/fixtures_data.json"
     python manage.py loaddata "${this_dir}/data/fixtures_questionnaires.json"
+    python manage.py loaddata "${this_dir}/data/fixtures_project_questionnaires.json"
     python manage.py loaddata "${this_dir}/data/fixtures_contrato_13_2019.json"
     python manage.py loaddata "${this_dir}/data/fixtures_contrato_14_2019.json"
     python manage.py loaddata "${this_dir}/data/fixtures_contrato_20_2019.json"

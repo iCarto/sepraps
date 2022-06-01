@@ -1,26 +1,42 @@
 [
     {
-        "model": "questionnaires.Questionnaire",
+        "model": "questionnaires.questionnaire",
         "pk": "certificacion_mensual",
         "fields": {
             "category": "monthly",
             "version": 1,
             "name": "Certificación mensual",
-            "fields": {
-                "campo": "A"
-            }
+            "fields": [
+                {
+                    "code": "monto_certificado",
+                    "label": "Monto certificado",
+                    "datatype": "integer",
+                    "include_expected_value": true
+                }
+            ]
         }
     },
     {
-        "model": "questionnaires.Questionnaire",
+        "model": "questionnaires.questionnaire",
         "pk": "tendido_red_mensual",
         "fields": {
             "category": "monthly",
             "version": 1,
             "name": "Tendido de red",
-            "fields": {
-                "campo": "A"
-            }
+            "fields": [
+                {
+                    "code": "metros_lineales_tendidos",
+                    "label": "Metros lineales tendidos",
+                    "datatype": "decimal2",
+                    "include_expected_value": true
+                },
+                {
+                    "code": "numero_conexiones_ejecutadas",
+                    "label": "Número de conexiones ejecutadas",
+                    "datatype": "integer",
+                    "include_expected_value": false
+                }
+            ]
         }
     }
 ]
