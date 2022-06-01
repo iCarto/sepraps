@@ -68,4 +68,176 @@ CREATE INDEX "monthly_questionnaire_instance_questionnaire_id_90e05628" ON "mont
 
 CREATE INDEX "monthly_questionnaire_instance_questionnaire_id_90e05628_like" ON "monthly_questionnaire_instance" ("questionnaire_id" varchar_pattern_ops);
 
+-- Django configuration for new tables
+INSERT INTO
+    django_content_type (app_label, model)
+VALUES
+    ('questionnaires', 'monthlyquestionnairevalue'),
+    ('questionnaires', 'questionnaire'),
+    ('questionnaires', 'monthlyquestionnaireinstance');
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add Dato de cuestionario mensual',
+        'add_monthlyquestionnairevalue',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnairevalue'
+        )
+    ),
+    (
+        'Can change Dato de cuestionario mensual',
+        'change_monthlyquestionnairevalue',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnairevalue'
+        )
+    ),
+    (
+        'Can delete Dato de cuestionario mensual',
+        'delete_monthlyquestionnairevalue',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnairevalue'
+        )
+    ),
+    (
+        'Can view Dato de cuestionario mensual',
+        'view_monthlyquestionnairevalue',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnairevalue'
+        )
+    ),
+    (
+        'Can add Cuestionario',
+        'add_questionnaire',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'questionnaire'
+        )
+    ),
+    (
+        'Can change Cuestionario',
+        'change_questionnaire',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'questionnaire'
+        )
+    ),
+    (
+        'Can delete Cuestionario',
+        'delete_questionnaire',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'questionnaire'
+        )
+    ),
+    (
+        'Can view Cuestionario',
+        'view_questionnaire',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'questionnaire'
+        )
+    ),
+    (
+        'Can add Instancia de cuestionario mensual',
+        'add_monthlyquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnaireinstance'
+        )
+    ),
+    (
+        'Can change Instancia de cuestionario mensual',
+        'change_monthlyquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnaireinstance'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can delete Instancia de cuestionario mensual',
+        'delete_monthlyquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnaireinstance'
+        )
+    ),
+    (
+        'Can view Instancia de cuestionario mensual',
+        'view_monthlyquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'questionnaires'
+                AND model = 'monthlyquestionnaireinstance'
+        )
+    );
+
 COMMIT;

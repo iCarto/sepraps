@@ -510,4 +510,888 @@ CREATE INDEX "construction_contract_social_inspector_id_e21bc955" ON "constructi
 
 CREATE INDEX "construction_contract_social_supervisor_id_b6f8c802" ON "construction_contract" ("social_supervisor_id");
 
+INSERT INTO
+    public.django_content_type (app_label, model)
+VALUES
+    ('documents', 'medianode'),
+    ('documents', 'document'),
+    ('documents', 'folder'),
+    ('monitoring', 'domainentry'),
+    ('monitoring', 'department'),
+    ('monitoring', 'milestone'),
+    ('monitoring', 'locality'),
+    ('monitoring', 'financingprogram'),
+    ('monitoring', 'project'),
+    ('monitoring', 'contact');
+
+INSERT INTO
+    public.django_content_type (app_label, model)
+VALUES
+    ('monitoring', 'provider'),
+    ('monitoring', 'financingfund'),
+    ('monitoring', 'infrastructure'),
+    ('monitoring', 'district'),
+    ('monitoring', 'constructioncontract'),
+    ('monitoring', 'contractor');
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add MediaNode',
+        'add_medianode',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'medianode'
+        )
+    ),
+    (
+        'Can change MediaNode',
+        'change_medianode',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'medianode'
+        )
+    ),
+    (
+        'Can delete MediaNode',
+        'delete_medianode',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'medianode'
+        )
+    ),
+    (
+        'Can view MediaNode',
+        'view_medianode',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'medianode'
+        )
+    ),
+    (
+        'Can add document',
+        'add_document',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'document'
+        )
+    ),
+    (
+        'Can change document',
+        'change_document',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'document'
+        )
+    ),
+    (
+        'Can delete document',
+        'delete_document',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'document'
+        )
+    ),
+    (
+        'Can view document',
+        'view_document',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'document'
+        )
+    ),
+    (
+        'Can add folder',
+        'add_folder',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'folder'
+        )
+    ),
+    (
+        'Can change folder',
+        'change_folder',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'folder'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can delete folder',
+        'delete_folder',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'folder'
+        )
+    ),
+    (
+        'Can view folder',
+        'view_folder',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'documents'
+                AND model = 'folder'
+        )
+    ),
+    (
+        'Can add Dominio',
+        'add_domainentry',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'domainentry'
+        )
+    ),
+    (
+        'Can change Dominio',
+        'change_domainentry',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'domainentry'
+        )
+    ),
+    (
+        'Can delete Dominio',
+        'delete_domainentry',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'domainentry'
+        )
+    ),
+    (
+        'Can view Dominio',
+        'view_domainentry',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'domainentry'
+        )
+    ),
+    (
+        'Can add Departamento',
+        'add_department',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'domainentry'
+        )
+    ),
+    (
+        'Can change Departamento',
+        'change_department',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'department'
+        )
+    ),
+    (
+        'Can delete Departamento',
+        'delete_department',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'department'
+        )
+    ),
+    (
+        'Can view Departamento',
+        'view_department',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'department'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add Hito',
+        'add_milestone',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'milestone'
+        )
+    ),
+    (
+        'Can change Hito',
+        'change_milestone',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'milestone'
+        )
+    ),
+    (
+        'Can delete Hito',
+        'delete_milestone',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'milestone'
+        )
+    ),
+    (
+        'Can view Hito',
+        'view_milestone',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'milestone'
+        )
+    ),
+    (
+        'Can add Localidad',
+        'add_locality',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'locality'
+        )
+    ),
+    (
+        'Can change Localidad',
+        'change_locality',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'locality'
+        )
+    ),
+    (
+        'Can delete Localidad',
+        'delete_locality',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'locality'
+        )
+    ),
+    (
+        'Can view Localidad',
+        'view_locality',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'locality'
+        )
+    ),
+    (
+        'Can add Programa de financiación',
+        'add_financingprogram',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingprogram'
+        )
+    ),
+    (
+        'Can change Programa de financiación',
+        'change_financingprogram',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingprogram'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can delete Programa de financiación',
+        'delete_financingprogram',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingprogram'
+        )
+    ),
+    (
+        'Can view Programa de financiación',
+        'view_financingprogram',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingprogram'
+        )
+    ),
+    (
+        'Can add Proyecto',
+        'add_project',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'project'
+        )
+    ),
+    (
+        'Can change Proyecto',
+        'change_project',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'project'
+        )
+    ),
+    (
+        'Can delete Proyecto',
+        'delete_project',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'project'
+        )
+    ),
+    (
+        'Can view Proyecto',
+        'view_project',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'project'
+        )
+    ),
+    (
+        'Can add Contacto',
+        'add_contact',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contact'
+        )
+    ),
+    (
+        'Can change Contacto',
+        'change_contact',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contact'
+        )
+    ),
+    (
+        'Can delete Contacto',
+        'delete_contact',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contact'
+        )
+    ),
+    (
+        'Can view Contacto',
+        'view_contact',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contact'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add Prestador',
+        'add_provider',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'provider'
+        )
+    ),
+    (
+        'Can change Prestador',
+        'change_provider',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'provider'
+        )
+    ),
+    (
+        'Can delete Prestador',
+        'delete_provider',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'provider'
+        )
+    ),
+    (
+        'Can view Prestador',
+        'view_provider',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'provider'
+        )
+    ),
+    (
+        'Can add Financiador',
+        'add_financingfund',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingfund'
+        )
+    ),
+    (
+        'Can change Financiador',
+        'change_financingfund',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingfund'
+        )
+    ),
+    (
+        'Can delete Financiador',
+        'delete_financingfund',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingfund'
+        )
+    ),
+    (
+        'Can view Financiador',
+        'view_financingfund',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'financingfund'
+        )
+    ),
+    (
+        'Can add Infraestructura',
+        'add_infrastructure',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'infrastructure'
+        )
+    ),
+    (
+        'Can change Infraestructura',
+        'change_infrastructure',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'infrastructure'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can delete Infraestructura',
+        'delete_infrastructure',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'infrastructure'
+        )
+    ),
+    (
+        'Can view Infraestructura',
+        'view_infrastructure',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'infrastructure'
+        )
+    ),
+    (
+        'Can add Distrito',
+        'add_district',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'district'
+        )
+    ),
+    (
+        'Can change Distrito',
+        'change_district',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'district'
+        )
+    ),
+    (
+        'Can delete Distrito',
+        'delete_district',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'district'
+        )
+    ),
+    (
+        'Can view Distrito',
+        'view_district',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'district'
+        )
+    ),
+    (
+        'Can add Contrato de obras',
+        'add_constructioncontract',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'constructioncontract'
+        )
+    ),
+    (
+        'Can change Contrato de obras',
+        'change_constructioncontract',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'constructioncontract'
+        )
+    ),
+    (
+        'Can delete Contrato de obras',
+        'delete_constructioncontract',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'constructioncontract'
+        )
+    ),
+    (
+        'Can view Contrato de obras',
+        'view_constructioncontract',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'constructioncontract'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add Contratista',
+        'add_contractor',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contractor'
+        )
+    ),
+    (
+        'Can change Contratista',
+        'change_contractor',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contractor'
+        )
+    ),
+    (
+        'Can delete Contratista',
+        'delete_contractor',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contractor'
+        )
+    ),
+    (
+        'Can view Contratista',
+        'view_contractor',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'contractor'
+        )
+    );
+
 COMMIT;

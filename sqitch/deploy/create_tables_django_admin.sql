@@ -185,4 +185,326 @@ CREATE INDEX "django_session_session_key_c0390e0f_like" ON "django_session" ("se
 
 CREATE INDEX "django_session_expire_date_a5c62663" ON "django_session" ("expire_date");
 
+INSERT INTO
+    public.django_content_type (app_label, model)
+VALUES
+    ('admin', 'logentry'),
+    ('auth', 'permission'),
+    ('auth', 'group'),
+    ('contenttypes', 'contenttype'),
+    ('sessions', 'session'),
+    ('users', 'user');
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add log entry',
+        'add_logentry',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'admin'
+                AND model = 'logentry'
+        )
+    ),
+    (
+        'Can change log entry',
+        'change_logentry',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'admin'
+                AND model = 'logentry'
+        )
+    ),
+    ('Can delete log entry', 'delete_logentry', 1),
+    (
+        'Can view log entry',
+        'view_logentry',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'admin'
+                AND model = 'logentry'
+        )
+    ),
+    (
+        'Can add permission',
+        'add_permission',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'permission'
+        )
+    ),
+    (
+        'Can change permission',
+        'change_permission',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'permission'
+        )
+    ),
+    (
+        'Can delete permission',
+        'delete_permission',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'permission'
+        )
+    ),
+    (
+        'Can view permission',
+        'view_permission',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'permission'
+        )
+    ),
+    (
+        'Can add group',
+        'add_group',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'group'
+        )
+    ),
+    (
+        'Can change group',
+        'change_group',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'group'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can delete group',
+        'delete_group',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'group'
+        )
+    ),
+    (
+        'Can view group',
+        'view_group',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'auth'
+                AND model = 'group'
+        )
+    ),
+    (
+        'Can add content type',
+        'add_contenttype',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'contenttypes'
+                AND model = 'contenttype'
+        )
+    ),
+    (
+        'Can change content type',
+        'change_contenttype',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'contenttypes'
+                AND model = 'contenttype'
+        )
+    ),
+    (
+        'Can delete content type',
+        'delete_contenttype',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'contenttypes'
+                AND model = 'contenttype'
+        )
+    ),
+    (
+        'Can view content type',
+        'view_contenttype',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'contenttypes'
+                AND model = 'contenttype'
+        )
+    ),
+    (
+        'Can add session',
+        'add_session',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'sessions'
+                AND model = 'session'
+        )
+    ),
+    (
+        'Can change session',
+        'change_session',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'sessions'
+                AND model = 'session'
+        )
+    ),
+    (
+        'Can delete session',
+        'delete_session',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'sessions'
+                AND model = 'session'
+        )
+    ),
+    (
+        'Can view session',
+        'view_session',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'sessions'
+                AND model = 'session'
+        )
+    );
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add user',
+        'add_user',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'users'
+                AND model = 'user'
+        )
+    ),
+    (
+        'Can change user',
+        'change_user',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'users'
+                AND model = 'user'
+        )
+    ),
+    (
+        'Can delete user',
+        'delete_user',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'users'
+                AND model = 'user'
+        )
+    ),
+    (
+        'Can view user',
+        'view_user',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'users'
+                AND model = 'user'
+        )
+    );
+
 COMMIT;
