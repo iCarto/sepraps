@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
-from monitoring.views import index
+from monitoring.views import stats_views
 from monitoring.views.constructrion_contract_viewset import ConstructionContractViewSet
 from monitoring.views.contact_viewset import ContactViewSet
 from monitoring.views.contractor_viewset import ContractorViewSet
@@ -34,5 +34,8 @@ router.register(r"milestones", MilestoneViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("home", index, name="index"),
+    path(
+        "stats/monthlyquestionnaires/<str:questionnaire_code>/<str:field_code>",
+        stats_views.get_monthly_questionnaire_stats,
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
