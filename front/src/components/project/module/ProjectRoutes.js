@@ -109,8 +109,13 @@ const projectRoutes = [
             <Route
                 key="project-questionnaire-detail"
                 path="questionnaires/:questionnaireCode"
-                element={<ViewProjectQuestionnairesSubPage />}
-            />
+            >
+                <Route
+                    path=":instanceId"
+                    element={<ViewProjectQuestionnairesSubPage />}
+                />
+                <Route path="" element={<ViewProjectQuestionnairesSubPage />} />
+            </Route>
             <Route key="project-info" path="" element={<ViewProjectSummarySubPage />}>
                 <Route
                     key="project-general-data"
