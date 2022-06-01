@@ -17,11 +17,15 @@ const UpdateContractPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
+    const path =
+        section === "generaldata" || section === "financing_program"
+            ? `/contracts/${contract.id}/summary`
+            : `/contracts/${contract.id}/phases`;
+
     const handleSubmit = contract => {
-        console.log({contract}, "cuando llega a handleSubmit");
         ContractService.updateContract(contract_view_adapter({...contract}))
             .then(() => {
-                navigate(`/contracts/${contract.id}/summary`, true);
+                navigate(path, true);
             })
             .catch(error => {
                 console.log(error);

@@ -2,13 +2,14 @@ import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {SubPageLayout} from "layout";
 import {
-    ContractContractorSection,
-    ContractGeneralDataSection,
-    ContractFinancingProgramSection,
+    ContractAwardingSection,
+    ContractBidRequestSection,
+    ContractExecutionSection,
+    ContractPostConstructionSection,
 } from "../presentational/generaldata";
 import Grid from "@mui/material/Grid";
 
-const ViewContractInfoSubPage = () => {
+const ViewContractPhasesSubPage = () => {
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
     let contract;
@@ -26,19 +27,22 @@ const ViewContractInfoSubPage = () => {
         >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <ContractGeneralDataSection isSidePanelOpen={isSidePanelOpen} />
+                    <ContractBidRequestSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractFinancingProgramSection
+                    <ContractAwardingSection isSidePanelOpen={isSidePanelOpen} />
+                </Grid>
+                <Grid item xs={12}>
+                    <ContractExecutionSection isSidePanelOpen={isSidePanelOpen} />
+                </Grid>
+                <Grid item xs={12}>
+                    <ContractPostConstructionSection
                         isSidePanelOpen={isSidePanelOpen}
                     />
-                </Grid>
-                <Grid item xs={12}>
-                    <ContractContractorSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
             </Grid>
         </SubPageLayout>
     );
 };
 
-export default ViewContractInfoSubPage;
+export default ViewContractPhasesSubPage;

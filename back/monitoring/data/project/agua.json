@@ -22,12 +22,14 @@
         {
             "code": "approval_technical_folder",
             "name": "Aprobación de la carpeta técnica",
+            "short_name": "Aprobación de la carpeta técnica",
             "checklist": [{"definition": "Se ha aprobado la carpeta técnica"}],
             "phase": "design"
         },
         {
             "code": "funding_allocation",
             "name": "Asignación de financiación",
+            "short_name": "Asignación de financiación",
             "checklist": [
                 {"definition": "Se ha rellenado el programa de financiación"},
                 {"definition": "Se ha rellenado el financiador"}
@@ -37,6 +39,7 @@
         {
             "code": "contract_signing",
             "name": "Firma del contrato",
+            "short_name": "Firma del contrato",
             "checklist": [
                 {"definition": "Se ha subido una copia del contrato al repositorio"}
             ],
@@ -45,6 +48,7 @@
         {
             "code": "start_of_works",
             "name": "Inicio de las obras",
+            "short_name": "Inicio de las obras",
             "checklist": [
                 {"definition": "Se ha subido la orden de inicio al repositorio"},
                 {"definition": "Se ha subido el acta de inicio al repositorio"}
@@ -54,6 +58,7 @@
         {
             "code": "technical_validation",
             "name": "Validación del checklist técnico",
+            "short_name": "Validación del checklist técnico",
             "checklist": [
                 {"definition": "Se han completado los puntos técnicos de este hito"}
             ],
@@ -63,6 +68,7 @@
                     "code": "technical_validation_drilling",
                     "checklist": [{"definition": "Se ha completado la perforación"}],
                     "name": "Perforación",
+                    "short_name": "Perforación",
                     "phase": "execution"
                 },
                 {
@@ -71,13 +77,15 @@
                         {"definition": "Se ha completado la prueba de bombeo"}
                     ],
                     "name": "Prueba de bombeo",
+                    "short_name": "Prueba de bombeo",
                     "phase": "execution"
                 }
             ]
         },
         {
             "code": "provisional_reception",
-            "name": "Recepción provisoria por la administración",
+            "name": "Recepción provisoria de las obras",
+            "short_name": "Recepción provisoria",
             "checklist": [
                 {
                     "definition": "Se ha subido el acta de recepción provisoria al repositorio"
@@ -86,8 +94,9 @@
             "phase": "execution"
         },
         {
-            "code": "definitive_reception",
-            "name": "Recepción definitiva por la administración",
+            "code": "final_reception",
+            "name": "Recepción definitiva de las obras",
+            "short_name": "Recepción definitiva",
             "checklist": [
                 {
                     "definition": "Se ha subido el acta de recepción definitiva al repositorio"
@@ -98,6 +107,7 @@
         {
             "code": "system_delivery",
             "name": "Entrega del sistema a la comunidad y transferencia de operación y mantenimiento",
+            "short_name": "Entrega del sistema",
             "checklist": [
                 {"definition": "Se ha subido el acta de entrega al repositorio"}
             ],
@@ -106,12 +116,14 @@
         {
             "code": "final_settlement",
             "name": "Liquidación final",
+            "short_name": "Liquidación final",
             "checklist": [{"definition": "Se ha cerrado la ejecución del proyecto"}],
             "phase": "execution"
         },
         {
             "code": "end_of_warranty",
             "name": "Fin del periodo de garantía",
+            "short_name": "Fin de la garantía",
             "checklist": [{"definition": "Ha finalizado el periodo de garantía"}],
             "phase": "post-execution"
         }
