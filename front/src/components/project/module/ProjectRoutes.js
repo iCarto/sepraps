@@ -11,6 +11,7 @@ import {
     ViewProjectContactsSubPage,
     UpdateProjectProviderPanel,
     ViewProjectDocumentsSubPage,
+    ViewProjectQuestionnairesSubPage,
     AddProjectProviderPanel,
     UpdateProjectPanel,
     UpdateProjectMainInfrastructurePanel,
@@ -105,6 +106,11 @@ const projectRoutes = [
                     element={<ViewDocumentPanel />}
                 />
             </Route>
+            <Route
+                key="project-questionnaire-detail"
+                path="questionnaires/:questionnaireCode"
+                element={<ViewProjectQuestionnairesSubPage />}
+            />
             <Route key="project-info" path="" element={<ViewProjectSummarySubPage />}>
                 <Route
                     key="project-general-data"

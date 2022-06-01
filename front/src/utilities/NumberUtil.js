@@ -7,7 +7,7 @@ var localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
 var localNumberFormatter = new Intl.NumberFormat("es-PY");
 
 const NumberUtil = {
-    formatDecimal(value, decimalSize) {
+    formatDecimal(value, decimalSize = 2) {
         if (!value) {
             return "";
         }
