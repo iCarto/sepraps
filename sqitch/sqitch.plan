@@ -7,3 +7,4 @@ create_tables_sepraps 2022-05-10T06:26:33Z Elías Gago <egago@icarto.es> # Creat
 update_financing_program_relationship 2022-05-10T09:25:53Z Elías Gago <egago@icarto.es> # Change financing program relationship from projects to contracts
 create_tables_questionnaires 2022-06-01T09:56:45Z Elías Gago <egago@icarto.es> # Create tables for questionnaires module
 create_relationship_project_questionnaire 2022-06-01T10:04:40Z Elías Gago <egago@icarto.es> # Create tables for relationship between questionnaires and projects
+insert_records_profiles 2022-06-01T11:44:23Z Elías Gago <egago@icarto.es> # Insert the default profiles and permissions

@@ -67,4 +67,65 @@ CREATE INDEX "project_questionnaire_instance_questionnaire_id_5d570823_like" ON 
 
 CREATE INDEX "project_questionnaire_inst_questionnaire_instance_id_f1df68e9" ON "project_questionnaire_instance" ("questionnaire_instance_id");
 
+INSERT INTO
+    django_content_type (app_label, model)
+VALUES
+    ('monitoring', 'projectquestionnaireinstance');
+
+INSERT INTO
+    auth_permission ("name", codename, content_type_id)
+VALUES
+    (
+        'Can add project questionnaire instance',
+        'add_projectquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'projectquestionnaireinstance'
+        )
+    ),
+    (
+        'Can change project questionnaire instance',
+        'change_projectquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'projectquestionnaireinstance'
+        )
+    ),
+    (
+        'Can delete project questionnaire instance',
+        'delete_projectquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'projectquestionnaireinstance'
+        )
+    ),
+    (
+        'Can view project questionnaire instance',
+        'view_projectquestionnaireinstance',
+        (
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'monitoring'
+                AND model = 'projectquestionnaireinstance'
+        )
+    );
+
 COMMIT;
