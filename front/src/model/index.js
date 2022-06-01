@@ -70,7 +70,6 @@ export {
     milestones_api_adapter,
     milestone_view_adapter,
 } from "./Milestone";
-
 export {
     default as createPhase,
     createPhases,
@@ -89,3 +88,15 @@ export {
     financing_program_api_adapter,
     financing_programs_api_adapter,
 } from "./FinancingProgram";
+export {
+    default as createQuestionnaire,
+    createQuestionnaires,
+    questionnaire_api_adapter,
+    questionnaires_api_adapter,
+} from "./questionnaires/Questionnaire";
+export {
+    default as createProjectQuestionnaire,
+    createProjectQuestionnaires,
+    project_questionnaire_api_adapter,
+    project_questionnaires_api_adapter,
+} from "./ProjectQuestionnaire";
