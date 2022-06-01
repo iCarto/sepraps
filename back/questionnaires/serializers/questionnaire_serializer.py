@@ -1,4 +1,4 @@
-from questionnaires.models import Questionnaire
+from questionnaires.models.questionnaire import Questionnaire
 from rest_framework import serializers
 
 

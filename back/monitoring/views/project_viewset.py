@@ -9,13 +9,20 @@ from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.domain_entry import DomainEntry
 from monitoring.models.milestone import CATEGORY_CHOICES, PHASE_CHOICES, Milestone
 from monitoring.models.project import Project
+from monitoring.models.project_questionnaire_instance import (
+    ProjectQuestionnaireInstance,
+)
 from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.milestone_serializer import MilestoneSerializer
+from monitoring.serializers.project_questionnaire_instance_serializer import (
+    ProjectQuestionnaireInstanceSerializer,
+)
 from monitoring.serializers.project_serializer import (
     ProjectSerializer,
     ProjectSummarySerializer,
 )
-from rest_framework import permissions, viewsets
+from questionnaires.models.questionnaire import Questionnaire
+from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -155,6 +162,57 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return Response(
             MilestoneSerializer(
                 milestones, many=True, context={"request": request}
+            ).data
+        )
+
+    @action(
+        detail=True,
+        methods=["get", "put"],
+        url_path="questionnaire_instances/(?P<questionnaire_code>\w+)",
+    )
+    def questionnaire_instances(self, request, questionnaire_code, pk=None):
+        """
+        Returns a list of all the instances of the questionnaire for the project
+        """
+        project = self.get_object()
+        questionnaire = Questionnaire.objects.get(pk=questionnaire_code)
+        instances = ProjectQuestionnaireInstance.objects.filter(
+            project=project.id, questionnaire__code=questionnaire_code
+        ).prefetch_related("questionnaire_instance__values")
+        questionnaire_instances = [
+            instance.questionnaire_instance for instance in instances
+        ]
+
+        if request.method == "PUT":
+            serializer = ProjectQuestionnaireInstanceSerializer(
+                data=request.data, context={"request": request}
+            )
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            serializer.update(
+                instance=dict(
+                    project=project,
+                    questionnaire=questionnaire,
+                    questionnaire_instances=questionnaire_instances,
+                ),
+                validated_data=serializer.validated_data,
+            )
+
+        instances = ProjectQuestionnaireInstance.objects.filter(
+            project=project.id, questionnaire__code=questionnaire_code
+        ).prefetch_related("questionnaire_instance__values")
+        questionnaire_instances = [
+            instance.questionnaire_instance for instance in instances
+        ]
+
+        return Response(
+            ProjectQuestionnaireInstanceSerializer(
+                dict(
+                    project=project,
+                    questionnaire=questionnaire,
+                    questionnaire_instances=questionnaire_instances,
+                ),
+                context={"request": request},
             ).data
         )
 

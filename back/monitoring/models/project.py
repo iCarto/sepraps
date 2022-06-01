@@ -12,7 +12,10 @@ from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.location import Locality
 from monitoring.models.provider import Provider
-from questionnaires.models import Questionnaire
+from questionnaires.models.monthly_questionnaire_instance import (
+    MonthlyQuestionnaireInstance,
+)
+from questionnaires.models.questionnaire import Questionnaire
 
 
 class Project(models.Model):
@@ -53,7 +56,12 @@ class Project(models.Model):
         null=True,
     )
 
+    # This field only exists to retrieve questionnaires list for project menu
+    # TODO Explore if there is another solution for this use case
     questionnaires = models.ManyToManyField(Questionnaire)
+    questionnaires_instances = models.ManyToManyField(
+        MonthlyQuestionnaireInstance, through="ProjectQuestionnaireInstance"
+    )
 
     closed = models.BooleanField(blank=False, null=False, default=False)
 
