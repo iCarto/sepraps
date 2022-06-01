@@ -11,6 +11,7 @@ class MilestoneSerializer(serializers.ModelSerializer):
             "id",
             "code",
             "name",
+            "short_name",
             "checklist",
             "phase",
             "phase_name",
@@ -31,7 +32,14 @@ class MilestoneSerializer(serializers.ModelSerializer):
 
 class MilestoneSummarySerializer(MilestoneSerializer):
     class Meta(MilestoneSerializer.Meta):
-        fields = ("code", "name", "phase", "phase_name", "compliance_date")
+        fields = (
+            "code",
+            "name",
+            "short_name",
+            "phase",
+            "phase_name",
+            "compliance_date",
+        )
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)

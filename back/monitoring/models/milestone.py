@@ -13,8 +13,9 @@ PHASE_CHOICES = [
 class Milestone(models.Model):
 
     id = models.AutoField(primary_key=True)
-    code = models.CharField("Code", max_length=50)
+    code = models.CharField("Código", max_length=50)
     name = models.CharField("Nombre", max_length=100)
+    short_name = models.CharField("Nombre corto", max_length=100)
     checklist = models.JSONField("Validación")
     phase = models.CharField("Fase", max_length=50, choices=PHASE_CHOICES)
     compliance_date = models.DateField("Fecha de cumplimiento", blank=True, null=True)
@@ -46,6 +47,7 @@ def create_project_milestones(project, milestones, parent=None):
         milestone = Milestone(
             code=milestone_data.get("code"),
             name=milestone_data.get("name"),
+            short_name=milestone_data.get("short_name"),
             checklist=milestone_data.get("checklist"),
             phase=milestone_data.get("phase"),
             project=project,

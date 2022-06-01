@@ -24,7 +24,7 @@ export function useColorMilestone() {
             [
                 "start_of_works",
                 "technical_validation",
-                "definitive_reception",
+                "final_reception",
                 "system_delivery",
                 "final_settlement",
             ].includes(milestone)

@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import EventNoteIcon from "@mui/icons-material/EventNote";
 
 const ContractMenu = ({contract}) => {
     return (
@@ -38,12 +39,19 @@ const ContractMenu = ({contract}) => {
                             </MenuListItemIcon>
                             <ListItemText primary="Información" />
                         </MenuListItemLink>
+                        <MenuListItemLink to={`/contracts/${contract?.id}/phases`}>
+                            <ListItemIcon>
+                                <EventNoteIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Fases" />
+                        </MenuListItemLink>
                         <MenuListItemLink to={`/contracts/${contract?.id}/monitoring`}>
                             <MenuListItemIcon>
                                 <PermContactCalendarIcon />
                             </MenuListItemIcon>
                             <ListItemText primary="Supervisión" />
                         </MenuListItemLink>
+
                         <MenuListItemLink to={`/contracts/${contract?.id}/projects`}>
                             <MenuListItemIcon>
                                 <FactCheckOutlinedIcon />

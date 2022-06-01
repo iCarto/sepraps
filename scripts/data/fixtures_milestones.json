@@ -104,7 +104,7 @@
         "model": "monitoring.milestone",
         "pk": 10,
         "fields": {
-            "category": "definitive_reception",
+            "category": "final_reception",
             "phase": "execution",
             "compliance_date": "2021-02-19",
             "project": 1,
@@ -249,7 +249,7 @@
         "model": "monitoring.milestone",
         "pk": 23,
         "fields": {
-            "category": "definitive_reception",
+            "category": "final_reception",
             "phase": "execution",
             "compliance_date": null,
             "project": 2,

@@ -16,6 +16,7 @@ import {
     ManageContractsPage,
     ViewContractPanel,
     ViewContractQuestionnairesSubPage,
+    ViewContractPhasesSubPage,
 } from "../container";
 import {UpdateContractMonitoringProfilePanel} from "../container/monitoring";
 
@@ -45,6 +46,18 @@ const contractRoutes = [
                 />
                 <Route
                     key="contract-general-data"
+                    path=":section/:action"
+                    element={<UpdateContractPanel />}
+                />
+            </Route>
+
+            <Route
+                key="contract-phases"
+                path="phases"
+                element={<ViewContractPhasesSubPage />}
+            >
+                <Route
+                    key="contract-phases-data"
                     path=":section/:action"
                     element={<UpdateContractPanel />}
                 />
