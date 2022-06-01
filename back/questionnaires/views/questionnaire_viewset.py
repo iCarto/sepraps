@@ -1,5 +1,5 @@
-from questionnaires.models import Questionnaire
-from questionnaires.serializers import QuestionnaireSerializer
+from questionnaires.models.questionnaire import Questionnaire
+from questionnaires.serializers.questionnaire_serializer import QuestionnaireSerializer
 from rest_framework import viewsets
 
 

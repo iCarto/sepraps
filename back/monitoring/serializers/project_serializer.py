@@ -14,7 +14,9 @@ from monitoring.serializers.infraestructure_serializer import InfraestructureSer
 from monitoring.serializers.locality_serializer import LocalitySerializer
 from monitoring.serializers.milestone_serializer import MilestoneSummarySerializer
 from monitoring.serializers.provider_serializer import ProviderSerializer
-from questionnaires.serializers import QuestionnaireShortSerializer
+from questionnaires.serializers.questionnaire_serializer import (
+    QuestionnaireShortSerializer,
+)
 from rest_framework import serializers
 
 
