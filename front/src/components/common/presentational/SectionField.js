@@ -1,5 +1,6 @@
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 
 const SectionField = ({
     label = null,
@@ -7,6 +8,7 @@ const SectionField = ({
     labelIcon = null,
     containerWidth = "",
     valueFontStyle = "inherit",
+    linkPath = null,
 }) => {
     let labelWidth;
     let valueWidth;
@@ -53,17 +55,30 @@ const SectionField = ({
                 </Typography>
             </Grid>
             <Grid item xs="auto" sm={7} lg={valueWidth}>
-                <Typography
-                    variant="subtitle1"
-                    sx={{
-                        lineHeight: {xs: 1.5, sm: 1.25},
-                        mb: {xs: 0, sm: 1.5},
-                        overflowWrap: "break-word",
-                        fontStyle: valueFontStyle,
-                    }}
-                >
-                    {value}
-                </Typography>
+                {!linkPath ? (
+                    <Typography
+                        variant="subtitle1"
+                        sx={{
+                            lineHeight: {xs: 1.5, sm: 1.25},
+                            mb: {xs: 0, sm: 1.5},
+                            overflowWrap: "break-word",
+                            fontStyle: valueFontStyle,
+                        }}
+                    >
+                        {value}
+                    </Typography>
+                ) : (
+                    <Link
+                        href={linkPath}
+                        variant="subtitle1"
+                        sx={{
+                            lineHeight: {xs: 1.5, sm: 1.25},
+                            pb: {xs: 0, sm: 1.5},
+                        }}
+                    >
+                        {value}
+                    </Link>
+                )}
             </Grid>
         </Grid>
     );
