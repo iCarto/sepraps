@@ -2,15 +2,10 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "auth";
 
 import {DateUtil, NumberUtil} from "utilities";
-import {
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "components/common/presentational";
+import {SectionCard, SectionField} from "components/common/presentational";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import LaunchIcon from "@mui/icons-material/Launch";
 
 const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
@@ -30,13 +25,14 @@ const ProjectContractSection = ({contract}) => {
     ];
 
     return (
-        <SectionCard
-            title="Contrato de obras"
-            secondaryActions={contract ? headerActions : []}
-        >
+        <SectionCard title="Contrato de obras">
             {contract ? (
                 <>
-                    <SectionField label="Número de contrato:" value={contract.number} />
+                    <SectionField
+                        label="Número de contrato:"
+                        value={contract.number}
+                        linkPath={`/contracts/${contract.id}`}
+                    />
                     <SectionField
                         label="Número de licitación:"
                         value={contract.bid_request_number}
@@ -48,7 +44,7 @@ const ProjectContractSection = ({contract}) => {
                     {/* TO-DO: FIX THESE 2 FIELDS */}
                     <SectionField
                         label="Plazo previsto de ejecución del contrato:"
-                        value={contract.expected_execution_period}
+                        value={`${contract.expected_execution_period} días`}
                     />
                     {contract.expected_execution_end_date && (
                         <SectionField

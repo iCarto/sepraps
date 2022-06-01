@@ -18,6 +18,8 @@ const ViewProjectFinancingSubPage = () => {
         setIsSidePanelOpen(isOpen);
     };
 
+    console.log(project.construction_contract, "project.construction_contract");
+
     return (
         <SubPageLayout
             outletContext={[project]}
