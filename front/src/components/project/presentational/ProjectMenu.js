@@ -3,7 +3,6 @@ import {SelectProjectDropDown} from "../container";
 
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import MenuList from "@mui/material/MenuList";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
@@ -13,6 +12,8 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import TopicOutlinedIcon from "@mui/icons-material/TopicOutlined";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import LinearScaleOutlinedIcon from "@mui/icons-material/LinearScaleOutlined";
+import MenuList from "@mui/material/MenuList";
+import ProjectMenuQuestionnaires from "./ProjectMenuQuestionnaires";
 
 const ProjectMenu = ({project}) => {
     return (
@@ -54,6 +55,7 @@ const ProjectMenu = ({project}) => {
                             </ListItemIcon>
                             <ListItemText primary="Hitos" />
                         </MenuListItemLink>
+                        <ProjectMenuQuestionnaires project={project} />
                         <MenuListItemLink to={`/projects/${project.id}/contacts`}>
                             <ListItemIcon>
                                 <PermContactCalendarOutlinedIcon />
