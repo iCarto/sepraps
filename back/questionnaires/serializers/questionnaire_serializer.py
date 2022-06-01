@@ -11,7 +11,7 @@ class QuestionnaireSerializer(serializers.ModelSerializer):
 class QuestionnaireShortSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = Questionnaire
-        fields = ("code", "name")
+        fields = ("code", "name", "fields")
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)

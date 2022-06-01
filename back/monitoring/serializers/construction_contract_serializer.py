@@ -1,3 +1,5 @@
+import itertools
+
 from django.db.models import Prefetch
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.contact import Contact
@@ -12,6 +14,9 @@ from monitoring.serializers.contractor_serializer import (
 )
 from monitoring.serializers.financing_program_serializer import (
     FinancingProgramSerializer,
+)
+from questionnaires.serializers.questionnaire_serializer import (
+    QuestionnaireShortSerializer,
 )
 from rest_framework import serializers
 
@@ -34,6 +39,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
     )
+    questionnaires = serializers.SerializerMethodField()
 
     class Meta:
         model = ConstructionContract
@@ -63,6 +69,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "execution_expected_delivery_date",
             "execution_final_delivery_date",
             "projects",
+            "questionnaires",
             "creation_user",
             "created_at",
             "updated_at",
@@ -84,6 +91,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         ).prefetch_related(
             "contractor__contacts",
             "financing_program__financing_funds",
+            "projects__questionnaires",
             Prefetch(
                 "projects__milestones",
                 queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
@@ -113,6 +121,12 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         return response
 
     # ATTRIBUTES
+
+    def get_questionnaires(self, obj):
+        projects = obj.projects.all()
+        questionnaires = [project.questionnaires.all() for project in projects]
+        questionnaires = list(itertools.chain(*questionnaires))
+        return QuestionnaireShortSerializer(set(questionnaires), many=True).data
 
     # OPERATIONS
 
