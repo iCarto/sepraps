@@ -106,7 +106,7 @@ workon sepraps
 Use the script
 
 ```shell
-./scripts/reset_db_and_migrations.sh empty
+./scripts/reset_db_and_create.sh empty
 ```
 
 if `empty` is ommited the script loads in the database the fixtures.
