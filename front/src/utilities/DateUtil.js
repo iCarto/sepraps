@@ -1,4 +1,5 @@
 import {format, parse} from "date-fns";
+import {es} from "date-fns/locale";
 
 export const DATE_FORMATS = {
     CLIENT_DATEFORMAT: "dd/MM/yyyy",
@@ -45,6 +46,9 @@ const DateUtil = {
     },
     parseDateTime(date, dateFormat = DATE_FORMATS.CLIENT_DATETIMEFORMAT) {
         return parse(date, dateFormat, new Date());
+    },
+    getMonthName(month) {
+        return format(new Date(null, month - 1), "LLLL", {locale: es});
     },
 };
 
