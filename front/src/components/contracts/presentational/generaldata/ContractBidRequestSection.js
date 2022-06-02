@@ -45,13 +45,13 @@ const ContractBidRequestSection = ({isSidePanelOpen = null}) => {
                 label="Monto Estimado:"
                 value={NumberUtil.formatCurrency(contract?.bid_request_budget)}
             />
-            <SectionField
+            {/* <SectionField
                 label="Plazo Previsto:"
                 value={
                     contract.bid_request_deadline &&
                     contract.bid_request_deadline + " meses"
                 }
-            />
+            /> */}
         </SectionCard>
     );
 };

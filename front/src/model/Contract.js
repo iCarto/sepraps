@@ -38,19 +38,19 @@ const contract_api_adapter = contract => {
     contract["execution_signature_date"] = contract["execution_signature_date"]
         ? new Date(contract["execution_signature_date"])
         : null;
-    contract["execution_order_start_date"] = contract["execution_order_start_date"]
-        ? new Date(contract["execution_order_start_date"])
-        : null;
+    // contract["execution_order_start_date"] = contract["execution_order_start_date"]
+    //     ? new Date(contract["execution_order_start_date"])
+    //     : null;
     contract["execution_certificate_start_date"] = contract[
         "execution_certificate_start_date"
     ]
         ? new Date(contract["execution_certificate_start_date"])
         : null;
-    contract["execution_expected_delivery_date"] = contract[
-        "execution_expected_delivery_date"
-    ]
-        ? new Date(contract["execution_expected_delivery_date"])
-        : null;
+    // contract["execution_expected_delivery_date"] = contract[
+    //     "execution_expected_delivery_date"
+    // ]
+    //     ? new Date(contract["execution_expected_delivery_date"])
+    //     : null;
     contract["execution_final_delivery_date"] = contract[
         "execution_final_delivery_date"
     ]
@@ -77,9 +77,9 @@ const contract_view_adapter = contract => {
     contract["bid_request_budget"] = !!contract["bid_request_budget"]
         ? NumberUtil.parseFloatOrNull(contract["bid_request_budget"])
         : null;
-    contract["bid_request_deadline"] = !!contract["bid_request_deadline"]
-        ? NumberUtil.parseIntOrNull(contract["bid_request_deadline"])
-        : null;
+    // contract["bid_request_deadline"] = !!contract["bid_request_deadline"]
+    //     ? NumberUtil.parseIntOrNull(contract["bid_request_deadline"])
+    //     : null;
     contract["awarding_budget"] = !!contract["awarding_budget"]
         ? NumberUtil.parseFloatOrNull(contract["awarding_budget"])
         : null;
@@ -98,6 +98,9 @@ const contract_view_adapter = contract => {
               DATE_FORMATS.SERVER_DATEFORMAT
           )
         : null;
+    contract["expected_execution_period"] = !!contract["expected_execution_period"]
+        ? NumberUtil.parseIntOrNull(contract["expected_execution_period"])
+        : null;
 
     contract["financing_program"] = !!contract["financing_program"]
         ? contract["financing_program"].id
@@ -114,25 +117,26 @@ const contract_view_adapter = contract => {
         contract["contractor"] = null;
     }
 
-    contract["execution_order_start_date"] = !!contract["execution_order_start_date"]
-        ? DateUtil.formatDate(
-              contract["execution_order_start_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
-        : null;
+    // TO-DO: Remove when it is confirmed that we are not using these 2 dates
+    // contract["execution_order_start_date"] = !!contract["execution_order_start_date"]
+    //     ? DateUtil.formatDate(
+    //           contract["execution_order_start_date"],
+    //           DATE_FORMATS.SERVER_DATEFORMAT
+    //       )
+    //     : null;
+    // contract["execution_expected_delivery_date"] = !!contract[
+    //     "execution_expected_delivery_date"
+    // ]
+    //     ? DateUtil.formatDate(
+    //           contract["execution_expected_delivery_date"],
+    //           DATE_FORMATS.SERVER_DATEFORMAT
+    //       )
+    //     : null;
     contract["execution_certificate_start_date"] = !!contract[
         "execution_certificate_start_date"
     ]
         ? DateUtil.formatDate(
               contract["execution_certificate_start_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
-        : null;
-    contract["execution_expected_delivery_date"] = !!contract[
-        "execution_expected_delivery_date"
-    ]
-        ? DateUtil.formatDate(
-              contract["execution_expected_delivery_date"],
               DATE_FORMATS.SERVER_DATEFORMAT
           )
         : null;
@@ -165,7 +169,7 @@ const createContract = ({
     bid_request_id = "",
     bid_request_date = null,
     bid_request_budget = null,
-    bid_request_deadline = null,
+    // bid_request_deadline = null,
     awarding_budget = null,
     awarding_percentage_drop = null,
     awarding_date = null,
@@ -178,10 +182,11 @@ const createContract = ({
     social_inspector = null,
     social_supervisor = null,
     execution_signature_date = null,
-    execution_order_start_date = null,
+    // execution_order_start_date = null,
+    // execution_expected_delivery_date = null,
     execution_certificate_start_date = null,
-    execution_expected_delivery_date = null,
     execution_final_delivery_date = null,
+    expected_execution_period = null,
     projects = [],
     questionnaires = [],
     created_at = null,
@@ -195,7 +200,7 @@ const createContract = ({
         bid_request_id,
         bid_request_date,
         bid_request_budget,
-        bid_request_deadline,
+        // bid_request_deadline,
         awarding_budget,
         awarding_percentage_drop,
         awarding_date,
@@ -208,9 +213,10 @@ const createContract = ({
         social_inspector,
         social_supervisor,
         execution_signature_date,
-        execution_order_start_date,
+        // execution_order_start_date,
+        // execution_expected_delivery_date,
+        expected_execution_period,
         execution_certificate_start_date,
-        execution_expected_delivery_date,
         execution_final_delivery_date,
         projects,
         questionnaires,

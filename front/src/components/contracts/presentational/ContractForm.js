@@ -41,18 +41,19 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
         bid_request_budget: contract?.bid_request_budget
             ? NumberUtil.formatDecimal(contract.bid_request_budget, 0)
             : "",
-        bid_request_deadline: contract?.bid_request_deadline || "",
+        // bid_request_deadline: contract?.bid_request_deadline || "",
         awarding_budget: contract?.awarding_budget
             ? NumberUtil.formatDecimal(contract.awarding_budget, 0)
             : "",
         awarding_date: contract?.awarding_date || "",
         execution_signature_date: contract?.execution_signature_date || "",
-        execution_order_start_date: contract?.execution_order_start_date || "",
+        // execution_order_start_date: contract?.execution_order_start_date || "",
+        // execution_expected_delivery_date:
+        //     contract?.execution_expected_delivery_date || "",
         execution_certificate_start_date:
             contract?.execution_certificate_start_date || "",
-        execution_expected_delivery_date:
-            contract?.execution_expected_delivery_date || "",
         execution_final_delivery_date: contract?.execution_final_delivery_date || "",
+        expected_execution_period: contract?.expected_execution_period || "",
     };
 
     const formMethods = useForm({
@@ -70,7 +71,7 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
             bid_request_id: data.bid_request_id,
             bid_request_date: data.bid_request_date,
             bid_request_budget: data.bid_request_budget,
-            bid_request_deadline: data.bid_request_deadline,
+            // bid_request_deadline: data.bid_request_deadline,
             awarding_budget: data.awarding_budget,
             awarding_percentage_drop:
                 data.bid_request_budget && data.awarding_budget
@@ -82,10 +83,11 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
             awarding_date: data.awarding_date,
             contractor: contract?.contractor,
             execution_signature_date: data.execution_signature_date,
-            execution_order_start_date: data.execution_order_start_date,
+            // execution_order_start_date: data.execution_order_start_date,
             execution_certificate_start_date: data.execution_certificate_start_date,
-            execution_expected_delivery_date: data.execution_expected_delivery_date,
+            // execution_expected_delivery_date: data.execution_expected_delivery_date,
             execution_final_delivery_date: data.execution_final_delivery_date,
+            expected_execution_period: data.expected_execution_period,
             projects: contract ? contract.projects : [],
         });
         console.log({updatedContract});

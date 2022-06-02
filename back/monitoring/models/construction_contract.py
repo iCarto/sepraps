@@ -17,7 +17,8 @@ class ConstructionContract(models.Model):
     bid_request_budget = models.DecimalField(
         "Monto total", max_digits=20, decimal_places=2
     )
-    bid_request_deadline = models.IntegerField("Plazo previsto")
+    # TO-DO: REMOVE THIS FIELD
+    # bid_request_deadline = models.IntegerField("Plazo previsto")
 
     awarding_budget = models.DecimalField(
         "Monto total de adjudicación", max_digits=20, decimal_places=2, null=True
@@ -62,18 +63,20 @@ class ConstructionContract(models.Model):
     execution_signature_date = models.DateField(
         "Fecha de firma del contrato", null=True
     )
-    execution_order_start_date = models.DateField(
-        "Fecha de la orden de inicio", null=True
-    )
+    # TO-DO: Remove when it is confirmed that we are not using these 2 dates
+    # execution_order_start_date = models.DateField(
+    #     "Fecha de la orden de inicio", null=True
+    # )
+    # execution_expected_delivery_date = models.DateField(
+    #     "Fecha de recepción provisoria", null=True
+    # )
     execution_certificate_start_date = models.DateField(
         "Fecha del acta de inicio", null=True
-    )
-    execution_expected_delivery_date = models.DateField(
-        "Fecha de recepción provisoria", null=True
     )
     execution_final_delivery_date = models.DateField(
         "Fecha de recepción definitiva", null=True
     )
+    expected_execution_period = models.IntegerField("Plazo previsto")
 
     closed = models.BooleanField(blank=False, null=False, default=False)
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
