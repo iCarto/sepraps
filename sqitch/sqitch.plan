@@ -8,3 +8,5 @@ update_financing_program_relationship 2022-05-10T09:25:53Z Elías Gago <egago@ic
 create_tables_questionnaires 2022-06-01T09:56:45Z Elías Gago <egago@icarto.es> # Create tables for questionnaires module
 create_relationship_project_questionnaire 2022-06-01T10:04:40Z Elías Gago <egago@icarto.es> # Create tables for relationship between questionnaires and projects
 insert_records_profiles 2022-06-01T11:44:23Z Elías Gago <egago@icarto.es> # Insert the default profiles and permissions
+update_construction_contract_dates 2022-06-02T15:51:53Z Elías Gago <egago@icarto.es> # Change construction contract date fields
+update_table_milestone 2022-06-02T16:00:18Z Elías Gago <egago@icarto.es> # Add new fields for milestone and remove category field
