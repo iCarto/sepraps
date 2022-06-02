@@ -124,7 +124,7 @@ const projectRoutes = [
                 <Route path="" element={<ViewProjectQuestionnairesSubPage />} />
             </Route>
             <Route
-                key="project-info"
+                key="project-summary"
                 path="summary"
                 element={<ViewProjectSummarySubPage />}
             >
