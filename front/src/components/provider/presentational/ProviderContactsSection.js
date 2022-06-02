@@ -11,8 +11,9 @@ import {AlertError} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import Box from "@mui/material/Box";
 
-const ProviderContactsSection = ({provider}) => {
+const ProviderContactsSection = ({provider, isSidePanelOpen = false}) => {
     const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
@@ -54,6 +55,10 @@ const ProviderContactsSection = ({provider}) => {
             });
     };
 
+    const tableContainerWidth = isSidePanelOpen
+        ? {md: "350px", lg: "550px", xl: "100%"}
+        : {md: "625px", lg: "100%", xl: "100%"};
+
     return (
         <Fragment>
             <AccordionLayout
@@ -63,10 +68,18 @@ const ProviderContactsSection = ({provider}) => {
                 <Grid container spacing={2}>
                     <Grid item container xs={12} justifyContent="center">
                         {provider.contacts.length !== 0 ? (
-                            <ContactsTable
-                                contacts={provider.contacts}
-                                handleActions={handleActions}
-                            />
+                            <Box
+                                sx={{
+                                    overflowX: "auto",
+                                    overflowY: "hidden",
+                                    width: tableContainerWidth,
+                                }}
+                            >
+                                <ContactsTable
+                                    contacts={provider.contacts}
+                                    handleActions={handleActions}
+                                />
+                            </Box>
                         ) : (
                             <Typography pt={3} sx={{fontStyle: "italic"}}>
                                 Este prestador aún no tiene contactos

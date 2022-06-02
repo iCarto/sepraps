@@ -18,7 +18,7 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ContractContractorSection = () => {
+const ContractContractorSection = ({isSidePanelOpen = false}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
@@ -69,7 +69,10 @@ const ContractContractorSection = () => {
                         value={contractor.email}
                     />
                     <SectionField label="Observaciones:" value={contractor.comments} />
-                    <ContractorContactsSection contractor={contractor} />
+                    <ContractorContactsSection
+                        contractor={contractor}
+                        isSidePanelOpen={isSidePanelOpen}
+                    />
                     <RemoveContractContractorDialog
                         contract={contract}
                         isDialogOpen={isRemoveDialogOpen}

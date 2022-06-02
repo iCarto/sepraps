@@ -19,7 +19,7 @@ import LocationOn from "@mui/icons-material/LocationOn";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ProjectProviderSection = () => {
+const ProjectProviderSection = ({isSidePanelOpen = false}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
@@ -64,7 +64,10 @@ const ProjectProviderSection = () => {
                         value={`${provider.locality.name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
                         labelIcon={LocationOn}
                     />
-                    <ProviderContactsSection provider={provider} />
+                    <ProviderContactsSection
+                        provider={provider}
+                        isSidePanelOpen={isSidePanelOpen}
+                    />
                     <RemoveProjectProviderDialog
                         project={project}
                         isDialogOpen={isRemoveDialogOpen}

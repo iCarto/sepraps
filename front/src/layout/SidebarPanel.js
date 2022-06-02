@@ -39,9 +39,6 @@ const SidebarPanel = ({
         setOpen = outletContext[outletContext.length - 1];
     }
 
-    console.log({outletContext});
-    console.log({setOpen});
-
     useEffect(() => {
         setOpen(true);
 

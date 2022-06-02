@@ -14,8 +14,9 @@ import Grid from "@mui/material/Grid";
 import {AlertError} from "components/common/presentational";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
-const ContractorContactsSection = ({contractor}) => {
+const ContractorContactsSection = ({contractor, isSidePanelOpen = false}) => {
     const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
@@ -23,6 +24,10 @@ const ContractorContactsSection = ({contractor}) => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [contactToRemove, setContactToRemove] = useState(null);
     const [error, setError] = useState("");
+
+    const tableContainerWidth = isSidePanelOpen
+        ? {md: "350px", lg: "550px", xl: "100%"}
+        : {md: "625px", lg: "100%", xl: "100%"};
 
     const handleActions = (contactId, action) => {
         switch (action) {
@@ -66,10 +71,18 @@ const ContractorContactsSection = ({contractor}) => {
                 <Grid container spacing={2}>
                     <Grid item container xs={12} justifyContent="center">
                         {contractor.contacts.length !== 0 ? (
-                            <ContactsTable
-                                contacts={contractor.contacts}
-                                handleActions={handleActions}
-                            />
+                            <Box
+                                sx={{
+                                    overflowX: "auto",
+                                    overflowY: "hidden",
+                                    width: tableContainerWidth,
+                                }}
+                            >
+                                <ContactsTable
+                                    contacts={contractor.contacts}
+                                    handleActions={handleActions}
+                                />
+                            </Box>
                         ) : (
                             <Typography pt={3} sx={{fontStyle: "italic"}}>
                                 Este contratista aún no tiene contactos
