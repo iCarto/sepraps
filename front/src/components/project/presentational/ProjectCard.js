@@ -60,7 +60,7 @@ const ProjectCard = ({project, onClick = null}) => {
     };
 
     return (
-        <Card id={project.id} variant="outlined">
+        <Card id={project.id}>
             <Stack
                 justifyContent="space-between"
                 onClick={handleClick}

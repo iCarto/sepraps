@@ -32,12 +32,12 @@ const ViewContractProjectsSubPage = () => {
     const navigate = useNavigate();
 
     const handleClickOnCard = projectId => {
-        navigate(`/projects/${projectId}/summary`);
+        navigate(`project/${projectId}`);
     };
 
     const onSelectProject = project => {
         setSelectedElement(project);
-        navigate(`info/${project.id}/summary`);
+        navigate(`project/${project.id}`);
     };
 
     const getIsSidePanelOpen = isOpen => {
