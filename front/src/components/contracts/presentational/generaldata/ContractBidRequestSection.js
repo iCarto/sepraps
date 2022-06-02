@@ -9,7 +9,7 @@ import {
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ContractBidRequestSection = ({isSidePanelOpen = null}) => {
+const ContractBidRequestSection = () => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
@@ -30,11 +30,7 @@ const ContractBidRequestSection = ({isSidePanelOpen = null}) => {
     ];
 
     return (
-        <SectionCard
-            title="Licitación"
-            secondaryActions={secondaryActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Licitación" secondaryActions={secondaryActions}>
             <SectionField label="Número:" value={contract.bid_request_number} />
             <SectionField label="Identificador:" value={contract.bid_request_id} />
             <SectionField

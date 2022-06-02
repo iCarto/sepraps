@@ -8,7 +8,7 @@ import {
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ContractAwardingSection = ({isSidePanelOpen = null}) => {
+const ContractAwardingSection = () => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
@@ -29,11 +29,7 @@ const ContractAwardingSection = ({isSidePanelOpen = null}) => {
     ];
 
     return (
-        <SectionCard
-            title="Adjudicación"
-            secondaryActions={secondaryActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Adjudicación" secondaryActions={secondaryActions}>
             <SectionField
                 label="Fecha de adjudicación:"
                 value={DateUtil.formatDate(contract.awarding_date)}

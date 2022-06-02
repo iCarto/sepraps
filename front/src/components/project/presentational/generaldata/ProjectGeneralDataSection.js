@@ -47,21 +47,21 @@ const ProjectGeneralDataSection = () => {
     let project;
     [project] = useOutletContext();
 
+    const secondaryActions = [
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Modificar"
+            icon={<EditIcon />}
+            onClick={() => {
+                navigate("edit");
+            }}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+        />,
+    ];
+
     return (
-        <SectionCard
-            secondaryActions={[
-                <SectionCardHeaderAction
-                    key="edit"
-                    name="edit"
-                    text="Modificar"
-                    icon={<EditIcon />}
-                    onClick={() => {
-                        navigate("edit");
-                    }}
-                    roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
-                />,
-            ]}
-        >
+        <SectionCard secondaryActions={secondaryActions}>
             <Grid container columnSpacing={2} sx={{marginTop: "-48px"}}>
                 <Grid item sm={3} md={4}>
                     <div style={{position: "relative"}}>

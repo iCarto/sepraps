@@ -37,11 +37,7 @@ const ContractPostConstructionSection = ({isSidePanelOpen = null}) => {
     );
 
     return (
-        <SectionCard
-            title="Post construcción"
-            secondaryActions={secondaryActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Post construcción" secondaryActions={secondaryActions}>
             {contract.warranty_end_date
                 ? getDatetInfo(
                       "Fin del periodo de garantía:",

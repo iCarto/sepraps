@@ -27,18 +27,16 @@ const ViewContractPhasesSubPage = () => {
         >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <ContractBidRequestSection isSidePanelOpen={isSidePanelOpen} />
+                    <ContractBidRequestSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractAwardingSection isSidePanelOpen={isSidePanelOpen} />
+                    <ContractAwardingSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractExecutionSection isSidePanelOpen={isSidePanelOpen} />
+                    <ContractExecutionSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractPostConstructionSection
-                        isSidePanelOpen={isSidePanelOpen}
-                    />
+                    <ContractPostConstructionSection />
                 </Grid>
             </Grid>
         </SubPageLayout>

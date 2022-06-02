@@ -44,10 +44,7 @@ const ViewProjectContactsSubPage = () => {
         >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <SectionCard
-                        title="Contactos del proyecto"
-                        isSidePanelOpen={isSidePanelOpen}
-                    >
+                    <SectionCard title="Contactos del proyecto">
                         {contacts ? (
                             <>
                                 <Grid container sx={{mb: 2}}>

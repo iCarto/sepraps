@@ -17,8 +17,6 @@ const ViewProjectSummarySubPage = () => {
     let project;
     [project] = useOutletContext();
 
-    console.log({project});
-
     const getIsSidePanelOpen = isOpen => {
         setIsSidePanelOpen(isOpen);
     };
