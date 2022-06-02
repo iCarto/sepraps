@@ -9,6 +9,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const ContractFinancingProgramSection = () => {
     const navigate = useNavigate();
@@ -53,8 +54,15 @@ const ContractFinancingProgramSection = () => {
                     <Typography style={{fontStyle: "italic"}}>
                         El contrato aún no tiene programa de financiación asignado
                     </Typography>
-                    {/* TO-DO: ADD BUTTON TO ADD FINANCING? (CHECK IF IT IS A MANDATORY FIELD IN THE CREATION FORM) */}
-                    {/*<AddContractorButtonGroup />*/}
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            navigate("financing_program/edit");
+                        }}
+                    >
+                        Asignar
+                    </Button>
                 </Stack>
             )}
         </SectionCard>

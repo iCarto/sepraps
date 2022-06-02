@@ -29,49 +29,46 @@ const ContractExecutionSection = () => {
         />,
     ];
 
-    // TO-DO: REFACTOR
-    const getDatetInfo = (label, date) => (
-        <SectionField label={label} value={DateUtil.formatDate(date)} />
-    );
-
-    const getNoDatetInfo = label => (
+    const getNoDatetMessage = label => (
         <SectionField label={label} value="Pendiente" valueFontStyle="italic" />
     );
 
+    const getDatetInfo = (label, date) => {
+        if (date) {
+            return <SectionField label={label} value={DateUtil.formatDate(date)} />;
+        } else
+            return (
+                <SectionField label={label} value="Pendiente" valueFontStyle="italic" />
+            );
+    };
+
     return (
         <SectionCard title="Ejecución" secondaryActions={secondaryActions}>
-            {contract.execution_signature_date
-                ? getDatetInfo(
-                      "Fecha de firma del contrato:",
-                      contract.execution_signature_date
-                  )
-                : getNoDatetInfo("Fecha de firma del contrato:")}
-            {contract.execution_certificate_start_date
-                ? getDatetInfo(
-                      "Fecha del acta de inicio:",
-                      contract.execution_certificate_start_date
-                  )
-                : getNoDatetInfo("Fecha del acta de inicio:")}
+            {getDatetInfo(
+                "Fecha de firma del contrato:",
+                contract.execution_signature_date
+            )}
+            {getDatetInfo(
+                "Fecha del acta de inicio:",
+                contract.execution_certificate_start_date
+            )}
+
             {contract.expected_execution_period ? (
                 <SectionField
                     label="Plazo previsto de ejecución:"
                     value={contract.expected_execution_period + " días"}
                 />
             ) : (
-                getNoDatetInfo("Plazo previsto de ejecución:")
+                getNoDatetMessage("Plazo previsto de ejecución:")
             )}
-            {contract.expected_execution_end_date
-                ? getDatetInfo(
-                      "Fecha prevista de fin de ejecución:",
-                      contract.expected_execution_end_date
-                  )
-                : getNoDatetInfo("Fecha prevista de fin de ejecución:")}
-            {contract.execution_final_delivery_date
-                ? getDatetInfo(
-                      "Fecha de recepción definitiva:",
-                      contract.execution_final_delivery_date
-                  )
-                : getNoDatetInfo("Fecha de recepción definitiva:")}
+            {getDatetInfo(
+                "Fecha prevista de fin de ejecución:",
+                contract.expected_execution_end_date
+            )}
+            {getDatetInfo(
+                "Fecha de recepción definitiva:",
+                contract.execution_final_delivery_date
+            )}
         </SectionCard>
     );
 };
