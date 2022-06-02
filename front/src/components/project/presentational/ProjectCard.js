@@ -59,6 +59,8 @@ const ProjectCard = ({project, onClick = null}) => {
         }
     };
 
+    console.log({project});
+
     return (
         <Card id={project.id} variant="outlined">
             <Stack
@@ -92,7 +94,7 @@ const ProjectCard = ({project, onClick = null}) => {
                             </Typography>
                         </Box>
                     )}
-                    <Tooltip title={`Clase: ${project.project_class}`}>
+                    <Tooltip title={`Clase: ${project.project_class_name}`}>
                         <Box sx={projectClassBoxStyle}>
                             <Typography variant="button">
                                 {project.project_class_name}
