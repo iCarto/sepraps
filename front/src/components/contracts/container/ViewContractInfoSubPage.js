@@ -32,7 +32,7 @@ const ViewContractInfoSubPage = () => {
                     <ContractFinancingProgramSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractContractorSection />
+                    <ContractContractorSection isSidePanelOpen={isSidePanelOpen} />
                 </Grid>
             </Grid>
         </SubPageLayout>
