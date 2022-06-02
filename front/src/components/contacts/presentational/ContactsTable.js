@@ -66,8 +66,8 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
     };
 
     return (
-        <TableContainer sx={{overflowX: "auto"}}>
-            <Table aria-labelledby="Contacts table" sx={{tableLayout: "fixed"}}>
+        <TableContainer sx={{width: "100%"}}>
+            <Table aria-labelledby="Contacts table">
                 <TableSortingHead
                     order={order}
                     attribute={attribute}
