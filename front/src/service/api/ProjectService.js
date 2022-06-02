@@ -61,14 +61,6 @@ const ProjectService = {
         );
     },
 
-    getProjectsForStats(id) {
-        return AuthApiService.get(basePath + "/projects_with_current_milestone").then(
-            response => {
-                return response;
-            }
-        );
-    },
-
     createProject(project) {
         return AuthApiService.post(basePath, project).then(response => {
             return createProject(project_api_adapter(response));

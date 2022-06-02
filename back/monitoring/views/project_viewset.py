@@ -242,43 +242,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
         )
 
     @action(detail=False)
-    def projects_with_current_milestone(self, request):
-
-        with connection.cursor() as cursor:
-            cursor.execute(
-                """
-            WITH vals (project_id, project_name, project_latitude, project_longitude, category) AS (
-                select p.id, p.name, mi.latitude, mi.longitude, m.category from project p
-                    left join milestone m on m.project_id = p.id and m.compliance_date is not null
-                    left join infrastructure mi on mi.id = p.main_infrastructure_id
-                where m.parent_id is null
-                order by p.name, m.ordering desc
-            )
-            SELECT
-                project_id,
-                project_name,
-                project_latitude,
-                project_longitude,
-                COALESCE((ARRAY_AGG(category) FILTER (WHERE category IS NOT NULL))[1], 'no_started') as milestone
-            FROM vals
-            GROUP BY
-                project_id,
-                project_name,
-                project_latitude,
-                project_longitude
-            """
-            )
-            projects = dictfetchall(cursor)
-            return Response(projects)
-
-    @action(detail=False)
     def stats_by_phase(self, request):
 
         with connection.cursor() as cursor:
             query = """
             with project_phase as (
                 select distinct on (p.id)
-                    p.id as project_id, category, phase
+                    p.id as project_id, m.name, m.phase
                 from project p
                     inner join milestone m on p.id = m.project_id
                     left join project_linked_localities pll on pll.project_id = p.id
@@ -352,8 +322,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
                         l.name as locality,
                         di.name as district,
                         de.name as department,
-                        category,
-                        phase
+                        m.name,
+                        m.phase
                 from project p
                     inner join milestone m on p.id = m.project_id
                     left join construction_contract cc on cc.id = p.construction_contract_id

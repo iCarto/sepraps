@@ -39,7 +39,7 @@ const ViewProjectPanel = () => {
                             variant="contained"
                             color="primary"
                             sx={{ml: 3}}
-                            onClick={() => navigate(`/projects/${project?.id}`)}
+                            onClick={() => navigate(`/projects/${project?.id}/summary`)}
                             startIcon={<LaunchIcon />}
                         >
                             Ir al proyecto

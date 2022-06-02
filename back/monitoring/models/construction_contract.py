@@ -21,7 +21,7 @@ class ConstructionContract(models.Model):
         "Monto total de adjudicación", max_digits=20, decimal_places=2, null=True
     )
     awarding_percentage_drop = models.DecimalField(
-        "Monto total de adjudicación", max_digits=5, decimal_places=2, null=True
+        "Porcentaje de baja de adjudicación", max_digits=5, decimal_places=2, null=True
     )
     awarding_date = models.DateField("Fecha de adjudicación", null=True)
 
@@ -63,13 +63,13 @@ class ConstructionContract(models.Model):
     execution_certificate_start_date = models.DateField(
         "Fecha del acta de inicio", null=True
     )
+    expected_execution_period = models.IntegerField(
+        "Plazo previsto de ejecución", null=True
+    )
     execution_final_delivery_date = models.DateField(
         "Fecha de recepción definitiva", null=True
     )
     warranty_end_date = models.DateField("Fin del periodo de garantía", null=True)
-    expected_execution_period = models.IntegerField(
-        "Plazo previsto de ejecución", null=True
-    )
 
     closed = models.BooleanField(blank=False, null=False, default=False)
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
