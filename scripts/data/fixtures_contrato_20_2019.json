@@ -9,16 +9,17 @@
             "bid_request_id": "364644",
             "bid_request_date": "2019-06-04",
             "bid_request_budget": 7035842072,
-            "bid_request_deadline": 12,
+
             "awarding_budget": 7015942974,
             "awarding_percentage_drop": 0.28,
             "awarding_date": "2019-12-06",
             "financing_program": 1,
             "contractor": 2,
             "execution_signature_date": "2019-12-11",
-            "execution_order_start_date": "2019-12-11",
+
             "execution_certificate_start_date": "2019-12-11",
-            "execution_expected_delivery_date": "2020-12-31",
+
+            "expected_execution_period": 240,
             "closed": false,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",

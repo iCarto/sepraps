@@ -29,12 +29,12 @@ const ContractBidRequestFormFields = () => {
                 label="Monto estimado"
                 rules={{required: "El campo es obligatorio"}}
             />
-            <FormInputInteger
+            {/* <FormInputInteger
                 name="bid_request_deadline"
                 label="Plazo previsto"
                 endAdornment="meses"
                 rules={{required: "El campo es obligatorio"}}
-            />
+            /> */}
         </Fragment>
     );
 };

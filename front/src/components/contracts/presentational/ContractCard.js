@@ -48,7 +48,7 @@ const ContractCard = ({contract, onClick = null}) => {
                             <DateRangeOutlinedIcon fontSize="small" />
                         </Tooltip>
                         <Typography variant="body2">
-                            {contract.bid_request_deadline} meses
+                            {contract.expected_execution_period} días
                         </Typography>
                     </Stack>
                     <Stack direction="row" spacing={2}>

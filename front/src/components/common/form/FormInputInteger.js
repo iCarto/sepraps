@@ -40,6 +40,7 @@ const FormInputInteger = ({
 
     return (
         <TextField
+            fullWidth
             onChange={onChange}
             onBlur={event => {
                 onBlur();

@@ -29,15 +29,41 @@ const ContractExecutionSection = ({isSidePanelOpen = null}) => {
         />,
     ];
 
+    const getDatetInfo = (label, date) => (
+        <SectionField label={label} value={DateUtil.formatDate(date)} />
+    );
+
+    const getNoDatetInfo = label => (
+        <SectionField label={label} value="Pendiente" valueFontStyle="italic" />
+    );
+
     return (
         <SectionCard
             title="Ejecución"
             secondaryActions={secondaryActions}
             isSidePanelOpen={isSidePanelOpen}
         >
+            {contract.execution_signature_date
+                ? getDatetInfo(
+                      "Fecha de firma del contrato:",
+                      contract.execution_signature_date
+                  )
+                : getNoDatetInfo("Fecha de firma del contrato:")}
+            {contract.execution_certificate_start_date
+                ? getDatetInfo(
+                      "Fecha del acta de inicio:",
+                      contract.execution_certificate_start_date
+                  )
+                : getNoDatetInfo("Fecha del acta de inicio:")}
+            {contract.execution_final_delivery_date
+                ? getDatetInfo(
+                      "Fecha de recepción definitiva:",
+                      contract.execution_final_delivery_date
+                  )
+                : getNoDatetInfo("Fecha de recepción definitiva:")}
             <SectionField
-                label="Fecha de firma del contrato:"
-                value={DateUtil.formatDate(contract.execution_signature_date)}
+                label="Plazo previsto:"
+                value={contract.expected_execution_period + " días"}
             />
             {/**
              * Hidden fields until we know which entity they are associated with
@@ -46,16 +72,8 @@ const ContractExecutionSection = ({isSidePanelOpen = null}) => {
                 value={DateUtil.formatDate(contract.execution_order_start_date)}
             />
             <SectionField
-                label="Fecha del acta de inicio:"
-                value={DateUtil.formatDate(contract.execution_certificate_start_date)}
-            />
-            <SectionField
                 label="Fecha de recepción provisoria:"
                 value={DateUtil.formatDate(contract.execution_expected_delivery_date)}
-            />
-            <SectionField
-                label="Fecha de recepción definitiva:"
-                value={DateUtil.formatDate(contract.execution_final_delivery_date)}
             />
             */}
         </SectionCard>

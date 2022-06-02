@@ -77,7 +77,7 @@ class Project(models.Model):
         verbose_name_plural = "Proyectos"
 
     def __str__(self):
-        return self.name
+        return self.code
 
 
 @receiver(post_save, sender=Project)

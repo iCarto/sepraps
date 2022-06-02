@@ -27,7 +27,7 @@ const headCells = [
         width: 12,
     },
     {
-        id: "bid_request_deadline",
+        id: "expected_execution_period",
         label: "Plazo previsto",
         width: 10,
     },
@@ -112,7 +112,7 @@ const ContractsTable = ({
                                     {contract.financing_program?.short_name}
                                 </TableCell>
                                 <TableCell>
-                                    {contract.bid_request_deadline} meses
+                                    {contract.expected_execution_period} días
                                 </TableCell>
                                 <TableCell>
                                     {NumberUtil.formatCurrency(
