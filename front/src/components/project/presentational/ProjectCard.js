@@ -59,8 +59,6 @@ const ProjectCard = ({project, onClick = null}) => {
         }
     };
 
-    console.log({project});
-
     return (
         <Card id={project.id} variant="outlined">
             <Stack

@@ -19,7 +19,7 @@ import LocationOn from "@mui/icons-material/LocationOn";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ProjectProviderSection = ({isSidePanelOpen = null}) => {
+const ProjectProviderSection = () => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
@@ -55,11 +55,7 @@ const ProjectProviderSection = ({isSidePanelOpen = null}) => {
         : null;
 
     return (
-        <SectionCard
-            title="Prestador"
-            secondaryActions={headerActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Prestador" secondaryActions={headerActions}>
             {provider?.id ? (
                 <>
                     <SectionField label="Nombre:" value={provider.name} />

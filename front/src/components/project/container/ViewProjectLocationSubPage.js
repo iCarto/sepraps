@@ -28,13 +28,13 @@ const ViewProjectLocationSubPage = () => {
         >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <ProjectInfrastructureSection isSidePanelOpen={isSidePanelOpen} />
+                    <ProjectInfrastructureSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ProjectProviderSection isSidePanelOpen={isSidePanelOpen} />
+                    <ProjectProviderSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ProjectLinkedLocalitiesSection isSidePanelOpen={isSidePanelOpen} />
+                    <ProjectLinkedLocalitiesSection />
                 </Grid>
             </Grid>
         </SubPageLayout>

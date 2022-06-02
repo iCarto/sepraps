@@ -30,11 +30,7 @@ const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
     ];
 
     return (
-        <SectionCard
-            title="Infraestructura principal"
-            secondaryActions={headerActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Infraestructura principal" secondaryActions={headerActions}>
             <SectionField
                 label="Ubicación:"
                 value={`${project.main_infrastructure.latitude}, ${project.main_infrastructure.longitude}`}

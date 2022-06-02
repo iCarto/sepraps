@@ -8,7 +8,7 @@ import {
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ContractGeneralDataSection = ({isSidePanelOpen = null}) => {
+const ContractGeneralDataSection = () => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
@@ -29,11 +29,7 @@ const ContractGeneralDataSection = ({isSidePanelOpen = null}) => {
     ];
 
     return (
-        <SectionCard
-            title="Datos generales"
-            secondaryActions={secondaryActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Datos generales" secondaryActions={secondaryActions}>
             <SectionField label="Número:" value={contract.number} />
             <SectionField label="Descripción:" value={contract.comments} />
         </SectionCard>

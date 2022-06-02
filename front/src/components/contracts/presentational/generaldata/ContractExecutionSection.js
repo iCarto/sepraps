@@ -9,7 +9,7 @@ import {
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ContractExecutionSection = ({isSidePanelOpen = null}) => {
+const ContractExecutionSection = () => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
@@ -39,11 +39,7 @@ const ContractExecutionSection = ({isSidePanelOpen = null}) => {
     );
 
     return (
-        <SectionCard
-            title="Ejecución"
-            secondaryActions={secondaryActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Ejecución" secondaryActions={secondaryActions}>
             {contract.execution_signature_date
                 ? getDatetInfo(
                       "Fecha de firma del contrato:",

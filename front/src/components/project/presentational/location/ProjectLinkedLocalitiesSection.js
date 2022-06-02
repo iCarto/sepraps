@@ -13,7 +13,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
+const ProjectLinkedLocalitiesSection = () => {
     const {ROLES} = useAuth();
 
     let project;
@@ -56,7 +56,7 @@ const ProjectLinkedLocalitiesSection = ({isSidePanelOpen = null}) => {
     };
 
     return (
-        <SectionCard title="Localidades vinculadas" isSidePanelOpen={isSidePanelOpen}>
+        <SectionCard title="Localidades vinculadas">
             <Grid item container xs={12} justifyContent="center">
                 {project.linked_localities.length !== 0 ? (
                     <ProjectLinkedLocalitiesTable handleActions={handleActions} />

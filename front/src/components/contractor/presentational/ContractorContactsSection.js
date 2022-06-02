@@ -72,7 +72,7 @@ const ContractorContactsSection = ({contractor}) => {
                             />
                         ) : (
                             <Typography pt={3} sx={{fontStyle: "italic"}}>
-                                Este prestador aún no tiene contactos
+                                Este contratista aún no tiene contactos
                             </Typography>
                         )}
                     </Grid>

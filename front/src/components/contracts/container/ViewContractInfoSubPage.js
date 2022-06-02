@@ -26,15 +26,13 @@ const ViewContractInfoSubPage = () => {
         >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <ContractGeneralDataSection isSidePanelOpen={isSidePanelOpen} />
+                    <ContractGeneralDataSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractFinancingProgramSection
-                        isSidePanelOpen={isSidePanelOpen}
-                    />
+                    <ContractFinancingProgramSection />
                 </Grid>
                 <Grid item xs={12}>
-                    <ContractContractorSection isSidePanelOpen={isSidePanelOpen} />
+                    <ContractContractorSection />
                 </Grid>
             </Grid>
         </SubPageLayout>

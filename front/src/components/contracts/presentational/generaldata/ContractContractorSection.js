@@ -18,15 +18,13 @@ import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ContractContractorSection = ({isSidePanelOpen = null}) => {
+const ContractContractorSection = () => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
     let contract;
     [contract] = useOutletContext();
     const contractor = contract.contractor;
-
-    // console.log({contract});
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
 
@@ -56,11 +54,7 @@ const ContractContractorSection = ({isSidePanelOpen = null}) => {
         : null;
 
     return (
-        <SectionCard
-            title="Contratista"
-            secondaryActions={headerActions}
-            isSidePanelOpen={isSidePanelOpen}
-        >
+        <SectionCard title="Contratista" secondaryActions={headerActions}>
             {contractor?.id ? (
                 <>
                     <SectionField label="Nombre:" value={contractor.name} />
