@@ -1,9 +1,9 @@
+import {BorderedTableCell as TableCell} from "components/common/presentational";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
 import {NumberUtil} from "utilities";
 
 const headCells = [
@@ -65,13 +65,6 @@ const headCells = [
 ];
 
 const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data}) => {
-    const tableRowStyle = {
-        "&:last-child td, &:last-child th": {
-            border: 0,
-        },
-        paddingRight: "12px",
-    };
-
     return (
         <TableContainer sx={{overflowX: "auto"}}>
             <Table aria-labelledby="Projects table" sx={{tableLayout: "fixed"}}>
@@ -82,7 +75,7 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data}) => {
                 </colgroup>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center"></TableCell>
+                        <TableCell align="center" rowSpan={2}></TableCell>
                         <TableCell align="center" colSpan={4}>
                             Previsto
                         </TableCell>
@@ -94,7 +87,6 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data}) => {
                         </TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center"></TableCell>
                         <TableCell align="center" colSpan={2}>
                             Mensual
                         </TableCell>
@@ -122,7 +114,7 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data}) => {
                 <TableBody>
                     {data["index"].map((indexLabel, index) => {
                         return (
-                            <TableRow hover key={index} sx={tableRowStyle}>
+                            <TableRow hover key={index}>
                                 <TableCell>{indexLabel}</TableCell>
                                 <TableCell align="right">
                                     {data["expected_values"][index]}

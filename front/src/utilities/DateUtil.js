@@ -1,5 +1,6 @@
 import {format, parse, add, addDays} from "date-fns";
 import {es} from "date-fns/locale";
+import TextUtil from "./TextUtil";
 
 export const DATE_FORMATS = {
     CLIENT_DATEFORMAT: "dd/MM/yyyy",
@@ -48,13 +49,18 @@ const DateUtil = {
         return parse(date, dateFormat, new Date());
     },
     getMonthName(month) {
-        return format(new Date(null, month - 1), "LLLL", {locale: es});
+        return TextUtil.capitalize(
+            format(new Date(null, month - 1), "LLLL", {locale: es})
+        );
     },
     addMonths(date, months) {
-        return add(date, { months });
+        return add(date, {months});
     },
     getDateAfterDays(date, amountOfDays) {
         return addDays(date, amountOfDays);
+    },
+    formatYearAndMonth(date) {
+        return `${this.getMonthName(date.getMonth() + 1)} / ${date.getFullYear()}`;
     },
 };
 

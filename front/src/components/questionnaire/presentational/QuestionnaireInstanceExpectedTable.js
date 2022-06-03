@@ -13,46 +13,31 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
+import {BorderedTableCell as TableCell} from "components/common/presentational";
 
-const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
+const QuestionnaireInstanceExpectedTable = ({
+    projectQuestionnaire,
+    onCancel = null,
+}) => {
     const navigate = useNavigateWithReload();
     const {ROLES, hasRole} = useAuth();
 
     const [error, setError] = useState("");
 
-    const questionnaireInstances = projectQuestionnaire.questionnaire_instances;
-
     const questionnaireFieldsWithExpectedValue = projectQuestionnaire.questionnaire.fields.filter(
         field => field.include_expected_value === true
     );
 
-    const hasInstances = questionnaireInstances.length !== 0;
-
-    const defaultMonthFrom = hasInstances
-        ? new Date(
-              questionnaireInstances[0].year,
-              questionnaireInstances[0].month - 1,
-              1
-          )
-        : new Date();
+    const defaultMonthFrom = new Date();
 
     // TODO: 12 months by default or get the number from other project fields?
-    const defaultExpectedMonths = hasInstances ? questionnaireInstances.length : "12";
+    const defaultExpectedMonths = "12";
 
-    const defaultExpectedMonthsValues = hasInstances
-        ? questionnaireInstances.map(instance => {
-              const defaultValue = {
-                  year_month: new Date(instance.year, instance.month - 1, 1),
-              };
-              questionnaireFieldsWithExpectedValue.forEach(field => {
-                  const valueFound = instance.values.find(
-                      value => value.code === field.code
-                  );
-                  defaultValue[field.code] = valueFound.expected_value;
-              });
-              return defaultValue;
-          })
-        : [];
+    const defaultExpectedMonthsValues = [];
 
     const formMethods = useForm({
         defaultValues: {
@@ -67,9 +52,7 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
     });
 
     useEffect(() => {
-        if (!hasInstances) {
-            refreshForm();
-        }
+        refreshForm();
     }, [projectQuestionnaire]);
 
     const refreshForm = () => {
@@ -139,10 +122,10 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
             });
     };
 
-    const hasEditPermission = [ROLES.EDIT, ROLES.MANAGEMENT].some(role =>
-        hasRole(role)
-    );
-    const isDisabled = hasInstances || !hasEditPermission;
+    const getMonth = index => {
+        const values = formMethods.getValues();
+        return values["expected_months_values"][index]["year_month"];
+    };
 
     return (
         <FormProvider {...formMethods}>
@@ -153,7 +136,6 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
                         name="expected_month_from"
                         views={["month", "year"]}
                         onChangeHandler={refreshForm}
-                        disabled={isDisabled}
                     />
                 </Grid>
                 <Grid item xs={2}>
@@ -161,7 +143,6 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
                         label="Meses previstos"
                         name="expected_months"
                         onBlurHandler={refreshForm}
-                        disabled={isDisabled}
                     />
                 </Grid>
             </Grid>
@@ -170,51 +151,49 @@ const QuestionnaireInstanceExpectedTable = ({projectQuestionnaire}) => {
                     Datos de previsión
                 </Typography>
                 <AlertError error={error} />
-                {fields.map((field, index) => (
-                    <Grid
-                        container
-                        key={field.id}
-                        spacing={2}
-                        wrap="nowrap"
-                        justifyContent="center"
-                    >
-                        <Grid item>
-                            <FormDatePicker
-                                label="Mes previsto"
-                                name={`expected_months_values.${index}.year_month`}
-                                views={["month", "year"]}
-                                disabled={true}
-                            />
-                        </Grid>
-                        {questionnaireFieldsWithExpectedValue.map(
-                            questionnaireField => (
-                                <Grid
-                                    item
-                                    key={`${field.id}-${questionnaireField.code}`}
-                                >
-                                    <FormInputText
-                                        label={questionnaireField.label}
-                                        name={`expected_months_values.${index}.${questionnaireField.code}`}
-                                        rules={{required: "Valor obligatorio"}}
-                                        disabled={isDisabled}
-                                    />
-                                </Grid>
-                            )
-                        )}
-                    </Grid>
-                ))}
-                {!isDisabled && (
-                    <Grid container justifyContent="center" sx={{mt: 2}}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{ml: 2}}
-                            onClick={formMethods.handleSubmit(onFormSubmit)}
-                        >
-                            Guardar
+                <TableContainer sx={{overflowX: "auto"}}>
+                    <Table aria-labelledby="Projects table" sx={{tableLayout: "fixed"}}>
+                        <TableBody>
+                            {fields.map((field, index) => (
+                                <TableRow key={field.id}>
+                                    <TableCell>
+                                        {DateUtil.formatYearAndMonth(getMonth(index))}
+                                    </TableCell>
+                                    {questionnaireFieldsWithExpectedValue.map(
+                                        questionnaireField => (
+                                            <TableCell
+                                                key={`${field.id}-${questionnaireField.code}`}
+                                            >
+                                                <FormInputText
+                                                    label={questionnaireField.label}
+                                                    name={`expected_months_values.${index}.${questionnaireField.code}`}
+                                                    rules={{
+                                                        required: "Valor obligatorio",
+                                                    }}
+                                                />
+                                            </TableCell>
+                                        )
+                                    )}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <Grid container justifyContent="center" sx={{mt: 2}}>
+                    {onCancel && (
+                        <Button sx={{ml: 2}} onClick={onCancel}>
+                            Cancelar
                         </Button>
-                    </Grid>
-                )}
+                    )}
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ml: 2}}
+                        onClick={formMethods.handleSubmit(onFormSubmit)}
+                    >
+                        Guardar
+                    </Button>
+                </Grid>
             </Paper>
         </FormProvider>
     );

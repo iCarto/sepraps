@@ -1,17 +1,15 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import {
-    QuestionnaireInstanceList,
-    QuestionnaireInstanceSummary,
-    QuestionnaireInstanceExpectedTable,
-    QuestionnaireInstanceHistoricalTable,
+    QuestionnaireInstanceMonitoring,
+    QuestionnaireInstanceEmpty,
+    QuestionnaireInstanceData,
 } from "../presentational";
-import {QuestionnaireInstanceViewProvider} from "components/questionnaire/provider";
+import {SectionHeading} from "components/common/presentational";
 
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -40,19 +38,25 @@ function a11yProps(index) {
 }
 
 const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
-    const [tabValue, setTabValue] = useState(1);
+    const [tabValue, setTabValue] = useState(0);
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
 
+    useEffect(() => {
+        setTabValue(0);
+    }, [projectQuestionnaire]);
+
+    const hasInstances = projectQuestionnaire?.questionnaire_instances?.length > 0;
+
     return (
         <Container maxWidth="lg">
             <Paper sx={{p: 3}}>
                 <Stack direction="row" justifyContent="space-between" sx={{mb: 3}}>
-                    <Typography variant="h5">
+                    <SectionHeading>
                         {projectQuestionnaire?.questionnaire?.name}
-                    </Typography>
+                    </SectionHeading>
                 </Stack>
                 <Box sx={{borderBottom: 1, borderColor: "divider"}}>
                     <Tabs
@@ -60,34 +64,28 @@ const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
                         onChange={handleTabChange}
                         aria-label="tab-questionnaire-instance"
                     >
-                        <Tab label="Previsión" {...a11yProps(0)} />
-                        <Tab label="Datos" {...a11yProps(1)} />
-                        <Tab label="Seguimiento" {...a11yProps(2)} />
-                        <Tab label="Histórico" {...a11yProps(3)} />
+                        <Tab label="Datos" {...a11yProps(0)} />
+                        {hasInstances && <Tab label="Seguimiento" {...a11yProps(1)} />}
                     </Tabs>
                 </Box>
                 <TabPanel value={tabValue} index={0}>
-                    <QuestionnaireInstanceExpectedTable
-                        projectQuestionnaire={projectQuestionnaire}
-                    />
-                </TabPanel>
-                <TabPanel value={tabValue} index={1}>
-                    <QuestionnaireInstanceList
-                        projectQuestionnaire={projectQuestionnaire}
-                    />
-                </TabPanel>
-                <TabPanel value={tabValue} index={2}>
-                    <QuestionnaireInstanceViewProvider>
-                        <QuestionnaireInstanceSummary
+                    {hasInstances ? (
+                        <QuestionnaireInstanceData
                             projectQuestionnaire={projectQuestionnaire}
                         />
-                    </QuestionnaireInstanceViewProvider>
+                    ) : (
+                        <QuestionnaireInstanceEmpty
+                            projectQuestionnaire={projectQuestionnaire}
+                        />
+                    )}
                 </TabPanel>
-                <TabPanel value={tabValue} index={3}>
-                    <QuestionnaireInstanceHistoricalTable
-                        projectQuestionnaire={projectQuestionnaire}
-                    />
-                </TabPanel>
+                {hasInstances && (
+                    <TabPanel value={tabValue} index={1}>
+                        <QuestionnaireInstanceMonitoring
+                            projectQuestionnaire={projectQuestionnaire}
+                        />
+                    </TabPanel>
+                )}
             </Paper>
         </Container>
     );

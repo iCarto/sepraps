@@ -1,7 +1,7 @@
 import {ProjectService} from "service/api";
 import {ViewQuestionnaireInstanceFieldData} from "../container";
 
-const QuestionnaireInstanceSummary = ({projectQuestionnaire}) => {
+const QuestionnaireInstanceMonitoring = ({projectQuestionnaire}) => {
     const getDataService = (id, questionnaireCode, fieldCode) => {
         return ProjectService.getProjectsQuestionnaireInstancesFieldData(
             id,
@@ -28,4 +28,4 @@ const QuestionnaireInstanceSummary = ({projectQuestionnaire}) => {
     );
 };
 
-export default QuestionnaireInstanceSummary;
+export default QuestionnaireInstanceMonitoring;
