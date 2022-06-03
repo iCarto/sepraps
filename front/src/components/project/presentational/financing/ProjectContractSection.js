@@ -11,6 +11,15 @@ const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
+    const getValueInfo = (label, value) => {
+        if (value) {
+            return <SectionField label={label} value={value} />;
+        } else
+            return (
+                <SectionField label={label} value="Pendiente" valueFontStyle="italic" />
+            );
+    };
+
     return (
         <SectionCard title="Contrato de obras">
             {contract ? (
@@ -24,29 +33,24 @@ const ProjectContractSection = ({contract}) => {
                         label="Número de licitación:"
                         value={contract.bid_request_number}
                     />
-                    <SectionField
-                        label="Fecha de firma del contrato:"
-                        value={DateUtil.formatDate(contract.execution_signature_date)}
-                    />
-                    <SectionField
-                        label="Plazo previsto de ejecución del contrato:"
-                        value={
-                            contract.expected_execution_period &&
+                    {getValueInfo(
+                        "Fecha de firma del contrato:",
+                        DateUtil.formatDate(contract.execution_signature_date)
+                    )}
+                    {getValueInfo(
+                        "Plazo previsto de ejecución del contrato:",
+                        contract.expected_execution_period &&
                             `${
                                 contract.expected_execution_period
                             } días (hasta el ${DateUtil.formatDate(
                                 contract.expected_execution_end_date
                             )})`
-                        }
-                    />
-                    <SectionField
-                        label="Contratista:"
-                        value={contract.contractor?.name}
-                    />
-                    <SectionField
-                        label="Monto adjudicado:"
-                        value={NumberUtil.formatCurrency(contract.awarding_budget)}
-                    />
+                    )}
+                    {getValueInfo("Contratista:", contract.contractor?.name)}
+                    {getValueInfo(
+                        "Monto adjudicado:",
+                        NumberUtil.formatCurrency(contract.awarding_budget)
+                    )}
                 </>
             ) : (
                 <Stack alignItems="center">
