@@ -27,7 +27,7 @@ const SectionField = ({
     const LabelIcon = labelIcon;
 
     return (
-        <Grid container spacing={3}>
+        <Grid container>
             <Grid
                 item
                 xs="auto"
@@ -58,6 +58,7 @@ const SectionField = ({
                 {!linkPath ? (
                     <Typography
                         variant="subtitle1"
+                        component="paragraph"
                         sx={{
                             lineHeight: {xs: 1.5, sm: 1.25},
                             mb: {xs: 0, sm: 1.5},
