@@ -23,9 +23,8 @@ const ContractExecutionFormFields = () => {
                 name="expected_execution_period"
                 label="Plazo previsto de ejecución"
                 endAdornment="días"
-                // rules={{required: "El campo es obligatorio"}}
             />
-            {expected_execution_period && (
+            {expected_execution_period && execution_certificate_start_date && (
                 <FormHelperText sx={{marginLeft: 1, color: "info.main"}}>
                     Fecha prevista de fin de ejecución:{" "}
                     {DateUtil.formatDate(
