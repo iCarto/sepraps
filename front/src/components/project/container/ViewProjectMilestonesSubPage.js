@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 
 const findActiveMilestone = milestones => {
     let activeMilestone = null;
-    // console.log({milestones});
+
     for (let milestone of milestones) {
         if (milestone["children"].length) {
             activeMilestone = findActiveMilestone(milestone["children"]);
