@@ -13,13 +13,10 @@ class MonthlyQuestionnaireInstanceListSerializer(serializers.ListSerializer):
             return instances
 
         instance_mapping = {instance.id: instance for instance in instances}
-        print(validated_data)
 
         ret = []
         for instance_data in validated_data:
             instance = instance_mapping.get(instance_data.get("id"), None)
-            print(instance)
-            print(instance_data)
 
             if instance_data.get("id") is None:
                 ret.append(self.child.create(instance_data))
