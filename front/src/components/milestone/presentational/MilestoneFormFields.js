@@ -20,6 +20,7 @@ const MilestoneFormFields = ({
                 name="compliance_date"
                 label="Fecha de cumplimiento"
                 isActive={areAllItemsChecked}
+                rules={{required: "El campo es obligatorio"}}
             />
         </>
     );

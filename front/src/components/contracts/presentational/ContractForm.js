@@ -27,7 +27,6 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
     if (outletContext) {
         contract = outletContext[0];
     }
-    // console.log({contract});
 
     const defaultFormValues = {
         id: contract?.id || "",
@@ -60,7 +59,6 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
     });
 
     const onFormSubmit = data => {
-        console.log({data}, "del formulario");
         const updatedContract = createContract({
             id: data.id,
             number: data.contract_number,

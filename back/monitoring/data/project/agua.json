@@ -41,7 +41,13 @@
             "name": "Firma del contrato",
             "short_name": "Firma del contrato",
             "checklist": [
-                {"definition": "Se ha subido una copia del contrato al repositorio"}
+                {"definition": "Se ha subido una copia del contrato al repositorio"},
+                {"definition": "Se ha asignado el monto de adjudicación del contrato"},
+                {
+                    "definition": "Se ha asignado el porcentaje de baja de adjudicación del contrato"
+                },
+                {"definition": "Se ha asignado la fecha de adjudicación del contrato"},
+                {"definition": "Se ha asignado un contratista al contrato"}
             ],
             "phase": "contracting"
         },
@@ -56,31 +62,68 @@
             "phase": "execution"
         },
         {
+            "code": "social_validation",
+            "name": "Validación del checklist social",
+            "short_name": "Validación del checklist social",
+            "checklist": [
+                {
+                    "definition": "Se han materializado los aportes comunitarios"
+                },
+                {
+                    "definition": "Se han llevado a cabo las capacitaciones"
+                }
+            ],
+            "phase": "execution"
+        },
+        {
             "code": "technical_validation",
             "name": "Validación del checklist técnico",
             "short_name": "Validación del checklist técnico",
             "checklist": [
-                {"definition": "Se han completado los puntos técnicos de este hito"}
-            ],
-            "phase": "execution",
-            "children": [
                 {
-                    "code": "technical_validation_drilling",
-                    "checklist": [{"definition": "Se ha completado la perforación"}],
-                    "name": "Perforación",
-                    "short_name": "Perforación",
-                    "phase": "execution"
+                    "definition": "Se ha realizado la perforación"
                 },
                 {
-                    "code": "technical_validation_pump_test",
-                    "checklist": [
-                        {"definition": "Se ha completado la prueba de bombeo"}
-                    ],
-                    "name": "Prueba de bombeo",
-                    "short_name": "Prueba de bombeo",
-                    "phase": "execution"
+                    "definition": "Se ha realizado la prueba de bombeo"
+                },
+                {
+                    "definition": "Se ha realizado el análisis de calidad"
+                },
+                {
+                    "definition": "Se ha instalado el sistema de desinfección"
+                },
+                {
+                    "definition": "Se ha probado el sistema de desinfección"
+                },
+                {
+                    "definition": "Se han construido los tanques"
+                },
+                {
+                    "definition": "Se ha construido la caseta de operaciones"
+                },
+                {
+                    "definition": "Se ha realizado la conexión eléctrica"
+                },
+                {
+                    "definition": "Se ha realizado el cercado del pozo"
+                },
+                {
+                    "definition": "Se ha realizado el cercado de los tanques"
+                },
+                {
+                    "definition": "Se ha realizado la provisión de materiales y accesorios para la red"
+                },
+                {
+                    "definition": "Se ha realizado el tendido de línea aductora"
+                },
+                {
+                    "definition": "Se ha realizado el tendido de acometidas"
+                },
+                {
+                    "definition": "Se ha realizado la colocación de hidrómetros"
                 }
-            ]
+            ],
+            "phase": "execution"
         },
         {
             "code": "provisional_reception",
