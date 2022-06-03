@@ -8,13 +8,11 @@ import {
 } from "components/common/presentational";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ContractPostConstructionSection = ({isSidePanelOpen = null}) => {
+const ContractPostConstructionSection = () => {
     const navigate = useNavigate();
 
     let contract;
     [contract] = useOutletContext();
-
-    console.log({contract}, "Post construction section");
 
     const secondaryActions = [
         <SectionCardHeaderAction

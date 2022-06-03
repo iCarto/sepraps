@@ -28,23 +28,30 @@ const ContractAwardingSection = () => {
         />,
     ];
 
+    const getValueInfo = (label, value) => {
+        if (value) {
+            return <SectionField label={label} value={value} />;
+        } else
+            return (
+                <SectionField label={label} value="Pendiente" valueFontStyle="italic" />
+            );
+    };
+
     return (
         <SectionCard title="Adjudicación" secondaryActions={secondaryActions}>
-            <SectionField
-                label="Fecha de adjudicación:"
-                value={DateUtil.formatDate(contract.awarding_date)}
-            />
-            <SectionField
-                label="Monto adjudicado:"
-                value={NumberUtil.formatCurrency(contract?.awarding_budget)}
-            />
-            <SectionField
-                label="Porcentaje de baja:"
-                value={
-                    contract.awarding_percentage_drop &&
+            {getValueInfo(
+                "Fecha de adjudicación:",
+                DateUtil.formatDate(contract.awarding_date)
+            )}
+            {getValueInfo(
+                "Monto adjudicado:",
+                NumberUtil.formatCurrency(contract?.awarding_budget)
+            )}
+            {getValueInfo(
+                "Porcentaje de baja:",
+                contract.awarding_percentage_drop &&
                     NumberUtil.formatDecimal(contract.awarding_percentage_drop, 2) + "%"
-                }
-            />
+            )}
         </SectionCard>
     );
 };
