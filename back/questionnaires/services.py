@@ -14,22 +14,33 @@ def format_float(x):
 
 def include_percentages(df, total_value):
     df["expected_values_perc"] = df.apply(
-        lambda x: (x["expected_values"] * 100) / total_value, axis=1
+        lambda x: (x["expected_values"] * 100) / total_value
+        if x["expected_values"] and total_value
+        else None,
+        axis=1,
     )
 
     df["expected_values_acc_perc"] = df.apply(
-        lambda x: (x["expected_values_acc"] * 100) / total_value, axis=1
+        lambda x: (x["expected_values_acc"] * 100) / total_value
+        if x["expected_values_acc"] and total_value
+        else None,
+        axis=1,
     )
     df["real_values_perc"] = df.apply(
-        lambda x: (x["real_values"] * 100) / total_value if x["real_values"] else None,
+        lambda x: (x["real_values"] * 100) / total_value
+        if x["real_values"] and total_value
+        else None,
         axis=1,
     )
     df["real_values_acc_perc"] = df.apply(
-        lambda x: (x["real_values_acc"] * 100) / total_value, axis=1
+        lambda x: (x["real_values_acc"] * 100) / total_value
+        if x["real_values_acc"] and total_value
+        else None,
+        axis=1,
     )
     df["variation_perc"] = df.apply(
         lambda x: x["real_values_perc"] - x["expected_values_perc"]
-        if x["real_values_perc"]
+        if x["real_values_perc"] and x["expected_values_perc"]
         else None,
         axis=1,
     )
@@ -57,7 +68,7 @@ def create_dataframe_integer(index, expected_values, real_values):
         df["expected_values_acc"] = df["expected_values"].cumsum()
         df["variation"] = df.apply(
             lambda x: x["real_values"] - x["expected_values"]
-            if x["real_values"]
+            if x["expected_values"] and x["real_values"]
             else None,
             axis=1,
         )
@@ -87,7 +98,10 @@ def create_dataframe_decimal2(index, expected_values, real_values):
 
         df["expected_values_acc"] = df["expected_values"].cumsum()
         df["variation"] = df.apply(
-            lambda x: x["real_values"] - x["expected_values"], axis=1
+            lambda x: x["real_values"] - x["expected_values"]
+            if x["real_values"] and x["expected_values"]
+            else None,
+            axis=1,
         )
 
         include_percentages(df, total_value_expected)
@@ -113,7 +127,6 @@ def create_dataframe_str(index, expected_values, real_values):
 
 
 def create_dataframe(datatype, index, expected_values, real_values):
-    print(real_values)
     if datatype == "integer":
         return create_dataframe_integer(index, expected_values, real_values)
     if datatype == "decimal2":
@@ -172,7 +185,6 @@ def get_monthly_questionnaire_instances_dataframe(
 
     year_month_values = get_year_month_values(field_code, instances)
 
-    print(year_month_values)
     df = create_dataframe(
         field_datatype,
         year_month_values.keys(),
