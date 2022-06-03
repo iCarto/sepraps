@@ -3,7 +3,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
+import {BorderedTableCell as TableCell} from "components/common/presentational";
 
 const headCells = [
     {
@@ -24,13 +24,6 @@ const headCells = [
 ];
 
 const QuestionnaireFieldTable = ({fieldLabel, data}) => {
-    const tableRowStyle = {
-        "&:last-child td, &:last-child th": {
-            border: 0,
-        },
-        paddingRight: "12px",
-    };
-
     return (
         <TableContainer sx={{overflowX: "auto"}}>
             <Table aria-labelledby="Projects table" sx={{tableLayout: "fixed"}}>
@@ -41,13 +34,12 @@ const QuestionnaireFieldTable = ({fieldLabel, data}) => {
                 </colgroup>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center"></TableCell>
+                        <TableCell align="center" rowSpan={2}></TableCell>
                         <TableCell align="center" colSpan={2}>
                             Real
                         </TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center"></TableCell>
                         <TableCell align="center">Mensual</TableCell>
                         <TableCell align="center">Acumulada</TableCell>
                     </TableRow>
@@ -62,7 +54,7 @@ const QuestionnaireFieldTable = ({fieldLabel, data}) => {
                 <TableBody>
                     {data["index"].map((indexLabel, index) => {
                         return (
-                            <TableRow hover key={index} sx={tableRowStyle}>
+                            <TableRow hover key={index}>
                                 <TableCell>{indexLabel}</TableCell>
                                 <TableCell align="right">
                                     {data["real_values"][index]}

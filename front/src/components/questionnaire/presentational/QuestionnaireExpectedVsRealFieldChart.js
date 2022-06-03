@@ -49,7 +49,7 @@ const QuestionnaireExpectedVsRealFieldChart = ({fieldLabel, data}) => {
           ];
 
     return (
-        <Grid container>
+        <Grid container justifyContent="flex-end">
             <Grid item xs={3}>
                 <FormControl fullWidth>
                     <InputLabel id="chart-type-select-label">Mostrar</InputLabel>

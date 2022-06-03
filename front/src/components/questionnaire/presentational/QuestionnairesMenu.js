@@ -3,7 +3,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItem from "@mui/material/ListItem";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import {MenuListItemLink, MenuListItemIcon} from "components/common/presentational";
-import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 
 const ProjectMenuQuestionnaires = ({questionnaires, basePath}) => {
     return (
@@ -21,7 +21,7 @@ const ProjectMenuQuestionnaires = ({questionnaires, basePath}) => {
                         to={`${basePath}/questionnaires/${questionnaire.code}`}
                     >
                         <MenuListItemIcon>
-                            <BallotOutlinedIcon fontSize="small" />
+                            <ListAltOutlinedIcon fontSize="small" />
                         </MenuListItemIcon>
                         <ListItemText
                             primary={questionnaire.name}

@@ -1,10 +1,6 @@
 export {
-    default as QuestionnaireInstanceChangeView,
-} from "./QuestionnaireInstanceChangeView";
-export {default as QuestionnaireInstanceList} from "./QuestionnaireInstanceList";
-export {default as QuestionnaireInstanceTree} from "./QuestionnaireInstanceTree";
-export {default as QuestionnaireInstanceDetail} from "./QuestionnaireInstanceDetail";
-export {default as QuestionnaireInstanceSummary} from "./QuestionnaireInstanceSummary";
+    default as QuestionnaireInstanceMonitoring,
+} from "./QuestionnaireInstanceMonitoring";
 export {default as QuestionnaireFieldTable} from "./QuestionnaireFieldTable";
 export {
     default as QuestionnaireExpectedVsRealFieldChart,
@@ -16,7 +12,7 @@ export {default as QuestionnaireInstanceForm} from "./QuestionnaireInstanceForm"
 export {
     default as QuestionnaireInstanceExpectedTable,
 } from "./QuestionnaireInstanceExpectedTable";
-export {
-    default as QuestionnaireInstanceHistoricalTable,
-} from "./QuestionnaireInstanceHistoricalTable";
+export {default as QuestionnaireInstanceTable} from "./QuestionnaireInstanceTable";
 export {default as QuestionnairesMenu} from "./QuestionnairesMenu";
+export {default as QuestionnaireInstanceEmpty} from "./QuestionnaireInstanceEmpty";
+export {default as QuestionnaireInstanceData} from "./QuestionnaireInstanceData";

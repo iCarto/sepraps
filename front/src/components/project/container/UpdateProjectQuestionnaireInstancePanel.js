@@ -36,9 +36,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
         )
             .then(() => {
                 navigate(
-                    selectedQuestionnaireInstance
-                        ? `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/${questionnaireInstance.id}`
-                        : `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
+                    `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
                     true
                 );
             })
@@ -57,9 +55,8 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
 
     const handleCloseSidebar = () => {
         navigate(
-            selectedQuestionnaireInstance
-                ? `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/${selectedQuestionnaireInstance.id}`
-                : `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`
+            `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
+            true
         );
     };
 
