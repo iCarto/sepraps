@@ -77,7 +77,7 @@ const ViewQuestionnaireInstanceFieldData = ({getDataService, fieldLabel}) => {
     };
 
     return (
-        <Stack sx={{mb: 5}}>
+        <Stack sx={{mb: 5, mt: 3}}>
             <Grid item container alignItems="center">
                 <BarChartIcon
                     sx={{color: theme => theme.palette["grey"]["300"], mr: 1}}

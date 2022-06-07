@@ -7,6 +7,7 @@ import {ViewQuestionnaireInstanceFieldData} from "components/questionnaire/conta
 import {QuestionnaireInstanceViewProvider} from "components/questionnaire/provider";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import {SectionHeading} from "components/common/presentational";
 
 const ViewContractQuestionnairesSubPage = () => {
     const {id, questionnaireCode} = useParams();
@@ -37,9 +38,7 @@ const ViewContractQuestionnairesSubPage = () => {
             isSidePanelOpen={isSidePanelOpen}
         >
             <Paper sx={{p: 3}}>
-                <Typography variant="h5" sx={{mb: 2}}>
-                    {questionnaire?.name}
-                </Typography>
+                <SectionHeading>{questionnaire?.name}</SectionHeading>
                 <QuestionnaireInstanceViewProvider>
                     {questionnaire?.fields.map(field => (
                         <ViewQuestionnaireInstanceFieldData
