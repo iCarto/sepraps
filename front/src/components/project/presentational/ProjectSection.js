@@ -36,7 +36,7 @@ const ProjectSection = ({project, headerActions = null}) => {
             <SectionField label="Clase:" value={project?.project_class_name} />
             <SectionField label="Descripción:" value={project?.description} />
 
-            <Divider variant="middle" sx={{mt: 3, mb: 4}}>
+            <Divider variant="middle" sx={{mx: 0, mt: 3, mb: 4}}>
                 <Chip label="Seguimiento" sx={{fontWeight: "light"}} />
             </Divider>
 
