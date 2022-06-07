@@ -1,11 +1,16 @@
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import LabelIcon from "@mui/icons-material/Label";
 
 const SectionHeading = ({children, icon = null}) => {
     return (
-        <Grid container alignItems="center">
-            <LabelIcon sx={{color: theme => theme.palette["grey"]["300"], mr: 1}} />
+        <Grid
+            container
+            sx={{display: "flex", flexDirection: "row", flexWrap: "noWrap"}}
+        >
+            <LabelIcon
+                sx={{color: theme => theme.palette["grey"]["300"], mr: 1, mt: 0.5}}
+            />
             <Typography
                 variant="h6"
                 color="grey.700"

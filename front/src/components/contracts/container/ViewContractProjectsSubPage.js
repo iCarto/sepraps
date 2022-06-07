@@ -14,6 +14,7 @@ import {SectionHeading} from "components/common/presentational";
 import {MapProjects} from "components/common/geo";
 
 import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -75,21 +76,27 @@ const ViewContractProjectsSubPage = () => {
             isSidePanelOpen={isSidePanelOpen}
         >
             <Paper sx={{p: 3}}>
-                <Stack direction="row" justifyContent="space-between" sx={{mb: 3}}>
-                    <SectionHeading>Proyectos del contrato</SectionHeading>
-                    <Stack
-                        direction="row"
-                        justifyContent="flex-end"
-                        alignItems="center"
-                    >
-                        <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
-                            <AddProjectButton
-                                basePath={`/contracts/${contract.id}/projects`}
-                            />
-                        </AuthAction>
-                        <ProjectListChangeView />
-                    </Stack>
-                </Stack>
+                <Grid
+                    container
+                    alignItems="flex-start"
+                    justifyContent="space-between"
+                    sx={{flexDirection: {xs: "column", md: "row"}}}
+                    mb={3}
+                >
+                    <Grid item md={6}>
+                        <SectionHeading>Proyectos del contrato</SectionHeading>
+                    </Grid>
+                    <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
+                        <Stack direction="row" justifyContent="flex-end" spacing={1}>
+                            <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                                <AddProjectButton
+                                    basePath={`/contracts/${contract.id}/projects`}
+                                />
+                            </AuthAction>
+                            <ProjectListChangeView />
+                        </Stack>
+                    </Grid>
+                </Grid>
                 {contract.projects.length !== 0 ? (
                     getViewComponent(view)
                 ) : (
