@@ -1,7 +1,6 @@
 import {useSort} from "hooks";
 
 import {TableSortingHead} from "components/common/presentational";
-import {MilestoneTimelineShort} from "components/milestone/presentational";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";

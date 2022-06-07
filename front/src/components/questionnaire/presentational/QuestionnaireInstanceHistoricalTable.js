@@ -4,7 +4,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {NumberUtil} from "utilities";
 
 const QuestionnaireInstanceHistoricalTable = ({projectQuestionnaire}) => {
     const tableRowStyle = {

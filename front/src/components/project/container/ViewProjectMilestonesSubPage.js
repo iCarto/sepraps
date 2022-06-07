@@ -5,7 +5,7 @@ import {ProjectService} from "service/api";
 import {useNavigateWithReload} from "hooks";
 
 import {SubPageLayout} from "layout";
-import {SectionCard} from "components/common/presentational";
+import {AlertError, SectionCard} from "components/common/presentational";
 import {MilestonePhase} from "components/milestone/presentational";
 import {CloseProjectButton, CloseProjectDialog} from ".";
 
@@ -50,10 +50,15 @@ const ViewProjectMilestonesSubPage = () => {
     };
 
     useEffect(() => {
-        ProjectService.getProjectMilestones(id).then(milestonesPhases => {
-            console.log({milestonesPhases});
-            setMilestonesPhases(milestonesPhases);
-        });
+        ProjectService.getProjectMilestones(id)
+            .then(milestonesPhases => {
+                console.log({milestonesPhases});
+                setMilestonesPhases(milestonesPhases);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error);
+            });
     }, [id, location.state?.lastRefreshDate]);
 
     const activeMilestone = findActiveMilestone(
@@ -83,6 +88,7 @@ const ViewProjectMilestonesSubPage = () => {
             isSidePanelOpen={isSidePanelOpen}
         >
             <Grid container spacing={3}>
+                <AlertError error={error} />
                 <Grid item xs={12}>
                     <SectionCard title="Hitos del proyecto">
                         {milestonesPhases.map(phase => {

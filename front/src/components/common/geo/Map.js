@@ -25,7 +25,7 @@ const Map = ({markerPosition, text = null}) => {
                 }),
             ],
         });
-        const marker = L.marker(markerPosition, {icon: getIcon()}).addTo(map);
+        L.marker(markerPosition, {icon: getIcon()}).addTo(map);
 
         return () => {
             map.off();

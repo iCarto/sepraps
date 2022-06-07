@@ -10,20 +10,23 @@ const ProjectSection = ({project, headerActions = null}) => {
         } else return "Pendiente";
     };
 
-    const milestonesData = [];
+    console.log("project?.milestones", project?.milestones);
 
-    project?.milestones.map(milestone => {
-        if (
-            milestone.code === "start_of_works" ||
-            milestone.code === "provisional_reception" ||
-            milestone.code === "final_reception"
-        ) {
-            const milestoneData = {};
-            milestoneData["name"] = milestone.short_name;
-            milestoneData["date"] = milestone.compliance_date;
-            milestonesData.push(milestoneData);
-        }
-    });
+    const milestonesData = project?.milestones
+        ? project?.milestones
+              .filter(
+                  milestone =>
+                      milestone.code === "start_of_works" ||
+                      milestone.code === "provisional_reception" ||
+                      milestone.code === "final_reception"
+              )
+              .map(milestone => {
+                  return {
+                      name: milestone.short_name,
+                      date: milestone.compliance_date,
+                  };
+              })
+        : [];
 
     return (
         <SectionCard title={project?.name} headerActions={headerActions}>

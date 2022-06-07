@@ -1,12 +1,7 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
 import {AuthAction, useAuth} from "auth";
 
-import {
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "components/common/presentational";
-import EditIcon from "@mui/icons-material/Edit";
+import {SectionCard, SectionField} from "components/common/presentational";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";

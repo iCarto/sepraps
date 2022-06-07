@@ -1,5 +1,3 @@
-import {TrendingUpRounded} from "@mui/icons-material";
-
 var localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
     style: "currency",
     currency: "PYG",

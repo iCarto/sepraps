@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {ContractService, FinancingService, TEMPLATE} from "service/api";
-import {useAdministrativeDivisions, useDomain} from "components/common/provider";
+import {useAdministrativeDivisions} from "components/common/provider";
 import Grid from "@mui/material/Grid";
 import {FormSelect} from "components/common/form";
 import {AccordionLayout} from "components/common/presentational";

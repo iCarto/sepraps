@@ -60,7 +60,7 @@ const ListProjectsPage = () => {
     );
 
     const handleFilterClear = useCallback(() => {
-        setFilter({["status"]: "active"});
+        setFilter({status: "active"});
     }, [filter]);
 
     const handleClickOnCard = projectId => {
