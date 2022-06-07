@@ -6,11 +6,6 @@ const milestone_api_adapter = milestone => {
     milestone["compliance_date"] = milestone["compliance_date"]
         ? new Date(milestone["compliance_date"])
         : null;
-    if (milestone["children"]) {
-        milestone["children"] = createMilestones(
-            milestones_api_adapter(milestone["children"])
-        );
-    }
     if (milestone["checklist"]) {
         milestone["checklist"] = milestone["checklist"]?.map(checkItem => checkItem);
     }
@@ -45,7 +40,6 @@ const createMilestone = ({
     phase_name = "",
     compliance_date = "",
     ordering = "",
-    children = [],
 } = {}) => {
     const publicApi = {
         id,
@@ -57,7 +51,6 @@ const createMilestone = ({
         phase_name,
         compliance_date,
         ordering,
-        children,
     };
 
     return Object.freeze(publicApi);
