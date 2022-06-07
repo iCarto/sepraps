@@ -91,7 +91,11 @@ const UpdateMilestonePanel = () => {
                     }}
                 >
                     <AlertError error={error} />
-                    <Typography sx={{fontWeight: "medium"}}>
+                    <Typography
+                        variant="h6"
+                        color="grey.700"
+                        sx={{textTransform: "uppercase", fontWeight: "bold"}}
+                    >
                         {milestone?.name}
                     </Typography>
                     <Typography variant="body2" py={3}>
