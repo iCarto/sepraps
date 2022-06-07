@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "hooks";
 import {ProjectService} from "service/api";

@@ -9,7 +9,7 @@ import {
     TEMPLATE,
 } from "service/api";
 
-import {FormAutocomplete, FormDatePicker, FormSelect} from "components/common/form";
+import {FormAutocomplete, FormDatePicker} from "components/common/form";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -33,7 +33,7 @@ const StatsFilterForm = ({
 }) => {
     const [expanded, setExpanded] = useState(() => {
         return (
-            Object.keys(filter).length != 0 &&
+            Object.keys(filter).length !== 0 &&
             (filter?.department !== "" &&
                 filter?.district !== "" &&
                 filter?.construction_contract !== "")

@@ -17,7 +17,7 @@ const FormAutocomplete = ({
     const {control} = useFormContext();
 
     const {
-        field: {onChange, onBlur, name, value, ref},
+        field: {onChange, value, ref},
         fieldState: {error},
     } = useController({
         name: propsName,
@@ -45,7 +45,7 @@ const FormAutocomplete = ({
             }
             isOptionEqualToValue={(option, value) =>
                 value &&
-                value != "" &&
+                value !== "" &&
                 option[optionIdAttribute] === value[optionIdAttribute]
             }
             renderOption={(props, option, {selected}) => (

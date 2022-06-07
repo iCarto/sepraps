@@ -1,5 +1,3 @@
-import {useTheme} from "@emotion/react";
-
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -23,8 +21,6 @@ ChartJS.register(
 );
 
 const LineChart = ({title, labels, datasets}) => {
-    const theme = useTheme();
-
     const options = {
         responsive: true,
         scales: {

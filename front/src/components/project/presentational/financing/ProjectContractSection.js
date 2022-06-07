@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {useAuth} from "auth";
+import {AuthAction, useAuth} from "auth";
 
 import {DateUtil, NumberUtil} from "utilities";
 import {SectionCard, SectionField} from "components/common/presentational";
@@ -57,15 +57,17 @@ const ProjectContractSection = ({contract}) => {
                     <Typography p={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no ha sido asignado a ningún contrato
                     </Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                            navigate("contract/new/add");
-                        }}
-                    >
-                        Asignar
-                    </Button>
+                    <AuthAction roles={[ROLES.MANAGEMENT]}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                navigate("contract/new/add");
+                            }}
+                        >
+                            Asignar
+                        </Button>
+                    </AuthAction>
                 </Stack>
             )}
         </SectionCard>

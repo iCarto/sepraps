@@ -4,7 +4,7 @@ import {useState} from "react";
  The searchFunction receives an array made of specific properties from the project object, and returns true when the searchText property is empty or when it is contained in the assessed project. */
 
 function useProjectsFilter(filters) {
-    const [filter, setFilter] = useState({...filters, ["status"]: "active"});
+    const [filter, setFilter] = useState({...filters, status: "active"});
 
     function filterProjectsFunction(project) {
         const propertiesForSearchFilter = [

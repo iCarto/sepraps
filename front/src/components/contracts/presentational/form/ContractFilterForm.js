@@ -1,14 +1,8 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {
-    ContractorService,
-    ContractService,
-    FinancingService,
-    LocationService,
-    TEMPLATE,
-} from "service/api";
+import {ContractorService, FinancingService} from "service/api";
 
-import {FormAutocomplete, FormDatePicker, FormSelect} from "components/common/form";
+import {FormAutocomplete, FormDatePicker} from "components/common/form";
 import {SearchBoxControlled} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
@@ -27,7 +21,7 @@ const ContractFilterForm = ({
 }) => {
     const [expanded, setExpanded] = useState(() => {
         return (
-            Object.keys(filter).length != 0 &&
+            Object.keys(filter).length !== 0 &&
             (filter?.department !== "" &&
                 filter?.district !== "" &&
                 filter?.construction_contract !== "")

@@ -43,7 +43,7 @@ const FormSelectMultipleChip = ({
             return optionValues
                 .map(
                     optionValue =>
-                        options?.find(option => option.value == optionValue)?.label
+                        options?.find(option => option.value === optionValue)?.label
                 )
                 .join(", ");
         }

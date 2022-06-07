@@ -15,8 +15,6 @@ const AddProjectLinkedLocalitiesPanel = () => {
     let project;
     [project] = useOutletContext();
 
-    let context = useOutletContext();
-
     const handleSubmit = project => {
         ProjectService.updateProject(project_view_adapter({...project}))
             .then(() => {

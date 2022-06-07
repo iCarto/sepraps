@@ -17,14 +17,6 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const fabStyle = {
-    position: "fixed",
-    // Leaflet CSS stylesheet is setting map elements' Z-index from 100 to 1000
-    zIndex: 1001,
-    bottom: 16,
-    right: 16,
-};
-
 const ListContractsPage = () => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
