@@ -65,11 +65,7 @@ const SidebarPanel = ({
                 sx={{justifyContent: "space-between", alignItems: "center"}}
             >
                 <Grid item xs={sidebarActions ? 9 : 10}>
-                    <Box
-                        sx={{display: "flex", justifyContent: "flex-start"}}
-                        p={1}
-                        pl={0}
-                    >
+                    <Box sx={{display: "flex", justifyContent: "flex-start"}} p={1}>
                         <Typography
                             variant="h6"
                             color="primary"

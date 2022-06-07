@@ -13,8 +13,6 @@ const ViewMilestonePanel = () => {
 
     const [milestone, setMilestone] = useState(null);
 
-    console.log({milestone});
-
     useEffect(() => {
         MilestoneService.getMilestone(milestoneId).then(milestone => {
             console.log({milestone});
@@ -28,7 +26,7 @@ const ViewMilestonePanel = () => {
 
     return (
         <SidebarPanel
-            sidebarTitle="Vista de detalle"
+            sidebarTitle="Detalle del hito"
             closeSidebarClick={handleCloseSidebar}
         >
             <MilestoneSection milestone={milestone} />
