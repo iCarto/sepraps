@@ -13,15 +13,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 const findActiveMilestone = milestones => {
-    let activeMilestone = null;
-
     for (let milestone of milestones) {
-        if (milestone["children"].length) {
-            activeMilestone = findActiveMilestone(milestone["children"]);
-            if (activeMilestone) {
-                return activeMilestone;
-            }
-        }
         if (!milestone["compliance_date"]) {
             return milestone;
         }
