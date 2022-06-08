@@ -72,6 +72,7 @@ MIGRATION_MODULES = (
         "users": None,
         "documents": None,
         "monitoring": None,
+        "questionnaires": None,
     }
     if env("DATABASE_CONTROL_CHANGES_MODE") == "sqitch"
     else {}
@@ -237,7 +238,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://127.0.0.1:8000",
 # )
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = list(default_headers) + ["content-disposition"]
+CORS_ALLOW_HEADERS = list(default_headers) + ["Content-Disposition"]
+CORS_EXPOSE_HEADERS = ["Content-Disposition"]
 
 AUTH_USER_MODEL = "users.User"
 
