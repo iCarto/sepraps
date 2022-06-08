@@ -2,7 +2,11 @@ var localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
     style: "currency",
     currency: "PYG",
 });
-var localNumberFormatter = new Intl.NumberFormat("es-PY");
+var localIntegerFormatter = new Intl.NumberFormat("es-PY");
+var localDecimalFormatter = new Intl.NumberFormat("es-PY", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+});
 
 const NumberUtil = {
     formatDecimal(value, decimalSize = 2) {
@@ -13,11 +17,23 @@ const NumberUtil = {
         return floatNumber.toFixed(decimalSize).replace(".", ",");
     },
 
+    formatDecimal2(value) {
+        if (!value) {
+            return "";
+        }
+        value = value.replace(",", ".");
+        if (isNaN(value)) {
+            return "";
+        }
+        const floatNumber = parseFloat(value);
+        return localDecimalFormatter.format(floatNumber);
+    },
+
     formatInteger(value) {
         if (!value || isNaN(value)) {
             return value;
         }
-        return localNumberFormatter.format(value);
+        return localIntegerFormatter.format(value);
     },
 
     formatCurrency(value, showCurrencySymbol = true) {
@@ -29,7 +45,7 @@ const NumberUtil = {
         }
         var formatter = showCurrencySymbol
             ? localCurrencyFormatter
-            : localNumberFormatter;
+            : localIntegerFormatter;
         return formatter.format(value);
     },
 
