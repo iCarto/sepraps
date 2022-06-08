@@ -5,14 +5,17 @@ from questionnaires import services as questtionnaire_services
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
 )
-from rest_framework.decorators import api_view, permission_classes
+from questionnaires.renderers import CSVFileRenderer
+from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from users.permissions import GestionPermission, SupervisionPermission
 
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated, SupervisionPermission | GestionPermission])
+@renderer_classes([JSONRenderer, CSVFileRenderer])
 def get_monthly_questionnaire_stats(
     request, questionnaire_code, field_code, format=None
 ):

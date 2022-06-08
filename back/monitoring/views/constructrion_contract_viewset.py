@@ -3,15 +3,11 @@ from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.domain_entry import DomainEntry
-from monitoring.models.project_questionnaire_instance import (
-    ProjectQuestionnaireInstance,
-)
 from monitoring.serializers.construction_contract_serializer import (
     ConstructionContractSerializer,
     ConstructionContractShortSerializer,
     ConstructionContractSummarySerializer,
 )
-from questionnaires import services as questtionnaire_services
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -64,28 +60,3 @@ class ConstructionContractViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user
         return super().perform_create(serializer)
-
-    @action(
-        detail=True,
-        methods=["get"],
-        url_path=(
-            "questionnaire_instances/(?P<questionnaire_code>\w+)/(?P<field_code>\w+)"
-        ),
-    )
-    def contract_questionnaire_instances_chart_data(
-        self, request, questionnaire_code, field_code, pk=None
-    ):
-        contract = self.get_object()
-        contract_project_codes = [project.id for project in contract.projects.all()]
-        instances = ProjectQuestionnaireInstance.objects.filter(
-            project__in=contract_project_codes, questionnaire__code=questionnaire_code
-        ).prefetch_related("questionnaire_instance__values")
-        questionnaire_instances = [
-            instance.questionnaire_instance for instance in instances
-        ]
-
-        return Response(
-            questtionnaire_services.get_monthly_questionnaire_instances_dataframe(
-                questionnaire_code, field_code, questionnaire_instances
-            )
-        )

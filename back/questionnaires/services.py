@@ -175,7 +175,6 @@ def flat_values_list(values_list, datatype):
 def get_monthly_questionnaire_instances_dataframe(
     questionnaire_code, field_code, instances
 ):
-
     questionnaire = Questionnaire.objects.get(pk=questionnaire_code)
     questionnaire_field = next(
         (field for field in questionnaire.fields if field.get("code") == field_code),
