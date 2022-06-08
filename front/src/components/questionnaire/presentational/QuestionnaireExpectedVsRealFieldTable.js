@@ -1,5 +1,5 @@
 import {NumberUtil} from "utilities";
-import {useFormattedValue} from "../hooks";
+import {useAlertCellStyle, useExpectedCellStyle, useFormattedValue} from "../hooks";
 import {QuestionnaireFieldDownloadCSV} from "../presentational";
 
 import {BorderedTableCell as TableCell} from "components/common/presentational";
@@ -70,6 +70,8 @@ const headCells = [
 
 const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
     const formatValue = useFormattedValue();
+    const expectedCellStyle = useExpectedCellStyle();
+    const getAlertCellStyle = useAlertCellStyle();
 
     return (
         <Grid container spacing={1}>
@@ -84,7 +86,11 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center" rowSpan={2}></TableCell>
-                                <TableCell align="center" colSpan={4}>
+                                <TableCell
+                                    align="center"
+                                    colSpan={4}
+                                    sx={expectedCellStyle}
+                                >
                                     Previsto
                                 </TableCell>
                                 <TableCell align="center" colSpan={4}>
@@ -95,10 +101,18 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell align="center" colSpan={2}>
+                                <TableCell
+                                    align="center"
+                                    colSpan={2}
+                                    sx={expectedCellStyle}
+                                >
                                     Mensual
                                 </TableCell>
-                                <TableCell align="center" colSpan={2}>
+                                <TableCell
+                                    align="center"
+                                    colSpan={2}
+                                    sx={expectedCellStyle}
+                                >
                                     Acumulada
                                 </TableCell>
                                 <TableCell align="center" colSpan={2}>
@@ -113,7 +127,15 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                             </TableRow>
                             <TableRow>
                                 {headCells.map(headCell => (
-                                    <TableCell key={headCell.id} align="center">
+                                    <TableCell
+                                        key={headCell.id}
+                                        align="center"
+                                        sx={
+                                            headCell.id.startsWith("expected")
+                                                ? expectedCellStyle
+                                                : {}
+                                        }
+                                    >
                                         {headCell.label}
                                     </TableCell>
                                 ))}
@@ -124,24 +146,24 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                                 return (
                                     <TableRow hover key={index}>
                                         <TableCell>{indexLabel}</TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={expectedCellStyle}>
                                             {formatValue(
                                                 data["expected_values"][index],
                                                 field.datatype
                                             )}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={expectedCellStyle}>
                                             {NumberUtil.formatDecimal(
                                                 data["expected_values_perc"][index]
                                             )}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={expectedCellStyle}>
                                             {formatValue(
                                                 data["expected_values_acc"][index],
                                                 field.datatype
                                             )}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={expectedCellStyle}>
                                             {NumberUtil.formatDecimal(
                                                 data["expected_values_acc_perc"][index]
                                             )}

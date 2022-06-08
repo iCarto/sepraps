@@ -1,6 +1,6 @@
 import {Fragment} from "react";
 import {useNavigate} from "react-router-dom";
-import {useFormattedValue} from "../hooks";
+import {useExpectedCellStyle, useFormattedValue} from "../hooks";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,6 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
     const navigate = useNavigate();
     const formatValue = useFormattedValue();
+    const expectedCellStyle = useExpectedCellStyle();
 
     const headCells = projectQuestionnaire.questionnaire.fields.map(field => {
         return {
@@ -64,6 +65,7 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
                                 <TableCell
                                     key={headCell.id + "expected"}
                                     align="center"
+                                    sx={expectedCellStyle}
                                 >
                                     Previsto
                                 </TableCell>
@@ -87,6 +89,7 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
                                             <TableCell
                                                 key={value.id + "expected"}
                                                 align="center"
+                                                sx={expectedCellStyle}
                                             >
                                                 {formatValue(
                                                     value.expected_value,
