@@ -21,7 +21,6 @@ const AddContractProjectPanel = () => {
         setSelectedProject(existingProject);
     };
 
-    //TO-DO REVIEW FUNCTION NAME - "addProjectToContract" ?
     const handleProjectToAdd = () => {
         const updatedContract = createContract({
             ...contract,
@@ -30,7 +29,6 @@ const AddContractProjectPanel = () => {
         handleFormSubmit(updatedContract);
     };
 
-    //TO-DO REVIEW FUNCTION NAME - "handleContractUpdate"?
     const handleFormSubmit = contract => {
         ContractService.updateContract(contract_view_adapter({...contract}))
             .then(() => {
