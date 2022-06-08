@@ -1,4 +1,4 @@
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useNavigate, useOutletContext, useParams} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {DomainProvider, LocationProvider} from "components/common/provider";
@@ -23,6 +23,8 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
         project = outletContext[0];
     }
 
+    const contractID = outletContext ? outletContext[0]?.id : null;
+
     const defaultFormValues = {
         id: project?.id || null,
         code: project?.code || null,
@@ -31,12 +33,12 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
         description: project?.description || "",
         init_date: project?.init_date || null,
         main_infrastructure_position: {
-            latitude: project?.main_infrastructure.latitude || "",
-            longitude: project?.main_infrastructure.longitude || "",
-            altitude: project?.main_infrastructure.altitude || "",
+            latitude: project?.main_infrastructure?.latitude || "",
+            longitude: project?.main_infrastructure?.longitude || "",
+            altitude: project?.main_infrastructure?.altitude || "",
         },
         linked_localities: project
-            ? project.linked_localities.map(linked_locality => {
+            ? project.linked_localities?.map(linked_locality => {
                   return {
                       non_existent: false,
                       code: linked_locality.code,
@@ -58,6 +60,7 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
                       department_name: "",
                   },
               ],
+        construction_contract: project?.construction_contract || contractID || "",
     };
 
     const formMethods = useForm({
@@ -66,7 +69,9 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
     });
 
     const handleCancel = () => {
-        navigate("/projects");
+        if (contractID) {
+            navigate(`/contracts/${contractID}/projects`);
+        } else navigate("/projects");
     };
 
     const onFormSubmit = data => {
@@ -97,7 +102,7 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
                     department_name: linked_locality.department_name,
                 });
             }),
-            construction_contract: project?.construction_contract,
+            construction_contract: data.construction_contract,
         });
         onSubmit(updatedProject);
     };
@@ -111,8 +116,6 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
         }
         return null;
     };
-
-    console.log({updatedSection});
 
     return (
         <LocationProvider>

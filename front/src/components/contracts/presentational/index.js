@@ -9,3 +9,4 @@ export {default as ContractSearchAutocomplete} from "./ContractSearchAutocomplet
 export {default as ContractSummary} from "./ContractSummary";
 export {default as ContractsTable} from "./ContractsTable";
 export {default as ContractListChangeView} from "./ContractListChangeView";
+export {default as AddContractProjectButtonGroup} from "./AddContractProjectButtonGroup";

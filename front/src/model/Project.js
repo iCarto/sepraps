@@ -89,7 +89,7 @@ const project_view_adapter = project => {
         ? infraestructure_view_adapter({...project["main_infrastructure"]})
         : null;
     project["construction_contract"] = !!project["construction_contract"]
-        ? project["construction_contract"].id
+        ? project["construction_contract"].id || project["construction_contract"]
         : null;
 
     delete project["name"];

@@ -1,6 +1,6 @@
+import {Route} from "react-router-dom";
 import {UpdateContractContractorContactPanel} from "components/contractor/container";
 import {ProjectListViewProvider} from "components/project/provider";
-import {Route} from "react-router-dom";
 import {
     ListContractsPage,
     ViewContractPage,
@@ -17,6 +17,7 @@ import {
     ViewContractPanel,
     ViewContractQuestionnairesSubPage,
     ViewContractPhasesSubPage,
+    CreateContractProjectPage,
 } from "../container";
 import {UpdateContractMonitoringProfilePanel} from "../container/monitoring";
 
@@ -85,8 +86,8 @@ const contractRoutes = [
                 }
             >
                 <Route
-                    key="contract-project-add"
-                    path="new/add"
+                    key="contract-project-add-existing"
+                    path="add/existing"
                     element={<AddContractProjectPanel />}
                 />
                 <Route
@@ -95,6 +96,11 @@ const contractRoutes = [
                     element={<ViewContractProjectPanel />}
                 />
             </Route>
+            <Route
+                key="contract-projects-add-new"
+                path="projects/add/new"
+                element={<CreateContractProjectPage />}
+            />
             <Route
                 key="contract-questionnaire-detail"
                 path="questionnaires/:questionnaireCode"

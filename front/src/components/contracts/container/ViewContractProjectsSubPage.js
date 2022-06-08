@@ -5,13 +5,13 @@ import {AuthAction, useAuth} from "auth";
 import {useProjectListView} from "components/project/provider";
 import {SubPageLayout} from "layout";
 import {
-    AddProjectButton,
     ProjectList,
     ProjectListChangeView,
     ProjectsTable,
 } from "components/project/presentational";
 import {SectionHeading} from "components/common/presentational";
 import {MapProjects} from "components/common/geo";
+import {AddContractProjectButtonGroup} from "../presentational";
 
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -89,9 +89,7 @@ const ViewContractProjectsSubPage = () => {
                     <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
                         <Stack direction="row" justifyContent="flex-end" spacing={1}>
                             <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
-                                <AddProjectButton
-                                    basePath={`/contracts/${contract.id}/projects`}
-                                />
+                                <AddContractProjectButtonGroup />
                             </AuthAction>
                             <ProjectListChangeView />
                         </Stack>

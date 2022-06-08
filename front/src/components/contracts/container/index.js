@@ -13,7 +13,6 @@ export {default as AddContractProjectPanel} from "./AddContractProjectPanel";
 export {default as RemoveContractProjectDialog} from "./RemoveContractProjectDialog";
 export {default as ManageContractsPage} from "./ManageContractsPage";
 export {default as ViewContractPanel} from "./ViewContractPanel";
-export {
-    default as ViewContractQuestionnairesSubPage,
-} from "./ViewContractQuestionnairesSubPage";
+export {default as ViewContractQuestionnairesSubPage} from "./ViewContractQuestionnairesSubPage";
 export {default as ViewContractPhasesSubPage} from "./ViewContractPhasesSubPage";
+export {default as CreateContractProjectPage} from "./CreateContractProjectPage";
