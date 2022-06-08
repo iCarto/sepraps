@@ -1,3 +1,4 @@
+import {useFormattedValue} from "../hooks";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -25,7 +26,9 @@ const headCells = [
     },
 ];
 
-const QuestionnaireFieldTable = ({fieldLabel, data, downloadPath}) => {
+const QuestionnaireFieldTable = ({field, data, downloadPath}) => {
+    const formatValue = useFormattedValue();
+
     return (
         <Grid container spacing={1}>
             <Grid item>
@@ -61,10 +64,16 @@ const QuestionnaireFieldTable = ({fieldLabel, data, downloadPath}) => {
                                     <TableRow hover key={index}>
                                         <TableCell>{indexLabel}</TableCell>
                                         <TableCell align="right">
-                                            {data["real_values"][index]}
+                                            {formatValue(
+                                                data["real_values"][index],
+                                                field.datatype
+                                            )}
                                         </TableCell>
                                         <TableCell align="right">
-                                            {data["real_values_acc"][index]}
+                                            {formatValue(
+                                                data["real_values_acc"][index],
+                                                field.datatype
+                                            )}
                                         </TableCell>
                                     </TableRow>
                                 );

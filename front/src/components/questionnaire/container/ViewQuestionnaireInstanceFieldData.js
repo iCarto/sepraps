@@ -22,12 +22,7 @@ const StyledBox = styled(Box)(({theme}) => ({
     margin: 10,
 }));
 
-const ViewQuestionnaireInstanceFieldData = ({
-    questionnaireCode,
-    fieldCode,
-    filter,
-    fieldLabel,
-}) => {
+const ViewQuestionnaireInstanceFieldData = ({questionnaireCode, field, filter}) => {
     const location = useLocation();
 
     const [data, setData] = useState(null);
@@ -37,19 +32,19 @@ const ViewQuestionnaireInstanceFieldData = ({
         setLoading(true);
         StatsService.getStatsByQuestionnaires(
             questionnaireCode,
-            fieldCode,
+            field.code,
             filter
         ).then(data => {
             console.log({data});
             setData(data);
             setLoading(false);
         });
-    }, [questionnaireCode, fieldCode, filter, location.state?.lastRefreshDate]);
+    }, [questionnaireCode, field, filter, location.state?.lastRefreshDate]);
 
     const getCSVUrl = () => {
         return StatsService.getStatsByQuestionnairesUrl(
             questionnaireCode,
-            fieldCode,
+            field.code,
             filter
         );
     };
@@ -61,14 +56,14 @@ const ViewQuestionnaireInstanceFieldData = ({
                     <Stack>
                         <StyledBox>
                             <QuestionnaireExpectedVsRealFieldTable
-                                fieldLabel={fieldLabel}
+                                field={field}
                                 data={data}
                                 downloadPath={getCSVUrl()}
                             />
                         </StyledBox>
                         <StyledBox>
                             <QuestionnaireExpectedVsRealFieldChart
-                                fieldLabel={fieldLabel}
+                                field={field}
                                 data={data}
                             />
                         </StyledBox>
@@ -79,14 +74,14 @@ const ViewQuestionnaireInstanceFieldData = ({
                     <Stack spacing={3}>
                         <StyledBox>
                             <QuestionnaireFieldTable
-                                fieldLabel={fieldLabel}
+                                field={field}
                                 data={data}
                                 downloadPath={getCSVUrl()}
                             />
                         </StyledBox>
                         <StyledBox>
                             <QuestionnaireExpectedVsRealFieldChart
-                                fieldLabel={fieldLabel}
+                                field={field}
                                 data={data}
                             />
                         </StyledBox>
@@ -102,7 +97,7 @@ const ViewQuestionnaireInstanceFieldData = ({
                 <BarChartIcon
                     sx={{color: theme => theme.palette["grey"]["300"], mr: 1}}
                 />
-                <Typography variant="h6">{fieldLabel}</Typography>
+                <Typography variant="h6">{field.label}</Typography>
             </Grid>
             <Divider />
             {loading && (

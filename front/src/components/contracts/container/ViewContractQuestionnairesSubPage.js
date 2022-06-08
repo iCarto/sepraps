@@ -36,9 +36,8 @@ const ViewContractQuestionnairesSubPage = () => {
                         <ViewQuestionnaireInstanceFieldData
                             key={field.code}
                             questionnaireCode={questionnaireCode}
-                            fieldCode={field.code}
+                            field={field}
                             filter={{construction_contract: id}}
-                            fieldLabel={field.label}
                         />
                     ))}
                 </QuestionnaireInstanceViewProvider>

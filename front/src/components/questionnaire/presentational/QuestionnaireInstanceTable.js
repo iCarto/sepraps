@@ -1,5 +1,6 @@
 import {Fragment} from "react";
 import {useNavigate} from "react-router-dom";
+import {useFormattedValue} from "../hooks";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +16,7 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
     const navigate = useNavigate();
+    const formatValue = useFormattedValue();
 
     const headCells = projectQuestionnaire.questionnaire.fields.map(field => {
         return {
@@ -74,43 +76,49 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
                 </TableHead>
                 <TableBody>
                     {projectQuestionnaire.questionnaire_instances.map(
-                        (instance, index) => {
-                            return (
-                                <TableRow hover key={index}>
-                                    <TableCell>
-                                        {instance.month + "/" + instance.year}
-                                    </TableCell>
-                                    {instance.values.map(value => (
+                        (instance, index) => (
+                            <TableRow hover key={index}>
+                                <TableCell>
+                                    {instance.month + "/" + instance.year}
+                                </TableCell>
+                                {instance.values.map(value => {
+                                    return (
                                         <Fragment key={value.id}>
                                             <TableCell
                                                 key={value.id + "expected"}
                                                 align="center"
                                             >
-                                                {value.expected_value}
+                                                {formatValue(
+                                                    value.expected_value,
+                                                    value.datatype
+                                                )}
                                             </TableCell>
                                             <TableCell
                                                 key={value.id + "real"}
                                                 align="center"
                                             >
-                                                {value.value}
+                                                {formatValue(
+                                                    value.value,
+                                                    value.datatype
+                                                )}
                                             </TableCell>
                                         </Fragment>
-                                    ))}
-                                    <TableCell>{instance.comments}</TableCell>
-                                    <TableCell>
-                                        <ActionsMenu>
-                                            <MenuAction
-                                                name="edit-questionnaire"
-                                                icon={<EditIcon />}
-                                                text="Modificar"
-                                                itemId={instance.id}
-                                                handleClick={handleClick}
-                                            />
-                                        </ActionsMenu>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        }
+                                    );
+                                })}
+                                <TableCell>{instance.comments}</TableCell>
+                                <TableCell>
+                                    <ActionsMenu>
+                                        <MenuAction
+                                            name="edit-questionnaire"
+                                            icon={<EditIcon />}
+                                            text="Modificar"
+                                            itemId={instance.id}
+                                            handleClick={handleClick}
+                                        />
+                                    </ActionsMenu>
+                                </TableCell>
+                            </TableRow>
+                        )
                     )}
                 </TableBody>
             </Table>

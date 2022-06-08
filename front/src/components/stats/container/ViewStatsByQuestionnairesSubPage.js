@@ -64,9 +64,8 @@ const ViewStatsByQuestionnairesSubPage = () => {
                                 <ViewQuestionnaireInstanceFieldData
                                     key={field.code}
                                     questionnaireCode={questionnaire.code}
-                                    fieldCode={field.code}
+                                    field={field}
                                     filter={filter}
-                                    fieldLabel={field.label}
                                 />
                             ))}
                         </QuestionnaireInstanceViewProvider>
