@@ -13,6 +13,13 @@ const NumberUtil = {
         return floatNumber.toFixed(decimalSize).replace(".", ",");
     },
 
+    formatInteger(value) {
+        if (!value || isNaN(value)) {
+            return value;
+        }
+        return localNumberFormatter.format(value);
+    },
+
     formatCurrency(value, showCurrencySymbol = true) {
         if (!value) {
             return "";

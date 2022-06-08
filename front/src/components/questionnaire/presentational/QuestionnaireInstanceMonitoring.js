@@ -8,9 +8,8 @@ const QuestionnaireInstanceMonitoring = ({projectQuestionnaire}) => {
             <ViewQuestionnaireInstanceFieldData
                 key={field.code}
                 questionnaireCode={projectQuestionnaire.questionnaire.code}
-                fieldCode={field.code}
+                field={field}
                 filter={{project: projectQuestionnaire.projectId}}
-                fieldLabel={field.label}
             />
         ))
     );

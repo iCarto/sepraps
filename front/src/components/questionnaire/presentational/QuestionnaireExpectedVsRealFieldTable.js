@@ -1,4 +1,5 @@
 import {NumberUtil} from "utilities";
+import {useFormattedValue} from "../hooks";
 import {QuestionnaireFieldDownloadCSV} from "../presentational";
 
 import {BorderedTableCell as TableCell} from "components/common/presentational";
@@ -67,7 +68,9 @@ const headCells = [
     },
 ];
 
-const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data, downloadPath}) => {
+const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
+    const formatValue = useFormattedValue();
+
     return (
         <Grid container spacing={1}>
             <Grid item>
@@ -122,7 +125,10 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data, downloadPath})
                                     <TableRow hover key={index}>
                                         <TableCell>{indexLabel}</TableCell>
                                         <TableCell align="right">
-                                            {data["expected_values"][index]}
+                                            {formatValue(
+                                                data["expected_values"][index],
+                                                field.datatype
+                                            )}
                                         </TableCell>
                                         <TableCell align="right">
                                             {NumberUtil.formatDecimal(
@@ -130,7 +136,10 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data, downloadPath})
                                             )}
                                         </TableCell>
                                         <TableCell align="right">
-                                            {data["expected_values_acc"][index]}
+                                            {formatValue(
+                                                data["expected_values_acc"][index],
+                                                field.datatype
+                                            )}
                                         </TableCell>
                                         <TableCell align="right">
                                             {NumberUtil.formatDecimal(
@@ -138,7 +147,10 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data, downloadPath})
                                             )}
                                         </TableCell>
                                         <TableCell align="right">
-                                            {data["real_values"][index]}
+                                            {formatValue(
+                                                data["real_values"][index],
+                                                field.datatype
+                                            )}
                                         </TableCell>
                                         <TableCell align="right">
                                             {NumberUtil.formatDecimal(
@@ -146,7 +158,10 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data, downloadPath})
                                             )}
                                         </TableCell>
                                         <TableCell align="right">
-                                            {data["real_values_acc"][index]}
+                                            {formatValue(
+                                                data["real_values_acc"][index],
+                                                field.datatype
+                                            )}
                                         </TableCell>
                                         <TableCell align="right">
                                             {NumberUtil.formatDecimal(
@@ -154,7 +169,10 @@ const QuestionnaireExpectedVsRealFieldTable = ({fieldLabel, data, downloadPath})
                                             )}
                                         </TableCell>
                                         <TableCell align="right">
-                                            {data["variation"][index]}
+                                            {formatValue(
+                                                data["variation"][index],
+                                                field.datatype
+                                            )}
                                         </TableCell>
                                         <TableCell align="right">
                                             {NumberUtil.formatDecimal(

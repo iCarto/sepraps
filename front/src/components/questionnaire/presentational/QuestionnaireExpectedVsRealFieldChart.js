@@ -18,7 +18,7 @@ import Grid from "@mui/material/Grid";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const QuestionnaireExpectedVsRealFieldChart = ({fieldLabel, data}) => {
+const QuestionnaireExpectedVsRealFieldChart = ({field, data}) => {
     const [chartType, setChartType] = useState("values_acc");
 
     const handleChange = event => {
@@ -72,7 +72,7 @@ const QuestionnaireExpectedVsRealFieldChart = ({fieldLabel, data}) => {
             </Grid>
             <Grid item xs={12}>
                 <LineChart
-                    title={fieldLabel}
+                    title={field.label}
                     labels={data["index"]}
                     datasets={datasets}
                 />
