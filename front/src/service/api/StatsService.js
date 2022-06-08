@@ -44,12 +44,16 @@ const StatsService = {
 
     getStatsByQuestionnaires(questionnaireCode, fieldCode, filter = {}) {
         return AuthApiService.get(
-            `/api/monitoring/stats/monthlyquestionnaires/${questionnaireCode}/${fieldCode}?${getQueryStringByFilter(
-                filter
-            )}`
+            this.getStatsByQuestionnairesUrl(questionnaireCode, fieldCode, filter)
         ).then(response => {
             return response;
         });
+    },
+
+    getStatsByQuestionnairesUrl(questionnaireCode, fieldCode, filter = {}) {
+        return `/api/monitoring/stats/monthlyquestionnaires/${questionnaireCode}/${fieldCode}?${getQueryStringByFilter(
+            filter
+        )}`;
     },
 
     getStatsByGender(filter = {}) {

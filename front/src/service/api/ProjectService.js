@@ -99,14 +99,6 @@ const ProjectService = {
             );
         });
     },
-
-    getProjectsQuestionnaireInstancesFieldData(id, questionnaireCode, fieldCode) {
-        return AuthApiService.get(
-            `${basePath}/${id}/questionnaire_instances/${questionnaireCode}/${fieldCode}`
-        ).then(response => {
-            return response;
-        });
-    },
 };
 
 export default ProjectService;

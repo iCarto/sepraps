@@ -10,3 +10,4 @@ export {default as ContractorService} from "./ContractorService";
 export {default as DocumentService} from "./DocumentService";
 export {default as MilestoneService} from "./MilestoneService";
 export {default as StatsService} from "./StatsService";
+export {default as FileService} from "./FileService";

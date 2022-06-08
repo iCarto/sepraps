@@ -6,3 +6,5 @@ export * from "./NavigateAndReload.js";
 export * from "./DownloadDocumentHook";
 export * from "./CopyToClipboardHook";
 export * from "./ContractsFilter";
+export * from "./DownloadFileHook";
+export * from "./DownloadChartHook";

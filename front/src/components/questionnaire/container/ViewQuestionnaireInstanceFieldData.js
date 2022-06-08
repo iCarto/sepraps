@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
+import {StatsService} from "service/api";
 
 import {
     QuestionnaireFieldTable,
@@ -21,7 +22,12 @@ const StyledBox = styled(Box)(({theme}) => ({
     margin: 10,
 }));
 
-const ViewQuestionnaireInstanceFieldData = ({getDataService, fieldLabel}) => {
+const ViewQuestionnaireInstanceFieldData = ({
+    questionnaireCode,
+    fieldCode,
+    filter,
+    fieldLabel,
+}) => {
     const location = useLocation();
 
     const [data, setData] = useState(null);
@@ -29,12 +35,24 @@ const ViewQuestionnaireInstanceFieldData = ({getDataService, fieldLabel}) => {
 
     useEffect(() => {
         setLoading(true);
-        getDataService().then(data => {
+        StatsService.getStatsByQuestionnaires(
+            questionnaireCode,
+            fieldCode,
+            filter
+        ).then(data => {
             console.log({data});
             setData(data);
             setLoading(false);
         });
-    }, [getDataService, location.state?.lastRefreshDate]);
+    }, [questionnaireCode, fieldCode, filter, location.state?.lastRefreshDate]);
+
+    const getCSVUrl = () => {
+        return StatsService.getStatsByQuestionnairesUrl(
+            questionnaireCode,
+            fieldCode,
+            filter
+        );
+    };
 
     const getViewComponent = () => {
         if (data) {
@@ -45,6 +63,7 @@ const ViewQuestionnaireInstanceFieldData = ({getDataService, fieldLabel}) => {
                             <QuestionnaireExpectedVsRealFieldTable
                                 fieldLabel={fieldLabel}
                                 data={data}
+                                downloadPath={getCSVUrl()}
                             />
                         </StyledBox>
                         <StyledBox>
@@ -62,6 +81,7 @@ const ViewQuestionnaireInstanceFieldData = ({getDataService, fieldLabel}) => {
                             <QuestionnaireFieldTable
                                 fieldLabel={fieldLabel}
                                 data={data}
+                                downloadPath={getCSVUrl()}
                             />
                         </StyledBox>
                         <StyledBox>
@@ -77,7 +97,7 @@ const ViewQuestionnaireInstanceFieldData = ({getDataService, fieldLabel}) => {
     };
 
     return (
-        <Stack sx={{mb: 5, mt: 3}}>
+        <Stack sx={{mb: 5, mt: 3}} spacing={1}>
             <Grid item container alignItems="center">
                 <BarChartIcon
                     sx={{color: theme => theme.palette["grey"]["300"], mr: 1}}

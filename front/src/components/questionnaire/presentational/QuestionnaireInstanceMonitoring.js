@@ -1,27 +1,15 @@
-import {ProjectService} from "service/api";
+import {StatsService} from "service/api";
 import {ViewQuestionnaireInstanceFieldData} from "../container";
 
 const QuestionnaireInstanceMonitoring = ({projectQuestionnaire}) => {
-    const getDataService = (id, questionnaireCode, fieldCode) => {
-        return ProjectService.getProjectsQuestionnaireInstancesFieldData(
-            id,
-            questionnaireCode,
-            fieldCode
-        );
-    };
-
     return (
         projectQuestionnaire &&
         projectQuestionnaire.questionnaire.fields.map(field => (
             <ViewQuestionnaireInstanceFieldData
                 key={field.code}
-                getDataService={() => {
-                    return getDataService(
-                        projectQuestionnaire.projectId,
-                        projectQuestionnaire.questionnaire.code,
-                        field.code
-                    );
-                }}
+                questionnaireCode={projectQuestionnaire.questionnaire.code}
+                fieldCode={field.code}
+                filter={{project: projectQuestionnaire.projectId}}
                 fieldLabel={field.label}
             />
         ))

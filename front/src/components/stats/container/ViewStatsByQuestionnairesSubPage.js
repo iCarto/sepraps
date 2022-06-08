@@ -28,14 +28,6 @@ const ViewStatsByQuestionnairesSubPage = () => {
         });
     }, [questionnaireCode, location.state?.lastRefreshDate]);
 
-    const getDataService = (questionnaireCode, fieldCode) => {
-        return StatsService.getStatsByQuestionnaires(
-            questionnaireCode,
-            fieldCode,
-            filter
-        );
-    };
-
     const handleFilterChange = (attribute, value) => {
         setFilter({...filter, [attribute]: value});
     };
@@ -71,12 +63,9 @@ const ViewStatsByQuestionnairesSubPage = () => {
                             {questionnaire?.fields.map(field => (
                                 <ViewQuestionnaireInstanceFieldData
                                     key={field.code}
-                                    getDataService={() => {
-                                        return getDataService(
-                                            questionnaire.code,
-                                            field.code
-                                        );
-                                    }}
+                                    questionnaireCode={questionnaire.code}
+                                    fieldCode={field.code}
+                                    filter={filter}
                                     fieldLabel={field.label}
                                 />
                             ))}
