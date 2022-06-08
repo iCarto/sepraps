@@ -1,17 +1,17 @@
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {StatsService} from "service/api";
-import {SubPageLayout} from "layout";
 
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
+import {SubPageLayout} from "layout";
+import {SectionHeading} from "components/common/presentational";
 import {
     StatsFilterForm,
     StatsByGenderTable,
     StatsByGenderChart,
 } from "../presentational";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewStatsByGenderSubPage = () => {
     const location = useLocation();
@@ -39,9 +39,7 @@ const ViewStatsByGenderSubPage = () => {
     return (
         <SubPageLayout>
             <Paper sx={{p: 3}}>
-                <Typography variant="h5" sx={{mb: 2}}>
-                    Contactos del prestador por género
-                </Typography>
+                <SectionHeading>Contactos del prestador por género</SectionHeading>
                 <StatsFilterForm
                     filter={filter}
                     views={[
