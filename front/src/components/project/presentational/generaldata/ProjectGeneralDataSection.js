@@ -61,7 +61,7 @@ const ProjectGeneralDataSection = () => {
     ];
 
     return (
-        <SectionCard secondaryActions={secondaryActions}>
+        <SectionCard secondaryActions={secondaryActions} headingLabel={false}>
             <Grid container columnSpacing={2} sx={{marginTop: "-48px"}}>
                 <Grid item sm={3} md={4}>
                     <div style={{position: "relative"}}>

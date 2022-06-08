@@ -22,7 +22,9 @@ const SectionCard = ({
             variant="outlined"
         >
             <CardHeader
-                title={<SectionHeading>{title}</SectionHeading>}
+                title={
+                    <SectionHeading label={props.headingLabel}>{title}</SectionHeading>
+                }
                 action={
                     secondaryActions && secondaryActions.length ? (
                         <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>

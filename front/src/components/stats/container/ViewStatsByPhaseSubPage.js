@@ -3,6 +3,7 @@ import {StatsService} from "service/api";
 import {useStatsFilter, useStatsView} from "../provider";
 
 import {SubPageLayout} from "layout";
+import {SectionHeading} from "components/common/presentational";
 import {
     StatsByPhaseChart,
     StatsByPhaseTable,
@@ -12,7 +13,6 @@ import {
 } from "../presentational";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
 const ViewStatsByPhaseSubPage = () => {
@@ -38,10 +38,14 @@ const ViewStatsByPhaseSubPage = () => {
             <Paper sx={{p: 3}}>
                 <Stack spacing={3}>
                     <Grid container justifyContent="space-between" alignItems="center">
-                        <Typography variant="h5">
-                            Número de proyectos por fase
-                        </Typography>
-                        <StatsChangeView />
+                        <Grid item xs={12} md={6}>
+                            <SectionHeading>
+                                Número de proyectos por fase
+                            </SectionHeading>
+                        </Grid>
+                        <Grid item container xs={12} md={6} justifyContent="flex-end">
+                            <StatsChangeView />
+                        </Grid>
                     </Grid>
                     <StatsByPhaseFilter onChange={handleFilterChange} />
                     {view === "chart" && <StatsByPhaseChart data={statsByPhaseData} />}

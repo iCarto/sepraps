@@ -2,15 +2,15 @@ import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import {StatsService} from "service/api";
 import {QuestionnaireService} from "service/api/questionnaires";
-import {SubPageLayout} from "layout";
 
+import {SubPageLayout} from "layout";
 import {ViewQuestionnaireInstanceFieldData} from "components/questionnaire/container";
 import {QuestionnaireInstanceViewProvider} from "components/questionnaire/provider";
+import {SectionHeading} from "components/common/presentational";
+import {StatsFilterForm} from "../presentational";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
-import {StatsFilterForm} from "../presentational";
 
 const ViewStatsByQuestionnairesSubPage = () => {
     const {questionnaireCode} = useParams();
@@ -53,9 +53,7 @@ const ViewStatsByQuestionnairesSubPage = () => {
                     </Grid>
                 ) : (
                     <>
-                        <Typography variant="h5" sx={{mb: 2}}>
-                            {questionnaire?.name}
-                        </Typography>
+                        <SectionHeading>{questionnaire?.name}</SectionHeading>
                         <StatsFilterForm
                             filter={filter}
                             views={[
