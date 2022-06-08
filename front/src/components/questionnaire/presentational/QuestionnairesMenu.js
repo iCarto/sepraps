@@ -12,7 +12,7 @@ const ProjectMenuQuestionnaires = ({questionnaires, basePath}) => {
                 <MenuListItemIcon>
                     <AssignmentOutlinedIcon />
                 </MenuListItemIcon>
-                <ListItemText primary="Seguimiento" />
+                <ListItemText primary="Cuestionarios" />
             </ListItem>
             <List component="div" disablePadding sx={{pl: 1}}>
                 {questionnaires.map(questionnaire => (
