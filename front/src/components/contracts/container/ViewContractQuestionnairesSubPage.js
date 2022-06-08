@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
-import {ContractService} from "service/api";
+import {StatsService} from "service/api";
 import {SubPageLayout} from "layout";
 
 import {ViewQuestionnaireInstanceFieldData} from "components/questionnaire/container";
@@ -24,14 +24,6 @@ const ViewContractQuestionnairesSubPage = () => {
         questionnaire => questionnaire.code === questionnaireCode
     );
 
-    const getDataService = (id, questionnaireCode, fieldCode) => {
-        return ContractService.getContractsQuestionnaireInstancesFieldData(
-            id,
-            questionnaireCode,
-            fieldCode
-        );
-    };
-
     return (
         <SubPageLayout
             getIsSidePanelOpen={getIsSidePanelOpen}
@@ -43,13 +35,9 @@ const ViewContractQuestionnairesSubPage = () => {
                     {questionnaire?.fields.map(field => (
                         <ViewQuestionnaireInstanceFieldData
                             key={field.code}
-                            getDataService={() => {
-                                return getDataService(
-                                    id,
-                                    questionnaireCode,
-                                    field.code
-                                );
-                            }}
+                            questionnaireCode={questionnaireCode}
+                            fieldCode={field.code}
+                            filter={{construction_contract: id}}
                             fieldLabel={field.label}
                         />
                     ))}

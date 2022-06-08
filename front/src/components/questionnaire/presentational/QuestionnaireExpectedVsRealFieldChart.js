@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -8,7 +9,7 @@ import {
     Legend,
 } from "chart.js";
 import {LineChart} from "components/common/chart";
-import {useState} from "react";
+
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";

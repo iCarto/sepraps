@@ -15,6 +15,10 @@ const FileUtil = {
         });
     },
 
+    convertBase64toBlob(b64Data) {
+        return fetch(b64Data).then(res => res.blob());
+    },
+
     formatBytes(bytes, decimals = 2) {
         if (!bytes) {
             return "";
