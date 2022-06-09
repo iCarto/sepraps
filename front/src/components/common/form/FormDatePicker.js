@@ -9,7 +9,6 @@ const FormDatePicker = ({
     onChangeHandler = null,
     views = ["year", "month", "day"],
     isActive = true,
-    disabled = false,
 }) => {
     const {control} = useFormContext();
     const {

@@ -35,6 +35,13 @@ const MilestoneSection = ({milestone}) => {
                     value={DateUtil.formatDate(milestone.compliance_date)}
                     containerWidth="short"
                 />
+                {milestone.comments && (
+                    <SectionField
+                        label="Observaciones:"
+                        value={milestone.comments}
+                        containerWidth="short"
+                    />
+                )}
                 <Divider variant="middle" sx={{mx: 0, my: 2}}>
                     <Chip label="Tareas completadas" sx={{fontWeight: "light"}} />
                 </Divider>
