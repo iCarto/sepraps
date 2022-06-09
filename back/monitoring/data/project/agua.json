@@ -23,7 +23,12 @@
             "code": "approval_technical_folder",
             "name": "Aprobación de la carpeta técnica",
             "short_name": "Aprobación de la carpeta técnica",
-            "checklist": [{"definition": "Se ha aprobado la carpeta técnica"}],
+            "checklist": [
+                {"definition": "Se ha aprobado la carpeta técnica"},
+                {
+                    "definition": "Se ha subido una copia de la carpeta técnica al repositorio"
+                }
+            ],
             "phase": "design"
         },
         {
@@ -87,7 +92,7 @@
                     "definition": "Se ha realizado la prueba de bombeo"
                 },
                 {
-                    "definition": "Se ha realizado el análisis de calidad"
+                    "definition": "Se ha realizado el análisis de calidad del agua"
                 },
                 {
                     "definition": "Se ha instalado el sistema de desinfección"
@@ -120,7 +125,7 @@
                     "definition": "Se ha realizado el tendido de acometidas"
                 },
                 {
-                    "definition": "Se ha realizado la colocación de hidrómetros"
+                    "definition": "Se han colocado y probado los hidrómetros"
                 }
             ],
             "phase": "execution"
@@ -154,13 +159,6 @@
             "checklist": [
                 {"definition": "Se ha subido el acta de entrega al repositorio"}
             ],
-            "phase": "execution"
-        },
-        {
-            "code": "final_settlement",
-            "name": "Liquidación final",
-            "short_name": "Liquidación final",
-            "checklist": [{"definition": "Se ha cerrado la ejecución del proyecto"}],
             "phase": "execution"
         },
         {
