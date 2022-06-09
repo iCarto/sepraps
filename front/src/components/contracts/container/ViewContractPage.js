@@ -6,16 +6,16 @@ import {PageWithMenuLayout} from "layout";
 import {ContractMenu} from "../presentational";
 
 const ViewContractPage = () => {
-    const {id} = useParams();
+    const {contractId} = useParams();
     const [contract, setContract] = useState(null);
     const location = useLocation();
 
     useEffect(() => {
-        ContractService.getContract(id).then(data => {
+        ContractService.getContract(contractId).then(data => {
             // console.log({data});
             setContract(data);
         });
-    }, [id, location.state?.lastRefreshDate]);
+    }, [contractId, location.state?.lastRefreshDate]);
 
     return (
         <PageWithMenuLayout menu={<ContractMenu contract={contract} />}>

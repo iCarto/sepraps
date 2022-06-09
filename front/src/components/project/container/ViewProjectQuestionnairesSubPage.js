@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewProjectQuestionnairesSubPage = () => {
-    const {id, questionnaireCode} = useParams();
+    const {projectId, questionnaireCode} = useParams();
     const location = useLocation();
 
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
@@ -17,14 +17,15 @@ const ViewProjectQuestionnairesSubPage = () => {
 
     useEffect(() => {
         setLoading(true);
-        ProjectService.getProjectsQuestionnaireInstances(id, questionnaireCode).then(
-            projectQuestionnaire => {
-                console.log({projectQuestionnaire});
-                setLoading(false);
-                setProjectQuestionnaire(projectQuestionnaire);
-            }
-        );
-    }, [id, questionnaireCode, location.state?.lastRefreshDate]);
+        ProjectService.getProjectsQuestionnaireInstances(
+            projectId,
+            questionnaireCode
+        ).then(projectQuestionnaire => {
+            console.log({projectQuestionnaire});
+            setLoading(false);
+            setProjectQuestionnaire(projectQuestionnaire);
+        });
+    }, [projectId, questionnaireCode, location.state?.lastRefreshDate]);
 
     const getIsSidePanelOpen = isOpen => {
         setIsSidePanelOpen(isOpen);

@@ -7,15 +7,15 @@ import {ProjectMenu} from "../presentational";
 import {LocationProvider} from "components/common/provider";
 
 const ViewProjectPage = () => {
-    const {id} = useParams();
+    const {projectId} = useParams();
     const [project, setProject] = useState(null);
     const location = useLocation();
 
     useEffect(() => {
-        ProjectService.getProject(id).then(data => {
+        ProjectService.getProject(projectId).then(data => {
             setProject(data);
         });
-    }, [id, location.state?.lastRefreshDate]);
+    }, [projectId, location.state?.lastRefreshDate]);
 
     return (
         <PageWithMenuLayout menu={<ProjectMenu project={project} />}>

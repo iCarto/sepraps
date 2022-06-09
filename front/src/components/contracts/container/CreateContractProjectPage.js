@@ -17,7 +17,7 @@ const CreateContractProjectPage = () => {
 
     const [error, setError] = useState("");
 
-    const {id: contractId} = useParams();
+    const {contractId} = useParams();
 
     const handleFormSubmit = project => {
         ProjectService.createProject(project_view_adapter({...project}))
