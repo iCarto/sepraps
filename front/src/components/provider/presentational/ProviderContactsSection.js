@@ -56,8 +56,8 @@ const ProviderContactsSection = ({provider, isSidePanelOpen = false}) => {
     };
 
     const tableContainerWidth = isSidePanelOpen
-        ? {md: "350px", lg: "550px", xl: "100%"}
-        : {md: "625px", lg: "100%", xl: "100%"};
+        ? {md: "300px", lg: "400px", xl: "100%"}
+        : {xs: "100%"};
 
     return (
         <Fragment>
