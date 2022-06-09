@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "auth";
 import {DateUtil} from "utilities";
 
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineItem from "@mui/lab/TimelineItem";
@@ -9,6 +10,7 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
+import InfoIcon from "@mui/icons-material/Info";
 import styled from "@mui/material/styles/styled";
 
 const MilestoneTimelineDot = styled(TimelineDot, {
@@ -44,17 +46,17 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
                     variant="outlined"
                     milestone={milestone}
                     current={true}
-                ></MilestoneTimelineDot>
+                />
             );
         } else if (milestone.compliance_date) {
-            return <MilestoneTimelineDot milestone={milestone}></MilestoneTimelineDot>;
+            return <MilestoneTimelineDot milestone={milestone} />;
         }
         return (
             <MilestoneTimelineDot
                 variant="outlined"
                 milestone={milestone}
                 disabled={true}
-            ></MilestoneTimelineDot>
+            />
         );
     };
 
@@ -77,12 +79,21 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
             }}
         >
             <TimelineOppositeContent
-                sx={{m: "auto 0", flex: 0.25}}
-                align="right"
+                sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    flex: 0.25,
+                    m: "auto 0",
+                }}
                 variant="body2"
                 color="text.secondary"
             >
                 {DateUtil.formatDate(milestone.compliance_date)}
+                {milestone.comments && (
+                    <Tooltip title="Este hito tiene observaciones">
+                        <InfoIcon fontSize="small" color="disabled" sx={{ml: 1}} />
+                    </Tooltip>
+                )}
             </TimelineOppositeContent>
             <TimelineSeparator>
                 {!isFirst && <TimelineConnector />}
