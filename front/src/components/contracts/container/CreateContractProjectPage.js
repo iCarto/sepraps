@@ -7,10 +7,9 @@ import {project_view_adapter} from "model";
 
 import {PageLayout} from "layout";
 import {ProjectForm} from "components/project/presentational";
-import {AlertError} from "components/common/presentational";
+import {AlertError, SectionHeadingWithoutLabel} from "components/common/presentational";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 
 const CreateContractProjectPage = () => {
     const navigate = useNavigateWithReload();
@@ -34,9 +33,9 @@ const CreateContractProjectPage = () => {
         <PageLayout>
             <Container maxWidth="md">
                 <Paper sx={{p: 3}}>
-                    <Typography variant="h6" sx={{mb: 2}}>
+                    <SectionHeadingWithoutLabel>
                         Registro de proyecto
-                    </Typography>
+                    </SectionHeadingWithoutLabel>
                     <AlertError error={error} />
                     <ProjectForm onSubmit={handleFormSubmit} />
                 </Paper>
