@@ -19,6 +19,7 @@ class Milestone(models.Model):
     checklist = models.JSONField("Validación", null=True)
     phase = models.CharField("Fase", max_length=50, choices=PHASE_CHOICES)
     compliance_date = models.DateField("Fecha de cumplimiento", blank=True, null=True)
+    comments = models.TextField("Observaciones", max_length=500, blank=True, null=True)
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
