@@ -39,6 +39,7 @@ const createMilestone = ({
     phase = "",
     phase_name = "",
     compliance_date = "",
+    comments = "",
     ordering = "",
 } = {}) => {
     const publicApi = {
@@ -50,6 +51,7 @@ const createMilestone = ({
         phase,
         phase_name,
         compliance_date,
+        comments,
         ordering,
     };
 
