@@ -1,4 +1,4 @@
-import {FormChecklist, FormDatePicker} from "components/common/form";
+import {FormChecklist, FormDatePicker, FormTextArea} from "components/common/form";
 
 const MilestoneFormFields = ({
     checklistItems = [],
@@ -15,6 +15,11 @@ const MilestoneFormFields = ({
                 name="milestone_checklist"
                 onChangeHandler={onCheck}
                 checklistItems={checklistItems}
+            />
+            <FormTextArea
+                name="comments"
+                label="Observaciones"
+                isActive={areAllItemsChecked}
             />
             <FormDatePicker
                 name="compliance_date"

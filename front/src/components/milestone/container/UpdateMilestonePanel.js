@@ -26,6 +26,7 @@ const UpdateMilestonePanel = () => {
     const formMethods = useForm({
         defaultValues: {
             compliance_date: "",
+            comments: "",
         },
         reValidateMode: "onSubmit",
     });
@@ -41,6 +42,7 @@ const UpdateMilestonePanel = () => {
         if (milestone) {
             formMethods.reset({
                 compliance_date: milestone.compliance_date,
+                comments: milestone.comments,
             });
         }
     }, [milestone]);
@@ -50,6 +52,7 @@ const UpdateMilestonePanel = () => {
             milestone_view_adapter({
                 ...milestone,
                 compliance_date: data.compliance_date,
+                comments: data.comments,
             })
         );
         handleFormSubmit(updatedMilestone);
