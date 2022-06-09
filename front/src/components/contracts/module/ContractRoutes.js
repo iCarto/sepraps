@@ -24,7 +24,7 @@ import {UpdateContractMonitoringProfilePanel} from "../container/monitoring";
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
     <Route key="contract-manage" path="" element={<ManageContractsPage />}>
-        <Route key="contract-detail" path=":id" element={<ViewContractPage />}>
+        <Route key="contract-detail" path=":contractId" element={<ViewContractPage />}>
             <Route
                 key="contract-info"
                 path="summary"

@@ -21,7 +21,7 @@ const findActiveMilestone = milestones => {
 };
 
 const ViewProjectMilestonesSubPage = () => {
-    const {id} = useParams();
+    const {projectId} = useParams();
     const location = useLocation();
     let project;
     [project] = useOutletContext();
@@ -42,7 +42,7 @@ const ViewProjectMilestonesSubPage = () => {
     };
 
     useEffect(() => {
-        ProjectService.getProjectMilestones(id)
+        ProjectService.getProjectMilestones(projectId)
             .then(milestonesPhases => {
                 console.log({milestonesPhases});
                 setMilestonesPhases(milestonesPhases);
@@ -51,7 +51,7 @@ const ViewProjectMilestonesSubPage = () => {
                 console.log(error);
                 setError(error);
             });
-    }, [id, location.state?.lastRefreshDate]);
+    }, [projectId, location.state?.lastRefreshDate]);
 
     const activeMilestone = findActiveMilestone(
         milestonesPhases.map(phase => phase["milestones"]).flat()

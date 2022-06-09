@@ -25,7 +25,7 @@ const ViewContractProjectPanel = () => {
     [contract] = useOutletContext();
 
     const {projectId} = useParams();
-    const {id: contractId} = useParams();
+    const {contractId} = useParams();
 
     useEffect(() => {
         ProjectService.getProject(projectId).then(project => {

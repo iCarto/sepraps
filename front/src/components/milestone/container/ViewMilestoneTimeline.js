@@ -5,7 +5,7 @@ import {ProjectService} from "service/api";
 import {MilestoneTimeline} from "../presentational";
 
 const ViewMilestoneTimeline = () => {
-    const {id: projectId} = useParams();
+    const {projectId} = useParams();
     const location = useLocation();
 
     const [milestonesPhases, setMilestonesPhases] = useState([]);

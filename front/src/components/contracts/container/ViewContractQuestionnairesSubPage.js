@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import {SectionHeading} from "components/common/presentational";
 
 const ViewContractQuestionnairesSubPage = () => {
-    const {id, questionnaireCode} = useParams();
+    const {contractId, questionnaireCode} = useParams();
 
     let contract;
     [contract] = useOutletContext();
@@ -37,7 +37,7 @@ const ViewContractQuestionnairesSubPage = () => {
                             key={field.code}
                             questionnaireCode={questionnaireCode}
                             field={field}
-                            filter={{construction_contract: id}}
+                            filter={{construction_contract: contractId}}
                         />
                     ))}
                 </QuestionnaireInstanceViewProvider>

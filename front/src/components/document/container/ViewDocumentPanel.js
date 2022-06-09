@@ -17,12 +17,11 @@ const ViewDocumentPanel = () => {
     const {ROLES} = useAuth();
 
     const params = useParams();
+    const {projectId} = useParams();
 
     const [folderElement, setFolderElement] = useState(null);
 
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-
-    const {id: projectId} = useParams();
 
     useEffect(() => {
         let path = params["*"];
@@ -55,10 +54,7 @@ const ViewDocumentPanel = () => {
     const handleCloseSidebar = (refresh = false) => {
         navigate(
             `/projects/${projectId}/documents/` +
-                folderElement.path
-                    .split("/")
-                    .slice(0, -1)
-                    .join("/"),
+                folderElement.path.split("/").slice(0, -1).join("/"),
             refresh
         );
     };

@@ -27,7 +27,7 @@ import {ViewDocumentPanel} from "components/document/container";
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
     <Route key="project-manage" path="" element={<ManageProjectsPage />}>
-        <Route key="project-detail" path=":id" element={<ViewProjectPage />}>
+        <Route key="project-detail" path=":projectId" element={<ViewProjectPage />}>
             <Route
                 key="project-location"
                 path="location"
