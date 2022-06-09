@@ -16,6 +16,7 @@ class MilestoneSerializer(serializers.ModelSerializer):
             "phase",
             "phase_name",
             "compliance_date",
+            "comments",
             "ordering",
         )
 
