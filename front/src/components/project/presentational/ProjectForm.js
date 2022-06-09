@@ -16,14 +16,13 @@ import Button from "@mui/material/Button";
 
 const ProjectForm = ({onSubmit, updatedSection = null}) => {
     const navigate = useNavigate();
+    const {projectId, contractId} = useParams();
 
     let project;
     const outletContext = useOutletContext();
-    if (outletContext) {
+    if (projectId) {
         project = outletContext[0];
     }
-
-    const contractID = outletContext ? outletContext[0]?.id : null;
 
     const defaultFormValues = {
         id: project?.id || null,
@@ -60,7 +59,7 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
                       department_name: "",
                   },
               ],
-        construction_contract: project?.construction_contract || contractID || "",
+        construction_contract: project?.construction_contract || contractId || "",
     };
 
     const formMethods = useForm({
@@ -69,8 +68,8 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
     });
 
     const handleCancel = () => {
-        if (contractID) {
-            navigate(`/contracts/${contractID}/projects`);
+        if (contractId) {
+            navigate(`/contracts/${contractId}/projects`);
         } else navigate("/projects");
     };
 
