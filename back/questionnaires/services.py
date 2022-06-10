@@ -51,7 +51,7 @@ def include_percentages(df, total_value):
     df["variation_perc"] = df["variation_perc"].apply(format_float)
 
 
-def create_dataframe_integer(index, expected_values, real_values):
+def create_dataframe_integer(index, expected_values, real_values, extended_values):
 
     real_values = list(map(lambda x: int(x) if x else None, real_values))
     data = {"real_values": real_values}
@@ -75,12 +75,16 @@ def create_dataframe_integer(index, expected_values, real_values):
 
         include_percentages(df, total_value_expected)
 
+        # Add extended values
+        extended_values = list(map(lambda x: int(x) if x else None, extended_values))
+        df["extended_values"] = extended_values
+
     df = df.reset_index()
 
     return df
 
 
-def create_dataframe_decimal2(index, expected_values, real_values):
+def create_dataframe_decimal2(index, expected_values, real_values, extended_values):
 
     real_values = list(map(lambda x: locale.atof(x) if x else None, real_values))
     data = {"real_values": real_values}
@@ -110,6 +114,13 @@ def create_dataframe_decimal2(index, expected_values, real_values):
         df["expected_values_acc"] = df["expected_values_acc"].apply(format_float)
         df["variation"] = df["variation"].apply(format_float)
 
+        # Add extended values
+        extended_values = list(
+            map(lambda x: locale.atof(x) if x else None, extended_values)
+        )
+        df["extended_values"] = extended_values
+        df["extended_values"] = df["expected_values"].apply(format_float)
+
     df["real_values"] = df["real_values"].apply(format_float)
     df["real_values_acc"] = df["real_values_acc"].apply(format_float)
 
@@ -118,20 +129,28 @@ def create_dataframe_decimal2(index, expected_values, real_values):
     return df
 
 
-def create_dataframe_str(index, expected_values, real_values):
+def create_dataframe_str(index, expected_values, real_values, extended_values):
 
-    data = {"expected_values": expected_values, "real_values": real_values}
+    data = {
+        "expected_values": expected_values,
+        "real_values": real_values,
+        "extended_values": extended_values,
+    }
     df = pd.DataFrame(data, index=index)
     df = df.reset_index()
     return df
 
 
-def create_dataframe(datatype, index, expected_values, real_values):
+def create_dataframe(datatype, index, expected_values, real_values, extended_values):
     if datatype == "integer":
-        return create_dataframe_integer(index, expected_values, real_values)
+        return create_dataframe_integer(
+            index, expected_values, real_values, extended_values
+        )
     if datatype == "decimal2":
-        return create_dataframe_decimal2(index, expected_values, real_values)
-    return create_dataframe_str(index, expected_values, real_values)
+        return create_dataframe_decimal2(
+            index, expected_values, real_values, extended_values
+        )
+    return create_dataframe_str(index, expected_values, real_values, extended_values)
 
 
 def get_year_month_values(field_code, instances):
@@ -140,15 +159,24 @@ def get_year_month_values(field_code, instances):
     for instance in instances:
         year_month = "{}/{}".format(instance.month, instance.year)
         if year_month not in year_month_values:
-            year_month_values[year_month] = {"expected_values": [], "real_values": []}
+            year_month_values[year_month] = {
+                "expected_values": [],
+                "real_values": [],
+                "extended_values": [],
+            }
         for field_value in (
             field_value
             for field_value in instance.values.all()
             if field_value.code == field_code
         ):
-            year_month_values[year_month]["expected_values"].append(
-                field_value.expected_value
-            )
+            if not instance.extended:
+                year_month_values[year_month]["expected_values"].append(
+                    field_value.expected_value
+                )
+            else:
+                year_month_values[year_month]["extended_values"].append(
+                    field_value.expected_value
+                )
             year_month_values[year_month]["real_values"].append(field_value.value)
     return year_month_values
 
@@ -195,6 +223,10 @@ def get_monthly_questionnaire_instances_dataframe(
         else None,
         [
             flat_values_list(values["real_values"], field_datatype)
+            for _, values in year_month_values.items()
+        ],
+        [
+            flat_values_list(values["extended_values"], field_datatype)
             for _, values in year_month_values.items()
         ],
     )
