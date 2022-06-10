@@ -36,7 +36,11 @@ const UpdateProjectPanel = () => {
             closeSidebarClick={handleCloseSidebar}
         >
             <AlertError error={error} />
-            <ProjectForm updatedSection="generaldata" onSubmit={handleSubmit} />
+            <ProjectForm
+                updatedSection="generaldata"
+                onSubmit={handleSubmit}
+                project={project}
+            />
         </SidebarPanel>
     );
 };

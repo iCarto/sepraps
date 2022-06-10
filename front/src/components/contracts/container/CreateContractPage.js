@@ -5,11 +5,10 @@ import {contract_view_adapter} from "model";
 
 import {PageLayout} from "layout";
 import {ContractForm} from "../presentational";
-import {AlertError} from "components/common/presentational";
+import {AlertError, SectionHeading} from "components/common/presentational";
 
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 
 const CreateContractPage = () => {
     const navigate = useNavigate();
@@ -31,9 +30,7 @@ const CreateContractPage = () => {
         <PageLayout>
             <Container maxWidth="md">
                 <Paper sx={{p: 3}}>
-                    <Typography variant="h6" sx={{mb: 2}}>
-                        Registro de contrato
-                    </Typography>
+                    <SectionHeading label={false}>Registro de contrato</SectionHeading>
                     <AlertError error={error} />
                     <ContractForm onSubmit={handleSubmit} />
                 </Paper>

@@ -21,4 +21,3 @@ export {default as DropdownMenuItemLink} from "./DropdownMenuItemLink";
 export {default as SearchBoxControlled} from "./SearchBoxControlled";
 export {default as AlertError} from "./AlertError";
 export {default as BorderedTableCell} from "./BorderedTableCell";
-export {default as SectionHeadingWithoutLabel} from "./SectionHeadingWithoutLabel";
