@@ -1,11 +1,7 @@
 import {useLocation, useNavigate, useOutletContext} from "react-router-dom";
 import {useAuth} from "auth";
 
-import {
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "components/common/presentational";
+import {SectionCard, SectionCardHeaderAction} from "components/common/presentational";
 import {MapInfraestructure} from "components/common/geo";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -17,7 +13,7 @@ const ProjectInfrastructureSection = () => {
     let project;
     [project] = useOutletContext();
 
-    const headerActions = [
+    const secondaryActions = [
         <SectionCardHeaderAction
             key="edit"
             name="edit"
@@ -32,9 +28,13 @@ const ProjectInfrastructureSection = () => {
 
     const isEditLocationOpen =
         location.pathname.indexOf("main_infrastructure/edit") >= 0;
+    const isProjectClosed = project.closed;
 
     return (
-        <SectionCard title="Infraestructura principal" secondaryActions={headerActions}>
+        <SectionCard
+            title="Infraestructura principal"
+            secondaryActions={!isProjectClosed && secondaryActions}
+        >
             {!isEditLocationOpen ? (
                 <MapInfraestructure
                     infraestructure={{

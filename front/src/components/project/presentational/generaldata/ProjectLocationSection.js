@@ -47,7 +47,7 @@ const ProjectLocationSection = () => {
         <>
             <SectionLabel label="Localidades vinculadas:" />
             <Box pr={3}>
-                <ProjectLinkedLocalitiesTable />
+                <ProjectLinkedLocalitiesTable localities={project.linked_localities} />
             </Box>
         </>
     );

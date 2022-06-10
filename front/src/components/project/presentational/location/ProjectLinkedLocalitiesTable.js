@@ -1,4 +1,3 @@
-import {useOutletContext} from "react-router-dom";
 import {ActionsMenu, MenuAction} from "components/common/presentational";
 import {AuthAction, useAuth} from "auth";
 
@@ -10,12 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ProjectLinkedLocalitiesTable = ({handleActions = null}) => {
+const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
     const {ROLES} = useAuth();
-
-    let project;
-    [project] = useOutletContext();
-    const localities = project?.linked_localities;
 
     const handleClick = (localityCode, buttonName) => {
         handleActions(localityCode, buttonName.split("-")[0]);

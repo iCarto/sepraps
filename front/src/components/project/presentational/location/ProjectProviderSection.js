@@ -29,7 +29,7 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
 
-    const headerActions = provider?.id
+    const secondaryActions = provider?.id
         ? [
               <SectionCardHeaderAction
                   key="edit"
@@ -54,8 +54,13 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
           ]
         : null;
 
+    const isProjectClosed = project.closed;
+
     return (
-        <SectionCard title="Prestador" secondaryActions={headerActions}>
+        <SectionCard
+            title="Prestador"
+            secondaryActions={!isProjectClosed && secondaryActions}
+        >
             {provider?.id ? (
                 <>
                     <SectionField label="Nombre:" value={provider.name} />
@@ -66,6 +71,7 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
                     />
                     <ProviderContactsSection
                         provider={provider}
+                        isProjectClosed={isProjectClosed}
                         isSidePanelOpen={isSidePanelOpen}
                     />
                     <RemoveProjectProviderDialog
