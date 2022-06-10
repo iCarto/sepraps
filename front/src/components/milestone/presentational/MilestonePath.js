@@ -4,7 +4,7 @@ import MilestonePoint from "./MilestonePoint";
 
 import {Timeline} from "@mui/lab";
 
-const MilestonePath = ({milestones, level, activeMilestone}) => {
+const MilestonePath = ({milestones, level, activeMilestone, isProjectClosed}) => {
     return (
         <Timeline sx={{ml: level * 0.5}}>
             {milestones.map((milestone, index) => {
@@ -16,6 +16,7 @@ const MilestonePath = ({milestones, level, activeMilestone}) => {
                         activeMilestone={activeMilestone}
                         isFirst={index === 0}
                         isLast={index === milestones.length - 1}
+                        isProjectClosed={isProjectClosed}
                     />
                 );
             })}

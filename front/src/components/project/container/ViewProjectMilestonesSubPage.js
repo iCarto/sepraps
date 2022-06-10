@@ -102,6 +102,7 @@ const ViewProjectMilestonesSubPage = () => {
                                     key={phase.code}
                                     phase={phase}
                                     activeMilestone={activeMilestone}
+                                    isProjectClosed={project.closed}
                                 />
                             );
                         })}
