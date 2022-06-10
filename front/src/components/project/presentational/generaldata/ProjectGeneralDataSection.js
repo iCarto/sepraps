@@ -60,9 +60,18 @@ const ProjectGeneralDataSection = () => {
         />,
     ];
 
+    const isProjectClosed = project.closed;
+
     return (
-        <SectionCard secondaryActions={secondaryActions} headingLabel={false}>
-            <Grid container columnSpacing={2} sx={{marginTop: "-48px"}}>
+        <SectionCard
+            secondaryActions={!isProjectClosed && secondaryActions}
+            headingLabel={false}
+        >
+            <Grid
+                container
+                columnSpacing={2}
+                sx={{marginTop: isProjectClosed ? "-24px" : "-48px"}}
+            >
                 <Grid item sm={3} md={4}>
                     <div style={{position: "relative"}}>
                         <CardMedia

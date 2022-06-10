@@ -56,6 +56,7 @@ const ProjectForm = ({
                   },
               ],
         construction_contract: project?.construction_contract || contractId || "",
+        closed: project?.closed || false,
     };
 
     const formMethods = useForm({
@@ -92,6 +93,7 @@ const ProjectForm = ({
                 });
             }),
             construction_contract: data.construction_contract,
+            closed: data.closed,
         });
         onSubmit(updatedProject);
     };

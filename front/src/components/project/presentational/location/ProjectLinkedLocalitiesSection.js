@@ -19,6 +19,8 @@ const ProjectLinkedLocalitiesSection = () => {
     let project;
     [project] = useOutletContext();
 
+    const isProjectClosed = project.closed;
+
     const navigate = useNavigateWithReload();
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
@@ -59,26 +61,31 @@ const ProjectLinkedLocalitiesSection = () => {
         <SectionCard title="Localidades vinculadas">
             <Grid item container xs={12} justifyContent="center">
                 {project.linked_localities.length !== 0 ? (
-                    <ProjectLinkedLocalitiesTable handleActions={handleActions} />
+                    <ProjectLinkedLocalitiesTable
+                        localities={project.linked_localities}
+                        handleActions={!isProjectClosed && handleActions}
+                    />
                 ) : (
                     <Typography pt={3} pb={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene localidades vinculadas
                     </Typography>
                 )}
             </Grid>
-            <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
-                <Grid item container xs={12} justifyContent="center">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                            navigate("linked_localities/new/add");
-                        }}
-                    >
-                        Añadir
-                    </Button>
-                </Grid>
-            </AuthAction>
+            {!isProjectClosed && (
+                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                    <Grid item container xs={12} justifyContent="center">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                navigate("linked_localities/new/add");
+                            }}
+                        >
+                            Añadir
+                        </Button>
+                    </Grid>
+                </AuthAction>
+            )}
             <AlertError error={error} />
             <RemoveProjectLinkedLocalityDialog
                 project={project}

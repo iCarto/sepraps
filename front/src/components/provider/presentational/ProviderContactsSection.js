@@ -13,7 +13,11 @@ import Typography from "@mui/material/Typography";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import Box from "@mui/material/Box";
 
-const ProviderContactsSection = ({provider, isSidePanelOpen = false}) => {
+const ProviderContactsSection = ({
+    provider,
+    isProjectClosed = false,
+    isSidePanelOpen = false,
+}) => {
     const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
@@ -77,23 +81,25 @@ const ProviderContactsSection = ({provider, isSidePanelOpen = false}) => {
                             >
                                 <ContactsTable
                                     contacts={provider.contacts}
-                                    handleActions={handleActions}
+                                    handleActions={!isProjectClosed && handleActions}
                                 />
                             </Box>
                         ) : (
                             <Typography pt={3} sx={{fontStyle: "italic"}}>
-                                Este prestador aún no tiene contactos
+                                Este prestador no tiene contactos
                             </Typography>
                         )}
                     </Grid>
-                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
-                        <Grid item container xs={12} mt={3} justifyContent="center">
-                            <AddContactButtonGroup
-                                basePath="provider/contact"
-                                btnName="Añadir contacto"
-                            />
-                        </Grid>
-                    </AuthAction>
+                    {!isProjectClosed && (
+                        <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                            <Grid item container xs={12} mt={3} justifyContent="center">
+                                <AddContactButtonGroup
+                                    basePath="provider/contact"
+                                    btnName="Añadir contacto"
+                                />
+                            </Grid>
+                        </AuthAction>
+                    )}
                     <AlertError error={error} />
                 </Grid>
             </AccordionLayout>
