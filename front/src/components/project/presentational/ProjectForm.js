@@ -1,4 +1,3 @@
-import {useNavigate, useOutletContext, useParams} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {DomainProvider, LocationProvider} from "components/common/provider";
@@ -14,16 +13,13 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ProjectForm = ({onSubmit, updatedSection = null}) => {
-    const navigate = useNavigate();
-    const {projectId, contractId} = useParams();
-
-    let project;
-    const outletContext = useOutletContext();
-    if (projectId) {
-        project = outletContext[0];
-    }
-
+const ProjectForm = ({
+    project = null,
+    contractId = null,
+    onSubmit,
+    onCancel = null,
+    updatedSection = null,
+}) => {
     const defaultFormValues = {
         id: project?.id || null,
         code: project?.code || null,
@@ -66,12 +62,6 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
         defaultValues: defaultFormValues,
         reValidateMode: "onSubmit",
     });
-
-    const handleCancel = () => {
-        if (contractId) {
-            navigate(`/contracts/${contractId}/projects`);
-        } else navigate("/projects");
-    };
 
     const onFormSubmit = data => {
         console.log("submit", {data});
@@ -116,6 +106,10 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
         return null;
     };
 
+    const onFormCancel = () => {
+        onCancel();
+    };
+
     return (
         <LocationProvider>
             <DomainProvider>
@@ -137,7 +131,7 @@ const ProjectForm = ({onSubmit, updatedSection = null}) => {
                             </>
                         ) : (
                             <ProjectCreationForm
-                                onCancel={handleCancel}
+                                onCancel={onFormCancel}
                                 onSubmit={formMethods.handleSubmit(onFormSubmit)}
                             />
                         )}

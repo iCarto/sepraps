@@ -7,7 +7,7 @@ import {project_view_adapter} from "model";
 
 import {PageLayout} from "layout";
 import {ProjectForm} from "components/project/presentational";
-import {AlertError, SectionHeadingWithoutLabel} from "components/common/presentational";
+import {AlertError, SectionHeading} from "components/common/presentational";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 
@@ -29,15 +29,21 @@ const CreateContractProjectPage = () => {
             });
     };
 
+    const handleFormCancel = () => {
+        navigate(`/contracts/${contractId}/projects`);
+    };
+
     return (
         <PageLayout>
             <Container maxWidth="md">
                 <Paper sx={{p: 3}}>
-                    <SectionHeadingWithoutLabel>
-                        Registro de proyecto
-                    </SectionHeadingWithoutLabel>
+                    <SectionHeading label={false}>Registro de proyecto</SectionHeading>
                     <AlertError error={error} />
-                    <ProjectForm onSubmit={handleFormSubmit} />
+                    <ProjectForm
+                        onSubmit={handleFormSubmit}
+                        onCancel={handleFormCancel}
+                        contractId={contractId}
+                    />
                 </Paper>
             </Container>
         </PageLayout>

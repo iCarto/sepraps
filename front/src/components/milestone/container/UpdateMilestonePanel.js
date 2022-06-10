@@ -7,7 +7,7 @@ import {MilestoneService} from "service/api";
 
 import {SidebarPanel} from "layout";
 import {MilestoneFormFields} from "../presentational";
-import {AlertError, SectionHeadingWithoutLabel} from "components/common/presentational";
+import {AlertError, SectionHeading} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -91,9 +91,7 @@ const UpdateMilestonePanel = () => {
                     }}
                 >
                     <AlertError error={error} />
-                    <SectionHeadingWithoutLabel>
-                        {milestone?.name}
-                    </SectionHeadingWithoutLabel>
+                    <SectionHeading label={false}>{milestone?.name}</SectionHeading>
                     <Typography variant="body2" py={3}>
                         Antes de confirmar la fecha de cumplimiento de este hito, por
                         favor realice las siguientes comprobaciones:
