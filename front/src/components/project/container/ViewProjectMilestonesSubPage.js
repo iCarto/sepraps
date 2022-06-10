@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation, useOutletContext, useParams} from "react-router-dom";
 
 import {ProjectService} from "service/api";
+import {AuthAction, useAuth} from "auth";
 import {useNavigateWithReload} from "hooks";
 
 import {SubPageLayout} from "layout";
@@ -25,6 +26,8 @@ const ViewProjectMilestonesSubPage = () => {
     const location = useLocation();
     let project;
     [project] = useOutletContext();
+
+    const {ROLES, hasRole} = useAuth();
 
     const navigate = useNavigateWithReload();
 
@@ -73,6 +76,16 @@ const ViewProjectMilestonesSubPage = () => {
         setIsCloseProjectDialogOpen(false);
     };
 
+    const isBtnDisabled = () => {
+        const isSupervisor = hasRole(ROLES.SUPERVISION);
+        const isManager = hasRole(ROLES.MANAGEMENT);
+        if (isSupervisor) {
+            return !!project.closed;
+        } else if (isManager) {
+            return !allMilestonesCompleted || project.closed;
+        }
+    };
+
     return (
         <SubPageLayout
             outletContext={[project]}
@@ -94,11 +107,13 @@ const ViewProjectMilestonesSubPage = () => {
                         })}
                     </SectionCard>
                     <Box display="flex" justifyContent="right" my={3}>
-                        <CloseProjectButton
-                            allMilestonesCompleted={allMilestonesCompleted}
-                            projectIsClosed={project.closed}
-                            openDialog={openDialog}
-                        />
+                        <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                            <CloseProjectButton
+                                isBtnDisabled={isBtnDisabled()}
+                                isProjectClosed={project.closed}
+                                openDialog={openDialog}
+                            />
+                        </AuthAction>
                     </Box>
                 </Grid>
                 <CloseProjectDialog
