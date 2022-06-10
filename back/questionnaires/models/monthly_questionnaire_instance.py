@@ -15,6 +15,7 @@ class MonthlyQuestionnaireInstance(models.Model):
     month = models.IntegerField("Mes")
     year = models.IntegerField("Año")
     comments = models.TextField("Observaciones", max_length=500, null=True)
+    extended = models.BooleanField(blank=False, null=False, default=False)
 
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     created_at = models.DateTimeField("Fecha de creación", null=True, auto_now_add=True)
