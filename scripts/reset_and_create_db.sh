@@ -74,6 +74,7 @@ if [[ -z "${CREATE_EMPTY}" ]]; then
     python manage.py loaddata "${this_dir}/data/fixtures_contrato_14_2019.json"
     python manage.py loaddata "${this_dir}/data/fixtures_contrato_20_2019.json"
     python manage.py loaddata "${this_dir}/data/fixtures_contrato_24_2019.json"
+    python manage.py loaddata "${this_dir}/data/fixtures_contrato_15_2019.json"
     python manage.py shell < "${this_dir}/data/update_milestones.py"
     cp -r "${this_dir}/data/folder_data/"* "${this_dir}/../${BACKEND_FOLDER_NAME}/media/"
 fi

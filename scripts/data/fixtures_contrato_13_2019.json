@@ -121,7 +121,6 @@
             "bid_request_id": "364644",
             "bid_request_date": "2019-06-04",
             "bid_request_budget": 4625709063,
-
             "awarding_budget": 4263960181,
             "awarding_percentage_drop": 7.82,
             "awarding_date": "2019-11-15",
@@ -134,9 +133,7 @@
             "social_inspector": 7,
             "social_supervisor": 8,
             "execution_signature_date": "2019-12-11",
-
             "execution_certificate_start_date": "2019-12-11",
-
             "expected_execution_period": 240,
             "warranty_end_date": "2021-12-11",
             "closed": false,
@@ -455,6 +452,15 @@
             "project": 2,
             "questionnaire_instance": 12,
             "questionnaire": "tendido_red_mensual"
+        }
+    },
+    {
+        "model": "monitoring.ProjectQuestionnaireInstance",
+        "pk": null,
+        "fields": {
+            "project": 1,
+            "questionnaire_instance": 22,
+            "questionnaire": "certificacion_mensual"
         }
     }
 ]
