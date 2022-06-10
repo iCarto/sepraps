@@ -521,6 +521,7 @@
             "questionnaire": "certificacion_mensual",
             "month": 4,
             "year": 2022,
+            "extended": true,
             "creation_user": 1,
             "created_at": "2021-12-01T00:00:00Z"
         }
@@ -533,6 +534,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
+            "expected_value": "6000000",
             "value": "8000000"
         }
     },
@@ -567,6 +569,54 @@
             "label": "Número de conexiones ejecutadas",
             "datatype": "integer",
             "value": "4"
+        }
+    },
+    {
+        "model": "questionnaires.MonthlyQuestionnaireInstance",
+        "pk": 21,
+        "fields": {
+            "questionnaire": "certificacion_mensual",
+            "month": 5,
+            "year": 2022,
+            "creation_user": 1,
+            "extended": true,
+            "created_at": "2021-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "questionnaires.MonthlyQuestionnaireValue",
+        "pk": 31,
+        "fields": {
+            "questionnaire_instance": 21,
+            "code": "monto_certificado",
+            "datatype": "integer",
+            "label": "Monto certificado",
+            "expected_value": "3000000",
+            "value": "5000000"
+        }
+    },
+    {
+        "model": "questionnaires.MonthlyQuestionnaireInstance",
+        "pk": 22,
+        "fields": {
+            "questionnaire": "certificacion_mensual",
+            "month": 3,
+            "year": 2022,
+            "extended": true,
+            "creation_user": 1,
+            "created_at": "2021-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "questionnaires.MonthlyQuestionnaireValue",
+        "pk": 32,
+        "fields": {
+            "questionnaire_instance": 22,
+            "code": "monto_certificado",
+            "datatype": "integer",
+            "label": "Monto certificado",
+            "expected_value": "90000000",
+            "value": "10000000"
         }
     }
 ]
