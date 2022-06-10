@@ -10,3 +10,4 @@ create_relationship_project_questionnaire 2022-06-01T10:04:40Z Elías Gago <egag
 insert_records_profiles 2022-06-01T11:44:23Z Elías Gago <egago@icarto.es> # Insert the default profiles and permissions
 update_construction_contract_dates 2022-06-02T15:51:53Z Elías Gago <egago@icarto.es> # Change construction contract date fields
 update_table_milestone 2022-06-02T16:00:18Z Elías Gago <egago@icarto.es> # Add new fields for milestone and remove category field
+update_table_milestone_comments 2022-06-10T09:09:50Z Elías Gago <egago@icarto.es> # Add new field 'comments' for milestones
