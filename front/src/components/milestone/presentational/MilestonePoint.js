@@ -88,12 +88,12 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
                 variant="body2"
                 color="text.secondary"
             >
-                {DateUtil.formatDate(milestone.compliance_date)}
                 {milestone.comments && (
-                    <Tooltip title="Este hito tiene observaciones">
-                        <InfoIcon fontSize="small" color="disabled" sx={{ml: 1}} />
+                    <Tooltip title={milestone.comments}>
+                        <InfoIcon fontSize="small" color="disabled" sx={{mr: 1}} />
                     </Tooltip>
                 )}
+                {DateUtil.formatDate(milestone.compliance_date)}
             </TimelineOppositeContent>
             <TimelineSeparator>
                 {!isFirst && <TimelineConnector />}
