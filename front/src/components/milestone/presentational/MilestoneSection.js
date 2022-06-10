@@ -8,9 +8,12 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 const MilestoneSection = ({milestone}) => {
-    const DoneChecklist = () => {
+    const isMilestoneCompleted = milestone?.compliance_date;
+
+    const ViewOnlyChecklist = () => {
         return (
             <List>
                 {milestone?.checklist?.map((checklistItem, index) => (
@@ -18,7 +21,11 @@ const MilestoneSection = ({milestone}) => {
                         <ListItemIcon
                             sx={{justifyContent: "center", minWidth: 0, pl: 1, pr: 1.5}}
                         >
-                            <DoneIcon fontSize="small" />
+                            {isMilestoneCompleted ? (
+                                <DoneIcon fontSize="small" />
+                            ) : (
+                                <ArrowRightIcon fontSize="small" />
+                            )}
                         </ListItemIcon>
                         <ListItemText primary={checklistItem["definition"]} />
                     </ListItem>
@@ -32,7 +39,11 @@ const MilestoneSection = ({milestone}) => {
             <SectionCard title={milestone.short_name}>
                 <SectionField
                     label="Fecha de cumplimiento:"
-                    value={DateUtil.formatDate(milestone.compliance_date)}
+                    value={
+                        isMilestoneCompleted
+                            ? DateUtil.formatDate(milestone.compliance_date)
+                            : "Pendiente"
+                    }
                     containerWidth="short"
                 />
                 {milestone.comments && (
@@ -42,10 +53,17 @@ const MilestoneSection = ({milestone}) => {
                         containerWidth="short"
                     />
                 )}
-                <Divider variant="middle" sx={{mx: 0, my: 2}}>
-                    <Chip label="Tareas completadas" sx={{fontWeight: "light"}} />
-                </Divider>
-                <DoneChecklist />
+                {isMilestoneCompleted && (
+                    <>
+                        <Divider variant="middle" sx={{mx: 0, my: 2}}>
+                            <Chip
+                                label="Tareas completadas"
+                                sx={{fontWeight: "light"}}
+                            />
+                        </Divider>
+                        <ViewOnlyChecklist />
+                    </>
+                )}
             </SectionCard>
         )
     );

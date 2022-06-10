@@ -14,7 +14,7 @@ const MilestonePhaseDivider = styled(Divider)(({code, theme}) => ({
     backgroundColor: theme.palette[code].main,
 }));
 
-const MilestonePhase = ({phase, activeMilestone}) => {
+const MilestonePhase = ({phase, activeMilestone, isProjectClosed}) => {
     return (
         <Box key={phase.code}>
             <MilestonePhaseText code={phase.code}>{phase.name}</MilestonePhaseText>
@@ -23,6 +23,7 @@ const MilestonePhase = ({phase, activeMilestone}) => {
                 milestones={phase.milestones}
                 level={0}
                 activeMilestone={activeMilestone}
+                isProjectClosed={isProjectClosed}
             />
         </Box>
     );

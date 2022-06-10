@@ -24,7 +24,14 @@ const MilestoneTimelineDot = styled(TimelineDot, {
         "2px solid " + (!disabled ? theme.palette[milestone.phase].dark : "inherit"),
 }));
 
-const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) => {
+const MilestonePoint = ({
+    milestone,
+    level,
+    activeMilestone,
+    isFirst,
+    isLast,
+    isProjectClosed,
+}) => {
     const navigate = useNavigate();
     const {ROLES, hasRole} = useAuth();
 
@@ -40,7 +47,7 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
     };
 
     const getTimelineDot = () => {
-        if (milestone.code === activeMilestone?.code) {
+        if (milestone.code === activeMilestone?.code && !isProjectClosed) {
             return (
                 <MilestoneTimelineDot
                     variant="outlined"
@@ -62,8 +69,9 @@ const MilestonePoint = ({milestone, level, activeMilestone, isFirst, isLast}) =>
 
     const isDisabled = () => {
         return (
-            milestone.code !== activeMilestone?.code &&
-            milestone.compliance_date === null
+            (milestone.code !== activeMilestone?.code &&
+                milestone.compliance_date === null) ||
+            (isProjectClosed && milestone.code === activeMilestone?.code)
         );
     };
 
