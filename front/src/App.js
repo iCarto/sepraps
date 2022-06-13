@@ -15,6 +15,7 @@ const customTheme = createTheme({
             lighter: "#ddebff",
             dark: "#00357a",
             contrastText: "#fff",
+            hover: "#f5f9fc",
         },
         // COLORS FOR PROJECT PHASES
         design: {

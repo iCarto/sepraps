@@ -6,6 +6,7 @@ import {LoginPage} from "components/user/container";
 import {projectRoutes} from "components/project/module";
 import {contractRoutes} from "components/contracts/module";
 import {statsRoutes} from "components/stats/module";
+import {ViewHomePage} from "components/home/container";
 
 export default function AppRoutes() {
     return (
@@ -14,6 +15,16 @@ export default function AppRoutes() {
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="" element={<MainLayout />}>
+                        <Route
+                            path=""
+                            element={
+                                <AuthRequired>
+                                    <ModuleLayout />
+                                </AuthRequired>
+                            }
+                        >
+                            <Route key="home" path="" element={<ViewHomePage />} />
+                        </Route>
                         <Route
                             path="projects"
                             element={

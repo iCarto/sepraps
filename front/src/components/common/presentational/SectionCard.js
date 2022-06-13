@@ -7,6 +7,7 @@ import SectionActionsMenu from "./SectionActionsMenu";
 
 const SectionCard = ({
     isSidePanelOpen = null,
+    headingLabel = true,
     title = "",
     secondaryActions = null,
     ...props
@@ -22,9 +23,7 @@ const SectionCard = ({
             variant="outlined"
         >
             <CardHeader
-                title={
-                    <SectionHeading label={props.headingLabel}>{title}</SectionHeading>
-                }
+                title={<SectionHeading label={headingLabel}>{title}</SectionHeading>}
                 action={
                     secondaryActions && secondaryActions.length ? (
                         <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>
