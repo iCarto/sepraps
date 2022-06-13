@@ -1,14 +1,14 @@
 import {useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useAuth} from "auth";
+import {LoginForm} from "../presentational";
 import {AlertError} from "components/common/presentational";
 
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {LoginForm} from "../presentational";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 const LoginPage = () => {
     let navigate = useNavigate();
@@ -17,7 +17,7 @@ const LoginPage = () => {
 
     const [error, setError] = useState("");
 
-    let from = location.state?.from?.pathname || "/projects";
+    let from = location.state?.from?.pathname || "/";
 
     function validateLogin(username, password) {
         auth.login(username, password, () => {})

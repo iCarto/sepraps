@@ -27,6 +27,13 @@ import {ViewDocumentPanel} from "components/document/container";
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
     <Route key="project-manage" path="" element={<ManageProjectsPage />}>
+        <Route key="project-list" path="" element={<ListProjectsPage />}>
+            <Route
+                key="project-info"
+                path="info/:projectId"
+                element={<ViewProjectPanel />}
+            />
+        </Route>
         <Route key="project-detail" path=":projectId" element={<ViewProjectPage />}>
             <Route
                 key="project-location"
@@ -129,13 +136,6 @@ const projectRoutes = [
                     element={<UpdateProjectPanel />}
                 />
             </Route>
-        </Route>
-        <Route key="project-list" path="" element={<ListProjectsPage />}>
-            <Route
-                key="project-info"
-                path="info/:projectId"
-                element={<ViewProjectPanel />}
-            />
         </Route>
     </Route>,
 ];

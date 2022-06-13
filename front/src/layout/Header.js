@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 import {useAuth} from "auth";
 
 import {AccountMenu} from "components/user/presentational";
@@ -27,7 +29,9 @@ const Header = () => {
                 }}
             >
                 <Box sx={{px: "38px", backgroundColor: "white", height: "65px"}}>
-                    <img src="/logo/logo_senasa.jpg" alt="Senasa logo" />
+                    <Link to="" title="Inicio">
+                        <img src="/logo/logo_senasa.jpg" alt="Senasa logo" />
+                    </Link>
                 </Box>
                 <AccountMenu />
             </Toolbar>
