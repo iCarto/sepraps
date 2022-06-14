@@ -101,7 +101,7 @@ const ProjectForm = ({
             return <ProjectFormGeneralDataFields layout="column" />;
         }
         if (section === "main_infrastructure") {
-            return <ProjectFormLocationFields isMapDisplayed={false} />;
+            return <ProjectFormLocationFields />;
         }
         return null;
     };
