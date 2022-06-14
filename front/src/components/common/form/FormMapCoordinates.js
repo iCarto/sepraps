@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import {NumberUtil} from "utilities";
 import L from "leaflet";
@@ -13,7 +13,7 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
-const FormMapCoordinates = ({name: propsName}) => {
+const FormMapCoordinates = ({name: propsName, orientation = "vertical"}) => {
     const {getValues, reset} = useFormContext();
 
     const [utmCoords, setUtmCoords] = useState({x: "", y: "", zone: 21});
@@ -68,11 +68,26 @@ const FormMapCoordinates = ({name: propsName}) => {
 
     const coordinates = getValues()[propsName];
 
+    useEffect(() => {
+        if (coordinates.latitude && coordinates.longitude) {
+            var utmCoords = L.latLng(
+                NumberUtil.parseFloatOrNull(coordinates.latitude),
+                NumberUtil.parseFloatOrNull(coordinates.longitude)
+            ).utm();
+
+            setUtmCoords({
+                x: Math.trunc(utmCoords.x).toString(),
+                y: Math.trunc(utmCoords.y).toString(),
+                zone: utmCoords.zone,
+            });
+        }
+    }, [coordinates]);
+
     return (
         <>
             <Grid container justifyContent="space-between" spacing={2} sx={{mb: 2}}>
-                <Grid item xs={12} md={4}>
-                    <FormControl>
+                <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
+                    <FormControl fullWidth>
                         <TextField
                             value={utmCoords.x}
                             onChange={event => {
@@ -90,8 +105,8 @@ const FormMapCoordinates = ({name: propsName}) => {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={4}>
-                    <FormControl>
+                <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
+                    <FormControl fullWidth>
                         <TextField
                             value={utmCoords.y}
                             onChange={event => {
@@ -109,7 +124,7 @@ const FormMapCoordinates = ({name: propsName}) => {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
                     <FormControl fullWidth>
                         <InputLabel id="label-zone" shrink>
                             Zona UTM
