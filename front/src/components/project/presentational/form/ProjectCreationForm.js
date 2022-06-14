@@ -17,7 +17,7 @@ const ProjectCreationForm = ({onSubmit, onCancel = null}) => {
                 <ProjectFormLinkedLocalitiesList name="linked_localities" />
             </FormSection>
             <FormSection title="Infraestructura principal">
-                <ProjectFormLocationFields />
+                <ProjectFormLocationFields orientation="horizontal" />
             </FormSection>
             <Grid container justifyContent="center" sx={{mt: 2}}>
                 {onCancel && (
