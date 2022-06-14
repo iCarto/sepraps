@@ -1,6 +1,7 @@
 import {useEffect, useRef} from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "leaflet.utm";
 
 import {useMapIcon} from "./hooks/MapIconHook";
 
@@ -50,7 +51,7 @@ const MapForm = ({onClick, latitude = null, longitude = null}) => {
     }, [latitude, longitude]);
 
     const handleClickOnMap = e => {
-        onClick(e.latlng.lat, e.latlng.lng);
+        onClick(e.latlng);
     };
 
     return <div id="map" style={style} />;

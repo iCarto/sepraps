@@ -7,7 +7,7 @@ import {
     ProjectFormLocationFields,
 } from ".";
 
-const ProjectFormSection = ({onSubmit, onCancel = null}) => {
+const ProjectCreationForm = ({onSubmit, onCancel = null}) => {
     return (
         <>
             <FormSection title="Información general">
@@ -17,7 +17,7 @@ const ProjectFormSection = ({onSubmit, onCancel = null}) => {
                 <ProjectFormLinkedLocalitiesList name="linked_localities" />
             </FormSection>
             <FormSection title="Infraestructura principal">
-                <ProjectFormLocationFields isMapDisplayed={true} />
+                <ProjectFormLocationFields />
             </FormSection>
             <Grid container justifyContent="center" sx={{mt: 2}}>
                 {onCancel && (
@@ -38,4 +38,4 @@ const ProjectFormSection = ({onSubmit, onCancel = null}) => {
     );
 };
 
-export default ProjectFormSection;
+export default ProjectCreationForm;
