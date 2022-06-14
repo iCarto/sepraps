@@ -7,7 +7,7 @@ import {
     SectionLabel,
 } from "components/common/presentational";
 import {ProjectLinkedLocalitiesTable} from "../location";
-import {Map} from "components/common/geo";
+import {MapInfraestructure} from "components/common/geo";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -80,10 +80,10 @@ const ProjectLocationSection = () => {
                         <SectionLabel label="Infraestructura principal:" />
                     </Grid>
                     <Grid item xs={12}>
-                        <Map
-                            markerPosition={{
-                                lat: project.main_infrastructure.latitude,
-                                lng: project.main_infrastructure.longitude,
+                        <MapInfraestructure
+                            infraestructure={{
+                                latitude: project.main_infrastructure.latitude,
+                                longitude: project.main_infrastructure.longitude,
                             }}
                         />
                     </Grid>

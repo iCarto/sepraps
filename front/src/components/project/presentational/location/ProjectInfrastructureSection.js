@@ -6,7 +6,7 @@ import {
     SectionCardHeaderAction,
     SectionField,
 } from "components/common/presentational";
-import {Map} from "components/common/geo";
+import {MapInfraestructure} from "components/common/geo";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
@@ -31,24 +31,14 @@ const ProjectInfrastructureSection = ({isSidePanelOpen = null}) => {
 
     return (
         <SectionCard title="Infraestructura principal" secondaryActions={headerActions}>
-            <SectionField
-                label="Ubicación:"
-                value={`${project.main_infrastructure.latitude}, ${project.main_infrastructure.longitude}`}
-            />
-            <SectionField
-                label="Altitud:"
-                value={
-                    project.main_infrastructure.altitude
-                        ? `${project.main_infrastructure.altitude} metros`
-                        : ""
-                }
-            />
-            <Map
-                markerPosition={{
-                    lat: project.main_infrastructure.latitude,
-                    lng: project.main_infrastructure.longitude,
+            <MapInfraestructure
+                infraestructure={{
+                    latitude: project.main_infrastructure.latitude,
+                    longitude: project.main_infrastructure.longitude,
+                    altitude: project.main_infrastructure.altitude,
+                    name: project.name,
+                    location: project.location,
                 }}
-                text={`${project.name}, ${project.location}`}
             />
         </SectionCard>
     );
