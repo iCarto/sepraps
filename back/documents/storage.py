@@ -1,8 +1,8 @@
 from django.core.files.storage import default_storage
 
 
-def open(file):
-    return default_storage.open(file)
+def open(file, mode="rb"):
+    return default_storage.open(file, mode)
 
 
 def save(path, file):

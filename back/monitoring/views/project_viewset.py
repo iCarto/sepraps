@@ -85,6 +85,15 @@ class ProjectViewSet(viewsets.ModelViewSet):
         serializer.validated_data["creation_user"] = self.request.user
         return super().perform_create(serializer)
 
+    def patch(self, request, pk):
+        project = self.get_object(pk)
+        serializer = self.get_serializer_class()(
+            project, data=request.data, partial=True
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.validated_data)
+
     @action(detail=True, methods=["put"], url_path="close")
     def close_project(self, request, pk=None):
         project = self.get_object()

@@ -1,4 +1,5 @@
 from django.db.models import Prefetch
+from documents.serializers import MediaUrlSerializer
 
 # from django.db.models import F, Prefetch
 from monitoring.models.construction_contract import ConstructionContract
@@ -50,6 +51,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "project_class_name",
             "description",
             "init_date",
+            "featured_image",
             "linked_localities",
             "main_infrastructure",
             "provider",
@@ -97,6 +99,14 @@ class ProjectSerializer(serializers.ModelSerializer):
                     instance.construction_contract, context=self.context
                 ).data
                 if instance.construction_contract is not None
+                else None
+            )
+        if "featured_image" in response:
+            response["featured_image"] = (
+                MediaUrlSerializer(instance.featured_image, context=self.context).data[
+                    "url"
+                ]
+                if instance.featured_image is not None
                 else None
             )
         return response
@@ -148,32 +158,38 @@ class ProjectSerializer(serializers.ModelSerializer):
         return project
 
     def update_main_infrastructure(self, instance, validated_data):
-        main_infrastructure_data = validated_data.pop("main_infrastructure")
+        main_infrastructure_data = validated_data.pop("main_infrastructure", None)
 
-        main_infrastructure = instance.main_infrastructure
-        for key in main_infrastructure_data.keys():
-            setattr(
-                main_infrastructure,
-                key,
-                main_infrastructure_data.get(key, getattr(main_infrastructure, key)),
-            )
+        if main_infrastructure_data:
+            main_infrastructure = instance.main_infrastructure
+            for key in main_infrastructure_data.keys():
+                setattr(
+                    main_infrastructure,
+                    key,
+                    main_infrastructure_data.get(
+                        key, getattr(main_infrastructure, key)
+                    ),
+                )
 
-        main_infrastructure.save()
-        instance.main_infrastructure = main_infrastructure
+            main_infrastructure.save()
+            instance.main_infrastructure = main_infrastructure
 
     def update_provider(self, instance, validated_data):
-        provider_data = validated_data.pop("provider")
+        # Two different ways
+        # - provider field doesn't exists in validated_data -> is a partial update
+        # - provider = null -> remove provider from project
+        if "provider" in validated_data:
+            provider_data = validated_data.pop("provider", None)
 
-        provider = None
-        if provider_data:
+            provider = None
+            if provider_data:
+                if "id" in provider_data and provider_data["id"] is not None:
+                    provider = Provider.objects.get(pk=provider_data["id"])
+                    self.fields["provider"].update(provider, provider_data)
+                else:
+                    provider = self.fields["provider"].create(provider_data)
 
-            if "id" in provider_data and provider_data["id"] is not None:
-                provider = Provider.objects.get(pk=provider_data["id"])
-                self.fields["provider"].update(provider, provider_data)
-            else:
-                provider = self.fields["provider"].create(provider_data)
-
-        instance.provider = provider
+            instance.provider = provider
 
     def update_linked_localities(self, instance, validated_data):
         instance.linked_localities.set(
@@ -183,11 +199,17 @@ class ProjectSerializer(serializers.ModelSerializer):
             )
         )
 
+    def update_featured_image(self, instance, validated_data):
+        if "featured_image" in validated_data:
+            featured_image_data = validated_data.pop("featured_image", None)
+            instance.featured_image = featured_image_data
+
     def update(self, instance, validated_data):
 
         self.update_main_infrastructure(instance, validated_data)
         self.update_provider(instance, validated_data)
         self.update_linked_localities(instance, validated_data)
+        self.update_featured_image(instance, validated_data)
 
         # nested entities properties were removed in previous methods
         for key in validated_data.keys():
@@ -234,6 +256,7 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             "project_class_name",
             "description",
             "init_date",
+            "featured_image",
             "linked_localities",
             "provider",
             "provider_name",
@@ -256,6 +279,7 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             "provider",
             "construction_contract",
             "construction_contract__financing_program",
+            "featured_image",
         ).prefetch_related(
             "linked_localities",
             Prefetch(
@@ -266,6 +290,18 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             ),
             "questionnaires",
         )
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        if "featured_image" in response:
+            response["featured_image"] = (
+                MediaUrlSerializer(instance.featured_image, context=self.context).data[
+                    "url"
+                ]
+                if instance.featured_image is not None
+                else None
+            )
+        return response
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
