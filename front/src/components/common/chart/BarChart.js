@@ -8,9 +8,8 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-import annotationPlugin from "chartjs-plugin-annotation";
 import {useRef} from "react";
-import {Line} from "react-chartjs-2";
+import {Bar} from "react-chartjs-2";
 import {DateUtil, DATE_FORMATS} from "utilities";
 
 import DownloadChart from "./DownloadChart";
@@ -36,11 +35,10 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
-    annotationPlugin,
     whiteBackgroundPlugin
 );
 
-const LineChart = ({title, labels, datasets, options = {}}) => {
+const BarChart = ({title, labels, datasets, options = {}}) => {
     const chartRef = useRef(null);
 
     const chartOptions = {
@@ -61,7 +59,7 @@ const LineChart = ({title, labels, datasets, options = {}}) => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Line options={chartOptions} data={chartData} ref={chartRef} />
+                <Bar options={chartOptions} data={chartData} ref={chartRef} />
             </Grid>
             <Grid item container justifyContent="flex-end">
                 <DownloadChart chartRef={chartRef} filename={chartFilename} />
@@ -70,4 +68,4 @@ const LineChart = ({title, labels, datasets, options = {}}) => {
     );
 };
 
-export default LineChart;
+export default BarChart;

@@ -135,7 +135,6 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
                                     const hasExpectedValue = hasFieldExpectedValue(
                                         value.code
                                     );
-                                    console.log({hasExpectedValue});
                                     return (
                                         <Fragment key={value.id}>
                                             {hasExpectedValue ? (
