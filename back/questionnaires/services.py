@@ -8,40 +8,52 @@ from questionnaires.models.questionnaire import Questionnaire
 NONE_VALUE = "-"
 
 
+def has_value(x):
+    return x and not pd.isna(x)
+
+
 def format_float(x):
-    return "{0:.2f}".format(x) if not pd.isna(x) else None
+    return "{0:.2f}".format(x) if has_value(x) else None
+
+
+def get_variation(real_value, expected_value, total_value):
+    if has_value(real_value) and has_value(expected_value):
+        return real_value - expected_value
+    if has_value(real_value) and total_value:
+        return real_value - total_value
+    return None
 
 
 def include_percentages(df, total_value):
     df["expected_values_perc"] = df.apply(
         lambda x: (x["expected_values"] * 100) / total_value
-        if x["expected_values"] and total_value
+        if has_value(x["expected_values"]) and total_value
         else None,
         axis=1,
     )
 
     df["expected_values_acc_perc"] = df.apply(
         lambda x: (x["expected_values_acc"] * 100) / total_value
-        if x["expected_values_acc"] and total_value
+        if has_value(x["expected_values_acc"]) and total_value
         else None,
         axis=1,
     )
     df["real_values_perc"] = df.apply(
         lambda x: (x["real_values"] * 100) / total_value
-        if x["real_values"] and total_value
+        if has_value(x["real_values"]) and total_value
         else None,
         axis=1,
     )
     df["real_values_acc_perc"] = df.apply(
         lambda x: (x["real_values_acc"] * 100) / total_value
-        if x["real_values_acc"] and total_value
+        if has_value(x["real_values_acc"]) and total_value
         else None,
         axis=1,
     )
     df["variation_perc"] = df.apply(
-        lambda x: x["real_values_perc"] - x["expected_values_perc"]
-        if x["real_values_perc"] and x["expected_values_perc"]
-        else None,
+        lambda x: get_variation(
+            x["real_values_acc_perc"], x["expected_values_acc_perc"], 100
+        ),
         axis=1,
     )
     df["expected_values_perc"] = df["expected_values_perc"].apply(format_float)
@@ -67,9 +79,9 @@ def create_dataframe_integer(index, expected_values, real_values, extended_value
 
         df["expected_values_acc"] = df["expected_values"].cumsum()
         df["variation"] = df.apply(
-            lambda x: x["real_values"] - x["expected_values"]
-            if x["expected_values"] and x["real_values"]
-            else None,
+            lambda x: get_variation(
+                x["real_values_acc"], x["expected_values_acc"], total_value_expected
+            ),
             axis=1,
         )
 
@@ -102,9 +114,9 @@ def create_dataframe_decimal2(index, expected_values, real_values, extended_valu
 
         df["expected_values_acc"] = df["expected_values"].cumsum()
         df["variation"] = df.apply(
-            lambda x: x["real_values"] - x["expected_values"]
-            if x["real_values"] and x["expected_values"]
-            else None,
+            lambda x: get_variation(
+                x["real_values_acc"], x["expected_values_acc"], total_value_expected
+            ),
             axis=1,
         )
 
@@ -119,7 +131,7 @@ def create_dataframe_decimal2(index, expected_values, real_values, extended_valu
             map(lambda x: locale.atof(x) if x else None, extended_values)
         )
         df["extended_values"] = extended_values
-        df["extended_values"] = df["expected_values"].apply(format_float)
+        df["extended_values"] = df["extended_values"].apply(format_float)
 
     df["real_values"] = df["real_values"].apply(format_float)
     df["real_values_acc"] = df["real_values_acc"].apply(format_float)
