@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 
 const SmallIconCard = ({
     heading = "",
-    figureContent = "",
+    figureContent = null,
     icon = null,
     urlPath = "",
 }) => {
