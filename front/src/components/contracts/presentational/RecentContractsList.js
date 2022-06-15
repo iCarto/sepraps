@@ -1,4 +1,6 @@
+import {useNavigate} from "react-router-dom";
 import {SectionSubheading} from "components/common/presentational";
+
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import List from "@mui/material/List";
@@ -7,6 +9,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
 const RecentContractsList = ({contracts}) => {
+    const navigate = useNavigate();
+
     const contractBtnStyle = {
         display: "flex",
         flexDirection: "column",
@@ -37,10 +41,18 @@ const RecentContractsList = ({contracts}) => {
             >
                 {contracts.map((contract, index) => (
                     <ListItem key={index} sx={{pt: {xs: 1, xl: 0}, px: 1}}>
-                        <ListItemButton sx={contractBtnStyle}>
+                        <ListItemButton
+                            sx={contractBtnStyle}
+                            onClick={() => {
+                                navigate(`contracts/${contract.id}/summary`);
+                            }}
+                        >
                             <ListItemText
-                                primary={contract.code}
-                                secondary={contract.financing_fund}
+                                primary={contract.number}
+                                secondary={contract.financing_program?.financing_funds
+                                    .map(financing_fund => financing_fund.short_name)
+                                    .join(", ")}
+                                secondaryTypographyProps={{textAlign: "center"}}
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",

@@ -1,4 +1,6 @@
+import {useNavigate} from "react-router-dom";
 import {SectionSubheading} from "components/common/presentational";
+
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import List from "@mui/material/List";
@@ -9,9 +11,12 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 
 const RecentProjectsList = ({projects}) => {
+    const navigate = useNavigate();
+
     const projectBtnStyle = {
         display: "flex",
         flexDirection: "column",
+        minHeight: "142px",
         boxShadow: 1,
         borderRadius: "4px",
         "&:hover": {
@@ -36,13 +41,19 @@ const RecentProjectsList = ({projects}) => {
             >
                 {projects.map((project, index) => (
                     <ListItem key={index} sx={{pt: {xs: 1, xl: 0}, px: 1}}>
-                        <ListItemButton sx={projectBtnStyle}>
+                        <ListItemButton
+                            sx={projectBtnStyle}
+                            onClick={() => {
+                                navigate(`projects/${project.id}/summary`);
+                            }}
+                        >
                             <ListItemAvatar
                                 sx={{
                                     display: "flex",
                                     justifyContent: "center",
                                     mr: 0,
                                     pr: 0,
+                                    pt: 1,
                                 }}
                             >
                                 <Avatar
@@ -53,10 +64,15 @@ const RecentProjectsList = ({projects}) => {
                             <ListItemText
                                 primary={project.name}
                                 secondary={project.code}
+                                primaryTypographyProps={{
+                                    textAlign: "center",
+                                    lineHeight: 1.25,
+                                }}
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
                                     alignItems: "center",
+                                    mt: 1.5,
                                 }}
                             />
                         </ListItemButton>

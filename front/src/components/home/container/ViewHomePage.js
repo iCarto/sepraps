@@ -1,3 +1,6 @@
+import {useEffect, useMemo, useState} from "react";
+import {ContractService, ProjectService} from "service/api";
+
 import {PageLayout} from "layout";
 import {SectionCard, SmallIconCard} from "components/common/presentational";
 import {RecentProjectsList} from "components/project/presentational";
@@ -7,44 +10,9 @@ import {ComingEventsWidget, NotificationsWidget} from ".";
 import Grid from "@mui/material/Grid";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewHomePage = () => {
-    const dummyDataForRecentProjects = [
-        {
-            name: "Pisadera",
-            code: "2019-AP-001",
-            featured_image:
-                "https://cdn.pixabay.com/photo/2016/11/22/07/26/indiana-dunes-state-park-1848559_960_720.jpg",
-        },
-        {
-            name: "Candelaria",
-            code: "2019-AP-002",
-            featured_image:
-                "https://cdn.pixabay.com/photo/2011/01/17/17/59/landscape-arch-4608_960_720.jpg",
-        },
-        {
-            name: "Ykua Pora",
-            code: "2019-AP-006",
-            featured_image:
-                "https://cdn.pixabay.com/photo/2018/04/20/07/12/alaska-3335260_960_720.jpg",
-        },
-    ];
-
-    const dummyDataForRecentContracts = [
-        {
-            code: "14/2019",
-            financing_fund: "BID",
-        },
-        {
-            code: "20/2019",
-            financing_fund: "BID",
-        },
-        {
-            code: "24/2019",
-            financing_fund: "MERCOSUR",
-        },
-    ];
-
     const dummyDataForNotifications = [
         {
             name: "Proyecto Pisadera - 2019-AP-014",
@@ -103,73 +71,103 @@ const ViewHomePage = () => {
         },
     ];
 
+    const [projects, setProjects] = useState([]);
+    const [contracts, setContracts] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    //TO-DO: FIX
+    const fakeFilter = {status: "active"};
+
+    useEffect(() => {
+        setLoading(true);
+        ProjectService.getProjects(fakeFilter).then(data => {
+            setProjects(data.sort((a, b) => b.updated_at - a.updated_at));
+            setLoading(false);
+        });
+    }, []);
+
+    useEffect(() => {
+        setLoading(true);
+        ContractService.getContracts(false).then(data => {
+            setContracts(data.sort((a, b) => b.updated_at - a.updated_at));
+            setLoading(false);
+        });
+    }, []);
+
+    const latestContracts = useMemo(() => contracts.slice(0, 3), [contracts]);
+    const latestProjects = useMemo(() => projects.slice(0, 3), [projects]);
+
     return (
         <PageLayout>
-            <Grid container sx={{mb: 4}} spacing={3} justifyContent="space-between">
-                <Grid
-                    item
-                    container
-                    xs={12}
-                    md={6}
-                    lg={5}
-                    spacing={3}
-                    alignContent="flex-start"
-                >
-                    <Grid item xs={6}>
-                        <SmallIconCard
-                            heading="Contratos"
-                            figureContent="3"
-                            urlPath="/contracts"
-                            icon={
-                                <WorkOutlineOutlinedIcon
-                                    sx={{fontSize: "60px", lineHeight: 0}}
-                                />
-                            }
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <SmallIconCard
-                            heading="Proyectos"
-                            figureContent="23"
-                            urlPath="/projects"
-                            icon={
-                                <FactCheckOutlinedIcon
-                                    sx={{fontSize: "60px", lineHeight: 0}}
-                                />
-                            }
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <SectionCard
-                            title="Últimas modificaciones"
-                            headingLabel={false}
-                        >
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} md={6}>
-                                    <RecentContractsList
-                                        contracts={dummyDataForRecentContracts}
+            {loading ? (
+                <Grid container justifyContent="center" my={6}>
+                    <CircularProgress size={40} />
+                </Grid>
+            ) : (
+                <Grid container sx={{mb: 4}} spacing={3} justifyContent="space-between">
+                    <Grid
+                        item
+                        container
+                        xs={12}
+                        md={6}
+                        lg={5}
+                        spacing={3}
+                        alignContent="flex-start"
+                    >
+                        <Grid item xs={6}>
+                            <SmallIconCard
+                                heading="Contratos"
+                                figureContent={contracts.length}
+                                urlPath="/contracts"
+                                icon={
+                                    <WorkOutlineOutlinedIcon
+                                        sx={{fontSize: "60px", lineHeight: 0}}
                                     />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
-                                    <RecentProjectsList
-                                        projects={dummyDataForRecentProjects}
+                                }
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <SmallIconCard
+                                heading="Proyectos"
+                                figureContent={projects.length}
+                                urlPath="/projects"
+                                icon={
+                                    <FactCheckOutlinedIcon
+                                        sx={{fontSize: "60px", lineHeight: 0}}
                                     />
+                                }
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <SectionCard
+                                title="Últimas modificaciones"
+                                headingLabel={false}
+                            >
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} md={6}>
+                                        <RecentContractsList
+                                            contracts={latestContracts}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={6}>
+                                        <RecentProjectsList projects={latestProjects} />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </SectionCard>
+                            </SectionCard>
+                        </Grid>
+                    </Grid>
+                    <Grid item container xs={12} md={6} lg={7} spacing={3}>
+                        <Grid item xs={12}>
+                            <NotificationsWidget
+                                notifications={dummyDataForNotifications}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <ComingEventsWidget events={dummyDataForComingEvents} />
+                        </Grid>
                     </Grid>
                 </Grid>
-                <Grid item container xs={12} md={6} lg={7} spacing={3}>
-                    <Grid item xs={12}>
-                        <NotificationsWidget
-                            notifications={dummyDataForNotifications}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ComingEventsWidget events={dummyDataForComingEvents} />
-                    </Grid>
-                </Grid>
-            </Grid>
+            )}
         </PageLayout>
     );
 };
