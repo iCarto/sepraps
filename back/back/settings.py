@@ -238,8 +238,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://127.0.0.1:8000",
 # )
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = list(default_headers) + ["Content-Disposition"]
-CORS_EXPOSE_HEADERS = ["Content-Disposition"]
+CORS_ALLOW_HEADERS = list(default_headers) + ["Content-Disposition", "Cache-Control"]
+CORS_EXPOSE_HEADERS = ["Content-Disposition", "Cache-Control"]
 
 AUTH_USER_MODEL = "users.User"
 
