@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {AuthAction, useAuth} from "auth";
 import {useCopyToClipboard, useDownloadDocument, useNavigateWithReload} from "hooks";
-import {DocumentService} from "service/api";
+import {DocumentService, ProjectService} from "service/api";
 
 import {SidebarAction, SidebarPanel} from "layout";
 import {DocumentSection} from "../presentational";
@@ -11,6 +11,9 @@ import {DeleteDocumentDialog} from ".";
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewDocumentPanel = () => {
     const navigate = useNavigateWithReload();
@@ -20,14 +23,17 @@ const ViewDocumentPanel = () => {
     const {projectId} = useParams();
 
     const [folderElement, setFolderElement] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
     useEffect(() => {
         let path = params["*"];
         if (path) {
+            setLoading(true);
             DocumentService.get(path).then(element => {
                 setFolderElement(element);
+                setLoading(false);
             });
         }
     }, [params]);
@@ -47,6 +53,15 @@ const ViewDocumentPanel = () => {
         copyToClipBoard(window.location);
     };
 
+    const handleSetFeaturedImage = () => {
+        ProjectService.updateProjectWithPatch({
+            id: projectId,
+            featured_image: folderElement.id,
+        }).then(response => {
+            handleCloseSidebar(true);
+        });
+    };
+
     const handleDeleteDialog = isOpen => {
         setIsDeleteDialogOpen(isOpen);
     };
@@ -54,7 +69,10 @@ const ViewDocumentPanel = () => {
     const handleCloseSidebar = (refresh = false) => {
         navigate(
             `/projects/${projectId}/documents/` +
-                folderElement.path.split("/").slice(0, -1).join("/"),
+                folderElement.path
+                    .split("/")
+                    .slice(0, -1)
+                    .join("/"),
             refresh
         );
     };
@@ -67,6 +85,15 @@ const ViewDocumentPanel = () => {
             icon={<LinkIcon />}
             onClick={handleCopyLink}
         />,
+        folderElement && folderElement.content_type.startsWith("image") ? (
+            <SidebarAction
+                key="set-project-featured-image"
+                name="set project featured image"
+                text="Usar como imagen principal"
+                icon={<ImageOutlinedIcon />}
+                onClick={handleSetFeaturedImage}
+            />
+        ) : null,
         <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
             <SidebarAction
                 key="remove-document"
@@ -87,7 +114,14 @@ const ViewDocumentPanel = () => {
             mainActionIcon={<DownloadIcon />}
             sidebarActions={sidebarActions}
         >
-            <DocumentSection folderElement={folderElement} />
+            {loading ? (
+                <Grid item container justifyContent="center" xs={12}>
+                    <CircularProgress color="inherit" size={20} />
+                </Grid>
+            ) : (
+                <DocumentSection folderElement={folderElement} />
+            )}
+
             <DeleteDocumentDialog
                 folderElement={folderElement}
                 onDeletedFolderElement={() => handleCloseSidebar(true)}

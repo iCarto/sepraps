@@ -17,9 +17,6 @@ import {provider_view_adapter} from "./Provider";
 class Projects extends Array {}
 
 const project_api_adapter = project => {
-    // Fake image loaded from public folder in front-end
-    project["featured_image"] = "/images/senasa" + (project["id"] % 5) + ".png";
-
     project["init_date"] = new Date(project["init_date"]);
     if (project.construction_contract) {
         project["construction_contract"] = createContract(
@@ -65,6 +62,7 @@ const project_api_adapter = project => {
             questionnaires_api_adapter(project["questionnaires"])
         );
     }
+
     return project;
 };
 
@@ -96,6 +94,8 @@ const project_view_adapter = project => {
     delete project["location"];
     delete project["milestones"];
     delete project["active_milestone"];
+    delete project["folder"];
+    delete project["featured_image"];
     delete project["creation_user"];
     delete project["created_at"];
     delete project["updated_at"];
