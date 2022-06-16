@@ -9,16 +9,13 @@
             "bid_request_id": "364644",
             "bid_request_date": "2019-06-04",
             "bid_request_budget": 7035842072,
-
             "awarding_budget": 7015942974,
             "awarding_percentage_drop": 0.28,
             "awarding_date": "2019-12-06",
             "financing_program": 1,
             "contractor": 2,
             "execution_signature_date": "2019-12-11",
-
             "execution_certificate_start_date": "2019-12-11",
-
             "expected_execution_period": 240,
             "warranty_end_date": "2021-12-11",
             "closed": false,
@@ -215,7 +212,7 @@
             "main_infrastructure": 15,
             "provider": 15,
             "construction_contract": 3,
-            "linked_localities": ["0519100"],
+            "linked_localities": ["0730270"],
             "closed": false,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
