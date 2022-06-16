@@ -1,4 +1,12 @@
-import {format, parse, add, addDays, differenceInCalendarMonths} from "date-fns";
+import {
+    format,
+    parse,
+    add,
+    addDays,
+    differenceInCalendarMonths,
+    startOfToday,
+    differenceInDays,
+} from "date-fns";
 import {es} from "date-fns/locale";
 import TextUtil from "./TextUtil";
 
@@ -48,13 +56,22 @@ const DateUtil = {
     parseDateTime(date, dateFormat = DATE_FORMATS.CLIENT_DATETIMEFORMAT) {
         return parse(date, dateFormat, new Date());
     },
+    addMonths(date, months) {
+        return add(date, {months});
+    },
     getMonthName(month) {
         return TextUtil.capitalize(
             format(new Date(null, month - 1), "LLLL", {locale: es})
         );
     },
-    addMonths(date, months) {
-        return add(date, {months});
+    getMonthInDate(date) {
+        return TextUtil.capitalize(format(new Date(date), "LLL", {locale: es}));
+    },
+    getDayInDate(date) {
+        return format(new Date(date), "d");
+    },
+    getDaysToDate(date) {
+        return differenceInDays(new Date(date), startOfToday());
     },
     getDateAfterDays(date, amountOfDays) {
         return addDays(date, amountOfDays);
