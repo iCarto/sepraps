@@ -8,9 +8,6 @@ import {
 class ProjectsSummaries extends Array {}
 
 const project_summary_api_adapter = project => {
-    // Fake image loaded from public folder in front-end
-    project["featured_image"] = "/images/senasa" + (project["id"] % 5) + ".png";
-
     project["init_date"] = new Date(project["init_date"]);
     project["created_at"] = new Date(project["created_at"]);
 

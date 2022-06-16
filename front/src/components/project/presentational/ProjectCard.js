@@ -15,6 +15,7 @@ import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import {ImagePreview} from "components/document/presentational";
 
 const projectTypeIconBoxStyle = {
     position: "absolute",
@@ -67,10 +68,8 @@ const ProjectCard = ({project, onClick = null}) => {
                 sx={{cursor: onClick ? "pointer" : "inherit"}}
             >
                 <div style={{position: "relative"}}>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image={project.featured_image}
+                    <ImagePreview
+                        path={project.featured_image}
                         alt={project.name}
                         sx={project.closed === true ? {opacity: 0.4} : {opacity: 1}}
                     />

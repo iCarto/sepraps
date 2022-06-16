@@ -75,6 +75,14 @@ const ProjectService = {
         );
     },
 
+    updateProjectWithPatch(project) {
+        return AuthApiService.patch(basePath + "/" + project.id, project).then(
+            response => {
+                return createProject(project_api_adapter(response));
+            }
+        );
+    },
+
     closeProject(projectId) {
         return AuthApiService.put(basePath + "/" + projectId + "/close");
     },

@@ -22,8 +22,12 @@ const DocumentService = {
         return AuthApiService.delete(basePath + path);
     },
 
+    preview(url, contentType) {
+        return AuthApiService.get(url);
+    },
+
     download(path, contentType) {
-        return AuthApiService.get(basePath + path + "?action=download", {
+        return AuthApiService.get(`${basePath}download/${path}`, {
             "Content-Type": contentType,
         });
     },

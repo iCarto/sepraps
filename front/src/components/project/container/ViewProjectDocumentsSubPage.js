@@ -25,8 +25,6 @@ const ViewProjectDocumentsSubPage = () => {
         setIsSidePanelOpen(isOpen);
     };
 
-    console.log({pathname});
-
     useEffect(() => {
         let path = params["*"];
         if (!path) {
@@ -34,7 +32,12 @@ const ViewProjectDocumentsSubPage = () => {
         }
         if (pathname.startsWith(basePath + "detail")) {
             // If we are in detail view
-            setFolderPath(path.split("/").slice(0, -1).join("/"));
+            setFolderPath(
+                path
+                    .split("/")
+                    .slice(0, -1)
+                    .join("/")
+            );
         } else {
             setFolderPath(path);
         }
