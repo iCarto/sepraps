@@ -49,11 +49,19 @@ class Project(models.Model):
     )
     linked_localities = models.ManyToManyField(Locality)
 
+    featured_image = models.ForeignKey(
+        MediaNode,
+        on_delete=models.SET_NULL,
+        verbose_name=MediaNode._meta.verbose_name,
+        null=True,
+        related_name="project_featured_image",
+    )
     folder = models.ForeignKey(
         MediaNode,
         on_delete=models.PROTECT,
         verbose_name=MediaNode._meta.verbose_name,
         null=True,
+        related_name="project_folder",
     )
 
     # This field only exists to retrieve questionnaires list for project menu
