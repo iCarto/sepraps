@@ -1,5 +1,10 @@
 import {useEffect, useMemo, useState} from "react";
-import {ContractService, NotificationService, ProjectService} from "service/api";
+import {
+    ContractService,
+    EventService,
+    NotificationService,
+    ProjectService,
+} from "service/api";
 
 import {PageLayout} from "layout";
 import {SectionCard, SmallIconCard} from "components/common/presentational";
@@ -13,36 +18,10 @@ import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 
 const ViewHomePage = () => {
-    const dummyDataForComingEvents = [
-        {
-            date: "2022-06-25",
-            day: "25",
-            month: "JUN",
-            linked_entity: "Contrato 20/2019",
-            eventMessage:
-                "El periodo de garantía de este contrato finalizará dentro de 11 días",
-        },
-        {
-            date: "2022-06-26",
-            day: "26",
-            month: "JUN",
-            linked_entity: "Contrato 19/2019",
-            eventMessage:
-                "El plazo previsto de terminación de este contrato finalizará dentro de 12 días",
-        },
-        {
-            date: "2022-06-30",
-            day: "30",
-            month: "JUN",
-            linked_entity: "Contrato 03/2019",
-            eventMessage:
-                "El periodo de garantía de este contrato finalizará dentro de 16 días",
-        },
-    ];
-
     const [projects, setProjects] = useState([]);
     const [contracts, setContracts] = useState([]);
     const [notifications, setNotifications] = useState([]);
+    const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
 
     //TO-DO: FIX
@@ -67,6 +46,12 @@ const ViewHomePage = () => {
     useEffect(() => {
         NotificationService.getNotifications().then(data => {
             setNotifications(data);
+        });
+    }, []);
+
+    useEffect(() => {
+        EventService.getEvents().then(data => {
+            setEvents(data);
         });
     }, []);
 
@@ -137,7 +122,7 @@ const ViewHomePage = () => {
                             <NotificationsWidget notifications={notifications} />
                         </Grid>
                         <Grid item xs={12}>
-                            <ComingEventsWidget events={dummyDataForComingEvents} />
+                            <ComingEventsWidget events={events} />
                         </Grid>
                     </Grid>
                 </Grid>

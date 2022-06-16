@@ -106,3 +106,10 @@ export {
     createNotifications,
     notification_view_adapter,
 } from "./Notification";
+export {
+    default as createEevent,
+    createEvents,
+    event_api_adapter,
+    events_api_adapter,
+    event_view_adapter,
+} from "./Event";

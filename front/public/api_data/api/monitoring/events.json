@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "type": "end_of_contract",
+        "title": "Contrato 20/2019",
+        "date": "2022-07-22",
+        "message": "El plazo previsto de ejecución de este contrato finalizará",
+        "url": "/contracts/3/phases"
+    },
+    {
+        "id": 2,
+        "type": "end_of_contract",
+        "title": "Contrato 14/2019",
+        "date": "2022-07-17",
+        "message": "El plazo previsto de ejecución de este contrato finalizará",
+        "url": "/contracts/2/phases"
+    },
+    {
+        "id": 3,
+        "type": "end_of_warranty",
+        "title": "Contrato 24/2019",
+        "date": "2022-06-30",
+        "message": "El periodo de garantía de este contrato finalizará",
+        "url": "/contracts/4/phases"
+    }
+]

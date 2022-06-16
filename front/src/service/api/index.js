@@ -12,3 +12,4 @@ export {default as MilestoneService} from "./MilestoneService";
 export {default as StatsService} from "./StatsService";
 export {default as FileService} from "./FileService";
 export {default as NotificationService} from "./NotificationService";
+export {default as EventService} from "./EventService";
