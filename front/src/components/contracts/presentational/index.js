@@ -10,4 +10,4 @@ export {default as ContractSummary} from "./ContractSummary";
 export {default as ContractsTable} from "./ContractsTable";
 export {default as ContractListChangeView} from "./ContractListChangeView";
 export {default as AddContractProjectButtonGroup} from "./AddContractProjectButtonGroup";
-export {default as RecentContractsList} from "./RecentContractsList";
+export {default as LatestContractsList} from "./LatestContractsList";

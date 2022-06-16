@@ -8,8 +8,8 @@ import {
 
 import {PageLayout} from "layout";
 import {SectionCard, SmallIconCard} from "components/common/presentational";
-import {RecentProjectsList} from "components/project/presentational";
-import {RecentContractsList} from "components/contracts/presentational";
+import {LatestProjectsList} from "components/project/presentational";
+import {LatestContractsList} from "components/contracts/presentational";
 import {ComingEventsWidget, NotificationsWidget} from ".";
 
 import Grid from "@mui/material/Grid";
@@ -18,40 +18,35 @@ import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 
 const ViewHomePage = () => {
-    const [projects, setProjects] = useState([]);
+    const [projects, setprojects] = useState([]);
     const [contracts, setContracts] = useState([]);
     const [notifications, setNotifications] = useState([]);
     const [events, setEvents] = useState([]);
+    const [statsByPhaseData, setStatsByPhaseData] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    //TO-DO: FIX
-    const fakeFilter = {status: "active"};
+    const filter = {status: "active"};
 
     useEffect(() => {
         setLoading(true);
-        ProjectService.getProjects(fakeFilter).then(data => {
-            setProjects(data.sort((a, b) => b.updated_at - a.updated_at));
+        ProjectService.getProjects(filter).then(data => {
+            setprojects(data.sort((a, b) => b.updated_at - a.updated_at));
             setLoading(false);
         });
-    }, []);
-
-    useEffect(() => {
-        setLoading(true);
         ContractService.getContracts(false).then(data => {
             setContracts(data.sort((a, b) => b.updated_at - a.updated_at));
-            setLoading(false);
         });
-    }, []);
-
-    useEffect(() => {
         NotificationService.getNotifications().then(data => {
             setNotifications(data);
         });
-    }, []);
-
-    useEffect(() => {
         EventService.getEvents().then(data => {
-            setEvents(data);
+            setEvents(data.sort((a, b) => a.date - b.date));
+        });
+        StatsService.getStatsByPhase().then(data => {
+            data.sort((a, b) =>
+                a.phase_name > b.phase_name ? 1 : b.phase_name > a.phase_name ? -1 : 0
+            );
+            setStatsByPhaseData(data);
         });
     }, []);
 
@@ -75,22 +70,36 @@ const ViewHomePage = () => {
                         spacing={3}
                         alignContent="flex-start"
                     >
-                        <Grid item xs={6}>
-                            <SmallIconCard
-                                heading="Contratos"
-                                figureContent={contracts.length}
-                                urlPath="/contracts"
-                                icon={
-                                    <WorkOutlineOutlinedIcon
-                                        sx={{fontSize: "60px", lineHeight: 0}}
-                                    />
-                                }
-                            />
+                        <Grid item container xs={6} spacing={2}>
+                            <Grid item xs={12}>
+                                <SmallIconCard
+                                    heading="Contratos"
+                                    figureContent={contracts.length}
+                                    urlPath="/contracts"
+                                    icon={
+                                        <WorkOutlineOutlinedIcon
+                                            sx={{fontSize: "60px", lineHeight: 0}}
+                                        />
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <SmallIconCard
+                                    heading="Proyectos"
+                                    figureContent={projects.length}
+                                    urlPath="/projects"
+                                    icon={
+                                        <FactCheckOutlinedIcon
+                                            sx={{fontSize: "60px", lineHeight: 0}}
+                                        />
+                                    }
+                                />
+                            </Grid>
                         </Grid>
                         <Grid item xs={6}>
                             <SmallIconCard
                                 heading="Proyectos"
-                                figureContent={projects.length}
+                                figureContent={numberOfProjects}
                                 urlPath="/projects"
                                 icon={
                                     <FactCheckOutlinedIcon
@@ -106,12 +115,12 @@ const ViewHomePage = () => {
                             >
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} md={6}>
-                                        <RecentContractsList
+                                        <LatestContractsList
                                             contracts={latestContracts}
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={6}>
-                                        <RecentProjectsList projects={latestProjects} />
+                                        <LatestProjectsList projects={latestProjects} />
                                     </Grid>
                                 </Grid>
                             </SectionCard>
