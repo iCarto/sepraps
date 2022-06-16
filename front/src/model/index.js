@@ -101,3 +101,8 @@ export {
     project_questionnaires_api_adapter,
     project_questionnaire_view_adapter,
 } from "./ProjectQuestionnaire";
+export {
+    default as createNotification,
+    createNotifications,
+    notification_view_adapter,
+} from "./Notification";

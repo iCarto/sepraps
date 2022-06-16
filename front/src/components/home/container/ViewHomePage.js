@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from "react";
-import {ContractService, ProjectService} from "service/api";
+import {ContractService, NotificationService, ProjectService} from "service/api";
 
 import {PageLayout} from "layout";
 import {SectionCard, SmallIconCard} from "components/common/presentational";
@@ -8,42 +8,11 @@ import {RecentContractsList} from "components/contracts/presentational";
 import {ComingEventsWidget, NotificationsWidget} from ".";
 
 import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewHomePage = () => {
-    const dummyDataForNotifications = [
-        {
-            name: "Proyecto Pisadera - 2019-AP-014",
-            notificationDate: "13-06-2022",
-            notificationMessage:
-                "No se han introducido datos en la certificación presupuestaria de este mes",
-            notificationColor: "error",
-        },
-        {
-            name: "Proyecto Ykua Pora - 2019-AP-003",
-            notificationDate: "15-06-2022",
-            notificationMessage:
-                "No se han introducido datos en la certificación presupuestaria de este mes",
-            notificationColor: "error",
-        },
-        {
-            name: "Contrato 20/2019",
-            notificationDate: "16-06-2022",
-            notificationMessage:
-                "Ya se han recibido todos los sitios de obra vinculados a este contrato",
-            notificationColor: "success",
-        },
-        {
-            name: "Contrato 14/2019",
-            notificationDate: "16-06-2022",
-            notificationMessage:
-                "El periodo de garantía de este contrato finalizará dentro de 25 días",
-            notificationColor: "warning",
-        },
-    ];
-
     const dummyDataForComingEvents = [
         {
             date: "2022-06-25",
@@ -73,6 +42,7 @@ const ViewHomePage = () => {
 
     const [projects, setProjects] = useState([]);
     const [contracts, setContracts] = useState([]);
+    const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(false);
 
     //TO-DO: FIX
@@ -91,6 +61,12 @@ const ViewHomePage = () => {
         ContractService.getContracts(false).then(data => {
             setContracts(data.sort((a, b) => b.updated_at - a.updated_at));
             setLoading(false);
+        });
+    }, []);
+
+    useEffect(() => {
+        NotificationService.getNotifications().then(data => {
+            setNotifications(data);
         });
     }, []);
 
@@ -158,9 +134,7 @@ const ViewHomePage = () => {
                     </Grid>
                     <Grid item container xs={12} md={6} lg={7} spacing={3}>
                         <Grid item xs={12}>
-                            <NotificationsWidget
-                                notifications={dummyDataForNotifications}
-                            />
+                            <NotificationsWidget notifications={notifications} />
                         </Grid>
                         <Grid item xs={12}>
                             <ComingEventsWidget events={dummyDataForComingEvents} />

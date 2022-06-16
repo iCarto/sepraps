@@ -8,7 +8,7 @@ const JsonFileService = {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
-        }).then(function(response) {
+        }).then(function (response) {
             return response.json();
         });
     },
