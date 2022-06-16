@@ -45,6 +45,9 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
 
         const markers = [];
         projects.forEach(project => {
+            const lastMilestone = project.milestones
+                .filter(milestone => milestone.compliance_date)
+                .slice(-1)[0];
             const marker = L.marker(
                 {
                     lat: project.latitude,
@@ -54,7 +57,9 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
                     icon: getIcon(
                         selectedElement?.id === project.id
                             ? null
-                            : getMilestoneColor(project.milestone)
+                            : getMilestoneColor(
+                                  lastMilestone ? lastMilestone.code : null
+                              )
                     ),
                     offset: L.point(0, -50),
                 }
