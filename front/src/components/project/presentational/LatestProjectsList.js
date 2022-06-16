@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {ImagePreview} from "components/document/presentational";
 import {SectionSubheading} from "components/common/presentational";
 
 import Card from "@mui/material/Card";
@@ -10,13 +11,13 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 
-const RecentProjectsList = ({projects}) => {
+const LatestProjectsList = ({projects}) => {
     const navigate = useNavigate();
 
     const projectBtnStyle = {
         display: "flex",
         flexDirection: "column",
-        minHeight: "142px",
+        minHeight: "152px",
         boxShadow: 1,
         borderRadius: "4px",
         "&:hover": {
@@ -58,8 +59,14 @@ const RecentProjectsList = ({projects}) => {
                             >
                                 <Avatar
                                     src={project.featured_image}
-                                    sx={{boxShadow: 1}}
-                                />
+                                    sx={{width: "50px", height: "50px", boxShadow: 1}}
+                                >
+                                    <ImagePreview
+                                        path={project.featured_image}
+                                        alt={project.name}
+                                        sx={{height: "100%"}}
+                                    />
+                                </Avatar>
                             </ListItemAvatar>
                             <ListItemText
                                 primary={project.name}
@@ -83,4 +90,4 @@ const RecentProjectsList = ({projects}) => {
     );
 };
 
-export default RecentProjectsList;
+export default LatestProjectsList;

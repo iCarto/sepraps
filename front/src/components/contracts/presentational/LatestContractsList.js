@@ -8,7 +8,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
-const RecentContractsList = ({contracts}) => {
+const LatestContractsList = ({contracts}) => {
     const navigate = useNavigate();
 
     const contractBtnStyle = {
@@ -67,4 +67,4 @@ const RecentContractsList = ({contracts}) => {
     );
 };
 
-export default RecentContractsList;
+export default LatestContractsList;

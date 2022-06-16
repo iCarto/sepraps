@@ -1,4 +1,5 @@
 import {Fragment} from "react";
+import {useNavigate} from "react-router-dom";
 import {DateUtil} from "utilities";
 
 import {SectionCard} from "components/common/presentational";
@@ -10,6 +11,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import styled from "@mui/material/styles/styled";
 
 const ComingEventsWidget = ({events}) => {
+    const navigate = useNavigate();
+
     const DateCardContainer = styled("div")(({theme}) => ({
         display: "flex",
         flexDirection: "column",

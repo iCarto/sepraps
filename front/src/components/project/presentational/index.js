@@ -11,4 +11,4 @@ export {default as ProjectSearchAutocomplete} from "./ProjectSearchAutocomplete"
 export {default as ProjectSection} from "./ProjectSection";
 export {default as ProjectFormSearch} from "./ProjectFormSearch";
 export {default as ProjectListChangeView} from "./ProjectListChangeView";
-export {default as RecentProjectsList} from "./RecentProjectsList";
+export {default as LatestProjectsList} from "./LatestProjectsList";

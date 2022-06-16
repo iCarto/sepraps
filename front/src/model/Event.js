@@ -13,7 +13,6 @@ const event_view_adapter = event => {
     event["date"] = !!event["date"]
         ? DateUtil.formatDate(event["date"], DATE_FORMATS.SERVER_DATEFORMAT)
         : null;
-
     return event;
 };
 
