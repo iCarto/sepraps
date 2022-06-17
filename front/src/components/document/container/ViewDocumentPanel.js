@@ -94,9 +94,8 @@ const ViewDocumentPanel = () => {
                 onClick={handleSetFeaturedImage}
             />
         ) : null,
-        <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+        <AuthAction key="remove-document" roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
             <SidebarAction
-                key="remove-document"
                 name="remove-document"
                 text="Eliminar"
                 icon={<DeleteIcon color="error" />}

@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
 import {AuthAction, useAuth} from "auth";
 import {DocumentService} from "service/api";
+import {useDownloadDocument} from "hooks";
 
 import {useFolderView} from "../provider";
 import {
@@ -14,6 +15,8 @@ import {FileUploadSection} from "../common";
 
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
+import IconButton from "@mui/material/IconButton";
+import DownloadIcon from "@mui/icons-material/Download";
 
 const ListFolder = ({
     folderPath,
@@ -21,26 +24,31 @@ const ListFolder = ({
     selectedElement = null,
     onSelectElement = null,
 }) => {
+    const downloadDocument = useDownloadDocument();
     const location = useLocation();
     const {ROLES} = useAuth();
 
     const {view} = useFolderView();
 
-    const [folderElements, setFolderElements] = useState([]);
+    const [folderElement, setFolderElement] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
         DocumentService.get(folderPath).then(element => {
-            setFolderElements(element.children);
+            setFolderElement(element);
             setLoading(false);
         });
     }, [folderPath, location.state?.lastRefreshDate]);
 
     const reloadFolder = file => {
         DocumentService.get(folderPath).then(folder => {
-            setFolderElements(folder.children);
+            setFolderElement(folder);
         });
+    };
+
+    const downloadFolder = () => {
+        downloadDocument(folderElement.name + ".zip", folderPath, "application/zip");
     };
 
     return (
@@ -56,7 +64,7 @@ const ListFolder = ({
                     </Grid>
                 ) : view === "list" ? (
                     <FolderList
-                        folderElements={folderElements}
+                        folderElements={folderElement?.children}
                         selectedElement={selectedElement}
                         onSelectElement={onSelectElement}
                         basePath={basePath}
@@ -64,12 +72,19 @@ const ListFolder = ({
                 ) : (
                     <FolderTable
                         basePath={basePath}
-                        folderElements={folderElements}
+                        folderElements={folderElement?.children}
                         selectedElement={selectedElement}
                         onSelectElement={onSelectElement}
                     />
                 )}
             </Grid>
+            {folderElement && (
+                <Grid item container xs={12} justifyContent="flex-end">
+                    <IconButton aria-label="download-zip" onClick={downloadFolder}>
+                        <DownloadIcon />
+                    </IconButton>
+                </Grid>
+            )}
             {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
             {folderPath.indexOf("/") >= 0 && (
                 <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
