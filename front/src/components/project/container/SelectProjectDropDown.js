@@ -1,13 +1,13 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import {useLocation, useOutletContext, useParams} from "react-router-dom";
 
 import {DropdownMenuItemLink} from "components/common/presentational";
 
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const SelectProjectDropDown = ({selectedProject}) => {
@@ -16,6 +16,21 @@ const SelectProjectDropDown = ({selectedProject}) => {
     let context;
     [context] = useOutletContext();
     const {filteredProjects} = context;
+
+    let location = useLocation();
+    const {projectId: currentProjectId} = useParams();
+
+    //TO-DO: Review:
+    // We want to get the subpage url path segment only to navigate when changing projects. Right now we need to implement this function because the questionnaires are placed in a two-level subpage: questionnaires/questionnaire_name and we need these 2 segments in order to display the page correctly.
+    const getSubpagePathSegment = () => {
+        const splitPath = location.pathname
+            .substring(location.pathname.indexOf(currentProjectId) + 1)
+            .split("/");
+
+        if (splitPath[1] === "questionnaires") {
+            return splitPath[1] + "/" + splitPath[2];
+        } else return splitPath[1];
+    };
 
     const open = Boolean(anchorElement);
 
@@ -109,7 +124,7 @@ const SelectProjectDropDown = ({selectedProject}) => {
                             variant="menu"
                             key={project.id}
                             id={project.id}
-                            to={`/projects/${project.id}/summary`}
+                            to={`/projects/${project.id}/${getSubpagePathSegment()}`}
                             selected={project === selectedProject.name}
                             onClick={handleClose}
                         >

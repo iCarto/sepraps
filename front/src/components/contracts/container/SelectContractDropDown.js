@@ -1,13 +1,13 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import {useOutletContext, useLocation, useParams} from "react-router-dom";
 
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import {DropdownMenuItemLink} from "components/common/presentational";
+import Menu from "@mui/material/Menu";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const SelectContractDropDown = ({selectedContract}) => {
     const [anchorElement, setAnchorElement] = useState(null);
@@ -15,6 +15,21 @@ const SelectContractDropDown = ({selectedContract}) => {
     let context;
     [context] = useOutletContext();
     const {filteredContracts} = context;
+
+    let location = useLocation();
+    const {contractId: currentContractId} = useParams();
+
+    //TO-DO: Review:
+    // We want to get the subpage url path segment only to navigate when changing contracts. Right now we need to implement this function because the questionnaires are placed in a two-level subpage: questionnaires/questionnaire_name and we need these 2 segments in order to display the page correctly.
+    const getSubpagePathSegment = () => {
+        const splitPath = location.pathname
+            .substring(location.pathname.indexOf(currentContractId) + 1)
+            .split("/");
+
+        if (splitPath[1] === "questionnaires") {
+            return splitPath[1] + "/" + splitPath[2];
+        } else return splitPath[1];
+    };
 
     const open = Boolean(anchorElement);
 
@@ -96,7 +111,7 @@ const SelectContractDropDown = ({selectedContract}) => {
                             variant="menu"
                             key={contract.id}
                             id={contract.id}
-                            to={`/contracts/${contract.id}/summary`}
+                            to={`/contracts/${contract.id}/${getSubpagePathSegment()}`}
                             selected={contract === selectedContract.number}
                             onClick={handleClose}
                         >
