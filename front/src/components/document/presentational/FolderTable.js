@@ -81,7 +81,7 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
 
     return (
         <TableContainer sx={{overflowX: "auto"}}>
-            {folderElements.length !== 0 ? (
+            {folderElements && folderElements.length !== 0 ? (
                 <Table sx={{tableLayout: "fixed"}} aria-labelledby="Files table">
                     <TableSortingHead
                         order={order}

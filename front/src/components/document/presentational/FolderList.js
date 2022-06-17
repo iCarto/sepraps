@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 const FolderList = ({folderElements, selectedElement, onSelectElement, basePath}) => {
-    return folderElements.length !== 0 ? (
+    return folderElements && folderElements.length !== 0 ? (
         folderElements.map(folderElement => {
             if (folderElement.children) {
                 return (
