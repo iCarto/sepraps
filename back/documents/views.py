@@ -1,11 +1,15 @@
-from django.http import FileResponse, HttpResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_control, cache_page
+import os
+import tempfile
+import zipfile
+
+from django.http import FileResponse
+from django.views.decorators.cache import cache_control
+from documents import storage
 from documents.models import MediaNode
 from documents.serializers import MediaLeafNodeSerializer, MediaNodeSerializer
 from documents.storage import delete, open, save
 from rest_framework import parsers, status, views
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -41,13 +45,56 @@ def download(request, media_path, format=None):
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
         file = open(media_node.media_path)
-        response = FileResponse(
-            file, as_attachment=True, filename=media_node.media_name
-        )
-        return response
+        return FileResponse(file, as_attachment=True, filename=media_node.media_name)
     if media_node.media_type == "FOLDER":
-        # TODO Zip folder action
-        pass
+        zip_file = create_zip_file(media_node.children.all())
+        return FileResponse(
+            zip_file, as_attachment=True, filename=media_node.media_name + ".zip"
+        )
+
+
+def create_zip_file(documentos):
+    # TODO. To be improved. Un par de cosas a tener en cuenta:
+    # * TemporaryFile, SpooledTemporaryFile y StringIO no generan/aseguran que
+    # hay un path en disco.
+    # FileResponse nececita un path a disco y hacen un open(path, 'r'). Al acabar
+    # hace un close.
+    # NameTemporaryFile por defecto hace un open(w+b), y ZipFile si le pasamos un
+    # path hace un open(w). Es decir abrimos el fichero dos veces. Con el del FileResponse
+    # también se abriría de nuevo. En Windows esto no funciona.
+    # https://stackoverflow.com/questions/12949077/
+    # https://stackoverflow.com/questions/11967720/
+    # https://stackoverflow.com/questions/23212435/
+    # https://stackoverflow.com/questions/12881294/
+
+    tmp = tempfile.NamedTemporaryFile()
+    with zipfile.ZipFile(tmp, "w", compression=zipfile.ZIP_DEFLATED) as zip:
+        zip_folder_documents(None, documentos, zip)
+    tmp.seek(0)
+    return tmp
+
+
+def zip_folder_documents(parent_path_in_zip, documents, zip):
+
+    for document in documents:
+        if document.media_type == "DOCUMENT":
+            path_in_disk = storage.open(document.media_path)
+            if os.path.isfile(path_in_disk.name):
+                path_in_zip = os.path.join(
+                    parent_path_in_zip if parent_path_in_zip is not None else "",
+                    document.media_name,
+                )
+                zip.write(path_in_disk.name, path_in_zip)
+
+        if document.media_type == "FOLDER":
+
+            path_in_zip = (
+                os.path.join(parent_path_in_zip, document.media_name)
+                if parent_path_in_zip is not None
+                else os.path.join(document.media_name)
+            )
+
+            zip_folder_documents(path_in_zip, document.children.all(), zip)
 
 
 class MediaView(views.APIView):
