@@ -22,15 +22,19 @@ const SectionCard = ({
             sx={isSidePanelOpen === true ? cardStyle : {width: "100%"}}
             variant="outlined"
         >
-            <CardHeader
-                title={<SectionHeading label={headingLabel}>{title}</SectionHeading>}
-                action={
-                    secondaryActions && secondaryActions.length ? (
-                        <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>
-                    ) : null
-                }
-            />
-            <CardContent>{props.children}</CardContent>
+            {secondaryActions || title !== "" ? (
+                <CardHeader
+                    title={
+                        <SectionHeading label={headingLabel}>{title}</SectionHeading>
+                    }
+                    action={
+                        secondaryActions && secondaryActions.length ? (
+                            <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>
+                        ) : null
+                    }
+                />
+            ) : null}
+            <CardContent sx={props.contentStyle}>{props.children}</CardContent>
         </Card>
     );
 };

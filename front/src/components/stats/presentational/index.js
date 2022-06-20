@@ -7,3 +7,4 @@ export {default as StatsByPhaseFilter} from "./StatsByPhaseFilter";
 export {default as StatsFilterForm} from "./StatsFilterForm";
 export {default as StatsByGenderTable} from "./StatsByGenderTable";
 export {default as StatsByGenderChart} from "./StatsByGenderChart";
+export {default as StatsByPhasePieChart} from "./StatsByPhasePieChart";

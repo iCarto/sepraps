@@ -4,15 +4,19 @@ import {
     EventService,
     NotificationService,
     ProjectService,
+    StatsService,
 } from "service/api";
 
 import {PageLayout} from "layout";
+import {ComingEventsWidget, NotificationsWidget} from ".";
 import {SectionCard, SmallIconCard} from "components/common/presentational";
 import {LatestProjectsList} from "components/project/presentational";
 import {LatestContractsList} from "components/contracts/presentational";
-import {ComingEventsWidget, NotificationsWidget} from ".";
+import {StatsByPhasePieChart} from "components/stats/presentational";
 
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
@@ -96,17 +100,28 @@ const ViewHomePage = () => {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
-                            <SmallIconCard
-                                heading="Proyectos"
-                                figureContent={numberOfProjects}
-                                urlPath="/projects"
-                                icon={
-                                    <FactCheckOutlinedIcon
-                                        sx={{fontSize: "60px", lineHeight: 0}}
-                                    />
-                                }
-                            />
+                        <Grid item container xs={6}>
+                            <SectionCard
+                                headingLabel={false}
+                                contentStyle={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    mt: 1,
+                                }}
+                            >
+                                <Typography
+                                    variant="overline"
+                                    lineHeight={1}
+                                    color="grey.800"
+                                    mb={3}
+                                >
+                                    Proyectos por fase
+                                </Typography>
+                                <Box sx={{maxWidth: 165}}>
+                                    <StatsByPhasePieChart data={statsByPhaseData} />
+                                </Box>
+                            </SectionCard>
                         </Grid>
                         <Grid item xs={12}>
                             <SectionCard
