@@ -12,7 +12,6 @@ import {contractor_view_adapter} from "./Contractor";
 
 class Contracts extends Array {}
 
-//Calcular aquí la fecha prevista de fin pero que no se guarde en bd
 const contract_api_adapter = contract => {
     // in back-end falsy values are null
     contract["bid_request_date"] = contract["bid_request_date"]
@@ -54,6 +53,15 @@ const contract_api_adapter = contract => {
               new Date(contract["execution_certificate_start_date"]),
               contract["expected_execution_period"]
           )
+        : null;
+
+    contract["expected_execution_period_in_months"] = contract[
+        "expected_execution_period"
+    ]
+        ? DateUtil.getMonths(
+              new Date(contract["execution_certificate_start_date"]),
+              new Date(contract["expected_execution_end_date"])
+          ) + 1
         : null;
     contract["warranty_end_date"] = contract["warranty_end_date"]
         ? new Date(contract["warranty_end_date"])
@@ -100,6 +108,7 @@ const contract_view_adapter = contract => {
     contract["expected_execution_period"] = !!contract["expected_execution_period"]
         ? NumberUtil.parseIntOrNull(contract["expected_execution_period"])
         : null;
+
     contract["warranty_end_date"] = !!contract["warranty_end_date"]
         ? DateUtil.formatDate(
               contract["warranty_end_date"],
@@ -173,6 +182,7 @@ const createContract = ({
     execution_certificate_start_date = null,
     execution_final_delivery_date = null,
     expected_execution_period = null,
+    expected_execution_period_in_months = null,
     expected_execution_end_date = null,
     warranty_end_date = null,
     projects = [],
@@ -201,6 +211,7 @@ const createContract = ({
         social_supervisor,
         execution_signature_date,
         expected_execution_period,
+        expected_execution_period_in_months,
         execution_certificate_start_date,
         execution_final_delivery_date,
         expected_execution_end_date,

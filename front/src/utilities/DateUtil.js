@@ -1,4 +1,4 @@
-import {format, parse, add, addDays} from "date-fns";
+import {format, parse, add, addDays, differenceInCalendarMonths} from "date-fns";
 import {es} from "date-fns/locale";
 import TextUtil from "./TextUtil";
 
@@ -61,6 +61,9 @@ const DateUtil = {
     },
     formatYearAndMonth(date) {
         return `${this.getMonthName(date.getMonth() + 1)} / ${date.getFullYear()}`;
+    },
+    getMonths(firstDate, lastDate) {
+        return differenceInCalendarMonths(lastDate, firstDate);
     },
 };
 
