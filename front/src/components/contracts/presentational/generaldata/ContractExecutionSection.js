@@ -42,6 +42,12 @@ const ContractExecutionSection = () => {
             );
     };
 
+    const getExpectedExecutionPeriodInfo = () => {
+        if (contract.execution_certificate_start_date) {
+            return `${contract.expected_execution_period} días (${contract.expected_execution_period_in_months} meses)`;
+        } else return `${contract.expected_execution_period} días`;
+    };
+
     return (
         <SectionCard title="Ejecución" secondaryActions={secondaryActions}>
             {getDatetInfo(
@@ -56,15 +62,16 @@ const ContractExecutionSection = () => {
             {contract.expected_execution_period ? (
                 <SectionField
                     label="Plazo previsto de ejecución:"
-                    value={contract.expected_execution_period + " días"}
+                    value={getExpectedExecutionPeriodInfo()}
                 />
             ) : (
                 getNoDatetMessage("Plazo previsto de ejecución:")
             )}
-            {getDatetInfo(
-                "Fecha prevista de fin de ejecución:",
-                contract.expected_execution_end_date
-            )}
+            {contract.execution_certificate_start_date &&
+                getDatetInfo(
+                    "Fecha prevista de fin de ejecución:",
+                    contract.expected_execution_end_date
+                )}
             {getDatetInfo(
                 "Fecha de recepción definitiva:",
                 contract.execution_final_delivery_date
