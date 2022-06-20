@@ -106,7 +106,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         if "projects" in response:
             response["projects"] = ProjectSummarySerializer(
-                instance.projects, many=True
+                instance.projects, many=True, context=self.context
             ).data
         if "financing_program" in response:
             response["financing_program"] = (
