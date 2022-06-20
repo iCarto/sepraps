@@ -34,7 +34,7 @@ const UpdateContractPanel = () => {
     };
 
     const handleCloseSidebar = () => {
-        navigate(`/contracts/${contract.id}/summary`);
+        navigate(path);
     };
 
     return (
