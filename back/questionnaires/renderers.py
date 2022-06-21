@@ -1,16 +1,24 @@
+import locale
 from datetime import datetime
 from io import BytesIO
 
+import pandas as pd
 from rest_framework import renderers
 
 
-class CSVFileRenderer(renderers.BaseRenderer):
+class DataFrameCSVFileRenderer(renderers.BaseRenderer):
     media_type = "text/csv"
     format = "csv"
     charset = None
     render_style = "binary"
 
-    def render(self, data, media_type=None, renderer_context=None):
+    def render(self, df, media_type=None, renderer_context=None):
+        float_column_names = df.select_dtypes(include=["float64"]).columns.tolist()
+        for column_name in float_column_names:
+            df[column_name] = df[column_name].apply(
+                lambda x: locale.format_string("%.2f", x) if not pd.isna(x) else None
+            )
+
         if renderer_context is not None:
             path = renderer_context["request"].get_full_path()
             filename = "{}_{}".format(
@@ -21,5 +29,18 @@ class CSVFileRenderer(renderers.BaseRenderer):
             ] = "attachment; filename={}.csv".format(filename)
 
         buffer = BytesIO()
-        data.to_csv(buffer, index=False)
+        df.to_csv(buffer, index=False)
         return buffer.getvalue()
+
+
+class DataFrameJSONRenderer(renderers.BaseRenderer):
+    media_type = "application/json"
+    format = "json"
+
+    def render(self, df, media_type=None, renderer_context=None):
+        float_column_names = df.select_dtypes(include=["float64"]).columns.tolist()
+        for column_name in float_column_names:
+            df[column_name] = df[column_name].apply(
+                lambda x: "{0:.2f}".format(x) if not pd.isna(x) else None
+            )
+        return pd.io.json.dumps(df.to_dict(orient="list"))
