@@ -141,7 +141,15 @@ const ViewHomePage = () => {
                             </SectionCard>
                         </Grid>
                     </Grid>
-                    <Grid item container xs={12} md={6} lg={7} spacing={3}>
+                    <Grid
+                        item
+                        container
+                        xs={12}
+                        md={6}
+                        lg={7}
+                        spacing={3}
+                        alignContent="flex-start"
+                    >
                         <Grid item xs={12}>
                             <NotificationsWidget notifications={notifications} />
                         </Grid>
