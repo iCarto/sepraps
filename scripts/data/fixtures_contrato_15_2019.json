@@ -2787,7 +2787,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "51078850",
+            "expected_value": "81078850",
             "value": "2533181"
         }
     },
@@ -2799,7 +2799,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "51078850",
+            "expected_value": "81078850",
             "value": "4611376"
         }
     },
@@ -2811,7 +2811,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "51078850",
+            "expected_value": "81078850",
             "value": "9222751"
         }
     },
@@ -2823,7 +2823,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "25539425",
+            "expected_value": "55539425",
             "value": "23056878"
         }
     },
@@ -2835,7 +2835,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "25539425",
+            "expected_value": "55539425",
             "value": "3952608"
         }
     },
@@ -2847,7 +2847,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "25539425",
+            "expected_value": "55539425",
             "value": "8475304"
         }
     },
@@ -2859,7 +2859,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "12769712",
+            "expected_value": "52769712",
             "value": null
         }
     },
@@ -2871,7 +2871,7 @@
             "code": "monto_certificado",
             "datatype": "integer",
             "label": "Monto certificado",
-            "expected_value": "12769712",
+            "expected_value": "52769712",
             "value": null
         }
     },
