@@ -1,13 +1,19 @@
 import {LineChart} from "components/common/chart";
 
-const QuestionnaireAccumulatedLineChart = ({field, data}) => {
+const QuestionnaireAccumulatedLineChart = ({field, data, showPercentage}) => {
+    const realValuesColumn = "real_values_acc" + (showPercentage ? "_perc" : "");
+    const expectedValuesColumn =
+        "expected_values_acc" + (showPercentage ? "_perc" : "");
+    const extendedValuesColumn =
+        "extended_values_acc" + (showPercentage ? "_perc" : "");
+
     let datasets = [
         {
             label: "Ejecutado",
-            pointRadius: 2,
-            data: data["real_values_acc"],
-            borderColor: "rgb(2, 94, 170)",
-            backgroundColor: "rgba(2, 94, 170)",
+            pointRadius: 3,
+            data: data[realValuesColumn],
+            borderColor: "#5b9bd5",
+            backgroundColor: "#5b9bd5",
         },
     ];
 
@@ -21,39 +27,41 @@ const QuestionnaireAccumulatedLineChart = ({field, data}) => {
             legend: {
                 position: "top",
                 labels: {
-                    filter: function(legend) {
-                        return legend.text !== "Tope previsto";
-                    },
+                    usePointStyle: true,
                 },
             },
             title: {
                 display: true,
-                text: `${field.label} - Acumulado`,
+                text: `${field.label} - Acumulado${showPercentage ? " (%)" : ""}`,
             },
         },
     };
 
     if (field.include_expected_value === true) {
-        const lastExpectedValue = data["expected_values_acc"]
-            ? data["expected_values_acc"].filter(value => value !== "-").slice(-1)[0]
+        const lastExpectedValue = data[expectedValuesColumn]
+            ? data[expectedValuesColumn].filter(value => value !== "-").slice(-1)[0]
             : 0;
 
         datasets = [
             {
                 label: "Previsto",
-                pointRadius: 2,
-                data: data["expected_values_acc"],
-                borderColor: "rgba(239, 163, 54)",
-                backgroundColor: "rgba(239, 163, 54)",
+                pointRadius: 3,
+                data: data[expectedValuesColumn],
+                borderColor: "#ed7d31",
+                backgroundColor: "#ed7d31",
             },
-            {
-                label: "Previsto (ampliado)",
-                data: data["extended_values"],
-                borderColor: "#8B6A36",
-                backgroundColor: "#8B6A36",
-            },
+            data[extendedValuesColumn]
+                ? {
+                      label: "Previsto (ampliado)",
+                      pointRadius: 3,
+                      data: data[extendedValuesColumn],
+                      borderColor: "#8B6A36",
+                      backgroundColor: "#8B6A36",
+                  }
+                : null,
             ...datasets,
-        ];
+        ].filter(n => n);
+
         chartOptions["plugins"] = {
             ...chartOptions.plugins,
             annotation: {
@@ -73,7 +81,7 @@ const QuestionnaireAccumulatedLineChart = ({field, data}) => {
 
     return (
         <LineChart
-            title={`${field.label} - Acumulado`}
+            title={`${field.label} - Acumulado${showPercentage ? " (%)" : ""}`}
             labels={data["index"]}
             datasets={datasets}
             options={chartOptions}

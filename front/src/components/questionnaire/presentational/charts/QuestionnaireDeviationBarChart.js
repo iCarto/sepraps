@@ -1,15 +1,17 @@
 import {BarChart} from "components/common/chart";
 
-const QuestionnaireDeviationBarChart = ({field, data}) => {
+const QuestionnaireDeviationBarChart = ({field, data, showPercentage}) => {
+    const variationColumn = "variation" + (showPercentage ? "_perc" : "");
+
     let datasets = [
         {
             label: "Variación",
-            data: data["variation"],
+            data: data[variationColumn],
             borderColor: "rgb(2, 94, 170)",
             backgroundColor: context => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                return value < 0 ? "#D4D4D4" : "#5f5f5f";
+                return value < 0 ? "#94bee3" : "#5b9bd5";
             },
         },
     ];
@@ -21,18 +23,20 @@ const QuestionnaireDeviationBarChart = ({field, data}) => {
             },
             title: {
                 display: true,
-                text: `${field.label} - Variación`,
+                text: `${field.label} - Variación${showPercentage ? " (%)" : ""}`,
             },
         },
     };
 
     return (
-        <BarChart
-            title={`${field.label} - Variación`}
-            labels={data["index"]}
-            datasets={datasets}
-            options={chartOptions}
-        />
+        data[variationColumn] && (
+            <BarChart
+                title={`${field.label} - Variación${showPercentage ? " (%)" : ""}`}
+                labels={data["index"]}
+                datasets={datasets}
+                options={chartOptions}
+            />
+        )
     );
 };
 
