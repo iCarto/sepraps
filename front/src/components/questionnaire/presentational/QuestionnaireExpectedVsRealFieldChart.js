@@ -12,23 +12,61 @@ import Grid from "@mui/material/Grid";
 import {
     QuestionnaireAccumulatedLineChart,
     QuestionnaireDeviationBarChart,
-    QuestionnaireTotalBarChart,
+    QuestionnaireMonthlylBarChart,
 } from "components/questionnaire/presentational/charts";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const QuestionnaireExpectedVsRealFieldChart = ({field, data}) => {
     const [chartType, setChartType] = useState("values_acc");
+    const [chartPercentage, setChartPercentage] = useState("abs");
 
-    const handleChange = event => {
+    const handleChangeChartType = event => {
         setChartType(event.target.value);
     };
 
-    console.log({data});
+    const handleChangeChartPercentage = event => {
+        setChartPercentage(event.target.value);
+    };
+
+    const getChart = chartType => {
+        if (chartType === "values") {
+            return (
+                <QuestionnaireMonthlylBarChart
+                    field={field}
+                    data={data}
+                    showPercentage={chartPercentage === "perc"}
+                />
+            );
+        }
+        if (chartType === "values_acc") {
+            return (
+                <QuestionnaireAccumulatedLineChart
+                    field={field}
+                    data={data}
+                    showPercentage={chartPercentage === "perc"}
+                />
+            );
+        }
+        if (chartType === "variation") {
+            return (
+                <QuestionnaireDeviationBarChart
+                    field={field}
+                    data={data}
+                    showPercentage={chartPercentage === "perc"}
+                />
+            );
+        }
+        return null;
+    };
 
     return (
         <Grid container justifyContent="flex-end" spacing={3}>
-            {/*<Grid item xs={3}>
+            <Grid item xs={3}>
                 <FormControl fullWidth>
                     <InputLabel id="chart-type-select-label">Mostrar</InputLabel>
                     <Select
@@ -36,28 +74,30 @@ const QuestionnaireExpectedVsRealFieldChart = ({field, data}) => {
                         id="chart-type-select"
                         value={chartType}
                         label="Mostrar"
-                        onChange={handleChange}
+                        onChange={handleChangeChartType}
                     >
-                        <MenuItem value={"values"}>Total</MenuItem>
-                        <MenuItem value={"values_perc"}>Total (%)</MenuItem>
+                        <MenuItem value={"values"}>Mensual</MenuItem>
                         <MenuItem value={"values_acc"}>Acumulado</MenuItem>
-                        <MenuItem value={"values_acc_perc"}>Acumulado (%)</MenuItem>
                         <MenuItem value={"variation"}>Variación</MenuItem>
-                        <MenuItem value={"variation_perc"}>Variación (%)</MenuItem>
                     </Select>
                 </FormControl>
-    </Grid>*/}
+            </Grid>
+            <Grid item xs={3}>
+                <FormControl fullWidth>
+                    <Select
+                        labelId="chart-perc-select-label"
+                        id="chart-perc-select"
+                        value={chartPercentage}
+                        onChange={handleChangeChartPercentage}
+                    >
+                        <MenuItem value={"abs"}>Absoluto</MenuItem>
+                        <MenuItem value={"perc"}>Porcentaje (%)</MenuItem>
+                    </Select>
+                </FormControl>
+            </Grid>
             <Grid item xs={12}>
-                <QuestionnaireAccumulatedLineChart field={field} data={data} />
+                {getChart(chartType)}
             </Grid>
-            <Grid item xs={field.include_expected_value === true ? 6 : 12}>
-                <QuestionnaireTotalBarChart field={field} data={data} />
-            </Grid>
-            {field.include_expected_value === true && (
-                <Grid item xs={6}>
-                    <QuestionnaireDeviationBarChart field={field} data={data} />
-                </Grid>
-            )}
         </Grid>
     );
 };

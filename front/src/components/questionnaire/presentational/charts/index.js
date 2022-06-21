@@ -1,7 +1,9 @@
 export {
     default as QuestionnaireAccumulatedLineChart,
 } from "./QuestionnaireAccumulatedLineChart";
-export {default as QuestionnaireTotalBarChart} from "./QuestionnaireTotalBarChart";
+export {
+    default as QuestionnaireMonthlylBarChart,
+} from "./QuestionnaireMonthlylBarChart";
 export {
     default as QuestionnaireDeviationBarChart,
 } from "./QuestionnaireDeviationBarChart";
