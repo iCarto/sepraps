@@ -14,12 +14,24 @@ import AuthApiService from "./AuthApiService";
 
 const basePath = "/api/monitoring/projects";
 
+const getQueryStringByFilter = filter => {
+    return Object.keys(filter)
+        .filter(key => filter[key])
+        .map(key => {
+            return key + "=" + filter[key];
+        })
+        .join("&");
+};
+
 const ProjectService = {
     getProjects(filter) {
-        const path = basePath + "?status=" + filter.status;
-        return AuthApiService.get(path).then(response => {
-            return createProjectsSummaries(projects_summaries_api_adapter(response));
-        });
+        return AuthApiService.get(`${basePath}?${getQueryStringByFilter(filter)}`).then(
+            response => {
+                return createProjectsSummaries(
+                    projects_summaries_api_adapter(response)
+                );
+            }
+        );
     },
 
     getProjectsBySearchText(searchText) {

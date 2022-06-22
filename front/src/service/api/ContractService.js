@@ -12,16 +12,22 @@ export const TEMPLATE = {
 
 const basePath = "/api/monitoring/constructioncontracts";
 
+const getQueryStringByFilter = filter => {
+    return Object.keys(filter)
+        .filter(key => filter[key])
+        .map(key => {
+            return key + "=" + filter[key];
+        })
+        .join("&");
+};
+
 const ContractService = {
-    getContracts(showClosed = false, template = null) {
-        const path =
-            basePath +
-            (showClosed ? "?status=all" : "?status=active") +
-            (template ? `&template=${template}` : "");
-        console.log({showClosed}, {path});
-        return AuthApiService.get(path).then(response => {
-            return createContracts(contracts_api_adapter(response));
-        });
+    getContracts(filter) {
+        return AuthApiService.get(`${basePath}?${getQueryStringByFilter(filter)}`).then(
+            response => {
+                return createContracts(contracts_api_adapter(response));
+            }
+        );
     },
 
     getContractsBySearchText(searchText) {
