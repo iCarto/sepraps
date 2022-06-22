@@ -34,7 +34,7 @@ const LatestContractsList = ({contracts}) => {
                 sx={{
                     display: "flex",
                     flexDirection: "row",
-                    flexWrap: {xs: "wrap", xl: "noWrap"},
+                    flexWrap: {xs: "wrap", md: "noWrap"},
                     p: 1,
                     pt: 0,
                 }}

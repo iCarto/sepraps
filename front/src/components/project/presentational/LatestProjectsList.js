@@ -35,7 +35,7 @@ const LatestProjectsList = ({projects}) => {
                 sx={{
                     display: "flex",
                     flexDirection: "row",
-                    flexWrap: {xs: "wrap", xl: "noWrap"},
+                    flexWrap: {xs: "wrap", md: "noWrap"},
                     p: 1,
                     pt: 0,
                 }}
