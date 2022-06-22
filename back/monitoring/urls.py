@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
-from monitoring.views import stats_views
+from monitoring.views import notifications_views, stats_views
 from monitoring.views.constructrion_contract_viewset import ConstructionContractViewSet
 from monitoring.views.contact_viewset import ContactViewSet
 from monitoring.views.contractor_viewset import ContractorViewSet
@@ -39,4 +39,5 @@ urlpatterns = [
         stats_views.get_monthly_questionnaire_stats,
     ),
     path("stats/contacts/gender", stats_views.get_provider_gender_stats),
+    path("notifications", notifications_views.get_notifications),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
