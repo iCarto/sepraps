@@ -124,3 +124,17 @@ def get_provider_gender_stats(request, format=None):
         for row in data:
             row["gender_name"] = dict(GENDER_CHOICES).get(row["gender"], row["gender"])
         return Response(data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_project_and_contract_stats(request, format=None):
+    with connection.cursor() as cursor:
+        query = """
+            SELECT 'opened_projects' as name, COUNT(*) as total FROM project p WHERE p.closed = FALSE
+            UNION
+            SELECT 'opened_contracts' as name, COUNT(*) as total FROM construction_contract cc WHERE cc.closed = FALSE;
+            """
+        cursor.execute(query)
+
+        return Response(dictfetchall(cursor))
