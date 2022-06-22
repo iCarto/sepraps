@@ -31,6 +31,7 @@ from rest_framework.response import Response
 class ProjectFilter(filters.FilterSet):
     status = filters.CharFilter(method="filter_by_status")
     search = filters.CharFilter(method="filter_by_search_text")
+    last_modified_items = filters.CharFilter(method="filter_by_last_modified_items")
 
     def filter_by_status(self, queryset, name, status):
         if status == "active":
@@ -42,6 +43,10 @@ class ProjectFilter(filters.FilterSet):
             Q(linked_localities__name__icontains=search_text)
             | Q(code__icontains=search_text)
         ).distinct()
+
+    def filter_by_last_modified_items(self, queryset, name, last_modified_items):
+        limit = int(last_modified_items)
+        return queryset.filter(closed=False).order_by("-updated_at")[:limit]
 
     class Meta:
         model = Project
@@ -66,7 +71,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
-        queryset = Project.objects.order_by("-created_at")
+        queryset = Project.objects.order_by("-updated_at")
         if self.action == "milestones":
             return queryset
         return self.get_serializer_class().setup_eager_loading(queryset)

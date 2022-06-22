@@ -9,13 +9,12 @@ from monitoring.serializers.construction_contract_serializer import (
     ConstructionContractSummarySerializer,
 )
 from rest_framework import viewsets
-from rest_framework.decorators import action
-from rest_framework.response import Response
 
 
 class ConstructionContractFilter(filters.FilterSet):
     status = filters.CharFilter(method="filter_by_status")
     search = filters.CharFilter(method="filter_by_search_text")
+    last_modified_items = filters.CharFilter(method="filter_by_last_modified_items")
 
     def filter_by_status(self, queryset, name, status):
         if status == "active":
@@ -26,6 +25,10 @@ class ConstructionContractFilter(filters.FilterSet):
     def filter_by_search_text(self, queryset, name, search_text):
 
         return queryset.filter(Q(number__icontains=search_text))
+
+    def filter_by_last_modified_items(self, queryset, name, last_modified_items):
+        limit = int(last_modified_items)
+        return queryset.filter(closed=False).order_by("-updated_at")[:limit]
 
     class Meta:
         model = ConstructionContract
