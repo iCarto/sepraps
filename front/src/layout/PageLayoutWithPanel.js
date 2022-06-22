@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Outlet} from "react-router-dom";
+import {useTheme} from "@emotion/react";
 
 import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
@@ -33,7 +34,7 @@ const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
         }),
         backgroundColor:
             theme.palette.mode === "light"
-                ? theme.palette.grey[100]
+                ? theme.palette.pageBackground
                 : theme.palette.grey[900],
         height: "calc(100vh - 64px)",
         minHeight: "100%",
@@ -45,6 +46,8 @@ const PageLayoutWithPanel = ({
     getIsSidePanelOpen = null,
     ...props
 }) => {
+    const theme = useTheme();
+
     const [rightPanelDrawerOpened, setRightPanelDrawerOpened] = useState(false);
 
     const getRightPanelDrawerStatus = () => {
@@ -61,7 +64,7 @@ const PageLayoutWithPanel = ({
                 maxWidth="lg"
                 sx={{
                     p: 3,
-                    backgroundColor: "grey.100",
+                    backgroundColor: theme.palette.pageBackground,
                 }}
             >
                 {props.children}

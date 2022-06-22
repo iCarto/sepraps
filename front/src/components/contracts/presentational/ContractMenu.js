@@ -1,58 +1,52 @@
-import {MenuListItemLink, MenuListItemIcon} from "components/common/presentational";
-import SelectContractDropDown from "../container/SelectContractDropDown";
+import {useTheme} from "@emotion/react";
+
+import {SelectContractDropDown} from "../container";
+import {MenuListItemLink} from "components/common/presentational";
 import {QuestionnairesMenu} from "components/questionnaire/presentational";
 
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import MenuList from "@mui/material/MenuList";
-import ListItemText from "@mui/material/ListItemText";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 
 const ContractMenu = ({contract}) => {
+    const theme = useTheme();
+
+    const toolbarStyle = {backgroundColor: theme.palette.primary.main};
+
     return (
         contract && (
-            <Box sx={{height: "100%", backgroundColor: "grey.200"}}>
-                <Toolbar
-                    sx={{
-                        backgroundColor: "grey.700",
-                    }}
-                    variant="dense"
-                    disableGutters
-                >
+            <Box sx={{height: "100%", backgroundColor: "#ffff"}}>
+                <Toolbar sx={toolbarStyle} variant="dense" disableGutters>
                     <SelectContractDropDown selectedContract={contract} />
                 </Toolbar>
                 <Divider />
                 <Box>
                     <MenuList sx={{pt: 0}}>
-                        <MenuListItemLink to={`/contracts/${contract?.id}/summary`}>
-                            <MenuListItemIcon>
-                                <InfoOutlinedIcon />
-                            </MenuListItemIcon>
-                            <ListItemText primary="Información" />
-                        </MenuListItemLink>
-                        <MenuListItemLink to={`/contracts/${contract?.id}/phases`}>
-                            <MenuListItemIcon>
-                                <EventNoteIcon />
-                            </MenuListItemIcon>
-                            <ListItemText primary="Fases" />
-                        </MenuListItemLink>
-                        <MenuListItemLink to={`/contracts/${contract?.id}/monitoring`}>
-                            <MenuListItemIcon>
-                                <PermContactCalendarIcon />
-                            </MenuListItemIcon>
-                            <ListItemText primary="Supervisión" />
-                        </MenuListItemLink>
-
-                        <MenuListItemLink to={`/contracts/${contract?.id}/projects`}>
-                            <MenuListItemIcon>
-                                <FactCheckOutlinedIcon />
-                            </MenuListItemIcon>
-                            <ListItemText primary="Proyectos" />
-                        </MenuListItemLink>
+                        <MenuListItemLink
+                            to={`/contracts/${contract?.id}/summary`}
+                            text="Información"
+                            icon={<InfoOutlinedIcon />}
+                        />
+                        <MenuListItemLink
+                            to={`/contracts/${contract?.id}/phases`}
+                            text="Fases"
+                            icon={<EventNoteIcon />}
+                        />
+                        <MenuListItemLink
+                            to={`/contracts/${contract?.id}/monitoring`}
+                            text="Supervisión"
+                            icon={<PermContactCalendarIcon />}
+                        />
+                        <MenuListItemLink
+                            to={`/contracts/${contract?.id}/projects`}
+                            text="Proyectos"
+                            icon={<FactCheckOutlinedIcon />}
+                        />
                         <QuestionnairesMenu
                             questionnaires={contract.questionnaires}
                             basePath={`/contracts/${contract?.id}`}
