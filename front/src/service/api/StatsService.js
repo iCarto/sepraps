@@ -63,6 +63,14 @@ const StatsService = {
             return response;
         });
     },
+
+    getStatsByProjectsAndContracts(filter = {}) {
+        return AuthApiService.get(`/api/monitoring/stats/projectandcontract`).then(
+            response => {
+                return response;
+            }
+        );
+    },
 };
 
 export default StatsService;
