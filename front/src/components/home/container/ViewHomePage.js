@@ -67,7 +67,6 @@ const ViewHomePage = () => {
                     container
                     xs={12}
                     md={6}
-                    lg={5}
                     spacing={3}
                     alignContent="flex-start"
                 >
@@ -141,7 +140,6 @@ const ViewHomePage = () => {
                     container
                     xs={12}
                     md={6}
-                    lg={7}
                     spacing={3}
                     alignContent="flex-start"
                 >
