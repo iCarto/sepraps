@@ -12,7 +12,7 @@ import {ComingEventsWidget, NotificationsWidget} from ".";
 import {SectionCard, SmallIconCard} from "components/common/presentational";
 import {LatestProjectsList} from "components/project/presentational";
 import {LatestContractsList} from "components/contracts/presentational";
-import {StatsByPhasePieChart} from "components/stats/presentational";
+import {StatsByPhaseChart} from "components/stats/presentational";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -71,7 +71,7 @@ const ViewHomePage = () => {
                     spacing={3}
                     alignContent="flex-start"
                 >
-                    <Grid item container xs={6} spacing={2}>
+                    <Grid item container xs={4} spacing={2}>
                         <Grid item xs={12}>
                             <SmallIconCard
                                 heading="Contratos"
@@ -97,7 +97,7 @@ const ViewHomePage = () => {
                             />
                         </Grid>
                     </Grid>
-                    <Grid item container xs={6}>
+                    <Grid item container xs={8}>
                         <SectionCard
                             headingLabel={false}
                             contentStyle={{
@@ -115,8 +115,8 @@ const ViewHomePage = () => {
                             >
                                 Proyectos por fase
                             </Typography>
-                            <Box sx={{maxWidth: 165}}>
-                                <StatsByPhasePieChart data={statsByPhaseData} />
+                            <Box>
+                                <StatsByPhaseChart data={statsByPhaseData} />
                             </Box>
                         </SectionCard>
                     </Grid>
