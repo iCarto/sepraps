@@ -12,6 +12,7 @@ const customTheme = createTheme({
         primary: {
             main: "#025eaa",
             light: "#538bdc",
+            lighter: "#ddebff",
             dark: "#00357a",
             contrastText: "#fff",
         },
@@ -53,6 +54,7 @@ const customTheme = createTheme({
             light: "#f2aeae",
             dark: "#aa2e25",
         },
+        pageBackground: "#e0e0e0",
     },
 });
 

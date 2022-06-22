@@ -32,7 +32,7 @@ const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
         }),
         backgroundColor:
             theme.palette.mode === "light"
-                ? theme.palette.grey[100]
+                ? theme.palette.pageBackground
                 : theme.palette.grey[900],
         height: "calc(100vh - 64px)",
         minHeight: "100%",
@@ -53,7 +53,7 @@ const SubPageLayout = ({
                     p: 3,
                     backgroundColor: theme =>
                         theme.palette.mode === "light"
-                            ? theme.palette.grey[100]
+                            ? theme.palette.pageBackground
                             : theme.palette.grey[900],
                 }}
             >

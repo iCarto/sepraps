@@ -1,15 +1,13 @@
+import {useEffect, useState} from "react";
+import {QuestionnaireService} from "service/api/questionnaires";
 import {MenuListItemLink} from "components/common/presentational";
 import {QuestionnairesMenu} from "components/questionnaire/presentational";
 
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import MenuList from "@mui/material/MenuList";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import LinearScaleIcon from "@mui/icons-material/LinearScale";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
-import {useEffect, useState} from "react";
-import {QuestionnaireService} from "service/api/questionnaires";
 
 const StatsMenu = () => {
     const [questionnaires, setQuestionnaires] = useState([]);
@@ -21,26 +19,24 @@ const StatsMenu = () => {
     }, []);
 
     return (
-        <Box sx={{height: "100%", backgroundColor: "grey.200"}}>
+        <Box sx={{height: "100%", backgroundColor: "#ffff"}}>
             <Divider />
             <Box>
                 <MenuList sx={{pt: 0}}>
-                    <MenuListItemLink to={`/stats/phase`}>
-                        <ListItemIcon style={{minWidth: "40px"}}>
-                            <LinearScaleIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Fases" />
-                    </MenuListItemLink>
+                    <MenuListItemLink
+                        to={`/stats/phase`}
+                        text="Fases"
+                        icon={<LinearScaleIcon />}
+                    />
                     <QuestionnairesMenu
                         questionnaires={questionnaires}
                         basePath={`/stats`}
                     />
-                    <MenuListItemLink to={`/stats/gender`}>
-                        <ListItemIcon style={{minWidth: "40px"}}>
-                            <PermContactCalendarOutlinedIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Género" />
-                    </MenuListItemLink>
+                    <MenuListItemLink
+                        to={`/stats/gender`}
+                        text="Género"
+                        icon={<PermContactCalendarOutlinedIcon />}
+                    />
                 </MenuList>
             </Box>
         </Box>

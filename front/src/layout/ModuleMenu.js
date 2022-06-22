@@ -6,8 +6,6 @@ import {MenuListItemLink} from "components/common/presentational";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import Tooltip from "@mui/material/Tooltip";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
@@ -24,7 +22,7 @@ const closedMixin = theme => ({
     [theme.breakpoints.up("sm")]: {
         width: `calc(${theme.spacing(9)} + 1px)`,
     },
-    backgroundColor: theme.palette.grey[200],
+    backgroundColor: theme.palette.grey[50],
 });
 
 const DrawerHeader = styled("div")(({theme}) => ({
@@ -57,28 +55,22 @@ const ModuleMenu = () => {
             <DrawerHeader />
             <Divider />
             <List>
-                <MenuListItemLink to={`/projects`}>
-                    <Tooltip title="Proyectos" placement="bottom-end">
-                        <ListItemIcon>
-                            <FactCheckOutlinedIcon />
-                        </ListItemIcon>
-                    </Tooltip>
-                </MenuListItemLink>
-                <MenuListItemLink to={`/contracts`}>
-                    <Tooltip title="Contratos" placement="bottom-end">
-                        <ListItemIcon>
-                            <WorkOutlineOutlinedIcon />
-                        </ListItemIcon>
-                    </Tooltip>
-                </MenuListItemLink>
+                <MenuListItemLink
+                    to={`/projects`}
+                    tooltipTitle="Proyectos"
+                    icon={<FactCheckOutlinedIcon />}
+                />
+                <MenuListItemLink
+                    to={`/contracts`}
+                    tooltipTitle="Contratos"
+                    icon={<WorkOutlineOutlinedIcon />}
+                />
                 <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                    <MenuListItemLink to={`/stats/phase`}>
-                        <Tooltip title="Resultados" placement="bottom-end">
-                            <ListItemIcon>
-                                <QueryStatsIcon />
-                            </ListItemIcon>
-                        </Tooltip>
-                    </MenuListItemLink>
+                    <MenuListItemLink
+                        to={`/stats/phase`}
+                        tooltipTitle="Resultados"
+                        icon={<QueryStatsIcon />}
+                    />
                 </AuthAction>
             </List>
         </Drawer>

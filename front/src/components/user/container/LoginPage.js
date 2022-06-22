@@ -44,7 +44,13 @@ const LoginPage = () => {
                 alignItems: "center",
             }}
         >
-            <Grid container component={Paper} elevation={6} square>
+            <Grid
+                container
+                component={Paper}
+                elevation={6}
+                square
+                sx={{borderRadius: "3px"}}
+            >
                 <Grid
                     item
                     xs={12}
@@ -60,6 +66,7 @@ const LoginPage = () => {
                                 : t.palette.grey[900],
                         backgroundSize: "cover",
                         backgroundPosition: "center",
+                        borderRadius: "3px 0px 0 3px",
                     }}
                 />
                 <Grid item xs={12} sm={8} md={5}>
