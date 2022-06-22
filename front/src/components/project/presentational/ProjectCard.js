@@ -1,12 +1,12 @@
 import {DateUtil} from "utilities";
 
-import {ProjectTypeIcon} from "components/common/presentational";
+import {ImagePreview} from "components/document/presentational";
 import {MilestoneTimelineShort} from "components/milestone/presentational";
+import {ProjectTypeIcon} from "components/common/presentational";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
@@ -15,7 +15,6 @@ import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import {ImagePreview} from "components/document/presentational";
 
 const projectTypeIconBoxStyle = {
     position: "absolute",
@@ -23,6 +22,7 @@ const projectTypeIconBoxStyle = {
     right: 0,
     display: "flex",
     m: 1.5,
+    mb: 2.5,
     p: 0.75,
     borderRadius: "50%",
     bgcolor: "white",
@@ -35,6 +35,7 @@ const projectClassBoxStyle = {
     left: 0,
     display: "flex",
     m: 1.5,
+    mb: 2.5,
     px: 0.5,
     borderRadius: 1,
     bgcolor: "white",
