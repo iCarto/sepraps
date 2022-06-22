@@ -9,7 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
 import MenuList from "@mui/material/MenuList";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
+import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 
@@ -45,7 +45,7 @@ const ContractMenu = ({contract}) => {
                         <MenuListItemLink
                             to={`/contracts/${contract?.id}/projects`}
                             text="Proyectos"
-                            icon={<FactCheckOutlinedIcon />}
+                            icon={<BallotOutlinedIcon />}
                         />
                         <QuestionnairesMenu
                             questionnaires={contract.questionnaires}

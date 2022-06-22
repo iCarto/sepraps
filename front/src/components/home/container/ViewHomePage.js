@@ -20,6 +20,8 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
+import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
 
 const ViewHomePage = () => {
     const [projects, setprojects] = useState([]);
@@ -81,7 +83,7 @@ const ViewHomePage = () => {
                                     figureContent={contracts.length}
                                     urlPath="/contracts"
                                     icon={
-                                        <WorkOutlineOutlinedIcon
+                                        <CasesOutlinedIcon
                                             sx={{fontSize: "60px", lineHeight: 0}}
                                         />
                                     }
@@ -93,7 +95,7 @@ const ViewHomePage = () => {
                                     figureContent={projects.length}
                                     urlPath="/projects"
                                     icon={
-                                        <FactCheckOutlinedIcon
+                                        <BallotOutlinedIcon
                                             sx={{fontSize: "60px", lineHeight: 0}}
                                         />
                                     }
