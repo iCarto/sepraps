@@ -31,15 +31,13 @@ const ViewHomePage = () => {
     const [statsByPhaseData, setStatsByPhaseData] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const filter = {status: "active"};
-
     useEffect(() => {
         setLoading(true);
-        ProjectService.getProjects(filter).then(data => {
+        ProjectService.getProjects({last_modified_items: 3}).then(data => {
             setProjects(data.sort((a, b) => b.updated_at - a.updated_at));
             setLoading(false);
         });
-        ContractService.getContracts(false).then(data => {
+        ContractService.getContracts({last_modified_items: 3}).then(data => {
             setContracts(data.sort((a, b) => b.updated_at - a.updated_at));
         });
         NotificationService.getNotifications().then(data => {
