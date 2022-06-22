@@ -39,6 +39,7 @@ urlpatterns = [
         stats_views.get_monthly_questionnaire_stats,
     ),
     path("stats/contacts/gender", stats_views.get_provider_gender_stats),
+    path("stats/projectandcontract", stats_views.get_project_and_contract_stats),
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
