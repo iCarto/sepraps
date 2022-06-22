@@ -3,6 +3,7 @@ import {DateUtil} from "utilities";
 import {ImagePreview} from "components/document/presentational";
 import {MilestoneTimelineShort} from "components/milestone/presentational";
 import {ProjectTypeIcon} from "components/common/presentational";
+import {ImagePreview} from "components/document/presentational";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -15,6 +16,7 @@ import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 
 const projectTypeIconBoxStyle = {
     position: "absolute",
@@ -150,7 +152,7 @@ const ProjectCard = ({project, onClick = null}) => {
                         </Stack>
                         <Stack direction="row" spacing={2}>
                             <Tooltip title="Trabajos">
-                                <FactCheckOutlinedIcon fontSize="small" />
+                                <AssignmentOutlinedIcon fontSize="small" />
                             </Tooltip>
                             <Typography variant="body2">
                                 {project.description}

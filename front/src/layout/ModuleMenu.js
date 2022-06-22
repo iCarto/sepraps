@@ -6,8 +6,8 @@ import {MenuListItemLink} from "components/common/presentational";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
-import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
+import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 
 const moduleMenuDrawerWidth = 240;
@@ -58,12 +58,12 @@ const ModuleMenu = () => {
                 <MenuListItemLink
                     to={`/projects`}
                     tooltipTitle="Proyectos"
-                    icon={<FactCheckOutlinedIcon />}
+                    icon={<BallotOutlinedIcon />}
                 />
                 <MenuListItemLink
                     to={`/contracts`}
                     tooltipTitle="Contratos"
-                    icon={<WorkOutlineOutlinedIcon />}
+                    icon={<CasesOutlinedIcon />}
                 />
                 <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                     <MenuListItemLink
