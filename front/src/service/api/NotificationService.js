@@ -5,8 +5,7 @@ const basePath = "/api/monitoring/notifications";
 
 const NotificationService = {
     getNotifications() {
-        // TO-DO: Replace by "get" when API for notifications/coming events is ready
-        return AuthApiService.getFake(basePath).then(response => {
+        return AuthApiService.get(basePath).then(response => {
             return createNotifications(response);
         });
     },

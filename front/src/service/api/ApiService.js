@@ -1,15 +1,7 @@
-// TO-DO: Remove fakeDataService when API for notifications/coming events is ready
-import {fakeDataService} from "config";
-
 import {dataService} from "config";
 import {uploadService} from "config";
 
 const ApiService = {
-    // TO-DO: Remove fakeDataService when API for notifications/coming events is ready
-    getFake(url, headers = {}) {
-        console.log("GET", url);
-        return fakeDataService.get(url, headers);
-    },
     get(url, headers = {}) {
         console.log("GET", url);
         return dataService.get(url, headers);

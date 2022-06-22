@@ -2,14 +2,6 @@ import {AuthService} from "auth";
 import ApiService from "./ApiService";
 
 export const AuthApiService = {
-    // TO-DO: Remove fakeDataService when API for notifications/coming events is ready
-    getFake(url, headers) {
-        console.log("AUTH GET", url, headers);
-        return ApiService.getFake(url, {
-            Authorization: "Bearer " + AuthService.getAccessToken(),
-            ...headers,
-        });
-    },
     get(url, headers) {
         console.log("AUTH GET", url, headers);
         return ApiService.get(url, {
