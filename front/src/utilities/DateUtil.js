@@ -70,6 +70,9 @@ const DateUtil = {
     getDayInDate(date) {
         return format(new Date(date), "d");
     },
+    getYearInDate(date) {
+        return format(new Date(date), "yyyy");
+    },
     getDaysToDate(date) {
         return differenceInDays(new Date(date), startOfToday());
     },

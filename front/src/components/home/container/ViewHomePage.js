@@ -24,7 +24,7 @@ import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
 
 const ViewHomePage = () => {
-    const [projects, setprojects] = useState([]);
+    const [projects, setProjects] = useState([]);
     const [contracts, setContracts] = useState([]);
     const [notifications, setNotifications] = useState([]);
     const [events, setEvents] = useState([]);
@@ -36,7 +36,7 @@ const ViewHomePage = () => {
     useEffect(() => {
         setLoading(true);
         ProjectService.getProjects(filter).then(data => {
-            setprojects(data.sort((a, b) => b.updated_at - a.updated_at));
+            setProjects(data.sort((a, b) => b.updated_at - a.updated_at));
             setLoading(false);
         });
         ContractService.getContracts(false).then(data => {

@@ -34,13 +34,15 @@ const ComingEventsWidget = ({events}) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        width: "60px",
-        height: "60px",
+        width: "80px",
         borderRadius: "4px",
         border: `1px solid ${theme.palette["primary"].main}`,
         color: "#fff",
         background: `${theme.palette["primary"].light}`,
         marginRight: "16px",
+        lineHeight: 1.1,
+        paddingTop: 5,
+        paddingBottom: 5,
     }));
 
     const btnStyle = {
@@ -65,7 +67,12 @@ const ComingEventsWidget = ({events}) => {
                                         }}
                                     >
                                         <DateCardContainer>
-                                            <span>
+                                            <span
+                                                style={{
+                                                    fontWeight: "600",
+                                                    fontSize: "1.5em",
+                                                }}
+                                            >
                                                 {DateUtil.getDayInDate(event.date)}
                                             </span>
                                             <span
@@ -76,25 +83,27 @@ const ComingEventsWidget = ({events}) => {
                                             >
                                                 {DateUtil.getMonthInDate(event.date)}
                                             </span>
+                                            <span
+                                                style={{
+                                                    fontSize: "0.7em",
+                                                }}
+                                            >
+                                                {DateUtil.getYearInDate(event.date)}
+                                            </span>
                                         </DateCardContainer>
                                         <ListItemText
                                             primaryTypographyProps={{
                                                 fontWeight: "medium",
                                             }}
                                             primary={event.title}
-                                            secondary={
-                                                event.message +
-                                                ` dentro de ${DateUtil.getDaysToDate(
-                                                    event.date
-                                                )} días`
-                                            }
+                                            secondary={event.message}
                                         />
                                     </ListItemButton>
                                 </ListItem>
                                 <Divider
                                     variant="inset"
                                     component="li"
-                                    sx={{ml: "100px"}}
+                                    sx={{ml: "85px"}}
                                 />
                             </Fragment>
                         );
