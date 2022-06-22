@@ -74,6 +74,8 @@ const ProjectCard = ({project, onClick = null}) => {
                     <ImagePreview
                         path={project.featured_image}
                         alt={project.name}
+                        width="auto"
+                        height="130px"
                         sx={project.closed === true ? {opacity: 0.4} : {opacity: 1}}
                     />
                     <Box sx={projectTypeIconBoxStyle}>

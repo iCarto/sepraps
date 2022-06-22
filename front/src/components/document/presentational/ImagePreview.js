@@ -7,7 +7,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 const DEFAULT_NO_IMAGE = "/images/no_image.jpg";
 const BLANK_IMAGE = "/images/blank_image.png";
 
-const ImagePreview = ({path: url, alt = null, sx = {}}) => {
+const ImagePreview = ({
+    path: url,
+    alt = null,
+    width = null,
+    height = null,
+    sx = {},
+}) => {
     const [imageUrl, setImageUrl] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -30,12 +36,32 @@ const ImagePreview = ({path: url, alt = null, sx = {}}) => {
         }
     }, [url]);
 
+    const getComponent = () => {
+        return width && height ? (
+            <Box
+                component="div"
+                alt={alt}
+                sx={{
+                    width,
+                    height,
+                    backgroundImage: `url(${imageUrl})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "top",
+                    backgroundRepeat: "no-repeat",
+                    ...sx,
+                }}
+            />
+        ) : (
+            <Box component="img" alt={alt} src={imageUrl} sx={{width: "100%", ...sx}} />
+        );
+    };
+
     return loading ? (
         <Grid item container justifyContent="center" xs={12}>
             <CircularProgress color="inherit" size={20} />
         </Grid>
     ) : (
-        <Box component="img" alt={alt} src={imageUrl} sx={{width: "100%", ...sx}} />
+        getComponent()
     );
 };
 

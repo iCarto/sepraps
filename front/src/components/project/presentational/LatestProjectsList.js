@@ -58,13 +58,13 @@ const LatestProjectsList = ({projects}) => {
                                 }}
                             >
                                 <Avatar
-                                    src={project.featured_image}
                                     sx={{width: "50px", height: "50px", boxShadow: 1}}
                                 >
                                     <ImagePreview
                                         path={project.featured_image}
                                         alt={project.name}
-                                        sx={{height: "100%"}}
+                                        width="50px"
+                                        height="50px"
                                     />
                                 </Avatar>
                             </ListItemAvatar>

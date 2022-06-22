@@ -26,16 +26,21 @@ import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
 const ViewHomePage = () => {
     const [projects, setProjects] = useState([]);
     const [contracts, setContracts] = useState([]);
+    const [projectsNumber, setProjectsNumber] = useState(null);
+    const [contractsNumber, setContractsNumber] = useState(null);
     const [notifications, setNotifications] = useState([]);
     const [events, setEvents] = useState([]);
     const [statsByPhaseData, setStatsByPhaseData] = useState([]);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
+        StatsService.getStatsByProjectsAndContracts().then(data => {
+            setProjectsNumber(data.find(item => item.name === "opened_projects").total);
+            setContractsNumber(
+                data.find(item => item.name === "opened_contracts").total
+            );
+        });
         ProjectService.getProjects({last_modified_items: 3}).then(data => {
             setProjects(data.sort((a, b) => b.updated_at - a.updated_at));
-            setLoading(false);
         });
         ContractService.getContracts({last_modified_items: 3}).then(data => {
             setContracts(data.sort((a, b) => b.updated_at - a.updated_at));
@@ -54,111 +59,100 @@ const ViewHomePage = () => {
         });
     }, []);
 
-    const latestContracts = useMemo(() => contracts.slice(0, 3), [contracts]);
-    const latestProjects = useMemo(() => projects.slice(0, 3), [projects]);
-
     return (
         <PageLayout>
-            {loading ? (
-                <Grid container justifyContent="center" my={6}>
-                    <CircularProgress size={40} />
-                </Grid>
-            ) : (
-                <Grid container sx={{mb: 4}} spacing={3} justifyContent="space-between">
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        md={6}
-                        lg={5}
-                        spacing={3}
-                        alignContent="flex-start"
-                    >
-                        <Grid item container xs={6} spacing={2}>
-                            <Grid item xs={12}>
-                                <SmallIconCard
-                                    heading="Contratos"
-                                    figureContent={contracts.length}
-                                    urlPath="/contracts"
-                                    icon={
-                                        <CasesOutlinedIcon
-                                            sx={{fontSize: "60px", lineHeight: 0}}
-                                        />
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <SmallIconCard
-                                    heading="Proyectos"
-                                    figureContent={projects.length}
-                                    urlPath="/projects"
-                                    icon={
-                                        <BallotOutlinedIcon
-                                            sx={{fontSize: "60px", lineHeight: 0}}
-                                        />
-                                    }
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid item container xs={6}>
-                            <SectionCard
-                                headingLabel={false}
-                                contentStyle={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    mt: 1,
-                                }}
-                            >
-                                <Typography
-                                    variant="overline"
-                                    lineHeight={1}
-                                    color="grey.800"
-                                    mb={3}
-                                >
-                                    Proyectos por fase
-                                </Typography>
-                                <Box sx={{maxWidth: 165}}>
-                                    <StatsByPhasePieChart data={statsByPhaseData} />
-                                </Box>
-                            </SectionCard>
+            <Grid container sx={{mb: 4}} spacing={3} justifyContent="space-between">
+                <Grid
+                    item
+                    container
+                    xs={12}
+                    md={6}
+                    lg={5}
+                    spacing={3}
+                    alignContent="flex-start"
+                >
+                    <Grid item container xs={6} spacing={2}>
+                        <Grid item xs={12}>
+                            <SmallIconCard
+                                heading="Contratos"
+                                figureContent={contractsNumber}
+                                urlPath="/contracts"
+                                icon={
+                                    <CasesOutlinedIcon
+                                        sx={{fontSize: "60px", lineHeight: 0}}
+                                    />
+                                }
+                            />
                         </Grid>
                         <Grid item xs={12}>
-                            <SectionCard
-                                title="Últimas modificaciones"
-                                headingLabel={false}
+                            <SmallIconCard
+                                heading="Proyectos"
+                                figureContent={projectsNumber}
+                                urlPath="/projects"
+                                icon={
+                                    <BallotOutlinedIcon
+                                        sx={{fontSize: "60px", lineHeight: 0}}
+                                    />
+                                }
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid item container xs={6}>
+                        <SectionCard
+                            headingLabel={false}
+                            contentStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                mt: 1,
+                            }}
+                        >
+                            <Typography
+                                variant="overline"
+                                lineHeight={1}
+                                color="grey.800"
+                                mb={3}
                             >
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} md={6}>
-                                        <LatestContractsList
-                                            contracts={latestContracts}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} md={6}>
-                                        <LatestProjectsList projects={latestProjects} />
-                                    </Grid>
+                                Proyectos por fase
+                            </Typography>
+                            <Box sx={{maxWidth: 165}}>
+                                <StatsByPhasePieChart data={statsByPhaseData} />
+                            </Box>
+                        </SectionCard>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <SectionCard
+                            title="Últimas modificaciones"
+                            headingLabel={false}
+                        >
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <LatestProjectsList projects={projects} />
                                 </Grid>
-                            </SectionCard>
-                        </Grid>
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        md={6}
-                        lg={7}
-                        spacing={3}
-                        alignContent="flex-start"
-                    >
-                        <Grid item xs={12}>
-                            <NotificationsWidget notifications={notifications} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <ComingEventsWidget events={events} />
-                        </Grid>
+                                <Grid item xs={12}>
+                                    <LatestContractsList contracts={contracts} />
+                                </Grid>
+                            </Grid>
+                        </SectionCard>
                     </Grid>
                 </Grid>
-            )}
+                <Grid
+                    item
+                    container
+                    xs={12}
+                    md={6}
+                    lg={7}
+                    spacing={3}
+                    alignContent="flex-start"
+                >
+                    <Grid item xs={12}>
+                        <NotificationsWidget notifications={notifications} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <ComingEventsWidget events={events} />
+                    </Grid>
+                </Grid>
+            </Grid>
         </PageLayout>
     );
 };
