@@ -16,25 +16,51 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
     let projectQuestionnaire;
     [projectQuestionnaire] = useOutletContext();
 
+    const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
 
+    const validate = questionnaireInstance => {
+        if (
+            !questionnaireInstance.id &&
+            projectQuestionnaire.questionnaire_instances.some(
+                instance =>
+                    instance.month === questionnaireInstance.month &&
+                    instance.year === questionnaireInstance.year
+            )
+        ) {
+            setError("Ya existe un registro para ese mes.");
+            return false;
+        }
+        return true;
+    };
+
     const handleSubmit = questionnaireInstance => {
+        if (!validate(questionnaireInstance)) {
+            return;
+        }
+        setSaving(true);
         const instanceIndex = projectQuestionnaire.questionnaire_instances.findIndex(
             instance => instance.id === questionnaireInstance.id
         );
+        const questionnaire_instances = [
+            ...projectQuestionnaire.questionnaire_instances,
+        ];
         if (instanceIndex >= 0) {
-            projectQuestionnaire.questionnaire_instances[
-                instanceIndex
-            ] = questionnaireInstance;
+            questionnaire_instances[instanceIndex] = questionnaireInstance;
         } else {
-            projectQuestionnaire.questionnaire_instances.push(questionnaireInstance);
+            questionnaire_instances.push({
+                ...questionnaireInstance,
+                extended: true,
+            });
         }
         ProjectService.updateProjectQuestionnaireInstances(
             project_questionnaire_view_adapter({
                 ...projectQuestionnaire,
+                questionnaire_instances,
             })
         )
             .then(() => {
+                setSaving(false);
                 navigate(
                     `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
                     true
@@ -43,6 +69,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
             .catch(error => {
                 console.log(error);
                 setError(error);
+                setSaving(false);
             });
     };
 
@@ -55,8 +82,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
 
     const handleCloseSidebar = () => {
         navigate(
-            `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
-            true
+            `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`
         );
     };
 
@@ -73,6 +99,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
                     questionnaireInstance={selectedQuestionnaireInstance}
                     questionnaireFields={projectQuestionnaire.questionnaire.fields}
                     onSubmit={handleSubmit}
+                    saving={saving}
                 />
             )}
         </SidebarPanel>

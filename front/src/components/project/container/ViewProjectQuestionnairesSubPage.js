@@ -4,6 +4,9 @@ import {useLocation, useParams} from "react-router-dom";
 import {ProjectService} from "service/api";
 import {SubPageLayout} from "layout";
 import {ViewQuestionnaireInstance} from "components/questionnaire/container";
+
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -37,16 +40,21 @@ const ViewProjectQuestionnairesSubPage = () => {
             getIsSidePanelOpen={getIsSidePanelOpen}
             isSidePanelOpen={isSidePanelOpen}
         >
-            {loading && (
-                <Grid item container justifyContent="center" xs={12}>
-                    <CircularProgress color="inherit" size={20} />
-                </Grid>
-            )}
-            {projectQuestionnaire && (
-                <ViewQuestionnaireInstance
-                    projectQuestionnaire={projectQuestionnaire}
-                />
-            )}
+            <Container maxWidth="lg">
+                <Paper sx={{p: 3}}>
+                    {loading ? (
+                        <Grid item container justifyContent="center" xs={12}>
+                            <CircularProgress color="inherit" size={20} />
+                        </Grid>
+                    ) : (
+                        projectQuestionnaire && (
+                            <ViewQuestionnaireInstance
+                                projectQuestionnaire={projectQuestionnaire}
+                            />
+                        )
+                    )}
+                </Paper>
+            </Container>
         </SubPageLayout>
     );
 };

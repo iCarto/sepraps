@@ -1,6 +1,9 @@
 import {LineChart} from "components/common/chart";
+import {useQuestionnaireColors} from "components/questionnaire/hooks";
 
 const QuestionnaireAccumulatedLineChart = ({field, data, showPercentage}) => {
+    const {getColor, COLORS} = useQuestionnaireColors();
+
     const realValuesColumn = "real_values_acc" + (showPercentage ? "_perc" : "");
     const expectedValuesColumn =
         "expected_values_acc" + (showPercentage ? "_perc" : "");
@@ -11,9 +14,10 @@ const QuestionnaireAccumulatedLineChart = ({field, data, showPercentage}) => {
         {
             label: "Ejecutado",
             pointRadius: 3,
+            pointBorderWidth: 2,
             data: data[realValuesColumn],
-            borderColor: "#5b9bd5",
-            backgroundColor: "#5b9bd5",
+            borderColor: getColor(COLORS.REAL).main,
+            backgroundColor: getColor(COLORS.REAL).light,
         },
     ];
 
@@ -46,17 +50,19 @@ const QuestionnaireAccumulatedLineChart = ({field, data, showPercentage}) => {
             {
                 label: "Previsto",
                 pointRadius: 3,
+                pointBorderWidth: 2,
                 data: data[expectedValuesColumn],
-                borderColor: "#ed7d31",
-                backgroundColor: "#ed7d31",
+                borderColor: getColor(COLORS.EXPECTED).main,
+                backgroundColor: getColor(COLORS.EXPECTED).light,
             },
             data[extendedValuesColumn]
                 ? {
                       label: "Previsto (ampliado)",
                       pointRadius: 3,
+                      pointBorderWidth: 2,
                       data: data[extendedValuesColumn],
-                      borderColor: "#8B6A36",
-                      backgroundColor: "#8B6A36",
+                      borderColor: getColor(COLORS.EXTENDED).main,
+                      backgroundColor: getColor(COLORS.EXTENDED).light,
                   }
                 : null,
             ...datasets,

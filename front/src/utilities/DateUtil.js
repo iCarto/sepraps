@@ -60,10 +60,20 @@ const DateUtil = {
         return addDays(date, amountOfDays);
     },
     formatYearAndMonth(date) {
-        return `${this.getMonthName(date.getMonth() + 1)} / ${date.getFullYear()}`;
+        return `${date.getMonth() + 1}/${date.getFullYear()}`;
     },
     getMonths(firstDate, lastDate) {
         return differenceInCalendarMonths(lastDate, firstDate);
+    },
+    getToday() {
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+        return now;
+    },
+    getFirstDayOfCurrentMonth() {
+        const today = this.getToday();
+        today.setDate(1);
+        return today;
     },
 };
 

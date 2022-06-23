@@ -1,6 +1,9 @@
 import {BarChart} from "components/common/chart";
+import {useQuestionnaireColors} from "components/questionnaire/hooks";
 
 const QuestionnaireTotalBarChart = ({field, data, showPercentage}) => {
+    const {getColor, COLORS} = useQuestionnaireColors();
+
     const realValuesColumn = "real_values" + (showPercentage ? "_perc" : "");
     const expectedValuesColumn = "expected_values" + (showPercentage ? "_perc" : "");
     const extendedValuesColumn = "extended_values" + (showPercentage ? "_perc" : "");
@@ -10,24 +13,27 @@ const QuestionnaireTotalBarChart = ({field, data, showPercentage}) => {
             ? {
                   label: "Previsto",
                   data: data[expectedValuesColumn],
-                  borderColor: "#ed7d31",
-                  backgroundColor: "#ed7d31",
+                  borderWidth: 2,
+                  borderColor: getColor(COLORS.EXPECTED).main,
+                  backgroundColor: getColor(COLORS.EXPECTED).light,
               }
             : null,
         data[realValuesColumn]
             ? {
                   label: "Ejecutado",
                   data: data[realValuesColumn],
-                  borderColor: "#5b9bd5",
-                  backgroundColor: "#5b9bd5",
+                  borderWidth: 2,
+                  borderColor: getColor(COLORS.REAL).main,
+                  backgroundColor: getColor(COLORS.REAL).light,
               }
             : null,
         data[extendedValuesColumn]
             ? {
                   label: "Previsto (ampliado)",
                   data: data[extendedValuesColumn],
-                  borderColor: "#8B6A36",
-                  backgroundColor: "#8B6A36",
+                  borderWidth: 2,
+                  borderColor: getColor(COLORS.EXTENDED).main,
+                  backgroundColor: getColor(COLORS.EXTENDED).light,
               }
             : null,
         // To remove null values

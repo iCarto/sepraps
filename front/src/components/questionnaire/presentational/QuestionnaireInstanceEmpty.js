@@ -13,7 +13,6 @@ const QuestionnaireInstanceEmpty = ({projectQuestionnaire}) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     useEffect(() => {
-        console.log("paso");
         setSelectedOption(null);
     }, [location.state?.lastRefreshDate]);
 

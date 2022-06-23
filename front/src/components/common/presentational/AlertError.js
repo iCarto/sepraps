@@ -8,7 +8,7 @@ const AlertStyled = styled(Alert)(({theme}) => ({
 
 const AlertError = ({error, ...props}) => {
     return error ? (
-        <AlertStyled severity="error" {...props}>
+        <AlertStyled severity="error" {...props} sx={{width: "100%"}}>
             {ErrorUtil.getMessage(error)}
         </AlertStyled>
     ) : null;

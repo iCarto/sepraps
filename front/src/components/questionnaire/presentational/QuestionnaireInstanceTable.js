@@ -1,27 +1,18 @@
 import {Fragment} from "react";
-import {useNavigate} from "react-router-dom";
-import {useAuth} from "auth";
-import {useExpectedCellStyle, useFormattedValue} from "../hooks";
+import {useQuestionnaireColors} from "../hooks";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import {
-    ActionsMenu,
-    BorderedTableCell as TableCell,
-    MenuAction,
-} from "components/common/presentational";
-import EditIcon from "@mui/icons-material/Edit";
-import Tooltip from "@mui/material/Tooltip";
-import ErrorIcon from "@mui/icons-material/Error";
+import {BorderedTableCell as TableCell} from "components/common/presentational";
+import QuestionnaireInstanceTableRow from "./QuestionnaireInstanceTableRow";
 
 const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
-    const navigate = useNavigate();
-    const formatValue = useFormattedValue();
-    const expectedCellStyle = useExpectedCellStyle();
-    const {ROLES, hasRole} = useAuth();
+    const {getCellStyle, COLORS} = useQuestionnaireColors();
+    const realCellStyle = getCellStyle(COLORS.REAL);
+    const expectedCellStyle = getCellStyle(COLORS.EXPECTED);
 
     const headCells = projectQuestionnaire.questionnaire.fields.map(field => {
         return {
@@ -31,37 +22,6 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
             width: 40 / projectQuestionnaire.questionnaire.fields.length,
         };
     });
-
-    const handleClick = instanceSelectedId => {
-        navigate(
-            `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/${instanceSelectedId}/edit`
-        );
-    };
-
-    const hasFieldExpectedValue = fieldCode => {
-        return projectQuestionnaire.questionnaire.fields.find(
-            field => field.code === fieldCode
-        ).include_expected_value;
-    };
-
-    const isInstanceMonthBefore = instance => {
-        const now = new Date();
-        return (
-            instance.year <= now.getFullYear() && instance.month < now.getMonth() + 1
-        );
-    };
-
-    const isInstanceMonthAfter = instance => {
-        const now = new Date();
-        return (
-            instance.year >= now.getFullYear() && instance.month > now.getMonth() + 1
-        );
-    };
-
-    const isInstanceEditable = instance => {
-        const hasEditPermission = [ROLES.SUPERVISION].some(role => hasRole(role));
-        return !isInstanceMonthAfter(instance) && hasEditPermission;
-    };
 
     return (
         <TableContainer sx={{overflowX: "auto"}}>
@@ -109,7 +69,11 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
                                         Previsto
                                     </TableCell>
                                 ) : null}
-                                <TableCell key={headCell.id + "real"} align="center">
+                                <TableCell
+                                    key={headCell.id + "real"}
+                                    align="center"
+                                    sx={realCellStyle}
+                                >
                                     Real
                                 </TableCell>
                             </Fragment>
@@ -117,74 +81,13 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {projectQuestionnaire.questionnaire_instances.map(
-                        (instance, index) => (
-                            <TableRow
-                                hover
-                                key={index}
-                                sx={
-                                    isInstanceMonthAfter(instance)
-                                        ? expectedCellStyle
-                                        : {}
-                                }
-                            >
-                                <TableCell>
-                                    {instance.month + "/" + instance.year}
-                                </TableCell>
-                                {instance.values.map(value => {
-                                    const hasExpectedValue = hasFieldExpectedValue(
-                                        value.code
-                                    );
-                                    return (
-                                        <Fragment key={value.id}>
-                                            {hasExpectedValue ? (
-                                                <TableCell
-                                                    key={value.id + "expected"}
-                                                    align="center"
-                                                    sx={expectedCellStyle}
-                                                >
-                                                    {formatValue(
-                                                        value.expected_value,
-                                                        value.datatype
-                                                    )}
-                                                </TableCell>
-                                            ) : null}
-                                            <TableCell
-                                                key={value.id + "real"}
-                                                align="center"
-                                            >
-                                                {isInstanceMonthBefore(instance) &&
-                                                !value?.value ? (
-                                                    <Tooltip title="Datos mensuales sin registrar">
-                                                        <ErrorIcon color="error" />
-                                                    </Tooltip>
-                                                ) : (
-                                                    formatValue(
-                                                        value.value,
-                                                        value.datatype
-                                                    )
-                                                )}
-                                            </TableCell>
-                                        </Fragment>
-                                    );
-                                })}
-                                <TableCell>{instance.comments}</TableCell>
-                                <TableCell>
-                                    {isInstanceEditable(instance) ? (
-                                        <ActionsMenu>
-                                            <MenuAction
-                                                name="edit-questionnaire"
-                                                icon={<EditIcon />}
-                                                text="Modificar"
-                                                itemId={instance.id}
-                                                handleClick={handleClick}
-                                            />
-                                        </ActionsMenu>
-                                    ) : null}
-                                </TableCell>
-                            </TableRow>
-                        )
-                    )}
+                    {projectQuestionnaire.questionnaire_instances.map(instance => (
+                        <QuestionnaireInstanceTableRow
+                            key={instance.id}
+                            instance={instance}
+                            projectQuestionnaire={projectQuestionnaire}
+                        />
+                    ))}
                 </TableBody>
             </Table>
         </TableContainer>

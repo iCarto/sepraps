@@ -12,7 +12,7 @@ const ErrorUtil = {
                 .join("\n");
         } catch (e) {
             console.log({e});
-            return error.message;
+            return error.message ? error.message : error;
         }
     },
 };

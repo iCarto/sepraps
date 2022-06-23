@@ -1,17 +1,29 @@
 import {BarChart} from "components/common/chart";
+import {useQuestionnaireColors} from "components/questionnaire/hooks";
 
 const QuestionnaireDeviationBarChart = ({field, data, showPercentage}) => {
+    const {getColor, COLORS} = useQuestionnaireColors();
+
     const variationColumn = "variation" + (showPercentage ? "_perc" : "");
 
     let datasets = [
         {
             label: "Variación",
             data: data[variationColumn],
-            borderColor: "rgb(2, 94, 170)",
+            borderWidth: 2,
+            borderColor: context => {
+                const index = context.dataIndex;
+                const value = context.dataset.data[index];
+                return value < 0
+                    ? getColor(COLORS.REAL).main
+                    : getColor(COLORS.REAL).dark;
+            },
             backgroundColor: context => {
                 const index = context.dataIndex;
                 const value = context.dataset.data[index];
-                return value < 0 ? "#94bee3" : "#5b9bd5";
+                return value < 0
+                    ? getColor(COLORS.REAL).light
+                    : getColor(COLORS.REAL).main;
             },
         },
     ];

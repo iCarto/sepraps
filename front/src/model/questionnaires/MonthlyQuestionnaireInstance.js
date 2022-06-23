@@ -35,6 +35,7 @@ const createMQInstance = ({
     id = null,
     month = -1,
     year = -1,
+    extended = false,
     comments = "",
     values = [],
 } = {}) => {
@@ -42,6 +43,7 @@ const createMQInstance = ({
         id,
         month,
         year,
+        extended,
         comments,
         values,
     };

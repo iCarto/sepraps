@@ -18,6 +18,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import {BorderedTableCell as TableCell} from "components/common/presentational";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const QuestionnaireInstanceExpectedTable = ({
     projectQuestionnaire,
@@ -26,6 +27,7 @@ const QuestionnaireInstanceExpectedTable = ({
     const navigate = useNavigateWithReload();
     const {ROLES, hasRole} = useAuth();
 
+    const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
 
     const questionnaireFieldsWithExpectedValue = projectQuestionnaire.questionnaire.fields.filter(
@@ -77,6 +79,7 @@ const QuestionnaireInstanceExpectedTable = ({
 
     const onFormSubmit = data => {
         console.log({data});
+        setSaving(true);
         const questionnaireInstances = data.expected_months_values.map(
             expectedMonth => {
                 // We should iterate over all fields and set a null value for fields with non expected value
@@ -119,6 +122,9 @@ const QuestionnaireInstanceExpectedTable = ({
             .catch(error => {
                 console.log(error);
                 setError(error);
+            })
+            .finally(() => {
+                setSaving(true);
             });
     };
 
@@ -156,7 +162,13 @@ const QuestionnaireInstanceExpectedTable = ({
                         <TableBody>
                             {fields.map((field, index) => (
                                 <TableRow key={field.id}>
-                                    <TableCell>
+                                    <TableCell
+                                        sx={{
+                                            fontStyle: "italic",
+                                            width: "20%",
+                                            textAlign: "center",
+                                        }}
+                                    >
                                         {DateUtil.formatYearAndMonth(getMonth(index))}
                                     </TableCell>
                                     {questionnaireFieldsWithExpectedValue.map(
@@ -180,7 +192,7 @@ const QuestionnaireInstanceExpectedTable = ({
                     </Table>
                 </TableContainer>
                 <Grid container justifyContent="center" sx={{mt: 2}}>
-                    {onCancel && (
+                    {onCancel && !saving && (
                         <Button sx={{ml: 2}} onClick={onCancel}>
                             Cancelar
                         </Button>
@@ -190,8 +202,16 @@ const QuestionnaireInstanceExpectedTable = ({
                         color="primary"
                         sx={{ml: 2}}
                         onClick={formMethods.handleSubmit(onFormSubmit)}
+                        disabled={saving}
                     >
                         Guardar
+                        {saving && (
+                            <CircularProgress
+                                color="inherit"
+                                size={20}
+                                sx={{marginLeft: 2}}
+                            />
+                        )}
                     </Button>
                 </Grid>
             </Paper>
