@@ -1,5 +1,5 @@
 import {NumberUtil} from "utilities";
-import {useAlertCellStyle, useExpectedCellStyle, useFormattedValue} from "../hooks";
+import {useAlertCellStyle, useQuestionnaireColors, useFormattedValue} from "../hooks";
 import {QuestionnaireFieldDownloadCSV} from "../presentational";
 
 import {BorderedTableCell as TableCell} from "components/common/presentational";
@@ -14,6 +14,7 @@ const headCells = [
     {
         id: "month",
         label: "Mes",
+        style: "",
         width: 10,
     },
     {
@@ -69,8 +70,13 @@ const headCells = [
 ];
 
 const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
+    const {getCellStyle, COLORS} = useQuestionnaireColors();
+
     const formatValue = useFormattedValue();
-    const expectedCellStyle = useExpectedCellStyle();
+    const cellStyle = useQuestionnaireColors();
+    const realCellStyle = getCellStyle(COLORS.REAL);
+    const expectedCellStyle = getCellStyle(COLORS.EXPECTED);
+    const extendedCellStyle = getCellStyle(COLORS.EXTENDED);
     const getAlertCellStyle = useAlertCellStyle();
 
     return (
@@ -93,7 +99,11 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                                 >
                                     Previsto
                                 </TableCell>
-                                <TableCell align="center" colSpan={4}>
+                                <TableCell
+                                    align="center"
+                                    colSpan={4}
+                                    sx={realCellStyle}
+                                >
                                     Real
                                 </TableCell>
                                 <TableCell align="center" colSpan={2}>
@@ -115,10 +125,18 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                                 >
                                     Acumulada
                                 </TableCell>
-                                <TableCell align="center" colSpan={2}>
+                                <TableCell
+                                    align="center"
+                                    colSpan={2}
+                                    sx={realCellStyle}
+                                >
                                     Mensual
                                 </TableCell>
-                                <TableCell align="center" colSpan={2}>
+                                <TableCell
+                                    align="center"
+                                    colSpan={2}
+                                    sx={realCellStyle}
+                                >
                                     Acumulada
                                 </TableCell>
                                 <TableCell align="center" colSpan={2}>
@@ -130,11 +148,18 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                                     <TableCell
                                         key={headCell.id}
                                         align="center"
-                                        sx={
-                                            headCell.id.startsWith("expected")
-                                                ? expectedCellStyle
-                                                : {}
-                                        }
+                                        sx={() => {
+                                            let style = null;
+                                            if (
+                                                headCell.id.startsWith(COLORS.EXPECTED)
+                                            ) {
+                                                style = COLORS.EXPECTED;
+                                            }
+                                            if (headCell.id.startsWith(COLORS.REAL)) {
+                                                style = COLORS.REAL;
+                                            }
+                                            return getCellStyle(style);
+                                        }}
                                     >
                                         {headCell.label}
                                     </TableCell>
@@ -168,24 +193,24 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                                                 data["expected_values_acc_perc"][index]
                                             )}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={realCellStyle}>
                                             {formatValue(
                                                 data["real_values"][index],
                                                 field.datatype
                                             )}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={realCellStyle}>
                                             {NumberUtil.formatDecimal(
                                                 data["real_values_perc"][index]
                                             )}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={realCellStyle}>
                                             {formatValue(
                                                 data["real_values_acc"][index],
                                                 field.datatype
                                             )}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" sx={realCellStyle}>
                                             {NumberUtil.formatDecimal(
                                                 data["real_values_acc_perc"][index]
                                             )}

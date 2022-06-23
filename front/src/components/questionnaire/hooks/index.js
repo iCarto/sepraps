@@ -1,3 +1,3 @@
 export * from "./QuestionnaireFieldFormattedValueHook";
-export * from "./QuestionnaireExpectedCellHook";
+export * from "./QuestionnaireColorHook";
 export * from "./QuestionnaireAlertCellHook";

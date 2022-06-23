@@ -1,16 +1,21 @@
 import {FormProvider, useForm} from "react-hook-form";
+import {useAuth} from "auth";
 import {createMQInstance, createMQInstanceValue} from "model/questionnaires";
 
+import QuestionnaireInstanceFormFields from "./QuestionnaireInstanceFormFields";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import QuestionnaireInstanceFormFields from "./QuestionnaireInstanceFormFields";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const QuestionnaireInstanceForm = ({
     questionnaireFields,
     questionnaireInstance = null,
     onSubmit = null,
     onCancel = null,
+    saving = false,
 }) => {
+    const {ROLES, hasRole} = useAuth();
+
     const defaultValues = questionnaireInstance
         ? {
               id: questionnaireInstance.id,
@@ -19,7 +24,7 @@ const QuestionnaireInstanceForm = ({
                   questionnaireInstance.month - 1,
                   1
               ),
-              comments: questionnaireInstance.comments,
+              comments: questionnaireInstance.comments || "",
           }
         : {
               id: null,
@@ -32,6 +37,12 @@ const QuestionnaireInstanceForm = ({
             ? questionnaireInstance.values.find(value => value.code === field.code)
                   .value
             : "";
+        if (field.include_expected_value) {
+            defaultValues[field.code + "_expected"] = questionnaireInstance
+                ? questionnaireInstance.values.find(value => value.code === field.code)
+                      .expected_value
+                : "";
+        }
     });
 
     const formMethods = useForm({
@@ -55,7 +66,7 @@ const QuestionnaireInstanceForm = ({
                 label: field.label,
                 expected_value: updatedQuestionnaireValue
                     ? updatedQuestionnaireValue.expected_value
-                    : null,
+                    : data[field.code + "_expected"],
                 value: data[field.code],
             });
         });
@@ -71,11 +82,16 @@ const QuestionnaireInstanceForm = ({
         onSubmit(updatedQuestionnaireInstance);
     };
 
+    const isExpectedDisabled = () => {
+        return questionnaireInstance != null && !hasRole(ROLES.SUPERVISION);
+    };
+
     return (
         <FormProvider {...formMethods}>
             <Grid container component="form">
                 <QuestionnaireInstanceFormFields
                     questionnaireFields={questionnaireFields}
+                    disableExpected={isExpectedDisabled()}
                 />
             </Grid>
             <Grid container justifyContent="center" sx={{mt: 2}}>
@@ -91,8 +107,16 @@ const QuestionnaireInstanceForm = ({
                             color="primary"
                             sx={{ml: 3}}
                             onClick={formMethods.handleSubmit(handleFormSubmit)}
+                            disabled={saving}
                         >
                             Guardar
+                            {saving && (
+                                <CircularProgress
+                                    color="inherit"
+                                    size={20}
+                                    sx={{marginLeft: 2}}
+                                />
+                            )}
                         </Button>
                     )}
                 </Grid>
