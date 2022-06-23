@@ -45,6 +45,7 @@ class MonthlyQuestionnaireInstanceSerializer(serializers.ModelSerializer):
             "id",
             "month",
             "year",
+            "extended",
             "comments",
             "values",
             "creation_user",
