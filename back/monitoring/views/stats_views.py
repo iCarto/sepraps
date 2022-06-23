@@ -35,10 +35,13 @@ def get_monthly_questionnaire_stats(
             ORDER BY mqi.year, mqi.month
         """
 
+    show_expanded = False
     filter_conditions = []
     if filter := request.GET.get("project"):
+        show_expanded = True
         filter_conditions.append("and pqi.project_id = {}".format(filter))
     if filter := request.GET.get("construction_contract"):
+        show_expanded = True
         filter_conditions.append("and p.construction_contract_id = {}".format(filter))
     if filter := request.GET.get("district"):
         filter_conditions.append("and l.district_id = '{}'".format(filter))
@@ -70,7 +73,7 @@ def get_monthly_questionnaire_stats(
 
     return Response(
         questtionnaire_services.get_monthly_questionnaire_instances_dataframe(
-            questionnaire_code, field_code, questionnaire_instances
+            questionnaire_code, field_code, questionnaire_instances, show_expanded
         )
     )
 
