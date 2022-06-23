@@ -263,7 +263,7 @@ def flat_values_list(values_list, datatype):
 
 
 def get_monthly_questionnaire_instances_dataframe(
-    questionnaire_code, field_code, instances
+    questionnaire_code, field_code, instances, show_expanded=False
 ):
     questionnaire = Questionnaire.objects.get(pk=questionnaire_code)
     questionnaire_field = next(
@@ -288,7 +288,9 @@ def get_monthly_questionnaire_instances_dataframe(
         [
             flat_values_list(values["extended_values"], field_datatype)
             for _, values in year_month_values.items()
-        ],
+        ]
+        if show_expanded
+        else [],
     )
     # df = df.fillna(NONE_VALUE)
 
