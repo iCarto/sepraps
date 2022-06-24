@@ -17,7 +17,7 @@ const MenuListItemLink = ({
 }) => {
     const theme = useTheme();
 
-    let resolved = useResolvedPath(to);
+    let resolved = useResolvedPath(props.resolvedPathName || to);
     let location = useLocation();
 
     const selected = location.pathname.startsWith(resolved.pathname);

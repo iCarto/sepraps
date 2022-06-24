@@ -36,7 +36,7 @@ const AddProviderButtonGroup = ({onAdd = null, onSearch = null}) => {
                 ref={ref}
                 mt={0}
             >
-                Asignar
+                Añadir
             </Button>
             <Menu
                 id="basic-menu"

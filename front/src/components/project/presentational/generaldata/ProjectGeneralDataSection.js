@@ -9,13 +9,12 @@ import {
     SectionField,
 } from "components/common/presentational";
 import {ViewMilestoneTimeline} from "components/milestone/container";
+import {ImagePreview} from "components/document/presentational";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import {ImagePreview} from "components/document/presentational";
 
 const imgBoxStyle = {
     position: "absolute",

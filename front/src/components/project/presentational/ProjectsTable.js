@@ -100,33 +100,6 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                         milestones={project.milestones}
                                     />
                                 </TableCell>
-                                {/*handleActions ? (
-                                    <TableCell>
-                                        <ActionsMenu>
-                                            <MenuAction
-                                                name="edit-contact"
-                                                icon={<EditIcon />}
-                                                text="Editar contacto"
-                                                itemId={project.id}
-                                                handleClick={handleClick}
-                                            />
-                                            <MenuAction
-                                                name="remove-contact"
-                                                icon={<LinkOffIcon />}
-                                                text="Quitar contacto"
-                                                itemId={project.id}
-                                                handleClick={handleClick}
-                                            />
-                                            <MenuAction
-                                                name="delete-contact"
-                                                icon={<DeleteIcon color="error" />}
-                                                text="Eliminar contacto"
-                                                itemId={project.id}
-                                                handleClick={handleClick}
-                                            />
-                                        </ActionsMenu>
-                                    </TableCell>
-                                ) : null*/}
                             </TableRow>
                         );
                     })}

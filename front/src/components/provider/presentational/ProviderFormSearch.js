@@ -45,7 +45,7 @@ const ProviderFormSearch = ({
                                 onSelect(existingProvider);
                             }}
                         >
-                            Añadir
+                            Guardar
                         </Button>
                     )}
                 </Grid>

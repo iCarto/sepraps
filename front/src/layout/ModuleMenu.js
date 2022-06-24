@@ -68,6 +68,7 @@ const ModuleMenu = () => {
                 <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                     <MenuListItemLink
                         to={`/stats/phase`}
+                        resolvedPathName={`/stats`}
                         tooltipTitle="Resultados"
                         icon={<QueryStatsIcon />}
                     />
