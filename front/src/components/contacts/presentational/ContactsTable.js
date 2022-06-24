@@ -93,7 +93,7 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
                                             <MenuAction
                                                 name="edit-contact"
                                                 icon={<EditIcon />}
-                                                text="Editar contacto"
+                                                text="Modificar contacto"
                                                 itemId={row.id}
                                                 handleClick={handleClick}
                                             />

@@ -36,7 +36,7 @@ const AddContractorButtonGroup = () => {
                 ref={ref}
                 mt={0}
             >
-                Asignar
+                Añadir
             </Button>
             <Menu
                 id="basic-menu"

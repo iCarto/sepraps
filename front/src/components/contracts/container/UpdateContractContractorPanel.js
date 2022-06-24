@@ -34,7 +34,7 @@ const UpdateContractContractorPanel = () => {
 
     return (
         <SidebarPanel
-            sidebarTitle="Actualizar contratista"
+            sidebarTitle="Modificar contratista"
             closeSidebarClick={handleCancel}
         >
             <AlertError error={error} />

@@ -34,7 +34,7 @@ const UpdateProjectProviderPanel = () => {
 
     return (
         <SidebarPanel
-            sidebarTitle="Actualizar prestador"
+            sidebarTitle="Modificar prestador"
             closeSidebarClick={handleCancel}
         >
             <AlertError error={error} />
