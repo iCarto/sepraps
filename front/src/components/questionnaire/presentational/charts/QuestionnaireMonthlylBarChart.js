@@ -59,7 +59,7 @@ const QuestionnaireTotalBarChart = ({field, data, showPercentage}) => {
     return (
         <BarChart
             title={`${field.label} - Mensual${showPercentage ? " (%)" : ""}`}
-            labels={data["index"]}
+            labels={data["year_month"]}
             datasets={datasets}
             options={chartOptions}
         />

@@ -10,8 +10,11 @@ var localDecimalFormatter = new Intl.NumberFormat("es-PY", {
 
 const NumberUtil = {
     formatDecimal(value, decimalSize = 2) {
-        if (!value || isNaN(value)) {
+        if (!value) {
             return "";
+        }
+        if (isNaN(value)) {
+            return value;
         }
         const floatNumber = parseFloat(value);
         return floatNumber.toFixed(decimalSize).replace(".", ",");
@@ -23,14 +26,17 @@ const NumberUtil = {
         }
         value = value.replace(",", ".");
         if (isNaN(value)) {
-            return "";
+            return value;
         }
         const floatNumber = parseFloat(value);
         return localDecimalFormatter.format(floatNumber);
     },
 
     formatInteger(value) {
-        if (!value || isNaN(value)) {
+        if (!value) {
+            return "";
+        }
+        if (isNaN(value)) {
             return value;
         }
         return localIntegerFormatter.format(value);

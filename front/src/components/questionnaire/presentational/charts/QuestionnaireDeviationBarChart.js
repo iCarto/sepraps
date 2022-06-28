@@ -44,7 +44,7 @@ const QuestionnaireDeviationBarChart = ({field, data, showPercentage}) => {
         data[variationColumn] && (
             <BarChart
                 title={`${field.label} - Variación${showPercentage ? " (%)" : ""}`}
-                labels={data["index"]}
+                labels={data["year_month"]}
                 datasets={datasets}
                 options={chartOptions}
             />

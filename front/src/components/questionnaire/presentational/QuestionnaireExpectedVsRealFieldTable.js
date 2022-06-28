@@ -167,7 +167,7 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {data["index"].map((indexLabel, index) => {
+                            {data["year_month"].map((indexLabel, index) => {
                                 return (
                                     <TableRow hover key={index}>
                                         <TableCell>{indexLabel}</TableCell>
