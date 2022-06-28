@@ -1,5 +1,6 @@
 import {useSort} from "hooks";
 
+import {DateUtil, NumberUtil} from "utilities";
 import {TableSortingHead} from "components/common/presentational";
 
 import Table from "@mui/material/Table";
@@ -7,18 +8,12 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import {NumberUtil} from "utilities";
 
 const headCells = [
     {
         id: "number",
         label: "Número",
-        width: 10,
-    },
-    {
-        id: "bid_request_number",
-        label: "Licitación",
-        width: 12,
+        width: 8,
     },
     {
         id: "financing_program.short_name",
@@ -28,6 +23,11 @@ const headCells = [
     {
         id: "expected_execution_period",
         label: "Plazo previsto",
+        width: 10,
+    },
+    {
+        id: "awarding_date",
+        label: "Fecha adjudicación",
         width: 10,
     },
     {
@@ -42,8 +42,7 @@ const headCells = [
     },
     {
         id: "comments",
-        label: "Observaciones",
-        width: 26,
+        label: "Descripción",
     },
     {
         id: "actions",
@@ -73,7 +72,6 @@ const ContractsTable = ({
     };
 
     const handleClick = contract => {
-        console.log("handleClick", contract);
         onSelectElement && onSelectElement(contract);
     };
 
@@ -106,12 +104,15 @@ const ContractsTable = ({
                                 >
                                     {contract.number}
                                 </TableCell>
-                                <TableCell>{contract.bid_request_number}</TableCell>
                                 <TableCell>
                                     {contract.financing_program?.short_name}
                                 </TableCell>
                                 <TableCell>
-                                    {contract.expected_execution_period} días
+                                    {contract.expected_execution_period &&
+                                        `${contract.expected_execution_period_in_months} meses`}
+                                </TableCell>
+                                <TableCell>
+                                    {DateUtil.formatDate(contract.awarding_date)}
                                 </TableCell>
                                 <TableCell>
                                     {NumberUtil.formatCurrency(
