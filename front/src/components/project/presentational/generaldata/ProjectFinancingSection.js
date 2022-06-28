@@ -1,4 +1,5 @@
 import {useNavigate, useOutletContext} from "react-router-dom";
+import {NumberUtil} from "utilities";
 
 import {
     SectionCard,
@@ -7,7 +8,6 @@ import {
     SectionSubheading,
 } from "components/common/presentational";
 import LaunchIcon from "@mui/icons-material/Launch";
-import {NumberUtil} from "utilities";
 
 const ProjectFinancingSection = () => {
     const navigate = useNavigate();

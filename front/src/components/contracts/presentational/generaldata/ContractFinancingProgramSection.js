@@ -6,10 +6,10 @@ import {
     SectionCardHeaderAction,
     SectionField,
 } from "components/common/presentational";
-import EditIcon from "@mui/icons-material/Edit";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ContractFinancingProgramSection = () => {
     const navigate = useNavigate();
@@ -32,10 +32,7 @@ const ContractFinancingProgramSection = () => {
     ];
 
     return (
-        <SectionCard
-            title="Programa de financiación"
-            secondaryActions={secondaryActions}
-        >
+        <SectionCard title="Financiación" secondaryActions={secondaryActions}>
             {contract.financing_program ? (
                 <>
                     <SectionField
