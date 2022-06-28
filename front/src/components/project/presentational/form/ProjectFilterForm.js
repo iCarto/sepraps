@@ -12,10 +12,10 @@ import {ClosedProjectsSwitch, ShowNoOfProjects} from "..";
 import {SearchBoxControlled} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
+import Collapse from "@mui/material/Collapse";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import Collapse from "@mui/material/Collapse";
 
 const ProjectFilterForm = ({
     filter,
@@ -102,10 +102,15 @@ const ProjectFilterForm = ({
         }
     };
 
+    const filterBtnStyle = {
+        color: "text.secondary",
+    };
+
     return (
         <FormProvider {...formMethods}>
             <Grid
                 container
+                component="form"
                 sx={{
                     mb: 3,
                 }}
@@ -120,10 +125,10 @@ const ProjectFilterForm = ({
                     <Grid item xs>
                         <Button
                             onClick={toggleAccordion}
-                            sx={{color: "text.secondary"}}
+                            sx={filterBtnStyle}
                             startIcon={<FilterListIcon />}
                         >
-                            Más Filtros
+                            {!expanded ? "Más Filtros" : "Ocultar filtros"}
                         </Button>
                     </Grid>
                     <Grid item>
@@ -132,12 +137,7 @@ const ProjectFilterForm = ({
                 </Grid>
                 <Grid item xs={12}>
                     <Collapse in={expanded} timeout="auto">
-                        <Grid
-                            container
-                            columnSpacing={2}
-                            rowSpacing={2}
-                            alignItems="center"
-                        >
+                        <Grid container columnSpacing={2} alignItems="center" mb={2}>
                             <Grid item xs={4}>
                                 <FormSelect
                                     name="department"
@@ -158,19 +158,9 @@ const ProjectFilterForm = ({
                                     showEmptyOption={true}
                                 />
                             </Grid>
-                            <Grid item xs />
                             <Grid item xs={4}>
-                                <FormAutocomplete
-                                    name="construction_contract"
-                                    label="Contrato"
-                                    options={contracts}
-                                    optionLabelAttribute="number"
-                                    onChangeHandler={option =>
-                                        onChange(
-                                            "construction_contract",
-                                            option ? option.id : null
-                                        )
-                                    }
+                                <ClosedProjectsSwitch
+                                    onChangeHandler={value => onChange("status", value)}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -187,18 +177,25 @@ const ProjectFilterForm = ({
                                     }
                                 />
                             </Grid>
-                            <Grid item xs />
                             <Grid item xs={4}>
-                                <ClosedProjectsSwitch
-                                    onChangeHandler={value => onChange("status", value)}
+                                <FormAutocomplete
+                                    name="construction_contract"
+                                    label="Contrato"
+                                    options={contracts}
+                                    optionLabelAttribute="number"
+                                    onChangeHandler={option =>
+                                        onChange(
+                                            "construction_contract",
+                                            option ? option.id : null
+                                        )
+                                    }
                                 />
                             </Grid>
-                            <Grid item xs={4} container justifyContent="flex-end">
+                            <Grid item xs={4} container>
                                 <Button
                                     color="primary"
                                     variant="outlined"
                                     onClick={handleClearAllFilters}
-                                    sx={{lineHeight: 1}}
                                 >
                                     <ClearIcon /> Borrar filtros
                                 </Button>

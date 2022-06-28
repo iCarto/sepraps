@@ -6,12 +6,12 @@ import {FormAutocomplete, FormDatePicker} from "components/common/form";
 import {SearchBoxControlled} from "components/common/presentational";
 
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import ClearIcon from "@mui/icons-material/Clear";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import Collapse from "@mui/material/Collapse";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 const ContractFilterForm = ({
     filter,
@@ -22,9 +22,9 @@ const ContractFilterForm = ({
     const [expanded, setExpanded] = useState(() => {
         return (
             Object.keys(filter).length !== 0 &&
-            (filter?.department !== "" &&
-                filter?.district !== "" &&
-                filter?.construction_contract !== "")
+            filter?.department !== "" &&
+            filter?.district !== "" &&
+            filter?.construction_contract !== ""
         );
     });
 
@@ -104,7 +104,7 @@ const ContractFilterForm = ({
                             sx={{color: "text.secondary"}}
                             startIcon={<FilterListIcon />}
                         >
-                            Más Filtros
+                            {!expanded ? "Más Filtros" : "Ocultar filtros"}
                         </Button>
                     </Grid>
                     <Grid item>
@@ -137,8 +137,9 @@ const ContractFilterForm = ({
                         <Grid
                             container
                             columnSpacing={2}
-                            rowSpacing={2}
+                            component="form"
                             alignItems="center"
+                            mb={2}
                         >
                             <Grid item xs={4}>
                                 <FormAutocomplete
