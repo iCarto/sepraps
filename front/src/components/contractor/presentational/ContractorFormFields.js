@@ -14,7 +14,7 @@ const ContractorFormFields = () => {
                 options={contractorTypes}
             />
             <FormInputText name="address" label="Dirección" />
-            <FormInputText name="phone" label="Teléfono" />
+            <FormInputText name="phone" label="Celular" />
             <FormInputText name="email" label="Correo electrónico" />
             <FormTextArea name="comments" label="Observaciones" />
         </Fragment>

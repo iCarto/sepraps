@@ -63,7 +63,7 @@ const ContractContractorSection = ({isSidePanelOpen = false}) => {
                         value={contractor.contractor_type_name}
                     />
                     <SectionField label="Dirección:" value={contractor.address} />
-                    <SectionField label="Teléfono:" value={contractor.phone} />
+                    <SectionField label="Celular:" value={contractor.phone} />
                     <SectionField
                         label="Correo electrónico:"
                         value={contractor.email}
