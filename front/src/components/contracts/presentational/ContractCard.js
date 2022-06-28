@@ -18,6 +18,17 @@ const ContractCard = ({contract, onClick = null}) => {
         }
     };
 
+    const getValueInfo = value => {
+        if (value) {
+            return <Typography variant="body2">{value}</Typography>;
+        } else
+            return (
+                <Typography variant="body2" sx={{fontStyle: "italic"}}>
+                    Pendiente
+                </Typography>
+            );
+    };
+
     return (
         <Card
             id={contract.id}
@@ -34,47 +45,44 @@ const ContractCard = ({contract, onClick = null}) => {
             <CardContent sx={{bgcolor: "grey.100"}}>
                 <Stack spacing={1}>
                     <Stack direction="row" spacing={2}>
-                        <Tooltip title="Financiación">
+                        <Tooltip title="Programa de financiación">
                             <AccountBalanceOutlinedIcon fontSize="small" />
                         </Tooltip>
-                        {contract.financing_program && (
-                            <Typography variant="body2">
-                                {contract.financing_program?.short_name}
-                            </Typography>
-                        )}
+                        {getValueInfo(contract.financing_program?.short_name)}
                     </Stack>
                     <Stack direction="row" spacing={2}>
                         <Tooltip title="Plazo previsto de ejecución">
                             <DateRangeOutlinedIcon fontSize="small" />
                         </Tooltip>
                         <Typography variant="body2">
-                            {contract.expected_execution_period &&
-                                `${contract.expected_execution_period} días`}
+                            {contract.expected_execution_period ? (
+                                `${contract.expected_execution_period} días (${contract.expected_execution_period_in_months} meses)`
+                            ) : (
+                                <Typography variant="body2" sx={{fontStyle: "italic"}}>
+                                    Pendiente
+                                </Typography>
+                            )}
                         </Typography>
                     </Stack>
                     <Stack direction="row" spacing={2}>
                         <Tooltip title="Fecha de adjudicación">
                             <EventOutlinedIcon fontSize="small" />
                         </Tooltip>
-                        <Typography variant="body2">
-                            {DateUtil.formatDate(contract.awarding_date)}
-                        </Typography>
+                        {getValueInfo(DateUtil.formatDate(contract.awarding_date))}
                     </Stack>
                     <Stack direction="row" spacing={2}>
                         <Tooltip title="Monto adjudicado">
                             <MonetizationOnOutlinedIcon fontSize="small" />
                         </Tooltip>
-                        <Typography variant="body2">
-                            {NumberUtil.formatCurrency(contract.awarding_budget)}
-                        </Typography>
+                        {getValueInfo(
+                            NumberUtil.formatCurrency(contract.awarding_budget)
+                        )}
                     </Stack>
                     <Stack direction="row" spacing={2}>
                         <Tooltip title="Contratista">
                             <EngineeringOutlinedIcon fontSize="small" />
                         </Tooltip>
-                        <Typography variant="body2">
-                            {contract.contractor?.name}
-                        </Typography>
+                        {getValueInfo(contract.contractor?.name)}
                     </Stack>
                 </Stack>
             </CardContent>
