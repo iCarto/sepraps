@@ -6,9 +6,9 @@ import {ContractService} from "service/api";
 import {ContractCard} from "../presentational";
 import {SidebarPanel} from "layout";
 
-import LaunchIcon from "@mui/icons-material/Launch";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const ViewContractPanel = () => {
     const navigate = useNavigateWithReload();
@@ -32,19 +32,17 @@ const ViewContractPanel = () => {
             closeSidebarClick={handleCloseSidebar}
         >
             {contract && (
-                <Grid container justifyContent="center">
+                <Grid container direction="column" alignItems="center">
                     <ContractCard contract={contract} />
-                    <Grid sx={{mt: 2}}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{ml: 3}}
-                            onClick={() => navigate(`/contracts/${contract?.id}`)}
-                            startIcon={<LaunchIcon />}
-                        >
-                            Ir al contrato
-                        </Button>
-                    </Grid>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => navigate(`/contracts/${contract?.id}/summary`)}
+                        startIcon={<LaunchIcon />}
+                        sx={{mt: 2, width: "fit-content"}}
+                    >
+                        Ir al contrato
+                    </Button>
                 </Grid>
             )}
         </SidebarPanel>

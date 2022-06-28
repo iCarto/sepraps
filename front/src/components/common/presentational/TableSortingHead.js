@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 
+import {visuallyHidden} from "@mui/utils";
+
 import Box from "@mui/material/Box";
-import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
-import {visuallyHidden} from "@mui/utils";
 
 function TableSortingHead({
     order,
