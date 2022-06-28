@@ -27,7 +27,7 @@ const headCells = [
     },
     {
         id: "awarding_date",
-        label: "Fecha adjudicación",
+        label: "Fecha adj.",
         width: 10,
     },
     {
