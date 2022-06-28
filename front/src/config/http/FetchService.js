@@ -39,7 +39,7 @@ const FetchService = {
                     throw new Error(text);
                 });
             }
-            if (response.headers.get("content-type") === "application/json") {
+            if (response.headers.get("content-type").startsWith("application/json")) {
                 return response.json();
             }
             return response;

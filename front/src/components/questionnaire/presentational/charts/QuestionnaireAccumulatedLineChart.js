@@ -43,7 +43,7 @@ const QuestionnaireAccumulatedLineChart = ({field, data, showPercentage}) => {
 
     if (field.include_expected_value === true) {
         const lastExpectedValue = data[expectedValuesColumn]
-            ? data[expectedValuesColumn].filter(value => value !== "-").slice(-1)[0]
+            ? data[expectedValuesColumn].filter(value => value !== null).slice(-1)[0]
             : 0;
 
         datasets = [
@@ -88,7 +88,7 @@ const QuestionnaireAccumulatedLineChart = ({field, data, showPercentage}) => {
     return (
         <LineChart
             title={`${field.label} - Acumulado${showPercentage ? " (%)" : ""}`}
-            labels={data["index"]}
+            labels={data["year_month"]}
             datasets={datasets}
             options={chartOptions}
         />

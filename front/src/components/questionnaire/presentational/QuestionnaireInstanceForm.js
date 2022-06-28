@@ -64,9 +64,9 @@ const QuestionnaireInstanceForm = ({
                 code: field.code,
                 datatype: field.datatype,
                 label: field.label,
-                expected_value: updatedQuestionnaireValue
-                    ? updatedQuestionnaireValue.expected_value
-                    : data[field.code + "_expected"],
+                expected_value: field.include_expected_value
+                    ? data[field.code + "_expected"]
+                    : null,
                 value: data[field.code],
             });
         });

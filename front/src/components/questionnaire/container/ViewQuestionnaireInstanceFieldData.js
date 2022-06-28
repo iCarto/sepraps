@@ -7,6 +7,7 @@ import {
     QuestionnaireExpectedVsRealFieldChart,
     QuestionnaireExpectedVsRealFieldTable,
 } from "../presentational";
+import {AlertError} from "components/common/presentational";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
@@ -27,18 +28,22 @@ const ViewQuestionnaireInstanceFieldData = ({questionnaireCode, field, filter}) 
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         setLoading(true);
-        StatsService.getStatsByQuestionnaires(
-            questionnaireCode,
-            field.code,
-            filter
-        ).then(data => {
-            console.log({data});
-            setData(data);
-            setLoading(false);
-        });
+        StatsService.getStatsByQuestionnaires(questionnaireCode, field.code, filter)
+            .then(data => {
+                console.log({data});
+                setData(data);
+            })
+            .catch(error => {
+                console.log({error});
+                setError(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [questionnaireCode, field, filter, location.state?.lastRefreshDate]);
 
     const getCSVUrl = () => {
@@ -93,6 +98,7 @@ const ViewQuestionnaireInstanceFieldData = ({questionnaireCode, field, filter}) 
 
     return (
         <Stack sx={{mb: 5, mt: 3}} spacing={1}>
+            <AlertError error={error} />
             <Grid item container alignItems="center">
                 <BarChartIcon
                     sx={{color: theme => theme.palette["grey"]["300"], mr: 1}}

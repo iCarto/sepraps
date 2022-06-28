@@ -1,4 +1,7 @@
+import {useState} from "react";
 import {useController, useFormContext} from "react-hook-form";
+import {NumberUtil} from "utilities";
+
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 
@@ -10,7 +13,8 @@ const FormInputInteger = ({
     onBlurHandler = null,
     disabled = false,
 }) => {
-    const {control} = useFormContext();
+    const {control, trigger} = useFormContext();
+    const [focused, setFocused] = useState(false);
 
     const {
         field: {onChange, onBlur, name, value, ref},
@@ -23,10 +27,23 @@ const FormInputInteger = ({
             pattern: {
                 //TODO: This function should use i18n pattern to validate decimal numbers
                 value: /^\d+$/,
-                message: "El valor del campo no cumple el formato correcto",
+                message: "Formato incorrecto",
             },
         },
     });
+
+    const handleFocus = () => {
+        setFocused(true);
+    };
+
+    const handleBlur = event => {
+        setFocused(false);
+        trigger(propsName);
+        onBlur();
+        if (onBlurHandler) {
+            onBlurHandler(event);
+        }
+    };
 
     let inputProps = {};
     if (endAdornment) {
@@ -42,13 +59,9 @@ const FormInputInteger = ({
         <TextField
             fullWidth
             onChange={onChange}
-            onBlur={event => {
-                onBlur();
-                if (onBlurHandler) {
-                    onBlurHandler(event);
-                }
-            }}
-            value={value}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            value={focused ? value : NumberUtil.formatCurrency(value, false)}
             name={name}
             inputRef={ref}
             label={label}
