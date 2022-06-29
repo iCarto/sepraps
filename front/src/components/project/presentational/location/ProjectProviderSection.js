@@ -85,7 +85,7 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
                     <Typography pb={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene prestador
                     </Typography>
-                    <AddProviderButtonGroup />
+                    {!isProjectClosed && <AddProviderButtonGroup />}
                 </Stack>
             )}
         </SectionCard>
