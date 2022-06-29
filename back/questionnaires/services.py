@@ -195,6 +195,10 @@ def reorder_columns(df):
         column_names.append("variation")
     if "variation_perc" in df:
         column_names.append("variation_perc")
+    if "extended_values" in df:
+        column_names.append("extended_values")
+    if "extended_values_acc" in df:
+        column_names.append("extended_values_acc")
 
     return df.reindex(columns=column_names)
 
