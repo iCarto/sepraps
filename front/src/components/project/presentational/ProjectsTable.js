@@ -11,24 +11,24 @@ import TableCell from "@mui/material/TableCell";
 
 const headCells = [
     {
+        id: "name",
+        label: "Localidad",
+        width: 16,
+    },
+    {
         id: "code",
         label: "Código",
         width: 12,
     },
     {
-        id: "name",
-        label: "Localidad",
-        width: 15,
-    },
-    {
         id: "location",
         label: "Ubicación",
-        width: 30,
+        width: 16,
     },
     {
         id: "description",
         label: "Descripción",
-        width: 23,
+        width: 30,
     },
     {
         id: "milestones",
@@ -59,7 +59,6 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
     };
 
     const handleClick = project => {
-        console.log("handleClick", project);
         onSelectElement && onSelectElement(project);
     };
 
@@ -85,6 +84,7 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                 selected={selectedElement?.id === project.id}
                                 style={noPointer}
                             >
+                                <TableCell>{project.name}</TableCell>
                                 <TableCell
                                     component="th"
                                     scope="row"
@@ -92,7 +92,6 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                 >
                                     {project.code}
                                 </TableCell>
-                                <TableCell>{project.name}</TableCell>
                                 <TableCell>{project.location}</TableCell>
                                 <TableCell>{project.description}</TableCell>
                                 <TableCell>

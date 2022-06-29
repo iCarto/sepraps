@@ -61,6 +61,17 @@ const ProjectCard = ({project, onClick = null}) => {
         }
     };
 
+    const getValueInfo = value => {
+        if (value) {
+            return <Typography variant="body2">{value}</Typography>;
+        } else
+            return (
+                <Typography variant="body2" sx={{fontStyle: "italic"}}>
+                    Pendiente
+                </Typography>
+            );
+    };
+
     return (
         <Card id={project.id}>
             <Stack
@@ -123,40 +134,46 @@ const ProjectCard = ({project, onClick = null}) => {
                             <Tooltip title="Fecha de inicio">
                                 <DateRangeOutlinedIcon fontSize="small" />
                             </Tooltip>
-                            <Typography variant="body2">
-                                {DateUtil.formatDate(project.init_date)}
-                            </Typography>
+                            {getValueInfo(DateUtil.formatDate(project.init_date))}
                         </Stack>
 
                         <Stack direction="row" spacing={2}>
                             <Tooltip title="Contrato">
                                 <WorkOutlineOutlinedIcon fontSize="small" />
                             </Tooltip>
-                            {project.construction_contract_number && (
+                            {project.construction_contract_number ||
+                            project.construction_contract?.number ? (
                                 <Typography variant="body2">
-                                    {project.construction_contract_number} (
-                                    {project.construction_contract_bid_request_number})
+                                    {project.construction_contract_number ||
+                                        project.construction_contract.number}{" "}
+                                    (
+                                    {project.construction_contract_bid_request_number ||
+                                        project.construction_contract
+                                            .bid_request_number}
+                                    )
+                                </Typography>
+                            ) : (
+                                <Typography variant="body2" sx={{fontStyle: "italic"}}>
+                                    Pendiente
                                 </Typography>
                             )}
                         </Stack>
 
                         <Stack direction="row" spacing={2}>
-                            <Tooltip title="Financiación">
+                            <Tooltip title="Programa de financiación">
                                 <AccountBalanceOutlinedIcon fontSize="small" />
                             </Tooltip>
-                            {project.financing_program_name && (
-                                <Typography variant="body2">
-                                    {project.financing_program_name}
-                                </Typography>
+                            {getValueInfo(
+                                project.financing_program_name ||
+                                    project.construction_contract?.financing_program
+                                        ?.short_name
                             )}
                         </Stack>
                         <Stack direction="row" spacing={2}>
                             <Tooltip title="Trabajos">
                                 <AssignmentOutlinedIcon fontSize="small" />
                             </Tooltip>
-                            <Typography variant="body2">
-                                {project.description}
-                            </Typography>
+                            {getValueInfo(project.description)}
                         </Stack>
                     </Stack>
                 </CardContent>
