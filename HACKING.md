@@ -145,9 +145,11 @@ workon sepraps
 git ir a la rama buena y hacer fetch
 # git clean -fdx Not do it because remove the .env
 cd back && pip install -r requirements.txt && cd ..
+# Increase memory space for compiling client
+export NODE_OPTIONS=--max_old_space_size=1024
 cd front && npm install && npm run build && cd ..
 cd back && echo -e "yes" | python manage.py collectstatic -c && cd ..
-# Migrate BD ?
+cd sqitch && sqitch deploy && cd ..
 systemctl restart apache2
 ```
 
