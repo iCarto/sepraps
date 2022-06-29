@@ -1,6 +1,5 @@
 import {DateUtil} from "utilities";
 
-import {ImagePreview} from "components/document/presentational";
 import {MilestoneTimelineShort} from "components/milestone/presentational";
 import {ProjectTypeIcon} from "components/common/presentational";
 import {ImagePreview} from "components/document/presentational";
@@ -14,7 +13,6 @@ import Tooltip from "@mui/material/Tooltip";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 
@@ -75,7 +73,7 @@ const ProjectCard = ({project, onClick = null}) => {
                         path={project.featured_image}
                         alt={project.name}
                         width="auto"
-                        height="130px"
+                        height="170px"
                         sx={project.closed === true ? {opacity: 0.4} : {opacity: 1}}
                     />
                     <Box sx={projectTypeIconBoxStyle}>
