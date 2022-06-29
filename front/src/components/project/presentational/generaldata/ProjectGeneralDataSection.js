@@ -70,7 +70,7 @@ const ProjectGeneralDataSection = () => {
             <Grid
                 container
                 columnSpacing={2}
-                sx={{marginTop: isProjectClosed ? "-24px" : "-48px"}}
+                sx={{marginTop: isProjectClosed ? 0 : "-48px"}}
             >
                 <Grid item sm={3} md={4}>
                     <div style={{position: "relative"}}>
