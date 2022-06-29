@@ -8,7 +8,7 @@ import {
     StatsByPhaseChart,
     StatsByPhaseTable,
     StatsByPhaseMapView,
-    StatsByPhaseFilter,
+    StatsByPhaseFilterForm,
     StatsChangeView,
 } from "../presentational";
 import Grid from "@mui/material/Grid";
@@ -33,6 +33,10 @@ const ViewStatsByPhaseSubPage = () => {
         setFilterAttributes(filterAttributes);
     };
 
+    const handleFilterClear = () => {
+        setFilterAttributes({});
+    };
+
     return (
         <SubPageLayout>
             <Paper sx={{p: 3}}>
@@ -47,7 +51,10 @@ const ViewStatsByPhaseSubPage = () => {
                             <StatsChangeView />
                         </Grid>
                     </Grid>
-                    <StatsByPhaseFilter onChange={handleFilterChange} />
+                    <StatsByPhaseFilterForm
+                        onChange={handleFilterChange}
+                        onClear={handleFilterClear}
+                    />
                     {view === "chart" && <StatsByPhaseChart data={statsByPhaseData} />}
                     {view === "table" && <StatsByPhaseTable data={statsByPhaseData} />}
                     {view === "map" && (

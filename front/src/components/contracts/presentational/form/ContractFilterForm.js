@@ -84,14 +84,8 @@ const ContractFilterForm = ({
 
     return (
         <FormProvider {...formMethods}>
-            <Grid
-                container
-                sx={{
-                    mb: 3,
-                }}
-                spacing={2}
-            >
-                <Grid item container spacing={2} xs={12}>
+            <Grid container spacing={2} mb={3}>
+                <Grid item container component="form" spacing={2} xs={12}>
                     <Grid item>
                         <SearchBoxControlled
                             name="searchText"
@@ -101,10 +95,10 @@ const ContractFilterForm = ({
                     <Grid item xs>
                         <Button
                             onClick={toggleAccordion}
-                            sx={{color: "text.secondary"}}
                             startIcon={<FilterListIcon />}
+                            sx={{color: "text.secondary"}}
                         >
-                            {!expanded ? "Más Filtros" : "Ocultar filtros"}
+                            {!expanded ? "Más filtros" : "Ocultar filtros"}
                         </Button>
                     </Grid>
                     <Grid item>

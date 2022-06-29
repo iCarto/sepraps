@@ -13,6 +13,7 @@ const FormSelect = ({
     onChangeHandler = null,
     showEmptyOption = false,
     disabled = false,
+    margin = "normal",
 }) => {
     const {control} = useFormContext();
     const {
@@ -30,7 +31,7 @@ const FormSelect = ({
     };
 
     return (
-        <FormControl fullWidth error={Boolean(error)} margin="normal">
+        <FormControl fullWidth error={Boolean(error)} margin={margin}>
             <InputLabel id={`${name}-label`}>{label}</InputLabel>
             <Select
                 labelId={`${name}-label`}
@@ -46,6 +47,7 @@ const FormSelect = ({
                     }
                 }}
                 disabled={disabled}
+                noOptionsText={"No hay opciones disponibles"}
             >
                 {(showEmptyOption ? [emptyOption, ...options] : options).map(
                     ({label, value}) => (
