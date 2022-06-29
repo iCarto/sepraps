@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useOutletContext} from "react-router-dom";
 import {AuthAction, useAuth} from "auth";
 import {DocumentService} from "service/api";
 import {useDownloadDocument} from "hooks";
@@ -32,6 +32,11 @@ const ListFolder = ({
 
     const [folderElement, setFolderElement] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    let project;
+    [project] = useOutletContext();
+
+    const isProjectClosed = project.closed;
 
     useEffect(() => {
         setLoading(true);
