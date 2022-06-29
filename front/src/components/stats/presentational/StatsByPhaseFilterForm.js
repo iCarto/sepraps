@@ -2,54 +2,68 @@ import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {ContractService, FinancingService, TEMPLATE} from "service/api";
 import {useAdministrativeDivisions} from "components/common/provider";
-import Grid from "@mui/material/Grid";
 import {FormSelect} from "components/common/form";
-import {AccordionLayout} from "components/common/presentational";
+import Grid from "@mui/material/Grid";
+import Collapse from "@mui/material/Collapse";
+import Button from "@mui/material/Button";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import ClearIcon from "@mui/icons-material/Clear";
 
-const StatsByPhaseFilter = ({onChange = null}) => {
-    const [contracts, setContracts] = useState([]);
+const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
     const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
+    const [contracts, setContracts] = useState([]);
     const {departments, districts} = useAdministrativeDivisions();
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
+    const [loadedDomains, setLoadedDomains] = useState(false);
+    const [expanded, setExpanded] = useState(false);
+
+    const toggleAccordion = () => {
+        setExpanded(oldExpanded => !oldExpanded);
+    };
 
     const formMethods = useForm({
         defaultValues: {
+            financing_fund: "",
+            financing_program: "",
             construction_contract: "",
             department: "",
             district: "",
-            financing_fund: "",
-            financing_program: "",
         },
     });
 
     useEffect(() => {
-        Promise.all([
-            ContractService.getContracts(false, TEMPLATE.SHORT),
-            FinancingService.getFinancingFunds(),
-            FinancingService.getFinancingPrograms(),
-        ]).then(([contracts, financingFunds, financingPrograms]) => {
-            setContracts(
-                contracts.map(contract => {
-                    return {value: contract.id, label: contract.number};
-                })
-            );
-            setFinancingFunds(
-                financingFunds.map(financingFund => {
-                    return {value: financingFund.id, label: financingFund.short_name};
-                })
-            );
-            setFinancingPrograms(
-                financingPrograms.map(financingProgram => {
-                    return {
-                        value: financingProgram.id,
-                        label: financingProgram.short_name,
-                    };
-                })
-            );
-        });
-    }, []);
+        if (expanded && !loadedDomains) {
+            Promise.all([
+                ContractService.getContracts(false, TEMPLATE.SHORT),
+                FinancingService.getFinancingFunds(),
+                FinancingService.getFinancingPrograms(),
+            ]).then(([contracts, financingFunds, financingPrograms]) => {
+                setContracts(
+                    contracts.map(contract => {
+                        return {value: contract.id, label: contract.number};
+                    })
+                );
+                setFinancingFunds(
+                    financingFunds.map(financingFund => {
+                        return {
+                            value: financingFund.id,
+                            label: financingFund.short_name,
+                        };
+                    })
+                );
+                setFinancingPrograms(
+                    financingPrograms.map(financingProgram => {
+                        return {
+                            value: financingProgram.id,
+                            label: financingProgram.short_name,
+                        };
+                    })
+                );
+                setLoadedDomains(true);
+            });
+        }
+    }, [expanded]);
 
     const handleChange = value => {
         onChange(formMethods.getValues());
@@ -69,13 +83,35 @@ const StatsByPhaseFilter = ({onChange = null}) => {
         onChange(values);
     };
 
+    const handleClearAllFilters = () => {
+        formMethods.reset({
+            financing_fund: "",
+            financing_program: "",
+            construction_contract: "",
+            department: "",
+            district: "",
+        });
+        if (onClear) {
+            onClear();
+        }
+    };
+
+    const filterBtnStyle = {
+        color: "text.secondary",
+        width: "fit-content",
+    };
+
     return (
         <FormProvider {...formMethods}>
-            <AccordionLayout
-                accordionTitle="Filtros"
-                accordionIcon={<FilterListIcon />}
+            <Button
+                onClick={toggleAccordion}
+                startIcon={<FilterListIcon />}
+                sx={filterBtnStyle}
             >
-                <Grid container component="form" spacing={2}>
+                {!expanded ? "Ver filtros" : "Ocultar filtros"}
+            </Button>
+            <Collapse in={expanded} timeout="auto">
+                <Grid container component="form" spacing={2} alignItems="center" mb={3}>
                     <Grid item xs={4}>
                         <FormSelect
                             name="financing_fund"
@@ -83,6 +119,7 @@ const StatsByPhaseFilter = ({onChange = null}) => {
                             options={financingFunds}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
+                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -92,6 +129,7 @@ const StatsByPhaseFilter = ({onChange = null}) => {
                             options={financingPrograms}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
+                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -101,6 +139,7 @@ const StatsByPhaseFilter = ({onChange = null}) => {
                             options={contracts}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
+                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -110,6 +149,7 @@ const StatsByPhaseFilter = ({onChange = null}) => {
                             options={departments}
                             onChangeHandler={handleChangeDepartment}
                             showEmptyOption={true}
+                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -119,12 +159,22 @@ const StatsByPhaseFilter = ({onChange = null}) => {
                             options={departmentDistricts}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
+                            margin="0"
                         />
                     </Grid>
+                    <Grid item xs container justifyContent="flex-end" mb={3}>
+                        <Button
+                            color="primary"
+                            variant="outlined"
+                            onClick={handleClearAllFilters}
+                        >
+                            <ClearIcon /> Borrar filtros
+                        </Button>
+                    </Grid>
                 </Grid>
-            </AccordionLayout>
+            </Collapse>
         </FormProvider>
     );
 };
 
-export default StatsByPhaseFilter;
+export default StatsByPhaseFilterForm;

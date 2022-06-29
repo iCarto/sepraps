@@ -7,7 +7,7 @@ import {
     TEMPLATE,
 } from "service/api";
 
-import {FormAutocomplete, FormSelect} from "components/common/form";
+import {FormAutocomplete} from "components/common/form";
 import {ClosedProjectsSwitch, ShowNoOfProjects} from "..";
 import {SearchBoxControlled} from "components/common/presentational";
 
@@ -26,10 +26,10 @@ const ProjectFilterForm = ({
     const [expanded, setExpanded] = useState(() => {
         return (
             filter?.status === "all" ||
-            filter?.department ||
-            filter?.district ||
+            filter?.financing_program ||
             filter?.construction_contract ||
-            filter?.financing_program
+            filter?.department ||
+            filter?.district
         );
     });
 
@@ -38,11 +38,11 @@ const ProjectFilterForm = ({
     };
 
     const [loadedDomains, setLoadedDomains] = useState(false);
+    const [financingPrograms, setFinancingPrograms] = useState([]);
     const [contracts, setContracts] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
-    const [financingPrograms, setFinancingPrograms] = useState([]);
 
     useEffect(() => {
         if (expanded && !loadedDomains) {
@@ -63,41 +63,44 @@ const ProjectFilterForm = ({
 
     const formMethods = useForm({
         defaultValues: {
+            status: filter?.status || "active",
+            searchText: filter?.searchText || "",
+            switchStatus: filter?.status === "all",
+            financing_program: filter?.financing_program || "",
+            construction_contract: filter?.construction_contract || "",
             department: filter?.department || "",
             district: filter?.district || "",
-            construction_contract: filter?.construction_contract || "",
-            financing_program: filter?.financing_program || "",
-            status: filter?.status || "active",
-            switchStatus: filter?.status === "all",
-            searchText: filter?.searchText || "",
         },
     });
 
     const handleChangeDepartment = selectedDepartment => {
-        setDepartmentDistricts(
-            districts.filter(
-                district => district.department_code === selectedDepartment
-            )
-        );
+        if (selectedDepartment) {
+            setDepartmentDistricts(
+                districts.filter(
+                    district => district.department_code === selectedDepartment.value
+                )
+            );
+        } else setDepartmentDistricts([]);
         const values = formMethods.getValues();
         values["district"] = "";
         formMethods.reset({
             ...values,
         });
-        onChange("department", selectedDepartment);
+        onChange("department", selectedDepartment ? selectedDepartment.value : null);
     };
 
     const handleClearAllFilters = () => {
         formMethods.reset({
-            department: "",
-            district: "",
-            construction_contract: "",
-            financing_program: "",
             status: "active",
             switchStatus: false,
             searchText: "",
+            financing_program: "",
+            construction_contract: "",
+            department: "",
+            district: "",
         });
         if (onClear) {
+            handleChangeDepartment();
             onClear();
         }
     };
@@ -108,14 +111,8 @@ const ProjectFilterForm = ({
 
     return (
         <FormProvider {...formMethods}>
-            <Grid
-                container
-                component="form"
-                sx={{
-                    mb: 3,
-                }}
-            >
-                <Grid item container spacing={2} xs={12}>
+            <Grid container spacing={2} mb={3}>
+                <Grid item container component="form" spacing={2} xs={12}>
                     <Grid item>
                         <SearchBoxControlled
                             name="searchText"
@@ -125,10 +122,10 @@ const ProjectFilterForm = ({
                     <Grid item xs>
                         <Button
                             onClick={toggleAccordion}
-                            sx={filterBtnStyle}
                             startIcon={<FilterListIcon />}
+                            sx={filterBtnStyle}
                         >
-                            {!expanded ? "Más Filtros" : "Ocultar filtros"}
+                            {!expanded ? "Más filtros" : "Ocultar filtros"}
                         </Button>
                     </Grid>
                     <Grid item>
@@ -137,25 +134,30 @@ const ProjectFilterForm = ({
                 </Grid>
                 <Grid item xs={12}>
                     <Collapse in={expanded} timeout="auto">
-                        <Grid container columnSpacing={2} alignItems="center" mb={2}>
+                        <Grid container spacing={2} alignItems="center" mb={2}>
                             <Grid item xs={4}>
-                                <FormSelect
+                                <FormAutocomplete
                                     name="department"
                                     label="Departamento"
                                     options={departments}
+                                    optionIdAttribute="value"
+                                    optionLabelAttribute="label"
                                     onChangeHandler={handleChangeDepartment}
-                                    showEmptyOption={true}
                                 />
                             </Grid>
                             <Grid item xs={4}>
-                                <FormSelect
+                                <FormAutocomplete
                                     name="district"
                                     label="Distrito"
                                     options={departmentDistricts}
-                                    onChangeHandler={value =>
-                                        onChange("district", value)
+                                    optionIdAttribute="value"
+                                    optionLabelAttribute="label"
+                                    onChangeHandler={option =>
+                                        onChange(
+                                            "district",
+                                            option ? option.value : null
+                                        )
                                     }
-                                    showEmptyOption={true}
                                 />
                             </Grid>
                             <Grid item xs={4}>
@@ -191,7 +193,7 @@ const ProjectFilterForm = ({
                                     }
                                 />
                             </Grid>
-                            <Grid item xs={4} container>
+                            <Grid item container xs pb={2}>
                                 <Button
                                     color="primary"
                                     variant="outlined"

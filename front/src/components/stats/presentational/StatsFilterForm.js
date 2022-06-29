@@ -12,10 +12,10 @@ import {
 import {FormAutocomplete, FormDatePicker} from "components/common/form";
 
 import Grid from "@mui/material/Grid";
+import Collapse from "@mui/material/Collapse";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import Collapse from "@mui/material/Collapse";
 
 const StatsFilterForm = ({
     filter,
@@ -34,18 +34,13 @@ const StatsFilterForm = ({
     const [expanded, setExpanded] = useState(() => {
         return (
             Object.keys(filter).length !== 0 &&
-            (filter?.department !== "" &&
-                filter?.district !== "" &&
-                filter?.construction_contract !== "")
+            filter?.department !== "" &&
+            filter?.district !== "" &&
+            filter?.construction_contract !== ""
         );
     });
 
-    const toggleAccordion = () => {
-        setExpanded(oldExpanded => !oldExpanded);
-    };
-
     const [loadedDomains, setLoadedDomains] = useState(false);
-
     const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
     const [contracts, setContracts] = useState([]);
@@ -54,6 +49,10 @@ const StatsFilterForm = ({
     const [districts, setDistricts] = useState([]);
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
     const [providers, setProviders] = useState([]);
+
+    const toggleAccordion = () => {
+        setExpanded(oldExpanded => !oldExpanded);
+    };
 
     useEffect(() => {
         if (expanded && !loadedDomains) {
@@ -83,7 +82,6 @@ const StatsFilterForm = ({
                     administrativeDivisions,
                     providers,
                 ]) => {
-                    console.log({contractors});
                     setFinancingFunds(financingFunds);
                     setFinancingPrograms(financingPrograms);
                     setContracts(contracts);
@@ -112,32 +110,11 @@ const StatsFilterForm = ({
         },
     });
 
-    const handleChangeDepartment = selectedDepartment => {
-        setDepartmentDistricts(
-            districts.filter(
-                district => district.department_code === selectedDepartment.value
-            )
-        );
-        const values = formMethods.getValues();
-        values["district"] = "";
-        formMethods.reset({
-            ...values,
-        });
-        onChange("department", selectedDepartment.value);
-    };
-
-    const handleChangeMonth = (field, value) => {
-        onChange(
-            field,
-            value ? `${value.getFullYear()}/${value.getMonth() + 1}` : null
-        );
-    };
-
     const handleClearAllFilters = () => {
         formMethods.reset({
             financing_fund: "",
             financing_program: "",
-            contract: "",
+            construction_contract: "",
             contractor: "",
             department: "",
             district: "",
@@ -147,178 +124,200 @@ const StatsFilterForm = ({
         });
         if (onClear) {
             onClear();
+            handleChangeDepartment();
         }
+    };
+
+    const handleChangeDepartment = selectedDepartment => {
+        if (selectedDepartment) {
+            setDepartmentDistricts(
+                districts.filter(
+                    district => district.department_code === selectedDepartment.value
+                )
+            );
+        } else setDepartmentDistricts([]);
+        const values = formMethods.getValues();
+        values["district"] = "";
+        formMethods.reset({
+            ...values,
+        });
+
+        onChange("department", selectedDepartment ? selectedDepartment.value : null);
+    };
+
+    const handleChangeMonth = (field, value) => {
+        onChange(
+            field,
+            value ? `${value.getFullYear()}/${value.getMonth() + 1}` : null
+        );
+    };
+
+    const filterBtnStyle = {
+        color: "text.secondary",
+        width: "fit-content",
+        mt: 2,
     };
 
     return (
         <FormProvider {...formMethods}>
-            <Grid
-                container
-                sx={{
-                    mb: 3,
-                }}
-                spacing={2}
+            <Button
+                onClick={toggleAccordion}
+                startIcon={<FilterListIcon />}
+                sx={filterBtnStyle}
             >
-                <Grid item container spacing={2} xs={12}>
-                    <Grid item xs>
+                {!expanded ? "Ver filtros" : "Ocultar filtros"}
+            </Button>
+            <Collapse in={expanded} timeout="auto">
+                <Grid
+                    container
+                    component="form"
+                    spacing={2}
+                    alignItems="center"
+                    mt={2}
+                    mb={3}
+                >
+                    {views.includes("financingFunds") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="financing_fund"
+                                label="Fondo de financiación"
+                                options={financingFunds}
+                                optionLabelAttribute="short_name"
+                                onChangeHandler={option =>
+                                    onChange(
+                                        "financing_fund",
+                                        option ? option.id : null
+                                    )
+                                }
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("financingPrograms") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="financing_program"
+                                label="Programa de financiación"
+                                options={financingPrograms}
+                                optionLabelAttribute="short_name"
+                                onChangeHandler={option =>
+                                    onChange(
+                                        "financing_program",
+                                        option ? option.id : null
+                                    )
+                                }
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("contracts") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="construction_contract"
+                                label="Contrato"
+                                options={contracts}
+                                optionLabelAttribute="number"
+                                onChangeHandler={option =>
+                                    onChange(
+                                        "construction_contract",
+                                        option ? option.id : null
+                                    )
+                                }
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("contractors") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="contractor"
+                                label="Contratista"
+                                options={contractors}
+                                onChangeHandler={option =>
+                                    onChange("contractor", option ? option.id : null)
+                                }
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("providers") && (
+                        <Grid
+                            item
+                            lg={3}
+                            sx={{display: {xs: "none", lg: "inherit"}}}
+                        ></Grid>
+                    )}
+                    {views.includes("administrativeDivisions") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="department"
+                                label="Departamento"
+                                options={departments}
+                                optionIdAttribute="value"
+                                optionLabelAttribute="label"
+                                onChangeHandler={handleChangeDepartment}
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("administrativeDivisions") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="district"
+                                label="Distrito"
+                                options={departmentDistricts}
+                                optionIdAttribute="value"
+                                optionLabelAttribute="label"
+                                onChangeHandler={option =>
+                                    onChange("district", option ? option.value : null)
+                                }
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("providers") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="provider"
+                                label="Prestador"
+                                options={providers}
+                                onChangeHandler={option =>
+                                    onChange("provider", option ? option.id : null)
+                                }
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("dates") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormDatePicker
+                                name="month_from"
+                                label="Desde el mes"
+                                views={["month", "year"]}
+                                margin="0"
+                                onChangeHandler={option =>
+                                    handleChangeMonth("month_from", option)
+                                }
+                            />
+                        </Grid>
+                    )}
+                    {views.includes("dates") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormDatePicker
+                                name="month_to"
+                                label="Hasta el mes"
+                                views={["month", "year"]}
+                                margin="0"
+                                onChangeHandler={option =>
+                                    handleChangeMonth("month_to", option)
+                                }
+                            />
+                        </Grid>
+                    )}
+                    <Grid item container xs justifyContent="flex-end" mb={3}>
                         <Button
-                            onClick={toggleAccordion}
-                            sx={{color: "text.secondary"}}
-                            startIcon={<FilterListIcon />}
+                            color="primary"
+                            variant="outlined"
+                            onClick={handleClearAllFilters}
                         >
-                            Ver Filtros
+                            <ClearIcon /> Borrar filtros
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <Collapse in={expanded} timeout="auto">
-                        <Grid
-                            container
-                            columnSpacing={2}
-                            rowSpacing={2}
-                            alignItems="center"
-                        >
-                            {views.includes("financingFunds") && (
-                                <Grid item xs={4}>
-                                    <FormAutocomplete
-                                        name="financing_fund"
-                                        label="Fondo de financiación"
-                                        options={financingFunds}
-                                        optionLabelAttribute="short_name"
-                                        onChangeHandler={option =>
-                                            onChange(
-                                                "financing_fund",
-                                                option ? option.id : null
-                                            )
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("financingPrograms") && (
-                                <Grid item xs={4}>
-                                    <FormAutocomplete
-                                        name="financing_program"
-                                        label="Programa de financiación"
-                                        options={financingPrograms}
-                                        optionLabelAttribute="short_name"
-                                        onChangeHandler={option =>
-                                            onChange(
-                                                "financing_program",
-                                                option ? option.id : null
-                                            )
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("contracts") && (
-                                <Grid item xs={4}>
-                                    <FormAutocomplete
-                                        name="construction_contract"
-                                        label="Contrato"
-                                        options={contracts}
-                                        optionLabelAttribute="number"
-                                        onChangeHandler={option =>
-                                            onChange(
-                                                "construction_contract",
-                                                option ? option.id : null
-                                            )
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("contractors") && (
-                                <Grid item xs={4}>
-                                    <FormAutocomplete
-                                        name="contractor"
-                                        label="Contratista"
-                                        options={contractors}
-                                        onChangeHandler={option =>
-                                            onChange(
-                                                "contractor",
-                                                option ? option.id : null
-                                            )
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("administrativeDivisions") && (
-                                <Grid item xs={4}>
-                                    <FormAutocomplete
-                                        name="department"
-                                        label="Departamento"
-                                        options={departments}
-                                        optionIdAttribute="value"
-                                        optionLabelAttribute="label"
-                                        onChangeHandler={handleChangeDepartment}
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("administrativeDivisions") && (
-                                <Grid item xs={4}>
-                                    <FormAutocomplete
-                                        name="district"
-                                        label="Distrito"
-                                        options={departmentDistricts}
-                                        optionIdAttribute="value"
-                                        optionLabelAttribute="label"
-                                        onChangeHandler={option =>
-                                            onChange("district", option.value)
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("providers") && (
-                                <Grid item xs={4}>
-                                    <FormAutocomplete
-                                        name="provider"
-                                        label="Prestador"
-                                        options={providers}
-                                        onChangeHandler={option =>
-                                            onChange(
-                                                "provider",
-                                                option ? option.id : null
-                                            )
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("dates") && (
-                                <Grid item xs={4}>
-                                    <FormDatePicker
-                                        name="month_from"
-                                        label="Desde el mes"
-                                        views={["month", "year"]}
-                                        onChangeHandler={option =>
-                                            handleChangeMonth("month_from", option)
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            {views.includes("dates") && (
-                                <Grid item xs={4}>
-                                    <FormDatePicker
-                                        name="month_to"
-                                        label="Hasta el mes"
-                                        views={["month", "year"]}
-                                        onChangeHandler={option =>
-                                            handleChangeMonth("month_to", option)
-                                        }
-                                    />
-                                </Grid>
-                            )}
-                            <Grid item xs={4} container justifyContent="flex-end">
-                                <Button
-                                    color="primary"
-                                    variant="outlined"
-                                    onClick={handleClearAllFilters}
-                                >
-                                    <ClearIcon /> Borrar filtros
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </Collapse>
-                </Grid>
-            </Grid>
+            </Collapse>
         </FormProvider>
     );
 };

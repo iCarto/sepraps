@@ -60,7 +60,7 @@ const SearchAutocomplete = ({
         <Autocomplete
             id="check-autocomplete"
             options={state.data}
-            NoOptionsText={"No hay opciones disponibles"}
+            noOptionsText={"No hay opciones disponibles"}
             onChange={handleSelectOption}
             getOptionLabel={data => data[optionLabel]}
             filterOptions={createFilterOptions({

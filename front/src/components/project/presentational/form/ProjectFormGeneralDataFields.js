@@ -27,6 +27,7 @@ const ProjectFormGeneralDataFields = ({layout = "row"}) => {
                 <FormTextArea
                     name="description"
                     label="Descripción del proyecto"
+                    margin="0"
                     rules={{required: "El campo es obligatorio"}}
                 />
             </Grid>
@@ -34,6 +35,7 @@ const ProjectFormGeneralDataFields = ({layout = "row"}) => {
                 <FormDatePicker
                     name="init_date"
                     label="Fecha de inicio"
+                    margin="0"
                     rules={{required: "El campo es obligatorio"}}
                 />
             </Grid>

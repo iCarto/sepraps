@@ -1,7 +1,13 @@
 import {useController, useFormContext} from "react-hook-form";
 import TextField from "@mui/material/TextField";
 
-const FormTextArea = ({name: propsName, label, rules = {}, isActive = true}) => {
+const FormTextArea = ({
+    name: propsName,
+    label,
+    rules = {},
+    isActive = true,
+    margin = "normal",
+}) => {
     const {control} = useFormContext();
 
     const {
@@ -17,7 +23,7 @@ const FormTextArea = ({name: propsName, label, rules = {}, isActive = true}) => 
         <TextField
             fullWidth
             multiline
-            margin="normal"
+            margin={margin}
             rows={3}
             disabled={!isActive}
             name={name}

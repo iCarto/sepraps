@@ -9,6 +9,7 @@ const FormDatePicker = ({
     onChangeHandler = null,
     views = ["year", "month", "day"],
     isActive = true,
+    margin = "normal",
 }) => {
     const {control} = useFormContext();
     const {
@@ -33,12 +34,13 @@ const FormDatePicker = ({
             value={value}
             views={views}
             disabled={!isActive}
+            sx={{m: 0}}
             renderInput={params => (
                 <TextField
                     {...params}
                     name={name}
                     fullWidth
-                    margin="normal"
+                    margin={margin}
                     error={Boolean(error)}
                     helperText={error?.message}
                 />
