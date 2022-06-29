@@ -9,15 +9,15 @@ import {useNavigateWithReload} from "hooks";
 
 import {FormDatePicker, FormInputInteger, FormInputText} from "components/common/form";
 import {AlertError} from "components/common/presentational";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+import {BorderedTableCell as TableCell} from "components/common/presentational";
 import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
+import TableContainer from "@mui/material/TableContainer";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
-import {BorderedTableCell as TableCell} from "components/common/presentational";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const QuestionnaireInstanceExpectedTable = ({
@@ -30,9 +30,10 @@ const QuestionnaireInstanceExpectedTable = ({
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
 
-    const questionnaireFieldsWithExpectedValue = projectQuestionnaire.questionnaire.fields.filter(
-        field => field.include_expected_value === true
-    );
+    const questionnaireFieldsWithExpectedValue =
+        projectQuestionnaire.questionnaire.fields.filter(
+            field => field.include_expected_value === true
+        );
 
     const defaultMonthFrom = new Date();
 
@@ -83,8 +84,8 @@ const QuestionnaireInstanceExpectedTable = ({
         const questionnaireInstances = data.expected_months_values.map(
             expectedMonth => {
                 // We should iterate over all fields and set a null value for fields with non expected value
-                const dynamicFieldValues = projectQuestionnaire.questionnaire.fields.map(
-                    field => {
+                const dynamicFieldValues =
+                    projectQuestionnaire.questionnaire.fields.map(field => {
                         return createMQInstanceValue({
                             id: null,
                             code: field.code,
@@ -95,8 +96,7 @@ const QuestionnaireInstanceExpectedTable = ({
                                 : null,
                             value: null,
                         });
-                    }
-                );
+                    });
                 return createMQInstance({
                     id: null,
                     year: expectedMonth.year_month.getFullYear(),

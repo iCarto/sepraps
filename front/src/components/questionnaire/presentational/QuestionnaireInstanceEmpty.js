@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useOutletContext} from "react-router-dom";
+
+import {QuestionnaireInstanceExpectedTable} from ".";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
-import QuestionnaireInstanceExpectedTable from "./QuestionnaireInstanceExpectedTable";
 import Alert from "@mui/material/Alert";
 
-const QuestionnaireInstanceEmpty = ({projectQuestionnaire}) => {
+const QuestionnaireInstanceEmpty = ({projectQuestionnaire, isProjectClosed}) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -31,11 +32,18 @@ const QuestionnaireInstanceEmpty = ({projectQuestionnaire}) => {
 
     return (
         <Grid container spacing={2} justifyContent="center">
-            {!selectedOption && (
+            {isProjectClosed && (
+                <Grid item>
+                    <Alert severity="info" sx={{textAlign: "center"}}>
+                        Este cuestionario no tiene registros.
+                    </Alert>
+                </Grid>
+            )}
+            {!selectedOption && !isProjectClosed && (
                 <>
                     <Grid item>
                         <Alert severity="info" sx={{textAlign: "center"}}>
-                            Este cuestionario no tiene todavía registros.
+                            Este cuestionario aún no tiene registros.
                             <br /> Puede comenzar introduciendo una previsión de
                             ejecución o puede comenzar añadiendo el primer registro.
                         </Alert>

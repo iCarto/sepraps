@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {useOutletContext} from "react-router-dom";
 
 import {
     QuestionnaireInstanceMonitoring,
@@ -38,6 +39,11 @@ function a11yProps(index) {
 const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
     const [tabValue, setTabValue] = useState(0);
 
+    let project;
+    [project] = useOutletContext();
+
+    const isProjectClosed = project.closed;
+
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
@@ -69,10 +75,12 @@ const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
                 {hasInstances ? (
                     <QuestionnaireInstanceData
                         projectQuestionnaire={projectQuestionnaire}
+                        isProjectClosed={isProjectClosed}
                     />
                 ) : (
                     <QuestionnaireInstanceEmpty
                         projectQuestionnaire={projectQuestionnaire}
+                        isProjectClosed={isProjectClosed}
                     />
                 )}
             </TabPanel>

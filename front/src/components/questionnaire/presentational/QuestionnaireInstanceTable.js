@@ -1,15 +1,15 @@
 import {Fragment} from "react";
 import {useQuestionnaireColors} from "../hooks";
 
+import {QuestionnaireInstanceTableRow} from ".";
+import {BorderedTableCell as TableCell} from "components/common/presentational";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import {BorderedTableCell as TableCell} from "components/common/presentational";
-import QuestionnaireInstanceTableRow from "./QuestionnaireInstanceTableRow";
 
-const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
+const QuestionnaireInstanceTable = ({projectQuestionnaire, isProjectClosed}) => {
     const {getCellStyle, COLORS} = useQuestionnaireColors();
     const realCellStyle = getCellStyle(COLORS.REAL);
     const expectedCellStyle = getCellStyle(COLORS.EXPECTED);
@@ -86,6 +86,7 @@ const QuestionnaireInstanceTable = ({projectQuestionnaire}) => {
                             key={instance.id}
                             instance={instance}
                             projectQuestionnaire={projectQuestionnaire}
+                            isProjectClosed={isProjectClosed}
                         />
                     ))}
                 </TableBody>
