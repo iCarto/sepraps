@@ -13,7 +13,6 @@ const CustomTooltip = styled(({className, ...props}) => (
         textAlign: "center",
         backgroundColor: `${theme.palette.grey["700"]}`,
         boxShadow: theme.shadows[1],
-        fontSize: 12,
     },
 }));
 
@@ -22,13 +21,16 @@ const MilestoneTimelineTooltip = ({milestone, completionDate, children}) => {
         <CustomTooltip
             title={
                 <>
-                    <Typography>{milestone}</Typography>
+                    <Typography variant="body2">
+                        {milestone}
+                        <br />
+                    </Typography>
                     {completionDate ? (
-                        <Typography variant="caption">
+                        <Typography variant="caption" sx={{fontStyle: "italic"}}>
                             Completado el {completionDate}
                         </Typography>
                     ) : (
-                        <Typography variant="caption">
+                        <Typography variant="caption" sx={{fontStyle: "italic"}}>
                             Pendiente de completar
                         </Typography>
                     )}

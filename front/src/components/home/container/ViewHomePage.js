@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {
     ContractService,
     EventService,
@@ -17,9 +17,6 @@ import {StatsByPhaseChart} from "components/stats/presentational";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
-import FactCheckOutlinedIcon from "@mui/icons-material/FactCheckOutlined";
-import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
 

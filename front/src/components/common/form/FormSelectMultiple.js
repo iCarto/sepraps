@@ -20,7 +20,6 @@ const FormSelectMultiple = ({name: propsName, label, options, rules = {}}) => {
     });
 
     const getOptionLabels = optionValues => {
-        console.log({optionValues});
         if (optionValues) {
             return optionValues
                 .map(

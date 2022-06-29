@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
-import {StatsService} from "service/api";
 import {QuestionnaireService} from "service/api/questionnaires";
 
 import {SubPageLayout} from "layout";

@@ -63,7 +63,7 @@ const ContactFormFields = ({
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputText name="phone" label="Celular" />
-            <FormInputText name="email" label="Correo electrónico" />
+            <FormInputText name="email" label="E-mail" />
             <FormTextArea name="comments" label="Observaciones" />
             {showIsStaff && <FormCheckbox name="is_staff" label="Personal interno" />}
         </Fragment>

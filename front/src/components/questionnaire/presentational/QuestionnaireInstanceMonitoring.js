@@ -1,4 +1,3 @@
-import {StatsService} from "service/api";
 import {ViewQuestionnaireInstanceFieldData} from "../container";
 
 const QuestionnaireInstanceMonitoring = ({projectQuestionnaire}) => {

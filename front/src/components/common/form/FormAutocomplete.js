@@ -29,6 +29,7 @@ const FormAutocomplete = ({
         <Autocomplete
             fullWidth
             id={`${propsName}-form-autocomplete`}
+            NoOptionsText={"No hay opciones disponibles"}
             onChange={(event, option) => {
                 onChange(option);
                 event.preventDefault();

@@ -1,7 +1,7 @@
 import {NumberUtil} from "utilities";
-import {useAlertCellStyle, useQuestionnaireColors, useFormattedValue} from "../hooks";
-import {QuestionnaireFieldDownloadCSV} from "../presentational";
+import {useQuestionnaireColors, useFormattedValue} from "../hooks";
 
+import {QuestionnaireFieldDownloadCSV} from "../presentational";
 import {BorderedTableCell as TableCell} from "components/common/presentational";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -73,11 +73,8 @@ const QuestionnaireExpectedVsRealFieldTable = ({field, data, downloadPath}) => {
     const {getCellStyle, COLORS} = useQuestionnaireColors();
 
     const formatValue = useFormattedValue();
-    const cellStyle = useQuestionnaireColors();
     const realCellStyle = getCellStyle(COLORS.REAL);
     const expectedCellStyle = getCellStyle(COLORS.EXPECTED);
-    const extendedCellStyle = getCellStyle(COLORS.EXTENDED);
-    const getAlertCellStyle = useAlertCellStyle();
 
     return (
         <Grid container spacing={1}>

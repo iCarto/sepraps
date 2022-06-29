@@ -70,8 +70,6 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
 
     const noPointer = {cursor: "default"};
 
-    console.log({folderElements});
-
     const tableRowStyle = {
         "&:last-child td, &:last-child th": {
             border: 0,
