@@ -49,7 +49,6 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     }, [localities]);
 
     const onChangeDepartment = selectedDepartment => {
-        console.log("onChangeDepartment", {selectedDepartment});
         setDepartmentDistricts(
             districts.filter(
                 district => district.department_code === selectedDepartment
@@ -74,7 +73,6 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     };
 
     const onChangeDistrict = selectedDistrict => {
-        console.log("onChangeDistrict", {selectedDistrict});
         setDistrictLocalities(
             localities.filter(locality => locality.district_code === selectedDistrict)
         );
@@ -96,7 +94,6 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     };
 
     const onChangeLocality = selectedLocality => {
-        console.log("onChangeLocality", {selectedLocality});
         const values = getValues();
         const locality = districtLocalities.find(
             district => district.value === selectedLocality
@@ -115,7 +112,6 @@ const FormLocationSelect = ({name: propsName, orientation = "vertical"}) => {
     };
 
     const onChangeNonExistent = nonExistent => {
-        console.log({nonExistent});
         if (nonExistent) {
             const values = getValues();
             setValueByPath(values, propsName, {

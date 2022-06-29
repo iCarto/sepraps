@@ -41,7 +41,6 @@ const ProviderForm = ({provider = null, onSubmit = null, onCancel = null}) => {
     });
 
     const handleFormSubmit = data => {
-        console.log({data});
         const updatedProvider = createProvider({
             id: data.id,
             name: data.name,
@@ -59,7 +58,6 @@ const ProviderForm = ({provider = null, onSubmit = null, onCancel = null}) => {
             }),
             contacts: provider ? [...provider.contacts] : [],
         });
-        console.log({updatedProvider});
         onSubmit(updatedProvider);
     };
 

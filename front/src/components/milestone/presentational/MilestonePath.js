@@ -1,8 +1,6 @@
-import {Fragment} from "react";
+import {Timeline} from "@mui/lab";
 
 import MilestonePoint from "./MilestonePoint";
-
-import {Timeline} from "@mui/lab";
 
 const MilestonePath = ({milestones, level, activeMilestone, isProjectClosed}) => {
     return (

@@ -1,13 +1,11 @@
 import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
-import {StatsService} from "service/api";
 import {SubPageLayout} from "layout";
 
 import {ViewQuestionnaireInstanceFieldData} from "components/questionnaire/container";
 import {QuestionnaireInstanceViewProvider} from "components/questionnaire/provider";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import {SectionHeading} from "components/common/presentational";
+import Paper from "@mui/material/Paper";
 
 const ViewContractQuestionnairesSubPage = () => {
     const {contractId, questionnaireCode} = useParams();

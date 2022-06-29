@@ -12,7 +12,6 @@ const ViewContractPage = () => {
 
     useEffect(() => {
         ContractService.getContract(contractId).then(data => {
-            // console.log({data});
             setContract(data);
         });
     }, [contractId, location.state?.lastRefreshDate]);

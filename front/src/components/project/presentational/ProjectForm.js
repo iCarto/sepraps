@@ -65,7 +65,6 @@ const ProjectForm = ({
     });
 
     const onFormSubmit = data => {
-        console.log("submit", {data});
         const updatedProject = createProject({
             id: data.id,
             code: data.code,

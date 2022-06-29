@@ -10,8 +10,6 @@ const ProjectSection = ({project, headerActions = null}) => {
         } else return "Pendiente";
     };
 
-    console.log("project?.milestones", project?.milestones);
-
     const milestonesData = project?.milestones
         ? project?.milestones
               .filter(
@@ -32,8 +30,8 @@ const ProjectSection = ({project, headerActions = null}) => {
         <SectionCard title={project?.name} headerActions={headerActions}>
             <SectionField label="Código:" value={project?.code} />
             <SectionField label="Ubicación:" value={project?.location} />
-            <SectionField label="Tipo:" value={project?.project_type_name} />
             <SectionField label="Clase:" value={project?.project_class_name} />
+            <SectionField label="Tipo:" value={project?.project_type_name} />
             <SectionField label="Descripción:" value={project?.description} />
 
             <Divider variant="middle" sx={{mx: 0, mt: 3, mb: 4}}>

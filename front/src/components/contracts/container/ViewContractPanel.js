@@ -28,7 +28,7 @@ const ViewContractPanel = () => {
 
     return (
         <SidebarPanel
-            sidebarTitle="Resumen del proyecto"
+            sidebarTitle="Resumen del contrato"
             closeSidebarClick={handleCloseSidebar}
         >
             {contract && (

@@ -33,7 +33,6 @@ const UpdateMilestonePanel = () => {
 
     useEffect(() => {
         MilestoneService.getMilestone(milestoneId).then(milestone => {
-            console.log({milestone});
             setMilestone(milestone);
         });
     }, [milestoneId]);

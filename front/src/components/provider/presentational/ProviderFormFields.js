@@ -5,8 +5,6 @@ import {FormInputText, FormSelect, FormLocationSelect} from "components/common/f
 const ProviderFormFields = () => {
     const {areas} = useDomain();
 
-    console.log("ProviderFormFields");
-
     return (
         <Fragment>
             <FormInputText name="name" label="Nombre del prestador" />
