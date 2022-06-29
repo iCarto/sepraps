@@ -14,7 +14,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
 import ErrorIcon from "@mui/icons-material/Error";
 
-const QuestionnaireInstanceTableRow = ({instance, projectQuestionnaire}) => {
+const QuestionnaireInstanceTableRow = ({
+    instance,
+    projectQuestionnaire,
+    isProjectClosed,
+}) => {
     const navigate = useNavigate();
     const formatValue = useFormattedValue();
     const {getCellStyle, COLORS} = useQuestionnaireColors();
@@ -44,7 +48,10 @@ const QuestionnaireInstanceTableRow = ({instance, projectQuestionnaire}) => {
 
     const isInstanceEditable = instance => {
         const hasEditPermission = [ROLES.SUPERVISION].some(role => hasRole(role));
-        return hasEditPermission || !isFutureInstance(instance);
+        return (
+            (!isProjectClosed && !isFutureInstance(instance)) ||
+            (!isProjectClosed && hasEditPermission)
+        );
     };
 
     return (
