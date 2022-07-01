@@ -4,7 +4,6 @@
         "pk": 1,
         "fields": {
             "name": "Ing. Cinthia Soledad Melgarejo",
-            "post": "responsable_contratista",
             "gender": "F",
             "phone": "",
             "email": "",
@@ -12,15 +11,30 @@
         }
     },
     {
+        "model": "monitoring.contractorcontact",
+        "fields": {
+            "entity": 1,
+            "contact": 1,
+            "post": "responsable_contratista"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 2,
         "fields": {
             "name": "Arq. Sebastián Pérez Codas",
-            "post": "responsable_contratista",
             "gender": "M",
             "phone": "",
             "email": "",
             "comments": "CI Nº 2.442.601"
+        }
+    },
+    {
+        "model": "monitoring.contractorcontact",
+        "fields": {
+            "entity": 1,
+            "contact": 2,
+            "post": "responsable_contratista"
         }
     },
     {
@@ -32,8 +46,7 @@
             "address": "José Berges nº 676, c/ Rosa Peña, Asunción",
             "phone": "(021) 224-951",
             "email": "",
-            "comments": "RUC Nº 80109430-5",
-            "contacts": [1, 2]
+            "comments": "RUC Nº 80109430-5"
         }
     },
     {
@@ -175,7 +188,7 @@
     {
         "model": "monitoring.providercontact",
         "fields": {
-            "provider": 1,
+            "entity": 1,
             "contact": 9,
             "post": "presidencia_junta_saneamiento"
         }
@@ -194,7 +207,7 @@
     {
         "model": "monitoring.providercontact",
         "fields": {
-            "provider": 1,
+            "entity": 1,
             "contact": 10,
             "post": "tesoreria_junta_saneamiento"
         }
@@ -213,7 +226,7 @@
     {
         "model": "monitoring.providercontact",
         "fields": {
-            "provider": 1,
+            "entity": 1,
             "contact": 11,
             "post": "secretaria_junta_saneamiento"
         }
@@ -232,7 +245,7 @@
     {
         "model": "monitoring.providercontact",
         "fields": {
-            "provider": 1,
+            "entity": 1,
             "contact": 12,
             "post": "otra_junta_saneamiento"
         }

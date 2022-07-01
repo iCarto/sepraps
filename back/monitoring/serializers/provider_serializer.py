@@ -1,8 +1,10 @@
 from monitoring.models.location import Locality
 from monitoring.models.project import Project
 from monitoring.models.provider import Provider
+from monitoring.serializers.contact_relationship_serializer import (
+    ContactProviderSerializer,
+)
 from monitoring.serializers.locality_serializer import LocalitySerializer
-from monitoring.serializers.provider_contact_serializer import ProviderContactSerializer
 from rest_framework import serializers
 
 
@@ -13,7 +15,7 @@ class ProviderSerializer(serializers.ModelSerializer):
     project = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=Project.objects.all(), required=False
     )
-    contacts = ProviderContactSerializer(
+    contacts = ContactProviderSerializer(
         source="providercontact_set", many=True, required=False
     )
 

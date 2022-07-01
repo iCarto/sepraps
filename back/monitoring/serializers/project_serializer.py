@@ -3,12 +3,12 @@ from documents.serializers import MediaUrlSerializer
 
 # from django.db.models import F, Prefetch
 from monitoring.models.construction_contract import ConstructionContract
+from monitoring.models.contact_relationship import ProviderContact
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project, get_code_for_new_project
 from monitoring.models.provider import Provider
-from monitoring.models.provider_contact import ProviderContact
 from monitoring.serializers.construction_contract_serializer import (
     ConstructionContractSummarySerializer,
 )

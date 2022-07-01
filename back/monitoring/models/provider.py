@@ -1,7 +1,7 @@
 from django.db import models
 from monitoring.models.contact import Contact
+from monitoring.models.contact_relationship import ProviderContact
 from monitoring.models.location import Locality
-from monitoring.models.provider_contact import ProviderContact
 
 
 class Provider(models.Model):
