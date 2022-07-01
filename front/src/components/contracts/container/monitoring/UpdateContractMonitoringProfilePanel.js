@@ -109,7 +109,7 @@ const UpdateContractMonitoringProfilePanel = () => {
         >
             <AlertError error={error} />
             {action === "search" ? (
-                <ContactFormSearch allowedPosts={[post]} onSelect={handleSubmit} />
+                <ContactFormSearch allowedPosts={[post]} onSubmit={handleSubmit} />
             ) : (
                 <ContactForm
                     contact={contract[sectionName]}

@@ -1,46 +1,50 @@
-import {useState} from "react";
+import {FormProvider, useForm} from "react-hook-form";
 
-import ContactSearchAutocomplete from "./ContactSearchAutocomplete";
-import ContactSection from "./ContactSection";
+import {DomainProvider, useDomain} from "components/common/provider";
 
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import ContactFormSearchFields from "./ContactFormSearchFields";
 
-const ContactFormSearch = ({allowedPosts = null, onSelect = null}) => {
-    const [existingContact, setExistingContact] = useState(null);
+const ContactFormSearch = ({allowedPosts = null, onSubmit}) => {
+    const formMethods = useForm({
+        defaultValues: {
+            post: "",
+            id: "",
+            name: "",
+            gender: "",
+            phone: "",
+            email: "",
+            comments: "",
+        },
+        reValidateMode: "onSubmit",
+    });
 
-    const handleSelectExistingContact = contact => {
-        setExistingContact(contact);
+    const handleSubmit = data => {
+        console.log({data});
+        onSubmit(data);
     };
 
     return (
-        <Grid container component="form" spacing={2} sx={{mt: 0.25}}>
-            <Grid item xs={12}>
-                <ContactSearchAutocomplete
-                    allowedPosts={allowedPosts}
-                    handleSelect={handleSelectExistingContact}
-                />
-            </Grid>
-            <Grid item xs={12}>
-                {existingContact && <ContactSection contact={existingContact} />}
-            </Grid>
-            <Grid container justifyContent="center" sx={{mt: 2}}>
-                <Grid>
-                    {onSelect && (
+        <DomainProvider>
+            <FormProvider {...formMethods}>
+                <Grid container component="form">
+                    <ContactFormSearchFields allowedPosts={allowedPosts} />
+                </Grid>
+                <Grid container justifyContent="center" sx={{mt: 2}}>
+                    <Grid>
                         <Button
                             variant="contained"
                             color="primary"
                             sx={{ml: 2}}
-                            onClick={() => {
-                                onSelect(existingContact);
-                            }}
+                            onClick={formMethods.handleSubmit(handleSubmit)}
                         >
                             Añadir
                         </Button>
-                    )}
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Grid>
+            </FormProvider>
+        </DomainProvider>
     );
 };
 

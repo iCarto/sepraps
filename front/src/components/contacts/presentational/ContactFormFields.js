@@ -22,8 +22,19 @@ const ContactFormFields = ({
 
     return (
         <Fragment>
-            <FormInputText name="name" label="Nombre del contacto" />
-            {!showPostField && <FormSelect name="post" label="Cargo" options={posts} />}
+            <FormInputText
+                name="name"
+                label="Nombre del contacto"
+                rules={{required: "El campo es obligatorio"}}
+            />
+            {!showPostField && (
+                <FormSelect
+                    name="post"
+                    label="Cargo"
+                    options={posts}
+                    rules={{required: "El campo es obligatorio"}}
+                />
+            )}
             <FormSelect
                 name="gender"
                 label="Género"
@@ -37,6 +48,7 @@ const ContactFormFields = ({
                         label: "Mujer",
                     },
                 ]}
+                rules={{required: "El campo es obligatorio"}}
             />
             <FormInputText name="phone" label="Celular" />
             <FormInputText name="email" label="Correo electrónico" />

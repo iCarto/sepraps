@@ -5,8 +5,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 const ContactSearchAutocomplete = ({allowedPosts = null, handleSelect}) => {
-    console.log({allowedPosts});
-
     const optionComponent = option => {
         return (
             <Stack>

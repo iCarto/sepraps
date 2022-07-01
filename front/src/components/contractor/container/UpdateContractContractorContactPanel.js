@@ -71,7 +71,7 @@ const UpdateContractContractorContactPanel = () => {
             {action === "search" ? (
                 <ContactFormSearch
                     allowedPosts={allowedPosts}
-                    onSelect={handleSubmit}
+                    onSubmit={handleSubmit}
                 />
             ) : (
                 <ContactForm
