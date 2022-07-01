@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from monitoring.models.contact import Contact
+from monitoring.models.contact_relationship import ConstructionContractContact
 from monitoring.models.contractor import Contractor
 from monitoring.models.financing_program import FinancingProgram
 
@@ -39,24 +40,9 @@ class ConstructionContract(models.Model):
         null=True,
         related_name="contract",
     )
-    field_manager = models.ForeignKey(
-        Contact, on_delete=models.PROTECT, null=True, related_name="+"
-    )
-    construction_inspector = models.ForeignKey(
-        Contact, on_delete=models.PROTECT, null=True, related_name="+"
-    )
-    construction_supervisor = models.ForeignKey(
-        Contact, on_delete=models.PROTECT, null=True, related_name="+"
-    )
-    social_coordinator = models.ForeignKey(
-        Contact, on_delete=models.PROTECT, null=True, related_name="+"
-    )
-    social_inspector = models.ForeignKey(
-        Contact, on_delete=models.PROTECT, null=True, related_name="+"
-    )
-    social_supervisor = models.ForeignKey(
-        Contact, on_delete=models.PROTECT, null=True, related_name="+"
-    )
+
+    contacts = models.ManyToManyField(Contact, through=ConstructionContractContact)
+
     execution_signature_date = models.DateField(
         "Fecha de firma del contrato", null=True
     )

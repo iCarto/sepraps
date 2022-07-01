@@ -3,10 +3,17 @@ import itertools
 from django.db.models import Prefetch
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.contact import Contact
+from monitoring.models.contact_relationship import (
+    ConstructionContractContact,
+    ContractorContact,
+)
 from monitoring.models.contractor import Contractor
 from monitoring.models.financing_program import FinancingProgram
 from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project
+from monitoring.serializers.contact_relationship_serializer import (
+    ContactConstructionContractSerializer,
+)
 from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.contractor_serializer import (
     ContractorSerializer,
@@ -27,12 +34,9 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         required=False, allow_null=True, queryset=FinancingProgram.objects.all()
     )
     contractor = ContractorSerializer(required=False, allow_null=True)
-    field_manager = ContactSerializer(required=False, allow_null=True)
-    construction_inspector = ContactSerializer(required=False, allow_null=True)
-    construction_supervisor = ContactSerializer(required=False, allow_null=True)
-    social_coordinator = ContactSerializer(required=False, allow_null=True)
-    social_inspector = ContactSerializer(required=False, allow_null=True)
-    social_supervisor = ContactSerializer(required=False, allow_null=True)
+    contacts = ContactConstructionContractSerializer(
+        source="constructioncontractcontact_set", many=True, required=False
+    )
     projects = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Project.objects.all()
     )
@@ -56,12 +60,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "awarding_date",
             "financing_program",
             "contractor",
-            "field_manager",
-            "construction_inspector",
-            "construction_supervisor",
-            "social_coordinator",
-            "social_inspector",
-            "social_supervisor",
+            "contacts",
             "execution_signature_date",
             "execution_certificate_start_date",
             "expected_execution_period",
@@ -87,7 +86,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         return queryset.select_related(
             "contractor", "financing_program"
         ).prefetch_related(
-            "contractor__contacts",
+            # TODO Improve contacts load to avoid multiples queries
             "financing_program__financing_funds",
             "projects__questionnaires",
             Prefetch(
@@ -142,40 +141,21 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
 
         contractor_data = validated_data.pop("contractor", None)
+        contacts = validated_data.pop("constructioncontractcontact_set", None)
+
         contractor = None
         if contractor_data:
             contractor, _ = Contractor.objects.get_or_create(**contractor_data)
 
         projects_for_contract = validated_data.pop("projects")
 
-        field_manager = self.create_monitoring_profile("field_manager", validated_data)
-        construction_inspector = self.create_monitoring_profile(
-            "construction_inspector", validated_data
-        )
-        construction_supervisor = self.create_monitoring_profile(
-            "construction_supervisor", validated_data
-        )
-        social_coordinator = self.create_monitoring_profile(
-            "social_coordinator", validated_data
-        )
-        social_inspector = self.create_monitoring_profile(
-            "social_inspector", validated_data
-        )
-        social_supervisor = self.create_monitoring_profile(
-            "social_supervisor", validated_data
-        )
-
         construction_contract = ConstructionContract.objects.create(
-            **validated_data,
-            contractor=contractor,
-            field_manager=field_manager,
-            construction_inspector=construction_inspector,
-            construction_supervisor=construction_supervisor,
-            social_coordinator=social_coordinator,
-            social_inspector=social_inspector,
-            social_supervisor=social_supervisor,
+            **validated_data, contractor=contractor
         )
         construction_contract.projects.set(projects_for_contract)
+
+        if contacts:
+            self.fields["contacts"].update(construction_contract, [], contacts)
 
         return construction_contract
 
@@ -194,42 +174,15 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
         instance.contractor = contractor
 
-    def update_monitoring_profiles(
-        self, monitoring_profile_key, instance, validated_data
-    ):
-        monitoring_profile_data = validated_data.pop(monitoring_profile_key, None)
-
-        monitoring_profile = None
-        if monitoring_profile_data:
-
-            if (
-                "id" in monitoring_profile_data
-                and monitoring_profile_data["id"] is not None
-            ):
-                monitoring_profile = self.fields[monitoring_profile_key].update(
-                    Contact.objects.get(pk=monitoring_profile_data["id"]),
-                    monitoring_profile_data,
-                )
-            else:
-                monitoring_profile = self.fields[monitoring_profile_key].create(
-                    monitoring_profile_data
-                )
-
-        setattr(instance, monitoring_profile_key, monitoring_profile)
+    def update_contacts(self, instance, validated_data):
+        contacts = validated_data.pop("constructioncontractcontact_set", None)
+        if contacts:
+            self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
 
     def update(self, instance, validated_data):
 
         self.update_contractor(instance, validated_data)
-        self.update_monitoring_profiles("field_manager", instance, validated_data)
-        self.update_monitoring_profiles(
-            "construction_inspector", instance, validated_data
-        )
-        self.update_monitoring_profiles(
-            "construction_supervisor", instance, validated_data
-        )
-        self.update_monitoring_profiles("social_coordinator", instance, validated_data)
-        self.update_monitoring_profiles("social_inspector", instance, validated_data)
-        self.update_monitoring_profiles("social_supervisor", instance, validated_data)
+        self.update_contacts(instance, validated_data)
 
         projects_for_contract = validated_data.pop("projects")
         instance.projects.set(projects_for_contract)

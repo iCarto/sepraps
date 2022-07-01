@@ -54,7 +54,6 @@
         "pk": 3,
         "fields": {
             "name": "Prueba Residente Obra",
-            "post": "residente_obra",
             "gender": "F",
             "phone": "(021) 123-123",
             "email": "residente_obra@test.com",
@@ -62,11 +61,18 @@
         }
     },
     {
+        "model": "monitoring.constructioncontractcontact",
+        "fields": {
+            "entity": 1,
+            "contact": 3,
+            "post": "residente_obra"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 4,
         "fields": {
             "name": "Prueba Fiscal de Obra",
-            "post": "fiscal_obra",
             "gender": "M",
             "phone": "(021) 234-234",
             "email": "fiscal_obra@test.com",
@@ -74,11 +80,18 @@
         }
     },
     {
+        "model": "monitoring.constructioncontractcontact",
+        "fields": {
+            "entity": 1,
+            "contact": 4,
+            "post": "fiscal_obra"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 5,
         "fields": {
             "name": "Prueba Supervisor de Obra",
-            "post": "supervisor_obra",
             "gender": "M",
             "phone": "(021) 345-345",
             "email": "supervisor_obra@test.com",
@@ -87,11 +100,18 @@
         }
     },
     {
+        "model": "monitoring.constructioncontractcontact",
+        "fields": {
+            "entity": 1,
+            "contact": 5,
+            "post": "supervisor_obra"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 6,
         "fields": {
             "name": "Prueba Coordinador Social",
-            "post": "coordinador_social",
             "gender": "F",
             "phone": "(021) 456-456",
             "email": "coordinador_social@test.com",
@@ -99,16 +119,11 @@
         }
     },
     {
-        "model": "monitoring.contact",
-        "pk": 7,
+        "model": "monitoring.constructioncontractcontact",
         "fields": {
-            "name": "Prueba Fiscal Social",
-            "post": "fiscal_social",
-            "gender": "F",
-            "phone": "(021) 567-567",
-            "email": "fiscal_social@test.com",
-            "comments": "Fiscal social de pruebas",
-            "is_staff": true
+            "entity": 1,
+            "contact": 6,
+            "post": "coordinador_social"
         }
     },
     {
@@ -116,12 +131,19 @@
         "pk": 8,
         "fields": {
             "name": "Prueba Supervisor Social",
-            "post": "supervisor_social",
             "gender": "F",
             "phone": "(021) 678-678",
             "email": "supervisor_social@test.com",
             "comments": "Supervisor social de pruebas",
             "is_staff": true
+        }
+    },
+    {
+        "model": "monitoring.constructioncontractcontact",
+        "fields": {
+            "entity": 1,
+            "contact": 8,
+            "post": "supervisor_social"
         }
     },
     {
@@ -139,12 +161,6 @@
             "awarding_date": "2019-11-15",
             "financing_program": 1,
             "contractor": 1,
-            "field_manager": 3,
-            "construction_inspector": 4,
-            "construction_supervisor": 5,
-            "social_coordinator": 6,
-            "social_inspector": 7,
-            "social_supervisor": 8,
             "execution_signature_date": "2019-12-11",
             "execution_certificate_start_date": "2019-12-11",
             "expected_execution_period": 240,
