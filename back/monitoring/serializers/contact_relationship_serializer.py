@@ -1,5 +1,9 @@
 from monitoring.models.contact import Contact
-from monitoring.models.contact_relationship import ContractorContact, ProviderContact
+from monitoring.models.contact_relationship import (
+    ConstructionContractContact,
+    ContractorContact,
+    ProviderContact,
+)
 from monitoring.models.domain_entry import dominio_get_value
 from monitoring.serializers.contact_serializer import ContactSerializer
 from rest_framework import serializers
@@ -115,3 +119,19 @@ class ContactContractorSerializer(ContactRelationshipSerializer):
     def many_init(cls, *args, **kwargs):
         kwargs["child"] = cls()
         return ContactContractorListSerializer(*args, **kwargs)
+
+
+class ContactConstructionContractListSerializer(ContactRelationshipListSerializer):
+    def get_contact_relationship_model(self):
+        return ContactConstructionContractSerializer.Meta.model
+
+
+class ContactConstructionContractSerializer(ContactRelationshipSerializer):
+    class Meta(ContactRelationshipSerializer.Meta):
+        model = ConstructionContractContact
+        list_serializer_class = ContactConstructionContractListSerializer
+
+    @classmethod
+    def many_init(cls, *args, **kwargs):
+        kwargs["child"] = cls()
+        return ContactConstructionContractListSerializer(*args, **kwargs)

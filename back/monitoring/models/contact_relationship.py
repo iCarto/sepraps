@@ -23,3 +23,13 @@ class ContractorContact(ContactRelationship):
 
     class Meta:
         db_table = "contractor_contact"
+
+
+class ConstructionContractContact(ContactRelationship):
+
+    entity = models.ForeignKey(
+        "monitoring.ConstructionContract", on_delete=models.CASCADE
+    )
+
+    class Meta:
+        db_table = "construction_contract_contact"
