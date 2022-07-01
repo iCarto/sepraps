@@ -6,6 +6,8 @@ import {
     project_summary_api_adapter,
     createFinancingProgram,
     financing_program_api_adapter,
+    contacts_api_adapter,
+    createContacts,
 } from "model";
 import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
 import {contractor_view_adapter} from "./Contractor";
@@ -74,6 +76,12 @@ const contract_api_adapter = contract => {
     if (contract["questionnaires"]) {
         contract["questionnaires"] = createQuestionnaires(
             questionnaires_api_adapter(contract["questionnaires"])
+        );
+    }
+
+    if (contract["contacts"]) {
+        contract["contacts"] = createContacts(
+            contacts_api_adapter(contract["contacts"])
         );
     }
 
@@ -172,12 +180,7 @@ const createContract = ({
     awarding_date = null,
     financing_program = null,
     contractor = null,
-    field_manager = null,
-    construction_inspector = null,
-    construction_supervisor = null,
-    social_coordinator = null,
-    social_inspector = null,
-    social_supervisor = null,
+    contacts = [],
     execution_signature_date = null,
     execution_certificate_start_date = null,
     execution_final_delivery_date = null,
@@ -203,12 +206,7 @@ const createContract = ({
         awarding_date,
         financing_program,
         contractor,
-        field_manager,
-        construction_inspector,
-        construction_supervisor,
-        social_coordinator,
-        social_inspector,
-        social_supervisor,
+        contacts,
         execution_signature_date,
         expected_execution_period,
         expected_execution_period_in_months,

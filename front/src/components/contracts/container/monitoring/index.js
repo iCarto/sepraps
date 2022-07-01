@@ -1,2 +1,3 @@
-export {default as UpdateContractMonitoringProfilePanel} from "./UpdateContractMonitoringProfilePanel";
-export {default as RemoveContractMonitoringProfileDialog} from "./RemoveContractMonitoringProfileDialog";
+export {default as UpdateContractContactPanel} from "./UpdateContractContactPanel";
+export {default as DeleteContractContactDialog} from "./DeleteContractContactDialog";
+export {default as RemoveContractContactDialog} from "./RemoveContractContactDialog";
