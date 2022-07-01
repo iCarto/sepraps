@@ -54,7 +54,7 @@ const ContractorContactsSection = ({contractor, isSidePanelOpen = false}) => {
     const handleUpdateContractor = updatedContractor => {
         ContractorService.updateContractor(updatedContractor)
             .then(() => {
-                navigate(`/contracts/${contractor.contract}`, true);
+                navigate(`/contracts/${contractor.contract}/summary`, true);
             })
             .catch(error => {
                 console.log(error);

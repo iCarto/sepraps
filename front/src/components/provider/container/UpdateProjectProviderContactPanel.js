@@ -82,7 +82,7 @@ const UpdateProjectProviderContactPanel = () => {
             {action === "search" ? (
                 <ContactFormSearch
                     allowedPosts={allowedPosts}
-                    onSelect={handleSubmit}
+                    onSubmit={handleSubmit}
                 />
             ) : (
                 <ContactForm

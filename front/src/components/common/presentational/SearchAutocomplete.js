@@ -77,6 +77,7 @@ const SearchAutocomplete = ({
             renderInput={params => (
                 <TextField
                     {...params}
+                    fullWidth
                     label={label}
                     variant="outlined"
                     onChange={ev => {
