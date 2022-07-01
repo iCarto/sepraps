@@ -8,6 +8,7 @@ from monitoring.models.infrastructure import Infrastructure
 from monitoring.models.milestone import Milestone
 from monitoring.models.project import Project, get_code_for_new_project
 from monitoring.models.provider import Provider
+from monitoring.models.provider_contact import ProviderContact
 from monitoring.serializers.construction_contract_serializer import (
     ConstructionContractSummarySerializer,
 )
@@ -80,7 +81,12 @@ class ProjectSerializer(serializers.ModelSerializer):
             "construction_contract__contractor",
         ).prefetch_related(
             "linked_localities",
-            "provider__contacts",
+            Prefetch(
+                "provider__contacts",
+                # TODO this is not working: multiple queries are executed
+                # https://stackoverflow.com/questions/35093204/django-prefetch-related-with-m2m-through-relationship
+                queryset=ProviderContact.objects.select_related("contact"),
+            ),
             "construction_contract__financing_program__financing_funds",
             "construction_contract__contractor__contacts",
             Prefetch(

@@ -1,6 +1,7 @@
 from django.db import models
 from monitoring.models.contact import Contact
 from monitoring.models.location import Locality
+from monitoring.models.provider_contact import ProviderContact
 
 
 class Provider(models.Model):
@@ -11,7 +12,7 @@ class Provider(models.Model):
     locality = models.ForeignKey(
         Locality, on_delete=models.PROTECT, verbose_name=Locality._meta.verbose_name
     )
-    contacts = models.ManyToManyField(Contact)
+    contacts = models.ManyToManyField(Contact, through=ProviderContact)
 
     class Meta:
         db_table = "provider"

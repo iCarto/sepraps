@@ -1,8 +1,8 @@
 from monitoring.models.location import Locality
 from monitoring.models.project import Project
 from monitoring.models.provider import Provider
-from monitoring.serializers.contact_serializer import ContactSerializer
 from monitoring.serializers.locality_serializer import LocalitySerializer
+from monitoring.serializers.provider_contact_serializer import ProviderContactSerializer
 from rest_framework import serializers
 
 
@@ -13,7 +13,9 @@ class ProviderSerializer(serializers.ModelSerializer):
     project = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=Project.objects.all(), required=False
     )
-    contacts = ContactSerializer(many=True, required=False)
+    contacts = ProviderContactSerializer(
+        source="providercontact_set", many=True, required=False
+    )
 
     class Meta:
         model = Provider
@@ -22,9 +24,8 @@ class ProviderSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
-        contacts_data = validated_data.pop("contacts", None)
-
         project = validated_data.pop("project", None)
+        contacts = validated_data.pop("providercontact_set", None)
 
         locality_data = validated_data.pop("locality", None)
         locality = None
@@ -35,7 +36,10 @@ class ProviderSerializer(serializers.ModelSerializer):
 
         provider = Provider.objects.create(locality=locality, **validated_data)
 
-        provider.contacts.set(self.fields["contacts"].update([], contacts_data))
+        # calling to ContactProviderListSerializer.update() we can make all modifications
+        # for contacts inside the provider
+        if contacts:
+            self.fields["contacts"].update(provider, [], contacts)
 
         if project:
             project.provider = provider
@@ -47,13 +51,11 @@ class ProviderSerializer(serializers.ModelSerializer):
 
         project = validated_data.pop("project", None)
 
-        # calling to ContactListSerializer.update() we can make all modifications
+        # calling to ContactProviderListSerializer.update() we can make all modifications
         # for contacts inside the provider
-        instance.contacts.set(
-            self.fields["contacts"].update(
-                instance.contacts.all(), validated_data.pop("contacts", None)
-            )
-        )
+        contacts = validated_data.pop("providercontact_set", None)
+        if contacts:
+            self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
 
         locality_data = validated_data.pop("locality", None)
         locality = None

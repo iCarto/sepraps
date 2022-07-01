@@ -111,15 +111,31 @@
         }
     },
     {
+        "model": "monitoring.provider",
+        "pk": 6,
+        "fields": {
+            "name": "Junta de Saneamiento Cleto Romero",
+            "area": "rural",
+            "locality": "0503100"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 15,
         "fields": {
             "name": "Juana Costa",
-            "post": "presidencia_junta_saneamiento",
             "gender": "F",
             "phone": "",
             "email": "",
             "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.providercontact",
+        "fields": {
+            "provider": 6,
+            "contact": 15,
+            "post": "presidencia_junta_saneamiento"
         }
     },
     {
@@ -127,7 +143,6 @@
         "pk": 16,
         "fields": {
             "name": "Estela Pradera",
-            "post": "tesoreria_junta_saneamiento",
             "gender": "F",
             "phone": "",
             "email": "",
@@ -135,11 +150,18 @@
         }
     },
     {
+        "model": "monitoring.providercontact",
+        "fields": {
+            "provider": 6,
+            "contact": 16,
+            "post": "tesoreria_junta_saneamiento"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 17,
         "fields": {
             "name": "Marcos López",
-            "post": "secretaria_junta_saneamiento",
             "gender": "M",
             "phone": "",
             "email": "",
@@ -147,13 +169,11 @@
         }
     },
     {
-        "model": "monitoring.provider",
-        "pk": 6,
+        "model": "monitoring.providercontact",
         "fields": {
-            "name": "Junta de Saneamiento Cleto Romero",
-            "area": "rural",
-            "locality": "0503100",
-            "contacts": [15, 16, 17]
+            "provider": 6,
+            "contact": 17,
+            "post": "secretaria_junta_saneamiento"
         }
     },
     {
