@@ -1,5 +1,6 @@
 from django.db import models
 from monitoring.models.contact import Contact
+from monitoring.models.contact_relationship import ContractorContact
 
 
 class Contractor(models.Model):
@@ -10,8 +11,8 @@ class Contractor(models.Model):
     address = models.TextField("Dirección", max_length=500, null=True)
     phone = models.CharField("Teléfono", max_length=20, null=True)
     email = models.CharField("Correo electrónico", max_length=255, null=True)
-    contacts = models.ManyToManyField(Contact)
     comments = models.TextField("Observaciones", max_length=500, null=True)
+    contacts = models.ManyToManyField(Contact, through=ContractorContact)
 
     class Meta:
         db_table = "contractor"

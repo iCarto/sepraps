@@ -4,7 +4,6 @@
         "pk": 13,
         "fields": {
             "name": "Ing. Ricardo Díaz Martínez",
-            "post": "responsable_contratista",
             "gender": "M",
             "phone": "",
             "email": "",
@@ -12,15 +11,30 @@
         }
     },
     {
+        "model": "monitoring.contractorcontact",
+        "fields": {
+            "entity": 2,
+            "contact": 13,
+            "post": "responsable_contratista"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 14,
         "fields": {
             "name": "Ing. Fernando Marcial Moreno Martínez",
-            "post": "responsable_contratista",
             "gender": "M",
             "phone": "",
             "email": "",
             "comments": "CI Nº 421.518"
+        }
+    },
+    {
+        "model": "monitoring.contractorcontact",
+        "fields": {
+            "entity": 2,
+            "contact": 14,
+            "post": "responsable_contratista"
         }
     },
     {
@@ -32,8 +46,7 @@
             "address": "John F. Kennedy nº 1083, c/ José A. Flores, Asunción",
             "phone": "(021) 207-699",
             "email": "",
-            "comments": "RUC Nº 80055403-3",
-            "contacts": [13, 14]
+            "comments": "RUC Nº 80055403-3"
         }
     },
     {
@@ -133,7 +146,7 @@
     {
         "model": "monitoring.providercontact",
         "fields": {
-            "provider": 6,
+            "entity": 6,
             "contact": 15,
             "post": "presidencia_junta_saneamiento"
         }
@@ -152,7 +165,7 @@
     {
         "model": "monitoring.providercontact",
         "fields": {
-            "provider": 6,
+            "entity": 6,
             "contact": 16,
             "post": "tesoreria_junta_saneamiento"
         }
@@ -171,7 +184,7 @@
     {
         "model": "monitoring.providercontact",
         "fields": {
-            "provider": 6,
+            "entity": 6,
             "contact": 17,
             "post": "secretaria_junta_saneamiento"
         }

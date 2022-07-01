@@ -4,11 +4,18 @@
         "pk": 15,
         "fields": {
             "name": "Carlos Eduardo Samudio Domínguez",
-            "post": "responsable_contratista",
             "gender": "M",
             "phone": "",
             "email": "",
             "comments": "CI Nº 615.260"
+        }
+    },
+    {
+        "model": "monitoring.contractorcontact",
+        "fields": {
+            "entity": 3,
+            "contact": 15,
+            "post": "responsable_contratista"
         }
     },
     {
@@ -20,8 +27,7 @@
             "address": "Calle Toledo nº 490 c/ Boquerón, Asunción",
             "phone": "(021) 224-951",
             "email": "",
-            "comments": "RUC Nº 80104163-5",
-            "contacts": [1, 5]
+            "comments": "RUC Nº 80104163-5"
         }
     },
     {
@@ -34,16 +40,13 @@
             "bid_request_id": "360930",
             "bid_request_date": "2019-10-14",
             "bid_request_budget": 8472948165,
-
             "awarding_budget": 7079058474,
             "awarding_percentage_drop": 16.45,
             "awarding_date": "2019-12-09",
             "financing_program": 2,
             "contractor": 3,
             "execution_signature_date": "2019-12-17",
-
             "execution_certificate_start_date": "2019-12-17",
-
             "expected_execution_period": 240,
             "warranty_end_date": "2021-12-11",
             "closed": false,

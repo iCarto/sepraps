@@ -1,6 +1,9 @@
 from monitoring.models.construction_contract import ConstructionContract
 from monitoring.models.contractor import Contractor
 from monitoring.models.domain_entry import dominio_get_value
+from monitoring.serializers.contact_relationship_serializer import (
+    ContactContractorSerializer,
+)
 from monitoring.serializers.contact_serializer import ContactSerializer
 from rest_framework import serializers
 
@@ -12,7 +15,9 @@ class ContractorSerializer(serializers.ModelSerializer):
     contract = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=ConstructionContract.objects.all(), required=False
     )
-    contacts = ContactSerializer(many=True, allow_null=True, required=False)
+    contacts = ContactContractorSerializer(
+        source="contractorcontact_set", many=True, required=False
+    )
 
     class Meta:
         model = Contractor
@@ -42,13 +47,16 @@ class ContractorSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
-        contacts_data = validated_data.pop("contacts", None)
+        contacts = validated_data.pop("contractorcontact_set", None)
 
         contract = validated_data.pop("contract", None)
 
         contractor = Contractor.objects.create(**validated_data)
 
-        contractor.contacts.set(self.fields["contacts"].update([], contacts_data))
+        # calling to ContactProviderListSerializer.update() we can make all modifications
+        # for contacts inside the provider
+        if contacts:
+            self.fields["contacts"].update(contractor, [], contacts)
 
         if contract:
             contract.contractor = contractor
@@ -58,13 +66,11 @@ class ContractorSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
 
-        # calling to ContactListSerializer.update() we can make all modifications
+        # calling to ContactProviderListSerializer.update() we can make all modifications
         # for contacts inside the provider
-        instance.contacts.set(
-            self.fields["contacts"].update(
-                instance.contacts.all(), validated_data.pop("contacts", None)
-            )
-        )
+        contacts = validated_data.pop("contractorcontact_set", None)
+        if contacts:
+            self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
 
         contract = validated_data.pop("contract", None)
 

@@ -4,12 +4,19 @@
         "pk": 18,
         "fields": {
             "name": "Ing. Rubén Cardozo Fariña",
-            "post": "responsable_contratista",
             "gender": "M",
             "phone": "",
             "email": "",
             "comments": "CI Nº 633.608",
             "is_staff": false
+        }
+    },
+    {
+        "model": "monitoring.contractorcontact",
+        "fields": {
+            "entity": 4,
+            "contact": 18,
+            "post": "responsable_contratista"
         }
     },
     {
@@ -21,8 +28,7 @@
             "address": "Santísima Trinidad nº340 esq. Americo Merlo",
             "phone": "(021) 613-386",
             "email": "",
-            "comments": "RUC Nº 80011849-9",
-            "contacts": [18]
+            "comments": "RUC Nº 80011849-9"
         }
     },
     {
