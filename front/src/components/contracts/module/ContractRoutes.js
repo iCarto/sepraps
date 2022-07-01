@@ -19,7 +19,7 @@ import {
     ViewContractPhasesSubPage,
     CreateContractProjectPage,
 } from "../container";
-import {UpdateContractMonitoringProfilePanel} from "../container/monitoring";
+import {UpdateContractContactPanel} from "../container/monitoring";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -71,8 +71,8 @@ const contractRoutes = [
             >
                 <Route
                     key="contract-monitoring-profile-edit"
-                    path=":sectionName/:contactId/:action"
-                    element={<UpdateContractMonitoringProfilePanel />}
+                    path="contact/:contactId/:action"
+                    element={<UpdateContractContactPanel />}
                 />
             </Route>
 
