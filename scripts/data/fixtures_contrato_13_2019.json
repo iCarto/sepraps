@@ -153,15 +153,31 @@
         }
     },
     {
+        "model": "monitoring.provider",
+        "pk": 1,
+        "fields": {
+            "name": "Junta de Saneamiento Loma Florida Costa Florida",
+            "area": "rural",
+            "locality": "0104330"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 9,
         "fields": {
             "name": "María Flores",
-            "post": "presidencia_junta_saneamiento",
             "gender": "F",
             "phone": "",
             "email": "",
             "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.providercontact",
+        "fields": {
+            "provider": 1,
+            "contact": 9,
+            "post": "presidencia_junta_saneamiento"
         }
     },
     {
@@ -169,7 +185,6 @@
         "pk": 10,
         "fields": {
             "name": "Rodrigo García",
-            "post": "tesoreria_junta_saneamiento",
             "gender": "M",
             "phone": "",
             "email": "",
@@ -177,15 +192,30 @@
         }
     },
     {
+        "model": "monitoring.providercontact",
+        "fields": {
+            "provider": 1,
+            "contact": 10,
+            "post": "tesoreria_junta_saneamiento"
+        }
+    },
+    {
         "model": "monitoring.contact",
         "pk": 11,
         "fields": {
             "name": "Mercedes Sánchez",
-            "post": "secretaria_junta_saneamiento",
             "gender": "F",
             "phone": "",
             "email": "",
             "comments": ""
+        }
+    },
+    {
+        "model": "monitoring.providercontact",
+        "fields": {
+            "provider": 1,
+            "contact": 11,
+            "post": "secretaria_junta_saneamiento"
         }
     },
     {
@@ -193,7 +223,6 @@
         "pk": 12,
         "fields": {
             "name": "Paula Álvarez",
-            "post": "otra_junta_saneamiento",
             "gender": "F",
             "phone": "",
             "email": "",
@@ -201,13 +230,11 @@
         }
     },
     {
-        "model": "monitoring.provider",
-        "pk": 1,
+        "model": "monitoring.providercontact",
         "fields": {
-            "name": "Junta de Saneamiento Loma Florida Costa Florida",
-            "area": "rural",
-            "locality": "0104330",
-            "contacts": [9, 10, 11, 12]
+            "provider": 1,
+            "contact": 12,
+            "post": "otra_junta_saneamiento"
         }
     },
     {

@@ -29,34 +29,13 @@ class ContactListSerializer(serializers.ListSerializer):
 class ContactSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(allow_null=True)
-    post_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Contact
-        fields = (
-            "id",
-            "name",
-            "post",
-            "post_name",
-            "gender",
-            "phone",
-            "email",
-            "comments",
-            "is_staff",
-        )
+        fields = ("id", "name", "gender", "phone", "email", "comments", "is_staff")
         extra_kwargs = {
             "phone": {"allow_null": True, "allow_blank": True},
             "email": {"allow_null": True, "allow_blank": True},
             "comments": {"allow_null": True, "allow_blank": True},
             "is_staff": {"allow_null": True},
         }
-        list_serializer_class = ContactListSerializer
-
-    @classmethod
-    def many_init(cls, *args, **kwargs):
-        # Return ContactListSerializer when many=True
-        kwargs["child"] = cls()
-        return ContactListSerializer(*args, **kwargs)
-
-    def get_post_name(self, obj):
-        return dominio_get_value(obj.post, self.context.get("domain"))

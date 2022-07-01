@@ -24,7 +24,7 @@ def get_provider_missing_contacts_notifications(filters):
         query = """
             SELECT prov.name AS provider_name, p.id AS project_id
             FROM provider prov
-                LEFT JOIN provider_contacts pc ON pc.provider_id = prov.id
+                LEFT JOIN provider_contact pc ON pc.entity_id = prov.id
                 JOIN project p ON p.provider_id = prov.id
             WHERE pc.contact_id IS NULL
             {filter_conditions}

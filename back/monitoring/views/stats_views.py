@@ -85,9 +85,9 @@ def get_provider_gender_stats(request, format=None):
         query = """
             SELECT cg.gender, count(*) as total FROM (
                 SELECT distinct c.id, c.gender
-                FROM provider_contacts pc
+                FROM provider_contact pc
                     INNER JOIN contact c ON c.id = pc.contact_id
-                    LEFT JOIN project p ON p.provider_id = pc.provider_id
+                    LEFT JOIN project p ON p.provider_id = pc.entity_id
                     LEFT JOIN construction_contract cc on cc.id = p.construction_contract_id
                     LEFT JOIN financing_program fp on fp.id = cc.financing_program_id
                     LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
@@ -102,7 +102,7 @@ def get_provider_gender_stats(request, format=None):
             """
         filter_conditions = []
         if filter := request.GET.get("provider"):
-            filter_conditions.append("and pc.provider_id = {}".format(filter))
+            filter_conditions.append("and pc.entity_id = {}".format(filter))
         if filter := request.GET.get("project"):
             filter_conditions.append("and p.id = {}".format(filter))
         if filter := request.GET.get("construction_contract"):
