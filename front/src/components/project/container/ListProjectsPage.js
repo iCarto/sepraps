@@ -6,7 +6,7 @@ import {ProjectService} from "service/api";
 import {useProjectListView} from "../provider";
 import {PageLayoutWithPanel} from "layout";
 import {ProjectFilterForm} from "../presentational/form";
-import {ProjectList, ProjectsTable, ProjectListChangeView} from "../presentational";
+import {ProjectsList, ProjectsTable, ProjectListChangeView} from "../presentational";
 import {MapProjects} from "components/common/geo";
 
 import Grid from "@mui/material/Grid";
@@ -84,7 +84,7 @@ const ListProjectsPage = () => {
         }
         if (view === "list") {
             return (
-                <ProjectList projects={filteredProjects} onClick={handleClickOnCard} />
+                <ProjectsList projects={filteredProjects} onClick={handleClickOnCard} />
             );
         }
         return (

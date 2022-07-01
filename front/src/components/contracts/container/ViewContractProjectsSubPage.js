@@ -5,7 +5,7 @@ import {AuthAction, useAuth} from "auth";
 import {useProjectListView} from "components/project/provider";
 import {SubPageLayout} from "layout";
 import {
-    ProjectList,
+    ProjectsList,
     ProjectListChangeView,
     ProjectsTable,
 } from "components/project/presentational";
@@ -57,7 +57,10 @@ const ViewContractProjectsSubPage = () => {
         }
         if (view === "list") {
             return (
-                <ProjectList projects={contract.projects} onClick={handleClickOnCard} />
+                <ProjectsList
+                    projects={contract.projects}
+                    onClick={handleClickOnCard}
+                />
             );
         }
         return (
