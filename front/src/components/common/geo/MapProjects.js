@@ -55,23 +55,25 @@ const MapProjects = ({projects, selectedElement = null, onSelectElement = null})
                 },
                 {
                     icon: getIcon(
-                        selectedElement?.id === project.id
-                            ? null
-                            : getMilestoneColor(
-                                  lastMilestone ? lastMilestone.code : null
-                              )
+                        !project.closed
+                            ? selectedElement?.id === project.id
+                                ? null
+                                : getMilestoneColor(
+                                      lastMilestone ? lastMilestone.code : null
+                                  )
+                            : "grey"
                     ),
                     offset: L.point(0, -50),
                 }
             ).addTo(map);
             marker.bindTooltip(project.name);
-            marker.on("mouseover", function(e) {
+            marker.on("mouseover", function (e) {
                 this.openTooltip();
             });
-            marker.on("mouseout", function(e) {
+            marker.on("mouseout", function (e) {
                 this.closeTooltip();
             });
-            marker.on("click", function(e) {
+            marker.on("click", function (e) {
                 if (onSelectElement) {
                     onSelectElement(project);
                 }

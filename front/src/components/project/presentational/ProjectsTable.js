@@ -84,17 +84,23 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                 selected={selectedElement?.id === project.id}
                                 style={noPointer}
                             >
-                                <TableCell>{project.name}</TableCell>
                                 <TableCell
                                     component="th"
                                     scope="row"
-                                    sx={{width: "100%"}}
+                                    sx={project.closed && {color: "grey.500"}}
                                 >
+                                    {project.name}
+                                </TableCell>
+                                <TableCell sx={project.closed && {color: "grey.500"}}>
                                     {project.code}
                                 </TableCell>
-                                <TableCell>{project.location}</TableCell>
-                                <TableCell>{project.description}</TableCell>
-                                <TableCell>
+                                <TableCell sx={project.closed && {color: "grey.500"}}>
+                                    {project.location}
+                                </TableCell>
+                                <TableCell sx={project.closed && {color: "grey.500"}}>
+                                    {project.description}
+                                </TableCell>
+                                <TableCell sx={project.closed && {color: "grey.500"}}>
                                     <MilestoneTimelineShort
                                         milestones={project.milestones}
                                     />

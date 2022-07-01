@@ -1,8 +1,8 @@
-import {ProjectCard} from "./";
+import {ProjectCard} from ".";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 
-const ProjectList = ({projects = [], onClick}) => {
+const ProjectsList = ({projects = [], onClick}) => {
     const noProjectFound = projects.length === 0 || !projects;
 
     const projectItems = projects.map(project => {
@@ -24,4 +24,4 @@ const ProjectList = ({projects = [], onClick}) => {
     );
 };
 
-export default ProjectList;
+export default ProjectsList;
