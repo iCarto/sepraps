@@ -57,7 +57,8 @@
             "gender": "F",
             "phone": "(021) 123-123",
             "email": "residente_obra@test.com",
-            "comments": "Residente de obra de pruebas"
+            "comments": "Residente de obra de pruebas",
+            "user": 2
         }
     },
     {
@@ -76,7 +77,8 @@
             "gender": "M",
             "phone": "(021) 234-234",
             "email": "fiscal_obra@test.com",
-            "comments": "Fiscal de obra de pruebas"
+            "comments": "Fiscal de obra de pruebas",
+            "user": 3
         }
     },
     {
@@ -96,7 +98,7 @@
             "phone": "(021) 345-345",
             "email": "supervisor_obra@test.com",
             "comments": "Supervisor de obra de pruebas",
-            "is_staff": true
+            "user": 5
         }
     },
     {
@@ -134,8 +136,7 @@
             "gender": "F",
             "phone": "(021) 678-678",
             "email": "supervisor_social@test.com",
-            "comments": "Supervisor social de pruebas",
-            "is_staff": true
+            "comments": "Supervisor social de pruebas"
         }
     },
     {
