@@ -1,1 +1,5 @@
 GROUP_ADMIN = "Administrar"
+GROUP_VISUALIZACION = "visualizacion"
+GROUP_EDICION = "edicion"
+GROUP_GESTION = "gestion"
+GROUP_SUPERVISION = "supervision"

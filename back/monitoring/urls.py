@@ -40,6 +40,8 @@ urlpatterns = [
     ),
     path("stats/contacts/gender", stats_views.get_provider_gender_stats),
     path("stats/projectandcontract", stats_views.get_project_and_contract_stats),
+    path("stats/projectbyphase", stats_views.get_project_by_phase_stats),
+    path("stats/projectbyphasemap", stats_views.get_projects_by_phase_map),
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

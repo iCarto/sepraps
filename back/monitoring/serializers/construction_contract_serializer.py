@@ -6,6 +6,7 @@ from monitoring.models.contact import Contact
 from monitoring.models.contact_relationship import (
     ConstructionContractContact,
     ContractorContact,
+    ProviderContact,
 )
 from monitoring.models.contractor import Contractor
 from monitoring.models.financing_program import FinancingProgram
@@ -88,7 +89,14 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         ).prefetch_related(
             # TODO Improve contacts load to avoid multiples queries
             "financing_program__financing_funds",
+            "projects",
+            "projects__linked_localities",
+            "projects__provider",
+            "projects__main_infrastructure",
             "projects__questionnaires",
+            # Prefetch(
+            #     "contacts", queryset=ProviderContact.objects.select_related("contact")
+            # ),
             Prefetch(
                 "projects__milestones",
                 queryset=Milestone.objects.exclude(parent__isnull=False).order_by(

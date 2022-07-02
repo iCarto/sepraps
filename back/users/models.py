@@ -12,5 +12,8 @@ class User(AbstractUser):
     def in_admin_group(self):
         return self.groups.filter(name=GROUP_ADMIN).exists()
 
-    def is_member(self, group):
+    def in_group(self, group):
         return self.groups.filter(name=group).exists()
+
+    def belongs_to(self, groups):
+        return self.groups.filter(name__in=groups).exists()

@@ -26,6 +26,7 @@ from questionnaires.models.questionnaire import Questionnaire
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
 class ProjectFilter(filters.FilterSet):
@@ -74,6 +75,13 @@ class ProjectViewSet(viewsets.ModelViewSet):
         queryset = Project.objects.order_by("-updated_at")
         if self.action == "milestones":
             return queryset
+        if self.request.user.belongs_to([GROUP_GESTION, GROUP_EDICION]):
+            queryset = queryset.filter(
+                Q(
+                    construction_contract__constructioncontractcontact__contact__user=self.request.user
+                )
+                | Q(creation_user=self.request.user)
+            )
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_class(self):
@@ -211,141 +219,3 @@ class ProjectViewSet(viewsets.ModelViewSet):
                 context={"request": request},
             ).data
         )
-
-    @action(detail=False)
-    def stats_by_phase(self, request):
-
-        with connection.cursor() as cursor:
-            query = """
-            with project_phase as (
-                select distinct on (p.id)
-                    p.id as project_id, m.name, m.phase
-                from project p
-                    inner join milestone m on p.id = m.project_id
-                    left join project_linked_localities pll on pll.project_id = p.id
-                    left join locality l on l.code = pll.locality_id
-                    left join construction_contract cc on cc.id = p.construction_contract_id
-                    left join financing_program fp on fp.id = cc.financing_program_id
-                    left join financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
-                where m.compliance_date is null
-                {project_filter_conditions}
-                order by p.id, m.id asc
-            ),
-            phases as (
-                select distinct phase
-                from milestone
-            )
-            select ph.phase, count(prph.project_id) as total
-            from phases ph
-                left join project_phase prph on prph.phase = ph.phase
-            group by ph.phase
-            """
-
-            project_filter_conditions = []
-            if request.GET.get("construction_contract"):
-                project_filter_conditions.append(
-                    "and p.construction_contract_id = {}".format(
-                        request.GET.get("construction_contract")
-                    )
-                )
-            if request.GET.get("district"):
-                project_filter_conditions.append(
-                    "and l.district_id = '{}'".format(request.GET.get("district"))
-                )
-            if request.GET.get("department"):
-                project_filter_conditions.append(
-                    "and l.department_id = '{}'".format(request.GET.get("department"))
-                )
-            if request.GET.get("financing_program"):
-                project_filter_conditions.append(
-                    "and cc.financing_program_id = {}".format(
-                        request.GET.get("financing_program")
-                    )
-                )
-            if request.GET.get("financing_fund"):
-                project_filter_conditions.append(
-                    " and fpff.financingfund_id = {}".format(
-                        request.GET.get("financing_fund")
-                    )
-                )
-
-            cursor.execute(
-                query.format(
-                    project_filter_conditions=" ".join(project_filter_conditions)
-                )
-            )
-            phases = dictfetchall(cursor)
-            for phase in phases:
-                phase["phase_name"] = dict(PHASE_CHOICES).get(
-                    phase["phase"], phase["phase"]
-                )
-            return Response(phases)
-
-    @action(detail=False)
-    def map_by_phase(self, request):
-
-        with connection.cursor() as cursor:
-            query = """
-                select distinct on (p.id)
-                        p.id as project_id,
-                        i.latitude,
-                        i.longitude,
-                        l.name as locality,
-                        di.name as district,
-                        de.name as department,
-                        m.name,
-                        m.phase
-                from project p
-                    inner join milestone m on p.id = m.project_id
-                    left join construction_contract cc on cc.id = p.construction_contract_id
-                    left join financing_program fp on fp.id = cc.financing_program_id
-                    left join financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
-                    left join infrastructure i on i.id = p.main_infrastructure_id
-                    left join project_linked_localities pll on pll.project_id = p.id
-                    left join locality l on l.code = pll.locality_id
-                    inner join district di on di.code = l.district_id
-                    inner join department de on de.code = l.department_id
-                where m.compliance_date is null
-                {project_filter_conditions}
-                order by p.id, m.id asc
-            """
-
-            project_filter_conditions = []
-            if request.GET.get("construction_contract"):
-                project_filter_conditions.append(
-                    "and p.construction_contract_id = {}".format(
-                        request.GET.get("construction_contract")
-                    )
-                )
-            if request.GET.get("district"):
-                project_filter_conditions.append(
-                    "and l.district_id = '{}'".format(request.GET.get("district"))
-                )
-            if request.GET.get("department"):
-                project_filter_conditions.append(
-                    "and l.department_id = '{}'".format(request.GET.get("department"))
-                )
-            if request.GET.get("financing_program"):
-                project_filter_conditions.append(
-                    "and cc.financing_program_id = {}".format(
-                        request.GET.get("financing_program")
-                    )
-                )
-            if request.GET.get("financing_fund"):
-                project_filter_conditions.append(
-                    " and fpff.financingfund_id = {}".format(
-                        request.GET.get("financing_fund")
-                    )
-                )
-
-            cursor.execute(
-                query.format(
-                    project_filter_conditions=" ".join(project_filter_conditions)
-                )
-            )
-            phases = dictfetchall(cursor)
-            for phase in phases:
-                phase["phase_name"] = dict(PHASE_CHOICES).get(
-                    phase["phase"], phase["phase"]
-                )
-            return Response(phases)
