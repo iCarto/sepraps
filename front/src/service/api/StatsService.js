@@ -20,7 +20,7 @@ const StatsService = {
                   .join("&")
             : "";
         return AuthApiService.get(
-            "/api/monitoring/projects/stats_by_phase" + queryString
+            "/api/monitoring/stats/projectbyphase" + queryString
         ).then(response => {
             return response;
         });
@@ -36,7 +36,7 @@ const StatsService = {
                   .join("&")
             : "";
         return AuthApiService.get(
-            "/api/monitoring/projects/map_by_phase" + queryString
+            "/api/monitoring/stats/projectbyphasemap" + queryString
         ).then(response => {
             return response;
         });
