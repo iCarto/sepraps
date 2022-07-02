@@ -65,7 +65,7 @@ const ModuleMenu = () => {
                     tooltipTitle="Contratos"
                     icon={<CasesOutlinedIcon />}
                 />
-                <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                <AuthAction roles={[ROLES.SUPERVISION, ROLES.VIEW]}>
                     <MenuListItemLink
                         to={`/stats/phase`}
                         resolvedPathName={`/stats`}
