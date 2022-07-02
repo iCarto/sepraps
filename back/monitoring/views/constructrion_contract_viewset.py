@@ -9,6 +9,7 @@ from monitoring.serializers.construction_contract_serializer import (
     ConstructionContractSummarySerializer,
 )
 from rest_framework import viewsets
+from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
 class ConstructionContractFilter(filters.FilterSet):
@@ -44,6 +45,11 @@ class ConstructionContractViewSet(viewsets.ModelViewSet):
         queryset = ConstructionContract.objects.filter(closed=False).order_by(
             "-created_at"
         )
+        if self.request.user.belongs_to([GROUP_GESTION, GROUP_EDICION]):
+            queryset = queryset.filter(
+                Q(constructioncontractcontact__contact__user=self.request.user)
+                | Q(creation_user=self.request.user)
+            )
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_context(self):
