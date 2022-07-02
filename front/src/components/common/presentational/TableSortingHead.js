@@ -21,7 +21,7 @@ function TableSortingHead({
     return (
         <>
             <colgroup>
-                {headCells.slice(0, -1).map((headCell, index) => (
+                {headCells.map((headCell, index) => (
                     <col key={index} width={headCell.width + "%"} />
                 ))}
             </colgroup>
@@ -31,7 +31,6 @@ function TableSortingHead({
                         <TableCell
                             key={headCell.id}
                             sortDirection={attribute === headCell.id ? order : false}
-                            sx={{width: "100px"}}
                         >
                             <TableSortLabel
                                 sx={{textTransform: "uppercase"}}
@@ -50,9 +49,7 @@ function TableSortingHead({
                             </TableSortLabel>
                         </TableCell>
                     ))}
-                    {actionsHeadcell && (
-                        <TableCell key="actions" sx={{width: "62px"}}></TableCell>
-                    )}
+                    {actionsHeadcell && <TableCell key="actions"></TableCell>}
                 </TableRow>
             </TableHead>
         </>
