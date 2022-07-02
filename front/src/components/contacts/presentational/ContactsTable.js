@@ -11,34 +11,47 @@ import TableCell from "@mui/material/TableCell";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
+import CheckIcon from "@mui/icons-material/Check";
 
 const headCells = [
     {
         id: "name",
         label: "Nombre",
+        width: 15,
     },
     {
         id: "post",
         label: "Puesto",
+        width: 15,
     },
     {
         id: "gender",
         label: "Género",
+        width: 5,
     },
     {
         id: "phone",
         label: "Celular",
+        width: 10,
     },
     {
         id: "email",
         label: "E-mail",
+        width: 10,
     },
     {
         id: "comments",
         label: "Observaciones",
+        width: 25,
+    },
+    {
+        id: "is_staff",
+        label: "Interno",
+        width: 5,
     },
     {
         id: "actions",
+        width: 5,
     },
 ];
 
@@ -64,6 +77,7 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
     const handleClick = (rowId, buttonName) => {
         handleActions(rowId, buttonName.split("-")[0]);
     };
+    console.log({contacts});
 
     return (
         <TableContainer sx={{width: "100%"}}>
@@ -76,17 +90,24 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
                     actionsHeadcell={handleActions}
                 />
                 <TableBody>
-                    {contacts.sort(sortFunction).map((row, index) => {
+                    {contacts.sort(sortFunction).map((contact, index) => {
                         return (
                             <TableRow hover key={index} sx={tableRowStyle}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {contact.name}
                                 </TableCell>
-                                <TableCell>{row.post_name}</TableCell>
-                                <TableCell>{row.gender}</TableCell>
-                                <TableCell>{row.phone}</TableCell>
-                                <TableCell>{row.email}</TableCell>
-                                <TableCell>{row.comments}</TableCell>
+                                <TableCell>{contact.post_name}</TableCell>
+                                <TableCell>{contact.gender}</TableCell>
+                                <TableCell>{contact.phone}</TableCell>
+                                <TableCell>{contact.email}</TableCell>
+                                <TableCell>{contact.comments}</TableCell>
+                                <TableCell>
+                                    {contact.is_staff ? (
+                                        <CheckIcon color="success" />
+                                    ) : (
+                                        ""
+                                    )}
+                                </TableCell>
                                 {handleActions ? (
                                     <TableCell>
                                         <ActionsMenu>
@@ -94,21 +115,21 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
                                                 name="edit-contact"
                                                 icon={<EditIcon />}
                                                 text="Modificar contacto"
-                                                itemId={row.id}
+                                                itemId={contact.id}
                                                 handleClick={handleClick}
                                             />
                                             <MenuAction
                                                 name="remove-contact"
                                                 icon={<LinkOffIcon />}
                                                 text="Quitar contacto"
-                                                itemId={row.id}
+                                                itemId={contact.id}
                                                 handleClick={handleClick}
                                             />
                                             <MenuAction
                                                 name="delete-contact"
                                                 icon={<DeleteIcon color="error" />}
                                                 text="Eliminar contacto"
-                                                itemId={row.id}
+                                                itemId={contact.id}
                                                 handleClick={handleClick}
                                             />
                                         </ActionsMenu>
