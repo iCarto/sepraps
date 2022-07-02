@@ -29,6 +29,7 @@ class ContactListSerializer(serializers.ListSerializer):
 class ContactSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(allow_null=True)
+    is_staff = serializers.SerializerMethodField()
 
     class Meta:
         model = Contact
@@ -37,5 +38,7 @@ class ContactSerializer(serializers.ModelSerializer):
             "phone": {"allow_null": True, "allow_blank": True},
             "email": {"allow_null": True, "allow_blank": True},
             "comments": {"allow_null": True, "allow_blank": True},
-            "is_staff": {"allow_null": True},
         }
+
+    def get_is_staff(self, obj):
+        return obj.user is not None

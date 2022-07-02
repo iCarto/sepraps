@@ -70,6 +70,7 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
     comments = serializers.CharField(
         source="contact.comments", allow_null=True, allow_blank=True
     )
+    is_staff = serializers.SerializerMethodField()
 
     class Meta:
         model = ProviderContact
@@ -82,11 +83,15 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
             "phone",
             "email",
             "comments",
+            "is_staff",
         )
         list_serializer_class = ContactRelationshipListSerializer
 
     def get_post_name(self, obj):
         return dominio_get_value(obj.post, self.context.get("domain"))
+
+    def get_is_staff(self, obj):
+        return obj.contact.user is not None
 
 
 class ContactProviderListSerializer(ContactRelationshipListSerializer):

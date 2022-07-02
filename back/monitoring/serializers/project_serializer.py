@@ -85,7 +85,8 @@ class ProjectSerializer(serializers.ModelSerializer):
                 "provider__contacts",
                 # TODO this is not working: multiple queries are executed
                 # https://stackoverflow.com/questions/35093204/django-prefetch-related-with-m2m-through-relationship
-                queryset=ProviderContact.objects.select_related("contact"),
+                # queryset=ProviderContact.objects.prefetch_related("contact"),
+                # To make this working we need a "provider" attribute in ProviderContact and not "entity"
             ),
             "construction_contract__financing_program__financing_funds",
             "construction_contract__contractor__contacts",

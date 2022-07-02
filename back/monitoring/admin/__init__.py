@@ -1,8 +1,10 @@
 from django.conf.locale.es import formats as es_formats
 from django.contrib import admin
+from monitoring.admin.contact_admin import ContactAdmin
 from monitoring.admin.entrada_dominio_admin import DomainEntryAdmin
 from monitoring.admin.financing_fund_admin import FinancingFundAdmin
 from monitoring.admin.financing_program import FinancingProgramAdmin
+from monitoring.models.contact import Contact
 from monitoring.models.domain_entry import DomainEntry
 from monitoring.models.financing_fund import FinancingFund
 from monitoring.models.financing_program import FinancingProgram
@@ -22,6 +24,7 @@ admin.site.register(FinancingFund, FinancingFundAdmin)
 admin.site.register(FinancingProgram, FinancingProgramAdmin)
 admin.site.register(Project)
 admin.site.register(Provider)
+admin.site.register(Contact, ContactAdmin)
 
 admin.site.register(Department)
 admin.site.register(District)

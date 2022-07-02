@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -20,7 +21,7 @@ class Contact(models.Model):
     phone = models.CharField("Teléfono", max_length=20)
     email = models.CharField("Correo electrónico", max_length=255)
     comments = models.TextField("Observaciones", max_length=500)
-    is_staff = models.BooleanField(blank=False, null=False, default=False)
+    user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT, null=True)
 
     class Meta:
         db_table = "contact"

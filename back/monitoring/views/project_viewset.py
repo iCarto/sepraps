@@ -124,26 +124,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         contract_contacts = []
         contractor_contacts = []
         if project.construction_contract:
-            if project.construction_contract.field_manager:
-                contract_contacts.append(project.construction_contract.field_manager)
-            if project.construction_contract.construction_inspector:
-                contract_contacts.append(
-                    project.construction_contract.construction_inspector
-                )
-            if project.construction_contract.construction_supervisor:
-                contract_contacts.append(
-                    project.construction_contract.construction_supervisor
-                )
-            if project.construction_contract.social_coordinator:
-                contract_contacts.append(
-                    project.construction_contract.social_coordinator
-                )
-            if project.construction_contract.social_inspector:
-                contract_contacts.append(project.construction_contract.social_inspector)
-            if project.construction_contract.social_supervisor:
-                contract_contacts.append(
-                    project.construction_contract.social_supervisor
-                )
+            contract_contacts = project.construction_contract.contacts.all()
 
             if project.construction_contract.contractor:
                 contractor_contacts = (
