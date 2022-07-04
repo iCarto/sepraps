@@ -1,15 +1,10 @@
-import {useNavigate, useOutletContext} from "react-router-dom";
-import {AuthAction, useAuth} from "auth";
+import {useOutletContext} from "react-router-dom";
 
 import {SectionCard, SectionField} from "components/common/presentational";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
 const ProjectFinancingDataSection = () => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
-
     let project;
     [project] = useOutletContext();
 
@@ -31,21 +26,9 @@ const ProjectFinancingDataSection = () => {
             ) : (
                 <Stack alignItems="center">
                     <Typography p={6} sx={{fontStyle: "italic"}}>
-                        Este proyecto aún no tiene financiador
+                        Los datos de financiación de este proyecto se actualizarán
+                        cuando sea asignado a un contrato.
                     </Typography>
-                    <AuthAction
-                        roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-                    >
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                                navigate("add");
-                            }}
-                        >
-                            Añadir
-                        </Button>
-                    </AuthAction>
                 </Stack>
             )}
         </SectionCard>
