@@ -19,10 +19,18 @@ const UpdateContractContractorContactPanel = () => {
     [contract] = useOutletContext();
 
     const handleSubmit = data => {
+        const contacts = [...contract.contractor.contacts];
+        if (selectedContact) {
+            let contactToRemoveIndex = contacts.findIndex(
+                contact => contact.id === selectedContact.id
+            );
+            contacts.splice(contactToRemoveIndex, 1);
+        }
+
         const updatedContractor = createContractor({
             ...contract.contractor,
             contacts: [
-                ...contract.contractor.contacts,
+                ...contacts,
                 {
                     id: data.id,
                     name: data.name,

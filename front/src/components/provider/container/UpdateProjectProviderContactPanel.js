@@ -19,11 +19,18 @@ const UpdateProjectProviderContactPanel = () => {
     [project] = useOutletContext();
 
     const handleSubmit = data => {
+        const contacts = [...project.provider.contacts];
+        if (selectedContact) {
+            let contactToRemoveIndex = contacts.findIndex(
+                contact => contact.id === selectedContact.id
+            );
+            contacts.splice(contactToRemoveIndex, 1);
+        }
         const updatedProvider = createProvider(
             provider_view_adapter({
                 ...project.provider,
                 contacts: [
-                    ...project.provider.contacts,
+                    ...contacts,
                     {
                         id: data.id,
                         name: data.name,
