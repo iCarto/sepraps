@@ -71,6 +71,7 @@ const UpdateContractContactPanel = () => {
         "supervisor_obra",
         "coordinador_social",
         "supervisor_social",
+        "otro_contacto",
     ];
 
     return (

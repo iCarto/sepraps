@@ -84,7 +84,7 @@ const ContractContactsSection = ({contract, isSidePanelOpen = false}) => {
                         </Typography>
                     )}
                 </Grid>
-                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                     <Grid item container xs={12} mt={3} justifyContent="center">
                         <AddContactButtonGroup
                             basePath="contact"
