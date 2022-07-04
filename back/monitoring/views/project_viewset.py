@@ -1,7 +1,6 @@
 # from cmath import log
 from itertools import chain
 
-from django.db import connection
 from django.db.models import Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
@@ -12,7 +11,9 @@ from monitoring.models.project import Project
 from monitoring.models.project_questionnaire_instance import (
     ProjectQuestionnaireInstance,
 )
-from monitoring.serializers.contact_serializer import ContactSerializer
+from monitoring.serializers.contact_relationship_serializer import (
+    ContactRelationshipSerializer,
+)
 from monitoring.serializers.milestone_serializer import MilestoneSerializer
 from monitoring.serializers.project_questionnaire_instance_serializer import (
     ProjectQuestionnaireInstanceSerializer,
@@ -21,7 +22,6 @@ from monitoring.serializers.project_serializer import (
     ProjectSerializer,
     ProjectSummarySerializer,
 )
-from monitoring.util import dictfetchall
 from questionnaires.models.questionnaire import Questionnaire
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
@@ -127,23 +127,25 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
         provider_contacts = []
         if project.provider:
-            provider_contacts = project.provider.contacts.all()
+            provider_contacts = project.provider.providercontact_set.all()
 
         contract_contacts = []
         contractor_contacts = []
         if project.construction_contract:
-            contract_contacts = project.construction_contract.contacts.all()
+            contract_contacts = (
+                project.construction_contract.constructioncontractcontact_set.all()
+            )
 
             if project.construction_contract.contractor:
                 contractor_contacts = (
-                    project.construction_contract.contractor.contacts.all()
+                    project.construction_contract.contractor.contractorcontact_set.all()
                 )
 
         return Response(
-            ContactSerializer(
+            ContactRelationshipSerializer(
                 sorted(
                     chain(provider_contacts, contract_contacts, contractor_contacts),
-                    key=lambda contact: contact.name,
+                    key=lambda entitycontact: entitycontact.contact.name,
                 ),
                 many=True,
                 context={"request": request},
