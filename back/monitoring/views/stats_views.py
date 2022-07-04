@@ -11,11 +11,11 @@ from rest_framework.decorators import api_view, permission_classes, renderer_cla
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from users.constants import GROUP_EDICION, GROUP_GESTION
-from users.permissions import GestionPermission, SupervisionPermission
+from users.permissions import SupervisionPermission, VisualizacionPermission
 
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated, SupervisionPermission | GestionPermission])
+@permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
 def get_monthly_questionnaire_stats(
     request, questionnaire_code, field_code, format=None
@@ -81,7 +81,7 @@ def get_monthly_questionnaire_stats(
 
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated, SupervisionPermission | GestionPermission])
+@permission_classes([IsAuthenticated, SupervisionPermission | VisualizacionPermission])
 def get_provider_gender_stats(request, format=None):
     with connection.cursor() as cursor:
         query = """
