@@ -13,3 +13,4 @@ update_table_milestone 2022-06-02T16:00:18Z Elías Gago <egago@icarto.es> # Add 
 update_table_milestone_comments 2022-06-10T09:09:50Z Elías Gago <egago@icarto.es> # Add new field 'comments' for milestones
 update_table_mqinstances_extended 2022-06-15T09:15:20Z Elías Gago <egago@icarto.es> # Add new field 'extended' for monthly questionnaire instances
 update_table_project_image 2022-06-17T05:39:03Z Elías Gago <egago@icarto.es> # Add new field featured_image for projects
+update_contacts_relationships 2022-07-04T06:34:51Z Elías Gago <egago@icarto.es> # Change contacts relationships with provider, contracts and contractors
