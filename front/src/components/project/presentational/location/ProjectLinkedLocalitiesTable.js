@@ -50,7 +50,13 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                             <TableCell>{locality.department_name}</TableCell>
                             {handleActions ? (
                                 <TableCell>
-                                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                                    <AuthAction
+                                        roles={[
+                                            ROLES.EDIT,
+                                            ROLES.MANAGEMENT,
+                                            ROLES.SUPERVISION,
+                                        ]}
+                                    >
                                         <ActionsMenu>
                                             <MenuAction
                                                 name="remove-contact"

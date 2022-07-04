@@ -128,7 +128,9 @@ const ListProjectsPage = () => {
                             justifyContent="flex-end"
                         >
                             <Stack direction="row" spacing={2}>
-                                <AuthAction roles={[ROLES.MANAGEMENT]}>
+                                <AuthAction
+                                    roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                                >
                                     <Button
                                         id="basic-button"
                                         color="primary"

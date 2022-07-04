@@ -38,7 +38,7 @@ const ContractContractorSection = ({isSidePanelOpen = false}) => {
                   onClick={() => {
                       navigate("contractor/" + contractor.id + "/edit");
                   }}
-                  roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+                  roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
               />,
               <SectionCardHeaderAction
                   key="remove"
@@ -48,7 +48,7 @@ const ContractContractorSection = ({isSidePanelOpen = false}) => {
                   onClick={() => {
                       setIsRemoveDialogOpen(true);
                   }}
-                  roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+                  roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
               />,
           ]
         : null;

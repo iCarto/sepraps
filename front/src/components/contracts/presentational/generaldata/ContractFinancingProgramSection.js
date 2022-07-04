@@ -27,7 +27,7 @@ const ContractFinancingProgramSection = () => {
             onClick={() => {
                 navigate("financing_program/edit");
             }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
 

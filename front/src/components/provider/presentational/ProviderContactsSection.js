@@ -91,7 +91,9 @@ const ProviderContactsSection = ({
                         )}
                     </Grid>
                     {!isProjectClosed && (
-                        <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                        <AuthAction
+                            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                        >
                             <Grid item container xs={12} mt={3} justifyContent="center">
                                 <AddContactButtonGroup
                                     basePath="provider/contact"

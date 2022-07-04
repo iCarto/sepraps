@@ -36,9 +36,11 @@ const MilestonePoint = ({
     const {ROLES, hasRole} = useAuth();
 
     const handleClick = () => {
-        const hasEditPermission = [ROLES.EDIT, ROLES.MANAGEMENT].some(role =>
-            hasRole(role)
-        );
+        const hasEditPermission = [
+            ROLES.EDIT,
+            ROLES.MANAGEMENT,
+            ROLES.SUPERVISION,
+        ].some(role => hasRole(role));
         if (hasEditPermission && milestone.code === activeMilestone?.code) {
             navigate(`${milestone.id}/edit`);
         } else {

@@ -57,7 +57,7 @@ const ProjectContractSection = ({contract}) => {
                     <Typography p={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no ha sido asignado a ningún contrato
                     </Typography>
-                    <AuthAction roles={[ROLES.MANAGEMENT]}>
+                    <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                         <Button
                             variant="contained"
                             color="primary"

@@ -72,7 +72,7 @@ const ProjectLinkedLocalitiesSection = () => {
                 )}
             </Grid>
             {!isProjectClosed && (
-                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                     <Grid item container xs={12} justifyContent="center">
                         <Button
                             variant="contained"

@@ -24,7 +24,7 @@ const ContractAwardingSection = () => {
             onClick={() => {
                 navigate("awarding/edit");
             }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
 

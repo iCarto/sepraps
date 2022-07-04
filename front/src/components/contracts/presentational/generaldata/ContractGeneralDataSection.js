@@ -24,7 +24,7 @@ const ContractGeneralDataSection = () => {
             onClick={() => {
                 navigate("generaldata/edit");
             }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
 

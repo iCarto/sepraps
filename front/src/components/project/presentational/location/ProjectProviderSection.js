@@ -39,7 +39,7 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
                   onClick={() => {
                       navigate("provider/" + provider.id + "/edit");
                   }}
-                  roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+                  roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
               />,
               <SectionCardHeaderAction
                   key="remove"
@@ -49,7 +49,7 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
                   onClick={() => {
                       setIsRemoveDialogOpen(true);
                   }}
-                  roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+                  roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
               />,
           ]
         : null;
