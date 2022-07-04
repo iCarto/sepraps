@@ -22,7 +22,7 @@ const ProjectInfrastructureSection = () => {
             onClick={() => {
                 navigate("main_infrastructure/edit");
             }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
 

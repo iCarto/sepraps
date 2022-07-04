@@ -25,7 +25,7 @@ const ContractBidRequestSection = () => {
             onClick={() => {
                 navigate("bidrequest/edit");
             }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
 

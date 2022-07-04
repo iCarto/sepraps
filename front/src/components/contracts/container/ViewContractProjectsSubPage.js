@@ -88,7 +88,7 @@ const ViewContractProjectsSubPage = () => {
                     </Grid>
                     <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
                         <Stack direction="row" justifyContent="flex-end" spacing={1}>
-                            <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                            <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                                 <AddContractProjectButtonGroup />
                             </AuthAction>
                             <ProjectListChangeView />

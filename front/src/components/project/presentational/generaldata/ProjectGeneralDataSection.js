@@ -56,7 +56,7 @@ const ProjectGeneralDataSection = () => {
             onClick={() => {
                 navigate("edit");
             }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT]}
+            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
 

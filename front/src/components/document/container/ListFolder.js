@@ -87,7 +87,7 @@ const ListFolder = ({
             )}
             {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
             {folderPath.indexOf("/") >= 0 && (
-                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                     <Grid item container xs={12} mt={8}>
                         <FileUploadSection
                             path={folderPath}

@@ -33,7 +33,9 @@ const ProjectFinancingDataSection = () => {
                     <Typography p={6} sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene financiador
                     </Typography>
-                    <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT]}>
+                    <AuthAction
+                        roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                    >
                         <Button
                             variant="contained"
                             color="primary"
