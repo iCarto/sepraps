@@ -1,4 +1,5 @@
 import {useSort} from "hooks";
+import {AuthAction, useAuth} from "auth";
 
 import {MenuAction, TableSortingHead} from "components/common/presentational";
 import {ActionsMenu} from "components/common/presentational";
@@ -56,6 +57,8 @@ const headCells = [
 ];
 
 const ContactsTable = ({contacts = [], handleActions = null}) => {
+    const {ROLES} = useAuth();
+
     const {attribute, setAttribute, order, setOrder, sortFunction} = useSort(
         "name",
         "asc"
@@ -110,29 +113,37 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
                                 </TableCell>
                                 {handleActions ? (
                                     <TableCell>
-                                        <ActionsMenu>
-                                            <MenuAction
-                                                name="edit-contact"
-                                                icon={<EditIcon />}
-                                                text="Modificar contacto"
-                                                itemId={contact.id}
-                                                handleClick={handleClick}
-                                            />
-                                            <MenuAction
-                                                name="remove-contact"
-                                                icon={<LinkOffIcon />}
-                                                text="Quitar contacto"
-                                                itemId={contact.id}
-                                                handleClick={handleClick}
-                                            />
-                                            <MenuAction
-                                                name="delete-contact"
-                                                icon={<DeleteIcon color="error" />}
-                                                text="Eliminar contacto"
-                                                itemId={contact.id}
-                                                handleClick={handleClick}
-                                            />
-                                        </ActionsMenu>
+                                        <AuthAction
+                                            roles={[
+                                                ROLES.EDIT,
+                                                ROLES.MANAGEMENT,
+                                                ROLES.SUPERVISION,
+                                            ]}
+                                        >
+                                            <ActionsMenu>
+                                                <MenuAction
+                                                    name="edit-contact"
+                                                    icon={<EditIcon />}
+                                                    text="Modificar contacto"
+                                                    itemId={contact.id}
+                                                    handleClick={handleClick}
+                                                />
+                                                <MenuAction
+                                                    name="remove-contact"
+                                                    icon={<LinkOffIcon />}
+                                                    text="Quitar contacto"
+                                                    itemId={contact.id}
+                                                    handleClick={handleClick}
+                                                />
+                                                <MenuAction
+                                                    name="delete-contact"
+                                                    icon={<DeleteIcon color="error" />}
+                                                    text="Eliminar contacto"
+                                                    itemId={contact.id}
+                                                    handleClick={handleClick}
+                                                />
+                                            </ActionsMenu>
+                                        </AuthAction>
                                     </TableCell>
                                 ) : null}
                             </TableRow>
