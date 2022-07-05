@@ -40,12 +40,24 @@ const ContactFormFields = ({
                 label="Género"
                 options={[
                     {
-                        value: "M",
-                        label: "Hombre",
+                        value: "F",
+                        label: "Feminino",
                     },
                     {
-                        value: "F",
-                        label: "Mujer",
+                        value: "M",
+                        label: "Masculino",
+                    },
+                    {
+                        value: "OS",
+                        label: "Otro específico",
+                    },
+                    {
+                        value: "NK",
+                        label: "No conocido",
+                    },
+                    {
+                        value: "NS",
+                        label: "No especificado",
                     },
                 ]}
                 rules={{required: "El campo es obligatorio"}}

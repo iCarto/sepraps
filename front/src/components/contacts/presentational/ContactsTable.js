@@ -100,7 +100,7 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
                                     {contact.name}
                                 </TableCell>
                                 <TableCell>{contact.post_name}</TableCell>
-                                <TableCell>{contact.gender}</TableCell>
+                                <TableCell>{contact.gender_name}</TableCell>
                                 <TableCell>{contact.phone}</TableCell>
                                 <TableCell>{contact.email}</TableCell>
                                 <TableCell>{contact.comments}</TableCell>

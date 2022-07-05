@@ -1,5 +1,4 @@
 from monitoring.models.contact import Contact
-from monitoring.models.domain_entry import dominio_get_value
 from rest_framework import serializers
 
 
@@ -29,16 +28,29 @@ class ContactListSerializer(serializers.ListSerializer):
 class ContactSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(allow_null=True)
+    gender_name = serializers.SerializerMethodField()
     is_staff = serializers.SerializerMethodField()
 
     class Meta:
         model = Contact
-        fields = ("id", "name", "gender", "phone", "email", "comments", "is_staff")
+        fields = (
+            "id",
+            "name",
+            "gender",
+            "gender_name",
+            "phone",
+            "email",
+            "comments",
+            "is_staff",
+        )
         extra_kwargs = {
             "phone": {"allow_null": True, "allow_blank": True},
             "email": {"allow_null": True, "allow_blank": True},
             "comments": {"allow_null": True, "allow_blank": True},
         }
+
+    def get_gender_name(self, obj):
+        return obj.get_gender_name()
 
     def get_is_staff(self, obj):
         return obj.user is not None

@@ -4,11 +4,11 @@ from django.db import models
 
 # TODO: Review gender options
 GENDER_CHOICES = [
-    ("M", "Hombre"),
-    ("F", "Mujer"),
-    ("OS", "Otra específica"),
-    ("NK", "No conocida"),
-    ("NS", "No especificada"),
+    ("M", "Masculino"),
+    ("F", "Feminino"),
+    ("OS", "Otro específico"),
+    ("NK", "No conocido"),
+    ("NS", "No especificado"),
 ]
 
 
@@ -27,6 +27,9 @@ class Contact(models.Model):
         db_table = "contact"
         verbose_name = "Contacto"
         verbose_name_plural = "Contactos"
+
+    def get_gender_name(self):
+        return dict(GENDER_CHOICES).get(self.gender, self.gender)
 
     def __str__(self):
         return self.name

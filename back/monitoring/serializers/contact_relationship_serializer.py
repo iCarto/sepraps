@@ -61,6 +61,7 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source="contact.name")
     post_name = serializers.SerializerMethodField()
     gender = serializers.CharField(source="contact.gender")
+    gender_name = serializers.SerializerMethodField()
     phone = serializers.CharField(
         source="contact.phone", allow_null=True, allow_blank=True
     )
@@ -80,6 +81,7 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
             "post",
             "post_name",
             "gender",
+            "gender_name",
             "phone",
             "email",
             "comments",
@@ -89,6 +91,9 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
 
     def get_post_name(self, obj):
         return dominio_get_value(obj.post, self.context.get("domain"))
+
+    def get_gender_name(self, obj):
+        return obj.contact.get_gender_name()
 
     def get_is_staff(self, obj):
         return obj.contact.user is not None
