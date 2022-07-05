@@ -16,12 +16,12 @@ const QuestionnaireInstanceFormFields = ({
 }) => {
     const getInput = (datatype, name, label, disabled = false) => {
         if (datatype === "decimal2") {
-            return <FormInputDecimal name={name} label={label} />;
+            return <FormInputDecimal name={name} label={label} disabled={disabled} />;
         }
         if (datatype === "integer") {
-            return <FormInputInteger name={name} label={label} />;
+            return <FormInputInteger name={name} label={label} disabled={disabled} />;
         }
-        return <FormInputText name={name} label={label} />;
+        return <FormInputText name={name} label={label} disabled={disabled} />;
     };
 
     return (

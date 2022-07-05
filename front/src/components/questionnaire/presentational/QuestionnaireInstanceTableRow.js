@@ -44,7 +44,7 @@ const QuestionnaireInstanceTableRow = ({instance, projectQuestionnaire}) => {
 
     const isInstanceEditable = instance => {
         const hasEditPermission = [ROLES.SUPERVISION].some(role => hasRole(role));
-        return !isFutureInstance(instance) || hasEditPermission;
+        return hasEditPermission || !isFutureInstance(instance);
     };
 
     return (
