@@ -30,6 +30,7 @@ class ProjectQuestionnaireInstanceSerializer(serializers.ModelSerializer):
         questionnaire_instances = self.fields["questionnaire_instances"].update(
             instance.get("questionnaire_instances"),
             validated_data.pop("questionnaire_instances", None),
+            questionnaire=instance.get("questionnaire"),
         )
         new_instances_ids = [instance.id for instance in questionnaire_instances]
 

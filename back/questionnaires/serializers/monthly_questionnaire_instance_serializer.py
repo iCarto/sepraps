@@ -8,17 +8,19 @@ from rest_framework import serializers
 
 
 class MonthlyQuestionnaireInstanceListSerializer(serializers.ListSerializer):
-    def update(self, instances, validated_data):
+    def update(self, instances, validated_data, **kwargs):
         if validated_data is None:
             return instances
 
         instance_mapping = {instance.id: instance for instance in instances}
+        questionnaire = kwargs.get("questionnaire")
 
         ret = []
         for instance_data in validated_data:
             instance = instance_mapping.get(instance_data.get("id"), None)
 
             if instance_data.get("id") is None:
+                instance_data["questionnaire"] = questionnaire
                 ret.append(self.child.create(instance_data))
                 continue
 
