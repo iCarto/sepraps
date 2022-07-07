@@ -55,7 +55,13 @@ const NotificationsWidget = ({notifications}) => {
                                         >
                                             <CircleIcon
                                                 fontSize="small"
-                                                color={notification.severity}
+                                                sx={{
+                                                    color:
+                                                        notification.severity ===
+                                                        "warning"
+                                                            ? `${notification.severity}.light`
+                                                            : `${notification.severity}.main`,
+                                                }}
                                             />
                                         </ListItemIcon>
                                         <ListItemText
