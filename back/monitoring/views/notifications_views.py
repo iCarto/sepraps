@@ -247,16 +247,16 @@ def get_notifications(request, format=None):
         get_contracts_milestone_compliance_notifications(
             "start_of_works",
             "all_work_sites_delivered",
-            "Ya se han entregado todos los sitios de obra vinculados a este contrato y"
-            " no tiene fecha de inicio",
+            "Este contrato no tiene fecha de inicio - Todos los sitios de obra se han"
+            " entregado",
             filter,
             request.user,
         )
         + get_contracts_milestone_compliance_notifications(
             "final_reception",
             "all_projects_completed",
-            "Ya se ha realizado la recepción de todos los proyectos de este contrato y"
-            " no tiene fecha de recepción definitiva",
+            "Este contrato no tiene fecha de recepción definitiva - Se han recibido"
+            " todos los proyectos",
             filter,
             request.user,
         )
