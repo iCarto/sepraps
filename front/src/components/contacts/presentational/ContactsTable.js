@@ -22,7 +22,7 @@ const headCells = [
     },
     {
         id: "post",
-        label: "Puesto",
+        label: "Cargo",
         width: 15,
     },
     {
@@ -80,7 +80,6 @@ const ContactsTable = ({contacts = [], handleActions = null}) => {
     const handleClick = (rowId, buttonName) => {
         handleActions(rowId, buttonName.split("-")[0]);
     };
-    console.log({contacts});
 
     return (
         <TableContainer sx={{width: "100%"}}>
