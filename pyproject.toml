@@ -3,8 +3,9 @@ line-length = 88
 # Mejor ser explícitos con la versión de python y los strings
 target-version = ['py39']
 skip-string-normalization = false
-experimental-string-processing = true
+preview = false
 skip-magic-trailing-comma = true
+safe = true
 # extend-exclude = '''
 # /(
 #   some_folder_here

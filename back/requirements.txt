@@ -9,6 +9,7 @@ djangorestframework-simplejwt==5.0.0
 drf-extensions==0.7.1
 psycopg2==2.9.2
 pandas==1.4.2
+django-debug-toolbar==3.5.0
 
 
 # Pillow

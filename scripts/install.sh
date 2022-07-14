@@ -1,7 +1,10 @@
 #!/bin/bash -i
 # We use -i to read .bashrc and have commands like rmvirtualenv available
 
-set -e
+# set -e: stops the script on error
+# set -u: stops the script on unset variables. Da problemas con virtualenv
+# set -o pipefail:  fail the whole pipeline on first error
+set -eo pipefail
 
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
 
@@ -15,9 +18,13 @@ source "${this_dir}"/../server/variables.ini
 cd "${this_dir}"/..
 
 # Clean up
-rmvirtualenv "${PROJECT_NAME}"
-
 command -v deactivate && deactivate
+
+: "${PROJECT_NAME}" # checks that project_name exists, if not an unbound variable is raised
+(
+    set +u
+    rmvirtualenv "${PROJECT_NAME}"
+) # does the remove without -u to avoid weird messages
 
 # Developer Experience Setup
 if ! pyenv versions | grep "${PYTHON_VERSION}" > /dev/null 2>&1; then
@@ -31,41 +38,21 @@ PYTHON_VERSION_BINARY_PATH="$(pyenv shell "${PYTHON_VERSION}" && pyenv which pyt
 mkvirtualenv -p "${PYTHON_VERSION_BINARY_PATH}" -a . "${PROJECT_NAME}" || true
 
 workon "${PROJECT_NAME}"
+
+if ! command -v deactivate; then
+    echo "Not in a virtualenv. Can not continue."
+    exit 1
+fi
+
 pip install -r requirements-dev.txt
 npm install
 pre-commit install --install-hooks
 
 # backend stuff
-# -------------
+bash scripts/install.back.sh
 
-## Python setup
-
-# create the .env file
-if [[ ! -f .env ]]; then
-    echo "* creating initial .env file"
-    echo "DEPLOYMENT=DEV
-DEBUG=True
-SECRET_KEY=your-secret-key
-DATABASE_URL=psql://${DBOWNER}:${PG_POSTGRES_PASSWD}@localhost:${PG_PORT}/${DBNAME}
-HTTPS=False" > "${BACKEND_FOLDER_NAME}/.env"
-else
-    echo "* .env file already exists"
-fi
-
-pip install -r "${BACKEND_FOLDER_NAME}/requirements.txt"
-
-# frontend stuff
-# -------------
-
-# FIXME. Something to do here? Probably not.
-if [[ ! -d "${FRONTEND_FOLDER_NAME}" ]]; then
-    create-react-app "${FRONTEND_FOLDER_NAME}"
-fi
-# build the frontend
-(
-    cd "${FRONTEND_FOLDER_NAME}"
-    npm install
-)
+# frontend stuf
+bash scripts/install.back.sh
 
 # ./scripts/util/prod-package.sh
 
@@ -84,8 +71,6 @@ fi
 # app-specific
 #-------------
 "${this_dir}"/util/setup-custom.sh
-"${this_dir}"/reset_db_and_migrations.sh
+"${this_dir}"/reset_and_create_db.sh
 
 echo "* DONE :)"
-
-exit

@@ -1,12 +1,10 @@
 #!/bin/bash
 
-source ./scripts/util/env.sh
-
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
 
 source "${this_dir}"/../server/variables.ini
 source "${this_dir}"/util/env.sh
-source "${this_dir}"/util/db_utils.sh
+source "${this_dir}"/../tools/db_utils.sh
 
 # Si se pasa cualquier parámetro a este comando crea una base de datos vacía
 CREATE_EMPTY="${1}"
@@ -17,8 +15,6 @@ find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 find . -path "*/migrations/*.pyc" -delete
 
 SITE_PACKAGES=$(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
-
-pwd
 
 # Eliminamos también las migraciones de los paquetes de django que utilicemos
 # para que no se creen migraciones intermedias
@@ -33,15 +29,7 @@ drop_db_and_kickout_users "${DBNAME}"
 
 create_db_from_template 'template1' "${DBNAME}"
 
-# Limpiamos el directorio media
-rm -rf "${this_dir}/../${BACKEND_FOLDER_NAME}/media/*"
-
-# Creamos los directorios necesarios para los estáticos
-mkdir -p "${this_dir}/../back/back/static"
-mkdir -p "${this_dir}/../back/monitoring/static"
-mkdir -p "${this_dir}/../front/build"
-rm -f back/front_build
-ln -s ../../front/build back/front_build
+bash "${this_dir}"/install.link_back_front.sh
 
 if [[ "${DATABASE_CONTROL_CHANGES_MODE}" == "sqitch" ]]; then
     cd "${this_dir}/../sqitch" || exit
