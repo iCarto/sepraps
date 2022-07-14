@@ -38,11 +38,3 @@ if [[ "${INSTALL_PYTHON_FROM}" == "pyenv" ]]; then
 else
     mkvirtualenv -p "${_PYTHON_PATH}" -a "${WWW_PATH}" "${PROJECT_NAME}"
 fi
-
-workon "${PROJECT_NAME}"
-[[ -f "${WWW_PATH}/requirements.txt" ]] && pip install -r "${WWW_PATH}/requirements.txt"
-[[ -f "${WWW_PATH}/setup.py" ]] && python setup.py install
-
-# Don't remove. If scripts ends with because setup.py does not exists it
-# returns a failure status and the caller could ends
-echo "Virtualenv installed"

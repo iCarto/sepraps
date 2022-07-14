@@ -2,10 +2,10 @@
 
 # set -e  # Porqué si se lanza desde cli se cierra el terminal
 
-_this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
-
-source "${_this_dir}/../../server/variables.ini"
-source "${_this_dir}/exit_codes.sh"
+db_utils_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
+# shellcheck source=../server/variables.ini
+source "${db_utils_dir}/../server/variables.ini"
+unset db_utils_dir
 
 kickout_users() {
     local DBNAME="${1}"
@@ -54,5 +54,7 @@ dump_db() {
     local WHEN="${2:-bck}"
     local BCK_FOLDER="${3:-$(pwd)}"
 
-    ${PGDUMP} -h 192.168.12.7 -U postgres -Fc -Z9 -E UTF-8 -f "${BCK_FOLDER}/${TODAY}_${WHEN}_${DBNAME}.dump" "${DBNAME}"
+    ${PGDUMP} -h localhost -U postgres -Fc -Z9 -E UTF-8 -f "${BCK_FOLDER}/${TODAY}_${WHEN}_${DBNAME}.dump" "${DBNAME}"
 }
+
+echo "Puerto en uso: ${PG_PORT}"

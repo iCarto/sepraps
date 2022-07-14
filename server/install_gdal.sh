@@ -2,12 +2,10 @@
 
 source variables.ini
 
-apt-get install -y libproj-dev gdal-bin
-
-OS_CODENAME=$(lsb_release -cs)
-
-if [[ "${OS_CODENAME}" == "focal" ]]; then
-    apt-get install -y python3-gdal
-else
-    apt-get install -y python-gdal
+if [[ "${OS_CODENAME}" != "focal" ]]; then
+    echo "Check OS version."
+    echo "Probably you must install $(python-gdal) instead of $(python3-gdal) if os is previous to focal"
+    exit 1
 fi
+
+apt-get install -y libproj-dev gdal-bin python3-gdal

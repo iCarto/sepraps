@@ -2,4 +2,4 @@
 
 source variables.ini
 
-apt-get install -y emacs-nox build-essential unzip binutils
+apt-get install -y emacs-nox build-essential unzip binutils curl

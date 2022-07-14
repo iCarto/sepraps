@@ -1,8 +1,11 @@
 #!/bin/bash
 
-source variables.ini
+# set -e: stops the script on error
+# set -u: stops the script on unset variables
+# set -o pipefail:  fail the whole pipeline on first error
+set -euo pipefail
 
-OS_CODENAME=$(lsb_release -cs)
+source variables.ini
 
 echo "deb http://apt.postgresql.org/pub/repos/apt/ ${OS_CODENAME}-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
@@ -35,19 +38,31 @@ chmod a-w "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org"
 chmod a-w "/etc/postgresql/${PG_VERSION}/main/postgresql.conf.${PG_VERSION}.org.no_comments"
 chmod a-w "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf.${PG_VERSION}.org.no_comments"
 
-if ${PG_ALLOW_EXTERNAL_CON}; then
-    echo "listen_addresses = '*'" >> "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
-fi
 sed -i "s/^port[ ]*=[ ]*[0-9]*/port = ${PG_PORT}/" "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
 
 # lc_messages = 'C' teniendo en cuenta si existe la línea o no
 sed -i "s/lc_messages = .*/lc_messages = 'C'/" "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
 grep -q 'lc_messages' "/etc/postgresql/${PG_VERSION}/main/postgresql.conf" || echo -e "lc_messages = 'C'\n" >> "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
 
-echo "host all all 0.0.0.0/0 md5" >> "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf"
+if ${PG_ALLOW_EXTERNAL_CON}; then
+    echo "listen_addresses = '*'" >> "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
+    echo "host all all 0.0.0.0/0 md5" >> "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf"
+fi
 
+# config psql dotfiles
 # https://stackoverflow.com/questions/1988249/how-do-i-use-su-to-execute-the-rest-of-the-bash-script-as-that-user
 # sudo -u "${DEFAULT_USER}" -H ./config_postgres_dotfiles.sh
-bash ./config_postgres_dotfiles.sh
+cp "${SETTINGS}/postgresql-settings/psqlrc" "${DEFAULT_USER_HOME}"/.psqlrc
+chown "${DEFAULT_USER}":"${DEFAULT_USER}" "${DEFAULT_USER_HOME}"/.psqlrc
+
+if [[ ${DEPLOYMENT} == "DEV" ]]; then
+    echo "*:${PG_PORT}:*:postgres:${PG_POSTGRES_PASSWD}" > "${DEFAULT_USER_HOME}"/.pgpass
+    chown "${DEFAULT_USER}":"${DEFAULT_USER}" "${DEFAULT_USER_HOME}"/.pgpass
+    chmod 600 "${DEFAULT_USER_HOME}"/.pgpass
+else
+    echo "*****************"
+    echo "install_postgres.sh: CHECK POSTGRESQL CONNECTION ISSUES"
+    echo "*****************"
+fi
 
 systemctl restart postgresql

@@ -1,25 +1,41 @@
 #!/bin/bash
 
-set -e
+# set -e: stops the script on error
+# set -u: stops the script on unset variables
+# set -o pipefail:  fail the whole pipeline on first error
+set -euo pipefail
 
-# DEPLOYMENT="${1:-PROD}"
+# If a first command line argument exists, use it as value for local variable
+# DEPLOYMENT overwritting default or env variable value
+# The value of the env variable will not be changed, even if export is used
+# inside the script if it's executed (bash variables.ini or ./variables.ini),
+# but it's changed even without using export if it's sourced
+# DEPLOYMENT="${1:-${DEPLOYMENT}}"
 DEPLOYMENT="${1}"
 
+if [[ "${DEPLOYMENT}" != "DEV" ]] && [[ "${DEPLOYMENT}" != "PROD" ]] && [[ "${DEPLOYMENT}" != "STAGE" ]]; then
+    echo "First argument must be a valid DEPLOYMENT value: DEV | PROD | STAGE"
+    exit 1
+fi
+
 if [[ ${DEPLOYMENT} == "DEV" ]]; then
-    # FIX ME
-    # "this_dir" trick does not seem to work with vagrant
+    # bootstrap is copied with another name to /tmp when provisioning Vagrant
+    # so "this_dir" trick does not work
     cd /vagrant/server
 
     # Descargamos aquí paquetes a modo de cache. Se puede borrar el directorio
     # cuando se quiera
     mkdir -p /vagrant/server/downloads
 
-    # shellcheck source=variables.ini
-    source /vagrant/server/variables.ini
+    this_dir=$(pwd)
 else
+    this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
     echo "Not ready to execute it directly in production jet"
     exit 1
 fi
+
+# shellcheck source=variables.ini
+source "${this_dir}/variables.ini"
 
 # https://serverfault.com/questions/500764/
 # https://unix.stackexchange.com/questions/22820
@@ -52,7 +68,6 @@ sed -i 's%.*history-search-forward%"\\e[6~": history-search-forward%' /etc/input
 ./install_git.sh
 
 ./install_postgres.sh
-
 ./install_sqitch.sh
 
 ./create_python_virtualenv_project.sh
@@ -64,9 +79,3 @@ sed -i 's%.*history-search-forward%"\\e[6~": history-search-forward%' /etc/input
 ./install_ufw.sh
 
 bash do_dist_upgrade.sh
-
-is_installed() {
-    if dpkg -s "${1}" > /dev/null 2>&1; then
-        echo "is installed"
-    fi
-}
