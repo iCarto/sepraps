@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_extensions",
     "users",
+    "log",
     "documents",
     "questionnaires",
     "monitoring",
@@ -73,6 +74,7 @@ MIGRATION_MODULES = (
         "documents": None,
         "monitoring": None,
         "questionnaires": None,
+        "log": None,
     }
     if env("DATABASE_CONTROL_CHANGES_MODE") == "sqitch"
     else {}
@@ -90,6 +92,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "log.middleware.SaveRequest",
 ]
 
 ROOT_URLCONF = "back.urls"

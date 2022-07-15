@@ -9,4 +9,5 @@ monitoring/migrations/
 users/migrations/
 documents/migrations/
 questionnaires/migrations/
+log/migrations/
 
