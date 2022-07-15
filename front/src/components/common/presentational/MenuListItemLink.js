@@ -1,11 +1,25 @@
 import {Link, useLocation, useResolvedPath} from "react-router-dom";
-import {useTheme} from "@emotion/react";
 
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuListItemIcon from "./MenuListItemIcon";
 import Tooltip from "@mui/material/Tooltip";
+import styled from "@mui/material/styles/styled";
+
+const ListItemStyled = styled(ListItem, {
+    shouldForwardProp: prop => prop !== "selected",
+})(({selected = false, theme}) => ({
+    color: selected ? theme.palette.primary.main : "inherit",
+    backgroundColor: selected ? theme.palette.primary.lighter : "inherit",
+    borderLeft: selected ? `3px solid ${theme.palette.primary.main}` : "inherit",
+}));
+
+const ListItemIconStyled = styled(ListItemIcon, {
+    shouldForwardProp: prop => prop !== "selected",
+})(({selected = false, theme}) => ({
+    color: selected ? theme.palette.primary.main : "inherit",
+}));
 
 const MenuListItemLink = ({
     to,
@@ -13,24 +27,13 @@ const MenuListItemLink = ({
     text = "",
     textStyle = {},
     tooltipTitle = "",
+    resolvedPathName = null,
     ...props
 }) => {
-    const theme = useTheme();
-
-    let resolved = useResolvedPath(props.resolvedPathName || to);
+    let resolved = useResolvedPath(resolvedPathName || to);
     let location = useLocation();
 
     const selected = location.pathname.startsWith(resolved.pathname);
-
-    const selectedOptionStyle = {
-        color: theme.palette.primary.main,
-        bgcolor: theme.palette.primary.lighter,
-        borderLeft: `3px solid ${theme.palette.primary.main}`,
-    };
-
-    const selectedOptionIconStyle = {
-        color: theme.palette.primary.main,
-    };
 
     const selectedOptionTextStyle = selected
         ? {
@@ -43,19 +46,13 @@ const MenuListItemLink = ({
           };
 
     return (
-        <ListItem
-            button
-            component={Link}
-            to={to}
-            {...props}
-            sx={selected && selectedOptionStyle}
-        >
+        <ListItemStyled button component={Link} to={to} {...props} selected={selected}>
             {icon && (
                 <MenuListItemIcon>
                     <Tooltip title={tooltipTitle} placement="bottom-end">
-                        <ListItemIcon sx={selected && selectedOptionIconStyle}>
+                        <ListItemIconStyled selected={selected}>
                             {icon}
-                        </ListItemIcon>
+                        </ListItemIconStyled>
                     </Tooltip>
                 </MenuListItemIcon>
             )}
@@ -63,7 +60,7 @@ const MenuListItemLink = ({
                 primary={text}
                 primaryTypographyProps={selectedOptionTextStyle}
             />
-        </ListItem>
+        </ListItemStyled>
     );
 };
 
