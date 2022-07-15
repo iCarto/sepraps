@@ -40,8 +40,8 @@ const UpdateMilestonePanel = () => {
     useEffect(() => {
         if (milestone) {
             formMethods.reset({
-                compliance_date: milestone.compliance_date,
-                comments: milestone.comments,
+                compliance_date: milestone.compliance_date || "",
+                comments: milestone.comments || "",
             });
         }
     }, [milestone]);
