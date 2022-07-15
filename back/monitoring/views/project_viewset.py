@@ -81,7 +81,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
                     construction_contract__constructioncontractcontact__contact__user=self.request.user
                 )
                 | Q(creation_user=self.request.user)
-            )
+            ).distinct()
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_class(self):

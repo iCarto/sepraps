@@ -49,7 +49,7 @@ class ConstructionContractViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(
                 Q(constructioncontractcontact__contact__user=self.request.user)
                 | Q(creation_user=self.request.user)
-            )
+            ).distinct()
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_context(self):
