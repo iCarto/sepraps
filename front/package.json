@@ -15,6 +15,7 @@
         "chart.js": "^3.7.1",
         "chartjs-plugin-annotation": "^1.4.0",
         "date-fns": "^2.25.0",
+        "ga-4-react": "0.1.281",
         "leaflet": "^1.7.1",
         "leaflet.utm": "^1.0.0",
         "react": "^17.0.2",
