@@ -13,6 +13,7 @@ env = environ.Env(  # set default values and casting
     DEPLOYMENT=(str, "PROD"),
     HTTPS=(bool, True),
     ALLOWED_HOSTS=(list, []),
+    SENTRY_API_KEY=(str, ""),
 )
 
 # Build paths inside the project like this: base('desired/local/path')
@@ -247,3 +248,31 @@ CORS_EXPOSE_HEADERS = ["Content-Disposition", "Cache-Control"]
 AUTH_USER_MODEL = "users.User"
 
 MONITORING_TEMPLATES_FOLDER = env("MONITORING_TEMPLATES_FOLDER")
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+
+if env("SENTRY_DSN"):
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    sentry_sdk.init(
+        dsn=env("SENTRY_DSN"),  # Automatic from env SENTRY_DSN
+        integrations=[DjangoIntegration()],
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production,
+        traces_sample_rate=0.05,
+        # traces_sample_rate is for performance, sample_rate for errors
+        sample_rate=1,
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True,
+        # By default the SDK will try to use the SENTRY_RELEASE
+        # environment variable, or infer a git commit
+        # SHA as release, however you may want to set
+        # something more human-readable.
+        # release="myapp@1.0.0", # Automatic from SENTRY_RELEASE
+        environment="production",  # Automatic from SENTRY_ENVIRONMENT
+    )
