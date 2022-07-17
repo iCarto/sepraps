@@ -4,6 +4,9 @@ import "./index.css";
 import App from "./App";
 
 import GA4React from "ga-4-react";
+import * as Sentry from "@sentry/react";
+import {BrowserTracing} from "@sentry/tracing";
+import {CaptureConsole as CaptureConsoleIntegration} from "@sentry/integrations";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -18,7 +21,7 @@ if (process.env.REACT_APP_GOOGLE_ANALYTICS_CODE) {
             const ga4react = new GA4React(process.env.REACT_APP_GOOGLE_ANALYTICS_CODE);
             ga4react
                 .initialize()
-                .then(g4 => {
+                .then(ga4 => {
                     ga4.pageview("path");
                     ga4.gtag("event", "pageview", "path"); // or your custom gtag event
                 })
@@ -27,4 +30,20 @@ if (process.env.REACT_APP_GOOGLE_ANALYTICS_CODE) {
     } catch (err) {
         console.error(err);
     }
+}
+
+if (process.env.REACT_APP_SENTRY_DSN) {
+    Sentry.init({
+        dsn: process.env.REACT_APP_SENTRY_DSN,
+        integrations: [new BrowserTracing(), new CaptureConsoleIntegration()],
+
+        // performance
+        tracesSampleRate: 0.05,
+
+        // errors
+        sampleRate: 1.0,
+
+        //release:
+        environment: "production",
+    });
 }
