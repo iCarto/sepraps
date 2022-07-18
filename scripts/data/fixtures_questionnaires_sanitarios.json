@@ -1,0 +1,19 @@
+[
+    {
+        "model": "questionnaires.questionnaire",
+        "pk": "instalacion_sanitarios",
+        "fields": {
+            "category": "monthly",
+            "version": 1,
+            "name": "Instalación de sanitarios",
+            "fields": [
+                {
+                    "code": "numero_viviendas_beneficiarias",
+                    "label": "Número de viviendas beneficiarias",
+                    "datatype": "integer",
+                    "include_expected_value": false
+                }
+            ]
+        }
+    }
+]
