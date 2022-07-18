@@ -41,7 +41,7 @@ const ViewProjectDocumentsSubPage = () => {
         } else {
             setFolderPath(path);
         }
-    }, [params]);
+    }, [params, project]);
 
     const handleSelectElement = folderElement => {
         setSelectedElement(folderElement);
