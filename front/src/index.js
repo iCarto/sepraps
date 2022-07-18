@@ -35,7 +35,10 @@ if (process.env.REACT_APP_GOOGLE_ANALYTICS_CODE) {
 if (process.env.REACT_APP_SENTRY_DSN) {
     Sentry.init({
         dsn: process.env.REACT_APP_SENTRY_DSN,
-        integrations: [new BrowserTracing(), new CaptureConsoleIntegration()],
+        integrations: [
+            new BrowserTracing(),
+            new CaptureConsoleIntegration({levels: ["warn", "error"]}),
+        ],
 
         // performance
         tracesSampleRate: 0.05,
