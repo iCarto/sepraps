@@ -249,10 +249,6 @@ AUTH_USER_MODEL = "users.User"
 
 MONITORING_TEMPLATES_FOLDER = env("MONITORING_TEMPLATES_FOLDER")
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
-
 if env("SENTRY_DSN"):
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration

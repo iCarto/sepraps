@@ -18,6 +18,7 @@ DATABASE_URL=psql://${DBOWNER}:${PG_POSTGRES_PASSWD}@localhost:${PG_PORT}/${DBNA
 HTTPS=False
 MONITORING_TEMPLATES_FOLDER=monitoring/data/project
 DATABASE_CONTROL_CHANGES_MODE=migrations
+SENTRY_DSN=
 " > back/.env
 
 else
