@@ -157,7 +157,7 @@ cd back && pip install -r requirements.txt && cd ..
 export NODE_OPTIONS=--max_old_space_size=1024
 cd front && npm install && npm run build && cd ..
 cd back && echo -e "yes" | python manage.py collectstatic -c && cd ..
-cd sqitch && sqitch deploy && cd ..
+cd bd && sqitch deploy && cd ..
 systemctl restart apache2
 ```
 
