@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # create the .env file
-if [[ ! -f back/.env ]]; then
+if [[ ! -f front/.env ]]; then
     echo "* creating initial .env file"
     echo "REACT_APP_API_BASE_URL=http://localhost:8000
 REACT_APP_API_CREDENTIALS=omit
 REACT_APP_GOOGLE_ANALYTICS_CODE=
 REACT_APP_SENTRY_DSN=
-" > back/.env
+" > front/.env
 
 else
-    echo "* back/.env file already exists"
+    echo "* front/.env file already exists"
 fi
 
 # FIXME. Something to do here? Probably not.
