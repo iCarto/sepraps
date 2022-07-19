@@ -76,7 +76,6 @@ git pull --rebase origin <xxxx>_<feature>
 
 The project is setup by default with strict linters and formatters that run on pre commit. But sometimes a quick fix is needed and you want to go over the linters. Use `git commit --no-verify` or set it to `[manual]` in `.pre-commit-config.yaml`.
 
-
 # Pre-Requisites
 
 Check `server/bootstrap.sh` for automatized way of configuring the tools.
@@ -128,7 +127,7 @@ code . # or your favourite IDE
 
 Instead of `start.sh` script you can open two consoles:
 
-````shell
+```shell
 # Launch back
 workon "${PROJECT_NAME}"
 cd back; python manage.py runserver_plus
@@ -165,7 +164,6 @@ systemctl restart apache2
 
 Launch all tests with `./scripts/test.sh`. Take care that this includes e2e tests and can be pretty slow.
 
-
 # Test in a production like environment
 
 NOT READY YET
@@ -175,8 +173,6 @@ vagrant ssh
 workon "${PROJECT_NAME}"
 ./scripts/deploy.sh
 ```
-
-
 
 # Recap
 

@@ -52,7 +52,7 @@ pre-commit install --install-hooks
 bash scripts/install.back.sh
 
 # frontend stuf
-bash scripts/install.back.sh
+bash scripts/install.front.sh
 
 # ./scripts/util/prod-package.sh
 
