@@ -28,8 +28,5 @@
         "stylelint-config-standard": "18.3.0",
         "stylelint-order": "3.0.0"
     },
-    "dependencies": {
-        "@mui/material": "5.4.3",
-        "@mui/styles": "5.4.2"
-    }
+    "dependencies": {}
 }
