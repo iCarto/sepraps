@@ -1,5 +1,6 @@
 import {useState, createContext, useContext} from "react";
 import AuthService from "./AuthService";
+import {ROLES} from "config";
 
 let AuthContext = createContext(null);
 
@@ -22,13 +23,6 @@ export default function AuthProvider({children}) {
 
     const hasRole = role => {
         return user && user.roles && user.roles.includes(role);
-    };
-
-    const ROLES = {
-        EDIT: "edicion",
-        MANAGEMENT: "gestion",
-        VIEW: "visualizacion",
-        SUPERVISION: "supervision",
     };
 
     let value = {user, login, logout, hasRole, ROLES};
