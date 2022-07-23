@@ -1,4 +1,4 @@
-export {default as DateUtil, DATE_FORMATS} from "./DateUtil";
+export {default as DateUtil} from "./DateUtil";
 export {default as NumberUtil} from "./NumberUtil";
 export {default as FileUtil} from "./FileUtil";
 export {default as FormUtil} from "./FormUtil";
