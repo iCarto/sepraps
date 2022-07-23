@@ -1,4 +1,4 @@
-import {DateUtil, DATE_FORMATS} from "utilities";
+import {DateUtil} from "utilities";
 
 class Milestones extends Array {}
 
@@ -16,10 +16,7 @@ const milestones_api_adapter = milestones => milestones.map(milestone_api_adapte
 
 const milestone_view_adapter = milestone => {
     milestone["compliance_date"] = !!milestone["compliance_date"]
-        ? DateUtil.formatDate(
-              milestone["compliance_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
+        ? DateUtil.formatDateForAPI(milestone["compliance_date"])
         : null;
 
     return milestone;

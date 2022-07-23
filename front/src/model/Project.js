@@ -9,7 +9,7 @@ import {
     contract_api_adapter,
 } from "model";
 import {createQuestionnaires, questionnaires_api_adapter} from "model/questionnaires";
-import {DateUtil, DATE_FORMATS} from "utilities";
+import {DateUtil} from "utilities";
 import {infraestructure_view_adapter} from "./Infrastructure";
 import {createMilestones, milestones_api_adapter} from "./Milestone";
 import {provider_view_adapter} from "./Provider";
@@ -71,7 +71,7 @@ const projects_api_adapter = projects => projects.map(project_api_adapter);
 const project_view_adapter = project => {
     // in front-end falsy values are "" or undefined or null
     project["init_date"] = !!project["init_date"]
-        ? DateUtil.formatDate(project["init_date"], DATE_FORMATS.SERVER_DATEFORMAT)
+        ? DateUtil.formatDateForAPI(project["init_date"])
         : null;
     // we must destructure object before its adapation because
     // nested objects are still inmutable inside project object

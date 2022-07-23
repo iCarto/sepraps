@@ -7,17 +7,10 @@ import {
     startOfToday,
     differenceInDays,
 } from "date-fns";
-import {es} from "date-fns/locale";
+
 import TextUtil from "./TextUtil";
 
-export const DATE_FORMATS = {
-    CLIENT_DATEFORMAT: "dd/MM/yyyy",
-    CLIENT_DATEMONTHFORMAT: "MM/yyyy",
-    CLIENT_DATETIMEFORMAT: "dd/MM/yyyy HH:mm",
-    CLIENT_TIMEFORMAT: "HH:mm",
-    FILE_DATETIMEFORMAT: "yyyyMMddHHmmss",
-    SERVER_DATEFORMAT: "yyyy-MM-dd",
-};
+import {DATE_FORMATS, USED_LOCALE} from "config";
 
 const DateUtil = {
     // Transform to UI format date DD/MM/YYYY
@@ -26,6 +19,9 @@ const DateUtil = {
             return "";
         }
         return format(date, dateFormat);
+    },
+    formatDateForAPI(date) {
+        return DateUtil.formatDate(date, DATE_FORMATS.API_DATEFORMAT);
     },
     formatDateMonth(date, dateFormat = DATE_FORMATS.CLIENT_DATEMONTHFORMAT) {
         if (!date) {
@@ -38,6 +34,9 @@ const DateUtil = {
             return "";
         }
         return format(date, dateFormat);
+    },
+    formatDateTimeForFilenames(date) {
+        return DateUtil.formatDate(date, DATE_FORMATS.FILENAME_DATETIMEFORMAT);
     },
     formatTime(date) {
         if (!date) {
@@ -61,11 +60,13 @@ const DateUtil = {
     },
     getMonthName(month) {
         return TextUtil.capitalize(
-            format(new Date(null, month - 1), "LLLL", {locale: es})
+            format(new Date(null, month - 1), "LLLL", {locale: USED_LOCALE})
         );
     },
     getMonthInDate(date) {
-        return TextUtil.capitalize(format(new Date(date), "LLL", {locale: es}));
+        return TextUtil.capitalize(
+            format(new Date(date), "LLL", {locale: USED_LOCALE})
+        );
     },
     getDayInDate(date) {
         return format(new Date(date), "d");

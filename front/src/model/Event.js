@@ -1,4 +1,4 @@
-import {DateUtil, DATE_FORMATS} from "utilities";
+import {DateUtil} from "utilities";
 
 class Events extends Array {}
 
@@ -10,9 +10,7 @@ const event_api_adapter = event => {
 const events_api_adapter = events => events.map(event_api_adapter);
 
 const event_view_adapter = event => {
-    event["date"] = !!event["date"]
-        ? DateUtil.formatDate(event["date"], DATE_FORMATS.SERVER_DATEFORMAT)
-        : null;
+    event["date"] = !!event["date"] ? DateUtil.formatDateForAPI(event["date"]) : null;
     return event;
 };
 

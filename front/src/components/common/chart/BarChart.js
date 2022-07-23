@@ -10,7 +10,7 @@ import {
 } from "chart.js";
 import {useRef} from "react";
 import {Bar} from "react-chartjs-2";
-import {DateUtil, DATE_FORMATS} from "utilities";
+import {DateUtil} from "utilities";
 
 import DownloadChart from "./DownloadChart";
 import Grid from "@mui/material/Grid";
@@ -51,9 +51,8 @@ const BarChart = ({title, labels, datasets, options = {}}) => {
         datasets: datasets,
     };
 
-    const chartFilename = `${DateUtil.formatDate(
-        new Date(),
-        DATE_FORMATS.FILE_DATETIMEFORMAT
+    const chartFilename = `${DateUtil.formatDateTimeForFilenames(
+        new Date()
     )}_${title.toLowerCase().replace(" ", "_")}.png`;
 
     return (

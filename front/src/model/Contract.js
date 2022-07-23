@@ -9,7 +9,7 @@ import {
     contacts_api_adapter,
     createContacts,
 } from "model";
-import {DateUtil, DATE_FORMATS, NumberUtil} from "utilities";
+import {DateUtil, NumberUtil} from "utilities";
 import {contractor_view_adapter} from "./Contractor";
 
 class Contracts extends Array {}
@@ -99,29 +99,20 @@ const contract_view_adapter = contract => {
         ? NumberUtil.parseFloatOrNull(contract["awarding_budget"])
         : null;
     contract["bid_request_date"] = !!contract["bid_request_date"]
-        ? DateUtil.formatDate(
-              contract["bid_request_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
+        ? DateUtil.formatDateForAPI(contract["bid_request_date"])
         : null;
     contract["awarding_date"] = !!contract["awarding_date"]
-        ? DateUtil.formatDate(contract["awarding_date"], DATE_FORMATS.SERVER_DATEFORMAT)
+        ? DateUtil.formatDateForAPI(contract["awarding_date"])
         : null;
     contract["execution_signature_date"] = !!contract["execution_signature_date"]
-        ? DateUtil.formatDate(
-              contract["execution_signature_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
+        ? DateUtil.formatDateForAPI(contract["execution_signature_date"])
         : null;
     contract["expected_execution_period"] = !!contract["expected_execution_period"]
         ? NumberUtil.parseIntOrNull(contract["expected_execution_period"])
         : null;
 
     contract["warranty_end_date"] = !!contract["warranty_end_date"]
-        ? DateUtil.formatDate(
-              contract["warranty_end_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
+        ? DateUtil.formatDateForAPI(contract["warranty_end_date"])
         : null;
 
     contract["financing_program"] = !!contract["financing_program"]
@@ -141,18 +132,12 @@ const contract_view_adapter = contract => {
     contract["execution_certificate_start_date"] = !!contract[
         "execution_certificate_start_date"
     ]
-        ? DateUtil.formatDate(
-              contract["execution_certificate_start_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
+        ? DateUtil.formatDateForAPI(contract["execution_certificate_start_date"])
         : null;
     contract["execution_final_delivery_date"] = !!contract[
         "execution_final_delivery_date"
     ]
-        ? DateUtil.formatDate(
-              contract["execution_final_delivery_date"],
-              DATE_FORMATS.SERVER_DATEFORMAT
-          )
+        ? DateUtil.formatDateForAPI(contract["execution_final_delivery_date"])
         : null;
     contract["projects"] = contract["projects"].map(project => {
         return project.id;
