@@ -1,9 +1,6 @@
 import {UserService} from "service/api";
 import {Storage} from "config";
-
-const USER = "sepraps_user";
-const ACCESS_TOKEN_KEY = "accessToken";
-const REFRESH_TOKEN_KEY = "refreshToken";
+import {USER, ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY} from "config";
 
 const AuthService = {
     login(username, password) {
