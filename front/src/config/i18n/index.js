@@ -1,3 +1,5 @@
+//DateUtil
+
 export const DATE_FORMATS = {
     CLIENT_DATEFORMAT: "dd/MM/yyyy",
     CLIENT_DATEMONTHFORMAT: "MM/yyyy",
@@ -8,3 +10,15 @@ export const DATE_FORMATS = {
 };
 
 export {es as USED_LOCALE} from "date-fns/locale";
+
+// NumberUtil
+
+export const localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
+    style: "currency",
+    currency: "PYG",
+});
+export const localIntegerFormatter = new Intl.NumberFormat("es-PY");
+export const localDecimalFormatter = new Intl.NumberFormat("es-PY", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+});
