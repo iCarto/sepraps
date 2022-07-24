@@ -1,12 +1,8 @@
-var localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
-    style: "currency",
-    currency: "PYG",
-});
-var localIntegerFormatter = new Intl.NumberFormat("es-PY");
-var localDecimalFormatter = new Intl.NumberFormat("es-PY", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-});
+import {
+    localCurrencyFormatter,
+    localIntegerFormatter,
+    localDecimalFormatter,
+} from "config";
 
 const NumberUtil = {
     formatDecimal(value, decimalSize = 2) {
