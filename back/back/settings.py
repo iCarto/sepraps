@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     #    "drf_spectacular",
     "corsheaders",
     "django_filters",
-    "debug_toolbar",
     "django_extensions",
     "users",
     "log",
@@ -64,6 +63,10 @@ INSTALLED_APPS = [
     "questionnaires",
     "monitoring",
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+
 
 # In Sqitch database control changes mode we have to remove migrations for all used modules to avoid errors
 MIGRATION_MODULES = (
