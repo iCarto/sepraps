@@ -5,9 +5,4 @@ front_build
 back/static
 monitoring/static
 
-monitoring/migrations/
-users/migrations/
-documents/migrations/
-questionnaires/migrations/
-log/migrations/
-
+**/migrations/0*.py
