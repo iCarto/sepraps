@@ -19,6 +19,29 @@ urlpatterns = [
     path("gestion/", admin.site.urls),
 ]
 
+if "drf_spectacular" in settings.INSTALLED_APPS:
+    from drf_spectacular.views import (  # noqa: WPS433
+        SpectacularAPIView,
+        SpectacularRedocView,
+        SpectacularSwaggerView,
+    )
+
+    urlpatterns += [
+        path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+        # Optional UI:
+        path(
+            "api/schema/swagger-ui/",
+            SpectacularSwaggerView.as_view(url_name="schema"),
+            name="swagger-ui",
+        ),
+        path(
+            "api/schema/redoc/",
+            SpectacularRedocView.as_view(url_name="schema"),
+            name="redoc",
+        ),
+    ]
+
+
 if settings.DEPLOYMENT == "dev":
     urlpatterns = urlpatterns + static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT

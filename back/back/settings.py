@@ -13,7 +13,7 @@ env = environ.Env(  # set default values and casting
     DEPLOYMENT=(str, "PROD"),
     HTTPS=(bool, True),
     ALLOWED_HOSTS=(list, []),
-    SENTRY_API_KEY=(str, ""),
+    SENTRY_DSN=(str, ""),
 )
 
 # Build paths inside the project like this: base('desired/local/path')
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "rest_framework",
+    #    "drf_spectacular",
     "corsheaders",
     "django_filters",
     "debug_toolbar",
@@ -228,6 +229,28 @@ SIMPLE_JWT = {
     "USER_ID_FIELD": "username",
     "USER_ID_CLAIM": "username",
 }
+
+if "drf_spectacular" in INSTALLED_APPS:
+    REST_FRAMEWORK["DEFAULT_SCHEMA_CLASS"] = "drf_spectacular.openapi.AutoSchema"
+    SPECTACULAR_SETTINGS = {
+        "TITLE": "SEPRAPS API",
+        "DESCRIPTION": "Proyecto financiado por el BID para el desarrollo de una herramienta para el Seguimiento de la Ejecución de Programas Rurales de Agua Potable y Saneamiento (SEPRAPS).",
+        "VERSION": "1.0.0",
+        "SERVE_INCLUDE_SCHEMA": False,
+        "SWAGGER_UI_SETTINGS": {
+            "deepLinking": True,
+            "tryItOutEnabled": False,
+            "defaultModelsExpandDepth": 2,
+            "defaultModelExpandDepth": 1,
+            "docExpansion": "full",
+        },
+        "REDOC_UI_SETTINGS": {
+            "disableSearch": False,
+            "hideDownloadButton": True,
+            "schemaExpansionLevel": "all",
+            "hideHostname": True,
+        },
+    }
 
 # Django debug toolbar
 INTERNAL_IPS = ["127.0.0.1"]
