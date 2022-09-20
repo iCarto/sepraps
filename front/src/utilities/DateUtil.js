@@ -79,7 +79,7 @@ const DateUtil = {
         return differenceInCalendarMonths(lastDate, firstDate);
     },
     getToday() {
-        const now = new Date();
+        const now = new Date(Date.now());
         now.setHours(0, 0, 0, 0);
         return now;
     },
