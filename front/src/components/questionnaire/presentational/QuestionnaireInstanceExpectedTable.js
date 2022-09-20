@@ -30,12 +30,11 @@ const QuestionnaireInstanceExpectedTable = ({
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
 
-    const questionnaireFieldsWithExpectedValue =
-        projectQuestionnaire.questionnaire.fields.filter(
-            field => field.include_expected_value === true
-        );
+    const questionnaireFieldsWithExpectedValue = projectQuestionnaire.questionnaire.fields.filter(
+        field => field.include_expected_value === true
+    );
 
-    const defaultMonthFrom = new Date();
+    const defaultMonthFrom = DateUtil.getToday();
 
     // TODO: 12 months by default or get the number from other project fields?
     const defaultExpectedMonths = "12";
@@ -84,8 +83,8 @@ const QuestionnaireInstanceExpectedTable = ({
         const questionnaireInstances = data.expected_months_values.map(
             expectedMonth => {
                 // We should iterate over all fields and set a null value for fields with non expected value
-                const dynamicFieldValues =
-                    projectQuestionnaire.questionnaire.fields.map(field => {
+                const dynamicFieldValues = projectQuestionnaire.questionnaire.fields.map(
+                    field => {
                         return createMQInstanceValue({
                             id: null,
                             code: field.code,
@@ -96,7 +95,8 @@ const QuestionnaireInstanceExpectedTable = ({
                                 : null,
                             value: null,
                         });
-                    });
+                    }
+                );
                 return createMQInstance({
                     id: null,
                     year: expectedMonth.year_month.getFullYear(),

@@ -52,7 +52,7 @@ const BarChart = ({title, labels, datasets, options = {}}) => {
     };
 
     const chartFilename = `${DateUtil.formatDateTimeForFilenames(
-        new Date()
+        DateUtil.getToday()
     )}_${title.toLowerCase().replace(" ", "_")}.png`;
 
     return (

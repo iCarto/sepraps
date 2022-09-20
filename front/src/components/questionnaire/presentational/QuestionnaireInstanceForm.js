@@ -6,6 +6,7 @@ import QuestionnaireInstanceFormFields from "./QuestionnaireInstanceFormFields";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
+import {DateUtil} from "utilities";
 
 const QuestionnaireInstanceForm = ({
     questionnaireFields,
@@ -28,7 +29,7 @@ const QuestionnaireInstanceForm = ({
           }
         : {
               id: null,
-              year_month: new Date(),
+              year_month: DateUtil.getToday(),
               comments: "",
           };
 
