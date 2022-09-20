@@ -3,7 +3,7 @@ import {DateUtil} from "utilities";
 class Events extends Array {}
 
 const event_api_adapter = event => {
-    event["date"] = new Date(event["date"]);
+    event["date"] = DateUtil.parseDateFromApi(event["date"]);
     return event;
 };
 

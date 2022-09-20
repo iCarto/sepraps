@@ -17,14 +17,12 @@ import {provider_view_adapter} from "./Provider";
 class Projects extends Array {}
 
 const project_api_adapter = project => {
-    project["init_date"] = new Date(project["init_date"]);
+    project["init_date"] = DateUtil.parseDateFromApi(project["init_date"]);
     if (project.construction_contract) {
         project["construction_contract"] = createContract(
             contract_api_adapter(project.construction_contract)
         );
     }
-    project["created_at"] = new Date(project["created_at"]);
-    project["updated_at"] = new Date(project["updated_at"]);
     if (project["linked_localities"]) {
         project["linked_localities"] = createLocalities(
             localities_api_adapter(project["linked_localities"])
@@ -62,6 +60,10 @@ const project_api_adapter = project => {
             questionnaires_api_adapter(project["questionnaires"])
         );
     }
+
+    // Audit dates from API are in UTC, so we don't have to format them
+    project["created_at"] = new Date(project["created_at"]);
+    project["updated_at"] = new Date(project["updated_at"]);
 
     return project;
 };

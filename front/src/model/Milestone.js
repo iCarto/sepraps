@@ -4,7 +4,7 @@ class Milestones extends Array {}
 
 const milestone_api_adapter = milestone => {
     milestone["compliance_date"] = milestone["compliance_date"]
-        ? new Date(milestone["compliance_date"])
+        ? DateUtil.parseDateFromApi(milestone["compliance_date"])
         : null;
     if (milestone["checklist"]) {
         milestone["checklist"] = milestone["checklist"]?.map(checkItem => checkItem);

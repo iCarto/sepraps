@@ -17,10 +17,10 @@ class Contracts extends Array {}
 const contract_api_adapter = contract => {
     // in back-end falsy values are null
     contract["bid_request_date"] = contract["bid_request_date"]
-        ? new Date(contract["bid_request_date"])
+        ? DateUtil.parseDateFromApi(contract["bid_request_date"])
         : null;
     contract["awarding_date"] = contract["awarding_date"]
-        ? new Date(contract["awarding_date"])
+        ? DateUtil.parseDateFromApi(contract["awarding_date"])
         : null;
     contract["contractor"] = contract["contractor"]
         ? createContractor(
@@ -38,21 +38,21 @@ const contract_api_adapter = contract => {
           )
         : null;
     contract["execution_signature_date"] = contract["execution_signature_date"]
-        ? new Date(contract["execution_signature_date"])
+        ? DateUtil.parseDateFromApi(contract["execution_signature_date"])
         : null;
     contract["execution_certificate_start_date"] = contract[
         "execution_certificate_start_date"
     ]
-        ? new Date(contract["execution_certificate_start_date"])
+        ? DateUtil.parseDateFromApi(contract["execution_certificate_start_date"])
         : null;
     contract["execution_final_delivery_date"] = contract[
         "execution_final_delivery_date"
     ]
-        ? new Date(contract["execution_final_delivery_date"])
+        ? DateUtil.parseDateFromApi(contract["execution_final_delivery_date"])
         : null;
     contract["expected_execution_end_date"] = contract["expected_execution_period"]
         ? DateUtil.getDateAfterDays(
-              new Date(contract["execution_certificate_start_date"]),
+              contract["execution_certificate_start_date"],
               contract["expected_execution_period"]
           )
         : null;
@@ -61,12 +61,12 @@ const contract_api_adapter = contract => {
         "expected_execution_period"
     ]
         ? DateUtil.getMonths(
-              new Date(contract["execution_certificate_start_date"]),
-              new Date(contract["expected_execution_end_date"])
+              DateUtil.parseDateFromApi(contract["execution_certificate_start_date"]),
+              DateUtil.parseDateFromApi(contract["expected_execution_end_date"])
           ) + 1
         : null;
     contract["warranty_end_date"] = contract["warranty_end_date"]
-        ? new Date(contract["warranty_end_date"])
+        ? DateUtil.parseDateFromApi(contract["warranty_end_date"])
         : null;
     if (contract.projects) {
         contract["projects"] = contract.projects.map(project => {
@@ -85,6 +85,7 @@ const contract_api_adapter = contract => {
         );
     }
 
+    // Audit dates from API are in UTC, so we don't have to format them
     contract["created_at"] = new Date(contract["created_at"]);
     contract["updated_at"] = new Date(contract["updated_at"]);
     return contract;

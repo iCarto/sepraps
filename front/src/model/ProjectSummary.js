@@ -1,3 +1,4 @@
+import {DateUtil} from "utilities";
 import {
     createLocalities,
     localities_api_adapter,
@@ -8,8 +9,7 @@ import {
 class ProjectsSummaries extends Array {}
 
 const project_summary_api_adapter = project => {
-    project["init_date"] = new Date(project["init_date"]);
-    project["created_at"] = new Date(project["created_at"]);
+    project["init_date"] = DateUtil.parseDateFromApi(project["init_date"]);
 
     if (project["linked_localities"]) {
         project["linked_localities"] = createLocalities(
@@ -34,6 +34,8 @@ const project_summary_api_adapter = project => {
         );
     }
 
+    // Audit dates from API are in UTC, so we don't have to format them
+    project["created_at"] = new Date(project["created_at"]);
     project["updated_at"] = new Date(project["updated_at"]);
 
     return project;
