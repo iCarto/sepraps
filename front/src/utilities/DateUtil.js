@@ -1,12 +1,4 @@
-import {
-    format,
-    parse,
-    add,
-    addDays,
-    differenceInCalendarMonths,
-    startOfToday,
-    differenceInDays,
-} from "date-fns";
+import {format, parse, add, addDays, differenceInCalendarMonths} from "date-fns";
 
 import TextUtil from "./TextUtil";
 
@@ -52,8 +44,11 @@ const DateUtil = {
             " min"
         );
     },
-    parseDateTime(date, dateFormat = DATE_FORMATS.CLIENT_DATETIMEFORMAT) {
+    parseDate(date, dateFormat = DATE_FORMATS.CLIENT_DATEFORMAT) {
         return parse(date, dateFormat, new Date());
+    },
+    parseDateFromApi(dateString) {
+        return DateUtil.parseDate(dateString, DATE_FORMATS.API_DATEFORMAT);
     },
     addMonths(date, months) {
         return add(date, {months});
@@ -69,13 +64,10 @@ const DateUtil = {
         );
     },
     getDayInDate(date) {
-        return format(new Date(date), "d");
+        return format(date, "d");
     },
     getYearInDate(date) {
-        return format(new Date(date), "yyyy");
-    },
-    getDaysToDate(date) {
-        return differenceInDays(new Date(date), startOfToday());
+        return format(date, "yyyy");
     },
     getDateAfterDays(date, amountOfDays) {
         return addDays(date, amountOfDays);
