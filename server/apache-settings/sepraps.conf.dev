@@ -1,6 +1,6 @@
 <VirtualHost *:80>
 
-  LoadModule wsgi_module "/home/vagrant/.virtualenvs/sepraps/lib/python3.9/site-packages/mod_wsgi/server/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so"
+  LoadModule wsgi_module "/home/sepraps/.virtualenvs/sepraps/lib/python3.10/site-packages/mod_wsgi/server/mod_wsgi-py310.cpython-310-x86_64-linux-gnu.so"
 
   # ServerName localhost
   # ServerAlias localhost
