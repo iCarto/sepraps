@@ -47,10 +47,10 @@ if [[ ${DEPLOYMENT} == "DEV" ]]; then
     a2ensite "${PROJECT_NAME}.conf"
     # a2ensite ${PROJECT_NAME}-ssl
 else
-    cp "${SETTINGS}/apache-settings/${PROJECT_NAME}.conf.prod" /etc/apache2/sites-available/
-    cp "${SETTINGS}/apache-settings/${PROJECT_NAME}-ssl.conf.prod" /etc/apache2/sites-available/
+    cp "${SETTINGS}/apache-settings/${PROJECT_NAME}.conf.prod" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
+    # cp "${SETTINGS}/apache-settings/${PROJECT_NAME}-ssl.conf.prod" /etc/apache2/sites-available/
     a2ensite "${PROJECT_NAME}"
-    a2ensite "${PROJECT_NAME}-ssl"
+    # a2ensite "${PROJECT_NAME}-ssl"
 fi
 
 ./restart_apache.sh

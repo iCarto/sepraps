@@ -2,7 +2,7 @@
 
 source variables.ini
 
-apt install ufw
+apt install -y ufw
 
 ufw default deny incoming
 ufw default allow outgoing

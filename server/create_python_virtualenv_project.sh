@@ -12,7 +12,7 @@ from_source() {
     # En debian 9 (stretch) python 3.6 no está en los repos
     # https://github.com/pyenv/pyenv/wiki/Common-build-problems
     # https://docs.python.org/3/using/unix.html#building-python
-    apt-get update && sudo apt-get upgrade -y
+    apt update && sudo apt upgrade -y
     # libffi-dev liblzma-dev
     # python-openssl
     apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev
@@ -46,7 +46,16 @@ from_apt() {
 # difficult to automate the provissioning. So we install virtualenvwrapper on a
 # system python3 version
 # We also install "default" `python` package to avoid weird behaviours
-apt-get install -o Dpkg::Options::=--force-confnew -y python python3 python3-pip
+if [[ "${OS_CODENAME}" == "jammy" ]]; then
+    # A partir de Ubuntu 22.04 jammy, ya no existe el "python", hay "python2" y
+    # "python3" que viene instalado por defecto. En realidad es probable que
+    # el paquete "python" a secas no fuera necesario instalarlo en ningún caso
+    # y se podría eliminar este if
+    apt-get install -o Dpkg::Options::=--force-confnew -y python3 python3-pip
+else
+    apt-get install -o Dpkg::Options::=--force-confnew -y python python3 python3-pip
+fi
+
 pip3 install --upgrade pip
 
 pip3 install virtualenvwrapper
@@ -56,9 +65,11 @@ if [[ "${INSTALL_PYTHON_FROM}" == "apt" ]]; then
 elif [[ "${INSTALL_PYTHON_FROM}" == "source" ]]; then
     from_source
 elif [[ "${INSTALL_PYTHON_FROM}" == "pyenv" ]]; then
-    sudo -u "${DEFAULT_USER}" -H "${SETTINGS}"/install_pyenv.sh
+    # install_pyenv se ejecuta sin tener en cuenta las variables de entorno seteadas. Si se le pasa PROD a bootstrap
+    # cuando se lea variables.ini dentro de install_pyenv PROD no estará seteada y usará DEV
+    sudo -u "${DEFAULT_USER}" --preserve-env=DEPLOYMENT,PG_POSTGRES_PASSWD,DEFAULT_USER_PASSWORD -H "${SETTINGS}"/install_pyenv.sh
 else
     echo "Error de parámetro" && exit 1
 fi
 
-sudo -u "${DEFAULT_USER}" -H "${SETTINGS}"/config_virtualenv_dotfiles.sh
+sudo -u "${DEFAULT_USER}" --preserve-env=DEPLOYMENT,PG_POSTGRES_PASSWD,DEFAULT_USER_PASSWORD -H "${SETTINGS}"/config_virtualenv_dotfiles.sh

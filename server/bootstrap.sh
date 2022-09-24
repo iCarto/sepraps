@@ -23,16 +23,20 @@ if [[ ${DEPLOYMENT} == "DEV" ]]; then
     # so "this_dir" trick does not work
     cd /vagrant/server
 
-    # Descargamos aquí paquetes a modo de cache. Se puede borrar el directorio
-    # cuando se quiera
-    mkdir -p /vagrant/server/downloads
-
     this_dir=$(pwd)
 else
     this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
-    echo "Not ready to execute it directly in production jet"
-    exit 1
+    if [[ -z ${FIRST_TIME_DEPLOY} ]]; then
+        echo "PROD mode must be execute from first_time_deploy.sh"
+        exit 1
+    fi
+    echo "Deploying PROD"
+    cd "${this_dir}"
 fi
+
+# Descargamos aquí paquetes a modo de cache. Se puede borrar el directorio
+# cuando se quiera
+mkdir -p "${this_dir}/downloads"
 
 # shellcheck source=variables.ini
 source "${this_dir}/variables.ini"
@@ -48,7 +52,7 @@ export UCF_FORCE_CONFFNEW=1
 
 apt-get update
 
-bash add_default_user.sh
+bash set_hostname_and_ip.sh
 
 # ./fix_locales_en.sh
 # ./fix_locales_es.sh
@@ -70,6 +74,7 @@ sed -i 's%.*history-search-forward%"\\e[6~": history-search-forward%' /etc/input
 ./install_postgres.sh
 ./install_sqitch.sh
 
+bash install_node_and_npm.sh
 ./create_python_virtualenv_project.sh
 
 ./install_apache.sh
@@ -77,5 +82,7 @@ sed -i 's%.*history-search-forward%"\\e[6~": history-search-forward%' /etc/input
 ./own_settings.sh
 
 ./install_ufw.sh
+
+./install_letsencrypt.sh
 
 bash do_dist_upgrade.sh

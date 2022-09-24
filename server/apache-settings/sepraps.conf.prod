@@ -1,6 +1,6 @@
 <VirtualHost *:80>
 
-  LoadModule wsgi_module "/home/vagrant/.virtualenvs/sepraps/lib/python3.9/site-packages/mod_wsgi/server/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so"
+  LoadModule wsgi_module "/home/sepraps/.virtualenvs/sepraps/lib/python3.9/site-packages/mod_wsgi/server/mod_wsgi-py39.cpython-39-x86_64-linux-gnu.so"
 
   # ServerName localhost
   # ServerAlias localhost
@@ -17,7 +17,7 @@
   ## mod_wsgi ##
   WSGIApplicationGroup %{GLOBAL}
   WSGIPassAuthorization On
-  WSGIDaemonProcess sepraps user=vagrant group=www-data python-path=/var/www/sepraps/back python-home=/home/vagrant/.virtualenvs/sepraps/ lang='es_ES.utf8' locale='es_ES.utf8'
+  WSGIDaemonProcess sepraps user=sepraps group=www-data python-path=/var/www/sepraps/back python-home=/home/sepraps/.virtualenvs/sepraps/ lang='en_ES.utf8' locale='en_ES.utf8'
   WSGIProcessGroup sepraps
   WSGIScriptAlias / /var/www/sepraps/back/back/wsgi.py
 

@@ -9,8 +9,12 @@ source "${this_dir}"/variables.ini
 # shellcheck source=load_pyenv.sh
 source "${this_dir}"/load_pyenv.sh
 
-sudo apt-get update
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+# This is executed as DEFAULT_USER, not as root, these variables are set in
+# the root session, so we need to set it here also, to avoid a restart service
+# screen to appear. Maybe there is a better way to do this, encapsulate apt
+# calls in a function, inherited variables from root sessión, ...
+sudo apt update
+sudo DEBIAN_FRONTEND=noninteractive apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # As local user. Not as root
 

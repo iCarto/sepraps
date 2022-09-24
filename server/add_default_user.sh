@@ -5,10 +5,12 @@
 # set -o pipefail:  fail the whole pipeline on first error
 set -euo pipefail
 
-this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
 
+# If the user does not exists, DEFAULT_USER_HOME will throw an error in
+# variables.ini. So we only call this scripts from first_time_deploy.sh where
+# DEFAULT_USER, DEPLOYMENT and DEFAULT_USER_PASSWORD, should be accesible
 # shellcheck source=variables.ini
-source "${this_dir}/variables.ini"
+# source "${this_dir}/variables.ini"
 
 if [[ "${DEPLOYMENT}" != "PROD" ]]; then
     # Nothing to do if it's not PROD

@@ -4,17 +4,9 @@ chmod -x /etc/cron.daily/mlocate
 
 SERVICES=("cups" "cups-browsed" "bluetooth")
 
-OS_CODENAME=$(lsb_release -cs)
-
-if [[ "${OS_CODENAME}" == "precise" ]]; then
-    for service in "${SERVICES[@]}"; do
-        [[ -f "/etc/init.d/${service}" ]] && update-rc.d "${service}" disable
-    done
-else
-    for service in "${SERVICES[@]}"; do
-        systemctl disable "${service}"
-    done
-fi
+for service in "${SERVICES[@]}"; do
+    systemctl disable "${service}"
+done
 
 apt-get purge unity-lens-shopping software-center unity-lens-music ubuntuone* python-ubuntuone-storage* deja-dup*
 

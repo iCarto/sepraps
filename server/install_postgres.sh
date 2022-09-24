@@ -55,14 +55,8 @@ fi
 cp "${SETTINGS}/postgresql-settings/psqlrc" "${DEFAULT_USER_HOME}"/.psqlrc
 chown "${DEFAULT_USER}":"${DEFAULT_USER}" "${DEFAULT_USER_HOME}"/.psqlrc
 
-if [[ ${DEPLOYMENT} == "DEV" ]]; then
-    echo "*:${PG_PORT}:*:postgres:${PG_POSTGRES_PASSWD}" > "${DEFAULT_USER_HOME}"/.pgpass
-    chown "${DEFAULT_USER}":"${DEFAULT_USER}" "${DEFAULT_USER_HOME}"/.pgpass
-    chmod 600 "${DEFAULT_USER_HOME}"/.pgpass
-else
-    echo "*****************"
-    echo "install_postgres.sh: CHECK POSTGRESQL CONNECTION ISSUES"
-    echo "*****************"
-fi
+echo "*:${PG_PORT}:*:postgres:${PG_POSTGRES_PASSWD}" > "${DEFAULT_USER_HOME}"/.pgpass
+chown "${DEFAULT_USER}":"${DEFAULT_USER}" "${DEFAULT_USER_HOME}"/.pgpass
+chmod 600 "${DEFAULT_USER_HOME}"/.pgpass
 
 systemctl restart postgresql
