@@ -138,26 +138,10 @@ cd front; npm start
 
 # Deployment
 
-NOT READY YET
-
-```shell
-./scripts/pre-deploy.sh
-./scripts/deploy.sh
-```
-
-Example
-
 ```shell
 workon "${PROJECT_NAME}"
-git ir a la rama buena y hacer fetch
-# git clean -fdx Not do it because remove the .env
-cd back && pip install -r requirements.txt && cd ..
-# Increase memory space for compiling client
-export NODE_OPTIONS=--max_old_space_size=1024
-cd front && npm install && npm run build && cd ..
-cd back && echo -e "yes" | python manage.py collectstatic -c && cd ..
-cd bd && sqitch deploy && cd ..
-systemctl restart apache2
+# ./scripts/pre-deploy.sh
+./scripts/deploy.sh
 ```
 
 # Automated Test

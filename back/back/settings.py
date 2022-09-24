@@ -8,17 +8,19 @@ from corsheaders.defaults import default_headers
 from django.core.exceptions import ImproperlyConfigured
 
 
+# Build paths inside the project like this: base('desired/local/path')
+base = environ.Path(__file__) - 2  # Folder of manage.py
+
 env = environ.Env(  # set default values and casting
     DEBUG=(bool, False),
     DEPLOYMENT=(str, "PROD"),
     HTTPS=(bool, True),
     ALLOWED_HOSTS=(list, []),
     SENTRY_DSN=(str, ""),
+    MEDIA_ROOT=(environ.Path, base("media")),
 )
 
-# Build paths inside the project like this: base('desired/local/path')
 
-base = environ.Path(__file__) - 2  # Folder of manage.py
 BASE_DIR = base()
 
 root = environ.Path(__file__) - 1  # Folder of this file
@@ -156,16 +158,8 @@ else:  # DEPLOYMENT == PROD
     # INSTALLED_APPS.append('raven.contrib.django.raven_compat')
     pass
 
-# Media storage backend
-try:
-    BACKBLAZEB2_ACCOUNT_ID = env("BACKBLAZEB2_ACCOUNT_ID")
-    BACKBLAZEB2_APP_KEY = env("BACKBLAZEB2_APP_KEY")
-    BACKBLAZEB2_BUCKET_NAME = env("BACKBLAZEB2_BUCKET")
-    DEFAULT_FILE_STORAGE = "b2_storage.storage.B2Storage"
-    # INSTALLED_APPS.append('b2_storage.authorise')
-except ImproperlyConfigured:  # use the default file storage to disk
-    MEDIA_ROOT = base("media")
-    MEDIA_URL = "/media/"
+MEDIA_ROOT = base("media")
+MEDIA_URL = "/media/"
 
 # Email sending
 try:
