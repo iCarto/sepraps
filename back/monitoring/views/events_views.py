@@ -26,7 +26,7 @@ def get_end_of_contract_events(filters, user):
             SELECT DISTINCT
                 cc.id as contract_id,
                 cc.number as contract_number,
-                cc.execution_certificate_start_date + CAST(cc.expected_execution_period||' days' AS Interval) as expected_end_date,
+                (cc.execution_certificate_start_date + CAST(cc.expected_execution_period||' days' AS Interval))::date as expected_end_date,
                 DATE_PART('day', cc.execution_certificate_start_date + CAST(cc.expected_execution_period||' days' AS Interval) - current_date)::int as days_left
             FROM construction_contract cc
                 LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
@@ -41,8 +41,9 @@ def get_end_of_contract_events(filters, user):
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})"
-                .format(user_id=user.id)
+                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
+                    user_id=user.id
+                )
             )
 
         cursor.execute(
@@ -90,8 +91,9 @@ def get_end_of_warranty_events(filters, user):
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})"
-                .format(user_id=user.id)
+                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
+                    user_id=user.id
+                )
             )
 
         cursor.execute(
