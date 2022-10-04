@@ -7,7 +7,7 @@ const document_api_adapter = document => {
     document["content_type"] = document.media_content_type;
     document["size"] = document.media_size;
     document["path"] = document.media_path;
-    document["created_at"] = DateUtil.parseDateFromApi(document["created_at"]);
+    document["created_at"] = new Date(document["created_at"]);
     return document;
 };
 
