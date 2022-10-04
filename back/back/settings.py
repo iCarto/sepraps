@@ -158,7 +158,7 @@ else:  # DEPLOYMENT == PROD
     # INSTALLED_APPS.append('raven.contrib.django.raven_compat')
     pass
 
-MEDIA_ROOT = base("media")
+MEDIA_ROOT = base(env("MEDIA_ROOT"))
 MEDIA_URL = "/media/"
 
 # Email sending
