@@ -7,10 +7,10 @@ import pathlib
 import pkg_resources
 
 
-try:
-    from pip._internal.utils.misc import get_installed_distributions
-except ImportError:  # pragma: no cover
-    from pip import get_installed_distributions
+# try:
+#     from pip._internal.utils.misc import get_installed_distributions
+# except ImportError:  # pragma: no cover
+#    from pip import get_installed_distributions
 
 
 logging.basicConfig(level=logging.INFO)
@@ -50,7 +50,8 @@ def main(file):
     for p in packages:
         get_dependencies_with_semver_string(p, deps)
     deps_keys = [p.key for p in deps]
-    all_keys = [p.key for p in get_installed_distributions()]
+    # all_keys = [p.key for p in get_installed_distributions()]
+    all_keys = [p.key for p in pkg_resources.working_set]
     ignore = [p for p in all_keys if p not in deps_keys]
     print(" ".join(ignore))
 
