@@ -2,6 +2,7 @@ import os
 import tempfile
 import zipfile
 
+from django.conf import settings
 from django.http import FileResponse
 from django.views.decorators.cache import cache_control
 from documents import storage
@@ -32,7 +33,7 @@ def preview(request, media_path, format=None):
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
 
-        file = open(media_node.media_path)
+        file = open(os.path.join(settings.MEDIA_ROOT, media_node.media_path))
         response = FileResponse(file)
         return response
 
@@ -44,7 +45,7 @@ def download(request, media_path, format=None):
     filter = get_filter(media_path)
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
-        file = open(media_node.media_path)
+        file = open(os.path.join(settings.MEDIA_ROOT, media_node.media_path))
         return FileResponse(file, as_attachment=True, filename=media_node.media_name)
     if media_node.media_type == "FOLDER":
         zip_file = create_zip_file(media_node.children.all())
@@ -78,7 +79,9 @@ def zip_folder_documents(parent_path_in_zip, documents, zip):
 
     for document in documents:
         if document.media_type == "DOCUMENT":
-            path_in_disk = storage.open(document.media_path)
+            path_in_disk = storage.open(
+                os.path.join(settings.MEDIA_ROOT, document.media_path)
+            )
             if os.path.isfile(path_in_disk.name):
                 path_in_zip = os.path.join(
                     parent_path_in_zip if parent_path_in_zip is not None else "",
@@ -125,9 +128,9 @@ class MediaView(views.APIView):
     def post(self, request, media_path, format=None):
         file = request.data.get("file", None)
         if file:
-            path = save(media_path, file)
+            path = save(os.path.join(settings.MEDIA_ROOT, media_path), file)
 
-            parent_path = "/".join(path.split("/")[:-1])
+            parent_path = "/".join(media_path.split("/")[:-1])
             parent_filter = get_filter(parent_path)
             parent = MediaNode.objects.filter(**parent_filter).first()
 
@@ -155,7 +158,7 @@ class MediaView(views.APIView):
         filter = get_filter(media_path)
         media_node = MediaNode.objects.filter(**filter).first()
 
-        delete(media_node.media_path)
+        delete(os.path.join(settings.MEDIA_ROOT, media_node.media_path))
         media_node.delete()
 
         return Response(status=status.HTTP_200_OK)
