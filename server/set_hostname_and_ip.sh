@@ -15,8 +15,9 @@ if [[ "${DEPLOYMENT}" != "PROD" ]]; then
     exit 0
 fi
 
+hostnamectl set-hostname "${MY_HOSTNAME}"
+
 # https://www.ipify.org/ is a good alternative to ipinfo.io
 IP=$(curl -s ipinfo.io/ip)
 echo "Public IP is: ${IP}"
-hostnamectl set-hostname "${MY_HOSTNAME}"
 echo -e "\n${IP}\t${MY_HOSTNAME}\n" >> /etc/hosts

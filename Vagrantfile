@@ -11,6 +11,8 @@ Vagrant.configure(2) do |config|
     config.vm.box = "ubuntu/jammy64"
     config.vm.box_version = "20230110.0.0"
     config.vm.box_check_update = false
+    # https://stackoverflow.com/questions/49822594/vagrant-how-to-specify-the-disk-size
+    # config.disksize.size = "100GB"
 
     if Vagrant.has_plugin?("vagrant-vbguest")
         # Disable it if problems with shared folders or guest additions appears
