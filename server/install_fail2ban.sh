@@ -3,144 +3,169 @@
 # set -e: stops the script on error
 # set -u: stops the script on unset variables
 # set -o pipefail:  fail the whole pipeline on first error
-set -eu
+set -euo pipefail
 
-# The script bypasses jail.conf/jail.local configuration creating custom configuration files inside the jail.d for default 
-# options like mail or actions, and for Apache and SSHD Jails 
+this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
+source ${this_dir}/fail2ban-settings/fail2ban.conf
 
-# Config files
-FILE_DEF=/etc/fail2ban/jail.d/defaults-debian # Change to the distribution defaults configuration file (e.g. defaults-arch,...)
-FILE_SSH=/etc/fail2ban/jail.d/sshd.local
-FILE_APACHE=/etc/fail2ban/jail.d/apache.local
-FILE_F2B="/etc/fail2ban/jail"
-
-# Enabled filters, select the ones you would like to use
-SSHD_ENABLE=true # Enabled by default. Bans hosts with multiple failed login attempts
-
-APACHE_AUTH_ENABLE=false          # Bans hosts with multiple failed login attempts
-APACHE_BADBOTS_ENABLE=false       # Stops some known malicious bot request patterns
-APACHE_BOTSEARCH_ENABLE=false     # Blocks hosts trying to access non-existent URL's
-APACHE_FAKEGOOGLEBOT_ENABLE=false # Filters fake Googlebot User Agents (https://johnmu.com/fake-googlebots/)
-APACHE_OVERFLOWS_ENABLE=false     # Blocks clients who are attempting to request unusually long and suspicious URLs
-APACHE_SHELLSHOCK_ENABLE=false    # Blocks Shellshock exploit attempts (https://blog.cloudflare.com/inside-shellshock/)
-APACHE_MODSECURITY_ENABLE=false   # Bans hosts based on Apache's security module log errors
-APACHE_NOHOME_ENABLE=false        # Can be enabled if you do not use Apache to provide access to web content within 
-                                  # users’ home directories
-APACHE_NOSCRIPT_ENABLE=false      # Bans clients searching for scripts on the website to execute and exploit. If you do
-                                  # not use PHP or any other language in your web server, you can enable this jail
-APACHE_PASS_ENABLE=false          #
-
-# Path to services' LOG files
-SSHD_ERROR_LOG="/var/log/auth.log"
-APACHE_ERROR_LOG="/var/log/apache2/*error.log"
-APACHE_ACCESS_LOG="/var/log/apache2/*access.log"
-
-
-# Service configuration 'man jail.conf' to get more info
-
-# IgnoreIP
-IGNORE="" # Hosts to be ignored
-
-# Mail
-MAIL_MTA="sendmail"             # "postfix, mailx ..."
-MAIL_SENDER="dev@icarto.es"    
-MAIL_SENDERNAME="Fail2ban"
-MAIL_DESTEMAIL="dev@icarto.es"
-
-DEFAULT_BANTIME="10m" # Time the host gets banned 
-DEFAULT_MAXRETRY=5 # number of errors resulting in a ban
-DEFAULT_FINDTIME="10m" # if host reachs maxretry in findtime gets banned
-
-DEFAULT_ACTION="%(action_mw)s" # action=%(action_)s, To ban reported host
-                               # action=%(action_mw)s, To ban & send an e-mail with whois report to the destemail.
-                               # action=%(action_mwl)s, Same as action_mw but also send relevant log lines.
-
-remove_configuration() {
-    if [ -f "$FILE_DEF.conf" ]; then
-        rm "$FILE_DEF.conf"
-        touch "$FILE_DEF.conf"
+reset_configuration() {
+    if [[ -f "${FILE_DEF}.conf" ]]; then
+        rm "${FILE_DEF}.conf"
+        touch "${FILE_DEF}.conf"
+    else
+        echo "Error: ${FILE_DEF}.conf doesn't exist. Make sure to edit FILE_DEF value in \
+              fail2ban-settings/fail2ban.conf to match your distribution"
+        exit 1
     fi
 
-    if [ -f "$FILE_SSH" ]; then
+    if [[ -f "$FILE_SSH" ]]; then
         rm "$FILE_SSH"
     fi
 
-    if [ -f "$FILE_APACHE" ]; then
+    if [[ -f "$FILE_APACHE" ]]; then
         rm "$FILE_APACHE"
     fi
+
+    if [[ -f "$FILE_REDMINE" ]]; then
+        rm "$FILE_REDMINE"
+    fi 
 }
 
 default_configuration() {
-    remove_configuration
+    # The script bypasses jail.conf/jail.local configuration creating custom configuration files inside the jail.d for default
+    # options like mail, actions, ban policy
+    reset_configuration
 
     # Generate local configuration, only to avoid config changes on service updates
     cp "$FILE_F2B.conf" "$FILE_F2B.local"
 
-    # Write configuration to default distribution config file
-    echo "[DEFAULT]\nignoreip=127.0.0.1/8 $IGNORE\n" >> "$FILE_DEF.local" # Configure ignoreIP
-
-    # Configure mail
-    echo "mta=$MAIL_MTA\nsender=$MAIL_SENDER\nsendername=$MAIL_SENDERNAME\ndestemail=$MAIL_DESTEMAIL\naction=$DEFAULT_ACTION\nbantime=$DEFAULT_BANTIME\nmaxretry=$DEFAULT_MAXRETRY\nfindtime=$DEFAULT_FINDTIME\n\n" >> "$FILE_DEF.local"
-
+    # Write default configuration
+    local config="[DEFAULT]
+        ignoreip=127.0.0.1/8 ${IGNORE}\n
+        mta=${MAIL_MTA}
+        sender=${MAIL_SENDER}
+        destemail=${MAIL_DESTEMAIL}\n
+        bantime=${DEFAULT_BANTIME}
+        maxretry=${DEFAULT_MAXRETRY}
+        findtime=${DEFAULT_FINDTIME}
+        action=${DEFAULT_ACTION}\n"
+    
+    echo -e "${config}" | sed 's/^[\t ]*//' > "${FILE_DEF}.local"
 }
 
 sshd_configuration() {
     # Generate SSH configuration
-    if "$SSHD_ENABLE"; then
-        echo "[sshd]\nenabled=true\nlogpath=$SSHD_ERROR_LOG\n" >> "$FILE_SSH"
-    fi
+    local config="[sshd]
+        enabled=true
+        logpath=${LOG_SSHD_ERROR}\n"
+    echo -e "${config}" | sed 's/^[\t ]*//' > "${FILE_SSH}"
 }
 
-Apache_configuration() {
+apache_configuration() {
     # Generate Apache configuration
-    if "$APACHE_AUTH_ENABLE"; then
-        echo "[apache-auth]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    local config=""
+    if "${APACHE_AUTH_ENABLE}"; then
+        config="[apache-auth]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
 
-    if "$APACHE_BADBOTS_ENABLE"; then
-        echo "[apache-badbots]\nenabled=true\nlogpath=$APACHE_ACCESS_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_BADBOTS_ENABLE}"; then
+        config+="[apache-badbots]
+        enabled=true
+        logpath=${LOG_APACHE_ACCESS}\n"
     fi
 
-    if "$APACHE_BOTSEARCH_ENABLE"; then
-        echo "[apache-botsearch]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_BOTSEARCH_ENABLE}"; then
+        config+="[apache-botsearch]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
 
-    if "$APACHE_FAKEGOOGLEBOT_ENABLE"; then
-        echo "[apache-fakegooglebot]\nenabled=true\nlogpath=$APACHE_ACCESS_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_FAKEGOOGLEBOT_ENABLE}"; then
+        config+="[apache-fakegooglebot]
+        enabled=true
+        logpath=${LOG_APACHE_ACCESS}\n"
     fi
 
-    if "$APACHE_MODSECURITY_ENABLE"; then
-        echo "[apache-modsecurity]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_MODSECURITY_ENABLE}"; then
+        config+="[apache-modsecurity]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
 
-    if "$APACHE_NOHOME_ENABLE"; then
-        echo "[apache-nohome]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_NOHOME_ENABLE}"; then
+        config+="[apache-nohome]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
 
-    if "$APACHE_NOSCRIPT_ENABLE"; then
-        echo "[apache-noscript]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_NOSCRIPT_ENABLE}"; then
+        config+="[apache-noscript]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
 
-    if "$APACHE_OVERFLOWS_ENABLE"; then
-        echo "[apache-overflows]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_OVERFLOWS_ENABLE}"; then
+        config+="[apache-overflows]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
 
-    if "$APACHE_PASS_ENABLE"; then
-        echo "[apache-pass]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_PASS_ENABLE}"; then
+        config+="
+        [apache-pass]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
 
-    if "$APACHE_SHELLSHOCK_ENABLE"; then
-        echo "[apache-shellshock]\nenabled=true\nlogpath=$APACHE_ERROR_LOG\n" >> "$FILE_APACHE"
+    if "${APACHE_SHELLSHOCK_ENABLE}"; then
+        config+="[apache-shellshock]
+        enabled=true
+        logpath=${LOG_APACHE_ERROR}\n"
     fi
+    echo -e "${config}" | sed 's/^[\t ]*//' > "${FILE_APACHE}"
+}
+
+redmine_configuration() {
+    # https://www.redmine.org/projects/redmine/wiki/HowTo_Configure_Fail2ban_For_Redmine
+    cp ${this_dir}/${FILTER_REDMINE_SOURCE} ${F2B_FILTER_DIR}
+
+    # Generate SSH configuration
+    local config="[redmine]
+        enabled  = true
+        filter   = redmine
+        port     = 80,443
+        logpath=${LOG_REDMINE_PRODUCTION}\n"
+    echo -e "${config}" | sed 's/^[\t ]*//' > "${FILE_REDMINE}"
 }
 
 # Install fail2ban
 apt -y install fail2ban
 
-# Configure service
+# Configure services
 default_configuration
-sshd_configuration
-Apache_configuration
+
+if [[ ${SSHD_ENABLE} ]]; then
+    sshd_configuration
+fi
+
+if [[ ${APACHE_AUTH_ENABLE} || 
+      ${APACHE_BADBOTS_ENABLE} || 
+      ${APACHE_BOTSEARCH_ENABLE} || 
+      ${APACHE_FAKEGOOGLEBOT_ENABLE} || 
+      ${APACHE_MODSECURITY_ENABLE} || 
+      ${APACHE_NOHOME_ENABLE} || 
+      ${APACHE_NOSCRIPT_ENABLE} || 
+      ${APACHE_OVERFLOWS_ENABLE} || 
+      ${APACHE_PASS_ENABLE} ||
+      ${APACHE_SHELLSHOCK_ENABLE} ]] ; then
+    apache_configuration
+fi
+
+if [[ ${REDMINE_ENABLE} ]]; then
+    redmine_configuration
+fi
 
 # Restart service
 systemctl enable fail2ban
