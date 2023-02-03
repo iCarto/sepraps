@@ -22,34 +22,29 @@ apt -y install fail2ban
 default_configuration
 
 # Configure enabled services
-if [[ "${SSHD_ENABLE}" == "true" ]]; then
-    sshd_configuration
-fi
-
-if [[ "${APACHE_AUTH_ENABLE}" == "true" ]] || 
-   [[ "${APACHE_BADBOTS_ENABLE}" == "true" ]] || 
-   [[ "${APACHE_BOTSEARCH_ENABLE}" == "true" ]] || 
-   [[ "${APACHE_FAKEGOOGLEBOT_ENABLE}" == "true" ]] || 
-   [[ "${APACHE_MODSECURITY_ENABLE}" == "true" ]] || 
-   [[ "${APACHE_NOHOME_ENABLE}" == "true" ]] || 
-   [[ "${APACHE_NOSCRIPT_ENABLE}" == "true" ]] || 
-   [[ "${APACHE_OVERFLOWS_ENABLE}" == "true" ]]|| 
-   [[ "${APACHE_PASS_ENABLE}" == "true" ]] ||
-   [[ "${APACHE_SHELLSHOCK_ENABLE}" == "true" ]] ; then
-    apache_configuration
-fi
-
-if [[ "${REDMINE_ENABLE}" == "true" ]]; then
-    redmine_configuration
-fi
-
-if [[ "${WORDPRESS_ENABLE}" == "true" ]]; then
-    wordpress_configuration
-fi
-
-if [[ "${POSTGRESQL_ENABLE}" == "true" ]]; then
-    postgresql_configuration
-fi
+for item in "${ACTIVE_JAILS[@]}"
+do
+    case $item in
+    SSHD)
+        sshd_configuration
+    ;;
+    APACHE_*)
+        apache_configuration "$item"
+    ;;
+    REDMINE)
+        redmine_configuration
+    ;;
+    WORDPRESS)
+        wordpress_configuration
+    ;;
+    POSTGRESQL)
+        postgresql_configuration
+    ;;
+    *)
+        echo "Error: Configuration action fot $item not defined"
+    ;;
+    esac
+done
 
 # Restart service
 systemctl enable fail2ban
