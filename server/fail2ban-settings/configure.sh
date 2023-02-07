@@ -161,10 +161,8 @@ postgresql_configuration(){
     cp "${this_dir}/${FILTER_POSTGRESQL_SOURCE}" "${F2B_FILTER_DIR}"
 
     if [[ -f "${CFG_POSTGRESQL}" ]]; then
-        # Check if PostgreSQL log configuration includes host info, otherwise exit intallation
-        if grep -q "log_line_prefix = '\%h \%m \[\%p\] \%q\%u\@\%d '" "${CFG_POSTGRESQL}"; then
-            echo "EXITE LA CADENA"
-        else
+        # If PostgreSQL log configuration does'nt include host info exit intallation
+        if ! grep -q "log_line_prefix = '\%h \%m \[\%p\] \%q\%u\@\%d '" "${CFG_POSTGRESQL}"; then
             echo "Error in log format: You need to change the value of the variable 'log_line_prefix' in ${CFG_POSTGRESQL} to '\%h \%m \[\%p\] \%q\%u\@\%d '"
             exit 1
         fi
@@ -173,17 +171,6 @@ postgresql_configuration(){
         fail2ban-settings/fail2ban.conf to match your installation"
         exit 1
     fi
-
-    # https://talk.plesk.com/threads/howto-secure-a-standard-postgres-port-with-fail2ban.355984/
-    # you'll need to modify /etc/postgresql/<VERSION>/main/postgresql.conf
-    # to add host info to the logfile
-    # if [[ -f "${CFG_POSTGRESQL}" ]]; then
-    #     sed -i "s/log_line_prefix = '\%m \[\%p\] \%q\%u\@\%d '/log_line_prefix = '\%h \%m \[\%p\] \%q\%u\@\%d '/" "${CFG_POSTGRESQL}"    
-    # else
-    #     echo "Error: ${CFG_POSTGRESQL} doesn't exist. Make sure to edit CFG_POSTGRESQL value in \
-    #          fail2ban-settings/fail2ban.conf to match your installation"
-    #    exit 1
-    # fi
 
     # Generate postgresql configuration
     local config="[postgresql]

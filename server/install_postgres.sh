@@ -59,4 +59,14 @@ echo "*:${PG_PORT}:*:postgres:${PG_POSTGRES_PASSWD}" > "${DEFAULT_USER_HOME}"/.p
 chown "${DEFAULT_USER}":"${DEFAULT_USER}" "${DEFAULT_USER_HOME}"/.pgpass
 chmod 600 "${DEFAULT_USER_HOME}"/.pgpass
 
+
+
+# Modify /etc/postgresql/<VERSION>/main/postgresql.conf to add host info to the logfile
+if [[ -f "/etc/postgresql/${PG_VERSION}/main/postgresql.conf" ]]; then
+    sed -i "s/log_line_prefix = '\%m \[\%p\] \%q\%u\@\%d '/log_line_prefix = '\%h \%m \[\%p\] \%q\%u\@\%d '/" "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"    
+else
+    echo "Error: /etc/postgresql/${PG_VERSION}/main/postgresql.conf doesn't exist. Make sure to edit CFG_POSTGRESQL value in fail2ban-settings/fail2ban.conf to match your installation"
+   exit 1
+fi
+
 systemctl restart postgresql
