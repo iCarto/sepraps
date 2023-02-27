@@ -13,7 +13,7 @@ source fail2ban-settings/configure_wordpress.sh
 set -euo pipefail
 
 # Jail configuration file
-JAIL_DEF="${F2B_PATH}/jail.d/defaults-debian" # Change to the distribution defaults configuration file (e.g. defaults-arch,...)
+JAIL_DEF="/etc/fail2ban/jail.d/defaults-debian" # Change to the distribution defaults configuration file (e.g. defaults-arch,...)
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
 
 reset_configuration() {
@@ -54,7 +54,7 @@ default_configuration() {
     reset_configuration
 
     # Generate local configuration, only to avoid config changes on service updates
-    cp "${F2B_PATH}/jail.conf" "${F2B_PATH}/jail.local"
+    cp "/etc/fail2ban/jail.conf" "/etc/fail2ban/jail.local"
 
 
     # Write default configuration

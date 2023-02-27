@@ -59,4 +59,7 @@ echo "*:${PG_PORT}:*:postgres:${PG_POSTGRES_PASSWD}" > "${DEFAULT_USER_HOME}"/.p
 chown "${DEFAULT_USER}":"${DEFAULT_USER}" "${DEFAULT_USER_HOME}"/.pgpass
 chmod 600 "${DEFAULT_USER_HOME}"/.pgpass
 
+# Add hostname to log_line_prefix
+sed -i "s/log_line_prefix = '\%m \[\%p\] \%q\%u\@\%d '/log_line_prefix = '\%h \%m \[\%p\] \%q\%u\@\%d '/" "/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
+
 systemctl restart postgresql

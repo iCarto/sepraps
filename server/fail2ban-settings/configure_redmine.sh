@@ -1,13 +1,13 @@
 #!/bin/bash
 source variables.ini
 LOG_REDMINE_PRODUCTION="/home/redmine/remine-5.0.4/log/production.log"
-JAIL_REDMINE="${F2B_PATH}/jail.d/redmine.local"
+JAIL_REDMINE="/etc/fail2ban/jail.d/redmine.local"
 FILTER_REDMINE_SOURCE="fail2ban-settings/filters/redmine.conf"
 
 redmine_configuration() {
     # Copy redmine regex filter to filter.d folder
     # https://www.redmine.org/projects/redmine/wiki/HowTo_Configure_Fail2ban_For_Redmine
-    cp "${this_dir}/${FILTER_REDMINE_SOURCE}" "${F2B_PATH}/filter.d"
+    cp "./${FILTER_REDMINE_SOURCE}" "/etc/fail2ban/filter.d"
 
     # Generate redmine configuration
     local config="[redmine]

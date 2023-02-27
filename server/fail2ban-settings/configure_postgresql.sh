@@ -1,13 +1,14 @@
 #!/bin/bash
 source variables.ini
-JAIL_POSTGRESQL="${F2B_PATH}/jail.d/postgresql.local"
+JAIL_POSTGRESQL="/etc/fail2ban/jail.d/postgresql.local"
 LOG_POSTGRESQL="/var/log/postgresql/postgresql-${PG_VERSION}-main.log"
 CFG_POSTGRESQL="/etc/postgresql/${PG_VERSION}/main/postgresql.conf"
 FILTER_POSTGRESQL_SOURCE="fail2ban-settings/filters/postgresql.conf"
 
 postgresql_configuration(){
     # Copy postgresql regex filter to filter.d folder
-    cp "${this_dir}/${FILTER_POSTGRESQL_SOURCE}" "${F2B_PATH}/filter.d"
+
+    cp "./${FILTER_POSTGRESQL_SOURCE}" "/etc/fail2ban/filter.d"
 
     if [[ -f "${CFG_POSTGRESQL}" ]]; then
         # If PostgreSQL log configuration does'nt include host info exit intallation

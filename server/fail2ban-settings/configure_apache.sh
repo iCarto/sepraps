@@ -2,7 +2,7 @@
 
 LOG_APACHE_ERROR="/var/log/apache2/*error.log"
 LOG_APACHE_ACCESS="/var/log/apache2/*access.log"
-JAIL_APACHE="${F2B_PATH}/jail.d/apache.local"
+JAIL_APACHE="/etc/fail2ban/jail.d/apache.local"
 
 apache_configuration() {
     ## Generate Apache configuration

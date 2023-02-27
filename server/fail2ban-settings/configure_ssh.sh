@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JAIL_SSH="${F2B_PATH}/jail.d/sshd.local"
+JAIL_SSH="/etc/fail2ban/jail.d/sshd.local"
 LOG_SSHD="/var/log/auth.log"
 
 sshd_configuration() {
