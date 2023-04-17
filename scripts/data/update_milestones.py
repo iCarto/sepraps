@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from monitoring.models.milestone import Milestone
-from monitoring.models.project import Project
+from app.models.milestone import Milestone
+from app.models.project import Project
 
 
 projects = Project.objects.all()

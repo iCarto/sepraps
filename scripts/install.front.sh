@@ -1,24 +1,18 @@
 #!/bin/bash
 
-# create the .env file
-if [[ ! -f front/.env ]]; then
-    echo "* creating initial .env file"
-    echo "REACT_APP_API_BASE_URL=http://localhost:8000
-REACT_APP_API_CREDENTIALS=omit
-REACT_APP_GOOGLE_ANALYTICS_CODE=
-REACT_APP_SENTRY_DSN=
-" > front/.env
+set -euo pipefail
 
-else
-    echo "* front/.env file already exists"
+if [[ ! -f front/package.json ]]; then
+    echo "Skip installing frontend"
+    exit
 fi
 
-# FIXME. Something to do here? Probably not.
-if [[ ! -d front ]]; then
-    create-react-app front
-fi
-# build the frontend
 (
     cd front || exit
     npm install
 )
+
+this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
+# create the .env file
+echo "* creating initial .env file"
+"${this_dir}/util/echo_env_front.sh" > front/.env

@@ -41,16 +41,14 @@ a2enmod deflate
 a2enmod ssl
 a2dissite 000-default
 
-if [[ ${DEPLOYMENT} == "DEV" ]]; then
-    cp "${SETTINGS}/apache-settings/${PROJECT_NAME}.conf.dev" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
-    # cp ${SETTINGS}/apache-settings/${PROJECT_NAME}-ssl.conf.dev /etc/apache2/sites-available/${PROJECT_NAME}-ssl.conf
-    a2ensite "${PROJECT_NAME}.conf"
-    # a2ensite ${PROJECT_NAME}-ssl
-else
-    cp "${SETTINGS}/apache-settings/${PROJECT_NAME}.conf.prod" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
-    # cp "${SETTINGS}/apache-settings/${PROJECT_NAME}-ssl.conf.prod" /etc/apache2/sites-available/
-    a2ensite "${PROJECT_NAME}"
-    # a2ensite "${PROJECT_NAME}-ssl"
-fi
+cp "${SETTINGS}/apache-settings/project.conf" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
+sed -i "s%__DEFAULT_USER%${DEFAULT_USER}%" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
+sed -i "s%__PROJECT_NAME%${PROJECT_NAME}%" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
+sed -i "s%__WWW_PATH%${WWW_PATH}%" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
+sed -i "s%__VIRTUALENV_PATH%${VIRTUALENV_PATH}%" "/etc/apache2/sites-available/${PROJECT_NAME}.conf"
+a2ensite "${PROJECT_NAME}"
+
+cp "${SETTINGS}/apache-settings/http2https.conf" "/etc/apache2/sites-available/"
+cp "${SETTINGS}/apache-settings/reverseproxy.conf" "/etc/apache2/sites-available/"
 
 ./restart_apache.sh

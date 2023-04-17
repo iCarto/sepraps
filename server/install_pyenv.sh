@@ -13,7 +13,7 @@ source "${this_dir}"/load_pyenv.sh
 # the root session, so we need to set it here also, to avoid a restart service
 # screen to appear. Maybe there is a better way to do this, encapsulate apt
 # calls in a function, inherited variables from root sessión, ...
-sudo apt update
+sudo apt update -qq
 sudo DEBIAN_FRONTEND=noninteractive apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
 # As local user. Not as root

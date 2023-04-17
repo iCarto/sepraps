@@ -1,9 +1,12 @@
 #!/bin/bash
 set -e
 
+# See also this scripts to check if a port is open:
+# https://github.com/vishnubob/wait-for-it
+# https://github.com/David-Lor/python-wait4it
+
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
 
-source "${this_dir}"/env.sh
 source "${this_dir}"/../../server/variables.ini
 
 # create the database

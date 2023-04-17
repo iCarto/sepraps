@@ -3,7 +3,6 @@ set -e
 
 this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
 
-source "${this_dir}"/env.sh
 source "${this_dir}"/../../server/variables.ini
 cd "${this_dir}"/../..
 

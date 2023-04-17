@@ -1,10 +1,13 @@
 #!/bin/bash
 
-source variables.ini
+# source variables.ini
 
-cd /vagrant/server || exit 1
+# sudo -u postgres createdb "${DBNAME}"
 
-sudo -u postgres createdb "${DBNAME}"
+# if [[ "${DEPLOYMENT}" == "PROD" ]]; then
+#     # Set fixed ip in prod
+#     cp "${SETTINGS}/own-settings/00-installer-config.yaml" /etc/netplan/00-installer-config.yaml
+# fi
 
 # sudo -u postgres psql -f "${SETTINGS}/own-settings/database_roles.sql"
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# bash drop_and_create_db.sh [yymmdd_DBNAME.dump]
+# bash drop_and_create_db.sh [DBNAME.dump]
 
 # This scripts covers the following workflow:
 # 1. The database `"${DBNAME}` exists but must be dropped
@@ -19,10 +19,21 @@
 # using a different "prefix" that the "production versions", seems to avoid errors derived from typings and hurries
 
 set -e
-. ../server/variables.ini
+
+this_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" > /dev/null && pwd)"
+# shellcheck source=variables.ini
+source "${this_dir}/variables.ini"
+
+kickout_users() {
+    # Kills all connections to the database to make the backup
+    local DBNAME="${1}"
+    ${PSQL} -h localhost -p "${PG_PORT}" -U postgres -d postgres -c "select pg_terminate_backend(pid) from pg_stat_activity where datname='${DBNAME}';"
+}
 
 # TODO: Improve checks
-if [[ (-f "${1}") && ("${1}" =~ [0-9][0-9][0-9][0-9][0-9][0-9]_${DBNAME}.dump) ]]; then
+# To check names like yymmdd_DBNAME.dump
+# [[ (-f "${1}") && ("${1}" =~ [0-9][0-9][0-9][0-9][0-9][0-9]_${DBNAME}.dump) ]]
+if [[ (-f "${1}") && ("${1}" =~ .*${DBNAME}.*.dump) ]]; then
     DUMP_FILE="${1}"
 fi
 
@@ -30,14 +41,13 @@ FAIL_IF_TODAY_BCK_EXISTS="True" # Setear cualquier otro valor para cambiar
 
 TODAY_MAIN_DB_BACKUP="${DBNAME}_tmp_${TODAY}"
 
-## Kills all connections to the database to make the backup ##
-${PSQL} -h localhost -p "${PG_PORT}" -U postgres -d postgres -c "select pg_terminate_backend(pid) from pg_stat_activity where datname='${DBNAME}';"
+kickout_users "${DBNAME}"
 
 ## Renames the database to make a backup ##
 
 # Other way to check if the database exists
 # if ! sudo -u postgres psql -d ${DBNAME} -c "select 1" > /dev/null 2>&1; then
-#     sudo -u postgres createdb -O ${DBOWNER} -E UTF-8 ${DBNAME}
+#     sudo -u postgres createdb -O ${PG_OWNER_USER} -E UTF-8 ${DBNAME}
 # fi
 MAIN_DB_EXISTS=$(${PSQL} -A -t -h localhost -p "${PG_PORT}" -U postgres -d postgres -c "SELECT 'True' FROM pg_database WHERE datname='${DBNAME}';")
 TODAY_MAIN_DB_BACKUP_EXISTS=$(${PSQL} -A -t -h localhost -p "${PG_PORT}" -U postgres -d postgres -c "SELECT 'True' FROM pg_database WHERE datname='${TODAY_MAIN_DB_BACKUP}';")
@@ -58,13 +68,18 @@ fi
 ## Creates the database again ##
 # https://www.postgresql.org/docs/current/static/manage-ag-templatedbs.html
 echo "Creando ${DBNAME}"
-createdb -h localhost -p "${PG_PORT}" -U postgres -T template0 -O "${DBOWNER}" -E UTF-8 -l "${LOCALE}" "${DBNAME}"
+createdb -h localhost -p "${PG_PORT}" -U postgres -T template0 -O "${PG_OWNER_USER}" -E UTF-8 -l "${LOCALE}" "${DBNAME}"
 
 if [[ -n "${DUMP_FILE}" ]]; then
     echo "Restaurando ${DUMP_FILE} en ${DBNAME}"
     ${PGRESTORE} -h localhost -p "${PG_PORT}" -U postgres -d "${DBNAME}" --single-transaction --exit-on-error --disable-triggers "${DUMP_FILE}"
-    echo "Creando $(basename "${DUMP_FILE%.dump}")"
-    createdb -h localhost -p "${PG_PORT}" -U postgres -T "${DBNAME}" -O "${DBOWNER}" -E UTF-8 -l "${LOCALE}" "$(basename "${DUMP_FILE%.dump}")"
-else
-    ${PSQL} -h localhost -p "${PG_PORT}" -U postgres -d "${DBNAME}" -c "CREATE EXTENSION IF NOT EXISTS postgis;"
+    if [[ (-f "${1}") && ("${1}" =~ [0-9][0-9][0-9][0-9][0-9][0-9]_${DBNAME}.dump) ]]; then
+        # Si el nombre del dump parece tener una fecha 230210_dbame creamos un template también
+        # TODO: Esto hay que mejorarlo
+        echo "Creando $(basename "${DUMP_FILE%.dump}")"
+        createdb -h localhost -p "${PG_PORT}" -U postgres -T "${DBNAME}" -O "${PG_OWNER_USER}" -E UTF-8 -l "${LOCALE}" "$(basename "${DUMP_FILE%.dump}")"
+    fi
 fi
+
+# TODO: Cuando crear la extensión hay que pensarlo mejor.
+${PSQL} -h localhost -p "${PG_PORT}" -U postgres -d "${DBNAME}" -c "CREATE EXTENSION IF NOT EXISTS postgis;"

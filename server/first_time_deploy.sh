@@ -1,29 +1,14 @@
 #!/bin/bash
 
-# This script is still in "alpha". Use it with caution
-#
-# Copy this file to your server or VPS after login as root
-# ssh root@ip
-# Fill the variables at the beggining of this script
-# Log as root
-# Execute this file as `bash first_time_deploy.sh`
-# Put your passwords and configuration in a secure place
-# Test ssh access from a new conexion
-# Remove this file and finish configuration
-
 set -e
-
-# https://www.linode.com/docs/getting-started/
-# https://docs.gitlab.com/ee/user/project/deploy_tokens/index.html
 
 ######################
 # SET THIS VARIABLES #
 ######################
-# Create a deploy token, and fill MY_REPO with the full url including the token
-export MY_REPO=''
 
-# Authorized public keys
-SSH_PUB_KEYS=''
+# Create a deploy token, and fill MY_REPO with the full url including the token
+# or preconfigure an ssh key and use it
+export MY_REPO=''
 
 # A new user will be created, usually the same name as the PROJECT_NAME
 export DEFAULT_USER=''
@@ -31,27 +16,50 @@ export DEFAULT_USER=''
 # Password for the new user
 export DEFAULT_USER_PASSWORD=''
 
+# Authorized public keys
+SSH_PUB_KEYS=''
+
 # Database password for postgres user
 export PG_POSTGRES_PASSWD=''
 
-BACK_ENV_FILE=''
+# https://docs.djangoproject.com/en/4.1/ref/settings/#std-setting-SECRET_KEY
+# Se puede generar con: base64 /dev/urandom | head -c50
+export SECRET_KEY=
 
-FRONT_ENV_FILE=''
+# https://docs.djangoproject.com/en/4.1/ref/settings/#allowed-hosts
+# Se suele rellenara con la ip y el dominio desde el que se servirá la
+# aplicación. Lista separada por comas, sin espacios. Por ejemplo
+# ALLOWED_HOSTS=168.0.1.9,.subdomain.domain.com
+export ALLOWED_HOSTS=
 
-# Path to a dump of the database to be restored
-DATABASE_DUMP=''
+########################
+# Variables opcionales #
+########################
 
-# Path to a folder with the attachments to be restored
-MEDIA_FOLDER=''
+# Ruta al .tgz instalable mediante pip que contiene la aplicación, en caso
+# de existir
+# DEPLOY_FILE=/tmp/221115_project_deploy/project-0.0.1.tar.gz
+export DEPLOY_FILE=
 
-# Path to apache conf file
-APACHE_CONF_FILE=
+# Ruta al dump de la base de datos que se restaurara, en caso de existir
+# DUMP_FILE=/tmp/221115_project_deploy//221115_project.dump
+export DUMP_FILE=
 
-# You can also set this variables
+# Ruta a una .tar.gz que contiene la carpeta "media" (ficheros modificables por usuarios
+# tipo fotos) en caso de existir
+# MEDIA_FILE=/tmp/221115_project_deploy/221115_media_project.tar.gz
+export MEDIA_FILE=
+
+# Puerto en que gunicorn servirá la aplicación web
+# export GUNICORN_PORT=8000
 # export SSH_PORT=10000
 # export MY_HOSTNAME=
-# export PG_PORT=
+# export PG_PORT=5432
 # export SERVER_RDNS=
+
+# If postgres should only listen on localhost or also for external connection
+# PG_ALLOW_EXTERNAL_CON=false
+
 #############################
 # END OF SET THIS VARIABLES #
 #############################
@@ -65,28 +73,18 @@ APACHE_CONF_FILE=
 #     exit 1
 #   fi
 
-export DEBIAN_FRONTEND=noninteractive
-export UCF_FORCE_CONFFNEW=1
-apt update && apt upgrade -y
-apt install -y git emacs-nox
+CURRENT_DIR=$(pwd)
 
-cd /tmp
-
-git clone "${MY_REPO}"
-
-MY_REPO_FOLDER=$(echo "${MY_REPO}" | awk -F '/' '{gsub(".git", ""); print $NF}')
-
-cd "${MY_REPO_FOLDER}/server/"
+if [[ $(id -u -n) != "root" ]]; then
+    echo "Este script debe ejecutarse como root"
+    exit 1
+fi
 
 export FIRST_TIME_DEPLOY=true
+
 export DEPLOYMENT=PROD
-bash add_default_user.sh
+bash bootstrap.sh "${DEPLOYMENT}"
 
-# mv /tmp/"${MY_REPO}" "${DEFAULT_USER_HOME}"/"${MY_REPO}"
-# cd "${DEFAULT_USER_HOME}"/"${MY_REPO}"/server
-chown -R "${DEFAULT_USER}":"${DEFAULT_USER}" ../../"${MY_REPO_FOLDER}"
-
-bash bootstrap.sh PROD
 source variables.ini
 
 echo "************************"
@@ -104,27 +102,25 @@ rm -rf "${WWW_PATH}"
 git clone "${MY_REPO}"
 
 cd "${WWW_PATH}"/
-
-echo "${BACK_ENV_FILE}" > "${WWW_PATH}/back/.env"
-echo "
-MEDIA_ROOT=${WWW_MEDIA_PATH}
-" >> ${WWW_PATH}/back/.env
-echo "${FRONT_ENV_FILE}" > "${WWW_PATH}/front/.env.production"
+./scripts/util/echo_env_back.sh > back/.env
+./scripts/util/echo_env_front.sh > front/.env.production
 
 chown -R "${DEFAULT_USER}":www-data "${WWW_PATH}"
 
-rm -rf "${WWW_MEDIA_PATH}"
-cp -r "${MEDIA_FOLDER}" "${WWW_MEDIA_PATH}"
-chown -R "${DEFAULT_USER}":www-data "${WWW_MEDIA_PATH}"
+cd "${CURRENT_DIR}" || echo "BD y Media no instalado"
 
-source scripts/db_utils.sh
-PGPASSWORD="${PG_POSTGRES_PASSWD}" create_last_db "${TODAY}_bck_${DBNAME}" "${DATABASE_DUMP}"
-PGPASSWORD="${PG_POSTGRES_PASSWD}" create_db_from_template "${TODAY}_bck_${DBNAME}" "${DBNAME}"
+if [[ -f "${DUMP_FILE}" ]]; then
+    bash drop_and_create_db.sh "${DUMP_FILE}"
+fi
 
-if [[ -n "${APACHE_CONF_FILE}" ]]; then
-    cp "${APACHE_CONF_FILE}" /etc/apache2/sites-available/
-    chown root:root /etc/apache2/sites-available/sepraps.conf
-    chmod 644 /etc/apache2/sites-available/sepraps.conf
+if [[ -n "${MEDIA_FILE}" ]] && [[ -d "${WWW_MEDIA_PATH}" ]] && [[ -z "$(ls -A ${WWW_MEDIA_PATH})" ]]; then
+    echo "Quiere desplegar la carpeta 'media' pero esta ya existe y no está vacía"
+else
+    if [[ -f "${MEDIA_FILE}" ]]; then
+        tar xzf "${MEDIA_FILE}"
+        mv media/* "${WWW_MEDIA_PATH}"
+        rm -r media
+    fi
 fi
 
 echo -e "\n\n******** FINISH ********************\n\n"
@@ -142,5 +138,5 @@ bash config_ssh.sh # edit it first
 # deploy the app, as not root
 
 workon ${PROJECT_NAME}
-scripts/deploy.sh
+./scripts/util/deploy_from_repo.sh
 "

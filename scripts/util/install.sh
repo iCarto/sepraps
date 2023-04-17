@@ -2,7 +2,7 @@
 set -e
 
 if [[ "${OSTYPE}" == "linux-gnu" ]]; then
-    sudo apt update
+    sudo apt update -qq
     sudo apt install python3 python3-pip nodejs npm
 elif [[ "${OSTYPE}" == "darwin"* ]]; then
     brew install python3 nodejs npm

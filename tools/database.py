@@ -11,7 +11,7 @@ def create_django_fixtures(data):
         if not exist_in_fixtures(fixtures_departments, locality[1]):
             fixtures_departments.append(
                 {
-                    "model": "app.department",
+                    "model": "monitoring.department",
                     "pk": None,
                     "fields": {"code": locality[1], "name": locality[2].title()},
                 }
@@ -19,7 +19,7 @@ def create_django_fixtures(data):
         if not exist_in_fixtures(fixtures_districts, locality[3]):
             fixtures_districts.append(
                 {
-                    "model": "app.district",
+                    "model": "monitoring.district",
                     "pk": None,
                     "fields": {
                         "code": locality[1] + locality[3],
@@ -30,7 +30,7 @@ def create_django_fixtures(data):
             )
         fixtures_localities.append(
             {
-                "model": "app.locality",
+                "model": "monitoring.locality",
                 "pk": None,
                 "fields": {
                     "code": locality[0],
@@ -64,6 +64,7 @@ def get_data(csv_input_file):
 
 
 if __name__ == "__main__":
+
     parser = argparse.ArgumentParser(
         description=(
             "Has hardcoded paths to a csv file that allows to create a mock database"

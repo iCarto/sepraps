@@ -50,12 +50,10 @@ source "${this_dir}/variables.ini"
 export DEBIAN_FRONTEND=noninteractive
 export UCF_FORCE_CONFFNEW=1
 
-apt-get update
+apt update -qq
 
 bash set_hostname_and_ip.sh
 
-# ./fix_locales_en.sh
-# ./fix_locales_es.sh
 ./fix_locales.sh
 
 bash config_time.sh
@@ -82,6 +80,7 @@ bash install_node_and_npm.sh
 ./own_settings.sh
 
 ./install_ufw.sh
+./install_fail2ban.sh
 
 ./install_letsencrypt.sh
 

@@ -1,5 +1,5 @@
+from app.models.project import Project
 from documents.models import MediaNode
-from monitoring.models.project import Project
 
 
 projects_images = [
