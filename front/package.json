@@ -23,14 +23,14 @@
         "react-dom": "^17.0.2",
         "react-hook-form": "^7.21.0",
         "react-router-dom": "^6.1.1",
-        "react-scripts": "4.0.3",
+        "react-scripts": "^5.0.1",
         "web-vitals": "^1.1.2"
     },
     "devDependencies": {
-        "react-error-overlay": "6.0.9",
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^11.2.7",
-        "@testing-library/user-event": "^12.8.3"
+        "@testing-library/user-event": "^12.8.3",
+        "react-error-overlay": "6.0.9"
     },
     "scripts": {
         "start": "react-scripts start",
