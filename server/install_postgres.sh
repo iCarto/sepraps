@@ -85,7 +85,7 @@ chmod 644 /etc/logrotate.d/postgresql-common
 
 if ${PG_ALLOW_EXTERNAL_CON}; then
     echo "listen_addresses = '*'" >> "${POSTGRESQL_CONF_FILE}"
-    echo "host all all 0.0.0.0/0 md5" >> "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf"
+    echo "host all all 0.0.0.0/0 scram-sha-256" >> "/etc/postgresql/${PG_VERSION}/main/pg_hba.conf"
 fi
 
 # config psql dotfiles
