@@ -1,7 +1,7 @@
 [tool.black]
 line-length = 88
 # Mejor ser explícitos con la versión de python y los strings
-target-version = ['py39']
+target-version = ['py310']
 skip-string-normalization = false
 preview = false
 skip-magic-trailing-comma = true
@@ -14,7 +14,7 @@ safe = true
 # '''
 
 [tool.isort]
-py_version = "39"
+py_version = "310"
 profile = "black"
 line_length = 88
 atomic = true # `true` cuando la versión de python target y que corre isort es la misma
@@ -24,4 +24,50 @@ skip_glob = ["*.egg", "*.egg-info", "__pycache__"]
 skip_gitignore = true
 combine_as_imports = false # Revisar
 known_third_party = ["bcrypt", "django", "selenium"]
-known_first_party = [] # Ajustar en cada proyecto
+known_first_party = ["app"] # Ajustar en cada proyecto
+
+[build-system]
+requires = ["setuptools==65.5.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sepraps"
+version = "0.0.1"
+authors = [
+  { name="iCarto", email="info@icarto.es" },
+]
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "License :: OSI Approved :: MIT License",
+    "Private :: Do Not Upload"
+]
+requires-python = "==3.10.*"
+dependencies = [
+    "Django==3.2.10",
+    "django-cors-headers==3.10.1",
+    "django-environ==0.8.1",
+    "django-extensions==3.1.5",
+    "django-filter==21.1",
+    "django-spa==0.3.6",
+    "djangorestframework==3.13.0",
+    "djangorestframework-simplejwt==5.0.0",
+    "djangorestframework-gis==1.0",
+    "drf-extensions==0.7.1",
+    "psycopg2-binary==2.9.2",
+    "pandas==1.4.2",
+    "django-debug-toolbar==3.5.0",
+    "drf-spectacular==0.23.1",
+    "sentry-sdk==1.7.2",
+]
+
+
+
+[tool.setuptools]
+package-dir = {"sepraps" = "back"}
+include-package-data = true
+
+[tool.setuptools.package-data]
+# *.css *.woff *.svg *.js *.gif *.ico *.png *.jpg *.html *.js.map
+"sepraps.static" = ["**"]
+"sepraps.templates" = ["**"]

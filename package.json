@@ -1,32 +1,11 @@
 {
-    "name": "sepraps",
-    "version": "1.0.0",
-    "description": "Herramienta para el seguimiento de ejecución de proyectos rurales de agua",
-    "author": "iCarto <info@icarto.es>",
-    "license": "AGPL-3.0",
-    "homepage": "https://gitlab.com/icarto/sepraps",
-    "repository": {
-        "type": "git",
-        "url": "git+ssh://git@gitlab.com:icarto/sepraps.git"
-    },
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "pretty:python": "black . && isort .",
-        "pretty:css": "npx stylelint --fix --ignore-path .ignore  '**/*.{vue,htm,html,css,sss,less,scss,sass,mak,jinja2}'",
-        "pretty:js": "npx prettier --ignore-path '.ignore' --write '**/*.js'",
-        "pretty:bash": "shfmt -l -w -i 4 -bn -sr -ci $(shfmt -f . | grep -v node_modules/)",
-        "pretty:others": "npx prettier --ignore-path '.ignore' --write '**/*.{md,yml,yaml,json}'",
-        "lint:bash": "git ls-files -c -o --exclude-from=.ignore '**.sh' | xargs shellcheck"
-    },
+    "private": true,
     "devDependencies": {
-        "eclint": "2.8.1",
         "htmllint": "0.7.2",
         "js-beautify": "1.10.0",
         "prettier": "1.18.2",
         "stylelint": "10.1.0",
         "stylelint-config-standard": "18.3.0",
         "stylelint-order": "3.0.0"
-    },
-    "dependencies": {}
+    }
 }

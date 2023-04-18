@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
 
-honcho -f Procfile.dev start
-
-exit
+# honcho -f Procfile.dev start
+# exit

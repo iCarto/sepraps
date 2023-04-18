@@ -11,7 +11,7 @@ You can use your own values.
 PROJECT_NAME=sepraps
 
 # Base directory for the whole project. Helper folders and repos are inside
-PROJECT_ROOT_PATH=~/development/sepraps
+PROJECT_ROOT_PATH="~/development/${PROJECT_NAME}"
 
 # The last deployed  version
 VERSION=$(date +%y%m%d) # like 220315
@@ -89,7 +89,7 @@ Check `server/bootstrap.sh` for automatized way of configuring the tools.
 
 This pre-requistes should be installed previous to the current user session. So if this is the first time you are installing it, _Log out_ from the host and _Log in_ again.
 
-Remember to keep the used ports open and unused: `3000`, `5432`, `8000`, `8080`.
+Remember to keep the used ports open and unused. Check `Vagrantfile` and variables like `*_PORT`
 
 ```shell
 sudo lsof -i -P -n | grep LISTEN
@@ -115,6 +115,12 @@ Use the script
 ./scripts/reset_db_and_create.sh empty
 ```
 
+or when a full dump restore is preferred
+
+```shell
+./server/drop_and_create_db.sh path_to_the_dump
+```
+
 # Development
 
 The common workflow:
@@ -138,11 +144,7 @@ cd front; npm start
 
 # Deployment
 
-```shell
-workon "${PROJECT_NAME}"
-# ./scripts/pre-deploy.sh
-./scripts/deploy.sh
-```
+Check `./docs/deployment.md`
 
 # Automated Test
 
@@ -150,12 +152,21 @@ Launch all tests with `./scripts/test.sh`. Take care that this includes e2e test
 
 # Test in a production like environment
 
-NOT READY YET
+Just follow the same steps as for a normal deployment.
 
-```shell
-vagrant ssh
-workon "${PROJECT_NAME}"
+For a more precise test
+
+```bash
+vagrant destroy
+# Take care of not clean enviroments. Uncomited files, local changes, ...
 ./scripts/deploy.sh
+# Coment in `Vagrantfile` the `config.vm.provision`.
+vagrant up
+vagrant ssh
+# Remember check the ports in the Vagrantfile
+# Stop the firewall if needed
+# Put /tmp/${TODAY}_${PROJECT_NAME}_deploy of the host inside the guest
+# follow "./docs/deployment.md#On Production or Staging servers"
 ```
 
 # Recap
@@ -166,10 +177,12 @@ After installing the pre-requisites.
 
 ```shell
 cd "${PROJECT_ROOT_PATH}"
-git clone git@gitlab.com:icarto-private/sepraps.git
+git clone git@github.com:iCarto/${PROJECT_NAME}.git
 ```
 
 ## Each development phase
+
+### Update repo
 
 ```shell
 git branch -D staging
@@ -180,13 +193,18 @@ git pull --rebase origin development
 git remote prune origin
 
 git co development
+```
 
+### Prepare local enviroment
+
+```
 # Clean up
 source server/variables.ini
 vagrant destroy
 rmvirtualenv "${PROJECT_NAME}"
 
 vagrant up
+# yes, shutdown the machine and boot it again. This avoid troubles
 vagrant halt
 vagrant up
 
@@ -196,6 +214,9 @@ vagrant up
 # Download fixture/test databases
 # Use --dir if recommended folder hierarchy is not followed
 ./scripts/reset_and_create_db.sh
+
+# or when a full dump restore is preferred
+# ./server/drop_and_create_db.sh path_to_the_dump
 
 deactivate
 

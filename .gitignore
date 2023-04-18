@@ -4,7 +4,7 @@
 __pycache__
 *.pyc
 build/
-# dist/
+dist/
 
 
 # Javascript
@@ -28,3 +28,4 @@ ubuntu-*-cloudimg-console.log
 
 # Project
 .env
+private

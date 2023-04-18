@@ -1,3 +1,0 @@
-back: (cd back; python manage.py runserver_plus)
-front: (cd front; npm start)
-

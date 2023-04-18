@@ -9,7 +9,7 @@ end
 
 Vagrant.configure(2) do |config|
     config.vm.box = "ubuntu/jammy64"
-    config.vm.box_version = "20220921.1.0"
+    config.vm.box_version = "20230110.0.0"
     config.vm.box_check_update = false
 
     if Vagrant.has_plugin?("vagrant-vbguest")
@@ -18,7 +18,7 @@ Vagrant.configure(2) do |config|
         config.vbguest.auto_update = true
     end
 
-    config.vm.network "forwarded_port", guest: 80, host: 8080
+    # config.vm.network "forwarded_port", guest: 80, host: 8080
     config.vm.network "forwarded_port", guest: 5432, host: 5432
     # config.vm.network "public_network", ip: "192.168.0.99"
 
