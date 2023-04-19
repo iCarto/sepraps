@@ -12,35 +12,34 @@ pre-commit==3.2.2
 
 black[jupyter]==23.3.0
 
-wemake-python-styleguide==0.16.1
+wemake-python-styleguide==0.17.0
 # Están comentados por qué los instala wemake y delegamos su instalación
-# flake8
-# flake8-broken-line
-# flake8-commas
-# flake8-comprehensions
-# flake8-debugger
-# flake8-quotes
 # flake8-bugbear
-# flake8-eradicate
-# flake8-string-format
+# flake8-comprehensions
+# flake8-commas
 # mccabe
-# pep8-naming
-# pydocstyle
 # flake8-docstrings
-# darglint
-# flake8-rst-docstrings
+# pycodestyle
+# flake8-eradicate
+# flake8
 # flake8-isort
+# flake8-broken-line
+# pep8-naming
+# flake8-string-format
+# flake8-quotes
 # flake8-bandit
+# flake8-debugger
+# flake8-rst-docstrings
+# darglint
+# pydocstyle
 # bandit
 # isort
 
 flake8-coding==1.3.2
-flake8-class-attributes-order==0.1.2
-dlint==0.12.0
+flake8-class-attributes-order==0.1.3
+dlint==0.14.1
 
-# Metakermit scaffolder
-honcho
-Werkzeug==2.0.3 # for runserver_plus
+Werkzeug==2.2.3 # for runserver_plus
 
 
 # Publication

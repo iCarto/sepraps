@@ -14,15 +14,13 @@ safe = true
 [tool.isort]
 py_version = "311"
 profile = "black"
-line_length = 88
 atomic = true # `true` cuando la versión de python target y que corre isort es la misma
 lines_after_imports = 2
 filter_files = true
-skip_glob = ["*.egg", "*.egg-info", "__pycache__"]
 skip_gitignore = true
-combine_as_imports = false # Revisar
-known_third_party = ["bcrypt", "django", "selenium"]
-known_first_party = ["app"] # Ajustar en cada proyecto
+combine_as_imports = true # Revisar
+# known_third_party = ["bcrypt", "django", "selenium"]
+known_first_party = ["users", "app", "back", "documents", "log", "questionnaries"] # Ajustar en cada proyecto
 
 [build-system]
 requires = ["setuptools==65.5.0"]
