@@ -223,7 +223,7 @@ def get_year_month_values(field_code, instances):
 
     year_month_values = {}
     for instance in instances:
-        year_month = "{}/{}".format(instance.month, instance.year)
+        year_month = f"{instance.month}/{instance.year}"
         if year_month not in year_month_values:
             year_month_values[year_month] = {
                 "expected_values": [],

@@ -41,18 +41,18 @@ def get_monthly_questionnaire_stats(
     filter_conditions = []
     if filter := request.GET.get("project"):
         show_expanded = True
-        filter_conditions.append("and pqi.project_id = {}".format(filter))
+        filter_conditions.append(f"and pqi.project_id = {filter}")
     if filter := request.GET.get("construction_contract"):
         show_expanded = True
-        filter_conditions.append("and p.construction_contract_id = {}".format(filter))
+        filter_conditions.append(f"and p.construction_contract_id = {filter}")
     if filter := request.GET.get("district"):
-        filter_conditions.append("and l.district_id = '{}'".format(filter))
+        filter_conditions.append(f"and l.district_id = '{filter}'")
     if filter := request.GET.get("department"):
-        filter_conditions.append("and l.department_id = '{}'".format(filter))
+        filter_conditions.append(f"and l.department_id = '{filter}'")
     if filter := request.GET.get("financing_program"):
-        filter_conditions.append("and cc.financing_program_id = {}".format(filter))
+        filter_conditions.append(f"and cc.financing_program_id = {filter}")
     if filter := request.GET.get("financing_fund"):
-        filter_conditions.append("and fpff.financingfund_id = {}".format(filter))
+        filter_conditions.append(f"and fpff.financingfund_id = {filter}")
     if filter := request.GET.get("month_from"):
         filter_conditions.append(
             "and mqi.year >= {} and mqi.month >= {}".format(
@@ -104,21 +104,21 @@ def get_provider_gender_stats(request, format=None):
             """
         filter_conditions = []
         if filter := request.GET.get("provider"):
-            filter_conditions.append("and pc.entity_id = {}".format(filter))
+            filter_conditions.append(f"and pc.entity_id = {filter}")
         if filter := request.GET.get("project"):
-            filter_conditions.append("and p.id = {}".format(filter))
+            filter_conditions.append(f"and p.id = {filter}")
         if filter := request.GET.get("construction_contract"):
             filter_conditions.append(
-                "and p.construction_contract_id = {}".format(filter)
+                f"and p.construction_contract_id = {filter}"
             )
         if filter := request.GET.get("district"):
-            filter_conditions.append("and l.district_id = '{}'".format(filter))
+            filter_conditions.append(f"and l.district_id = '{filter}'")
         if filter := request.GET.get("department"):
-            filter_conditions.append("and l.department_id = '{}'".format(filter))
+            filter_conditions.append(f"and l.department_id = '{filter}'")
         if filter := request.GET.get("financing_program"):
-            filter_conditions.append("and cc.financing_program_id = {}".format(filter))
+            filter_conditions.append(f"and cc.financing_program_id = {filter}")
         if filter := request.GET.get("financing_fund"):
-            filter_conditions.append("and fpff.financingfund_id = {}".format(filter))
+            filter_conditions.append(f"and fpff.financingfund_id = {filter}")
 
         cursor.execute(query.format(filter_conditions=" ".join(filter_conditions)))
 

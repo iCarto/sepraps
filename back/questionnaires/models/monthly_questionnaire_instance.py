@@ -26,4 +26,4 @@ class MonthlyQuestionnaireInstance(models.Model):
         verbose_name_plural = "Instancias de cuestionarios mensuales"
 
     def __str__(self):
-        return "({}) - {}/{}".format(str(self.id), str(self.month), str(self.year))
+        return f"({str(self.id)}) - {str(self.month)}/{str(self.year)}"

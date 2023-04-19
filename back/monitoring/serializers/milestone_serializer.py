@@ -21,7 +21,7 @@ class MilestoneSerializer(serializers.ModelSerializer):
         )
 
     def get_fields(self):
-        fields = super(MilestoneSerializer, self).get_fields()
+        fields = super().get_fields()
         fields["children"] = MilestoneSerializer(
             many=True, read_only=True, required=False
         )

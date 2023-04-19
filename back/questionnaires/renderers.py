@@ -31,7 +31,7 @@ class DataFrameCSVFileRenderer(renderers.BaseRenderer):
                 )
                 renderer_context["response"][
                     "Content-Disposition"
-                ] = "attachment; filename={}.csv".format(filename)
+                ] = f"attachment; filename={filename}.csv"
 
             buffer = BytesIO()
             df.to_csv(buffer, index=False)
@@ -50,7 +50,7 @@ class DataFrameJSONRenderer(renderers.BaseRenderer):
             float_column_names = df.select_dtypes(include=["float64"]).columns.tolist()
             for column_name in float_column_names:
                 df[column_name] = df[column_name].apply(
-                    lambda x: "{0:.2f}".format(x) if not pd.isna(x) else None
+                    lambda x: f"{x:.2f}" if not pd.isna(x) else None
                 )
             return pd.io.json.dumps(df.to_dict(orient="list"))
         return pd.io.json.dumps(response)

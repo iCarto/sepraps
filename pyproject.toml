@@ -1,7 +1,7 @@
 [tool.black]
 line-length = 88
 # Mejor ser explícitos con la versión de python y los strings
-target-version = ['py310']
+target-version = ['py311']
 skip-string-normalization = false
 preview = false
 skip-magic-trailing-comma = true
@@ -14,7 +14,7 @@ safe = true
 # '''
 
 [tool.isort]
-py_version = "310"
+py_version = "311"
 profile = "black"
 line_length = 88
 atomic = true # `true` cuando la versión de python target y que corre isort es la misma
@@ -38,11 +38,10 @@ authors = [
 ]
 readme = "README.md"
 classifiers = [
-    "Programming Language :: Python :: 3.10",
     "License :: OSI Approved :: MIT License",
     "Private :: Do Not Upload"
 ]
-requires-python = "==3.10.*"
+requires-python = "==3.11.*"
 dependencies = [
     "Django==3.2.10",
     "django-cors-headers==3.10.1",

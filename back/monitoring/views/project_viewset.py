@@ -90,7 +90,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return super().get_serializer_class()
 
     def get_serializer_context(self):
-        context = super(ProjectViewSet, self).get_serializer_context()
+        context = super().get_serializer_context()
         context.update({"domain": DomainEntry.objects.all()})
         return context
 

@@ -53,7 +53,7 @@ class ConstructionContractViewSet(viewsets.ModelViewSet):
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_context(self):
-        context = super(ConstructionContractViewSet, self).get_serializer_context()
+        context = super().get_serializer_context()
         context.update({"action": self.action})
         context.update({"domain": DomainEntry.objects.all()})
         return context
