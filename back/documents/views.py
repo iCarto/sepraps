@@ -28,11 +28,9 @@ def get_filter(media_path):
 @permission_classes([IsAuthenticated])
 @cache_control(private=True, max_age=60 * 60 * 24)
 def preview(request, media_path, format=None):
-
     filter = get_filter(media_path)
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
-
         file = open(os.path.join(settings.MEDIA_ROOT, media_node.media_path))
         response = FileResponse(file)
         return response
@@ -41,7 +39,6 @@ def preview(request, media_path, format=None):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def download(request, media_path, format=None):
-
     filter = get_filter(media_path)
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
@@ -76,7 +73,6 @@ def create_zip_file(documentos):
 
 
 def zip_folder_documents(parent_path_in_zip, documents, zip):
-
     for document in documents:
         if document.media_type == "DOCUMENT":
             path_in_disk = storage.open(
@@ -90,7 +86,6 @@ def zip_folder_documents(parent_path_in_zip, documents, zip):
                 zip.write(path_in_disk.name, path_in_zip)
 
         if document.media_type == "FOLDER":
-
             path_in_zip = (
                 os.path.join(parent_path_in_zip, document.media_name)
                 if parent_path_in_zip is not None
@@ -106,7 +101,6 @@ class MediaView(views.APIView):
     queryset = MediaNode.objects.all()
 
     def get(self, request, media_path):
-
         filter = get_filter(media_path)
         media_node = MediaNode.objects.filter(**filter).first()
 
@@ -154,7 +148,6 @@ class MediaView(views.APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, media_path):
-
         filter = get_filter(media_path)
         media_node = MediaNode.objects.filter(**filter).first()
 

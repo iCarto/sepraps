@@ -33,7 +33,6 @@ class LocalityListSerializer(serializers.ListSerializer):
 
 
 class LocalitySerializer(serializers.ModelSerializer):
-
     code = serializers.CharField(allow_null=True)
     name = serializers.CharField()
     district = serializers.PrimaryKeyRelatedField(queryset=District.objects.all())

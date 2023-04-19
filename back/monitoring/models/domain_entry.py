@@ -2,7 +2,6 @@ from django.db import models
 
 
 class DomainEntry(models.Model):
-
     CATEGORY_CHOICES = [
         ("project_type", "Tipo de Proyecto"),
         ("project_class", "Clase de Proyecto"),

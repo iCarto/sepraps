@@ -4,7 +4,6 @@ from monitoring.models.contact_relationship import ContractorContact
 
 
 class Contractor(models.Model):
-
     id = models.AutoField(primary_key=True)
     name = models.CharField("Nombre", max_length=100)
     contractor_type = models.CharField("Tipo de contratista", max_length=50, null=True)

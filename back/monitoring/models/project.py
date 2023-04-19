@@ -19,7 +19,6 @@ from questionnaires.models.questionnaire import Questionnaire
 
 
 class Project(models.Model):
-
     id = models.AutoField(primary_key=True)
     code = models.CharField("Código", unique=True, max_length=30)
     project_type = models.CharField("Tipo de proyecto", max_length=50, null=True)

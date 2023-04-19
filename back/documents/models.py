@@ -6,7 +6,6 @@ PATH_SEPARATOR = "/"
 
 
 class MediaNode(models.Model):
-
     MEDIA_TYPE_CHOICES = [("FOLDER", "Carpeta"), ("DOCUMENT", "Documento")]
 
     id = models.AutoField(primary_key=True)

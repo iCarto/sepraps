@@ -5,7 +5,6 @@ from rest_framework import serializers
 
 
 class InfraestructureSerializer(serializers.ModelSerializer):
-
     id = serializers.IntegerField(read_only=True)
     locality = serializers.PrimaryKeyRelatedField(
         queryset=Locality.objects.all(), required=False

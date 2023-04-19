@@ -137,7 +137,6 @@ class ProjectSerializer(serializers.ModelSerializer):
     # OPERATIONS
 
     def create(self, validated_data):
-
         validated_data["code"] = get_code_for_new_project()
 
         main_infrastructure_data = validated_data.pop("main_infrastructure")
@@ -212,7 +211,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             instance.featured_image = featured_image_data
 
     def update(self, instance, validated_data):
-
         self.update_main_infrastructure(instance, validated_data)
         self.update_provider(instance, validated_data)
         self.update_linked_localities(instance, validated_data)

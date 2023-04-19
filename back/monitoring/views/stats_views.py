@@ -154,8 +154,9 @@ def get_project_and_contract_stats(request, format=None):
                 )
             )
             contract_filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})"
-                .format(user_id=request.user.id)
+                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
+                    user_id=request.user.id
+                )
             )
 
         cursor.execute(
@@ -171,7 +172,6 @@ def get_project_and_contract_stats(request, format=None):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_project_by_phase_stats(request, format=None):
-
     with connection.cursor() as cursor:
         query = """
         with project_phase as (
@@ -248,7 +248,6 @@ def get_project_by_phase_stats(request, format=None):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_projects_by_phase_map(request, format=None):
-
     with connection.cursor() as cursor:
         query = """
             select distinct on (p.id)

@@ -3,7 +3,6 @@ from monitoring.models.location import Locality
 
 
 class Infrastructure(models.Model):
-
     id = models.AutoField(primary_key=True)
     locality = models.ForeignKey(
         Locality,

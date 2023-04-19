@@ -13,7 +13,6 @@ GENDER_CHOICES = [
 
 
 class Contact(models.Model):
-
     id = models.AutoField(primary_key=True)
     name = models.CharField("Nombre", max_length=255)
     post = models.CharField("Cargo", max_length=50, null=True)

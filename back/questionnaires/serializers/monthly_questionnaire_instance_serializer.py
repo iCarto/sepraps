@@ -62,7 +62,6 @@ class MonthlyQuestionnaireInstanceSerializer(serializers.ModelSerializer):
         return MonthlyQuestionnaireInstanceListSerializer(*args, **kwargs)
 
     def create(self, validated_data):
-
         values_data = validated_data.pop("values", None)
 
         validated_data["creation_user"] = self.context["request"].user
@@ -73,7 +72,6 @@ class MonthlyQuestionnaireInstanceSerializer(serializers.ModelSerializer):
         return instance
 
     def update(self, instance, validated_data):
-
         # calling to MonthlyQuestionnaireValueListSerializer.update() we can make all modifications
         # for values inside the instance
         instance.values.set(

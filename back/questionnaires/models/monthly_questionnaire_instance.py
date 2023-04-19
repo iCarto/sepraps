@@ -4,7 +4,6 @@ from questionnaires.models.questionnaire import Questionnaire
 
 
 class MonthlyQuestionnaireInstance(models.Model):
-
     id = models.AutoField(primary_key=True)
     questionnaire = models.ForeignKey(
         Questionnaire,

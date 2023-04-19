@@ -1,3 +1,4 @@
+fail_fast: false
 repos:
     - repo: local
       hooks:
@@ -6,7 +7,8 @@ repos:
             entry: black
             language: system
             verbose: true
-            types: [python]
+            files: \.ipynb$
+            types_or: [python, jupyter]
 
           - id: isort
             name: isort

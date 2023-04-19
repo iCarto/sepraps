@@ -7,7 +7,6 @@ from monitoring.models.financing_program import FinancingProgram
 
 
 class ConstructionContract(models.Model):
-
     id = models.AutoField(primary_key=True)
     number = models.CharField("Nombre", max_length=50)
     comments = models.TextField("Observaciones", max_length=500, null=True)

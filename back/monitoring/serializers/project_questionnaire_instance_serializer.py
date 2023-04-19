@@ -10,7 +10,6 @@ from rest_framework import serializers
 
 
 class ProjectQuestionnaireInstanceSerializer(serializers.ModelSerializer):
-
     project = serializers.PrimaryKeyRelatedField(queryset=Project.objects.all())
     questionnaire = QuestionnaireSerializer(read_only=True)
     questionnaire_instances = MonthlyQuestionnaireInstanceSerializer(many=True)
@@ -20,7 +19,6 @@ class ProjectQuestionnaireInstanceSerializer(serializers.ModelSerializer):
         fields = ("project", "questionnaire", "questionnaire_instances")
 
     def update(self, instance, validated_data):
-
         # calling to MonthlyQuestionnaireInstanceListSerializer.update() we can make all modifications
         # for instances inside the questionnaire
         old_instances_ids = [

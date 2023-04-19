@@ -10,7 +10,6 @@ class ContractorFilter(filters.FilterSet):
     search = filters.CharFilter(method="filter_by_search_text")
 
     def filter_by_search_text(self, queryset, name, search_text):
-
         return queryset.filter(
             Q(name__icontains=search_text)
             | Q(email__icontains=search_text)

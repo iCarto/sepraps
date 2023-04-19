@@ -9,7 +9,6 @@ Milestone.objects.all().delete()
 projects = Project.objects.all()
 
 for project in projects:
-
     data = {}
     with open(
         settings.MONITORING_TEMPLATES_FOLDER

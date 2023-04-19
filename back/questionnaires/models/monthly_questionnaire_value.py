@@ -13,7 +13,6 @@ QUESTIONNAIRE_DATATYPE_CHOICES = [
 
 
 class MonthlyQuestionnaireValue(models.Model):
-
     id = models.AutoField(primary_key=True)
     questionnaire_instance = models.ForeignKey(
         MonthlyQuestionnaireInstance,

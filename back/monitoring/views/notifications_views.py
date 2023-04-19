@@ -141,8 +141,9 @@ def get_incomplete_monthly_certification_notifications(filters, user):
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})"
-                .format(user_id=user.id)
+                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
+                    user_id=user.id
+                )
             )
 
         cursor.execute(
@@ -206,8 +207,9 @@ def get_contracts_milestone_compliance_notifications(
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})"
-                .format(user_id=user.id)
+                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
+                    user_id=user.id
+                )
             )
 
         cursor.execute(

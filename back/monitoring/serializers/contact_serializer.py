@@ -26,7 +26,6 @@ class ContactListSerializer(serializers.ListSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
-
     id = serializers.IntegerField(allow_null=True)
     gender_name = serializers.SerializerMethodField()
     is_staff = serializers.SerializerMethodField()

@@ -5,7 +5,6 @@ from monitoring.models.location import Locality
 
 
 class Provider(models.Model):
-
     id = models.AutoField(primary_key=True)
     name = models.CharField("Nombre", null=True, max_length=100)
     area = models.CharField("Área", max_length=50, null=True)

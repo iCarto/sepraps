@@ -64,7 +64,6 @@ def get_data(csv_input_file):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(
         description=(
             "Has hardcoded paths to a csv file that allows to create a mock database"

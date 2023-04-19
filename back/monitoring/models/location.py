@@ -4,7 +4,6 @@ from django.dispatch import receiver
 
 
 class Department(models.Model):
-
     code = models.CharField("Código", primary_key=True, max_length=10)
     name = models.CharField("Nombre", max_length=255)
 
@@ -18,7 +17,6 @@ class Department(models.Model):
 
 
 class District(models.Model):
-
     code = models.CharField("Código", primary_key=True, max_length=10)
     name = models.CharField("Nombre", max_length=255)
     department = models.ForeignKey(
@@ -42,7 +40,6 @@ class LocalityManager(models.Manager):
 
 
 class Locality(models.Model):
-
     objects = LocalityManager()
 
     code = models.CharField("Código", primary_key=True, max_length=10)

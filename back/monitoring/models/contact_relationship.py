@@ -10,7 +10,6 @@ class ContactRelationship(models.Model):
 
 
 class ProviderContact(ContactRelationship):
-
     entity = models.ForeignKey("monitoring.Provider", on_delete=models.CASCADE)
 
     class Meta:
@@ -18,7 +17,6 @@ class ProviderContact(ContactRelationship):
 
 
 class ContractorContact(ContactRelationship):
-
     entity = models.ForeignKey("monitoring.Contractor", on_delete=models.CASCADE)
 
     class Meta:
@@ -26,7 +24,6 @@ class ContractorContact(ContactRelationship):
 
 
 class ConstructionContractContact(ContactRelationship):
-
     entity = models.ForeignKey(
         "monitoring.ConstructionContract", on_delete=models.CASCADE
     )

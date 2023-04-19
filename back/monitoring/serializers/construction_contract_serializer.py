@@ -30,7 +30,6 @@ from rest_framework import serializers
 
 
 class ConstructionContractSerializer(serializers.ModelSerializer):
-
     financing_program = serializers.PrimaryKeyRelatedField(
         required=False, allow_null=True, queryset=FinancingProgram.objects.all()
     )
@@ -136,7 +135,6 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
     # OPERATIONS
 
     def create_monitoring_profile(self, monitoring_profile_key, validated_data):
-
         monitoring_profile_data = validated_data.pop(monitoring_profile_key, None)
         monitoring_profile = None
         if monitoring_profile_data:
@@ -147,7 +145,6 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         return monitoring_profile
 
     def create(self, validated_data):
-
         contractor_data = validated_data.pop("contractor", None)
         contacts = validated_data.pop("constructioncontractcontact_set", None)
 
@@ -172,7 +169,6 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
         contractor = None
         if contractor_data:
-
             if "id" in contractor_data and contractor_data["id"] is not None:
                 contractor = self.fields["contractor"].update(
                     Contractor.objects.get(pk=contractor_data["id"]), contractor_data
@@ -188,7 +184,6 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
 
     def update(self, instance, validated_data):
-
         self.update_contractor(instance, validated_data)
         self.update_contacts(instance, validated_data)
 
@@ -204,7 +199,6 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
 
 
 class ConstructionContractSummarySerializer(serializers.ModelSerializer):
-
     financing_program = FinancingProgramSerializer()
     contractor = ContractorSummarySerializer()
 

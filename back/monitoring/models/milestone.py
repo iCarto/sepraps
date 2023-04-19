@@ -11,7 +11,6 @@ PHASE_CHOICES = [
 
 
 class Milestone(models.Model):
-
     id = models.AutoField(primary_key=True)
     code = models.CharField("Código", max_length=50)
     name = models.CharField("Nombre", max_length=100)

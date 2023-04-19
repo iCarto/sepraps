@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Questionnaire(models.Model):
-
     QUESTIONNAIRE_CATEGORY_CHOICES = [("monthly", "Mensual")]
 
     code = models.CharField("Código", primary_key=True, max_length=50)

@@ -67,7 +67,6 @@ def update_extended_with_real_value(df):
 
 
 def include_percentages_over_expected(df):
-
     expected_value_total = get_last_value_from_serie(df["expected_values_acc"])
 
     df["expected_values_perc"] = df.apply(
@@ -204,7 +203,6 @@ def reorder_columns(df):
 
 
 def create_dataframe(datatype, index, real_values, expected_values, extended_values):
-
     if datatype == "integer":
         df = create_dataframe_integer(
             index, real_values, expected_values, extended_values
@@ -220,7 +218,6 @@ def create_dataframe(datatype, index, real_values, expected_values, extended_val
 
 
 def get_year_month_values(field_code, instances):
-
     year_month_values = {}
     for instance in instances:
         year_month = f"{instance.month}/{instance.year}"

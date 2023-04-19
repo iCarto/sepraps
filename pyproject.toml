@@ -1,7 +1,5 @@
 [tool.black]
 line-length = 88
-# Mejor ser explícitos con la versión de python y los strings
-target-version = ['py311']
 skip-string-normalization = false
 preview = false
 skip-magic-trailing-comma = true

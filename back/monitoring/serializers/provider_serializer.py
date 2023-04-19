@@ -9,7 +9,6 @@ from rest_framework import serializers
 
 
 class ProviderSerializer(serializers.ModelSerializer):
-
     id = serializers.IntegerField(allow_null=True, required=False)
     locality = LocalitySerializer()
     project = serializers.PrimaryKeyRelatedField(
@@ -25,7 +24,6 @@ class ProviderSerializer(serializers.ModelSerializer):
         extra_kwargs = {"project": {"write_only": True}}
 
     def create(self, validated_data):
-
         project = validated_data.pop("project", None)
         contacts = validated_data.pop("providercontact_set", None)
 
@@ -50,7 +48,6 @@ class ProviderSerializer(serializers.ModelSerializer):
         return provider
 
     def update(self, instance, validated_data):
-
         project = validated_data.pop("project", None)
 
         # calling to ContactProviderListSerializer.update() we can make all modifications

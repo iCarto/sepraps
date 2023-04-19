@@ -9,7 +9,6 @@ from rest_framework import serializers
 
 
 class ContractorSerializer(serializers.ModelSerializer):
-
     id = serializers.IntegerField(allow_null=True, required=False)
     contractor_type_name = serializers.SerializerMethodField()
     contract = serializers.PrimaryKeyRelatedField(
@@ -46,7 +45,6 @@ class ContractorSerializer(serializers.ModelSerializer):
         return dominio_get_value(obj.contractor_type, self.context.get("domain"))
 
     def create(self, validated_data):
-
         contacts = validated_data.pop("contractorcontact_set", None)
 
         contract = validated_data.pop("contract", None)
@@ -65,7 +63,6 @@ class ContractorSerializer(serializers.ModelSerializer):
         return contractor
 
     def update(self, instance, validated_data):
-
         # calling to ContactProviderListSerializer.update() we can make all modifications
         # for contacts inside the provider
         contacts = validated_data.pop("contractorcontact_set", None)

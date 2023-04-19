@@ -3,7 +3,6 @@ from monitoring.models.financing_fund import FinancingFund
 
 
 class FinancingProgram(models.Model):
-
     id = models.AutoField(primary_key=True)
     short_name = models.CharField("Nombre corto", max_length=30)
     name = models.CharField("Nombre", max_length=100)

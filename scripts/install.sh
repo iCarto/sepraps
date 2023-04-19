@@ -41,7 +41,9 @@ python -m pip install --upgrade build
 
 pip install -r requirements-dev.txt
 npm install
-pre-commit install --install-hooks
+pre-commit clean
+pre-commit gc
+pre-commit install --install-hooks --overwrite
 
 # backend stuff
 bash scripts/install.back.sh

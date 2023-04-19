@@ -24,7 +24,6 @@ class ConstructionContractFilter(filters.FilterSet):
         return queryset
 
     def filter_by_search_text(self, queryset, name, search_text):
-
         return queryset.filter(Q(number__icontains=search_text))
 
     def filter_by_last_modified_items(self, queryset, name, last_modified_items):
