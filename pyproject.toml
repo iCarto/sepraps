@@ -19,8 +19,8 @@ lines_after_imports = 2
 filter_files = true
 skip_gitignore = true
 combine_as_imports = true # Revisar
-# known_third_party = ["bcrypt", "django", "selenium"]
-known_first_party = ["users", "app", "back", "documents", "log", "questionnaries"] # Ajustar en cada proyecto
+# known_third_party = []
+known_first_party = ["users", "app", "back", "documents", "log", "questionnaires"] # Ajustar en cada proyecto
 
 [build-system]
 requires = ["setuptools==65.5.0"]

@@ -1,9 +1,10 @@
+from rest_framework import serializers
+
 from app.models.construction_contract import ConstructionContract
 from app.models.contractor import Contractor
 from app.models.domain_entry import dominio_get_value
 from app.serializers.contact_relationship_serializer import ContactContractorSerializer
 from app.serializers.contact_serializer import ContactSerializer
-from rest_framework import serializers
 
 
 class ContractorSerializer(serializers.ModelSerializer):

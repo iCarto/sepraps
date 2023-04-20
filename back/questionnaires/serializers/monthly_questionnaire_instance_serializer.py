@@ -1,10 +1,11 @@
+from rest_framework import serializers
+
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
 )
 from questionnaires.serializers.monthly_questionnaire_value_serializer import (
     MonthlyQuestionnaireValueSerializer,
 )
-from rest_framework import serializers
 
 
 class MonthlyQuestionnaireInstanceListSerializer(serializers.ListSerializer):

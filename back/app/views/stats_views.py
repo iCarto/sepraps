@@ -1,4 +1,8 @@
 from django.db import connection
+from rest_framework.decorators import api_view, permission_classes, renderer_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 from app.models.contact import GENDER_CHOICES
 from app.models.milestone import PHASE_CHOICES
 from app.util import dictfetchall
@@ -7,9 +11,6 @@ from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
 )
 from questionnaires.renderers import DataFrameCSVFileRenderer, DataFrameJSONRenderer
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from users.constants import GROUP_EDICION, GROUP_GESTION
 from users.permissions import SupervisionPermission, VisualizacionPermission
 

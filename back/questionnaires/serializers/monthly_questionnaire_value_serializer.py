@@ -1,5 +1,6 @@
-from questionnaires.models.monthly_questionnaire_value import MonthlyQuestionnaireValue
 from rest_framework import serializers
+
+from questionnaires.models.monthly_questionnaire_value import MonthlyQuestionnaireValue
 
 
 class MonthlyQuestionnaireValueListSerializer(serializers.ListSerializer):

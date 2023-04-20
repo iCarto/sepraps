@@ -1,5 +1,6 @@
-from app.models.domain_entry import DomainEntry
 from rest_framework import serializers
+
+from app.models.domain_entry import DomainEntry
 
 
 class DomainEntrySerializer(serializers.ModelSerializer):

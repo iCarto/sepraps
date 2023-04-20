@@ -1,5 +1,5 @@
 from django.db.models import Prefetch
-from documents.serializers import MediaUrlSerializer
+from rest_framework import serializers
 
 # from django.db.models import F, Prefetch
 from app.models.construction_contract import ConstructionContract
@@ -16,10 +16,10 @@ from app.serializers.infraestructure_serializer import InfraestructureSerializer
 from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
 from app.serializers.provider_serializer import ProviderSerializer
+from documents.serializers import MediaUrlSerializer
 from questionnaires.serializers.questionnaire_serializer import (
     QuestionnaireShortSerializer,
 )
-from rest_framework import serializers
 
 
 class ProjectSerializer(serializers.ModelSerializer):

@@ -1,10 +1,11 @@
+from rest_framework import serializers
+
 from app.models.location import (
     Department,
     District,
     Locality,
     get_code_for_new_locality,
 )
-from rest_framework import serializers
 
 
 class LocalityListSerializer(serializers.ListSerializer):

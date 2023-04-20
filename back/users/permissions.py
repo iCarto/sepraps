@@ -1,5 +1,6 @@
 from django.contrib.auth.models import Group
 from rest_framework.permissions import BasePermission
+
 from users.constants import (
     GROUP_EDICION,
     GROUP_GESTION,

@@ -1,6 +1,8 @@
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
+
 from app.models.construction_contract import ConstructionContract
 from app.models.domain_entry import DomainEntry
 from app.serializers.construction_contract_serializer import (
@@ -8,7 +10,6 @@ from app.serializers.construction_contract_serializer import (
     ConstructionContractShortSerializer,
     ConstructionContractSummarySerializer,
 )
-from rest_framework import viewsets
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 

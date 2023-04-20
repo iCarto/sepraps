@@ -1,7 +1,8 @@
 from cgitb import lookup
 
-from documents.models import MediaNode
 from rest_framework import serializers
+
+from documents.models import MediaNode
 
 
 class HashHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):

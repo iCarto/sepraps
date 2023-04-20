@@ -1,9 +1,10 @@
+from rest_framework import serializers
+
 from app.models.location import Locality
 from app.models.project import Project
 from app.models.provider import Provider
 from app.serializers.contact_relationship_serializer import ContactProviderSerializer
 from app.serializers.locality_serializer import LocalitySerializer
-from rest_framework import serializers
 
 
 class ProviderSerializer(serializers.ModelSerializer):

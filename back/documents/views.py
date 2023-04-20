@@ -5,14 +5,15 @@ import zipfile
 from django.conf import settings
 from django.http import FileResponse
 from django.views.decorators.cache import cache_control
-from documents import storage
-from documents.models import MediaNode
-from documents.serializers import MediaLeafNodeSerializer, MediaNodeSerializer
-from documents.storage import delete, open, save
 from rest_framework import parsers, status, views
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+
+from documents import storage
+from documents.models import MediaNode
+from documents.serializers import MediaLeafNodeSerializer, MediaNodeSerializer
+from documents.storage import delete, open, save
 
 
 def get_filter(media_path):

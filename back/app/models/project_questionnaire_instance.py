@@ -1,4 +1,5 @@
 from django.db import models
+
 from app.models.project import Project
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,

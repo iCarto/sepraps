@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
+from rest_framework import routers
+
 from app.views import events_views, notifications_views, stats_views
 from app.views.constructrion_contract_viewset import ConstructionContractViewSet
 from app.views.contact_viewset import ContactViewSet
@@ -12,7 +14,6 @@ from app.views.locality_viewset import LocalityViewSet
 from app.views.milestone_viewset import MilestoneViewSet
 from app.views.project_viewset import ProjectViewSet
 from app.views.provider_viewset import ProviderViewSet
-from rest_framework import routers
 
 
 router = routers.DefaultRouter(trailing_slash=False)

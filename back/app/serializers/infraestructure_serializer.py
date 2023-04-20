@@ -1,7 +1,8 @@
+from rest_framework import serializers
+
 from app.models.infrastructure import Infrastructure
 from app.models.location import Locality
 from app.serializers.locality_serializer import LocalitySerializer
-from rest_framework import serializers
 
 
 class InfraestructureSerializer(serializers.ModelSerializer):

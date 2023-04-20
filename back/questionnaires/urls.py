@@ -1,9 +1,10 @@
 from django.urls import include, path
+from rest_framework import routers
+
 from questionnaires.views.monthly_questionnaire_instance_viewset import (
     MonthlyQuestionnaireInstanceView,
 )
 from questionnaires.views.questionnaire_viewset import QuestionnaireView
-from rest_framework import routers
 
 
 router = routers.DefaultRouter(trailing_slash=False)

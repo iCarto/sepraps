@@ -1,5 +1,6 @@
-from app.models.milestone import Milestone
 from rest_framework import serializers
+
+from app.models.milestone import Milestone
 
 
 class MilestoneSerializer(serializers.ModelSerializer):

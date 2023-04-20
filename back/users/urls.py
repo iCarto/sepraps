@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
+
 from users import jwt
 from users.api import GroupViewSet, UserViewSet
 

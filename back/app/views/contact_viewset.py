@@ -1,9 +1,10 @@
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import permissions, viewsets
+
 from app.models.contact import Contact
 from app.serializers.contact_serializer import ContactSerializer
-from rest_framework import permissions, viewsets
 
 
 class ContactFilter(filters.FilterSet):

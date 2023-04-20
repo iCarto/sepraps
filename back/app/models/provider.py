@@ -1,4 +1,5 @@
 from django.db import models
+
 from app.models.contact import Contact
 from app.models.contact_relationship import ProviderContact
 from app.models.location import Locality

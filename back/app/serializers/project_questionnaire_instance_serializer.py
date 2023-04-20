@@ -1,10 +1,11 @@
+from rest_framework import serializers
+
 from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
 from questionnaires.serializers.monthly_questionnaire_instance_serializer import (
     MonthlyQuestionnaireInstanceSerializer,
 )
 from questionnaires.serializers.questionnaire_serializer import QuestionnaireSerializer
-from rest_framework import serializers
 
 
 class ProjectQuestionnaireInstanceSerializer(serializers.ModelSerializer):

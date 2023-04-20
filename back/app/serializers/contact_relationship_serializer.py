@@ -1,3 +1,5 @@
+from rest_framework import serializers
+
 from app.models.contact import Contact
 from app.models.contact_relationship import (
     ConstructionContractContact,
@@ -6,7 +8,6 @@ from app.models.contact_relationship import (
 )
 from app.models.domain_entry import dominio_get_value
 from app.serializers.contact_serializer import ContactSerializer
-from rest_framework import serializers
 
 
 class ContactRelationshipListSerializer(serializers.ListSerializer):

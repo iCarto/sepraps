@@ -1,6 +1,7 @@
+from rest_framework import mixins, viewsets
+
 from app.models.milestone import Milestone
 from app.serializers.milestone_serializer import MilestoneSerializer
-from rest_framework import mixins, viewsets
 
 
 class MilestoneViewSet(

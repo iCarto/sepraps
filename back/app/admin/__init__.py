@@ -1,5 +1,6 @@
 from django.conf.locale.es import formats as es_formats
 from django.contrib import admin
+
 from app.admin.contact_admin import ContactAdmin
 from app.admin.entrada_dominio_admin import DomainEntryAdmin
 from app.admin.financing_fund_admin import FinancingFundAdmin

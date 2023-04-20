@@ -2,6 +2,7 @@ import locale
 from functools import reduce
 
 import pandas as pd
+
 from questionnaires.models.questionnaire import Questionnaire
 
 

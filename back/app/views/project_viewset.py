@@ -5,6 +5,10 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import permissions, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
 from app.models.domain_entry import DomainEntry
 from app.models.milestone import PHASE_CHOICES, Milestone
 from app.models.project import Project
@@ -21,9 +25,6 @@ from app.serializers.project_serializer import (
     ProjectSummarySerializer,
 )
 from questionnaires.models.questionnaire import Questionnaire
-from rest_framework import permissions, status, viewsets
-from rest_framework.decorators import action
-from rest_framework.response import Response
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 

@@ -1,5 +1,6 @@
-from questionnaires.models.questionnaire import Questionnaire
 from rest_framework import serializers
+
+from questionnaires.models.questionnaire import Questionnaire
 
 
 class QuestionnaireSerializer(serializers.ModelSerializer):

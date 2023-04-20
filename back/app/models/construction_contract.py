@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+
 from app.models.contact import Contact
 from app.models.contact_relationship import ConstructionContractContact
 from app.models.contractor import Contractor

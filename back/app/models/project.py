@@ -7,11 +7,12 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
-from documents.models import MediaNode
+
 from app.models.construction_contract import ConstructionContract
 from app.models.infrastructure import Infrastructure
 from app.models.location import Locality
 from app.models.provider import Provider
+from documents.models import MediaNode
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
 )
@@ -92,8 +93,8 @@ def post_create(sender, instance, created, *args, **kwargs):
     """
     Create project folder structure and project milestones from template
     """
-    from documents.models import create_folder_structure
     from app.models.milestone import create_project_milestones
+    from documents.models import create_folder_structure
 
     if not created:
         return

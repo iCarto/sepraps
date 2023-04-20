@@ -1,6 +1,8 @@
 import itertools
 
 from django.db.models import Prefetch
+from rest_framework import serializers
+
 from app.models.construction_contract import ConstructionContract
 from app.models.contact import Contact
 from app.models.contact_relationship import (
@@ -24,7 +26,6 @@ from app.serializers.financing_program_serializer import FinancingProgramSeriali
 from questionnaires.serializers.questionnaire_serializer import (
     QuestionnaireShortSerializer,
 )
-from rest_framework import serializers
 
 
 class ConstructionContractSerializer(serializers.ModelSerializer):

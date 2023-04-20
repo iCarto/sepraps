@@ -1,4 +1,5 @@
 from django.db import models
+
 from app.models.location import Locality
 
 
