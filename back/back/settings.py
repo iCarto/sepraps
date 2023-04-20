@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     "log",
     "documents",
     "questionnaires",
-    "monitoring",
+    "app",
 ]
 
 if DEBUG:
@@ -79,7 +79,7 @@ MIGRATION_MODULES = (
         "sessions": None,
         "users": None,
         "documents": None,
-        "monitoring": None,
+        "app": None,
         "questionnaires": None,
         "log": None,
     }
@@ -192,7 +192,7 @@ USE_TZ = True
 STATIC_ROOT = base("static")
 STATIC_URL = "/staticfiles/"
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (root("static"), root("front_build"), base("monitoring/static"))
+STATICFILES_DIRS = (root("static"), root("front_build"), base("app/static"))
 
 # Django SPA - simple setup for serving modern SPAs from Django
 # https://github.com/metakermit/django-spa
