@@ -183,7 +183,6 @@ locale.setlocale(locale.LC_ALL, "es_ES.utf-8")
 LANGUAGE_CODE = "es-PY"
 TIME_ZONE = "America/Asuncion"
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
