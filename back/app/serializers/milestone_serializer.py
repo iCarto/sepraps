@@ -6,7 +6,7 @@ from app.models.milestone import Milestone
 class MilestoneSerializer(serializers.ModelSerializer):
     phase_name = serializers.SerializerMethodField()
 
-    class Meta:
+    class Meta(object):
         model = Milestone
         fields = (
             "id",

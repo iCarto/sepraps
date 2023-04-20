@@ -41,7 +41,7 @@ class LocalitySerializer(serializers.ModelSerializer):
     department = serializers.PrimaryKeyRelatedField(queryset=Department.objects.all())
     department_name = serializers.CharField(source="department.name", read_only=True)
 
-    class Meta:
+    class Meta(object):
         model = Locality
         fields = (
             "code",

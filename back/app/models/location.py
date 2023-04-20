@@ -7,7 +7,7 @@ class Department(models.Model):
     code = models.CharField("Código", primary_key=True, max_length=10)
     name = models.CharField("Nombre", max_length=255)
 
-    class Meta:
+    class Meta(object):
         db_table = "department"
         verbose_name = "Departamento"
         verbose_name_plural = "Departamentos"
@@ -23,7 +23,7 @@ class District(models.Model):
         Department, on_delete=models.PROTECT, verbose_name=Department._meta.verbose_name
     )
 
-    class Meta:
+    class Meta(object):
         db_table = "district"
         verbose_name = "Distrito"
         verbose_name_plural = "Distritos"
@@ -51,7 +51,7 @@ class Locality(models.Model):
         District, on_delete=models.PROTECT, verbose_name=District._meta.verbose_name
     )
 
-    class Meta:
+    class Meta(object):
         db_table = "locality"
         verbose_name = "Localidad"
         verbose_name_plural = "Localidades"

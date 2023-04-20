@@ -22,7 +22,7 @@ class Contact(models.Model):
     comments = models.TextField("Observaciones", max_length=500)
     user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT, null=True)
 
-    class Meta:
+    class Meta(object):
         db_table = "contact"
         verbose_name = "Contacto"
         verbose_name_plural = "Contactos"

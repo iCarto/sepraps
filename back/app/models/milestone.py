@@ -31,7 +31,7 @@ class Milestone(models.Model):
     )
     ordering = models.IntegerField("Orden")
 
-    class Meta:
+    class Meta(object):
         db_table = "milestone"
         verbose_name = "Hito"
         verbose_name_plural = "Hitos"

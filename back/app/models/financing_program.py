@@ -12,7 +12,7 @@ class FinancingProgram(models.Model):
     )
     closed = models.BooleanField(blank=False, null=False, default=False)
 
-    class Meta:
+    class Meta(object):
         db_table = "financing_program"
         verbose_name = "Programa de financiación"
         verbose_name_plural = "Programas de financiación"

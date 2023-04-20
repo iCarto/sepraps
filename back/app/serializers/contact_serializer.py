@@ -31,7 +31,7 @@ class ContactSerializer(serializers.ModelSerializer):
     gender_name = serializers.SerializerMethodField()
     is_staff = serializers.SerializerMethodField()
 
-    class Meta:
+    class Meta(object):
         model = Contact
         fields = (
             "id",

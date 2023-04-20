@@ -22,7 +22,7 @@ class MediaNode(models.Model):
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     created_at = models.DateTimeField("Fecha de creación", null=True, auto_now_add=True)
 
-    class Meta:
+    class Meta(object):
         db_table = "media_node"
         verbose_name = "MediaNode"
         verbose_name_plural = "MediaNodes"
@@ -45,7 +45,7 @@ class DocumentManager(models.Manager):
 class Document(MediaNode):
     objects = DocumentManager()
 
-    class Meta:
+    class Meta(object):
         proxy = True
 
 
@@ -57,7 +57,7 @@ class FolderManager(models.Manager):
 class Folder(MediaNode):
     objects = FolderManager()
 
-    class Meta:
+    class Meta(object):
         proxy = True
 
 

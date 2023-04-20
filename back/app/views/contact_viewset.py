@@ -22,7 +22,7 @@ class ContactFilter(filters.FilterSet):
         posts = posts.split(",")
         return queryset.filter(post__in=posts)
 
-    class Meta:
+    class Meta(object):
         model = Contact
         fields = ("search",)
 

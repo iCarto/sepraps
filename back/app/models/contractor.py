@@ -14,7 +14,7 @@ class Contractor(models.Model):
     comments = models.TextField("Observaciones", max_length=500, null=True)
     contacts = models.ManyToManyField(Contact, through=ContractorContact)
 
-    class Meta:
+    class Meta(object):
         db_table = "contractor"
         verbose_name = "Contratista"
         verbose_name_plural = "Contratistas"

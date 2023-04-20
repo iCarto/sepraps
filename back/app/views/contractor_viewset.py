@@ -17,7 +17,7 @@ class ContractorFilter(filters.FilterSet):
             | Q(phone__icontains=search_text)
         )
 
-    class Meta:
+    class Meta(object):
         model = Contractor
         fields = ("search",)
 

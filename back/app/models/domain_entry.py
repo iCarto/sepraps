@@ -19,7 +19,7 @@ class DomainEntry(models.Model):
     parent = models.CharField("Padre", null=True, max_length=30)
     tooltip = models.TextField("Tooltip", null=True, max_length=255)
 
-    class Meta:
+    class Meta(object):
         db_table = "dominios"
         verbose_name = "Dominio"
         verbose_name_plural = "Dominios"

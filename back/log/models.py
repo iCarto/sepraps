@@ -12,7 +12,7 @@ class LogRequest(models.Model):
     exec_time = models.IntegerField(null=True)  # Time taken to create the response
     date = models.DateTimeField(auto_now=True)  # Date and time of request
 
-    class Meta:
+    class Meta(object):
         db_table = "log_request"
         verbose_name = "Log Request"
         verbose_name_plural = "Log Requests"

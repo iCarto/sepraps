@@ -44,7 +44,7 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
     )
     questionnaires = serializers.SerializerMethodField()
 
-    class Meta:
+    class Meta(object):
         model = ConstructionContract
         fields = (
             "id",

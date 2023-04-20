@@ -79,7 +79,7 @@ class Project(models.Model):
         "Fecha de última modificación", null=True, auto_now=True
     )
 
-    class Meta:
+    class Meta(object):
         db_table = "project"
         verbose_name = "Proyecto"
         verbose_name_plural = "Proyectos"

@@ -64,7 +64,7 @@ class ConstructionContract(models.Model):
         "Fecha de última modificación", null=True, auto_now=True
     )
 
-    class Meta:
+    class Meta(object):
         db_table = "construction_contract"
         verbose_name = "Contrato de obras"
         verbose_name_plural = "Contratos de obras"

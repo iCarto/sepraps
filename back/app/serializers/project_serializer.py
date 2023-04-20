@@ -40,7 +40,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     folder = serializers.SerializerMethodField()
     questionnaires = QuestionnaireShortSerializer(many=True, read_only=True)
 
-    class Meta:
+    class Meta(object):
         model = Project
         fields = (
             "id",

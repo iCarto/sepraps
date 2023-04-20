@@ -17,7 +17,7 @@ class ProviderSerializer(serializers.ModelSerializer):
         source="providercontact_set", many=True, required=False
     )
 
-    class Meta:
+    class Meta(object):
         model = Provider
         fields = ("id", "name", "area", "locality", "project", "contacts")
         extra_kwargs = {"project": {"write_only": True}}

@@ -13,7 +13,7 @@ class ProviderFilter(filters.FilterSet):
     def filter_by_search_text(self, queryset, name, search_text):
         return queryset.filter(Q(name__icontains=search_text))
 
-    class Meta:
+    class Meta(object):
         model = Provider
         fields = ("search",)
 

@@ -6,7 +6,7 @@ class FinancingFund(models.Model):
     short_name = models.CharField("Nombre corto", max_length=30)
     name = models.CharField("Nombre", max_length=100)
 
-    class Meta:
+    class Meta(object):
         db_table = "financing_fund"
         verbose_name = "Financiador"
         verbose_name_plural = "Financiadores"

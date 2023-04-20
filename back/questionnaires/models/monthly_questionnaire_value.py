@@ -30,7 +30,7 @@ class MonthlyQuestionnaireValue(models.Model):
     expected_value = models.CharField("Valor", null=True, max_length=255)
     value = models.CharField("Valor", null=True, max_length=255)
 
-    class Meta:
+    class Meta(object):
         db_table = "monthly_questionnaire_value"
         verbose_name = "Dato de cuestionario mensual"
         verbose_name_plural = "Datos de cuestionarios mensuales"

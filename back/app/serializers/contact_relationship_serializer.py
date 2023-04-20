@@ -74,7 +74,7 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
     )
     is_staff = serializers.SerializerMethodField()
 
-    class Meta:
+    class Meta(object):
         model = ProviderContact
         fields = (
             "id",

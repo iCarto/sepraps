@@ -14,5 +14,5 @@ class ProjectQuestionnaireInstance(models.Model):
     )
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.PROTECT)
 
-    class Meta:
+    class Meta(object):
         db_table = "project_questionnaire_instance"

@@ -12,7 +12,7 @@ class Questionnaire(models.Model):
     )
     fields = models.JSONField("Campos")
 
-    class Meta:
+    class Meta(object):
         db_table = "questionnaire"
         verbose_name = "Cuestionario"
         verbose_name_plural = "Cuestionarios"

@@ -17,7 +17,7 @@ class ContractorSerializer(serializers.ModelSerializer):
         source="contractorcontact_set", many=True, required=False
     )
 
-    class Meta:
+    class Meta(object):
         model = Contractor
         fields = (
             "id",

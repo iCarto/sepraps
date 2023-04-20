@@ -20,7 +20,7 @@ class MonthlyQuestionnaireInstance(models.Model):
     creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
     created_at = models.DateTimeField("Fecha de creación", null=True, auto_now_add=True)
 
-    class Meta:
+    class Meta(object):
         db_table = "monthly_questionnaire_instance"
         verbose_name = "Instancia de cuestionario mensual"
         verbose_name_plural = "Instancias de cuestionarios mensuales"

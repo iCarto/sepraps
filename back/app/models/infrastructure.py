@@ -17,7 +17,7 @@ class Infrastructure(models.Model):
     longitude = models.DecimalField(max_digits=8, decimal_places=5)
     altitude = models.IntegerField(null=True)
 
-    class Meta:
+    class Meta(object):
         db_table = "infrastructure"
         verbose_name = "Infraestructura"
         verbose_name_plural = "Infraestructuras"

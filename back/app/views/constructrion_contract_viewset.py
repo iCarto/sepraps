@@ -31,7 +31,7 @@ class ConstructionContractFilter(filters.FilterSet):
         limit = int(last_modified_items)
         return queryset.filter(closed=False).order_by("-updated_at")[:limit]
 
-    class Meta:
+    class Meta(object):
         model = ConstructionContract
         fields = ("search",)
 

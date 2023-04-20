@@ -13,7 +13,7 @@ class ProjectQuestionnaireInstanceSerializer(serializers.ModelSerializer):
     questionnaire = QuestionnaireSerializer(read_only=True)
     questionnaire_instances = MonthlyQuestionnaireInstanceSerializer(many=True)
 
-    class Meta:
+    class Meta(object):
         model = ProjectQuestionnaireInstance
         fields = ("project", "questionnaire", "questionnaire_instances")
 

@@ -12,7 +12,7 @@ class InfraestructureSerializer(serializers.ModelSerializer):
     )
     altitude = serializers.IntegerField(allow_null=True)
 
-    class Meta:
+    class Meta(object):
         model = Infrastructure
         fields = ("id", "locality", "latitude", "longitude", "altitude")
 

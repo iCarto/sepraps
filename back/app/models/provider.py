@@ -14,7 +14,7 @@ class Provider(models.Model):
     )
     contacts = models.ManyToManyField(Contact, through=ProviderContact)
 
-    class Meta:
+    class Meta(object):
         db_table = "provider"
         verbose_name = "Prestador"
         verbose_name_plural = "Prestadores"

@@ -7,6 +7,6 @@ from app.serializers.financing_fund_serializer import FinancingFundSerializer
 class FinancingProgramSerializer(serializers.ModelSerializer):
     financing_funds = FinancingFundSerializer(many=True, read_only=True)
 
-    class Meta:
+    class Meta(object):
         model = FinancingProgram
         fields = ("id", "short_name", "name", "financing_funds")
