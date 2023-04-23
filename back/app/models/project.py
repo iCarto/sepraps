@@ -1,4 +1,5 @@
 import json
+import os
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -100,14 +101,15 @@ def post_create(sender, instance, created, *args, **kwargs):
         return
 
     data = {}
-    with open(
-        settings.MONITORING_TEMPLATES_FOLDER
-        + "/project/"
-        + instance.project_type
-        + ".json",
-        "r",
-    ) as f:
+    data_path = os.path.join(settings.BASE_DIR, "app", "data", "project", f"{instance.project_type}.json")
+    with open(data_path) as f:
         data = json.load(f)
+        # settings.MONITORING_TEMPLATES_FOLDER
+        # + "/project/"
+        # + instance.project_type
+        # + ".json",
+
+
 
     root_folder = create_folder_structure(instance.code, data.get("folders", []))
     instance.folder = root_folder

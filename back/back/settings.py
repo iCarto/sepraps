@@ -266,7 +266,6 @@ CORS_EXPOSE_HEADERS = ["Content-Disposition", "Cache-Control"]
 
 AUTH_USER_MODEL = "users.User"
 
-MONITORING_TEMPLATES_FOLDER = env("MONITORING_TEMPLATES_FOLDER")
 
 if env("SENTRY_DSN"):
     import sentry_sdk
