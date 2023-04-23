@@ -1,6 +1,6 @@
 [
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "project_type",
@@ -9,7 +9,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "project_class",
@@ -18,7 +18,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "project_class",
@@ -27,7 +27,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "project_class",
@@ -36,7 +36,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "provider_area",
@@ -45,7 +45,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "provider_area",
@@ -54,7 +54,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -63,7 +63,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -72,7 +72,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -81,7 +81,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -90,7 +90,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -99,7 +99,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -108,7 +108,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -117,7 +117,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -126,7 +126,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -135,7 +135,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -144,7 +144,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -153,7 +153,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -162,7 +162,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -171,7 +171,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contractor_type",
@@ -180,7 +180,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contractor_type",
@@ -189,7 +189,7 @@
         }
     },
     {
-        "model": "monitoring.DomainEntry",
+        "model": "app.DomainEntry",
         "pk": null,
         "fields": {
             "category": "contractor_type",
@@ -198,7 +198,7 @@
         }
     },
     {
-        "model": "monitoring.financingprogram",
+        "model": "app.financingprogram",
         "pk": 1,
         "fields": {
             "short_name": "3601/OC-PR",
@@ -207,7 +207,7 @@
         }
     },
     {
-        "model": "monitoring.financingprogram",
+        "model": "app.financingprogram",
         "pk": 2,
         "fields": {
             "short_name": "COF 01/08",
@@ -216,7 +216,7 @@
         }
     },
     {
-        "model": "monitoring.financingfund",
+        "model": "app.financingfund",
         "pk": 1,
         "fields": {
             "short_name": "BID",
@@ -224,7 +224,7 @@
         }
     },
     {
-        "model": "monitoring.financingfund",
+        "model": "app.financingfund",
         "pk": 2,
         "fields": {
             "short_name": "MERCOSUR",
@@ -232,7 +232,7 @@
         }
     },
     {
-        "model": "monitoring.financingfund",
+        "model": "app.financingfund",
         "pk": 3,
         "fields": {
             "short_name": "AECID",
@@ -240,7 +240,7 @@
         }
     },
     {
-        "model": "monitoring.financingfund",
+        "model": "app.financingfund",
         "pk": 4,
         "fields": {
             "short_name": "Fondos locales",

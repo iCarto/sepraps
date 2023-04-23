@@ -1,6 +1,6 @@
 [
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 13,
         "fields": {
             "name": "Ing. Ricardo Díaz Martínez",
@@ -11,7 +11,7 @@
         }
     },
     {
-        "model": "monitoring.contractorcontact",
+        "model": "app.contractorcontact",
         "fields": {
             "entity": 2,
             "contact": 13,
@@ -19,7 +19,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 14,
         "fields": {
             "name": "Ing. Fernando Marcial Moreno Martínez",
@@ -30,7 +30,7 @@
         }
     },
     {
-        "model": "monitoring.contractorcontact",
+        "model": "app.contractorcontact",
         "fields": {
             "entity": 2,
             "contact": 14,
@@ -38,7 +38,7 @@
         }
     },
     {
-        "model": "monitoring.contractor",
+        "model": "app.contractor",
         "pk": 2,
         "fields": {
             "name": "CONSORCIO TAPE RORY",
@@ -50,7 +50,7 @@
         }
     },
     {
-        "model": "monitoring.ConstructionContract",
+        "model": "app.ConstructionContract",
         "pk": 2,
         "fields": {
             "number": "14/2019",
@@ -75,7 +75,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 5,
         "fields": {
             "locality": "0518001",
@@ -85,7 +85,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 5,
         "fields": {
             "name": "Junta de Saneamiento 3 de Febrero",
@@ -95,7 +95,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 5,
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -114,7 +114,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 6,
         "fields": {
             "locality": "0503100",
@@ -124,7 +124,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 6,
         "fields": {
             "name": "Junta de Saneamiento Cleto Romero",
@@ -133,7 +133,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 15,
         "fields": {
             "name": "Juana Costa",
@@ -144,7 +144,7 @@
         }
     },
     {
-        "model": "monitoring.providercontact",
+        "model": "app.providercontact",
         "fields": {
             "entity": 6,
             "contact": 15,
@@ -152,7 +152,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 16,
         "fields": {
             "name": "Estela Pradera",
@@ -163,7 +163,7 @@
         }
     },
     {
-        "model": "monitoring.providercontact",
+        "model": "app.providercontact",
         "fields": {
             "entity": 6,
             "contact": 16,
@@ -171,7 +171,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 17,
         "fields": {
             "name": "Marcos López",
@@ -182,7 +182,7 @@
         }
     },
     {
-        "model": "monitoring.providercontact",
+        "model": "app.providercontact",
         "fields": {
             "entity": 6,
             "contact": 17,
@@ -190,7 +190,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 6,
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -209,7 +209,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 7,
         "fields": {
             "locality": "0518310",
@@ -219,7 +219,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 7,
         "fields": {
             "name": "Junta de Saneamiento Ko'e Rory",
@@ -229,7 +229,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 7,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
@@ -248,7 +248,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 8,
         "fields": {
             "locality": "0502140",
@@ -258,7 +258,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 8,
         "fields": {
             "name": "Junta de Saneamiento Jakarei 3 Bocas",
@@ -268,7 +268,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 8,
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -287,7 +287,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 9,
         "fields": {
             "locality": "0519100",
@@ -297,7 +297,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 9,
         "fields": {
             "name": "Junta de Saneamiento Torin Cue",
@@ -307,7 +307,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 9,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -326,7 +326,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 10,
         "fields": {
             "locality": "0511485",
@@ -336,7 +336,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 10,
         "fields": {
             "name": "Junta de Saneamiento Ka'iho 3ra Línea",
@@ -346,7 +346,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 10,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -365,7 +365,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -374,7 +374,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -383,7 +383,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -392,7 +392,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -401,7 +401,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -410,7 +410,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -419,7 +419,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -428,7 +428,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,
@@ -437,7 +437,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 5,

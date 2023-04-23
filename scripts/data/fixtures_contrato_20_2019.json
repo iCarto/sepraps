@@ -1,6 +1,6 @@
 [
     {
-        "model": "monitoring.ConstructionContract",
+        "model": "app.ConstructionContract",
         "pk": 3,
         "fields": {
             "number": "20/2019",
@@ -25,7 +25,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 11,
         "fields": {
             "locality": "0401200",
@@ -35,7 +35,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 11,
         "fields": {
             "name": "Junta de Saneamiento Portrerito",
@@ -45,7 +45,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 11,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -64,7 +64,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 12,
         "fields": {
             "locality": "0407500",
@@ -74,7 +74,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 12,
         "fields": {
             "name": "Junta de Saneamiento Mayor Cue",
@@ -84,7 +84,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 12,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -103,7 +103,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 13,
         "fields": {
             "locality": "0407450",
@@ -113,7 +113,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 13,
         "fields": {
             "name": "Junta de Saneamiento Cerro Corá",
@@ -123,7 +123,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 13,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
@@ -142,7 +142,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 14,
         "fields": {
             "locality": "0401170",
@@ -152,7 +152,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 14,
         "fields": {
             "name": "Junta de Saneamiento Pisadera",
@@ -162,7 +162,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 14,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -181,7 +181,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 15,
         "fields": {
             "locality": "0730270",
@@ -191,7 +191,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 15,
         "fields": {
             "name": "Junta de Saneamiento Taguato ́i",
@@ -201,7 +201,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 15,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -220,7 +220,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 16,
         "fields": {
             "locality": "1008200",
@@ -230,7 +230,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 16,
         "fields": {
             "name": "Junta de Saneamiento Torocua í – Torocua",
@@ -240,7 +240,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 16,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",

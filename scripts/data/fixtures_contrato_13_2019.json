@@ -1,6 +1,6 @@
 [
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 1,
         "fields": {
             "name": "Ing. Cinthia Soledad Melgarejo",
@@ -11,7 +11,7 @@
         }
     },
     {
-        "model": "monitoring.contractorcontact",
+        "model": "app.contractorcontact",
         "fields": {
             "entity": 1,
             "contact": 1,
@@ -19,7 +19,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 2,
         "fields": {
             "name": "Arq. Sebastián Pérez Codas",
@@ -30,7 +30,7 @@
         }
     },
     {
-        "model": "monitoring.contractorcontact",
+        "model": "app.contractorcontact",
         "fields": {
             "entity": 1,
             "contact": 2,
@@ -38,7 +38,7 @@
         }
     },
     {
-        "model": "monitoring.contractor",
+        "model": "app.contractor",
         "pk": 1,
         "fields": {
             "name": "CONSORCIO YSAKA",
@@ -50,7 +50,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 3,
         "fields": {
             "name": "Prueba Residente Obra",
@@ -62,7 +62,7 @@
         }
     },
     {
-        "model": "monitoring.constructioncontractcontact",
+        "model": "app.constructioncontractcontact",
         "fields": {
             "entity": 1,
             "contact": 3,
@@ -70,7 +70,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 4,
         "fields": {
             "name": "Prueba Fiscal de Obra",
@@ -82,7 +82,7 @@
         }
     },
     {
-        "model": "monitoring.constructioncontractcontact",
+        "model": "app.constructioncontractcontact",
         "fields": {
             "entity": 1,
             "contact": 4,
@@ -90,7 +90,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 5,
         "fields": {
             "name": "Prueba Supervisor de Obra",
@@ -102,7 +102,7 @@
         }
     },
     {
-        "model": "monitoring.constructioncontractcontact",
+        "model": "app.constructioncontractcontact",
         "fields": {
             "entity": 1,
             "contact": 5,
@@ -110,7 +110,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 6,
         "fields": {
             "name": "Prueba Coordinador Social",
@@ -121,7 +121,7 @@
         }
     },
     {
-        "model": "monitoring.constructioncontractcontact",
+        "model": "app.constructioncontractcontact",
         "fields": {
             "entity": 1,
             "contact": 6,
@@ -129,7 +129,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 8,
         "fields": {
             "name": "Prueba Supervisor Social",
@@ -140,7 +140,7 @@
         }
     },
     {
-        "model": "monitoring.constructioncontractcontact",
+        "model": "app.constructioncontractcontact",
         "fields": {
             "entity": 1,
             "contact": 8,
@@ -148,7 +148,7 @@
         }
     },
     {
-        "model": "monitoring.ConstructionContract",
+        "model": "app.ConstructionContract",
         "pk": 1,
         "fields": {
             "number": "13/2019",
@@ -173,7 +173,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 1,
         "fields": {
             "locality": "0104330",
@@ -183,7 +183,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 1,
         "fields": {
             "name": "Junta de Saneamiento Loma Florida Costa Florida",
@@ -192,7 +192,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 9,
         "fields": {
             "name": "María Flores",
@@ -203,7 +203,7 @@
         }
     },
     {
-        "model": "monitoring.providercontact",
+        "model": "app.providercontact",
         "fields": {
             "entity": 1,
             "contact": 9,
@@ -211,7 +211,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 10,
         "fields": {
             "name": "Rodrigo García",
@@ -222,7 +222,7 @@
         }
     },
     {
-        "model": "monitoring.providercontact",
+        "model": "app.providercontact",
         "fields": {
             "entity": 1,
             "contact": 10,
@@ -230,7 +230,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 11,
         "fields": {
             "name": "Mercedes Sánchez",
@@ -241,7 +241,7 @@
         }
     },
     {
-        "model": "monitoring.providercontact",
+        "model": "app.providercontact",
         "fields": {
             "entity": 1,
             "contact": 11,
@@ -249,7 +249,7 @@
         }
     },
     {
-        "model": "monitoring.contact",
+        "model": "app.contact",
         "pk": 12,
         "fields": {
             "name": "Paula Álvarez",
@@ -260,7 +260,7 @@
         }
     },
     {
-        "model": "monitoring.providercontact",
+        "model": "app.providercontact",
         "fields": {
             "entity": 1,
             "contact": 12,
@@ -268,7 +268,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 1,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -287,7 +287,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 2,
         "fields": {
             "locality": "0104200",
@@ -297,7 +297,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 2,
         "fields": {
             "name": "Junta de Saneamiento Virgen del Camino",
@@ -307,7 +307,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 2,
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -326,7 +326,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 3,
         "fields": {
             "locality": "0104360",
@@ -336,7 +336,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 3,
         "fields": {
             "name": "Junta de Saneamiento Ycua Porá - Cañada Lourdes",
@@ -346,7 +346,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 3,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
@@ -365,7 +365,7 @@
         }
     },
     {
-        "model": "monitoring.infrastructure",
+        "model": "app.infrastructure",
         "pk": 4,
         "fields": {
             "locality": "0218880",
@@ -375,7 +375,7 @@
         }
     },
     {
-        "model": "monitoring.provider",
+        "model": "app.provider",
         "pk": 4,
         "fields": {
             "name": "Junta de Saneamiento San Miguel del Norte",
@@ -385,7 +385,7 @@
         }
     },
     {
-        "model": "monitoring.project",
+        "model": "app.project",
         "pk": 4,
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
@@ -404,7 +404,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 1,
@@ -413,7 +413,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 1,
@@ -422,7 +422,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 1,
@@ -431,7 +431,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 1,
@@ -440,7 +440,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 1,
@@ -449,7 +449,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 1,
@@ -458,7 +458,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 2,
@@ -467,7 +467,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 2,
@@ -476,7 +476,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 2,
@@ -485,7 +485,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 2,
@@ -494,7 +494,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 2,
@@ -503,7 +503,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 2,
@@ -512,7 +512,7 @@
         }
     },
     {
-        "model": "monitoring.ProjectQuestionnaireInstance",
+        "model": "app.ProjectQuestionnaireInstance",
         "pk": null,
         "fields": {
             "project": 1,
