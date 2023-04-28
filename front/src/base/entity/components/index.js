@@ -5,5 +5,6 @@ export {default as EntityViewPanel} from "./EntityViewPanel";
 export {default as EntityCreateButton} from "./EntityCreateButton";
 export {default as EntityChangeView} from "./EntityChangeView";
 export {default as EntityCardsList} from "./EntityCardsList";
+export {default as EntityCard} from "./EntityCard";
 // export {default as EntityListMap} from "./EntityListMap";
 export * from "./EntityLayer";
