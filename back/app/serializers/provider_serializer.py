@@ -6,7 +6,6 @@ from app.models.provider import Provider
 from app.serializers.contact_relationship_serializer import ContactProviderSerializer
 from app.serializers.locality_serializer import LocalitySerializer
 
-
 class ProviderSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(allow_null=True, required=False)
     locality = LocalitySerializer()
@@ -16,10 +15,23 @@ class ProviderSerializer(serializers.ModelSerializer):
     contacts = ContactProviderSerializer(
         source="providercontact_set", many=True, required=False
     )
+    creation_user = serializers.CharField(
+        source="creation_user.username", required=False
+    )
 
     class Meta(object):
         model = Provider
-        fields = ("id", "name", "area", "locality", "project", "contacts")
+        fields = (
+            "id",
+            "name",
+            "area",
+            "locality",
+            "project",
+            "contacts",
+            "creation_user",
+            "created_at",
+            "updated_at",
+        )
         extra_kwargs = {"project": {"write_only": True}}
 
     def create(self, validated_data):

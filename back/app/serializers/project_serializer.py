@@ -27,7 +27,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     closed = serializers.BooleanField(required=False)
     project_type_name = serializers.SerializerMethodField(required=False)
     project_class_name = serializers.SerializerMethodField(required=False)
-    main_infrastructure = InfraestructureSerializer()
+    main_infrastructure = InfrastructureSerializer()
     linked_localities = LocalitySerializer(many=True)
     provider = ProviderSerializer(required=False, allow_null=True)
     construction_contract = serializers.PrimaryKeyRelatedField(

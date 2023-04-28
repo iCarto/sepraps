@@ -26,3 +26,7 @@ class ProviderViewSet(viewsets.ModelViewSet):
     filterset_class = ProviderFilter
     serializer_class = ProviderSerializer
     permission_classes = [permissions.DjangoModelPermissions]
+
+    def perform_create(self, serializer):
+        serializer.validated_data["creation_user"] = self.request.user
+        return super().perform_create(serializer)
