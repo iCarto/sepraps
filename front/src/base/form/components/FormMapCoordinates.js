@@ -15,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 /// TO-DO: Adapt based on GADPO
 
-const FormMapCoordinates = ({name: propsName, orientation = "vertical"}) => {
+const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
     const {getValues, reset} = useFormContext();
 
     const [utmCoords, setUtmCoords] = useState({x: "", y: "", zone: 21});
@@ -87,8 +87,8 @@ const FormMapCoordinates = ({name: propsName, orientation = "vertical"}) => {
 
     return (
         <>
-            <Grid container justifyContent="space-between" spacing={2} sx={{mb: 2}}>
-                <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
+            <Grid container justifyContent="space-between" spacing={1} sx={{mb: 1}}>
+                <Grid item xs={12} md={orientation === "column" ? 12 : 4}>
                     <FormControl fullWidth>
                         <TextField
                             value={utmCoords.x}
@@ -107,7 +107,7 @@ const FormMapCoordinates = ({name: propsName, orientation = "vertical"}) => {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
+                <Grid item xs={12} md={orientation === "column" ? 12 : 4}>
                     <FormControl fullWidth>
                         <TextField
                             value={utmCoords.y}
@@ -126,16 +126,16 @@ const FormMapCoordinates = ({name: propsName, orientation = "vertical"}) => {
                         />
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} md={orientation === "vertical" ? 12 : 4}>
+                <Grid item xs={12} md={orientation === "column" ? 12 : 4}>
                     <FormControl fullWidth>
-                        <InputLabel id="label-zone" shrink>
+                        <InputLabel id="utm-zone" shrink>
                             Zona UTM
                         </InputLabel>
                         <Select
                             labelId="label-zone"
                             id="zone"
                             value={utmCoords.zone}
-                            label="Age"
+                            label="utm-zone"
                             onChange={event => {
                                 handleFormChangeZone(utmCoords, event.target.value);
                             }}

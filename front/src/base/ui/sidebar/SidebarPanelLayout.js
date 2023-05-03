@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Divider from "@mui/material/Divider";
 
-const SidebarPanel = ({
+const SidebarPanelLayout = ({
     children,
     sidebarTitle,
     mainActionText = "",
@@ -102,4 +102,4 @@ const SidebarPanel = ({
     );
 };
 
-export default SidebarPanel;
+export default SidebarPanelLayout;

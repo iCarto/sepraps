@@ -1,16 +1,18 @@
 import {useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 
-import {useNavigateWithReload} from "../../navigation/hooks";
-import {AuthAction} from "../../user/components";
-import {SidebarAction, SidebarPanelLayout} from "../../ui/sidebar";
-import {AlertError} from "../../error/components";
-import {DeleteItemDialog} from "../../delete/components";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {
+    SidebarDeleteAction,
+    SidebarEditAction,
+    SidebarPanelLayout,
+    SidebarRemoveAction,
+} from "base/ui/sidebar";
+import {AlertError} from "base/error/components";
+import {DeleteItemDialog, RemoveItemDialog} from "base/delete/components";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import LaunchIcon from "@mui/icons-material/Launch";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 
 const EntityViewPanel = ({
     children,
@@ -21,19 +23,31 @@ const EntityViewPanel = ({
     onClickEditAction = null,
     showDeleteAction = false,
     onClickDeleteAction = null,
+    showRemoveAction = false,
+    onClickRemoveAction = null,
     deleteService = null,
+    onClickCloseSidebar = null,
+    createEntityObject = null,
+    entity = {},
+    subEntityName = "",
+    subEntityList = [],
 }) => {
     const {idInfoPanel} = useParams();
     const navigate = useNavigateWithReload();
 
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [error, setError] = useState("");
 
     const location = useLocation();
     const basePath = location.pathname.split("/info/")[0];
 
     const handleClose = () => {
-        navigate(`${basePath}`);
+        if (onClickCloseSidebar) {
+            onClickCloseSidebar();
+        } else {
+            navigate(`${basePath}`);
+        }
     };
 
     const handleClickDetail = () => {
@@ -56,6 +70,10 @@ const EntityViewPanel = ({
         setIsDeleteDialogOpen(true);
     };
 
+    const handleClickRemove = () => {
+        setIsRemoveDialogOpen(true);
+    };
+
     const handleDelete = () => {
         if (onClickDeleteAction) {
             onClickDeleteAction(idInfoPanel);
@@ -70,38 +88,22 @@ const EntityViewPanel = ({
         }
     };
 
+    const handleRemove = updatedEntity => {
+        onClickRemoveAction(updatedEntity);
+    };
+
     const sidebarActions = [];
 
-    if (showDeleteAction) {
-        sidebarActions.push(
-            <AuthAction
-                key="remove-entity"
-                roles={[]} // TODO: Bootstraped permissions
-            >
-                <SidebarAction
-                    name="remove-entity"
-                    text="Eliminar"
-                    icon={<DeleteIcon color="error" />}
-                    onClick={() => handleClickDelete()}
-                />
-            </AuthAction>
-        );
+    if (showEditAction) {
+        sidebarActions.push(<SidebarEditAction onClick={handleClickEdit} />);
     }
 
-    if (showEditAction) {
-        sidebarActions.push(
-            <AuthAction
-                key="edit-entity"
-                roles={[]} // TODO: Bootstraped permissions
-            >
-                <SidebarAction
-                    name="edit-entity"
-                    text="Modificar"
-                    icon={<EditIcon />}
-                    onClick={() => handleClickEdit()}
-                />
-            </AuthAction>
-        );
+    if (showRemoveAction) {
+        sidebarActions.push(<SidebarRemoveAction onClick={handleClickRemove} />);
+    }
+
+    if (showDeleteAction) {
+        sidebarActions.push(<SidebarDeleteAction onClick={handleClickDelete} />);
     }
 
     return (
@@ -126,6 +128,16 @@ const EntityViewPanel = ({
                     </Button>
                 </Grid>
             )}
+            <RemoveItemDialog
+                isDialogOpen={isRemoveDialogOpen}
+                setIsDialogOpen={setIsRemoveDialogOpen}
+                onRemove={handleRemove}
+                itemToRemove={idInfoPanel}
+                createEntityObject={createEntityObject}
+                entity={entity}
+                subEntityList={subEntityList}
+                subEntityName={subEntityName}
+            />
             <DeleteItemDialog
                 isDialogOpen={isDeleteDialogOpen}
                 setIsDialogOpen={setIsDeleteDialogOpen}

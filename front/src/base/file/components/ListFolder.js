@@ -40,16 +40,16 @@ const ListFolder = ({
 
     useEffect(() => {
         setLoading(true);
-        DocumentService.get(folderPath).then(element => {
-            setFolderElement(element);
-            setLoading(false);
-        });
+        // DocumentService.get(folderPath).then(element => {
+        //     setFolderElement(element);
+        //     setLoading(false);
+        // });
     }, [folderPath, location.state?.lastRefreshDate]);
 
     const reloadFolder = file => {
-        DocumentService.get(folderPath).then(folder => {
-            setFolderElement(folder);
-        });
+        // DocumentService.get(folderPath).then(folder => {
+        //     setFolderElement(folder);
+        // });
     };
 
     const downloadFolder = () => {

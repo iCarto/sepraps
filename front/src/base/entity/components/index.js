@@ -3,6 +3,7 @@ export {default as EntityCounter} from "./EntityCounter";
 export {default as EntityUpdatePanel} from "./EntityUpdatePanel";
 export {default as EntityViewPanel} from "./EntityViewPanel";
 export {default as EntityCreateButton} from "./EntityCreateButton";
+export {default as EntityAddButtonGroup} from "./EntityAddButtonGroup";
 export {default as EntityChangeView} from "./EntityChangeView";
 export {default as EntityCardsList} from "./EntityCardsList";
 export {default as EntityCard} from "./EntityCard";

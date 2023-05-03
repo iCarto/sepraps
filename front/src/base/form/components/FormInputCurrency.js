@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useController, useFormContext} from "react-hook-form";
+import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 import {NumberUtil} from "base/format/utilities";
 
 import TextField from "@mui/material/TextField";
@@ -38,7 +39,7 @@ const FormInputCurrency = ({name: propsName, label, rules = {}, disabled = false
     };
 
     let inputProps = {
-        endAdornment: <InputAdornment position="end">Gs.</InputAdornment>,
+        endAdornment: <InputAdornment position="end">{CURRENCY_SYMBOL}</InputAdornment>,
     };
 
     return (

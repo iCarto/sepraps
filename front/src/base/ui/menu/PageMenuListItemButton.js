@@ -14,11 +14,18 @@ const PageMenuListItemButton = ({to, text, icon = null, ...props}) => {
     let resolved = useResolvedPath(to);
     let location = useLocation();
 
-    const targetUrl = resolved.pathname.substring(1);
-    const currentUrl = location.pathname;
-    const currentUrlSlugs = currentUrl.split("/");
+    const resolvedPath = resolved.pathname;
+    const targetUrlForPrimaryMenu = resolvedPath.substring(1);
+    const targetUrlForSecondaryMenu = resolvedPath.substring(
+        resolvedPath.lastIndexOf("/") + 1
+    );
+    const currentUrlSlugs = location.pathname.split("/");
     const currentUrlFirstSlugs = [currentUrlSlugs[1], currentUrlSlugs[2]].join("/");
-    const selected = currentUrlFirstSlugs === targetUrl;
+    const currentUrlLastSlug = currentUrlSlugs.pop();
+
+    const isOptionSelected =
+        targetUrlForPrimaryMenu === currentUrlFirstSlugs ||
+        targetUrlForSecondaryMenu === currentUrlLastSlug;
 
     return (
         <>
@@ -26,13 +33,13 @@ const PageMenuListItemButton = ({to, text, icon = null, ...props}) => {
                 component={Link}
                 to={to}
                 {...props}
-                selected={selected}
+                selected={isOptionSelected}
                 sx={{
                     bgcolor: theme.palette.menu.primary.header.background,
-                    borderLeft: selected
+                    borderLeft: isOptionSelected
                         ? `5px solid ${theme.palette.menu.primary.header.text}`
                         : null,
-                    fontWeight: selected ? "bold" : "inherit",
+                    fontWeight: isOptionSelected ? "bold" : "inherit",
                 }}
             >
                 {icon && (

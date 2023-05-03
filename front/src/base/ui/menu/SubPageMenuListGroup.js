@@ -25,6 +25,7 @@ const SubPageMenuListGroup = ({headerText = "", headerIcon = null, items = []}) 
 
     const submenuItems = items.map((menuListSubItem, index) => (
         <SubPageMenuListGroupItemButton
+            key={index}
             text={menuListSubItem.text}
             to={menuListSubItem.to}
         />

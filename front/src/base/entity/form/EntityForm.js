@@ -14,7 +14,7 @@ const EntityForm = ({children, onSubmit, onCancel = null}) => {
                 )}
                 <Grid item>
                     <Button variant="contained" onClick={() => onSubmit()}>
-                        Gardar
+                        Guardar
                     </Button>
                 </Grid>
             </Grid>

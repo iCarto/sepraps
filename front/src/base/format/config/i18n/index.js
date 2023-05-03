@@ -13,6 +13,7 @@ export {es as USED_LOCALE} from "date-fns/locale";
 
 // Number formats
 
+export const CURRENCY_SYMBOL = "Gs.";
 export const localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
     style: "currency",
     currency: "PYG",

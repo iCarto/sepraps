@@ -9,16 +9,17 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 
 const FormStepper = ({onSubmit, onCancel = null, steps = [], stepComponents = []}) => {
+    const {handleSubmit, trigger} = useFormContext();
+    const [activeStep, setActiveStep] = useState(0);
+
+    const moreThanOneStep = steps.length > 1;
+
     function getStepContent(step) {
         if (stepComponents[step]) {
             return stepComponents[step];
         }
         return null;
     }
-
-    const {handleSubmit, trigger} = useFormContext();
-
-    const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = async () => {
         const isStepValid = await trigger();
@@ -37,16 +38,20 @@ const FormStepper = ({onSubmit, onCancel = null, steps = [], stepComponents = []
 
     return (
         <Box>
-            <Stepper activeStep={activeStep}>
-                {steps.map(label => {
-                    return (
-                        <Step key={label}>
-                            <StepLabel>{label}</StepLabel>
-                        </Step>
-                    );
-                })}
-            </Stepper>
-            <Container sx={{p: 3}}>{getStepContent(activeStep)}</Container>
+            {moreThanOneStep ? (
+                <Stepper activeStep={activeStep}>
+                    {steps.map(label => {
+                        return (
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+            ) : null}
+            <Container sx={{p: moreThanOneStep ? 3 : 0}}>
+                {getStepContent(activeStep)}
+            </Container>
             <Box sx={{display: "flex", flexDirection: "row", pt: 2}}>
                 <Button color="primary" onClick={handleBack}>
                     {activeStep === 0 ? "Cancelar" : "Atrás"}

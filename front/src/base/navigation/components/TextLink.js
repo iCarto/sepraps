@@ -4,7 +4,7 @@ import useTheme from "@mui/material/styles/useTheme";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
-const TextLink = ({text, to}) => {
+const TextLink = ({text, to, textStyleProps = {}}) => {
     const theme = useTheme();
     const textLinkStyle = {
         display: "inline-block",
@@ -21,8 +21,10 @@ const TextLink = ({text, to}) => {
     };
 
     return (
-        <Link component={HashLink} to={to} smooth style={textLinkStyle}>
-            <Typography sx={textLinkHoverStyle}>{text}</Typography>
+        <Link component={HashLink} to={to} smooth style={{...textLinkStyle}}>
+            <Typography sx={{...textLinkHoverStyle, ...textStyleProps}}>
+                {text}
+            </Typography>
         </Link>
     );
 };

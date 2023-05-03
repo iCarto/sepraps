@@ -23,7 +23,7 @@ const ViewDocumentPanel = () => {
     const {ROLES} = useAuth();
 
     const params = useParams();
-    const {projectId} = useParams();
+    const {id: projectId} = useParams();
 
     const [folderElement, setFolderElement] = useState(null);
     const [loading, setLoading] = useState(false);

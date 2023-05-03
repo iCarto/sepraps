@@ -1,10 +1,10 @@
-// import { AuthApiService } from "../../api/service";
+// import {AuthApiService} from "base/api/service";
 import {
     createDocument,
     createFolder,
     document_api_adapter,
     folder_api_adapter,
-} from "../../file/model";
+} from "base/file/model";
 
 const basePath = "/api/documents/";
 

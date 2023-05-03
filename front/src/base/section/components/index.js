@@ -6,3 +6,4 @@ export {default as SectionField} from "./SectionField";
 export {default as SectionLabel} from "./SectionLabel";
 export {default as SectionActionsMenu} from "./SectionActionsMenu";
 export {default as SectionFieldHelpText} from "./SectionFieldHelpText";
+export {default as SectionFieldEditButton} from "./SectionFieldEditButton";
