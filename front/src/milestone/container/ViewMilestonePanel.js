@@ -2,19 +2,20 @@ import {useEffect, useState} from "react";
 import {useNavigate, useOutletContext, useParams} from "react-router-dom";
 
 import {MilestoneService} from "milestone/service";
-import {SidebarPanel} from "base/ui/sidebar";
 import {MilestoneSection} from "milestone/presentational";
+import {EntityViewPanel} from "base/entity/components";
 
 const ViewMilestonePanel = () => {
-    const {milestoneId} = useParams();
     const navigate = useNavigate();
+    const [milestone, setMilestone] = useState(null);
+
+    const {milestoneId} = useParams();
+
     let project;
     [project] = useOutletContext();
 
-    const [milestone, setMilestone] = useState(null);
-
     useEffect(() => {
-        MilestoneService.getMilestone(milestoneId).then(milestone => {
+        MilestoneService.get(milestoneId).then(milestone => {
             setMilestone(milestone);
         });
     }, [milestoneId]);
@@ -24,12 +25,15 @@ const ViewMilestonePanel = () => {
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Detalle del hito"
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <MilestoneSection milestone={milestone} />
-        </SidebarPanel>
+        milestone && (
+            <EntityViewPanel
+                title="Detalle del hito"
+                showDetailButton={false}
+                onClickCloseSidebar={handleCloseSidebar}
+            >
+                {<MilestoneSection milestone={milestone} />}
+            </EntityViewPanel>
+        )
     );
 };
 

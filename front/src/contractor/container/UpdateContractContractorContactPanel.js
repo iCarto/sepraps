@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
+
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractorService} from "contractor/service";
 import {createContractor} from "contractor/model";
-import {AlertError} from "base/error/components";
 
-import {SidebarPanel} from "base/ui/sidebar";
 import {ContactForm, ContactFormSearch} from "contact/presentational";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const UpdateContractContractorContactPanel = () => {
     const {action, contactId} = useParams();
@@ -17,6 +17,17 @@ const UpdateContractContractorContactPanel = () => {
 
     let contract;
     [contract] = useOutletContext();
+
+    const basePath = `/contracts/${contract.id}/summary`;
+
+    const selectedContact =
+        action === "edit"
+            ? contract.contractor.contacts.find(
+                  contact => contact.id === parseInt(contactId)
+              )
+            : null;
+
+    const allowedPosts = ["responsable_contratista", "residente_obra"];
 
     const handleSubmit = data => {
         const contacts = [...contract.contractor.contacts];
@@ -49,7 +60,7 @@ const UpdateContractContractorContactPanel = () => {
     const handleFormSubmit = contractor => {
         ContractorService.updateContractor(contractor)
             .then(() => {
-                navigate(`/contracts/${contract.id}/summary`, true);
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log(error);
@@ -57,38 +68,30 @@ const UpdateContractContractorContactPanel = () => {
             });
     };
 
-    const handleCloseSidebar = () => {
-        navigate(`/contracts/${contract.id}/summary`);
+    const handleFormCancel = () => {
+        navigate(basePath);
     };
 
-    const selectedContact =
-        action === "edit"
-            ? contract.contractor.contacts.find(
-                  contact => contact.id === parseInt(contactId)
-              )
-            : null;
-
-    const allowedPosts = ["responsable_contratista", "residente_obra"];
-
     return (
-        <SidebarPanel
-            sidebarTitle="Añadir contacto"
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            {action === "search" ? (
-                <ContactFormSearch
-                    allowedPosts={allowedPosts}
-                    onSubmit={handleSubmit}
-                />
-            ) : (
-                <ContactForm
-                    contact={selectedContact}
-                    allowedPosts={allowedPosts}
-                    onSubmit={handleSubmit}
-                />
-            )}
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Añadir contacto"
+            form={
+                action === "search" ? (
+                    <ContactFormSearch
+                        allowedPosts={allowedPosts}
+                        onSubmit={handleSubmit}
+                    />
+                ) : (
+                    <ContactForm
+                        contact={selectedContact}
+                        allowedPosts={allowedPosts}
+                        onSubmit={handleSubmit}
+                    />
+                )
+            }
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

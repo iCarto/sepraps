@@ -1,4 +1,5 @@
 export {default as MilestoneFormFields} from "./MilestoneFormFields";
+export {default as MilestoneForm} from "./MilestoneForm";
 export {default as MilestonePhase} from "./MilestonePhase";
 export {default as MilestonePath} from "./MilestonePath";
 export {default as MilestonePoint} from "./MilestonePoint";

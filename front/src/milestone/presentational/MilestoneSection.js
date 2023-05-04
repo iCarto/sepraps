@@ -38,7 +38,7 @@ const MilestoneSection = ({milestone}) => {
         milestone && (
             <SectionCard title={milestone.short_name}>
                 <SectionField
-                    label="Fecha de cumplimiento:"
+                    label="Fecha de cumplimiento"
                     value={
                         isMilestoneCompleted
                             ? DateUtil.formatDate(milestone.compliance_date)

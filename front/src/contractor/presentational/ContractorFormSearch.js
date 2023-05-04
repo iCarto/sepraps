@@ -5,7 +5,7 @@ import {ContractorSearchAutocomplete, ContractorSummary} from ".";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
-const ContractorFormSearch = ({onSelect = null, onCancel = null}) => {
+const ContractorFormSearch = ({onSubmit = null, onCancel = null}) => {
     const [existingContractor, setExistingContractor] = useState(null);
 
     const handleSelectExistingContractor = contractor => {
@@ -31,13 +31,13 @@ const ContractorFormSearch = ({onSelect = null, onCancel = null}) => {
                             Cancelar
                         </Button>
                     )}
-                    {onSelect && (
+                    {onSubmit && (
                         <Button
                             variant="contained"
                             color="primary"
                             sx={{ml: 3}}
                             onClick={() => {
-                                onSelect(existingContractor);
+                                onSubmit(existingContractor);
                             }}
                         >
                             Añadir

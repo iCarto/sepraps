@@ -1,4 +1,3 @@
-import {Fragment} from "react";
 import {useDomain} from "sepraps/domain/provider";
 import {
     FormCheckbox,
@@ -21,7 +20,7 @@ const ContactFormFields = ({
         : [...contactPosts];
 
     return (
-        <Fragment>
+        <>
             <FormInputText
                 name="name"
                 label="Nombre del contacto"
@@ -66,7 +65,7 @@ const ContactFormFields = ({
             <FormInputText name="email" label="E-mail" />
             <FormTextArea name="comments" label="Observaciones" />
             {showIsStaff && <FormCheckbox name="is_staff" label="Personal interno" />}
-        </Fragment>
+        </>
     );
 };
 

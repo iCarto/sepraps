@@ -4,7 +4,7 @@ import {AuthApiService} from "../../base/api/service";
 const basePath = "/api/monitoring/contacts";
 
 const ContactService = {
-    getContacts() {
+    getAll() {
         return AuthApiService.get(basePath).then(response => {
             return createContacts(contacts_api_adapter(response));
         });
@@ -18,9 +18,9 @@ const ContactService = {
             return createContacts(contacts_api_adapter(response));
         });
     },
-    deleteContact(contactId) {
+    delete(contactId) {
         return AuthApiService.delete(basePath + "/" + contactId).then(response => {
-            console.log(response);
+            console.log({deleted: response});
         });
     },
 };

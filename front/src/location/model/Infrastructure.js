@@ -9,10 +9,10 @@ const infrastructure_api_adapter = infrastructure => {
 const infrastructure_view_adapter = infrastructure => {
     // in front-end falsy values are "" or undefined or null
     infrastructure["latitude"] = !!infrastructure["latitude"]
-        ? NumberUtil.parseFloatOrNull(infrastructure["latitude"])
+        ? NumberUtil.parseFloat(infrastructure["latitude"])
         : null;
     infrastructure["longitude"] = !!infrastructure["longitude"]
-        ? NumberUtil.parseFloatOrNull(infrastructure["longitude"])
+        ? NumberUtil.parseFloat(infrastructure["longitude"])
         : null;
     infrastructure["altitude"] = !!infrastructure["altitude"]
         ? NumberUtil.parseIntOrNull(infrastructure["altitude"])
