@@ -1,6 +1,6 @@
-# from cmath import log
 from itertools import chain
 
+from django.db import models
 from django.db.models import Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
@@ -31,6 +31,11 @@ from users.constants import GROUP_EDICION, GROUP_GESTION
 class ProjectFilter(filters.FilterSet):
     status = filters.CharFilter(method="filter_by_status")
     search = filters.CharFilter(method="filter_by_search_text")
+    locality = filters.CharFilter(method="filter_by_locality")
+    district = filters.CharFilter(method="filter_by_district")
+    department = filters.CharFilter(method="filter_by_department")
+    construction_contract = filters.CharFilter(method="filter_by_construction_contract")
+    financing_program = filters.CharFilter(method="filter_by_financing_program")
     last_modified_items = filters.CharFilter(method="filter_by_last_modified_items")
 
     def filter_by_status(self, queryset, name, status):
@@ -41,8 +46,31 @@ class ProjectFilter(filters.FilterSet):
     def filter_by_search_text(self, queryset, name, search_text):
         return queryset.filter(
             Q(linked_localities__name__icontains=search_text)
+            | Q(linked_localities__district__name__icontains=search_text)
+            | Q(linked_localities__district__department__name__icontains=search_text)
             | Q(code__icontains=search_text)
         ).distinct()
+
+    def filter_by_locality(self, queryset, param_name, search_value):
+        return queryset.filter(models.Q(main_infrastructure__locality=search_value))
+
+    def filter_by_district(self, queryset, param_name, search_value):
+        return queryset.filter(
+            models.Q(main_infrastructure__locality__district=search_value)
+        )
+
+    def filter_by_department(self, queryset, param_name, search_value):
+        return queryset.filter(
+            models.Q(main_infrastructure__locality__department=search_value)
+        )
+
+    def filter_by_construction_contract(self, queryset, param_name, search_value):
+        return queryset.filter(models.Q(construction_contract=search_value))
+
+    def filter_by_financing_program(self, queryset, param_name, search_value):
+        return queryset.filter(
+            models.Q(construction_contract__financing_program=search_value)
+        )
 
     def filter_by_last_modified_items(self, queryset, name, last_modified_items):
         limit = int(last_modified_items)
@@ -50,7 +78,7 @@ class ProjectFilter(filters.FilterSet):
 
     class Meta(object):
         model = Project
-        fields = ("search",)
+        fields = ("search", "main_infrastructure", "construction_contract")
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

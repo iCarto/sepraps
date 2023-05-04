@@ -1,3 +1,4 @@
+from django.db import models
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -9,13 +10,25 @@ from app.serializers.provider_serializer import ProviderSerializer
 
 class ProviderFilter(filters.FilterSet):
     search = filters.CharFilter(method="filter_by_search_text")
+    locality = filters.CharFilter(method="filter_by_locality")
+    district = filters.CharFilter(method="filter_by_district")
+    department = filters.CharFilter(method="filter_by_department")
 
     def filter_by_search_text(self, queryset, name, search_text):
         return queryset.filter(Q(name__icontains=search_text))
 
-    class Meta(object):
+    def filter_by_locality(self, queryset, param_name, search_value):
+        return queryset.filter(models.Q(locality=search_value))
+
+    def filter_by_district(self, queryset, param_name, search_value):
+        return queryset.filter(models.Q(locality__district=search_value))
+
+    def filter_by_department(self, queryset, param_name, search_value):
+        return queryset.filter(models.Q(locality__department=search_value))
+
+    class Meta:
         model = Provider
-        fields = ("search",)
+        fields = ("search", "locality")
 
 
 class ProviderViewSet(viewsets.ModelViewSet):

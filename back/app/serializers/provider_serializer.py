@@ -10,7 +10,7 @@ class ProviderSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(allow_null=True, required=False)
     locality = LocalitySerializer()
     project = serializers.PrimaryKeyRelatedField(
-        write_only=True, queryset=Project.objects.all(), required=False
+        write_only=True, queryset=Project.objects.all(), allow_null=True, required=False
     )
     contacts = ContactProviderSerializer(
         source="providercontact_set", many=True, required=False

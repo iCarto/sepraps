@@ -5,7 +5,7 @@ from django.db import models
 # TODO: Review gender options
 GENDER_CHOICES = [
     ("M", "Masculino"),
-    ("F", "Feminino"),
+    ("F", "Femenino"),
     ("OS", "Otro específico"),
     ("NK", "No conocido"),
     ("NS", "No especificado"),
