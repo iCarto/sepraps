@@ -1,10 +1,8 @@
-import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 
-import {ContractContactsSection} from "../presentational";
+import {ContractContactsSection} from "contract/presentational/section";
 import {EntityViewSubPage} from "base/entity/pages";
-import {DownloadEntityPDFReportButton} from "base/report/components";
-import {AddContactButtonGroup} from "contact/presentational";
+import {EntityAddButtonGroup} from "base/entity/components";
 
 const ViewContractMonitoringSubPage = () => {
     let contract;
@@ -12,10 +10,7 @@ const ViewContractMonitoringSubPage = () => {
 
     const sections = [<ContractContactsSection contract={contract} />];
 
-    const subPageActions = [
-        <AddContactButtonGroup />,
-        <DownloadEntityPDFReportButton />,
-    ];
+    const subPageActions = [<EntityAddButtonGroup />];
 
     return (
         contract && (

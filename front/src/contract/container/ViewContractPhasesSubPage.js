@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {
     ContractAwardingSection,
@@ -7,16 +6,10 @@ import {
     ContractPostConstructionSection,
 } from "contract/presentational/section";
 import {EntityViewSubPage} from "base/entity/pages";
-import {DownloadEntityPDFReportButton} from "base/report/components";
 
 const ViewContractPhasesSubPage = () => {
     let contract;
     [contract] = useOutletContext();
-
-    // const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
-    // const getIsSidePanelOpen = isOpen => {
-    //     setIsSidePanelOpen(isOpen);
-    // };
 
     const sections = [
         <ContractBidRequestSection contract={contract} />,
@@ -25,13 +18,7 @@ const ViewContractPhasesSubPage = () => {
         <ContractPostConstructionSection contract={contract} />,
     ];
 
-    const subPageActions = [<DownloadEntityPDFReportButton />];
-
-    return (
-        contract && (
-            <EntityViewSubPage sections={sections} subPageActions={subPageActions} />
-        )
-    );
+    return contract && <EntityViewSubPage sections={sections} />;
 };
 
 export default ViewContractPhasesSubPage;

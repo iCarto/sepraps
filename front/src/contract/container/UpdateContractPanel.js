@@ -4,13 +4,11 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractService} from "contract/service";
 import {contract_view_adapter} from "contract/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
 import {ContractForm} from "contract/presentational/form";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const UpdateContractPanel = () => {
     const {section} = useParams();
-
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
 
@@ -23,7 +21,7 @@ const UpdateContractPanel = () => {
             : `/contracts/${contract.id}/phases`;
 
     const handleSubmit = contract => {
-        ContractService.updateContract(contract_view_adapter({...contract}))
+        ContractService.update(contract_view_adapter({...contract}))
             .then(() => {
                 navigate(path, true);
             })
@@ -33,19 +31,24 @@ const UpdateContractPanel = () => {
             });
     };
 
-    const handleCloseSidebar = () => {
-        console.log("clic");
+    const handleFormCancel = () => {
         navigate(path);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Modificar contrato"
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            <ContractForm updatedSection={section} onSubmit={handleSubmit} />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Modificar contrato"
+            form={
+                <ContractForm
+                    contract={contract}
+                    updatedSection={section}
+                    onSubmit={handleSubmit}
+                    onCancel={handleFormCancel}
+                />
+            }
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

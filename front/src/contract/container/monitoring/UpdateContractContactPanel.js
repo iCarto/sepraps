@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
+
 import {ContractService} from "contract/service";
 import {contract_view_adapter, createContract} from "contract/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {ContactForm, ContactFormSearch} from "contact/presentational";
-import {SidebarPanel} from "base/ui/sidebar";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const UpdateContractContactPanel = () => {
     const {action, contactId} = useParams();
@@ -17,9 +17,21 @@ const UpdateContractContactPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const handleCloseSidebar = () => {
-        navigate(`/contracts/${contract.id}/monitoring`);
-    };
+    const basePath = `/contracts/${contract.id}/monitoring`;
+
+    const selectedContact =
+        action === "edit"
+            ? contract.contacts.find(contact => contact.id === parseInt(contactId))
+            : null;
+
+    const allowedPosts = [
+        "residente_obra",
+        "fiscal_obra",
+        "supervisor_obra",
+        "coordinador_social",
+        "supervisor_social",
+        "otro_contacto",
+    ];
 
     const handleSubmit = data => {
         const contacts = [...contract.contacts];
@@ -50,9 +62,9 @@ const UpdateContractContactPanel = () => {
     };
 
     const handleFormSubmit = updatedContract => {
-        ContractService.updateContract(contract_view_adapter({...updatedContract}))
+        ContractService.update(contract_view_adapter({...updatedContract}))
             .then(() => {
-                navigate(`/contracts/${contract.id}/monitoring`, true);
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log(error);
@@ -60,39 +72,30 @@ const UpdateContractContactPanel = () => {
             });
     };
 
-    const selectedContact =
-        action === "edit"
-            ? contract.contacts.find(contact => contact.id === parseInt(contactId))
-            : null;
-
-    const allowedPosts = [
-        "residente_obra",
-        "fiscal_obra",
-        "supervisor_obra",
-        "coordinador_social",
-        "supervisor_social",
-        "otro_contacto",
-    ];
+    const handleFormCancel = () => {
+        navigate(basePath);
+    };
 
     return (
-        <SidebarPanel
-            sidebarTitle={action === "edit" ? `Modificar contacto` : `Asignar contacto`}
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            {action === "search" ? (
-                <ContactFormSearch
-                    allowedPosts={allowedPosts}
-                    onSubmit={handleSubmit}
-                />
-            ) : (
-                <ContactForm
-                    contact={selectedContact}
-                    allowedPosts={allowedPosts}
-                    onSubmit={handleSubmit}
-                />
-            )}
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title={action === "edit" ? `Modificar contacto` : `Asignar contacto`}
+            form={
+                action === "search" ? (
+                    <ContactFormSearch
+                        allowedPosts={allowedPosts}
+                        onSubmit={handleSubmit}
+                    />
+                ) : (
+                    <ContactForm
+                        contact={selectedContact}
+                        allowedPosts={allowedPosts}
+                        onSubmit={handleSubmit}
+                    />
+                )
+            }
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

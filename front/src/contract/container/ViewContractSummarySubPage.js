@@ -2,7 +2,6 @@ import {useOutletContext} from "react-router-dom";
 import {EntityViewSubPage} from "base/entity/pages";
 import {EntityAuditSection} from "base/entity/sections";
 import {ContractGeneralDataSection} from "contract/presentational/section";
-import {DownloadEntityPDFReportButton} from "base/report/components";
 import {
     ContractContractorSection,
     ContractFinancingProgramSection,
@@ -19,13 +18,7 @@ const ViewContractSummarySubPage = () => {
         <EntityAuditSection entity={contract} />,
     ];
 
-    const subPageActions = [<DownloadEntityPDFReportButton />];
-
-    return (
-        contract && (
-            <EntityViewSubPage sections={sections} subPageActions={subPageActions} />
-        )
-    );
+    return contract && <EntityViewSubPage sections={sections} />;
 };
 
 export default ViewContractSummarySubPage;

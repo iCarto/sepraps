@@ -20,7 +20,7 @@ const CreateContractProjectPage = () => {
     const {contractId} = useParams();
 
     const handleFormSubmit = project => {
-        ProjectService.createProject(project_view_adapter({...project}))
+        ProjectService.create(project_view_adapter({...project}))
             .then(() => {
                 navigate(`/contracts/${contractId}/projects`, true);
             })

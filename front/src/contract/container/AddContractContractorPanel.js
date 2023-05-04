@@ -5,8 +5,7 @@ import {ContractService} from "contract/service";
 import {contract_view_adapter} from "contract/model";
 
 import {ContractorFormSearch, ContractorForm} from "contractor/presentational";
-import {AlertError} from "base/error/components";
-import {SidebarPanel} from "base/ui/sidebar";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const AddContractContractorPanel = () => {
     const {action} = useParams();
@@ -18,7 +17,7 @@ const AddContractContractorPanel = () => {
     [contract] = useOutletContext();
 
     const handleSubmit = contractor => {
-        ContractService.updateContract(
+        ContractService.update(
             contract_view_adapter({...contract, contractor: contractor})
         )
             .then(() => {
@@ -34,22 +33,19 @@ const AddContractContractorPanel = () => {
         navigate(`/contracts/${contract.id}/summary`);
     };
 
-    const handleSelectExistingContractor = selectedExistingContractor => {
-        handleSubmit(selectedExistingContractor);
-    };
-
     return (
-        <SidebarPanel
-            sidebarTitle="Añadir contratista"
-            closeSidebarClick={handleCancel}
-        >
-            <AlertError error={error} />
-            {action === "search" ? (
-                <ContractorFormSearch onSelect={handleSelectExistingContractor} />
-            ) : (
-                <ContractorForm onSubmit={handleSubmit} />
-            )}
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Añadir contratista"
+            form={
+                action === "search" ? (
+                    <ContractorFormSearch onSubmit={handleSubmit} />
+                ) : (
+                    <ContractorForm onSubmit={handleSubmit} />
+                )
+            }
+            onCancel={handleCancel}
+            error={error}
+        />
     );
 };
 

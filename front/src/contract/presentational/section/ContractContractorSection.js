@@ -1,17 +1,18 @@
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {useAuth} from "base/user/provider";
 
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {useAuth} from "base/user/provider";
+import {ContractService} from "contract/service";
+import {contract_view_adapter} from "contract/model";
+
+import {EntityAddButtonGroup} from "base/entity/components";
+import {RemoveItemDialog} from "base/delete/components";
 import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
 } from "base/section/components";
-import {
-    AddContractorButtonGroup,
-    ContractorContactsSection,
-} from "contractor/presentational";
-import {RemoveContractContractorDialog} from "contractor/container";
+import {ContractorContactsSection} from "contractor/presentational";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -19,12 +20,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
 const ContractContractorSection = ({contract}) => {
-    const navigate = useNavigate();
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
+
+    const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
     const contractor = contract.contractor;
-
-    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
 
     const headerActions = contractor?.id
         ? [
@@ -51,6 +52,15 @@ const ContractContractorSection = ({contract}) => {
           ]
         : null;
 
+    const handleRemoveContractor = () => {
+        setIsRemoveDialogOpen(false);
+        ContractService.update(
+            contract_view_adapter({...contract, contractor: null})
+        ).then(() => {
+            navigate("/contracts/" + contract.id + "/summary", true);
+        });
+    };
+
     return (
         <SectionCard title="Contratista" secondaryActions={headerActions}>
             {contractor?.id ? (
@@ -64,14 +74,11 @@ const ContractContractorSection = ({contract}) => {
                     <SectionField label="Celular" value={contractor?.phone} />
                     <SectionField label="E-mail" value={contractor?.email} />
                     <SectionField label="Observaciones" value={contractor?.comments} />
-                    <ContractorContactsSection
-                        contractor={contractor}
-                        // isSidePanelOpen={isSidePanelOpen}
-                    />
-                    <RemoveContractContractorDialog
-                        contract={contract}
+                    <ContractorContactsSection contractor={contractor} />
+                    <RemoveItemDialog
                         isDialogOpen={isRemoveDialogOpen}
                         setIsDialogOpen={setIsRemoveDialogOpen}
+                        onRemove={handleRemoveContractor}
                     />
                 </>
             ) : (
@@ -79,7 +86,7 @@ const ContractContractorSection = ({contract}) => {
                     <Typography style={{fontStyle: "italic"}}>
                         El contrato no tiene ningún contratista asignado
                     </Typography>
-                    <AddContractorButtonGroup />
+                    <EntityAddButtonGroup />
                 </Stack>
             )}
         </SectionCard>

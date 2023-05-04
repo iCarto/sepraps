@@ -4,12 +4,10 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
 import {ContractFormSearch} from "contract/presentational/form";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const AddProjectContractPanel = () => {
-    const [selectedContract, setSelectedContract] = useState(null);
     const [error, setError] = useState("");
 
     const navigate = useNavigateWithReload();
@@ -17,16 +15,12 @@ const AddProjectContractPanel = () => {
     let project;
     [project] = useOutletContext();
 
-    const handleSelectedContract = existingContract => {
-        setSelectedContract(existingContract);
-    };
-
-    const handleContractToAdd = () => {
+    const handleContractToAdd = selectedContract => {
         const updatedProject = project_view_adapter({
             ...project,
             construction_contract: selectedContract,
         });
-        ProjectService.updateProject(updatedProject)
+        ProjectService.update(updatedProject)
             .then(project => {
                 navigate(`/projects/${project.id}/financing`, true);
             })
@@ -36,20 +30,17 @@ const AddProjectContractPanel = () => {
             });
     };
 
-    const handleCloseSidebar = () => {
+    const handleFormCancel = () => {
         navigate(`/projects/${project.id}/financing/`);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Añadir contrato existente"
-            mainActionText="Añadir"
-            mainActionClick={handleContractToAdd}
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            <ContractFormSearch onSelect={handleSelectedContract} />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Añadir contrato existente"
+            form={<ContractFormSearch onSubmit={handleContractToAdd} />}
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

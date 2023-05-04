@@ -1,4 +1,5 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
+import {FieldUtil} from "base/section/utilities";
 
 export function useContractTable() {
     const tableColumns = [
@@ -12,7 +13,7 @@ export function useContractTable() {
             label: "Programa",
             width: 10,
             formatFunction: element => {
-                return element.financing_program.short_name;
+                return element.financing_program?.short_name;
             },
         },
         {
@@ -20,7 +21,7 @@ export function useContractTable() {
             label: "Plazo previsto",
             width: 10,
             formatFunction: element => {
-                return `${element.expected_execution_period} días`;
+                return FieldUtil.getValue(element.expected_execution_period, "días");
             },
         },
         {
@@ -44,7 +45,7 @@ export function useContractTable() {
             label: "Contratista",
             width: 15,
             formatFunction: element => {
-                return element.contractor.name;
+                return element.contractor?.name;
             },
         },
         {

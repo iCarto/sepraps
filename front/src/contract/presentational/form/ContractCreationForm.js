@@ -11,7 +11,7 @@ const ContractCreationForm = ({onSubmit, onCancel = null}) => {
     return (
         <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-                <FormSection title="Información general ">
+                <FormSection title="Información general">
                     <ContractGeneralDataFormFields />
                 </FormSection>
                 <FormSection title="Financiación">

@@ -42,13 +42,13 @@ const ContractService = {
         });
     },
 
-    createContract(contract) {
+    create(contract) {
         return AuthApiService.post(basePath, contract).then(response => {
             return createContract(contract_api_adapter(response));
         });
     },
 
-    updateContract(contract) {
+    update(contract) {
         return AuthApiService.put(basePath + "/" + contract.id, contract).then(
             response => {
                 return createContract(contract_api_adapter(response));

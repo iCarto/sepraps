@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
+import {AddNewButton} from "base/shared/components";
 
 const ContractFinancingProgramSection = ({contract}) => {
     const navigate = useNavigate();
@@ -44,19 +45,11 @@ const ContractFinancingProgramSection = ({contract}) => {
                     />
                 </>
             ) : (
-                <Stack alignItems="center" spacing={2}>
-                    <Typography style={{fontStyle: "italic"}}>
+                <Stack alignItems="center" spacing={3}>
+                    <Typography sx={{fontStyle: "italic"}}>
                         El contrato aún no tiene programa de financiación asignado
                     </Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                            navigate("financing_program/edit");
-                        }}
-                    >
-                        Asignar
-                    </Button>
+                    <AddNewButton basePath="financing_program/edit" />
                 </Stack>
             )}
         </SectionCard>

@@ -9,3 +9,4 @@ export {
 export {
     default as ContractPostConstructionSection,
 } from "./ContractPostConstructionSection";
+export {default as ContractContactsSection} from "./ContractContactsSection";

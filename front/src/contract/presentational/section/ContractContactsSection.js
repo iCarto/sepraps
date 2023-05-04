@@ -2,16 +2,14 @@ import {useState} from "react";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {useAuth} from "base/user/provider";
 import {ContractService} from "contract/service";
+import {contract_view_adapter, createContract} from "contract/model";
 
 import {ContactsTable} from "contact/presentational";
-import {
-    DeleteContractContactDialog,
-    RemoveContractContactDialog,
-} from "../container/monitoring";
-
+import {DeleteContractContactDialog} from "../../container/monitoring";
 import {AlertError} from "base/error/components";
-import {contract_view_adapter} from "contract/model";
 import {SectionCard} from "base/section/components";
+import {RemoveItemDialog} from "base/delete/components";
+
 import Typography from "@mui/material/Typography";
 
 const ContractContactsSection = ({contract}) => {
@@ -42,11 +40,12 @@ const ContractContactsSection = ({contract}) => {
     };
 
     const handleEdit = contactId => {
-        navigate(`contact/${contactId}/edit`);
+        navigate(`${contactId}/edit`);
     };
 
-    const handleUpdateContractor = updatedContract => {
-        ContractService.updateContract(contract_view_adapter({...updatedContract}))
+    const handleUpdateContract = updatedContract => {
+        console.log(contract_view_adapter({...updatedContract}));
+        ContractService.update(contract_view_adapter({...updatedContract}))
             .then(() => {
                 navigate(`/contracts/${contract.id}/monitoring`, true);
             })
@@ -60,7 +59,7 @@ const ContractContactsSection = ({contract}) => {
         <>
             <SectionCard title="Contactos de supervisión">
                 <AlertError error={error} />
-                {contract.contacts.length ? (
+                {contract?.contacts.length ? (
                     <ContactsTable
                         contacts={contract.contacts}
                         handleActions={handleActions}
@@ -71,12 +70,15 @@ const ContractContactsSection = ({contract}) => {
                     </Typography>
                 )}
             </SectionCard>
-            <RemoveContractContactDialog
-                contract={contract}
-                contactToRemove={contactToRemove}
-                onRemoval={handleUpdateContractor}
+            <RemoveItemDialog
                 isDialogOpen={isRemoveDialogOpen}
                 setIsDialogOpen={setIsRemoveDialogOpen}
+                onRemove={handleUpdateContract}
+                itemToRemove={contactToRemove}
+                createEntityObject={createContract}
+                entity={contract}
+                subEntityList={contract.contacts}
+                subEntityName={"contacts"}
             />
             <DeleteContractContactDialog
                 contract={contract}

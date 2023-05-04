@@ -23,7 +23,6 @@ const ContractFilterForm = ({onClear = null}) => {
         !filter?.awarding_date_max;
 
     const [loadedDomains, setLoadedDomains] = useState(false);
-
     const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
     const [contractors, setContractors] = useState([]);
@@ -100,7 +99,7 @@ const ContractFilterForm = ({onClear = null}) => {
                 <Grid item xs={3}>
                     <ToggleFilterAccordionButton
                         clickHandler={toggleAccordion}
-                        expanded={expanded}
+                        isExpanded={expanded}
                     />
                 </Grid>
                 <Grid item xs={5} md={4} xl={2}>

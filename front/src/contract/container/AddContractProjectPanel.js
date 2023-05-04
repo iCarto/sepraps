@@ -4,12 +4,10 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractService} from "contract/service";
 import {contract_view_adapter, createContract} from "contract/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
 import {ProjectFormSearch} from "project/presentational/form";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const AddContractProjectPanel = () => {
-    const [selectedProject, setSelectedProject] = useState(null);
     const [error, setError] = useState("");
 
     const navigate = useNavigateWithReload();
@@ -17,11 +15,7 @@ const AddContractProjectPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const handleSelectedProject = existingProject => {
-        setSelectedProject(existingProject);
-    };
-
-    const handleProjectToAdd = () => {
+    const handleProjectToAdd = selectedProject => {
         const updatedContract = createContract({
             ...contract,
             projects: [...contract.projects, selectedProject],
@@ -30,7 +24,7 @@ const AddContractProjectPanel = () => {
     };
 
     const handleFormSubmit = contract => {
-        ContractService.updateContract(contract_view_adapter({...contract}))
+        ContractService.update(contract_view_adapter({...contract}))
             .then(() => {
                 navigate(`/contracts/${contract.id}/projects`, true);
             })
@@ -40,20 +34,17 @@ const AddContractProjectPanel = () => {
             });
     };
 
-    const handleCloseSidebar = () => {
+    const handleFormCancel = () => {
         navigate(`/contracts/${contract.id}/projects`);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Añadir proyecto existente"
-            mainActionText="Añadir"
-            mainActionClick={handleProjectToAdd}
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            <ProjectFormSearch onSelect={handleSelectedProject} />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Añadir proyecto existente"
+            form={<ProjectFormSearch onSubmit={handleProjectToAdd} />}
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractService} from "contract/service";
 
@@ -28,7 +29,7 @@ const ViewContractPanel = () => {
                 onClickDetailButton={handleClickDetail}
                 title="Resumen del contrato"
             >
-                {<ContractCard contract={contract} />}
+                {<ContractCard entity={contract} />}
             </EntityViewPanel>
         )
     );

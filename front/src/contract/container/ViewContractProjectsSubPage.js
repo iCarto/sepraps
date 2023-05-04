@@ -12,7 +12,7 @@ import {
 } from "project/presentational";
 import {SectionHeading} from "base/section/components";
 import {MapProjects} from "base/map/components";
-import {AddContractProjectButtonGroup} from "../presentational";
+import {EntityAddButtonGroup} from "base/entity/components";
 
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -27,7 +27,6 @@ const ViewContractProjectsSubPage = () => {
     [contract] = useOutletContext();
 
     const [selectedElement, setSelectedElement] = useState(null);
-    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
     const {view} = useProjectListView();
 
@@ -40,10 +39,6 @@ const ViewContractProjectsSubPage = () => {
     const onSelectProject = project => {
         setSelectedElement(project);
         navigate(`project/${project.id}`);
-    };
-
-    const getIsSidePanelOpen = isOpen => {
-        setIsSidePanelOpen(isOpen);
     };
 
     const getViewComponent = view => {
@@ -88,7 +83,7 @@ const ViewContractProjectsSubPage = () => {
                 <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
                     <Stack direction="row" justifyContent="flex-end" spacing={1}>
                         <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                            <AddContractProjectButtonGroup />
+                            <EntityAddButtonGroup />
                         </AuthAction>
                         <ProjectListChangeView />
                     </Stack>

@@ -17,7 +17,7 @@ const DeleteContractContactDialog = ({
 
     const handleConfirmDeletion = () => {
         setIsDialogOpen(false);
-        ContactService.deleteContact(contactToDelete).then(() => {
+        ContactService.delete(contactToDelete).then(() => {
             navigate(`/contracts/${contract.id}/monitoring`, true);
         });
     };
@@ -26,7 +26,7 @@ const DeleteContractContactDialog = ({
         <DialogLayout
             dialogLabel="Delete contact"
             dialogTitle="¿Quiere eliminar este contacto definitivamente?"
-            dialogContentText="Si hace clic en Eliminar, el contacto se borrará definitivamente. Este contacto no se podrá recuperar."
+            dialogContentText="Este contacto no se podrá recuperar."
             mainActionClick={handleConfirmDeletion}
             mainActionText="Eliminar"
             mainActionColor="error"

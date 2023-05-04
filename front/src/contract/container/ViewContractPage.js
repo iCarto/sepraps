@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react";
 import {useLocation, useParams} from "react-router-dom";
+
 import {ContractService} from "contract/service";
+import {useConfigModule} from "base/ui/module/provider";
 
 import {PageLayout} from "base/ui/main";
 import {ContractSubPageMenu} from "contract/menu";
@@ -10,8 +12,13 @@ const ViewContractPage = () => {
     const [contract, setContract] = useState(null);
     const location = useLocation();
 
+    const {addToModuleFilter, setModuleBasePath} = useConfigModule();
+
     useEffect(() => {
+        setContract(null);
+        setModuleBasePath(`/contracts/${id}`);
         ContractService.get(id).then(data => {
+            addToModuleFilter({contract: data.id});
             setContract(data);
         });
     }, [id, location.state?.lastRefreshDate]);

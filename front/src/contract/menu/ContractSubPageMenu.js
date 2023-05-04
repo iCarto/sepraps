@@ -8,17 +8,28 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import EventNoteIcon from "@mui/icons-material/EventNote";
+import useTheme from "@mui/material/styles/useTheme";
+import Toolbar from "@mui/material/Toolbar";
+import Divider from "@mui/material/Divider";
 
 const ContractSubPageMenu = ({contract}) => {
     const {ROLES} = useAuth();
     const {id} = useParams();
     const basePath = `/contracts/${id}`;
 
+    const theme = useTheme();
+
+    const toolbarStyle = {backgroundColor: theme.palette.primary.main};
+
     return (
         <SubPageMenu
             headingPrimaryText={contract.number}
             headingSecondaryText={`Contrato:`}
         >
+            {/* <Toolbar sx={toolbarStyle} variant="dense" disableGutters> */}
+            {/* <SelectContractDropDown selectedContract={contract} /> */}
+            {/* </Toolbar>
+            <Divider /> */}
             <PageMenuListItemButton
                 key="contract-detail"
                 to={`${basePath}/summary`}

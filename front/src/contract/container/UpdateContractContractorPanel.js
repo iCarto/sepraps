@@ -4,9 +4,8 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractorService} from "contractor/service";
 import {contractor_view_adapter} from "contractor/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
-import {AlertError} from "base/error/components";
 import {ContractorForm} from "contractor/presentational";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const UpdateContractContractorPanel = () => {
     const [error, setError] = useState("");
@@ -15,12 +14,14 @@ const UpdateContractContractorPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
+    const basePath = `/contracts/${contract.id}/summary`;
+
     const handleSubmit = contractor => {
         ContractorService.updateContractor(
             contractor_view_adapter({...contractor, contract: contract.id})
         )
             .then(() => {
-                navigate("/contracts/" + contract.id + "/summary", true);
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log({error});
@@ -28,18 +29,22 @@ const UpdateContractContractorPanel = () => {
             });
     };
 
-    const handleCancel = () => {
-        navigate(`/contracts/${contract.id}/summary`);
+    const handleFormCancel = () => {
+        navigate(basePath);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Modificar contratista"
-            closeSidebarClick={handleCancel}
-        >
-            <AlertError error={error} />
-            <ContractorForm contractor={contract.contractor} onSubmit={handleSubmit} />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Modificar contratista"
+            form={
+                <ContractorForm
+                    contractor={contract.contractor}
+                    onSubmit={handleSubmit}
+                />
+            }
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

@@ -1,33 +1,17 @@
-import {useNavigate, useOutletContext} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 import {NumberUtil} from "base/format/utilities";
 import {createContract} from "contract/model";
 import {DomainProvider} from "sepraps/domain/provider";
 
-import {
-    ContractCreationForm,
-    ContractGeneralDataFormFields,
-    ContractAwardingFormFields,
-    ContractExecutionFormFields,
-    ContractBidRequestFormFields,
-    ContractFinancingFormFields,
-    ContractPostConstructionFormFields,
-} from ".";
+import {EntityForm} from "base/entity/form";
+import {ContractCreationForm, ContractModificationForm} from ".";
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-
-const ContractForm = ({onSubmit, updatedSection = null}) => {
-    const navigate = useNavigate();
-
-    // TODO: Review how to manage outlet context to extract contract properly
-    let contract;
-    const outletContext = useOutletContext();
-    if (outletContext) {
-        contract = outletContext[0];
-    }
-
+const ContractForm = ({
+    contract = null,
+    onSubmit,
+    onCancel = null,
+    updatedSection = null,
+}) => {
     const defaultFormValues = {
         id: contract?.id || "",
         contract_number: contract?.number || "",
@@ -58,6 +42,14 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
         reValidateMode: "onSubmit",
     });
 
+    const getAwardedPercentageDrop = (bid_request_budget, awarding_budget) => {
+        if (bid_request_budget && awarding_budget) {
+            const awardedPercentage = (awarding_budget * 100) / bid_request_budget;
+            const droppedPercentage = 100 - awardedPercentage;
+            return droppedPercentage.toFixed(2);
+        } else return null;
+    };
+
     const onFormSubmit = data => {
         const updatedContract = createContract({
             id: data.id,
@@ -69,13 +61,10 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
             bid_request_date: data.bid_request_date,
             bid_request_budget: data.bid_request_budget,
             awarding_budget: data.awarding_budget,
-            awarding_percentage_drop:
-                data.bid_request_budget && data.awarding_budget
-                    ? (
-                          100 -
-                          (data.awarding_budget * 100) / data.bid_request_budget
-                      ).toFixed(2)
-                    : null,
+            awarding_percentage_drop: getAwardedPercentageDrop(
+                data.bid_request_budget,
+                data.awarding_budget
+            ),
             awarding_date: data.awarding_date,
             contractor: contract?.contractor,
             execution_signature_date: data.execution_signature_date,
@@ -88,57 +77,23 @@ const ContractForm = ({onSubmit, updatedSection = null}) => {
         onSubmit(updatedContract);
     };
 
-    const handleCancel = () => {
-        navigate(`/contracts`);
-    };
-
-    const getFormBySection = section => {
-        if (section === "generaldata") {
-            return <ContractGeneralDataFormFields />;
-        }
-        if (section === "financing_program") {
-            return <ContractFinancingFormFields />;
-        }
-        if (section === "bidrequest") {
-            return <ContractBidRequestFormFields />;
-        }
-        if (section === "awarding") {
-            return <ContractAwardingFormFields />;
-        }
-        if (section === "execution") {
-            return <ContractExecutionFormFields />;
-        }
-        if (section === "postconstruction") {
-            return <ContractPostConstructionFormFields />;
-        }
-        return null;
+    const onFormCancel = () => {
+        onCancel();
     };
 
     return (
         <DomainProvider>
             <FormProvider {...formMethods}>
-                <Box component="form" width="100%">
-                    {updatedSection ? (
-                        <>
-                            {getFormBySection(updatedSection)}
-                            <Grid container justifyContent="center" sx={{mt: 2}}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ml: 2}}
-                                    onClick={formMethods.handleSubmit(onFormSubmit)}
-                                >
-                                    Guardar
-                                </Button>
-                            </Grid>
-                        </>
-                    ) : (
-                        <ContractCreationForm
-                            onCancel={handleCancel}
-                            onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                        />
-                    )}
-                </Box>
+                {updatedSection ? (
+                    <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
+                        <ContractModificationForm section={updatedSection} />
+                    </EntityForm>
+                ) : (
+                    <ContractCreationForm
+                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onCancel={onFormCancel}
+                    />
+                )}
             </FormProvider>
         </DomainProvider>
     );

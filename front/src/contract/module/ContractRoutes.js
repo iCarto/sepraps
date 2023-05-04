@@ -33,7 +33,7 @@ const contractRoutes = [
         </Route>
         <Route key="contract-detail" path=":id" element={<ViewContractPage />}>
             <Route
-                key="contract-info"
+                key="contract-summary"
                 path="summary"
                 element={<ViewContractSummarySubPage />}
             >
@@ -78,7 +78,8 @@ const contractRoutes = [
             >
                 <Route
                     key="contract-monitoring-profile-edit"
-                    path="contact/:contactId/:action"
+                    // path="contact/:contactId/:action"
+                    path=":contactId/:action"
                     element={<UpdateContractContactPanel />}
                 />
             </Route>
@@ -99,7 +100,7 @@ const contractRoutes = [
                 />
                 <Route
                     key="contract-project-view"
-                    path="project/:projectId"
+                    path="project/:idInfoPanel"
                     element={<ViewContractProjectPanel />}
                 />
             </Route>
