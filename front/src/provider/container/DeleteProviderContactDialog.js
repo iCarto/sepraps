@@ -17,7 +17,7 @@ const DeleteProviderContactDialog = ({
 
     const handleConfirmDeletion = () => {
         setIsDialogOpen(false);
-        ContactService.deleteContact(contactToDelete).then(() => {
+        ContactService.delete(contactToDelete).then(() => {
             navigate(`/projects/${provider.project}/location`, true);
         });
     };

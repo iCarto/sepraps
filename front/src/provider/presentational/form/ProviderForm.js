@@ -58,10 +58,7 @@ const ProviderForm = ({
             <DomainProvider>
                 <FormProvider {...formMethods}>
                     {updatedSection ? (
-                        <EntityForm
-                            onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                            onCancel={onFormCancel}
-                        >
+                        <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
                             <ProviderModificationForm section={updatedSection} />
                         </EntityForm>
                     ) : (

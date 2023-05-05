@@ -8,6 +8,7 @@ import {SidebarPanel} from "base/ui/sidebar";
 import {ContactForm, ContactFormSearch} from "contact/presentational";
 import {AlertError} from "base/error/components";
 
+// TO-DO: Consider removing this component if we are not allowing a provider to be edited from the project
 const UpdateProjectProviderContactPanel = () => {
     const {action, contactId} = useParams();
 
@@ -48,7 +49,7 @@ const UpdateProjectProviderContactPanel = () => {
     };
 
     const handleFormSubmit = provider => {
-        ProviderService.updateProvider(provider)
+        ProviderService.update(provider)
             .then(() => {
                 navigate(`/projects/${project.id}/location`, true);
             })

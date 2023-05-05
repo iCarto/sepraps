@@ -3,6 +3,7 @@ import {
     CreateProviderPage,
     ListProvidersPage,
     ManageProvidersPage,
+    UpdateProviderContactPanel,
     UpdateProviderPanel,
     ViewProviderContactsSubPage,
     ViewProviderPage,
@@ -10,6 +11,7 @@ import {
     ViewProviderSummarySubPage,
 } from "provider/container";
 import {ViewDocumentPanel} from "base/file/components";
+import {UpdateContractContactPanel} from "contract/container/monitoring";
 
 const providerRoutes = [
     <Route key="provider-new" path="new" element={<CreateProviderPage />} />,
@@ -49,7 +51,14 @@ const providerRoutes = [
                 key="provider-contacts"
                 path="contacts"
                 element={<ViewProviderContactsSubPage />}
-            />
+            >
+                <Route
+                    key="provider-contacts-edit"
+                    // path="contact/:contactId/:action"
+                    path=":contactId/:action"
+                    element={<UpdateProviderContactPanel />}
+                />
+            </Route>
         </Route>
     </Route>,
 ];

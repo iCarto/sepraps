@@ -5,12 +5,15 @@ import {
     providers_api_adapter,
 } from "provider/model";
 import {AuthApiService} from "../../base/api/service";
+import {ServiceUtil} from "base/api/utilities";
 
 const basePath = "/api/monitoring/providers";
 
 const ProviderService = {
-    getAll() {
-        return AuthApiService.get(basePath).then(response => {
+    getAll(filter, page) {
+        return AuthApiService.get(
+            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(filter)}`
+        ).then(response => {
             return createProviders(providers_api_adapter(response));
         });
     },

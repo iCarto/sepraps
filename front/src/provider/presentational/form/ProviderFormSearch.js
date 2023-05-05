@@ -1,13 +1,14 @@
 import {useState} from "react";
 
-import {ProviderSearchAutocomplete} from ".";
-import {ProviderSummary} from "../section";
+import {ProviderSearchAutocomplete} from "provider/presentational/form";
+import {ProviderSummary} from "provider/presentational/section";
+
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
 const ProviderFormSearch = ({
     onClickSelected = null,
-    onSelect = null,
+    onSubmit = null,
     onCancel = null,
 }) => {
     const [existingProvider, setExistingProvider] = useState(null);
@@ -36,13 +37,13 @@ const ProviderFormSearch = ({
                             Cancelar
                         </Button>
                     )}
-                    {onSelect && (
+                    {onSubmit && (
                         <Button
                             variant="contained"
                             color="primary"
                             sx={{ml: 3}}
                             onClick={() => {
-                                onSelect(existingProvider);
+                                onSubmit(existingProvider);
                             }}
                         >
                             Guardar

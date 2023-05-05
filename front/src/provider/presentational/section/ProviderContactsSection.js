@@ -6,12 +6,11 @@ import {ProviderService} from "provider/service";
 import {SectionCard} from "base/section/components";
 import {AlertError} from "base/error/components";
 import {ContactsTable} from "contact/presentational";
-import {
-    DeleteProviderContactDialog,
-    RemoveProviderContactDialog,
-} from "../../container";
+import {DeleteProviderContactDialog} from "../../container";
 
 import Typography from "@mui/material/Typography";
+import {RemoveItemDialog} from "base/delete/components";
+import {createProvider} from "provider/model";
 
 const ProviderContactsSection = ({provider}) => {
     const navigate = useNavigateWithReload();
@@ -45,9 +44,9 @@ const ProviderContactsSection = ({provider}) => {
     };
 
     const handleUpdateProvider = updatedProvider => {
-        ProviderService.updateProvider(updatedProvider)
+        ProviderService.update(updatedProvider)
             .then(() => {
-                navigate(`/projects/${provider.project}/location`, true);
+                navigate(`/projects/${provider.project}/contacts`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -75,12 +74,15 @@ const ProviderContactsSection = ({provider}) => {
                     </Typography>
                 )}
             </SectionCard>
-            <RemoveProviderContactDialog
-                provider={provider}
-                contactToRemove={contactToRemove}
-                onRemoval={handleUpdateProvider}
+            <RemoveItemDialog
                 isDialogOpen={isRemoveDialogOpen}
                 setIsDialogOpen={setIsRemoveDialogOpen}
+                onRemove={handleUpdateProvider}
+                itemToRemove={contactToRemove}
+                createEntityObject={createProvider}
+                entity={provider}
+                subEntityList={provider.contacts}
+                subEntityName={"contacts"}
             />
             <DeleteProviderContactDialog
                 provider={provider}

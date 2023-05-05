@@ -10,7 +10,7 @@ import {EntityUpdatePanel} from "base/entity/components";
 const UpdateProviderPanel = () => {
     const {section} = useParams();
     const location = useLocation();
-    const baseLocationPath = location.pathname.split(section)[0];
+    const basePath = location.pathname.split(section)[0];
 
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
@@ -21,7 +21,7 @@ const UpdateProviderPanel = () => {
     const handleSubmit = provider => {
         ProviderService.update(provider_view_adapter({...provider}))
             .then(() => {
-                navigate(baseLocationPath, true);
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log(error);
@@ -30,11 +30,12 @@ const UpdateProviderPanel = () => {
     };
 
     const handleFormCancel = () => {
-        navigate(baseLocationPath);
+        navigate(basePath);
     };
 
     return (
         <EntityUpdatePanel
+            title="Modificar prestador"
             form={
                 <ProviderForm
                     provider={provider}
@@ -43,9 +44,8 @@ const UpdateProviderPanel = () => {
                     onCancel={handleFormCancel}
                 />
             }
-            title="Modificar prestador"
-            error={error}
             onCancel={handleFormCancel}
+            error={error}
         />
     );
 };

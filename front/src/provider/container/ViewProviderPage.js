@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 
-import {PageLayout} from "base/ui/main";
-import {useConfigModule} from "base/ui/module/provider";
-import {ProviderSubPageMenu} from "provider/menu";
 import {ProviderService} from "provider/service";
+import {useConfigModule} from "base/ui/module/provider";
+
+import {PageLayout} from "base/ui/main";
+import {ProviderSubPageMenu} from "provider/menu";
 
 const ViewProviderPage = () => {
     const {id} = useParams();

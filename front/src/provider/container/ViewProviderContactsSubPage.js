@@ -1,8 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 import {EntityViewSubPage} from "base/entity/pages";
 import {ProviderContactsSection} from "provider/presentational/section";
-import {AddContactButtonGroup} from "contact/presentational";
-import {DownloadEntityPDFReportButton} from "base/report/components";
+import {EntityAddButtonGroup} from "base/entity/components";
 
 const ViewProviderContactsSubPage = () => {
     let provider;
@@ -10,11 +9,7 @@ const ViewProviderContactsSubPage = () => {
 
     const sections = [<ProviderContactsSection provider={provider} />];
 
-    const subPageActions = [
-        <AddContactButtonGroup />,
-        // TO-DO: CREATE NEW COMPONENT TO PRINT CONTACTS INSTEAD OF ENTITY REPORT
-        <DownloadEntityPDFReportButton />,
-    ];
+    const subPageActions = [<EntityAddButtonGroup />];
 
     return (
         provider && (
