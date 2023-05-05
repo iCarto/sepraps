@@ -1,4 +1,4 @@
-import {DialogLayout} from "../../shared/components";
+import {DialogLayout} from "base/shared/components";
 
 const DeleteItemDialog = ({isDialogOpen, setIsDialogOpen, onDelete}) => {
     const handleDialog = isOpen => {
@@ -12,8 +12,6 @@ const DeleteItemDialog = ({isDialogOpen, setIsDialogOpen, onDelete}) => {
 
     return (
         <DialogLayout
-            dialogId={`delete`}
-            dialogLabelledBy={`eliminar`}
             dialogTitle={`¿Quiere eliminar este elemento definitivamente?`}
             dialogContentText={`Si hace clic en Eliminar, el elemento se borrará y no se podrá recuperar.`}
             mainActionClick={handleConfirmDeletion}
