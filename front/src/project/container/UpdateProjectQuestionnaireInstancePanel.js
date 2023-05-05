@@ -1,23 +1,31 @@
 import {useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
+
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 import {project_questionnaire_view_adapter} from "questionnaire/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
+import {EntityUpdatePanel} from "base/entity/components";
 import {QuestionnaireInstanceForm} from "questionnaire/presentational";
-import {AlertError} from "base/error/components";
 
 const UpdateProjectQuestionnaireInstancePanel = () => {
-    const navigate = useNavigateWithReload();
+    const [error, setError] = useState("");
+    const [saving, setSaving] = useState(false);
 
+    const navigate = useNavigateWithReload();
     const {instanceId, action} = useParams();
 
     let projectQuestionnaire;
     [projectQuestionnaire] = useOutletContext();
 
-    const [saving, setSaving] = useState(false);
-    const [error, setError] = useState("");
+    const basePath = `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`;
+
+    let selectedQuestionnaireInstance = null;
+    if (projectQuestionnaire) {
+        selectedQuestionnaireInstance = projectQuestionnaire.questionnaire_instances.find(
+            instance => instance.id === parseInt(instanceId)
+        );
+    }
 
     const validate = questionnaireInstance => {
         if (
@@ -61,10 +69,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
         )
             .then(() => {
                 setSaving(false);
-                navigate(
-                    `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
-                    true
-                );
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log(error);
@@ -73,36 +78,26 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
             });
     };
 
-    let selectedQuestionnaireInstance = null;
-    if (projectQuestionnaire) {
-        selectedQuestionnaireInstance = projectQuestionnaire.questionnaire_instances.find(
-            instance => instance.id === parseInt(instanceId)
-        );
-    }
-
-    const handleCloseSidebar = () => {
-        navigate(
-            `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`
-        );
+    const handleFormCancel = () => {
+        navigate(basePath);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle={
-                action === "edit" ? "Modificar cuestionario" : "Añadir cuestionario"
+        <EntityUpdatePanel
+            title={action === "edit" ? "Modificar cuestionario" : "Añadir cuestionario"}
+            form={
+                projectQuestionnaire && (
+                    <QuestionnaireInstanceForm
+                        questionnaireInstance={selectedQuestionnaireInstance}
+                        questionnaireFields={projectQuestionnaire.questionnaire.fields}
+                        onSubmit={handleSubmit}
+                        saving={saving}
+                    />
+                )
             }
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            {projectQuestionnaire && (
-                <QuestionnaireInstanceForm
-                    questionnaireInstance={selectedQuestionnaireInstance}
-                    questionnaireFields={projectQuestionnaire.questionnaire.fields}
-                    onSubmit={handleSubmit}
-                    saving={saving}
-                />
-            )}
-        </SidebarPanel>
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

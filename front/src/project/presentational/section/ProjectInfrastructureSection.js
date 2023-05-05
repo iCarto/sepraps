@@ -5,13 +5,10 @@ import {SectionCard, SectionCardHeaderAction} from "base/section/components";
 import {MapInfrastructure} from "base/map/components";
 import EditIcon from "@mui/icons-material/Edit";
 
-const ProjectInfrastructureSection = () => {
+const ProjectInfrastructureSection = ({project}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
     const location = useLocation();
-
-    let project;
-    [project] = useOutletContext();
 
     const secondaryActions = [
         <SectionCardHeaderAction

@@ -1,23 +1,21 @@
 import {useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+
 import {ProjectService} from "project/service";
-import {useNavigate} from "react-router-dom";
-
 import {project_view_adapter} from "project/model";
-import {PageLayout} from "base/ui/main";
-import {ProjectForm} from "project/presentational/form";
-import {SectionHeading} from "base/section/components";
-import {AlertError} from "base/error/components";
 
-import Paper from "@mui/material/Paper";
-import Container from "@mui/material/Container";
+import {ProjectForm} from "project/presentational/form";
+import {EntityCreatePage} from "base/entity/pages";
 
 const CreateProjectPage = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const basePath = location.pathname.split("/new")[0];
 
     const [error, setError] = useState("");
 
     const handleFormSubmit = project => {
-        ProjectService.createProject(project_view_adapter({...project}))
+        ProjectService.create(project_view_adapter({...project}))
             .then(createdProject => {
                 navigate(`/projects/${createdProject.id}/summary`);
             })
@@ -28,22 +26,17 @@ const CreateProjectPage = () => {
     };
 
     const handleFormCancel = () => {
-        navigate("/projects");
+        navigate(`${basePath}/list`);
     };
 
     return (
-        <PageLayout>
-            <Container maxWidth="md">
-                <Paper sx={{p: 3}}>
-                    <SectionHeading label={false}>Registro de proyecto</SectionHeading>
-                    <AlertError error={error} />
-                    <ProjectForm
-                        onSubmit={handleFormSubmit}
-                        onCancel={handleFormCancel}
-                    />
-                </Paper>
-            </Container>
-        </PageLayout>
+        <EntityCreatePage
+            title="Registro de proyecto"
+            form={
+                <ProjectForm onSubmit={handleFormSubmit} onCancel={handleFormCancel} />
+            }
+            error={error}
+        />
     );
 };
 

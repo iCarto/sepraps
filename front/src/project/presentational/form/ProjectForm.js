@@ -5,15 +5,11 @@ import {DomainProvider} from "sepraps/domain/provider";
 import {createInfrastructure, createLocality} from "location/model";
 import {createProject} from "project/model";
 
+import {EntityForm} from "base/entity/form";
 import {
     ProjectCreationForm,
-    ProjectFormGeneralDataFields,
-    ProjectFormLocationFields,
+    ProjectModificationForm,
 } from "project/presentational/form";
-
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 
 const ProjectForm = ({
     project = null,
@@ -99,16 +95,6 @@ const ProjectForm = ({
         onSubmit(updatedProject);
     };
 
-    const getFormBySection = section => {
-        if (section === "generaldata") {
-            return <ProjectFormGeneralDataFields layout="column" />;
-        }
-        if (section === "main_infrastructure") {
-            return <ProjectFormLocationFields />;
-        }
-        return null;
-    };
-
     const onFormCancel = () => {
         onCancel();
     };
@@ -117,28 +103,16 @@ const ProjectForm = ({
         <LocationProvider>
             <DomainProvider>
                 <FormProvider {...formMethods}>
-                    <Box component="form" width="100%">
-                        {updatedSection ? (
-                            <>
-                                {getFormBySection(updatedSection)}
-                                <Grid container justifyContent="center" sx={{mt: 2}}>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        sx={{ml: 2}}
-                                        onClick={formMethods.handleSubmit(onFormSubmit)}
-                                    >
-                                        Guardar
-                                    </Button>
-                                </Grid>
-                            </>
-                        ) : (
-                            <ProjectCreationForm
-                                onCancel={onFormCancel}
-                                onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                            />
-                        )}
-                    </Box>
+                    {updatedSection ? (
+                        <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
+                            <ProjectModificationForm section={updatedSection} />
+                        </EntityForm>
+                    ) : (
+                        <ProjectCreationForm
+                            onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                            onCancel={onFormCancel}
+                        />
+                    )}
                 </FormProvider>
             </DomainProvider>
         </LocationProvider>

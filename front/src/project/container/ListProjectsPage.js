@@ -1,17 +1,17 @@
 import {ProjectService} from "project/service";
+import {useProjectTable} from "project/data/ProjectsTableColumns";
 import {EntityListPage} from "base/entity/pages";
 import {ProjectFilterForm} from "project/presentational/form";
-import {useProjectTable} from "project/data/ProjectsTableColumns";
 
 const ListProjectsPage = () => {
     const {tableColumns} = useProjectTable();
 
     return (
         <EntityListPage
+            service={ProjectService.getAll}
             views={["list", "table", "map"]}
             entityName="proyectos"
             basePath="projects"
-            service={ProjectService.getAll}
             tableColumns={tableColumns}
             filterForm={<ProjectFilterForm />}
         />

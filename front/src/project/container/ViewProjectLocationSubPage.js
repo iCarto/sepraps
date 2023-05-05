@@ -1,44 +1,24 @@
-import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 
-import {SubPageLayout} from "base/ui/main";
 import {
     ProjectInfrastructureSection,
     ProjectLinkedLocalitiesSection,
     ProjectProviderSection,
 } from "project/presentational/section";
 
-import Grid from "@mui/material/Grid";
+import {EntityViewSubPage} from "base/entity/pages";
 
 const ViewProjectLocationSubPage = () => {
-    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
-
     let project;
     [project] = useOutletContext();
 
-    const getIsSidePanelOpen = isOpen => {
-        setIsSidePanelOpen(isOpen);
-    };
+    const sections = [
+        <ProjectInfrastructureSection project={project} />,
+        <ProjectProviderSection project={project} />,
+        <ProjectLinkedLocalitiesSection project={project} />,
+    ];
 
-    return (
-        <SubPageLayout
-            outletContext={[project]}
-            getIsSidePanelOpen={getIsSidePanelOpen}
-            isSidePanelOpen={isSidePanelOpen}
-        >
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <ProjectInfrastructureSection />
-                </Grid>
-                <Grid item xs={12}>
-                    <ProjectProviderSection isSidePanelOpen={isSidePanelOpen} />
-                </Grid>
-                <Grid item xs={12}>
-                    <ProjectLinkedLocalitiesSection />
-                </Grid>
-            </Grid>
-        </SubPageLayout>
-    );
+    return project && <EntityViewSubPage sections={sections} />;
 };
 
 export default ViewProjectLocationSubPage;

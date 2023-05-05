@@ -4,7 +4,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 
 import {EntityViewPanel} from "base/entity/components";
-import {ProjectCard} from "../presentational";
+import {ProjectSection} from "project/presentational/section";
 
 const ViewProjectPanel = () => {
     const navigate = useNavigateWithReload();
@@ -28,7 +28,7 @@ const ViewProjectPanel = () => {
                 onClickDetailButton={handleClickDetail}
                 title="Resumen del proyecto"
             >
-                {<ProjectCard project={project} />}
+                {<ProjectSection project={project} />}
             </EntityViewPanel>
         )
     );

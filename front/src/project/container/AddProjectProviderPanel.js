@@ -4,9 +4,8 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {project_view_adapter} from "project/model";
 import {ProjectService} from "project/service";
 
-import {SidebarPanel} from "base/ui/sidebar";
-import {ProviderForm, ProviderFormSearch} from "provider/presentational/form";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
+import {ProviderFormSearch} from "provider/presentational/form";
 
 const AddProjectProviderPanel = () => {
     const {action} = useParams();
@@ -18,7 +17,7 @@ const AddProjectProviderPanel = () => {
     [project] = useOutletContext();
 
     const handleSubmit = provider => {
-        ProjectService.updateProject(project_view_adapter({...project, provider}))
+        ProjectService.update(project_view_adapter({...project, provider}))
             .then(() => {
                 navigate(`/projects/${project.id}/location`, true);
             })
@@ -32,19 +31,13 @@ const AddProjectProviderPanel = () => {
         navigate(`/projects/${project.id}/location`);
     };
 
-    const handleSelectExistingProvider = selectedExistingProvider => {
-        handleSubmit(selectedExistingProvider);
-    };
-
     return (
-        <SidebarPanel sidebarTitle="Añadir prestador" closeSidebarClick={handleCancel}>
-            <AlertError error={error} />
-            {action === "search" ? (
-                <ProviderFormSearch onSelect={handleSelectExistingProvider} />
-            ) : (
-                <ProviderForm onSubmit={handleSubmit} />
-            )}
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Añadir prestador"
+            form={<ProviderFormSearch onSubmit={handleSubmit} />}
+            onCancel={handleCancel}
+            error={error}
+        />
     );
 };
 

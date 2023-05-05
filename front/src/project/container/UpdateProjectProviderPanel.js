@@ -1,14 +1,17 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import {useLocation, useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {provider_view_adapter} from "provider/model";
 import {ProviderService} from "provider/service";
-import {SidebarPanel} from "base/ui/sidebar";
-import {AlertError} from "base/error/components";
-import {ProviderForm} from "provider/presentational/form";
+import {EntityUpdatePanel} from "base/entity/components";
+import {ProviderFormSearch} from "provider/presentational/form";
 
 const UpdateProjectProviderPanel = () => {
+    const {section} = useParams();
+    const location = useLocation();
+    const basePath = location.pathname.split(section)[0];
+
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
 
@@ -16,7 +19,7 @@ const UpdateProjectProviderPanel = () => {
     [project] = useOutletContext();
 
     const handleSubmit = provider => {
-        ProviderService.updateProvider(
+        ProviderService.update(
             provider_view_adapter({...provider, project: project.id})
         )
             .then(() => {
@@ -28,18 +31,17 @@ const UpdateProjectProviderPanel = () => {
             });
     };
 
-    const handleCancel = () => {
-        navigate(`/projects/${project.id}/location`);
+    const handleFormCancel = () => {
+        navigate(basePath);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Modificar prestador"
-            closeSidebarClick={handleCancel}
-        >
-            <AlertError error={error} />
-            <ProviderForm provider={project.provider} onSubmit={handleSubmit} />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Modificar prestador"
+            form={<ProviderFormSearch onSubmit={handleSubmit} />}
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

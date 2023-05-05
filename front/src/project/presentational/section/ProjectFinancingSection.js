@@ -1,4 +1,4 @@
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {NumberUtil} from "base/format/utilities";
 
 import {
@@ -9,11 +9,8 @@ import {
 } from "base/section/components";
 import LaunchIcon from "@mui/icons-material/Launch";
 
-const ProjectFinancingSection = () => {
+const ProjectFinancingSection = ({project}) => {
     const navigate = useNavigate();
-
-    let project;
-    [project] = useOutletContext();
 
     const headerActions = [
         <SectionCardHeaderAction
@@ -27,64 +24,55 @@ const ProjectFinancingSection = () => {
         />,
     ];
 
-    const getFinancingInfo = () => (
-        <>
-            <SectionField
-                label="Programa:"
-                value={project.construction_contract.financing_program.name}
-            />
-            <SectionField
-                label="Financiador/es:"
-                value={project.construction_contract.financing_program.financing_funds
-                    .map(financing_fund => financing_fund.name)
-                    .join(", ")}
-            />
-        </>
-    );
-
-    const getNoFinancingInfo = () => (
+    const noFinancingInfoMessage = (
         <SectionField
-            label="Programa:"
-            value="Este proyecto aún no tiene programa de financiación"
+            value="Este proyecto aún no tiene financiación asignada"
             valueFontStyle="italic"
         />
     );
 
-    const getContractInfo = () => (
-        <>
-            <SectionField
-                label="Número:"
-                value={project.construction_contract.number}
-            />
-            <SectionField
-                label="Monto adjudicado:"
-                value={NumberUtil.formatCurrency(
-                    project.construction_contract.awarding_budget
-                )}
-            />
-            <SectionField
-                label="Contratista:"
-                value={project.construction_contract.contractor?.name}
-            />
-        </>
-    );
+    const getContractInfo = contract => {
+        if (contract) {
+            return (
+                <>
+                    <SectionField label="Número" value={contract.number} />
+                    <SectionField
+                        label="Monto adjudicado"
+                        value={NumberUtil.formatCurrency(contract.awarding_budget)}
+                    />
+                    <SectionField
+                        label="Contratista"
+                        value={contract.contractor?.name}
+                    />
+                </>
+            );
+        }
+        return noFinancingInfoMessage;
+    };
 
-    const getNoContractInfo = () => (
-        <SectionField
-            label="Número:"
-            value="Este proyecto aún no ha sido asignado a ningún contrato"
-            valueFontStyle="italic"
-        />
-    );
+    const getFinancingProgramInfo = financing_program => {
+        if (financing_program) {
+            return (
+                <>
+                    <SectionField label="Programa" value={financing_program.name} />
+                    <SectionField
+                        label="Financiador/es"
+                        value={financing_program.financing_funds
+                            .map(financing_fund => financing_fund.name)
+                            .join(", ")}
+                    />
+                </>
+            );
+        }
+        return noFinancingInfoMessage;
+    };
 
     return (
         <SectionCard title="Financiación" secondaryActions={headerActions}>
             <SectionSubheading heading="Contrato" />
-            {project.construction_contract ? getContractInfo() : getNoContractInfo()}
+            {getContractInfo(project?.construction_contract)}
             <SectionSubheading heading="Programa" />
-            {project.construction_contract?.financing_program
-                ? getFinancingInfo()
-                : getNoFinancingInfo()}
+            {getFinancingProgramInfo(project?.construction_contract?.financing_program)}
         </SectionCard>
     );
 };

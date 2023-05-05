@@ -4,9 +4,8 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
 import {ProjectLinkedLocalitiesForm} from "../presentational/location";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const AddProjectLinkedLocalitiesPanel = () => {
     const [error, setError] = useState("");
@@ -15,10 +14,12 @@ const AddProjectLinkedLocalitiesPanel = () => {
     let project;
     [project] = useOutletContext();
 
+    const basePath = `/projects/${project.id}/location`;
+
     const handleSubmit = project => {
-        ProjectService.updateProject(project_view_adapter({...project}))
+        ProjectService.update(project_view_adapter({...project}))
             .then(() => {
-                navigate(`/projects/${project.id}/location`, true);
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log(error);
@@ -26,18 +27,22 @@ const AddProjectLinkedLocalitiesPanel = () => {
             });
     };
 
-    const handleCloseSidebar = () => {
-        navigate(`/projects/${project.id}/location`);
+    const handleFormCancel = () => {
+        navigate(basePath);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Añadir otra localidad"
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            <ProjectLinkedLocalitiesForm project={project} onSubmit={handleSubmit} />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Añadir localidad"
+            form={
+                <ProjectLinkedLocalitiesForm
+                    project={project}
+                    onSubmit={handleSubmit}
+                />
+            }
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

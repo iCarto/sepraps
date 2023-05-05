@@ -1,28 +1,34 @@
 import {useState, useEffect} from "react";
-import {Outlet, useLocation, useParams} from "react-router-dom";
-import {ProjectService} from "project/service";
+import {useLocation, useParams} from "react-router-dom";
 
-import {PageWithMenuLayout} from "base/ui/main";
+import {ProjectService} from "project/service";
+import {useConfigModule} from "base/ui/module/provider";
+
+import {PageLayout} from "base/ui/main";
 import {ProjectSubPageMenu} from "project/menu";
-import {LocationProvider} from "sepraps/location/provider";
 
 const ViewProjectPage = () => {
-    const {projectId} = useParams();
+    const {id} = useParams();
     const [project, setProject] = useState(null);
     const location = useLocation();
 
+    const {addToModuleFilter, setModuleBasePath} = useConfigModule();
+
     useEffect(() => {
-        ProjectService.get(projectId).then(data => {
+        setProject(null);
+        setModuleBasePath(`/projects/${id}`);
+        ProjectService.get(id).then(data => {
+            addToModuleFilter({project: data.id});
             setProject(data);
         });
-    }, [projectId, location.state?.lastRefreshDate]);
+    }, [id, location.state?.lastRefreshDate]);
 
     return (
-        <PageWithMenuLayout menu={<ProjectSubPageMenu project={project} />}>
-            <LocationProvider>
-                {project && <Outlet context={[project]} />}
-            </LocationProvider>
-        </PageWithMenuLayout>
+        <PageLayout
+            menu={<ProjectSubPageMenu project={project} />}
+            context={[project]}
+            subPage={true}
+        />
     );
 };
 

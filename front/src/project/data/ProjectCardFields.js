@@ -27,7 +27,7 @@ export function useProjectCard() {
             formatFunction: element => {
                 return (
                     element.construction_contract_number ||
-                    element.construction_contract.bid_request_number
+                    element.construction_contract?.bid_request_number
                 );
             },
         },

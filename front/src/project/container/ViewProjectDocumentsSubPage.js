@@ -1,17 +1,15 @@
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate, useOutletContext, useParams} from "react-router-dom";
 
-import {SubPageLayout} from "base/ui/main";
-import {SectionCard} from "base/section/components";
-
 import {FolderViewProvider} from "base/file/provider";
+
 import {ListFolder} from "base/file/components";
-import Grid from "@mui/material/Grid";
+import {SectionCard} from "base/section/components";
+import {EntityViewSubPage} from "base/entity/pages";
 
 const ViewProjectDocumentsSubPage = () => {
     const [folderPath, setFolderPath] = useState(null);
     const [selectedElement, setSelectedElement] = useState(null);
-    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
 
     const params = useParams();
     const {pathname} = useLocation();
@@ -20,16 +18,12 @@ const ViewProjectDocumentsSubPage = () => {
     let project;
     [project] = useOutletContext();
 
-    const basePath = `/projects/${project.id}/documents/`;
-
-    const getIsSidePanelOpen = isOpen => {
-        setIsSidePanelOpen(isOpen);
-    };
+    const basePath = `/projects/${project?.id}/documents/`;
 
     useEffect(() => {
         let path = params["*"];
         if (!path) {
-            path = project.folder;
+            path = project?.folder;
         }
         if (pathname.startsWith(basePath + "detail")) {
             // If we are in detail view
@@ -53,29 +47,20 @@ const ViewProjectDocumentsSubPage = () => {
         }
     };
 
-    return (
-        <SubPageLayout
-            getIsSidePanelOpen={getIsSidePanelOpen}
-            isSidePanelOpen={isSidePanelOpen}
-        >
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    {folderPath && (
-                        <SectionCard title="Documentos">
-                            <FolderViewProvider>
-                                <ListFolder
-                                    folderPath={folderPath}
-                                    basePath={basePath}
-                                    selectedElement={selectedElement}
-                                    onSelectElement={handleSelectElement}
-                                />
-                            </FolderViewProvider>
-                        </SectionCard>
-                    )}
-                </Grid>
-            </Grid>
-        </SubPageLayout>
-    );
+    const sections = [
+        <SectionCard title="Documentos">
+            <FolderViewProvider>
+                <ListFolder
+                    folderPath={folderPath}
+                    basePath={basePath}
+                    selectedElement={selectedElement}
+                    onSelectElement={handleSelectElement}
+                />
+            </FolderViewProvider>
+        </SectionCard>,
+    ];
+
+    return folderPath && <EntityViewSubPage sections={sections} />;
 };
 
 export default ViewProjectDocumentsSubPage;

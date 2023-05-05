@@ -1,14 +1,17 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import {useLocation, useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
 import {ProjectForm} from "project/presentational/form";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const UpdateProjectPanel = () => {
+    const {section} = useParams();
+    const location = useLocation();
+    const basePath = location.pathname.split(section)[0];
+
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
 
@@ -16,7 +19,7 @@ const UpdateProjectPanel = () => {
     [project] = useOutletContext();
 
     const handleSubmit = project => {
-        ProjectService.updateProject(project_view_adapter({...project}))
+        ProjectService.update(project_view_adapter({...project}))
             .then(() => {
                 navigate(`/projects/${project.id}/summary`, true);
             })
@@ -26,22 +29,24 @@ const UpdateProjectPanel = () => {
             });
     };
 
-    const handleCloseSidebar = () => {
-        navigate(`/projects/${project.id}/summary`);
+    const handleFormCancel = () => {
+        navigate(basePath);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Modificar proyecto"
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            <ProjectForm
-                updatedSection="generaldata"
-                onSubmit={handleSubmit}
-                project={project}
-            />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Modificar proyecto"
+            form={
+                <ProjectForm
+                    project={project}
+                    updatedSection={section}
+                    onSubmit={handleSubmit}
+                    onCancel={handleFormCancel}
+                />
+            }
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

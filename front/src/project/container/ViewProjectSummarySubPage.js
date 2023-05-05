@@ -1,48 +1,26 @@
-import {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 
-import {SubPageLayout} from "base/ui/main";
 import {
-    ProjectAuditSection,
     ProjectFinancingSection,
     ProjectGeneralDataSection,
     ProjectLocationSection,
 } from "project/presentational/section";
 
-import Grid from "@mui/material/Grid";
+import {EntityAuditSection} from "base/entity/sections";
+import {EntityViewSubPage} from "base/entity/pages";
 
 const ViewProjectSummarySubPage = () => {
-    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
-
     let project;
     [project] = useOutletContext();
 
-    const getIsSidePanelOpen = isOpen => {
-        setIsSidePanelOpen(isOpen);
-    };
+    const sections = [
+        <ProjectGeneralDataSection project={project} />,
+        <ProjectLocationSection project={project} />,
+        <ProjectFinancingSection project={project} />,
+        <EntityAuditSection entity={project} />,
+    ];
 
-    return (
-        <SubPageLayout
-            outletContext={[project]}
-            getIsSidePanelOpen={getIsSidePanelOpen}
-            isSidePanelOpen={isSidePanelOpen}
-        >
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <ProjectGeneralDataSection />
-                </Grid>
-                <Grid item xs={12}>
-                    <ProjectLocationSection />
-                </Grid>
-                <Grid item xs={12}>
-                    <ProjectFinancingSection />
-                </Grid>
-                <Grid item xs={12}>
-                    <ProjectAuditSection />
-                </Grid>
-            </Grid>
-        </SubPageLayout>
-    );
+    return project && <EntityViewSubPage sections={sections} />;
 };
 
 export default ViewProjectSummarySubPage;

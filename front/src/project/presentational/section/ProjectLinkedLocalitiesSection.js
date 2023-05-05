@@ -1,33 +1,30 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
-import {project_view_adapter} from "project/model";
+import {createProject, project_view_adapter} from "project/model";
 
 import {SectionCard} from "base/section/components";
+import {RemoveItemDialog} from "base/delete/components";
+import {AlertError} from "base/error/components";
 import {ProjectLinkedLocalitiesTable} from "../location";
 
-import {RemoveProjectLinkedLocalityDialog} from "project/container";
-import {AlertError} from "base/error/components";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import {AddNewButton} from "base/shared/components";
 
-const ProjectLinkedLocalitiesSection = () => {
-    const {ROLES} = useAuth();
-
-    let project;
-    [project] = useOutletContext();
-
-    const isProjectClosed = project.closed;
-
-    const navigate = useNavigateWithReload();
-
+const ProjectLinkedLocalitiesSection = ({project}) => {
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [localityToRemove, setLocalityToRemove] = useState(null);
     const [error, setError] = useState("");
+
+    const {ROLES} = useAuth();
+    const navigate = useNavigateWithReload();
+
+    const isProjectClosed = project.closed;
 
     const handleActions = (localityId, action) => {
         switch (action) {
@@ -48,7 +45,7 @@ const ProjectLinkedLocalitiesSection = () => {
     };
 
     const handleUpdateProject = updatedProject => {
-        ProjectService.updateProject(project_view_adapter({...updatedProject}))
+        ProjectService.update(project_view_adapter({...updatedProject}))
             .then(() => {
                 navigate(`/projects/${project.id}/location`, true);
             })
@@ -61,40 +58,34 @@ const ProjectLinkedLocalitiesSection = () => {
 
     return (
         <SectionCard title="Localidades vinculadas">
-            <Grid item container xs={12} justifyContent="center">
-                {project.linked_localities.length ? (
-                    <ProjectLinkedLocalitiesTable
-                        localities={project.linked_localities}
-                        handleActions={!isProjectClosed && handleActions}
-                    />
-                ) : (
-                    <Typography pt={3} pb={6} sx={{fontStyle: "italic"}}>
+            {project.linked_localities.length ? (
+                <ProjectLinkedLocalitiesTable
+                    localities={project.linked_localities}
+                    handleActions={!isProjectClosed && handleActions}
+                />
+            ) : (
+                <Stack alignItems="center" spacing={3}>
+                    <Typography sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene localidades vinculadas
                     </Typography>
-                )}
-            </Grid>
-            {!isProjectClosed && (
-                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                    <Grid item container xs={12} justifyContent="center">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                                navigate("linked_localities/new/add");
-                            }}
-                        >
-                            Añadir
-                        </Button>
-                    </Grid>
-                </AuthAction>
+                    {!isProjectClosed && (
+                        <AddNewButton
+                            basePath="linked_localities/new/add"
+                            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                        />
+                    )}
+                </Stack>
             )}
             <AlertError error={error} />
-            <RemoveProjectLinkedLocalityDialog
-                project={project}
-                localityToRemove={localityToRemove}
-                onRemoval={handleUpdateProject}
+            <RemoveItemDialog
                 isDialogOpen={isRemoveDialogOpen}
                 setIsDialogOpen={setIsRemoveDialogOpen}
+                onRemove={handleUpdateProject}
+                itemToRemove={localityToRemove}
+                createEntityObject={createProject}
+                entity={project}
+                subEntityList={project.linked_localities}
+                subEntityName={"linked_localities"}
             />
         </SectionCard>
     );

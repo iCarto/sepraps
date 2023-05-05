@@ -1,29 +1,42 @@
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "base/user/provider";
-import {AuthAction} from "base/user/components";
 
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/section/utilities";
+
+import {AddNewButton} from "base/shared/components";
 import {SectionCard, SectionField} from "base/section/components";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
+    const secondaryActions = [
+        // <SectionCardHeaderAction
+        //     key="edit"
+        //     name="edit"
+        //     text="Modificar"
+        //     icon={<EditIcon />}
+        //     onClick={() => {
+        //         navigate("contract/edit");
+        //     }}
+        //     roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+        // />,
+    ];
+
     return (
-        <SectionCard title="Contrato de obras">
+        <SectionCard title="Contrato de obras" secondaryActions={secondaryActions}>
             {contract ? (
                 <>
                     <SectionField
-                        label="Número de contrato:"
+                        label="Número de contrato"
                         value={contract.number}
                         linkPath={`/contracts/${contract.id}/summary`}
                     />
                     <SectionField
-                        label="Número de licitación:"
+                        label="Número de licitación"
                         value={contract.bid_request_number}
                     />
                     {FieldUtil.getSectionField(
@@ -49,21 +62,14 @@ const ProjectContractSection = ({contract}) => {
                     )}
                 </>
             ) : (
-                <Stack alignItems="center">
-                    <Typography p={6} sx={{fontStyle: "italic"}}>
+                <Stack alignItems="center" spacing={3}>
+                    <Typography sx={{fontStyle: "italic"}}>
                         Este proyecto aún no ha sido asignado a ningún contrato
                     </Typography>
-                    <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => {
-                                navigate("contract/new/add");
-                            }}
-                        >
-                            Asignar
-                        </Button>
-                    </AuthAction>
+                    <AddNewButton
+                        basePath="contract/new/add"
+                        roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                    />
                 </Stack>
             )}
         </SectionCard>

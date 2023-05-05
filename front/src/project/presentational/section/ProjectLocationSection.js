@@ -1,23 +1,21 @@
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
+import {FieldUtil} from "base/section/utilities";
 import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
     SectionLabel,
 } from "base/section/components";
-import {ProjectLinkedLocalitiesTable} from "../location";
+
 import {MapInfrastructure} from "base/map/components";
+import {ProjectLinkedLocalitiesTable} from "../location";
 
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import LaunchIcon from "@mui/icons-material/Launch";
 
-const ProjectLocationSection = () => {
+const ProjectLocationSection = ({project}) => {
     const navigate = useNavigate();
-
-    let project;
-    [project] = useOutletContext();
 
     const headerActions = [
         <SectionCardHeaderAction
@@ -31,43 +29,30 @@ const ProjectLocationSection = () => {
         />,
     ];
 
-    const providerInfo = (
-        <SectionField label="Nombre del prestador:" value={project.provider?.name} />
-    );
-
-    const noProviderInfo = (
-        <SectionField
-            label="Nombre del prestador:"
-            value="Este proyecto aún no tiene prestador"
-            valueFontStyle="italic"
-        />
-    );
-
     const linkedLocalities = (
         <>
-            <SectionLabel label="Localidades vinculadas:" />
-            <Box pr={3}>
-                <ProjectLinkedLocalitiesTable localities={project.linked_localities} />
-            </Box>
+            <SectionLabel label="Localidades vinculadas" />
+            <ProjectLinkedLocalitiesTable localities={project?.linked_localities} />
         </>
     );
 
-    const noLinkedLocalities = (
+    const noLinkedLocalitiesMessage = (
         <SectionField
-            label="Localidades vinculadas:"
-            value="Este proyecto aún no tiene localidades vinculadas"
+            label="Localidades vinculadas"
+            value="Este proyecto no tiene localidades vinculadas"
             valueFontStyle="italic"
         />
     );
 
     return (
         <SectionCard title="Ubicación" secondaryActions={headerActions}>
-            <Grid container>
-                <Grid item xs={12} lg={8}>
-                    {project.provider ? providerInfo : noProviderInfo}
-                    {project.linked_localities.length
-                        ? linkedLocalities
-                        : noLinkedLocalities}
+            <Grid container columnSpacing={4}>
+                <Grid item xs={12} mb={3}>
+                    <SectionField
+                        label="Prestador"
+                        value={FieldUtil.getValue(project?.provider?.name)}
+                        linkPath={`/providers/${project?.provider?.id}/summary`}
+                    />
                 </Grid>
                 <Grid item container xs={12} lg={4}>
                     <Grid
@@ -77,16 +62,21 @@ const ProjectLocationSection = () => {
                             mt: {xs: 3, lg: 0},
                         }}
                     >
-                        <SectionLabel label="Infraestructura principal:" />
+                        <SectionLabel label="Infraestructura principal" />
                     </Grid>
                     <Grid item xs={12}>
                         <MapInfrastructure
                             infrastructure={{
-                                latitude: project.main_infrastructure.latitude,
-                                longitude: project.main_infrastructure.longitude,
+                                latitude: project?.main_infrastructure.latitude,
+                                longitude: project?.main_infrastructure.longitude,
                             }}
                         />
                     </Grid>
+                </Grid>
+                <Grid item xs={12} lg={8}>
+                    {project?.linked_localities?.length
+                        ? linkedLocalities
+                        : noLinkedLocalitiesMessage}
                 </Grid>
             </Grid>
         </SectionCard>

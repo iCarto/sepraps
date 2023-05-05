@@ -4,9 +4,8 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
-import {SidebarPanel} from "base/ui/sidebar";
 import {ProjectForm} from "project/presentational/form";
-import {AlertError} from "base/error/components";
+import {EntityUpdatePanel} from "base/entity/components";
 
 const UpdateProjectMainInfrastructurePanel = () => {
     const [error, setError] = useState("");
@@ -15,10 +14,13 @@ const UpdateProjectMainInfrastructurePanel = () => {
     let project;
     [project] = useOutletContext();
 
+    const basePath = `/projects/${project.id}/location`;
+
     const handleSubmit = project => {
-        ProjectService.updateProject(project_view_adapter({...project}))
+        console.log(project);
+        ProjectService.update(project_view_adapter({...project}))
             .then(() => {
-                navigate(`/projects/${project.id}/location`, true);
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log(error);
@@ -26,22 +28,23 @@ const UpdateProjectMainInfrastructurePanel = () => {
             });
     };
 
-    const handleCloseSidebar = () => {
-        navigate(`/projects/${project.id}/location`);
+    const handleFormCancel = () => {
+        navigate(basePath);
     };
 
     return (
-        <SidebarPanel
-            sidebarTitle="Modificar infraestructura principal"
-            closeSidebarClick={handleCloseSidebar}
-        >
-            <AlertError error={error} />
-            <ProjectForm
-                updatedSection="main_infrastructure"
-                onSubmit={handleSubmit}
-                project={project}
-            />
-        </SidebarPanel>
+        <EntityUpdatePanel
+            title="Modificar infraestructura principal"
+            form={
+                <ProjectForm
+                    project={project}
+                    updatedSection="main_infrastructure"
+                    onSubmit={handleSubmit}
+                />
+            }
+            onCancel={handleFormCancel}
+            error={error}
+        />
     );
 };
 

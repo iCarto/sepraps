@@ -6,9 +6,8 @@ import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {SubPageLayout} from "base/ui/main";
+import {EntityViewSubPage} from "base/entity/pages";
 import {SectionCard} from "base/section/components";
-import {AlertError} from "base/error/components";
 import {MilestonePhase} from "milestone/presentational";
 import {CloseProjectButton, CloseProjectDialog} from ".";
 
@@ -24,7 +23,7 @@ const findActiveMilestone = milestones => {
 };
 
 const ViewProjectMilestonesSubPage = () => {
-    const {projectId} = useParams();
+    const {id: projectId} = useParams();
     const location = useLocation();
     let project;
     [project] = useOutletContext();
@@ -34,13 +33,8 @@ const ViewProjectMilestonesSubPage = () => {
     const navigate = useNavigateWithReload();
 
     const [milestonesPhases, setMilestonesPhases] = useState([]);
-    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
     const [isCloseProjectDialogOpen, setIsCloseProjectDialogOpen] = useState(false);
     const [error, setError] = useState("");
-
-    const getIsSidePanelOpen = isOpen => {
-        setIsSidePanelOpen(isOpen);
-    };
 
     const openDialog = () => {
         setIsCloseProjectDialogOpen(true);
@@ -62,14 +56,14 @@ const ViewProjectMilestonesSubPage = () => {
         milestonesPhases.map(phase => phase["milestones"]).flat()
     );
 
-    let allMilestonesCompleted = project.milestones.every(milestone => {
-        return milestone.compliance_date !== null;
+    let allMilestonesCompleted = project?.milestones?.every(milestone => {
+        return milestone?.compliance_date !== null;
     });
 
     const handleCloseProject = () => {
-        ProjectService.closeProject(project.id)
+        ProjectService.closeProject(project?.id)
             .then(() => {
-                navigate(`/projects/${project.id}/milestones`, true);
+                navigate(`/projects/${project?.id}/milestones`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -78,55 +72,50 @@ const ViewProjectMilestonesSubPage = () => {
         setIsCloseProjectDialogOpen(false);
     };
 
-    const isBtnDisabled = () => {
+    const isButtonDisabled = () => {
         const isSupervisor = hasRole(ROLES.SUPERVISION);
         const isManager = hasRole(ROLES.MANAGEMENT);
         if (isSupervisor) {
-            return !!project.closed;
+            return !!project?.closed;
         } else if (isManager) {
-            return !allMilestonesCompleted || project.closed;
+            return !allMilestonesCompleted || project?.closed;
         }
     };
 
-    return (
-        <SubPageLayout
-            outletContext={[project]}
-            getIsSidePanelOpen={getIsSidePanelOpen}
-            isSidePanelOpen={isSidePanelOpen}
-        >
-            <Grid container spacing={3}>
-                <AlertError error={error} />
-                <Grid item xs={12}>
-                    <SectionCard title="Hitos del proyecto">
-                        {milestonesPhases.map(phase => {
-                            return (
-                                <MilestonePhase
-                                    key={phase.code}
-                                    phase={phase}
-                                    activeMilestone={activeMilestone}
-                                    isProjectClosed={project.closed}
-                                />
-                            );
-                        })}
-                    </SectionCard>
-                    <Box display="flex" justifyContent="right" my={3}>
-                        <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                            <CloseProjectButton
-                                isBtnDisabled={isBtnDisabled()}
-                                isProjectClosed={project.closed}
-                                openDialog={openDialog}
+    const milestonesSection = [
+        <>
+            <Grid item xs={12}>
+                <SectionCard title="Hitos del proyecto">
+                    {milestonesPhases.map(phase => {
+                        return (
+                            <MilestonePhase
+                                key={phase.code}
+                                phase={phase}
+                                activeMilestone={activeMilestone}
+                                isProjectClosed={project?.closed}
                             />
-                        </AuthAction>
-                    </Box>
-                </Grid>
-                <CloseProjectDialog
-                    onClosure={handleCloseProject}
-                    isDialogOpen={isCloseProjectDialogOpen}
-                    setIsDialogOpen={setIsCloseProjectDialogOpen}
-                />
+                        );
+                    })}
+                </SectionCard>
+                <Box display="flex" justifyContent="right" my={3}>
+                    <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                        <CloseProjectButton
+                            isButtonDisabled={isButtonDisabled()}
+                            isProjectClosed={project?.closed}
+                            openDialog={openDialog}
+                        />
+                    </AuthAction>
+                </Box>
             </Grid>
-        </SubPageLayout>
-    );
+            <CloseProjectDialog
+                onClosure={handleCloseProject}
+                isDialogOpen={isCloseProjectDialogOpen}
+                setIsDialogOpen={setIsCloseProjectDialogOpen}
+            />
+        </>,
+    ];
+
+    return project && <EntityViewSubPage sections={milestonesSection} error={error} />;
 };
 
 export default ViewProjectMilestonesSubPage;

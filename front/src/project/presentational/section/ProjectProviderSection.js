@@ -1,31 +1,30 @@
 import {useState} from "react";
-import {useNavigate, useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
+import {ProjectService} from "project/service";
+import {project_view_adapter} from "project/model";
+import {useNavigateWithReload} from "base/navigation/hooks";
 
+import {RemoveItemDialog} from "base/delete/components";
+import {EntityAddButtonGroup} from "base/entity/components";
 import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
 } from "base/section/components";
-import {RemoveProjectProviderDialog} from "provider/container";
-import {AddProviderButtonGroup} from "provider/presentational";
-import {ProviderContactsSection} from "provider/presentational/section";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import LocationOn from "@mui/icons-material/LocationOn";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-const ProjectProviderSection = ({isSidePanelOpen = false}) => {
-    const navigate = useNavigate();
+const ProjectProviderSection = ({project}) => {
+    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
+
+    const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
-    let project;
-    [project] = useOutletContext();
     const provider = project.provider;
-
-    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
+    const isProjectClosed = project.closed;
 
     const secondaryActions = provider?.id
         ? [
@@ -52,7 +51,14 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
           ]
         : null;
 
-    const isProjectClosed = project.closed;
+    const handleRemoveProvider = () => {
+        setIsRemoveDialogOpen(false);
+        ProjectService.update(project_view_adapter({...project, provider: null})).then(
+            () => {
+                navigate("/projects/" + project.id + "/location", true);
+            }
+        );
+    };
 
     return (
         <SectionCard
@@ -61,29 +67,28 @@ const ProjectProviderSection = ({isSidePanelOpen = false}) => {
         >
             {provider?.id ? (
                 <>
-                    <SectionField label="Nombre:" value={provider.name} />
                     <SectionField
-                        label="Ubicación:"
+                        label="Nombre"
+                        value={provider.name}
+                        linkPath={`/providers/${provider.id}/summary`}
+                    />
+                    <SectionField
+                        label="Ubicación"
                         value={`${provider.locality.name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
-                        labelIcon={LocationOn}
                     />
-                    <ProviderContactsSection
-                        provider={provider}
-                        isProjectClosed={isProjectClosed}
-                        isSidePanelOpen={isSidePanelOpen}
-                    />
-                    <RemoveProjectProviderDialog
-                        project={project}
+                    {/* <ProjectContactsSection provider={provider} /> */}
+                    <RemoveItemDialog
                         isDialogOpen={isRemoveDialogOpen}
                         setIsDialogOpen={setIsRemoveDialogOpen}
+                        onRemove={handleRemoveProvider}
                     />
                 </>
             ) : (
-                <Stack alignItems="center" spacing={2}>
-                    <Typography pb={6} sx={{fontStyle: "italic"}}>
+                <Stack alignItems="center" spacing={3}>
+                    <Typography sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene prestador
                     </Typography>
-                    {!isProjectClosed && <AddProviderButtonGroup />}
+                    {!isProjectClosed && <EntityAddButtonGroup basePath="provider/" />}
                 </Stack>
             )}
         </SectionCard>

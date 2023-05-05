@@ -73,13 +73,13 @@ const ProjectService = {
         );
     },
 
-    createProject(project) {
+    create(project) {
         return AuthApiService.post(basePath, project).then(response => {
             return createProject(project_api_adapter(response));
         });
     },
 
-    updateProject(project) {
+    update(project) {
         return AuthApiService.put(basePath + "/" + project.id, project).then(
             response => {
                 return createProject(project_api_adapter(response));

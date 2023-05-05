@@ -1,4 +1,4 @@
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import {useAuth} from "base/user/provider";
 import {DateUtil} from "base/format/utilities";
@@ -41,12 +41,9 @@ const closedProjectTagStyle = {
     opacity: 0.8,
 };
 
-const ProjectGeneralDataSection = () => {
+const ProjectGeneralDataSection = ({project}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
-
-    let project;
-    [project] = useOutletContext();
 
     const secondaryActions = [
         <SectionCardHeaderAction
@@ -55,13 +52,13 @@ const ProjectGeneralDataSection = () => {
             text="Modificar"
             icon={<EditIcon />}
             onClick={() => {
-                navigate("edit");
+                navigate(`generaldata/edit`);
             }}
             roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
 
-    const isProjectClosed = project.closed;
+    const isProjectClosed = project?.closed;
 
     return (
         <SectionCard
@@ -76,22 +73,22 @@ const ProjectGeneralDataSection = () => {
                 <Grid item sm={3} md={4}>
                     <div style={{position: "relative"}}>
                         <ImagePreview
-                            path={project.featured_image}
-                            alt={project.name}
+                            path={project?.featured_image}
+                            alt={project?.name}
                             sx={{
                                 display: {xs: "none", sm: "block"},
                                 borderRadius: 1,
-                                opacity: project.closed === true ? 0.4 : 1,
+                                opacity: project?.closed === true ? 0.4 : 1,
                             }}
                         />
                         <Box sx={imgBoxStyle}>
                             <ProjectTypeIcon
-                                projectType={project.project_type}
-                                projectTypeName={project.project_type_name}
+                                projectType={project?.project_type}
+                                projectTypeName={project?.project_type_name}
                                 size="medium"
                             />
                         </Box>
-                        {project.closed && (
+                        {project?.closed && (
                             <Box sx={closedProjectTagStyle}>
                                 <Typography
                                     component="span"
@@ -106,28 +103,28 @@ const ProjectGeneralDataSection = () => {
                 </Grid>
                 <Grid item sm={9} md={8}>
                     <Typography variant="h4" color="grey.700" sx={{fontWeight: "bold"}}>
-                        {project.name}
+                        {project?.name}
                     </Typography>
                     <Typography
                         variant="h5"
                         color="grey.700"
                         sx={{fontWeight: "bold", mb: 3}}
                     >
-                        {project.location}
+                        {project?.location}
                     </Typography>
-                    <SectionField label="Código:" value={project.code} />
+                    <SectionField label="Código" value={project?.code} />
                     <SectionField
-                        label="Tipo de proyecto:"
-                        value={project.project_type_name}
+                        label="Tipo de proyecto"
+                        value={project?.project_type_name}
                     />
                     <SectionField
-                        label="Clase de proyecto:"
-                        value={project.project_class_name}
+                        label="Clase de proyecto"
+                        value={project?.project_class_name}
                     />
-                    <SectionField label="Descripción:" value={project.description} />
+                    <SectionField label="Descripción" value={project?.description} />
                     <SectionField
-                        label="Fecha de inicio:"
-                        value={DateUtil.formatDate(project.init_date)}
+                        label="Fecha de inicio"
+                        value={DateUtil.formatDate(project?.init_date)}
                     />
                 </Grid>
                 <Grid item xs={12}>

@@ -22,15 +22,14 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
         "&:last-child td, &:last-child th": {
             border: 0,
         },
-        paddingRight: "12px",
     };
 
     return (
         <TableContainer>
-            <Table aria-label="localities table">
+            <Table aria-label="localities table" size="small">
                 <TableHead>
                     <TableRow>
-                        <TableCell sx={{textTransform: "uppercase"}}>
+                        <TableCell sx={{pl: 0, textTransform: "uppercase"}}>
                             Localidad
                         </TableCell>
                         <TableCell sx={{textTransform: "uppercase"}}>
@@ -45,7 +44,7 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                 <TableBody>
                     {localities?.map(locality => (
                         <TableRow key={locality.code} sx={tableRowStyle}>
-                            <TableCell component="th" scope="row">
+                            <TableCell component="th" scope="row" sx={{pl: 0}}>
                                 {locality.name}
                             </TableCell>
                             <TableCell>{locality.district_name}</TableCell>

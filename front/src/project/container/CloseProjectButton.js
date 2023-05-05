@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 
-const CloseProjectButton = ({openDialog, isBtnDisabled, isProjectClosed}) => {
+const CloseProjectButton = ({openDialog, isButtonDisabled, isProjectClosed}) => {
     const handleDialog = () => {
         openDialog();
     };
@@ -9,7 +9,7 @@ const CloseProjectButton = ({openDialog, isBtnDisabled, isProjectClosed}) => {
         <Button
             variant="contained"
             color="error"
-            disabled={isBtnDisabled}
+            disabled={isButtonDisabled}
             onClick={handleDialog}
         >
             {isProjectClosed ? "Proyecto archivado" : "Archivar proyecto"}

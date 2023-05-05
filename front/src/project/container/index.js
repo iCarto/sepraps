@@ -21,9 +21,6 @@ export {
 export {
     default as AddProjectLinkedLocalitiesPanel,
 } from "./AddProjectLinkedLocalitiesPanel";
-export {
-    default as RemoveProjectLinkedLocalityDialog,
-} from "./RemoveProjectLinkedLocalityDialog";
 export {default as ViewProjectPanel} from "./ViewProjectPanel";
 export {default as CloseProjectDialog} from "./CloseProjectDialog";
 export {default as CloseProjectButton} from "./CloseProjectButton";

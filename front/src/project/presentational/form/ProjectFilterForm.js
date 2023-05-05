@@ -122,7 +122,7 @@ const ProjectFilterForm = ({onClear = null}) => {
                 <Grid item xs={3}>
                     <ToggleFilterAccordionButton
                         clickHandler={toggleAccordion}
-                        expanded={expanded}
+                        isExpanded={expanded}
                     />
                 </Grid>
                 <Grid item xs={5} md={4} xl={2}>
