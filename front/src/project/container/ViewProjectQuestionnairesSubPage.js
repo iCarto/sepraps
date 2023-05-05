@@ -2,61 +2,36 @@ import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 
 import {ProjectService} from "project/service";
-import {SubPageLayout} from "base/ui/main";
-import {ViewQuestionnaireInstance} from "questionnaire/container";
-
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
+import {EntityViewSubPage} from "base/entity/pages";
+import {ProjectQuestionnaireSection} from "questionnaire/presentational";
 
 const ViewProjectQuestionnairesSubPage = () => {
-    const {projectId, questionnaireCode} = useParams();
+    const {id: projectId, questionnaireCode} = useParams();
     const location = useLocation();
 
-    const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
     const [projectQuestionnaire, setProjectQuestionnaire] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
+        setIsLoading(true);
         ProjectService.getProjectsQuestionnaireInstances(
             projectId,
             questionnaireCode
         ).then(projectQuestionnaire => {
             console.log({projectQuestionnaire});
-            setLoading(false);
+            setIsLoading(false);
             setProjectQuestionnaire(projectQuestionnaire);
         });
     }, [projectId, questionnaireCode, location.state?.lastRefreshDate]);
 
-    const getIsSidePanelOpen = isOpen => {
-        setIsSidePanelOpen(isOpen);
-    };
+    const sections = [
+        <ProjectQuestionnaireSection
+            questionnaire={projectQuestionnaire}
+            isLoading={isLoading}
+        />,
+    ];
 
-    return (
-        <SubPageLayout
-            outletContext={[projectQuestionnaire]}
-            getIsSidePanelOpen={getIsSidePanelOpen}
-            isSidePanelOpen={isSidePanelOpen}
-        >
-            <Container maxWidth="lg">
-                <Paper sx={{p: 3}}>
-                    {loading ? (
-                        <Grid item container justifyContent="center" xs={12}>
-                            <CircularProgress color="inherit" size={20} />
-                        </Grid>
-                    ) : (
-                        projectQuestionnaire && (
-                            <ViewQuestionnaireInstance
-                                projectQuestionnaire={projectQuestionnaire}
-                            />
-                        )
-                    )}
-                </Paper>
-            </Container>
-        </SubPageLayout>
-    );
+    return <EntityViewSubPage sections={sections} />;
 };
 
 export default ViewProjectQuestionnairesSubPage;

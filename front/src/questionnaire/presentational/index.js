@@ -2,6 +2,7 @@ export {
     default as QuestionnaireInstanceMonitoring,
 } from "./QuestionnaireInstanceMonitoring";
 export {default as QuestionnaireFieldTable} from "./QuestionnaireFieldTable";
+export {default as ProjectQuestionnaireSection} from "./ProjectQuestionnaireSection";
 export {
     default as QuestionnaireExpectedVsRealFieldChart,
 } from "./QuestionnaireExpectedVsRealFieldChart";

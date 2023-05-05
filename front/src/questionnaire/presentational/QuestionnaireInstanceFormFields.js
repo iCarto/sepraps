@@ -1,4 +1,3 @@
-import {Fragment} from "react";
 import {
     FormDatePicker,
     FormInputInteger,
@@ -25,7 +24,7 @@ const QuestionnaireInstanceFormFields = ({
     };
 
     return (
-        <Fragment>
+        <>
             <FormDatePicker
                 name="year_month"
                 label="Mes y año"
@@ -57,7 +56,7 @@ const QuestionnaireInstanceFormFields = ({
                     </Grid>
                 );
             })}
-        </Fragment>
+        </>
     );
 };
 

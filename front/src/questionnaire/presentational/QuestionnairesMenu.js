@@ -4,10 +4,10 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 const QuestionnairesMenu = ({questionnaires, basePath}) => {
     const menuItems = [];
 
-    questionnaires.map(questionnaire =>
+    questionnaires?.map(questionnaire =>
         menuItems.push({
-            to: `${basePath}/questionnaires/${questionnaire.code}`,
-            text: questionnaire.name,
+            to: `${basePath}/questionnaires/${questionnaire?.code}`,
+            text: questionnaire?.name,
         })
     );
 

@@ -1,4 +1,6 @@
-export {default as ViewQuestionnaireInstance} from "./ViewQuestionnaireInstance";
+export {
+    default as ViewProjectQuestionnaireInstance,
+} from "./ViewProjectQuestionnaireInstance";
 export {
     default as ViewQuestionnaireInstanceFieldData,
 } from "./ViewQuestionnaireInstanceFieldData";

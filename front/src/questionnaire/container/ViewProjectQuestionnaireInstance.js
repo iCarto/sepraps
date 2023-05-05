@@ -36,7 +36,7 @@ function a11yProps(index) {
     };
 }
 
-const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
+const ViewProjectQuestionnaireInstance = ({projectQuestionnaire}) => {
     const [tabValue, setTabValue] = useState(0);
 
     let project;
@@ -95,4 +95,4 @@ const ViewQuestionnaireInstance = ({projectQuestionnaire}) => {
     );
 };
 
-export default ViewQuestionnaireInstance;
+export default ViewProjectQuestionnaireInstance;
