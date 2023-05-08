@@ -7,5 +7,5 @@ export {default as EntityAddButtonGroup} from "./EntityAddButtonGroup";
 export {default as EntityChangeView} from "./EntityChangeView";
 export {default as EntityCardsList} from "./EntityCardsList";
 export {default as EntityCard} from "./EntityCard";
-// export {default as EntityListMap} from "./EntityListMap";
+export {default as EntityListMap} from "./EntityListMap";
 export * from "./EntityLayer";

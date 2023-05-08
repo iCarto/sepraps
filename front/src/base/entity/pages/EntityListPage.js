@@ -2,14 +2,15 @@ import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
 import {useAuth} from "base/user/provider";
-import {useList} from "../hooks";
+import {useList} from "base/entity/hooks";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {
     EntityCardsList,
     EntityChangeView,
     EntityCreateButton,
     EntityTable,
-} from "../components";
+    EntityListMap,
+} from "base/entity/components";
 import {EntityFilterForm} from "base/entity/form";
 import {PageLayout} from "base/ui/main";
 import {PaperContainer} from "base/shared/components";
@@ -74,16 +75,16 @@ const EntityListPage = ({
             );
         }
 
-        // if (view === "map") {
-        //     return (
-        //         <EntityListMap
-        //             layer={mapLayer}
-        //             service={service}
-        //             selectedElement={selectedElement}
-        //             onSelectElement={handleSelectElement}
-        //         />
-        //     );
-        // }
+        if (view === "map") {
+            return (
+                <EntityListMap
+                    layer={mapLayer}
+                    service={service}
+                    selectedElement={selectedElement}
+                    onSelectElement={handleSelectElement}
+                />
+            );
+        }
         return null;
     };
 

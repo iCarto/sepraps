@@ -56,7 +56,8 @@ class EntityService {
             response["crs"] = {
                 type: "name",
                 properties: {
-                    name: "urn:ogc:def:crs:EPSG::25829",
+                    // name: "urn:ogc:def:crs:EPSG::25829",
+                    name: "urn:ogc:def:crs:EPSG::32721",
                 },
             };
             return response;
