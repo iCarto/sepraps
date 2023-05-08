@@ -24,7 +24,9 @@ from app.serializers.project_serializer import (
     ProjectSerializer,
     ProjectSummarySerializer,
 )
+from monitoring.views.base_viewsets import ModelListViewSet
 from questionnaires.models.questionnaire import Questionnaire
+from rest_framework.pagination import PageNumberPagination
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
@@ -81,7 +83,7 @@ class ProjectFilter(filters.FilterSet):
         fields = ("search", "main_infrastructure", "construction_contract")
 
 
-class ProjectViewSet(viewsets.ModelViewSet):
+class ProjectViewSet(ModelListViewSet):
     queryset = Project.objects.select_related(
         "main_infrastructure",
         "main_infrastructure__locality",
@@ -94,9 +96,10 @@ class ProjectViewSet(viewsets.ModelViewSet):
         "construction_contract",
     )
     serializer_class = ProjectSerializer
+    pagination_class = PageNumberPagination()
+    permission_classes = [permissions.DjangoModelPermissions]
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter
-    permission_classes = [permissions.DjangoModelPermissions]
 
     def get_queryset(self):
         queryset = Project.objects.order_by("-updated_at")

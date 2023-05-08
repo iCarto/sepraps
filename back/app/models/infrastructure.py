@@ -23,11 +23,4 @@ class Infrastructure(models.Model):
         verbose_name_plural = "Infraestructuras"
 
     def __str__(self):
-        return (
-            self.locality.name
-            + " - "
-            + self.district.name
-            + " ("
-            + self.department.name
-            + ")"
-        )
+        return self.locality.name

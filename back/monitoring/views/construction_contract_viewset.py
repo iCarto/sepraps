@@ -11,6 +11,8 @@ from app.serializers.construction_contract_serializer import (
     ConstructionContractShortSerializer,
     ConstructionContractSummarySerializer,
 )
+from monitoring.views.base_viewsets import ModelListViewSet
+from rest_framework.pagination import PageNumberPagination
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
@@ -42,11 +44,9 @@ class ConstructionContractFilter(filters.FilterSet):
         return queryset.filter(models.Q(contractor=search_value))
 
     def filter_by_awarding_date_min(self, queryset, param_name, date):
-        # min_date = formatDate(date)
         return queryset.filter(awarding_date__gte=date)
 
     def filter_by_awarding_date_max(self, queryset, param_name, date):
-        # max_date = formatDate(date)
         return queryset.filter(awarding_date__lte=date)
 
     def filter_by_last_modified_items(self, queryset, name, last_modified_items):
@@ -58,8 +58,9 @@ class ConstructionContractFilter(filters.FilterSet):
         fields = ("search",)
 
 
-class ConstructionContractViewSet(viewsets.ModelViewSet):
+class ConstructionContractViewSet(ModelListViewSet):
     serializer_class = ConstructionContractSerializer
+    pagination_class = PageNumberPagination()
     filter_backends = [DjangoFilterBackend]
     filterset_class = ConstructionContractFilter
 

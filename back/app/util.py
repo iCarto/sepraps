@@ -7,6 +7,13 @@ def dictfetchall(cursor):
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 
+def is_geojson_request(request):
+    return (
+        request.action == "list"
+        and request.request.content_type == "application/geo+json"
+    )
+
+
 def formatDate(date):
     date_split_reversed = date.split("/")[::-1]
     return datetime.date(

@@ -2,7 +2,9 @@ from django.db import models
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
+from monitoring.views.mixin import ListPaginationMixin
 from rest_framework import permissions, viewsets
+from rest_framework.pagination import PageNumberPagination
 
 from app.models.provider import Provider
 from app.serializers.provider_serializer import ProviderSerializer
@@ -31,15 +33,22 @@ class ProviderFilter(filters.FilterSet):
         fields = ("search", "locality")
 
 
-class ProviderViewSet(viewsets.ModelViewSet):
+class ProviderViewSet(ListPaginationMixin, viewsets.ModelViewSet):
     queryset = Provider.objects.select_related(
         "locality", "locality__department", "locality__district"
     )
+    serializer_class = ProviderSerializer
+    pagination_class = PageNumberPagination()
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProviderFilter
-    serializer_class = ProviderSerializer
     permission_classes = [permissions.DjangoModelPermissions]
 
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user
         return super().perform_create(serializer)
+
+    def get_pagination_class(self):
+        # Avoid pagination when comes from autocomplete
+        # if self.action == "list":
+        #    return None
+        return PageNumberPagination()
