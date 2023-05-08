@@ -3,12 +3,11 @@ import {FormProvider, useForm} from "react-hook-form";
 import {FinancingService} from "financing/service";
 import {ContractService, TEMPLATE} from "contract/service";
 import {useAdministrativeDivisions} from "sepraps/location/provider";
+
 import {ToggleFilterAccordionButton} from "base/shared/components";
-import {FormSelect} from "base/form/components";
+import {FormClearButton, FormSelect} from "base/form/components";
 import Grid from "@mui/material/Grid";
 import Collapse from "@mui/material/Collapse";
-import Button from "@mui/material/Button";
-import ClearIcon from "@mui/icons-material/Clear";
 
 const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
     const [financingFunds, setFinancingFunds] = useState([]);
@@ -101,10 +100,16 @@ const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
         <FormProvider {...formMethods}>
             <ToggleFilterAccordionButton
                 clickHandler={toggleAccordion}
-                expanded={expanded}
+                isExpanded={expanded}
             />
             <Collapse in={expanded} timeout="auto" sx={{width: "100%"}}>
-                <Grid container component="form" spacing={2} alignItems="center" mb={3}>
+                <Grid
+                    container
+                    component="form"
+                    columnSpacing={1}
+                    alignItems="center"
+                    mb={3}
+                >
                     <Grid item xs={4}>
                         <FormSelect
                             name="financing_fund"
@@ -112,7 +117,6 @@ const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
                             options={financingFunds}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
-                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -122,7 +126,6 @@ const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
                             options={financingPrograms}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
-                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -132,7 +135,6 @@ const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
                             options={contracts}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
-                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -142,7 +144,6 @@ const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
                             options={departments}
                             onChangeHandler={handleChangeDepartment}
                             showEmptyOption={true}
-                            margin="0"
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -152,17 +153,10 @@ const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
                             options={departmentDistricts}
                             onChangeHandler={handleChange}
                             showEmptyOption={true}
-                            margin="0"
                         />
                     </Grid>
-                    <Grid item xs container justifyContent="flex-end" mb={3}>
-                        <Button
-                            color="primary"
-                            variant="outlined"
-                            onClick={handleClearAllFilters}
-                        >
-                            <ClearIcon /> Borrar filtros
-                        </Button>
+                    <Grid item xs>
+                        <FormClearButton handleClear={handleClearAllFilters} />
                     </Grid>
                 </Grid>
             </Collapse>

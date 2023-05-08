@@ -1,16 +1,16 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-import {AuthProvider} from "base/user/provider";
-import {AuthRequired} from "base/user/utilities";
-import {projectRoutes} from "project/module";
-import {statsRoutes} from "stats/routes";
-import {ViewHomePage} from "home/container";
-import {SeprapsApp} from "sepraps/ui";
-import {LoginPage} from "base/user/components";
-import {ModuleLayout} from "base/ui/module/components";
+import {StatsModule, statsRoutes} from "stats/module";
 import {ContractsModule, contractRoutes} from "contract/module";
 import {ProvidersModule, providerRoutes} from "provider/module";
-import {ProjectsModule} from "project/module";
+import {ProjectsModule, projectRoutes} from "project/module";
+import {AuthProvider} from "base/user/provider";
+import {AuthRequired} from "base/user/utilities";
+
+import {ModuleLayout} from "base/ui/module/components";
+import {SeprapsApp} from "sepraps/ui";
+import {ViewHomePage} from "home/container";
+import {LoginPage} from "base/user/components";
 
 export default function SeprapsRoutes() {
     return (
@@ -63,7 +63,7 @@ export default function SeprapsRoutes() {
                             path="stats"
                             element={
                                 <AuthRequired>
-                                    <ModuleLayout />
+                                    <StatsModule />
                                 </AuthRequired>
                             }
                         >

@@ -1,17 +1,13 @@
-import {Outlet} from "react-router-dom";
-import {PageWithMenuLayout} from "base/ui/main";
-import {StatsMenu} from "../presentational";
-import {StatsFilterProvider, StatsViewProvider} from "../provider";
+import {PageLayout} from "base/ui/main";
+import {StatsFilterProvider, StatsViewProvider} from "stats/provider";
 
 const ViewStatsPage = () => {
     return (
-        <PageWithMenuLayout menu={<StatsMenu />}>
-            <StatsViewProvider>
-                <StatsFilterProvider>
-                    <Outlet />
-                </StatsFilterProvider>
-            </StatsViewProvider>
-        </PageWithMenuLayout>
+        <StatsViewProvider>
+            <StatsFilterProvider>
+                <PageLayout subPage={true} />
+            </StatsFilterProvider>
+        </StatsViewProvider>
     );
 };
 

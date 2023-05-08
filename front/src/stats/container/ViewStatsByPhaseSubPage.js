@@ -1,19 +1,18 @@
 import {useEffect, useState} from "react";
 import {StatsService} from "stats/service";
-import {useStatsFilter, useStatsView} from "../provider";
+import {useStatsFilter, useStatsView} from "stats/provider";
 
-import {SubPageLayout} from "base/ui/main";
-import {SectionHeading} from "base/section/components";
+import {EntityViewSubPage} from "base/entity/pages";
+import {SectionCard} from "base/section/components";
 import {
     StatsByPhaseChart,
     StatsByPhaseTable,
     StatsByPhaseMapView,
     StatsByPhaseFilterForm,
     StatsChangeView,
-} from "../presentational";
+} from "stats/presentational";
+
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
 
 const ViewStatsByPhaseSubPage = () => {
     const {filterAttributes, setFilterAttributes} = useStatsFilter();
@@ -37,33 +36,28 @@ const ViewStatsByPhaseSubPage = () => {
         setFilterAttributes({});
     };
 
-    return (
-        <SubPageLayout>
-            <Paper sx={{p: 3}}>
-                <Stack spacing={3}>
-                    <Grid container justifyContent="space-between" alignItems="center">
-                        <Grid item xs={12} md={6}>
-                            <SectionHeading>
-                                Número de proyectos por fase
-                            </SectionHeading>
-                        </Grid>
-                        <Grid item container xs={12} md={6} justifyContent="flex-end">
-                            <StatsChangeView />
-                        </Grid>
+    const sections = [
+        <>
+            <SectionCard title="Número de proyectos por fase">
+                <Grid container justifyContent="space-between" alignItems="flex-start">
+                    <Grid item xs={6}>
+                        <StatsByPhaseFilterForm
+                            onChange={handleFilterChange}
+                            onClear={handleFilterClear}
+                        />
                     </Grid>
-                    <StatsByPhaseFilterForm
-                        onChange={handleFilterChange}
-                        onClear={handleFilterClear}
-                    />
-                    {view === "chart" && <StatsByPhaseChart data={statsByPhaseData} />}
-                    {view === "table" && <StatsByPhaseTable data={statsByPhaseData} />}
-                    {view === "map" && (
-                        <StatsByPhaseMapView filter={filterAttributes} />
-                    )}
-                </Stack>
-            </Paper>
-        </SubPageLayout>
-    );
+                    <Grid item xs={6} container justifyContent="flex-end">
+                        <StatsChangeView />
+                    </Grid>
+                </Grid>
+                {view === "chart" && <StatsByPhaseChart data={statsByPhaseData} />}
+                {view === "table" && <StatsByPhaseTable data={statsByPhaseData} />}
+                {view === "map" && <StatsByPhaseMapView filter={filterAttributes} />}
+            </SectionCard>
+        </>,
+    ];
+
+    return statsByPhaseData && <EntityViewSubPage sections={sections} />;
 };
 
 export default ViewStatsByPhaseSubPage;

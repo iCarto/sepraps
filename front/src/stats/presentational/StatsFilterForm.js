@@ -7,13 +7,11 @@ import {ContractorService} from "contractor/service";
 import {FinancingService} from "financing/service";
 import {LocationService} from "sepraps/location/service";
 
-import {FormAutocomplete, FormDatePicker} from "base/form/components";
+import {FormAutocomplete, FormClearButton, FormDatePicker} from "base/form/components";
 import {ToggleFilterAccordionButton} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
 import Collapse from "@mui/material/Collapse";
-import Button from "@mui/material/Button";
-import ClearIcon from "@mui/icons-material/Clear";
 
 const StatsFilterForm = ({
     filter,
@@ -154,15 +152,15 @@ const StatsFilterForm = ({
         <FormProvider {...formMethods}>
             <ToggleFilterAccordionButton
                 clickHandler={toggleAccordion}
-                expanded={expanded}
+                isExpanded={expanded}
             />
+
             <Collapse in={expanded} timeout="auto" sx={{width: "100%"}}>
                 <Grid
                     container
                     component="form"
-                    spacing={2}
+                    columnSpacing={1}
                     alignItems="center"
-                    mt={2}
                     mb={3}
                 >
                     {views.includes("financingFunds") && (
@@ -296,14 +294,8 @@ const StatsFilterForm = ({
                             />
                         </Grid>
                     )}
-                    <Grid item container xs justifyContent="flex-end" mb={3}>
-                        <Button
-                            color="primary"
-                            variant="outlined"
-                            onClick={handleClearAllFilters}
-                        >
-                            <ClearIcon /> Borrar filtros
-                        </Button>
+                    <Grid item xs>
+                        <FormClearButton handleClear={handleClearAllFilters} />
                     </Grid>
                 </Grid>
             </Collapse>

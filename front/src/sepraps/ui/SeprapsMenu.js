@@ -21,7 +21,7 @@ const SeprapsMenu = () => {
         },
         {
             name: "Resultados",
-            to: "stats",
+            to: "stats/phase",
             pathname: "stats",
         },
     ];
