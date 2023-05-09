@@ -1,4 +1,5 @@
 import {FormProvider, useForm} from "react-hook-form";
+import {DateUtil} from "base/format/utilities";
 import {useAuth} from "base/user/provider";
 import {createMQInstance, createMQInstanceValue} from "questionnaire/model";
 
@@ -6,7 +7,6 @@ import QuestionnaireInstanceFormFields from "./QuestionnaireInstanceFormFields";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import {DateUtil} from "base/format/utilities";
 
 const QuestionnaireInstanceForm = ({
     questionnaireFields,
@@ -52,7 +52,6 @@ const QuestionnaireInstanceForm = ({
     });
 
     const handleFormSubmit = data => {
-        console.log({data});
         const dynamicFieldValues = questionnaireFields.map(field => {
             let updatedQuestionnaireValue = null;
             if (questionnaireInstance) {

@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
 
 import {DocumentService} from "base/file/service";
+import {Spinner} from "base/shared/components";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const DEFAULT_NO_IMAGE = "/images/no_image.jpg";
 
@@ -52,13 +51,7 @@ const ImagePreview = ({path: url, alt = "", width = null, height = null, sx = {}
         );
     };
 
-    return loading ? (
-        <Grid item container justifyContent="center" xs={12}>
-            <CircularProgress color="inherit" size={20} />
-        </Grid>
-    ) : (
-        getComponent()
-    );
+    return loading ? <Spinner /> : getComponent();
 };
 
 export default ImagePreview;

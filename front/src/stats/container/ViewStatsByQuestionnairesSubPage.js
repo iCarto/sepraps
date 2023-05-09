@@ -4,13 +4,11 @@ import {useLocation, useParams} from "react-router-dom";
 import {QuestionnaireService} from "questionnaire/service";
 import {QuestionnaireInstanceViewProvider} from "questionnaire/provider";
 
-import {EntityViewSubPage} from "base/entity/pages";
+import {Spinner} from "base/shared/components";
 import {SectionCard} from "base/section/components";
+import {EntityViewSubPage} from "base/entity/pages";
 import {StatsFilterForm} from "stats/presentational";
 import {ViewQuestionnaireInstanceFieldData} from "questionnaire/container";
-
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewStatsByQuestionnairesSubPage = () => {
     const [questionnaire, setQuestionnaire] = useState(null);
@@ -39,9 +37,7 @@ const ViewStatsByQuestionnairesSubPage = () => {
     const sections = [
         <SectionCard title={questionnaire?.name}>
             {loading ? (
-                <Grid item container justifyContent="center" xs={12}>
-                    <CircularProgress color="inherit" size={20} />
-                </Grid>
+                <Spinner />
             ) : (
                 <>
                     <StatsFilterForm

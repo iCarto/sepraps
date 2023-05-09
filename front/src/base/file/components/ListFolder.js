@@ -6,6 +6,7 @@ import {AuthAction} from "base/user/components";
 import {useDownloadDocument} from "../utilities";
 import {DocumentService} from "../service";
 import {useFolderView} from "../provider";
+import {Spinner} from "base/shared/components";
 import {
     FileUploadSection,
     FolderBreadcrumb,
@@ -14,7 +15,6 @@ import {
     FolderTable,
 } from ".";
 import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import DownloadIcon from "@mui/icons-material/Download";
 
@@ -64,9 +64,7 @@ const ListFolder = ({
             </Grid>
             <Grid item container xs={12}>
                 {loading ? (
-                    <Grid item container xs={12} justifyContent="center">
-                        <CircularProgress color="inherit" size={20} />
-                    </Grid>
+                    <Spinner />
                 ) : view === "list" ? (
                     <FolderList
                         folderElements={folderElement?.children}

@@ -8,6 +8,7 @@ import {useDownloadDocument} from "../utilities";
 import {useCopyToClipboard} from "../../shared/utilities";
 import {ProjectService} from "project/service";
 
+import {Spinner} from "base/shared/components";
 import {SidebarAction, SidebarPanel} from "base/ui/sidebar";
 import {DeleteDocumentDialog, DocumentSection} from ".";
 
@@ -15,8 +16,6 @@ import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewDocumentPanel = () => {
     const navigate = useNavigateWithReload();
@@ -119,13 +118,7 @@ const ViewDocumentPanel = () => {
             mainActionIcon={<DownloadIcon />}
             sidebarActions={sidebarActions}
         >
-            {loading ? (
-                <Grid item container justifyContent="center" xs={12}>
-                    <CircularProgress color="inherit" size={20} />
-                </Grid>
-            ) : (
-                <DocumentSection folderElement={folderElement} />
-            )}
+            {loading ? <Spinner /> : <DocumentSection folderElement={folderElement} />}
 
             <DeleteDocumentDialog
                 folderElement={folderElement}

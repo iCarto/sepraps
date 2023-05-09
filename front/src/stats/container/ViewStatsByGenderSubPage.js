@@ -4,6 +4,7 @@ import {StatsService} from "stats/service";
 
 import {EntityViewSubPage} from "base/entity/pages";
 import {SectionCard} from "base/section/components";
+import {Spinner} from "base/shared/components";
 import {
     StatsFilterForm,
     StatsByGenderTable,
@@ -11,7 +12,6 @@ import {
 } from "stats/presentational";
 
 import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const ViewStatsByGenderSubPage = () => {
     const [data, setData] = useState([]);
@@ -39,9 +39,7 @@ const ViewStatsByGenderSubPage = () => {
     const sections = [
         <SectionCard title="Contactos del prestador por género">
             {loading ? (
-                <Grid item container justifyContent="center" xs={12}>
-                    <CircularProgress color="inherit" size={20} />
-                </Grid>
+                <Spinner />
             ) : (
                 <>
                     <StatsFilterForm

@@ -7,9 +7,10 @@ import {
     QuestionnaireExpectedVsRealFieldChart,
     QuestionnaireExpectedVsRealFieldTable,
 } from "../presentational";
+import {Spinner} from "base/shared/components";
 import {AlertError} from "base/error/components";
+
 import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -106,11 +107,7 @@ const ViewQuestionnaireInstanceFieldData = ({questionnaireCode, field, filter}) 
                 <Typography variant="h6">{field.label}</Typography>
             </Grid>
             <Divider />
-            {loading && (
-                <Grid item container justifyContent="center" xs={12}>
-                    <CircularProgress color="inherit" size={20} sx={{mt: 5}} />
-                </Grid>
-            )}
+            {loading && <Spinner />}
             {getViewComponent()}
         </Stack>
     );
