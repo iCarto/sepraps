@@ -48,8 +48,6 @@ const EntityListPage = ({
         setSelectedElement(idInfoPanel ? parseInt(idInfoPanel) : null);
     }, [idInfoPanel]);
 
-    console.log(view);
-
     const getViewComponent = () => {
         if (view === "list") {
             return (

@@ -37,11 +37,11 @@ const ViewHomePage = () => {
                 data.find(item => item.name === "opened_contracts").total
             );
         });
-        ProjectService.getAll({last_modified_items: 3}).then(data => {
-            setProjects(data.sort((a, b) => b.updated_at - a.updated_at));
+        ProjectService.getAll({page: 1, last_modified_items: 3}).then(data => {
+            setProjects(data.results.sort((a, b) => b.updated_at - a.updated_at));
         });
-        ContractService.getAll({last_modified_items: 3}).then(data => {
-            setContracts(data.sort((a, b) => b.updated_at - a.updated_at));
+        ContractService.getAll({page: 1, last_modified_items: 3}).then(data => {
+            setContracts(data.results.sort((a, b) => b.updated_at - a.updated_at));
         });
         NotificationService.getNotifications().then(data => {
             setNotifications(data);

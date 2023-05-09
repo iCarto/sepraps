@@ -37,8 +37,9 @@ const project_summary_api_adapter = project => {
     return project;
 };
 
-const projects_summaries_api_adapter = projectsSummaries =>
-    projectsSummaries.map(project_summary_api_adapter);
+const projects_summaries_api_adapter = projectsSummaries => {
+    return projectsSummaries.map(project_summary_api_adapter);
+};
 
 const createProjectsSummaries = (data = []) => {
     const projectsSummaries = ProjectsSummaries.from(data, projectSummary =>

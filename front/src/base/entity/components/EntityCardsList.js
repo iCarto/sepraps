@@ -15,12 +15,12 @@ const EntityCardsList = ({entityName = "", service, onSelectElement}) => {
     const {filter, page, order} = useList();
 
     useEffect(() => {
-        console.log({order});
+        console.log({filter, page, order});
         setLoading(true);
         const serviceCall = service(filter, page, order);
         serviceCall.then(data => {
             console.log({data});
-            setElements(data);
+            setElements(data.results);
             setLoading(false);
         });
     }, [filter, page, order]);

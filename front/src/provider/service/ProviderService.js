@@ -10,17 +10,20 @@ import {ServiceUtil} from "base/api/utilities";
 const basePath = "/api/monitoring/providers";
 
 const ProviderService = {
-    getAll(filter, page) {
+    getAll(filter, page, sort, order) {
         return AuthApiService.get(
-            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(filter)}`
+            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(
+                filter
+            )}&${ServiceUtil.getOrderQueryString(sort, order)}`
         ).then(response => {
-            return createProviders(providers_api_adapter(response));
+            response.results = createProviders(providers_api_adapter(response.results));
+            return response;
         });
     },
 
     getBySearchText(searchText) {
         return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
-            return createProviders(providers_api_adapter(response));
+            return createProviders(providers_api_adapter(response.results));
         });
     },
 

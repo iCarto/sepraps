@@ -25,7 +25,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LaunchIcon from "@mui/icons-material/Launch";
 
-const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
+// TO-DO: process.env.REACT_APP_PAGE_SIZE returning NaN even after running install.sh
+// const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
+const pageSize = 20;
 
 const tableRowStyle = {
     "&:last-child td, &:last-child th": {
@@ -67,19 +69,19 @@ const EntityTable = ({
 
     const [elements, setElements] = useState([]);
     const [loading, setLoading] = useState(false);
-
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(null);
     const [error, setError] = useState("");
 
+    console.log({size, pageSize, page});
+
     useEffect(() => {
-        console.log({sort}, {order}, {filter});
+        console.log({page, sort, order, filter});
         setLoading(true);
         const serviceCall = service(filter, page, sort, order);
         serviceCall.then(data => {
-            console.log({data});
-            setElements(data);
-            setSize(data.length);
+            setElements(data.results);
+            setSize(data.count);
             setLoading(false);
         });
     }, [filter, page, sort, order]);
@@ -146,9 +148,9 @@ const EntityTable = ({
             <CircularProgress size={40} />
         </Grid>
     );
-    const noElements = !elements || elements.length === 0;
+    const noElements = !elements || !elements.length;
     const noElementsMessage =
-        filter && filter.length === 0
+        filter && filter.length
             ? "No existen elementos para mostrar."
             : "No se ha encontrado ningún elemento que coincida con su búsqueda. Por favor, intente realizar otra búsqueda o borre los filtros activos.";
     const noElementsComponent = (

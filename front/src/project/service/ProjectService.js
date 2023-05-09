@@ -11,27 +11,22 @@ import {
     createProjectQuestionnaire,
     project_questionnaire_api_adapter,
 } from "questionnaire/model";
+import {ServiceUtil} from "base/api/utilities";
 
 const basePath = "/api/monitoring/projects";
 
-const getQueryStringByFilter = filter => {
-    return Object.keys(filter)
-        .filter(key => filter[key])
-        .map(key => {
-            return key + "=" + filter[key];
-        })
-        .join("&");
-};
-
 const ProjectService = {
-    getAll(filter) {
-        return AuthApiService.get(`${basePath}?${getQueryStringByFilter(filter)}`).then(
-            response => {
-                return createProjectsSummaries(
-                    projects_summaries_api_adapter(response)
-                );
-            }
-        );
+    getAll(filter, page, sort, order) {
+        return AuthApiService.get(
+            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(
+                filter
+            )}&${ServiceUtil.getOrderQueryString(sort, order)}`
+        ).then(response => {
+            response.results = createProjectsSummaries(
+                projects_summaries_api_adapter(response.results)
+            );
+            return response;
+        });
     },
 
     getBySearchText(searchText) {

@@ -5,6 +5,7 @@ import {
     contract_api_adapter,
 } from "contract/model";
 import {AuthApiService} from "base/api/service";
+import {ServiceUtil} from "base/api/utilities";
 
 export const TEMPLATE = {
     SHORT: "short",
@@ -12,22 +13,16 @@ export const TEMPLATE = {
 
 const basePath = "/api/monitoring/constructioncontracts";
 
-const getQueryStringByFilter = filter => {
-    return Object.keys(filter)
-        .filter(key => filter[key])
-        .map(key => {
-            return key + "=" + filter[key];
-        })
-        .join("&");
-};
-
 const ContractService = {
-    getAll(filter) {
-        return AuthApiService.get(`${basePath}?${getQueryStringByFilter(filter)}`).then(
-            response => {
-                return createContracts(contracts_api_adapter(response));
-            }
-        );
+    getAll(filter, page, sort, order) {
+        return AuthApiService.get(
+            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(
+                filter
+            )}&${ServiceUtil.getOrderQueryString(sort, order)}`
+        ).then(response => {
+            response.results = createContracts(contracts_api_adapter(response.results));
+            return response;
+        });
     },
 
     getBySearchText(searchText) {
