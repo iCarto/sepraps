@@ -5,7 +5,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractService} from "contract/service";
 
 import {EntityViewPanel} from "base/entity/components";
-import {ContractCard} from "../presentational";
+import {ContractSummary} from "../presentational";
 
 const ViewContractPanel = () => {
     const navigate = useNavigateWithReload();
@@ -29,7 +29,7 @@ const ViewContractPanel = () => {
                 onClickDetailButton={handleClickDetail}
                 title="Resumen del contrato"
             >
-                {<ContractCard entity={contract} />}
+                {<ContractSummary contract={contract} />}
             </EntityViewPanel>
         )
     );

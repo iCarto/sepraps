@@ -4,11 +4,8 @@ import {SectionCard, SectionField} from "base/section/components";
 const ContractSummary = ({contract}) => {
     return (
         <SectionCard title="Contrato de obras">
-            <SectionField label="Número de contrato" value={contract.number} />
-            <SectionField
-                label="Número de licitación"
-                value={contract.bid_request_number}
-            />
+            <SectionField label="Contrato" value={contract.number} />
+            <SectionField label="Licitación" value={contract.bid_request_number} />
             <SectionField
                 label="Fecha de licitación"
                 value={DateUtil.formatDate(contract.bid_request_date)}
