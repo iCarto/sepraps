@@ -24,6 +24,7 @@ const EntityListPage = ({
     service,
     basePath = "",
     tableColumns = [],
+    card = null,
     mapLayer = null,
     filterForm = null,
     deleteService = null,
@@ -54,6 +55,7 @@ const EntityListPage = ({
                 <EntityCardsList
                     entityName={entityName}
                     service={service}
+                    entityCard={card}
                     onSelectElement={handleSelectElement}
                 />
             );
@@ -72,7 +74,6 @@ const EntityListPage = ({
                 />
             );
         }
-
         if (view === "map") {
             return (
                 <EntityListMap
@@ -97,7 +98,7 @@ const EntityListPage = ({
                         justifyContent="flex-start"
                         alignItems="flex-start"
                     >
-                        <Grid item container xs={8} role="form">
+                        <Grid item xs={8} role="form">
                             {filterForm || <EntityFilterForm entityName={entityName} />}
                         </Grid>
                         <Grid

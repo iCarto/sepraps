@@ -5,11 +5,12 @@ import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {AlertError} from "base/error/components";
-import {ActionsMenu} from "base/shared/components";
+import {ActionsMenu, Spinner} from "base/shared/components";
 import {MenuAction} from "base/ui/menu";
 import {DeleteItemDialog} from "base/delete/components";
 import {TableDownloadButton, TableSortingHead} from "base/table/components";
-import {useList} from "../hooks";
+import {EntityNoItemsComponent} from "base/entity/components";
+import {useList} from "base/entity/hooks";
 
 import Grid from "@mui/material/Grid";
 import Table from "@mui/material/Table";
@@ -18,9 +19,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Pagination from "@mui/material/Pagination";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -73,7 +71,8 @@ const EntityTable = ({
     const [itemToDelete, setItemToDelete] = useState(null);
     const [error, setError] = useState("");
 
-    console.log({size, pageSize, page});
+    const noElements = !size;
+    const isFilterEmpty = Object.values(filter).every(value => !value);
 
     useEffect(() => {
         console.log({page, sort, order, filter});
@@ -143,28 +142,10 @@ const EntityTable = ({
         setPage(newPage);
     };
 
-    const loadingComponent = (
-        <Grid item container justifyContent="center" my={6}>
-            <CircularProgress size={40} />
-        </Grid>
-    );
-    const noElements = !elements || !elements.length;
-    const noElementsMessage =
-        filter && filter.length
-            ? "No existen elementos para mostrar."
-            : "No se ha encontrado ningún elemento que coincida con su búsqueda. Por favor, intente realizar otra búsqueda o borre los filtros activos.";
-    const noElementsComponent = (
-        <Container sx={{textAlign: "center"}}>
-            <Typography py={12} sx={{fontStyle: "italic"}}>
-                {noElementsMessage}
-            </Typography>
-        </Container>
-    );
-
     return loading ? (
-        loadingComponent
+        <Spinner />
     ) : noElements ? (
-        noElementsComponent
+        <EntityNoItemsComponent isFilterEmpty={isFilterEmpty} />
     ) : (
         <>
             <AlertError error={error} />

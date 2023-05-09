@@ -6,3 +6,4 @@ export {default as SmallIconCard} from "./SmallIconCard";
 export {default as PaperContainer} from "./PaperContainer";
 export {default as AddNewButton} from "./AddNewButton";
 export {default as ToggleFilterAccordionButton} from "./ToggleFilterAccordionButton";
+export {default as Spinner} from "./Spinner";

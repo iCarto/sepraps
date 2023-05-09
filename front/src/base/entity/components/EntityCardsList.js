@@ -1,18 +1,23 @@
 import {useEffect, useState} from "react";
 
 import {useList} from "../hooks";
-import {ContractCard} from "contract/presentational";
-import {ProjectCard} from "project/presentational";
+import {Spinner} from "base/shared/components";
+import {EntityNoItemsComponent} from "base/entity/components";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
+import Pagination from "@mui/material/Pagination";
 
-const EntityCardsList = ({entityName = "", service, onSelectElement}) => {
+// TO-DO: process.env.REACT_APP_PAGE_SIZE returning NaN even after running install.sh
+// const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
+const pageSize = 20;
+
+const EntityCardsList = ({entityName = "", service, entityCard, onSelectElement}) => {
     const [elements, setElements] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const {filter, page, order} = useList();
+    const {filter, page, setPage, size, setSize, order} = useList();
+
+    const noElements = !size;
+    const isFilterEmpty = Object.values(filter).every(value => !value);
 
     useEffect(() => {
         console.log({filter, page, order});
@@ -21,60 +26,58 @@ const EntityCardsList = ({entityName = "", service, onSelectElement}) => {
         serviceCall.then(data => {
             console.log({data});
             setElements(data.results);
+            setSize(data.count);
             setLoading(false);
         });
     }, [filter, page, order]);
 
-    const noElements = !elements || elements.length === 0;
-    const noElementsMessage =
-        filter && filter.length === 0
-            ? "No existen elementos para mostrar"
-            : "No se ha encontrado ningún elemento que coincida con su búsqueda. Por favor, intente realizar otra búsqueda o borre los filtros activos.";
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
-    const entityItems = elements.map(element => {
-        // TO-DO: Extract bootstrapped code
+    const EntityCard = entityCard;
+
+    const entityCards = elements.map(element => {
         return (
             <Grid item xs={12} sm={6} md={4} xl={3} key={element.id}>
-                {entityName === "contratos" ? (
-                    <ContractCard
-                        key={element.id}
-                        contract={element}
-                        onClick={onSelectElement}
-                    />
-                ) : (
-                    <ProjectCard
-                        key={element.id}
-                        project={element}
-                        onClick={onSelectElement}
-                    />
-                )}
+                <EntityCard
+                    key={element.id}
+                    entity={element}
+                    onClick={onSelectElement}
+                />
             </Grid>
         );
     });
 
     return loading ? (
-        <Grid item container justifyContent="center" my={6}>
-            <CircularProgress size={40} />
-        </Grid>
+        <Spinner />
     ) : noElements ? (
-        <Container sx={{textAlign: "center"}}>
-            <Typography py={12} sx={{fontStyle: "italic"}}>
-                {noElementsMessage}
-            </Typography>
-        </Container>
+        <EntityNoItemsComponent isFilterEmpty={isFilterEmpty} />
     ) : (
-        <Grid
-            component="ul"
-            container
-            spacing={3}
-            sx={{display: "flex", justifyContent: "left", p: 0, listStyleType: "none"}}
-        >
-            {noElements ? (
-                <Container sx={{mt: 3, textAlign: "center"}}></Container>
-            ) : (
-                entityItems
+        <>
+            <Grid
+                component="ul"
+                container
+                spacing={3}
+                sx={{
+                    display: "flex",
+                    justifyContent: "left",
+                    p: 0,
+                    listStyleType: "none",
+                }}
+            >
+                {entityCards}
+            </Grid>
+            {page && (
+                <Grid container justifyContent="flex-end" sx={{mt: 3}}>
+                    <Pagination
+                        count={Math.ceil(size / pageSize)}
+                        page={page}
+                        onChange={handleChangePage}
+                    />
+                </Grid>
             )}
-        </Grid>
+        </>
     );
 };
 

@@ -9,7 +9,12 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 const EntityChangeView = ({views = null}) => {
     const {view, setView} = useList();
 
-    const handleChange = (event, selectedOption) => setView(selectedOption);
+    const handleChange = (event, selectedOption) => {
+        console.log({selectedOption});
+        setView(selectedOption);
+    };
+
+    console.log({views, view});
 
     return (
         views?.length && (
