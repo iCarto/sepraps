@@ -11,7 +11,7 @@ export function useContractCard() {
             label: "Programa de financiación",
             icon: <AccountBalanceOutlinedIcon fontSize="small" />,
             formatFunction: element => {
-                return element.financing_program.short_name;
+                return element?.financing_program?.short_name;
             },
         },
         {

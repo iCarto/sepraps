@@ -6,34 +6,26 @@ import {ProviderService} from "provider/service";
 import {SectionCard} from "base/section/components";
 import {AlertError} from "base/error/components";
 import {ContactsTable} from "contact/presentational";
-import {
-    DeleteProviderContactDialog,
-    RemoveProviderContactDialog,
-} from "../../container";
+import {RemoveItemDialog} from "base/delete/components";
 
 import Typography from "@mui/material/Typography";
+
+// TO-DO: Removing contact is not working. Should decide how to handle contacts in this section. Are we allowing editions/removals for provider contacts?
 
 const ProjectContactsSection = ({projectId, contacts}) => {
     const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const [contactToRemove, setContactToRemove] = useState(null);
     const [error, setError] = useState("");
 
     const handleActions = (contactId, clickedAction) => {
         switch (clickedAction) {
-            case "remove":
-                setContactToRemove(contactId);
-                setIsRemoveDialogOpen(true);
-                break;
-            case "delete":
-                setContactToRemove(contactId);
-                setIsDeleteDialogOpen(true);
-                break;
             case "edit":
                 handleEdit(contactId);
+                break;
+            case "remove":
+                setIsRemoveDialogOpen(true);
                 break;
             default:
                 break;
@@ -45,22 +37,27 @@ const ProjectContactsSection = ({projectId, contacts}) => {
     };
 
     const handleUpdateProvider = updatedProvider => {
-        ProviderService.update(updatedProvider)
-            .then(() => {
-                navigate(`/projects/${projectId}/contacts`, true);
-            })
-            .catch(error => {
-                console.log(error);
-                setError(error);
-            });
+        console.log(updatedProvider);
+        // ProviderService.update(updatedProvider)
+        //     .then(() => {
+        //         navigate(`/projects/${projectId}/contacts`, true);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         setError(error);
+        //     });
     };
 
     return (
         <>
-            <SectionCard>
+            <SectionCard title="Contactos del proyecto">
                 <AlertError error={error} />
-                {contacts ? (
-                    <ContactsTable contacts={contacts} handleActions={handleActions} />
+                {contacts.length ? (
+                    <ContactsTable
+                        contacts={contacts}
+                        handleActions={handleActions}
+                        showDeleteAction={false}
+                    />
                 ) : (
                     <Typography
                         sx={{
@@ -72,19 +69,11 @@ const ProjectContactsSection = ({projectId, contacts}) => {
                     </Typography>
                 )}
             </SectionCard>
-            {/* <RemoveProviderContactDialog
-                provider={provider}
-                contactToRemove={contactToRemove}
-                onRemoval={handleUpdateProvider}
+            <RemoveItemDialog
                 isDialogOpen={isRemoveDialogOpen}
                 setIsDialogOpen={setIsRemoveDialogOpen}
+                onRemove={handleUpdateProvider}
             />
-            <DeleteProviderContactDialog
-                provider={provider}
-                contactToDelete={contactToRemove}
-                isDialogOpen={isDeleteDialogOpen}
-                setIsDialogOpen={setIsDeleteDialogOpen}
-            /> */}
         </>
     );
 };

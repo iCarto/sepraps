@@ -47,7 +47,7 @@ const closedProjectTagStyle = {
     opacity: 0.8,
 };
 
-const ProjectCard = ({project, onClick = null}) => {
+const ProjectCard = ({entity: project, onClick = null}) => {
     const {cardFields} = useProjectCard();
 
     const projectCardHeader = (

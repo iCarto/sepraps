@@ -3,6 +3,7 @@ import {useProjectTable} from "project/data/ProjectsTableColumns";
 import {EntityListPage} from "base/entity/pages";
 import {ProjectFilterForm} from "project/presentational/form";
 import {useProjectLayer} from "project/geo";
+import {ProjectCard} from "project/presentational";
 
 const ListProjectsPage = () => {
     const {tableColumns} = useProjectTable();
@@ -16,6 +17,7 @@ const ListProjectsPage = () => {
             basePath="projects"
             tableColumns={tableColumns}
             filterForm={<ProjectFilterForm />}
+            card={ProjectCard}
         />
     );
 };

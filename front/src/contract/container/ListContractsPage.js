@@ -2,6 +2,7 @@ import {ContractService} from "contract/service";
 import {useContractTable} from "contract/data/ContractsTableColumns";
 import {EntityListPage} from "base/entity/pages";
 import {ContractFilterForm} from "contract/presentational/form";
+import {ContractCard} from "contract/presentational";
 
 const ListContractsPage = () => {
     const {tableColumns} = useContractTable();
@@ -14,6 +15,7 @@ const ListContractsPage = () => {
             basePath="contracts"
             tableColumns={tableColumns}
             filterForm={<ContractFilterForm />}
+            card={ContractCard}
         />
     );
 };

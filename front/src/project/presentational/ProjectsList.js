@@ -1,25 +1,23 @@
-import {ProjectCard} from ".";
+import {ProjectCard} from "project/presentational";
+import {EntityNoItemsComponent} from "base/entity/components";
 import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 
 const ProjectsList = ({projects = [], onClick}) => {
     const noProjectFound = projects.length === 0 || !projects;
 
-    const projectItems = projects.map(project => {
+    const projectCards = projects.map(project => {
         return (
             <Grid item xs={12} sm={6} md={4} xl={3} key={project.id}>
-                <ProjectCard project={project} onClick={onClick} />
+                <ProjectCard entity={project} onClick={onClick} />
             </Grid>
         );
     });
 
-    return (
+    return noProjectFound ? (
+        <EntityNoItemsComponent />
+    ) : (
         <Grid container spacing={3}>
-            {noProjectFound ? (
-                <Container sx={{mt: 3, textAlign: "center"}}></Container>
-            ) : (
-                projectItems
-            )}
+            {projectCards}
         </Grid>
     );
 };

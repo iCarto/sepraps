@@ -12,10 +12,9 @@ const ViewProjectContactsSubPage = () => {
     let project;
     [project] = useOutletContext();
 
-    // TO-DO: fix handling of project contacts. Is this project-linked contacts or provider contacts instead?
+    // TO-DO: fix handling of project contacts. Should this be project-linked contacts or provider contacts instead?
     useEffect(() => {
         ProjectService.getProjectContacts(projectId).then(data => {
-            console.log(data);
             setContacts(data);
         });
     }, []);
