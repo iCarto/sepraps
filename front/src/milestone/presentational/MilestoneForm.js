@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {MilestoneService} from "milestone/service";
-import {createMilestone, milestone_view_adapter} from "milestone/model";
+import {createMilestone} from "milestone/model";
 
 import {MilestoneFormFields} from "milestone/presentational";
 import {SectionHeading} from "base/section/components";
@@ -42,13 +42,11 @@ const MilestoneForm = ({onSubmit}) => {
     }, [milestone]);
 
     const handleFormSubmit = data => {
-        const updatedMilestone = createMilestone(
-            milestone_view_adapter({
-                ...milestone,
-                compliance_date: data.compliance_date,
-                comments: data.comments,
-            })
-        );
+        const updatedMilestone = createMilestone({
+            ...milestone,
+            compliance_date: data.compliance_date,
+            comments: data.comments,
+        });
         onSubmit(updatedMilestone);
     };
 

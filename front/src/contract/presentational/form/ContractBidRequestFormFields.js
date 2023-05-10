@@ -1,9 +1,9 @@
-import {Fragment} from "react";
-import {FormInputText, FormDatePicker, FormInputCurrency} from "base/form/components";
+import {FormInputText, FormDatePicker, FormInputInteger} from "base/form/components";
+import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 
 const ContractBidRequestFormFields = () => {
     return (
-        <Fragment>
+        <>
             <FormInputText
                 name="bid_request_number"
                 label="Número de licitación"
@@ -19,12 +19,13 @@ const ContractBidRequestFormFields = () => {
                 label="Fecha de publicación"
                 rules={{required: "El campo es obligatorio"}}
             />
-            <FormInputCurrency
+            <FormInputInteger
                 name="bid_request_budget"
                 label="Monto estimado"
+                endAdornment={CURRENCY_SYMBOL}
                 rules={{required: "El campo es obligatorio"}}
             />
-        </Fragment>
+        </>
     );
 };
 

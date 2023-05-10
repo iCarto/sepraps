@@ -1,15 +1,16 @@
-import {Fragment} from "react";
-import {FormDatePicker, FormInputCurrency} from "base/form/components";
+import {CURRENCY_SYMBOL} from "base/format/config/i18n";
+import {FormDatePicker, FormInputInteger} from "base/form/components";
 
 const ContractAwardingFormFields = () => {
     return (
-        <Fragment>
-            <FormInputCurrency
+        <>
+            <FormDatePicker name="awarding_date" label="Fecha de adjudicación" />
+            <FormInputInteger
                 name="awarding_budget"
                 label="Monto total de adjudicación"
+                endAdornment={CURRENCY_SYMBOL}
             />
-            <FormDatePicker name="awarding_date" label="Fecha de adjudicación" />
-        </Fragment>
+        </>
     );
 };
 

@@ -15,7 +15,7 @@ const infrastructure_view_adapter = infrastructure => {
         ? NumberUtil.parseFloat(infrastructure["longitude"])
         : null;
     infrastructure["altitude"] = !!infrastructure["altitude"]
-        ? NumberUtil.parseIntOrNull(infrastructure["altitude"])
+        ? NumberUtil.parseInteger(infrastructure["altitude"])
         : null;
     return infrastructure;
 };

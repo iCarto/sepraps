@@ -1,12 +1,9 @@
-import {DateUtil} from "base/format/utilities";
 import {createMilestones, milestones_api_adapter} from "milestone/model";
 import {createLocalities, localities_api_adapter} from "location/model";
 
 class ProjectsSummaries extends Array {}
 
 const project_summary_api_adapter = project => {
-    project["init_date"] = DateUtil.parseDateFromApi(project["init_date"]);
-
     if (project["linked_localities"]) {
         project["linked_localities"] = createLocalities(
             localities_api_adapter(project["linked_localities"])
@@ -29,10 +26,6 @@ const project_summary_api_adapter = project => {
             milestones_api_adapter(project["milestones"])
         );
     }
-
-    // Audit dates from API are in UTC, so we don't have to format them
-    project["created_at"] = new Date(project["created_at"]);
-    project["updated_at"] = new Date(project["updated_at"]);
 
     return project;
 };

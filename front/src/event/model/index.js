@@ -3,5 +3,4 @@ export {
     createEvents,
     event_api_adapter,
     events_api_adapter,
-    event_view_adapter,
 } from "./Event";

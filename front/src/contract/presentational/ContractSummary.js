@@ -8,7 +8,7 @@ const ContractSummary = ({contract}) => {
             <SectionField label="Licitación" value={contract.bid_request_number} />
             <SectionField
                 label="Fecha de licitación"
-                value={DateUtil.formatDate(contract.bid_request_date)}
+                value={contract.bid_request_date}
             />
             <SectionField
                 label="Fecha de adjudicación"

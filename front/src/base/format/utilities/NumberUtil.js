@@ -2,7 +2,12 @@ import {
     localCurrencyFormatter,
     localIntegerFormatter,
     localDecimalFormatter,
+    DECIMAL_SEPARATOR,
 } from "base/format/config/i18n";
+
+const countOccurrencesOfSubstring = (string, substring) => {
+    return (string.match(new RegExp(substring, "g")) || []).length;
+};
 
 const NumberUtil = {
     formatDecimal(value, decimalSize = 2) {
@@ -29,13 +34,9 @@ const NumberUtil = {
     },
 
     formatInteger(value) {
-        if (!value) {
-            return "";
+        if (value || value === 0) {
+            return localIntegerFormatter.format(value);
         }
-        if (isNaN(value)) {
-            return value;
-        }
-        return localIntegerFormatter.format(value);
     },
 
     formatCurrency(value, showCurrencySymbol = true) {
@@ -51,8 +52,39 @@ const NumberUtil = {
         return formatter.format(value);
     },
 
-    parseFloatOrNull(value) {
-        if (value == null) {
+    formatFloat(value, decimalSize = 2, replaceDecimalSeparator = true) {
+        if (isNaN(value) || value === 0) {
+            return value;
+        } else if (!value) {
+            return "";
+        }
+        const floatNumber = parseFloat(value);
+
+        if (replaceDecimalSeparator) {
+            return floatNumber.toFixed(decimalSize).replace(".", DECIMAL_SEPARATOR);
+        } else {
+            return floatNumber.toFixed(decimalSize);
+        }
+    },
+
+    formatKilometersAndMeters(meters) {
+        return Math.trunc(meters / 1000) + " km " + (meters % 1000) + " m";
+    },
+
+    parseNumber(value) {
+        if (typeof value === "string") {
+            return Number(value);
+        } else {
+            return value || 0;
+        }
+    },
+
+    parseDecimal(value) {
+        return value.replace(DECIMAL_SEPARATOR, ".");
+    },
+
+    parseFloat(value) {
+        if (!value) {
             return "";
         }
         if (value === "") {
@@ -66,8 +98,8 @@ const NumberUtil = {
         return parseFloat(value);
     },
 
-    parseIntOrNull(value) {
-        if (value == null) {
+    parseInteger(value) {
+        if (!value) {
             return "";
         }
         if (value === "") {
@@ -79,12 +111,26 @@ const NumberUtil = {
         return parseInt(value);
     },
 
-    formatFloat(value) {
-        return parseFloat(value).toFixed(2);
+    cleanDecimal(value) {
+        const notAllowedCharacters = new RegExp(`[^\\d${DECIMAL_SEPARATOR}]`, "g");
+        let cleanValue = value.replace(notAllowedCharacters, "");
+        const hasMultipleSeparators =
+            countOccurrencesOfSubstring(cleanValue, DECIMAL_SEPARATOR) > 1;
+
+        if (hasMultipleSeparators) {
+            const lastDecimalSeparatorIndex = cleanValue.lastIndexOf(DECIMAL_SEPARATOR);
+            cleanValue =
+                cleanValue.slice(0, lastDecimalSeparatorIndex) +
+                cleanValue.slice(lastDecimalSeparatorIndex + 1);
+        }
+        return cleanValue;
     },
 
-    formatKilometersAndMeters(meters) {
-        return Math.trunc(meters / 1000) + " km " + (meters % 1000) + " m";
+    cleanInteger(value) {
+        if (typeof value === "string") {
+            return value.replace(/[^0-9]/g, "");
+        }
+        return value;
     },
 };
 

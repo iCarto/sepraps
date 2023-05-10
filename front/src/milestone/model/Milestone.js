@@ -1,11 +1,6 @@
-import {DateUtil} from "base/format/utilities";
-
 class Milestones extends Array {}
 
 const milestone_api_adapter = milestone => {
-    milestone["compliance_date"] = milestone["compliance_date"]
-        ? DateUtil.parseDateFromApi(milestone["compliance_date"])
-        : null;
     if (milestone["checklist"]) {
         milestone["checklist"] = milestone["checklist"]?.map(checkItem => checkItem);
     }
@@ -13,14 +8,6 @@ const milestone_api_adapter = milestone => {
 };
 
 const milestones_api_adapter = milestones => milestones.map(milestone_api_adapter);
-
-const milestone_view_adapter = milestone => {
-    milestone["compliance_date"] = !!milestone["compliance_date"]
-        ? DateUtil.formatDateForAPI(milestone["compliance_date"])
-        : null;
-
-    return milestone;
-};
 
 const createMilestones = (data = []) => {
     const milestones = Milestones.from(data, milestone => createMilestone(milestone));
@@ -60,5 +47,4 @@ export {
     createMilestones,
     milestone_api_adapter,
     milestones_api_adapter,
-    milestone_view_adapter,
 };

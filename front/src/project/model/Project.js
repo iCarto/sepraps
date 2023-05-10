@@ -1,6 +1,5 @@
 import {createContract, contract_api_adapter} from "contract/model";
 import {createQuestionnaires, questionnaires_api_adapter} from "questionnaire/model";
-import {DateUtil} from "base/format/utilities";
 import {
     createInfrastructure,
     infrastructure_view_adapter,
@@ -18,7 +17,6 @@ import {
 class Projects extends Array {}
 
 const project_api_adapter = project => {
-    project["init_date"] = DateUtil.parseDateFromApi(project["init_date"]);
     if (project.construction_contract) {
         project["construction_contract"] = createContract(
             contract_api_adapter(project.construction_contract)
@@ -62,20 +60,15 @@ const project_api_adapter = project => {
         );
     }
 
-    // Audit dates from API are in UTC, so we don't have to format them
-    project["created_at"] = new Date(project["created_at"]);
-    project["updated_at"] = new Date(project["updated_at"]);
-
     return project;
 };
 
-const projects_api_adapter = projects => projects.map(project_api_adapter);
+const projects_api_adapter = projects => {
+    return projects.map(project_api_adapter);
+};
 
 const project_view_adapter = project => {
     // in front-end falsy values are "" or undefined or null
-    project["init_date"] = !!project["init_date"]
-        ? DateUtil.formatDateForAPI(project["init_date"])
-        : null;
     // we must destructure object before its adaptation because
     // nested objects are still inmutable inside project object
     if (!!project["provider"]) {

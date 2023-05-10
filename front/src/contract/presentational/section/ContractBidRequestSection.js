@@ -1,4 +1,4 @@
-import {useOutletContext, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 
@@ -31,11 +31,11 @@ const ContractBidRequestSection = ({contract}) => {
             <SectionField label="Número" value={contract?.bid_request_number} />
             <SectionField label="Identificador" value={contract?.bid_request_id} />
             <SectionField
-                label="Fecha de Publicación"
+                label="Fecha de publicación"
                 value={DateUtil.formatDate(contract?.bid_request_date)}
             />
             <SectionField
-                label="Monto Estimado"
+                label="Monto estimado"
                 value={NumberUtil.formatCurrency(contract?.bid_request_budget)}
             />
         </SectionCard>

@@ -12,13 +12,6 @@ import {DateUtil, NumberUtil} from "base/format/utilities";
 class Contracts extends Array {}
 
 const contract_api_adapter = contract => {
-    // in back-end falsy values are null
-    contract["bid_request_date"] = contract["bid_request_date"]
-        ? DateUtil.parseDateFromApi(contract["bid_request_date"])
-        : null;
-    contract["awarding_date"] = contract["awarding_date"]
-        ? DateUtil.parseDateFromApi(contract["awarding_date"])
-        : null;
     contract["contractor"] = contract["contractor"]
         ? createContractor(
               contractor_api_adapter({
@@ -34,19 +27,6 @@ const contract_api_adapter = contract => {
               })
           )
         : null;
-    contract["execution_signature_date"] = contract["execution_signature_date"]
-        ? DateUtil.parseDateFromApi(contract["execution_signature_date"])
-        : null;
-    contract["execution_certificate_start_date"] = contract[
-        "execution_certificate_start_date"
-    ]
-        ? DateUtil.parseDateFromApi(contract["execution_certificate_start_date"])
-        : null;
-    contract["execution_final_delivery_date"] = contract[
-        "execution_final_delivery_date"
-    ]
-        ? DateUtil.parseDateFromApi(contract["execution_final_delivery_date"])
-        : null;
     contract["expected_execution_end_date"] = contract["expected_execution_period"]
         ? DateUtil.getDateAfterDays(
               contract["execution_certificate_start_date"],
@@ -61,9 +41,6 @@ const contract_api_adapter = contract => {
               contract["execution_certificate_start_date"],
               contract["expected_execution_end_date"]
           ) + 1
-        : null;
-    contract["warranty_end_date"] = contract["warranty_end_date"]
-        ? DateUtil.parseDateFromApi(contract["warranty_end_date"])
         : null;
     if (contract.projects) {
         contract["projects"] = contract.projects.map(project => {
@@ -81,43 +58,39 @@ const contract_api_adapter = contract => {
             contacts_api_adapter(contract["contacts"])
         );
     }
-
-    // Audit dates from API are in UTC, so we don't have to format them
-    contract["created_at"] = new Date(contract["created_at"]);
-    contract["updated_at"] = new Date(contract["updated_at"]);
     return contract;
 };
 
 const contract_view_adapter = contract => {
     // in front-end falsy values are "" or undefined or null
     contract["bid_request_budget"] = !!contract["bid_request_budget"]
-        ? NumberUtil.parseFloatOrNull(contract["bid_request_budget"])
+        ? contract["bid_request_budget"]
         : null;
     contract["awarding_budget"] = !!contract["awarding_budget"]
-        ? NumberUtil.parseFloatOrNull(contract["awarding_budget"])
+        ? contract["awarding_budget"]
         : null;
     contract["bid_request_date"] = !!contract["bid_request_date"]
-        ? DateUtil.formatDateForAPI(contract["bid_request_date"])
+        ? contract["bid_request_date"]
         : null;
     contract["awarding_date"] = !!contract["awarding_date"]
-        ? DateUtil.formatDateForAPI(contract["awarding_date"])
+        ? contract["awarding_date"]
         : null;
     contract["execution_signature_date"] = !!contract["execution_signature_date"]
-        ? DateUtil.formatDateForAPI(contract["execution_signature_date"])
+        ? contract["execution_signature_date"]
         : null;
     contract["expected_execution_period"] = !!contract["expected_execution_period"]
-        ? NumberUtil.parseIntOrNull(contract["expected_execution_period"])
+        ? NumberUtil.parseInteger(contract["expected_execution_period"])
         : null;
 
     contract["warranty_end_date"] = !!contract["warranty_end_date"]
-        ? DateUtil.formatDateForAPI(contract["warranty_end_date"])
+        ? contract["warranty_end_date"]
         : null;
 
     contract["financing_program"] = !!contract["financing_program"]
         ? contract["financing_program"].id
         : null;
 
-    // we must destructure object before its adapation because
+    // we must destructure object before its adaptation because
     // nested objects are still inmutable inside contract object
     if (!!contract["contractor"]) {
         contract["contractor"] = contractor_view_adapter({...contract["contractor"]});
@@ -130,12 +103,12 @@ const contract_view_adapter = contract => {
     contract["execution_certificate_start_date"] = !!contract[
         "execution_certificate_start_date"
     ]
-        ? DateUtil.formatDateForAPI(contract["execution_certificate_start_date"])
+        ? contract["execution_certificate_start_date"]
         : null;
     contract["execution_final_delivery_date"] = !!contract[
         "execution_final_delivery_date"
     ]
-        ? DateUtil.formatDateForAPI(contract["execution_final_delivery_date"])
+        ? contract["execution_final_delivery_date"]
         : null;
     contract["projects"] = contract["projects"].map(project => {
         return project.id;

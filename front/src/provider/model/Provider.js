@@ -14,10 +14,6 @@ const provider_api_adapter = provider => {
             contacts_api_adapter(provider["contacts"])
         );
     }
-    // Audit dates from API are in UTC, so we don't have to format them
-    provider["created_at"] = new Date(provider["created_at"]);
-    provider["updated_at"] = new Date(provider["updated_at"]);
-
     return provider;
 };
 
@@ -29,7 +25,9 @@ const provider_view_adapter = provider => {
     return provider;
 };
 
-const providers_api_adapter = providers => providers.map(provider_api_adapter);
+const providers_api_adapter = providers => {
+    return providers.map(provider_api_adapter);
+};
 
 const createProviders = (data = []) => {
     const providers = Providers.from(data, provider => createProvider(provider));

@@ -1,13 +1,6 @@
-import {
-    format,
-    parse,
-    add,
-    addDays,
-    differenceInCalendarMonths,
-    parseISO,
-} from "date-fns";
+import {format, parse, add, addDays, differenceInCalendarMonths} from "date-fns";
 
-import TextUtil from "./TextUtil";
+import {TextUtil} from "base/format/utilities";
 import {DATE_FORMATS, USED_LOCALE} from "base/format/config/i18n";
 
 const DateUtil = {
@@ -16,7 +9,7 @@ const DateUtil = {
         if (!date) {
             return "";
         }
-        return format(date, dateFormat);
+        return format(new Date(date), dateFormat);
     },
     // Transform to API format
     formatDateForAPI(date) {
@@ -29,22 +22,22 @@ const DateUtil = {
         if (!date) {
             return "";
         }
-        return format(date, dateFormat);
+        return format(new Date(date), dateFormat);
     },
     formatDateTime(date, dateFormat = DATE_FORMATS.CLIENT_DATETIMEFORMAT) {
         if (!date) {
             return "";
         }
-        return format(date, dateFormat);
+        return format(new Date(date), dateFormat);
     },
     formatDateTimeForFilenames(date) {
-        return DateUtil.formatDate(date, DATE_FORMATS.FILENAME_DATETIMEFORMAT);
+        return this.formatDate(date, DATE_FORMATS.FILENAME_DATETIMEFORMAT);
     },
     formatTime(date) {
         if (!date) {
             return "";
         }
-        return format(date, DATE_FORMATS.CLIENT_TIMEFORMAT);
+        return format(new Date(date), DATE_FORMATS.CLIENT_TIMEFORMAT);
     },
     formatHoursAndMinutes(millis) {
         return (
@@ -57,46 +50,51 @@ const DateUtil = {
     parseDate(date, dateFormat = DATE_FORMATS.CLIENT_DATEFORMAT) {
         return parse(date, dateFormat, new Date());
     },
+    // Transform from API format (YYYY/MM/DD) to Date()
     parseDateFromApi(dateString) {
-        return DateUtil.parseDate(dateString, DATE_FORMATS.API_DATEFORMAT);
+        if (dateString) {
+            return this.parseDate(dateString, DATE_FORMATS.API_DATEFORMAT);
+        } else {
+            return null;
+        }
     },
     addMonths(date, months) {
-        return add(date, {months});
-    },
-    getMonthName(month) {
-        return TextUtil.capitalize(
-            format(new Date(null, month - 1), "LLLL", {locale: USED_LOCALE})
-        );
-    },
-    getMonthInDate(date) {
-        return TextUtil.capitalize(
-            format(new Date(date), "LLL", {locale: USED_LOCALE})
-        );
-    },
-    getDayInDate(date) {
-        return format(date, "d");
-    },
-    getYearInDate(date) {
-        return format(date, "yyyy");
-    },
-    getDateAfterDays(date, amountOfDays) {
-        return addDays(date, amountOfDays);
-    },
-    formatYearAndMonth(date) {
-        return `${date.getMonth() + 1}/${date.getFullYear()}`;
-    },
-    getMonths(firstDate, lastDate) {
-        return differenceInCalendarMonths(lastDate, firstDate);
+        return add(new Date(date), {months});
     },
     getToday() {
         const now = new Date(Date.now());
         now.setHours(0, 0, 0, 0);
         return now;
     },
+    getDayInDate(date) {
+        return format(new Date(date), "d");
+    },
+    getMonthInDate(date) {
+        return TextUtil.capitalize(
+            format(new Date(date), "LLL", {locale: USED_LOCALE})
+        );
+    },
+    getYearInDate(date) {
+        return format(new Date(date), "yyyy");
+    },
+    getMonthName(month) {
+        return TextUtil.capitalize(
+            format(new Date(null, month - 1), "LLLL", {locale: USED_LOCALE})
+        );
+    },
+    getDateAfterDays(date, amountOfDays) {
+        return addDays(this.parseDateFromApi(date), amountOfDays);
+    },
+    getMonths(firstDate, lastDate) {
+        return differenceInCalendarMonths(new Date(lastDate), new Date(firstDate));
+    },
     getFirstDayOfCurrentMonth() {
         const today = this.getToday();
         today.setDate(1);
         return today;
+    },
+    formatYearAndMonth(date) {
+        return `${new Date(date).getMonth() + 1}/${new Date(date).getFullYear()}`;
     },
 };
 
