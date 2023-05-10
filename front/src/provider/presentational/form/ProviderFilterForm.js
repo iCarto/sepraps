@@ -4,23 +4,24 @@ import {LocationService} from "sepraps/location/service";
 
 import {useList} from "base/entity/hooks";
 import {EntityCounter} from "base/entity/components";
+import {SearchBox} from "base/search/components";
 import {FormAutocomplete, FormClearButton} from "base/form/components";
 import {ToggleFilterAccordionButton} from "base/shared/components";
-import {SearchBox} from "base/search/components";
 
 import Grid from "@mui/material/Grid";
 import Collapse from "@mui/material/Collapse";
 
 const ProviderFilterForm = ({onClear = null}) => {
     const {filter, setFilter, setPage, size} = useList();
+    const isFilterEmpty =
+        !filter?.searchText && !filter?.department && !filter?.district;
 
     const [loadedDomains, setLoadedDomains] = useState(false);
     const [departments, setDepartments] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
-
     const [expanded, setExpanded] = useState(() => {
-        return filter?.department || filter?.district;
+        return !isFilterEmpty;
     });
 
     const toggleAccordion = () => {
@@ -38,7 +39,7 @@ const ProviderFilterForm = ({onClear = null}) => {
                 }
             );
         }
-    }, [expanded]);
+    }, [expanded, loadedDomains]);
 
     const formMethods = useForm({
         defaultValues: {
@@ -84,6 +85,7 @@ const ProviderFilterForm = ({onClear = null}) => {
             handleChangeDepartment();
             onClear();
         }
+        setFilter({});
     };
 
     return (

@@ -5,8 +5,8 @@ import {ContractorService} from "contractor/service";
 
 import {useList} from "base/entity/hooks";
 import {EntityCounter} from "base/entity/components";
-import {FormAutocomplete, FormDatePicker, FormClearButton} from "base/form/components";
 import {SearchBox} from "base/search/components";
+import {FormAutocomplete, FormDatePicker, FormClearButton} from "base/form/components";
 import {ToggleFilterAccordionButton} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
@@ -14,20 +14,21 @@ import Collapse from "@mui/material/Collapse";
 
 const ContractFilterForm = ({onClear = null}) => {
     const {filter, setFilter, setPage, size} = useList();
+    const isFilterEmpty =
+        !filter?.searchText &&
+        !filter?.financing_fund &&
+        !filter?.financing_program &&
+        !filter?.contractor &&
+        !filter?.awarding_date_min &&
+        !filter?.awarding_date_max;
 
     const [loadedDomains, setLoadedDomains] = useState(false);
 
     const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
     const [contractors, setContractors] = useState([]);
-
     const [expanded, setExpanded] = useState(() => {
-        return (
-            Object.keys(filter).length &&
-            filter?.department !== "" &&
-            filter?.district !== "" &&
-            filter?.construction_contract !== ""
-        );
+        return !isFilterEmpty;
     });
 
     const toggleAccordion = () => {
@@ -107,7 +108,7 @@ const ContractFilterForm = ({onClear = null}) => {
                 </Grid>
             </Grid>
 
-            <Collapse in={expanded} timeout="auto">
+            <Collapse in={expanded} timeout="auto" sx={{width: "100%"}}>
                 <Grid container columnSpacing={1} alignItems="center" sx={{mt: "0px"}}>
                     <Grid item xs={4}>
                         <FormAutocomplete

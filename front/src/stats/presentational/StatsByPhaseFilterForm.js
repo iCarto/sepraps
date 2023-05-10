@@ -3,11 +3,11 @@ import {FormProvider, useForm} from "react-hook-form";
 import {FinancingService} from "financing/service";
 import {ContractService, TEMPLATE} from "contract/service";
 import {useAdministrativeDivisions} from "sepraps/location/provider";
+import {ToggleFilterAccordionButton} from "base/shared/components";
 import {FormSelect} from "base/form/components";
 import Grid from "@mui/material/Grid";
 import Collapse from "@mui/material/Collapse";
 import Button from "@mui/material/Button";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
@@ -97,21 +97,13 @@ const StatsByPhaseFilterForm = ({onChange = null, onClear = null}) => {
         }
     };
 
-    const filterBtnStyle = {
-        color: "text.secondary",
-        width: "fit-content",
-    };
-
     return (
         <FormProvider {...formMethods}>
-            <Button
-                onClick={toggleAccordion}
-                startIcon={<FilterListIcon />}
-                sx={filterBtnStyle}
-            >
-                {!expanded ? "Ver filtros" : "Ocultar filtros"}
-            </Button>
-            <Collapse in={expanded} timeout="auto">
+            <ToggleFilterAccordionButton
+                clickHandler={toggleAccordion}
+                expanded={expanded}
+            />
+            <Collapse in={expanded} timeout="auto" sx={{width: "100%"}}>
                 <Grid container component="form" spacing={2} alignItems="center" mb={3}>
                     <Grid item xs={4}>
                         <FormSelect

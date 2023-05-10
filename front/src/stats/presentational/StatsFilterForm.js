@@ -8,12 +8,12 @@ import {FinancingService} from "financing/service";
 import {LocationService} from "sepraps/location/service";
 
 import {FormAutocomplete, FormDatePicker} from "base/form/components";
+import {ToggleFilterAccordionButton} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
 import Collapse from "@mui/material/Collapse";
 import Button from "@mui/material/Button";
 import ClearIcon from "@mui/icons-material/Clear";
-import FilterListIcon from "@mui/icons-material/FilterList";
 
 const StatsFilterForm = ({
     filter,
@@ -150,22 +150,13 @@ const StatsFilterForm = ({
         );
     };
 
-    const filterBtnStyle = {
-        color: "text.secondary",
-        width: "fit-content",
-        mt: 2,
-    };
-
     return (
         <FormProvider {...formMethods}>
-            <Button
-                onClick={toggleAccordion}
-                startIcon={<FilterListIcon />}
-                sx={filterBtnStyle}
-            >
-                {!expanded ? "Ver filtros" : "Ocultar filtros"}
-            </Button>
-            <Collapse in={expanded} timeout="auto">
+            <ToggleFilterAccordionButton
+                clickHandler={toggleAccordion}
+                expanded={expanded}
+            />
+            <Collapse in={expanded} timeout="auto" sx={{width: "100%"}}>
                 <Grid
                     container
                     component="form"
