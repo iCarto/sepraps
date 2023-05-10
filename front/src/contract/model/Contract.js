@@ -58,8 +58,8 @@ const contract_api_adapter = contract => {
         "expected_execution_period"
     ]
         ? DateUtil.getMonths(
-              DateUtil.parseDateFromApi(contract["execution_certificate_start_date"]),
-              DateUtil.parseDateFromApi(contract["expected_execution_end_date"])
+              contract["execution_certificate_start_date"],
+              contract["expected_execution_end_date"]
           ) + 1
         : null;
     contract["warranty_end_date"] = contract["warranty_end_date"]
