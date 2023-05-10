@@ -1,4 +1,4 @@
-import {Fragment, useCallback, useRef} from "react";
+import {useCallback, useRef} from "react";
 import {useController, useFormContext} from "react-hook-form";
 
 import Button from "@mui/material/Button";
@@ -38,7 +38,7 @@ const FileUploadButton = ({name, onSelectFiles = null, rules = {}}) => {
     };
 
     return (
-        <Fragment>
+        <>
             <input
                 type="file"
                 multiple
@@ -53,7 +53,7 @@ const FileUploadButton = ({name, onSelectFiles = null, rules = {}}) => {
                 Seleccione los archivos en disco
             </Button>
             {errors[name] && <Alert severity="error">{errors[name].message}</Alert>}
-        </Fragment>
+        </>
     );
 };
 

@@ -1,31 +1,25 @@
-import {useState, forwardRef} from "react";
+import {useState} from "react";
 import {useController, useFormContext} from "react-hook-form";
+import {NumberUtil} from "base/format/utilities";
+
+import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Tooltip from "@mui/material/Tooltip";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import Box from "@mui/material/Box";
 
-const allowOnlyNumber = value => {
-    return value.replace(/[^0-9]/g, "");
-};
-
-const FormInputInteger = (
-    {
-        name: propsName,
-        label,
-        onFocusHandler = null,
-        onBlurHandler = null,
-        tooltipText = "",
-        endAdornment = null,
-        placeholder = null,
-        maxLength = null,
-        small = false,
-        disabled = false,
-        rules = {},
-    },
-    ref
-) => {
+const FormInputInteger = ({
+    name: propsName,
+    label,
+    onFocusHandler = null,
+    onBlurHandler = null,
+    tooltipText = "",
+    endAdornment = null,
+    placeholder = null,
+    maxLength = null,
+    disabled = false,
+    rules = {},
+}) => {
     const {control, trigger} = useFormContext();
 
     const {
@@ -39,6 +33,7 @@ const FormInputInteger = (
             // Format validation not needed because component only allows numbers
         },
     });
+
     const [value, setValue] = useState(field.value);
 
     const handleBlur = event => {
@@ -47,6 +42,9 @@ const FormInputInteger = (
         if (onBlurHandler) {
             onBlurHandler(event);
         }
+
+        const formattedValue = NumberUtil.formatInteger(value);
+        setValue(formattedValue);
     };
 
     const handleFocus = event => {
@@ -54,6 +52,9 @@ const FormInputInteger = (
         if (onFocusHandler) {
             onFocusHandler(event);
         }
+
+        const unformattedValue = NumberUtil.cleanInteger(value);
+        setValue(unformattedValue);
     };
 
     let inputProps = {};
@@ -63,7 +64,7 @@ const FormInputInteger = (
             endAdornment: (
                 <>
                     {endAdornment && (
-                        <InputAdornment position="start">{endAdornment}</InputAdornment>
+                        <InputAdornment position="end">{endAdornment}</InputAdornment>
                     )}
                 </>
             ),
@@ -90,30 +91,27 @@ const FormInputInteger = (
 
     return (
         <TextField
-            ref={ref}
             fullWidth
+            name={field.name}
+            value={value}
             onChange={event => {
-                const userValue = allowOnlyNumber(event.target.value);
+                const userValue = NumberUtil.cleanInteger(event.target.value);
                 field.onChange(parseInt(userValue)); // data send back to hook form
                 setValue(userValue); // UI state
             }}
-            size={small ? "small" : "normal"}
             onBlur={handleBlur}
             onFocus={handleFocus}
-            value={value}
-            name={field.name}
             inputRef={field.ref}
             label={getLabel()}
-            disabled={disabled}
-            error={Boolean(error)}
+            placeholder={placeholder}
             helperText={error?.message}
             InputLabelProps={{shrink: true}}
             InputProps={inputProps}
             inputProps={{maxLength: maxLength}}
-            placeholder={placeholder}
-            sx={{padding: "0px"}}
+            error={Boolean(error)}
+            disabled={disabled}
         />
     );
 };
 
-export default forwardRef(FormInputInteger);
+export default FormInputInteger;

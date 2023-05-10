@@ -1,4 +1,4 @@
-import {Fragment, useState} from "react";
+import {useState} from "react";
 
 import Autocomplete, {createFilterOptions} from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -96,12 +96,12 @@ const SearchAutocomplete = ({
                             </InputAdornment>
                         ),
                         endAdornment: (
-                            <Fragment>
+                            <>
                                 {state.loading ? (
                                     <CircularProgress color="inherit" size={20} />
                                 ) : null}
                                 {params.InputProps.endAdornment}
-                            </Fragment>
+                            </>
                         ),
                     }}
                 />

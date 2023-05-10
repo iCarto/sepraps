@@ -22,7 +22,7 @@ const setValueByPath = (object, path, value) =>
 
 const FormLocationSelect = ({
     name: propsName,
-    orientation = "row",
+    orientation = "column",
     required = false,
 }) => {
     const {control, reset, getValues} = useFormContext();
@@ -150,7 +150,7 @@ const FormLocationSelect = ({
 
     return (
         <Grid container columnSpacing={1}>
-            <Grid item xs={12} md={orientation === "row" ? 12 : 3}>
+            <Grid item xs={12} md={orientation === "column" ? 12 : 3}>
                 <FormSelect
                     name={`${propsName}.department`}
                     label="Departamento"
@@ -160,7 +160,7 @@ const FormLocationSelect = ({
                     showEmptyOption={true}
                 />
             </Grid>
-            <Grid item xs={12} md={orientation === "row" ? 12 : 3}>
+            <Grid item xs={12} md={orientation === "column" ? 12 : 3}>
                 <FormSelect
                     name={`${propsName}.district`}
                     label="Distrito"
@@ -171,7 +171,7 @@ const FormLocationSelect = ({
                     disabled={department === ""}
                 />
             </Grid>
-            <Grid item xs={12} md={orientation === "row" ? 12 : 4}>
+            <Grid item xs={12} md={orientation === "column" ? 12 : 4}>
                 {nonExistent ? (
                     <FormInputText
                         name={`${propsName}.name`}
@@ -192,7 +192,7 @@ const FormLocationSelect = ({
                     />
                 )}
             </Grid>
-            <Grid item xs={12} md={orientation === "row" ? 12 : 2}>
+            <Grid item xs={12} md={orientation === "column" ? 12 : 2}>
                 <FormCheckbox
                     name={`${propsName}.non_existent`}
                     label="Localidad nueva"

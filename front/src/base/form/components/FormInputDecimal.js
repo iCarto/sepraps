@@ -1,25 +1,14 @@
 import {useState} from "react";
 import {useController, useFormContext} from "react-hook-form";
+
+import {DECIMAL_SEPARATOR} from "base/format/config/i18n";
 import {NumberUtil} from "base/format/utilities";
+
+import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Tooltip from "@mui/material/Tooltip";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import Box from "@mui/material/Box";
-
-const DECIMAL_SEPARATOR = ",";
-
-const allowOnlyNumberAndSeparator = value => {
-    let replaced = value.replace(
-        new RegExp("[^\\d" + DECIMAL_SEPARATOR + "]", "g"),
-        ""
-    );
-    if ((replaced.match(RegExp(DECIMAL_SEPARATOR, "g")) || []).length) {
-        const lastIndex = replaced.lastIndexOf(DECIMAL_SEPARATOR);
-        replaced = replaced.substring(0, lastIndex) + replaced.substring(lastIndex + 1);
-    }
-    return replaced;
-};
 
 const getDecimalSize = value => {
     if (value.includes(DECIMAL_SEPARATOR)) {
@@ -61,7 +50,7 @@ const FormInputDecimal = ({
             endAdornment: (
                 <>
                     {endAdornment && (
-                        <InputAdornment position="start">{endAdornment}</InputAdornment>
+                        <InputAdornment position="end">{endAdornment}</InputAdornment>
                     )}
                 </>
             ),
@@ -93,25 +82,25 @@ const FormInputDecimal = ({
 
     return (
         <TextField
+            fullWidth
+            name={field.name}
+            value={value}
             onChange={event => {
-                const userValue = allowOnlyNumberAndSeparator(event.target.value);
+                const userValue = NumberUtil.cleanDecimal(event.target.value);
                 if (getDecimalSize(userValue) <= decimalSize) {
                     field.onChange(NumberUtil.parseDecimal(userValue)); // data sent back to hook form
                     setValue(userValue); // UI state
                 }
             }}
             onBlur={handleBlur}
-            value={value}
-            name={field.name}
             inputRef={field.ref}
             label={getLabel()}
-            fullWidth
-            error={Boolean(error)}
+            placeholder={placeholder}
             helperText={error?.message}
             InputLabelProps={{shrink: true}}
             InputProps={inputProps}
+            error={Boolean(error)}
             disabled={disabled}
-            placeholder={placeholder}
         />
     );
 };

@@ -73,8 +73,8 @@ const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
     useEffect(() => {
         if (coordinates.latitude && coordinates.longitude) {
             var utmCoords = L.latLng(
-                NumberUtil.parseFloatOrNull(coordinates.latitude),
-                NumberUtil.parseFloatOrNull(coordinates.longitude)
+                NumberUtil.parseFloat(coordinates.latitude),
+                NumberUtil.parseFloat(coordinates.longitude)
             ).utm();
 
             setUtmCoords({
@@ -149,8 +149,8 @@ const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
             </Grid>
             <MapForm
                 onClick={handleMapChangeLocation}
-                latitude={NumberUtil.parseFloatOrNull(coordinates.latitude)}
-                longitude={NumberUtil.parseFloatOrNull(coordinates.longitude)}
+                latitude={NumberUtil.parseFloat(coordinates.latitude)}
+                longitude={NumberUtil.parseFloat(coordinates.longitude)}
             />
         </>
     );

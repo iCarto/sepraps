@@ -112,13 +112,11 @@ const SectionField = ({
         <Grid container>
             <Grid
                 item
+                container
+                alignItems="flex-start"
                 xs="auto"
                 sm={5}
                 lg={labelWidth}
-                sx={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                }}
             >
                 {labelIcon && (
                     <LabelIcon fontSize="small" sx={{mr: 1, color: "text.secondary"}} />
@@ -133,7 +131,7 @@ const SectionField = ({
                     </Typography>
                 )}
             </Grid>
-            <Grid item container xs="auto" sm={7} lg={valueWidth}>
+            <Grid item container xs="auto" sm={7} lg={valueWidth} alignItems="flex-end">
                 <Grid item>
                     {isValueValid ? (linkPath ? linkField : regularField) : emptyField}
                 </Grid>
