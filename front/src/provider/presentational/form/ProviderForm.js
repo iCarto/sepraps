@@ -64,7 +64,7 @@ const ProviderForm = ({
                     ) : (
                         <ProviderCreationForm
                             onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                            onCancel={onFormCancel}
+                            onCancel={onCancel ? onFormCancel : null}
                         />
                     )}
                 </FormProvider>

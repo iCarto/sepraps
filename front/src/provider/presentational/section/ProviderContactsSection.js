@@ -40,7 +40,7 @@ const ProviderContactsSection = ({provider}) => {
     };
 
     const handleEdit = contactId => {
-        navigate(`provider/contact/${contactId}/edit`);
+        navigate(`edit/${contactId}`);
     };
 
     const handleUpdateProvider = updatedProvider => {
@@ -64,12 +64,7 @@ const ProviderContactsSection = ({provider}) => {
                         handleActions={handleActions}
                     />
                 ) : (
-                    <Typography
-                        sx={{
-                            paddingY: 3,
-                            marginX: "auto",
-                        }}
-                    >
+                    <Typography paddingY={3} textAlign="center">
                         Este prestador no tiene contactos.
                     </Typography>
                 )}

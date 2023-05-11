@@ -7,8 +7,9 @@ import {ProviderService} from "provider/service";
 import {EntityUpdatePanel} from "base/entity/components";
 import {ProviderFormSearch} from "provider/presentational/form";
 
+//TO-DO: Consider removing this component if we are only allowing provider to be updated from its own module.
 const UpdateProjectProviderPanel = () => {
-    const {section} = useParams();
+    const {action, section} = useParams();
     const location = useLocation();
     const basePath = location.pathname.split(section)[0];
 
@@ -37,7 +38,7 @@ const UpdateProjectProviderPanel = () => {
 
     return (
         <EntityUpdatePanel
-            title="Modificar prestador"
+            title={action === "new" ? "Añadir prestador" : "Modificar prestador"}
             form={<ProviderFormSearch onSubmit={handleSubmit} />}
             onCancel={handleFormCancel}
             error={error}

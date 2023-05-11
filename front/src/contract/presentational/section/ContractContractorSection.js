@@ -86,7 +86,7 @@ const ContractContractorSection = ({contract}) => {
                     <Typography style={{fontStyle: "italic"}}>
                         El contrato no tiene ningún contratista asignado
                     </Typography>
-                    <EntityAddButtonGroup />
+                    <EntityAddButtonGroup basePath="contractor/" />
                 </Stack>
             )}
         </SectionCard>

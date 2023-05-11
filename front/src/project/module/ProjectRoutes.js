@@ -9,7 +9,6 @@ import {
     ViewProjectFinancingSubPage,
     ViewProjectMilestonesSubPage,
     ViewProjectContactsSubPage,
-    UpdateProjectProviderPanel,
     ViewProjectDocumentsSubPage,
     ViewProjectQuestionnairesSubPage,
     AddProjectProviderPanel,
@@ -49,12 +48,7 @@ const projectRoutes = [
             >
                 <Route
                     key="project-provider-update"
-                    path="provider/:providerId/:action"
-                    element={<UpdateProjectProviderPanel />}
-                />
-                <Route
-                    key="project-provider-new-add"
-                    path="provider/new/:action"
+                    path="provider/:action/:providerId"
                     element={<AddProjectProviderPanel />}
                 />
                 <Route

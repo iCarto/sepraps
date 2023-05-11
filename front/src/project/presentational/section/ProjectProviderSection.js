@@ -34,7 +34,7 @@ const ProjectProviderSection = ({project}) => {
                   text="Modificar"
                   icon={<EditIcon />}
                   onClick={() => {
-                      navigate("provider/" + provider.id + "/edit");
+                      navigate("provider/edit" + provider.id);
                   }}
                   roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
               />,
@@ -76,7 +76,6 @@ const ProjectProviderSection = ({project}) => {
                         label="Ubicación"
                         value={`${provider.locality.name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
                     />
-                    {/* <ProjectContactsSection provider={provider} /> */}
                     <RemoveItemDialog
                         isDialogOpen={isRemoveDialogOpen}
                         setIsDialogOpen={setIsRemoveDialogOpen}

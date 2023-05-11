@@ -1,7 +1,7 @@
 import {useDomain} from "sepraps/domain/provider";
 import {FormInputText, FormLocationSelect, FormSelect} from "base/form/components";
 
-const ProviderFormGeneralDataFields = ({orientation = "row"}) => {
+const ProviderFormGeneralDataFields = ({orientation = "column"}) => {
     const {areas} = useDomain();
 
     return (

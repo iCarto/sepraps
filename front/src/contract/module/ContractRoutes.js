@@ -38,18 +38,18 @@ const contractRoutes = [
                 element={<ViewContractSummarySubPage />}
             >
                 <Route
-                    key="contract-contractor"
-                    path="contractor/:contractorId/edit"
+                    key="contract-contractor-edit"
+                    path="contractor/edit/:contractorId"
                     element={<UpdateContractContractorPanel />}
                 />
                 <Route
-                    key="contract-contractor-new-add"
-                    path="contractor/new/:action"
+                    key="contract-contractor-add"
+                    path="contractor/add/:contractorId"
                     element={<AddContractContractorPanel />}
                 />
                 <Route
                     key="contract-contractor-contact"
-                    path="contractor/contact/:contactId/:action"
+                    path="contractor/contact/:action/:contactId"
                     element={<UpdateContractContractorContactPanel />}
                 />
                 <Route
@@ -78,8 +78,7 @@ const contractRoutes = [
             >
                 <Route
                     key="contract-monitoring-profile-edit"
-                    // path="contact/:contactId/:action"
-                    path=":contactId/:action"
+                    path=":action/:contactId"
                     element={<UpdateContractContactPanel />}
                 />
             </Route>

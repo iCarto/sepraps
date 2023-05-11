@@ -53,7 +53,7 @@ const ContractorContactsSection = ({contractor}) => {
     };
 
     const handleEdit = contactId => {
-        navigate(`contractor/contact/${contactId}/edit`);
+        navigate(`contractor/contact/edit/${contactId}`);
     };
 
     const handleUpdateContractor = updatedContractor => {

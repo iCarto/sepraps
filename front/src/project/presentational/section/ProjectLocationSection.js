@@ -51,7 +51,11 @@ const ProjectLocationSection = ({project}) => {
                     <SectionField
                         label="Prestador"
                         value={FieldUtil.getValue(project?.provider?.name)}
-                        linkPath={`/providers/${project?.provider?.id}/summary`}
+                        linkPath={
+                            project?.provider
+                                ? `/providers/${project.provider.id}/summary`
+                                : null
+                        }
                     />
                 </Grid>
                 <Grid item container xs={12} lg={4}>

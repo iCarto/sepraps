@@ -76,7 +76,7 @@ const UpdateContractContractorContactPanel = () => {
         <EntityUpdatePanel
             title="Añadir contacto"
             form={
-                action === "search" ? (
+                contactId === "existing" ? (
                     <ContactFormSearch
                         allowedPosts={allowedPosts}
                         onSubmit={handleSubmit}

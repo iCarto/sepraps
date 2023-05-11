@@ -54,8 +54,7 @@ const providerRoutes = [
             >
                 <Route
                     key="provider-contacts-edit"
-                    // path="contact/:contactId/:action"
-                    path=":contactId/:action"
+                    path=":action/:contactId"
                     element={<UpdateProviderContactPanel />}
                 />
             </Route>

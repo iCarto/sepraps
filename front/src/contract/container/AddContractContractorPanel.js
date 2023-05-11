@@ -8,7 +8,7 @@ import {ContractorFormSearch, ContractorForm} from "contractor/presentational";
 import {EntityUpdatePanel} from "base/entity/components";
 
 const AddContractContractorPanel = () => {
-    const {action} = useParams();
+    const {contractorId} = useParams();
 
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
@@ -37,7 +37,7 @@ const AddContractContractorPanel = () => {
         <EntityUpdatePanel
             title="Añadir contratista"
             form={
-                action === "search" ? (
+                contractorId === "existing" ? (
                     <ContractorFormSearch onSubmit={handleSubmit} />
                 ) : (
                     <ContractorForm onSubmit={handleSubmit} />

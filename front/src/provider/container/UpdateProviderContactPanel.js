@@ -9,7 +9,7 @@ import {ContactForm, ContactFormSearch} from "contact/presentational";
 import {EntityUpdatePanel} from "base/entity/components";
 
 const UpdateProviderContactPanel = () => {
-    const {action, contactId} = useParams();
+    const {contactId, action} = useParams();
 
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
@@ -78,7 +78,7 @@ const UpdateProviderContactPanel = () => {
         <EntityUpdatePanel
             title={action === "edit" ? `Modificar contacto` : `Asignar contacto`}
             form={
-                action === "search" ? (
+                contactId === "existing" ? (
                     <ContactFormSearch
                         allowedPosts={allowedPosts}
                         onSubmit={handleSubmit}

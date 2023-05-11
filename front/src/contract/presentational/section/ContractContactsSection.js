@@ -40,7 +40,7 @@ const ContractContactsSection = ({contract}) => {
     };
 
     const handleEdit = contactId => {
-        navigate(`${contactId}/edit`);
+        navigate(`edit/${contactId}`);
     };
 
     const handleUpdateContract = updatedContract => {

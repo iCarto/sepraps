@@ -5,10 +5,11 @@ import {project_view_adapter} from "project/model";
 import {ProjectService} from "project/service";
 
 import {EntityUpdatePanel} from "base/entity/components";
-import {ProviderFormSearch} from "provider/presentational/form";
+import {ProviderForm, ProviderFormSearch} from "provider/presentational/form";
 
 const AddProjectProviderPanel = () => {
-    const {action} = useParams();
+    const {action, providerId} = useParams();
+    const params = useParams();
 
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
@@ -33,8 +34,14 @@ const AddProjectProviderPanel = () => {
 
     return (
         <EntityUpdatePanel
-            title="Añadir prestador"
-            form={<ProviderFormSearch onSubmit={handleSubmit} />}
+            title={action === "add" ? "Añadir prestador" : "Modificar prestador"}
+            form={
+                providerId === "existing" ? (
+                    <ProviderFormSearch onSubmit={handleSubmit} />
+                ) : (
+                    <ProviderForm onSubmit={handleSubmit} />
+                )
+            }
             onCancel={handleCancel}
             error={error}
         />
