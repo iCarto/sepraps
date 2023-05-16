@@ -1,5 +1,5 @@
 import {contacts_api_adapter, createContacts} from "contact/model";
-import {AuthApiService} from "../../base/api/service";
+import {AuthApiService} from "base/api/service";
 
 const basePath = "/api/monitoring/contacts";
 

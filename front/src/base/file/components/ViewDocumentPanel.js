@@ -1,41 +1,41 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {useAuth} from "../../user/provider";
-import {AuthAction} from "../../user/components";
-import {DocumentService} from "../service";
-import {useNavigateWithReload} from "../../navigation/hooks";
-import {useDownloadDocument} from "../utilities";
-import {useCopyToClipboard} from "../../shared/utilities";
+import {useAuth} from "base/user/provider";
+import {AuthAction} from "base/user/components";
+import {DocumentService} from "base/file/service";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {useDownloadDocument} from "base/file/utilities";
+import {useCopyToClipboard} from "base/shared/utilities";
 import {ProjectService} from "project/service";
 
 import {Spinner} from "base/shared/components";
 import {SidebarAction, SidebarPanel} from "base/ui/sidebar";
-import {DeleteDocumentDialog, DocumentSection} from ".";
+import {DeleteDocumentDialog, DocumentSection} from "base/file/components";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 
+// TO-DO: Implement EntityViewPanel ?
 const ViewDocumentPanel = () => {
+    const [folderElement, setFolderElement] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
     const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
     const params = useParams();
     const {id: projectId} = useParams();
 
-    const [folderElement, setFolderElement] = useState(null);
-    const [loading, setLoading] = useState(false);
-
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-
     useEffect(() => {
         let path = params["*"];
         if (path) {
-            setLoading(true);
+            setIsLoading(true);
             DocumentService.get(path).then(element => {
                 setFolderElement(element);
-                setLoading(false);
+                setIsLoading(false);
             });
         }
     }, [params]);
@@ -118,7 +118,11 @@ const ViewDocumentPanel = () => {
             mainActionIcon={<DownloadIcon />}
             sidebarActions={sidebarActions}
         >
-            {loading ? <Spinner /> : <DocumentSection folderElement={folderElement} />}
+            {isLoading ? (
+                <Spinner />
+            ) : (
+                <DocumentSection folderElement={folderElement} />
+            )}
 
             <DeleteDocumentDialog
                 folderElement={folderElement}

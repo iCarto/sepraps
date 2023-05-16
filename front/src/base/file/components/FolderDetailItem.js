@@ -29,13 +29,15 @@ const FolderDetailItem = ({
         <Stack
             onClick={e => handleClick(e)}
             onDoubleClick={e => handleDoubleClick(e)}
-            style={{color: "inherit", textDecoration: "inherit"}}
             justifyContent="center"
             alignItems="center"
             sx={{
                 p: 2,
-                backgroundColor: selected ? "grey.100" : "inherit",
                 borderRadius: 3,
+                backgroundColor: selected ? "grey.100" : "inherit",
+                color: "inherit",
+                textDecoration: "inherit",
+                cursor: "pointer",
             }}
         >
             <FolderOutlinedIcon sx={{fontSize: 50}} color="primary" />

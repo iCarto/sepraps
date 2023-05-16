@@ -8,6 +8,7 @@ export {default as FolderElementIcon} from "./FolderElementIcon";
 export {default as DocumentSection} from "./DocumentSection";
 export {default as ListFolder} from "./ListFolder";
 export {default as ViewDocumentPanel} from "./ViewDocumentPanel";
+export {default as ViewDocumentsSubPage} from "./ViewDocumentsSubPage";
 export {default as DeleteDocumentDialog} from "./DeleteDocumentDialog";
 export {default as FileUploadSection} from "./FileUploadSection";
 export {default as PendingFile} from "./PendingFile";

@@ -3,9 +3,9 @@ import {useLocation, useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 
-import {useDownloadDocument} from "../utilities";
-import {DocumentService} from "../service";
-import {useFolderView} from "../provider";
+import {useDownloadDocument} from "base/file/utilities";
+import {DocumentService} from "base/file/service";
+import {useFolderView} from "base/file/provider";
 import {Spinner} from "base/shared/components";
 import {
     FileUploadSection,
@@ -13,10 +13,11 @@ import {
     FolderChangeViewButtonGroup,
     FolderList,
     FolderTable,
-} from ".";
+} from "base/file/components";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import DownloadIcon from "@mui/icons-material/Download";
+import Tooltip from "@mui/material/Tooltip";
 
 const ListFolder = ({
     folderPath,
@@ -24,32 +25,32 @@ const ListFolder = ({
     selectedElement = null,
     onSelectElement = null,
 }) => {
+    const [folderElement, setFolderElement] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
     const downloadDocument = useDownloadDocument();
     const location = useLocation();
     const {ROLES} = useAuth();
-
     const {view} = useFolderView();
-
-    const [folderElement, setFolderElement] = useState(null);
-    const [loading, setLoading] = useState(false);
 
     let project;
     [project] = useOutletContext();
 
     const isProjectClosed = project.closed;
+    const folderContainsFiles = folderElement?.children?.some(child => child["size"]);
 
     useEffect(() => {
-        setLoading(true);
-        // DocumentService.get(folderPath).then(element => {
-        //     setFolderElement(element);
-        //     setLoading(false);
-        // });
+        setIsLoading(true);
+        DocumentService.get(folderPath).then(element => {
+            setFolderElement(element);
+            setIsLoading(false);
+        });
     }, [folderPath, location.state?.lastRefreshDate]);
 
     const reloadFolder = file => {
-        // DocumentService.get(folderPath).then(folder => {
-        //     setFolderElement(folder);
-        // });
+        DocumentService.get(folderPath).then(folder => {
+            setFolderElement(folder);
+        });
     };
 
     const downloadFolder = () => {
@@ -63,7 +64,7 @@ const ListFolder = ({
                 <FolderChangeViewButtonGroup />
             </Grid>
             <Grid item container xs={12}>
-                {loading ? (
+                {isLoading ? (
                     <Spinner />
                 ) : view === "list" ? (
                     <FolderList
@@ -81,24 +82,26 @@ const ListFolder = ({
                     />
                 )}
             </Grid>
-            {folderElement && (
+            {folderContainsFiles ? (
                 <Grid item container xs={12} justifyContent="flex-end">
-                    <IconButton aria-label="download-zip" onClick={downloadFolder}>
-                        <DownloadIcon />
-                    </IconButton>
+                    <Tooltip title="Descargar archivos">
+                        <IconButton aria-label="download-zip" onClick={downloadFolder}>
+                            <DownloadIcon />
+                        </IconButton>
+                    </Tooltip>
                 </Grid>
-            )}
+            ) : null}
             {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
-            {folderPath.indexOf("/") >= 0 && (
+            {folderPath.indexOf("/") >= 0 ? (
                 <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                    <Grid item container xs={12} mt={8}>
+                    <Grid item container xs={12} mt={4}>
                         <FileUploadSection
                             path={folderPath}
                             onFinishUpload={reloadFolder}
                         />
                     </Grid>
                 </AuthAction>
-            )}
+            ) : null}
         </Grid>
     );
 };

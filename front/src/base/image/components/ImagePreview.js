@@ -17,17 +17,17 @@ const ImagePreview = ({path: url, alt = "", width = null, height = null, sx = {}
     };
 
     useEffect(() => {
-        // if (url) {
-        //     setLoading(true);
-        //     // A Blob is necessary because we have to load the image using AuthService
-        //     DocumentService.preview(url).then(response => {
-        //         createBlob(response);
-        //         setLoading(false);
-        //     });
-        //     setLoading(false);
-        // } else {
-        //     setImageUrl(DEFAULT_NO_IMAGE);
-        // }
+        if (url) {
+            setLoading(true);
+            // A Blob is necessary because we have to load the image using AuthService
+            DocumentService.preview(url).then(response => {
+                createBlob(response);
+                setLoading(false);
+            });
+            setLoading(false);
+        } else {
+            setImageUrl(DEFAULT_NO_IMAGE);
+        }
         setImageUrl(DEFAULT_NO_IMAGE);
     }, [url]);
 

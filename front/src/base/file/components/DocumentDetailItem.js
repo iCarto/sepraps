@@ -1,11 +1,11 @@
 import {createRef} from "react";
 import {useNavigate} from "react-router-dom";
 
+import {useDownloadDocument} from "base/file/utilities";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import {useDownloadDocument} from "../utilities";
 
 const DocumentDetailItem = ({
     document: documentElement,
@@ -44,7 +44,6 @@ const DocumentDetailItem = ({
 
     return (
         <Stack
-            style={{color: "inherit", textDecoration: "inherit"}}
             ref={link}
             onClick={e => handleClick(e)}
             onDoubleClick={e => handleDoubleClick(e)}
@@ -54,6 +53,9 @@ const DocumentDetailItem = ({
                 p: 2,
                 backgroundColor: selected ? "grey.100" : "inherit",
                 borderRadius: 3,
+                color: "inherit",
+                textDecoration: "inherit",
+                cursor: "pointer",
             }}
         >
             {documentElement.content_type.startsWith("image") ? (

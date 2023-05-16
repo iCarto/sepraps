@@ -1,12 +1,12 @@
-// import { AuthApiService } from "../../api/service";
+import {AuthApiService} from "base/api/service";
 
 const FileService = {
     download(path, contentType) {
-        console.log("FileService");
-        // return AuthApiService.get(path, {
-        //     Accept: contentType,
-        //     "Content-Type": contentType,
-        // });
+        console.log("FileService", path);
+        return AuthApiService.get(path, {
+            Accept: contentType,
+            "Content-Type": contentType,
+        });
     },
 };
 

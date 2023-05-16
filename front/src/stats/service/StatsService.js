@@ -1,4 +1,4 @@
-import {AuthApiService} from "../../base/api/service";
+import {AuthApiService} from "base/api/service";
 
 const getQueryStringByFilter = filter => {
     return Object.keys(filter)

@@ -78,16 +78,16 @@ const SelectFileSection = ({formFilesName, formFileInputName, rules}) => {
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDropFile}
-                    backgroundColor={isDropAreaActive ? "none" : "grey.100"}
-                    height="200px"
                     sx={{
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center",
+                        height: "200px",
                         p: 3,
                         border: "1px solid grey",
                         borderRadius: 5,
+                        backgroundColor: isDropAreaActive ? "none" : "grey.100",
                     }}
                 >
                     <CloudUploadIcon sx={{color: "grey.500"}} fontSize="large" />

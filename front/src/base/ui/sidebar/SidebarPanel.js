@@ -94,9 +94,7 @@ const SidebarPanel = ({
             </Grid>
             <Divider />
             <Box p={3}>
-                <Grid container mt={3}>
-                    {children}
-                </Grid>
+                <Grid container>{children}</Grid>
                 {mainActionClick && (
                     <Grid container justifyContent="center" mt={2}>
                         <Button

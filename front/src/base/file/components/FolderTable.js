@@ -13,26 +13,26 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Typography from "@mui/material/Typography";
 
-const headCells = [
+const columns = [
     {
         id: "icon",
         label: "",
+        width: 5,
     },
     {
         id: "name",
         label: "Nombre",
+        width: 40,
     },
     {
         id: "content_type",
         label: "Tipo",
+        width: 35,
     },
     {
         id: "size",
         label: "Tamaño",
-    },
-    {
-        id: "actions",
-        label: "",
+        width: 20,
     },
 ];
 
@@ -69,7 +69,7 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
         }
     };
 
-    const noPointer = {cursor: "default"};
+    const pointer = {cursor: "pointer"};
 
     const tableRowStyle = {
         "&:last-child td, &:last-child th": {
@@ -80,13 +80,19 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
 
     return (
         <TableContainer sx={{overflowX: "auto"}}>
-            {folderElements && folderElements.length ? (
+            {folderElements?.length ? (
                 <Table sx={{tableLayout: "fixed"}} aria-labelledby="Files table">
                     <TableSortingHead
                         order={order}
                         attribute={attribute}
                         onRequestSort={handleRequestSort}
-                        headCells={headCells}
+                        headCells={[
+                            ...columns,
+                            {
+                                id: "actions",
+                                // width: 5,
+                            },
+                        ]}
                     />
                     <TableBody>
                         {folderElements
@@ -97,12 +103,12 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                                         hover
                                         key={index}
                                         sx={tableRowStyle}
+                                        selected={
+                                            selectedElement?.name === folderElement.name
+                                        }
                                         onClick={() => handleClick(folderElement)}
                                         onDoubleClick={() =>
                                             handleDoubleClick(folderElement)
-                                        }
-                                        selected={
-                                            selectedElement?.name === folderElement.name
                                         }
                                     >
                                         <TableCell>
@@ -113,7 +119,7 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                                         <TableCell
                                             component="th"
                                             scope="row"
-                                            style={noPointer}
+                                            style={pointer}
                                             sx={{
                                                 color: folderElement.content_type
                                                     ? "inherit"
@@ -125,10 +131,10 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                                         >
                                             {folderElement.name}
                                         </TableCell>
-                                        <TableCell style={noPointer}>
+                                        <TableCell style={pointer}>
                                             {folderElement.content_type}
                                         </TableCell>
-                                        <TableCell style={noPointer}>
+                                        <TableCell style={pointer}>
                                             {folderElement.size &&
                                                 FileUtil.formatBytes(
                                                     folderElement.size
@@ -141,8 +147,8 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                 </Table>
             ) : (
                 <Typography
-                    pt={6}
                     sx={{
+                        paddingTop: 6,
                         textAlign: "center",
                         fontStyle: "italic",
                     }}

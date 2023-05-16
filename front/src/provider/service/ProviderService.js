@@ -4,7 +4,7 @@ import {
     provider_api_adapter,
     providers_api_adapter,
 } from "provider/model";
-import {AuthApiService} from "../../base/api/service";
+import {AuthApiService} from "base/api/service";
 import {ServiceUtil} from "base/api/utilities";
 
 const basePath = "/api/monitoring/providers";

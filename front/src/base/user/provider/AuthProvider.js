@@ -1,6 +1,6 @@
 import {useState, createContext, useContext} from "react";
 
-import {AuthService} from "../service";
+import {AuthService} from "base/api/service";
 import {ROLES} from "../config";
 
 let AuthContext = createContext(null);

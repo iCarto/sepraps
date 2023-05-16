@@ -1,39 +1,35 @@
-// import {AuthApiService} from "base/api/service";
 import {
-    createDocument,
-    createFolder,
-    document_api_adapter,
     folder_api_adapter,
+    createFolder,
+    createDocument,
+    document_api_adapter,
 } from "base/file/model";
+import {AuthApiService} from "base/api/service";
 
 const basePath = "/api/documents/";
 
 const DocumentService = {
     get(path) {
-        console.log("DocumentService");
-        // return AuthApiService.get(basePath + path).then(response => {
-        //     if (response.media_type === "FOLDER") {
-        //         return createFolder(folder_api_adapter(response));
-        //     }
-        //     return createDocument(document_api_adapter(response));
-        // });
+        return AuthApiService.get(basePath + path).then(response => {
+            if (response.media_type === "FOLDER") {
+                return createFolder(folder_api_adapter(response));
+            }
+            return createDocument(document_api_adapter(response));
+        });
     },
 
     delete(path) {
-        console.log("DocumentService");
-        // return AuthApiService.delete(basePath + path);
+        return AuthApiService.delete(basePath + path);
     },
 
     preview(url, contentType) {
-        console.log("DocumentService");
-        // return AuthApiService.get(url);
+        return AuthApiService.get(url);
     },
 
     download(path, contentType) {
-        console.log("DocumentService");
-        // return AuthApiService.get(`${basePath}download/${path}`, {
-        //     "Content-Type": contentType,
-        // });
+        return AuthApiService.get(`${basePath}download/${path}`, {
+            "Content-Type": contentType,
+        });
     },
 
     upload(
@@ -44,15 +40,14 @@ const DocumentService = {
         onAbort = () => {},
         onError = () => {}
     ) {
-        console.log("DocumentService");
-        // return AuthApiService.upload(
-        //     file,
-        //     basePath + path + "/" + file.name,
-        //     onFinish,
-        //     onProgress,
-        //     onAbort,
-        //     onError
-        // );
+        return AuthApiService.upload(
+            file,
+            basePath + path + "/" + file.name,
+            onFinish,
+            onProgress,
+            onAbort,
+            onError
+        );
     },
 };
 
