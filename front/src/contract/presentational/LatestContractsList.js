@@ -11,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 const LatestContractsList = ({contracts}) => {
     const navigate = useNavigate();
 
-    const contractBtnStyle = {
+    const contractButtonStyle = {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#fff",
@@ -42,7 +42,7 @@ const LatestContractsList = ({contracts}) => {
                 {contracts.map((contract, index) => (
                     <ListItem key={index} sx={{pt: {xs: 1, xl: 0}, px: 1}}>
                         <ListItemButton
-                            sx={contractBtnStyle}
+                            sx={contractButtonStyle}
                             onClick={() => {
                                 navigate(`contracts/${contract.id}/summary`);
                             }}

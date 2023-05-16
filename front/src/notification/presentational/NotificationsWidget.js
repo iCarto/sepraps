@@ -29,7 +29,7 @@ const NotificationsWidget = ({notifications}) => {
         setCurrentPage(value);
     };
 
-    const btnStyle = {
+    const buttonStyle = {
         py: {xs: 0, xl: "inherit"},
         "&:hover": {
             backgroundColor: "primary.hover",
@@ -45,7 +45,7 @@ const NotificationsWidget = ({notifications}) => {
                             <Fragment key={notification.id}>
                                 <ListItem alignItems="flex-start" sx={{pl: "8px"}}>
                                     <ListItemButton
-                                        sx={btnStyle}
+                                        sx={buttonStyle}
                                         onClick={() => {
                                             navigate(`${notification.url}`);
                                         }}

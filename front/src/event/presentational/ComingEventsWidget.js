@@ -45,7 +45,7 @@ const ComingEventsWidget = ({events}) => {
         paddingBottom: 5,
     }));
 
-    const btnStyle = {
+    const buttonStyle = {
         py: {xs: 0, xl: "inherit"},
         "&:hover": {
             backgroundColor: "primary.hover",
@@ -61,7 +61,7 @@ const ComingEventsWidget = ({events}) => {
                             <Fragment key={event.id}>
                                 <ListItem sx={{pl: "8px"}}>
                                     <ListItemButton
-                                        sx={btnStyle}
+                                        sx={buttonStyle}
                                         onClick={() => {
                                             navigate(`${event.url}`);
                                         }}

@@ -1,5 +1,5 @@
 import {LogoLink} from "base/navigation/components";
-import {APP_NAME, APP_NAME_LONG} from "base/ui/app/config/appInfo";
+import {APP_NAME, APP_NAME_LONG} from "sepraps/config/appInfo";
 import {HeaderHero} from "base/ui/header";
 
 const SeprapsHeaderHero = () => {

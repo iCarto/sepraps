@@ -95,7 +95,7 @@ const SectionField = ({
     );
 
     const linkField = (
-        <TextLink text={value} to={linkPath} textStyleProps={{fontSize: "14px"}} />
+        <TextLink text={value} to={linkPath} textStyle={{fontSize: "14px"}} />
     );
 
     const emptyField = (

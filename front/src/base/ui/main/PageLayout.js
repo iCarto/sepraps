@@ -6,8 +6,8 @@ import {
     PAGE_MENU_DRAWER_WIDTH,
     SIDEBAR_PANEL_DRAWER_WIDTH,
     SUBPAGE_MENU_DRAWER_WIDTH,
-} from "../app/config/measurements";
-import {SidebarPanelDrawer} from "../sidebar";
+} from "base/ui/app/config/measurements";
+import {SidebarPanelDrawer} from "base/ui/sidebar";
 import styled from "@mui/material/styles/styled";
 import Box from "@mui/material/Box";
 
@@ -35,14 +35,14 @@ const PageLayout = ({
     context = [],
     subPage = false,
     disablePadding = false,
-    styleProps = {},
+    style = {},
 }) => {
     const [isSidebarPanelOpen, setSidebarPanelOpen] = useState(false);
 
     const drawerWidth = subPage ? SUBPAGE_MENU_DRAWER_WIDTH : PAGE_MENU_DRAWER_WIDTH;
 
     return (
-        <PageContainer open={isSidebarPanelOpen} sx={styleProps}>
+        <PageContainer open={isSidebarPanelOpen} sx={{...style}}>
             {menu}
             <Box
                 role="page-container"

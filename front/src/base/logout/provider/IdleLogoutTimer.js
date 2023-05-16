@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {IdleTimerProvider} from "react-idle-timer";
-import {APP_NAME} from "base/ui/app/config/appInfo";
+import {APP_NAME} from "sepraps/config/appInfo";
 
 const IdleLogoutTimer = ({children}) => {
     let navigate = useNavigate();

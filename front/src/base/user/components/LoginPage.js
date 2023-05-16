@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useAuth} from "base/user/provider";
-import {APP_LOGO_URL, APP_NAME, APP_NAME_LONG} from "base/ui/app/config/appInfo";
+import {APP_LOGO_URL, APP_NAME, APP_NAME_LONG} from "sepraps/config/appInfo";
 
 import {LoginForm} from ".";
 import {AlertError} from "base/error/components";

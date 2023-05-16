@@ -58,8 +58,8 @@ const ViewHomePage = () => {
     }, []);
 
     return (
-        <PageLayout styleProps={{p: 2}}>
-            <Grid container sx={{mb: 4}} spacing={2} justifyContent="space-between">
+        <PageLayout style={{p: 2}}>
+            <Grid container spacing={2} justifyContent="space-between">
                 <Grid
                     item
                     container
@@ -138,7 +138,7 @@ const ViewHomePage = () => {
                     container
                     xs={12}
                     md={6}
-                    spacing={2}
+                    rowSpacing={2}
                     alignContent="flex-start"
                 >
                     <Grid item xs={12}>

@@ -15,7 +15,7 @@ import Avatar from "@mui/material/Avatar";
 const LatestProjectsList = ({projects}) => {
     const navigate = useNavigate();
 
-    const projectBtnStyle = {
+    const projectButtonStyle = {
         display: "flex",
         flexDirection: "column",
         minHeight: "152px",
@@ -44,7 +44,7 @@ const LatestProjectsList = ({projects}) => {
                 {projects.map((project, index) => (
                     <ListItem key={index} sx={{pt: {xs: 1, xl: 0}, px: 1}}>
                         <ListItemButton
-                            sx={projectBtnStyle}
+                            sx={projectButtonStyle}
                             onClick={() => {
                                 navigate(`projects/${project.id}/summary`);
                             }}
