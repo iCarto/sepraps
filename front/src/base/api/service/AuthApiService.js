@@ -1,4 +1,4 @@
-import {ApiService} from ".";
+import {ApiService} from "base/api/service";
 import {AuthService} from "base/user/service";
 
 export const AuthApiService = {

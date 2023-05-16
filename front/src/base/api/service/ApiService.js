@@ -1,5 +1,5 @@
 import {uploadService} from "base/file/utilities";
-import {dataService} from "../utilities";
+import {dataService} from "base/api/utilities";
 
 const ApiService = {
     get(url, headers = {}) {

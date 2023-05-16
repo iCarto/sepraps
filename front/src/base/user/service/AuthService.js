@@ -1,6 +1,6 @@
-import {UserService} from ".";
-import {Storage} from "../../shared/utilities";
-import {ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, USER} from "../config";
+import {UserService} from "base/user/service";
+import {ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, USER} from "base/user/config";
+import {Storage} from "base/storage";
 
 const AuthService = {
     login(username, password) {
