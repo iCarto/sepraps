@@ -12,8 +12,6 @@ const EntityViewSubPage = ({
 }) => {
     const context = useOutletContext();
 
-    console.log(context);
-
     const sectionsToDisplay = sections.map((section, index) => (
         <Grid item xs={12} key={index} id={`${index + 2}`}>
             {section}

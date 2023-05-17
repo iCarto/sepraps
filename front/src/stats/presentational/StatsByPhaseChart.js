@@ -42,7 +42,7 @@ const StatsByPhaseChart = ({data}) => {
         labels,
         datasets: [
             {
-                label: "Nº Proyectos",
+                label: "Nº proyectos",
                 data: data.map(row => row.total),
                 borderColor: data.map(row => theme.palette[row.phase].main),
                 backgroundColor: data.map(row => theme.palette[row.phase].light),

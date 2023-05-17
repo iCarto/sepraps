@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 
-import {ContractService, TEMPLATE} from "contract/service";
+import {ContractService} from "contract/service";
 import {ProviderService} from "provider/service";
 import {ContractorService} from "contractor/service";
 import {FinancingService} from "financing/service";
@@ -27,24 +27,29 @@ const StatsFilterForm = ({
     onChange = null,
     onClear = null,
 }) => {
-    const [expanded, setExpanded] = useState(() => {
-        return (
-            Object.keys(filter).length &&
-            filter?.department !== "" &&
-            filter?.district !== "" &&
-            filter?.construction_contract !== ""
-        );
-    });
+    const isFilterEmpty =
+        !filter?.financing_program &&
+        !filter?.financing_fund &&
+        !filter?.construction_contract &&
+        !filter?.contractor &&
+        !filter?.department &&
+        !filter?.district &&
+        !filter?.provider &&
+        !filter?.month_from &&
+        !filter?.month_to;
 
     const [loadedDomains, setLoadedDomains] = useState(false);
-    const [financingFunds, setFinancingFunds] = useState([]);
     const [financingPrograms, setFinancingPrograms] = useState([]);
+    const [financingFunds, setFinancingFunds] = useState([]);
     const [contracts, setContracts] = useState([]);
     const [contractors, setContractors] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [departmentDistricts, setDepartmentDistricts] = useState([]);
     const [providers, setProviders] = useState([]);
+    const [expanded, setExpanded] = useState(() => {
+        return !isFilterEmpty;
+    });
 
     const toggleAccordion = () => {
         setExpanded(oldExpanded => !oldExpanded);
@@ -59,16 +64,12 @@ const StatsFilterForm = ({
                 views.includes("financingPrograms")
                     ? FinancingService.getFinancingPrograms()
                     : null,
-                views.includes("contracts")
-                    ? ContractService.getAll(false, TEMPLATE.SHORT)
-                    : null,
-                views.includes("contractors")
-                    ? ContractorService.getContractors()
-                    : null,
+                views.includes("contracts") ? ContractService.getAll(false, 1) : null,
+                views.includes("contractors") ? ContractorService.getAll() : null,
                 views.includes("administrativeDivisions")
                     ? LocationService.getAdministrativeDivisions()
                     : null,
-                views.includes("providers") ? ProviderService.getAll() : null,
+                views.includes("providers") ? ProviderService.getAll(false, 1) : null,
             ]).then(
                 ([
                     financingFunds,
@@ -80,17 +81,17 @@ const StatsFilterForm = ({
                 ]) => {
                     setFinancingFunds(financingFunds);
                     setFinancingPrograms(financingPrograms);
-                    setContracts(contracts);
+                    setContracts(contracts?.results);
                     setContractors(contractors);
                     const {departments, districts} = administrativeDivisions;
                     setDepartments(departments);
                     setDistricts(districts);
-                    setProviders(providers);
+                    setProviders(providers?.results);
                     setLoadedDomains(true);
                 }
             );
         }
-    }, [expanded]);
+    }, [expanded, loadedDomains, views]);
 
     const formMethods = useForm({
         defaultValues: {
@@ -119,8 +120,8 @@ const StatsFilterForm = ({
             month_to: null,
         });
         if (onClear) {
-            onClear();
             handleChangeDepartment();
+            onClear();
         }
     };
 
@@ -137,8 +138,9 @@ const StatsFilterForm = ({
         formMethods.reset({
             ...values,
         });
-
-        onChange("department", selectedDepartment ? selectedDepartment.value : null);
+        onChange({
+            department: selectedDepartment ? selectedDepartment.value : null,
+        });
     };
 
     const handleChangeMonth = (field, value) => {
@@ -153,6 +155,7 @@ const StatsFilterForm = ({
             <ToggleFilterAccordionButton
                 clickHandler={toggleAccordion}
                 isExpanded={expanded}
+                buttonText="Mostrar filtros"
             />
 
             <Collapse in={expanded} timeout="auto" sx={{width: "100%"}}>
@@ -171,10 +174,9 @@ const StatsFilterForm = ({
                                 options={financingFunds}
                                 optionLabelAttribute="short_name"
                                 onChangeHandler={option =>
-                                    onChange(
-                                        "financing_fund",
-                                        option ? option.id : null
-                                    )
+                                    onChange({
+                                        financing_fund: option ? option.id : null,
+                                    })
                                 }
                             />
                         </Grid>
@@ -187,10 +189,9 @@ const StatsFilterForm = ({
                                 options={financingPrograms}
                                 optionLabelAttribute="short_name"
                                 onChangeHandler={option =>
-                                    onChange(
-                                        "financing_program",
-                                        option ? option.id : null
-                                    )
+                                    onChange({
+                                        financing_program: option ? option.id : null,
+                                    })
                                 }
                             />
                         </Grid>
@@ -203,10 +204,11 @@ const StatsFilterForm = ({
                                 options={contracts}
                                 optionLabelAttribute="number"
                                 onChangeHandler={option =>
-                                    onChange(
-                                        "construction_contract",
-                                        option ? option.id : null
-                                    )
+                                    onChange({
+                                        construction_contract: option
+                                            ? option.id
+                                            : null,
+                                    })
                                 }
                             />
                         </Grid>
@@ -218,17 +220,12 @@ const StatsFilterForm = ({
                                 label="Contratista"
                                 options={contractors}
                                 onChangeHandler={option =>
-                                    onChange("contractor", option ? option.id : null)
+                                    onChange({
+                                        contractor: option ? option.id : null,
+                                    })
                                 }
                             />
                         </Grid>
-                    )}
-                    {views.includes("providers") && (
-                        <Grid
-                            item
-                            lg={3}
-                            sx={{display: {xs: "none", lg: "inherit"}}}
-                        ></Grid>
                     )}
                     {views.includes("administrativeDivisions") && (
                         <Grid item xs={4} lg={3}>
@@ -250,9 +247,11 @@ const StatsFilterForm = ({
                                 options={departmentDistricts}
                                 optionIdAttribute="value"
                                 optionLabelAttribute="label"
-                                onChangeHandler={option =>
-                                    onChange("district", option ? option.value : null)
-                                }
+                                onChangeHandler={option => {
+                                    onChange({
+                                        district: option ? option.value : null,
+                                    });
+                                }}
                             />
                         </Grid>
                     )}
@@ -263,36 +262,38 @@ const StatsFilterForm = ({
                                 label="Prestador"
                                 options={providers}
                                 onChangeHandler={option =>
-                                    onChange("provider", option ? option.id : null)
+                                    onChange({
+                                        provider: option ? option.id : null,
+                                    })
                                 }
                             />
                         </Grid>
                     )}
                     {views.includes("dates") && (
-                        <Grid item xs={4} lg={3}>
-                            <FormDatePicker
-                                name="month_from"
-                                label="Desde el mes"
-                                views={["month", "year"]}
-                                margin="0"
-                                onChangeHandler={option =>
-                                    handleChangeMonth("month_from", option)
-                                }
-                            />
-                        </Grid>
-                    )}
-                    {views.includes("dates") && (
-                        <Grid item xs={4} lg={3}>
-                            <FormDatePicker
-                                name="month_to"
-                                label="Hasta el mes"
-                                views={["month", "year"]}
-                                margin="0"
-                                onChangeHandler={option =>
-                                    handleChangeMonth("month_to", option)
-                                }
-                            />
-                        </Grid>
+                        <>
+                            <Grid item xs={4} lg={3}>
+                                <FormDatePicker
+                                    name="month_from"
+                                    label="Desde el mes"
+                                    views={["month", "year"]}
+                                    margin="0"
+                                    onChangeHandler={option =>
+                                        handleChangeMonth("month_from", option)
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={4} lg={3}>
+                                <FormDatePicker
+                                    name="month_to"
+                                    label="Hasta el mes"
+                                    views={["month", "year"]}
+                                    margin="0"
+                                    onChangeHandler={option =>
+                                        handleChangeMonth("month_from", option)
+                                    }
+                                />
+                            </Grid>
+                        </>
                     )}
                     <Grid item xs>
                         <FormClearButton handleClear={handleClearAllFilters} />

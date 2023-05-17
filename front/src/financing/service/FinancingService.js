@@ -4,7 +4,7 @@ import {
     createFinancingPrograms,
     financing_programs_api_adapter,
 } from "financing/model";
-import {AuthApiService} from "../../base/api/service";
+import {AuthApiService} from "base/api/service";
 
 const basePathFinancingFunds = "/api/monitoring/financingfunds";
 const basePathFinancingPrograms = "/api/monitoring/financingprograms";

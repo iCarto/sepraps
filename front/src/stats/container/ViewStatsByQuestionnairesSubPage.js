@@ -1,8 +1,9 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 
 import {QuestionnaireService} from "questionnaire/service";
 import {QuestionnaireInstanceViewProvider} from "questionnaire/provider";
+import {useList} from "base/entity/hooks";
 
 import {Spinner} from "base/shared/components";
 import {SectionCard} from "base/section/components";
@@ -13,7 +14,7 @@ import {ViewQuestionnaireInstanceFieldData} from "questionnaire/container";
 const ViewStatsByQuestionnairesSubPage = () => {
     const [questionnaire, setQuestionnaire] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [filter, setFilter] = useState({});
+    const {filter, setFilter} = useList();
 
     const {questionnaireCode} = useParams();
     const location = useLocation();
@@ -26,9 +27,12 @@ const ViewStatsByQuestionnairesSubPage = () => {
         });
     }, [questionnaireCode, location.state?.lastRefreshDate]);
 
-    const handleFilterChange = (attribute, value) => {
-        setFilter({...filter, [attribute]: value});
-    };
+    const handleFilterChange = useCallback(
+        attributeValue => {
+            setFilter({...filter, ...attributeValue});
+        },
+        [filter, setFilter]
+    );
 
     const handleFilterClear = () => {
         setFilter({});

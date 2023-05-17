@@ -24,7 +24,7 @@ const ContractorSearchAutocomplete = ({handleSelect}) => {
             label="Buscar un contratista"
             optionLabel="name"
             optionComponent={optionComponent}
-            search={ContractorService.getContractorsBySearchText}
+            search={ContractorService.getAllBySearchText}
             handleSelect={handleSelect}
         />
     );

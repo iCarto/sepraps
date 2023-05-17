@@ -34,12 +34,14 @@ const ContractFilterForm = ({onClear = null}) => {
         setExpanded(oldExpanded => !oldExpanded);
     };
 
+    console.log(filter);
+
     useEffect(() => {
         if (expanded && !loadedDomains) {
             Promise.all([
                 FinancingService.getFinancingFunds(),
                 FinancingService.getFinancingPrograms(),
-                ContractorService.getContractors(),
+                ContractorService.getAll(),
             ]).then(([financingFunds, financingPrograms, contractors]) => {
                 setFinancingFunds(financingFunds);
                 setFinancingPrograms(financingPrograms);

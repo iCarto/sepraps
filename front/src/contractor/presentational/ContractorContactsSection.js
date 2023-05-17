@@ -56,8 +56,8 @@ const ContractorContactsSection = ({contractor}) => {
         navigate(`contractor/contact/edit/${contactId}`);
     };
 
-    const handleUpdateContractor = updatedContractor => {
-        ContractorService.updateContractor(updatedContractor)
+    const handleupdate = updatedContractor => {
+        ContractorService.update(updatedContractor)
             .then(() => {
                 navigate(`/contracts/${contractor.contract}/summary`, true);
             })
@@ -107,7 +107,7 @@ const ContractorContactsSection = ({contractor}) => {
             <RemoveItemDialog
                 isDialogOpen={isRemoveDialogOpen}
                 setIsDialogOpen={setIsRemoveDialogOpen}
-                onRemove={handleUpdateContractor}
+                onRemove={handleupdate}
                 itemToRemove={contactToRemove}
                 createEntityObject={createContractor}
                 entity={contractor}

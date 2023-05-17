@@ -1,42 +1,22 @@
 import {AuthApiService} from "base/api/service";
-
-const getQueryStringByFilter = filter => {
-    return Object.keys(filter)
-        .filter(key => filter[key])
-        .map(key => {
-            return key + "=" + filter[key];
-        })
-        .join("&");
-};
+import {ServiceUtil} from "base/api/utilities";
 
 const StatsService = {
     getStatsByPhase(filter) {
-        const queryString = filter
-            ? "?" +
-              Object.keys(filter)
-                  .map(filterAttribute => {
-                      return `${filterAttribute}=${filter[filterAttribute]}`;
-                  })
-                  .join("&")
-            : "";
         return AuthApiService.get(
-            "/api/monitoring/stats/projectbyphase" + queryString
+            `/api/monitoring/stats/projectbyphase?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`
         ).then(response => {
             return response;
         });
     },
 
     getMapsByPhase(filter) {
-        const queryString = filter
-            ? "?" +
-              Object.keys(filter)
-                  .map(filterAttribute => {
-                      return `${filterAttribute}=${filter[filterAttribute]}`;
-                  })
-                  .join("&")
-            : "";
         return AuthApiService.get(
-            "/api/monitoring/stats/projectbyphasemap" + queryString
+            `/api/monitoring/stats/projectbyphasemap?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`
         ).then(response => {
             return response;
         });
@@ -51,14 +31,16 @@ const StatsService = {
     },
 
     getStatsByQuestionnairesUrl(questionnaireCode, fieldCode, filter = {}) {
-        return `/api/monitoring/stats/monthlyquestionnaires/${questionnaireCode}/${fieldCode}?${getQueryStringByFilter(
+        return `/api/monitoring/stats/monthlyquestionnaires/${questionnaireCode}/${fieldCode}?${ServiceUtil.getFilterQueryString(
             filter
         )}`;
     },
 
     getStatsByGender(filter = {}) {
         return AuthApiService.get(
-            `/api/monitoring/stats/contacts/gender?${getQueryStringByFilter(filter)}`
+            `/api/monitoring/stats/contacts/gender?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`
         ).then(response => {
             return response;
         });

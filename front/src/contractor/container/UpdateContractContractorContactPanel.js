@@ -58,7 +58,7 @@ const UpdateContractContractorContactPanel = () => {
     };
 
     const handleFormSubmit = contractor => {
-        ContractorService.updateContractor(contractor)
+        ContractorService.update(contractor)
             .then(() => {
                 navigate(basePath, true);
             })

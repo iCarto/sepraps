@@ -1,60 +1,119 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
+
 import {StatsService} from "stats/service";
-import {useStatsFilter, useStatsView} from "stats/provider";
+import {useStatsView} from "stats/provider";
+import {useList} from "base/entity/hooks";
 
 import {EntityViewSubPage} from "base/entity/pages";
+import {EntityCounter} from "base/entity/components";
 import {SectionCard} from "base/section/components";
+import {Spinner} from "base/shared/components";
 import {
     StatsByPhaseChart,
     StatsByPhaseTable,
     StatsByPhaseMapView,
-    StatsByPhaseFilterForm,
     StatsChangeView,
+    StatsFilterForm,
 } from "stats/presentational";
-
 import Grid from "@mui/material/Grid";
 
 const ViewStatsByPhaseSubPage = () => {
-    const {filterAttributes, setFilterAttributes} = useStatsFilter();
-    const {view} = useStatsView();
     const [statsByPhaseData, setStatsByPhaseData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const {filter, setFilter} = useList();
+
+    const {view: selectedView} = useStatsView();
+    const location = useLocation();
 
     useEffect(() => {
-        StatsService.getStatsByPhase(filterAttributes).then(result => {
-            result.sort((a, b) =>
+        setIsLoading(true);
+        StatsService.getStatsByPhase(filter).then(data => {
+            data.sort((a, b) =>
                 a.phase_name > b.phase_name ? 1 : b.phase_name > a.phase_name ? -1 : 0
             );
-            setStatsByPhaseData(result);
+            setStatsByPhaseData(data);
+            setIsLoading(false);
         });
-    }, [filterAttributes]);
+    }, [filter, location.state?.lastRefreshDate]);
 
-    const handleFilterChange = filterAttributes => {
-        setFilterAttributes(filterAttributes);
-    };
+    const handleFilterChange = useCallback(
+        attributeValue => {
+            setFilter({...filter, ...attributeValue});
+        },
+        [filter, setFilter]
+    );
 
     const handleFilterClear = () => {
-        setFilterAttributes({});
+        setFilter(null);
     };
 
-    const sections = [
-        <>
-            <SectionCard title="Número de proyectos por fase">
-                <Grid container justifyContent="space-between" alignItems="flex-start">
-                    <Grid item xs={6}>
-                        <StatsByPhaseFilterForm
-                            onChange={handleFilterChange}
-                            onClear={handleFilterClear}
-                        />
-                    </Grid>
-                    <Grid item xs={6} container justifyContent="flex-end">
-                        <StatsChangeView />
-                    </Grid>
+    const getNumberOfProjects = () => {
+        let total = 0;
+        statsByPhaseData.map(item => (total += item["total"]));
+        return total;
+    };
+
+    const viewsAndComponents = [
+        {
+            view: "chart",
+            component: (
+                <Grid item xs={10} md={6}>
+                    <StatsByPhaseChart data={statsByPhaseData} />
                 </Grid>
-                {view === "chart" && <StatsByPhaseChart data={statsByPhaseData} />}
-                {view === "table" && <StatsByPhaseTable data={statsByPhaseData} />}
-                {view === "map" && <StatsByPhaseMapView filter={filterAttributes} />}
-            </SectionCard>
-        </>,
+            ),
+        },
+        {
+            view: "table",
+            component: <StatsByPhaseTable data={statsByPhaseData} />,
+        },
+        {
+            view: "map",
+            component: <StatsByPhaseMapView filter={filter} />,
+        },
+    ];
+
+    const componentToDisplay = viewsAndComponents.find(
+        ({view}) => view === selectedView
+    );
+
+    const sections = [
+        <SectionCard title="Número de proyectos por fase">
+            <Grid
+                container
+                justifyContent="space-between"
+                alignItems="flex-start"
+                mb={2}
+            >
+                <Grid item xs={8}>
+                    <StatsFilterForm
+                        filter={filter}
+                        views={[
+                            "financingFunds",
+                            "financingPrograms",
+                            "contracts",
+                            "administrativeDivisions",
+                        ]}
+                        onChange={handleFilterChange}
+                        onClear={handleFilterClear}
+                    />
+                </Grid>
+                <Grid item container xs={2} justifyContent="flex-end">
+                    <EntityCounter
+                        size={getNumberOfProjects()}
+                        entityName={"proyectos"}
+                    />
+                </Grid>
+                <Grid item xs={2} container justifyContent="flex-end">
+                    <StatsChangeView />
+                </Grid>
+            </Grid>
+            {isLoading ? (
+                <Spinner />
+            ) : (
+                <Grid container>{componentToDisplay?.component}</Grid>
+            )}
+        </SectionCard>,
     ];
 
     return statsByPhaseData && <EntityViewSubPage sections={sections} />;

@@ -4,30 +4,30 @@ import {
     contractors_api_adapter,
     contractor_api_adapter,
 } from "contractor/model";
-import {AuthApiService} from "../../base/api/service";
+import {AuthApiService} from "base/api/service";
 
 const basePath = "/api/monitoring/contractors";
 
 const ContractorService = {
-    getContractors() {
+    getAll() {
         return AuthApiService.get(basePath).then(response => {
             return createContractors(contractors_api_adapter(response));
         });
     },
 
-    getContractorsBySearchText(searchText) {
+    getAllBySearchText(searchText) {
         return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
             return createContractors(contractors_api_adapter(response));
         });
     },
 
-    createContractor(contractor) {
+    create(contractor) {
         return AuthApiService.post(basePath, contractor).then(response => {
             return createContractor(contractor_api_adapter(response));
         });
     },
 
-    updateContractor(contractor) {
+    update(contractor) {
         return AuthApiService.put(basePath + "/" + contractor.id, contractor).then(
             response => {
                 return createContractor(contractor_api_adapter(response));

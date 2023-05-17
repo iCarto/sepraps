@@ -41,7 +41,7 @@ const ProjectFilterForm = ({onClear = null}) => {
     useEffect(() => {
         if (expanded && !loadedDomains) {
             Promise.all([
-                ContractService.getAll(false, TEMPLATE.SHORT),
+                ContractService.getAll(false, 1),
                 LocationService.getAdministrativeDivisions(),
                 FinancingService.getFinancingPrograms(),
             ]).then(([contracts, administrativeDivisions, financingPrograms]) => {

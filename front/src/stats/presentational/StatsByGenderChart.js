@@ -32,7 +32,7 @@ const StatsByGenderChart = ({data}) => {
         labels,
         datasets: [
             {
-                label: "Género Personas Juntas de Saneamiento",
+                label: "Género personas Juntas de Saneamiento",
                 data: data.map(row => row.total),
             },
         ],

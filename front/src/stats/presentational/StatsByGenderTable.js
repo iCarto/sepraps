@@ -6,6 +6,12 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 
 const StatsByGenderTable = ({data}) => {
+    const getNumberOfPeople = () => {
+        let total = 0;
+        data.map(item => (total += item["total"]));
+        return total;
+    };
+
     return (
         <TableContainer sx={{overflowX: "auto"}}>
             <Table aria-labelledby="Data table" sx={{tableLayout: "fixed"}}>
@@ -18,6 +24,9 @@ const StatsByGenderTable = ({data}) => {
                                 </TableCell>
                             );
                         })}
+                        <TableCell key={3} align="center">
+                            Total
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -29,6 +38,9 @@ const StatsByGenderTable = ({data}) => {
                                 </TableCell>
                             );
                         })}
+                        <TableCell key={3} align="center">
+                            {getNumberOfPeople()}
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

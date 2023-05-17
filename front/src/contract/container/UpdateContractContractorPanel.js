@@ -17,7 +17,7 @@ const UpdateContractContractorPanel = () => {
     const basePath = `/contracts/${contract.id}/summary`;
 
     const handleSubmit = contractor => {
-        ContractorService.updateContractor(
+        ContractorService.update(
             contractor_view_adapter({...contractor, contract: contract.id})
         )
             .then(() => {

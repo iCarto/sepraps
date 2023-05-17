@@ -1,7 +1,11 @@
 import Button from "@mui/material/Button";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
-const ToggleFilterAccordionButton = ({clickHandler, isExpanded}) => {
+const ToggleFilterAccordionButton = ({
+    clickHandler,
+    isExpanded,
+    buttonText = "Más filtros",
+}) => {
     const filterButtonStyle = {
         textAlign: "left",
         lineHeight: 1.25,
@@ -15,7 +19,7 @@ const ToggleFilterAccordionButton = ({clickHandler, isExpanded}) => {
             startIcon={<FilterListIcon />}
             sx={filterButtonStyle}
         >
-            {!isExpanded ? "Más filtros" : "Ocultar filtros"}
+            {!isExpanded ? buttonText : "Ocultar filtros"}
         </Button>
     );
 };
