@@ -31,7 +31,12 @@ const ViewProjectQuestionnairesSubPage = () => {
         />,
     ];
 
-    return <EntityViewSubPage sections={sections} />;
+    return (
+        <EntityViewSubPage
+            sections={sections}
+            additionalContext={projectQuestionnaire}
+        />
+    );
 };
 
 export default ViewProjectQuestionnairesSubPage;

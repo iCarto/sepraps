@@ -17,7 +17,7 @@ const QuestionnaireInstanceEmpty = ({projectQuestionnaire, isProjectClosed}) => 
         setSelectedOption(null);
     }, [location.state?.lastRefreshDate]);
 
-    const onHandleSelecteOption = option => {
+    const onHandleSelectedOption = option => {
         setSelectedOption(option);
         if (option === "add") {
             navigate(
@@ -53,7 +53,7 @@ const QuestionnaireInstanceEmpty = ({projectQuestionnaire, isProjectClosed}) => 
                             <Button
                                 variant="outlined"
                                 color="primary"
-                                onClick={() => onHandleSelecteOption("expected")}
+                                onClick={() => onHandleSelectedOption("expected")}
                             >
                                 Introducir previsión
                             </Button>
@@ -62,7 +62,7 @@ const QuestionnaireInstanceEmpty = ({projectQuestionnaire, isProjectClosed}) => 
                             <Button
                                 variant="outlined"
                                 color="primary"
-                                onClick={() => onHandleSelecteOption("add")}
+                                onClick={() => onHandleSelectedOption("add")}
                             >
                                 Añadir registro
                             </Button>

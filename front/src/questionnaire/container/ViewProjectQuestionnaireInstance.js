@@ -5,7 +5,7 @@ import {
     QuestionnaireInstanceMonitoring,
     QuestionnaireInstanceEmpty,
     QuestionnaireInstanceData,
-} from "../presentational";
+} from "questionnaire/presentational";
 import {SectionHeading} from "base/section/components";
 
 import Stack from "@mui/material/Stack";
@@ -42,7 +42,7 @@ const ViewProjectQuestionnaireInstance = ({projectQuestionnaire}) => {
     let project;
     [project] = useOutletContext();
 
-    const isProjectClosed = project.closed;
+    const isProjectClosed = project?.closed;
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);

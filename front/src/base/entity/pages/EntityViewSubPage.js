@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 const EntityViewSubPage = ({
     sections = [],
     subPageActions = [],
+    additionalContext = null,
     children = null,
     error = null,
 }) => {
@@ -19,7 +20,7 @@ const EntityViewSubPage = ({
     ));
 
     return (
-        <ContentLayout context={[...context]}>
+        <ContentLayout context={[...context, additionalContext]}>
             <AlertError error={error} />
             {subPageActions.length ? (
                 <Grid container spacing={1} justifyContent="flex-end" marginBottom={1}>

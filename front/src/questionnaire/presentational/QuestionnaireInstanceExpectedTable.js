@@ -102,8 +102,8 @@ const QuestionnaireInstanceExpectedTable = ({
                 );
                 return createMQInstance({
                     id: null,
-                    year: expectedMonth.year_month.getFullYear(),
-                    month: expectedMonth.year_month.getMonth() + 1,
+                    year: new Date(expectedMonth.year_month).getFullYear(),
+                    month: new Date(expectedMonth.year_month).getMonth() + 1,
                     comments: "",
                     values: dynamicFieldValues,
                 });

@@ -13,16 +13,16 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
     const [saving, setSaving] = useState(false);
 
     const navigate = useNavigateWithReload();
-    const {instanceId, action} = useParams();
+    const {questionnaireCode, instanceId, action} = useParams();
 
-    let projectQuestionnaire;
-    [projectQuestionnaire] = useOutletContext();
+    const outletContext = useOutletContext();
+    const projectQuestionnaire = outletContext[1];
 
-    const basePath = `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`;
+    const basePath = `/projects/${projectQuestionnaire?.projectId}/questionnaires/${questionnaireCode}`;
 
     let selectedQuestionnaireInstance = null;
     if (projectQuestionnaire) {
-        selectedQuestionnaireInstance = projectQuestionnaire.questionnaire_instances.find(
+        selectedQuestionnaireInstance = projectQuestionnaire?.questionnaire_instances.find(
             instance => instance.id === parseInt(instanceId)
         );
     }
@@ -30,7 +30,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
     const validate = questionnaireInstance => {
         if (
             !questionnaireInstance.id &&
-            projectQuestionnaire.questionnaire_instances.some(
+            projectQuestionnaire?.questionnaire_instances.some(
                 instance =>
                     instance.month === questionnaireInstance.month &&
                     instance.year === questionnaireInstance.year
@@ -47,11 +47,11 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
             return;
         }
         setSaving(true);
-        const instanceIndex = projectQuestionnaire.questionnaire_instances.findIndex(
+        const instanceIndex = projectQuestionnaire?.questionnaire_instances.findIndex(
             instance => instance.id === questionnaireInstance.id
         );
         const questionnaire_instances = [
-            ...projectQuestionnaire.questionnaire_instances,
+            ...projectQuestionnaire?.questionnaire_instances,
         ];
         if (instanceIndex >= 0) {
             questionnaire_instances[instanceIndex] = questionnaireInstance;
@@ -89,7 +89,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
                 projectQuestionnaire && (
                     <QuestionnaireInstanceForm
                         questionnaireInstance={selectedQuestionnaireInstance}
-                        questionnaireFields={projectQuestionnaire.questionnaire.fields}
+                        questionnaireFields={projectQuestionnaire?.questionnaire.fields}
                         onSubmit={handleSubmit}
                         saving={saving}
                     />

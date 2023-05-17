@@ -2,8 +2,8 @@ import {FormProvider, useForm} from "react-hook-form";
 import {DateUtil} from "base/format/utilities";
 import {useAuth} from "base/user/provider";
 import {createMQInstance, createMQInstanceValue} from "questionnaire/model";
+import {QuestionnaireInstanceFormFields} from "questionnaire/presentational";
 
-import QuestionnaireInstanceFormFields from "./QuestionnaireInstanceFormFields";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -70,11 +70,12 @@ const QuestionnaireInstanceForm = ({
                 value: data[field.code],
             });
         });
+
         const updatedQuestionnaireInstance = createMQInstance({
             ...questionnaireInstance,
             id: data.id,
-            year: data.year_month.getFullYear(),
-            month: data.year_month.getMonth() + 1,
+            year: new Date(data.year_month).getFullYear(),
+            month: new Date(data.year_month).getMonth() + 1,
             comments: data.comments,
             values: dynamicFieldValues,
         });

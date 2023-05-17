@@ -23,3 +23,6 @@ export {
 export {
     default as QuestionnaireFieldDownloadCSV,
 } from "./QuestionnaireFieldDownloadCSV";
+export {
+    default as QuestionnaireInstanceFormFields,
+} from "./QuestionnaireInstanceFormFields";
