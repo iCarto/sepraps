@@ -12,6 +12,7 @@ export {default as PageMenuListGroup} from "./PageMenuListGroup";
 export {default as PageMenuListItemButton} from "./PageMenuListItemButton";
 export {default as SubPageMenu} from "./SubPageMenu";
 export {default as SubPageMenuHeading} from "./SubPageMenuHeading";
+export {default as SubPageMenuHeadingButton} from "./SubPageMenuHeadingButton";
 export {default as SubPageMenuListGroup} from "./SubPageMenuListGroup";
 export {
     default as SubPageMenuListGroupItemButton,

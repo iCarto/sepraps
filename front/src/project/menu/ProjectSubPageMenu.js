@@ -1,9 +1,8 @@
-import {useParams} from "react-router-dom";
-
 import {useAuth} from "base/user/provider";
 import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
 import {QuestionnairesMenu} from "questionnaire/presentational";
 import {ClosedProjectTag} from "project/presentational";
+import {SelectProjectDropDown} from "project/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import PinDropIcon from "@mui/icons-material/PinDrop";
@@ -14,14 +13,16 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ProjectSubPageMenu = ({project}) => {
     const {ROLES} = useAuth();
-    const {id} = useParams();
-    const basePath = `/projects/${id}`;
+    const basePath = `/projects/${project?.id}`;
 
     return (
         <SubPageMenu
-            headingPrimaryText={project?.name}
-            headingSecondaryText={`Proyecto:`}
-            headingTag={project?.closed ? <ClosedProjectTag /> : null}
+            subPageMenuDropdown={
+                <SelectProjectDropDown
+                    project={project}
+                    headingTag={project?.closed ? <ClosedProjectTag /> : null}
+                />
+            }
         >
             <PageMenuListItemButton
                 key="project-detail"

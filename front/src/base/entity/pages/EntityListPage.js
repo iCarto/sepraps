@@ -54,7 +54,6 @@ const EntityListPage = ({
         if (view === "list") {
             return (
                 <EntityCardsList
-                    entityName={entityName}
                     service={service}
                     entityCard={card}
                     onSelectElement={handleSelectElement}

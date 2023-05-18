@@ -20,6 +20,5 @@ export {
 } from "./ViewContractQuestionnairesSubPage";
 export {default as ViewContractPhasesSubPage} from "./ViewContractPhasesSubPage";
 export {default as CreateContractProjectPage} from "./CreateContractProjectPage";
-export {default as SelectContractDropDown} from "./SelectContractDropDown";
 export {default as ViewContractSummarySubPage} from "./ViewContractSummarySubPage";
 export {default as ListContractProjects} from "./ListContractProjects";

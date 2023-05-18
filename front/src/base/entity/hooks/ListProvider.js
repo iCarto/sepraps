@@ -6,6 +6,7 @@ let ListContext = createContext(null);
 export default function ListProvider({children}) {
     const {moduleFilter} = useConfigModule();
 
+    const [elements, setElements] = useState([]);
     const [view, setView] = useState("table");
     const [filter, setFilter] = useState(null);
     const [page, setPage] = useState(1);
@@ -15,10 +16,11 @@ export default function ListProvider({children}) {
 
     useEffect(() => {
         setFilter({...filter, ...moduleFilter});
-        console.log(moduleFilter);
     }, [moduleFilter]);
 
     let value = {
+        elements,
+        setElements,
         view,
         setView,
         filter,
@@ -32,6 +34,8 @@ export default function ListProvider({children}) {
         order,
         setOrder,
     };
+
+    console.log({elements, filter, moduleFilter});
 
     return <ListContext.Provider value={value}>{children}</ListContext.Provider>;
 }

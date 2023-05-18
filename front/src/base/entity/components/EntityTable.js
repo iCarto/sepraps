@@ -55,6 +55,8 @@ const EntityTable = ({
     const basePath = location.pathname;
 
     const {
+        elements,
+        setElements,
         filter,
         page,
         setPage,
@@ -66,7 +68,7 @@ const EntityTable = ({
         setOrder,
     } = useList();
 
-    const [elements, setElements] = useState([]);
+    // const [elements, setElements] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(null);

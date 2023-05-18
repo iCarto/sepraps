@@ -1,20 +1,17 @@
-import {useParams} from "react-router-dom";
-
 import {useAuth} from "base/user/provider";
 import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
+import {SelectProviderDropDown} from "provider/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ProviderSubPageMenu = ({provider}) => {
     const {ROLES} = useAuth();
-    const {id} = useParams();
-    const basePath = `/providers/${id}`;
+    const basePath = `/providers/${provider?.id}`;
 
     return (
         <SubPageMenu
-            headingPrimaryText={provider.name}
-            headingSecondaryText={`Prestador:`}
+            subPageMenuDropdown={<SelectProviderDropDown provider={provider} />}
         >
             <PageMenuListItemButton
                 key="provider-detail"

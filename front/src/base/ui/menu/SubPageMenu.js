@@ -12,6 +12,7 @@ const SubPageMenu = ({
     headingSecondaryText = "",
     headingTag = null,
     headingInfo = null,
+    subPageMenuDropdown = null,
     children,
 }) => {
     const theme = useTheme();
@@ -28,14 +29,16 @@ const SubPageMenu = ({
         <Box component="nav" sx={menuStyles}>
             <Divider />
             <MenuList sx={{color: "white"}} dense disablePadding>
-                <SubPageMenuHeading
-                    headingPrimaryText={headingPrimaryText || "-"}
-                    headingSecondaryText={headingSecondaryText}
-                    headingTag={headingTag}
-                    isSubMenu={true}
-                >
-                    {headingInfo}
-                </SubPageMenuHeading>
+                {subPageMenuDropdown || (
+                    <SubPageMenuHeading
+                        headingPrimaryText={headingPrimaryText || "-"}
+                        headingSecondaryText={headingSecondaryText}
+                        headingTag={headingTag}
+                        isSubMenu={true}
+                    >
+                        {headingInfo}
+                    </SubPageMenuHeading>
+                )}
 
                 {children}
             </MenuList>

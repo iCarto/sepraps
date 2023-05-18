@@ -11,7 +11,6 @@ export {default as ViewProjectDocumentsSubPage} from "./ViewProjectDocumentsSubP
 export {
     default as ViewProjectQuestionnairesSubPage,
 } from "./ViewProjectQuestionnairesSubPage";
-export {default as SelectProjectDropDown} from "./SelectProjectDropDown";
 export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPanel";
 export {default as AddProjectProviderPanel} from "./AddProjectProviderPanel";
 export {default as UpdateProjectPanel} from "./UpdateProjectPanel";
