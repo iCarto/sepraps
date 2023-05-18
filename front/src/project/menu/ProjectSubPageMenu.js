@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
 import {QuestionnairesMenu} from "questionnaire/presentational";
+import {ClosedProjectTag} from "project/presentational";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import PinDropIcon from "@mui/icons-material/PinDrop";
@@ -20,6 +21,7 @@ const ProjectSubPageMenu = ({project}) => {
         <SubPageMenu
             headingPrimaryText={project?.name}
             headingSecondaryText={`Proyecto:`}
+            headingTag={project?.closed ? <ClosedProjectTag /> : null}
         >
             <PageMenuListItemButton
                 key="project-detail"

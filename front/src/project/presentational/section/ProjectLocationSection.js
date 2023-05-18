@@ -40,7 +40,7 @@ const ProjectLocationSection = ({project}) => {
         <SectionField
             label="Localidades vinculadas"
             value="Este proyecto no tiene localidades vinculadas"
-            valueFontStyle="italic"
+            valueCustomStyle={{fontStyle: "italic"}}
         />
     );
 

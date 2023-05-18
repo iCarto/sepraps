@@ -24,6 +24,7 @@ const EntityListPage = ({
     service,
     basePath = "",
     tableColumns = [],
+    highlightItems = null,
     card = null,
     mapLayer = null,
     filterForm = null,
@@ -65,6 +66,7 @@ const EntityListPage = ({
                 <EntityTable
                     columns={tableColumns}
                     service={service}
+                    highlightItems={highlightItems}
                     selectedElement={selectedElement}
                     onSelectElement={handleSelectElement}
                     showDetailAction={false}

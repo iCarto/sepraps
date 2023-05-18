@@ -28,6 +28,16 @@ const ProjectSection = ({project, headerActions = null}) => {
 
     return (
         <SectionCard title={project?.name} headerActions={headerActions}>
+            {project.closed ? (
+                <SectionField
+                    label="Estado"
+                    value="archivado"
+                    valueCustomStyle={{
+                        color: "error.main",
+                        textTransform: "uppercase",
+                    }}
+                />
+            ) : null}
             <SectionField label="Código" value={project?.code} />
             <SectionField label="Ubicación" value={project?.location} />
             <SectionField label="Clase" value={project?.project_class_name} />

@@ -10,6 +10,7 @@ import Divider from "@mui/material/Divider";
 const SubPageMenu = ({
     headingPrimaryText = "",
     headingSecondaryText = "",
+    headingTag = null,
     headingInfo = null,
     children,
 }) => {
@@ -30,6 +31,7 @@ const SubPageMenu = ({
                 <SubPageMenuHeading
                     headingPrimaryText={headingPrimaryText || "-"}
                     headingSecondaryText={headingSecondaryText}
+                    headingTag={headingTag}
                     isSubMenu={true}
                 >
                     {headingInfo}

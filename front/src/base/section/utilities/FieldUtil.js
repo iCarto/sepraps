@@ -14,7 +14,11 @@ const FieldUtil = {
             return <SectionField label={label} value={`${value} ${unit}`} />;
         } else
             return (
-                <SectionField label={label} value="Pendiente" valueFontStyle="italic" />
+                <SectionField
+                    label={label}
+                    value="Pendiente"
+                    valueCustomStyle={{fontStyle: "italic"}}
+                />
             );
     },
 };

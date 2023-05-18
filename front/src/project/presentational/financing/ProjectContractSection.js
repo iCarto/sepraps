@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 
 import {DateUtil, NumberUtil} from "base/format/utilities";
@@ -13,6 +13,11 @@ const ProjectContractSection = ({contract}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
+    let project;
+    [project] = useOutletContext();
+    const isProjectClosed = project?.closed;
+
+    // TO-DO: Allow editing (selecting different existing contract)?
     const secondaryActions = [
         // <SectionCardHeaderAction
         //     key="edit"
@@ -66,10 +71,12 @@ const ProjectContractSection = ({contract}) => {
                     <Typography sx={{fontStyle: "italic"}}>
                         Este proyecto aún no ha sido asignado a ningún contrato
                     </Typography>
-                    <AddNewButton
-                        basePath="contract/new/add"
-                        roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-                    />
+                    {isProjectClosed ? null : (
+                        <AddNewButton
+                            basePath="contract/new/add"
+                            roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                        />
+                    )}
                 </Stack>
             )}
         </SectionCard>

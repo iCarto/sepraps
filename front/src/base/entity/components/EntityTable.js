@@ -38,6 +38,7 @@ const tableRowStyle = {
 const EntityTable = ({
     columns,
     service,
+    highlightItems = null,
     selectedElement = null,
     onSelectElement = null,
     showDetailAction = true,
@@ -83,7 +84,7 @@ const EntityTable = ({
             setSize(data.count);
             setLoading(false);
         });
-    }, [filter, page, sort, order]);
+    }, [filter, page, sort, order]); // eslint-disable-line
 
     const handleSelectElement = (event, element) => {
         const cellIndex = event.target.cellIndex;
@@ -181,7 +182,16 @@ const EntityTable = ({
                                 >
                                     {columns.map((cellAttribute, index) => {
                                         return (
-                                            <TableCell key={cellAttribute.id}>
+                                            <TableCell
+                                                key={cellAttribute.id}
+                                                sx={
+                                                    highlightItems?.formatFunction(
+                                                        element
+                                                    )
+                                                        ? highlightItems.highlightingStyle
+                                                        : {}
+                                                }
+                                            >
                                                 {cellAttribute.formatFunction
                                                     ? cellAttribute.formatFunction(
                                                           element

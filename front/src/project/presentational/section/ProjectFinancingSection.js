@@ -27,7 +27,7 @@ const ProjectFinancingSection = ({project}) => {
     const noFinancingInfoMessage = (
         <SectionField
             value="Este proyecto aún no tiene financiación asignada"
-            valueFontStyle="italic"
+            valueCustomStyle={{fontStyle: "italic"}}
         />
     );
 
@@ -68,7 +68,10 @@ const ProjectFinancingSection = ({project}) => {
     };
 
     return (
-        <SectionCard title="Financiación" secondaryActions={headerActions}>
+        <SectionCard
+            title="Financiación"
+            secondaryActions={project.closed ? null : headerActions}
+        >
             <SectionSubheading heading="Contrato" />
             {getContractInfo(project?.construction_contract)}
             <SectionSubheading heading="Programa" />

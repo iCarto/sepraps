@@ -9,7 +9,7 @@ import {
     SectionField,
 } from "base/section/components";
 import {ViewMilestoneTimeline} from "milestone/container";
-import {ProjectTypeIcon} from "project/presentational";
+import {ClosedProjectTag, ProjectTypeIcon} from "project/presentational";
 import {ImagePreview} from "base/image/components";
 
 import Grid from "@mui/material/Grid";
@@ -36,14 +36,13 @@ const closedProjectTagStyle = {
     display: {xs: "none", md: "flex"},
     m: 1.5,
     p: 0.75,
-    borderRadius: "5%",
-    bgcolor: "error.main",
-    opacity: 0.8,
 };
 
 const ProjectGeneralDataSection = ({project}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
+
+    const isProjectClosed = project?.closed;
 
     const secondaryActions = [
         <SectionCardHeaderAction
@@ -57,8 +56,6 @@ const ProjectGeneralDataSection = ({project}) => {
             roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
-
-    const isProjectClosed = project?.closed;
 
     return (
         <SectionCard
@@ -89,15 +86,7 @@ const ProjectGeneralDataSection = ({project}) => {
                             />
                         </Box>
                         {project?.closed && (
-                            <Box sx={closedProjectTagStyle}>
-                                <Typography
-                                    component="span"
-                                    variant="button"
-                                    sx={{fontWeight: 800, color: "#fff"}}
-                                >
-                                    Archivado
-                                </Typography>
-                            </Box>
+                            <ClosedProjectTag tagCustomStyle={closedProjectTagStyle} />
                         )}
                     </div>
                 </Grid>

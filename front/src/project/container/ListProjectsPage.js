@@ -6,7 +6,7 @@ import {useProjectLayer} from "project/geo";
 import {ProjectCard} from "project/presentational";
 
 const ListProjectsPage = () => {
-    const {tableColumns} = useProjectTable();
+    const {tableColumns, highlightItems} = useProjectTable();
 
     return (
         <EntityListPage
@@ -16,6 +16,7 @@ const ListProjectsPage = () => {
             entityName="proyectos"
             basePath="projects"
             tableColumns={tableColumns}
+            highlightItems={highlightItems}
             filterForm={<ProjectFilterForm />}
             card={ProjectCard}
         />

@@ -25,12 +25,20 @@ export function useProjectTable() {
         {
             id: "milestones",
             label: "Estado",
-            formatFunction: element => {
-                return <MilestoneTimelineShort milestones={element.milestones} />;
+            formatFunction: item => {
+                return <MilestoneTimelineShort milestones={item.milestones} />;
             },
             width: 25,
         },
     ];
 
-    return {tableColumns};
+    const highlightItems = {
+        attribute: "isClosed",
+        highlightingStyle: {opacity: 0.5},
+        formatFunction: item => {
+            return item.closed;
+        },
+    };
+
+    return {tableColumns, highlightItems};
 }

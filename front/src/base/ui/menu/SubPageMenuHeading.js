@@ -13,13 +13,17 @@ const SubPagePageMenuHeading = ({
     to = "",
     headingPrimaryText = "",
     headingSecondaryText = "",
+    headingTag = null,
     isSubMenu = false,
     children,
 }) => {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const buttonStyles = {
+    const buttonStyle = {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
         bgcolor: theme.palette.menu.secondary.header.background,
         // bgcolor: theme.palette.secondary.lighter,
         color: theme.palette.menu.secondary.header.text,
@@ -50,7 +54,7 @@ const SubPagePageMenuHeading = ({
             }}
         >
             <ListItemButton
-                sx={buttonStyles}
+                sx={buttonStyle}
                 onClick={handleClick}
                 role={disabled ? "heading" : "button"}
                 disabled={disabled}
@@ -59,6 +63,7 @@ const SubPagePageMenuHeading = ({
                     sx={{
                         display: "flex",
                         flexDirection: "column-reverse",
+                        justifyContent: "flex-end",
                         border: "none",
                     }}
                     primary={headingPrimaryText}
@@ -76,6 +81,7 @@ const SubPagePageMenuHeading = ({
                         color: theme.palette.menu.secondary.header.text,
                     }}
                 />
+                {headingTag}
             </ListItemButton>
             <Box sx={{bgcolor: theme.palette.menu.secondary.header.background}}>
                 {children}

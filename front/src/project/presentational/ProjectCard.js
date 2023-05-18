@@ -1,7 +1,7 @@
 import {useProjectCard} from "project/data";
 import {EntityCard} from "base/entity/components";
 import {MilestoneTimelineShort} from "milestone/presentational";
-import {ProjectTypeIcon} from "project/presentational";
+import {ClosedProjectTag, ProjectTypeIcon} from "project/presentational";
 import {ImagePreview} from "base/image/components";
 
 import Box from "@mui/material/Box";
@@ -35,18 +35,6 @@ const projectClassBoxStyle = {
     opacity: 0.8,
 };
 
-const closedProjectTagStyle = {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    display: {xs: "none", md: "flex"},
-    m: 1.5,
-    px: 0.5,
-    borderRadius: "5%",
-    bgcolor: "error.main",
-    opacity: 0.8,
-};
-
 const ProjectCard = ({entity: project, onClick = null}) => {
     const {cardFields} = useProjectCard();
 
@@ -68,15 +56,15 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                     />
                 </Box>
                 {project.closed && (
-                    <Box sx={closedProjectTagStyle}>
-                        <Typography
-                            component="span"
-                            variant="button"
-                            sx={{fontWeight: 800, color: "#fff"}}
-                        >
-                            Archivado
-                        </Typography>
-                    </Box>
+                    <ClosedProjectTag
+                        tagCustomStyle={{
+                            display: {xs: "none", md: "flex"},
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            m: 1.5,
+                        }}
+                    />
                 )}
                 <Tooltip title={`Clase: ${project.project_class_name}`}>
                     <Box sx={projectClassBoxStyle}>

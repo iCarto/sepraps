@@ -10,7 +10,7 @@ import Pagination from "@mui/material/Pagination";
 // const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
 const pageSize = 20;
 
-const EntityCardsList = ({entityName = "", service, entityCard, onSelectElement}) => {
+const EntityCardsList = ({service, entityCard, onSelectElement}) => {
     const [elements, setElements] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ const EntityCardsList = ({entityName = "", service, entityCard, onSelectElement}
             setSize(data.count);
             setLoading(false);
         });
-    }, [filter, page, order]);
+    }, [filter, page, order]); // eslint-disable-line
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

@@ -28,7 +28,11 @@ const ContractExecutionSection = ({contract}) => {
     ];
 
     const getNoDateMessage = label => (
-        <SectionField label={label} value="Pendiente" valueFontStyle="italic" />
+        <SectionField
+            label={label}
+            value="Pendiente"
+            valueCustomStyle={{fontStyle: "italic"}}
+        />
     );
 
     const getExpectedExecutionPeriodInfo = () => {

@@ -31,7 +31,7 @@ const SectionField = ({
     unit = "",
     labelIcon = null,
     containerWidth = "",
-    valueFontStyle = "inherit",
+    valueCustomStyle = {},
     customValueStyle = null,
     linkPath = null,
     editButton = false,
@@ -73,7 +73,7 @@ const SectionField = ({
         overflowWrap: "break-word",
         lineHeight: {xs: 1.5, sm: 1.25},
         fontWeight: "regular",
-        fontStyle: valueFontStyle,
+        ...valueCustomStyle,
     };
 
     const LabelIcon = labelIcon;
