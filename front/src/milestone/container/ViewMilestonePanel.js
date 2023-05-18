@@ -3,7 +3,7 @@ import {useNavigate, useOutletContext, useParams} from "react-router-dom";
 
 import {MilestoneService} from "milestone/service";
 import {MilestoneSection} from "milestone/presentational";
-import {EntityViewPanel} from "base/entity/components";
+import {EntityViewPanel} from "base/entity/components/presentational";
 
 const ViewMilestonePanel = () => {
     const navigate = useNavigate();

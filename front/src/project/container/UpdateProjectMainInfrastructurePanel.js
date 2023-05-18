@@ -5,7 +5,7 @@ import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
 import {ProjectForm} from "project/presentational/form";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateProjectMainInfrastructurePanel = () => {
     const [error, setError] = useState("");

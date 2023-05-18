@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 
-import {useList} from "../hooks";
+import {useList} from "base/entity/hooks";
 import {Spinner} from "base/shared/components";
-import {EntityNoItemsComponent} from "base/entity/components";
+import {EntityNoItemsComponent} from "base/entity/components/presentational";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 
@@ -22,7 +22,7 @@ const EntityCardsList = ({service, entityCard, onSelectElement}) => {
     useEffect(() => {
         console.log({filter, page, order});
         setLoading(true);
-        const serviceCall = service(filter, page, order);
+        const serviceCall = service.getAll(filter, page, order);
         serviceCall.then(data => {
             console.log({data});
             setElements(data.results);

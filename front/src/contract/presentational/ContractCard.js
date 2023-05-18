@@ -1,4 +1,4 @@
-import {EntityCard} from "base/entity/components";
+import {EntityCard} from "base/entity/components/presentational";
 import {useContractCard} from "contract/data";
 
 const ContractCard = ({entity: contract, onClick = null}) => {

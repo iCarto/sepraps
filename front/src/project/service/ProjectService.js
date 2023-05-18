@@ -11,34 +11,45 @@ import {
     createProjectQuestionnaire,
     project_questionnaire_api_adapter,
 } from "questionnaire/model";
-import {ServiceUtil} from "base/api/utilities";
+import {createEntityService} from "base/entity/service";
 
 const basePath = "/api/monitoring/projects";
 
+const entityService = createEntityService(
+    basePath,
+    createProject,
+    createProjectsSummaries,
+    project_api_adapter,
+    projects_summaries_api_adapter
+);
+
 const ProjectService = {
-    getAll(filter, page, sort, order) {
-        return AuthApiService.get(
-            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(
-                filter
-            )}&${ServiceUtil.getOrderQueryString(sort, order)}`
-        ).then(response => {
-            response.results = createProjectsSummaries(
-                projects_summaries_api_adapter(response.results)
-            );
-            return response;
-        });
+    getAll(filter, sort, order, format = null) {
+        return entityService.getList(filter, null, sort, order, format);
+    },
+
+    getPaginatedList(filter, page, sort, order) {
+        return entityService.getList(filter, page, sort, order);
+    },
+
+    getFeatures(filter) {
+        return entityService.getFeatures(filter);
     },
 
     getBySearchText(searchText) {
-        return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
-            return createProjectsSummaries(projects_summaries_api_adapter(response));
-        });
+        return entityService.getBySearchText(searchText);
     },
 
     get(id) {
-        return AuthApiService.get(basePath + "/" + id).then(response => {
-            return createProject(project_api_adapter(response));
-        });
+        return entityService.get(id);
+    },
+
+    create(provider) {
+        return entityService.create(provider);
+    },
+
+    update(provider) {
+        return entityService.update(provider);
     },
 
     getProjectContacts(id) {
@@ -64,20 +75,6 @@ const ProjectService = {
                     phase["milestones"].push(milestone);
                 });
                 return createPhases(phases_api_adapter(phases));
-            }
-        );
-    },
-
-    create(project) {
-        return AuthApiService.post(basePath, project).then(response => {
-            return createProject(project_api_adapter(response));
-        });
-    },
-
-    update(project) {
-        return AuthApiService.put(basePath + "/" + project.id, project).then(
-            response => {
-                return createProject(project_api_adapter(response));
             }
         );
     },

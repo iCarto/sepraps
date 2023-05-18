@@ -3,7 +3,7 @@ import {useOutletContext, useParams} from "react-router-dom";
 import {ProjectService} from "project/service";
 
 import {ProjectContactsSection} from "project/presentational/section";
-import {EntityViewSubPage} from "base/entity/pages";
+import {EntityViewSubPage} from "base/entity/components/container";
 
 const ViewProjectContactsSubPage = () => {
     const {id: projectId} = useParams();

@@ -7,7 +7,7 @@ import {project_view_adapter} from "project/model";
 
 import {PageLayout} from "base/ui/main";
 import {ProjectForm} from "project/presentational/form";
-import {SectionHeading} from "base/section/components";
+import {SectionHeading} from "base/ui/section/components";
 import {AlertError} from "base/error/components";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";

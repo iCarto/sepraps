@@ -7,7 +7,7 @@ import {contract_view_adapter, createContract} from "contract/model";
 import {ContactsTable} from "contact/presentational";
 import {DeleteContractContactDialog} from "../../container/monitoring";
 import {AlertError} from "base/error/components";
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {RemoveItemDialog} from "base/delete/components";
 
 import Typography from "@mui/material/Typography";

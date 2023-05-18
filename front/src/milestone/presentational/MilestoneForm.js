@@ -6,7 +6,7 @@ import {MilestoneService} from "milestone/service";
 import {createMilestone} from "milestone/model";
 
 import {MilestoneFormFields} from "milestone/presentational";
-import {SectionHeading} from "base/section/components";
+import {SectionHeading} from "base/ui/section/components";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";

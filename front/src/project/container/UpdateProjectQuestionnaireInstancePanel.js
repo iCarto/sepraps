@@ -5,7 +5,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 import {project_questionnaire_view_adapter} from "questionnaire/model";
 
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 import {QuestionnaireInstanceForm} from "questionnaire/presentational";
 
 const UpdateProjectQuestionnaireInstancePanel = () => {

@@ -7,7 +7,7 @@ import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-} from "base/section/components";
+} from "base/ui/section/components";
 import {ViewMilestoneTimeline} from "milestone/container";
 import {ClosedProjectTag, ProjectTypeIcon} from "project/presentational";
 import {ImagePreview} from "base/image/components";

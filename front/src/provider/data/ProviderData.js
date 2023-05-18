@@ -1,4 +1,4 @@
-import {FieldUtil} from "base/section/utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 
 export function useProviderData(provider) {
     const entityData = {

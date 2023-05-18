@@ -5,7 +5,7 @@ import {ContractService} from "contract/service";
 import {contract_view_adapter, createContract} from "contract/model";
 
 import {ProjectFormSearch} from "project/presentational/form";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const AddContractProjectPanel = () => {
     const [error, setError] = useState("");

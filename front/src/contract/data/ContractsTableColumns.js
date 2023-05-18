@@ -1,5 +1,5 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {FieldUtil} from "base/section/utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 
 export function useContractTable() {
     const tableColumns = [

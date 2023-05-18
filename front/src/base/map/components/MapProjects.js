@@ -1,8 +1,9 @@
 import {useEffect} from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import {useColorMilestone} from "milestone/hooks";
+
 import {useMapIcon} from "base/map/utilities";
+import {useColorMilestone} from "milestone/hooks";
 
 const style = {
     width: "100%",

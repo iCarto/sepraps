@@ -9,7 +9,7 @@ import {ActionsMenu, Spinner} from "base/shared/components";
 import {MenuAction} from "base/ui/menu";
 import {DeleteItemDialog} from "base/delete/components";
 import {TableDownloadButton, TableSortingHead} from "base/table/components";
-import {EntityNoItemsComponent} from "base/entity/components";
+import {EntityNoItemsComponent} from "base/entity/components/presentational";
 import {useList} from "base/entity/hooks";
 
 import Grid from "@mui/material/Grid";
@@ -38,6 +38,7 @@ const tableRowStyle = {
 const EntityTable = ({
     columns,
     service,
+    customPaginatedService = null,
     highlightItems = null,
     selectedElement = null,
     onSelectElement = null,
@@ -74,19 +75,27 @@ const EntityTable = ({
     const [itemToDelete, setItemToDelete] = useState(null);
     const [error, setError] = useState("");
 
-    const noElements = !size;
+    const noElements = !size && !elements.length;
     const isFilterEmpty = Object.values(filter).every(value => !value);
 
     useEffect(() => {
-        console.log({page, sort, order, filter});
         setLoading(true);
-        const serviceCall = service(filter, page, sort, order);
-        serviceCall.then(data => {
-            setElements(data.results);
-            setSize(data.count);
-            setLoading(false);
-        });
-    }, [filter, page, sort, order]); // eslint-disable-line
+        const serviceCall = customPaginatedService
+            ? customPaginatedService(filter, page, sort, order)
+            : service.getPaginatedList(filter, page, sort, order);
+        console.log({serviceCall}, {filter});
+        serviceCall
+            .then(data => {
+                setElements(data.results);
+                setSize(data.count);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.log(error);
+                setLoading(false);
+                setError(error);
+            });
+    }, [filter, page, sort, order, location.state?.lastRefreshDate]); // eslint-disable-line
 
     const handleSelectElement = (event, element) => {
         const cellIndex = event.target.cellIndex;

@@ -4,7 +4,7 @@ import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-} from "base/section/components";
+} from "base/ui/section/components";
 // import {MapSingleLocation} from "base/component/geo";
 
 import LaunchIcon from "@mui/icons-material/Launch";

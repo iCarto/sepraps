@@ -5,7 +5,7 @@ import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-} from "base/section/components";
+} from "base/ui/section/components";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";

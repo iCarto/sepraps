@@ -5,7 +5,7 @@ import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
 import {ProjectForm} from "project/presentational/form";
-import {EntityCreatePage} from "base/entity/pages";
+import {EntityCreatePage} from "base/entity/components/container";
 
 const CreateProjectPage = () => {
     const navigate = useNavigate();

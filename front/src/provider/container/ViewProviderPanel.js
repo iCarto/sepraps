@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {ProviderService} from "provider/service";
-import {EntityViewPanel} from "base/entity/components";
-import {SectionCard, SectionField} from "base/section/components";
+import {EntityViewPanel} from "base/entity/components/presentational";
+import {SectionCard, SectionField} from "base/ui/section/components";
 
 const ViewProviderPanel = () => {
     const {id} = useParams();

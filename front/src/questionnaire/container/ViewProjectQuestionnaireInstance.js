@@ -6,7 +6,7 @@ import {
     QuestionnaireInstanceEmpty,
     QuestionnaireInstanceData,
 } from "questionnaire/presentational";
-import {SectionHeading} from "base/section/components";
+import {SectionHeading} from "base/ui/section/components";
 
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";

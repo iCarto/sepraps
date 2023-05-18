@@ -1,5 +1,5 @@
 import {CUSTOM_COLORS} from "Theme";
-import {useEntityLayer} from "base/entity/components";
+import {useEntityLayer} from "base/entity/hooks";
 
 const getTooltip = feature => {
     let data = feature.properties;

@@ -5,7 +5,7 @@ import {ContractService, TEMPLATE} from "contract/service";
 import {LocationService} from "sepraps/location/service";
 
 import {useList} from "base/entity/hooks";
-import {EntityCounter} from "base/entity/components";
+import {EntityCounter} from "base/entity/components/presentational";
 import {SearchBox} from "base/search/components";
 import {FormAutocomplete, FormClearButton} from "base/form/components";
 import {ClosedProjectsSwitch} from "..";
@@ -53,7 +53,7 @@ const ProjectFilterForm = ({onClear = null}) => {
                 setLoadedDomains(true);
             });
         }
-    }, [expanded]);
+    }, [expanded, loadedDomains]);
 
     const formMethods = useForm({
         defaultValues: {
@@ -119,13 +119,13 @@ const ProjectFilterForm = ({onClear = null}) => {
                         onChangeHandler={value => handleChange({search: value})}
                     />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <ToggleFilterAccordionButton
                         clickHandler={toggleAccordion}
                         isExpanded={expanded}
                     />
                 </Grid>
-                <Grid item xs={5} md={4} xl={2}>
+                <Grid item xs={5}>
                     <EntityCounter size={size} entityName={"proyectos"} />
                 </Grid>
             </Grid>

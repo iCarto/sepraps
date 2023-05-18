@@ -1,5 +1,5 @@
 import {DateUtil} from "base/format/utilities";
-import {SectionCard, SectionField} from "base/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 

@@ -9,5 +9,4 @@ export {default as EntityCardsList} from "./EntityCardsList";
 export {default as EntityCard} from "./EntityCard";
 export {default as EntityListMap} from "./EntityListMap";
 export {default as EntityMenuDropDown} from "./EntityMenuDropDown";
-export * from "./EntityLayer";
 export {default as EntityNoItemsComponent} from "./EntityNoItemsComponent";

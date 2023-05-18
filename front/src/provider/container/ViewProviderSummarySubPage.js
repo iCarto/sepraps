@@ -1,6 +1,6 @@
 import {useOutletContext} from "react-router-dom";
-import {EntityViewSubPage} from "base/entity/pages";
-import {EntityAuditSection} from "base/entity/sections";
+import {EntityViewSubPage} from "base/entity/components/container";
+import {EntityAuditSection} from "base/entity/components/presentational/sections";
 import {ProviderGeneralDataSection} from "provider/presentational/section";
 
 const ViewProviderSummarySubPage = () => {

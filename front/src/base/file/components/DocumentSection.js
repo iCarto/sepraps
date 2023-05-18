@@ -1,7 +1,7 @@
 import {FileUtil} from "base/file/utilities";
 import {DateUtil} from "base/format/utilities";
 
-import {SectionCard, SectionField} from "base/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
 import {ImagePreview} from "base/image/components";
 import Box from "@mui/material/Box";
 

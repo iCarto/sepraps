@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {SectionSubheading} from "base/section/components";
+import {SectionSubheading} from "base/ui/section/components";
 
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";

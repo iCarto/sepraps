@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {useList} from "../hooks";
+import {useList} from "base/entity/hooks";
 import {useMap} from "base/map/hooks";
 import {useMapLayerProvider} from "base/map/provider";
 
@@ -35,7 +35,7 @@ const EntityListMap = ({
     }, []);
 
     useEffect(() => {
-        service(filter).then(result => {
+        service.getAll(filter).then(result => {
             setItems(result);
             // setSize(result.features.length);
             setSize(result?.length);

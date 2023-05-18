@@ -2,7 +2,7 @@ import {FormProvider, useForm} from "react-hook-form";
 
 import {ProviderCreationForm, ProviderModificationForm} from ".";
 import {FormUtil} from "base/form/utilities";
-import {EntityForm} from "base/entity/form";
+import {EntityForm} from "base/entity/components/form";
 import {LocationProvider} from "sepraps/location/provider";
 import {DomainProvider} from "sepraps/domain/provider";
 

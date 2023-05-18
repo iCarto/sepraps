@@ -27,6 +27,7 @@ const tableRowStyle = {
 
 const ContactsTable = ({
     contacts = [],
+    customTableColumns = null,
     handleActions = null,
     showEditAction = true,
     showRemoveAction = true,
@@ -38,6 +39,9 @@ const ContactsTable = ({
         "name",
         "asc"
     );
+
+    const columns = customTableColumns || tableColumns;
+    const showIsStaffColumn = columns?.some(column => column.id === "is_staff");
 
     const handleRequestSort = (event, property) => {
         const isAsc = attribute === property && order === "asc";
@@ -57,7 +61,7 @@ const ContactsTable = ({
                     attribute={attribute}
                     onRequestSort={handleRequestSort}
                     headCells={[
-                        ...tableColumns,
+                        ...columns,
                         {
                             id: "actions",
                             width: 5,
@@ -75,13 +79,15 @@ const ContactsTable = ({
                                 <TableCell>{contact.phone}</TableCell>
                                 <TableCell>{contact.email}</TableCell>
                                 <TableCell>{contact.comments}</TableCell>
-                                <TableCell>
-                                    {contact.is_staff ? (
-                                        <CheckIcon color="success" />
-                                    ) : (
-                                        ""
-                                    )}
-                                </TableCell>
+                                {showIsStaffColumn ? (
+                                    <TableCell>
+                                        {contact.is_staff ? (
+                                            <CheckIcon color="success" />
+                                        ) : (
+                                            ""
+                                        )}
+                                    </TableCell>
+                                ) : null}
                                 {handleActions ? (
                                     <TableCell sx={{paddingX: 0}}>
                                         <AuthAction

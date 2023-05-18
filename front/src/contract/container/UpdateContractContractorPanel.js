@@ -5,7 +5,7 @@ import {ContractorService} from "contractor/service";
 import {contractor_view_adapter} from "contractor/model";
 
 import {ContractorForm} from "contractor/presentational";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateContractContractorPanel = () => {
     const [error, setError] = useState("");

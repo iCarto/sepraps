@@ -1,4 +1,4 @@
-import {FieldUtil} from "base/section/utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";

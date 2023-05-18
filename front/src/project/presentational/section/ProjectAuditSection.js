@@ -1,7 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 import {DateUtil} from "base/format/utilities";
 
-import {SectionCard, SectionField} from "base/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
 
 const ProjectAuditSection = () => {
     let project;

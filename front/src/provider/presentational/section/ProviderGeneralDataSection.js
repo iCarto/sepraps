@@ -1,5 +1,5 @@
 import {useAuth} from "base/user/provider";
-import {EntityGeneralDataSection} from "base/entity/sections";
+import {EntityGeneralDataSection} from "base/entity/components/presentational/sections";
 
 const ProviderGeneralDataSection = ({provider}) => {
     const {ROLES} = useAuth();

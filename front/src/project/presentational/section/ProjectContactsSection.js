@@ -1,16 +1,15 @@
 import {useState} from "react";
-import {useNavigateWithReload} from "base/navigation/hooks";
+
 import {useAuth} from "base/user/provider";
 import {ProviderService} from "provider/service";
 
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {AlertError} from "base/error/components";
 import {ContactsTable} from "contact/presentational";
 import {RemoveItemDialog} from "base/delete/components";
 
 import Typography from "@mui/material/Typography";
-
-// TO-DO: Removing contact is not working. Should decide how to handle contacts in this section. Are we allowing editions/removals for provider contacts?
+import {useNavigateWithReload} from "base/navigation/hooks";
 
 const ProjectContactsSection = ({projectId, contacts}) => {
     const navigate = useNavigateWithReload();
@@ -37,15 +36,14 @@ const ProjectContactsSection = ({projectId, contacts}) => {
     };
 
     const handleUpdateProvider = updatedProvider => {
-        console.log(updatedProvider);
-        // ProviderService.update(updatedProvider)
-        //     .then(() => {
-        //         navigate(`/projects/${projectId}/contacts`, true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
+        ProviderService.update(updatedProvider)
+            .then(() => {
+                navigate(`/projects/${projectId}/contacts`, true);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error);
+            });
     };
 
     return (
@@ -53,11 +51,7 @@ const ProjectContactsSection = ({projectId, contacts}) => {
             <SectionCard title="Contactos del proyecto">
                 <AlertError error={error} />
                 {contacts.length ? (
-                    <ContactsTable
-                        contacts={contacts}
-                        handleActions={handleActions}
-                        showDeleteAction={false}
-                    />
+                    <ContactsTable contacts={contacts} />
                 ) : (
                     <Typography
                         sx={{

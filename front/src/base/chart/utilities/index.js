@@ -1,1 +1,1 @@
-export * from "./DownloadChartHook";
+export * from "./DownloadChart.js";

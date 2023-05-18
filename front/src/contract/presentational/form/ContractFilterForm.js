@@ -4,7 +4,7 @@ import {FinancingService} from "financing/service";
 import {ContractorService} from "contractor/service";
 
 import {useList} from "base/entity/hooks";
-import {EntityCounter} from "base/entity/components";
+import {EntityCounter} from "base/entity/components/presentational";
 import {SearchBox} from "base/search/components";
 import {FormAutocomplete, FormDatePicker, FormClearButton} from "base/form/components";
 import {ToggleFilterAccordionButton} from "base/shared/components";

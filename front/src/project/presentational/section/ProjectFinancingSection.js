@@ -6,7 +6,7 @@ import {
     SectionCardHeaderAction,
     SectionField,
     SectionSubheading,
-} from "base/section/components";
+} from "base/ui/section/components";
 import LaunchIcon from "@mui/icons-material/Launch";
 
 const ProjectFinancingSection = ({project}) => {

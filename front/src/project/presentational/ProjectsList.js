@@ -1,5 +1,5 @@
 import {ProjectCard} from "project/presentational";
-import {EntityNoItemsComponent} from "base/entity/components";
+import {EntityNoItemsComponent} from "base/entity/components/presentational";
 import Grid from "@mui/material/Grid";
 
 const ProjectsList = ({projects = [], onClick}) => {

@@ -5,7 +5,7 @@ import {
     ContractExecutionSection,
     ContractPostConstructionSection,
 } from "contract/presentational/section";
-import {EntityViewSubPage} from "base/entity/pages";
+import {EntityViewSubPage} from "base/entity/components/container";
 
 const ViewContractPhasesSubPage = () => {
     let contract;

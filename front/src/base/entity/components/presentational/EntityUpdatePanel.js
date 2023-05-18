@@ -1,5 +1,5 @@
-import {AlertError} from "../../error/components";
-import {SidebarPanelLayout} from "../../ui/sidebar";
+import {AlertError} from "base/error/components";
+import {SidebarPanelLayout} from "base/ui/sidebar";
 
 const EntityUpdatePanel = ({form, title, error = null, onCancel}) => {
     return (

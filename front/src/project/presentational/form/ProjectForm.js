@@ -5,7 +5,7 @@ import {DomainProvider} from "sepraps/domain/provider";
 import {createInfrastructure, createLocality} from "location/model";
 import {createProject} from "project/model";
 
-import {EntityForm} from "base/entity/form";
+import {EntityForm} from "base/entity/components/form";
 import {
     ProjectCreationForm,
     ProjectModificationForm,

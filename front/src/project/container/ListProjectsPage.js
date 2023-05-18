@@ -1,6 +1,6 @@
 import {ProjectService} from "project/service";
 import {useProjectTable} from "project/data/ProjectsTableColumns";
-import {EntityListPage} from "base/entity/pages";
+import {EntityListPage} from "base/entity/components/container";
 import {ProjectFilterForm} from "project/presentational/form";
 import {useProjectLayer} from "project/geo";
 import {ProjectCard} from "project/presentational";
@@ -10,7 +10,7 @@ const ListProjectsPage = () => {
 
     return (
         <EntityListPage
-            service={ProjectService.getAll}
+            service={ProjectService}
             mapLayer={useProjectLayer}
             views={["list", "table", "map"]}
             entityName="proyectos"

@@ -5,7 +5,7 @@ import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
 import {ProjectLinkedLocalitiesForm} from "../presentational/location";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const AddProjectLinkedLocalitiesPanel = () => {
     const [error, setError] = useState("");

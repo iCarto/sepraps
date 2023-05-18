@@ -5,13 +5,13 @@ import {useAuth} from "base/user/provider";
 import {ContractService} from "contract/service";
 import {contract_view_adapter} from "contract/model";
 
-import {EntityAddButtonGroup} from "base/entity/components";
+import {EntityAddButtonGroup} from "base/entity/components/presentational";
 import {RemoveItemDialog} from "base/delete/components";
 import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-} from "base/section/components";
+} from "base/ui/section/components";
 import {ContractorContactsSection} from "contractor/presentational";
 
 import Stack from "@mui/material/Stack";

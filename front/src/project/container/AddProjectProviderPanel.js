@@ -4,7 +4,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {project_view_adapter} from "project/model";
 import {ProjectService} from "project/service";
 
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 import {ProviderForm, ProviderFormSearch} from "provider/presentational/form";
 
 const AddProjectProviderPanel = () => {

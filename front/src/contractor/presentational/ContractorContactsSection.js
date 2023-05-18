@@ -5,7 +5,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractorService} from "contractor/service";
 import {createContractor} from "contractor/model";
 
-import {EntityAddButtonGroup} from "base/entity/components";
+import {EntityAddButtonGroup} from "base/entity/components/presentational";
 import {AuthAction} from "base/user/components";
 import {AccordionLayout} from "base/shared/components";
 import {RemoveItemDialog} from "base/delete/components";

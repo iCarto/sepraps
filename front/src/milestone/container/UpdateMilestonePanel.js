@@ -5,7 +5,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {MilestoneService} from "milestone/service";
 
 import {MilestoneForm} from "milestone/presentational";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateMilestonePanel = () => {
     const [error, setError] = useState("");

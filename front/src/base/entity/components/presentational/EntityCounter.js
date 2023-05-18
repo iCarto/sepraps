@@ -8,6 +8,7 @@ const EntityCounter = ({size, entityName}) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                minWidth: "fit-content",
                 px: 1,
                 border: 1,
                 borderRadius: 1,

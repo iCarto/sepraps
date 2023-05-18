@@ -1,20 +1,17 @@
 import {useState} from "react";
 import {useAuth} from "base/user/provider";
-import {AuthAction} from "base/user/components";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 import {createProject, project_view_adapter} from "project/model";
 
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {RemoveItemDialog} from "base/delete/components";
 import {AlertError} from "base/error/components";
-import {ProjectLinkedLocalitiesTable} from "../location";
+import {AddNewButton} from "base/shared/components";
+import {ProjectLinkedLocalitiesTable} from "project/presentational/location";
 
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import {AddNewButton} from "base/shared/components";
 
 const ProjectLinkedLocalitiesSection = ({project}) => {
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);

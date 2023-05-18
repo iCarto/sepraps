@@ -4,8 +4,7 @@ import {
     contracts_api_adapter,
     contract_api_adapter,
 } from "contract/model";
-import {AuthApiService} from "base/api/service";
-import {ServiceUtil} from "base/api/utilities";
+import {createEntityService} from "base/entity/service";
 
 export const TEMPLATE = {
     SHORT: "short",
@@ -13,42 +12,41 @@ export const TEMPLATE = {
 
 const basePath = "/api/monitoring/constructioncontracts";
 
+const entityService = createEntityService(
+    basePath,
+    createContract,
+    createContracts,
+    contract_api_adapter,
+    contracts_api_adapter
+);
+
 const ContractService = {
-    getAll(filter, page, sort, order) {
-        return AuthApiService.get(
-            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(
-                filter
-            )}&${ServiceUtil.getOrderQueryString(sort, order)}`
-        ).then(response => {
-            response.results = createContracts(contracts_api_adapter(response.results));
-            return response;
-        });
+    getAll(filter, sort, order, format = null) {
+        return entityService.getList(filter, null, sort, order, format);
+    },
+
+    getPaginatedList(filter, page, sort, order) {
+        return entityService.getList(filter, page, sort, order);
+    },
+
+    getFeatures(filter) {
+        return entityService.getFeatures(filter);
     },
 
     getBySearchText(searchText) {
-        return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
-            return createContracts(contracts_api_adapter(response));
-        });
+        return entityService.getBySearchText(searchText);
     },
 
     get(id) {
-        return AuthApiService.get(basePath + "/" + id).then(response => {
-            return createContract(contract_api_adapter(response));
-        });
+        return entityService.get(id);
     },
 
-    create(contract) {
-        return AuthApiService.post(basePath, contract).then(response => {
-            return createContract(contract_api_adapter(response));
-        });
+    create(provider) {
+        return entityService.create(provider);
     },
 
-    update(contract) {
-        return AuthApiService.put(basePath + "/" + contract.id, contract).then(
-            response => {
-                return createContract(contract_api_adapter(response));
-            }
-        );
+    update(provider) {
+        return entityService.update(provider);
     },
 };
 

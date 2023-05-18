@@ -3,7 +3,7 @@ import {NumberUtil} from "base/format/utilities";
 import {createContract} from "contract/model";
 import {DomainProvider} from "sepraps/domain/provider";
 
-import {EntityForm} from "base/entity/form";
+import {EntityForm} from "base/entity/components/form";
 import {ContractCreationForm, ContractModificationForm} from ".";
 
 const ContractForm = ({

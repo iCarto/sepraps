@@ -3,7 +3,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {LocationService} from "sepraps/location/service";
 
 import {useList} from "base/entity/hooks";
-import {EntityCounter} from "base/entity/components";
+import {EntityCounter} from "base/entity/components/presentational";
 import {SearchBox} from "base/search/components";
 import {FormAutocomplete, FormClearButton} from "base/form/components";
 import {ToggleFilterAccordionButton} from "base/shared/components";

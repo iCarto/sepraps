@@ -1,4 +1,4 @@
-import {SectionActionsMenu, SectionHeading} from "base/section/components";
+import {SectionActionsMenu, SectionHeading} from "base/ui/section/components";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";

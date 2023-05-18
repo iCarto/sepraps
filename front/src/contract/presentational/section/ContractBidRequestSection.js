@@ -6,7 +6,7 @@ import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-} from "base/section/components";
+} from "base/ui/section/components";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ContractBidRequestSection = ({contract}) => {

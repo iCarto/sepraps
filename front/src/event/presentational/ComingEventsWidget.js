@@ -2,7 +2,7 @@ import {Fragment, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {DateUtil} from "base/format/utilities";
 
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";

@@ -1,5 +1,5 @@
-import {AuthApiService} from "base/service";
-import {ServiceRequestFormat, ServiceUtil} from "base/utilities";
+import {AuthApiService} from "base/api/service";
+import {ServiceRequestFormat, ServiceUtil} from "base/api/utilities";
 
 class EntityService {
     #base_path;
@@ -68,7 +68,9 @@ class EntityService {
         return AuthApiService.get(this.#base_path + `?search=${searchText}`).then(
             response =>
                 this.#objects_constructor
-                    ? this.#objects_constructor(this.#objects_api_adapter(response))
+                    ? this.#objects_constructor(
+                          this.#objects_api_adapter(response.results)
+                      )
                     : response
         );
     }

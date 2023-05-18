@@ -6,7 +6,7 @@ import {provider_view_adapter, createProvider} from "provider/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {ContactForm, ContactFormSearch} from "contact/presentational";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateProviderContactPanel = () => {
     const {contactId, action} = useParams();

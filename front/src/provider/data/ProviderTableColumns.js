@@ -1,4 +1,4 @@
-export function useProviderTable() {
+export function useProviderTableColumns() {
     const tableColumns = [
         {
             id: "name",

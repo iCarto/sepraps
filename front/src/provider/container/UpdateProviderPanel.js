@@ -5,7 +5,7 @@ import {ProviderForm} from "../presentational/form";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {provider_view_adapter} from "provider/model";
 import {ProviderService} from "provider/service";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateProviderPanel = () => {
     const {section} = useParams();

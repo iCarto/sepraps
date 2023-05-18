@@ -1,5 +1,5 @@
 import {ViewProjectQuestionnaireInstance} from "questionnaire/container";
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {Spinner} from "base/shared/components";
 
 const ProjectQuestionnaireSection = ({questionnaire, isLoading}) => {

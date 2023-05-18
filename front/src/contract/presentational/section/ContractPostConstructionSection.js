@@ -1,8 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import {DateUtil} from "base/format/utilities";
-import {FieldUtil} from "base/section/utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 
-import {SectionCard, SectionCardHeaderAction} from "base/section/components";
+import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ContractPostConstructionSection = ({contract}) => {

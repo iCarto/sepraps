@@ -1,5 +1,5 @@
 import {DateUtil} from "base/format/utilities";
-import {SectionCard, SectionField} from "base/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";

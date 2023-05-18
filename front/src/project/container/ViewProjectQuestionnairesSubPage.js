@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 
 import {ProjectService} from "project/service";
-import {EntityViewSubPage} from "base/entity/pages";
+import {EntityViewSubPage} from "base/entity/components/container";
 import {ProjectQuestionnaireSection} from "questionnaire/presentational";
 
 const ViewProjectQuestionnairesSubPage = () => {

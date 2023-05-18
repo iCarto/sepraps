@@ -2,18 +2,20 @@ import {useState} from "react";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {useAuth} from "base/user/provider";
 import {ProviderService} from "provider/service";
+import {createProvider} from "provider/model";
+import {useProviderContactsTable} from "provider/data";
 
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {AlertError} from "base/error/components";
+import {RemoveItemDialog} from "base/delete/components";
 import {ContactsTable} from "contact/presentational";
-import {DeleteProviderContactDialog} from "../../container";
+import {DeleteProviderContactDialog} from "provider/container";
 
 import Typography from "@mui/material/Typography";
-import {RemoveItemDialog} from "base/delete/components";
-import {createProvider} from "provider/model";
 
 const ProviderContactsSection = ({provider}) => {
     const navigate = useNavigateWithReload();
+    const {tableColumns} = useProviderContactsTable();
     const {ROLES} = useAuth();
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
@@ -60,6 +62,7 @@ const ProviderContactsSection = ({provider}) => {
                 <AlertError error={error} />
                 {provider.contacts.length ? (
                     <ContactsTable
+                        customTableColumns={tableColumns}
                         contacts={provider.contacts}
                         handleActions={handleActions}
                     />

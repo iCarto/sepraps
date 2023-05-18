@@ -6,7 +6,7 @@ import {
     ProjectProviderSection,
 } from "project/presentational/section";
 
-import {EntityViewSubPage} from "base/entity/pages";
+import {EntityViewSubPage} from "base/entity/components/container";
 
 const ViewProjectLocationSubPage = () => {
     let project;

@@ -5,9 +5,12 @@ import {AuthAction} from "base/user/components";
 
 import {useProjectListView} from "project/provider";
 import {ProjectsList, ProjectsTable} from "project/presentational";
-import {SectionHeading} from "base/section/components";
+import {SectionHeading} from "base/ui/section/components";
 import {MapProjects} from "base/map/components";
-import {EntityAddButtonGroup, EntityChangeView} from "base/entity/components";
+import {
+    EntityAddButtonGroup,
+    EntityChangeView,
+} from "base/entity/components/presentational";
 
 import {PageLayout} from "base/ui/main";
 import {PaperContainer} from "base/shared/components";

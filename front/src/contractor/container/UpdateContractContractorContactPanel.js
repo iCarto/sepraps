@@ -6,7 +6,7 @@ import {ContractorService} from "contractor/service";
 import {createContractor} from "contractor/model";
 
 import {ContactForm, ContactFormSearch} from "contact/presentational";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateContractContractorContactPanel = () => {
     const {action, contactId} = useParams();

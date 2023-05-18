@@ -5,9 +5,9 @@ import {StatsService} from "stats/service";
 import {useStatsView} from "stats/provider";
 import {useList} from "base/entity/hooks";
 
-import {EntityViewSubPage} from "base/entity/pages";
-import {EntityCounter} from "base/entity/components";
-import {SectionCard} from "base/section/components";
+import {EntityViewSubPage} from "base/entity/components/container";
+import {EntityCounter} from "base/entity/components/presentational";
+import {SectionCard} from "base/ui/section/components";
 import {Spinner} from "base/shared/components";
 import {
     StatsByPhaseChart,

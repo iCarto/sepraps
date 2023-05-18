@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 
-import {SectionCard, SectionField} from "base/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
 import {FeaturedDocumentDownload} from "base/file/components";
 import {ImagePreview} from "base/image/components";
 

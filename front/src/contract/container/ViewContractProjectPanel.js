@@ -6,7 +6,7 @@ import {ContractService} from "contract/service";
 import {ProjectService} from "project/service";
 import {contract_view_adapter, createContract} from "contract/model";
 
-import {EntityViewPanel} from "base/entity/components";
+import {EntityViewPanel} from "base/entity/components/presentational";
 import {ProjectSection} from "project/presentational/section";
 
 const ViewContractProjectPanel = () => {

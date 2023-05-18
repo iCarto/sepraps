@@ -1,12 +1,12 @@
 import {useNavigate} from "react-router-dom";
 
-import {FieldUtil} from "base/section/utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
     SectionLabel,
-} from "base/section/components";
+} from "base/ui/section/components";
 
 import {MapInfrastructure} from "base/map/components";
 import {ProjectLinkedLocalitiesTable} from "../location";

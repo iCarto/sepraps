@@ -4,7 +4,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {ContractService} from "contract/service";
 import {contract_view_adapter} from "contract/model";
 
-import {EntityCreatePage} from "base/entity/pages";
+import {EntityCreatePage} from "base/entity/components/container";
 import {ContractForm} from "contract/presentational/form";
 
 const CreateContractPage = () => {

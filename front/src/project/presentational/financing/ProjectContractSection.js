@@ -2,10 +2,10 @@ import {useNavigate, useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {FieldUtil} from "base/section/utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 
 import {AddNewButton} from "base/shared/components";
-import {SectionCard, SectionField} from "base/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 

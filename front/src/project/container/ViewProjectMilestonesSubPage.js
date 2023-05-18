@@ -6,8 +6,8 @@ import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {EntityViewSubPage} from "base/entity/pages";
-import {SectionCard} from "base/section/components";
+import {EntityViewSubPage} from "base/entity/components/container";
+import {SectionCard} from "base/ui/section/components";
 import {MilestonePhase} from "milestone/presentational";
 import {CloseProjectButton, CloseProjectDialog} from ".";
 

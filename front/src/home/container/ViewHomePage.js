@@ -9,7 +9,7 @@ import {EventService} from "event/service";
 import {PageLayout} from "base/ui/main";
 import {NotificationsWidget} from "notification/presentational";
 import {ComingEventsWidget} from "event/presentational";
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {SmallIconCard} from "base/shared/components";
 import {LatestProjectsList} from "project/presentational";
 import {LatestContractsList} from "contract/presentational";

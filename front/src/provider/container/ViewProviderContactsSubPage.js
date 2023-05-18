@@ -1,7 +1,7 @@
 import {useOutletContext} from "react-router-dom";
-import {EntityViewSubPage} from "base/entity/pages";
+import {EntityViewSubPage} from "base/entity/components/container";
 import {ProviderContactsSection} from "provider/presentational/section";
-import {EntityAddButtonGroup} from "base/entity/components";
+import {EntityAddButtonGroup} from "base/entity/components/presentational";
 
 const ViewProviderContactsSubPage = () => {
     let provider;

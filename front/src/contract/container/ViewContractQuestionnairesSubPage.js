@@ -2,8 +2,8 @@ import {useOutletContext, useParams} from "react-router-dom";
 
 import {ViewQuestionnaireInstanceFieldData} from "questionnaire/container";
 import {QuestionnaireInstanceViewProvider} from "questionnaire/provider";
-import {SectionCard} from "base/section/components";
-import {EntityViewSubPage} from "base/entity/pages";
+import {SectionCard} from "base/ui/section/components";
+import {EntityViewSubPage} from "base/entity/components/container";
 
 const ViewContractQuestionnairesSubPage = () => {
     const {contractId, questionnaireCode} = useParams();

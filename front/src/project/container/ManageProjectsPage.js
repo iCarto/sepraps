@@ -1,4 +1,4 @@
-import {EntityManagePage} from "base/entity/pages";
+import {EntityManagePage} from "base/entity/components/container";
 
 const ManageProjectsPage = () => {
     return <EntityManagePage></EntityManagePage>;

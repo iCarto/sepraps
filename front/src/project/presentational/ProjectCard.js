@@ -1,5 +1,5 @@
 import {useProjectCard} from "project/data";
-import {EntityCard} from "base/entity/components";
+import {EntityCard} from "base/entity/components/presentational";
 import {MilestoneTimelineShort} from "milestone/presentational";
 import {ClosedProjectTag, ProjectTypeIcon} from "project/presentational";
 import {ImagePreview} from "base/image/components";

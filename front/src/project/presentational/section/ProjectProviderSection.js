@@ -5,12 +5,12 @@ import {project_view_adapter} from "project/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {RemoveItemDialog} from "base/delete/components";
-import {EntityAddButtonGroup} from "base/entity/components";
+import {EntityAddButtonGroup} from "base/entity/components/presentational";
 import {
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-} from "base/section/components";
+} from "base/ui/section/components";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";

@@ -4,7 +4,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {provider_view_adapter} from "provider/model";
 import {ProviderService} from "provider/service";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 import {ProviderFormSearch} from "provider/presentational/form";
 
 //TO-DO: Consider removing this component if we are only allowing provider to be updated from its own module.

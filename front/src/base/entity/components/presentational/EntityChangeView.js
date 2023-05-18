@@ -1,4 +1,4 @@
-import {useList} from "../hooks";
+import {useList} from "base/entity/hooks";
 
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -10,11 +10,8 @@ const EntityChangeView = ({views = null}) => {
     const {view, setView} = useList();
 
     const handleChange = (event, selectedOption) => {
-        console.log({selectedOption});
         setView(selectedOption);
     };
-
-    console.log({views, view});
 
     return (
         views?.length && (

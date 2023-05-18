@@ -10,8 +10,8 @@ import {
     EntityCreateButton,
     EntityTable,
     EntityListMap,
-} from "base/entity/components";
-import {EntityFilterForm} from "base/entity/form";
+} from "base/entity/components/presentational";
+import {EntityFilterForm} from "base/entity/components/form";
 import {PageLayout} from "base/ui/main";
 import {PaperContainer} from "base/shared/components";
 import {AuthAction} from "base/user/components";
@@ -104,11 +104,12 @@ const EntityListPage = ({
                         </Grid>
                         <Grid
                             item
-                            xs={4}
                             container
-                            spacing={2}
+                            xs={4}
+                            spacing={1}
+                            direction={{xs: "column", lg: "row"}}
                             justifyContent="flex-end"
-                            alignItems="flex-start"
+                            alignItems={{xs: "flex-end", lg: "flex-start"}}
                         >
                             {createButton ? (
                                 <Grid item>

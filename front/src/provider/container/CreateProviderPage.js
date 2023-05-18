@@ -4,7 +4,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {ProviderService} from "provider/service";
 import {provider_view_adapter} from "provider/model";
 
-import {EntityCreatePage} from "base/entity/pages";
+import {EntityCreatePage} from "base/entity/components/container";
 import {ProviderForm} from "provider/presentational/form";
 
 const CreateProviderPage = () => {

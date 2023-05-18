@@ -6,7 +6,7 @@ import {contract_view_adapter, createContract} from "contract/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {ContactForm, ContactFormSearch} from "contact/presentational";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateContractContactPanel = () => {
     const {action, contactId} = useParams();

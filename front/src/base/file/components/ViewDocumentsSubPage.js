@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {FolderViewProvider} from "base/file/provider";
 import {PageLayout} from "base/ui/main";
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {ListFolder} from "base/file/components";
 
 const ViewDocumentsSubPage = ({entity, basePath}) => {

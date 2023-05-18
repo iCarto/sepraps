@@ -4,7 +4,7 @@ import {
     ProjectContractSection,
     ProjectFinancingDataSection,
 } from "project/presentational/financing";
-import {EntityViewSubPage} from "base/entity/pages";
+import {EntityViewSubPage} from "base/entity/components/container";
 
 const ViewProjectFinancingSubPage = () => {
     let project;

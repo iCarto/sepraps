@@ -1,7 +1,7 @@
 import {PageLayout} from "base/ui/main";
 import {AlertError} from "base/error/components";
 import {PaperContainer} from "base/shared/components";
-import {SectionHeading} from "base/section/components";
+import {SectionHeading} from "base/ui/section/components";
 
 const EntityCreatePage = ({form, title, error = null}) => {
     return (

@@ -5,7 +5,7 @@ import {ContractService} from "contract/service";
 import {contract_view_adapter} from "contract/model";
 
 import {ContractForm} from "contract/presentational/form";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const UpdateContractPanel = () => {
     const {section} = useParams();

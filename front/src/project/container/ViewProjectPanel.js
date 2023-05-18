@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProjectService} from "project/service";
 
-import {EntityViewPanel} from "base/entity/components";
+import {EntityViewPanel} from "base/entity/components/presentational";
 import {ProjectSection} from "project/presentational/section";
 
 const ViewProjectPanel = () => {

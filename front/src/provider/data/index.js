@@ -1,2 +1,3 @@
-export * from "./ProviderTable";
+export * from "./ProviderTableColumns";
+export * from "./ProviderContactsTableColumns";
 export * from "./ProviderData";

@@ -1,8 +1,9 @@
 import {useCallback} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {useList} from "../hooks";
+
+import {useList} from "base/entity/hooks";
 import {SearchBox} from "base/search/components";
-import {EntityCounter} from "../components";
+import {EntityCounter} from "base/entity/components/presentational";
 
 import Grid from "@mui/material/Grid";
 

@@ -1,4 +1,4 @@
-import {SectionCard, SectionField} from "base/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
 
 const ProviderSummary = ({provider}) => {
     return (

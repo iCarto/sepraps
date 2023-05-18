@@ -1,7 +1,7 @@
 import {useLocation, useNavigate, useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 
-import {SectionCard, SectionCardHeaderAction} from "base/section/components";
+import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {MapInfrastructure} from "base/map/components";
 import EditIcon from "@mui/icons-material/Edit";
 

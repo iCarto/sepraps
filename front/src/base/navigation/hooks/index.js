@@ -1,1 +1,1 @@
-export * from "./NavigateAndReload.js";
+export * from "./NavigateAndReloadHook";

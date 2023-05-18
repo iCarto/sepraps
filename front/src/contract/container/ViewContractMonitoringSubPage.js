@@ -1,8 +1,8 @@
 import {useOutletContext} from "react-router-dom";
 
 import {ContractContactsSection} from "contract/presentational/section";
-import {EntityViewSubPage} from "base/entity/pages";
-import {EntityAddButtonGroup} from "base/entity/components";
+import {EntityViewSubPage} from "base/entity/components/container";
+import {EntityAddButtonGroup} from "base/entity/components/presentational";
 
 const ViewContractMonitoringSubPage = () => {
     let contract;

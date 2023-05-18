@@ -1,4 +1,4 @@
-import {EntityMenuDropDown} from "base/entity/components";
+import {EntityMenuDropDown} from "base/entity/components/presentational";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 

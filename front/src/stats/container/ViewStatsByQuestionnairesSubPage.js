@@ -6,8 +6,8 @@ import {QuestionnaireInstanceViewProvider} from "questionnaire/provider";
 import {useList} from "base/entity/hooks";
 
 import {Spinner} from "base/shared/components";
-import {SectionCard} from "base/section/components";
-import {EntityViewSubPage} from "base/entity/pages";
+import {SectionCard} from "base/ui/section/components";
+import {EntityViewSubPage} from "base/entity/components/container";
 import {StatsFilterForm} from "stats/presentational";
 import {ViewQuestionnaireInstanceFieldData} from "questionnaire/container";
 

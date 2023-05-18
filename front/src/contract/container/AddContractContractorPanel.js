@@ -5,7 +5,7 @@ import {ContractService} from "contract/service";
 import {contract_view_adapter} from "contract/model";
 
 import {ContractorFormSearch, ContractorForm} from "contractor/presentational";
-import {EntityUpdatePanel} from "base/entity/components";
+import {EntityUpdatePanel} from "base/entity/components/presentational";
 
 const AddContractContractorPanel = () => {
     const {contractorId} = useParams();

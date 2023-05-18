@@ -1,3 +1,3 @@
-export * from "./MilestoneColorHook";
-export * from "./MilestonePhaseHook";
-export * from "./PhaseColorHook";
+export * from "./MilestoneColor.js";
+export * from "./MilestonePhase.js";
+export * from "./PhaseColor.js";

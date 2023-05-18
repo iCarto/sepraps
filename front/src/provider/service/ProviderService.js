@@ -4,47 +4,45 @@ import {
     provider_api_adapter,
     providers_api_adapter,
 } from "provider/model";
-import {AuthApiService} from "base/api/service";
-import {ServiceUtil} from "base/api/utilities";
+import {createEntityService} from "base/entity/service";
 
 const basePath = "/api/monitoring/providers";
 
+const entityService = createEntityService(
+    basePath,
+    createProvider,
+    createProviders,
+    provider_api_adapter,
+    providers_api_adapter
+);
+
 const ProviderService = {
-    getAll(filter, page, sort, order) {
-        return AuthApiService.get(
-            `${basePath}?page=${page}&${ServiceUtil.getFilterQueryString(
-                filter
-            )}&${ServiceUtil.getOrderQueryString(sort, order)}`
-        ).then(response => {
-            response.results = createProviders(providers_api_adapter(response.results));
-            return response;
-        });
+    getAll(filter, sort, order, format = null) {
+        return entityService.getList(filter, null, sort, order, format);
+    },
+
+    getPaginatedList(filter, page, sort, order) {
+        return entityService.getList(filter, page, sort, order);
+    },
+
+    getFeatures(filter) {
+        return entityService.getFeatures(filter);
     },
 
     getBySearchText(searchText) {
-        return AuthApiService.get(basePath + `?search=${searchText}`).then(response => {
-            return createProviders(providers_api_adapter(response.results));
-        });
+        return entityService.getBySearchText(searchText);
     },
 
     get(id) {
-        return AuthApiService.get(basePath + "/" + id).then(response => {
-            return createProvider(provider_api_adapter(response));
-        });
+        return entityService.get(id);
     },
 
     create(provider) {
-        return AuthApiService.post(basePath, provider).then(response => {
-            return createProvider(provider_api_adapter(response));
-        });
+        return entityService.create(provider);
     },
 
     update(provider) {
-        return AuthApiService.put(basePath + "/" + provider.id, provider).then(
-            response => {
-                return createProvider(provider_api_adapter(response));
-            }
-        );
+        return entityService.update(provider);
     },
 };
 

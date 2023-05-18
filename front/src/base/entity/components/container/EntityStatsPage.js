@@ -1,4 +1,4 @@
-import {SectionCard} from "base/section/components";
+import {SectionCard} from "base/ui/section/components";
 import {ContentLayout} from "base/ui/main";
 import {StatsTable} from "stats/components";
 import Grid from "@mui/material/Grid";
