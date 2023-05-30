@@ -1,3 +1,1 @@
-export {
-    default as DownloadEntityPDFReportButton,
-} from "./DownloadEntityPDFReportButton";
+export {default as DownloadPDFButton} from "./DownloadPDFButton";

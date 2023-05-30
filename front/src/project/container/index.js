@@ -9,6 +9,7 @@ export {default as ViewProjectFinancingSubPage} from "./ViewProjectFinancingSubP
 export {default as ViewProjectMilestonesSubPage} from "./ViewProjectMilestonesSubPage";
 export {default as ViewProjectContactsSubPage} from "./ViewProjectContactsSubPage";
 export {default as ViewProjectDocumentsSubPage} from "./ViewProjectDocumentsSubPage";
+export {default as ViewProjectsSupervisionPage} from "./ViewProjectsSupervisionPage";
 export {
     default as ViewProjectQuestionnairesSubPage,
 } from "./ViewProjectQuestionnairesSubPage";
