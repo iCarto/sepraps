@@ -1,32 +1,30 @@
+import {useEffect, useState} from "react";
+import {downloadFieldReportPDF} from "base/report/utilities";
+
 import {PageLayout} from "base/ui/main";
 import {PaperContainer} from "base/shared/components";
-import DownloadPDFButton from "base/report/components/DownloadPDFButton";
-import {useEffect, useState} from "react";
-import {useGetDataUrl} from "base/shared/utilities";
+import {DownloadPDFButton} from "base/report/components";
 
 const ViewProjectsSupervisionPage = () => {
-    const [imageUrl, setImageUrl] = useState(null);
+    const [data, setData] = useState(null);
 
-    // const entityData = useOutletContext()[1];
-    // const {download: handleDownloadEntityReportPdf} = useDownloadEntityPDFReport();
-    const getDataUrl = useGetDataUrl();
+    const {download: handleDownloadFieldReportPdf} = downloadFieldReportPDF();
 
     useEffect(() => {
-        // if (entityData?.image) {
-        //     // A Blob is necessary because we need to load the image using AuthService
-        //     DocumentService.preview(entityData.image).then(response => {
-        //         getDataUrl(response).then(dataUrl => {
-        //             setImageUrl(dataUrl);
-        //         });
-        //     });
-        // } else {
-        //     setImageUrl(null);
-        // }
-        setImageUrl(null);
+        fetch("/testing_report_data/fieldReportDummyData.json")
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                setData(data);
+            })
+            .catch(error => {
+                console.log(error.message);
+            });
     }, []);
 
     const handleGeneratePDF = () => {
-        // handleDownloadEntityReportPdf(entityData, imageUrl);
+        handleDownloadFieldReportPdf(data);
     };
 
     return (
