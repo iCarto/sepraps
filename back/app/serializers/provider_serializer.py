@@ -6,6 +6,7 @@ from app.models.provider import Provider
 from app.serializers.contact_relationship_serializer import ContactProviderSerializer
 from app.serializers.locality_serializer import LocalitySerializer
 
+
 class ProviderSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(allow_null=True, required=False)
     locality = LocalitySerializer()
@@ -86,3 +87,23 @@ class ProviderSerializer(serializers.ModelSerializer):
             project.save()
 
         return instance
+
+
+class ProviderSummarySerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(allow_null=True, required=False)
+    locality = LocalitySerializer()
+
+    class Meta(ProviderSerializer.Meta):
+        fields = (
+            "id",
+            "name",
+            "area",
+            "locality",
+        )
+
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        for field in fields:
+            if field != "id":
+                fields[field].read_only = True
+        return fields

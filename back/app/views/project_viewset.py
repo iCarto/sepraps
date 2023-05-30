@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import permissions, status, viewsets
+from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -204,7 +204,7 @@ class ProjectViewSet(ModelListViewSet):
     @action(
         detail=True,
         methods=["get", "put"],
-        url_path="questionnaire_instances/(?P<questionnaire_code>\w+)",
+        url_path="questionnaire_instances/(?P<questionnaire_code>\w+)",  # noqa: W605
     )
     def questionnaire_instances(self, request, questionnaire_code, pk=None):
         """

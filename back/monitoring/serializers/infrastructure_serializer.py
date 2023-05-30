@@ -5,7 +5,7 @@ from app.models.location import Locality
 from app.serializers.locality_serializer import LocalitySerializer
 
 
-class InfraestructureSerializer(serializers.ModelSerializer):
+class InfrastructureSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     locality = serializers.PrimaryKeyRelatedField(
         queryset=Locality.objects.all(), required=False

@@ -4,7 +4,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from app.views import events_views, notifications_views, stats_views
-from app.views.constructrion_contract_viewset import ConstructionContractViewSet
+from app.views.construction_contract_viewset import ConstructionContractViewSet
 from app.views.contact_viewset import ContactViewSet
 from app.views.contractor_viewset import ContractorViewSet
 from app.views.domain_entry_viewset import DomainEntryViewSet

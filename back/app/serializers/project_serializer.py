@@ -12,7 +12,7 @@ from app.models.provider import Provider
 from app.serializers.construction_contract_serializer import (
     ConstructionContractSummarySerializer,
 )
-from app.serializers.infraestructure_serializer import InfraestructureSerializer
+from app.serializers.infrastructure_serializer import InfrastructureSerializer
 from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
 from app.serializers.provider_serializer import ProviderSerializer

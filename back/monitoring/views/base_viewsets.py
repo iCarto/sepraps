@@ -1,4 +1,4 @@
-from monitoring.util import is_geojson_request
+from app.util import is_geojson_request
 from monitoring.views.mixin import ListPaginationMixin, ListSummaryMixin
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination

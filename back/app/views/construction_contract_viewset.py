@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+from rest_framework import permissions
 
 from app.models.construction_contract import ConstructionContract
 from app.models.domain_entry import DomainEntry
@@ -10,6 +10,8 @@ from app.serializers.construction_contract_serializer import (
     ConstructionContractShortSerializer,
     ConstructionContractSummarySerializer,
 )
+from monitoring.views.base_viewsets import ModelListViewSet
+from rest_framework.pagination import PageNumberPagination
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
@@ -36,8 +38,10 @@ class ConstructionContractFilter(filters.FilterSet):
         fields = ("search",)
 
 
-class ConstructionContractViewSet(viewsets.ModelViewSet):
+class ConstructionContractViewSet(ModelListViewSet):
     serializer_class = ConstructionContractSerializer
+    pagination_class = PageNumberPagination()
+    permission_classes = [permissions.DjangoModelPermissions]
     filter_backends = [DjangoFilterBackend]
     filterset_class = ConstructionContractFilter
 
