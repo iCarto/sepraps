@@ -17,6 +17,7 @@ import {
     ViewProjectPanel,
     AddProjectLinkedLocalitiesPanel,
     UpdateProjectQuestionnaireInstancePanel,
+    ViewProjectsSupervisionPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -122,6 +123,11 @@ const projectRoutes = [
                 />
             </Route>
         </Route>
+        <Route
+            key="projects-supervision"
+            path="supervision"
+            element={<ViewProjectsSupervisionPage />}
+        ></Route>
     </Route>,
 ];
 
