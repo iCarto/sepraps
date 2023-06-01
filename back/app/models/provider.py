@@ -1,6 +1,6 @@
 from django.db import models
 
-from app.base.base_models import BaseEntityModelMixin
+from app.base.models.base_models import BaseEntityModelMixin
 from app.models.contact import Contact
 from app.models.contact_relationship import ProviderContact
 from app.models.location import Locality

@@ -7,8 +7,10 @@ from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions, status
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
+from app.base.views.base_viewsets import ModelListViewSet
 from app.models.domain_entry import DomainEntry
 from app.models.milestone import PHASE_CHOICES, Milestone
 from app.models.project import Project
@@ -24,9 +26,7 @@ from app.serializers.project_serializer import (
     ProjectSerializer,
     ProjectSummarySerializer,
 )
-from monitoring.views.base_viewsets import ModelListViewSet
 from questionnaires.models.questionnaire import Questionnaire
-from rest_framework.pagination import PageNumberPagination
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 

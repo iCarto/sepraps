@@ -1,5 +1,9 @@
 from rest_framework import serializers
 
+from app.base.serializers.base_serializers import (
+    BaseModelSerializer,
+    BaseSummarySerializer,
+)
 from app.models.location import Locality
 from app.models.project import Project
 from app.models.provider import Provider
@@ -7,8 +11,18 @@ from app.serializers.contact_relationship_serializer import ContactProviderSeria
 from app.serializers.locality_serializer import LocalitySerializer
 
 
-class ProviderSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(allow_null=True, required=False)
+class ProviderSerializer(BaseModelSerializer):
+    class Meta(BaseModelSerializer.Meta):
+        model = Provider
+        fields = BaseModelSerializer.Meta.fields + (
+            "name",
+            "area",
+            "locality",
+            "project",
+            "contacts",
+        )
+        extra_kwargs = {"project": {"write_only": True}}
+
     locality = LocalitySerializer()
     project = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=Project.objects.all(), allow_null=True, required=False
@@ -16,24 +30,6 @@ class ProviderSerializer(serializers.ModelSerializer):
     contacts = ContactProviderSerializer(
         source="providercontact_set", many=True, required=False
     )
-    creation_user = serializers.CharField(
-        source="creation_user.username", required=False
-    )
-
-    class Meta(object):
-        model = Provider
-        fields = (
-            "id",
-            "name",
-            "area",
-            "locality",
-            "project",
-            "contacts",
-            "creation_user",
-            "created_at",
-            "updated_at",
-        )
-        extra_kwargs = {"project": {"write_only": True}}
 
     def create(self, validated_data):
         project = validated_data.pop("project", None)
@@ -89,21 +85,9 @@ class ProviderSerializer(serializers.ModelSerializer):
         return instance
 
 
-class ProviderSummarySerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(allow_null=True, required=False)
+class ProviderSummarySerializer(BaseSummarySerializer):
+    class Meta(BaseSummarySerializer.Meta):
+        model = Provider
+        fields = BaseSummarySerializer.Meta.fields + ("name", "area", "locality")
+
     locality = LocalitySerializer()
-
-    class Meta(ProviderSerializer.Meta):
-        fields = (
-            "id",
-            "name",
-            "area",
-            "locality",
-        )
-
-    def get_fields(self, *args, **kwargs):
-        fields = super().get_fields(*args, **kwargs)
-        for field in fields:
-            if field != "id":
-                fields[field].read_only = True
-        return fields

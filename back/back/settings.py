@@ -267,6 +267,8 @@ CORS_EXPOSE_HEADERS = ["Content-Disposition", "Cache-Control"]
 
 AUTH_USER_MODEL = "users.User"
 
+SILENCED_SYSTEM_CHECKS = ["rest_framework.W001"]
+
 
 if env("SENTRY_DSN"):
     import sentry_sdk
