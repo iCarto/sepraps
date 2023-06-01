@@ -2,11 +2,20 @@ from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 
 from app.base.views.base_viewsets import ModelListAuditViewSet
+from app.base.views.filters import MappedOrderingFilter
 from app.models.provider import Provider
 from app.serializers.provider_serializer import (
     ProviderSerializer,
     ProviderSummarySerializer,
 )
+
+
+class ProviderOrderingFilter(MappedOrderingFilter):
+    ordering_field_mappping = {
+        "locality.name": "locality__name",
+        "locality.district_name": "locality__district__name",
+        "locality.department_name": "locality__department__name",
+    }
 
 
 class ProviderFilter(filters.FilterSet):
@@ -38,5 +47,10 @@ class ProviderViewSet(ModelListAuditViewSet):
     ).order_by("name")
     serializer_class = ProviderSerializer
     summary_serializer_class = ProviderSummarySerializer
-    filter_backends = [DjangoFilterBackend]
     filterset_class = ProviderFilter
+    filter_backends = [DjangoFilterBackend, ProviderOrderingFilter]
+    ordering_fields = [
+        "locality.name",
+        "locality.district_name",
+        "locality.department_name",
+    ]
