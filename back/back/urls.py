@@ -14,7 +14,7 @@ urlpatterns = [
     path("api/documents/", include("documents.urls")),
     path("api/users/", include("users.urls")),
     path("api/questionnaires/", include("questionnaires.urls")),
-    path("api/monitoring/", include("app.urls")),
+    path("api/app/", include("app.urls")),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("gestion/", admin.site.urls),
 ]

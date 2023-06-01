@@ -13,6 +13,7 @@ from app.models.construction_contract import ConstructionContract
 from app.models.infrastructure import Infrastructure
 from app.models.location import Locality
 from app.models.provider import Provider
+from documents.folder_utils import create_folder
 from documents.models import MediaNode
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
@@ -95,13 +96,14 @@ def post_create(sender, instance, created, *args, **kwargs):
     Create project folder structure and project milestones from template
     """
     from app.models.milestone import create_project_milestones
-    from documents.models import create_folder_structure
 
     if not created:
         return
 
     data = {}
-    data_path = os.path.join(settings.BASE_DIR, "app", "data", "project", f"{instance.project_type}.json")
+    data_path = os.path.join(
+        settings.BASE_DIR, "app", "data", "project", f"{instance.project_type}.json"
+    )
     with open(data_path) as f:
         data = json.load(f)
         # settings.MONITORING_TEMPLATES_FOLDER
@@ -109,9 +111,9 @@ def post_create(sender, instance, created, *args, **kwargs):
         # + instance.project_type
         # + ".json",
 
-
-
-    root_folder = create_folder_structure(instance.code, data.get("folders", []))
+    root_folder = create_folder(
+        instance, field="code", created=True, children_data=data.get("folders", [])
+    )
     instance.folder = root_folder
 
     instance.questionnaires.set(

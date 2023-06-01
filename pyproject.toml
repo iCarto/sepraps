@@ -1,3 +1,6 @@
+[tool.pyright]
+executionEnvironments = [{ root = "back" }]
+
 [tool.black]
 line-length = 88
 skip-string-normalization = false

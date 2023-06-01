@@ -77,11 +77,16 @@ def create_folder_children(folder_parent, children):
         create_folder_children(folder_child, folder_child_data.get("children", []))
 
 
-def create_folder_structure(root_path, children_data):
+def create_folder_structure(media_name, storage_path, children_data):
+    parent = None
+    storage_parent_path = storage_path.split("/")[:-1]
+    if storage_parent_path is not None:
+        parent = Folder.objects.filter(media_name=storage_parent_path).first()
     root_folder = Folder(
         media_type="FOLDER",
-        media_name=root_path,
-        storage_path=root_path,
+        media_name=media_name,
+        storage_path=storage_path,
+        parent=parent,
         creation_user=get_user_model().objects.get(username="admin"),
     )
     root_folder.save()
