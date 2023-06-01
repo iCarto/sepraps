@@ -1,16 +1,6 @@
-import {useEffect, useState} from "react";
+import {cloneElement, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-
-import {useAuth} from "base/user/provider";
-import {AuthAction} from "base/user/components";
-import {useNavigateWithReload} from "base/navigation/hooks";
-import {AlertError} from "base/error/components";
-import {ActionsMenu, Spinner} from "base/shared/components";
-import {MenuAction} from "base/ui/menu";
-import {DeleteItemDialog} from "base/delete/components";
-import {TableDownloadButton, TableSortingHead} from "base/table/components";
-import {EntityNoItemsComponent} from "base/entity/components/presentational";
-import {useList} from "base/entity/hooks";
+import useTheme from "@mui/material/styles/useTheme";
 
 import Grid from "@mui/material/Grid";
 import Table from "@mui/material/Table";
@@ -19,45 +9,31 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Pagination from "@mui/material/Pagination";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import LaunchIcon from "@mui/icons-material/Launch";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import {useList} from "base/entity/hooks";
+import {AlertError} from "base/error/components";
+import {TableDownloadButton, TableSortingHead} from "base/table/components";
+import {AuthAction} from "base/user/components";
+import {MenuActions} from "base/ui/menu";
+import {useAuth} from "base/user/provider";
 
-// TO-DO: process.env.REACT_APP_PAGE_SIZE returning NaN even after running install.sh
-// const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
-const pageSize = 20;
+const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
 
-const tableRowStyle = {
-    "&:last-child td, &:last-child th": {
-        border: 0,
-    },
-    paddingRight: "12px",
-    cursor: "pointer",
-};
+console.log("process.env", process.env);
 
 const EntityTable = ({
     columns,
     service,
-    customPaginatedService = null,
-    highlightItems = null,
     selectedElement = null,
     onSelectElement = null,
-    showDetailAction = true,
-    onClickDetailAction = null,
-    showEditAction = true,
-    onClickEditAction = null,
-    showDeleteAction = true,
-    onClickDeleteAction = null,
-    deleteService = null,
+    elementActions = [],
 }) => {
     const {ROLES} = useAuth();
-    const navigate = useNavigateWithReload();
     const location = useLocation();
-    const basePath = location.pathname;
 
     const {
-        elements,
-        setElements,
         filter,
         page,
         setPage,
@@ -69,21 +45,20 @@ const EntityTable = ({
         setOrder,
     } = useList();
 
-    // const [elements, setElements] = useState([]);
+    const [elements, setElements] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const [itemToDelete, setItemToDelete] = useState(null);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
 
-    const noElements = !size && !elements.length;
-    const isFilterEmpty = Object.values(filter).every(value => !value);
+    let theme;
+    theme = useTheme();
 
     useEffect(() => {
+        console.log("calling");
         setLoading(true);
-        const serviceCall = customPaginatedService
-            ? customPaginatedService(filter, page, sort, order)
-            : service.getPaginatedList(filter, page, sort, order);
-        console.log({serviceCall}, {filter});
+        const serviceCall =
+            typeof service === "function"
+                ? service(filter, page, sort, order)
+                : service.getPaginatedList(filter, page, sort, order);
         serviceCall
             .then(data => {
                 setElements(data.results);
@@ -95,7 +70,7 @@ const EntityTable = ({
                 setLoading(false);
                 setError(error);
             });
-    }, [filter, page, sort, order, location.state?.lastRefreshDate]); // eslint-disable-line
+    }, [filter, page, sort, order, location.state?.lastRefreshDate]);
 
     const handleSelectElement = (event, element) => {
         const cellIndex = event.target.cellIndex;
@@ -105,41 +80,6 @@ const EntityTable = ({
             onSelectElement
         ) {
             onSelectElement(element.id);
-        }
-    };
-
-    const handleClickDetail = element => {
-        if (onClickDetailAction) {
-            onClickDetailAction(element);
-        } else {
-            navigate(`${basePath}/${element.id}`);
-        }
-    };
-
-    const handleClickEdit = element => {
-        if (onClickEditAction) {
-            onClickEditAction(element);
-        } else {
-            navigate(`${basePath}/${element.id}/edit`);
-        }
-    };
-
-    const handleClickDelete = element => {
-        setItemToDelete(element);
-        setIsDeleteDialogOpen(true);
-    };
-
-    const handleDelete = () => {
-        if (onClickDeleteAction) {
-            onClickDeleteAction(itemToDelete);
-        } else if (deleteService) {
-            deleteService(itemToDelete.id)
-                .then(() => {
-                    navigate(basePath, true);
-                })
-                .catch(error => {
-                    setError(error);
-                });
         }
     };
 
@@ -154,142 +94,135 @@ const EntityTable = ({
         setPage(newPage);
     };
 
-    return loading ? (
-        <Spinner />
-    ) : noElements ? (
-        <EntityNoItemsComponent isFilterEmpty={isFilterEmpty} />
-    ) : (
+    let noElementsMessage =
+        filter && filter.length === 0
+            ? "No existen elementos para mostrar"
+            : "No se ha encontrado ningún elemento que coincida con su búsqueda. Por favor, intente realizar otra búsqueda o borre los filtros activos.";
+
+    const getNestedAttributeValue = (element, attribute) => {
+        let returnData = element;
+
+        attribute.split(".").forEach(subPath => {
+            returnData = returnData[subPath] || "";
+        });
+
+        return returnData;
+    };
+
+    const getAttributeValue = (element, attribute) => {
+        if (attribute.indexOf(".") >= 0) {
+            return getNestedAttributeValue(element, attribute);
+        }
+        return element[attribute];
+    };
+
+    return (
         <>
-            <AlertError error={error} />
-            <TableContainer sx={{width: "100%"}}>
-                <Table aria-labelledby="Tabla" size="small">
-                    <TableSortingHead
-                        order={order}
-                        attribute={sort}
-                        onRequestSort={handleRequestSort}
-                        headCells={[
-                            ...columns,
-                            {
-                                id: "actions",
-                                width: 5,
-                            },
-                        ]}
-                    />
-                    <TableBody>
-                        {elements.map((element, index) => {
-                            return (
-                                <TableRow
-                                    hover
-                                    key={index}
-                                    sx={tableRowStyle}
-                                    selected={
-                                        selectedElement &&
-                                        selectedElement?.id === element.id
-                                    }
-                                    onClick={event =>
-                                        handleSelectElement &&
-                                        handleSelectElement(event, element)
-                                    }
-                                >
-                                    {columns.map((cellAttribute, index) => {
+            <AlertError error={error} />{" "}
+            {loading ? (
+                <Grid item container justifyContent="center" my={6}>
+                    <CircularProgress size={40} />
+                </Grid>
+            ) : elements && elements.length === 0 ? (
+                <Container sx={{textAlign: "center"}}>
+                    <Typography py={12} sx={{fontStyle: "italic"}}>
+                        {noElementsMessage}
+                    </Typography>
+                </Container>
+            ) : (
+                elements && (
+                    <TableContainer sx={{width: "100%"}}>
+                        <Table
+                            aria-labelledby="Tabla"
+                            size="small"
+                            sx={{tableLayout: "fixed"}}
+                        >
+                            <TableSortingHead
+                                order={order}
+                                attribute={sort}
+                                onRequestSort={handleRequestSort}
+                                headCells={[
+                                    ...columns,
+                                    {
+                                        id: "actions",
+                                        width: 5,
+                                    },
+                                ]}
+                            />
+                            <TableBody>
+                                {elements &&
+                                    elements.map((element, index) => {
                                         return (
-                                            <TableCell
-                                                key={cellAttribute.id}
-                                                sx={
-                                                    highlightItems?.formatFunction(
-                                                        element
-                                                    )
-                                                        ? highlightItems.highlightingStyle
-                                                        : {}
+                                            <TableRow
+                                                hover
+                                                key={index}
+                                                selected={
+                                                    selectedElement === element.id
+                                                }
+                                                onClick={event =>
+                                                    handleSelectElement(event, element)
                                                 }
                                             >
-                                                {cellAttribute.formatFunction
-                                                    ? cellAttribute.formatFunction(
-                                                          element
-                                                      )
-                                                    : element[cellAttribute.id]}
-                                            </TableCell>
+                                                {columns.map((cellAttribute, index) => {
+                                                    return (
+                                                        <TableCell
+                                                            key={cellAttribute.id}
+                                                        >
+                                                            {cellAttribute.formatFunction
+                                                                ? cellAttribute.formatFunction(
+                                                                      element
+                                                                  )
+                                                                : element[
+                                                                      cellAttribute.id
+                                                                  ]}
+                                                        </TableCell>
+                                                    );
+                                                })}
+                                                {elementActions &&
+                                                elementActions.length > 0 ? (
+                                                    <TableCell>
+                                                        <AuthAction roles={[]}>
+                                                            <MenuActions>
+                                                                {elementActions.map(
+                                                                    actionMenu =>
+                                                                        cloneElement(
+                                                                            actionMenu,
+                                                                            {
+                                                                                element,
+                                                                            }
+                                                                        )
+                                                                )}
+                                                            </MenuActions>
+                                                        </AuthAction>
+                                                    </TableCell>
+                                                ) : null}
+                                            </TableRow>
                                         );
                                     })}
-                                    {showDetailAction ||
-                                    showDeleteAction ||
-                                    showEditAction ? (
-                                        <TableCell>
-                                            <AuthAction roles={[]}>
-                                                <ActionsMenu>
-                                                    {showDetailAction && (
-                                                        <MenuAction
-                                                            name="table-view-action"
-                                                            icon={<LaunchIcon />}
-                                                            text="Ir al detalle"
-                                                            itemId={element.id}
-                                                            handleClick={() =>
-                                                                handleClickDetail(
-                                                                    element
-                                                                )
-                                                            }
-                                                        />
-                                                    )}
-                                                    {showEditAction && (
-                                                        <MenuAction
-                                                            name="table-edit-action"
-                                                            icon={<EditIcon />}
-                                                            text="Modificar"
-                                                            itemId={element.id}
-                                                            handleClick={() =>
-                                                                handleClickEdit(element)
-                                                            }
-                                                        />
-                                                    )}
-                                                    {showDeleteAction && (
-                                                        <MenuAction
-                                                            name="table-delete-action"
-                                                            icon={
-                                                                <DeleteIcon color="error" />
-                                                            }
-                                                            text="Eliminar"
-                                                            itemId={element.id}
-                                                            handleClick={() =>
-                                                                handleClickDelete(
-                                                                    element
-                                                                )
-                                                            }
-                                                        />
-                                                    )}
-                                                </ActionsMenu>
-                                            </AuthAction>
-                                        </TableCell>
-                                    ) : null}
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-                {page && (
-                    <Grid container justifyContent="space-between" sx={{mt: 3}}>
-                        <Grid item>
-                            <TableDownloadButton
-                                service={service}
-                                filter={filter}
-                                sort={sort}
-                                order={order}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <Pagination
-                                count={Math.ceil(size / pageSize)}
-                                page={page}
-                                onChange={handleChangePage}
-                            />
-                        </Grid>
-                    </Grid>
-                )}
-            </TableContainer>
-            <DeleteItemDialog
-                isDialogOpen={isDeleteDialogOpen}
-                setIsDialogOpen={setIsDeleteDialogOpen}
-                onDelete={handleDelete}
-            />
+                            </TableBody>
+                        </Table>
+                        {page && (
+                            <Grid container justifyContent="space-between" sx={{mt: 3}}>
+                                <Grid item>
+                                    <TableDownloadButton
+                                        service={service}
+                                        filter={filter}
+                                        sort={sort}
+                                        order={order}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <Pagination
+                                        count={Math.ceil(size / pageSize)}
+                                        page={page}
+                                        onChange={handleChangePage}
+                                    />
+                                </Grid>
+                            </Grid>
+                        )}
+                    </TableContainer>
+                )
+            )}
         </>
     );
 };

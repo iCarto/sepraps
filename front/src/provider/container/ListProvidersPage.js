@@ -1,6 +1,5 @@
 import {ProviderService} from "provider/service";
 import {useProviderTableColumns} from "provider/data";
-import {useProviderLayer} from "provider/geo";
 import {EntityListPage} from "base/entity/components/container";
 import {ProviderFilterForm} from "provider/presentational/form";
 
@@ -9,13 +8,13 @@ const ListProvidersPage = () => {
 
     return (
         <EntityListPage
+            views={["table"]}
+            entityName="Prestadores"
             service={ProviderService}
-            views={["table", "map"]}
-            mapLayer={useProviderLayer}
-            entityName="prestadores"
-            basePath="providers"
             tableColumns={tableColumns}
             filterForm={<ProviderFilterForm />}
+            basePath="providers"
+            subPage={false}
         />
     );
 };

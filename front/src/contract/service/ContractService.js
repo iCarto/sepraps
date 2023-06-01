@@ -10,7 +10,7 @@ export const TEMPLATE = {
     SHORT: "short",
 };
 
-const basePath = "/api/monitoring/constructioncontracts";
+const basePath = "/api/app/constructioncontracts";
 
 const entityService = createEntityService(
     basePath,

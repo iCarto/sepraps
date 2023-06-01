@@ -6,8 +6,8 @@ import {
 } from "financing/model";
 import {AuthApiService} from "base/api/service";
 
-const basePathFinancingFunds = "/api/monitoring/financingfunds";
-const basePathFinancingPrograms = "/api/monitoring/financingprograms";
+const basePathFinancingFunds = "/api/app/financingfunds";
+const basePathFinancingPrograms = "/api/app/financingprograms";
 
 const FinancingService = {
     getFinancingFunds() {

@@ -6,7 +6,7 @@ import {
 } from "provider/model";
 import {createEntityService} from "base/entity/service";
 
-const basePath = "/api/monitoring/providers";
+const basePath = "/api/app/providers";
 
 const entityService = createEntityService(
     basePath,

@@ -1,7 +1,7 @@
 import {createNotifications} from "notification/model";
 import {AuthApiService} from "base/api/service";
 
-const basePath = "/api/monitoring/notifications";
+const basePath = "/api/app/notifications";
 
 const NotificationService = {
     getNotifications() {

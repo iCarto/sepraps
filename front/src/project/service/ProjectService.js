@@ -13,7 +13,7 @@ import {
 } from "questionnaire/model";
 import {createEntityService} from "base/entity/service";
 
-const basePath = "/api/monitoring/projects";
+const basePath = "/api/app/projects";
 
 const entityService = createEntityService(
     basePath,

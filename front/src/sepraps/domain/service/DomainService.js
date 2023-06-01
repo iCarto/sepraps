@@ -1,6 +1,6 @@
 import {AuthApiService} from "base/api/service";
 
-const basePath = "/api/monitoring/domainentries";
+const basePath = "/api/app/domainentries";
 
 const DomainService = {
     getDomain() {
@@ -22,6 +22,7 @@ const DomainService = {
                     return a["ordering"] - b["ordering"];
                 });
             });
+            console.log({domain});
             return domain;
         });
     },

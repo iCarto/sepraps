@@ -6,7 +6,7 @@ import {
 } from "contractor/model";
 import {AuthApiService} from "base/api/service";
 
-const basePath = "/api/monitoring/contractors";
+const basePath = "/api/app/contractors";
 
 const ContractorService = {
     getAll() {

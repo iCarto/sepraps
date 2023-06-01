@@ -1,7 +1,7 @@
 import {createMilestone, milestone_api_adapter} from "milestone/model";
 import {AuthApiService} from "base/api/service";
 
-const basePath = "/api/monitoring/milestones";
+const basePath = "/api/app/milestones";
 
 const MilestoneService = {
     get(id) {

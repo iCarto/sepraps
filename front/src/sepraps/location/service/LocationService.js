@@ -1,6 +1,6 @@
 import {AuthApiService} from "base/api/service";
 
-const localitiesBasePath = "/api/monitoring/localities";
+const localitiesBasePath = "/api/app/localities";
 
 const LocationService = {
     getAdministrativeDivisions() {

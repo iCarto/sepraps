@@ -1,35 +1,33 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
-import {useAuth} from "base/user/provider";
-import {useList} from "base/entity/hooks";
-import {useNavigateWithReload} from "base/navigation/hooks";
+import Grid from "@mui/material/Grid";
+import {Stack} from "@mui/material";
 import {
     EntityCardsList,
     EntityChangeView,
     EntityCreateButton,
-    EntityTable,
     EntityListMap,
-} from "base/entity/components/presentational";
-import {EntityFilterForm} from "base/entity/components/form";
+    EntityTable,
+} from "../presentational";
+import {useAuth} from "base/user/provider";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {useList} from "base/entity/hooks";
 import {PageLayout} from "base/ui/main";
 import {PaperContainer} from "base/shared/components";
-import {AuthAction} from "base/user/components";
-
-import Grid from "@mui/material/Grid";
+import {EntityFilterForm} from "../form";
 
 const EntityListPage = ({
     views = ["table", "map"],
     entityName,
     service,
-    basePath = "",
-    tableColumns = [],
-    highlightItems = null,
+    tableColumns,
     card = null,
     mapLayer = null,
     filterForm = null,
-    deleteService = null,
     createButton = true,
+    elementActions = null,
+    basePath = null,
     subPage = true,
 }) => {
     const {ROLES} = useAuth();
@@ -65,13 +63,9 @@ const EntityListPage = ({
                 <EntityTable
                     columns={tableColumns}
                     service={service}
-                    highlightItems={highlightItems}
                     selectedElement={selectedElement}
                     onSelectElement={handleSelectElement}
-                    showDetailAction={false}
-                    showEditAction={false}
-                    showDeleteAction={false}
-                    deleteService={deleteService}
+                    elementActions={elementActions}
                 />
             );
         }
@@ -91,38 +85,20 @@ const EntityListPage = ({
     return (
         filter && (
             <PageLayout subPage={subPage}>
-                <PaperContainer justifyContent="space-between" alignItems="center">
-                    <Grid
-                        item
-                        container
-                        spacing={2}
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                    >
-                        <Grid item xs={8} role="form">
+                <PaperContainer>
+                    <Grid item container alignItems="center" xs={12}>
+                        <Grid item xs={6}>
                             {filterForm || <EntityFilterForm entityName={entityName} />}
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            xs={4}
-                            spacing={1}
-                            direction={{xs: "column", lg: "row"}}
-                            justifyContent="flex-end"
-                            alignItems={{xs: "flex-end", lg: "flex-start"}}
-                        >
-                            {createButton ? (
-                                <Grid item>
-                                    <AuthAction roles={[]}>
-                                        <EntityCreateButton basePath={basePath} />
-                                    </AuthAction>
-                                </Grid>
-                            ) : null}
-                            {views.length ? (
-                                <Grid item>
+                        <Grid item container xs={6} justifyContent="flex-end">
+                            <Stack direction="row" spacing={2}>
+                                {createButton ? (
+                                    <EntityCreateButton basePath={basePath} />
+                                ) : null}
+                                {views.length > 1 ? (
                                     <EntityChangeView views={views} />
-                                </Grid>
-                            ) : null}
+                                ) : null}
+                            </Stack>
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sx={{mt: 3}}>
