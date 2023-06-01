@@ -22,7 +22,7 @@ const EntityCardsList = ({service, entityCard, onSelectElement}) => {
     useEffect(() => {
         console.log({filter, page, order});
         setLoading(true);
-        const serviceCall = service.getAll(filter, page, order);
+        const serviceCall = service.getPaginatedList(filter, page, order);
         serviceCall.then(data => {
             console.log({data});
             setElements(data.results);

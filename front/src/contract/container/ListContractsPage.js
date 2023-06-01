@@ -9,13 +9,14 @@ const ListContractsPage = () => {
 
     return (
         <EntityListPage
+            views={["table", "list"]}
+            entityName="Contratos"
             service={ContractService}
-            views={["list", "table"]}
-            entityName="contratos"
-            basePath="contracts"
             tableColumns={tableColumns}
             filterForm={<ContractFilterForm />}
+            basePath="contracts"
             card={ContractCard}
+            subPage={false}
         />
     );
 };

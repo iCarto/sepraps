@@ -96,7 +96,6 @@ class ProjectViewSet(ModelListViewSet):
         "construction_contract",
     )
     serializer_class = ProjectSerializer
-    pagination_class = PageNumberPagination()
     permission_classes = [permissions.DjangoModelPermissions]
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter

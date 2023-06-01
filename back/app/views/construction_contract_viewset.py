@@ -40,7 +40,6 @@ class ConstructionContractFilter(filters.FilterSet):
 
 class ConstructionContractViewSet(ModelListViewSet):
     serializer_class = ConstructionContractSerializer
-    pagination_class = PageNumberPagination()
     permission_classes = [permissions.DjangoModelPermissions]
     filter_backends = [DjangoFilterBackend]
     filterset_class = ConstructionContractFilter
