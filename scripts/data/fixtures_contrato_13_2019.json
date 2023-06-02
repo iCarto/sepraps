@@ -188,7 +188,6 @@
         "fields": {
             "name": "Junta de Saneamiento Loma Florida Costa Florida",
             "area": "rural",
-            "locality": "0104330",
             "created_by": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_by": 1,
@@ -306,7 +305,6 @@
         "fields": {
             "name": "Junta de Saneamiento Virgen del Camino",
             "area": "rural",
-            "locality": "0104200",
             "contacts": [],
             "created_by": 1,
             "created_at": "2019-12-01T00:00:00Z",
@@ -349,7 +347,6 @@
         "fields": {
             "name": "Junta de Saneamiento Ycua Porá - Cañada Lourdes",
             "area": "rural",
-            "locality": "0104360",
             "contacts": [],
             "created_by": 1,
             "created_at": "2019-12-01T00:00:00Z",
@@ -392,7 +389,6 @@
         "fields": {
             "name": "Junta de Saneamiento San Miguel del Norte",
             "area": "rural",
-            "locality": "0218880",
             "contacts": [],
             "created_by": 1,
             "created_at": "2019-12-01T00:00:00Z",

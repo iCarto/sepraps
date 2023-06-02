@@ -6,11 +6,9 @@ from app.base.serializers.base_serializers import (
     BaseModelSerializer,
     BaseSummarySerializer,
 )
-from app.models.location import Locality
 from app.models.project import Project
 from app.models.provider import Provider
 from app.serializers.contact_relationship_serializer import ContactProviderSerializer
-from app.serializers.locality_serializer import LocalitySerializer
 
 
 class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
@@ -19,13 +17,18 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
         fields = BaseModelSerializer.Meta.fields + (
             "name",
             "area",
-            "locality",
+            "type",
+            "number_of_members",
+            "number_of_women",
+            "is_legalized",
+            "legalization_date",
+            "legal_status",
+            "legal_registry_code",
             "project",
             "contacts",
         )
         extra_kwargs = {"project": {"write_only": True}}
 
-    locality = LocalitySerializer()
     project = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=Project.objects.all(), allow_null=True, required=False
     )
@@ -33,20 +36,18 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
         source="providercontact_set", many=True, required=False
     )
 
-    domain_fields = [BaseDomainField("area", DomainCategoryChoices.area_prestador)]
+    domain_fields = [
+        BaseDomainField("area", DomainCategoryChoices.provider_area),
+        BaseDomainField("type", DomainCategoryChoices.provider_type),
+        BaseDomainField("is_legalized", DomainCategoryChoices.yes_no_domain),
+        BaseDomainField("legal_status", DomainCategoryChoices.legal_status),
+    ]
 
     def create(self, validated_data):
         project = validated_data.pop("project", None)
         contacts = validated_data.pop("providercontact_set", None)
 
-        locality_data = validated_data.pop("locality", None)
-        locality = None
-        if locality_data.get("code"):
-            locality = Locality.objects.get(pk=locality_data["code"])
-        else:
-            locality = self.fields["locality"].create(locality_data)
-
-        provider = Provider.objects.create(locality=locality, **validated_data)
+        provider = Provider.objects.create(**validated_data)
 
         # calling to ContactProviderListSerializer.update() we can make all modifications
         # for contacts inside the provider
@@ -68,14 +69,6 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
         if contacts:
             self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
 
-        locality_data = validated_data.pop("locality", None)
-        locality = None
-        if locality_data.get("code"):
-            locality = Locality.objects.get(pk=locality_data["code"])
-        else:
-            locality = self.fields["locality"].create(locality_data)
-        instance.locality = locality
-
         # nested entities properties were removed in previous methods
         for key in validated_data.keys():
             setattr(instance, key, validated_data.get(key, getattr(instance, key)))
@@ -92,8 +85,15 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
 class ProviderSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
     class Meta(BaseSummarySerializer.Meta):
         model = Provider
-        fields = BaseSummarySerializer.Meta.fields + ("name", "area", "locality")
+        fields = BaseSummarySerializer.Meta.fields + (
+            "name",
+            "area",
+            "type",
+            "is_legalized",
+        )
 
-    locality = LocalitySerializer()
-
-    domain_fields = [BaseDomainField("area", DomainCategoryChoices.area_prestador)]
+    domain_fields = [
+        BaseDomainField("area", DomainCategoryChoices.provider_area),
+        BaseDomainField("type", DomainCategoryChoices.provider_type),
+        BaseDomainField("is_legalized", DomainCategoryChoices.yes_no_domain),
+    ]

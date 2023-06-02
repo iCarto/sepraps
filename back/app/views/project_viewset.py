@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
-from app.models.milestone import PHASE_CHOICES, Milestone
+from app.models.milestone import Milestone
 from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
 from app.serializers.contact_relationship_serializer import (
@@ -88,9 +88,6 @@ class ProjectViewSet(ModelListViewSet):
         "main_infrastructure__locality__department",
         "main_infrastructure__locality__district",
         "provider",
-        "provider__locality",
-        "provider__locality__department",
-        "provider__locality__district",
         "construction_contract",
     )
     serializer_class = ProjectSerializer
