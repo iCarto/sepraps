@@ -1,7 +1,10 @@
 import {useOutletContext} from "react-router-dom";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
-import {ProviderGeneralDataSection} from "provider/presentational/section";
+import {
+    ProviderGeneralDataSection,
+    ProviderLegalDataSection,
+} from "provider/presentational/section";
 
 const ViewProviderSummarySubPage = () => {
     let provider;
@@ -9,6 +12,7 @@ const ViewProviderSummarySubPage = () => {
 
     const sections = [
         <ProviderGeneralDataSection provider={provider} />,
+        <ProviderLegalDataSection provider={provider} />,
         <EntityAuditSection entity={provider} />,
     ];
 

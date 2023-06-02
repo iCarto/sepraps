@@ -7,3 +7,4 @@ export {
 export {default as ProviderFormSearch} from "./ProviderFormSearch";
 export {default as ProviderModificationForm} from "./ProviderModificationForm";
 export {default as ProviderSearchAutocomplete} from "./ProviderSearchAutocomplete";
+export {default as ProviderFormLegalDataFields} from "./ProviderFormLegalDataFields";

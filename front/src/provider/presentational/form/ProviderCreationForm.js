@@ -1,11 +1,24 @@
-import {ProviderFormGeneralDataFields} from ".";
+import {
+    ProviderFormGeneralDataFields,
+    ProviderFormLegalDataFields,
+} from "provider/presentational/form";
+import {FormSection} from "base/form/components";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 
 const ProviderCreationForm = ({onSubmit, onCancel = null}) => {
     return (
         <>
-            <ProviderFormGeneralDataFields orientation={onCancel ? "row" : "column"} />
+            <FormSection title="Información general">
+                <ProviderFormGeneralDataFields
+                    orientation={onCancel ? "row" : "column"}
+                />
+            </FormSection>
+            <FormSection title="Datos legales">
+                <ProviderFormLegalDataFields
+                    orientation={onCancel ? "row" : "column"}
+                />
+            </FormSection>
             <Grid container justifyContent="center" sx={{mt: 2}}>
                 {onCancel && (
                     <Button sx={{ml: 2}} onClick={onCancel}>

@@ -6,7 +6,6 @@ const SelectProviderDropDown = ({provider}) => {
     const getDropdownItemContent = eachProvider => {
         return (
             <Stack>
-                <Typography>{eachProvider.locality.name}</Typography>
                 <Typography variant="caption" sx={{ml: 1}}>
                     {eachProvider.name}
                 </Typography>

@@ -3,36 +3,22 @@ export function useProviderTableColumns() {
         {
             id: "name",
             label: "Nombre",
-            width: 30,
-        },
-        {
-            id: "locality.name",
-            label: "Localidad",
-            width: 20,
-            formatFunction: element => {
-                return element.locality.name;
-            },
-        },
-        {
-            id: "locality.district_name",
-            label: "Distrito",
-            width: 20,
-            formatFunction: element => {
-                return element.locality.district_name;
-            },
-        },
-        {
-            id: "locality.department_name",
-            label: "Departamento",
-            width: 20,
-            formatFunction: element => {
-                return element.locality.department_name;
-            },
+            width: 45,
         },
         {
             id: "area_label",
             label: "Área",
-            width: 10,
+            width: 15,
+        },
+        {
+            id: "type_label",
+            label: "Tipo",
+            width: 25,
+        },
+        {
+            id: "is_legalized_label",
+            label: "Legalmente constituida",
+            width: 15,
         },
     ];
 

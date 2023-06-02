@@ -3,7 +3,6 @@ import {FormProvider, useForm} from "react-hook-form";
 import {ProviderCreationForm, ProviderModificationForm} from ".";
 import {FormUtil} from "base/form/utilities";
 import {EntityForm} from "base/entity/components/form";
-import {LocationProvider} from "sepraps/location/provider";
 import {DomainProvider} from "sepraps/domain/provider";
 
 const ProviderForm = ({
@@ -16,15 +15,13 @@ const ProviderForm = ({
         id: FormUtil.getFormValue(provider?.id),
         name: FormUtil.getFormValue(provider?.name),
         area: FormUtil.getFormValue(provider?.area),
-        locality: {
-            non_existent: false,
-            code: FormUtil.getFormValue(provider?.locality.code),
-            name: FormUtil.getFormValue(provider?.locality.name),
-            district: FormUtil.getFormValue(provider?.locality.district),
-            district_name: FormUtil.getFormValue(provider?.locality.district_name),
-            department: FormUtil.getFormValue(provider?.locality.department),
-            department_name: FormUtil.getFormValue(provider?.locality.department_name),
-        },
+        type: FormUtil.getFormValue(provider?.type),
+        number_of_members: FormUtil.getFormValue(provider?.number_of_members),
+        number_of_women: FormUtil.getFormValue(provider?.number_of_women),
+        is_legalized: FormUtil.getFormValue(provider?.is_legalized),
+        legalization_date: FormUtil.getFormValue(provider?.legalization_date),
+        legal_status: FormUtil.getFormValue(provider?.legal_status),
+        legal_registry_code: FormUtil.getFormValue(provider?.legal_registry_code),
     };
 
     const formMethods = useForm({
@@ -36,16 +33,14 @@ const ProviderForm = ({
         onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
-            area: FormUtil.getFormValue(data.area),
-            locality: {
-                non_existent: false,
-                code: FormUtil.getFormValue(data.locality.code),
-                name: FormUtil.getFormValue(data.locality.name),
-                district: FormUtil.getFormValue(data.locality.district),
-                district_name: FormUtil.getFormValue(data.locality.district_name),
-                department: FormUtil.getFormValue(data.locality.department),
-                department_name: FormUtil.getFormValue(data.locality.department_name),
-            },
+            area: FormUtil.getDataValue(data.area),
+            type: FormUtil.getDataValue(data?.type),
+            number_of_members: FormUtil.getDataValue(data?.number_of_members),
+            number_of_women: FormUtil.getDataValue(data?.number_of_women),
+            is_legalized: FormUtil.getDataValue(data?.is_legalized),
+            legalization_date: FormUtil.getDataValue(data?.legalization_date),
+            legal_status: FormUtil.getDataValue(data?.legal_status),
+            legal_registry_code: FormUtil.getDataValue(data?.legal_registry_code),
         });
     };
 
@@ -54,22 +49,20 @@ const ProviderForm = ({
     };
 
     return (
-        <LocationProvider>
-            <DomainProvider>
-                <FormProvider {...formMethods}>
-                    {updatedSection ? (
-                        <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
-                            <ProviderModificationForm section={updatedSection} />
-                        </EntityForm>
-                    ) : (
-                        <ProviderCreationForm
-                            onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                            onCancel={onCancel ? onFormCancel : null}
-                        />
-                    )}
-                </FormProvider>
-            </DomainProvider>
-        </LocationProvider>
+        <DomainProvider>
+            <FormProvider {...formMethods}>
+                {updatedSection ? (
+                    <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
+                        <ProviderModificationForm section={updatedSection} />
+                    </EntityForm>
+                ) : (
+                    <ProviderCreationForm
+                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onCancel={onCancel ? onFormCancel : null}
+                    />
+                )}
+            </FormProvider>
+        </DomainProvider>
     );
 };
 

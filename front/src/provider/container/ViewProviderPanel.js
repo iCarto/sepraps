@@ -25,15 +25,33 @@ const ViewProviderPanel = () => {
             <EntityViewPanel onClickDetailButton={handleClickDetail} title="Prestador">
                 <SectionCard title={provider.name}>
                     <SectionField label="Nombre" value={provider.name} />
-                    <SectionField label="Localidad" value={provider.locality.name} />
+                    <SectionField label="Área" value={provider.area_label} />
+                    <SectionField label="Tipo" value={provider.type_label} />
                     <SectionField
-                        label="Distrito"
-                        value={provider.locality.district_name}
+                        label="Nº miembros"
+                        value={provider.number_of_members}
                     />
+                    <SectionField label="Nº mujeres" value={provider.number_of_women} />
                     <SectionField
-                        label="Departamento"
-                        value={provider.locality.department_name}
+                        label="Legalmente constituida"
+                        value={provider.is_legalized_label}
                     />
+                    {provider.is_legalized ? (
+                        <>
+                            <SectionField
+                                label="Fecha de legalización"
+                                value={provider.legalization_date}
+                            />
+                            <SectionField
+                                label="Naturaleza jurídica"
+                                value={provider.legal_status_label}
+                            />
+                            <SectionField
+                                label="Nº personería jurídica/registro"
+                                value={provider.legal_registry_code}
+                            />
+                        </>
+                    ) : null}
                 </SectionCard>
             </EntityViewPanel>
         )
