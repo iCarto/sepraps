@@ -1,14 +1,8 @@
 import {contacts_api_adapter, createContacts} from "contact/model";
-import {createLocality, locality_api_adapter} from "location/model";
 
 class Providers extends Array {}
 
 const provider_api_adapter = provider => {
-    if (provider["locality"]) {
-        provider["locality"] = createLocality(
-            locality_api_adapter(provider["locality"])
-        );
-    }
     if (provider["contacts"]) {
         provider["contacts"] = createContacts(
             contacts_api_adapter(provider["contacts"])
@@ -18,9 +12,10 @@ const provider_api_adapter = provider => {
 };
 
 const provider_view_adapter = provider => {
-    delete provider["creation_user"];
+    delete provider["created_by"];
     delete provider["created_at"];
     delete provider["updated_at"];
+    delete provider["updated_by"];
 
     return provider;
 };
@@ -38,25 +33,45 @@ const createProvider = ({
     id = null,
     name = "",
     area = "",
-    area_label = null,
-    locality = createLocality(),
+    area_label = "",
+    type = "",
+    type_label = "",
+    number_of_members = null,
+    number_of_women = null,
+    is_legalized = false,
+    is_legalized_label = false,
+    legalization_date = null,
+    legal_status = "",
+    legal_status_label = "",
+    legal_registry_code = "",
     project = null, // project id
     contacts = [],
-    creation_user = "",
+    created_by = "",
     created_at = null,
     updated_at = null,
+    updated_by = "",
 } = {}) => {
     const publicApi = {
         id,
         name,
         area,
+        type,
         area_label,
-        locality,
+        type_label,
+        number_of_members,
+        number_of_women,
+        is_legalized,
+        is_legalized_label,
+        legalization_date,
+        legal_status,
+        legal_status_label,
+        legal_registry_code,
         project,
         contacts,
-        creation_user,
+        created_by,
         created_at,
         updated_at,
+        updated_by,
     };
 
     return Object.freeze(publicApi);
