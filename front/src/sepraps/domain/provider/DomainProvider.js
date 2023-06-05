@@ -5,11 +5,14 @@ import {FinancingService} from "financing/service";
 let DomainContext = createContext(null);
 
 export default function DomainProvider({children}) {
+    const [yesNoDomain, setYesNoDomain] = useState([]);
     const [projectTypes, setProjectTypes] = useState([]);
     const [projectClasses, setProjectClasses] = useState([]);
     const [contactPosts, setContactPosts] = useState([]);
     const [contractorTypes, setContractorTypes] = useState([]);
-    const [areas, setAreas] = useState([]);
+    const [providerAreas, setProviderAreas] = useState([]);
+    const [providerTypes, setProviderTypes] = useState([]);
+    const [providerLegalStatus, setProviderLegalStatus] = useState([]);
 
     useEffect(() => {
         Promise.all([
@@ -18,24 +21,33 @@ export default function DomainProvider({children}) {
             FinancingService.getFinancingPrograms(),
         ]).then(([domain]) => {
             const {
+                dominiosino,
                 project_type,
                 project_class,
-                area_prestador,
                 contact_post,
                 contractor_type,
+                area_prestador,
+                tipo_prestador,
+                naturaleza_juridica,
             } = domain;
+            setYesNoDomain(dominiosino);
             setProjectTypes(project_type);
             setProjectClasses(project_class);
-            setAreas(area_prestador);
+            setProviderAreas(area_prestador);
+            setProviderTypes(tipo_prestador);
+            setProviderLegalStatus(naturaleza_juridica);
             setContactPosts(contact_post);
             setContractorTypes(contractor_type);
         });
     }, []);
 
     let value = {
+        yesNoDomain,
         projectTypes,
         projectClasses,
-        areas,
+        providerAreas,
+        providerTypes,
+        providerLegalStatus,
         contactPosts,
         contractorTypes,
     };
