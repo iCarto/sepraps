@@ -10,7 +10,7 @@ const ContactSearchAutocomplete = ({allowedPosts = null, handleSelect}) => {
             <Stack>
                 <Typography>{option.name}</Typography>
                 <Typography variant="caption" sx={{ml: 1}}>
-                    {option.post_name}
+                    {option.post_label}
                 </Typography>
                 <Typography variant="caption" sx={{ml: 1}}>
                     {option.phone} - {option.email}

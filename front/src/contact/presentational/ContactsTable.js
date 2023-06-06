@@ -74,7 +74,7 @@ const ContactsTable = ({
                         return (
                             <TableRow hover key={index} sx={tableRowStyle}>
                                 <TableCell>{contact.name}</TableCell>
-                                <TableCell>{contact.post_name}</TableCell>
+                                <TableCell>{contact.post_label}</TableCell>
                                 <TableCell>{contact.gender_name}</TableCell>
                                 <TableCell>{contact.phone}</TableCell>
                                 <TableCell>{contact.email}</TableCell>

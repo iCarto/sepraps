@@ -46,7 +46,7 @@ const UpdateContractContractorContactPanel = () => {
                     id: data.id,
                     name: data.name,
                     post: data.post,
-                    post_name: data.post_name,
+                    post_label: data.post_label,
                     gender: data.gender,
                     phone: data.phone,
                     email: data.email,

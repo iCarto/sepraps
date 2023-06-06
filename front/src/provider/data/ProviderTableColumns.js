@@ -30,7 +30,7 @@ export function useProviderTableColumns() {
             },
         },
         {
-            id: "area",
+            id: "area_label",
             label: "Área",
             width: 10,
         },

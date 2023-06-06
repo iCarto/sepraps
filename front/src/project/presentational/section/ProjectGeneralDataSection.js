@@ -81,7 +81,7 @@ const ProjectGeneralDataSection = ({project}) => {
                         <Box sx={imgBoxStyle}>
                             <ProjectTypeIcon
                                 projectType={project?.project_type}
-                                projectTypeName={project?.project_type_name}
+                                projectTypeName={project?.project_type_label}
                                 size="medium"
                             />
                         </Box>
@@ -104,11 +104,11 @@ const ProjectGeneralDataSection = ({project}) => {
                     <SectionField label="Código" value={project?.code} />
                     <SectionField
                         label="Tipo de proyecto"
-                        value={project?.project_type_name}
+                        value={project?.project_type_label}
                     />
                     <SectionField
                         label="Clase de proyecto"
-                        value={project?.project_class_name}
+                        value={project?.project_class_label}
                     />
                     <SectionField label="Descripción" value={project?.description} />
                     <SectionField

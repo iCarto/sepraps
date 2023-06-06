@@ -51,7 +51,7 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                 <Box sx={projectTypeIconBoxStyle}>
                     <ProjectTypeIcon
                         projectType={project.project_type}
-                        projectTypeName={project.project_type_name}
+                        projectTypeName={project.project_type_label}
                         size="medium"
                     />
                 </Box>
@@ -66,10 +66,10 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                         }}
                     />
                 )}
-                <Tooltip title={`Clase: ${project.project_class_name}`}>
+                <Tooltip title={`Clase: ${project.project_class_label}`}>
                     <Box sx={projectClassBoxStyle}>
                         <Typography variant="button">
-                            {project.project_class_name}
+                            {project.project_class_label}
                         </Typography>
                     </Box>
                 </Tooltip>

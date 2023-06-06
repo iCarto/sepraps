@@ -38,6 +38,7 @@ const createProvider = ({
     id = null,
     name = "",
     area = "",
+    area_label = null,
     locality = createLocality(),
     project = null, // project id
     contacts = [],
@@ -49,6 +50,7 @@ const createProvider = ({
         id,
         name,
         area,
+        area_label,
         locality,
         project,
         contacts,

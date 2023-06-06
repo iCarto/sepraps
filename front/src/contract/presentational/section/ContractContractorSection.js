@@ -68,7 +68,7 @@ const ContractContractorSection = ({contract}) => {
                     <SectionField label="Nombre" value={contractor?.name} />
                     <SectionField
                         label="Tipo"
-                        value={contractor?.contractor_type_name}
+                        value={contractor?.contractor_type_label}
                     />
                     <SectionField label="Dirección" value={contractor?.address} />
                     <SectionField label="Celular" value={contractor?.phone} />

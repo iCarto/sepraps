@@ -8,7 +8,7 @@ function useSearch(initialSearchTextValue) {
         return [
             item.name,
             item.post,
-            item.post_name,
+            item.post_label,
             item.email,
             item.department_name,
             item.district_name,
