@@ -1,6 +1,6 @@
 [
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "project_type",
@@ -9,7 +9,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "project_class",
@@ -18,7 +18,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "project_class",
@@ -27,7 +27,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "project_class",
@@ -36,25 +36,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
-        "pk": null,
-        "fields": {
-            "category": "provider_area",
-            "key": "rural",
-            "value": "Rural"
-        }
-    },
-    {
-        "model": "app.DomainEntry",
-        "pk": null,
-        "fields": {
-            "category": "provider_area",
-            "key": "urban",
-            "value": "Urbana"
-        }
-    },
-    {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -63,7 +45,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -72,7 +54,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -81,7 +63,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -90,7 +72,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -99,7 +81,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -108,7 +90,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -117,7 +99,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -126,7 +108,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -135,7 +117,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -144,7 +126,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -153,7 +135,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -162,7 +144,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contact_post",
@@ -171,7 +153,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contractor_type",
@@ -180,7 +162,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contractor_type",
@@ -189,7 +171,7 @@
         }
     },
     {
-        "model": "app.DomainEntry",
+        "model": "domains.domainentry",
         "pk": null,
         "fields": {
             "category": "contractor_type",

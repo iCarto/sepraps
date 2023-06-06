@@ -1,7 +1,8 @@
 from django.contrib import admin
+from domains import models
 
 
-class DomainEntryAdmin(admin.ModelAdmin):
+class DomainAdmin(admin.ModelAdmin):
     fields = ("category", "key", "value", "ordering")
     list_display = ("category", "key", "value", "ordering")
     list_display_links = ("key", "value")
@@ -12,3 +13,6 @@ class DomainEntryAdmin(admin.ModelAdmin):
         if obj is None:
             return []
         return ["category", "key"]
+
+
+admin.site.register(models.DomainEntry, DomainAdmin)

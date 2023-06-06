@@ -1,3 +1,5 @@
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.contact import Contact
@@ -6,7 +8,6 @@ from app.models.contact_relationship import (
     ContractorContact,
     ProviderContact,
 )
-from app.models.domain_entry import dominio_get_value
 from app.serializers.contact_serializer import ContactSerializer
 
 
@@ -57,10 +58,9 @@ class ContactRelationshipListSerializer(serializers.ListSerializer):
         return ret
 
 
-class ContactRelationshipSerializer(serializers.ModelSerializer):
+class ContactRelationshipSerializer(BaseDomainMixin, serializers.ModelSerializer):
     id = serializers.IntegerField(source="contact.id", allow_null=True)
     name = serializers.CharField(source="contact.name")
-    post_name = serializers.SerializerMethodField()
     gender = serializers.CharField(source="contact.gender")
     gender_name = serializers.SerializerMethodField()
     phone = serializers.CharField(
@@ -80,7 +80,6 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "post",
-            "post_name",
             "gender",
             "gender_name",
             "phone",
@@ -90,14 +89,13 @@ class ContactRelationshipSerializer(serializers.ModelSerializer):
         )
         list_serializer_class = ContactRelationshipListSerializer
 
-    def get_post_name(self, obj):
-        return dominio_get_value(obj.post, self.context.get("domain"))
-
     def get_gender_name(self, obj):
         return obj.contact.get_gender_name()
 
     def get_is_staff(self, obj):
         return obj.contact.user is not None
+
+    domain_fields = [BaseDomainField("post", DomainCategoryChoices.contact_post)]
 
 
 class ContactProviderListSerializer(ContactRelationshipListSerializer):

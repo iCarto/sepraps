@@ -1,15 +1,14 @@
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.construction_contract import ConstructionContract
 from app.models.contractor import Contractor
-from app.models.domain_entry import dominio_get_value
 from app.serializers.contact_relationship_serializer import ContactContractorSerializer
-from app.serializers.contact_serializer import ContactSerializer
 
 
-class ContractorSerializer(serializers.ModelSerializer):
+class ContractorSerializer(BaseDomainMixin, serializers.ModelSerializer):
     id = serializers.IntegerField(allow_null=True, required=False)
-    contractor_type_name = serializers.SerializerMethodField()
     contract = serializers.PrimaryKeyRelatedField(
         write_only=True, queryset=ConstructionContract.objects.all(), required=False
     )
@@ -23,7 +22,6 @@ class ContractorSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "contractor_type",
-            "contractor_type_name",
             "address",
             "phone",
             "email",
@@ -40,8 +38,9 @@ class ContractorSerializer(serializers.ModelSerializer):
             "contract": {"write_only": True},
         }
 
-    def get_contractor_type_name(self, obj):
-        return dominio_get_value(obj.contractor_type, self.context.get("domain"))
+    domain_fields = [
+        BaseDomainField("contractor_type", DomainCategoryChoices.contractor_type)
+    ]
 
     def create(self, validated_data):
         contacts = validated_data.pop("contractorcontact_set", None)
@@ -89,7 +88,6 @@ class ContractorSummarySerializer(ContractorSerializer):
             "id",
             "name",
             "contractor_type",
-            "contractor_type_name",
             "address",
             "phone",
             "email",
@@ -101,3 +99,7 @@ class ContractorSummarySerializer(ContractorSerializer):
         for field in fields:
             fields[field].read_only = True
         return fields
+
+    domain_fields = [
+        BaseDomainField("contractor_type", DomainCategoryChoices.contractor_type)
+    ]

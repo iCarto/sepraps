@@ -1,10 +1,10 @@
 from django.db.models import Prefetch
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 # from django.db.models import F, Prefetch
 from app.models.construction_contract import ConstructionContract
-from app.models.contact_relationship import ProviderContact
-from app.models.domain_entry import dominio_get_value
 from app.models.infrastructure import Infrastructure
 from app.models.milestone import Milestone
 from app.models.project import Project, get_code_for_new_project
@@ -22,11 +22,9 @@ from questionnaires.serializers.questionnaire_serializer import (
 )
 
 
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
     code = serializers.CharField(required=False, read_only=True)
     closed = serializers.BooleanField(required=False)
-    project_type_name = serializers.SerializerMethodField(required=False)
-    project_class_name = serializers.SerializerMethodField(required=False)
     main_infrastructure = InfrastructureSerializer()
     linked_localities = LocalitySerializer(many=True)
     provider = ProviderSerializer(required=False, allow_null=True)
@@ -47,9 +45,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "code",
             "closed",
             "project_type",
-            "project_type_name",
             "project_class",
-            "project_class_name",
             "description",
             "init_date",
             "featured_image",
@@ -120,19 +116,18 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     # ATTRIBUTES
 
-    def get_project_type_name(self, obj):
-        return dominio_get_value(obj.project_type, self.context["domain"])
-
-    def get_project_class_name(self, obj):
-        return dominio_get_value(obj.project_class, self.context["domain"])
-
     def get_folder(self, obj):
-        return obj.folder.media_path
+        return obj.folder.media_path if obj.folder else None
 
     def get_milestones(self, obj):
         return MilestoneSummarySerializer(
             obj.milestones.exclude(parent__isnull=False).order_by("ordering"), many=True
         ).data
+
+    domain_fields = [
+        BaseDomainField("project_type", DomainCategoryChoices.project_type),
+        BaseDomainField("project_class", DomainCategoryChoices.project_class),
+    ]
 
     # OPERATIONS
 
@@ -224,9 +219,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         return instance
 
 
-class ProjectSummarySerializer(serializers.ModelSerializer):
-    project_type_name = serializers.SerializerMethodField()
-    project_class_name = serializers.SerializerMethodField()
+class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
     closed = serializers.BooleanField()
     linked_localities = LocalitySerializer(many=True)
     provider_name = serializers.CharField(source="provider.name", default=None)
@@ -256,9 +249,7 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             "code",
             "closed",
             "project_type",
-            "project_type_name",
             "project_class",
-            "project_class_name",
             "description",
             "init_date",
             "featured_image",
@@ -315,11 +306,10 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
                 fields[field].read_only = True
         return fields
 
-    def get_project_type_name(self, obj):
-        return dominio_get_value(obj.project_type, self.context.get("domain"))
-
-    def get_project_class_name(self, obj):
-        return dominio_get_value(obj.project_class, self.context.get("domain"))
+    domain_fields = [
+        BaseDomainField("project_type", DomainCategoryChoices.project_type),
+        BaseDomainField("project_class", DomainCategoryChoices.project_class),
+    ]
 
     def get_milestones(self, obj):
         return MilestoneSummarySerializer(obj.milestones, many=True).data

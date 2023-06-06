@@ -1,4 +1,5 @@
 from django.db import connection
+from domains.models import DomainEntry
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.settings import api_settings
@@ -28,6 +29,11 @@ class ModelListViewSet(ListSummaryMixin, ListGeoMixin, viewsets.ModelViewSet):
                 return self.get_geo_serializer_class()
             return self.get_summary_serializer_class()
         return super().get_serializer_class()
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"domain": DomainEntry.objects.all()})
+        return context
 
     def paginate_queryset(self, queryset):
         if "page" not in self.request.query_params:

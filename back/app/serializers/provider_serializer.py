@@ -1,3 +1,5 @@
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import (
@@ -11,7 +13,7 @@ from app.serializers.contact_relationship_serializer import ContactProviderSeria
 from app.serializers.locality_serializer import LocalitySerializer
 
 
-class ProviderSerializer(BaseModelSerializer):
+class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = Provider
         fields = BaseModelSerializer.Meta.fields + (
@@ -30,6 +32,8 @@ class ProviderSerializer(BaseModelSerializer):
     contacts = ContactProviderSerializer(
         source="providercontact_set", many=True, required=False
     )
+
+    domain_fields = [BaseDomainField("area", DomainCategoryChoices.provider_area)]
 
     def create(self, validated_data):
         project = validated_data.pop("project", None)
@@ -85,9 +89,11 @@ class ProviderSerializer(BaseModelSerializer):
         return instance
 
 
-class ProviderSummarySerializer(BaseSummarySerializer):
+class ProviderSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
     class Meta(BaseSummarySerializer.Meta):
         model = Provider
         fields = BaseSummarySerializer.Meta.fields + ("name", "area", "locality")
 
     locality = LocalitySerializer()
+
+    domain_fields = [BaseDomainField("area", DomainCategoryChoices.provider_area)]

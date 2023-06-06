@@ -1,6 +1,6 @@
 import {AuthApiService} from "base/api/service";
 
-const basePath = "/api/app/domainentries";
+const basePath = "/api/domains/domains";
 
 const DomainService = {
     getDomain() {

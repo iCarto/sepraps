@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "users",
     "log",
+    "domains",
     "documents",
     "questionnaires",
     "app",
@@ -78,10 +79,11 @@ MIGRATION_MODULES = (
         "auth": None,
         "sessions": None,
         "users": None,
+        "log": None,
+        "domains": None,
         "documents": None,
         "app": None,
         "questionnaires": None,
-        "log": None,
     }
     if env("DATABASE_CONTROL_CHANGES_MODE") == "sqitch"
     else {}
