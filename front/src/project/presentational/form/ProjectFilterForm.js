@@ -119,13 +119,13 @@ const ProjectFilterForm = ({onClear = null}) => {
                         onChangeHandler={value => handleChange({search: value})}
                     />
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={3}>
                     <ToggleFilterAccordionButton
                         clickHandler={toggleAccordion}
                         isExpanded={expanded}
                     />
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={5} md={4} xl={2}>
                     <EntityCounter size={size} entityName={"proyectos"} />
                 </Grid>
             </Grid>
