@@ -44,3 +44,4 @@ Werkzeug==2.2.3 # for runserver_plus
 
 # Publication
 # pip-licenses-3.5.4
+xlrd==2.0.1

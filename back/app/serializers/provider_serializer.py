@@ -33,7 +33,7 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
         source="providercontact_set", many=True, required=False
     )
 
-    domain_fields = [BaseDomainField("area", DomainCategoryChoices.provider_area)]
+    domain_fields = [BaseDomainField("area", DomainCategoryChoices.area_prestador)]
 
     def create(self, validated_data):
         project = validated_data.pop("project", None)
@@ -96,4 +96,4 @@ class ProviderSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
 
     locality = LocalitySerializer()
 
-    domain_fields = [BaseDomainField("area", DomainCategoryChoices.provider_area)]
+    domain_fields = [BaseDomainField("area", DomainCategoryChoices.area_prestador)]

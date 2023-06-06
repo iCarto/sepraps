@@ -5,8 +5,10 @@ class DomainCategoryChoices(models.TextChoices):
     project_type = ("project_type", "Tipo de proyecto")
     project_class = ("project_class", "Clase de proyecto")
     contact_post = ("contact_post", "Cargo del contacto")
-    provider_area = ("provider_area", "Área del prestador")
+    area_prestador = ("area_prestador", "Área del prestador")
     contractor_type = ("contractor_type", "Tipo de contratista")
+    tipo_prestador = ("tipo_prestador", "Tipo de prestador")
+    naturaleza_juridica = ("naturaleza_juridica", "Naturaleza jurídica")
 
 
 class DomainEntry(models.Model):

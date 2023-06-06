@@ -20,13 +20,13 @@ export default function DomainProvider({children}) {
             const {
                 project_type,
                 project_class,
-                provider_area,
+                area_prestador,
                 contact_post,
                 contractor_type,
             } = domain;
             setProjectTypes(project_type);
             setProjectClasses(project_class);
-            setAreas(provider_area);
+            setAreas(area_prestador);
             setContactPosts(contact_post);
             setContractorTypes(contractor_type);
         });
