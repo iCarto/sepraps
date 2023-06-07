@@ -32,13 +32,10 @@ export function useProjectTable() {
         },
     ];
 
-    const highlightItems = {
-        attribute: "isClosed",
-        highlightingStyle: {opacity: 0.5},
-        formatFunction: item => {
-            return item.closed;
-        },
+    const getCellProps = item => {
+        if (item.closed) return {sx: {opacity: 0.5}};
+        return {};
     };
 
-    return {tableColumns, highlightItems};
+    return {tableColumns, getCellProps};
 }

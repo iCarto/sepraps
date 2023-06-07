@@ -1,6 +1,18 @@
 import {cloneElement, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-import useTheme from "@mui/material/styles/useTheme";
+
+import {useList} from "base/entity/hooks";
+
+import {AlertError} from "base/error/components";
+import {
+    TableCustomCell,
+    TableDownloadButton,
+    TableSortingHead,
+} from "base/table/components";
+import {AuthAction} from "base/user/components";
+import {ActionsMenu} from "base/ui/menu";
+import {Spinner} from "base/shared/components";
+import {EntityNoItemsComponent} from "base/entity/components/presentational";
 
 import Grid from "@mui/material/Grid";
 import Table from "@mui/material/Table";
@@ -9,19 +21,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Pagination from "@mui/material/Pagination";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
-import {useList} from "base/entity/hooks";
-import {AlertError} from "base/error/components";
-import {TableDownloadButton, TableSortingHead} from "base/table/components";
-import {AuthAction} from "base/user/components";
-import {MenuActions} from "base/ui/menu";
-import {useAuth} from "base/user/provider";
 
 const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
 
-console.log("process.env", process.env);
+const tableRowStyle = {
+    "&:last-child td, &:last-child th": {
+        border: 0,
+    },
+    paddingRight: "12px",
+    cursor: "pointer",
+};
 
 const EntityTable = ({
     columns,
@@ -29,8 +38,8 @@ const EntityTable = ({
     selectedElement = null,
     onSelectElement = null,
     elementActions = [],
+    getCellProps = null,
 }) => {
-    const {ROLES} = useAuth();
     const location = useLocation();
 
     const {
@@ -45,15 +54,14 @@ const EntityTable = ({
         setOrder,
     } = useList();
 
-    const [elements, setElements] = useState(null);
+    const [elements, setElements] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    let theme;
-    theme = useTheme();
+    const noElements = !size && !elements.length;
+    const isFilterEmpty = Object.values(filter).every(value => !value);
 
     useEffect(() => {
-        console.log("calling");
         setLoading(true);
         const serviceCall =
             typeof service === "function"
@@ -94,11 +102,6 @@ const EntityTable = ({
         setPage(newPage);
     };
 
-    let noElementsMessage =
-        filter && filter.length === 0
-            ? "No existen elementos para mostrar"
-            : "No se ha encontrado ningún elemento que coincida con su búsqueda. Por favor, intente realizar otra búsqueda o borre los filtros activos.";
-
     const getNestedAttributeValue = (element, attribute) => {
         let returnData = element;
 
@@ -118,17 +121,11 @@ const EntityTable = ({
 
     return (
         <>
-            <AlertError error={error} />{" "}
+            <AlertError error={error} />
             {loading ? (
-                <Grid item container justifyContent="center" my={6}>
-                    <CircularProgress size={40} />
-                </Grid>
-            ) : elements && elements.length === 0 ? (
-                <Container sx={{textAlign: "center"}}>
-                    <Typography py={12} sx={{fontStyle: "italic"}}>
-                        {noElementsMessage}
-                    </Typography>
-                </Container>
+                <Spinner />
+            ) : noElements ? (
+                <EntityNoItemsComponent isFilterEmpty={isFilterEmpty} />
             ) : (
                 elements && (
                     <TableContainer sx={{width: "100%"}}>
@@ -150,55 +147,57 @@ const EntityTable = ({
                                 ]}
                             />
                             <TableBody>
-                                {elements &&
-                                    elements.map((element, index) => {
-                                        return (
-                                            <TableRow
-                                                hover
-                                                key={index}
-                                                selected={
-                                                    selectedElement === element.id
-                                                }
-                                                onClick={event =>
-                                                    handleSelectElement(event, element)
-                                                }
-                                            >
-                                                {columns.map((cellAttribute, index) => {
-                                                    return (
-                                                        <TableCell
-                                                            key={cellAttribute.id}
-                                                        >
-                                                            {cellAttribute.formatFunction
-                                                                ? cellAttribute.formatFunction(
-                                                                      element
-                                                                  )
-                                                                : element[
-                                                                      cellAttribute.id
-                                                                  ]}
-                                                        </TableCell>
-                                                    );
-                                                })}
-                                                {elementActions &&
-                                                elementActions.length > 0 ? (
-                                                    <TableCell>
-                                                        <AuthAction roles={[]}>
-                                                            <MenuActions>
-                                                                {elementActions.map(
-                                                                    actionMenu =>
-                                                                        cloneElement(
-                                                                            actionMenu,
-                                                                            {
-                                                                                element,
-                                                                            }
-                                                                        )
-                                                                )}
-                                                            </MenuActions>
-                                                        </AuthAction>
-                                                    </TableCell>
-                                                ) : null}
-                                            </TableRow>
-                                        );
-                                    })}
+                                {elements?.map((element, index) => {
+                                    return (
+                                        <TableRow
+                                            hover
+                                            key={index}
+                                            sx={tableRowStyle}
+                                            selected={selectedElement === element.id}
+                                            onClick={event =>
+                                                handleSelectElement(event, element)
+                                            }
+                                        >
+                                            {columns.map((cellAttribute, index) => {
+                                                return (
+                                                    <TableCustomCell
+                                                        id={cellAttribute.id}
+                                                        TableCellProps={
+                                                            getCellProps
+                                                                ? getCellProps(element)
+                                                                : null
+                                                        }
+                                                    >
+                                                        {cellAttribute.formatFunction
+                                                            ? cellAttribute.formatFunction(
+                                                                  element
+                                                              )
+                                                            : element[cellAttribute.id]}
+                                                    </TableCustomCell>
+                                                );
+                                            })}
+                                            {elementActions?.length ? (
+                                                <TableCell>
+                                                    <AuthAction roles={[]}>
+                                                        <ActionsMenu>
+                                                            {elementActions.map(
+                                                                actionMenu =>
+                                                                    cloneElement(
+                                                                        actionMenu,
+                                                                        {
+                                                                            element,
+                                                                        }
+                                                                    )
+                                                            )}
+                                                        </ActionsMenu>
+                                                    </AuthAction>
+                                                </TableCell>
+                                            ) : (
+                                                <TableCell></TableCell>
+                                            )}
+                                        </TableRow>
+                                    );
+                                })}
                             </TableBody>
                         </Table>
                         {page && (

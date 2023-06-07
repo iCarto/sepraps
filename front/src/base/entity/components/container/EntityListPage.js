@@ -21,6 +21,7 @@ const EntityListPage = ({
     entityName,
     service,
     tableColumns,
+    getCellProps = null,
     card = null,
     mapLayer = null,
     filterForm = null,
@@ -65,6 +66,7 @@ const EntityListPage = ({
                     selectedElement={selectedElement}
                     onSelectElement={handleSelectElement}
                     elementActions={elementActions}
+                    getCellProps={getCellProps}
                 />
             );
         }
@@ -92,13 +94,14 @@ const EntityListPage = ({
                         justifyContent="flex-start"
                         alignItems="flex-start"
                     >
-                        <Grid item xs={8} role="form">
+                        <Grid item xs={8} xl={6} role="form">
                             {filterForm || <EntityFilterForm entityName={entityName} />}
                         </Grid>
                         <Grid
                             item
                             container
                             xs={4}
+                            xl={6}
                             spacing={1}
                             direction={{xs: "column", lg: "row"}}
                             justifyContent="flex-end"

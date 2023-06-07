@@ -5,7 +5,7 @@ import {ProjectFilterForm} from "project/presentational/form";
 import {ProjectCard} from "project/presentational";
 
 const ListProjectsPage = () => {
-    const {tableColumns, highlightItems} = useProjectTable();
+    const {tableColumns, getCellProps} = useProjectTable();
 
     return (
         <EntityListPage
@@ -13,6 +13,7 @@ const ListProjectsPage = () => {
             entityName="Proyectos"
             service={ProjectService}
             tableColumns={tableColumns}
+            getCellProps={getCellProps}
             filterForm={<ProjectFilterForm />}
             basePath="projects"
             card={ProjectCard}
