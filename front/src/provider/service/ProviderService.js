@@ -44,6 +44,10 @@ const ProviderService = {
     update(provider) {
         return entityService.update(provider);
     },
+
+    delete(providerId) {
+        return entityService.delete(providerId);
+    },
 };
 
 export default ProviderService;

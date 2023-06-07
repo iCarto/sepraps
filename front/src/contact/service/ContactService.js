@@ -1,9 +1,20 @@
-import {contacts_api_adapter, createContacts} from "contact/model";
+import {
+    contact_api_adapter,
+    contacts_api_adapter,
+    createContact,
+    createContacts,
+} from "contact/model";
 import {AuthApiService} from "base/api/service";
 
 const basePath = "/api/app/contacts";
 
 const ContactService = {
+    get(id) {
+        return AuthApiService.get(basePath + "/" + id).then(response => {
+            return createContact(contact_api_adapter(response));
+        });
+    },
+
     getAll() {
         return AuthApiService.get(basePath).then(response => {
             return createContacts(contacts_api_adapter(response));

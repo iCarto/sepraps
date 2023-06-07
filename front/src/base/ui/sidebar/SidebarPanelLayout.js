@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {useOutletContext} from "react-router-dom";
 
-import {ActionsMenu} from "base/shared/components";
+import {ActionsMenu} from "base/ui/menu";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";

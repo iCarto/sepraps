@@ -1,15 +1,14 @@
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
 
-const MenuAction = ({id, icon, text, element = null, handleClick = null}) => {
+const MenuAction = ({key, icon, text, element = null, handleClick = null}) => {
     const handleClickAction = () => {
-        handleClick(element, id);
+        handleClick(element, key);
     };
     return (
         <MenuItem
-            key={`${id}-${element?.id}`}
-            name={id}
-            aria-label={id}
+            key={`${key}-${element?.id}`}
+            aria-label={key}
             onClick={handleClickAction}
         >
             <ListItemIcon>{icon}</ListItemIcon>

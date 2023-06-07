@@ -3,17 +3,17 @@ export function useProviderContactsTable() {
         {
             id: "name",
             label: "Nombre",
-            width: 15,
+            width: 20,
         },
         {
-            id: "post",
+            id: "post_label",
             label: "Cargo",
-            width: 20,
+            width: 30,
         },
         {
             id: "gender",
             label: "Género",
-            width: 5,
+            width: 10,
         },
         {
             id: "phone",
@@ -23,12 +23,7 @@ export function useProviderContactsTable() {
         {
             id: "email",
             label: "E-mail",
-            width: 15,
-        },
-        {
-            id: "comments",
-            label: "Observ.",
-            width: 30,
+            width: 25,
         },
     ];
 

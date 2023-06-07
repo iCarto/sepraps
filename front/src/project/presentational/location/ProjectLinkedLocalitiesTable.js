@@ -2,7 +2,7 @@ import {MenuAction} from "base/ui/menu";
 import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 
-import {ActionsMenu} from "base/shared/components";
+import {ActionsMenu} from "base/ui/menu";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -60,10 +60,10 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                                     >
                                         <ActionsMenu>
                                             <MenuAction
-                                                name="remove-contact"
+                                                id="remove-contact"
                                                 icon={<LinkOffIcon />}
                                                 text="Quitar localidad"
-                                                itemId={locality.code}
+                                                element={locality.code}
                                                 handleClick={handleClick}
                                             />
                                         </ActionsMenu>
