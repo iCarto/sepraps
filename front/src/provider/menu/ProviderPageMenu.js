@@ -1,13 +1,11 @@
 import {useLocation} from "react-router-dom";
 
-import {useAuth} from "base/user/provider";
 import {PageMenu, PageMenuListItemButton} from "base/ui/menu";
 
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 
 const ProviderPageMenu = () => {
-    const {ROLES} = useAuth();
     const location = useLocation();
     const currentUrl = location.pathname;
     const entityUrlSlug = "providers";
@@ -24,7 +22,7 @@ const ProviderPageMenu = () => {
 
             <PageMenuListItemButton
                 key="providers-stats"
-                to={`${basePath}/${entityUrlSlug}/stats`}
+                to={`${basePath}/${entityUrlSlug}/stats/gender`}
                 text="Estadísticas"
                 icon={<QueryStatsIcon />}
             />

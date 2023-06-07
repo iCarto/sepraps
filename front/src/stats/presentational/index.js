@@ -6,5 +6,6 @@ export {default as StatsByPhaseMapView} from "./StatsByPhaseMapView";
 export {default as StatsFilterForm} from "./StatsFilterForm";
 export {default as StatsByGenderTable} from "./StatsByGenderTable";
 export {default as StatsByGenderChart} from "./StatsByGenderChart";
+export {default as StatsByGenderPieChart} from "./StatsByGenderPieChart";
 export {default as StatsByPhasePieChart} from "./StatsByPhasePieChart";
 export {default as StatsTable} from "./StatsTable";

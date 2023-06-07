@@ -26,12 +26,6 @@ const StatsPageMenu = () => {
                     text="Fases"
                     icon={<LinearScaleIcon />}
                 />
-                <PageMenuListItemButton
-                    key="providers-stats"
-                    to={`${basePath}/gender`}
-                    text="Género"
-                    icon={<PermContactCalendarOutlinedIcon />}
-                />
                 <QuestionnairesMenu
                     questionnaires={questionnaires}
                     basePath={`/stats`}

@@ -8,10 +8,11 @@ import {
     ViewProviderContactsSubPage,
     ViewProviderPage,
     ViewProviderPanel,
+    ViewProvidersStatsPage,
     ViewProviderSummarySubPage,
+    ViewProvidersContactsSubPage,
 } from "provider/container";
-import {ViewDocumentPanel} from "base/file/components";
-import {UpdateContractContactPanel} from "contract/container/monitoring";
+import {ViewStatsByGenderSubPage} from "stats/container";
 
 const providerRoutes = [
     <Route key="provider-new" path="new" element={<CreateProviderPage />} />,
@@ -24,18 +25,6 @@ const providerRoutes = [
             />
         </Route>
         <Route key="provider-detail" path=":id" element={<ViewProviderPage />}>
-            {/* 
-            <Route
-                key="provider-documents"
-                path="documents/*"
-                element={<ViewProviderDocumentsSubPage />}
-            >
-                <Route
-                    key="provider-documents-view"
-                    path="detail/*"
-                    element={<ViewDocumentPanel />}
-                />
-            </Route> */}
             <Route
                 key="provider-summary"
                 path="summary"
@@ -58,6 +47,18 @@ const providerRoutes = [
                     element={<UpdateProviderContactPanel />}
                 />
             </Route>
+        </Route>
+        <Route key="providers-stats" path="stats" element={<ViewProvidersStatsPage />}>
+            <Route
+                key="providers-stats-by-gender"
+                path="gender"
+                element={<ViewStatsByGenderSubPage />}
+            ></Route>
+            <Route
+                key="providers-contacts"
+                path="contacts"
+                element={<ViewProvidersContactsSubPage />}
+            ></Route>
         </Route>
     </Route>,
 ];

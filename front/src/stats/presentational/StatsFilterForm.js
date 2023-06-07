@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {ContractService} from "contract/service";
@@ -6,6 +7,7 @@ import {ProviderService} from "provider/service";
 import {ContractorService} from "contractor/service";
 import {FinancingService} from "financing/service";
 import {LocationService} from "sepraps/location/service";
+import {useDomain} from "sepraps/domain/provider";
 
 import {FormAutocomplete, FormClearButton, FormDatePicker} from "base/form/components";
 import {ToggleFilterAccordionButton} from "base/shared/components";
@@ -22,11 +24,14 @@ const StatsFilterForm = ({
         "contractors",
         "administrativeDivisions",
         "providers",
+        "providerTypes",
         "dates",
     ],
     onChange = null,
     onClear = null,
 }) => {
+    const location = useLocation();
+
     const isFilterEmpty =
         !filter?.financing_program &&
         !filter?.financing_fund &&
@@ -35,6 +40,7 @@ const StatsFilterForm = ({
         !filter?.department &&
         !filter?.district &&
         !filter?.provider &&
+        !filter?.provider_type &&
         !filter?.month_from &&
         !filter?.month_to;
 
@@ -50,6 +56,8 @@ const StatsFilterForm = ({
     const [expanded, setExpanded] = useState(() => {
         return !isFilterEmpty;
     });
+
+    const {providerTypes} = useDomain();
 
     const toggleAccordion = () => {
         setExpanded(oldExpanded => !oldExpanded);
@@ -91,7 +99,7 @@ const StatsFilterForm = ({
                 }
             );
         }
-    }, [expanded, loadedDomains, views]);
+    }, [expanded, loadedDomains, views, location.state?.lastRefreshDate]);
 
     const formMethods = useForm({
         defaultValues: {
@@ -102,6 +110,7 @@ const StatsFilterForm = ({
             department: filter?.department || "",
             district: filter?.district || "",
             provider: filter?.provider || "",
+            type: filter?.type || "",
             month_from: filter?.month_from || null,
             month_to: filter?.month_to || null,
         },
@@ -116,6 +125,7 @@ const StatsFilterForm = ({
             department: "",
             district: "",
             provider: "",
+            type: "",
             month_from: null,
             month_to: null,
         });
@@ -166,6 +176,22 @@ const StatsFilterForm = ({
                     alignItems="center"
                     mb={3}
                 >
+                    {views.includes("providerType") && (
+                        <Grid item xs={4} lg={3}>
+                            <FormAutocomplete
+                                name="type"
+                                label="Tipo de prestador"
+                                options={providerTypes}
+                                optionIdAttribute="value"
+                                optionLabelAttribute="label"
+                                onChangeHandler={option =>
+                                    onChange({
+                                        type: option ? option.value : null,
+                                    })
+                                }
+                            />
+                        </Grid>
+                    )}
                     {views.includes("financingFunds") && (
                         <Grid item xs={4} lg={3}>
                             <FormAutocomplete

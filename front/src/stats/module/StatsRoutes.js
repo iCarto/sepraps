@@ -3,7 +3,6 @@ import {
     ViewStatsByPhaseSubPage,
     ViewStatsPage,
     ViewStatsByQuestionnairesSubPage,
-    ViewStatsByGenderSubPage,
     ManageStatsPage,
 } from "stats/container";
 
@@ -19,11 +18,6 @@ const statsRoutes = [
                 key="stats-by-questionnaires"
                 path="questionnaires/:questionnaireCode"
                 element={<ViewStatsByQuestionnairesSubPage />}
-            ></Route>
-            <Route
-                key="stats-by-gender"
-                path="gender"
-                element={<ViewStatsByGenderSubPage />}
             ></Route>
         </Route>
     </Route>,

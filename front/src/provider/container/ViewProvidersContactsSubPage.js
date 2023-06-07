@@ -1,34 +1,29 @@
 import {useCallback, useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
 
 import {StatsService} from "stats/service";
 import {StatsFilterProvider} from "stats/provider";
 
-import {EntityViewSubPage} from "base/entity/components/container";
-import {SectionCard} from "base/ui/section/components";
-import {Spinner} from "base/shared/components";
-import {
-    StatsFilterForm,
-    StatsByGenderTable,
-    StatsByGenderPieChart,
-} from "stats/presentational";
-import {EntityNoItemsComponent} from "base/entity/components/presentational";
-import Grid from "@mui/material/Grid";
+import {useProvidersContactsTable} from "provider/data/ProvidersContactsTableColumns";
 
-const ViewStatsByGenderSubPage = () => {
+import {SectionCard} from "base/ui/section/components";
+import {EntityViewSubPage} from "base/entity/components/container";
+import {Spinner} from "base/shared/components";
+import {StatsFilterForm} from "stats/presentational";
+import {ContactsTable} from "contact/presentational";
+import {EntityNoItemsComponent} from "base/entity/components/presentational";
+
+const ViewProvidersContactsSubPage = () => {
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
-    const location = useLocation();
-
     useEffect(() => {
         setIsLoading(true);
-        StatsService.getStatsByGender(filter).then(data => {
+        StatsService.getStatsProviderContacts(filter).then(data => {
             setData(data);
             setIsLoading(false);
         });
-    }, [filter, location.state?.lastRefreshDate]);
+    }, [filter]);
 
     const handleFilterChange = useCallback(
         attributeValue => {
@@ -41,15 +36,16 @@ const ViewStatsByGenderSubPage = () => {
         setFilter({});
     };
 
-    const totalData = data?.find(item => item.gender === "TOTAL");
-    const noElements = !totalData?.total;
-    const isFilterEmpty = filter ? Object.values(filter).every(value => !value) : true;
+    const {tableColumns} = useProvidersContactsTable();
+
+    const noElements = !data.length;
+    const isFilterEmpty = Object.values(filter).every(value => !value);
 
     const sections = [
-        <SectionCard title="Miembros de las Comisiones Directivas por género">
+        <SectionCard title={`Miembros de las Comisiones Directivas (${data?.length})`}>
             <StatsFilterForm
                 filter={filter}
-                views={["administrativeDivisions", "providerType"]}
+                views={["administrativeDivisions"]}
                 onChange={handleFilterChange}
                 onClear={handleFilterClear}
             />
@@ -58,14 +54,7 @@ const ViewStatsByGenderSubPage = () => {
             ) : noElements ? (
                 <EntityNoItemsComponent isFilterEmpty={isFilterEmpty} />
             ) : (
-                <Grid container columnSpacing={10} mt={3}>
-                    <Grid item xs={12} md={5} xl={3}>
-                        <StatsByGenderPieChart data={data} />
-                    </Grid>
-                    <Grid item xs={12} md={6} xl={4}>
-                        <StatsByGenderTable data={data} />
-                    </Grid>
-                </Grid>
+                <ContactsTable contacts={data} customTableColumns={tableColumns} />
             )}
         </SectionCard>,
     ];
@@ -77,4 +66,4 @@ const ViewStatsByGenderSubPage = () => {
     );
 };
 
-export default ViewStatsByGenderSubPage;
+export default ViewProvidersContactsSubPage;

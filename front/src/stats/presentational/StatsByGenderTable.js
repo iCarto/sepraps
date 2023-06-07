@@ -6,10 +6,10 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 
 const StatsByGenderTable = ({data}) => {
-    const getNumberOfPeople = () => {
-        let total = 0;
-        data.map(item => (total += item["total"]));
-        return total;
+    const rowStyle = {
+        "&:last-child td, &:last-child th": {
+            borderTop: "solid 1px #c0c4c2",
+        },
     };
 
     return (
@@ -17,30 +17,24 @@ const StatsByGenderTable = ({data}) => {
             <Table aria-labelledby="Data table" sx={{tableLayout: "fixed"}}>
                 <TableHead>
                     <TableRow>
-                        {data.map((row, index) => {
+                        {data?.map((row, index) => {
                             return (
                                 <TableCell key={index} align="center">
                                     {row.gender_name}
                                 </TableCell>
                             );
                         })}
-                        <TableCell key={3} align="center">
-                            Total
-                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow hover>
-                        {data.map((row, index) => {
+                    <TableRow hover sx={rowStyle}>
+                        {data?.map((row, index) => {
                             return (
                                 <TableCell key={index} align="center">
                                     {row.total}
                                 </TableCell>
                             );
                         })}
-                        <TableCell key={3} align="center">
-                            {getNumberOfPeople()}
-                        </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

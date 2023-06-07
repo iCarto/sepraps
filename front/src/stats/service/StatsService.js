@@ -36,7 +36,17 @@ const StatsService = {
 
     getStatsByGender(filter = {}) {
         return AuthApiService.get(
-            `/api/app/stats/contacts/gender?${ServiceUtil.getFilterQueryString(filter)}`
+            `/api/app/stats/providersgender?${ServiceUtil.getFilterQueryString(filter)}`
+        ).then(response => {
+            return response;
+        });
+    },
+
+    getStatsProviderContacts(filter = {}) {
+        return AuthApiService.get(
+            `/api/app/stats/providerscontacts?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`
         ).then(response => {
             return response;
         });

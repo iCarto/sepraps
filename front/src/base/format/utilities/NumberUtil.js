@@ -132,6 +132,11 @@ const NumberUtil = {
         }
         return value;
     },
+
+    getPercentage(value, total) {
+        const percentage = NumberUtil.formatDecimal((value * 100) / total);
+        return `${percentage}%`;
+    },
 };
 
 export default NumberUtil;

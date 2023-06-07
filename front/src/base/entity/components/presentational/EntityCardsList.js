@@ -6,9 +6,7 @@ import {EntityNoItemsComponent} from "base/entity/components/presentational";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 
-// TO-DO: process.env.REACT_APP_PAGE_SIZE returning NaN even after running install.sh
-// const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
-const pageSize = 20;
+const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
 
 const EntityCardsList = ({service, entityCard, onSelectElement}) => {
     const [elements, setElements] = useState([]);

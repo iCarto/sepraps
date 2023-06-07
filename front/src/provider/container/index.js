@@ -11,3 +11,5 @@ export {default as UpdateProviderPanel} from "./UpdateProviderPanel";
 export {default as UpdateProviderContactPanel} from "./UpdateProviderContactPanel";
 export {default as ViewProviderSummarySubPage} from "./ViewProviderSummarySubPage";
 export {default as ViewProviderContactsSubPage} from "./ViewProviderContactsSubPage";
+export {default as ViewProvidersContactsSubPage} from "./ViewProvidersContactsSubPage";
+export {default as ViewProvidersStatsPage} from "./ViewProvidersStatsPage";

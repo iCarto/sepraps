@@ -10,7 +10,7 @@ const ToggleFilterAccordionButton = ({
         textAlign: "left",
         lineHeight: 1.25,
         color: "text.secondary",
-        marginBottom: isExpanded ? 2 : 0,
+        marginBottom: 2,
     };
 
     return (
