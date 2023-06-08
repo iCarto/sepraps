@@ -109,6 +109,12 @@ class EntityService {
                     : response
         );
     }
+
+    delete(entityId) {
+        return AuthApiService.delete(this.#base_path + "/" + entityId).then(
+            response => response
+        );
+    }
 }
 
 const createEntityService = (
