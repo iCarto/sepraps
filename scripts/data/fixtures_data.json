@@ -3,6 +3,24 @@
         "model": "domains.domainentry",
         "pk": null,
         "fields": {
+            "category": "dominiosino",
+            "key": true,
+            "value": "Sí"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "dominiosino",
+            "key": false,
+            "value": "No"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
             "category": "project_type",
             "key": "agua",
             "value": "Agua Potable"
