@@ -2,8 +2,8 @@ from django.db import connection
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
 from app.models.contact import GENDER_CHOICES
+
 from app.models.milestone import PHASE_CHOICES
 from app.util import dictfetchall
 from questionnaires import services as questtionnaire_services
@@ -36,7 +36,7 @@ def get_monthly_questionnaire_stats(
             WHERE pqi.questionnaire_id = '{questionnaire_code}'
             {filter_conditions}
             ORDER BY mqi.year, mqi.month
-        """
+            """
 
     show_expanded = False
     filter_conditions = []
@@ -83,47 +83,79 @@ def get_monthly_questionnaire_stats(
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated, SupervisionPermission | VisualizacionPermission])
-def get_provider_gender_stats(request, format=None):
+def get_providers_gender_stats(request, format=None):
     with connection.cursor() as cursor:
         query = """
-            SELECT cg.gender, count(*) as total FROM (
-                SELECT distinct c.id, c.gender
-                FROM provider_contact pc
-                    INNER JOIN contact c ON c.id = pc.contact_id
-                    LEFT JOIN project p ON p.provider_id = pc.entity_id
-                    LEFT JOIN construction_contract cc on cc.id = p.construction_contract_id
-                    LEFT JOIN financing_program fp on fp.id = cc.financing_program_id
-                    LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
-                    LEFT JOIN project_linked_localities pll on pll.project_id = p.id
-                    LEFT JOIN locality l on l.code = pll.locality_id
-                    INNER JOIN district di on di.code = l.district_id
-                    INNER JOIN department de on de.code = l.department_id
-                WHERE 1 = 1
-                {filter_conditions}
-            ) cg
-            GROUP BY cg.gender
+            SELECT SUM(providers.number_of_women) as F, (SUM(providers.number_of_members) - SUM(providers.number_of_women)) as M, SUM(providers.number_of_members) as total FROM
+                (SELECT DISTINCT pv.id, pv.number_of_members, pv.number_of_women
+                FROM provider pv
+                INNER JOIN project p ON p.provider_id = pv.id
+                LEFT JOIN project_linked_localities pll on pll.project_id = p.id
+		        LEFT JOIN locality l on l.code = pll.locality_id
+                INNER JOIN district di on di.code = l.district_id
+                INNER JOIN department de on de.code = l.department_id
+            WHERE 1 = 1
+            {filter_conditions}
+            ) providers
             """
         filter_conditions = []
         if filter := request.GET.get("provider"):
             filter_conditions.append(f"and pc.entity_id = {filter}")
         if filter := request.GET.get("project"):
             filter_conditions.append(f"and p.id = {filter}")
-        if filter := request.GET.get("construction_contract"):
-            filter_conditions.append(f"and p.construction_contract_id = {filter}")
         if filter := request.GET.get("district"):
             filter_conditions.append(f"and l.district_id = '{filter}'")
         if filter := request.GET.get("department"):
             filter_conditions.append(f"and l.department_id = '{filter}'")
-        if filter := request.GET.get("financing_program"):
-            filter_conditions.append(f"and cc.financing_program_id = {filter}")
-        if filter := request.GET.get("financing_fund"):
-            filter_conditions.append(f"and fpff.financingfund_id = {filter}")
+        if filter := request.GET.get("type"):
+            filter_conditions.append(f"and pv.type = '{filter}'")
+
+        cursor.execute(query.format(filter_conditions=" ".join(filter_conditions)))
+
+        query_result = dictfetchall(cursor)
+        data = []
+        for key, value in query_result[0].items():
+            gender_key = key.upper()
+            gender_name = dict(GENDER_CHOICES).get(gender_key, gender_key)
+            new_dict = {
+                "gender": gender_key,
+                "gender_name": gender_name,
+                "total": value,
+            }
+            data.append(new_dict)
+        return Response(data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated, SupervisionPermission | VisualizacionPermission])
+def get_providers_contacts_stats(request, format=None):
+    with connection.cursor() as cursor:
+        query = """
+            SELECT distinct c.id, c.name, p2.name as provider, c.post, c.phone, c.email, c.gender, c.comments
+                FROM provider_contact pc
+                    INNER JOIN contact c ON c.id = pc.contact_id
+                    LEFT JOIN provider p2 ON pc.entity_id = p2.id
+                    LEFT JOIN project p ON p.provider_id = pc.entity_id
+                    LEFT JOIN project_linked_localities pll on pll.project_id = p.id
+                    LEFT JOIN locality l on l.code = pll.locality_id
+                    INNER JOIN district di on di.code = l.district_id
+                    INNER JOIN department de on de.code = l.department_id
+                WHERE 1 = 1
+            {filter_conditions}
+            """
+        filter_conditions = []
+        if filter := request.GET.get("provider"):
+            filter_conditions.append(f"and pc.entity_id = {filter}")
+        if filter := request.GET.get("project"):
+            filter_conditions.append(f"and p.id = {filter}")
+        if filter := request.GET.get("district"):
+            filter_conditions.append(f"and l.district_id = '{filter}'")
+        if filter := request.GET.get("department"):
+            filter_conditions.append(f"and l.department_id = '{filter}'")
 
         cursor.execute(query.format(filter_conditions=" ".join(filter_conditions)))
 
         data = dictfetchall(cursor)
-        for row in data:
-            row["gender_name"] = dict(GENDER_CHOICES).get(row["gender"], row["gender"])
         return Response(data)
 
 
