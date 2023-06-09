@@ -18,7 +18,7 @@ const ProviderForm = ({
         type: FormUtil.getFormValue(provider?.type),
         number_of_members: FormUtil.getFormValue(provider?.number_of_members),
         number_of_women: FormUtil.getFormValue(provider?.number_of_women),
-        is_legalized: FormUtil.getFormValue(provider?.is_legalized),
+        is_legalized: FormUtil.getFormValue(provider?.is_legalized || false),
         legalization_date: FormUtil.getFormValue(provider?.legalization_date),
         legal_status: FormUtil.getFormValue(provider?.legal_status),
         legal_registry_code: FormUtil.getFormValue(provider?.legal_registry_code),
