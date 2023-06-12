@@ -22,8 +22,9 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
             "number_of_women",
             "is_legalized",
             "legalization_date",
-            "legal_status",
-            "legal_registry_code",
+            "is_provider_contract_signed",
+            "legal_status_number",
+            "local_resolution_number",
             "project",
             "contacts",
         )
@@ -40,7 +41,9 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
         BaseDomainField("area", DomainCategoryChoices.provider_area),
         BaseDomainField("type", DomainCategoryChoices.provider_type),
         BaseDomainField("is_legalized", DomainCategoryChoices.yes_no_domain),
-        BaseDomainField("legal_status", DomainCategoryChoices.legal_status),
+        BaseDomainField(
+            "is_provider_contract_signed", DomainCategoryChoices.yes_no_domain
+        ),
     ]
 
     def create(self, validated_data):

@@ -17,27 +17,35 @@ class Provider(BaseDocumentModel, BaseEntityModelMixin):
     name = models.CharField("Nombre", max_length=100)
     area = models.CharField("Área", max_length=50)
     type = models.CharField("Tipo", max_length=50, null=True, blank=True)
-    number_of_members = models.IntegerField("Número de miembros", null=True, blank=True)
-    number_of_women = models.IntegerField("Número de mujeres", null=True, blank=True)
+    number_of_members = models.IntegerField(
+        "Número de miembros de la Comisión Directiva", null=True, blank=True
+    )
+    number_of_women = models.IntegerField(
+        "Número de mujeres de la Comisión Directiva", null=True, blank=True
+    )
     is_legalized = models.BooleanField(null=True, blank=True, default=False)
     legalization_date = models.DateField("Fecha de legalización", null=True, blank=True)
-    legal_status = models.CharField(
-        "Naturaleza jurídica", max_length=50, null=True, blank=True
+    is_provider_contract_signed = models.BooleanField(
+        null=True, blank=True, default=False
     )
-    legal_registry_code = models.CharField(
-        "Número de personería jurídica / Número de registro",
-        max_length=25,
-        null=True,
-        blank=True,
+    legal_status_number = models.CharField(
+        "Número de personería jurídica", max_length=20, null=True, blank=True
+    )
+    local_resolution_number = models.CharField(
+        "Número de resolución municipal", max_length=20, null=True, blank=True
     )
     contacts = models.ManyToManyField(Contact, through=ProviderContact)
 
 
 @receiver(pre_save, sender=Provider)
-def locality_pre_save(sender, instance, *args, **kwargs):
+def provider_pre_save(sender, instance, *args, **kwargs):
     if not instance.is_legalized:
         instance.legalization_date = None
-        instance.legal_status = ""
-        instance.legal_registry_code = ""
+        instance.legal_status_number = ""
+        instance.local_resolution_number = ""
+    if instance.is_legalized and instance.type == "junta_de_saneamiento":
+        instance.local_resolution_number = ""
+    if instance.is_legalized and instance.type == "comision_de_agua":
+        instance.legal_status_number = ""
 
     return instance
