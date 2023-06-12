@@ -39,7 +39,8 @@ const FormUtil = {
     getDataValue(value, defaultValue = null) {
         // in front-end falsy values doesn't include 0
         // For si/non fields, 0 should not evaluate as falsy, since it is the value for the "Non" option.
-        return value || value === 0 ? value : defaultValue;
+        if (value === false || value === 0 || value) return value;
+        return defaultValue;
     },
 };
 
