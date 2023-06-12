@@ -26,14 +26,14 @@ const ProviderFormGeneralDataFields = ({orientation = "column"}) => {
                 <Grid item xs={orientation === "column" ? 12 : 6}>
                     <FormInputInteger
                         name="number_of_members"
-                        label="Nº de miembros"
+                        label="Nº de miembros de la Comisión Directiva"
                         maxLength={5}
                     />
                 </Grid>
                 <Grid item xs={orientation === "column" ? 12 : 6}>
                     <FormInputInteger
                         name="number_of_women"
-                        label="Nº de mujeres"
+                        label="Nº de mujeres de la Comisión Directiva"
                         maxLength={5}
                     />
                 </Grid>

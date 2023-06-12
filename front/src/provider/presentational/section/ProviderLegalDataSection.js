@@ -29,24 +29,30 @@ const ProviderLegalDataSection = ({provider}) => {
         <SectionCard title="Datos legales" secondaryActions={secondaryActions}>
             <SectionField label="Tipo de prestador" value={provider.type_label} />
             <SectionField
+                label="Contrato Permisionario firmado"
+                value={provider.is_provider_contract_signed_label}
+            />
+            <SectionField
                 label="Legalmente constituida"
                 value={provider.is_legalized_label}
             />
             {provider.is_legalized ? (
-                <>
-                    <SectionField
-                        label="Fecha de legalización"
-                        value={DateUtil.formatDate(provider.legalization_date)}
-                    />
-                    <SectionField
-                        label="Naturaleza jurídica"
-                        value={provider.legal_status_label}
-                    />
-                    <SectionField
-                        label="Nº personería jurídica / Nº registro"
-                        value={provider.legal_registry_code}
-                    />
-                </>
+                <SectionField
+                    label="Fecha de legalización"
+                    value={DateUtil.formatDate(provider.legalization_date)}
+                />
+            ) : null}
+            {provider.is_legalized && provider.type === "junta_de_saneamiento" ? (
+                <SectionField
+                    label="Nº de personería jurídica"
+                    value={provider.legal_status_number}
+                />
+            ) : null}
+            {provider.is_legalized && provider.type === "comision_de_agua" ? (
+                <SectionField
+                    label="Nº de resolución municipal"
+                    value={provider.local_resolution_number}
+                />
             ) : null}
         </SectionCard>
     );

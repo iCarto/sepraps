@@ -9,11 +9,11 @@ const ProviderGeneralDataSection = ({provider}) => {
         },
         {label: "Área", value: provider.area_label},
         {
-            label: "Nº miembros",
+            label: "Nº miembros de la Comisión Directiva",
             value: NumberUtil.formatInteger(provider.number_of_members),
         },
         {
-            label: "Nº mujeres",
+            label: "Nº mujeres de la Comisión Directiva",
             value: NumberUtil.formatInteger(provider.number_of_women),
         },
     ];

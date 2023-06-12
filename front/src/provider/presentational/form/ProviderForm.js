@@ -20,8 +20,13 @@ const ProviderForm = ({
         number_of_women: FormUtil.getFormValue(provider?.number_of_women),
         is_legalized: FormUtil.getFormValue(provider?.is_legalized || false),
         legalization_date: FormUtil.getFormValue(provider?.legalization_date),
-        legal_status: FormUtil.getFormValue(provider?.legal_status),
-        legal_registry_code: FormUtil.getFormValue(provider?.legal_registry_code),
+        is_provider_contract_signed: FormUtil.getFormValue(
+            provider?.is_provider_contract_signed || false
+        ),
+        legal_status_number: FormUtil.getFormValue(provider?.legal_status_number),
+        local_resolution_number: FormUtil.getFormValue(
+            provider?.local_resolution_number
+        ),
     };
 
     const formMethods = useForm({
@@ -39,8 +44,13 @@ const ProviderForm = ({
             number_of_women: FormUtil.getDataValue(data?.number_of_women),
             is_legalized: FormUtil.getDataValue(data?.is_legalized),
             legalization_date: FormUtil.getDataValue(data?.legalization_date),
-            legal_status: FormUtil.getDataValue(data?.legal_status),
-            legal_registry_code: FormUtil.getDataValue(data?.legal_registry_code),
+            is_provider_contract_signed: FormUtil.getDataValue(
+                data?.is_provider_contract_signed
+            ),
+            legal_status_number: FormUtil.getDataValue(data?.legal_status_number),
+            local_resolution_number: FormUtil.getDataValue(
+                data?.local_resolution_number
+            ),
         });
     };
 

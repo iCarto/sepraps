@@ -10,10 +10,13 @@ import {
 import Grid from "@mui/material/Grid";
 
 const ProviderFormLegalDataFields = ({orientation = "column"}) => {
-    const {providerTypes, providerLegalStatus} = useDomain();
+    const {providerTypes} = useDomain();
 
     const is_legalized = useWatch({
         name: "is_legalized",
+    });
+    const type = useWatch({
+        name: "type",
     });
 
     return (
@@ -28,30 +31,37 @@ const ProviderFormLegalDataFields = ({orientation = "column"}) => {
                     />
                 </Grid>
                 <Grid item xs={orientation === "column" ? 12 : 6}>
+                    <FormCheckbox
+                        name="is_provider_contract_signed_label"
+                        label="Contrato Permisionario firmado"
+                    />
+                </Grid>
+                <Grid item xs={12}>
                     <FormCheckbox name="is_legalized" label="Legalmente constituida" />
                 </Grid>
                 {is_legalized ? (
-                    <>
-                        <Grid item xs={orientation === "column" ? 12 : 6}>
-                            <FormDatePicker
-                                name="legalization_date"
-                                label="Fecha de legalización"
-                            />
-                        </Grid>
-                        <Grid item xs={orientation === "column" ? 12 : 6}>
-                            <FormSelect
-                                name="legal_status"
-                                label="Naturaleza jurídica"
-                                options={providerLegalStatus}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormInputText
-                                name="legal_registry_code"
-                                label="Nº personería jurídica/registro"
-                            />
-                        </Grid>
-                    </>
+                    <Grid item xs={orientation === "column" ? 12 : 6}>
+                        <FormDatePicker
+                            name="legalization_date"
+                            label="Fecha de legalización"
+                        />
+                    </Grid>
+                ) : null}
+                {is_legalized && type === "junta_de_saneamiento" ? (
+                    <Grid item xs={orientation === "column" ? 12 : 6}>
+                        <FormInputText
+                            name="legal_status_number"
+                            label="Nº de personería jurídica"
+                        />
+                    </Grid>
+                ) : null}
+                {is_legalized && type === "comision_de_agua" ? (
+                    <Grid item xs={orientation === "column" ? 12 : 6}>
+                        <FormInputText
+                            name="local_resolution_number"
+                            label="Nº de resolución municipal"
+                        />
+                    </Grid>
                 ) : null}
             </Grid>
         </>
