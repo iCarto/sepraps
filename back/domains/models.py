@@ -8,7 +8,6 @@ class DomainCategoryChoices(models.TextChoices):
     contractor_type = ("contractor_type", "Tipo de contratista")
     provider_area = ("area_prestador", "Área del prestador")
     provider_type = ("tipo_prestador", "Tipo de prestador")
-    legal_status = ("naturaleza_juridica", "Naturaleza jurídica")
     yes_no_domain = ("dominiosino", "Sí/No")
 
 
