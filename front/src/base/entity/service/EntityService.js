@@ -68,12 +68,17 @@ class EntityService {
 
     getBySearchText(searchText) {
         return AuthApiService.get(this.#base_path + `?search=${searchText}`).then(
-            response =>
-                this.#objects_constructor
-                    ? this.#objects_constructor(
-                          this.#objects_api_adapter(response.results)
-                      )
-                    : response
+            response => {
+                if (this.#objects_constructor && response.results) {
+                    response.results = this.#objects_constructor(
+                        this.#objects_api_adapter(response.results)
+                    );
+                    return response;
+                }
+                return this.#objects_constructor
+                    ? this.#objects_constructor(this.#objects_api_adapter(response))
+                    : response;
+            }
         );
     }
 

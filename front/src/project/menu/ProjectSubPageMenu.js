@@ -8,6 +8,7 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import FlagIcon from "@mui/icons-material/Flag";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/${project?.id}`;
@@ -25,6 +26,12 @@ const ProjectSubPageMenu = ({project}) => {
                 to={`${basePath}/location`}
                 text="Ubicación"
                 icon={<PinDropIcon />}
+            />
+            <PageMenuListItemButton
+                key="project-provider"
+                to={`${basePath}/provider`}
+                text="Prestador"
+                icon={<GroupsIcon />}
             />
             <PageMenuListItemButton
                 key="project-financing"

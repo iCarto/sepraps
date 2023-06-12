@@ -3,9 +3,7 @@ import {useOutletContext} from "react-router-dom";
 import {
     ProjectInfrastructureSection,
     ProjectLinkedLocalitiesSection,
-    ProjectProviderSection,
 } from "project/presentational/section";
-
 import {EntityViewSubPage} from "base/entity/components/container";
 
 const ViewProjectLocationSubPage = () => {
@@ -14,7 +12,6 @@ const ViewProjectLocationSubPage = () => {
 
     const sections = [
         <ProjectInfrastructureSection project={project} />,
-        <ProjectProviderSection project={project} />,
         <ProjectLinkedLocalitiesSection project={project} />,
     ];
 

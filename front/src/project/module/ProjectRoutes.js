@@ -11,12 +11,13 @@ import {
     ViewProjectContactsSubPage,
     ViewProjectDocumentsSubPage,
     ViewProjectQuestionnairesSubPage,
-    AddProjectProviderPanel,
+    UpdateProjectProviderPanel,
     UpdateProjectPanel,
     UpdateProjectMainInfrastructurePanel,
     ViewProjectPanel,
     AddProjectLinkedLocalitiesPanel,
     UpdateProjectQuestionnaireInstancePanel,
+    ViewProjectProviderSubPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -47,16 +48,6 @@ const projectRoutes = [
                 element={<ViewProjectLocationSubPage />}
             >
                 <Route
-                    key="project-provider-update"
-                    path="provider/:action/:providerId"
-                    element={<AddProjectProviderPanel />}
-                />
-                <Route
-                    key="project-provider-contact-update"
-                    path="provider/contact/:contactId/:action"
-                    element={<UpdateProjectProviderContactPanel />}
-                />
-                <Route
                     key="project-main-infrastructure-edit"
                     path="main_infrastructure/edit"
                     element={<UpdateProjectMainInfrastructurePanel />}
@@ -65,6 +56,22 @@ const projectRoutes = [
                     key="project-linked-localities-update"
                     path="linked_localities/:localityCode/:action"
                     element={<AddProjectLinkedLocalitiesPanel />}
+                />
+            </Route>
+            <Route
+                key="project-provider"
+                path="provider"
+                element={<ViewProjectProviderSubPage />}
+            >
+                <Route
+                    key="project-provider-update"
+                    path=":action/:providerId"
+                    element={<UpdateProjectProviderPanel />}
+                />
+                <Route
+                    key="project-provider-contact-update"
+                    path="provider/contact/:contactId/:action"
+                    element={<UpdateProjectProviderContactPanel />}
                 />
             </Route>
             <Route

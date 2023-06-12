@@ -4,9 +4,10 @@ const ProviderSummary = ({provider}) => {
     return (
         <SectionCard title="Prestador">
             <SectionField label="Nombre" value={provider.name} />
+            <SectionField label="Tipo" value={`${provider.type_label}`} />
             <SectionField
-                label="Ubicación"
-                value={`${provider.locality.name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
+                label="Legalmente constituida"
+                value={`${provider.is_legalized_label}`}
             />
         </SectionCard>
     );

@@ -1,17 +1,14 @@
 import {useState} from "react";
-import {useLocation, useOutletContext, useParams} from "react-router-dom";
+import {useOutletContext, useParams} from "react-router-dom";
 import {useNavigateWithReload} from "base/navigation/hooks";
+import {project_view_adapter} from "project/model";
+import {ProjectService} from "project/service";
 
-import {provider_view_adapter} from "provider/model";
-import {ProviderService} from "provider/service";
 import {EntityUpdatePanel} from "base/entity/components/presentational";
 import {ProviderFormSearch} from "provider/presentational/form";
 
-//TO-DO: Consider removing this component if we are only allowing provider to be updated from its own module.
 const UpdateProjectProviderPanel = () => {
-    const {action, section} = useParams();
-    const location = useLocation();
-    const basePath = location.pathname.split(section)[0];
+    const {action} = useParams();
 
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
@@ -19,12 +16,12 @@ const UpdateProjectProviderPanel = () => {
     let project;
     [project] = useOutletContext();
 
+    const basePath = `/projects/${project.id}/provider`;
+
     const handleSubmit = provider => {
-        ProviderService.update(
-            provider_view_adapter({...provider, project: project.id})
-        )
+        ProjectService.update(project_view_adapter({...project, provider}))
             .then(() => {
-                navigate("/projects/" + project.id + "/location", true);
+                navigate(basePath, true);
             })
             .catch(error => {
                 console.log({error});
@@ -32,15 +29,15 @@ const UpdateProjectProviderPanel = () => {
             });
     };
 
-    const handleFormCancel = () => {
+    const handleCancel = () => {
         navigate(basePath);
     };
 
     return (
         <EntityUpdatePanel
-            title={action === "new" ? "Añadir prestador" : "Modificar prestador"}
+            title={action === "add" ? "Añadir prestador" : "Modificar prestador"}
             form={<ProviderFormSearch onSubmit={handleSubmit} />}
-            onCancel={handleFormCancel}
+            onCancel={handleCancel}
             error={error}
         />
     );

@@ -4,6 +4,7 @@ export {default as CreateProjectPage} from "./CreateProjectPage";
 export {default as ViewProjectPage} from "./ViewProjectPage";
 export {default as ViewProjectSummarySubPage} from "./ViewProjectSummarySubPage";
 export {default as ViewProjectLocationSubPage} from "./ViewProjectLocationSubPage";
+export {default as ViewProjectProviderSubPage} from "./ViewProjectProviderSubPage";
 export {default as ViewProjectFinancingSubPage} from "./ViewProjectFinancingSubPage";
 export {default as ViewProjectMilestonesSubPage} from "./ViewProjectMilestonesSubPage";
 export {default as ViewProjectContactsSubPage} from "./ViewProjectContactsSubPage";
@@ -12,7 +13,6 @@ export {
     default as ViewProjectQuestionnairesSubPage,
 } from "./ViewProjectQuestionnairesSubPage";
 export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPanel";
-export {default as AddProjectProviderPanel} from "./AddProjectProviderPanel";
 export {default as UpdateProjectPanel} from "./UpdateProjectPanel";
 export {
     default as UpdateProjectMainInfrastructurePanel,

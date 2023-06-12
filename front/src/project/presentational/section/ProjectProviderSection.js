@@ -5,7 +5,7 @@ import {project_view_adapter} from "project/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {RemoveItemDialog} from "base/delete/components";
-import {EntityAddButtonGroup} from "base/entity/components/presentational";
+import {AddNewButton} from "base/shared/components";
 import {
     SectionCard,
     SectionCardHeaderAction,
@@ -34,7 +34,7 @@ const ProjectProviderSection = ({project}) => {
                   text="Modificar"
                   icon={<EditIcon />}
                   onClick={() => {
-                      navigate("provider/edit" + provider.id);
+                      navigate("edit/" + provider.id);
                   }}
                   roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
               />,
@@ -55,14 +55,14 @@ const ProjectProviderSection = ({project}) => {
         setIsRemoveDialogOpen(false);
         ProjectService.update(project_view_adapter({...project, provider: null})).then(
             () => {
-                navigate("/projects/" + project.id + "/location", true);
+                navigate("/projects/" + project.id + "/provider", true);
             }
         );
     };
 
     return (
         <SectionCard
-            title="Prestador"
+            title="Prestador de servicios"
             secondaryActions={!isProjectClosed && secondaryActions}
         >
             {provider?.id ? (
@@ -72,9 +72,10 @@ const ProjectProviderSection = ({project}) => {
                         value={provider.name}
                         linkPath={`/providers/${provider.id}/summary`}
                     />
+                    <SectionField label="Tipo" value={`${provider.type_label}`} />
                     <SectionField
-                        label="Ubicación"
-                        value={`${provider.locality.name}, ${provider.locality.department_name} (${provider.locality.district_name})`}
+                        label="Legalmente constituida"
+                        value={`${provider.is_legalized_label}`}
                     />
                     <RemoveItemDialog
                         isDialogOpen={isRemoveDialogOpen}
@@ -85,9 +86,10 @@ const ProjectProviderSection = ({project}) => {
             ) : (
                 <Stack alignItems="center" spacing={3}>
                     <Typography sx={{fontStyle: "italic"}}>
-                        Este proyecto aún no tiene prestador
+                        Este proyecto aún no tiene ningún prestador de servicios
+                        asociado
                     </Typography>
-                    {!isProjectClosed && <EntityAddButtonGroup basePath="provider/" />}
+                    {!isProjectClosed && <AddNewButton basePath={`add/existing`} />}
                 </Stack>
             )}
         </SectionCard>

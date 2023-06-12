@@ -1,6 +1,5 @@
 import {useNavigate} from "react-router-dom";
 
-import {FieldUtil} from "base/ui/section/utilities";
 import {
     SectionCard,
     SectionCardHeaderAction,
@@ -47,17 +46,6 @@ const ProjectLocationSection = ({project}) => {
     return (
         <SectionCard title="Ubicación" secondaryActions={headerActions}>
             <Grid container columnSpacing={4}>
-                <Grid item xs={12} mb={3}>
-                    <SectionField
-                        label="Prestador"
-                        value={FieldUtil.getValue(project?.provider?.name)}
-                        linkPath={
-                            project?.provider
-                                ? `/providers/${project.provider.id}/summary`
-                                : null
-                        }
-                    />
-                </Grid>
                 <Grid item container xs={12} lg={4}>
                     <Grid
                         item
