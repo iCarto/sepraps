@@ -1,6 +1,6 @@
 import {SUBPAGE_MENU_DRAWER_WIDTH} from "../app/config/measurements";
 
-import {SubPageMenuHeading} from ".";
+import {SubPageMenuHeader} from ".";
 
 import useTheme from "@mui/material/styles/useTheme";
 import Box from "@mui/material/Box";
@@ -8,10 +8,10 @@ import MenuList from "@mui/material/MenuList";
 import Divider from "@mui/material/Divider";
 
 const SubPageMenu = ({
-    headingPrimaryText = "",
-    headingSecondaryText = "",
-    headingTag = null,
-    headingInfo = null,
+    headerTitle = "",
+    headerText = "",
+    headerTag = null,
+    headerContent = null,
     subPageMenuDropdown = null,
     children,
 }) => {
@@ -31,14 +31,14 @@ const SubPageMenu = ({
             <MenuList sx={{color: "white"}} dense disablePadding>
                 {subPageMenuDropdown ? (
                     subPageMenuDropdown || (
-                        <SubPageMenuHeading
-                            headingPrimaryText={headingPrimaryText || "-"}
-                            headingSecondaryText={headingSecondaryText}
-                            headingTag={headingTag}
+                        <SubPageMenuHeader
+                            headerText={headerText || "-"}
+                            headerTitle={headerTitle}
+                            headerTag={headerTag}
                             isSubMenu={true}
                         >
-                            {headingInfo}
-                        </SubPageMenuHeading>
+                            {headerContent}
+                        </SubPageMenuHeader>
                     )
                 ) : (
                     <Divider

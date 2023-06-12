@@ -13,7 +13,7 @@ const QuestionnairesMenu = ({questionnaires, basePath}) => {
 
     return (
         <SubPageMenuListGroup
-            headerText="Cuestionarios"
+            headerTitle="Cuestionarios"
             headerIcon={<AssignmentOutlinedIcon />}
             items={menuItems}
         />

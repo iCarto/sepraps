@@ -1,3 +1,4 @@
+import {createElement} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {CUSTOM_FONT_FAMILY} from "Theme";
@@ -8,12 +9,11 @@ import Paper from "@mui/material/Paper";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import {createElement} from "react";
 
-const PageMenuHeading = ({
-    headingPrimaryText = "",
-    headingSecondaryText = "",
-    headingIcon = null,
+const PageMenuHeader = ({
+    headerText = "",
+    headerTitle = "",
+    headerIcon = null,
     to = null,
     children = null,
 }) => {
@@ -22,7 +22,6 @@ const PageMenuHeading = ({
 
     const buttonStyles = {
         bgcolor: theme.palette.secondary.dark,
-        // bgcolor: theme.palette.secondary.lighter,
         color: "white",
         border: "none",
         mb: 1,
@@ -41,7 +40,7 @@ const PageMenuHeading = ({
     const disabled = !to;
 
     const getIcon = () => {
-        return createElement(headingIcon, {
+        return createElement(headerIcon, {
             fontSize: "large",
             sx: {color: "white"},
         });
@@ -61,7 +60,7 @@ const PageMenuHeading = ({
                         flexDirection: "column-reverse",
                         border: "none",
                     }}
-                    primary={headingPrimaryText}
+                    primary={headerText}
                     primaryTypographyProps={{
                         whiteSpace: "normal",
                         lineHeight: 1.25,
@@ -70,13 +69,13 @@ const PageMenuHeading = ({
                         textTransform: "uppercase",
                         fontFamily: CUSTOM_FONT_FAMILY,
                     }}
-                    secondary={headingSecondaryText}
+                    secondary={headerTitle}
                     secondaryTypographyProps={{
                         lineHeight: 2,
                         color: "white",
                     }}
                 />
-                {headingIcon && (
+                {headerIcon && (
                     <ListItemIcon sx={{justifyContent: "flex-end"}}>
                         {getIcon()}
                     </ListItemIcon>
@@ -87,4 +86,4 @@ const PageMenuHeading = ({
     );
 };
 
-export default PageMenuHeading;
+export default PageMenuHeader;

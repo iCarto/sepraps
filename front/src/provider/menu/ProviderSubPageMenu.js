@@ -1,12 +1,10 @@
-import {useAuth} from "base/user/provider";
 import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
-import {SelectProviderDropDown} from "provider/menu";
+import {SelectProviderDropDown} from "provider/container";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ProviderSubPageMenu = ({provider}) => {
-    const {ROLES} = useAuth();
     const basePath = `/providers/${provider?.id}`;
 
     return (

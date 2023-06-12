@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {FOOTER_HEIGHT, PAGE_MENU_DRAWER_WIDTH} from "../app/config/measurements";
 
-import {PageMenuHeading} from ".";
+import {PageMenuHeader} from ".";
 
 import useTheme from "@mui/material/styles/useTheme";
 import styled from "@mui/material/styles/styled";
@@ -46,10 +46,10 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: prop => prop !== "open"})(
 );
 
 const PageMenu = ({
-    headingPrimaryText = "",
-    headingSecondaryText = "",
-    headingIcon = null,
-    headingUrl = null,
+    headerText = "",
+    headerTitle = "",
+    headerIcon = null,
+    headerUrl = null,
     children,
 }) => {
     const theme = useTheme();
@@ -82,12 +82,12 @@ const PageMenu = ({
             <DrawerHeader />
             <Divider />
             <MenuList sx={{pt: 0, color: "white"}}>
-                {headingPrimaryText ? (
-                    <PageMenuHeading
-                        to={headingUrl}
-                        headingPrimaryText={headingPrimaryText}
-                        headingSecondaryText={headingSecondaryText}
-                        headingIcon={headingIcon}
+                {headerText ? (
+                    <PageMenuHeader
+                        to={headerUrl}
+                        headerText={headerText}
+                        headerTitle={headerTitle}
+                        headerIcon={headerIcon}
                     />
                 ) : null}
 

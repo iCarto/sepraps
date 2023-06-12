@@ -19,7 +19,7 @@ import Box from "@mui/material/Box";
  * If `menuListSubItems` is composed of objects, then the `createButtons` prop must be set to `true`, so that the objects can be used to create their corresponding button.
  */
 
-const PageMenuListGroup = ({headerText = "", headerIcon = null, items = []}) => {
+const PageMenuListGroup = ({headerTitle = "", headerIcon = null, items = []}) => {
     const theme = useTheme();
 
     const menuItems = items.map((menuListSubItem, index) => (
@@ -32,7 +32,7 @@ const PageMenuListGroup = ({headerText = "", headerIcon = null, items = []}) => 
 
     return (
         <>
-            {headerText ? (
+            {headerTitle ? (
                 <ListItem sx={{bgcolor: theme.palette.menu.primary.header.background}}>
                     {headerIcon && (
                         <ListItemIcon
@@ -45,7 +45,7 @@ const PageMenuListGroup = ({headerText = "", headerIcon = null, items = []}) => 
                         </ListItemIcon>
                     )}
                     <ListItemText sx={{color: theme.palette.menu.primary.header.text}}>
-                        {headerText}
+                        {headerTitle}
                     </ListItemText>
                     <KeyboardArrowDownIcon
                         sx={{color: theme.palette.menu.primary.header.text}}

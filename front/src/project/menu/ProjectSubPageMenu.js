@@ -1,7 +1,5 @@
-import {useAuth} from "base/user/provider";
 import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
 import {QuestionnairesMenu} from "questionnaire/presentational";
-import {ClosedProjectTag} from "project/presentational";
 import {SelectProjectDropDown} from "project/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
@@ -12,18 +10,10 @@ import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 
 const ProjectSubPageMenu = ({project}) => {
-    const {ROLES} = useAuth();
     const basePath = `/projects/${project?.id}`;
 
     return (
-        <SubPageMenu
-            subPageMenuDropdown={
-                <SelectProjectDropDown
-                    project={project}
-                    headingTag={project?.closed ? <ClosedProjectTag /> : null}
-                />
-            }
-        >
+        <SubPageMenu subPageMenuDropdown={<SelectProjectDropDown project={project} />}>
             <PageMenuListItemButton
                 key="project-detail"
                 to={`${basePath}/summary`}

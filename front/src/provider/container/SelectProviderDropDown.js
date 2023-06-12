@@ -1,3 +1,4 @@
+import {ProviderService} from "provider/service";
 import {EntityMenuDropDown} from "base/entity/components/presentational";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -13,12 +14,21 @@ const SelectProviderDropDown = ({provider}) => {
         );
     };
 
+    const entityInfo = provider
+        ? {
+              id: provider?.id,
+              title: "Prestador:",
+              slug: "providers",
+              primaryInfo: provider?.name,
+              secondaryInfo: "",
+              tag: null,
+          }
+        : null;
+
     return (
         <EntityMenuDropDown
-            currentItem={provider}
-            urlPrimarySlug="providers"
-            entityPrimaryInfo={provider?.name}
-            headingSecondaryText="Prestador:"
+            entityInfo={entityInfo}
+            service={ProviderService.getAll}
             getDropdownItemContent={getDropdownItemContent}
         />
     );

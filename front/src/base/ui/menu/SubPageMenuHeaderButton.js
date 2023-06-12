@@ -6,10 +6,10 @@ import useTheme from "@mui/material/styles/useTheme";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 
-const SubPageMenuHeadingButton = ({
-    headingPrimaryText = null,
-    headingSecondaryText = "",
-    headingTag = null,
+const SubPageMenuHeaderButton = ({
+    headerText = null,
+    headerTitle = "",
+    headerTag = null,
     isDropDown = false,
     isPopUpOpen = false,
     onClick = null,
@@ -62,7 +62,7 @@ const SubPageMenuHeadingButton = ({
                     justifyContent: "flex-end",
                     border: "none",
                 }}
-                primary={headingPrimaryText}
+                primary={headerText}
                 primaryTypographyProps={{
                     whiteSpace: "normal",
                     lineHeight: 1.25,
@@ -71,15 +71,15 @@ const SubPageMenuHeadingButton = ({
                     textTransform: "uppercase",
                     fontFamily: CUSTOM_FONT_FAMILY,
                 }}
-                secondary={headingSecondaryText}
+                secondary={headerTitle}
                 secondaryTypographyProps={{
                     lineHeight: 2,
                     color: theme.palette.menu.secondary.header.text,
                 }}
             />
-            {headingTag}
+            {headerTag}
         </ListItemButton>
     );
 };
 
-export default SubPageMenuHeadingButton;
+export default SubPageMenuHeaderButton;

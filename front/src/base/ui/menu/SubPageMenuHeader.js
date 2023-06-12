@@ -1,14 +1,14 @@
-import {SubPageMenuHeadingButton} from "base/ui/menu";
+import {SubPageMenuHeaderButton} from "base/ui/menu";
 import useTheme from "@mui/material/styles/useTheme";
 
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 
-const SubPageMenuHeading = ({
+const SubPageMenuHeader = ({
     to = "",
-    headingPrimaryText = "",
-    headingSecondaryText = "",
-    headingTag = null,
+    headerText = "",
+    headerTitle = "",
+    headerTag = null,
     isSubMenu = false,
     children,
 }) => {
@@ -24,10 +24,10 @@ const SubPageMenuHeading = ({
                 mb: 1,
             }}
         >
-            <SubPageMenuHeadingButton
-                headingPrimaryText={headingPrimaryText}
-                headingSecondaryText={headingSecondaryText}
-                headingTag={headingTag}
+            <SubPageMenuHeaderButton
+                headerText={headerText}
+                headerTitle={headerTitle}
+                headerTag={headerTag}
                 isSubMenu={isSubMenu}
                 to={to}
             />
@@ -38,4 +38,4 @@ const SubPageMenuHeading = ({
     );
 };
 
-export default SubPageMenuHeading;
+export default SubPageMenuHeader;

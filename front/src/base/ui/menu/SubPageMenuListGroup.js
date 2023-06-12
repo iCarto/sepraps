@@ -20,7 +20,7 @@ import Divider from "@mui/material/Divider";
  * If `menuListSubItems` is composed of objects, then the `createButtons` prop must be set to `true`, so that the objects can be used to create their corresponding button.
  */
 
-const SubPageMenuListGroup = ({headerText = "", headerIcon = null, items = []}) => {
+const SubPageMenuListGroup = ({headerTitle = "", headerIcon = null, items = []}) => {
     const theme = useTheme();
 
     const submenuItems = items.map((menuListSubItem, index) => (
@@ -33,7 +33,7 @@ const SubPageMenuListGroup = ({headerText = "", headerIcon = null, items = []}) 
 
     return (
         <>
-            {headerText ? (
+            {headerTitle ? (
                 <>
                     <ListItem
                         sx={{
@@ -51,7 +51,7 @@ const SubPageMenuListGroup = ({headerText = "", headerIcon = null, items = []}) 
                         <ListItemText
                             sx={{color: theme.palette.menu.secondary.options.text}}
                         >
-                            {headerText}
+                            {headerTitle}
                         </ListItemText>
                         <KeyboardArrowDownIcon
                             sx={{color: theme.palette.menu.secondary.options.text}}

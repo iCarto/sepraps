@@ -1,8 +1,11 @@
+import {ProjectService} from "project/service";
 import {EntityMenuDropDown} from "base/entity/components/presentational";
+import {ClosedProjectTag} from "project/presentational";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import {TEMPLATE} from "contract/service";
 
-const SelectProjectDropDown = ({project, headingTag = null}) => {
+const SelectProjectDropDown = ({project}) => {
     const getDropdownItemContent = eachProject => {
         return (
             <Stack>
@@ -15,14 +18,24 @@ const SelectProjectDropDown = ({project, headingTag = null}) => {
         );
     };
 
+    console.log(project);
+
+    const entityInfo = project
+        ? {
+              id: project?.id,
+              title: "Proyecto:",
+              slug: "projects",
+              primaryInfo: project?.code,
+              secondaryInfo: `${project?.name}, ${project?.location}`,
+              tag: project?.closed ? <ClosedProjectTag /> : null,
+          }
+        : null;
+
     return (
         <EntityMenuDropDown
-            currentItem={project}
-            urlPrimarySlug="projects"
-            entityPrimaryInfo={project?.code}
-            entitySecondaryInfo={`${project?.name}, ${project?.location}`}
-            headingSecondaryText="Proyecto:"
-            headingTag={headingTag}
+            entityInfo={entityInfo}
+            service={ProjectService.getAll}
+            template={TEMPLATE.SHORT}
             getDropdownItemContent={getDropdownItemContent}
         />
     );

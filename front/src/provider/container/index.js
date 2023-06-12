@@ -13,3 +13,4 @@ export {default as ViewProviderSummarySubPage} from "./ViewProviderSummarySubPag
 export {default as ViewProviderContactsSubPage} from "./ViewProviderContactsSubPage";
 export {default as ViewProvidersContactsSubPage} from "./ViewProvidersContactsSubPage";
 export {default as ViewProvidersStatsPage} from "./ViewProvidersStatsPage";
+export {default as SelectProviderDropDown} from "./SelectProviderDropDown";

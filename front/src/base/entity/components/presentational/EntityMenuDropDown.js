@@ -1,42 +1,56 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 
 import {useList} from "base/entity/hooks";
-import {DropdownMenuItemLink, SubPageMenuHeadingButton} from "base/ui/menu";
+import {DropdownMenuItemLink, SubPageMenuHeaderButton} from "base/ui/menu";
 
 import useTheme from "@mui/material/styles/useTheme";
 import Paper from "@mui/material/Paper";
 import Menu from "@mui/material/Menu";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const EntityMenuDropDown = ({
-    currentItem,
-    entityPrimaryInfo,
-    entitySecondaryInfo = "",
-    urlPrimarySlug = "",
-    headingSecondaryText = "",
+    service,
+    template = "",
+    entityInfo = {
+        id: "",
+        title: "",
+        slug: "",
+        primaryInfo: "",
+        secondaryInfo: "",
+        tag: null,
+    },
     getDropdownItemContent = null,
-    headingTag = null,
 }) => {
+    const [elements, setElements] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [anchorElement, setAnchorElement] = useState(null);
 
-    const {elements} = useList();
-    let location = useLocation();
+    const {filter} = useList();
+    const location = useLocation();
+    const theme = useTheme();
 
     const isOpen = Boolean(anchorElement);
 
-    const theme = useTheme();
+    useEffect(() => {
+        setLoading(true);
+        service(filter, false, false, template).then(data => {
+            setElements(data);
+            setLoading(false);
+        });
+    }, [filter]);
 
-    const getSubPageUrlSlug = () => {
+    const getUrl = itemId => {
         const urlSlugs = location.pathname
-            .substring(location.pathname.indexOf(currentItem?.id) + 1)
+            .substring(location.pathname.indexOf(entityInfo?.id) + 1)
             .split("/");
 
         if (urlSlugs[1] !== "questionnaires") {
-            return urlSlugs[1];
+            return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}`;
         }
-        return `${urlSlugs[1]}/${urlSlugs[2]}`;
+        return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/${urlSlugs[2]}`;
     };
 
     const handleClick = event => {
@@ -57,7 +71,7 @@ const EntityMenuDropDown = ({
                     lineHeight: 1.25,
                 }}
             >
-                {entityPrimaryInfo}
+                {entityInfo?.primaryInfo}
             </Typography>
             <Typography
                 variant="overline"
@@ -68,7 +82,7 @@ const EntityMenuDropDown = ({
                     letterSpacing: "0.5px",
                 }}
             >
-                {entitySecondaryInfo}
+                {entityInfo?.secondaryInfo}
             </Typography>
         </Stack>
     );
@@ -84,17 +98,25 @@ const EntityMenuDropDown = ({
                     mb: 1,
                 }}
             >
-                <SubPageMenuHeadingButton
-                    headingPrimaryText={entityBasicInfo}
-                    headingSecondaryText={headingSecondaryText}
-                    headingTag={headingTag}
-                    isDropDown={true}
-                    onClick={handleClick}
-                    isPopUpOpen={isOpen}
-                />
+                {entityInfo ? (
+                    <SubPageMenuHeaderButton
+                        headerText={entityBasicInfo}
+                        headerTitle={entityInfo?.title}
+                        headerTag={entityInfo?.tag}
+                        isDropDown={true}
+                        onClick={handleClick}
+                        isPopUpOpen={isOpen}
+                    />
+                ) : (
+                    <Stack
+                        sx={{p: 0.5, justifyContent: "center", alignItems: "center"}}
+                    >
+                        <CircularProgress size={30} />
+                    </Stack>
+                )}
             </Paper>
 
-            {elements.length > 0 && (
+            {elements.length && (
                 <Menu
                     id="lock-menu"
                     anchorEl={anchorElement}
@@ -119,10 +141,8 @@ const EntityMenuDropDown = ({
                                 variant="menu"
                                 key={item.id}
                                 id={item.id}
-                                to={`/${urlPrimarySlug}/${
-                                    item.id
-                                }/${getSubPageUrlSlug()}`}
-                                selected={item.id === currentItem?.id}
+                                to={getUrl(item.id)}
+                                selected={item.id === entityInfo?.id}
                                 onClick={handleClose}
                             >
                                 {getDropdownItemContent(item)}
