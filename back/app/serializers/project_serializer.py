@@ -310,3 +310,8 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
 
     def get_milestones(self, obj):
         return MilestoneSummarySerializer(obj.milestones, many=True).data
+
+
+class ProjectShortSerializer(ProjectSerializer):
+    class Meta(ProjectSerializer.Meta):
+        fields = ("id", "code", "closed", "linked_localities")

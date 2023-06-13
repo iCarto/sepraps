@@ -22,6 +22,7 @@ from app.serializers.project_questionnaire_instance_serializer import (
 )
 from app.serializers.project_serializer import (
     ProjectSerializer,
+    ProjectShortSerializer,
     ProjectSummarySerializer,
 )
 from questionnaires.models.questionnaire import Questionnaire
@@ -110,6 +111,9 @@ class ProjectViewSet(ModelListViewSet):
 
     def get_serializer_class(self):
         if self.action == "list":
+            template = self.request.query_params.get("template")
+            if template == "short":
+                return ProjectShortSerializer
             return ProjectSummarySerializer
         return super().get_serializer_class()
 
