@@ -45,13 +45,6 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
         "asc"
     );
 
-    const tableRowStyle = {
-        "&:last-child td, &:last-child th": {
-            border: 0,
-        },
-        paddingRight: "12px",
-    };
-
     const handleRequestSort = (event, property) => {
         const isAsc = attribute === property && order === "asc";
         setOrder(isAsc ? "desc" : "asc");
@@ -79,7 +72,6 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                             <TableRow
                                 hover
                                 key={project.id}
-                                sx={tableRowStyle}
                                 onClick={() => handleClick(project)}
                                 selected={selectedElement?.id === project.id}
                                 style={noPointer}

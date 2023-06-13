@@ -18,10 +18,6 @@ const StatsTable = ({tableColumns = [], elements = []}) => {
     );
 
     const tableRowStyle = {
-        "&:last-child td, &:last-child th": {
-            border: 0,
-        },
-        paddingRight: "12px",
         cursor: "pointer",
     };
 

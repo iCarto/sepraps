@@ -18,12 +18,6 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
         handleActions(localityCode, buttonName.split("-")[0]);
     };
 
-    const tableRowStyle = {
-        "&:last-child td, &:last-child th": {
-            border: 0,
-        },
-    };
-
     return (
         <TableContainer>
             <Table aria-label="localities table" size="small">
@@ -43,7 +37,7 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                 </TableHead>
                 <TableBody>
                     {localities?.map(locality => (
-                        <TableRow key={locality.code} sx={tableRowStyle}>
+                        <TableRow key={locality.code}>
                             <TableCell component="th" scope="row" sx={{pl: 0}}>
                                 {locality.name}
                             </TableCell>
@@ -60,7 +54,7 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                                     >
                                         <ActionsMenu>
                                             <MenuAction
-                                                id="remove-contact"
+                                                key="remove-contact"
                                                 icon={<LinkOffIcon />}
                                                 text="Quitar localidad"
                                                 element={locality.code}

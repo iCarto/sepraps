@@ -25,10 +25,6 @@ import Pagination from "@mui/material/Pagination";
 const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
 
 const tableRowStyle = {
-    "&:last-child td, &:last-child th": {
-        border: 0,
-    },
-    paddingRight: "12px",
     cursor: "pointer",
 };
 

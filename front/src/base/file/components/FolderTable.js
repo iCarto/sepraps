@@ -71,13 +71,6 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
 
     const pointer = {cursor: "pointer"};
 
-    const tableRowStyle = {
-        "&:last-child td, &:last-child th": {
-            border: 0,
-        },
-        paddingRight: "12px",
-    };
-
     return (
         <TableContainer sx={{overflowX: "auto"}}>
             {folderElements?.length ? (
@@ -102,7 +95,6 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                                     <TableRow
                                         hover
                                         key={index}
-                                        sx={tableRowStyle}
                                         selected={
                                             selectedElement?.name === folderElement.name
                                         }

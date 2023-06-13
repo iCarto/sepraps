@@ -162,6 +162,17 @@ const customTheme = createTheme({
             },
         },
 
+        MuiTableRow: {
+            styleOverrides: {
+                root: {
+                    paddingRight: "12px",
+                    "&:last-child td, &:last-child th": {
+                        border: 0,
+                    },
+                },
+            },
+        },
+
         MuiTableSortLabel: {
             styleOverrides: {
                 root: {
