@@ -43,21 +43,17 @@ const SectionField = ({
     let valueWidth;
 
     switch (`${containerWidth}`) {
+        case "long":
+            labelWidth = editButton ? 9 : 9;
+            valueWidth = editButton ? 2 : 3;
+            break;
         case "short":
-            labelWidth = editButton ? 5 : 5;
-            valueWidth = editButton ? 6 : 7;
-            break;
-        case "shortLabel":
-            labelWidth = editButton ? 5 : 3;
-            valueWidth = editButton ? 6 : 9;
-            break;
-        case "longLabel":
             labelWidth = editButton ? 6 : 7;
             valueWidth = editButton ? 5 : 5;
             break;
         default:
-            labelWidth = editButton ? 4 : 4;
-            valueWidth = editButton ? 7 : 8;
+            labelWidth = editButton ? 6 : 6;
+            valueWidth = editButton ? 5 : 6;
             break;
     }
 
@@ -75,10 +71,6 @@ const SectionField = ({
         fontWeight: "regular",
         ...valueCustomStyle,
     };
-
-    const LabelIcon = labelIcon;
-
-    const isValueValid = value || value === 0;
 
     const regularField = (
         <>
@@ -108,6 +100,10 @@ const SectionField = ({
         </Typography>
     );
 
+    const LabelIcon = labelIcon;
+    const isValueValid = value || value === 0;
+    const typeOfField = linkPath ? linkField : regularField;
+
     return (
         <Grid container>
             <Grid
@@ -132,9 +128,7 @@ const SectionField = ({
                 )}
             </Grid>
             <Grid item container xs="auto" sm={7} lg={valueWidth} alignItems="flex-end">
-                <Grid item>
-                    {isValueValid ? (linkPath ? linkField : regularField) : emptyField}
-                </Grid>
+                <Grid item>{isValueValid ? typeOfField : emptyField}</Grid>
                 {editButton ? (
                     <Grid item xs={1}>
                         <SectionFieldEditButton onClick={navigate(editButtonPath)} />
