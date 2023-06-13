@@ -14,7 +14,6 @@ const ListProvidersPage = () => {
             tableColumns={tableColumns}
             filterForm={<ProviderFilterForm />}
             basePath="providers"
-            subPage={false}
         />
     );
 };

@@ -1,21 +1,20 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
-import Grid from "@mui/material/Grid";
-import {Stack} from "@mui/material";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {useList} from "base/entity/hooks";
+import {useAuth} from "base/user/provider";
 import {
     EntityCardsList,
     EntityChangeView,
     EntityCreateButton,
     EntityListMap,
     EntityTable,
-} from "../presentational";
-import {useAuth} from "base/user/provider";
-import {useNavigateWithReload} from "base/navigation/hooks";
-import {useList} from "base/entity/hooks";
+} from "base/entity/components/presentational";
+import {EntityFilterForm} from "base/entity/components/form";
 import {PageLayout} from "base/ui/main";
 import {PaperContainer} from "base/shared/components";
-import {EntityFilterForm} from "../form";
+import Grid from "@mui/material/Grid";
 
 const EntityListPage = ({
     views = ["table", "map"],
@@ -86,19 +85,35 @@ const EntityListPage = ({
         filter && (
             <PageLayout subPage={subPage}>
                 <PaperContainer>
-                    <Grid item container alignItems="center" xs={12}>
-                        <Grid item xs={6}>
+                    <Grid
+                        item
+                        container
+                        spacing={2}
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
+                    >
+                        <Grid item xs={8} role="form">
                             {filterForm || <EntityFilterForm entityName={entityName} />}
                         </Grid>
-                        <Grid item container xs={6} justifyContent="flex-end">
-                            <Stack direction="row" spacing={2}>
-                                {createButton ? (
+                        <Grid
+                            item
+                            container
+                            xs={4}
+                            spacing={1}
+                            direction={{xs: "column", lg: "row"}}
+                            justifyContent="flex-end"
+                            alignItems={{xs: "flex-end", lg: "flex-start"}}
+                        >
+                            {createButton ? (
+                                <Grid item>
                                     <EntityCreateButton basePath={basePath} />
-                                ) : null}
-                                {views.length > 1 ? (
+                                </Grid>
+                            ) : null}
+                            {views.length > 1 ? (
+                                <Grid item>
                                     <EntityChangeView views={views} />
-                                ) : null}
-                            </Stack>
+                                </Grid>
+                            ) : null}
                         </Grid>
                     </Grid>
                     <Grid item xs={12} sx={{mt: 3}}>

@@ -16,7 +16,6 @@ const ListProjectsPage = () => {
             filterForm={<ProjectFilterForm />}
             basePath="projects"
             card={ProjectCard}
-            subPage={false}
         />
     );
 };

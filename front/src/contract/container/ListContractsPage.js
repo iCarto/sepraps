@@ -16,7 +16,6 @@ const ListContractsPage = () => {
             filterForm={<ContractFilterForm />}
             basePath="contracts"
             card={ContractCard}
-            subPage={false}
         />
     );
 };
