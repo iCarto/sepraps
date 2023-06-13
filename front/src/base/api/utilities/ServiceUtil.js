@@ -19,14 +19,20 @@ const ServiceRequestFormat = Object.freeze({
 });
 
 const ServiceUtil = {
-    getQueryString(page, filter, sort, order) {
+    getQueryString(page, filter, sort, order, template) {
         return `${this.getPageQueryString(page)}&${this.getFilterQueryString(
             filter
-        )}&${this.getOrderQueryString(sort, order)}&`;
+        )}&${this.getOrderQueryString(sort, order)}&${this.getTemplateString(
+            template
+        )}&`;
     },
 
     getPageQueryString(page) {
         return page != null ? `page=${page}` : "";
+    },
+
+    getTemplateString(template) {
+        return template != null ? `template=${template}` : "";
     },
 
     getFilterQueryString(filter) {

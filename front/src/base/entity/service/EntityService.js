@@ -22,13 +22,14 @@ class EntityService {
         this.#objects_api_adapter = objects_api_adapter;
     }
 
-    getList(filter, page, sort, order, format = null) {
+    getList(filter, page, sort, order, template, format = null) {
         return AuthApiService.get(
             `${this.#base_path}?${ServiceUtil.getQueryString(
                 page,
                 filter,
                 sort,
-                order
+                order,
+                template
             )}`,
             ServiceUtil.getAcceptHeader(format)
         ).then(response => {
