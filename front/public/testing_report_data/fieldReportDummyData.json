@@ -1,86 +1,146 @@
 {
+    "report_name": "Visita de Fiscalización de Obras - Ciudad de Yhú, Distrito de Yhú - Dpto. Caaguazú",
     "report_code": "M TS 29-22",
-    "report_date": "2022-02-22",
-    "report_name": "Informe de actividades",
-    "reporting_person_name": "Sonia Villalba",
+    "report_date": "2023-06-09",
+    "visit_dates": "16/02/2023 - 18/02/2023",
+    "visit_date_start": "2023-06-01",
+    "visit_date_end": "2023-06-06",
+    "reporting_person_name": "Licenciada Sonia Villalva",
     "reporting_person_role": "Técnica Social - ECATEF/UPC-SENASA/BID",
     "other_reporting_persons": [
-        {"name": "Lic. Teódulo Morinigo", "role": "Especialista Social"},
-        {"name": "Ing. Giovanni Bertoli", "role": "área técnica"}
+        {"name": "Licenciado Teódulo Morinigo", "role": "Especialista Social"},
+        {"name": "Doctor Amado Rivas", "role": "área técnica"}
     ],
-    "reported_person_name": "Lic. Claudia Vera",
-    "reported_person_role": "Coordinadora General - UPC-SENASA/BID/FONPRODE",
-    "report_comments": "Dicha tarea consistió en dar asistencia a la Comisión Directiva de la Junta de Saneamiento y usuarios/as en general para la realización de la excavación de zanja e instalación de tubos para la red de distribución.",
-    "activities_dates": "16 al 18 de febrero",
-    "contract_code": "11/2021 - CONFORTEC SRL",
-    "project_name": "Construcción de Componentes de Sistemas de Abastecimiento de Agua Potable en Localidades rurales de la región oriental del país, modalidad contrato marco",
-    "visited_localities": [
+    "reported_persons": [
+        {"name": "Licenciada Claudia Vera", "role": "Especialista Social"},
+        {"name": "Ingeniero Juan Pereria", "role": "Especialista Social"}
+    ],
+    "report_comments_start": "Por este medio me dirijo a Usted y por su intermedio a quien corresponde, a fin de remitirle el informe de las Actividades realizadas en fechas 16 al 18 de febrero del corriente, en el marco Construcción de Componentes de Sistemas de Abastecimiento de Agua Potable en Localidades rurales de la región oriental del país, modalidad contrato marco.",
+    "report_comments_end": "Se adjunta listado proporcionado por la Junta de Saneamiento por sector/número de casa.",
+    "visit_goals": [
+        {
+            "text": "Dar asistencia a la Comisión Directiva de la Junta de Saneamiento y usuarios/as en general para la realización de la excavación de zanja e instalación de tubos para la red de distribución."
+        },
+        {"text": "Objetivo 2"},
+        {"text": "Objetivo 3"}
+    ],
+    "visited_contracts": [{"code": "XXXXX"}, {"code": "YYYYYY"}],
+    "visited_projects": [
         {
             "id": 1,
+            "code": "2022-AP-008",
+            "contract": "15/2019",
             "locality": "Cumbre",
             "district": "Pedro Juan Caballero (Cerro Corá)",
             "department": "Amambay",
-            "notes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur luctus pulvinar hendrerit. Aenean quis tellus eros. Pellentesque cursus, enim ut ultricies tempor, sapien augue laoreet ante, in cursus magna libero sit amet neque. Ut vel congue enim, ut rhoncus felis. Donec volutpat enim eget nunc gravida posuere eu quis nisl. Nam scelerisque iaculis dui, vitae ullamcorper nisi. Nulla id dictum sapien, tristique tempor velit. Nulla eu commodo enim. Mauris tincidunt augue vel elit facilisis efficitur. Quisque justo nulla, tristique et scelerisque vel, tincidunt vitae nulla. In sed enim id mi vehicula lacinia a et erat.",
-            "images": [
+            "history": "Comunidades Indígenas de la Región Oriental- Entrega de sitio y relevamiento Técnico de los componentes que faltan para poner en funcionamiento el Sistema de Agua—en el Marco del Contrato Marco II - Contrato N° 33/2022 Empresa Contratista Ricardo Diaz Martínez.",
+            "agreements": "Los líderes se comprometen a limpiar el sitio y acompañar a la Empresa para facilitar los trabajos.",
+            "activities": [
                 {
-                    "url": "/images/testing_field_report/field_report_img_12.31.34.png",
-                    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non porta felis, quis faucibus nunc. Nulla turpis massa, sagittis eu arcu non, imperdiet consequat quam. Nullam ultricies purus in dui."
+                    "id": 1,
+                    "title": "Visita a la comunidad",
+                    "date": "2023/02/16",
+                    "notes": "Revisión general de la marcha del proyecto. Alcantarillado y mejoramiento del sistema de agua potable, fueron los temas de la reunión con los miembros de la Junta de saneamiento y los técnicos respectivamente. Se informa que el Ing. Raúl Riveros por la Junta de Saneamiento se suma al equipo técnico para tratar de fortalecer los trabajos. A las 13.00 hs se visita a predio de la Planta de tratamiento con representantes de la Junta de Saneamiento, Fiscalización, y Contratista, verificando los niveles de la laguna facultativa 2, para la colocación de la Geomembrana y perfilado de talud externo para posterior empastado.",
+                    "images": [
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.34.png",
+                            "comment": "Figura 1"
+                        },
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                            "comment": "Figura 2"
+                        },
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.46.png",
+                            "comment": "Figura 3"
+                        }
+                    ]
                 },
                 {
-                    "url": "/images/testing_field_report/field_report_img_12.31.40.png",
-                    "comment": "Fusce ac mauris nec magna ornare placerat. Phasellus ac auctor turpis, id elementum urna. Morbi hendrerit ullamcorper tortor ut dignissim."
-                },
-                {
-                    "url": "/images/testing_field_report/field_report_img_12.31.46.png",
-                    "comment": ""
+                    "id": 2,
+                    "title": "Visita al contratista",
+                    "date": "2023/02/17",
+                    "notes": "Se han verificado un total de 20 unidades sanitarias básicas, en las que se realizan las siguientes observaciones. Como se observa en la figura 1, hay muretes ejecutados con mezcla elaborada utilizando tierra del lugar en vez de arena lavada. Colocación inadecuada de los ladrillos. Pileta fijada al soporte metálico con 4 tornillos en vez de 6. Mala terminación en general, falta de limpieza y retiro de material sobrante, restos de mezcla. Como se observa en la figura 2 los Cuidados y terminaciones varias que se deben tener en cuenta luego corregir el tipo de arena utilizado.",
+                    "images": [
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.52.png",
+                            "comment": "Imagen 1"
+                        },
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.54.png",
+                            "comment": "Imagen 2"
+                        }
+                    ]
                 }
             ]
         },
         {
             "id": 4,
+            "code": "2022-AP-005",
+            "contract": "15/2019",
             "locality": "1ero de Mayo",
             "district": "Pedro Juan Caballero (Cerro Corá)",
             "department": "Amambay",
-            "notes": "Praesent ac augue malesuada, malesuada augue vitae, mollis tellus. Etiam condimentum mauris vitae lacus posuere porttitor. Proin lacinia, augue eu laoreet finibus, ex risus interdum turpis, id placerat quam velit vitae urna. Quisque interdum commodo mauris non tempor. Aenean massa elit, cursus consectetur justo et, iaculis porta massa. Mauris cursus turpis mi, eu commodo nibh finibus a. Donec sit amet lacus ut leo dictum hendrerit nec a ante.",
-            "images": [
+            "history": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit velit lacinia lorem vulputate auctor. Nullam hendrerit, leo a aliquam scelerisque, magna lacus auctor velit, id lobortis est quam vel nisi. Etiam egestas magna semper pellentesque consectetur. Mauris porta odio ornare, aliquam nisl ut, blandit augue. Praesent feugiat faucibus pretium.",
+            "activities": [
                 {
-                    "url": "/images/testing_field_report/field_report_img_12.31.52.png",
-                    "comment": ""
-                },
-                {
-                    "url": "/images/testing_field_report/field_report_img_12.31.34.png",
-                    "comment": "Fusce ac mauris nec magna ornare placerat. Phasellus ac auctor turpis, id elementum urna. Nulla at accumsan nisl. Cras rutrum rutrum scelerisque. Pellentesque accumsan diam quis condimentum suscipit. Vivamus vehicula feugiat facilisis. Morbi hendrerit ullamcorper tortor ut dignissim."
-                },
-                {
-                    "url": "/images/testing_field_report/field_report_img_12.31.46.png",
-                    "comment": "Nulla turpis massa, sagittis eu arcu non, imperdiet consequat quam. Nullam ultricies purus in dui."
-                },
-                {
-                    "url": "/images/testing_field_report/field_report_img_12.31.40.png",
-                    "comment": ""
+                    "id": 1,
+                    "title": "Visita a la obra",
+                    "date": "2023/02/17",
+                    "notes": "",
+                    "images": [
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.54.png",
+                            "comment": "Imagen 2"
+                        }
+                    ]
                 }
             ]
         },
         {
             "id": 10,
+            "code": "2022-AP-004",
+            "contract": "13/2019",
             "locality": "María Auxiliadora 3era zona",
             "district": "Pedro Juan Caballero (Cerro Corá)",
             "department": "Amambay",
-            "notes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum viverra rutrum neque eu vehicula. Fusce vitae turpis augue. Donec quis orci luctus, hendrerit metus a, rutrum odio. Donec sed commodo lorem. Integer neque neque, fermentum ut volutpat ac, tincidunt at metus. In libero erat, tristique nec consectetur a, suscipit non arcu. Maecenas auctor finibus varius. Donec nisi arcu, porttitor a sem ac, ultrices elementum justo. Praesent ipsum tellus, porta consectetur dignissim nec, ultricies et lectus. Maecenas congue lectus a dolor sodales, eget suscipit eros rutrum. Praesent ut ante eget risus maximus vehicula a ac neque.",
-            "images": [
+            "history": "Sed mattis diam tortor, sit amet laoreet nisl interdum eget. Aliquam velit dolor, fringilla sit amet libero id, rhoncus ullamcorper mi. Vivamus ut dui eu nisi placerat vulputate.",
+            "activities": [
                 {
-                    "url": "/images/testing_field_report/field_report_img_12.31.46.png",
-                    "comment": ""
-                },
-                {
-                    "url": "/images/testing_field_report/field_report_img_12.31.34.png",
-                    "comment": "Cras rutrum rutrum scelerisque. Pellentesque accumsan diam quis condimentum suscipit. Vivamus vehicula feugiat facilisis."
-                },
-                {
-                    "url": "/images/testing_field_report/field_report_img_12.31.52.png",
-                    "comment": ""
+                    "id": 1,
+                    "title": "Visita a la obra",
+                    "date": "2023/02/17",
+                    "notes": "",
+                    "images": [
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                            "comment": "Figura 2"
+                        },
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.52.png",
+                            "comment": "Imagen 1"
+                        },
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                            "comment": "Figura 2"
+                        },
+                        {
+                            "url": "/images/testing_field_report/field_report_img_12.31.46.png",
+                            "comment": "Figura 3"
+                        }
+                    ]
                 }
             ]
+        },
+        {
+            "id": 11,
+            "code": "2022-AP-006",
+            "contract": "13/2019",
+            "locality": "Acaray Costa",
+            "district": "Itakyry",
+            "department": "Alto Paraná",
+            "history": "",
+            "activities": []
         }
     ]
 }
