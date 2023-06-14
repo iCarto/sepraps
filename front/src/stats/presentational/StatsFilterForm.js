@@ -77,7 +77,7 @@ const StatsFilterForm = ({
                 views.includes("administrativeDivisions")
                     ? LocationService.getAdministrativeDivisions()
                     : null,
-                views.includes("providers") ? ProviderService.getAll(false, 1) : null,
+                views.includes("providers") ? ProviderService.getList(false, 1) : null,
             ]).then(
                 ([
                     financingFunds,

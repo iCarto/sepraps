@@ -28,7 +28,7 @@ const SelectProviderDropDown = ({provider}) => {
     return (
         <EntityMenuDropDown
             entityInfo={entityInfo}
-            service={ProviderService.getAll}
+            service={ProviderService.getList}
             getDropdownItemContent={getDropdownItemContent}
         />
     );
