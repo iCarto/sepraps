@@ -32,8 +32,8 @@ const ProviderFormLegalDataFields = ({orientation = "column"}) => {
                 </Grid>
                 <Grid item xs={orientation === "column" ? 12 : 6}>
                     <FormCheckbox
-                        name="is_provider_contract_signed_label"
-                        label="Contrato Permisionario firmado"
+                        name="is_provider_contract_signed"
+                        label="Contrato permisionario firmado"
                     />
                 </Grid>
                 <Grid item xs={12}>

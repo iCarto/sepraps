@@ -24,9 +24,11 @@ const ViewProviderPanel = () => {
 
     return (
         provider && (
-            <EntityViewPanel onClickDetailButton={handleClickDetail} title="Prestador">
+            <EntityViewPanel
+                onClickDetailButton={handleClickDetail}
+                title="Prestador de servicios"
+            >
                 <SectionCard title={provider.name}>
-                    <SectionField label="Nombre" value={provider.name} />
                     <SectionField label="Área" value={provider.area_label} />
                     <SectionField label="Tipo" value={provider.type_label} />
                     <SectionField
@@ -38,7 +40,7 @@ const ViewProviderPanel = () => {
                         value={provider.number_of_women}
                     />
                     <SectionField
-                        label="Contrato Permisionario firmado"
+                        label="Contrato permisionario firmado"
                         value={provider.is_provider_contract_signed_label}
                     />
                     <SectionField

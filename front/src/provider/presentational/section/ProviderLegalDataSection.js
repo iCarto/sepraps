@@ -29,7 +29,7 @@ const ProviderLegalDataSection = ({provider}) => {
         <SectionCard title="Datos legales" secondaryActions={secondaryActions}>
             <SectionField label="Tipo de prestador" value={provider.type_label} />
             <SectionField
-                label="Contrato Permisionario firmado"
+                label="Contrato permisionario firmado"
                 value={provider.is_provider_contract_signed_label}
             />
             <SectionField
