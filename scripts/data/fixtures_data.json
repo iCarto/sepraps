@@ -67,8 +67,8 @@
         "pk": null,
         "fields": {
             "category": "contact_post",
-            "key": "presidencia_junta_saneamiento",
-            "value": "Presidencia de la Junta de Saneamiento"
+            "key": "presidencia_prestador",
+            "value": "Presidencia"
         }
     },
     {
@@ -76,8 +76,8 @@
         "pk": null,
         "fields": {
             "category": "contact_post",
-            "key": "tesoreria_junta_saneamiento",
-            "value": "Tesorería de la Junta de Saneamiento"
+            "key": "vicepresidencia_prestador",
+            "value": "Vicepresidencia"
         }
     },
     {
@@ -85,8 +85,8 @@
         "pk": null,
         "fields": {
             "category": "contact_post",
-            "key": "secretaria_junta_saneamiento",
-            "value": "Secretaría de la Junta de Saneamiento"
+            "key": "tesoreria_prestador",
+            "value": "Tesorería"
         }
     },
     {
@@ -94,8 +94,26 @@
         "pk": null,
         "fields": {
             "category": "contact_post",
-            "key": "otra_junta_saneamiento",
-            "value": "Otra responsabilidad la Junta de Saneamiento"
+            "key": "secretaria_prestador",
+            "value": "Secretaría"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "vocal_prestador",
+            "value": "Vocal"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "contact_post",
+            "key": "otra_prestador",
+            "value": "Otra responsabilidad"
         }
     },
     {

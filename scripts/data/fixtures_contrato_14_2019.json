@@ -155,7 +155,7 @@
         "fields": {
             "entity": 6,
             "contact": 15,
-            "post": "presidencia_junta_saneamiento"
+            "post": "presidencia_prestador"
         }
     },
     {
@@ -174,7 +174,7 @@
         "fields": {
             "entity": 6,
             "contact": 16,
-            "post": "tesoreria_junta_saneamiento"
+            "post": "tesoreria_prestador"
         }
     },
     {
@@ -193,7 +193,7 @@
         "fields": {
             "entity": 6,
             "contact": 17,
-            "post": "secretaria_junta_saneamiento"
+            "post": "secretaria_prestador"
         }
     },
     {
