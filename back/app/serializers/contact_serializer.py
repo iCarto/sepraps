@@ -27,10 +27,6 @@ class ContactListSerializer(serializers.ListSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(allow_null=True)
-    gender_name = serializers.SerializerMethodField()
-    is_staff = serializers.SerializerMethodField()
-
     class Meta(object):
         model = Contact
         fields = (
@@ -38,16 +34,16 @@ class ContactSerializer(serializers.ModelSerializer):
             "name",
             "gender",
             "gender_name",
+            "ci_number",
             "phone",
             "email",
             "comments",
             "is_staff",
         )
-        extra_kwargs = {
-            "phone": {"allow_null": True, "allow_blank": True},
-            "email": {"allow_null": True, "allow_blank": True},
-            "comments": {"allow_null": True, "allow_blank": True},
-        }
+
+    id = serializers.IntegerField(allow_null=True)
+    gender_name = serializers.SerializerMethodField()
+    is_staff = serializers.SerializerMethodField()
 
     def get_gender_name(self, obj):
         return obj.get_gender_name()

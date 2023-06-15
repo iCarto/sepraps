@@ -63,6 +63,7 @@ class ContactRelationshipSerializer(BaseDomainMixin, serializers.ModelSerializer
     name = serializers.CharField(source="contact.name")
     gender = serializers.CharField(source="contact.gender")
     gender_name = serializers.SerializerMethodField()
+    ci_number = serializers.CharField(source="contact.ci_number", allow_null=True)
     phone = serializers.CharField(
         source="contact.phone", allow_null=True, allow_blank=True
     )
@@ -82,6 +83,7 @@ class ContactRelationshipSerializer(BaseDomainMixin, serializers.ModelSerializer
             "post",
             "gender",
             "gender_name",
+            "ci_number",
             "phone",
             "email",
             "comments",

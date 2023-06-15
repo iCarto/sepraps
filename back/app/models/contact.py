@@ -17,6 +17,7 @@ class Contact(models.Model):
     name = models.CharField("Nombre", max_length=255)
     post = models.CharField("Cargo", max_length=50, null=True)
     gender = models.CharField("Género", max_length=2, choices=GENDER_CHOICES)
+    ci_number = models.IntegerField("Género", null=True)
     phone = models.CharField("Celular", max_length=20)
     email = models.CharField("E-mail", max_length=255)
     comments = models.TextField("Observaciones", max_length=500)
