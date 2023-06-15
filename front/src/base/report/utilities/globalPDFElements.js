@@ -5,6 +5,7 @@ import {CUSTOM_COLORS} from "Theme";
 
 export const globalPDFElements = {
     pageMargin: 15,
+    // pageMargin: 20,
     pagePaddingTop: 45,
 
     getPageMargins() {
@@ -29,21 +30,60 @@ export const globalPDFElements = {
             pageMargins: this.getPageMargins(),
             pagePaddingTop: this.pagePaddingTop,
             contentPositionTop: contentPositionTop,
+            fontSizeRegular: 10,
+            fontSizeHeadingOne: 18,
+            fontSizeHeadingTwo: 14,
         };
+    },
+
+    drawLine(doc, positionY) {
+        doc.setDrawColor(CUSTOM_COLORS.text.primary).line(
+            this.pageMargin,
+            positionY,
+            globalPDFElements.getPageWidth(doc),
+            positionY
+        );
     },
 
     drawHeader(doc, reportHeading) {
         const logoWidth = 45;
-        const logoHeight = 13;
+        const logoHeight = 14;
         const logoPositionRight = this.getPageWidth(doc) - logoWidth;
         const textPositionTop = 24;
 
-        doc.setFontSize(18);
-        doc.setTextColor(CUSTOM_COLORS.primary.main);
-        doc.text(reportHeading, this.pageMargin, textPositionTop, {
-            maxWidth: logoPositionRight,
-            baseline: "bottom",
-        });
+        const pageCount = doc.internal.getNumberOfPages();
+
+        for (let i = 2; i <= pageCount; i++) {
+            if (i !== 0) doc.setPage(i);
+            doc.setFontSize(18)
+                .setTextColor(CUSTOM_COLORS.primary.main)
+                .text(reportHeading, this.pageMargin, textPositionTop, {
+                    maxWidth: logoPositionRight,
+                    baseline: "bottom",
+                });
+
+            doc.addImage(
+                APP_LOGO_URL,
+                "png",
+                logoPositionRight,
+                logoHeight,
+                logoWidth,
+                logoHeight
+            );
+            doc.setDrawColor(CUSTOM_COLORS.primary.main).line(
+                this.pageMargin,
+                30,
+                this.getPageWidth(doc),
+                30
+            );
+        }
+
+        doc.setFontSize(18)
+            .setTextColor(CUSTOM_COLORS.primary.main)
+            .text(reportHeading, this.pageMargin, textPositionTop, {
+                maxWidth: logoPositionRight,
+                baseline: "bottom",
+            });
 
         doc.addImage(
             APP_LOGO_URL,
@@ -53,22 +93,33 @@ export const globalPDFElements = {
             logoWidth,
             logoHeight
         );
-        doc.setDrawColor(CUSTOM_COLORS.primary.main);
-        doc.line(this.pageMargin, 30, this.getPageWidth(doc), 30);
+        doc.setDrawColor(CUSTOM_COLORS.primary.main).line(
+            this.pageMargin,
+            30,
+            this.getPageWidth(doc),
+            30
+        );
     },
 
     drawFooter(doc) {
         const pageCount = doc.internal.getNumberOfPages();
-        const currentPage = doc.internal.getCurrentPageInfo().pageNumber;
 
-        const footerText = `${DateUtil.formatDate(
-            new Date()
-            // )} - Página ${currentPage} de ${pageCount}`;
-        )} - Página ${currentPage}`;
+        for (let i = 2; i <= pageCount; i++) {
+            const footerText = `${DateUtil.formatDate(new Date())} - Página ${String(
+                i
+            )} de ${String(pageCount)}`;
 
-        doc.setFontSize(8);
-        doc.setTextColor(CUSTOM_COLORS.grey["500"]);
-        doc.text(footerText, this.getPageWidth(doc) - 28, this.getPageHeight(doc) + 5);
+            if (i !== 0)
+                doc.setPage(i)
+                    .setFont(undefined, "normal")
+                    .setFontSize(8)
+                    .setTextColor(CUSTOM_COLORS.grey["500"])
+                    .text(
+                        footerText,
+                        this.getPageWidth(doc) - 33,
+                        this.getPageHeight(doc) + 5
+                    );
+        }
     },
 
     drawSummaryTable(doc, entityData, sectionData, summaryPositionTop) {
@@ -103,7 +154,7 @@ export const globalPDFElements = {
                 1: {cellPadding: 0.5, halign: "left", fontSize: 9},
             },
             pageBreak: "avoid",
-            didDrawPage: function(data) {
+            didDrawPage: () => {
                 globalPDFElements.drawHeader(doc, entityData);
                 globalPDFElements.drawFooter(doc);
             },
