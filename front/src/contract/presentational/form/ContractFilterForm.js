@@ -60,7 +60,7 @@ const ContractFilterForm = ({onClear = null}) => {
             awarding_date_max: filter?.awarding_date_max || null,
             status: filter?.status || "active",
             switchStatus: filter?.switchStatus || false,
-            searchText: filter?.searchText || "",
+            searchText: filter?.search || "",
         },
     });
 

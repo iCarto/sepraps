@@ -12,7 +12,7 @@ const ProviderFilterForm = () => {
 
     const formMethods = useForm({
         defaultValues: {
-            searchText: filter?.searchText || "",
+            searchText: filter?.search || "",
         },
     });
 

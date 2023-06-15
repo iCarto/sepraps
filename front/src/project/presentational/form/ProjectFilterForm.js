@@ -58,7 +58,7 @@ const ProjectFilterForm = ({onClear = null}) => {
     const formMethods = useForm({
         defaultValues: {
             status: filter?.status || "active",
-            searchText: filter?.searchText || "",
+            searchText: filter?.search || "",
             switchStatus: filter?.status === "all",
             financing_program: filter?.financing_program || "",
             construction_contract: filter?.construction_contract || "",
