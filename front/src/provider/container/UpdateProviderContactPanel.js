@@ -49,6 +49,7 @@ const UpdateProviderContactPanel = () => {
                 {
                     id: data.id,
                     name: data.name,
+                    ci_number: data.ci_number,
                     post: data.post,
                     post_label: data.post_label,
                     gender: data.gender,

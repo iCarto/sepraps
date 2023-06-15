@@ -1,6 +1,7 @@
 import {useDomain} from "sepraps/domain/provider";
 import {
     FormCheckbox,
+    FormInputInteger,
     FormInputText,
     FormSelect,
     FormTextArea,
@@ -34,6 +35,7 @@ const ContactFormFields = ({
                     rules={{required: "El campo es obligatorio"}}
                 />
             )}
+
             <FormSelect
                 name="gender"
                 label="Género"
@@ -61,6 +63,7 @@ const ContactFormFields = ({
                 ]}
                 rules={{required: "El campo es obligatorio"}}
             />
+            <FormInputInteger name="ci_number" label="Nº CI" />
             <FormInputText name="phone" label="Celular" />
             <FormInputText name="email" label="E-mail" />
             <FormTextArea name="comments" label="Observaciones" />

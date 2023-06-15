@@ -17,6 +17,7 @@ const ContactForm = ({
             ? {
                   id: contact?.id,
                   name: contact?.name,
+                  ci_number: contact?.ci_number,
                   post: contact?.post,
                   gender: contact?.gender,
                   phone: contact?.phone,
@@ -27,6 +28,7 @@ const ContactForm = ({
             : {
                   id: null,
                   name: "",
+                  ci_number: null,
                   post: "",
                   gender: "",
                   phone: "",

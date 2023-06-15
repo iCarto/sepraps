@@ -11,7 +11,7 @@ import {
     ViewProvidersStatsPage,
     ViewProviderSummarySubPage,
     ViewProvidersContactsSubPage,
-    ViewContactProviderPanel,
+    ViewProviderContactPanel,
 } from "provider/container";
 import {ViewStatsByGenderSubPage} from "stats/container";
 
@@ -50,7 +50,7 @@ const providerRoutes = [
                 <Route
                     key="provider-contact-info"
                     path="info/:contactId"
-                    element={<ViewContactProviderPanel />}
+                    element={<ViewProviderContactPanel />}
                 />
             </Route>
         </Route>
