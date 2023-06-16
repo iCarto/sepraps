@@ -12,12 +12,16 @@ import Grid from "@mui/material/Grid";
 const ProviderFormLegalDataFields = ({orientation = "column"}) => {
     const {providerTypes} = useDomain();
 
-    const is_legalized = useWatch({
+    const isLegalized = useWatch({
         name: "is_legalized",
     });
     const type = useWatch({
         name: "type",
     });
+
+    const isJuntaDeSaneamiento = type === "junta_de_saneamiento";
+    const isComisionDeAguaOSaneamiento =
+        type === "comision_de_agua" || type === "comision_de_saneamiento";
 
     return (
         <>
@@ -37,9 +41,14 @@ const ProviderFormLegalDataFields = ({orientation = "column"}) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <FormCheckbox name="is_legalized" label="Legalmente constituida" />
+                    <FormCheckbox
+                        name="is_legalized"
+                        label="Legalmente constituida"
+                        defaultChecked={isJuntaDeSaneamiento ? true : false}
+                        disabled={isJuntaDeSaneamiento ? true : false}
+                    />
                 </Grid>
-                {is_legalized ? (
+                {isLegalized || isJuntaDeSaneamiento ? (
                     <Grid item xs={orientation === "column" ? 12 : 6}>
                         <FormDatePicker
                             name="legalization_date"
@@ -47,7 +56,7 @@ const ProviderFormLegalDataFields = ({orientation = "column"}) => {
                         />
                     </Grid>
                 ) : null}
-                {is_legalized && type === "junta_de_saneamiento" ? (
+                {isJuntaDeSaneamiento ? (
                     <Grid item xs={orientation === "column" ? 12 : 6}>
                         <FormInputText
                             name="legal_status_number"
@@ -55,7 +64,7 @@ const ProviderFormLegalDataFields = ({orientation = "column"}) => {
                         />
                     </Grid>
                 ) : null}
-                {is_legalized && type === "comision_de_agua" ? (
+                {isLegalized && isComisionDeAguaOSaneamiento ? (
                     <Grid item xs={orientation === "column" ? 12 : 6}>
                         <FormInputText
                             name="local_resolution_number"

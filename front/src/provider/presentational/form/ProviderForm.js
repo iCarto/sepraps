@@ -11,6 +11,8 @@ const ProviderForm = ({
     onCancel = null,
     updatedSection = null,
 }) => {
+    console.log(provider?.is_legalized);
+
     const defaultFormValues = {
         id: FormUtil.getFormValue(provider?.id),
         name: FormUtil.getFormValue(provider?.name),
@@ -39,17 +41,18 @@ const ProviderForm = ({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             area: FormUtil.getDataValue(data.area),
-            type: FormUtil.getDataValue(data?.type),
-            number_of_members: FormUtil.getDataValue(data?.number_of_members),
-            number_of_women: FormUtil.getDataValue(data?.number_of_women),
-            is_legalized: FormUtil.getDataValue(data?.is_legalized),
-            legalization_date: FormUtil.getDataValue(data?.legalization_date),
+            type: FormUtil.getDataValue(data.type),
+            number_of_members: FormUtil.getDataValue(data.number_of_members),
+            number_of_women: FormUtil.getDataValue(data.number_of_women),
+            is_legalized:
+                data.type === "junta_de_saneamiento" ? true : data.is_legalized,
+            legalization_date: FormUtil.getDataValue(data.legalization_date),
             is_provider_contract_signed: FormUtil.getDataValue(
-                data?.is_provider_contract_signed
+                data.is_provider_contract_signed
             ),
-            legal_status_number: FormUtil.getDataValue(data?.legal_status_number),
+            legal_status_number: FormUtil.getDataValue(data.legal_status_number),
             local_resolution_number: FormUtil.getDataValue(
-                data?.local_resolution_number
+                data.local_resolution_number
             ),
         });
     };
