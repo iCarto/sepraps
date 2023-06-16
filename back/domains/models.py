@@ -9,6 +9,7 @@ class DomainCategoryChoices(models.TextChoices):
     provider_area = ("area_prestador", "Área del prestador")
     provider_type = ("tipo_prestador", "Tipo de prestador")
     yes_no_domain = ("dominiosino", "Sí/No")
+    gender_domain = ("gender", "Género")
 
 
 class DomainEntry(models.Model):
