@@ -39,13 +39,16 @@ class Provider(BaseDocumentModel, BaseEntityModelMixin):
 
 @receiver(pre_save, sender=Provider)
 def provider_pre_save(sender, instance, *args, **kwargs):
-    if not instance.is_legalized:
+    if instance and not instance.is_legalized:
         instance.legalization_date = None
         instance.legal_status_number = ""
         instance.local_resolution_number = ""
-    if instance.is_legalized and instance.type == "junta_de_saneamiento":
+    if instance.type == "junta_de_saneamiento":
+        instance.is_legalized = True
         instance.local_resolution_number = ""
-    if instance.is_legalized and instance.type == "comision_de_agua":
+    if (
+        instance.type == "comision_de_agua"
+        or instance.type == "comision_de_saneamiento"
+    ):
         instance.legal_status_number = ""
-
     return instance
