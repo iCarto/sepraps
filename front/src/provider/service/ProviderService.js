@@ -37,16 +37,16 @@ const ProviderService = {
         return entityService.get(id);
     },
 
-    create(provider) {
-        return entityService.create(provider);
+    create(entity) {
+        return entityService.create(entity);
     },
 
-    update(provider) {
-        return entityService.update(provider);
+    update(entity) {
+        return entityService.update(entity);
     },
 
-    delete(providerId) {
-        return entityService.delete(providerId);
+    delete(id) {
+        return entityService.delete(id);
     },
 };
 

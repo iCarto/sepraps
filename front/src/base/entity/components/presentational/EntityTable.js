@@ -2,6 +2,7 @@ import {cloneElement, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 
 import {useList} from "base/entity/hooks";
+import {useAuth} from "base/user/provider";
 
 import {AlertError} from "base/error/components";
 import {
@@ -53,6 +54,8 @@ const EntityTable = ({
     const [elements, setElements] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const {ROLES} = useAuth();
 
     const noElements = !size && !elements.length;
     const isFilterEmpty = Object.values(filter).every(value => !value);
@@ -157,6 +160,7 @@ const EntityTable = ({
                                             {columns.map((cellAttribute, index) => {
                                                 return (
                                                     <TableCustomCell
+                                                        key={index}
                                                         id={cellAttribute.id}
                                                         TableCellProps={
                                                             getCellProps
@@ -174,7 +178,13 @@ const EntityTable = ({
                                             })}
                                             {elementActions?.length ? (
                                                 <TableCell>
-                                                    <AuthAction roles={[]}>
+                                                    <AuthAction
+                                                        roles={[
+                                                            ROLES.EDIT,
+                                                            ROLES.MANAGEMENT,
+                                                            ROLES.SUPERVISION,
+                                                        ]}
+                                                    >
                                                         <ActionsMenu>
                                                             {elementActions.map(
                                                                 actionMenu =>

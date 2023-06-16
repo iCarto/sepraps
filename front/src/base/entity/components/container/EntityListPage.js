@@ -3,7 +3,6 @@ import {useParams} from "react-router-dom";
 
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {useList} from "base/entity/hooks";
-import {useAuth} from "base/user/provider";
 import {
     EntityCardsList,
     EntityChangeView,
@@ -30,7 +29,6 @@ const EntityListPage = ({
     basePath = null,
     subPage = true,
 }) => {
-    const {ROLES} = useAuth();
     const navigate = useNavigateWithReload();
     const {idInfoPanel} = useParams();
 
