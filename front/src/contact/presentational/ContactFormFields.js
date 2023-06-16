@@ -12,7 +12,7 @@ const ContactFormFields = ({
     showPostField = false,
     showIsStaff = false,
 }) => {
-    const {contactPosts} = useDomain();
+    const {contactPosts, genderDomain} = useDomain();
 
     // TODO post.value is a dependency with a back-end domain value
     // We should remove this dependency in the future
@@ -35,32 +35,10 @@ const ContactFormFields = ({
                     rules={{required: "El campo es obligatorio"}}
                 />
             )}
-
             <FormSelect
                 name="gender"
                 label="Género"
-                options={[
-                    {
-                        value: "F",
-                        label: "Femenino",
-                    },
-                    {
-                        value: "M",
-                        label: "Masculino",
-                    },
-                    {
-                        value: "OS",
-                        label: "Otro específico",
-                    },
-                    {
-                        value: "NK",
-                        label: "No conocido",
-                    },
-                    {
-                        value: "NS",
-                        label: "No especificado",
-                    },
-                ]}
+                options={genderDomain}
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputInteger name="ci_number" label="Nº CI" />
