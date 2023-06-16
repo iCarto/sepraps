@@ -12,6 +12,7 @@ const FormCheckbox = ({
     disabled = false,
     onChange = null,
     style = {},
+    defaultChecked = false,
 }) => {
     const {control} = useFormContext();
 
@@ -41,7 +42,7 @@ const FormCheckbox = ({
                 value={value}
                 control={
                     <Checkbox
-                        checked={value}
+                        checked={defaultChecked || value}
                         onChange={event => {
                             const userValue = event.target.checked;
                             field.onChange(userValue); // data sent back to hook form
