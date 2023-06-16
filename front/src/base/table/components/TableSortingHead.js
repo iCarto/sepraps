@@ -1,15 +1,17 @@
+import {visuallyHidden} from "@mui/utils";
 import Box from "@mui/material/Box";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Tooltip from "@mui/material/Tooltip";
-import {visuallyHidden} from "@mui/utils";
 
-function TableSortingHead({order, attribute, onRequestSort, headCells}) {
+function TableSortingHead({order, attribute, onRequestSort, headCells, showActions}) {
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
+
+    const displayedCells = showActions ? headCells.slice(0, -1) : headCells;
 
     return (
         <>
@@ -20,7 +22,7 @@ function TableSortingHead({order, attribute, onRequestSort, headCells}) {
             </colgroup>
             <TableHead>
                 <TableRow>
-                    {headCells.slice(0, -1).map(headCell => (
+                    {displayedCells.map(headCell => (
                         <Tooltip
                             key={headCell.id}
                             title={headCell.title || ""}
@@ -53,7 +55,6 @@ function TableSortingHead({order, attribute, onRequestSort, headCells}) {
                             </TableCell>
                         </Tooltip>
                     ))}
-                    <TableCell key="actions" sx={{padding: 0}}></TableCell>
                 </TableRow>
             </TableHead>
         </>

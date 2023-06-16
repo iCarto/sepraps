@@ -30,7 +30,6 @@ const ContactsTable = ({
 
     const columns = customTableColumns || tableColumns;
     const tableRowStyle = {
-        paddingRight: 1,
         cursor: onSelectElement ? "pointer" : "auto",
     };
 
@@ -51,6 +50,16 @@ const ContactsTable = ({
         }
     };
 
+    const headCells = elementActions.length
+        ? [
+              ...columns,
+              {
+                  id: "actions",
+                  width: 7,
+              },
+          ]
+        : columns;
+
     return (
         <>
             <TableContainer sx={{width: "100%"}}>
@@ -59,13 +68,8 @@ const ContactsTable = ({
                         order={order}
                         attribute={attribute}
                         onRequestSort={handleRequestSort}
-                        headCells={[
-                            ...columns,
-                            {
-                                id: "actions",
-                                width: 5,
-                            },
-                        ]}
+                        headCells={headCells}
+                        showActions={elementActions?.length}
                     />
                     <TableBody>
                         {contacts.sort(sortFunction).map((element, index) => {
@@ -92,7 +96,13 @@ const ContactsTable = ({
                                     })}
                                     {elementActions?.length ? (
                                         <TableCell>
-                                            <AuthAction roles={[]}>
+                                            <AuthAction
+                                                roles={[
+                                                    ROLES.EDIT,
+                                                    ROLES.MANAGEMENT,
+                                                    ROLES.SUPERVISION,
+                                                ]}
+                                            >
                                                 <ActionsMenu>
                                                     {elementActions.map(actionMenu =>
                                                         cloneElement(actionMenu, {
@@ -102,9 +112,7 @@ const ContactsTable = ({
                                                 </ActionsMenu>
                                             </AuthAction>
                                         </TableCell>
-                                    ) : (
-                                        <TableCell></TableCell>
-                                    )}
+                                    ) : null}
                                 </TableRow>
                             );
                         })}

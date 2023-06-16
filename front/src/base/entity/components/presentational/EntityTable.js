@@ -118,6 +118,16 @@ const EntityTable = ({
         return element[attribute];
     };
 
+    const headCells = elementActions
+        ? [
+              ...columns,
+              {
+                  id: "actions",
+                  width: 7,
+              },
+          ]
+        : columns;
+
     return (
         <>
             <AlertError error={error} />
@@ -137,13 +147,8 @@ const EntityTable = ({
                                 order={order}
                                 attribute={sort}
                                 onRequestSort={handleRequestSort}
-                                headCells={[
-                                    ...columns,
-                                    {
-                                        id: "actions",
-                                        width: 5,
-                                    },
-                                ]}
+                                headCells={headCells}
+                                showActions={elementActions?.length}
                             />
                             <TableBody>
                                 {elements?.map((element, index) => {
@@ -198,9 +203,7 @@ const EntityTable = ({
                                                         </ActionsMenu>
                                                     </AuthAction>
                                                 </TableCell>
-                                            ) : (
-                                                <TableCell></TableCell>
-                                            )}
+                                            ) : null}
                                         </TableRow>
                                     );
                                 })}
