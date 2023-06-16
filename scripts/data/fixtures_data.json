@@ -3,6 +3,51 @@
         "model": "domains.domainentry",
         "pk": null,
         "fields": {
+            "category": "gender",
+            "key": "F",
+            "value": "Femenino"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "gender",
+            "key": "M",
+            "value": "Masculino"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "gender",
+            "key": "OS",
+            "value": "Otro específico"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "gender",
+            "key": "NK",
+            "value": "No conocido"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "gender",
+            "key": "NS",
+            "value": "No especificado"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
             "category": "dominiosino",
             "key": true,
             "value": "Sí"
