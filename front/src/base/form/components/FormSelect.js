@@ -76,10 +76,12 @@ const FormSelect = ({
                         }}
                         disabled
                     >
-                        Seleccione una opción de la lista
+                        {options
+                            ? "Seleccione una opción de la lista"
+                            : "No hay opciones disponibles"}
                     </MenuItem>
                 ) : null}
-                {(showEmptyOption ? [emptyOption, ...options] : options).map(
+                {(showEmptyOption ? [emptyOption, ...options] : options)?.map(
                     ({label, value}) => (
                         <MenuItem key={value} value={value}>
                             {label}
