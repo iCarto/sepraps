@@ -1,14 +1,16 @@
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 
-import {SectionCard, SectionField} from "base/ui/section/components";
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "base/ui/section/components";
 import {FeaturedDocumentDownload} from "base/file/components";
 import {ImagePreview} from "base/image/components";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 
 const EntityGeneralDataSection = ({
@@ -18,7 +20,7 @@ const EntityGeneralDataSection = ({
     sections = [],
 }) => {
     const navigate = useNavigate();
-    const {ROLES} = useAuth();
+    const {ROLES, hasRole} = useAuth();
 
     const displayFirstColumn = featured_image || featured_document;
     const sectionFields = sections.length
@@ -35,7 +37,25 @@ const EntityGeneralDataSection = ({
         : null;
 
     return (
-        <SectionCard headingLabel={false}>
+        <SectionCard
+            headingLabel={false}
+            secondaryActions={
+                !hasRole(ROLES.AUDITOR)
+                    ? [
+                          <SectionCardHeaderAction
+                              key="edit"
+                              name="edit"
+                              text="Modificar"
+                              icon={<EditIcon />}
+                              onClick={() => {
+                                  navigate(`generaldata/edit`);
+                              }}
+                              roles={[]}
+                          />,
+                      ]
+                    : []
+            }
+        >
             <Grid container columnSpacing={2}>
                 {displayFirstColumn && (
                     <Grid
@@ -72,31 +92,14 @@ const EntityGeneralDataSection = ({
                     xl={displayFirstColumn ? 9 : 12}
                     alignContent="flex-start"
                 >
-                    <Grid item xs={11}>
-                        <Typography
-                            variant="h4"
-                            color="grey.700"
-                            pb={2}
-                            sx={{fontWeight: "bold"}}
-                        >
-                            {name}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <Tooltip title="Editar campo">
-                            <IconButton
-                                sx={{
-                                    mt: 0.5,
-                                    ml: 4,
-                                }}
-                                onClick={() => {
-                                    navigate(`generaldata/edit`);
-                                }}
-                            >
-                                <EditIcon fontSize="small" />
-                            </IconButton>
-                        </Tooltip>
-                    </Grid>
+                    <Typography
+                        variant="h4"
+                        color="grey.700"
+                        pb={2}
+                        sx={{fontWeight: "bold", mt: -7}}
+                    >
+                        {name}
+                    </Typography>
                     <Grid item xs={12}>
                         {sectionFields}
                     </Grid>

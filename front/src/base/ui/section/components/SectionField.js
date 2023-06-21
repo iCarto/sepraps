@@ -5,6 +5,8 @@ import {SectionFieldEditButton} from ".";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import SectionFieldHelpText from "./SectionFieldHelpText";
+import Tooltip from "@mui/material/Tooltip";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const Unit = ({unit}) => {
     return (
@@ -36,7 +38,8 @@ const SectionField = ({
     linkPath = null,
     editButton = false,
     editButtonPath = "",
-    helperTextValue = "",
+    helperText = "",
+    tooltipText = null,
 }) => {
     const navigate = useNavigate();
     let labelWidth;
@@ -81,7 +84,7 @@ const SectionField = ({
             >
                 {value}
             </Typography>
-            {helperTextValue && <SectionFieldHelpText text={helperTextValue} />}
+            {helperText && <SectionFieldHelpText text={helperText} />}
             {unit && <Unit unit={unit} />}
         </>
     );
@@ -105,15 +108,22 @@ const SectionField = ({
     const typeOfField = linkPath ? linkField : regularField;
 
     return (
-        <Grid container>
+        <Grid container columnSpacing={containerWidth === "long" ? 2 : 1}>
             <Grid
                 item
                 container
-                alignItems="flex-start"
                 xs="auto"
                 sm={5}
                 lg={labelWidth}
+                alignItems="flex-start"
             >
+                {tooltipText && (
+                    <Tooltip title={tooltipText} arrow enterDelay={500}>
+                        <InfoOutlinedIcon
+                            sx={{mr: 1, color: "grey.500", fontSize: "0.9rem"}}
+                        />
+                    </Tooltip>
+                )}
                 {labelIcon && (
                     <LabelIcon fontSize="small" sx={{mr: 1, color: "text.secondary"}} />
                 )}
@@ -127,7 +137,7 @@ const SectionField = ({
                     </Typography>
                 )}
             </Grid>
-            <Grid item container xs="auto" sm={7} lg={valueWidth} alignItems="flex-end">
+            <Grid item container xs="auto" sm={6} lg={valueWidth} alignItems="flex-end">
                 <Grid item>{isValueValid ? typeOfField : emptyField}</Grid>
                 {editButton ? (
                     <Grid item xs={1}>

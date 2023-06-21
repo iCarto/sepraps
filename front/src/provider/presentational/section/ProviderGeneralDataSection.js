@@ -3,10 +3,6 @@ import {EntityGeneralDataSection} from "base/entity/components/presentational/se
 
 const ProviderGeneralDataSection = ({provider}) => {
     const sections = [
-        {
-            label: "Nombre",
-            value: provider.name,
-        },
         {label: "Área", value: provider.area_label},
         {
             label: "Nº miembros de la Comisión Directiva",
