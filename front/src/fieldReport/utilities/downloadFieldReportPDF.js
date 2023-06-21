@@ -1,6 +1,7 @@
 import {jsPDF} from "jspdf";
-import {getFieldReportContent, getFieldReportPDFElements, globalPDFElements} from ".";
+import {getFieldReportContent, getFieldReportPDFElements} from ".";
 import {getImagesData} from "base/image/utilities/getImagesData";
+import {globalPDFElements} from "base/pdf/utilities";
 
 export function downloadFieldReportPDF() {
     const download = async reportData => {

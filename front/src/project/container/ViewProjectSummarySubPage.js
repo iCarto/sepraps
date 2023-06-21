@@ -1,6 +1,6 @@
 import {useOutletContext} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {downloadFieldReportPDF} from "base/report/utilities";
+import {downloadFieldReportPDF} from "fieldReport/utilities";
 
 import {
     ProjectFinancingSection,

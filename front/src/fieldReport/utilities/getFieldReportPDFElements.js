@@ -1,6 +1,7 @@
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
-import {getFieldReportContent, globalPDFElements} from ".";
+import {getFieldReportContent} from ".";
+import {globalPDFElements} from "base/pdf/utilities";
 
 export function getFieldReportPDFElements(doc, reportData) {
     const dimensions = globalPDFElements.getPDFDimensions(doc);
