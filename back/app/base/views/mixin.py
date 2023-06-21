@@ -56,8 +56,3 @@ class AuditViewMixin(object):
     def perform_update(self, serializer):
         serializer.validated_data["updated_by"] = self.request.user
         return super().perform_update(serializer)
-
-    def perform_destroy(self, instance):
-        instance.updated_by = self.request.user
-        instance.active = False
-        instance.save()
