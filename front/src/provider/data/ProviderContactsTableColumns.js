@@ -11,7 +11,7 @@ export function useProviderContactsTable() {
             width: 20,
         },
         {
-            id: "gender",
+            id: "gender_name",
             label: "Género",
             width: 10,
         },

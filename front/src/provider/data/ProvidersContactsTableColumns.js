@@ -11,12 +11,12 @@ export function useProvidersContactsTable() {
             width: 20,
         },
         {
-            id: "post",
+            id: "post_label",
             label: "Cargo",
             width: 20,
         },
         {
-            id: "gender",
+            id: "gender_name",
             label: "Género",
             width: 10,
         },

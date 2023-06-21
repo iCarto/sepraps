@@ -3,17 +3,17 @@ export function useContactsTable() {
         {
             id: "name",
             label: "Nombre",
-            width: 15,
+            width: 20,
         },
         {
-            id: "post",
+            id: "post_label",
             label: "Cargo",
             width: 20,
         },
         {
-            id: "gender",
+            id: "gender_name",
             label: "Género",
-            width: 5,
+            width: 10,
         },
         {
             id: "phone",
@@ -28,7 +28,7 @@ export function useContactsTable() {
         {
             id: "comments",
             label: "Observ.",
-            width: 30,
+            width: 20,
         },
         {
             id: "is_staff",
