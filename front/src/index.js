@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import "./index.css";
 import App from "./App";
 
@@ -8,12 +7,10 @@ import * as Sentry from "@sentry/react";
 import {BrowserTracing} from "@sentry/tracing";
 import {CaptureConsole as CaptureConsoleIntegration} from "@sentry/integrations";
 
-ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
-    document.getElementById("root")
-);
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(<App />);
 
 if (process.env.REACT_APP_GOOGLE_ANALYTICS_CODE) {
     try {
