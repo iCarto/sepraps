@@ -17,18 +17,23 @@ const ImagePreview = ({path: url, alt = "", width = null, height = null, sx = {}
     };
 
     useEffect(() => {
+        setLoading(true);
         if (url) {
-            setLoading(true);
             // A Blob is necessary because we have to load the image using AuthService
-            DocumentService.preview(url).then(response => {
-                createBlob(response);
-                setLoading(false);
-            });
-            setLoading(false);
+            DocumentService.preview(url)
+                .then(response => {
+                    createBlob(response);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.log(error);
+                    setImageUrl(DEFAULT_NO_IMAGE);
+                    setLoading(false);
+                });
         } else {
             setImageUrl(DEFAULT_NO_IMAGE);
+            setLoading(false);
         }
-        setImageUrl(DEFAULT_NO_IMAGE);
     }, [url]);
 
     const getComponent = () => {
