@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {AuthAction} from "base/user/components";
 import Button from "@mui/material/Button";
 
-const AddNewButton = ({basePath, roles = []}) => {
+const AddNewButton = ({text = "", basePath, roles = []}) => {
     const navigate = useNavigate();
 
     return (
@@ -14,7 +14,7 @@ const AddNewButton = ({basePath, roles = []}) => {
                     navigate(basePath);
                 }}
             >
-                Añadir
+                {text || "Añadir"}
             </Button>
         </AuthAction>
     );

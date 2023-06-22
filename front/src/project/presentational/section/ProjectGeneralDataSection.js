@@ -16,7 +16,6 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import PrintOutlinedIcon from "@mui/icons-material/PrintOutlined";
 
 const imgBoxStyle = {
     position: "absolute",
@@ -39,15 +38,11 @@ const closedProjectTagStyle = {
     p: 0.75,
 };
 
-const ProjectGeneralDataSection = ({project, handleGeneratePDF}) => {
+const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
     const isProjectClosed = project?.closed;
-
-    const handleClickOnDownloadReport = () => {
-        handleGeneratePDF();
-    };
 
     const secondaryActions = [
         <SectionCardHeaderAction
@@ -58,14 +53,6 @@ const ProjectGeneralDataSection = ({project, handleGeneratePDF}) => {
             onClick={() => {
                 navigate(`generaldata/edit`);
             }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-        />,
-        <SectionCardHeaderAction
-            key="download-field-report"
-            name="download-field-report"
-            text="Descargar informe de viaje"
-            icon={<PrintOutlinedIcon />}
-            onClick={handleClickOnDownloadReport}
             roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];

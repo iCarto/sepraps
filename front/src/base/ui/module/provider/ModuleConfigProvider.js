@@ -7,6 +7,7 @@ export default function ModuleConfigProvider({children}) {
         project: null,
         contract: null,
         provider: null,
+        project_field: null,
     });
     const [moduleBasePath, setModuleBasePath] = useState(null);
 

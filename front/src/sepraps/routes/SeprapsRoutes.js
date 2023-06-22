@@ -1,9 +1,10 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-import {StatsModule, statsRoutes} from "stats/module";
 import {ContractsModule, contractRoutes} from "contract/module";
-import {ProvidersModule, providerRoutes} from "provider/module";
 import {ProjectsModule, projectRoutes} from "project/module";
+import {ProvidersModule, providerRoutes} from "provider/module";
+import {FieldReportsModule, fieldReportRoutes} from "fieldReport/module";
+import {StatsModule, statsRoutes} from "stats/module";
 import {AuthProvider} from "base/user/provider";
 import {AuthRequired} from "base/user/utilities";
 
@@ -58,6 +59,16 @@ export default function SeprapsRoutes() {
                             }
                         >
                             {providerRoutes}
+                        </Route>
+                        <Route
+                            path="field-reports"
+                            element={
+                                <AuthRequired>
+                                    <FieldReportsModule />
+                                </AuthRequired>
+                            }
+                        >
+                            {fieldReportRoutes}
                         </Route>
                         <Route
                             path="stats"
