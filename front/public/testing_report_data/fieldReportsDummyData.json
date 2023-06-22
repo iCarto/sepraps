@@ -1,0 +1,208 @@
+{
+    "count": 2,
+    "results": [
+        {
+            "report_name": "Visita de Fiscalización de Obras - Ciudad de Yhú, Distrito de Yhú - Dpto. Caaguazú",
+            "report_code": "M TS 29-22",
+            "report_date": "2023-06-09",
+            "visit_dates": "16/02/2023 - 18/02/2023",
+            "reporting_person_name": "Licenciada Sonia Villalva",
+            "reporting_person_role": "Técnica Social - ECATEF/UPC-SENASA/BID",
+            "other_reporting_persons": [
+                {"name": "Licenciado Teódulo Morinigo", "role": "Especialista Social"},
+                {"name": "Doctor Amado Rivas", "role": "área técnica"}
+            ],
+            "reported_persons": [
+                {"name": "Licenciada Claudia Vera", "role": "Especialista Social"},
+                {"name": "Ingeniero Juan Pereria", "role": "Especialista Social"}
+            ],
+            "report_comments": "Dicha tarea consistió en dar asistencia a la Comisión Directiva de la Junta de Saneamiento y usuarios/as en general para la realización de la excavación de zanja e instalación de tubos para la red de distribución.",
+            "visit_goals": [
+                {"goal": "Objetivo 1"},
+                {"goal": "Objetivo 2"},
+                {"goal": "Objetivo 3"}
+            ],
+            "visited_contracts": [{"code": "XXXXX"}, {"code": "YYYYYY"}],
+            "visited_projects": [
+                {
+                    "id": 1,
+                    "code": "AAAAAAA",
+                    "contract": "XXXXX",
+                    "locality": "Cumbre",
+                    "district": "Pedro Juan Caballero (Cerro Corá)",
+                    "department": "Amambay",
+                    "activities": [
+                        {
+                            "title": "Visita a la comunidad",
+                            "date": "2023/02/16",
+                            "notes": "Revisión general de la marcha del proyecto. Alcantarillado y mejoramiento del sistema de agua potable, fueron los temas de la reunión con los miembros de la Junta de saneamiento y los técnicos respectivamente. Se informa que el Ing. Raúl Riveros por la Junta de Saneamiento se suma al equipo técnico para tratar de fortalecer los trabajos. A las 13.00 hs se visita a predio de la Planta de tratamiento con representantes de la Junta de Saneamiento, Fiscalización, y Contratista, verificando los niveles de la laguna facultativa 2, para la colocación de la Geomembrana y perfilado de talud externo para posterior empastado.",
+                            "images": [
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.34.png",
+                                    "comment": "Figura 1"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                                    "comment": "Figura 2"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.46.png",
+                                    "comment": "Figura 3"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Visita al contratista",
+                            "date": "2023/02/17",
+                            "notes": "Se han verificado un total de 20 unidades sanitarias básicas, en las que se realizan las siguientes observaciones. Como se observa en la figura 1, hay muretes ejecutados con mezcla elaborada utilizando tierra del lugar en vez de arena lavada. Colocación inadecuada de los ladrillos. Pileta fijada al soporte metálico con 4 tornillos en vez de 6. Mala terminación en general, falta de limpieza y retiro de material sobrante, restos de mezcla. Como se observa en la figura 2 los Cuidados y terminaciones varias que se deben tener en cuenta luego corregir el tipo de arena utilizado.",
+                            "images": [
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.52.png",
+                                    "comment": "Imagen 1"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.54.png",
+                                    "comment": "Imagen 2"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "code": "BBBBBBB",
+                    "contract": "XXXXX",
+                    "locality": "1ero de Mayo",
+                    "district": "Pedro Juan Caballero (Cerro Corá)",
+                    "department": "Amambay",
+                    "activities": [
+                        {
+                            "title": "Visita a la obra",
+                            "date": "2023/02/17",
+                            "notes": "",
+                            "images": [
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.54.png",
+                                    "comment": "Imagen 2"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "code": "AAAAAAA",
+                    "contract": "YYYYYY",
+                    "locality": "María Auxiliadora 3era zona",
+                    "district": "Pedro Juan Caballero (Cerro Corá)",
+                    "department": "Amambay",
+                    "activities": [
+                        {
+                            "title": "Visita a la obra",
+                            "date": "2023/02/17",
+                            "notes": "",
+                            "images": [
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                                    "comment": "Figura 2"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.52.png",
+                                    "comment": "Imagen 1"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                                    "comment": "Figura 2"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.46.png",
+                                    "comment": "Figura 3"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "report_name": "Visita de supervisión a las Comunidades Indígenas de la Región Oriental",
+            "report_code": "M DC 16/2023",
+            "report_date": "2023-04-24",
+            "visit_dates": "19/04/2023 - 21/04/2023",
+            "reporting_person_name": "Licenciado Teodulo Morinigo Maldonado",
+            "reporting_person_role": "Especialista Social - Área de Desarrollo Comunitario - UCP SENASA/BID",
+            "other_reporting_persons": [
+                {
+                    "name": "Arq. Francisco Baez",
+                    "role": "Fiscal de Obras ECATEF – UCP- SENASA/BID"
+                }
+            ],
+            "reported_persons": [
+                {
+                    "name": "Lic. Alfonso Bogarin",
+                    "role": "Coordinador General - Unidad Coordinadora de Proyecto – UCP SENASA BID"
+                },
+                {"name": "Ingeniero Juan Pereria", "role": "Especialista Social"}
+            ],
+            "report_comments": "Comunidades Indígena de la Región Oriental- Entrega de sitio y relevamiento Técnico de los componentes que faltan para poner en funcionamiento el Sistema de Agua—en el Marco del Contrato Marco II - Contrato N° 33/2022 Empresa Contratista Ricardo Diaz Martínez.",
+            "visit_goals": [{"goal": "Objetivo 1"}, {"goal": "Objetivo 2"}],
+            "visited_contracts": [{"code": "XXXXX"}, {"code": "YYYYYY"}],
+            "visited_projects": [
+                {
+                    "id": 4,
+                    "code": "BBBBBBB",
+                    "contract": "XXXXX",
+                    "locality": "1ero de Mayo",
+                    "district": "Pedro Juan Caballero (Cerro Corá)",
+                    "department": "Amambay",
+                    "activities": [
+                        {
+                            "title": "Visita a la obra",
+                            "date": "2023/02/17",
+                            "notes": "",
+                            "images": [
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.54.png",
+                                    "comment": "Imagen 2"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "code": "AAAAAAA",
+                    "contract": "YYYYYY",
+                    "locality": "María Auxiliadora 3era zona",
+                    "district": "Pedro Juan Caballero (Cerro Corá)",
+                    "department": "Amambay",
+                    "activities": [
+                        {
+                            "title": "Visita a la obra",
+                            "date": "2023/02/17",
+                            "notes": "",
+                            "images": [
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                                    "comment": "Figura 2"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.52.png",
+                                    "comment": "Imagen 1"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.40.png",
+                                    "comment": "Figura 2"
+                                },
+                                {
+                                    "url": "/images/testing_field_report/field_report_img_12.31.46.png",
+                                    "comment": "Figura 3"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
