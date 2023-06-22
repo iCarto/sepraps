@@ -42,13 +42,13 @@ const ProviderLegalDataSection = ({provider}) => {
                     value={DateUtil.formatDate(provider.legalization_date)}
                 />
             ) : null}
-            {provider.is_legalized && provider.type === "junta_de_saneamiento" ? (
+            {provider.type === "junta_de_saneamiento" ? (
                 <SectionField
                     label="Nº de personería jurídica"
                     value={provider.legal_status_number}
                 />
             ) : null}
-            {provider.is_legalized && provider.type === "comision_de_agua" ? (
+            {provider.is_legalized && provider.type !== "junta_de_saneamiento" ? (
                 <SectionField
                     label="Nº de resolución municipal"
                     value={provider.local_resolution_number}
