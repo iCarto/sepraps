@@ -10,7 +10,7 @@ import {theme} from "./Theme";
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <LocalizationProvider dateAdapter={AdapterDateFns} apterLocale={esLocale}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={esLocale}>
                 <CssBaseline>
                     <div className="App">
                         <SeprapsRoutes />
