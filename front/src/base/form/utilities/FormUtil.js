@@ -22,25 +22,16 @@ const FormUtil = {
         return formData;
     },
 
-    getFormValue(value, defaultValue = null) {
-        // for boolean fields, false (not falsy) values need to be returned as such, and not as an empty string
-        if (value === false) {
-            defaultValue = false;
-        }
-        if (defaultValue == null) {
-            // If not defaultValue is present form expects an empty string
-            defaultValue = "";
-        }
-        // in front-end falsy values doesn't include 0
-        // For si/non fields, 0 should not evaluate as falsy, since it is the value for the "Non" option.
-        return value || value === 0 ? value : defaultValue;
+    getFormValue(value, defaultValue = "") {
+        // If no defaultValue is present form expects an empty string.
+        // False/0/"" are returned as such for the form.
+        return value ?? defaultValue;
     },
 
     getDataValue(value, defaultValue = null) {
-        // in front-end falsy values doesn't include 0
-        // For si/non fields, 0 should not evaluate as falsy, since it is the value for the "Non" option.
-        if (value === false || value === 0 || value) return value;
-        return defaultValue;
+        // False/0 are returned as such. Empty strings & undefined are converted to null.
+        if (value === "") return defaultValue;
+        return value ?? defaultValue;
     },
 };
 
