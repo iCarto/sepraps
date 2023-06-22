@@ -33,7 +33,6 @@ class EntityService {
             )}`,
             ServiceUtil.getAcceptHeader(format)
         ).then(response => {
-            console.log(response);
             if (!(response instanceof Response)) {
                 if (this.#objects_constructor && response.results) {
                     response.results = this.#objects_constructor(

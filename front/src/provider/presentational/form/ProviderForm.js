@@ -11,8 +11,6 @@ const ProviderForm = ({
     onCancel = null,
     updatedSection = null,
 }) => {
-    console.log(provider?.is_legalized);
-
     const defaultFormValues = {
         id: FormUtil.getFormValue(provider?.id),
         name: FormUtil.getFormValue(provider?.name),

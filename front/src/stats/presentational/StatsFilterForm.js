@@ -302,7 +302,7 @@ const StatsFilterForm = ({
                                     name="month_from"
                                     label="Desde el mes"
                                     views={["month", "year"]}
-                                    margin="0"
+                                    margin="none"
                                     onChangeHandler={option =>
                                         handleChangeMonth("month_from", option)
                                     }
@@ -313,7 +313,7 @@ const StatsFilterForm = ({
                                     name="month_to"
                                     label="Hasta el mes"
                                     views={["month", "year"]}
-                                    margin="0"
+                                    margin="none"
                                     onChangeHandler={option =>
                                         handleChangeMonth("month_from", option)
                                     }
