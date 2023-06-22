@@ -29,25 +29,15 @@ const SubPageMenu = ({
         <Box component="nav" sx={menuStyles}>
             <Divider />
             <MenuList sx={{color: "white"}} dense disablePadding>
-                {subPageMenuDropdown ? (
-                    subPageMenuDropdown || (
-                        <SubPageMenuHeader
-                            headerText={headerText || "-"}
-                            headerTitle={headerTitle}
-                            headerTag={headerTag}
-                            isSubMenu={true}
-                        >
-                            {headerContent}
-                        </SubPageMenuHeader>
-                    )
-                ) : (
-                    <Divider
-                        sx={{
-                            borderRightColor: "white",
-                            borderTop:
-                                "5px solid " + theme.palette.menu.primary.header.text,
-                        }}
-                    />
+                {subPageMenuDropdown || (
+                    <SubPageMenuHeader
+                        headerText={headerText || "-"}
+                        headerTitle={headerTitle}
+                        headerTag={headerTag}
+                        isSubMenu={true}
+                    >
+                        {headerContent}
+                    </SubPageMenuHeader>
                 )}
 
                 {children}

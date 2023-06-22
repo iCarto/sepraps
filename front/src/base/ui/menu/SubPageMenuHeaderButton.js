@@ -37,7 +37,6 @@ const SubPageMenuHeaderButton = ({
         bgcolor: theme.palette.menu.secondary.header.background,
         color: theme.palette.menu.secondary.header.text,
         border: "none",
-        minHeight: "120px",
 
         "&.Mui-disabled": {
             opacity: "unset",
