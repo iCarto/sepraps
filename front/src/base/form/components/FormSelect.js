@@ -33,6 +33,8 @@ const FormSelect = ({
 
     const [value, setValue] = useState(valueIsSet ? field.value : placeholderValue);
 
+    const inputLabel = rules && rules["required"] ? `${label} *` : label;
+
     const emptyOption = {
         value: "",
         label: "‌‌", // This is not an empty character. It's U+200C unicode character.
@@ -48,14 +50,14 @@ const FormSelect = ({
     return (
         <FormControl fullWidth error={Boolean(error)} margin={margin}>
             <InputLabel id={`${field.name}-label`} shrink>
-                {label}
+                {inputLabel}
             </InputLabel>
             <Select
                 labelId={`${field.name}-label`}
                 name={field.name}
                 inputRef={field.ref}
                 value={value}
-                label={label}
+                label={inputLabel}
                 sx={styleForPlaceholder}
                 onChange={event => {
                     event.preventDefault();

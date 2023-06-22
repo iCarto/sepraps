@@ -25,6 +25,8 @@ const FormDatePicker = ({
         },
     });
 
+    const inputLabel = rules && rules["required"] ? `${label} *` : label;
+
     return (
         <DatePicker
             onChange={event => {
@@ -35,7 +37,7 @@ const FormDatePicker = ({
                 }
             }}
             inputRef={field.ref}
-            label={label}
+            label={inputLabel}
             value={field.value}
             disabled={disabled}
             renderInput={({inputProps, ...params}) => (

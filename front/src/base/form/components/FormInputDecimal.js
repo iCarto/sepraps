@@ -43,6 +43,8 @@ const FormInputDecimal = ({
         NumberUtil.formatDecimal(field.value, decimalSize)
     );
 
+    const inputLabel = rules && rules["required"] ? `${label} *` : label;
+
     let inputProps = {};
     if (endAdornment || tooltipText) {
         inputProps = {
@@ -65,7 +67,7 @@ const FormInputDecimal = ({
     const getLabel = () => {
         return tooltipText ? (
             <Box display="flex" alignItems="center" marginRight="-8px">
-                {label}
+                {inputLabel}
                 {
                     <Tooltip title={tooltipText} arrow enterDelay={500}>
                         <InfoOutlinedIcon
@@ -76,7 +78,7 @@ const FormInputDecimal = ({
                 }
             </Box>
         ) : (
-            label
+            inputLabel
         );
     };
 

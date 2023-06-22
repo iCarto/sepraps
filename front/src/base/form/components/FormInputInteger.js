@@ -36,6 +36,8 @@ const FormInputInteger = ({
 
     const [value, setValue] = useState(field.value);
 
+    const inputLabel = rules && rules["required"] ? `${label} *` : label;
+
     const handleBlur = event => {
         trigger(propsName);
         field.onBlur();
@@ -74,7 +76,7 @@ const FormInputInteger = ({
     const getLabel = () => {
         return tooltipText ? (
             <Box display="flex" alignItems="center" marginRight="-8px">
-                {label}
+                {inputLabel}
                 {
                     <Tooltip title={tooltipText} arrow enterDelay={500}>
                         <InfoOutlinedIcon
@@ -85,7 +87,7 @@ const FormInputInteger = ({
                 }
             </Box>
         ) : (
-            label
+            inputLabel
         );
     };
 

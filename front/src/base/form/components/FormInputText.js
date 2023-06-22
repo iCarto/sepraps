@@ -26,6 +26,8 @@ const FormInputText = ({
         rules,
     });
 
+    const inputLabel = rules && rules["required"] ? `${label} *` : label;
+
     let inputProps = {};
     if (endAdornment || tooltipText) {
         inputProps = {
@@ -43,7 +45,7 @@ const FormInputText = ({
     const getLabel = () => {
         return tooltipText ? (
             <Box display="flex" alignItems="center" marginRight="-8px">
-                {label}
+                {inputLabel}
                 {
                     <Tooltip title={tooltipText} arrow enterDelay={500}>
                         <InfoOutlinedIcon
@@ -54,7 +56,7 @@ const FormInputText = ({
                 }
             </Box>
         ) : (
-            label
+            inputLabel
         );
     };
 

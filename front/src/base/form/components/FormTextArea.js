@@ -13,6 +13,8 @@ const FormTextArea = ({name: propsName, label, rules = {}, isActive = true}) => 
         rules,
     });
 
+    const inputLabel = rules && rules["required"] ? `${label} *` : label;
+
     return (
         <TextField
             fullWidth
@@ -20,7 +22,7 @@ const FormTextArea = ({name: propsName, label, rules = {}, isActive = true}) => 
             rows={3}
             disabled={!isActive}
             name={name}
-            label={label}
+            label={inputLabel}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
