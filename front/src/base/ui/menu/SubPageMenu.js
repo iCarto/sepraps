@@ -5,7 +5,6 @@ import {SubPageMenuHeader} from ".";
 import useTheme from "@mui/material/styles/useTheme";
 import Box from "@mui/material/Box";
 import MenuList from "@mui/material/MenuList";
-import Divider from "@mui/material/Divider";
 
 const SubPageMenu = ({
     headerTitle = "",
@@ -27,7 +26,6 @@ const SubPageMenu = ({
 
     return (
         <Box component="nav" sx={menuStyles}>
-            <Divider />
             <MenuList sx={{color: "white"}} dense disablePadding>
                 {subPageMenuDropdown || (
                     <SubPageMenuHeader
