@@ -47,16 +47,16 @@ const SectionField = ({
 
     switch (`${containerWidth}`) {
         case "long":
-            labelWidth = editButton ? 9 : 9;
+            labelWidth = 9;
             valueWidth = editButton ? 2 : 3;
             break;
         case "short":
-            labelWidth = editButton ? 6 : 7;
-            valueWidth = editButton ? 5 : 5;
+            labelWidth = editButton ? 5 : 6;
+            valueWidth = 6;
             break;
         default:
-            labelWidth = editButton ? 6 : 6;
-            valueWidth = editButton ? 5 : 6;
+            labelWidth = 5;
+            valueWidth = editButton ? 6 : 7;
             break;
     }
 
