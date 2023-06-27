@@ -1,21 +1,36 @@
-import {cloneElement} from "react";
+import {styled} from "@mui/material/styles";
 import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+
+const AccordionSummary = styled(props => (
+    <MuiAccordionSummary
+        expandIcon={<ArrowForwardIosSharpIcon sx={{fontSize: "0.9rem"}} />}
+        {...props}
+    />
+))(({theme}) => ({
+    flexDirection: "row-reverse",
+    "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+        transform: "rotate(90deg)",
+    },
+    "& .MuiAccordionSummary-content": {
+        marginLeft: theme.spacing(1),
+    },
+}));
 
 const AccordionUndercoverLayout = ({
     accordionTitle,
-    accordionIcon = null,
+    defaultExpanded = false,
     children,
 }) => {
     return (
         <Accordion
+            defaultExpanded={defaultExpanded}
             disableGutters
             elevation={0}
             sx={{
-                mt: 1,
                 display: "flex",
                 flexDirection: "column",
                 width: "100%",
@@ -24,37 +39,18 @@ const AccordionUndercoverLayout = ({
                 },
             }}
         >
-            <Tooltip title="Desplegar/Ocultar" followCursor>
-                <AccordionSummary
-                    aria-controls="accordion-content"
-                    id="accordion-header"
-                    sx={{
-                        padding: "0 12px 0 6px",
-                        display: "flex",
-                        width: "min-content",
-                        "& .MuiAccordionSummary-content": {
-                            alignItems: "center",
-                        },
-                    }}
-                >
-                    {accordionIcon &&
-                        cloneElement(accordionIcon, {
-                            fontSize: "small",
-                            sx: {color: "text.secondary"},
-                        })}
-                    <Typography
-                        variant="subtitle1"
-                        color="text.secondary"
-                        sx={{
-                            pl: 1,
-                            lineHeight: 1,
-                            textTransform: "uppercase",
-                        }}
-                    >
-                        {accordionTitle}
-                    </Typography>
-                </AccordionSummary>
-            </Tooltip>
+            <AccordionSummary
+                aria-controls="accordion-content"
+                id="accordion-header"
+                sx={{
+                    marginTop: "12px",
+                    padding: 0,
+                }}
+            >
+                <Typography variant="overline" component="h3">
+                    {accordionTitle}
+                </Typography>
+            </AccordionSummary>
             <AccordionDetails sx={{padding: 0}}>{children}</AccordionDetails>
         </Accordion>
     );
