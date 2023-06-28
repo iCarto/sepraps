@@ -10,3 +10,9 @@ export {default as FieldReportProjectsForm} from "./FieldReportProjectsForm";
 export {
     default as FieldReportProjectsFormFields,
 } from "./FieldReportProjectsFormFields";
+export {
+    default as FieldReportProjectActivitiesForm,
+} from "./FieldReportProjectActivitiesForm";
+export {
+    default as FieldReportProjectActivitiesFormFields,
+} from "./FieldReportProjectActivitiesFormFields";

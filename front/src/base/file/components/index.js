@@ -11,6 +11,7 @@ export {default as ViewDocumentPanel} from "./ViewDocumentPanel";
 export {default as ViewDocumentsSubPage} from "./ViewDocumentsSubPage";
 export {default as DeleteDocumentDialog} from "./DeleteDocumentDialog";
 export {default as FileUploadSection} from "./FileUploadSection";
+export {default as FileUploadButton} from "./FileUploadButton";
 export {default as PendingFile} from "./PendingFile";
 export {default as SelectFileSection} from "./SelectFileSection";
 export {default as FeaturedDocumentDownload} from "./FeaturedDocumentDownload";

@@ -13,3 +13,6 @@ export {
 export {
     default as FieldReportProjectActivitiesSection,
 } from "./FieldReportProjectActivitiesSection";
+export {
+    default as FieldReportProjectActivityCard,
+} from "./FieldReportProjectActivityCard";
