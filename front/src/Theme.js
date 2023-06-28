@@ -192,6 +192,7 @@ const customTheme = createTheme({
         MuiInputBase: {
             styleOverrides: {
                 input: {
+                    backgroundColor: CUSTOM_COLORS.white,
                     "&::placeholder": {
                         opacity: 0.15,
                         fontStyle: "italic",
