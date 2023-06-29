@@ -16,3 +16,12 @@ export {
 export {
     default as FieldReportProjectActivityCard,
 } from "./FieldReportProjectActivityCard";
+export {
+    default as FieldReportCommentsStartSection,
+} from "./FieldReportCommentsStartSection";
+export {
+    default as FieldReportCommentsEndSection,
+} from "./FieldReportCommentsEndSection";
+export {
+    default as FieldReportProjectsListSection,
+} from "./FieldReportProjectsListSection";

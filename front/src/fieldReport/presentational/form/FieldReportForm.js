@@ -26,6 +26,10 @@ const FieldReportForm = ({
         report_code: FormUtil.getFormValue(fieldReport?.report_code),
         visit_date_start: FormUtil.getFormValue(fieldReport?.visit_date_start),
         visit_date_end: FormUtil.getFormValue(fieldReport?.visit_date_end),
+        report_comments_start: FormUtil.getFormValue(
+            fieldReport?.report_comments_start
+        ),
+        report_comments_end: FormUtil.getFormValue(fieldReport?.report_comments_end),
     };
 
     const formMethods = useForm({
@@ -44,6 +48,8 @@ const FieldReportForm = ({
             report_code: FormUtil.getDataValue(data.report_code),
             visit_date_start: FormUtil.getDataValue(data.visit_date_start),
             visit_date_end: FormUtil.getDataValue(data.visit_date_end),
+            report_comments_start: FormUtil.getDataValue(data.report_comments_start),
+            report_comments_end: FormUtil.getDataValue(data.report_comments_end),
         });
     };
 

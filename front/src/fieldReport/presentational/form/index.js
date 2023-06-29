@@ -16,3 +16,9 @@ export {
 export {
     default as FieldReportProjectActivitiesFormFields,
 } from "./FieldReportProjectActivitiesFormFields";
+export {
+    default as FieldReportFormCommentsStartFields,
+} from "./FieldReportFormCommentsStartFields";
+export {
+    default as FieldReportFormCommentsEndFields,
+} from "./FieldReportFormCommentsEndFields";

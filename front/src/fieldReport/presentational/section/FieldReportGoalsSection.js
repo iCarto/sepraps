@@ -67,7 +67,7 @@ const FieldReportGoalsSection = ({fieldReport}) => {
             {deleteDialog}
             <SectionCard title="Objetivos">
                 {fieldReport.visit_goals.length ? (
-                    <List dense={true}>
+                    <List dense>
                         {fieldReport.visit_goals.map((goal, index) => {
                             return (
                                 <ListItem

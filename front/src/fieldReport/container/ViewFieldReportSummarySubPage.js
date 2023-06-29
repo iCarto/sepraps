@@ -6,7 +6,10 @@ import {EntityViewSubPage} from "base/entity/components/container";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
 import {
     FieldReportGeneralDataSection,
+    FieldReportCommentsStartSection,
+    FieldReportProjectsListSection,
     FieldReportGoalsSection,
+    FieldReportCommentsEndSection,
 } from "fieldReport/presentational/section";
 import {DownloadPDFButton} from "base/pdf/presentational";
 
@@ -37,7 +40,10 @@ const ViewFieldReportSummarySubPage = () => {
 
     const sections = [
         <FieldReportGeneralDataSection fieldReport={fieldReport} />,
+        <FieldReportCommentsStartSection fieldReport={fieldReport} />,
+        <FieldReportProjectsListSection projects={fieldReport?.visited_projects} />,
         <FieldReportGoalsSection fieldReport={fieldReport} />,
+        <FieldReportCommentsEndSection fieldReport={fieldReport} />,
         <EntityAuditSection entity={fieldReport} />,
     ];
 
