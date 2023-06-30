@@ -1,4 +1,4 @@
-import {FieldReportProjectActivitiesSection} from ".";
+import {FieldReportProjectActivitiesSection, FieldReportProjectHistorySection} from ".";
 import {AccordionUndercoverLayout, Tag} from "base/shared/components";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -20,11 +20,7 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
                 accordionTitle="Antecedentes"
                 defaultExpanded={true}
             >
-                {
-                    <Typography variant="body1" color="text.primary">
-                        {project.history}
-                    </Typography>
-                }
+                <FieldReportProjectHistorySection project={project} />
             </AccordionUndercoverLayout>
 
             <AccordionUndercoverLayout accordionTitle="Actividades realizadas">

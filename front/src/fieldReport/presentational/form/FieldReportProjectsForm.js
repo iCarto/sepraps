@@ -6,11 +6,13 @@ import {FormUtil} from "base/form/utilities";
 import {EntityForm} from "base/entity/components/form";
 import {FieldReportProjectsFormFields} from ".";
 
-const FieldReportProjectsForm = ({fieldReport = null, projectId = null, onSubmit}) => {
-    const project = fieldReport?.visited_projects
-        ? fieldReport.visited_projects[projectId]
-        : null;
-
+// TO-DO: CHange name: FieldReportProject (singular)
+const FieldReportProjectsForm = ({
+    project = null,
+    fieldReport = null,
+    projectId = null,
+    onSubmit,
+}) => {
     const defaultFormValues = {
         visited_project: {
             text: FormUtil.getFormValue(project?.text),
