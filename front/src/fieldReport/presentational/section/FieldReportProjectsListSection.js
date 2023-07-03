@@ -1,7 +1,6 @@
-import {useParams} from "react-router-dom";
+import {Fragment} from "react";
 
 import {SectionCard} from "base/ui/section/components";
-import {AddNewButton} from "base/shared/components";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -11,11 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import CircleIcon from "@mui/icons-material/Circle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import {Fragment} from "react";
 
 const FieldReportProjectsListSection = ({projects}) => {
-    const {id: fieldReportId} = useParams();
-
     const contracts = new Set();
     projects.map(project => contracts.add(project.contract));
 
@@ -88,12 +84,6 @@ const FieldReportProjectsListSection = ({projects}) => {
                         </Typography>
                     </Stack>
                 )}
-                <Stack alignItems="center" mt={2}>
-                    <AddNewButton
-                        text="Añadir proyecto"
-                        basePath={`/field-reports/${fieldReportId}/projects`}
-                    />
-                </Stack>
             </SectionCard>
         </>
     );
