@@ -1,17 +1,17 @@
 import {FieldReportProjectsForm} from "../form";
+import {AddNewFullWidthButton} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import {AddNewFullWidthButton} from "base/shared/components";
 
-const FieldReportProjectHistorySection = ({
+const FieldReportProjectAgreementsSection = ({
     project,
     isFormOpen,
     onOpenForm,
     onCloseForm,
 }) => {
-    const section = "history";
+    const section = "agreements";
 
     const handleOpenForm = () => {
         onOpenForm(section);
@@ -58,4 +58,4 @@ const FieldReportProjectHistorySection = ({
     );
 };
 
-export default FieldReportProjectHistorySection;
+export default FieldReportProjectAgreementsSection;

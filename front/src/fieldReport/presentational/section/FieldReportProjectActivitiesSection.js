@@ -1,30 +1,39 @@
 import {useState} from "react";
 
-import {AddNewButtonFullWidthButton} from "base/shared/components";
+import {AddNewFullWidthButton} from "base/shared/components";
 import {FieldReportProjectActivitiesForm} from "../form";
 
 import Grid from "@mui/material/Grid";
 import FieldReportProjectActivityCard from "./FieldReportProjectActivityCard";
 
-const FieldReportProjectActivitiesSection = ({activities}) => {
-    const [displayFormNew, setDisplayFormNew] = useState(false);
-    const [displayFormEdit, setDisplayFormEdit] = useState(false);
+const FieldReportProjectActivitiesSection = ({
+    activities,
+    isFormOpen,
+    onOpenForm,
+    onCloseForm,
+}) => {
+    const section = "activities";
+    const [ifFormNewOpen, setIsFormNewOpen] = useState(isFormOpen === section);
+    const [isFormEditOpen, setIsFormEditOpen] = useState(isFormOpen === section);
     const [activityToEditId, setActivityToEditId] = useState(false);
 
     const handleClickNew = () => {
-        setDisplayFormEdit(false);
-        setDisplayFormNew(true);
+        onOpenForm(section);
+        setIsFormEditOpen(false);
+        setIsFormNewOpen(true);
     };
 
     const handleClickEdit = activity => {
+        onOpenForm(section);
         setActivityToEditId(activity.id);
-        setDisplayFormNew(false);
-        setDisplayFormEdit(true);
+        setIsFormNewOpen(false);
+        setIsFormEditOpen(true);
     };
 
     const handleCancelForm = () => {
-        setDisplayFormNew(false);
-        setDisplayFormEdit(false);
+        setIsFormNewOpen(false);
+        setIsFormEditOpen(false);
+        onCloseForm(section);
     };
 
     const handleClickDelete = activity => {
@@ -35,13 +44,13 @@ const FieldReportProjectActivitiesSection = ({activities}) => {
     return (
         <>
             {activities?.map((activity, index) =>
-                displayFormEdit && activityToEditId === activity.id ? (
+                isFormOpen && activityToEditId === activity.id ? (
                     <Grid item mb={4} key={index}>
                         <FieldReportProjectActivitiesForm
                             activity={activity}
                             onSubmit={undefined}
                             onCancel={handleCancelForm}
-                            display={displayFormEdit}
+                            display={isFormOpen && isFormEditOpen}
                         />
                     </Grid>
                 ) : (
@@ -57,13 +66,10 @@ const FieldReportProjectActivitiesSection = ({activities}) => {
             <FieldReportProjectActivitiesForm
                 onSubmit={undefined}
                 onCancel={handleCancelForm}
-                display={displayFormNew}
+                display={isFormOpen && ifFormNewOpen}
             />
-            <Grid
-                mt={2}
-                display={displayFormNew || displayFormEdit ? "none" : "inherit"}
-            >
-                <AddNewButtonFullWidthButton onClick={handleClickNew} />
+            <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                <AddNewFullWidthButton onClick={handleClickNew} />
             </Grid>
         </>
     );

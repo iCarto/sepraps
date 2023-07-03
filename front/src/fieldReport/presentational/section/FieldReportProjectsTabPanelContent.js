@@ -1,9 +1,24 @@
-import {FieldReportProjectActivitiesSection, FieldReportProjectHistorySection} from ".";
+import {useState} from "react";
 import {AccordionUndercoverLayout, Tag} from "base/shared/components";
+import {
+    FieldReportProjectActivitiesSection,
+    FieldReportProjectAgreementsSection,
+    FieldReportProjectHistorySection,
+} from ".";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
 const FieldReportProjectsTabPanelContent = ({project}) => {
+    const [openFormSection, setOpenFormSection] = useState(null);
+
+    const handleOpenForm = section => {
+        setOpenFormSection(section);
+    };
+
+    const handleCloseForm = () => {
+        setOpenFormSection(null);
+    };
+
     return (
         <>
             <Stack flexDirection={"row"} alignItems="center">
@@ -18,19 +33,32 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
 
             <AccordionUndercoverLayout
                 accordionTitle="Antecedentes"
-                defaultExpanded={true}
+                defaultExpanded={!!project.history}
             >
-                <FieldReportProjectHistorySection project={project} />
+                <FieldReportProjectHistorySection
+                    project={project}
+                    isFormOpen={openFormSection === "history"}
+                    onOpenForm={handleOpenForm}
+                    onCloseForm={handleCloseForm}
+                />
             </AccordionUndercoverLayout>
 
             <AccordionUndercoverLayout accordionTitle="Actividades realizadas">
-                <FieldReportProjectActivitiesSection activities={project.activities} />
+                <FieldReportProjectActivitiesSection
+                    activities={project.activities}
+                    isFormOpen={openFormSection === "activities"}
+                    onOpenForm={handleOpenForm}
+                    onCloseForm={handleCloseForm}
+                />
             </AccordionUndercoverLayout>
 
             <AccordionUndercoverLayout accordionTitle="Acuerdos alcanzados">
-                <Typography variant="body1" color="text.primary">
-                    {project.agreements}
-                </Typography>
+                <FieldReportProjectAgreementsSection
+                    project={project}
+                    isFormOpen={openFormSection === "agreements"}
+                    onOpenForm={handleOpenForm}
+                    onCloseForm={handleCloseForm}
+                />
             </AccordionUndercoverLayout>
         </>
     );

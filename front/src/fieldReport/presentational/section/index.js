@@ -28,3 +28,6 @@ export {
 export {
     default as FieldReportProjectHistorySection,
 } from "./FieldReportProjectHistorySection";
+export {
+    default as FieldReportProjectAgreementsSection,
+} from "./FieldReportProjectAgreementsSection";

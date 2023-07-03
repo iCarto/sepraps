@@ -11,7 +11,9 @@ const FieldReportProjectsForm = ({
     project = null,
     fieldReport = null,
     projectId = null,
+    section = "",
     onSubmit,
+    onCancel = null,
 }) => {
     const defaultFormValues = {
         visited_project: {
@@ -42,8 +44,11 @@ const FieldReportProjectsForm = ({
 
     return (
         <FormProvider {...formMethods}>
-            <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
-                <FieldReportProjectsFormFields />
+            <EntityForm
+                onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                onCancel={onCancel}
+            >
+                <FieldReportProjectsFormFields section={section} />
             </EntityForm>
         </FormProvider>
     );
