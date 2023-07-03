@@ -28,10 +28,7 @@ const FieldReportCommentsStartSection = ({fieldReport}) => {
 
     return (
         <>
-            <SectionCard
-                title="Introducción al informe"
-                secondaryActions={secondaryActions}
-            >
+            <SectionCard title="Introducción" secondaryActions={secondaryActions}>
                 {fieldReport?.report_comments_start ? (
                     <Typography>{fieldReport?.report_comments_start}</Typography>
                 ) : (
