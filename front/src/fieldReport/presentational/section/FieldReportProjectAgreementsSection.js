@@ -1,4 +1,4 @@
-import {FieldReportProjectsForm} from "../form";
+import {FieldReportProjectForm} from "../form";
 import {AddNewFullWidthButton} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -13,6 +13,18 @@ const FieldReportProjectAgreementsSection = ({
 }) => {
     const section = "agreements";
 
+    const handleSubmit = fieldReport => {
+        console.log("handleSubmit", fieldReport);
+        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
+        //     .then(() => {
+        //         navigate(basePath, true);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         setError(error);
+        //     });
+    };
+
     const handleOpenForm = () => {
         onOpenForm(section);
     };
@@ -24,10 +36,10 @@ const FieldReportProjectAgreementsSection = ({
     return (
         <>
             {isFormOpen ? (
-                <FieldReportProjectsForm
+                <FieldReportProjectForm
                     project={project}
                     section={section}
-                    onSubmit={undefined}
+                    onSubmit={handleSubmit}
                     onCancel={handleCancelForm}
                 />
             ) : project?.[section] ? (

@@ -1,7 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 
 import {TabPanel} from "base/ui/tab";
-import {FieldReportProjectsForm} from "../form";
+import {FieldReportProjectForm} from "../form";
 
 const FieldReportNewProjectTabPanel = ({index, value}) => {
     let fieldReport;
@@ -23,7 +23,7 @@ const FieldReportNewProjectTabPanel = ({index, value}) => {
 
     return (
         <TabPanel key={index} value={value} index={index}>
-            <FieldReportProjectsForm onSubmit={handleSubmit} />
+            <FieldReportProjectForm onSubmit={handleSubmit} />
         </TabPanel>
     );
 };

@@ -6,10 +6,8 @@ export {
 } from "./FieldReportFormGeneralDataFields";
 export {default as FieldReportGoalsForm} from "./FieldReportGoalsForm";
 export {default as FieldReportGoalsFormFields} from "./FieldReportGoalsFormFields";
-export {default as FieldReportProjectsForm} from "./FieldReportProjectsForm";
-export {
-    default as FieldReportProjectsFormFields,
-} from "./FieldReportProjectsFormFields";
+export {default as FieldReportProjectForm} from "./FieldReportProjectForm";
+export {default as FieldReportProjectFormFields} from "./FieldReportProjectFormFields";
 export {
     default as FieldReportProjectActivitiesForm,
 } from "./FieldReportProjectActivitiesForm";

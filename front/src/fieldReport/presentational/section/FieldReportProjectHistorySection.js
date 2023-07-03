@@ -1,10 +1,11 @@
-import {FieldReportProjectsForm} from "../form";
+import {FieldReportProjectForm} from "../form";
+import {AddNewFullWidthButton} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-import {AddNewFullWidthButton} from "base/shared/components";
 
+// TO-DO: Extract this and FieldReportProjectAgreementsSection.js to one abstract component
 const FieldReportProjectHistorySection = ({
     project,
     isFormOpen,
@@ -12,6 +13,18 @@ const FieldReportProjectHistorySection = ({
     onCloseForm,
 }) => {
     const section = "history";
+
+    const handleSubmit = fieldReport => {
+        console.log("handleSubmit", fieldReport);
+        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
+        //     .then(() => {
+        //         navigate(basePath, true);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         setError(error);
+        //     });
+    };
 
     const handleOpenForm = () => {
         onOpenForm(section);
@@ -24,10 +37,10 @@ const FieldReportProjectHistorySection = ({
     return (
         <>
             {isFormOpen ? (
-                <FieldReportProjectsForm
+                <FieldReportProjectForm
                     project={project}
                     section={section}
-                    onSubmit={undefined}
+                    onSubmit={handleSubmit}
                     onCancel={handleCancelForm}
                 />
             ) : project?.[section] ? (

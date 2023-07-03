@@ -1,19 +1,35 @@
-import {FormTextArea} from "base/form/components";
+import {useEffect, useState} from "react";
+import {ProjectService} from "project/service";
+import {FormProjectSelect, FormTextArea} from "base/form/components";
 import {ContractSearchAutocomplete} from "contract/presentational";
-import {ProjectSearchAutocomplete} from "project/presentational/form";
+
 import Grid from "@mui/material/Grid";
 
-const FieldReportProjectsFormFields = ({section}) => {
-    const handleSelectContract = contract => {
-        console.log("contract", contract);
-    };
-
-    const handleSelectProject = contract => {
-        console.log("contract", contract);
-    };
+const FieldReportProjectFormFields = ({section}) => {
+    const [filter, setFilter] = useState({});
+    const [projects, setProjects] = useState([]);
 
     const displayHistoryField = !section || section === "history";
     const displayAgreementsField = !section || section === "agreements";
+
+    useEffect(() => {
+        if (Object.keys(filter).length) {
+            ProjectService.getAll(filter).then(data => {
+                const projectList = data.map(project => ({
+                    label: `${project.code} - ${project.location}`,
+                    value: project.id,
+                }));
+                setProjects(projectList);
+            });
+        } else {
+            setProjects([]);
+        }
+    }, [filter]);
+
+    const handleSelectContract = contract => {
+        if (contract) setFilter({construction_contract: contract.id});
+        else setFilter({});
+    };
 
     return (
         <Grid container columnSpacing={1}>
@@ -25,7 +41,7 @@ const FieldReportProjectsFormFields = ({section}) => {
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <ProjectSearchAutocomplete handleSelect={handleSelectProject} />
+                        <FormProjectSelect name="id" projects={projects} />
                     </Grid>
                 </>
             ) : null}
@@ -47,4 +63,4 @@ const FieldReportProjectsFormFields = ({section}) => {
     );
 };
 
-export default FieldReportProjectsFormFields;
+export default FieldReportProjectFormFields;
