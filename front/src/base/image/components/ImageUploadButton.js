@@ -1,7 +1,7 @@
 import {useCallback, useRef} from "react";
 import {useController, useFormContext} from "react-hook-form";
 
-import {AddNewButtonFullWidthButton} from "base/shared/components";
+import {AddNewFullWidthButton} from "base/shared/components";
 import Alert from "@mui/material/Alert";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
@@ -50,7 +50,7 @@ const ImageUploadButton = ({name, onSelectFiles = null, rules = {}}) => {
                 }}
                 onChange={handleSelectFile}
             />
-            <AddNewButtonFullWidthButton
+            <AddNewFullWidthButton
                 onClick={triggerInputClick}
                 icon={<AddPhotoAlternateIcon />}
             />

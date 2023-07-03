@@ -4,7 +4,7 @@ import {AuthAction} from "base/user/components";
 import Stack from "@mui/material/Stack";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-const AddNewButtonFullWidthButton = ({onClick, roles = [], icon = null}) => {
+const AddNewFullWidthButton = ({onClick, roles = [], icon = null}) => {
     const buttonIcon = icon || <AddCircleIcon />;
 
     const buttonStyle = {
@@ -38,4 +38,4 @@ const AddNewButtonFullWidthButton = ({onClick, roles = [], icon = null}) => {
     );
 };
 
-export default AddNewButtonFullWidthButton;
+export default AddNewFullWidthButton;
