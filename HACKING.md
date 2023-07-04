@@ -80,12 +80,12 @@ The project is setup by default with strict linters and formatters that run on p
 
 Check `server/bootstrap.sh` for automatized way of configuring the tools.
 
--   [VirtualBox and Vagrant](https://gitlab.com/icarto/ikdb/blob/master/configurar_equipo/linux/virtualbox_y_vagrant.md)
--   [nodejs y npm](https://gitlab.com/icarto/ikdb/blob/master/configurar_equipo/linux/instalar_y_actualizar_node_y_npm.md)
--   [Virtualenwrapper](https://gitlab.com/icarto/ikdb/-/blob/master/python/python_tooling_virtualenvwrapper.md#instalaci%C3%B3n)
--   [pyenv](https://gitlab.com/icarto/ikdb/-/blob/master/python/python_tooling_pyenv.md#instalaci%C3%B3n)
--   [shfmt](https://gitlab.com/icarto/ikdb/-/blob/wip_linters/linters_estilo_codigo_y_formatters/estilo_codigo_y_formatters/herramientas/formatters_bash.md#configuraci%C3%B3n-icarto)
--   [shellcheck](https://gitlab.com/icarto/ikdb/-/blob/wip_linters/linters_estilo_codigo_y_formatters/linters/5.linters_bash.md#configuraci%C3%B3n-icarto)
+-   [VirtualBox and Vagrant](https://github.com/iCarto/ikdb/blob/master/configurar_equipo/linux/virtualbox_y_vagrant.md)
+-   [nodejs y npm](https://github.com/icarto/ikdb/blob/master/configurar_equipo/linux/instalar_y_actualizar_node_y_npm.md)
+-   [Virtualenwrapper](https://github.com/icarto/ikdb/blob/master/python/python_tooling_virtualenvwrapper.md)
+-   [pyenv](https://github.com/icarto/ikdb/blob/master/python/python_tooling_pyenv.md)
+-   [shfmt](https://github.com/icarto/ikdb/blob/wip_linters/linters_estilo_codigo_y_formatters/estilo_codigo_y_formatters/herramientas/formatters_bash.md#configuraci%C3%B3n-icarto)
+-   [shellcheck](https://github.com/icarto/ikdb/blob/wip_linters/linters_estilo_codigo_y_formatters/linters/5.linters_bash.md#configuraci%C3%B3n-icarto)
 
 This pre-requistes should be installed previous to the current user session. So if this is the first time you are installing it, _Log out_ from the host and _Log in_ again.
 
