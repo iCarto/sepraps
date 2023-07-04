@@ -10,7 +10,9 @@ import {
     ViewFieldReportProjectsSubPage,
     UpdateFieldReportGoalsPanel,
 } from "fieldReport/container";
+import {FieldReportProjectsSection} from "fieldReport/presentational/section";
 import {ViewDocumentPanel} from "base/file/components";
+import {FieldReportProjectsSection} from "fieldReport/presentational/section";
 
 const fieldReportRoutes = [
     <Route key="field-report-new" path="new" element={<CreateFieldReportPage />} />,
@@ -43,7 +45,13 @@ const fieldReportRoutes = [
                 key="field-report-projects"
                 path="projects"
                 element={<ViewFieldReportProjectsSubPage />}
-            ></Route>
+            >
+                <Route
+                    key="field-report-projects-tabs"
+                    path=":tab"
+                    element={<FieldReportProjectsSection />}
+                />
+            </Route>
         </Route>
     </Route>,
 ];

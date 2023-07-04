@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useOutletContext, Link as RouterLink} from "react-router-dom";
 
 import {FieldReportProjectsTabPanels} from ".";
 import Paper from "@mui/material/Paper";
@@ -9,20 +10,24 @@ import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-const FieldReportProjectsSection = ({fieldReport}) => {
+const FieldReportProjectsSection = () => {
     const [value, setValue] = useState(0);
+
+    let fieldReport;
+    [fieldReport] = useOutletContext();
 
     const contracts = new Set();
     fieldReport.visited_projects.map(project => contracts.add(project.contract));
 
-    function a11yProps(name) {
+    function a11yProps(id) {
         return {
-            id: `tab-${name}`,
-            "aria-controls": `tabpanel-${name}`,
+            id: `tab-${id}`,
+            "aria-controls": `tabpanel-${id}`,
         };
     }
 
     const handleChangeTab = (event, newValue) => {
+        console.log(newValue);
         setValue(newValue);
     };
 
@@ -51,14 +56,23 @@ const FieldReportProjectsSection = ({fieldReport}) => {
                         ? fieldReport.visited_projects?.map((project, index) => (
                               <Tab
                                   key={index}
+                                  component={RouterLink}
+                                  to={{
+                                      pathname: `${project.id}`,
+                                  }}
                                   label={getTabLabel(project)}
-                                  {...a11yProps(project.locality)}
+                                  {...a11yProps(project.id)}
+                                  value={index}
                               />
                           ))
                         : null}
                     <Tab
                         key={indexForNewTab}
                         id="tab-nuevo"
+                        component={RouterLink}
+                        to={{
+                            pathname: `new`,
+                        }}
                         aria-controls="tabpanel-nuevo"
                         label={<AddIcon />}
                         sx={{minWidth: "48px"}}
