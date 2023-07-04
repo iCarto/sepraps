@@ -5,12 +5,12 @@ export function useFieldReportsTableColumns() {
         {
             id: "name",
             label: "Nombre",
-            width: 45,
+            width: 35,
         },
         {
             id: "code",
             label: "Memorándum",
-            width: 15,
+            width: 20,
         },
         {
             id: "date",
@@ -18,7 +18,7 @@ export function useFieldReportsTableColumns() {
             formatFunction: item => {
                 return DateUtil.formatDate(item.date);
             },
-            width: 15,
+            width: 20,
         },
         {
             id: "reporting_person_name",
