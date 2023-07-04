@@ -36,8 +36,8 @@ const FieldReportGeneralDataSection = ({fieldReport}) => {
 
     return (
         <SectionCard title="Datos básicos" secondaryActions={secondaryActions}>
-            <SectionField label="Nombre" value={fieldReport?.report_name} />
-            <SectionField label="Nº de memorándum" value={fieldReport?.report_code} />
+            <SectionField label="Nombre" value={fieldReport?.name} />
+            <SectionField label="Nº de memorándum" value={fieldReport?.code} />
             <SectionField
                 label="Fechas de la intervención"
                 value={`${DateUtil.formatDate(

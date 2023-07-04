@@ -3,20 +3,20 @@ import {DateUtil} from "base/format/utilities";
 export function useFieldReportsTableColumns() {
     const tableColumns = [
         {
-            id: "report_name",
+            id: "name",
             label: "Nombre",
             width: 45,
         },
         {
-            id: "report_code",
+            id: "code",
             label: "Memorándum",
             width: 15,
         },
         {
-            id: "report_date",
+            id: "date",
             label: "Fecha",
             formatFunction: item => {
-                return DateUtil.formatDate(item.report_date);
+                return DateUtil.formatDate(item.date);
             },
             width: 15,
         },

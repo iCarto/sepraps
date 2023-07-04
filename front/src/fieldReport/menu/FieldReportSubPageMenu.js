@@ -9,8 +9,8 @@ const FieldReportSubPageMenu = ({fieldReport}) => {
 
     return (
         <SubPageMenu
-            headerText={`${fieldReport.report_code}`}
-            headerTitle={`${DateUtil.formatDate(fieldReport.report_date)}`}
+            headerText={`${fieldReport.code}`}
+            headerTitle={`${DateUtil.formatDate(fieldReport.date)}`}
         >
             <PageMenuListItemButton
                 key="fieldReport-summary"

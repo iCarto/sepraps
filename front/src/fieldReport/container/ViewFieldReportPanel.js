@@ -29,11 +29,11 @@ const ViewFieldReportPanel = () => {
                 onClickDetailButton={handleClickDetail}
                 title="Informe de viaje"
             >
-                <SectionCard title={fieldReport.report_name}>
-                    <SectionField label="Memorándum" value={fieldReport.report_code} />
+                <SectionCard title={fieldReport.name}>
+                    <SectionField label="Memorándum" value={fieldReport.code} />
                     <SectionField
                         label="Fecha"
-                        value={DateUtil.formatDate(fieldReport.report_date)}
+                        value={DateUtil.formatDate(fieldReport.date)}
                     />
                     <SectionField
                         label="Autor/a"

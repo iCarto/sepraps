@@ -36,14 +36,14 @@ const FieldReportFormGeneralDataFields = ({orientation = "column"}) => {
             <Grid container columnSpacing={1} mt={3}>
                 <Grid item xs={12}>
                     <FormInputText
-                        name="report_name"
+                        name="name"
                         label="Nombre del informe"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <FormInputText
-                        name="report_code"
+                        name="code"
                         label="Nº de memorándum"
                         rules={{required: "Este campo es obligatorio"}}
                     />
