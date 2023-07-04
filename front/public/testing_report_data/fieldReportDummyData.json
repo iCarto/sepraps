@@ -1,7 +1,7 @@
 {
-    "report_name": "Visita de Fiscalización de Obras - Ciudad de Yhú, Distrito de Yhú - Dpto. Caaguazú",
-    "report_code": "M TS 29-22",
-    "report_date": "2023-06-09",
+    "name": "Visita de Fiscalización de Obras - Ciudad de Yhú, Distrito de Yhú - Dpto. Caaguazú",
+    "code": "M TS 29-22",
+    "date": "2023-06-09",
     "visit_dates": "16/02/2023 - 18/02/2023",
     "visit_date_start": "2023-06-01",
     "visit_date_end": "2023-06-06",
@@ -17,12 +17,10 @@
     ],
     "report_comments_start": "Por este medio me dirijo a Usted y por su intermedio a quien corresponde, a fin de remitirle el informe de las Actividades realizadas en fechas 16 al 18 de febrero del corriente, en el marco Construcción de Componentes de Sistemas de Abastecimiento de Agua Potable en Localidades rurales de la región oriental del país, modalidad contrato marco.",
     "report_comments_end": "Se adjunta listado proporcionado por la Junta de Saneamiento por sector/número de casa.",
-    "visit_goals": [
-        {
-            "text": "Dar asistencia a la Comisión Directiva de la Junta de Saneamiento y usuarios/as en general para la realización de la excavación de zanja e instalación de tubos para la red de distribución."
-        },
-        {"text": "Objetivo 2"},
-        {"text": "Objetivo 3"}
+    "goals": [
+        "Dar asistencia a la Comisión Directiva de la Junta de Saneamiento y usuarios/as en general para la realización de la excavación de zanja e instalación de tubos para la red de distribución.",
+        "Objetivo 2",
+        "Objetivo 3"
     ],
     "visited_contracts": [{"code": "XXXXX"}, {"code": "YYYYYY"}],
     "visited_projects": [
@@ -34,7 +32,11 @@
             "district": "Pedro Juan Caballero (Cerro Corá)",
             "department": "Amambay",
             "history": "Comunidades Indígenas de la Región Oriental- Entrega de sitio y relevamiento Técnico de los componentes que faltan para poner en funcionamiento el Sistema de Agua—en el Marco del Contrato Marco II - Contrato N° 33/2022 Empresa Contratista Ricardo Diaz Martínez.",
-            "agreements": "Los líderes se comprometen a limpiar el sitio y acompañar a la Empresa para facilitar los trabajos.",
+            "agreements": [
+                "Los líderes se comprometen a limpiar el sitio y acompañar a la Empresa para facilitar los trabajos.",
+                "Los líderes se comprometen a entregar el transformador.",
+                "Los líderes se comprometen a acompañar las gestiones en la ANDE."
+            ],
             "activities": [
                 {
                     "id": 1,
