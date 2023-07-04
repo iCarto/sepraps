@@ -8,10 +8,7 @@ export function getFieldReportPDFElements(doc, reportData) {
     const fieldReportContent = getFieldReportContent(reportData);
 
     const drawReportHeader = () => {
-        globalPDFElements.drawHeader(
-            doc,
-            `Informe de viaje - ${reportData.report_code}`
-        );
+        globalPDFElements.drawHeader(doc, `Informe de viaje - ${reportData.code}`);
     };
 
     const drawReportFirstPageHeader = logosData => {
@@ -95,7 +92,7 @@ export function getFieldReportPDFElements(doc, reportData) {
         };
 
         const initialPositionY = doc.lastAutoTable.finalY + 80;
-        const title = `Informe de viaje - ${reportData.report_code}`;
+        const title = `Informe de viaje - ${reportData.code}`;
 
         doc.setFontSize(dimensions.fontSizeHeadingOne)
             .setTextColor(CUSTOM_COLORS.primary.main)
@@ -106,14 +103,14 @@ export function getFieldReportPDFElements(doc, reportData) {
         doc.setFontSize(dimensions.fontSizeHeadingTwo)
             .setTextColor(CUSTOM_COLORS.text.primary)
             .text(
-                reportData.report_name,
-                getTextPositionY(reportData.report_name),
+                reportData.name,
+                getTextPositionY(reportData.name),
                 initialPositionY + 10
             );
 
         doc.setFont(undefined, "bold").text(
-            reportData.report_date,
-            getTextPositionY(reportData.report_date),
+            reportData.date,
+            getTextPositionY(reportData.date),
             initialPositionY + 20
         );
     };

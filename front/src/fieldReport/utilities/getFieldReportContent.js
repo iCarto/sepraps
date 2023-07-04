@@ -14,8 +14,8 @@ export function getFieldReportContent(reportData) {
     };
 
     const headTableBody = [
-        ["Memorándum n.º:", reportData.report_code],
-        ["Fecha de la visita:", DateUtil.formatDate(reportData.report_date)],
+        ["Memorándum n.º:", reportData.code],
+        ["Fecha de la visita:", DateUtil.formatDate(reportData.date)],
         [
             "Elaborado por:",
             `${reportData.reporting_person_name}, ${reportData.reporting_person_role}`,
@@ -42,7 +42,7 @@ export function getFieldReportContent(reportData) {
     });
 
     const goalsList = [];
-    reportData.visit_goals.map((goal, index) => {
+    reportData.goals.map((goal, index) => {
         goalsList.push([`${index + 1}.`, goal.goal]);
     });
 

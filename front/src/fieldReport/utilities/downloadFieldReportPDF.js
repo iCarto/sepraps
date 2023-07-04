@@ -65,7 +65,7 @@ export function downloadFieldReportPDF() {
         fieldReportElements.drawReportHeader();
         globalPDFElements.drawFooter(doc);
 
-        doc.save(`informe_viaje_${reportData.report_date}.pdf`);
+        doc.save(`informe_viaje_${reportData.date}.pdf`);
     };
 
     return {download};
