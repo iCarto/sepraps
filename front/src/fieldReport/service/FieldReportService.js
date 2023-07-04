@@ -6,7 +6,7 @@ import {
 } from "fieldReport/model";
 import {createEntityService} from "base/entity/service";
 
-const basePath = "/api/app/fieldReports";
+const basePath = "/api/app/fieldreports";
 
 const entityService = createEntityService(
     basePath,
@@ -18,21 +18,15 @@ const entityService = createEntityService(
 
 const FieldReportService = {
     getList(filter, sort, order, format = null) {
-        // return entityService.getList(filter, null, sort, order, format);
-        return fetch("/testing_report_data/fieldReportsDummyData.json")
-            .then(response => response.json())
-            .then(data => {
-                return data;
-            });
+        return entityService.getList(filter, null, sort, order, format).then(data => {
+            return data;
+        });
     },
 
     getPaginatedList(filter, page, sort, order) {
-        // return entityService.getList(filter, page, sort, order);
-        return fetch("/testing_report_data/fieldReportsDummyData.json")
-            .then(response => response.json())
-            .then(data => {
-                return data;
-            });
+        return entityService.getList(filter, page, sort, order).then(data => {
+            return data;
+        });
     },
 
     getFeatures(filter) {
@@ -60,9 +54,9 @@ const FieldReportService = {
         return entityService.update(entity);
     },
 
-    // delete(id) {
-    //     return entityService.delete(id);
-    // },
+    delete(id) {
+        return entityService.delete(id);
+    },
 };
 
 export default FieldReportService;
