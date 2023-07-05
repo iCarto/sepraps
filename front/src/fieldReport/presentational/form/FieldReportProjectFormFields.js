@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {ProjectService} from "project/service";
-import {FormProjectSelect, FormTextArea} from "base/form/components";
+import {FormComboBox, FormTextArea} from "base/form/components";
 import {ContractSearchAutocomplete} from "contract/presentational";
 
 import Grid from "@mui/material/Grid";
@@ -17,7 +17,7 @@ const FieldReportProjectFormFields = ({section}) => {
             ProjectService.getAll(filter).then(data => {
                 const projectList = data.map(project => ({
                     label: `${project.code} - ${project.location}`,
-                    value: project.id,
+                    id: project.id,
                 }));
                 setProjects(projectList);
             });
@@ -38,10 +38,16 @@ const FieldReportProjectFormFields = ({section}) => {
                     <Grid item xs={12} md={6}>
                         <ContractSearchAutocomplete
                             handleSelect={handleSelectContract}
+                            rules={{required: "Este campo es obligatorio"}}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <FormProjectSelect name="id" projects={projects} />
+                        <FormComboBox
+                            name="id"
+                            options={projects}
+                            label="Proyecto"
+                            rules={{required: "Este campo es obligatorio"}}
+                        />
                     </Grid>
                 </>
             ) : null}

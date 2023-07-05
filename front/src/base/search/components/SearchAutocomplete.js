@@ -73,14 +73,13 @@ const SearchAutocomplete = ({
                 </Box>
             )}
             forcePopupIcon={false}
-            noOptionsText="No se han encontrado resultados"
             loading={state.loading}
             renderInput={params => (
                 <TextField
-                    {...params}
                     fullWidth
                     label={label}
                     variant="outlined"
+                    {...params}
                     onChange={ev => {
                         // dont fire API if the user delete or not entered anything
                         if (ev.target.value !== "" || ev.target.value !== null) {
