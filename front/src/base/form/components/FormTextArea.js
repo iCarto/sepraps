@@ -3,9 +3,11 @@ import TextField from "@mui/material/TextField";
 
 const FormTextArea = ({
     name: propsName,
+    placeholder = "",
     label,
-    rules = {},
     isActive = true,
+    maxLength = 600,
+    rules = {},
     rows = 3,
 }) => {
     const {control} = useFormContext();
@@ -29,12 +31,14 @@ const FormTextArea = ({
             disabled={!isActive}
             name={name}
             label={inputLabel}
+            placeholder={placeholder}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
             inputRef={ref}
             error={Boolean(error)}
             helperText={error?.message}
+            inputProps={{maxLength: maxLength}}
             InputLabelProps={{shrink: true}}
         />
     );
