@@ -9,3 +9,4 @@ export {default as ToggleFilterAccordionButton} from "./ToggleFilterAccordionBut
 export {default as Spinner} from "./Spinner";
 export {default as Tag} from "./Tag";
 export {default as ContainerWithLabel} from "./ContainerWithLabel";
+export {default as BulletList} from "./BulletList";
