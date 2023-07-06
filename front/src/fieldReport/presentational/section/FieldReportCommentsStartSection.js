@@ -2,49 +2,67 @@ import {useNavigate} from "react-router-dom";
 
 import {useAuth} from "base/user/provider";
 
-import {AddNewButton} from "base/shared/components";
-import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
+import {AddNewFullWidthButton} from "base/shared/components";
+import {FieldReportForm} from "../form";
 
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 
-const FieldReportCommentsStartSection = ({fieldReport}) => {
+const FieldReportCommentsStartSection = ({
+    fieldReport,
+    isFormOpen,
+    onOpenForm,
+    onCloseForm,
+    onSubmit,
+}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
-    const secondaryActions = [
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar"
-            icon={<EditIcon />}
-            onClick={() => {
-                navigate(`start/add`);
-            }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-        />,
-    ];
+    const section = "report_comments_start";
+
+    const handleOpenForm = () => {
+        onOpenForm(section);
+    };
+
+    const handleCancelForm = () => {
+        onCloseForm(section);
+    };
 
     return (
         <>
-            <SectionCard title="Introducción" secondaryActions={secondaryActions}>
-                {fieldReport?.report_comments_start ? (
-                    <Typography>{fieldReport?.report_comments_start}</Typography>
-                ) : (
-                    <>
-                        <Stack alignItems="center" spacing={3}>
-                            <Typography sx={{fontStyle: "italic"}}>
-                                No se ha definido la introducción para este informe.
-                            </Typography>
-                            <AddNewButton
-                                text="Añadir introducción"
-                                basePath="start/add"
-                            />
-                        </Stack>
-                    </>
-                )}
-            </SectionCard>
+            {isFormOpen ? (
+                <FieldReportForm
+                    fieldReport={fieldReport}
+                    section={section}
+                    onSubmit={onSubmit}
+                    onCancel={handleCancelForm}
+                />
+            ) : fieldReport?.[section] ? (
+                <Grid container columnSpacing={1}>
+                    <Grid item xs>
+                        <Typography variant="body1" color="text.primary">
+                            {fieldReport[section]}
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xs={"auto"}
+                        container
+                        justifyContent="flex-end"
+                        alignItems="flex-start"
+                    >
+                        <IconButton onClick={handleOpenForm}>
+                            <EditIcon fontSize="small" />
+                        </IconButton>
+                    </Grid>
+                </Grid>
+            ) : (
+                <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                    <AddNewFullWidthButton onClick={handleOpenForm} />
+                </Grid>
+            )}
         </>
     );
 };

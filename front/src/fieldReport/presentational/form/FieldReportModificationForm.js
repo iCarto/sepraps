@@ -2,6 +2,7 @@ import {
     FieldReportFormGeneralDataFields,
     FieldReportFormCommentsStartFields,
     FieldReportFormCommentsEndFields,
+    FieldReportFormGoalsFields,
 } from ".";
 
 const FieldReportModificationForm = ({section}) => {
@@ -10,6 +11,9 @@ const FieldReportModificationForm = ({section}) => {
     }
     if (section === "start") {
         return <FieldReportFormCommentsStartFields />;
+    }
+    if (section === "goals") {
+        return <FieldReportFormGoalsFields />;
     }
     if (section === "end") {
         return <FieldReportFormCommentsEndFields />;

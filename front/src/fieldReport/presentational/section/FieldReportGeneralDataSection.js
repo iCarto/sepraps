@@ -1,32 +1,11 @@
-import {useNavigate} from "react-router-dom";
-
-import {useAuth} from "base/user/provider";
 import {DateUtil} from "base/format/utilities";
-import {
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "base/ui/section/components";
+import {SectionCard, SectionField} from "base/ui/section/components";
+import {DownloadPDFButton} from "base/pdf/presentational";
 
-import EditIcon from "@mui/icons-material/Edit";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
-const FieldReportGeneralDataSection = ({fieldReport}) => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
-
-    const secondaryActions = [
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar"
-            icon={<EditIcon />}
-            onClick={() => {
-                navigate(`generaldata/edit`);
-            }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-        />,
-    ];
-
+const FieldReportGeneralDataSection = ({fieldReport, handleGeneratePDF}) => {
     const reported_persons = fieldReport?.reported_persons.map(
         person => `${person.name} (${person.role})`
     );
@@ -35,9 +14,27 @@ const FieldReportGeneralDataSection = ({fieldReport}) => {
     );
 
     return (
-        <SectionCard title="Datos básicos" secondaryActions={secondaryActions}>
-            <SectionField label="Nombre" value={fieldReport?.name} />
-            <SectionField label="Nº de memorándum" value={fieldReport?.code} />
+        <SectionCard
+            headingLabel={false}
+            secondaryAction={
+                <DownloadPDFButton
+                    handleGeneratePDF={handleGeneratePDF}
+                    text="Imprimir informe"
+                />
+            }
+        >
+            <Grid sx={{marginTop: "-48px"}}>
+                <Typography variant="h4" color="grey.700" sx={{fontWeight: "bold"}}>
+                    Informe de viaje {fieldReport.code}
+                </Typography>
+                <Typography
+                    variant="h6"
+                    color="grey.700"
+                    sx={{fontWeight: "bold", mb: 3}}
+                >
+                    {fieldReport?.name}
+                </Typography>
+            </Grid>
             <SectionField
                 label="Fechas de la intervención"
                 value={`${DateUtil.formatDate(

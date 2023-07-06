@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {ProjectService} from "project/service";
+
 import {FormComboBox, FormTextArea} from "base/form/components";
 import {ContractSearchAutocomplete} from "contract/presentational";
+import {FieldReportProjectFormAgreementsFields} from ".";
 
 import Grid from "@mui/material/Grid";
-import {FieldReportProjectFormAgreementsFields} from ".";
 
 const FieldReportProjectFormFields = ({section}) => {
     const [filter, setFilter] = useState({});

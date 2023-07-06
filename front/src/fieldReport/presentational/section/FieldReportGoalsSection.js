@@ -1,61 +1,82 @@
 import {useNavigate} from "react-router-dom";
 
 import {useAuth} from "base/user/provider";
-
-import {AddNewButton, BulletList} from "base/shared/components";
-import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
 import {FieldReportService} from "fieldReport/service";
 
-import Stack from "@mui/material/Stack";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import {FieldReportForm} from "../form";
+import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 
-const FieldReportGoalsSection = ({fieldReport}) => {
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+
+const FieldReportGoalsSection = ({
+    fieldReport,
+    isFormOpen,
+    onOpenForm,
+    onCloseForm,
+    onSubmit,
+}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
 
-    const handleClickDelete = index => {
-        console.log("delete", index);
+    const section = "goals";
+
+    const handleOpenForm = () => {
+        onOpenForm(section);
+    };
+
+    const handleCancelForm = () => {
+        onCloseForm(section);
+    };
+
+    const handleSubmit = fieldReport => {
+        console.log("handleSubmit", fieldReport);
+        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
+        //     .then(() => {
+        //         navigate(basePath, true);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         setError(error);
+        //     });
     };
 
     const {dialog: deleteDialog} = useMenuGenericDeleteAction(FieldReportService);
 
-    const getSecondaryActions = index => {
-        return [
-            <SectionCardHeaderAction
-                key="edit"
-                name="edit"
-                text="Modificar"
-                icon={<EditIcon />}
-                onClick={() => {
-                    navigate(`goals/edit/${index}`);
-                }}
-                roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-            />,
-            <SectionCardHeaderAction
-                key="delete"
-                name="delete"
-                text="Eliminar"
-                icon={<DeleteIcon color="error" />}
-                onClick={() => handleClickDelete(index)}
-                roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-            />,
-        ];
-    };
-
     return (
         <>
             {deleteDialog}
-            <SectionCard title="Objetivos">
-                <BulletList
-                    items={fieldReport?.visit_goals}
-                    getActions={getSecondaryActions}
+            {isFormOpen ? (
+                <FieldReportForm
+                    fieldReport={fieldReport}
+                    section={section}
+                    onSubmit={onSubmit}
+                    onCancel={handleCancelForm}
                 />
-                <Stack alignItems="center" mt={2}>
-                    <AddNewButton text="Añadir objetivo" basePath="goals/add/new" />
-                </Stack>
-            </SectionCard>
+            ) : fieldReport?.goals?.length ? (
+                <Grid container columnSpacing={1}>
+                    <Grid item xs>
+                        <BulletList items={fieldReport?.goals} dense={false} />
+                    </Grid>
+                    <Grid
+                        item
+                        xs={"auto"}
+                        container
+                        justifyContent="flex-end"
+                        alignItems="center"
+                    >
+                        <IconButton onClick={handleOpenForm}>
+                            <EditIcon fontSize="small" />
+                        </IconButton>
+                    </Grid>
+                </Grid>
+            ) : (
+                <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                    <AddNewFullWidthButton onClick={handleOpenForm} />
+                </Grid>
+            )}
         </>
     );
 };

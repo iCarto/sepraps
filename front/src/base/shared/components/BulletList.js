@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import CircleIcon from "@mui/icons-material/Circle";
 
-const BulletList = ({items, getActions = null}) => {
+const BulletList = ({items, getActions = null, dense = true}) => {
     const listItemStyle = {
         pt: 0,
         px: 1,
@@ -16,7 +16,7 @@ const BulletList = ({items, getActions = null}) => {
     };
 
     return (
-        <List dense>
+        <List dense={dense}>
             {items
                 ? items.map((item, index) => {
                       return (

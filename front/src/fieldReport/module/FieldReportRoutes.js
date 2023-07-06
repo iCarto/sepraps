@@ -3,16 +3,15 @@ import {
     CreateFieldReportPage,
     ListFieldReportsPage,
     ManageFieldReportsPage,
-    UpdateFieldReportPanel,
     ViewFieldReportPage,
     ViewFieldReportPanel,
     ViewFieldReportSummarySubPage,
     ViewFieldReportProjectsSubPage,
-    UpdateFieldReportGoalsPanel,
+    ViewFieldReportCoverSubPage,
+    ViewFieldReportIntroSubPage,
 } from "fieldReport/container";
 import {FieldReportProjectsSection} from "fieldReport/presentational/section";
 import {ViewDocumentPanel} from "base/file/components";
-import {FieldReportProjectsSection} from "fieldReport/presentational/section";
 
 const fieldReportRoutes = [
     <Route key="field-report-new" path="new" element={<CreateFieldReportPage />} />,
@@ -29,18 +28,17 @@ const fieldReportRoutes = [
                 key="field-report-summary"
                 path="summary"
                 element={<ViewFieldReportSummarySubPage />}
-            >
-                <Route
-                    key="field-report-summary-update"
-                    path=":section/:action"
-                    element={<UpdateFieldReportPanel />}
-                />
-                <Route
-                    key="field-report-goals-update"
-                    path="goals/:action/:goalId"
-                    element={<UpdateFieldReportGoalsPanel />}
-                />
-            </Route>
+            />
+            <Route
+                key="field-report-cover"
+                path="cover"
+                element={<ViewFieldReportCoverSubPage />}
+            />
+            <Route
+                key="field-report-intro"
+                path="intro"
+                element={<ViewFieldReportIntroSubPage />}
+            />
             <Route
                 key="field-report-projects"
                 path="projects"

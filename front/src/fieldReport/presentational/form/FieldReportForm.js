@@ -1,16 +1,15 @@
 import {FormProvider, useForm} from "react-hook-form";
 
-import {FieldReportModificationForm, FieldReportCreationForm} from ".";
 import {FormUtil} from "base/form/utilities";
-import {EntityForm} from "base/entity/components/form";
-import {LocationProvider} from "sepraps/location/provider";
 import {DomainProvider} from "sepraps/domain/provider";
+import {EntityForm} from "base/entity/components/form";
+import {FieldReportFormFields} from ".";
 
 const FieldReportForm = ({
     fieldReport = null,
+    section = "",
     onSubmit,
     onCancel = null,
-    updatedSection = null,
 }) => {
     const defaultFormValues = {
         id: FormUtil.getFormValue(fieldReport?.id),
@@ -30,6 +29,7 @@ const FieldReportForm = ({
             fieldReport?.report_comments_start
         ),
         report_comments_end: FormUtil.getFormValue(fieldReport?.report_comments_end),
+        goals: FormUtil.getFormValue(fieldReport?.goals, []),
     };
 
     const formMethods = useForm({
@@ -50,30 +50,21 @@ const FieldReportForm = ({
             visit_date_end: FormUtil.getDataValue(data.visit_date_end),
             report_comments_start: FormUtil.getDataValue(data.report_comments_start),
             report_comments_end: FormUtil.getDataValue(data.report_comments_end),
+            goals: FormUtil.getDataValue(data.goals),
         });
     };
 
-    const onFormCancel = () => {
-        onCancel();
-    };
-
     return (
-        <LocationProvider>
-            <DomainProvider>
-                <FormProvider {...formMethods}>
-                    {updatedSection ? (
-                        <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
-                            <FieldReportModificationForm section={updatedSection} />
-                        </EntityForm>
-                    ) : (
-                        <FieldReportCreationForm
-                            onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                            onCancel={onCancel ? onFormCancel : null}
-                        />
-                    )}
-                </FormProvider>
-            </DomainProvider>
-        </LocationProvider>
+        <DomainProvider>
+            <FormProvider {...formMethods}>
+                <EntityForm
+                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                    onCancel={onCancel}
+                >
+                    <FieldReportFormFields section={section} />
+                </EntityForm>
+            </FormProvider>
+        </DomainProvider>
     );
 };
 

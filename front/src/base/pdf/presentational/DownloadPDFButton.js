@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import PrintOutlinedIcon from "@mui/icons-material/PrintOutlined";
 import Tooltip from "@mui/material/Tooltip";
 
-const DownloadPDFButton = ({handleGeneratePDF}) => {
+const DownloadPDFButton = ({handleGeneratePDF, text = ""}) => {
     const handleClick = () => {
         handleGeneratePDF();
     };
@@ -15,7 +15,7 @@ const DownloadPDFButton = ({handleGeneratePDF}) => {
                 variant="contained"
                 startIcon={<PrintOutlinedIcon />}
             >
-                PDF
+                {text || "PDF"}
             </Button>
         </Tooltip>
     );

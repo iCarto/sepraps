@@ -1,6 +1,8 @@
 import {Fragment} from "react";
+import {useParams} from "react-router-dom";
 
 import {SectionCard} from "base/ui/section/components";
+import {TextLink} from "base/navigation/components";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -12,6 +14,8 @@ import CircleIcon from "@mui/icons-material/Circle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 const FieldReportProjectsListSection = ({projects}) => {
+    const {id: reportId} = useParams();
+
     const contracts = new Set();
     projects.map(project => contracts.add(project.contract));
 
@@ -23,7 +27,7 @@ const FieldReportProjectsListSection = ({projects}) => {
         },
     };
 
-    const getProjectsList = contract => {
+    const ProjectsList = ({contract}) => {
         return (
             <List component="div" dense>
                 {projects.map((project, projectIndex) => {
@@ -43,7 +47,12 @@ const FieldReportProjectsListSection = ({projects}) => {
                                     />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={`Proyecto ${project.code}, ${project.locality}`}
+                                    primary={
+                                        <TextLink
+                                            text={`Proyecto ${project.code}, ${project.locality}`}
+                                            to={`/field-reports/${reportId}/projects/${project.id}`}
+                                        />
+                                    }
                                 />
                             </ListItem>
                         );
@@ -56,7 +65,7 @@ const FieldReportProjectsListSection = ({projects}) => {
         <>
             <SectionCard title="Contratos y proyectos objetivo del informe">
                 {projects ? (
-                    <List dense>
+                    <List dense sx={{paddingTop: 0}}>
                         {[...contracts].map((contract, contractIndex) => {
                             return (
                                 <Fragment key={contractIndex}>
@@ -72,7 +81,7 @@ const FieldReportProjectsListSection = ({projects}) => {
                                             }
                                         />
                                     </ListItem>
-                                    {getProjectsList(contract)}
+                                    {<ProjectsList contract={contract} />}
                                 </Fragment>
                             );
                         })}

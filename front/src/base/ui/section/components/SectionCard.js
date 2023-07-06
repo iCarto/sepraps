@@ -7,6 +7,7 @@ const SectionCard = ({
     isSidePanelOpen = null,
     headingLabel = true,
     title = "",
+    secondaryAction = null,
     secondaryActions = null,
     ...props
 }) => {
@@ -19,21 +20,25 @@ const SectionCard = ({
         width: {xs: 0, sm: "20%", md: "40%", lg: "68%", xl: "100%"},
     };
 
+    const getActions = () => {
+        if (secondaryAction) return secondaryAction;
+        if (secondaryActions)
+            return <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>;
+        else return null;
+    };
+
     return (
         <Card
             sx={isSidePanelOpen ? cardStyleForSidePanel : cardStyle}
             variant="outlined"
         >
-            {secondaryActions || title !== "" ? (
+            {secondaryAction || secondaryActions || title ? (
                 <CardHeader
                     title={
                         <SectionHeading label={headingLabel}>{title}</SectionHeading>
                     }
-                    action={
-                        secondaryActions && secondaryActions.length ? (
-                            <SectionActionsMenu>{secondaryActions}</SectionActionsMenu>
-                        ) : null
-                    }
+                    action={getActions()}
+                    sx={{pb: 1}}
                 />
             ) : null}
             <CardContent sx={props.contentStyle}>{props.children}</CardContent>

@@ -5,8 +5,8 @@ import {FieldReportProjectForm} from "../form";
 import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
-import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
 
 const FieldReportProjectAgreementsSection = ({
     project,

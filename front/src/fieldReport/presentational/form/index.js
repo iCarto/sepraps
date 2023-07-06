@@ -4,8 +4,7 @@ export {default as FieldReportModificationForm} from "./FieldReportModificationF
 export {
     default as FieldReportFormGeneralDataFields,
 } from "./FieldReportFormGeneralDataFields";
-export {default as FieldReportGoalsForm} from "./FieldReportGoalsForm";
-export {default as FieldReportGoalsFormFields} from "./FieldReportGoalsFormFields";
+export {default as FieldReportFormGoalsFields} from "./FieldReportFormGoalsFields";
 export {default as FieldReportProjectForm} from "./FieldReportProjectForm";
 export {default as FieldReportProjectFormFields} from "./FieldReportProjectFormFields";
 export {
@@ -21,5 +20,6 @@ export {
     default as FieldReportFormCommentsEndFields,
 } from "./FieldReportFormCommentsEndFields";
 export {
-    default as FieldReportProjectFormAgreementsList,
-} from "./FieldReportProjectFormAgreementsList";
+    default as FieldReportProjectFormAgreementsFields,
+} from "./FieldReportProjectFormAgreementsFields";
+export {default as FieldReportFormFields} from "./FieldReportFormFields";
