@@ -22,9 +22,13 @@ const FormUtil = {
         return formData;
     },
 
-    getFormValue(value, defaultValue = "") {
+    getFormValue(value, defaultValue = null) {
         // If no defaultValue is present form expects an empty string.
         // False/0/"" are returned as such for the form.
+        if (defaultValue == null) {
+            // If not defaultValue is present form expects an empty string
+            defaultValue = "";
+        }
         return value ?? defaultValue;
     },
 
