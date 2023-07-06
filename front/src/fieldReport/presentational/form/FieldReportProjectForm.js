@@ -14,7 +14,7 @@ const FieldReportProjectForm = ({
     const defaultFormValues = {
         id: FormUtil.getFormValue(project?.id),
         history: FormUtil.getFormValue(project?.history),
-        agreements: FormUtil.getFormValue(project?.agreements),
+        agreements: FormUtil.getFormValue(project?.agreements, []),
     };
 
     const formMethods = useForm({

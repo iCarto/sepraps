@@ -4,6 +4,7 @@ import {FormComboBox, FormTextArea} from "base/form/components";
 import {ContractSearchAutocomplete} from "contract/presentational";
 
 import Grid from "@mui/material/Grid";
+import {FieldReportProjectFormAgreementsFields} from ".";
 
 const FieldReportProjectFormFields = ({section}) => {
     const [filter, setFilter] = useState({});
@@ -38,7 +39,6 @@ const FieldReportProjectFormFields = ({section}) => {
                     <Grid item xs={12} md={6}>
                         <ContractSearchAutocomplete
                             handleSelect={handleSelectContract}
-                            rules={{required: "Este campo es obligatorio"}}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -58,10 +58,9 @@ const FieldReportProjectFormFields = ({section}) => {
             ) : null}
             {displayAgreementsField ? (
                 <Grid item xs={12}>
-                    <FormTextArea
-                        name="agreements"
-                        label="Acuerdos alcanzados"
-                        rows={8}
+                    <FieldReportProjectFormAgreementsFields
+                        name={"agreements"}
+                        isEditFormSection={section === "agreements"}
                     />
                 </Grid>
             ) : null}

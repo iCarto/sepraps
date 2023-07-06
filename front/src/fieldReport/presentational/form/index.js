@@ -20,3 +20,6 @@ export {
 export {
     default as FieldReportFormCommentsEndFields,
 } from "./FieldReportFormCommentsEndFields";
+export {
+    default as FieldReportProjectFormAgreementsList,
+} from "./FieldReportProjectFormAgreementsList";

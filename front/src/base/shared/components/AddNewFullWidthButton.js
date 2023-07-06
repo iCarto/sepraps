@@ -3,8 +3,9 @@ import {AuthAction} from "base/user/components";
 
 import Stack from "@mui/material/Stack";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Tooltip from "@mui/material/Tooltip";
 
-const AddNewFullWidthButton = ({onClick, roles = [], icon = null}) => {
+const AddNewFullWidthButton = ({onClick, roles = [], icon = null, tooltip = ""}) => {
     const buttonIcon = icon || <AddCircleIcon />;
 
     const buttonStyle = {
@@ -29,11 +30,13 @@ const AddNewFullWidthButton = ({onClick, roles = [], icon = null}) => {
 
     return (
         <AuthAction roles={roles}>
-            <Stack sx={buttonStyle} onClick={handleClick}>
-                {cloneElement(buttonIcon, {
-                    sx: {color: "grey.600", ...icon?.props?.sx},
-                })}
-            </Stack>
+            <Tooltip title={tooltip} followCursor>
+                <Stack sx={buttonStyle} onClick={handleClick}>
+                    {cloneElement(buttonIcon, {
+                        sx: {color: "grey.600", ...icon?.props?.sx},
+                    })}
+                </Stack>
+            </Tooltip>
         </AuthAction>
     );
 };
