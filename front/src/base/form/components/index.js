@@ -22,4 +22,5 @@ export {default as FormInputLabelOffset} from "./FormInputLabelOffset";
 export {default as FormLocationSelect} from "./FormLocationSelect";
 export {default as FormMapCoordinates} from "./FormMapCoordinates";
 export {default as FormComboBox} from "./FormComboBox";
-export {default as FormList} from "./FormList";
+export {default as FormTextAreaList} from "./FormTextAreaList";
+export {default as FormInputTextList} from "./FormInputTextList";

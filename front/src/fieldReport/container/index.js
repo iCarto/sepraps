@@ -1,6 +1,5 @@
 export {default as ManageFieldReportsPage} from "./ManageFieldReportsPage";
 export {default as CreateFieldReportPage} from "./CreateFieldReportPage";
-export {default as UpdateFieldReportPanel} from "./UpdateFieldReportPanel";
 export {default as ListFieldReportsPage} from "./ListFieldReportsPage";
 export {default as ViewFieldReportPanel} from "./ViewFieldReportPanel";
 export {default as ViewFieldReportPage} from "./ViewFieldReportPage";

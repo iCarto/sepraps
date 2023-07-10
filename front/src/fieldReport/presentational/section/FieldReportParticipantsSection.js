@@ -1,26 +1,25 @@
-import {useNavigate} from "react-router-dom";
-
-import {useAuth} from "base/user/provider";
-
-import {AddNewFullWidthButton} from "base/shared/components";
+import {FieldReportService} from "fieldReport/service";
+import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
+import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 import {FieldReportForm} from "../form";
 
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 
-const FieldReportCommentsStartSection = ({
+// TO-DO: MOVER EL HANDLESUBMIT AL PADRE
+const FieldReportParticipantsSection = ({
     fieldReport,
     isFormOpen,
     onOpenForm,
     onCloseForm,
     onSubmit,
 }) => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
+    const section = "participants";
 
-    const section = "report_comments_start";
+    const other_reporting_persons = fieldReport?.other_reporting_persons.map(
+        person => `${person.name} (${person.role})`
+    );
 
     const handleOpenForm = () => {
         onOpenForm(section);
@@ -30,8 +29,23 @@ const FieldReportCommentsStartSection = ({
         onCloseForm(section);
     };
 
+    const handleSubmit = fieldReport => {
+        console.log("handleSubmit", fieldReport);
+        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
+        //     .then(() => {
+        //         navigate(basePath, true);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         setError(error);
+        //     });
+    };
+
+    const {dialog: deleteDialog} = useMenuGenericDeleteAction(FieldReportService);
+
     return (
         <>
+            {deleteDialog}
             {isFormOpen ? (
                 <FieldReportForm
                     fieldReport={fieldReport}
@@ -39,19 +53,17 @@ const FieldReportCommentsStartSection = ({
                     onSubmit={onSubmit}
                     onCancel={handleCancelForm}
                 />
-            ) : fieldReport?.[section] ? (
-                <Grid container columnSpacing={1}>
+            ) : other_reporting_persons.length ? (
+                <Grid container>
                     <Grid item xs>
-                        <Typography variant="body1" color="text.primary">
-                            {fieldReport[section]}
-                        </Typography>
+                        <BulletList items={other_reporting_persons} />
                     </Grid>
                     <Grid
                         item
                         xs={"auto"}
                         container
                         justifyContent="flex-end"
-                        alignItems="flex-start"
+                        alignItems="center"
                     >
                         <IconButton onClick={handleOpenForm}>
                             <EditIcon fontSize="small" />
@@ -67,4 +79,4 @@ const FieldReportCommentsStartSection = ({
     );
 };
 
-export default FieldReportCommentsStartSection;
+export default FieldReportParticipantsSection;

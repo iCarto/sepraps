@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const FormList = ({name: propsName, itemName}) => {
+const FormTextAreaList = ({name: propsName, itemName}) => {
     const {control} = useFormContext();
     const {fields, append, remove} = useFieldArray({
         control,
@@ -63,4 +63,4 @@ const FormList = ({name: propsName, itemName}) => {
     );
 };
 
-export default FormList;
+export default FormTextAreaList;

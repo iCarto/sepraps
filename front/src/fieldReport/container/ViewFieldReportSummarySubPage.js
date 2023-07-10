@@ -5,8 +5,8 @@ import {downloadFieldReportPDF} from "fieldReport/utilities";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
 import {
-    FieldReportGeneralDataSection,
     FieldReportProjectsListSection,
+    FieldReportSummarySection,
 } from "fieldReport/presentational/section";
 
 const ViewFieldReportSummarySubPage = () => {
@@ -35,7 +35,7 @@ const ViewFieldReportSummarySubPage = () => {
     };
 
     const sections = [
-        <FieldReportGeneralDataSection
+        <FieldReportSummarySection
             fieldReport={fieldReport}
             handleGeneratePDF={handleGeneratePDF}
         />,

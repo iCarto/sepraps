@@ -1,26 +1,22 @@
-import {useNavigate} from "react-router-dom";
-
-import {useAuth} from "base/user/provider";
-
-import {AddNewFullWidthButton} from "base/shared/components";
 import {FieldReportForm} from "../form";
+import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 
-const FieldReportCommentsStartSection = ({
+const FieldReportReportedPersonsSection = ({
     fieldReport,
     isFormOpen,
     onOpenForm,
     onCloseForm,
     onSubmit,
 }) => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
+    const reported_persons = fieldReport?.reported_persons.map(
+        person => `${person.name} (${person.role})`
+    );
 
-    const section = "report_comments_start";
+    const section = "reported_persons";
 
     const handleOpenForm = () => {
         onOpenForm(section);
@@ -39,19 +35,17 @@ const FieldReportCommentsStartSection = ({
                     onSubmit={onSubmit}
                     onCancel={handleCancelForm}
                 />
-            ) : fieldReport?.[section] ? (
-                <Grid container columnSpacing={1}>
+            ) : reported_persons.length ? (
+                <Grid container>
                     <Grid item xs>
-                        <Typography variant="body1" color="text.primary">
-                            {fieldReport[section]}
-                        </Typography>
+                        <BulletList items={reported_persons} />
                     </Grid>
                     <Grid
                         item
                         xs={"auto"}
                         container
                         justifyContent="flex-end"
-                        alignItems="flex-start"
+                        alignItems="center"
                     >
                         <IconButton onClick={handleOpenForm}>
                             <EditIcon fontSize="small" />
@@ -67,4 +61,4 @@ const FieldReportCommentsStartSection = ({
     );
 };
 
-export default FieldReportCommentsStartSection;
+export default FieldReportReportedPersonsSection;

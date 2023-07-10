@@ -59,10 +59,7 @@ const FieldReportProjectFormFields = ({section}) => {
             ) : null}
             {displayAgreementsField ? (
                 <Grid item xs={12}>
-                    <FieldReportProjectFormAgreementsFields
-                        name={"agreements"}
-                        isEditFormSection={section === "agreements"}
-                    />
+                    <FieldReportProjectFormAgreementsFields />
                 </Grid>
             ) : null}
         </Grid>
