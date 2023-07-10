@@ -20,3 +20,4 @@ export {
 } from "./SubPageMenuListGroupItemButton";
 export {default as SubPageMenuListItemButton} from "./SubPageMenuListItemButton";
 export {default as DropdownMenuItemLink} from "./DropdownMenuItemLink";
+export {default as SubmenuAccordion} from "./SubmenuAccordion";

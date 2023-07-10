@@ -1,13 +1,11 @@
-import {SubPageMenuListGroupItemButton} from ".";
 import useTheme from "@mui/material/styles/useTheme";
+import {SubPageMenuListGroupItemButton, SubmenuAccordion} from ".";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 
 /**
  * This component accepts an array of items (`menuListSubItems`). These items can be of 2 types:
@@ -31,43 +29,45 @@ const SubPageMenuListGroup = ({headerTitle = "", headerIcon = null, items = []})
         />
     ));
 
+    const SubmenuTitle = () => {
+        return (
+            <ListItem
+                sx={{
+                    bgcolor: theme.palette.menu.primary.header.background,
+                    color: theme.palette.menu.primary.header.text,
+                    fontWeight: "inherit",
+                }}
+            >
+                <ListItemIcon
+                    style={{
+                        minWidth: "35px",
+                        color: theme.palette.menu.primary.header.text,
+                    }}
+                >
+                    {headerIcon}
+                </ListItemIcon>
+                <ListItemText>{headerTitle}</ListItemText>
+            </ListItem>
+        );
+    };
+
     return (
         <>
             {headerTitle ? (
-                <>
-                    <ListItem
+                <SubmenuAccordion accordionTitle={<SubmenuTitle />}>
+                    <Box
                         sx={{
                             bgcolor: theme.palette.menu.secondary.options.background,
                         }}
                     >
-                        <ListItemIcon
-                            style={{
-                                minWidth: "35px",
-                                color: theme.palette.menu.secondary.options.text,
-                            }}
-                        >
-                            {headerIcon}
-                        </ListItemIcon>
-                        <ListItemText
-                            sx={{color: theme.palette.menu.secondary.options.text}}
-                        >
-                            {headerTitle}
-                        </ListItemText>
-                        <KeyboardArrowDownIcon
-                            sx={{color: theme.palette.menu.secondary.options.text}}
-                        />
-                    </ListItem>
-                    <Divider sx={{borderColor: "#ededed"}} />
-                </>
+                        {items.length ? (
+                            <List dense disablePadding>
+                                {submenuItems}
+                            </List>
+                        ) : null}
+                    </Box>
+                </SubmenuAccordion>
             ) : null}
-
-            <Box sx={{bgcolor: theme.palette.menu.secondary.options.background}}>
-                {items.length ? (
-                    <List dense disablePadding>
-                        {submenuItems}
-                    </List>
-                ) : null}
-            </Box>
         </>
     );
 };
