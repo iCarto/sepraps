@@ -64,6 +64,35 @@ class BaseModelSerializer(serializers.ModelSerializer):
         return obj.folder.media_path if obj.folder else None
 
 
+class BaseModelWithFolderSerializer(serializers.ModelSerializer):
+    class Meta(object):
+        model = None
+        fields = (
+            "id",
+            "folder",
+            "created_by",
+            "created_at",
+            "updated_by",
+            "updated_at",
+        )
+        extra_kwargs = {
+            "created_by": {"read_only": True},
+            "updated_by": {"read_only": True},
+        }
+
+    id = serializers.IntegerField(allow_null=True, required=False)
+    folder = serializers.SerializerMethodField()
+    created_by = serializers.CharField(
+        required=False, source="created_by.username", read_only=True
+    )
+    updated_by = serializers.CharField(
+        required=False, source="updated_by.username", read_only=True
+    )
+
+    def get_folder(self, obj):  # noqa: WPS615
+        return obj.folder.media_path if obj.folder else None
+
+
 class BaseSummarySerializer(serializers.ModelSerializer):
     class Meta(object):
         model = None

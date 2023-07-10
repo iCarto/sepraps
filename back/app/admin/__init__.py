@@ -5,6 +5,8 @@ from app.admin.contact_admin import ContactAdmin
 from app.admin.financing_fund_admin import FinancingFundAdmin
 from app.admin.financing_program import FinancingProgramAdmin
 from app.models.contact import Contact
+from app.models.field_report_project import FieldReportProject
+from app.models.field_report_project_activity import FieldReportProjectActivity
 from app.models.financing_fund import FinancingFund
 from app.models.financing_program import FinancingProgram
 from app.models.location import Department, District, Locality
@@ -27,3 +29,7 @@ admin.site.register(Contact, ContactAdmin)
 admin.site.register(Department)
 admin.site.register(District)
 admin.site.register(Locality)
+
+# Only for fixtures (remove when endoints are implemented)
+admin.site.register(FieldReportProject)
+admin.site.register(FieldReportProjectActivity)

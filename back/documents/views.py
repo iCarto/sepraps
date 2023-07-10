@@ -32,7 +32,7 @@ def preview(request, media_path, format=None):
     filter = get_filter(media_path)
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
-        file = open(os.path.join(settings.MEDIA_ROOT, media_node.media_path))
+        file = open(os.path.join(settings.MEDIA_ROOT, media_node.storage_path))
         response = FileResponse(file)
         return response
 
@@ -43,7 +43,7 @@ def download(request, media_path, format=None):
     filter = get_filter(media_path)
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
-        file = open(os.path.join(settings.MEDIA_ROOT, media_node.media_path))
+        file = open(os.path.join(settings.MEDIA_ROOT, media_node.storage_path))
         return FileResponse(file, as_attachment=True, filename=media_node.media_name)
     if media_node.media_type == "FOLDER":
         zip_file = create_zip_file(media_node.children.all())

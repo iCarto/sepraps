@@ -33,8 +33,12 @@ class BaseDocumentModel(models.Model):
     @classmethod
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
-        models.signals.post_save.connect(post_create, sender=cls)
+        models.signals.post_save.connect(post_create_call, sender=cls)
+
+    def post_create(self, sender, created, *args, **kwargs):
+        if created:
+            create_folder(self, created=created)
 
 
-def post_create(sender, instance, created, *args, **kwargs):
-    create_folder(instance, created=created)
+def post_create_call(sender, instance, created, *args, **kwargs):
+    instance.post_create(sender, created, *args, **kwargs)

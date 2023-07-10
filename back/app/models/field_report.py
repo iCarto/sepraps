@@ -1,9 +1,9 @@
-from django.db import models
-
 from django.contrib.postgres.fields import ArrayField
+from django.db import models
 
 from app.base.models.base_models import BaseEntityModelMixin
 from documents.base.base_models import BaseDocumentModel
+from documents.models import MediaNode
 
 
 class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
@@ -20,13 +20,14 @@ class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
         "Fecha de culminación de la intervención", null=True
     )
     # TO-DO: Reporting person can be more than one (as seen in sample reports); same for reported_person (not yet added here)
-    reporting_person_name = models.CharField("Autor/a del informe", max_length=100)
-    reporting_person_role = models.CharField(
-        "Cargo del/de la autor/a", max_length=100, null=True
+    reporting_person = models.CharField("Autor/a del informe", max_length=100)
+    reported_persons = ArrayField(
+        models.CharField("Autor/a del/de la responsable de aprobación", max_length=100)
     )
-    reporting_person_department = models.CharField(
-        "Departamento del/de la autor/a", max_length=100, null=True
+    participant_persons = ArrayField(
+        models.CharField("Participantes en la intervención", max_length=100)
     )
+
     report_comments_start = models.TextField(
         "Introducción al informe", max_length=500, null=True
     )
@@ -34,3 +35,11 @@ class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
         "Cierre del informe", max_length=500, null=True
     )
     goals = ArrayField(models.TextField("Objetivo", max_length=300), null=True)
+
+    folder = models.ForeignKey(
+        MediaNode,
+        on_delete=models.PROTECT,
+        verbose_name="Directorio",
+        null=True,
+        related_name="folder+",
+    )

@@ -1,0 +1,247 @@
+[
+    {
+        "model": "app.fieldreport",
+        "pk": 1,
+        "fields": {
+            "name": "Supervisión de Contrato N° 30/2021",
+            "code": "28/2023",
+            "date": "2023-04-24",
+            "visit_date_start": "2023-04-18",
+            "visit_date_end": "2023-04-22",
+            "reporting_person": "Arq. Luis Torres - Fiscal de Obras (Dpto. de Construcciones - DOSAPAS)",
+            "reported_persons": [
+                "Ing. Civil Héctor Horacio León Sanabria - Encargado (Dpto. de Construcciones - DOSAPAS)"
+            ],
+            "participant_persons": [
+                "Tec. Reinaldo González - Jefe del Dpto. Electromecánico (Dpto. de Construcciones - DOSAPAS)"
+            ],
+            "report_comments_start": "Me dirijo a usted con el fin de informar sobre la visita técnica realizada en los Departamentos de Caazapá, Guaira, Central y Alto Paraná, en las localidades de referencia. Todas las actividades fueron realizadas en el marco del Programa Acción. La visita a los sitios de obra lo realizamos en conjunto el Arq. Luis Torres, el Sr. Reinaldo González y el Sr. Juan Carlos Correa, Chofer del Departamento de Construcciones con vehículo Ford Ranger de la institución con chapa EAJ 545.",
+            "report_comments_end": "El alojamiento lo realizamos 1 noche en Colonia Independencia a 150km y 3 noches en Minga Guazú a 350km de mi lugar habitual de trabajo. El trabajo se realizó hasta el día sábado 22 de abril.",
+            "goals": [
+                "Supervisión para Certificación de Obras en el marco contrato N° 30/2021 “CONSTRUCCIÓN DE COMPONENTES DE SISTEMAS DE ABASTECIMIENTO DE AGUA EN COMUNIDADES INDIGENAS Y RURALES DE LA REGION ORIENTAL DEL PAIS” - COVID - 19"
+            ],
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreport",
+        "pk": 2,
+        "fields": {
+            "name": "Visita de Fiscalización de Obras - Dpto. Guairá, Dpto Caaguazú, Dpto. Paraguarí",
+            "code": "141/2023",
+            "date": "2023-05-16",
+            "visit_date_start": "2023-05-09",
+            "visit_date_end": "2023-05-12",
+            "reporting_person": "Ingeniero Sergio Santos - Supervisor de Obras (UCP/SENASA/BID)",
+            "reported_persons": [
+                "Lic. Alfonso Bogarín, Coordinador general (UCP/SENASA/BID)"
+            ],
+            "participant_persons": [
+                "Lic. Sonia Villalba - Trabajadora social (UCP/SENASA/BID)",
+                "Sr. Manuel Olmedo - Chófer (UCP/SENASA/BID)"
+            ],
+            "report_comments_start": "Con referencia al viaje realizado del 09/05/2023 al 12/05/2023 a 6 localidades del Departamento de Caaguazú, 1 localidad del Departamento de Guairá y 1 localidad del Departamentó de Paraguarí a fin de Supervisar las Obras en ejecución y realizar la Recepción Provisoria de Sistemas de Agua Potable; con el chofer Manuel Olmedo; se presenta el presente INFORME TÉCNICO de las actividades realizadas.",
+            "report_comments_end": "Se realizaron las actividades previstas en cada localidad. Se notifica a la empresa contratista sobre las observaciones realizadas en campo. Se logra visitar las 8 localidades previstas, los caminos se encontraban en buen estado.",
+            "goals": [
+                "Viaje para Recepción provisoria de Sistemas de Agua Potable. Contrato Nº12/2021",
+                "Supervisión de obras de USB en construcción. Contrato Nº04/2022"
+            ],
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreport",
+        "pk": 3,
+        "fields": {
+            "name": "Visita de Fiscalización de Obras - Dpto. Guairá, Dpto Caaguazú, Dpto. Paraguarí",
+            "code": "x/2023",
+            "date": "2023-04-24",
+            "visit_date_start": "2023-04-12",
+            "visit_date_end": "2023-04-13",
+            "reporting_person": "Lic. Inés Martínez - Supervisora Social ECATEF (UCP/SENASA/BID)",
+            "reported_persons": [
+                "Ing. Juan Pereira - Coordinador del Servicio (Consorcio AH - Consultores/ECATEF)",
+                "Lic. Claudia Vera, Coordinador general (UCP/SENASA/BID)"
+            ],
+            "participant_persons": [
+                "Lic. Inés Martínez (UCP/SENASA/BID)",
+                "Ing. Daniel Gómez (UCP/SENASA/BID)",
+                "Ing. Regina Farías (UCP/SENASA/BID)",
+                "Sr. Juan Silva, chófer (UCP/SENASA/BID)"
+            ],
+            "report_comments_start": "Por este medio me dirijo a Usted, a fin de remitirle el informe de las Actividades realizadas durante la visita de acompañamiento a Auditores que debían relevar datos en la Ciudad de Capitán Miranda, además de la reunión de seguimiento con los fiscales de obra y la trabajadora social de la Ciudad de Fram los días 12 al 13 de abril de 2023.",
+            "report_comments_end": "La actividad planificada con Auditoria externa fue suspendida por la intensa lluvia registrada en la fecha prevista de la misión. Reunión con la Empresa Constructora Consorcio Saneamiento Paraguay. Fiscalización y Supervisión del SENASA. Revisión de procesos y proyecciones en cuanto a la adecuación de los usuarios. Reunión con la Empresa Constructora Barrail, Fiscalización y Supervisión del SENASA. Revisión de procesos y proyecciones en cuanto a la adecuación de los usuarios. Visita en zona de obras de la Planta de tratamiento, en donde se observó mayor avance.",
+            "goals": [
+                "Participar de la reunión - visita a zona de obras de la ciudad de Capitán Miranda, acompañando la misión de Auditoría Externa."
+            ],
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreportproject",
+        "pk": 1,
+        "fields": {
+            "project": 1,
+            "field_report": 3,
+            "history": "",
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreportproject",
+        "pk": 2,
+        "fields": {
+            "project": 2,
+            "field_report": 3,
+            "history": "",
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreportprojectactivity",
+        "pk": 1,
+        "fields": {
+            "field_report_project": 1,
+            "title": "06:00 a 13:00 hs. - Traslado desde Asunción a la ciudad de Fram.",
+            "date": "2023-04-12",
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreportprojectactivity",
+        "pk": 2,
+        "fields": {
+            "field_report_project": 1,
+            "title": "14:00 a 16:00 hs. - Reunión en el Centro de Operaciones, Barrail y visita en zona de obras",
+            "date": "2023-04-12",
+            "notes": "En la misma se mencionaron temas técnicos, actividades en relación al relevamiento topográfico, al respecto. El fiscal de obras indicó dificultad para el cierre de las manzanas en ese componente ya que el equipo utilizado no es el indicado para realizar el trabajo, con clima nublado o por el exceso de árboles en algunos patios de usuarios, dificulta la toma de señal y enlentece el trabajo, son mínimos los casos en donde no se puede realizar el trabajo a causa de la ausencia de usuarios en sus viviendas al momento del relevamiento, con el acompañamiento de la relacionista comunitaria y la trabajadora social, reagendan lo más rápido posible para el logro del relevamiento en esos casos, no se encontró negativa por parte de ningún usuario para el ingreso de los trabajadores a las viviendas.\n\nAdemás, se sumaron a la reunión los representantes de la Empresa Constructora Barrail Hnos., los temas tratados se presentan a continuación: 1. Poco avance en redes en tramos donde encuentran rocas. 2. Se encontraron terrenos con pozos ciegos en las veredas, se definió que serían adecuadas al momento de la conexión al sistema, ya que probablemente, solo requeriría de un registro. Se quedó en identificar esos casos. 3. La construcción de manzanas es muy lenta. 4. A la fecha cuentan con 40 relevamientos, que no fueron entregados a la supervisión. Se solicitó al menos entregar algunos, para verificar, antes de la entrega total. 5. En la visita a la planta de tratamiento se observaron mayor movimiento de maquinas en la zona de las lagunas.",
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreportprojectactivity",
+        "pk": 3,
+        "fields": {
+            "field_report_project": 2,
+            "title": "08:00 a 11:30 hs. - Reunión con representantes del Consorcio Saneamiento Paraguay, los fiscales y supervisores del SENASA y el Auditor Externo",
+            "date": "2023-04-13",
+            "notes": "Se definió no continuar con la misión por las inclemencias del tiempo, posponiendo la actividad para la siguiente semana. De igual forma se aprovechó la ocasión para la revisión de los procesos en cuanto a obras y la proyección de trabajos relacionados a las adecuaciones intraprediales.\nSe mencionó que se relevaron 150 lotes, los mismos serían entregados a la supervisión con la certificación.  \nPor otro lado, el supervisor de obras indicó que se realice el relevamiento de dónde podría ser el trasado de la red para la estación de bombeo 3, ya que el propuesto, cuenta con problemas de servidumbre de paso por parte del dueño. \nSe indicó a la Trabajadora Social, desarrollar las estrategias necesarias para el logro de las adecuaciones.  ",
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "app.fieldreportprojectactivity",
+        "pk": 4,
+        "fields": {
+            "field_report_project": 2,
+            "title": "11:00 a 18:00 hs: Viaje de retorno a Asunción.",
+            "date": "2023-04-13",
+            "created_by": 1,
+            "created_at": "2023-07-07T00:00:00.000Z",
+            "updated_by": 1,
+            "updated_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "fields": {
+            "media_type": "DOCUMENT",
+            "media_name": "image1.jpg",
+            "media_content_type": "image/jpeg",
+            "media_size": 1000,
+            "storage_path": "fieldreport/3/fieldreportproject/1/fieldreportprojectactivity/2/image1.jpg",
+            "parent": 178,
+            "creation_user": 1,
+            "created_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "fields": {
+            "media_type": "DOCUMENT",
+            "media_name": "image2.jpg",
+            "media_content_type": "image/jpeg",
+            "media_size": 1000,
+            "storage_path": "fieldreport/3/fieldreportproject/1/fieldreportprojectactivity/2/image2.jpg",
+            "parent": 178,
+            "creation_user": 1,
+            "created_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "fields": {
+            "media_type": "DOCUMENT",
+            "media_name": "image3.jpg",
+            "media_content_type": "image/jpeg",
+            "media_size": 1000,
+            "storage_path": "fieldreport/3/fieldreportproject/1/fieldreportprojectactivity/2/image3.jpg",
+            "parent": 178,
+            "creation_user": 1,
+            "created_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "fields": {
+            "media_type": "DOCUMENT",
+            "media_name": "image4.jpg",
+            "media_content_type": "image/jpeg",
+            "media_size": 1000,
+            "storage_path": "fieldreport/3/fieldreportproject/1/fieldreportprojectactivity/2/image4.jpg",
+            "parent": 178,
+            "creation_user": 1,
+            "created_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "fields": {
+            "media_type": "DOCUMENT",
+            "media_name": "image5.jpg",
+            "media_content_type": "image/jpeg",
+            "media_size": 1000,
+            "storage_path": "fieldreport/3/fieldreportproject/2/fieldreportprojectactivity/3/image5.jpg",
+            "parent": 179,
+            "creation_user": 1,
+            "created_at": "2023-07-07T00:00:00.000Z"
+        }
+    },
+    {
+        "model": "documents.medianode",
+        "fields": {
+            "media_type": "DOCUMENT",
+            "media_name": "image6.jpg",
+            "media_content_type": "image/jpeg",
+            "media_size": 1000,
+            "storage_path": "fieldreport/3/fieldreportproject/2/fieldreportprojectactivity/3/image6.jpg",
+            "parent": 179,
+            "creation_user": 1,
+            "created_at": "2023-07-07T00:00:00.000Z"
+        }
+    }
+]
