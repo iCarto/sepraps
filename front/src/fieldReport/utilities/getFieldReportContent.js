@@ -1,49 +1,35 @@
 import {DateUtil} from "base/format/utilities";
 
 export function getFieldReportContent(reportData) {
-    const getInvolvedPersons = persons => {
-        let involvedPersons = "";
-        if (persons.length) {
-            persons.map((person, index) => {
-                if (index === persons.length - 1)
-                    involvedPersons += `${person.name} (${person.role})`;
-                else involvedPersons += `${person.name} (${person.role}), `;
-            });
-        }
-        return involvedPersons;
-    };
-
     const headTableBody = [
         ["Memorándum n.º:", reportData.code],
         ["Fecha de la visita:", DateUtil.formatDate(reportData.date)],
-        [
-            "Elaborado por:",
-            `${reportData.reporting_person_name}, ${reportData.reporting_person_role}`,
-        ],
+        ["Elaborado por:", `${reportData.reporting_person}`],
         [
             "Otros participantes en la visita:",
-            getInvolvedPersons(reportData.other_reporting_persons),
+            reportData.participant_persons?.join(", "),
         ],
-        ["A la atención de:", getInvolvedPersons(reportData.reported_persons)],
+        ["A la atención de:", reportData.reported_persons?.join(", ")],
         ["Firmas y sellos:", ""],
     ];
 
-    const introText = `Por este medio me dirijo a Usted y por su intermedio a quien corresponde, a fin de remitirle el informe de las Actividades realizadas por las personas participantes mencionadas arriba, en fechas ${reportData.visit_dates} del corriente.`;
+    const introText = reportData.report_comments_start;
+    const closingText = reportData.report_comments_end;
 
     const projectsTableColumns = ["N.º", "Localidad", "Distrito", "Departamento"];
 
     const projectsList = [];
-    reportData.visited_projects.map(project => {
+    reportData.field_report_projects.map(project => {
         // Unicode for bullet point
         projectsList.push([
             "\u2022 ",
-            `${project.code} (contrato ${project.contract})`,
+            `${project.code}, ${project.name} (contrato ${project.contract})`,
         ]);
     });
 
     const goalsList = [];
     reportData.goals.map((goal, index) => {
-        goalsList.push([`${index + 1}.`, goal.goal]);
+        goalsList.push([`${index + 1}.`, goal]);
     });
 
     const sectionTwoIntroText =
@@ -51,7 +37,8 @@ export function getFieldReportContent(reportData) {
 
     const getImageUrls = images => {
         let imageUrls = [];
-        images.map(image => imageUrls.push(image.url));
+        // images.map(image => imageUrls.push(image.url));
+        images.map(image => imageUrls.push(image));
 
         return imageUrls;
     };
@@ -101,7 +88,7 @@ export function getFieldReportContent(reportData) {
     };
 
     const projectsTableBody = [];
-    reportData.visited_projects.map((project, index) => {
+    reportData.field_report_projects.map((project, index) => {
         projectsTableBody.push([
             index + 1,
             project.locality,
@@ -109,16 +96,12 @@ export function getFieldReportContent(reportData) {
             project.department,
         ]);
     });
-
-    const endingText = reportData.report_comments
-        ? `${reportData.report_comments}`
-        : "";
     // -------------------- //
 
     return {
         headTableBody,
         introText,
-        endingText,
+        closingText,
         projectsTableColumns,
         projectsTableBody,
         projectsList,

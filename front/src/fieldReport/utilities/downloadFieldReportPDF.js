@@ -32,6 +32,7 @@ export function downloadFieldReportPDF() {
 
         fieldReportElements.drawVisitedProjectsList();
         fieldReportElements.drawVisitGoalsList();
+        fieldReportElements.drawReportClosure();
 
         doc.addPage();
 
@@ -42,15 +43,21 @@ export function downloadFieldReportPDF() {
         );
 
         // Create array of promises for all instances of drawVisitPicturesTable
-        const visits = reportData.visited_projects.flatMap(project =>
-            project.activities.map(async activity => {
-                const visitImages = await getImagesData(
-                    fieldReportContent.getImageUrls(activity.images)
-                );
+        const visits = reportData.field_report_projects.flatMap(project =>
+            project.field_report_project_activities.map(async activity => {
+                // const activityImages = [
+                //     activity.image1,
+                //     activity.image2,
+                //     activity.image3,
+                //     activity.image4,
+                // ];
+                // const visitImages = await getImagesData(
+                //     fieldReportContent.getImageUrls(activityImages)
+                // );
 
                 fieldReportElements.drawVisitedProjectSection(project);
                 fieldReportElements.drawActivitySummary(activity);
-                fieldReportElements.drawVisitPicturesTable(visitImages);
+                // fieldReportElements.drawVisitPicturesTable(visitImages);
             })
         );
 
@@ -58,8 +65,8 @@ export function downloadFieldReportPDF() {
         await Promise.all(visits);
 
         // Page count can only be calculated after all pages have been drawn. With this code we go back to page 2 and draw the Report closure there.
-        doc.setPage(2);
-        fieldReportElements.drawReportClosure();
+        // doc.setPage(2);
+        // fieldReportElements.drawReportClosure();
 
         // Draw header & footer in all pages
         fieldReportElements.drawReportHeader();

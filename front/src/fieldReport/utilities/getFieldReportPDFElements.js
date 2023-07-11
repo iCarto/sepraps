@@ -213,14 +213,12 @@ export function getFieldReportPDFElements(doc, reportData) {
     };
 
     const drawReportClosure = () => {
-        const pageCount = doc.internal.getNumberOfPages();
-
-        const closingText = `El documento tiene una extensión de ${pageCount} páginas para la explicación de los proyectos visitados.`;
+        const closingText = fieldReportContent.closingText;
 
         doc.setFont(undefined, "normal").text(
             closingText,
             dimensions.pageMargin,
-            doc.lastAutoTable.finalY - 50,
+            doc.lastAutoTable.finalY + 20,
             {
                 maxWidth: dimensions.pageWidth - dimensions.pageMargin,
                 lineHeightFactor: 2,
@@ -234,9 +232,9 @@ export function getFieldReportPDFElements(doc, reportData) {
             theme: "plain",
             head: [
                 [
-                    `Proyecto ${project.code.toUpperCase()} (${project.district}, ${
-                        project.department
-                    })`,
+                    `Proyecto ${project.code.toUpperCase()}, ${project.name} - ${
+                        project.location
+                    }`,
                 ],
             ],
             headStyles: {
@@ -248,7 +246,7 @@ export function getFieldReportPDFElements(doc, reportData) {
 
     const drawActivitySummary = activity => {
         const doesTableFitInPrevPage =
-            doc.lastAutoTable.finalY < dimensions.pageHeight - 40;
+            doc.lastAutoTable.finalY < dimensions.pageHeight - 60;
         const tablePositionTop = doesTableFitInPrevPage
             ? doc.lastAutoTable.finalY + 5
             : doc.lastAutoTable.finalY + dimensions.pagePaddingTop;
