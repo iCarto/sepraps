@@ -7,6 +7,10 @@ from app.views import events_views, notifications_views, stats_views
 from app.views.construction_contract_viewset import ConstructionContractViewSet
 from app.views.contact_viewset import ContactViewSet
 from app.views.contractor_viewset import ContractorViewSet
+from app.views.field_report_project_activity_viewset import (
+    FieldReportProjectActivityViewSet,
+)
+from app.views.field_report_project_viewset import FieldReportProjectViewSet
 from app.views.field_report_viewset import FieldReportViewSet
 from app.views.financing_fund_viewset import FinancingFundViewSet
 from app.views.financing_program_viewset import FinancingProgramViewSet
@@ -23,6 +27,8 @@ router.register("localities", LocalityViewSet)
 router.register("projects", ProjectViewSet)
 router.register("providers", ProviderViewSet)
 router.register("fieldreports", FieldReportViewSet)
+router.register("fieldreportprojects", FieldReportProjectViewSet)
+router.register("fieldreportprojectactivities", FieldReportProjectActivityViewSet)
 router.register("contacts", ContactViewSet)
 router.register(
     "constructioncontracts",

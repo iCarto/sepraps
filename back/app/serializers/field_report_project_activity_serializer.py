@@ -14,6 +14,7 @@ class FieldReportProjectActivitySerializer(BaseModelSerializer):
             "image2",
             "image3",
             "image4",
+            "field_report_project",
         )
 
     def to_representation(self, instance):
