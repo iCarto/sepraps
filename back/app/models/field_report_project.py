@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -16,6 +17,8 @@ class FieldReportProject(BaseDocumentModel, BaseEntityModelMixin):
         verbose_name_plural = "Proyectos en informe de viaje"
 
     history = models.TextField("Antecedentes", max_length=500, null=True)
+    agreements = ArrayField(models.TextField("Objetivo", max_length=300), null=True)
+
     field_report = models.ForeignKey(
         FieldReport,
         on_delete=models.PROTECT,
