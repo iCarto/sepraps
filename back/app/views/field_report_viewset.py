@@ -34,4 +34,4 @@ class FieldReportViewSet(ModelListAuditViewSet):
     summary_serializer_class = FieldReportSummarySerializer
     filterset_class = FieldReportFilter
     filter_backends = [DjangoFilterBackend, FieldReportOrderingFilter]
-    ordering_fields = ["name", "code", "date", "reporting_person_name"]
+    ordering_fields = ["name", "code", "date", "reporting_person"]
