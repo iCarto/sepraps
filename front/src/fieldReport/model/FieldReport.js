@@ -1,10 +1,27 @@
+import {DateUtil} from "base/format/utilities";
+import {
+    createFieldReportProjects,
+    fieldReportProjects_api_adapter,
+} from "fieldReportProject/model";
+
 class FieldReports extends Array {}
 
 const fieldReport_api_adapter = fieldReport => {
+    if (fieldReport["field_report_projects"]) {
+        fieldReport["field_report_projects"] = createFieldReportProjects(
+            fieldReportProjects_api_adapter(fieldReport["field_report_projects"])
+        );
+    }
     return fieldReport;
 };
 
 const fieldReport_view_adapter = fieldReport => {
+    fieldReport["date"] = DateUtil.formatDateForAPI(new Date());
+    if (!fieldReport["goals"].length) {
+        fieldReport["goals"] = null;
+    }
+
+    delete fieldReport["folder"];
     delete fieldReport["created_by"];
     delete fieldReport["created_at"];
     delete fieldReport["updated_at"];
@@ -31,11 +48,14 @@ const createFieldReport = ({
     date = null,
     visit_date_start = null,
     visit_date_end = null,
-    reporting_person_name = "",
-    reporting_person_role = "",
+    reporting_person = "",
+    reported_persons = [],
+    participant_persons = [],
     report_comments_start = "",
     report_comments_end = "",
     goals = [],
+    field_report_projects = [],
+    folder = "",
     created_by = "",
     created_at = null,
     updated_at = null,
@@ -48,11 +68,14 @@ const createFieldReport = ({
         date,
         visit_date_start,
         visit_date_end,
-        reporting_person_name,
-        reporting_person_role,
+        reporting_person,
+        reported_persons,
+        participant_persons,
         report_comments_start,
         report_comments_end,
         goals,
+        field_report_projects,
+        folder,
         created_by,
         created_at,
         updated_at,

@@ -38,12 +38,9 @@ const FieldReportService = {
     },
 
     get(id) {
-        // return entityService.get(id);
-        return fetch("/testing_report_data/fieldReportDummyData.json")
-            .then(response => response.json())
-            .then(data => {
-                return data;
-            });
+        return entityService.get(id).then(data => {
+            return data;
+        });
     },
 
     create(entity) {
