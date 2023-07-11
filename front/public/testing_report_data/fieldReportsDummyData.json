@@ -6,9 +6,9 @@
             "report_code": "M TS 29-22",
             "report_date": "2023-06-09",
             "visit_dates": "16/02/2023 - 18/02/2023",
-            "reporting_person_name": "Licenciada Sonia Villalva",
+            "reporting_person": "Licenciada Sonia Villalva",
             "reporting_person_role": "Técnica Social - ECATEF/UPC-SENASA/BID",
-            "other_reporting_persons": [
+            "participant_persons": [
                 {"name": "Licenciado Teódulo Morinigo", "role": "Especialista Social"},
                 {"name": "Doctor Amado Rivas", "role": "área técnica"}
             ],
@@ -23,7 +23,7 @@
                 {"goal": "Objetivo 3"}
             ],
             "visited_contracts": [{"code": "XXXXX"}, {"code": "YYYYYY"}],
-            "visited_projects": [
+            "field_report_projects": [
                 {
                     "id": 1,
                     "code": "AAAAAAA",
@@ -129,9 +129,9 @@
             "report_code": "M DC 16/2023",
             "report_date": "2023-04-24",
             "visit_dates": "19/04/2023 - 21/04/2023",
-            "reporting_person_name": "Licenciado Teodulo Morinigo Maldonado",
+            "reporting_person": "Licenciado Teodulo Morinigo Maldonado",
             "reporting_person_role": "Especialista Social - Área de Desarrollo Comunitario - UCP SENASA/BID",
-            "other_reporting_persons": [
+            "participant_persons": [
                 {
                     "name": "Arq. Francisco Baez",
                     "role": "Fiscal de Obras ECATEF – UCP- SENASA/BID"
@@ -147,7 +147,7 @@
             "report_comments": "Comunidades Indígena de la Región Oriental- Entrega de sitio y relevamiento Técnico de los componentes que faltan para poner en funcionamiento el Sistema de Agua—en el Marco del Contrato Marco II - Contrato N° 33/2022 Empresa Contratista Ricardo Diaz Martínez.",
             "visit_goals": [{"goal": "Objetivo 1"}, {"goal": "Objetivo 2"}],
             "visited_contracts": [{"code": "XXXXX"}, {"code": "YYYYYY"}],
-            "visited_projects": [
+            "field_report_projects": [
                 {
                     "id": 4,
                     "code": "BBBBBBB",

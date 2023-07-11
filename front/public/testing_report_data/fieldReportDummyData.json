@@ -5,9 +5,9 @@
     "visit_dates": "16/02/2023 - 18/02/2023",
     "visit_date_start": "2023-06-01",
     "visit_date_end": "2023-06-06",
-    "reporting_person_name": "Licenciada Sonia Villalva",
+    "reporting_person": "Licenciada Sonia Villalva",
     "reporting_person_role": "Técnica Social - ECATEF/UPC-SENASA/BID",
-    "other_reporting_persons": [
+    "participant_persons": [
         {"name": "Licenciado Teódulo Morinigo", "role": "Especialista Social"},
         {"name": "Doctor Amado Rivas", "role": "área técnica"}
     ],
@@ -23,7 +23,7 @@
         "Objetivo 3"
     ],
     "visited_contracts": [{"code": "XXXXX"}, {"code": "YYYYYY"}],
-    "visited_projects": [
+    "field_report_projects": [
         {
             "id": 1,
             "code": "2022-AP-008",
