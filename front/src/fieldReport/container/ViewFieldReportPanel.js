@@ -23,13 +23,6 @@ const ViewFieldReportPanel = () => {
         navigate(`/field-reports/${fieldReport.id}/summary`);
     };
 
-    const reported_persons = fieldReport?.reported_persons.map(
-        person => `${person.name}`
-    );
-    const other_reporting_persons = fieldReport?.other_reporting_persons.map(
-        person => `${person.name}`
-    );
-
     return (
         fieldReport && (
             <EntityViewPanel
@@ -50,15 +43,15 @@ const ViewFieldReportPanel = () => {
                     />
                     <SectionField
                         label="Autor/a"
-                        value={`${fieldReport?.reporting_person_name}, (${fieldReport?.reporting_person_role})`}
+                        value={`${fieldReport?.reporting_person}`}
                     />
                     <SectionField
                         label="Participante/s en la intervención"
-                        value={other_reporting_persons?.join(", ")}
+                        value={fieldReport?.participant_persons?.join(", ")}
                     />
                     <SectionField
                         label="Responsable/s de aprobación"
-                        value={reported_persons?.join(", ")}
+                        value={fieldReport?.reported_persons?.join(", ")}
                     />
                 </SectionCard>
             </EntityViewPanel>

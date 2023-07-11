@@ -13,20 +13,9 @@ const FieldReportProjectAgreementsSection = ({
     isFormOpen,
     onOpenForm,
     onCloseForm,
+    onSubmit,
 }) => {
     const section = "agreements";
-
-    const handleSubmit = fieldReport => {
-        console.log("handleSubmit", fieldReport);
-        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
-        //     .then(() => {
-        //         navigate(basePath, true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
-    };
 
     const handleOpenForm = () => {
         onOpenForm(section);
@@ -34,6 +23,10 @@ const FieldReportProjectAgreementsSection = ({
 
     const handleCancelForm = () => {
         onCloseForm(section);
+    };
+
+    const handleSubmit = () => {
+        onSubmit(section);
     };
 
     const {dialog: deleteDialog} = useMenuGenericDeleteAction(FieldReportService);

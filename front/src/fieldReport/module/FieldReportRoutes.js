@@ -10,7 +10,7 @@ import {
     ViewFieldReportCoverSubPage,
     ViewFieldReportIntroSubPage,
 } from "fieldReport/container";
-import {FieldReportProjectsSection} from "fieldReport/presentational/section";
+import {FieldReportProjectsSection} from "fieldReportProject/presentational/section";
 import {ViewDocumentPanel} from "base/file/components";
 
 const fieldReportRoutes = [

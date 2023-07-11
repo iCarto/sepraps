@@ -1,5 +1,3 @@
-import {FieldReportService} from "fieldReport/service";
-import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
 import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 import {FieldReportForm} from "../form";
 
@@ -7,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 
-// TO-DO: MOVER EL HANDLESUBMIT AL PADRE
 const FieldReportParticipantsSection = ({
     fieldReport,
     isFormOpen,
@@ -15,11 +12,7 @@ const FieldReportParticipantsSection = ({
     onCloseForm,
     onSubmit,
 }) => {
-    const section = "participants";
-
-    const other_reporting_persons = fieldReport?.other_reporting_persons.map(
-        person => `${person.name} (${person.role})`
-    );
+    const section = "participant_persons";
 
     const handleOpenForm = () => {
         onOpenForm(section);
@@ -29,23 +22,8 @@ const FieldReportParticipantsSection = ({
         onCloseForm(section);
     };
 
-    const handleSubmit = fieldReport => {
-        console.log("handleSubmit", fieldReport);
-        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
-        //     .then(() => {
-        //         navigate(basePath, true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
-    };
-
-    const {dialog: deleteDialog} = useMenuGenericDeleteAction(FieldReportService);
-
     return (
         <>
-            {deleteDialog}
             {isFormOpen ? (
                 <FieldReportForm
                     fieldReport={fieldReport}
@@ -53,10 +31,10 @@ const FieldReportParticipantsSection = ({
                     onSubmit={onSubmit}
                     onCancel={handleCancelForm}
                 />
-            ) : other_reporting_persons.length ? (
+            ) : fieldReport?.participant_persons?.length ? (
                 <Grid container>
                     <Grid item xs>
-                        <BulletList items={other_reporting_persons} />
+                        <BulletList items={fieldReport.participant_persons} />
                     </Grid>
                     <Grid
                         item

@@ -49,7 +49,7 @@ const FieldReportProjectsListSection = ({projects}) => {
                                 <ListItemText
                                     primary={
                                         <TextLink
-                                            text={`Proyecto ${project.code}, ${project.locality}`}
+                                            text={`Proyecto ${project.code}, ${project.name}`}
                                             to={`/field-reports/${reportId}/projects/${project.id}`}
                                         />
                                     }

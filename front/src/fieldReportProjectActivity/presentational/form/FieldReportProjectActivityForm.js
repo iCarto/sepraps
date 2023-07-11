@@ -3,11 +3,12 @@ import {FormProvider, useForm} from "react-hook-form";
 import {FormUtil} from "base/form/utilities";
 
 import {EntityForm} from "base/entity/components/form";
-import {FieldReportProjectActivitiesFormFields} from ".";
+import {FieldReportProjectActivityFormFields} from ".";
+
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-const FieldReportProjectActivitiesForm = ({
+const FieldReportProjectActivityForm = ({
     activity = null,
     onSubmit,
     onCancel,
@@ -68,7 +69,7 @@ const FieldReportProjectActivitiesForm = ({
                         onSubmit={formMethods.handleSubmit(onFormSubmit)}
                         onCancel={handleCancel}
                     >
-                        <FieldReportProjectActivitiesFormFields />
+                        <FieldReportProjectActivityFormFields />
                     </EntityForm>
                 </Grid>
             </Grid>
@@ -76,4 +77,4 @@ const FieldReportProjectActivitiesForm = ({
     );
 };
 
-export default FieldReportProjectActivitiesForm;
+export default FieldReportProjectActivityForm;

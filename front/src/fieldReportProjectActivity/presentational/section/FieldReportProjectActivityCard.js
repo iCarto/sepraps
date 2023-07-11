@@ -69,10 +69,9 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
                 <Grid container spacing={1} pt={2}>
                     {activity.images?.map((image, imageIndex) => (
                         <Grid item key={imageIndex} xs={6} lg={3}>
-                            <ImageListItem key={image.path}>
+                            <ImageListItem key={image}>
                                 <ImagePreview
-                                    path={image.path}
-                                    alt={image.comment}
+                                    path={image}
                                     sx={{
                                         borderRadius: 1,
                                     }}

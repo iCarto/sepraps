@@ -48,7 +48,7 @@ const FieldReportGeneralDataSection = ({
                         />
                         <SectionField
                             label="Autor/a"
-                            value={`${fieldReport.reporting_person_name} - ${fieldReport.reporting_person_role}`}
+                            value={`${fieldReport.reporting_person}`}
                         />
                     </Grid>
                     <Grid

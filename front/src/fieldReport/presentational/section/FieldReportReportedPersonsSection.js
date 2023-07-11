@@ -12,10 +12,6 @@ const FieldReportReportedPersonsSection = ({
     onCloseForm,
     onSubmit,
 }) => {
-    const reported_persons = fieldReport?.reported_persons.map(
-        person => `${person.name} (${person.role})`
-    );
-
     const section = "reported_persons";
 
     const handleOpenForm = () => {
@@ -35,10 +31,10 @@ const FieldReportReportedPersonsSection = ({
                     onSubmit={onSubmit}
                     onCancel={handleCancelForm}
                 />
-            ) : reported_persons.length ? (
+            ) : fieldReport?.reported_persons?.length ? (
                 <Grid container>
                     <Grid item xs>
-                        <BulletList items={reported_persons} />
+                        <BulletList items={fieldReport.reported_persons} />
                     </Grid>
                     <Grid
                         item

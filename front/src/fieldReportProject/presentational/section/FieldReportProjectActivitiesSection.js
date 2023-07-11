@@ -1,16 +1,17 @@
 import {useState} from "react";
 
 import {AddNewFullWidthButton} from "base/shared/components";
-import {FieldReportProjectActivitiesForm} from "../form";
+import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/presentational/form";
+import {FieldReportProjectActivityCard} from "fieldReportProjectActivity/presentational/section";
 
 import Grid from "@mui/material/Grid";
-import FieldReportProjectActivityCard from "./FieldReportProjectActivityCard";
 
 const FieldReportProjectActivitiesSection = ({
     activities,
     isFormOpen,
     onOpenForm,
     onCloseForm,
+    onSubmit,
 }) => {
     const section = "activities";
     const [ifFormNewOpen, setIsFormNewOpen] = useState(isFormOpen === section);
@@ -41,14 +42,18 @@ const FieldReportProjectActivitiesSection = ({
         console.log(activity);
     };
 
+    const handleSubmit = () => {
+        onSubmit(section);
+    };
+
     return (
         <>
             {activities?.map((activity, index) =>
                 isFormOpen && activityToEditId === activity.id ? (
                     <Grid item mb={4} key={index}>
-                        <FieldReportProjectActivitiesForm
+                        <FieldReportProjectActivityForm
                             activity={activity}
-                            onSubmit={undefined}
+                            onSubmit={handleSubmit}
                             onCancel={handleCancelForm}
                             display={isFormOpen && isFormEditOpen}
                         />
@@ -63,8 +68,8 @@ const FieldReportProjectActivitiesSection = ({
                     />
                 )
             )}
-            <FieldReportProjectActivitiesForm
-                onSubmit={undefined}
+            <FieldReportProjectActivityForm
+                onSubmit={handleSubmit}
                 onCancel={handleCancelForm}
                 display={isFormOpen && ifFormNewOpen}
             />

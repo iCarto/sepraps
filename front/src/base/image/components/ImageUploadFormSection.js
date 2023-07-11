@@ -120,7 +120,7 @@ const ImageUploadFormSection = ({name, formFileInputName}) => {
                     ? fileList.map((image, index) => (
                           <Grid item xs={4} md={2.5} key={index}>
                               <ImageListItem>
-                                  <ImagePreview path={image.path} />
+                                  <ImagePreview path={image} />
                                   <ImageListItemBar
                                       title={`Imagen ${index + 1}`}
                                       position="top"

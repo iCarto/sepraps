@@ -1,4 +1,3 @@
-import Grid from "@mui/material/Grid";
 import {
     FieldReportFormGeneralDataFields,
     FieldReportFormBasicDataFields,
@@ -8,13 +7,14 @@ import {
     FieldReportFormCommentsStartFields,
     FieldReportFormGoalsFields,
 } from ".";
+import Grid from "@mui/material/Grid";
 
 const FieldReportFormFields = ({section}) => {
     const displayCommentsStart = section === "report_comments_start";
     const displayGoals = section === "goals";
     const displayCommentsEnd = section === "report_comments_end";
     const displayBasicData = section === "basic_data";
-    const displayParticipants = section === "participants";
+    const displayParticipants = section === "participant_persons";
     const displayReportedPersons = section === "reported_persons";
 
     return (

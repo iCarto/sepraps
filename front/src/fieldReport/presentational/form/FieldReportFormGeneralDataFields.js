@@ -1,35 +1,21 @@
-import {FormDatePicker, FormInputText} from "base/form/components";
+import {FormDatePicker, FormInputText, FormInputTextList} from "base/form/components";
 import Grid from "@mui/material/Grid";
 
 const FieldReportFormGeneralDataFields = ({orientation = "column"}) => {
     return (
         <>
-            <Grid container columnSpacing={1}>
-                <Grid item xs={12} md={orientation === "row" ? 6 : 12}>
+            <Grid container columnSpacing={1} mt={3}>
+                <Grid item xs={12}>
                     <FormInputText
-                        name="reporting_person_name"
-                        label="Autor/a del informe (nombre)"
+                        name="reporting_person"
+                        label="Autor/a del informe (nombre y cargo)"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
-                <Grid item xs={12} md={orientation === "row" ? 6 : 12}>
-                    <FormInputText
-                        name="reporting_person_role"
-                        label="Autor/a del informe (cargo)"
-                    />
-                </Grid>
-
-                <Grid item xs={12} md={orientation === "row" ? 6 : 12}>
-                    <FormInputText
-                        name="reported_person_name"
-                        label="Dirigido a (nombre)"
-                        rules={{required: "Este campo es obligatorio"}}
-                    />
-                </Grid>
-                <Grid item xs={12} md={orientation === "row" ? 6 : 12}>
-                    <FormInputText
-                        name="reported_person_role"
-                        label="Dirigido a (cargo)"
+                <Grid item xs={12}>
+                    <FormInputTextList
+                        name="reported_persons"
+                        itemName="Responsable de aprobación (nombre y cargo)"
                     />
                 </Grid>
             </Grid>

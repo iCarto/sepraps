@@ -17,7 +17,7 @@ const FieldReportProjectsSection = () => {
     [fieldReport] = useOutletContext();
 
     const contracts = new Set();
-    fieldReport.visited_projects.map(project => contracts.add(project.contract));
+    fieldReport.field_report_projects.map(project => contracts.add(project.contract));
 
     function a11yProps(id) {
         return {
@@ -27,18 +27,19 @@ const FieldReportProjectsSection = () => {
     }
 
     const handleChangeTab = (event, newValue) => {
-        console.log(newValue);
         setValue(newValue);
     };
 
-    const indexForNewTab = fieldReport?.visited_projects?.length;
+    const indexForNewTab = fieldReport?.field_report_projects?.length;
 
     const getTabLabel = project => (
         <Grid>
             <Typography sx={{fontSize: "14px", fontWeight: "500"}}>
-                {project.locality}
+                {project.name}
             </Typography>
-            <Typography sx={{fontSize: "12px"}}>{project.contract}</Typography>
+            <Typography sx={{fontSize: "12px"}}>
+                {project.construction_contract_number}
+            </Typography>
         </Grid>
     );
 
@@ -52,8 +53,8 @@ const FieldReportProjectsSection = () => {
                     scrollButtons="auto"
                     aria-label="pestañas de proyectos"
                 >
-                    {fieldReport?.visited_projects?.length
-                        ? fieldReport.visited_projects?.map((project, index) => (
+                    {fieldReport?.field_report_projects?.length
+                        ? fieldReport.field_report_projects?.map((project, index) => (
                               <Tab
                                   key={index}
                                   component={RouterLink}
@@ -80,7 +81,7 @@ const FieldReportProjectsSection = () => {
                 </Tabs>
             </Box>
             <FieldReportProjectsTabPanels
-                projects={fieldReport?.visited_projects}
+                projects={fieldReport?.field_report_projects}
                 value={value}
             />
         </Paper>

@@ -1,7 +1,7 @@
 import {useAuth} from "base/user/provider";
 
 import {TabPanel} from "base/ui/tab";
-import {FieldReportNewProjectTabPanel, FieldReportProjectsTabPanelContent} from ".";
+import {FieldReportProjectsTabPanelContent, FieldReportNewProjectTabPanel} from ".";
 
 const FieldReportProjectsTabPanels = ({projects, value}) => {
     const {ROLES} = useAuth();

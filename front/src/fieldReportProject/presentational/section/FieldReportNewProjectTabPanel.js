@@ -1,7 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 
 import {TabPanel} from "base/ui/tab";
-import {FieldReportProjectForm} from "../form";
+import {FieldReportProjectForm} from "fieldReportProject/presentational/form";
 
 const FieldReportNewProjectTabPanel = ({index, value}) => {
     let fieldReport;

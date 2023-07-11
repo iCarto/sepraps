@@ -60,7 +60,7 @@ const ViewFieldReportCoverSubPage = () => {
             <AccordionUndercoverLayout accordionTitle="Participante/s en la intervención">
                 <FieldReportParticipantsSection
                     fieldReport={fieldReport}
-                    isFormOpen={openFormSection === "participants"}
+                    isFormOpen={openFormSection === "participant_persons"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
                     onSubmit={handleSubmit}

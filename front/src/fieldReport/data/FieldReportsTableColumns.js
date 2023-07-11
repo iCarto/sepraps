@@ -21,7 +21,7 @@ export function useFieldReportsTableColumns() {
             width: 20,
         },
         {
-            id: "reporting_person_name",
+            id: "reporting_person",
             label: "Autor/a",
             width: 25,
         },

@@ -33,17 +33,11 @@ const FieldReportFormBasicDataFields = () => {
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12}>
                     <FormInputText
-                        name="reporting_person_name"
-                        label="Autor/a del informe (nombre)"
+                        name="reporting_person"
+                        label="Autor/a del informe (nombre y cargo)"
                         rules={{required: "Este campo es obligatorio"}}
-                    />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <FormInputText
-                        name="reporting_person_role"
-                        label="Autor/a del informe (cargo)"
                     />
                 </Grid>
             </Grid>

@@ -11,20 +11,11 @@ const FieldReportProjectHistorySection = ({
     isFormOpen,
     onOpenForm,
     onCloseForm,
+    onSubmit,
 }) => {
     const section = "history";
 
-    const handleSubmit = fieldReport => {
-        console.log("handleSubmit", fieldReport);
-        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
-        //     .then(() => {
-        //         navigate(basePath, true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
-    };
+    console.log(project);
 
     const handleOpenForm = () => {
         onOpenForm(section);
@@ -32,6 +23,10 @@ const FieldReportProjectHistorySection = ({
 
     const handleCancelForm = () => {
         onCloseForm(section);
+    };
+
+    const handleSubmit = () => {
+        onSubmit(section);
     };
 
     return (

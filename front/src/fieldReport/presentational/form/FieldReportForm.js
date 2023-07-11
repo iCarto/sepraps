@@ -15,14 +15,12 @@ const FieldReportForm = ({
         id: FormUtil.getFormValue(fieldReport?.id),
         name: FormUtil.getFormValue(fieldReport?.name),
         code: FormUtil.getFormValue(fieldReport?.code),
-        reporting_person_name: FormUtil.getFormValue(
-            fieldReport?.reporting_person_name
+        reporting_person: FormUtil.getFormValue(fieldReport?.reporting_person),
+        reported_persons: FormUtil.getFormValue(fieldReport?.reported_persons, []),
+        participant_persons: FormUtil.getFormValue(
+            fieldReport?.participant_persons,
+            []
         ),
-        reporting_person_role: FormUtil.getFormValue(
-            fieldReport?.reporting_person_role
-        ),
-        reported_person_name: FormUtil.getFormValue(fieldReport?.reported_person_name),
-        reported_person_role: FormUtil.getFormValue(fieldReport?.reported_person_role),
         visit_date_start: FormUtil.getFormValue(fieldReport?.visit_date_start),
         visit_date_end: FormUtil.getFormValue(fieldReport?.visit_date_end),
         report_comments_start: FormUtil.getFormValue(
@@ -42,10 +40,9 @@ const FieldReportForm = ({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             code: FormUtil.getDataValue(data.code),
-            reporting_person_name: FormUtil.getDataValue(data.reporting_person_name),
-            reporting_person_role: FormUtil.getDataValue(data.reporting_person_role),
-            reported_person_name: FormUtil.getDataValue(data.reported_person_name),
-            reported_person_role: FormUtil.getDataValue(data.reported_person_role),
+            reporting_person: FormUtil.getDataValue(data.reporting_person),
+            reported_persons: FormUtil.getDataValue(data.reported_persons),
+            participant_persons: FormUtil.getDataValue(data.participant_persons),
             visit_date_start: FormUtil.getDataValue(data.visit_date_start),
             visit_date_end: FormUtil.getDataValue(data.visit_date_end),
             report_comments_start: FormUtil.getDataValue(data.report_comments_start),

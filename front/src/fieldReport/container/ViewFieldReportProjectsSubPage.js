@@ -1,5 +1,5 @@
 import {EntityViewSubPage} from "base/entity/components/container";
-import {FieldReportProjectsSection} from "fieldReport/presentational/section";
+import {FieldReportProjectsSection} from "fieldReportProject/presentational/section";
 
 const ViewFieldReportProjectsSubPage = () => {
     const sections = [<FieldReportProjectsSection />];
