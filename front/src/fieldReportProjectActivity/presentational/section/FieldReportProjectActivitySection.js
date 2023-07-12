@@ -13,9 +13,9 @@ import Grid from "@mui/material/Grid";
 const FieldReportProjectActivitySection = ({
     activity,
     activityIndex,
+    isFormOpen,
     onOpenForm,
     onCloseForm,
-    isFormOpen,
 }) => {
     const [activityToEditId, setActivityToEditId] = useState(false);
 
@@ -30,11 +30,6 @@ const FieldReportProjectActivitySection = ({
 
     const handleCancelForm = () => {
         onCloseForm();
-    };
-
-    const handleClickDelete = activity => {
-        //TO-DO: Implement
-        console.log(activity);
     };
 
     const handleSubmit = activity => {
@@ -53,6 +48,11 @@ const FieldReportProjectActivitySection = ({
             });
     };
 
+    const handleClickDelete = activity => {
+        //TO-DO: Implement
+        console.log(activity);
+    };
+
     return (
         <>
             {isFormOpen && activityToEditId === activity.id ? (
@@ -61,7 +61,6 @@ const FieldReportProjectActivitySection = ({
                         activity={activity}
                         onSubmit={handleSubmit}
                         onCancel={handleCancelForm}
-                        display={isFormOpen}
                     />
                 </Grid>
             ) : (

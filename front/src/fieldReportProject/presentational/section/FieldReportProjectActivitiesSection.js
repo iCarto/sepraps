@@ -1,25 +1,26 @@
 import {useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
+
+import {FieldReportProjectActivityService} from "fieldReportProjectActivity/service";
+import {fieldReportProjectActivity_view_adapter} from "fieldReportProjectActivity/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {AddNewFullWidthButton} from "base/shared/components";
 import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/presentational/form";
+import {FieldReportProjectActivitySection} from "fieldReportProjectActivity/presentational/section";
 
-import {FieldReportProjectActivityService} from "fieldReportProjectActivity/service";
-import {fieldReportProjectActivity_view_adapter} from "fieldReportProjectActivity/model";
-import {FieldReportProjectActivitySection} from ".";
 import Grid from "@mui/material/Grid";
 
 const FieldReportProjectActivitiesSection = ({
     activities,
-    isFormOpen,
+    isFormSectionActive,
     onOpenForm,
     onCloseForm,
 }) => {
     const section = "activities";
 
-    const [ifFormNewOpen, setIsFormNewOpen] = useState(isFormOpen === section);
-    const [isFormEditOpen, setIsFormEditOpen] = useState(isFormOpen === section);
+    const [isFormNewOpen, setIsFormNewOpen] = useState(false);
+    const [isFormEditOpen, setIsFormEditOpen] = useState(false);
 
     const {tab: projectId} = useParams();
     const basePath = useLocation();
@@ -67,17 +68,20 @@ const FieldReportProjectActivitiesSection = ({
                     activityIndex={index}
                     onOpenForm={handleClickEdit}
                     onCloseForm={handleCancelForm}
-                    isFormOpen={isFormOpen && isFormEditOpen}
+                    isFormOpen={isFormSectionActive && isFormEditOpen}
                 />
             ))}
-            <FieldReportProjectActivityForm
-                onSubmit={handleSubmit}
-                onCancel={handleCancelForm}
-                display={isFormOpen && ifFormNewOpen}
-            />
-            <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
-                <AddNewFullWidthButton onClick={handleClickNew} />
-            </Grid>
+            {isFormSectionActive && isFormNewOpen ? (
+                <FieldReportProjectActivityForm
+                    onSubmit={handleSubmit}
+                    onCancel={handleCancelForm}
+                />
+            ) : null}
+            {isFormSectionActive ? null : (
+                <Grid mt={2}>
+                    <AddNewFullWidthButton onClick={handleClickNew} />
+                </Grid>
+            )}
         </>
     );
 };

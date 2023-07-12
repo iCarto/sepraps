@@ -27,6 +27,7 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
                     container
                     columnSpacing={1}
                     justifyContent={"space-between"}
+                    alignItems="baseline"
                     pt={index === 0 ? 0 : 3}
                 >
                     <Grid item container xs alignItems="baseline">
@@ -35,6 +36,7 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
                             component="h4"
                             sx={{
                                 pr: "12px",
+                                lineHeight: "1.25",
                                 color: "primary.dark",
                                 fontWeight: "500",
                             }}
@@ -79,6 +81,10 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
                                     />
                                     <ImageListItemBar
                                         subtitle={`Imagen ${imageIndex + 1}`}
+                                        sx={{
+                                            transform: "translateY(-6px)",
+                                            borderRadius: "0 0 5px 5px",
+                                        }}
                                     />
                                 </ImageListItem>
                             </Grid>

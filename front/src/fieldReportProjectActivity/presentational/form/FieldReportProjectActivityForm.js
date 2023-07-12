@@ -8,12 +8,7 @@ import {FieldReportProjectActivityFormFields} from ".";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-const FieldReportProjectActivityForm = ({
-    activity = null,
-    onSubmit,
-    onCancel,
-    display = true,
-}) => {
+const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) => {
     const defaultFormValues = {
         id: FormUtil.getFormValue(activity?.id),
         text: FormUtil.getFormValue(activity?.text),
@@ -29,7 +24,14 @@ const FieldReportProjectActivityForm = ({
     });
 
     const handleCancel = () => {
-        //TO-DO: When canceling new activity form, reset all form fields (including images)
+        formMethods.reset({
+            id: null,
+            text: "",
+            title: "",
+            date: null,
+            notes: "",
+            images: [],
+        });
         onCancel();
     };
 
@@ -49,7 +51,6 @@ const FieldReportProjectActivityForm = ({
         <FormProvider {...formMethods}>
             <Grid
                 container
-                display={display ? "inherit" : "none"}
                 mt={3}
                 p={1}
                 border={1}

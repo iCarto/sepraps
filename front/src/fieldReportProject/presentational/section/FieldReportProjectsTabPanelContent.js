@@ -15,17 +15,17 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
 const FieldReportProjectsTabPanelContent = ({project}) => {
-    const [openFormSection, setOpenFormSection] = useState(null);
+    const [activeFormSection, setActiveFormSection] = useState("");
 
     const basePath = useLocation();
     const navigate = useNavigateWithReload();
 
     const handleOpenForm = section => {
-        setOpenFormSection(section);
+        setActiveFormSection(section);
     };
 
     const handleCloseForm = () => {
-        setOpenFormSection(null);
+        setActiveFormSection("");
     };
 
     const handleSubmit = updatedProject => {
@@ -60,7 +60,7 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
             >
                 <FieldReportProjectHistorySection
                     project={project}
-                    isFormOpen={openFormSection === "history"}
+                    isFormOpen={activeFormSection === "history"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
                     onSubmit={handleSubmit}
@@ -70,7 +70,7 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
             <AccordionUndercoverLayout accordionTitle="Actividades realizadas">
                 <FieldReportProjectActivitiesSection
                     activities={project.field_report_project_activities}
-                    isFormOpen={openFormSection === "activities"}
+                    isFormSectionActive={activeFormSection === "activities"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
                 />
@@ -79,7 +79,7 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
             <AccordionUndercoverLayout accordionTitle="Acuerdos alcanzados">
                 <FieldReportProjectAgreementsSection
                     project={project}
-                    isFormOpen={openFormSection === "agreements"}
+                    isFormOpen={activeFormSection === "agreements"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
                     onSubmit={handleSubmit}
