@@ -1,4 +1,10 @@
 import {useState} from "react";
+import {useLocation} from "react-router-dom";
+
+import {FieldReportProjectService} from "fieldReportProject/service";
+import {fieldReportProject_view_adapter} from "fieldReportProject/model";
+import {useNavigateWithReload} from "base/navigation/hooks";
+
 import {AccordionUndercoverLayout, Tag} from "base/shared/components";
 import {
     FieldReportProjectActivitiesSection,
@@ -7,10 +13,6 @@ import {
 } from ".";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import {FieldReportProjectService} from "fieldReportProject/service";
-import {fieldReportProject_view_adapter} from "fieldReportProject/model";
-import {useNavigateWithReload} from "base/navigation/hooks";
-import {useLocation} from "react-router-dom";
 
 const FieldReportProjectsTabPanelContent = ({project}) => {
     const [openFormSection, setOpenFormSection] = useState(null);
@@ -71,7 +73,6 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
                     isFormOpen={openFormSection === "activities"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
-                    onSubmit={handleSubmit}
                 />
             </AccordionUndercoverLayout>
 

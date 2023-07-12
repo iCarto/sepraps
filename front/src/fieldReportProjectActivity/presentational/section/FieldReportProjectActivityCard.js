@@ -66,23 +66,25 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
                 <Typography variant="body1" color="text.primary" gutterBottom>
                     {activity.notes}
                 </Typography>
-                <Grid container spacing={1} pt={2}>
-                    {activity.images?.map((image, imageIndex) => (
-                        <Grid item key={imageIndex} xs={6} lg={3}>
-                            <ImageListItem key={image}>
-                                <ImagePreview
-                                    path={image}
-                                    sx={{
-                                        borderRadius: 1,
-                                    }}
-                                />
-                                <ImageListItemBar
-                                    subtitle={`Imagen ${imageIndex + 1}`}
-                                />
-                            </ImageListItem>
-                        </Grid>
-                    ))}
-                </Grid>
+                {activity?.images?.length ? (
+                    <Grid container spacing={1} pt={2}>
+                        {activity.images.map((image, imageIndex) => (
+                            <Grid item key={imageIndex} xs={6} lg={3}>
+                                <ImageListItem key={image}>
+                                    <ImagePreview
+                                        path={image}
+                                        sx={{
+                                            borderRadius: 1,
+                                        }}
+                                    />
+                                    <ImageListItemBar
+                                        subtitle={`Imagen ${imageIndex + 1}`}
+                                    />
+                                </ImageListItem>
+                            </Grid>
+                        ))}
+                    </Grid>
+                ) : null}
             </div>
         </>
     );

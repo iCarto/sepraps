@@ -10,11 +10,14 @@ const FieldReportProjectsTabPanels = ({projects, value}) => {
 
     return (
         <>
-            {projects?.map((project, index) => (
-                <TabPanel key={index} value={value} index={index}>
-                    <FieldReportProjectsTabPanelContent project={project} />
-                </TabPanel>
-            ))}
+            {projects?.map((project, index) => {
+                console.log({project, index, value});
+                return (
+                    <TabPanel key={index} index={index} value={value}>
+                        <FieldReportProjectsTabPanelContent project={project} />
+                    </TabPanel>
+                );
+            })}
             <FieldReportNewProjectTabPanel index={indexForNewTab} value={value} />
         </>
     );

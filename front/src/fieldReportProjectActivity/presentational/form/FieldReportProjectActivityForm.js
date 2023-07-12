@@ -34,8 +34,15 @@ const FieldReportProjectActivityForm = ({
     };
 
     const onFormSubmit = data => {
-        //TO-DO: Implement
-        console.log(data);
+        const updatedActivity = {
+            id: FormUtil.getDataValue(data.id),
+            text: FormUtil.getDataValue(data.text),
+            title: FormUtil.getDataValue(data.title),
+            date: FormUtil.getDataValue(data.date),
+            notes: FormUtil.getDataValue(data.notes),
+            images: FormUtil.getDataValue(data.images),
+        };
+        onSubmit(updatedActivity);
     };
 
     return (

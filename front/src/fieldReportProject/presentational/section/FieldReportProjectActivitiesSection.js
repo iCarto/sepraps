@@ -1,9 +1,13 @@
 import {useState} from "react";
+import {useLocation, useParams} from "react-router-dom";
+import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {AddNewFullWidthButton} from "base/shared/components";
 import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/presentational/form";
-import {FieldReportProjectActivityCard} from "fieldReportProjectActivity/presentational/section";
 
+import {FieldReportProjectActivityService} from "fieldReportProjectActivity/service";
+import {fieldReportProjectActivity_view_adapter} from "fieldReportProjectActivity/model";
+import {FieldReportProjectActivitySection} from ".";
 import Grid from "@mui/material/Grid";
 
 const FieldReportProjectActivitiesSection = ({
@@ -11,12 +15,15 @@ const FieldReportProjectActivitiesSection = ({
     isFormOpen,
     onOpenForm,
     onCloseForm,
-    onSubmit,
 }) => {
     const section = "activities";
+
     const [ifFormNewOpen, setIsFormNewOpen] = useState(isFormOpen === section);
     const [isFormEditOpen, setIsFormEditOpen] = useState(isFormOpen === section);
-    const [activityToEditId, setActivityToEditId] = useState(false);
+
+    const {tab: projectId} = useParams();
+    const basePath = useLocation();
+    const navigate = useNavigateWithReload();
 
     const handleClickNew = () => {
         onOpenForm(section);
@@ -24,9 +31,8 @@ const FieldReportProjectActivitiesSection = ({
         setIsFormNewOpen(true);
     };
 
-    const handleClickEdit = activity => {
+    const handleClickEdit = () => {
         onOpenForm(section);
-        setActivityToEditId(activity.id);
         setIsFormNewOpen(false);
         setIsFormEditOpen(true);
     };
@@ -37,37 +43,33 @@ const FieldReportProjectActivitiesSection = ({
         onCloseForm(section);
     };
 
-    const handleClickDelete = activity => {
-        //TO-DO: Implement
-        console.log(activity);
-    };
-
-    const handleSubmit = () => {
-        onSubmit(section);
+    const handleSubmit = activity => {
+        FieldReportProjectActivityService.create(
+            fieldReportProjectActivity_view_adapter({
+                ...activity,
+                field_report_project: projectId,
+            })
+        )
+            .then(() => {
+                navigate(basePath, true);
+            })
+            .catch(error => {
+                console.log(error);
+                // setError(error);
+            });
     };
 
     return (
         <>
-            {activities?.map((activity, index) =>
-                isFormOpen && activityToEditId === activity.id ? (
-                    <Grid item mb={4} key={index}>
-                        <FieldReportProjectActivityForm
-                            activity={activity}
-                            onSubmit={handleSubmit}
-                            onCancel={handleCancelForm}
-                            display={isFormOpen && isFormEditOpen}
-                        />
-                    </Grid>
-                ) : (
-                    <FieldReportProjectActivityCard
-                        key={index}
-                        index={index}
-                        activity={activity}
-                        onEdit={handleClickEdit}
-                        onDelete={handleClickDelete}
-                    />
-                )
-            )}
+            {activities?.map((activity, index) => (
+                <FieldReportProjectActivitySection
+                    activity={activity}
+                    activityIndex={index}
+                    onOpenForm={handleClickEdit}
+                    onCloseForm={handleCancelForm}
+                    isFormOpen={isFormOpen && isFormEditOpen}
+                />
+            ))}
             <FieldReportProjectActivityForm
                 onSubmit={handleSubmit}
                 onCancel={handleCancelForm}

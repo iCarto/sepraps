@@ -13,6 +13,9 @@ export {
     default as FieldReportProjectActivitiesSection,
 } from "./FieldReportProjectActivitiesSection";
 export {
+    default as FieldReportProjectActivitySection,
+} from "./FieldReportProjectActivitySection";
+export {
     default as FieldReportProjectHistorySection,
 } from "./FieldReportProjectHistorySection";
 export {
