@@ -15,8 +15,6 @@ const FieldReportProjectHistorySection = ({
 }) => {
     const section = "history";
 
-    console.log(project);
-
     const handleOpenForm = () => {
         onOpenForm(section);
     };
@@ -25,8 +23,8 @@ const FieldReportProjectHistorySection = ({
         onCloseForm(section);
     };
 
-    const handleSubmit = () => {
-        onSubmit(section);
+    const handleSubmit = updatedProject => {
+        onSubmit(updatedProject);
     };
 
     return (

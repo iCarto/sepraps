@@ -7,9 +7,16 @@ import {
 } from ".";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import {FieldReportProjectService} from "fieldReportProject/service";
+import {fieldReportProject_view_adapter} from "fieldReportProject/model";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {useLocation} from "react-router-dom";
 
 const FieldReportProjectsTabPanelContent = ({project}) => {
     const [openFormSection, setOpenFormSection] = useState(null);
+
+    const basePath = useLocation();
+    const navigate = useNavigateWithReload();
 
     const handleOpenForm = section => {
         setOpenFormSection(section);
@@ -19,16 +26,18 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
         setOpenFormSection(null);
     };
 
-    const handleSubmit = project => {
-        console.log("handleSubmit", project);
-        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
-        //     .then(() => {
-        //         navigate(basePath, true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
+    const handleSubmit = updatedProject => {
+        console.log("handleSubmit", updatedProject);
+        FieldReportProjectService.update(
+            fieldReportProject_view_adapter({...updatedProject})
+        )
+            .then(() => {
+                navigate(basePath, true);
+            })
+            .catch(error => {
+                console.log(error);
+                // setError(error);
+            });
     };
 
     return (

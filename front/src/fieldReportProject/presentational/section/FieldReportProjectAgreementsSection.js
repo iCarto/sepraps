@@ -25,15 +25,12 @@ const FieldReportProjectAgreementsSection = ({
         onCloseForm(section);
     };
 
-    const handleSubmit = () => {
-        onSubmit(section);
+    const handleSubmit = updatedProject => {
+        onSubmit(updatedProject);
     };
-
-    const {dialog: deleteDialog} = useMenuGenericDeleteAction(FieldReportService);
 
     return (
         <>
-            {deleteDialog}
             {isFormOpen ? (
                 <FieldReportProjectForm
                     project={project}

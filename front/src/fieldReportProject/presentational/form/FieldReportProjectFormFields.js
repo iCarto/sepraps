@@ -14,6 +14,7 @@ const FieldReportProjectFormFields = ({section}) => {
     const displayHistoryField = !section || section === "history";
     const displayAgreementsField = !section || section === "agreements";
 
+    // TO-DO: Extract contract & project combo to new component
     useEffect(() => {
         if (Object.keys(filter).length) {
             ProjectService.getAll(filter).then(data => {
@@ -44,7 +45,7 @@ const FieldReportProjectFormFields = ({section}) => {
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <FormComboBox
-                            name="id"
+                            name="project"
                             options={projects}
                             label="Proyecto"
                             rules={{required: "Este campo es obligatorio"}}
