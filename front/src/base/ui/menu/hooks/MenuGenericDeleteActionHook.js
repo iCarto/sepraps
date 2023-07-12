@@ -8,6 +8,7 @@ import {DeleteItemDialog} from "base/delete/components";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 
+// TO-DO: Implement more generic delete action
 export function useMenuGenericDeleteAction(service) {
     const navigate = useNavigateWithReload();
 

@@ -4,6 +4,7 @@ import {useLocation} from "react-router-dom";
 import {FieldReportProjectService} from "fieldReportProject/service";
 import {fieldReportProject_view_adapter} from "fieldReportProject/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
+import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
 
 import {AccordionUndercoverLayout, Tag} from "base/shared/components";
 import {
@@ -13,9 +14,14 @@ import {
 } from ".";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 const FieldReportProjectsTabPanelContent = ({project}) => {
     const [activeFormSection, setActiveFormSection] = useState("");
+
+    const {dialog: deleteDialog} = useMenuGenericDeleteAction(
+        FieldReportProjectService
+    );
 
     const basePath = useLocation();
     const navigate = useNavigateWithReload();
@@ -42,8 +48,13 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
             });
     };
 
+    const handleDelete = () => {
+        console.log("delete");
+    };
+
     return (
         <>
+            {deleteDialog}
             <Stack flexDirection={"row"} alignItems="center">
                 <Typography variant="h5" component="h2" fontWeight="500">
                     {`${project.name}`}
@@ -85,6 +96,12 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
                     onSubmit={handleSubmit}
                 />
             </AccordionUndercoverLayout>
+
+            <Stack flexDirection={"row"} justifyContent="flex-end" mt={3}>
+                <Button variant="contained" color="error" onClick={handleDelete}>
+                    Eliminar proyecto
+                </Button>
+            </Stack>
         </>
     );
 };
