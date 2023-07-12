@@ -1,5 +1,10 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import {useLocation, useOutletContext} from "react-router-dom";
+
+import {FieldReportService} from "fieldReport/service";
+import {fieldReport_view_adapter} from "fieldReport/model";
+import {useNavigateWithReload} from "base/navigation/hooks";
+
 import {AccordionUndercoverLayout, PaperContainer} from "base/shared/components";
 import {
     FieldReportGeneralDataSection,
@@ -13,6 +18,10 @@ const ViewFieldReportCoverSubPage = () => {
     [fieldReport] = useOutletContext();
 
     const [openFormSection, setOpenFormSection] = useState(null);
+    const [error, setError] = useState(null);
+
+    const basePath = useLocation();
+    const navigate = useNavigateWithReload();
 
     const handleOpenForm = section => {
         setOpenFormSection(section);
@@ -23,15 +32,14 @@ const ViewFieldReportCoverSubPage = () => {
     };
 
     const handleSubmit = fieldReport => {
-        console.log("handleSubmit", fieldReport);
-        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
-        //     .then(() => {
-        //         navigate(basePath, true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
+        FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
+            .then(() => {
+                navigate(basePath, true);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error);
+            });
     };
 
     return (

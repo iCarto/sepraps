@@ -6,14 +6,17 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const FormInputTextList = ({name: propsName, itemName}) => {
+const FormInputTextList = ({name: propsName, itemName, rules = {}}) => {
     const {control} = useFormContext();
     const {fields, append, remove} = useFieldArray({
         control,
         name: propsName,
+        rules,
     });
 
     const moreThanOneField = fields.length > 1;
+    //TO-DO: Fix required labels
+    const inputLabel = rules && rules["required"] ? `${itemName} 1 *` : `${itemName} 1`;
 
     const handleClickAppend = () => {
         append("");
@@ -24,10 +27,7 @@ const FormInputTextList = ({name: propsName, itemName}) => {
             {!fields.length ? (
                 <Grid item container alignItems="center" xs={12}>
                     <Grid item xs={12}>
-                        <FormInputText
-                            name={`${propsName}.0`}
-                            label={`${itemName} 1`}
-                        />
+                        <FormInputText name={`${propsName}.0`} label={inputLabel} />
                     </Grid>
                 </Grid>
             ) : null}
