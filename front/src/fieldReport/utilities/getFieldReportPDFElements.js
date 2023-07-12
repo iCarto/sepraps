@@ -14,6 +14,7 @@ export function getFieldReportPDFElements(doc, reportData) {
     const drawReportFirstPageHeader = logosData => {
         const headerLogos = [];
         logosData.map(logo => headerLogos.push(logo.url));
+        console.log({logosData});
 
         const numberOfLogos = headerLogos.length;
 
@@ -215,15 +216,17 @@ export function getFieldReportPDFElements(doc, reportData) {
     const drawReportClosure = () => {
         const closingText = fieldReportContent.closingText;
 
-        doc.setFont(undefined, "normal").text(
-            closingText,
-            dimensions.pageMargin,
-            doc.lastAutoTable.finalY + 20,
-            {
-                maxWidth: dimensions.pageWidth - dimensions.pageMargin,
-                lineHeightFactor: 2,
-            }
-        );
+        if (closingText) {
+            doc.setFont(undefined, "normal").text(
+                closingText,
+                dimensions.pageMargin,
+                doc.lastAutoTable.finalY + 20,
+                {
+                    maxWidth: dimensions.pageWidth - dimensions.pageMargin,
+                    lineHeightFactor: 2,
+                }
+            );
+        }
     };
 
     const drawVisitedProjectSection = project => {
@@ -316,21 +319,19 @@ export function getFieldReportPDFElements(doc, reportData) {
                 pageBreak: "avoid",
                 didDrawCell: data => {
                     const cellData = data.cell;
-                    const isImage =
-                        cellData.raw.endsWith(".png") || cellData.raw.endsWith(".jpg");
+                    const isImage = cellData.raw.hasOwnProperty("url");
                     if (isImage) {
-                        const imageUrl = cellData.raw;
-                        const imageOriginalHeight = images[data.column.index].height;
+                        const imageUrl = cellData.raw.url;
+                        const imageOriginalHeight = cellData.raw.height;
                         const imageAdjustedHeight = minCellHeight;
                         const ratio = imageOriginalHeight / imageAdjustedHeight;
-                        const imageAdjustedWidth =
-                            images[data.column.index].width / ratio;
+                        const imageAdjustedWidth = cellData.raw.width / ratio;
                         const imagePositionX =
                             cellData.x + (cellData.width - imageAdjustedWidth) / 2;
                         const imagePositionY = cellData.y;
                         doc.addImage(
                             imageUrl,
-                            "png",
+                            "jpg",
                             imagePositionX,
                             imagePositionY,
                             imageAdjustedWidth,

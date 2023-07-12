@@ -25,9 +25,15 @@ class FieldReportProjectSerializer(BaseModelSerializer):
     construction_contract_number = serializers.CharField(
         source="project.construction_contract.number", default=None, read_only=True
     )
-    field_report_project_activities = FieldReportProjectActivitySerializer(
-        read_only=True, many=True
-    )
+    field_report_project_activities = serializers.SerializerMethodField()
+
+    def get_field_report_project_activities(self, instance):
+        activities = instance.field_report_project_activities.all().order_by(
+            "date", "id"
+        )
+        return FieldReportProjectActivitySerializer(
+            activities, read_only=True, many=True, context=self.context
+        ).data
 
     def to_representation(self, instance):
         response = super().to_representation(instance)

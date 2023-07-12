@@ -42,27 +42,35 @@ export function downloadFieldReportPDF() {
             fieldReportContent.sectionTwoIntroText
         );
 
-        // Create array of promises for all instances of drawVisitPicturesTable
-        const visits = reportData.field_report_projects.flatMap(project =>
-            project.field_report_project_activities.map(async activity => {
-                // const activityImages = [
-                //     activity.image1,
-                //     activity.image2,
-                //     activity.image3,
-                //     activity.image4,
-                // ];
-                // const visitImages = await getImagesData(
-                //     fieldReportContent.getImageUrls(activityImages)
-                // );
-
-                fieldReportElements.drawVisitedProjectSection(project);
-                fieldReportElements.drawActivitySummary(activity);
-                // fieldReportElements.drawVisitPicturesTable(visitImages);
-            })
+        // Create array of promises for all calls to load activity images
+        const activitiesImages = [];
+        const activitiesImagesPromises = reportData.field_report_projects.flatMap(
+            project =>
+                project.field_report_project_activities.map(async activity => {
+                    const activityImages = await getImagesData(
+                        activity.images.filter(item => item)
+                    );
+                    activitiesImages.push({id: activity.id, images: activityImages});
+                })
         );
 
         // Wait for all promises and then execute doc.save()
-        await Promise.all(visits);
+        await Promise.all(activitiesImagesPromises);
+
+        reportData.field_report_projects.forEach(fieldReportProject => {
+            fieldReportElements.drawVisitedProjectSection(fieldReportProject);
+
+            fieldReportProject.field_report_project_activities.forEach(
+                fieldReportProjectActivity => {
+                    fieldReportElements.drawActivitySummary(fieldReportProjectActivity);
+                    fieldReportElements.drawVisitPicturesTable(
+                        activitiesImages.find(
+                            activity => fieldReportProjectActivity.id === activity.id
+                        ).images
+                    );
+                }
+            );
+        });
 
         // Page count can only be calculated after all pages have been drawn. With this code we go back to page 2 and draw the Report closure there.
         // doc.setPage(2);

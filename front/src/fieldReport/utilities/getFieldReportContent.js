@@ -28,9 +28,11 @@ export function getFieldReportContent(reportData) {
     });
 
     const goalsList = [];
-    reportData.goals.map((goal, index) => {
-        goalsList.push([`${index + 1}.`, goal]);
-    });
+    if (reportData.goals) {
+        reportData.goals.map((goal, index) => {
+            goalsList.push([`${index + 1}.`, goal]);
+        });
+    }
 
     const sectionTwoIntroText =
         "En este apartado se resume el trabajo realizado en cada uno de los proyectos y entidades asociadas, exponiendo los comentarios y observaciones de los técnicos en las diferentes reuniones y visitas realizadas.";
@@ -50,7 +52,7 @@ export function getFieldReportContent(reportData) {
 
         images.map((image, index) => {
             comments.push(`Figura ${index + 1}`);
-            urls.push(image.url);
+            urls.push(image);
         });
 
         const maxLength = Math.max(urls.length, comments.length);
