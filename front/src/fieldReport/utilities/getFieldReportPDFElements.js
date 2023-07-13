@@ -14,7 +14,6 @@ export function getFieldReportPDFElements(doc, reportData) {
     const drawReportFirstPageHeader = logosData => {
         const headerLogos = [];
         logosData.map(logo => headerLogos.push(logo.url));
-        console.log({logosData});
 
         const numberOfLogos = headerLogos.length;
 
@@ -150,15 +149,16 @@ export function getFieldReportPDFElements(doc, reportData) {
             theme: "plain",
             head: [[title.toUpperCase()]],
             headStyles: {
-                fillColor: CUSTOM_COLORS.primary.main,
+                fillColor: CUSTOM_COLORS.primary.dark,
                 textColor: CUSTOM_COLORS.white,
                 fontSize: dimensions.fontSizeRegular,
                 fontStyle: "bold",
             },
             body: [[""], [text]],
             bodyStyles: {
-                textColor: CUSTOM_COLORS.text.primary,
                 fontSize: dimensions.fontSizeRegular,
+                fontStyle: "italic",
+                textColor: CUSTOM_COLORS.text.primary,
             },
         });
     };
@@ -217,21 +217,20 @@ export function getFieldReportPDFElements(doc, reportData) {
         const closingText = fieldReportContent.closingText;
 
         if (closingText) {
-            doc.setFont(undefined, "normal").text(
+            doc.setFont(undefined, "italic").text(
                 closingText,
                 dimensions.pageMargin,
-                doc.lastAutoTable.finalY + 20,
+                doc.lastAutoTable.finalY + 15,
                 {
                     maxWidth: dimensions.pageWidth - dimensions.pageMargin,
-                    lineHeightFactor: 2,
                 }
             );
         }
     };
 
-    const drawVisitedProjectSection = project => {
+    const drawVisitedProjectTitle = project => {
         autoTable(doc, {
-            startY: doc.lastAutoTable.finalY + 5,
+            startY: doc.lastAutoTable.finalY + 10,
             theme: "plain",
             head: [
                 [
@@ -241,10 +240,48 @@ export function getFieldReportPDFElements(doc, reportData) {
                 ],
             ],
             headStyles: {
-                fillColor: CUSTOM_COLORS.grey["200"],
+                fillColor: CUSTOM_COLORS.primary.main,
+                textColor: CUSTOM_COLORS.white,
                 fontStyle: "bold",
             },
         });
+    };
+
+    const drawVisitedProjectHistory = project => {
+        if (project.history) {
+            autoTable(doc, {
+                startY: doc.lastAutoTable.finalY + 5,
+                theme: "plain",
+                head: [["Antecedentes"]],
+                headStyles: {
+                    fontStyle: "bold",
+                },
+                body: [[project.history]],
+            });
+        }
+    };
+
+    const drawVisitedProjectAgreementsList = project => {
+        if (project.agreements) {
+            doc.setFont(undefined, "bold")
+                .setFontSize(dimensions.fontSizeRegular)
+                .setTextColor(CUSTOM_COLORS.text.primary)
+                .text(
+                    "Acuerdos alcanzados",
+                    dimensions.pageMargin,
+                    doc.lastAutoTable.finalY + 10
+                );
+            autoTable(doc, {
+                startY: doc.lastAutoTable.finalY + 15,
+                theme: "plain",
+                body: fieldReportContent.getProjectAgreementsList(project.agreements),
+                columnStyles: {
+                    0: {
+                        cellWidth: 10,
+                    },
+                },
+            });
+        }
     };
 
     const drawActivitySummary = activity => {
@@ -262,11 +299,12 @@ export function getFieldReportPDFElements(doc, reportData) {
             startY: tablePositionTop,
             margin: {top: tableMarginTop},
             theme: "plain",
-            head: [[`${activity.title} (${activity.date})`]],
+            head: [[`${activity.date} | ${activity.title}`]],
             headStyles: {
                 fontStyle: "bold",
+                fillColor: CUSTOM_COLORS.grey["200"],
             },
-            body: [[activity.notes]],
+            body: activity.notes ? [[activity.notes]] : null,
             bodyStyles: {
                 fontStyle: "normal",
             },
@@ -285,7 +323,7 @@ export function getFieldReportPDFElements(doc, reportData) {
         });
     };
 
-    const drawVisitPicturesTable = images => {
+    const drawActivityPicturesTable = images => {
         const tableBody = fieldReportContent.getImageTableContent(images);
 
         const minCellHeight = 60;
@@ -391,8 +429,10 @@ export function getFieldReportPDFElements(doc, reportData) {
         drawVisitedProjectsList,
         drawVisitGoalsList,
         drawReportClosure,
-        drawVisitedProjectSection,
+        drawVisitedProjectTitle,
+        drawVisitedProjectHistory,
+        drawVisitedProjectAgreementsList,
         drawActivitySummary,
-        drawVisitPicturesTable,
+        drawActivityPicturesTable,
     };
 }

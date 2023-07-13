@@ -37,6 +37,16 @@ export function getFieldReportContent(reportData) {
     const sectionTwoIntroText =
         "En este apartado se resume el trabajo realizado en cada uno de los proyectos y entidades asociadas, exponiendo los comentarios y observaciones de los técnicos en las diferentes reuniones y visitas realizadas.";
 
+    const getProjectAgreementsList = agreements => {
+        const projectAgreementsList = [];
+        if (agreements) {
+            agreements.map((agreement, index) => {
+                projectAgreementsList.push([`${index + 1}.`, agreement]);
+            });
+        }
+        return projectAgreementsList;
+    };
+
     const getImageUrls = images => {
         let imageUrls = [];
         // images.map(image => imageUrls.push(image.url));
@@ -111,5 +121,6 @@ export function getFieldReportContent(reportData) {
         sectionTwoIntroText,
         getImageUrls,
         getImageTableContent,
+        getProjectAgreementsList,
     };
 }

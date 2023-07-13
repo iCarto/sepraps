@@ -58,18 +58,21 @@ export function downloadFieldReportPDF() {
         await Promise.all(activitiesImagesPromises);
 
         reportData.field_report_projects.forEach(fieldReportProject => {
-            fieldReportElements.drawVisitedProjectSection(fieldReportProject);
+            fieldReportElements.drawVisitedProjectTitle(fieldReportProject);
+            fieldReportElements.drawVisitedProjectHistory(fieldReportProject);
 
             fieldReportProject.field_report_project_activities.forEach(
                 fieldReportProjectActivity => {
                     fieldReportElements.drawActivitySummary(fieldReportProjectActivity);
-                    fieldReportElements.drawVisitPicturesTable(
+                    fieldReportElements.drawActivityPicturesTable(
                         activitiesImages.find(
                             activity => fieldReportProjectActivity.id === activity.id
                         ).images
                     );
                 }
             );
+
+            fieldReportElements.drawVisitedProjectAgreementsList(fieldReportProject);
         });
 
         // Page count can only be calculated after all pages have been drawn. With this code we go back to page 2 and draw the Report closure there.

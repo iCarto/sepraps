@@ -56,6 +56,7 @@ export const globalPDFElements = {
         for (let i = 2; i <= pageCount; i++) {
             if (i !== 0) doc.setPage(i);
             doc.setFontSize(18)
+                .setFont(undefined, "normal")
                 .setTextColor(CUSTOM_COLORS.primary.main)
                 .text(reportHeading, this.pageMargin, textPositionTop, {
                     maxWidth: logoPositionRight,
