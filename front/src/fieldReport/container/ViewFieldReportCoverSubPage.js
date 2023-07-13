@@ -65,7 +65,10 @@ const ViewFieldReportCoverSubPage = () => {
                     onSubmit={handleSubmit}
                 />
             </AccordionUndercoverLayout>
-            <AccordionUndercoverLayout accordionTitle="Participante/s en la intervención">
+            <AccordionUndercoverLayout
+                accordionTitle="Participante/s en la intervención"
+                defaultExpanded={!!fieldReport?.participant_persons?.length}
+            >
                 <FieldReportParticipantsSection
                     fieldReport={fieldReport}
                     isFormOpen={openFormSection === "participant_persons"}
@@ -74,7 +77,10 @@ const ViewFieldReportCoverSubPage = () => {
                     onSubmit={handleSubmit}
                 />
             </AccordionUndercoverLayout>
-            <AccordionUndercoverLayout accordionTitle="Responsable/s de aprobación">
+            <AccordionUndercoverLayout
+                accordionTitle="Responsable/s de aprobación"
+                defaultExpanded={!!fieldReport?.reported_persons?.length}
+            >
                 <FieldReportReportedPersonsSection
                     fieldReport={fieldReport}
                     isFormOpen={openFormSection === "reported_persons"}

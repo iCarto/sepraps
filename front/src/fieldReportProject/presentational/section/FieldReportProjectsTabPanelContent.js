@@ -67,7 +67,7 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
 
             <AccordionUndercoverLayout
                 accordionTitle="Antecedentes"
-                defaultExpanded={!!project.history}
+                defaultExpanded={!!project?.history}
             >
                 <FieldReportProjectHistorySection
                     project={project}
@@ -78,7 +78,10 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
                 />
             </AccordionUndercoverLayout>
 
-            <AccordionUndercoverLayout accordionTitle="Actividades realizadas">
+            <AccordionUndercoverLayout
+                accordionTitle="Actividades realizadas"
+                defaultExpanded={!!project?.field_report_project_activities?.length}
+            >
                 <FieldReportProjectActivitiesSection
                     activities={project.field_report_project_activities}
                     isFormSectionActive={activeFormSection === "activities"}
@@ -87,7 +90,10 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
                 />
             </AccordionUndercoverLayout>
 
-            <AccordionUndercoverLayout accordionTitle="Acuerdos alcanzados">
+            <AccordionUndercoverLayout
+                accordionTitle="Acuerdos alcanzados"
+                defaultExpanded={!!project?.agreements?.length}
+            >
                 <FieldReportProjectAgreementsSection
                     project={project}
                     isFormOpen={activeFormSection === "agreements"}

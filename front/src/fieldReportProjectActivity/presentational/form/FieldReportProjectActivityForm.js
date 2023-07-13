@@ -51,6 +51,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
         <FormProvider {...formMethods}>
             <Grid
                 container
+                flexDirection="column"
                 mt={3}
                 p={1}
                 border={1}
@@ -58,7 +59,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
                 borderRadius={1}
                 sx={{backgroundColor: "grey.50"}}
             >
-                <Grid item>
+                <Grid item xl={6}>
                     <Typography
                         variant="h6"
                         component="h4"
@@ -72,7 +73,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
                         {activity ? "Editar actividad" : "Añadir actividad"}
                     </Typography>
                 </Grid>
-                <Grid item>
+                <Grid item xl={6}>
                     <EntityForm
                         onSubmit={formMethods.handleSubmit(onFormSubmit)}
                         onCancel={handleCancel}

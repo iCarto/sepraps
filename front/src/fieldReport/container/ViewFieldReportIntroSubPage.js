@@ -55,7 +55,7 @@ const ViewFieldReportIntroSubPage = () => {
             </Typography>
             <AccordionUndercoverLayout
                 accordionTitle="Texto introductorio"
-                defaultExpanded={true}
+                defaultExpanded={!!fieldReport?.report_comments_start}
             >
                 <FieldReportCommentsStartSection
                     fieldReport={fieldReport}
@@ -65,7 +65,10 @@ const ViewFieldReportIntroSubPage = () => {
                     onSubmit={handleSubmit}
                 />
             </AccordionUndercoverLayout>
-            <AccordionUndercoverLayout accordionTitle="Objetivos">
+            <AccordionUndercoverLayout
+                accordionTitle="Objetivos"
+                defaultExpanded={!!fieldReport?.goals?.length}
+            >
                 <FieldReportGoalsSection
                     fieldReport={fieldReport}
                     isFormOpen={openFormSection === "goals"}
@@ -74,7 +77,10 @@ const ViewFieldReportIntroSubPage = () => {
                     onSubmit={handleSubmit}
                 />
             </AccordionUndercoverLayout>
-            <AccordionUndercoverLayout accordionTitle="Explicación del informe">
+            <AccordionUndercoverLayout
+                accordionTitle="Explicación del informe"
+                defaultExpanded={!!fieldReport?.report_comments_end}
+            >
                 <FieldReportCommentsEndSection
                     fieldReport={fieldReport}
                     isFormOpen={openFormSection === "report_comments_end"}
