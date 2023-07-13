@@ -50,7 +50,7 @@ const FieldReportProjectsListSection = ({projects}) => {
                                     primary={
                                         <TextLink
                                             text={`Proyecto ${project.code}, ${project.name}`}
-                                            to={`/field-reports/${reportId}/projects/${project.id}`}
+                                            to={`/field-reports/${reportId}/projects/${project.projectId}`}
                                         />
                                     }
                                 />

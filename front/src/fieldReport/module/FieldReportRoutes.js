@@ -46,7 +46,7 @@ const fieldReportRoutes = [
             >
                 <Route
                     key="field-report-projects-tabs"
-                    path=":tab"
+                    path=":fieldReportProjectId"
                     element={<FieldReportProjectsSection />}
                 />
             </Route>

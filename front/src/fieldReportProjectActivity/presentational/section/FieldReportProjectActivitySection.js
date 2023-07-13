@@ -21,7 +21,7 @@ const FieldReportProjectActivitySection = ({
     const [activityToEditId, setActivityToEditId] = useState(false);
     const [error, setError] = useState("");
 
-    const {tab: projectId} = useParams();
+    const {fieldReportProjectId} = useParams();
     const basePath = useLocation();
     const navigate = useNavigateWithReload();
 
@@ -38,7 +38,7 @@ const FieldReportProjectActivitySection = ({
         FieldReportProjectActivityService.update(
             fieldReportProjectActivity_view_adapter({
                 ...activity,
-                field_report_project: projectId,
+                field_report_project: fieldReportProjectId,
             })
         )
             .then(() => {

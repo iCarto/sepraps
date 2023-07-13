@@ -7,6 +7,7 @@ class FieldReportProjects extends Array {}
 
 const fieldReportProject_api_adapter = fieldReportProject => {
     fieldReportProject["code"] = fieldReportProject.project.code;
+    fieldReportProject["projectId"] = fieldReportProject.project.id;
     fieldReportProject["name"] = fieldReportProject.project["linked_localities"]
         .map(locality => locality.name)
         .join(" - ");
@@ -67,6 +68,7 @@ const createFieldReportProject = ({
     history = "",
     agreements = [],
     location = "",
+    projectId = null,
     project = null,
     construction_contract_number = "",
     field_report_project_activities = [],
@@ -83,6 +85,7 @@ const createFieldReportProject = ({
         history,
         agreements,
         location,
+        projectId,
         project,
         construction_contract_number,
         field_report_project_activities,

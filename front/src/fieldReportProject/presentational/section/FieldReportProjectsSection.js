@@ -19,10 +19,10 @@ const FieldReportProjectsSection = () => {
     const contracts = new Set();
     fieldReport.field_report_projects.map(project => contracts.add(project.contract));
 
-    function a11yProps(id) {
+    function a11yProps(projectId) {
         return {
-            id: `tab-${id}`,
-            "aria-controls": `tabpanel-${id}`,
+            id: `tab-${projectId}`,
+            "aria-controls": `tabpanel-${projectId}`,
         };
     }
 
@@ -54,18 +54,20 @@ const FieldReportProjectsSection = () => {
                     aria-label="pestañas de proyectos"
                 >
                     {fieldReport?.field_report_projects?.length
-                        ? fieldReport.field_report_projects?.map((project, index) => (
-                              <Tab
-                                  key={index}
-                                  component={RouterLink}
-                                  to={{
-                                      pathname: `${project.id}`,
-                                  }}
-                                  label={getTabLabel(project)}
-                                  {...a11yProps(project.id)}
-                                  value={index}
-                              />
-                          ))
+                        ? fieldReport.field_report_projects?.map((project, index) => {
+                              return (
+                                  <Tab
+                                      key={index}
+                                      component={RouterLink}
+                                      to={{
+                                          pathname: `${project.projectId}`,
+                                      }}
+                                      label={getTabLabel(project)}
+                                      {...a11yProps(project.projectId)}
+                                      value={index}
+                                  />
+                              );
+                          })
                         : null}
                     <Tab
                         key={indexForNewTab}
