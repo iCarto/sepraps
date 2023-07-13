@@ -98,6 +98,7 @@ const XMLHttpRequestService = {
                             ...uploadingFile,
                             progress: 100,
                             stored: true,
+                            response: JSON.parse(this.responseText),
                         },
                         e
                     );

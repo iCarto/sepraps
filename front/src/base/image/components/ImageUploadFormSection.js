@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useController, useFormContext} from "react-hook-form";
 
-import {ImagePreview, ImageUploadButton} from ".";
+import {ImageFilePreview, ImagePreview, ImageUploadButton} from ".";
 import {ContainerWithLabel} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
@@ -25,9 +25,12 @@ const validateSize = files => {
         return true;
     }
     for (const file of invalidFiles) {
+        if (!(file instanceof File)) {
+            return null;
+        }
         let message = "";
         if (!validateFileType(file, ["image/jpg", "image/jpeg", "image/png"])) {
-            message += "El archivo debe ser de tipo jpf, jpeg o png. ";
+            message += "El archivo debe ser de tipo jpg, jpeg o png. ";
         }
         if (!validateFileMaxSize(file, 20000000)) {
             message += `El archivo ${file.name} tiene un tamaño superior a 20Mb\n`;
@@ -89,6 +92,7 @@ const ImageUploadFormSection = ({name, formFileInputName}) => {
     const handleAdd = files => {
         const values = getValues();
         const updatedFileList = [...values[name], ...files];
+        console.log({updatedFileList});
         onChange(updatedFileList);
         trigger([name]);
     };
@@ -120,9 +124,18 @@ const ImageUploadFormSection = ({name, formFileInputName}) => {
                     ? fileList.map((image, index) => (
                           <Grid item xs={4} md={2.5} key={index}>
                               <ImageListItem>
-                                  <ImagePreview path={image} />
+                                  {image instanceof File ? (
+                                      <ImageFilePreview
+                                          image={image}
+                                          width="100%"
+                                          height="100px"
+                                      />
+                                  ) : (
+                                      <ImagePreview path={image} />
+                                  )}
+
                                   <ImageListItemBar
-                                      title={`Imagen ${index + 1}`}
+                                      title={`Figura ${index + 1}`}
                                       position="top"
                                       actionIcon={
                                           <IconButton
@@ -140,12 +153,14 @@ const ImageUploadFormSection = ({name, formFileInputName}) => {
                           </Grid>
                       ))
                     : null}
-                <Grid item container xs={4} md={2}>
-                    <ImageUploadButton
-                        name={formFileInputName}
-                        onSelectFiles={handleSelectFiles}
-                    />
-                </Grid>
+                {fileList?.length < 4 && (
+                    <Grid item container xs={4} md={2}>
+                        <ImageUploadButton
+                            name={formFileInputName}
+                            onSelectFiles={handleSelectFiles}
+                        />
+                    </Grid>
+                )}
             </Grid>
             <Grid mt={2}>
                 {errors[name] && <Alert severity="error">{errors[name].message}</Alert>}

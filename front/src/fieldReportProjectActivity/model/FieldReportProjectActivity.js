@@ -11,13 +11,6 @@ const fieldReportProjectActivity_api_adapter = fieldReportProjectActivity => {
 };
 
 const fieldReportProjectActivity_view_adapter = fieldReportProjectActivity => {
-    fieldReportProjectActivity.image1 = fieldReportProjectActivity.images[0];
-    fieldReportProjectActivity.image2 = fieldReportProjectActivity.images[1];
-    fieldReportProjectActivity.image3 = fieldReportProjectActivity.images[2];
-    fieldReportProjectActivity.image4 = fieldReportProjectActivity.images[3];
-
-    delete fieldReportProjectActivity["images"];
-
     return fieldReportProjectActivity;
 };
 
@@ -39,14 +32,24 @@ const createFieldReportProjectActivity = ({
     title = "",
     date = null,
     notes = "",
+    image1 = null,
+    image2 = null,
+    image3 = null,
+    image4 = null,
     images = [],
+    folder = "",
 } = {}) => {
     const publicApi = {
         id,
         title,
         date,
         notes,
+        image1,
+        image2,
+        image3,
+        image4,
         images,
+        folder,
     };
 
     return Object.freeze(publicApi);

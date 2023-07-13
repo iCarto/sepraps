@@ -2,7 +2,7 @@ import {FormDatePicker, FormInputText, FormTextArea} from "base/form/components"
 import {ImageUploadFormSection} from "base/image/components";
 import Grid from "@mui/material/Grid";
 
-const FieldReportProjectActivitiesFormFields = () => {
+const FieldReportProjectActivityFormFields = () => {
     return (
         <Grid container columnSpacing={1}>
             <Grid item xs={12} md={6}>
@@ -21,4 +21,4 @@ const FieldReportProjectActivitiesFormFields = () => {
     );
 };
 
-export default FieldReportProjectActivitiesFormFields;
+export default FieldReportProjectActivityFormFields;

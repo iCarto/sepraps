@@ -10,6 +10,7 @@ import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/present
 import {FieldReportProjectActivityCard} from "fieldReportProjectActivity/presentational/section";
 
 import Grid from "@mui/material/Grid";
+import {DocumentService} from "base/file/service";
 
 const FieldReportProjectActivitySection = ({
     activity,
@@ -34,15 +35,57 @@ const FieldReportProjectActivitySection = ({
         onCloseForm();
     };
 
-    const handleSubmit = activity => {
-        FieldReportProjectActivityService.update(
-            fieldReportProjectActivity_view_adapter({
-                ...activity,
-                field_report_project: fieldReportProjectId,
-            })
-        )
-            .then(() => {
-                navigate(basePath, true);
+    const handleSubmit = updatedActivity => {
+        const imagesUploadPromises = updatedActivity.images.map(image => {
+            if (image instanceof File) {
+                return new Promise((resolve, reject) => {
+                    const onFinish = onFinishResult => {
+                        console.log({onFinishResult});
+                        resolve(onFinishResult.response);
+                    };
+                    const onError = onFinishError => {
+                        console.log({onFinishError});
+                        reject(onFinishError);
+                    };
+                    DocumentService.upload(
+                        image,
+                        activity.folder,
+                        onFinish,
+                        () => {},
+                        () => {},
+                        onError
+                    );
+                });
+            }
+            return Promise.resolve();
+        });
+        Promise.all(imagesUploadPromises)
+            .then(result => {
+                updatedActivity.images.forEach((image, index) => {
+                    const storedImageId =
+                        image instanceof File
+                            ? result.find(
+                                  storedImage =>
+                                      storedImage &&
+                                      storedImage.media_name === image.name
+                              ).id
+                            : image.id;
+                    updatedActivity["image" + (index + 1)] = storedImageId;
+                });
+                console.log({updatedActivity});
+                FieldReportProjectActivityService.update(
+                    fieldReportProjectActivity_view_adapter({
+                        ...updatedActivity,
+                        field_report_project: fieldReportProjectId,
+                    })
+                )
+                    .then(() => {
+                        navigate(basePath, true);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        // setError(error);
+                    });
             })
             .catch(error => {
                 console.log(error);
