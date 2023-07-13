@@ -6,6 +6,7 @@ import {fieldReportProjectActivity_view_adapter} from "fieldReportProjectActivit
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {AddNewFullWidthButton} from "base/shared/components";
+import {AlertError} from "base/error/components";
 import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/presentational/form";
 import {FieldReportProjectActivitySection} from "fieldReportProjectActivity/presentational/section";
 
@@ -21,6 +22,7 @@ const FieldReportProjectActivitiesSection = ({
 
     const [isFormNewOpen, setIsFormNewOpen] = useState(false);
     const [isFormEditOpen, setIsFormEditOpen] = useState(false);
+    const [error, setError] = useState("");
 
     const {tab: projectId} = useParams();
     const basePath = useLocation();
@@ -56,7 +58,7 @@ const FieldReportProjectActivitiesSection = ({
             })
             .catch(error => {
                 console.log(error);
-                // setError(error);
+                setError(error);
             });
     };
 
@@ -72,10 +74,13 @@ const FieldReportProjectActivitiesSection = ({
                 />
             ))}
             {isFormSectionActive && isFormNewOpen ? (
-                <FieldReportProjectActivityForm
-                    onSubmit={handleSubmit}
-                    onCancel={handleCancelForm}
-                />
+                <>
+                    <AlertError error={error} />
+                    <FieldReportProjectActivityForm
+                        onSubmit={handleSubmit}
+                        onCancel={handleCancelForm}
+                    />
+                </>
             ) : null}
             {isFormSectionActive ? null : (
                 <Grid mt={2}>

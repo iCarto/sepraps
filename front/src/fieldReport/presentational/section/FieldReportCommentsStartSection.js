@@ -1,14 +1,10 @@
-import {useNavigate} from "react-router-dom";
-
-import {useAuth} from "base/user/provider";
-
 import {AddNewFullWidthButton} from "base/shared/components";
 import {FieldReportForm} from "../form";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
 
 const FieldReportCommentsStartSection = ({
     fieldReport,
@@ -17,9 +13,6 @@ const FieldReportCommentsStartSection = ({
     onCloseForm,
     onSubmit,
 }) => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
-
     const section = "report_comments_start";
 
     const handleOpenForm = () => {

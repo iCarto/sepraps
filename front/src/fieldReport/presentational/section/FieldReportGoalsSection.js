@@ -1,6 +1,3 @@
-import {useNavigate} from "react-router-dom";
-
-import {useAuth} from "base/user/provider";
 import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
 import {FieldReportService} from "fieldReport/service";
 
@@ -18,9 +15,6 @@ const FieldReportGoalsSection = ({
     onCloseForm,
     onSubmit,
 }) => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
-
     const section = "goals";
 
     const handleOpenForm = () => {
@@ -29,18 +23,6 @@ const FieldReportGoalsSection = ({
 
     const handleCancelForm = () => {
         onCloseForm(section);
-    };
-
-    const handleSubmit = fieldReport => {
-        console.log("handleSubmit", fieldReport);
-        // FieldReportService.update(fieldReport_view_adapter({...fieldReport}))
-        //     .then(() => {
-        //         navigate(basePath, true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
     };
 
     const {dialog: deleteDialog} = useMenuGenericDeleteAction(FieldReportService);

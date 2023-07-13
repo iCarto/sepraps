@@ -7,6 +7,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
 
 import {AccordionUndercoverLayout, Tag} from "base/shared/components";
+import {AlertError} from "base/error/components";
 import {
     FieldReportProjectActivitiesSection,
     FieldReportProjectAgreementsSection,
@@ -18,6 +19,7 @@ import Button from "@mui/material/Button";
 
 const FieldReportProjectsTabPanelContent = ({project}) => {
     const [activeFormSection, setActiveFormSection] = useState("");
+    const [error, setError] = useState("");
 
     const {dialog: deleteDialog} = useMenuGenericDeleteAction(
         FieldReportProjectService
@@ -44,7 +46,7 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
             })
             .catch(error => {
                 console.log(error);
-                // setError(error);
+                setError(error);
             });
     };
 
@@ -64,6 +66,8 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
             <Typography variant="body2" color="text.secondary">
                 {`${project.code} \u2022 ${project.location}`}
             </Typography>
+
+            <AlertError error={error} />
 
             <AccordionUndercoverLayout
                 accordionTitle="Antecedentes"

@@ -6,6 +6,7 @@ import {fieldReport_view_adapter} from "fieldReport/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {AccordionUndercoverLayout, PaperContainer} from "base/shared/components";
+import {AlertError} from "base/error/components";
 import {
     FieldReportGeneralDataSection,
     FieldReportParticipantsSection,
@@ -53,6 +54,9 @@ const ViewFieldReportCoverSubPage = () => {
             >
                 Portada del informe
             </Typography>
+
+            <AlertError error={error} />
+
             <AccordionUndercoverLayout
                 accordionTitle="Datos del informe"
                 defaultExpanded={true}

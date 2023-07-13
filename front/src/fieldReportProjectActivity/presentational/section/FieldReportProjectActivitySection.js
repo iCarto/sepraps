@@ -5,6 +5,7 @@ import {FieldReportProjectActivityService} from "fieldReportProjectActivity/serv
 import {fieldReportProjectActivity_view_adapter} from "fieldReportProjectActivity/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
+import {AlertError} from "base/error/components";
 import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/presentational/form";
 import {FieldReportProjectActivityCard} from "fieldReportProjectActivity/presentational/section";
 
@@ -18,6 +19,7 @@ const FieldReportProjectActivitySection = ({
     onCloseForm,
 }) => {
     const [activityToEditId, setActivityToEditId] = useState(false);
+    const [error, setError] = useState("");
 
     const {tab: projectId} = useParams();
     const basePath = useLocation();
@@ -44,7 +46,7 @@ const FieldReportProjectActivitySection = ({
             })
             .catch(error => {
                 console.log(error);
-                // setError(error);
+                setError(error);
             });
     };
 
@@ -57,6 +59,7 @@ const FieldReportProjectActivitySection = ({
         <>
             {isFormOpen && activityToEditId === activity.id ? (
                 <Grid item mb={4} key={activityIndex}>
+                    <AlertError error={error} />
                     <FieldReportProjectActivityForm
                         activity={activity}
                         onSubmit={handleSubmit}
