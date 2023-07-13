@@ -19,7 +19,7 @@ const FieldReportProjectFormFields = ({section}) => {
         if (Object.keys(filter).length) {
             ProjectService.getAll(filter).then(data => {
                 const projectList = data.map(project => ({
-                    label: `${project.code} - ${project.location}`,
+                    label: `${project.code} - ${project.name}, ${project.location}`,
                     id: project.id,
                 }));
                 setProjects(projectList);
