@@ -74,7 +74,10 @@ const FieldReportGoalsSection = ({
                 </Grid>
             ) : (
                 <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
-                    <AddNewFullWidthButton onClick={handleOpenForm} />
+                    <AddNewFullWidthButton
+                        onClick={handleOpenForm}
+                        tooltip="Añadir objetivo"
+                    />
                 </Grid>
             )}
         </>

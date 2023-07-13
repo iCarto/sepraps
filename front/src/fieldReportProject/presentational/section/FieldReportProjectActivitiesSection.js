@@ -79,7 +79,10 @@ const FieldReportProjectActivitiesSection = ({
             ) : null}
             {isFormSectionActive ? null : (
                 <Grid mt={2}>
-                    <AddNewFullWidthButton onClick={handleClickNew} />
+                    <AddNewFullWidthButton
+                        onClick={handleClickNew}
+                        tooltip="Añadir actividad"
+                    />
                 </Grid>
             )}
         </>
