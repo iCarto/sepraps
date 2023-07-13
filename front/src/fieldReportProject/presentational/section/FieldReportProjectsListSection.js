@@ -17,7 +17,7 @@ const FieldReportProjectsListSection = ({projects}) => {
     const {id: reportId} = useParams();
 
     const contracts = new Set();
-    projects.map(project => contracts.add(project.contract));
+    projects.map(project => contracts.add(project.construction_contract_number));
 
     const listItemStyle = {
         pt: 0,
@@ -31,7 +31,7 @@ const FieldReportProjectsListSection = ({projects}) => {
         return (
             <List component="div" dense>
                 {projects.map((project, projectIndex) => {
-                    if (project.contract === contract)
+                    if (project.construction_contract_number === contract)
                         return (
                             <ListItem key={projectIndex} sx={listItemStyle}>
                                 <ListItemIcon
