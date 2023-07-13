@@ -1,6 +1,3 @@
-import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
-import {FieldReportService} from "fieldReport/service";
-
 import {FieldReportForm} from "../form";
 import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 
@@ -25,11 +22,8 @@ const FieldReportGoalsSection = ({
         onCloseForm(section);
     };
 
-    const {dialog: deleteDialog} = useMenuGenericDeleteAction(FieldReportService);
-
     return (
         <>
-            {deleteDialog}
             {isFormOpen ? (
                 <FieldReportForm
                     fieldReport={fieldReport}

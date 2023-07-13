@@ -1,6 +1,3 @@
-import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
-import {FieldReportService} from "fieldReport/service";
-
 import {FieldReportProjectForm} from "../form";
 import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 
@@ -38,7 +35,7 @@ const FieldReportProjectAgreementsSection = ({
                     onSubmit={handleSubmit}
                     onCancel={handleCancelForm}
                 />
-            ) : project?.agreements ? (
+            ) : project?.agreements?.length ? (
                 <Grid container columnSpacing={1}>
                     <Grid item xs>
                         <BulletList items={project?.agreements} />

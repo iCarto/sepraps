@@ -19,6 +19,7 @@ const FieldReportNewProjectTabPanel = ({index, value}) => {
     const navigate = useNavigateWithReload();
 
     const handleSubmit = fieldReportProject => {
+        console.log(fieldReportProject);
         FieldReportProjectService.create(
             fieldReportProject_view_adapter({
                 ...fieldReportProject,
@@ -26,7 +27,7 @@ const FieldReportNewProjectTabPanel = ({index, value}) => {
             })
         )
             .then(() => {
-                navigate(basePath, true);
+                navigate(`${basePath}/${fieldReportProject.project}`, true);
             })
             .catch(error => {
                 console.log(error);

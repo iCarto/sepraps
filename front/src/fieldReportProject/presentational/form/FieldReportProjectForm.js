@@ -11,7 +11,6 @@ const FieldReportProjectForm = ({
     onSubmit,
     onCancel = null,
 }) => {
-    console.log(project);
     const defaultFormValues = {
         id: FormUtil.getFormValue(project?.id),
         project: FormUtil.getFormValue(project?.project.id),

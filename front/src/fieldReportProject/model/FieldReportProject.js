@@ -31,6 +31,11 @@ const fieldReportProject_api_adapter = fieldReportProject => {
 };
 
 const fieldReportProject_view_adapter = fieldReportProject => {
+    const agreementsListClean = fieldReportProject["agreements"].filter(item => item);
+    if (!agreementsListClean.length) {
+        fieldReportProject["agreements"] = null;
+    }
+
     delete fieldReportProject["code"];
     delete fieldReportProject["name"];
     delete fieldReportProject["location"];

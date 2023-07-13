@@ -1,6 +1,6 @@
 import {FormTextAreaList} from "base/form/components";
 
-const FieldReportProjectFormAgreementsFields = ({}) => {
+const FieldReportProjectFormAgreementsFields = () => {
     return <FormTextAreaList name="agreements" itemName="Acuerdo" />;
 };
 
