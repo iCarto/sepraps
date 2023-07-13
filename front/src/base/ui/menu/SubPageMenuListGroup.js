@@ -18,7 +18,12 @@ import Box from "@mui/material/Box";
  * If `menuListSubItems` is composed of objects, then the `createButtons` prop must be set to `true`, so that the objects can be used to create their corresponding button.
  */
 
-const SubPageMenuListGroup = ({headerTitle = "", headerIcon = null, items = []}) => {
+const SubPageMenuListGroup = ({
+    headerTitle = "",
+    headerIcon = null,
+    items = [],
+    expanded = true,
+}) => {
     const theme = useTheme();
 
     const submenuItems = items.map((menuListSubItem, index) => (
@@ -54,7 +59,10 @@ const SubPageMenuListGroup = ({headerTitle = "", headerIcon = null, items = []})
     return (
         <>
             {headerTitle ? (
-                <SubmenuAccordion accordionTitle={<SubmenuTitle />}>
+                <SubmenuAccordion
+                    accordionTitle={<SubmenuTitle />}
+                    defaultExpanded={expanded}
+                >
                     <Box
                         sx={{
                             bgcolor: theme.palette.menu.secondary.options.background,

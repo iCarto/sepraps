@@ -38,6 +38,7 @@ const FieldReportSubPageMenu = ({fieldReport}) => {
                 headerTitle="Contenido"
                 headerIcon={<FormatListBulletedOutlinedIcon />}
                 items={contentSubmenuItems}
+                expanded={true}
             />
         </SubPageMenu>
     );
