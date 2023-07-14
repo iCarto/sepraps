@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-const FieldReportProjectsTabPanelContent = ({project}) => {
+const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
     const [activeFormSection, setActiveFormSection] = useState("");
     const [error, setError] = useState("");
 
@@ -59,22 +59,27 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
             {deleteDialog}
             <Stack flexDirection={"row"} alignItems="center">
                 <Typography variant="h5" component="h2" fontWeight="500">
-                    {`${project.name}`}
+                    {`${fieldReportProject.name}`}
                 </Typography>
-                <Tag content={project.construction_contract_number || "Sin contrato"} />
+                <Tag
+                    content={
+                        fieldReportProject.construction_contract_number ||
+                        "Sin contrato"
+                    }
+                />
             </Stack>
             <Typography variant="body2" color="text.secondary">
-                {`${project.code} \u2022 ${project.location}`}
+                {`${fieldReportProject.code} \u2022 ${fieldReportProject.location}`}
             </Typography>
 
             <AlertError error={error} />
 
             <AccordionUndercoverLayout
                 accordionTitle="Antecedentes"
-                defaultExpanded={!!project?.history}
+                defaultExpanded={!!fieldReportProject?.history}
             >
                 <FieldReportProjectHistorySection
-                    project={project}
+                    project={fieldReportProject}
                     isFormOpen={activeFormSection === "history"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
@@ -84,10 +89,12 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
 
             <AccordionUndercoverLayout
                 accordionTitle="Actividades realizadas"
-                defaultExpanded={!!project?.field_report_project_activities?.length}
+                defaultExpanded={
+                    !!fieldReportProject?.field_report_project_activities?.length
+                }
             >
                 <FieldReportProjectActivitiesSection
-                    activities={project.field_report_project_activities}
+                    activities={fieldReportProject.field_report_project_activities}
                     isFormSectionActive={activeFormSection === "activities"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
@@ -96,10 +103,10 @@ const FieldReportProjectsTabPanelContent = ({project}) => {
 
             <AccordionUndercoverLayout
                 accordionTitle="Acuerdos alcanzados"
-                defaultExpanded={!!project?.agreements?.length}
+                defaultExpanded={!!fieldReportProject?.agreements?.length}
             >
                 <FieldReportProjectAgreementsSection
-                    project={project}
+                    project={fieldReportProject}
                     isFormOpen={activeFormSection === "agreements"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}

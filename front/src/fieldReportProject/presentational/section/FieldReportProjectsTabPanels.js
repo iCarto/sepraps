@@ -1,24 +1,26 @@
-import {useAuth} from "base/user/provider";
-
 import {TabPanel} from "base/ui/tab";
 import {FieldReportProjectsTabPanelContent, FieldReportNewProjectTabPanel} from ".";
 
-const FieldReportProjectsTabPanels = ({projects, value}) => {
-    const {ROLES} = useAuth();
-
-    const indexForNewTab = projects?.length;
-
+const FieldReportProjectsTabPanels = ({fieldReportProjects, activeTabId}) => {
     return (
         <>
-            {projects?.map((project, index) => {
-                console.log({project, index, value});
+            {fieldReportProjects?.map((fieldReportProject, index) => {
                 return (
-                    <TabPanel key={index} index={index} value={value}>
-                        <FieldReportProjectsTabPanelContent project={project} />
+                    <TabPanel
+                        key={fieldReportProject.id}
+                        index={fieldReportProject.id}
+                        visible={
+                            fieldReportProject.id === activeTabId ||
+                            (activeTabId === 0 && index === 0)
+                        }
+                    >
+                        <FieldReportProjectsTabPanelContent
+                            fieldReportProject={fieldReportProject}
+                        />
                     </TabPanel>
                 );
             })}
-            <FieldReportNewProjectTabPanel index={indexForNewTab} value={value} />
+            <FieldReportNewProjectTabPanel index={-1} activeTabId={activeTabId} />
         </>
     );
 };

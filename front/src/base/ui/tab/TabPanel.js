@@ -1,17 +1,17 @@
 import Box from "@mui/material/Box";
 
 const TabPanel = props => {
-    const {children, value, index, ...other} = props;
+    const {children, visible, index, ...other} = props;
 
     return (
         <div
             role="tabpanel"
-            hidden={value !== index}
+            hidden={!visible}
             id={`tabpanel-${index}`}
             aria-labelledby={`tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{p: 2, pt: 3}}>{children}</Box>}
+            {visible && <Box sx={{p: 2, pt: 3}}>{children}</Box>}
         </div>
     );
 };

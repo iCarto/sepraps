@@ -11,6 +11,7 @@ import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/present
 import {FieldReportProjectActivitySection} from "fieldReportProjectActivity/presentational/section";
 
 import Grid from "@mui/material/Grid";
+import {DocumentService} from "base/file/service";
 
 const FieldReportProjectActivitiesSection = ({
     activities,
@@ -46,20 +47,72 @@ const FieldReportProjectActivitiesSection = ({
         onCloseForm(section);
     };
 
-    const handleSubmit = activity => {
+    const handleSubmit = createdActivity => {
         FieldReportProjectActivityService.create(
             fieldReportProjectActivity_view_adapter({
-                ...activity,
-                field_report_project: fieldReportProjectId,
+                ...createdActivity,
+                field_report_project: parseInt(fieldReportProjectId),
             })
-        )
-            .then(() => {
-                navigate(basePath, true);
-            })
-            .catch(error => {
-                console.log(error);
-                setError(error);
+        ).then(resultActivity => {
+            const imagesUploadPromises = createdActivity.images.map(image => {
+                if (image instanceof File) {
+                    return new Promise((resolve, reject) => {
+                        const onFinish = onFinishResult => {
+                            console.log({onFinishResult});
+                            resolve(onFinishResult.response);
+                        };
+                        const onError = onFinishError => {
+                            console.log({onFinishError});
+                            reject(onFinishError);
+                        };
+                        DocumentService.upload(
+                            image,
+                            resultActivity.folder,
+                            onFinish,
+                            () => {},
+                            () => {},
+                            onError
+                        );
+                    });
+                }
+                return Promise.resolve();
             });
+            Promise.all(imagesUploadPromises)
+                .then(result => {
+                    createdActivity.images.forEach((image, index) => {
+                        const storedImageId =
+                            image instanceof File
+                                ? result.find(
+                                      storedImage =>
+                                          storedImage &&
+                                          storedImage.media_name === image.name
+                                  ).id
+                                : image.id;
+                        const imageAttribute = "image" + (index + 1);
+                        resultActivity = {
+                            ...resultActivity,
+                            [imageAttribute]: storedImageId,
+                        };
+                    });
+                    FieldReportProjectActivityService.update(
+                        fieldReportProjectActivity_view_adapter({
+                            ...resultActivity,
+                            field_report_project: parseInt(fieldReportProjectId),
+                        })
+                    )
+                        .then(() => {
+                            navigate(basePath, true);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            setError(error);
+                        });
+                })
+                .catch(error => {
+                    console.log(error);
+                    setError(error);
+                });
+        });
     };
 
     return (

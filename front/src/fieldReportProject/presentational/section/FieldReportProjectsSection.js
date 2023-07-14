@@ -1,5 +1,5 @@
-import {useState} from "react";
-import {useOutletContext, Link as RouterLink} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useOutletContext, Link as RouterLink, useParams} from "react-router-dom";
 
 import {FieldReportProjectsTabPanels} from ".";
 import Paper from "@mui/material/Paper";
@@ -11,7 +11,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 const FieldReportProjectsSection = () => {
-    const [value, setValue] = useState(0);
+    const {fieldReportProjectId} = useParams();
+    const [activeTabId, setActiveTabId] = useState(-1);
 
     let fieldReport;
     [fieldReport] = useOutletContext();
@@ -26,11 +27,21 @@ const FieldReportProjectsSection = () => {
         };
     }
 
-    const handleChangeTab = (event, newValue) => {
-        setValue(newValue);
-    };
+    useEffect(() => {
+        if (fieldReportProjectId) {
+            fieldReportProjectId === "new"
+                ? setActiveTabId(-1)
+                : setActiveTabId(parseInt(fieldReportProjectId));
+        } else {
+            fieldReport?.field_report_projects?.length
+                ? setActiveTabId(fieldReport.field_report_projects[0].id)
+                : setActiveTabId(-1);
+        }
+    }, [fieldReportProjectId]);
 
-    const indexForNewTab = fieldReport?.field_report_projects?.length;
+    const handleChangeTab = (event, newValue) => {
+        setActiveTabId(newValue);
+    };
 
     const getTabLabel = project => (
         <Grid>
@@ -47,30 +58,31 @@ const FieldReportProjectsSection = () => {
         <Paper sx={{width: "100%", pb: 1}}>
             <Box sx={{borderBottom: 1, borderColor: "divider"}}>
                 <Tabs
-                    value={value}
+                    value={activeTabId}
                     onChange={handleChangeTab}
                     variant="scrollable"
                     scrollButtons="auto"
                     aria-label="pestañas de proyectos"
                 >
                     {fieldReport?.field_report_projects?.length
-                        ? fieldReport.field_report_projects?.map((project, index) => {
+                        ? fieldReport.field_report_projects?.map(fieldReportProject => {
                               return (
                                   <Tab
-                                      key={index}
+                                      key={fieldReportProject.id}
                                       component={RouterLink}
                                       to={{
-                                          pathname: `${project.projectId}`,
+                                          pathname: `${fieldReportProject.id}`,
                                       }}
-                                      label={getTabLabel(project)}
-                                      {...a11yProps(project.projectId)}
-                                      value={index}
+                                      label={getTabLabel(fieldReportProject)}
+                                      {...a11yProps(fieldReportProject.id)}
+                                      value={fieldReportProject.id}
                                   />
                               );
                           })
                         : null}
                     <Tab
-                        key={indexForNewTab}
+                        key={0}
+                        value={-1}
                         id="tab-nuevo"
                         component={RouterLink}
                         to={{
@@ -83,8 +95,8 @@ const FieldReportProjectsSection = () => {
                 </Tabs>
             </Box>
             <FieldReportProjectsTabPanels
-                projects={fieldReport?.field_report_projects}
-                value={value}
+                fieldReportProjects={fieldReport?.field_report_projects}
+                activeTabId={activeTabId}
             />
         </Paper>
     );

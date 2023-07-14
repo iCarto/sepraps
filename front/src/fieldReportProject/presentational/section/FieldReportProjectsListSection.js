@@ -13,11 +13,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import CircleIcon from "@mui/icons-material/Circle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
-const FieldReportProjectsListSection = ({projects}) => {
+const FieldReportProjectsListSection = ({fieldReportProjects}) => {
     const {id: reportId} = useParams();
 
     const contracts = new Set();
-    projects.map(project => contracts.add(project.construction_contract_number));
+    fieldReportProjects.map(fieldReportProject =>
+        contracts.add(fieldReportProject.construction_contract_number)
+    );
 
     const listItemStyle = {
         pt: 0,
@@ -30,8 +32,8 @@ const FieldReportProjectsListSection = ({projects}) => {
     const ProjectsList = ({contract}) => {
         return (
             <List component="div" dense>
-                {projects.map((project, projectIndex) => {
-                    if (project.construction_contract_number === contract)
+                {fieldReportProjects.map((fieldReportProject, projectIndex) => {
+                    if (fieldReportProject.construction_contract_number === contract)
                         return (
                             <ListItem key={projectIndex} sx={listItemStyle}>
                                 <ListItemIcon
@@ -49,8 +51,8 @@ const FieldReportProjectsListSection = ({projects}) => {
                                 <ListItemText
                                     primary={
                                         <TextLink
-                                            text={`Proyecto ${project.code}, ${project.name}`}
-                                            to={`/field-reports/${reportId}/projects/${project.projectId}`}
+                                            text={`Proyecto ${fieldReportProject.code}, ${fieldReportProject.name}`}
+                                            to={`/field-reports/${reportId}/projects/${fieldReportProject.id}`}
                                         />
                                     }
                                 />
@@ -64,7 +66,7 @@ const FieldReportProjectsListSection = ({projects}) => {
     return (
         <>
             <SectionCard title="Contratos y proyectos objetivo del informe">
-                {projects ? (
+                {fieldReportProjects ? (
                     <List dense sx={{paddingTop: 0}}>
                         {[...contracts].map((contract, contractIndex) => {
                             return (

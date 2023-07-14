@@ -72,11 +72,10 @@ const FieldReportProjectActivitySection = ({
                             : image.id;
                     updatedActivity["image" + (index + 1)] = storedImageId;
                 });
-                console.log({updatedActivity});
                 FieldReportProjectActivityService.update(
                     fieldReportProjectActivity_view_adapter({
                         ...updatedActivity,
-                        field_report_project: fieldReportProjectId,
+                        field_report_project: parseInt(fieldReportProjectId),
                     })
                 )
                     .then(() => {
@@ -84,7 +83,7 @@ const FieldReportProjectActivitySection = ({
                     })
                     .catch(error => {
                         console.log(error);
-                        // setError(error);
+                        setError(error);
                     });
             })
             .catch(error => {

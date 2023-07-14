@@ -9,7 +9,7 @@ import {TabPanel} from "base/ui/tab";
 import {AlertError} from "base/error/components";
 import {FieldReportProjectForm} from "fieldReportProject/presentational/form";
 
-const FieldReportNewProjectTabPanel = ({index, value}) => {
+const FieldReportNewProjectTabPanel = ({index, activeTabId}) => {
     let fieldReport;
     [fieldReport] = useOutletContext();
 
@@ -26,8 +26,8 @@ const FieldReportNewProjectTabPanel = ({index, value}) => {
                 field_report: fieldReport.id,
             })
         )
-            .then(() => {
-                navigate(`${basePath}/${fieldReportProject.project}`, true);
+            .then(createdFieldReportProject => {
+                navigate(`${basePath}/${createdFieldReportProject.id}`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -36,7 +36,7 @@ const FieldReportNewProjectTabPanel = ({index, value}) => {
     };
 
     return (
-        <TabPanel key={index} value={value} index={index}>
+        <TabPanel key={index} index={index} visible={activeTabId === -1}>
             <AlertError error={error} />
             <FieldReportProjectForm onSubmit={handleSubmit} />
         </TabPanel>

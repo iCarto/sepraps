@@ -23,7 +23,7 @@ const ViewFieldReportSummarySubPage = () => {
             handleGeneratePDF={handleGeneratePDF}
         />,
         <FieldReportProjectsListSection
-            projects={fieldReport?.field_report_projects}
+            fieldReportProjects={fieldReport?.field_report_projects}
         />,
         <EntityAuditSection entity={fieldReport} />,
     ];
