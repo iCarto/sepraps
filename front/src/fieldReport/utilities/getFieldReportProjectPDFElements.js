@@ -10,24 +10,26 @@ export function getFieldReportProjectPDFElements(
     fieldReportContent
 ) {
     const drawVisitedProjectsSection = () => {
-        doc.setFont(undefined, "bold")
-            .setFontSize(dimensions.fontSizeRegular)
-            .setTextColor(CUSTOM_COLORS.text.primary)
-            .text(
-                "Relación de contratos y proyectos visitados",
+        if (reportData.field_report_projects.length) {
+            doc.setFont(undefined, "bold")
+                .setFontSize(dimensions.fontSizeRegular)
+                .setTextColor(CUSTOM_COLORS.text.primary)
+                .text(
+                    "Relación de contratos y proyectos visitados",
+                    dimensions.pageMargin,
+                    doc.lastAutoTable.finalY + 10
+                );
+
+            globalPDFElements.drawLine(doc, doc.lastAutoTable.finalY + 12);
+
+            doc.setFont(undefined, "normal").text(
+                "Los proyectos y contratos objetivo de la visita al campo fueron:",
                 dimensions.pageMargin,
-                doc.lastAutoTable.finalY + 10
+                doc.lastAutoTable.finalY + 20
             );
 
-        globalPDFElements.drawLine(doc, doc.lastAutoTable.finalY + 12);
-
-        doc.setFont(undefined, "normal").text(
-            "Los proyectos y contratos objetivo de la visita al campo fueron:",
-            dimensions.pageMargin,
-            doc.lastAutoTable.finalY + 20
-        );
-
-        drawVisitedProjectsList();
+            drawVisitedProjectsList();
+        }
     };
 
     const drawVisitedProjectsList = () => {

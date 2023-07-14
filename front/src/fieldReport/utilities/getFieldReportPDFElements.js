@@ -145,23 +145,29 @@ export function getFieldReportPDFElements(
     };
 
     const drawReportGoalsList = () => {
-        doc.setFont(undefined, "bold")
-            .setFontSize(dimensions.fontSizeRegular)
-            .setTextColor(CUSTOM_COLORS.text.primary)
-            .text("Objetivos", dimensions.pageMargin, doc.lastAutoTable.finalY + 10);
+        if (fieldReportContent.goalsList) {
+            doc.setFont(undefined, "bold")
+                .setFontSize(dimensions.fontSizeRegular)
+                .setTextColor(CUSTOM_COLORS.text.primary)
+                .text(
+                    "Objetivos",
+                    dimensions.pageMargin,
+                    doc.lastAutoTable.finalY + 10
+                );
 
-        globalPDFElements.drawLine(doc, doc.lastAutoTable.finalY + 12);
+            globalPDFElements.drawLine(doc, doc.lastAutoTable.finalY + 12);
 
-        autoTable(doc, {
-            startY: doc.lastAutoTable.finalY + 20,
-            theme: "plain",
-            body: fieldReportContent.goalsList,
-            columnStyles: {
-                0: {
-                    cellWidth: 10,
+            autoTable(doc, {
+                startY: doc.lastAutoTable.finalY + 20,
+                theme: "plain",
+                body: fieldReportContent.goalsList,
+                columnStyles: {
+                    0: {
+                        cellWidth: 10,
+                    },
                 },
-            },
-        });
+            });
+        }
     };
 
     const drawReportClosure = () => {

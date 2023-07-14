@@ -134,7 +134,7 @@ export const globalPDFElements = {
                 fontSize: this.getPDFDimensions(doc).fontSizeRegular,
                 fontStyle: "bold",
             },
-            body: [[""], [text]],
+            body: [[""], [text || ""]],
             bodyStyles: {
                 fontSize: this.getPDFDimensions(doc).fontSizeRegular,
                 fontStyle: "italic",

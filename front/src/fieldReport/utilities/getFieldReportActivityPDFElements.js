@@ -78,13 +78,30 @@ export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportCo
                     const isImage = cellData.raw.hasOwnProperty("url");
                     if (isImage) {
                         const imageUrl = cellData.raw.url;
+                        const imageOriginalWidth = cellData.raw.width;
                         const imageOriginalHeight = cellData.raw.height;
-                        const imageAdjustedHeight = minCellHeight;
-                        const ratio = imageOriginalHeight / imageAdjustedHeight;
-                        const imageAdjustedWidth = cellData.raw.width / ratio;
+                        const cellWidth = cellData.width;
+                        const cellHeight = cellData.height;
+
+                        let imageAdjustedWidth = imageOriginalWidth;
+                        let imageAdjustedHeight = imageOriginalHeight;
+
+                        if (imageOriginalWidth > cellWidth) {
+                            const ratio = imageOriginalWidth / cellWidth;
+                            imageAdjustedWidth = cellWidth;
+                            imageAdjustedHeight = imageOriginalHeight / ratio;
+                        }
+
+                        if (imageAdjustedHeight > cellHeight) {
+                            const ratio = imageAdjustedHeight / cellHeight;
+                            imageAdjustedHeight = cellHeight;
+                            imageAdjustedWidth = imageAdjustedWidth / ratio;
+                        }
+
                         const imagePositionX =
-                            cellData.x + (cellData.width - imageAdjustedWidth) / 2;
-                        const imagePositionY = cellData.y;
+                            cellData.x + (cellWidth - imageAdjustedWidth) / 2;
+                        const imagePositionY =
+                            cellData.y + (cellHeight - imageAdjustedHeight) / 2;
                         doc.addImage(
                             imageUrl,
                             "jpg",

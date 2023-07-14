@@ -63,7 +63,7 @@ export function downloadFieldReportPDF() {
                 })
         );
 
-        // Wait for all promises and then execute doc.save()
+        // Wait for all promises and then execute the rest of the code and doc.save()
         await Promise.all(activitiesImagesPromises);
 
         const contracts = fieldReportContent.getContractsList();
