@@ -1,8 +1,14 @@
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
 import {globalPDFElements} from "base/pdf/utilities";
+import {getFieldReportPDF} from ".";
 
-export function getFieldReportProjectPDFElements(doc, dimensions, fieldReportContent) {
+export function getFieldReportProjectPDFElements(
+    doc,
+    dimensions,
+    reportData,
+    fieldReportContent
+) {
     const drawVisitedProjectsSection = () => {
         doc.setFont(undefined, "bold")
             .setFontSize(dimensions.fontSizeRegular)
@@ -25,9 +31,9 @@ export function getFieldReportProjectPDFElements(doc, dimensions, fieldReportCon
     };
 
     const drawVisitedProjectsList = () => {
-        const contracts = fieldReportContent?.getContractProjectsList();
+        const contracts = fieldReportContent?.getContractsList();
 
-        contracts.forEach((item, index) => {
+        contracts.forEach((contract, index) => {
             autoTable(doc, {
                 startY:
                     index === 0
@@ -37,13 +43,13 @@ export function getFieldReportProjectPDFElements(doc, dimensions, fieldReportCon
                 head: [
                     [
                         {
-                            content: `Contrato ${item.contract}`,
+                            content: `Contrato ${contract.code}`,
                             colSpan: 2,
                             styles: {fillColor: CUSTOM_COLORS.grey["100"]},
                         },
                     ],
                 ],
-                body: item.projects,
+                body: contract.projects,
                 columnStyles: {
                     0: {
                         cellWidth: 10,
@@ -54,9 +60,23 @@ export function getFieldReportProjectPDFElements(doc, dimensions, fieldReportCon
         });
     };
 
-    const drawVisitedProjectTitle = project => {
+    const drawContractHeader = (doc, title) => {
         autoTable(doc, {
             startY: doc.lastAutoTable.finalY + 10,
+            theme: "plain",
+            head: [[title.toUpperCase()]],
+            headStyles: {
+                fillColor: CUSTOM_COLORS.primary.main,
+                textColor: CUSTOM_COLORS.white,
+                fontSize: dimensions.fontSizeRegular,
+                fontStyle: "bold",
+            },
+        });
+    };
+
+    const drawVisitedProjectHeader = project => {
+        autoTable(doc, {
+            startY: doc.lastAutoTable.finalY + 5,
             theme: "plain",
             head: [
                 [
@@ -66,7 +86,7 @@ export function getFieldReportProjectPDFElements(doc, dimensions, fieldReportCon
                 ],
             ],
             headStyles: {
-                fillColor: CUSTOM_COLORS.primary.main,
+                fillColor: CUSTOM_COLORS.primary.light,
                 textColor: CUSTOM_COLORS.white,
                 fontStyle: "bold",
             },
@@ -110,10 +130,27 @@ export function getFieldReportProjectPDFElements(doc, dimensions, fieldReportCon
         }
     };
 
+    const drawVisitedProjectSection = (project, activitiesImages) => {
+        const fieldReport = getFieldReportPDF(doc, reportData);
+        const fieldReportActivityElements = fieldReport.fieldReportActivityElements;
+
+        drawVisitedProjectHeader(project);
+        drawVisitedProjectHistory(project);
+
+        project.field_report_project_activities.forEach(projectActivity => {
+            fieldReportActivityElements.drawActivitySummary(projectActivity);
+            fieldReportActivityElements.drawActivityPicturesTable(
+                activitiesImages.find(activity => projectActivity.id === activity.id)
+                    .images
+            );
+        });
+
+        drawVisitedProjectAgreementsList(project);
+    };
+
     return {
         drawVisitedProjectsSection,
-        drawVisitedProjectTitle,
-        drawVisitedProjectHistory,
-        drawVisitedProjectAgreementsList,
+        drawContractHeader,
+        drawVisitedProjectSection,
     };
 }

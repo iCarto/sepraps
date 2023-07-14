@@ -10,7 +10,6 @@ export function downloadFieldReportPDF() {
         const fieldReport = getFieldReportPDF(doc, reportData);
         const fieldReportElements = fieldReport.fieldReportElements;
         const fieldReportProjectElements = fieldReport.fieldReportProjectElements;
-        const fieldReportActivityElements = fieldReport.fieldReportActivityElements;
 
         const firstHeaderLogo = "/logo/logo_bilingue_M_Salud_Publica.png";
         const secondHeaderLogo = "/logo/logo_bilingue_gobierno_PY.png";
@@ -67,26 +66,24 @@ export function downloadFieldReportPDF() {
         // Wait for all promises and then execute doc.save()
         await Promise.all(activitiesImagesPromises);
 
-        reportData.field_report_projects.forEach(fieldReportProject => {
-            fieldReportProjectElements.drawVisitedProjectTitle(fieldReportProject);
-            fieldReportProjectElements.drawVisitedProjectHistory(fieldReportProject);
+        const contracts = fieldReportContent.getContractsList();
 
-            fieldReportProject.field_report_project_activities.forEach(
-                fieldReportProjectActivity => {
-                    fieldReportActivityElements.drawActivitySummary(
-                        fieldReportProjectActivity
-                    );
-                    fieldReportActivityElements.drawActivityPicturesTable(
-                        activitiesImages.find(
-                            activity => fieldReportProjectActivity.id === activity.id
-                        ).images
+        contracts.forEach(contract => {
+            fieldReportProjectElements.drawContractHeader(
+                doc,
+                `Contrato ${contract.code}`
+            );
+
+            reportData.field_report_projects.forEach(fieldReportProject => {
+                if (
+                    fieldReportProject.construction_contract_number === contract.code[0]
+                ) {
+                    fieldReportProjectElements.drawVisitedProjectSection(
+                        fieldReportProject,
+                        activitiesImages
                     );
                 }
-            );
-
-            fieldReportProjectElements.drawVisitedProjectAgreementsList(
-                fieldReportProject
-            );
+            });
         });
 
         // Page count can only be calculated after all pages have been drawn. With this code we go back to page 2 and draw the Report closure there.

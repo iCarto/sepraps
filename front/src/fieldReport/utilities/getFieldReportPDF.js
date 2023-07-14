@@ -19,6 +19,7 @@ export function getFieldReportPDF(doc, reportData) {
     const fieldReportProjectElements = getFieldReportProjectPDFElements(
         doc,
         dimensions,
+        reportData,
         fieldReportContent
     );
     const fieldReportActivityElements = getFieldReportActivityPDFElements(

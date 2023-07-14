@@ -24,12 +24,10 @@ export function getFieldReportContent(reportData) {
         contractsList.push(project.construction_contract_number);
     });
 
-    const getContractProjectsList = () => {
+    const getContractsList = () => {
         const contracts = [];
         contractsList.forEach(contract => {
-            const existingContract = contracts.find(
-                item => item.contract[0] === contract
-            );
+            const existingContract = contracts.find(item => item.code[0] === contract);
 
             if (!existingContract) {
                 const contractObject = createContractObject(contract);
@@ -47,7 +45,7 @@ export function getFieldReportContent(reportData) {
 
     const createContractObject = contract => {
         return {
-            contract: [contract],
+            code: [contract],
             projects: [],
         };
     };
@@ -79,7 +77,6 @@ export function getFieldReportContent(reportData) {
 
     const getImageUrls = images => {
         let imageUrls = [];
-        // images.map(image => imageUrls.push(image.url));
         images.map(image => imageUrls.push(image));
 
         return imageUrls;
@@ -146,12 +143,11 @@ export function getFieldReportContent(reportData) {
         closingText,
         projectsTableColumns,
         projectsTableBody,
-        // projectsList,
-        getContractProjectsList,
         goalsList,
         sectionTwoIntroText,
+        getContractsList,
+        getProjectAgreementsList,
         getImageUrls,
         getImageTableContent,
-        getProjectAgreementsList,
     };
 }
