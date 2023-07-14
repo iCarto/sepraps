@@ -1,4 +1,5 @@
 import {AddNewFullWidthButton} from "base/shared/components";
+import {FormContainer} from "base/form/components";
 import {FieldReportForm} from "../form";
 
 import Typography from "@mui/material/Typography";
@@ -26,12 +27,14 @@ const FieldReportCommentsEndSection = ({
     return (
         <>
             {isFormOpen ? (
-                <FieldReportForm
-                    fieldReport={fieldReport}
-                    section={section}
-                    onSubmit={onSubmit}
-                    onCancel={handleCancelForm}
-                />
+                <FormContainer>
+                    <FieldReportForm
+                        fieldReport={fieldReport}
+                        section={section}
+                        onSubmit={onSubmit}
+                        onCancel={handleCancelForm}
+                    />
+                </FormContainer>
             ) : fieldReport?.[section] ? (
                 <Grid container columnSpacing={1}>
                     <Grid item xs>

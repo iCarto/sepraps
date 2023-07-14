@@ -3,6 +3,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {FormUtil} from "base/form/utilities";
 
 import {EntityForm} from "base/entity/components/form";
+import {FormContainer} from "base/form/components";
 import {FieldReportProjectActivityFormFields} from ".";
 
 import Grid from "@mui/material/Grid";
@@ -49,16 +50,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
 
     return (
         <FormProvider {...formMethods}>
-            <Grid
-                container
-                flexDirection="column"
-                mt={3}
-                p={1}
-                border={1}
-                borderColor={"grey.300"}
-                borderRadius={1}
-                sx={{backgroundColor: "grey.50"}}
-            >
+            <FormContainer>
                 <Grid item xl={6}>
                     <Typography
                         variant="h6"
@@ -81,7 +73,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
                         <FieldReportProjectActivityFormFields />
                     </EntityForm>
                 </Grid>
-            </Grid>
+            </FormContainer>
         </FormProvider>
     );
 };

@@ -20,7 +20,7 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
     };
 
     return (
-        <div key={index}>
+        <div key={index} style={{marginBottom: "24px"}}>
             <Grid
                 container
                 columnSpacing={1}

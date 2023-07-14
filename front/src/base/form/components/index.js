@@ -24,3 +24,4 @@ export {default as FormMapCoordinates} from "./FormMapCoordinates";
 export {default as FormComboBox} from "./FormComboBox";
 export {default as FormTextAreaList} from "./FormTextAreaList";
 export {default as FormInputTextList} from "./FormInputTextList";
+export {default as FormContainer} from "./FormContainer";

@@ -1,4 +1,5 @@
 import {FieldReportForm} from "../form";
+import {FormContainer} from "base/form/components";
 import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
@@ -25,12 +26,14 @@ const FieldReportGoalsSection = ({
     return (
         <>
             {isFormOpen ? (
-                <FieldReportForm
-                    fieldReport={fieldReport}
-                    section={section}
-                    onSubmit={onSubmit}
-                    onCancel={handleCancelForm}
-                />
+                <FormContainer>
+                    <FieldReportForm
+                        fieldReport={fieldReport}
+                        section={section}
+                        onSubmit={onSubmit}
+                        onCancel={handleCancelForm}
+                    />
+                </FormContainer>
             ) : fieldReport?.goals?.length ? (
                 <Grid container columnSpacing={1}>
                     <Grid item xs>

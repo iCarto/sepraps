@@ -1,5 +1,6 @@
-import {FieldReportForm} from "../form";
 import {AddNewFullWidthButton, BulletList} from "base/shared/components";
+import {FieldReportForm} from "../form";
+import {FormContainer} from "base/form/components";
 
 import Grid from "@mui/material/Grid";
 import EditIcon from "@mui/icons-material/Edit";
@@ -25,12 +26,14 @@ const FieldReportReportedPersonsSection = ({
     return (
         <>
             {isFormOpen ? (
-                <FieldReportForm
-                    fieldReport={fieldReport}
-                    section={section}
-                    onSubmit={onSubmit}
-                    onCancel={handleCancelForm}
-                />
+                <FormContainer>
+                    <FieldReportForm
+                        fieldReport={fieldReport}
+                        section={section}
+                        onSubmit={onSubmit}
+                        onCancel={handleCancelForm}
+                    />
+                </FormContainer>
             ) : fieldReport?.reported_persons?.length ? (
                 <Grid container>
                     <Grid item xs>

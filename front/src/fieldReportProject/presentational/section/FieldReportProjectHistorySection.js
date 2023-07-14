@@ -1,4 +1,5 @@
 import {FieldReportProjectForm} from "../form";
+import {FormContainer} from "base/form/components";
 import {AddNewFullWidthButton} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -30,12 +31,14 @@ const FieldReportProjectHistorySection = ({
     return (
         <>
             {isFormOpen ? (
-                <FieldReportProjectForm
-                    project={project}
-                    section={section}
-                    onSubmit={handleSubmit}
-                    onCancel={handleCancelForm}
-                />
+                <FormContainer>
+                    <FieldReportProjectForm
+                        project={project}
+                        section={section}
+                        onSubmit={handleSubmit}
+                        onCancel={handleCancelForm}
+                    />
+                </FormContainer>
             ) : project?.[section] ? (
                 <Grid container columnSpacing={1}>
                     <Grid item xs>

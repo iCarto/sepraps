@@ -1,5 +1,6 @@
 import {DateUtil} from "base/format/utilities";
 import {SectionField} from "base/ui/section/components";
+import {FormContainer} from "base/form/components";
 import {FieldReportForm} from "../form";
 
 import Grid from "@mui/material/Grid";
@@ -26,12 +27,14 @@ const FieldReportGeneralDataSection = ({
     return (
         <>
             {isFormOpen ? (
-                <FieldReportForm
-                    fieldReport={fieldReport}
-                    section={section}
-                    onSubmit={onSubmit}
-                    onCancel={handleCancelForm}
-                />
+                <FormContainer>
+                    <FieldReportForm
+                        fieldReport={fieldReport}
+                        section={section}
+                        onSubmit={onSubmit}
+                        onCancel={handleCancelForm}
+                    />
+                </FormContainer>
             ) : (
                 <Grid container>
                     <Grid item xs>
