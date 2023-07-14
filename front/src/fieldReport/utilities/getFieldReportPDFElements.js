@@ -1,12 +1,13 @@
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
 import {globalPDFElements} from "base/pdf/utilities";
-import {getFieldReportContent} from ".";
 
-export function getFieldReportPDFElements(doc, reportData) {
-    const dimensions = globalPDFElements.getPDFDimensions(doc);
-    const fieldReportContent = getFieldReportContent(reportData);
-
+export function getFieldReportPDFElements(
+    doc,
+    reportData,
+    dimensions,
+    fieldReportContent
+) {
     const drawReportHeader = () => {
         globalPDFElements.drawHeader(doc, `Informe de viaje - ${reportData.code}`);
     };
@@ -143,78 +144,7 @@ export function getFieldReportPDFElements(doc, reportData) {
         });
     };
 
-    const drawSectionIntro = (title, text) => {
-        autoTable(doc, {
-            startY: dimensions.contentPositionTop,
-            theme: "plain",
-            head: [[title.toUpperCase()]],
-            headStyles: {
-                fillColor: CUSTOM_COLORS.primary.dark,
-                textColor: CUSTOM_COLORS.white,
-                fontSize: dimensions.fontSizeRegular,
-                fontStyle: "bold",
-            },
-            body: [[""], [text]],
-            bodyStyles: {
-                fontSize: dimensions.fontSizeRegular,
-                fontStyle: "italic",
-                textColor: CUSTOM_COLORS.text.primary,
-            },
-        });
-    };
-
-    const drawVisitedProjectsSection = () => {
-        doc.setFont(undefined, "bold")
-            .setFontSize(dimensions.fontSizeRegular)
-            .setTextColor(CUSTOM_COLORS.text.primary)
-            .text(
-                "Relación de contratos y proyectos visitados",
-                dimensions.pageMargin,
-                doc.lastAutoTable.finalY + 10
-            );
-
-        globalPDFElements.drawLine(doc, doc.lastAutoTable.finalY + 12);
-
-        doc.setFont(undefined, "normal").text(
-            "Los proyectos y contratos objetivo de la visita al campo fueron:",
-            dimensions.pageMargin,
-            doc.lastAutoTable.finalY + 20
-        );
-
-        drawVisitedProjectsList();
-    };
-
-    const drawVisitedProjectsList = () => {
-        const contracts = fieldReportContent?.getContractProjectsList();
-
-        contracts.forEach((item, index) => {
-            autoTable(doc, {
-                startY:
-                    index === 0
-                        ? doc.lastAutoTable.finalY + 25
-                        : doc.lastAutoTable.finalY + 5,
-                theme: "plain",
-                head: [
-                    [
-                        {
-                            content: `Contrato ${item.contract}`,
-                            colSpan: 2,
-                            styles: {fillColor: CUSTOM_COLORS.grey["100"]},
-                        },
-                    ],
-                ],
-                body: item.projects,
-                columnStyles: {
-                    0: {
-                        cellWidth: 10,
-                        halign: "center",
-                    },
-                },
-            });
-        });
-    };
-
-    const drawVisitGoalsList = () => {
+    const drawReportGoalsList = () => {
         doc.setFont(undefined, "bold")
             .setFontSize(dimensions.fontSizeRegular)
             .setTextColor(CUSTOM_COLORS.text.primary)
@@ -246,159 +176,6 @@ export function getFieldReportPDFElements(doc, reportData) {
                     maxWidth: dimensions.pageWidth - dimensions.pageMargin,
                 }
             );
-        }
-    };
-
-    const drawVisitedProjectTitle = project => {
-        autoTable(doc, {
-            startY: doc.lastAutoTable.finalY + 10,
-            theme: "plain",
-            head: [
-                [
-                    `Proyecto ${project.code.toUpperCase()}, ${project.name} - ${
-                        project.location
-                    }`,
-                ],
-            ],
-            headStyles: {
-                fillColor: CUSTOM_COLORS.primary.main,
-                textColor: CUSTOM_COLORS.white,
-                fontStyle: "bold",
-            },
-        });
-    };
-
-    const drawVisitedProjectHistory = project => {
-        if (project.history) {
-            autoTable(doc, {
-                startY: doc.lastAutoTable.finalY + 5,
-                theme: "plain",
-                head: [["Antecedentes"]],
-                headStyles: {
-                    fontStyle: "bold",
-                },
-                body: [[project.history]],
-            });
-        }
-    };
-
-    const drawVisitedProjectAgreementsList = project => {
-        if (project.agreements) {
-            doc.setFont(undefined, "bold")
-                .setFontSize(dimensions.fontSizeRegular)
-                .setTextColor(CUSTOM_COLORS.text.primary)
-                .text(
-                    "Acuerdos alcanzados",
-                    dimensions.pageMargin,
-                    doc.lastAutoTable.finalY + 10
-                );
-            autoTable(doc, {
-                startY: doc.lastAutoTable.finalY + 15,
-                theme: "plain",
-                body: fieldReportContent.getProjectAgreementsList(project.agreements),
-                columnStyles: {
-                    0: {
-                        cellWidth: 10,
-                    },
-                },
-            });
-        }
-    };
-
-    const drawActivitySummary = activity => {
-        const doesTableFitInPrevPage =
-            doc.lastAutoTable.finalY < dimensions.pageHeight - 60;
-        const tablePositionTop = doesTableFitInPrevPage
-            ? doc.lastAutoTable.finalY + 5
-            : doc.lastAutoTable.finalY + dimensions.pagePaddingTop;
-
-        const tableMarginTop = doesTableFitInPrevPage
-            ? 0
-            : dimensions.pagePaddingTop - 10;
-
-        autoTable(doc, {
-            startY: tablePositionTop,
-            margin: {top: tableMarginTop},
-            theme: "plain",
-            head: [[`${activity.date} | ${activity.title}`]],
-            headStyles: {
-                fontStyle: "bold",
-                fillColor: CUSTOM_COLORS.grey["200"],
-            },
-            body: activity.notes ? [[activity.notes]] : null,
-            bodyStyles: {
-                fontStyle: "normal",
-            },
-            // Attempt to draw only bottom border for table head --fails (draws all borders around head)
-            // didParseCell: function(data) {
-            //     if (data.row.section === "head") {
-            //         data.cell.styles.lineColor = CUSTOM_COLORS.text.primary;
-            //         data.cell.styles.lineWidth = {
-            //             top: 0,
-            //             right: 0,
-            //             bottom: 0.1,
-            //             left: 0,
-            //         };
-            //     }
-            // },
-        });
-    };
-
-    const drawActivityPicturesTable = images => {
-        const tableBody = fieldReportContent.getImageTableContent(images);
-
-        const minCellHeight = 60;
-        const textRowHeight = 11;
-        const rowPairHeight = minCellHeight + textRowHeight;
-        const tableHeight = (tableBody.length / 2) * rowPairHeight;
-
-        const doesTableFitInPrevPage =
-            dimensions.pageHeight > doc.lastAutoTable.finalY + tableHeight;
-
-        const tablePositionTop = doesTableFitInPrevPage
-            ? doc.lastAutoTable.finalY + 5
-            : doc.lastAutoTable.finalY + dimensions.pagePaddingTop;
-
-        const tableMarginTop = doesTableFitInPrevPage
-            ? 0
-            : dimensions.pagePaddingTop - 10;
-
-        if (images.length) {
-            autoTable(doc, {
-                startY: tablePositionTop,
-                margin: {top: tableMarginTop},
-                theme: "plain",
-                body: tableBody,
-                bodyStyles: {cellPadding: 3, halign: "center"},
-                alternateRowStyles: {
-                    minCellHeight: minCellHeight,
-                    textColor: CUSTOM_COLORS.white,
-                    fillColor: CUSTOM_COLORS.white,
-                },
-                pageBreak: "avoid",
-                didDrawCell: data => {
-                    const cellData = data.cell;
-                    const isImage = cellData.raw.hasOwnProperty("url");
-                    if (isImage) {
-                        const imageUrl = cellData.raw.url;
-                        const imageOriginalHeight = cellData.raw.height;
-                        const imageAdjustedHeight = minCellHeight;
-                        const ratio = imageOriginalHeight / imageAdjustedHeight;
-                        const imageAdjustedWidth = cellData.raw.width / ratio;
-                        const imagePositionX =
-                            cellData.x + (cellData.width - imageAdjustedWidth) / 2;
-                        const imagePositionY = cellData.y;
-                        doc.addImage(
-                            imageUrl,
-                            "jpg",
-                            imagePositionX,
-                            imagePositionY,
-                            imageAdjustedWidth,
-                            imageAdjustedHeight
-                        );
-                    }
-                },
-            });
         }
     };
 
@@ -446,14 +223,7 @@ export function getFieldReportPDFElements(doc, reportData) {
         drawReportMainLogo,
         drawReportTitle,
         drawReportDetailsTable,
-        drawSectionIntro,
-        drawVisitedProjectsSection,
-        drawVisitGoalsList,
+        drawReportGoalsList,
         drawReportClosure,
-        drawVisitedProjectTitle,
-        drawVisitedProjectHistory,
-        drawVisitedProjectAgreementsList,
-        drawActivitySummary,
-        drawActivityPicturesTable,
     };
 }

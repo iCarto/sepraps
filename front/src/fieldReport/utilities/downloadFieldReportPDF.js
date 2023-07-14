@@ -1,5 +1,5 @@
 import {jsPDF} from "jspdf";
-import {getFieldReportContent, getFieldReportPDFElements} from ".";
+import {getFieldReportContent, getFieldReportPDF} from ".";
 import {getImagesData} from "base/image/utilities/getImagesData";
 import {globalPDFElements} from "base/pdf/utilities";
 
@@ -7,14 +7,22 @@ export function downloadFieldReportPDF() {
     const download = async reportData => {
         const doc = new jsPDF({orientation: "portrait"});
         const fieldReportContent = getFieldReportContent(reportData);
-        const fieldReportElements = getFieldReportPDFElements(doc, reportData);
+        const fieldReport = getFieldReportPDF(doc, reportData);
+        const fieldReportElements = fieldReport.fieldReportElements;
+        const fieldReportProjectElements = fieldReport.fieldReportProjectElements;
+        const fieldReportActivityElements = fieldReport.fieldReportActivityElements;
 
-        const firstLogo = "/logo/logo_bilingue_M_Salud_Publica.png";
-        const secondLogo = "/logo/logo_bilingue_gobierno_PY.png";
-        const thirdLogo = "/logo/logo_eslogan_guarani.png";
+        const firstHeaderLogo = "/logo/logo_bilingue_M_Salud_Publica.png";
+        const secondHeaderLogo = "/logo/logo_bilingue_gobierno_PY.png";
+        const thirdHeaderLogo = "/logo/logo_eslogan_guarani.png";
         const mainLogo = "/logo/logo_senasa_tagline.png";
 
-        const logos = await getImagesData([firstLogo, secondLogo, thirdLogo, mainLogo]);
+        const logos = await getImagesData([
+            firstHeaderLogo,
+            secondHeaderLogo,
+            thirdHeaderLogo,
+            mainLogo,
+        ]);
 
         // First page
         fieldReportElements.drawReportFirstPageHeader(logos.slice(0, -1));
@@ -25,19 +33,21 @@ export function downloadFieldReportPDF() {
         doc.addPage();
 
         // Second page
-        fieldReportElements.drawSectionIntro(
+        globalPDFElements.drawSectionIntro(
+            doc,
             "1. Introducción",
             fieldReportContent.introText
         );
 
-        fieldReportElements.drawVisitedProjectsSection();
-        fieldReportElements.drawVisitGoalsList();
+        fieldReportProjectElements.drawVisitedProjectsSection();
+        fieldReportElements.drawReportGoalsList();
         fieldReportElements.drawReportClosure();
 
         doc.addPage();
 
         // Third and subsequent pages for visited projects
-        fieldReportElements.drawSectionIntro(
+        globalPDFElements.drawSectionIntro(
+            doc,
             "2. Trabajo realizado",
             fieldReportContent.sectionTwoIntroText
         );
@@ -58,13 +68,15 @@ export function downloadFieldReportPDF() {
         await Promise.all(activitiesImagesPromises);
 
         reportData.field_report_projects.forEach(fieldReportProject => {
-            fieldReportElements.drawVisitedProjectTitle(fieldReportProject);
-            fieldReportElements.drawVisitedProjectHistory(fieldReportProject);
+            fieldReportProjectElements.drawVisitedProjectTitle(fieldReportProject);
+            fieldReportProjectElements.drawVisitedProjectHistory(fieldReportProject);
 
             fieldReportProject.field_report_project_activities.forEach(
                 fieldReportProjectActivity => {
-                    fieldReportElements.drawActivitySummary(fieldReportProjectActivity);
-                    fieldReportElements.drawActivityPicturesTable(
+                    fieldReportActivityElements.drawActivitySummary(
+                        fieldReportProjectActivity
+                    );
+                    fieldReportActivityElements.drawActivityPicturesTable(
                         activitiesImages.find(
                             activity => fieldReportProjectActivity.id === activity.id
                         ).images
@@ -72,7 +84,9 @@ export function downloadFieldReportPDF() {
                 }
             );
 
-            fieldReportElements.drawVisitedProjectAgreementsList(fieldReportProject);
+            fieldReportProjectElements.drawVisitedProjectAgreementsList(
+                fieldReportProject
+            );
         });
 
         // Page count can only be calculated after all pages have been drawn. With this code we go back to page 2 and draw the Report closure there.

@@ -123,6 +123,26 @@ export const globalPDFElements = {
         }
     },
 
+    drawSectionIntro(doc, title, text) {
+        autoTable(doc, {
+            startY: this.getPDFDimensions(doc).contentPositionTop,
+            theme: "plain",
+            head: [[title.toUpperCase()]],
+            headStyles: {
+                fillColor: CUSTOM_COLORS.primary.dark,
+                textColor: CUSTOM_COLORS.white,
+                fontSize: this.getPDFDimensions(doc).fontSizeRegular,
+                fontStyle: "bold",
+            },
+            body: [[""], [text]],
+            bodyStyles: {
+                fontSize: this.getPDFDimensions(doc).fontSizeRegular,
+                fontStyle: "italic",
+                textColor: CUSTOM_COLORS.text.primary,
+            },
+        });
+    },
+
     drawSummaryTable(doc, entityData, sectionData, summaryPositionTop) {
         const getTableStartY = () => {
             if (doc.lastAutoTable) return doc.lastAutoTable.finalY + 5;
