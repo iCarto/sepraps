@@ -16,10 +16,15 @@ const fieldReport_api_adapter = fieldReport => {
 };
 
 const fieldReport_view_adapter = fieldReport => {
+    fieldReport["participant_persons"] = fieldReport["participant_persons"].filter(
+        item => item
+    );
+    fieldReport["reported_persons"] = fieldReport["reported_persons"].filter(
+        item => item
+    );
+    fieldReport["goals"] = fieldReport["goals"].filter(item => item);
+
     fieldReport["date"] = DateUtil.formatDateForAPI(new Date());
-    if (!fieldReport["goals"].length) {
-        fieldReport["goals"] = null;
-    }
 
     delete fieldReport["folder"];
     delete fieldReport["created_by"];
