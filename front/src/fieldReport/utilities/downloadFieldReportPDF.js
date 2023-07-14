@@ -30,7 +30,7 @@ export function downloadFieldReportPDF() {
             fieldReportContent.introText
         );
 
-        fieldReportElements.drawVisitedProjectsList();
+        fieldReportElements.drawVisitedProjectsSection();
         fieldReportElements.drawVisitGoalsList();
         fieldReportElements.drawReportClosure();
 

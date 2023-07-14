@@ -15,17 +15,47 @@ export function getFieldReportContent(reportData) {
 
     const introText = reportData.report_comments_start;
     const closingText = reportData.report_comments_end;
+    const visitedProjects = reportData.field_report_projects;
 
     const projectsTableColumns = ["N.º", "Localidad", "Distrito", "Departamento"];
 
-    const projectsList = [];
-    reportData.field_report_projects.map(project => {
-        // Unicode for bullet point
-        projectsList.push([
-            "\u2022 ",
-            `${project.code}, ${project.name} (contrato ${project.contract})`,
-        ]);
+    const contractsList = [];
+    visitedProjects.forEach(project => {
+        contractsList.push(project.construction_contract_number);
     });
+
+    const getContractProjectsList = () => {
+        const contracts = [];
+        contractsList.forEach(contract => {
+            const existingContract = contracts.find(
+                item => item.contract[0] === contract
+            );
+
+            if (!existingContract) {
+                const contractObject = createContractObject(contract);
+
+                visitedProjects.forEach(project => {
+                    if (project.construction_contract_number === contract) {
+                        contractObject.projects.push(createProjectEntry(project));
+                    }
+                });
+                contracts.push(contractObject);
+            }
+        });
+        return contracts;
+    };
+
+    const createContractObject = contract => {
+        return {
+            contract: [contract],
+            projects: [],
+        };
+    };
+
+    const createProjectEntry = project => {
+        // Unicode for bullet point
+        return ["\u2022 ", `${project.code}, ${project.name}`];
+    };
 
     const goalsList = [];
     if (reportData.goals) {
@@ -116,7 +146,8 @@ export function getFieldReportContent(reportData) {
         closingText,
         projectsTableColumns,
         projectsTableBody,
-        projectsList,
+        // projectsList,
+        getContractProjectsList,
         goalsList,
         sectionTwoIntroText,
         getImageUrls,

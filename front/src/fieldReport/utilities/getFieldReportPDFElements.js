@@ -1,7 +1,7 @@
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
-import {getFieldReportContent} from ".";
 import {globalPDFElements} from "base/pdf/utilities";
+import {getFieldReportContent} from ".";
 
 export function getFieldReportPDFElements(doc, reportData) {
     const dimensions = globalPDFElements.getPDFDimensions(doc);
@@ -163,7 +163,7 @@ export function getFieldReportPDFElements(doc, reportData) {
         });
     };
 
-    const drawVisitedProjectsList = () => {
+    const drawVisitedProjectsSection = () => {
         doc.setFont(undefined, "bold")
             .setFontSize(dimensions.fontSizeRegular)
             .setTextColor(CUSTOM_COLORS.text.primary)
@@ -181,15 +181,36 @@ export function getFieldReportPDFElements(doc, reportData) {
             doc.lastAutoTable.finalY + 20
         );
 
-        autoTable(doc, {
-            startY: doc.lastAutoTable.finalY + 25,
-            theme: "plain",
-            body: fieldReportContent.projectsList,
-            columnStyles: {
-                0: {
-                    cellWidth: 10,
+        drawVisitedProjectsList();
+    };
+
+    const drawVisitedProjectsList = () => {
+        const contracts = fieldReportContent?.getContractProjectsList();
+
+        contracts.forEach((item, index) => {
+            autoTable(doc, {
+                startY:
+                    index === 0
+                        ? doc.lastAutoTable.finalY + 25
+                        : doc.lastAutoTable.finalY + 5,
+                theme: "plain",
+                head: [
+                    [
+                        {
+                            content: `Contrato ${item.contract}`,
+                            colSpan: 2,
+                            styles: {fillColor: CUSTOM_COLORS.grey["100"]},
+                        },
+                    ],
+                ],
+                body: item.projects,
+                columnStyles: {
+                    0: {
+                        cellWidth: 10,
+                        halign: "center",
+                    },
                 },
-            },
+            });
         });
     };
 
@@ -426,7 +447,7 @@ export function getFieldReportPDFElements(doc, reportData) {
         drawReportTitle,
         drawReportDetailsTable,
         drawSectionIntro,
-        drawVisitedProjectsList,
+        drawVisitedProjectsSection,
         drawVisitGoalsList,
         drawReportClosure,
         drawVisitedProjectTitle,
