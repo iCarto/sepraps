@@ -11,6 +11,7 @@ import {
     FieldReportGoalsSection,
     FieldReportCommentsEndSection,
 } from "fieldReport/presentational/section";
+import {AlertError} from "base/error/components";
 import Typography from "@mui/material/Typography";
 
 const ViewFieldReportIntroSubPage = () => {
@@ -53,6 +54,7 @@ const ViewFieldReportIntroSubPage = () => {
             >
                 Página de introducción al informe
             </Typography>
+            <AlertError error={error} />
             <AccordionUndercoverLayout
                 accordionTitle="Texto introductorio"
                 defaultExpanded={!!fieldReport?.report_comments_start}
