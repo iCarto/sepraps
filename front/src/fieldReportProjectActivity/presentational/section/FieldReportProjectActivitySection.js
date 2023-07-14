@@ -2,15 +2,15 @@ import {useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 
 import {FieldReportProjectActivityService} from "fieldReportProjectActivity/service";
+import {DocumentService} from "base/file/service";
 import {fieldReportProjectActivity_view_adapter} from "fieldReportProjectActivity/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
+import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
 
 import {AlertError} from "base/error/components";
 import {FieldReportProjectActivityForm} from "fieldReportProjectActivity/presentational/form";
 import {FieldReportProjectActivityCard} from "fieldReportProjectActivity/presentational/section";
-
 import Grid from "@mui/material/Grid";
-import {DocumentService} from "base/file/service";
 
 const FieldReportProjectActivitySection = ({
     activity,
@@ -26,7 +26,12 @@ const FieldReportProjectActivitySection = ({
     const basePath = useLocation();
     const navigate = useNavigateWithReload();
 
-    const handleClickEdit = activity => {
+    const {
+        dialog: deleteDialog,
+        handleClickDelete: onClickDelete,
+    } = useMenuGenericDeleteAction(FieldReportProjectActivityService);
+
+    const handleClickEdit = () => {
         onOpenForm(activity.id);
         setActivityToEditId(activity.id);
     };
@@ -92,13 +97,13 @@ const FieldReportProjectActivitySection = ({
             });
     };
 
-    const handleClickDelete = activity => {
-        //TO-DO: Implement
-        console.log(activity);
+    const handleClickDelete = () => {
+        onClickDelete(activity);
     };
 
     return (
         <>
+            {deleteDialog}
             {isFormOpen && activityToEditId === activity.id ? (
                 <Grid item mb={4} key={activityIndex}>
                     <AlertError error={error} />

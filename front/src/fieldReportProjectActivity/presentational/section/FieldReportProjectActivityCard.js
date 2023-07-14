@@ -11,13 +11,12 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => {
-    const handleClickEdit = activity => {
-        onEdit(activity);
+    const handleClickEdit = () => {
+        onEdit();
     };
 
-    const handleClickDelete = activity => {
-        console.log("delete");
-        onDelete(activity);
+    const handleClickDelete = () => {
+        onDelete();
     };
 
     return (
@@ -58,10 +57,10 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
                     alignItems="flex-end"
                     color="text.secondary"
                 >
-                    <IconButton onClick={() => handleClickEdit(activity)}>
+                    <IconButton onClick={handleClickEdit}>
                         <EditIcon fontSize="small" />
                     </IconButton>
-                    <IconButton onClick={() => handleClickDelete(activity)}>
+                    <IconButton onClick={handleClickDelete}>
                         <DeleteIcon fontSize="small" />
                     </IconButton>
                 </Grid>

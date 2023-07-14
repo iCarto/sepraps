@@ -7,14 +7,16 @@ import {AlertError} from "base/error/components";
 import {DeleteItemDialog} from "base/delete/components";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import {useLocation} from "react-router-dom";
 
-// TO-DO: Implement more generic delete action
+// TO-DO: This is now more generic than menu action --Change name
 export function useMenuGenericDeleteAction(service) {
     const navigate = useNavigateWithReload();
 
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [itemToDelete, setItemToDelete] = useState(null);
     const [error, setError] = useState("");
+    const location = useLocation();
 
     const handleClickDelete = element => {
         setItemToDelete(element);
@@ -25,7 +27,7 @@ export function useMenuGenericDeleteAction(service) {
         service
             .delete(itemToDelete.id)
             .then(() => {
-                navigate("", true);
+                navigate(location.pathname, true);
             })
             .catch(error => {
                 console.log(error);
@@ -53,5 +55,5 @@ export function useMenuGenericDeleteAction(service) {
         </>
     );
 
-    return {action, dialog};
+    return {action, dialog, handleClickDelete};
 }

@@ -21,9 +21,10 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
     const [activeFormSection, setActiveFormSection] = useState("");
     const [error, setError] = useState("");
 
-    const {dialog: deleteDialog} = useMenuGenericDeleteAction(
-        FieldReportProjectService
-    );
+    const {
+        dialog: deleteDialog,
+        handleClickDelete: onClickDelete,
+    } = useMenuGenericDeleteAction(FieldReportProjectService);
 
     const basePath = useLocation();
     const navigate = useNavigateWithReload();
@@ -37,7 +38,6 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
     };
 
     const handleSubmit = updatedProject => {
-        console.log("handleSubmit", updatedProject);
         FieldReportProjectService.update(
             fieldReportProject_view_adapter({...updatedProject})
         )
@@ -50,8 +50,8 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
             });
     };
 
-    const handleDelete = () => {
-        console.log("delete");
+    const handleClickDelete = () => {
+        onClickDelete(fieldReportProject);
     };
 
     return (
@@ -115,7 +115,7 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
             </AccordionUndercoverLayout>
 
             <Stack flexDirection={"row"} justifyContent="flex-end" mt={3}>
-                <Button variant="contained" color="error" onClick={handleDelete}>
+                <Button variant="contained" color="error" onClick={handleClickDelete}>
                     Eliminar proyecto
                 </Button>
             </Stack>
