@@ -21,7 +21,7 @@ const ListFieldReportsPage = () => {
                 tableColumns={tableColumns}
                 // filterForm={<FieldReportFilterForm />}
                 basePath="field-reports"
-                elementActions={[deleteAction]}
+                // elementActions={[deleteAction]}
             />
         </>
     );
