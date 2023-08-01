@@ -14,7 +14,7 @@ const ViewFieldReportSummarySubPage = () => {
     const {download: handleDownloadFieldReportPdf} = downloadFieldReportPDF();
 
     const handleGeneratePDF = () => {
-        handleDownloadFieldReportPdf(fieldReport);
+        return handleDownloadFieldReportPdf(fieldReport);
     };
 
     const sections = [

@@ -6,7 +6,7 @@ const FormTextArea = ({
     placeholder = "",
     label,
     isActive = true,
-    maxLength = 600,
+    maxLength = 4000,
     rules = {},
     rows = 3,
 }) => {

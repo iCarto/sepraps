@@ -25,6 +25,8 @@ class FieldReportSerializer(BaseModelWithFolderSerializer):
             "field_report_projects",
         )
 
+        extra_kwargs = {"goals": {"allow_null": True}}
+
     field_report_projects = FieldReportProjectSerializer(read_only=True, many=True)
 
 

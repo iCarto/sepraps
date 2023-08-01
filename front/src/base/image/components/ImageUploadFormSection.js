@@ -135,7 +135,7 @@ const ImageUploadFormSection = ({name, formFileInputName}) => {
                                   )}
 
                                   <ImageListItemBar
-                                      title={`Figura ${index + 1}`}
+                                      title={`Imagen ${index + 1}`}
                                       position="top"
                                       actionIcon={
                                           <IconButton

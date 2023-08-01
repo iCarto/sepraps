@@ -16,12 +16,12 @@ class FieldReportProject(BaseDocumentModel, BaseEntityModelMixin):
         verbose_name = "Proyecto en informe de viaje"
         verbose_name_plural = "Proyectos en informe de viaje"
 
-    history = models.TextField("Antecedentes", max_length=500, null=True)
-    agreements = ArrayField(models.TextField("Objetivo", max_length=300), null=True)
+    history = models.TextField("Antecedentes", null=True)
+    agreements = ArrayField(models.TextField("Objetivo"), null=True)
 
     field_report = models.ForeignKey(
         FieldReport,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         verbose_name=FieldReport._meta.verbose_name,
         null=True,
         related_name="field_report_projects",

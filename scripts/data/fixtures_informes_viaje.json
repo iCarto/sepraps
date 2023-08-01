@@ -30,7 +30,7 @@
         "model": "app.fieldreport",
         "pk": 2,
         "fields": {
-            "name": "Visita de Fiscalización de Obras - Dpto. Guairá, Dpto Caaguazú, Dpto. Paraguarí",
+            "name": "Visita de Fiscalización de Obras - Prueba",
             "code": "141/2023",
             "date": "2023-05-16",
             "visit_date_start": "2023-05-09",
@@ -60,7 +60,7 @@
         "pk": 3,
         "fields": {
             "name": "Visita de Fiscalización de Obras - Dpto. Guairá, Dpto Caaguazú, Dpto. Paraguarí",
-            "code": "x/2023",
+            "code": "87/2023",
             "date": "2023-04-24",
             "visit_date_start": "2023-04-12",
             "visit_date_end": "2023-04-13",

@@ -12,7 +12,7 @@ class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
         verbose_name = "Informe de viaje"
         verbose_name_plural = "Informes de viaje"
 
-    name = models.CharField("Nombre", max_length=100)
+    name = models.CharField("Nombre", max_length=200)
     code = models.CharField("Número de memorandum", max_length=50)
     date = models.DateField("Fecha del informe")
     visit_date_start = models.DateField("Fecha de inicio de la intervención", null=True)
@@ -20,21 +20,17 @@ class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
         "Fecha de culminación de la intervención", null=True
     )
     # TO-DO: Reporting person can be more than one (as seen in sample reports); same for reported_person (not yet added here)
-    reporting_person = models.CharField("Autor/a del informe", max_length=100)
+    reporting_person = models.CharField("Autor/a del informe", max_length=200)
     reported_persons = ArrayField(
-        models.CharField("Autor/a del/de la responsable de aprobación", max_length=100)
+        models.CharField("Autor/a del/de la responsable de aprobación", max_length=200)
     )
     participant_persons = ArrayField(
-        models.CharField("Participantes en la intervención", max_length=100)
+        models.CharField("Participantes en la intervención", max_length=200)
     )
 
-    report_comments_start = models.TextField(
-        "Introducción al informe", max_length=500, null=True
-    )
-    report_comments_end = models.TextField(
-        "Cierre del informe", max_length=500, null=True
-    )
-    goals = ArrayField(models.TextField("Objetivo", max_length=300), null=True)
+    report_comments_start = models.TextField("Introducción al informe", null=True)
+    report_comments_end = models.TextField("Cierre del informe", null=True)
+    goals = ArrayField(models.TextField("Objetivo"), null=True)
 
     folder = models.ForeignKey(
         MediaNode,

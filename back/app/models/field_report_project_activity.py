@@ -12,12 +12,12 @@ class FieldReportProjectActivity(BaseDocumentModel, BaseEntityModelMixin):
         verbose_name = "Actividad de proyecto en informe de viaje"
         verbose_name_plural = "Actividades de proyecto en informe de viaje"
 
-    title = models.TextField("Título", max_length=500)
+    title = models.TextField("Título")
     date = models.DateField("Fecha del informe")
-    notes = models.TextField("Notas", max_length=500, null=True)
+    notes = models.TextField("Notas", null=True)
     field_report_project = models.ForeignKey(
         FieldReportProject,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         verbose_name=FieldReportProject._meta.verbose_name,
         null=True,
         related_name="field_report_project_activities",

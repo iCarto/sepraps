@@ -22,7 +22,10 @@ const fieldReport_view_adapter = fieldReport => {
     fieldReport["reported_persons"] = fieldReport["reported_persons"].filter(
         item => item
     );
-    fieldReport["goals"] = fieldReport["goals"].filter(item => item);
+    fieldReport["goals"] =
+        fieldReport["goals"] && fieldReport["goals"].length
+            ? fieldReport["goals"].filter(item => item)
+            : null;
 
     fieldReport["date"] = DateUtil.formatDateForAPI(new Date());
 
