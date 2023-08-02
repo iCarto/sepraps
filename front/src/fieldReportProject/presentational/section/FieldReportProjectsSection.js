@@ -1,5 +1,10 @@
 import {useEffect, useState} from "react";
-import {useOutletContext, Link as RouterLink, useParams} from "react-router-dom";
+import {
+    useOutletContext,
+    Link as RouterLink,
+    useParams,
+    useNavigate,
+} from "react-router-dom";
 
 import {FieldReportProjectsTabPanels} from ".";
 import Paper from "@mui/material/Paper";
@@ -11,6 +16,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 const FieldReportProjectsSection = () => {
+    const navigate = useNavigate();
     const {fieldReportProjectId} = useParams();
     const [activeTabId, setActiveTabId] = useState(-1);
 
@@ -33,9 +39,13 @@ const FieldReportProjectsSection = () => {
                 ? setActiveTabId(-1)
                 : setActiveTabId(parseInt(fieldReportProjectId));
         } else {
-            fieldReport?.field_report_projects?.length
-                ? setActiveTabId(fieldReport.field_report_projects[0].id)
-                : setActiveTabId(-1);
+            if (fieldReport?.field_report_projects?.length) {
+                navigate(
+                    `/field-reports/${fieldReport.id}/projects/${fieldReport.field_report_projects[0].id}`
+                );
+            } else {
+                setActiveTabId(-1);
+            }
         }
     }, [fieldReportProjectId]);
 
