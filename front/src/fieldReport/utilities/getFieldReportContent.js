@@ -87,8 +87,8 @@ export function getFieldReportContent(reportData) {
         const urls = [];
         const comments = [];
 
-        images.map((image, index) => {
-            comments.push(`Imagen ${index + 1}`);
+        images.map(image => {
+            comments.push(image.label);
             urls.push(image);
         });
 

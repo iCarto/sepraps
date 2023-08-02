@@ -54,6 +54,7 @@ const ImageUploadButton = ({name, onSelectFiles = null, rules = {}}) => {
                 onClick={triggerInputClick}
                 icon={<AddPhotoAlternateIcon />}
                 tooltip="Añadir imagen"
+                height="100px"
             />
             {errors[name] && <Alert severity="error">{errors[name].message}</Alert>}
         </>

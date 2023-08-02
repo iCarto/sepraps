@@ -1,12 +1,6 @@
 class FieldReportProjectActivities extends Array {}
 
 const fieldReportProjectActivity_api_adapter = fieldReportProjectActivity => {
-    fieldReportProjectActivity["images"] = [
-        fieldReportProjectActivity.image1,
-        fieldReportProjectActivity.image2,
-        fieldReportProjectActivity.image3,
-        fieldReportProjectActivity.image4,
-    ].filter(image => image);
     return fieldReportProjectActivity;
 };
 

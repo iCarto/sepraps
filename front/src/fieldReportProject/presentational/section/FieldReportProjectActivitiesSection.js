@@ -48,13 +48,19 @@ const FieldReportProjectActivitiesSection = ({
     };
 
     const handleSubmit = createdActivity => {
+        console.log({createdActivity});
         FieldReportProjectActivityService.create(
             fieldReportProjectActivity_view_adapter({
                 ...createdActivity,
                 field_report_project: parseInt(fieldReportProjectId),
+                image1: null,
+                image2: null,
+                image3: null,
+                image4: null,
             })
         ).then(resultActivity => {
-            const imagesUploadPromises = createdActivity.images.map(image => {
+            const imagesUploadPromises = [1, 2, 3, 4].map(imageIndex => {
+                const image = createdActivity[`image${imageIndex}`];
                 if (image instanceof File) {
                     return new Promise((resolve, reject) => {
                         const onFinish = onFinishResult => {
@@ -79,25 +85,25 @@ const FieldReportProjectActivitiesSection = ({
             });
             Promise.all(imagesUploadPromises)
                 .then(result => {
-                    createdActivity.images.forEach((image, index) => {
-                        const storedImageId =
-                            image instanceof File
-                                ? result.find(
-                                      storedImage =>
-                                          storedImage &&
-                                          storedImage.media_name === image.name
-                                  ).id
-                                : image.id;
-                        const imageAttribute = "image" + (index + 1);
-                        resultActivity = {
-                            ...resultActivity,
-                            [imageAttribute]: storedImageId,
-                        };
+                    let activityImages = {};
+                    [1, 2, 3, 4].forEach(imageIndex => {
+                        const image = createdActivity["image" + imageIndex];
+                        if (image) {
+                            const storedImageId =
+                                image instanceof File
+                                    ? result.find(
+                                          storedImage =>
+                                              storedImage &&
+                                              storedImage.media_name === image.name
+                                      ).id
+                                    : image.id;
+                            activityImages["image" + imageIndex] = storedImageId;
+                        }
                     });
                     FieldReportProjectActivityService.update(
                         fieldReportProjectActivity_view_adapter({
                             ...resultActivity,
-                            field_report_project: parseInt(fieldReportProjectId),
+                            ...activityImages,
                         })
                     )
                         .then(() => {
@@ -124,6 +130,7 @@ const FieldReportProjectActivitiesSection = ({
                     onOpenForm={handleClickEdit}
                     onCloseForm={handleCancelForm}
                     isFormOpen={isFormSectionActive && isFormEditOpen}
+                    key={index}
                 />
             ))}
             {isFormSectionActive && isFormNewOpen ? (

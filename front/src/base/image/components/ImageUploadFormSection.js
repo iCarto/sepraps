@@ -11,32 +11,18 @@ import IconButton from "@mui/material/IconButton";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Alert from "@mui/material/Alert";
 
-const validateSize = files => {
-    const invalidFiles = files.filter(file => {
-        const isFileTypeValid = validateFileType(file, [
-            "image/jpg",
-            "image/jpeg",
-            "image/png",
-        ]);
-        const isFileSizeValid = validateFileMaxSize(file, 20000000);
-        return !isFileTypeValid || !isFileSizeValid;
-    });
-    if (invalidFiles.length === 0) {
-        return true;
+const validateSize = (imageFile, label) => {
+    if (!(imageFile instanceof File)) {
+        return null;
     }
-    for (const file of invalidFiles) {
-        if (!(file instanceof File)) {
-            return null;
-        }
-        let message = "";
-        if (!validateFileType(file, ["image/jpg", "image/jpeg", "image/png"])) {
-            message += "El archivo debe ser de tipo jpg, jpeg o png. ";
-        }
-        if (!validateFileMaxSize(file, 20000000)) {
-            message += `El archivo ${file.name} tiene un tamaño superior a 20Mb\n`;
-        }
-        return message;
+    let message = "";
+    if (!validateFileType(imageFile, ["image/jpg", "image/jpeg", "image/png"])) {
+        return `El archivo "${label}" debe ser de tipo jpg, jpeg o png.`;
     }
+    if (!validateFileMaxSize(imageFile, 20000000)) {
+        return `El archivo "${label}" tiene un tamaño superior a 20Mb\n`;
+    }
+    return null;
 };
 
 const validateFileType = (file, fileTypes) => {
@@ -47,7 +33,7 @@ const validateFileMaxSize = (file, maxSize) => {
     return file.size <= maxSize;
 };
 
-const ImageUploadFormSection = ({name, formFileInputName}) => {
+const ImageUploadFormSection = ({name, label, formFileInputName}) => {
     const {
         getValues,
         control,
@@ -57,27 +43,31 @@ const ImageUploadFormSection = ({name, formFileInputName}) => {
 
     const {
         field: {onChange},
-    } = useController({name: name, control, rules: {validate: validateSize}});
+    } = useController({
+        name: name,
+        control,
+        rules: {validate: imageFile => validateSize(imageFile, label)},
+    });
 
     const [isDropAreaActive, setIsDropAreaActive] = useState(false);
     const [error, setError] = useState({});
 
     // TO-DO: Prevent adding file to fileList if validation fails. Functions are only getting errors[name] on next upload ??
-    const fileList = getValues()[name];
+    const fileImage = getValues()[name];
 
     useEffect(() => {
         setError(errors);
-    }, [fileList]);
+    }, [fileImage]);
 
     const handleSelectFiles = async fileList => {
-        handleAdd(fileList);
+        handleAdd(fileList[0]);
     };
 
     const handleDropFile = async event => {
         event.preventDefault();
         setIsDropAreaActive(false);
-        var selectedFiles = Array.from(event.dataTransfer.files);
-        handleAdd(selectedFiles);
+        var selectedFile = Array.from(event.dataTransfer.files)[0];
+        handleAdd(selectedFile);
     };
 
     const handleDragOver = event => {
@@ -89,82 +79,68 @@ const ImageUploadFormSection = ({name, formFileInputName}) => {
         setIsDropAreaActive(false);
     };
 
-    const handleAdd = files => {
-        const values = getValues();
-        const updatedFileList = [...values[name], ...files];
-        console.log({updatedFileList});
-        onChange(updatedFileList);
+    const handleAdd = file => {
+        onChange(file);
         trigger([name]);
     };
 
     const handleRemove = fileToRemove => {
         const values = getValues();
-        const updatedFileList = values[name].filter(
-            file => file.name !== fileToRemove.name
-        );
-        onChange(updatedFileList);
+        onChange(null);
         trigger([name]);
     };
 
-    const handleCancel = () => {
-        const updatedFileList = [];
-        onChange(updatedFileList);
-    };
-
     return (
-        <ContainerWithLabel label="Añadir imágenes" isAreaActive={isDropAreaActive}>
+        <ContainerWithLabel isAreaActive={isDropAreaActive}>
             <Grid
-                container
-                spacing={1}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDropFile}
             >
-                {fileList?.length
-                    ? fileList.map((image, index) => (
-                          <Grid item xs={4} md={2.5} key={index}>
-                              <ImageListItem>
-                                  {image instanceof File ? (
-                                      <ImageFilePreview
-                                          image={image}
-                                          width="100%"
-                                          height="100px"
-                                      />
-                                  ) : (
-                                      <ImagePreview path={image} />
-                                  )}
-
-                                  <ImageListItemBar
-                                      title={`Imagen ${index + 1}`}
-                                      position="top"
-                                      actionIcon={
-                                          <IconButton
-                                              sx={{
-                                                  color: "grey.400",
-                                              }}
-                                              aria-label={`Eliminar imagen ${index}`}
-                                              onClick={() => handleRemove(image)}
-                                          >
-                                              <CancelIcon />
-                                          </IconButton>
-                                      }
-                                  />
-                              </ImageListItem>
-                          </Grid>
-                      ))
-                    : null}
-                {fileList?.length < 4 && (
-                    <Grid item container xs={4} md={2}>
+                <ImageListItem>
+                    {fileImage ? (
+                        fileImage instanceof File ? (
+                            <ImageFilePreview image={fileImage} width="100%" />
+                        ) : (
+                            <ImagePreview path={fileImage} />
+                        )
+                    ) : (
                         <ImageUploadButton
                             name={formFileInputName}
                             onSelectFiles={handleSelectFiles}
                         />
-                    </Grid>
-                )}
+                    )}
+
+                    <ImageListItemBar
+                        position="below"
+                        title={`${label}`}
+                        actionIcon={
+                            fileImage && (
+                                <IconButton
+                                    sx={{
+                                        color: "grey.400",
+                                    }}
+                                    aria-label={`Eliminar ${label}`}
+                                    onClick={() => handleRemove(fileImage)}
+                                >
+                                    <CancelIcon
+                                        sx={{
+                                            fontSize: 20,
+                                        }}
+                                    />
+                                </IconButton>
+                            )
+                        }
+                    />
+                </ImageListItem>
             </Grid>
-            <Grid mt={2}>
-                {errors[name] && <Alert severity="error">{errors[name].message}</Alert>}
-            </Grid>
+            {errors[name] && (
+                <Grid mt={2}>
+                    <Alert severity="error" sx={{fontSize: "0.8em"}}>
+                        {errors[name].message}
+                    </Alert>
+                </Grid>
+            )}
         </ContainerWithLabel>
     );
 };

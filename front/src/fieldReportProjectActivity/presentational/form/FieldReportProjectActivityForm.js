@@ -16,7 +16,10 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
         title: FormUtil.getFormValue(activity?.title),
         date: FormUtil.getFormValue(activity?.date),
         notes: FormUtil.getFormValue(activity?.notes),
-        images: FormUtil.getFormValue(activity?.images || []),
+        image1: FormUtil.getFormValue(activity?.image1),
+        image2: FormUtil.getFormValue(activity?.image2),
+        image3: FormUtil.getFormValue(activity?.image3),
+        image4: FormUtil.getFormValue(activity?.image4),
     };
 
     const formMethods = useForm({
@@ -31,7 +34,10 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
             title: "",
             date: null,
             notes: "",
-            images: [],
+            image1: null,
+            image2: null,
+            image3: null,
+            image4: null,
         });
         onCancel();
     };
@@ -43,7 +49,10 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
             title: FormUtil.getDataValue(data.title),
             date: FormUtil.getDataValue(data.date),
             notes: FormUtil.getDataValue(data.notes),
-            images: FormUtil.getDataValue(data.images),
+            image1: FormUtil.getDataValue(data.image1),
+            image2: FormUtil.getDataValue(data.image2),
+            image3: FormUtil.getDataValue(data.image3),
+            image4: FormUtil.getDataValue(data.image4),
         };
         onSubmit(updatedActivity);
     };
@@ -51,7 +60,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
     return (
         <FormProvider {...formMethods}>
             <FormContainer>
-                <Grid item xl={6}>
+                <Grid item>
                     <Typography
                         variant="h6"
                         component="h4"
@@ -65,7 +74,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
                         {activity ? "Editar actividad" : "Añadir actividad"}
                     </Typography>
                 </Grid>
-                <Grid item xl={6}>
+                <Grid item>
                     <EntityForm
                         onSubmit={formMethods.handleSubmit(onFormSubmit)}
                         onCancel={handleCancel}

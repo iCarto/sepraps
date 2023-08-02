@@ -5,7 +5,13 @@ import Stack from "@mui/material/Stack";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Tooltip from "@mui/material/Tooltip";
 
-const AddNewFullWidthButton = ({onClick, roles = [], icon = null, tooltip = ""}) => {
+const AddNewFullWidthButton = ({
+    onClick,
+    roles = [],
+    icon = null,
+    tooltip = "",
+    height = null,
+}) => {
     const buttonIcon = icon || <AddCircleIcon />;
 
     const buttonStyle = {
@@ -22,6 +28,7 @@ const AddNewFullWidthButton = ({onClick, roles = [], icon = null, tooltip = ""})
         "&:active": {
             transform: "translateY(1px)",
         },
+        height,
     };
 
     const handleClick = () => {

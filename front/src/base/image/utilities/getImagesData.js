@@ -1,11 +1,15 @@
 import {AuthService} from "base/api/service";
 
-export function getImagesData(urls) {
-    const promises = urls.map(url => {
+export function getImagesData(images) {
+    console.log({images});
+    const promises = images.map(image => {
+        if (!image) {
+            return null;
+        }
         return new Promise((resolve, reject) => {
             const img = new Image();
 
-            fetch(url, {
+            fetch(image.url, {
                 headers: {
                     Authorization: "Bearer " + AuthService.getAccessToken(),
                 },
@@ -24,11 +28,12 @@ export function getImagesData(urls) {
                     url: img.src, // new blob url
                     width: img.width,
                     height: img.height,
+                    label: image.label,
                 };
                 resolve(imageData);
             };
             img.onerror = function() {
-                reject(new Error("No se pudo cargar la imagen: " + url));
+                reject(new Error("No se pudo cargar la imagen: " + image.url));
             };
         });
     });

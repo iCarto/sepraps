@@ -41,7 +41,8 @@ const FieldReportProjectActivitySection = ({
     };
 
     const handleSubmit = updatedActivity => {
-        const imagesUploadPromises = updatedActivity.images.map(image => {
+        const imagesUploadPromises = [1, 2, 3, 4].map(imageIndex => {
+            const image = updatedActivity[`image${imageIndex}`];
             if (image instanceof File) {
                 return new Promise((resolve, reject) => {
                     const onFinish = onFinishResult => {
@@ -66,16 +67,19 @@ const FieldReportProjectActivitySection = ({
         });
         Promise.all(imagesUploadPromises)
             .then(result => {
-                updatedActivity.images.forEach((image, index) => {
-                    const storedImageId =
-                        image instanceof File
-                            ? result.find(
-                                  storedImage =>
-                                      storedImage &&
-                                      storedImage.media_name === image.name
-                              ).id
-                            : image.id;
-                    updatedActivity["image" + (index + 1)] = storedImageId;
+                [1, 2, 3, 4].forEach(imageIndex => {
+                    const image = updatedActivity["image" + imageIndex];
+                    if (image) {
+                        const storedImageId =
+                            image instanceof File
+                                ? result.find(
+                                      storedImage =>
+                                          storedImage &&
+                                          storedImage.media_name === image.name
+                                  ).id
+                                : image.id;
+                        updatedActivity["image" + imageIndex] = storedImageId;
+                    }
                 });
                 FieldReportProjectActivityService.update(
                     fieldReportProjectActivity_view_adapter({

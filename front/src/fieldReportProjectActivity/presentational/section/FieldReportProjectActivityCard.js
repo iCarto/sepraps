@@ -69,29 +69,30 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
             <Typography variant="body1" color="text.primary" gutterBottom>
                 {activity.notes}
             </Typography>
-            {activity?.images?.length ? (
-                <Grid container spacing={1} pt={2}>
-                    {activity.images.map((image, imageIndex) => (
-                        <Grid item key={imageIndex} xs={6} lg={3}>
-                            <ImageListItem key={image}>
-                                <ImagePreview
-                                    path={image}
-                                    sx={{
-                                        borderRadius: 1,
-                                    }}
-                                />
-                                <ImageListItemBar
-                                    subtitle={`Imagen ${imageIndex + 1}`}
-                                    sx={{
-                                        transform: "translateY(-6px)",
-                                        borderRadius: "0 0 5px 5px",
-                                    }}
-                                />
-                            </ImageListItem>
-                        </Grid>
-                    ))}
-                </Grid>
-            ) : null}
+            <Grid container spacing={5} pt={2}>
+                {[1, 2, 3, 4].map(
+                    imageIndex =>
+                        activity[`image${imageIndex}`] && (
+                            <Grid item key={imageIndex} xs={6} lg={3}>
+                                <ImageListItem>
+                                    <ImagePreview
+                                        path={activity[`image${imageIndex}`]}
+                                        sx={{
+                                            borderRadius: 1,
+                                        }}
+                                    />
+                                    <ImageListItemBar
+                                        subtitle={`Imagen ${imageIndex}`}
+                                        sx={{
+                                            transform: "translateY(-6px)",
+                                            borderRadius: "0 0 5px 5px",
+                                        }}
+                                    />
+                                </ImageListItem>
+                            </Grid>
+                        )
+                )}
+            </Grid>
         </div>
     );
 };

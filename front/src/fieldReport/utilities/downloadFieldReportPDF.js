@@ -11,10 +11,22 @@ export function downloadFieldReportPDF() {
         const fieldReportElements = fieldReport.fieldReportElements;
         const fieldReportProjectElements = fieldReport.fieldReportProjectElements;
 
-        const firstHeaderLogo = "/logo/logo_bilingue_M_Salud_Publica.png";
-        const secondHeaderLogo = "/logo/logo_bilingue_gobierno_PY.png";
-        const thirdHeaderLogo = "/logo/logo_eslogan_guarani.png";
-        const mainLogo = "/logo/logo_senasa_tagline.png";
+        const firstHeaderLogo = {
+            url: "/logo/logo_bilingue_M_Salud_Publica.png",
+            label: "Ministerio de Salud Pública",
+        };
+        const secondHeaderLogo = {
+            url: "/logo/logo_bilingue_gobierno_PY.png",
+            label: "Gobierno de Paraguay",
+        };
+        const thirdHeaderLogo = {
+            url: "/logo/logo_eslogan_guarani.png",
+            label: "Eslogan guaraní",
+        };
+        const mainLogo = {
+            url: "/logo/logo_senasa_tagline.png",
+            label: "SENASA",
+        };
 
         const logos = await getImagesData([
             firstHeaderLogo,
@@ -56,9 +68,17 @@ export function downloadFieldReportPDF() {
         const activitiesImagesPromises = reportData.field_report_projects.flatMap(
             project =>
                 project.field_report_project_activities.map(async activity => {
-                    const activityImages = await getImagesData(
-                        activity.images.filter(item => item)
-                    );
+                    const images = [1, 2, 3, 4]
+                        .map(imageIndex => {
+                            return activity[`image${imageIndex}`]
+                                ? {
+                                      url: activity[`image${imageIndex}`],
+                                      label: `Imagen ${imageIndex}`,
+                                  }
+                                : null;
+                        })
+                        .filter(item => item);
+                    const activityImages = await getImagesData(images);
                     activitiesImages.push({id: activity.id, images: activityImages});
                 })
         );

@@ -12,7 +12,7 @@ const ContainerWithLabel = ({label = "", isAreaActive = false, children, ...prop
             sx={{
                 position: "relative",
                 mt: 1,
-                p: 2,
+                p: 1,
                 border: 1,
                 borderColor: isAreaActive ? "grey.800" : "grey.400",
                 borderRadius: 1,
