@@ -70,3 +70,4 @@ include-package-data = true
 # *.css *.woff *.svg *.js *.gif *.ico *.png *.jpg *.html *.js.map
 "sepraps.static" = ["**"]
 "sepraps.templates" = ["**"]
+"sepraps.app.data" = ["**"]

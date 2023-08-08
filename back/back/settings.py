@@ -295,3 +295,31 @@ if env("SENTRY_DSN"):
         # release="myapp@1.0.0", # Automatic from SENTRY_RELEASE
         environment="production",  # Automatic from SENTRY_ENVIRONMENT
     )
+
+
+if not DEBUG:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "root": {"level": "INFO", "handlers": ["file"]},
+        "handlers": {
+            "file": {
+                "level": "INFO",
+                "class": "logging.FileHandler",
+                "filename": "/var/log/gunicorn/django.log",
+                "formatter": "app",
+            }
+        },
+        "loggers": {
+            "django": {"handlers": ["file"], "level": "INFO", "propagate": True}
+        },
+        "formatters": {
+            "app": {
+                "format": (
+                    "%(asctime)s [%(levelname)-8s] "
+                    "(%(module)s.%(funcName)s) %(message)s"
+                ),
+                "datefmt": "%Y-%m-%d %H:%M:%S",
+            }
+        },
+    }
