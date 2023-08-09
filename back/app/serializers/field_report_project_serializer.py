@@ -20,6 +20,7 @@ class FieldReportProjectSerializer(BaseModelSerializer):
             "field_report",
             "field_report_project_activities",
         )
+        extra_kwargs = {"agreements": {"allow_empty": True, "required": False}}
 
     project = serializers.PrimaryKeyRelatedField(queryset=Project.objects.all())
     construction_contract_number = serializers.CharField(
@@ -27,7 +28,7 @@ class FieldReportProjectSerializer(BaseModelSerializer):
     )
     field_report_project_activities = serializers.SerializerMethodField()
 
-    def get_field_report_project_activities(self, instance):
+    def get_field_report_project_activities(self, instance):  # noqa: WPS615
         activities = instance.field_report_project_activities.all().order_by(
             "date", "id"
         )
@@ -38,7 +39,11 @@ class FieldReportProjectSerializer(BaseModelSerializer):
     def to_representation(self, instance):
         response = super().to_representation(instance)
         if "project" in response:
-            response["project"] = ProjectShortSerializer(
-                instance.project, context=self.context
-            ).data
+            response.update(
+                {
+                    "project": ProjectShortSerializer(
+                        instance.project, context=self.context
+                    ).data
+                }
+            )
         return response
