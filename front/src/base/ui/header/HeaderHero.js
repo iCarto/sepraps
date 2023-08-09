@@ -10,7 +10,7 @@ const HeaderHero = ({left = [], right = []}) => {
             role="hero"
             minHeight={`${HERO_HEIGHT}px`}
             px={2}
-            bgcolor="primary.main"
+            bgcolor="#eb2010"
         >
             <Grid item container xs={6} md={8} alignItems="center">
                 {left.map((component, index) => (
