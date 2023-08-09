@@ -5,6 +5,7 @@ import {
     fieldReports_api_adapter,
 } from "fieldReport/model";
 import {createEntityService} from "base/entity/service";
+import {AuthApiService} from "base/api/service";
 
 const basePath = "/api/app/fieldreports";
 
@@ -53,6 +54,14 @@ const FieldReportService = {
 
     delete(id) {
         return entityService.delete(id);
+    },
+
+    getFieldReportForProject(projectId, fieldReportId) {
+        return AuthApiService.get(
+            `${basePath}/${fieldReportId}/project/${projectId}`
+        ).then(response => {
+            return createFieldReport(fieldReport_api_adapter(response));
+        });
     },
 };
 

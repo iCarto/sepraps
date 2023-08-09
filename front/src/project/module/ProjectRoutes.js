@@ -19,6 +19,7 @@ import {
     UpdateProjectQuestionnaireInstancePanel,
     ViewProjectProviderSubPage,
     ViewProjectsSupervisionPage,
+    ViewProjectFieldReportSubPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -129,6 +130,11 @@ const projectRoutes = [
                     element={<UpdateProjectQuestionnaireInstancePanel />}
                 />
             </Route>
+            <Route
+                key="project-fieldreport-detail"
+                path="fieldreport/:fieldReportId"
+                element={<ViewProjectFieldReportSubPage />}
+            />
         </Route>
         <Route
             key="projects-supervision"

@@ -6,6 +6,7 @@ import {EntityViewSubPage} from "base/entity/components/container";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
 import {FieldReportSummarySection} from "fieldReport/presentational/section";
 import {FieldReportProjectsListSection} from "fieldReportProject/presentational/section";
+import {DownloadPDFButton} from "base/pdf/presentational";
 
 const ViewFieldReportSummarySubPage = () => {
     let fieldReport;
@@ -20,7 +21,12 @@ const ViewFieldReportSummarySubPage = () => {
     const sections = [
         <FieldReportSummarySection
             fieldReport={fieldReport}
-            handleGeneratePDF={handleGeneratePDF}
+            secondaryAction={
+                <DownloadPDFButton
+                    handleGeneratePDF={handleGeneratePDF}
+                    text="Imprimir informe"
+                />
+            }
         />,
         <FieldReportProjectsListSection
             fieldReportProjects={fieldReport?.field_report_projects}

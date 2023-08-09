@@ -18,3 +18,4 @@ export {
 export {
     default as FieldReportProjectAgreementsSection,
 } from "./FieldReportProjectAgreementsSection";
+export {default as FieldReportProjectContent} from "./FieldReportProjectContent";

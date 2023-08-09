@@ -1,22 +1,13 @@
 import {DateUtil} from "base/format/utilities";
 import {SectionCard, SectionField} from "base/ui/section/components";
-import {DownloadPDFButton} from "base/pdf/presentational";
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const FieldReportSummarySection = ({fieldReport, handleGeneratePDF}) => {
+const FieldReportSummarySection = ({fieldReport, secondaryAction = null}) => {
     return (
-        <SectionCard
-            headingLabel={false}
-            secondaryAction={
-                <DownloadPDFButton
-                    handleGeneratePDF={handleGeneratePDF}
-                    text="Imprimir informe"
-                />
-            }
-        >
-            <Grid sx={{marginTop: "-48px"}}>
+        <SectionCard headingLabel={false} secondaryAction={secondaryAction}>
+            <Grid sx={{marginTop: secondaryAction ? "-48px" : "0px"}}>
                 <Typography variant="h4" color="grey.700" sx={{fontWeight: "bold"}}>
                     Informe de viaje {fieldReport.code}
                 </Typography>

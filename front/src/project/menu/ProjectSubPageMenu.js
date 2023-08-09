@@ -9,6 +9,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GroupsIcon from "@mui/icons-material/Groups";
+import {FieldReportProjectMenu} from "fieldReportProject/presentational/menu";
 
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/${project?.id}`;
@@ -59,6 +60,10 @@ const ProjectSubPageMenu = ({project}) => {
             />
             <QuestionnairesMenu
                 questionnaires={project?.questionnaires}
+                basePath={`/projects/${project?.id}`}
+            />
+            <FieldReportProjectMenu
+                projectId={project?.id}
                 basePath={`/projects/${project?.id}`}
             />
         </SubPageMenu>

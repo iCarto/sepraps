@@ -27,3 +27,6 @@ export {default as CloseProjectButton} from "./CloseProjectButton";
 export {
     default as UpdateProjectQuestionnaireInstancePanel,
 } from "./UpdateProjectQuestionnaireInstancePanel";
+export {
+    default as ViewProjectFieldReportSubPage,
+} from "./ViewProjectFieldReportSubPage";

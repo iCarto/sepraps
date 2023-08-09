@@ -10,7 +10,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
-const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => {
+const FieldReportProjectActivityCard = ({
+    activity,
+    index,
+    onEdit = null,
+    onDelete = null,
+}) => {
     const handleClickEdit = () => {
         onEdit();
     };
@@ -57,12 +62,16 @@ const FieldReportProjectActivityCard = ({activity, index, onEdit, onDelete}) => 
                     alignItems="flex-end"
                     color="text.secondary"
                 >
-                    <IconButton onClick={handleClickEdit}>
-                        <EditIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton onClick={handleClickDelete}>
-                        <DeleteIcon fontSize="small" />
-                    </IconButton>
+                    {onEdit && (
+                        <IconButton onClick={handleClickEdit}>
+                            <EditIcon fontSize="small" />
+                        </IconButton>
+                    )}
+                    {onDelete && (
+                        <IconButton onClick={handleClickDelete}>
+                            <DeleteIcon fontSize="small" />
+                        </IconButton>
+                    )}
                 </Grid>
             </Grid>
             <Divider sx={{mb: 2}} />

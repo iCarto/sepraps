@@ -57,6 +57,8 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
     return (
         <>
             {deleteDialog}
+            <AlertError error={error} />
+
             <Stack flexDirection={"row"} alignItems="center">
                 <Typography variant="h5" component="h2" fontWeight="500">
                     {`${fieldReportProject.name}`}
@@ -71,8 +73,6 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
             <Typography variant="body2" color="text.secondary">
                 {`${fieldReportProject.code} \u2022 ${fieldReportProject.location}`}
             </Typography>
-
-            <AlertError error={error} />
 
             <AccordionUndercoverLayout
                 accordionTitle="Antecedentes"
