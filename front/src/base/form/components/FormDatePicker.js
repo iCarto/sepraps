@@ -29,8 +29,8 @@ const FormDatePicker = ({
 
     return (
         <DatePicker
-            onChange={event => {
-                const formattedDate = DateUtil.formatDateForAPI(event);
+            onChange={value => {
+                const formattedDate = DateUtil.formatDateForAPI(value);
                 field.onChange(formattedDate); // data sent back to hook form
                 if (onChangeHandler) {
                     onChangeHandler(formattedDate);
@@ -38,7 +38,7 @@ const FormDatePicker = ({
             }}
             inputRef={field.ref}
             label={inputLabel}
-            value={field.value}
+            value={DateUtil.parseDateFromApi(field.value)}
             disabled={disabled}
             renderInput={({inputProps, ...params}) => (
                 <TextField

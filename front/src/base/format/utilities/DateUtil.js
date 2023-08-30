@@ -9,7 +9,13 @@ const DateUtil = {
         if (!date) {
             return "";
         }
-        return format(new Date(date), dateFormat);
+        if (date instanceof Date) {
+            return format(date, dateFormat);
+        }
+        if (typeof date === "string" && date.includes("T")) {
+            return format(new Date(date), dateFormat);
+        }
+        return format(this.parseDateFromApi(date), dateFormat);
     },
     // Transform to API format
     formatDateForAPI(date) {
@@ -22,13 +28,13 @@ const DateUtil = {
         if (!date) {
             return "";
         }
-        return format(new Date(date), dateFormat);
+        return this.formatDate(date, dateFormat);
     },
     formatDateTime(date, dateFormat = DATE_FORMATS.CLIENT_DATETIMEFORMAT) {
         if (!date) {
             return "";
         }
-        return format(new Date(date), dateFormat);
+        return this.formatDate(date, dateFormat);
     },
     formatDateTimeForFilenames(date) {
         return this.formatDate(date, DATE_FORMATS.FILENAME_DATETIMEFORMAT);
@@ -37,7 +43,7 @@ const DateUtil = {
         if (!date) {
             return "";
         }
-        return format(new Date(date), DATE_FORMATS.CLIENT_TIMEFORMAT);
+        return this.formatDate(date, DATE_FORMATS.CLIENT_TIMEFORMAT);
     },
     formatHoursAndMinutes(millis) {
         return (
