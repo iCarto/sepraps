@@ -27,8 +27,6 @@ const fieldReport_view_adapter = fieldReport => {
             ? fieldReport["goals"].filter(item => item)
             : null;
 
-    fieldReport["date"] = DateUtil.formatDateForAPI(new Date());
-
     delete fieldReport["folder"];
     delete fieldReport["created_by"];
     delete fieldReport["created_at"];

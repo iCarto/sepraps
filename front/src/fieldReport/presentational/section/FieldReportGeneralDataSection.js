@@ -44,6 +44,10 @@ const FieldReportGeneralDataSection = ({
                             value={`${fieldReport?.code}`}
                         />
                         <SectionField
+                            label="Fecha del informe"
+                            value={DateUtil.formatDate(fieldReport.date)}
+                        />
+                        <SectionField
                             label="Fechas de la intervención"
                             value={`${DateUtil.formatDate(
                                 fieldReport?.visit_date_start

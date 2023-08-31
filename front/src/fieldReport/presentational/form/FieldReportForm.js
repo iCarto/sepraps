@@ -15,6 +15,7 @@ const FieldReportForm = ({
         id: FormUtil.getFormValue(fieldReport?.id),
         name: FormUtil.getFormValue(fieldReport?.name),
         code: FormUtil.getFormValue(fieldReport?.code),
+        date: FormUtil.getFormValue(fieldReport?.date),
         reporting_person: FormUtil.getFormValue(fieldReport?.reporting_person),
         reported_persons: FormUtil.getFormValue(fieldReport?.reported_persons, []),
         participant_persons: FormUtil.getFormValue(
@@ -40,6 +41,7 @@ const FieldReportForm = ({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             code: FormUtil.getDataValue(data.code),
+            date: FormUtil.getDataValue(data.date),
             reporting_person: FormUtil.getDataValue(data.reporting_person),
             reported_persons: FormUtil.getDataValue(data.reported_persons),
             participant_persons: FormUtil.getDataValue(data.participant_persons),

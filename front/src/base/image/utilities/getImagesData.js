@@ -1,7 +1,6 @@
 import {AuthService} from "base/api/service";
 
 export function getImagesData(images) {
-    console.log({images});
     const promises = images.map(image => {
         if (!image) {
             return null;

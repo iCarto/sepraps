@@ -12,10 +12,17 @@ const FieldReportFormGeneralDataFields = ({orientation = "column"}) => {
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={orientation === "row" ? 6 : 12}>
                     <FormInputText
                         name="code"
                         label="Nº de memorándum"
+                        rules={{required: "Este campo es obligatorio"}}
+                    />
+                </Grid>
+                <Grid item xs={12} md={orientation === "row" ? 6 : 12}>
+                    <FormDatePicker
+                        name="date"
+                        label="Fecha del informe"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
