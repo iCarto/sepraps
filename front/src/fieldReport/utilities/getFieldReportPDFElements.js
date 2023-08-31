@@ -1,6 +1,7 @@
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
 import {globalPDFElements} from "base/pdf/utilities";
+import {DateUtil} from "base/format/utilities";
 
 export function getFieldReportPDFElements(
     doc,
@@ -67,10 +68,9 @@ export function getFieldReportPDFElements(
     };
 
     const drawReportMainLogo = logo => {
-        const logoAdjustedWidth = logo.width / 3;
+        const logoAdjustedWidth = logo.width / 12; // reduces the logo width
         const ratio = logo.width / logoAdjustedWidth;
-        // Original logo is slightly distorted vertically, so we need to fix it here by reducing the high.
-        const logoAdjustedHeight = (logo.height - 10) / ratio;
+        const logoAdjustedHeight = logo.height / ratio;
 
         doc.addImage(
             logo.url,
@@ -110,8 +110,8 @@ export function getFieldReportPDFElements(
             );
 
         doc.setFont(undefined, "bold").text(
-            reportData.date,
-            getTextPositionY(reportData.date),
+            `(${DateUtil.formatDate(reportData.date)})`,
+            getTextPositionY(`(${DateUtil.formatDate(reportData.date)})`),
             initialPositionY + 20
         );
     };
@@ -126,7 +126,7 @@ export function getFieldReportPDFElements(
             },
             columnStyles: {
                 0: {
-                    cellWidth: 40,
+                    cellWidth: 50,
                     fontSize: dimensions.fontSizeRegular,
                     fontStyle: "bold",
                 },

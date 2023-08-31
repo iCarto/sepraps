@@ -1,3 +1,4 @@
+import {DateUtil} from "base/format/utilities";
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
 
@@ -17,7 +18,7 @@ export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportCo
             startY: tablePositionTop,
             margin: {top: tableMarginTop},
             theme: "plain",
-            head: [[`${activity.date} | ${activity.title}`]],
+            head: [[`${DateUtil.formatDate(activity.date)} | ${activity.title}`]],
             headStyles: {
                 fontStyle: "bold",
                 fillColor: CUSTOM_COLORS.grey["200"],

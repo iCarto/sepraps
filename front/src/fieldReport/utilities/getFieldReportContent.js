@@ -3,10 +3,15 @@ import {DateUtil} from "base/format/utilities";
 export function getFieldReportContent(reportData) {
     const headTableBody = [
         ["Memorándum n.º:", reportData.code],
-        ["Fecha de la visita:", DateUtil.formatDate(reportData.date)],
+        [
+            "Fechas de la intervención:",
+            `${DateUtil.formatDate(
+                reportData?.visit_date_start
+            )} - ${DateUtil.formatDate(reportData?.visit_date_end)}`,
+        ],
         ["Elaborado por:", `${reportData.reporting_person}`],
         [
-            "Otros participantes en la visita:",
+            "Otros participantes en la intervención:",
             reportData.participant_persons?.join(", "),
         ],
         ["A la atención de:", reportData.reported_persons?.join(", ")],
