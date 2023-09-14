@@ -29,10 +29,6 @@ const ProviderLegalDataSection = ({provider}) => {
         <SectionCard title="Datos legales" secondaryActions={secondaryActions}>
             <SectionField label="Tipo de prestador" value={provider.type_label} />
             <SectionField
-                label="Contrato permisionario firmado"
-                value={provider.is_provider_contract_signed_label}
-            />
-            <SectionField
                 label="Legalmente constituida"
                 value={provider.is_legalized_label}
             />
@@ -42,6 +38,10 @@ const ProviderLegalDataSection = ({provider}) => {
                     value={DateUtil.formatDate(provider.legalization_date)}
                 />
             ) : null}
+            <SectionField
+                label="Contrato permisionario firmado"
+                value={provider.is_provider_contract_signed_label}
+            />
             {provider.type === "junta_de_saneamiento" ? (
                 <SectionField
                     label="Nº de personería jurídica"

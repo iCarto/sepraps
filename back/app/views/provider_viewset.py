@@ -30,7 +30,7 @@ class ProviderFilter(filters.FilterSet):
 
 
 class ProviderViewSet(ModelListAuditViewSet):
-    queryset = Provider.objects.all()
+    queryset = Provider.objects.all().order_by("name")
     serializer_class = ProviderSerializer
     summary_serializer_class = ProviderSummarySerializer
     filterset_class = ProviderFilter

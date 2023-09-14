@@ -20,7 +20,7 @@ const ProviderSubPageMenu = ({provider}) => {
             <PageMenuListItemButton
                 key="provider-contacts"
                 to={`${basePath}/contacts`}
-                text="Contactos"
+                text="Miembros/Contactos"
                 icon={<PermContactCalendarIcon />}
             />
         </SubPageMenu>

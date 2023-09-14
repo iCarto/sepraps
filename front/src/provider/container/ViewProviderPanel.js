@@ -30,7 +30,6 @@ const ViewProviderPanel = () => {
             >
                 <SectionCard title={provider.name}>
                     <SectionField label="Área" value={provider.area_label} />
-                    <SectionField label="Tipo" value={provider.type_label} />
                     <SectionField
                         label="Nº miembros de la Comisión Directiva"
                         value={provider.number_of_members}
@@ -39,10 +38,7 @@ const ViewProviderPanel = () => {
                         label="Nº mujeres de la Comisión Directiva"
                         value={provider.number_of_women}
                     />
-                    <SectionField
-                        label="Contrato permisionario firmado"
-                        value={provider.is_provider_contract_signed_label}
-                    />
+                    <SectionField label="Tipo" value={provider.type_label} />
                     <SectionField
                         label="Legalmente constituida"
                         value={provider.is_legalized_label}
@@ -53,6 +49,10 @@ const ViewProviderPanel = () => {
                             value={DateUtil.formatDate(provider.legalization_date)}
                         />
                     ) : null}
+                    <SectionField
+                        label="Contrato permisionario firmado"
+                        value={provider.is_provider_contract_signed_label}
+                    />
                     {provider.type === "junta_de_saneamiento" ? (
                         <SectionField
                             label="Nº de personería jurídica"
