@@ -93,7 +93,7 @@ export function getFieldReportPDFElements(
         };
 
         const initialPositionY = doc.lastAutoTable.finalY + 80;
-        const title = `Informe de viaje - ${reportData.code}`;
+        const title = `Informe de viaje`;
 
         doc.setFontSize(dimensions.fontSizeHeadingOne)
             .setTextColor(CUSTOM_COLORS.primary.main)
@@ -101,18 +101,28 @@ export function getFieldReportPDFElements(
                 lineHeightFactor: 2,
             });
 
-        doc.setFontSize(dimensions.fontSizeHeadingTwo)
+        doc.setFont(undefined, "bold")
+            .setFontSize(dimensions.fontSizeHeadingTwo)
+            .setTextColor(CUSTOM_COLORS.text.primary)
+            .text(
+                `Memorándum nº: ${reportData.code}`,
+                getTextPositionY(`Memorándum n.º: ${reportData.code}`),
+                initialPositionY + 10
+            );
+
+        doc.setFont(undefined, "normal")
+            .setFontSize(dimensions.fontSizeHeadingTwo)
             .setTextColor(CUSTOM_COLORS.text.primary)
             .text(
                 reportData.name,
                 getTextPositionY(reportData.name),
-                initialPositionY + 10
+                initialPositionY + 20
             );
 
-        doc.setFont(undefined, "bold").text(
+        doc.text(
             `(${DateUtil.formatDate(reportData.date)})`,
             getTextPositionY(`(${DateUtil.formatDate(reportData.date)})`),
-            initialPositionY + 20
+            initialPositionY + 30
         );
     };
 

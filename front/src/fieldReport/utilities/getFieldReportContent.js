@@ -2,7 +2,6 @@ import {DateUtil} from "base/format/utilities";
 
 export function getFieldReportContent(reportData) {
     const headTableBody = [
-        ["Memorándum n.º:", reportData.code],
         [
             "Fechas de la intervención:",
             `${DateUtil.formatDate(

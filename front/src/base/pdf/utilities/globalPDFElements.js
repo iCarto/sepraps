@@ -31,7 +31,7 @@ export const globalPDFElements = {
             pagePaddingTop: this.pagePaddingTop,
             contentPositionTop: contentPositionTop,
             fontSizeRegular: 10,
-            fontSizeHeadingOne: 18,
+            fontSizeHeadingOne: 30,
             fontSizeHeadingTwo: 14,
         };
     },
