@@ -38,7 +38,16 @@ class FieldReportFilter(filters.FilterSet):
 
 
 class FieldReportViewSet(ModelListAuditViewSet):
-    queryset = FieldReport.objects.all()
+    queryset = FieldReport.objects.prefetch_related(
+        "created_by",
+        "updated_by",
+        models.Prefetch(
+            "field_report_projects",
+            queryset=FieldReportProject.objects.select_related(
+                "project", "project__construction_contract"
+            ),
+        ),
+    ).all()
     serializer_class = FieldReportSerializer
     summary_serializer_class = FieldReportSummarySerializer
     filterset_class = FieldReportFilter
