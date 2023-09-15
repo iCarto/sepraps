@@ -9,7 +9,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GroupsIcon from "@mui/icons-material/Groups";
-import {FieldReportProjectMenu} from "fieldReportProject/presentational/menu";
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/${project?.id}`;
@@ -58,12 +58,14 @@ const ProjectSubPageMenu = ({project}) => {
                 text="Contactos"
                 icon={<PermContactCalendarIcon />}
             />
+            <PageMenuListItemButton
+                key="project-fieldreport"
+                to={`${basePath}/fieldreport`}
+                text="Informes de viaje"
+                icon={<DirectionsCarFilledOutlinedIcon />}
+            />
             <QuestionnairesMenu
                 questionnaires={project?.questionnaires}
-                basePath={`/projects/${project?.id}`}
-            />
-            <FieldReportProjectMenu
-                projectId={project?.id}
                 basePath={`/projects/${project?.id}`}
             />
         </SubPageMenu>

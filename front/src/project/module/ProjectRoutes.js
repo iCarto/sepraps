@@ -132,7 +132,7 @@ const projectRoutes = [
             </Route>
             <Route
                 key="project-fieldreport-detail"
-                path="fieldreport/:fieldReportId"
+                path="fieldreport/:fieldReportId?"
                 element={<ViewProjectFieldReportSubPage />}
             />
         </Route>
