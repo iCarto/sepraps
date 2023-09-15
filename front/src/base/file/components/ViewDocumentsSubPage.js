@@ -1,11 +1,11 @@
-import {useEffect, useState} from "react";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {FolderViewProvider} from "base/file/provider";
 import {PageLayout} from "base/ui/main";
 import {SectionCard} from "base/ui/section/components";
-import {ListFolder} from "base/file/components";
+import {useEffect, useState} from "react";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {FolderViewProvider} from "../provider";
+import ListFolder from "./ListFolder";
 
-const ViewDocumentsSubPage = ({entity, basePath}) => {
+const ViewDocumentsSubPage = ({entity, basePath, lookupIdField = "id"}) => {
     const [folderPath, setFolderPath] = useState(null);
     const [selectedElement, setSelectedElement] = useState(null);
 
@@ -13,8 +13,7 @@ const ViewDocumentsSubPage = ({entity, basePath}) => {
     const {pathname} = useLocation();
     const navigate = useNavigate();
 
-    const baseDocumentsPath = `${basePath}/${entity.id}/documents/`;
-    console.log({baseDocumentsPath});
+    const baseDocumentsPath = `${basePath}/${entity[lookupIdField]}/documents/`;
 
     useEffect(() => {
         let path = params["*"];
@@ -45,7 +44,7 @@ const ViewDocumentsSubPage = ({entity, basePath}) => {
 
     return (
         <PageLayout>
-            {folderPath ? (
+            {folderPath && (
                 <SectionCard title="Documentos">
                     <FolderViewProvider>
                         <ListFolder
@@ -56,7 +55,7 @@ const ViewDocumentsSubPage = ({entity, basePath}) => {
                         />
                     </FolderViewProvider>
                 </SectionCard>
-            ) : null}
+            )}
         </PageLayout>
     );
 };

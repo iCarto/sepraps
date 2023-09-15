@@ -1,7 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 from app.base.models.base_models import BaseEntityModelMixin
 from app.models.field_report import FieldReport
@@ -36,11 +34,12 @@ class FieldReportProject(BaseDocumentModel, BaseEntityModelMixin):
 
     def post_create(self, sender, created, *args, **kwargs):
         if created:
+            classtype = type(self).__name__
             folder = Folder(
                 media_type="FOLDER",
-                media_name="FieldReportProject_{0}".format(self.project.id),
-                storage_path="{0}/fieldreportproject/{1}".format(
-                    self.field_report.folder.storage_path, self.project.id
+                media_name="{0}".format(self.project.code),
+                storage_path="{0}/{1}/{2}".format(
+                    self.field_report.folder.storage_path, classtype, self.project.code
                 ),
                 parent=self.field_report.folder,
                 creation_user=self.created_by,

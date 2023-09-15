@@ -11,3 +11,6 @@ export {
 } from "./ViewFieldReportProjectsSubPage";
 export {default as ViewFieldReportCoverSubPage} from "./ViewFieldReportCoverSubPage";
 export {default as ViewFieldReportIntroSubPage} from "./ViewFieldReportIntroSubPage";
+export {
+    default as ViewFieldReportDocumentsSubPage,
+} from "./ViewFieldReportDocumentsSubPage";

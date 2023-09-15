@@ -54,11 +54,15 @@ class FieldReportProjectActivity(BaseDocumentModel, BaseEntityModelMixin):
 
     def post_create(self, sender, created, *args, **kwargs):
         if created:
+            classtype = type(self).__name__
+            field_value = "{0}-{1}".format(self.date.strftime("%d-%m-%Y"), self.id)
             folder = Folder(
                 media_type="FOLDER",
-                media_name="FieldReportProjectActivity_{0}".format(self.id),
-                storage_path="{0}/fieldreportprojectactivity/{1}".format(
-                    self.field_report_project.folder.storage_path, self.id
+                media_name=field_value,
+                storage_path="{0}/{1}/{2}".format(
+                    self.field_report_project.folder.storage_path,
+                    classtype,
+                    field_value,
                 ),
                 parent=self.field_report_project.folder,
                 creation_user=self.created_by,

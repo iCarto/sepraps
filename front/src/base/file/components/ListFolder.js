@@ -91,17 +91,14 @@ const ListFolder = ({
                     </Tooltip>
                 </Grid>
             ) : null}
-            {/* TODO: Hack to know if is root folder. Will be changed when folder permissions are working. */}
-            {folderPath.indexOf("/") >= 0 ? (
-                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                    <Grid item container xs={12} mt={4}>
-                        <FileUploadSection
-                            path={folderPath}
-                            onFinishUpload={reloadFolder}
-                        />
-                    </Grid>
-                </AuthAction>
-            ) : null}
+            <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                <Grid item container xs={12} mt={4}>
+                    <FileUploadSection
+                        path={folderPath}
+                        onFinishUpload={reloadFolder}
+                    />
+                </Grid>
+            </AuthAction>
         </Grid>
     );
 };

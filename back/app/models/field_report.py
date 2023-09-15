@@ -3,7 +3,8 @@ from django.db import models
 
 from app.base.models.base_models import BaseEntityModelMixin
 from documents.base.base_models import BaseDocumentModel
-from documents.models import MediaNode
+from documents.folder_utils import sanitize_field_value
+from documents.models import MediaNode, create_folder_structure
 
 
 class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
@@ -39,3 +40,16 @@ class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
         null=True,
         related_name="folder+",
     )
+
+    def post_create(self, sender, created, *args, **kwargs):
+        if created:
+            classtype = type(self).__name__
+            field_value = sanitize_field_value(self.code)
+            root_folder = create_folder_structure(
+                "{0}".format(field_value),
+                "{0}/{1}".format(classtype.lower(), field_value),
+                [],
+            )
+            self.folder = root_folder
+
+            self.save()

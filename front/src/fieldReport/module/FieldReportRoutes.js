@@ -9,6 +9,7 @@ import {
     ViewFieldReportProjectsSubPage,
     ViewFieldReportCoverSubPage,
     ViewFieldReportIntroSubPage,
+    ViewFieldReportDocumentsSubPage,
 } from "fieldReport/container";
 import {FieldReportProjectsSection} from "fieldReportProject/presentational/section";
 import {ViewDocumentPanel} from "base/file/components";
@@ -48,6 +49,17 @@ const fieldReportRoutes = [
                     key="field-report-projects-tabs"
                     path=":fieldReportProjectId"
                     element={<FieldReportProjectsSection />}
+                />
+            </Route>
+            <Route
+                key="field-report-documents"
+                path="documents/*"
+                element={<ViewFieldReportDocumentsSubPage />}
+            >
+                <Route
+                    key="field-report-documents-view"
+                    path="detail/*"
+                    element={<ViewDocumentPanel />}
                 />
             </Route>
         </Route>

@@ -4,6 +4,7 @@ import {SubPageMenu, PageMenuListItemButton, SubPageMenuListGroup} from "base/ui
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 
 const FieldReportSubPageMenu = ({fieldReport}) => {
     const basePath = `/field-reports/${fieldReport?.id}`;
@@ -29,7 +30,7 @@ const FieldReportSubPageMenu = ({fieldReport}) => {
             headerTitle={`${DateUtil.formatDate(fieldReport.date)}`}
         >
             <PageMenuListItemButton
-                key="fieldReport-summary"
+                key="field-report-summary"
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InventoryRoundedIcon />}
@@ -39,6 +40,12 @@ const FieldReportSubPageMenu = ({fieldReport}) => {
                 headerIcon={<FormatListBulletedOutlinedIcon />}
                 items={contentSubmenuItems}
                 expanded={true}
+            />
+            <PageMenuListItemButton
+                key="field-report-documents"
+                to={`${basePath}/documents`}
+                text="Documentos"
+                icon={<FolderOpenIcon />}
             />
         </SubPageMenu>
     );

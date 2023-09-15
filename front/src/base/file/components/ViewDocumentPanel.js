@@ -1,41 +1,41 @@
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {useAuth} from "base/user/provider";
-import {AuthAction} from "base/user/components";
-import {DocumentService} from "base/file/service";
-import {useNavigateWithReload} from "base/navigation/hooks";
-import {useDownloadDocument} from "base/file/utilities";
-import {useCopyToClipboard} from "base/shared/utilities";
-import {ProjectService} from "project/service";
-
-import {Spinner} from "base/shared/components";
-import {SidebarAction, SidebarPanel} from "base/ui/sidebar";
-import {DeleteDocumentDialog, DocumentSection} from "base/file/components";
-
+import {useParams, useLocation} from "react-router-dom";
+import {DeleteDocumentDialog, DocumentSection} from ".";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
 import DownloadIcon from "@mui/icons-material/Download";
 import LinkIcon from "@mui/icons-material/Link";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {DocumentService} from "../service";
+import {useDownloadDocument} from "../utilities";
+import {useCopyToClipboard} from "base/shared/utilities";
+import {SidebarAction, SidebarPanelLayout} from "base/ui/sidebar";
+import {AuthAction} from "base/user/components";
 
-// TO-DO: Implement EntityViewPanel ?
-const ViewDocumentPanel = () => {
-    const [folderElement, setFolderElement] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-
+const ViewDocumentPanel = ({
+    onSetFeaturedImage = null,
+    onSetFeaturedDocument = null,
+}) => {
     const navigate = useNavigateWithReload();
-    const {ROLES} = useAuth();
 
     const params = useParams();
-    const {id: projectId} = useParams();
+    const location = useLocation();
+
+    const [folderElement, setFolderElement] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
     useEffect(() => {
         let path = params["*"];
         if (path) {
-            setIsLoading(true);
+            setLoading(true);
             DocumentService.get(path).then(element => {
                 setFolderElement(element);
-                setIsLoading(false);
+                setLoading(false);
             });
         }
     }, [params]);
@@ -56,10 +56,13 @@ const ViewDocumentPanel = () => {
     };
 
     const handleSetFeaturedImage = () => {
-        ProjectService.updateProjectWithPatch({
-            id: projectId,
-            featured_image: folderElement.id,
-        }).then(response => {
+        onSetFeaturedImage(folderElement.id).then(response => {
+            handleCloseSidebar(true);
+        });
+    };
+
+    const handleSetFeaturedDocument = () => {
+        onSetFeaturedDocument(folderElement.id).then(response => {
             handleCloseSidebar(true);
         });
     };
@@ -70,11 +73,11 @@ const ViewDocumentPanel = () => {
 
     const handleCloseSidebar = (refresh = false) => {
         navigate(
-            `/projects/${projectId}/documents/` +
-                folderElement.path
-                    .split("/")
-                    .slice(0, -1)
-                    .join("/"),
+            location.pathname
+                .split("/")
+                .slice(0, -1)
+                .join("/")
+                .replace("/detail", ""),
             refresh
         );
     };
@@ -87,18 +90,29 @@ const ViewDocumentPanel = () => {
             icon={<LinkIcon />}
             onClick={handleCopyLink}
         />,
-        folderElement && folderElement.content_type.startsWith("image") ? (
+        onSetFeaturedImage &&
+        folderElement &&
+        folderElement.content_type.startsWith("image") ? (
             <SidebarAction
-                key="set-project-featured-image"
-                name="set project featured image"
+                key="set-featured-image"
+                name="set featured image"
                 text="Usar como imagen principal"
                 icon={<ImageOutlinedIcon />}
                 onClick={handleSetFeaturedImage}
             />
         ) : null,
+        onSetFeaturedDocument && folderElement ? (
+            <SidebarAction
+                key="set-featured-document"
+                name="set featured document"
+                text="Usar como documento principal"
+                icon={<InsertDriveFileOutlinedIcon />}
+                onClick={handleSetFeaturedDocument}
+            />
+        ) : null,
         <AuthAction
             key="remove-document"
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+            roles={[]} // TODO: Bootstraped permissions
         >
             <SidebarAction
                 name="remove-document"
@@ -110,7 +124,7 @@ const ViewDocumentPanel = () => {
     ];
 
     return (
-        <SidebarPanel
+        <SidebarPanelLayout
             sidebarTitle="Detalle del documento"
             closeSidebarClick={handleCloseSidebar}
             mainActionText="Descargar"
@@ -118,8 +132,10 @@ const ViewDocumentPanel = () => {
             mainActionIcon={<DownloadIcon />}
             sidebarActions={sidebarActions}
         >
-            {isLoading ? (
-                <Spinner />
+            {loading ? (
+                <Grid item container justifyContent="center" xs={12}>
+                    <CircularProgress color="inherit" size={20} />
+                </Grid>
             ) : (
                 <DocumentSection folderElement={folderElement} />
             )}
@@ -130,7 +146,7 @@ const ViewDocumentPanel = () => {
                 isDialogOpen={isDeleteDialogOpen}
                 setIsDialogOpen={setIsDeleteDialogOpen}
             />
-        </SidebarPanel>
+        </SidebarPanelLayout>
     );
 };
 
