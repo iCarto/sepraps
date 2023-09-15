@@ -187,7 +187,7 @@ export function getFieldReportPDFElements(
             doc.setFont(undefined, "italic").text(
                 closingText,
                 dimensions.pageMargin,
-                doc.lastAutoTable.finalY + 15,
+                doc.lastAutoTable.finalY + 8,
                 {
                     maxWidth: dimensions.pageWidth - dimensions.pageMargin,
                 }

@@ -126,6 +126,7 @@ export const globalPDFElements = {
         autoTable(doc, {
             startY: this.getPDFDimensions(doc).contentPositionTop,
             theme: "plain",
+            margin: {top: 0, bottom: 0},
             head: [[title.toUpperCase()]],
             headStyles: {
                 fillColor: CUSTOM_COLORS.primary.dark,
@@ -133,11 +134,12 @@ export const globalPDFElements = {
                 fontSize: this.getPDFDimensions(doc).fontSizeRegular,
                 fontStyle: "bold",
             },
-            body: [[""], [text || ""]],
+            body: [[text || ""]],
             bodyStyles: {
                 fontSize: this.getPDFDimensions(doc).fontSizeRegular,
                 fontStyle: "italic",
                 textColor: CUSTOM_COLORS.text.primary,
+                cellPadding: {top: 5},
             },
         });
     },
