@@ -2,7 +2,7 @@ import {useController, useFormContext} from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-const FormSwitch = ({name: propsName, onChangeHandler = null}) => {
+const FormSwitch = ({name: propsName, label, onChangeHandler = null}) => {
     const {control} = useFormContext();
     const {
         field: {onChange, name, value, ref},
@@ -13,7 +13,7 @@ const FormSwitch = ({name: propsName, onChangeHandler = null}) => {
 
     return (
         <FormControlLabel
-            label="Archivados"
+            label={label}
             id={`${name}-switch-label`}
             control={
                 <Switch

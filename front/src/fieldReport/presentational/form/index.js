@@ -20,3 +20,4 @@ export {
 export {
     default as FieldReportFormReportedPersonsFields,
 } from "./FieldReportFormReportedPersonsFields";
+export {default as FieldReportFilterForm} from "./FieldReportFilterForm";

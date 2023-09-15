@@ -25,6 +25,9 @@ const FieldReportService = {
     },
 
     getPaginatedList(filter, page, sort, order) {
+        if (filter.creator_user === "undefined" || filter.creator_user == null) {
+            filter["creator_user"] = true;
+        }
         return entityService.getList(filter, page, sort, order).then(data => {
             return data;
         });

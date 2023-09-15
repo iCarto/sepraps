@@ -15,7 +15,13 @@ const ClosedProjectsSwitch = ({onChangeHandler = null}) => {
         }
     };
 
-    return <FormSwitch name="switchStatus" onChangeHandler={handleChangeStatus} />;
+    return (
+        <FormSwitch
+            label="Archivados"
+            name="switchStatus"
+            onChangeHandler={handleChangeStatus}
+        />
+    );
 };
 
 export default ClosedProjectsSwitch;
