@@ -16,10 +16,14 @@ import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 const FieldReportProjectsListSection = ({fieldReportProjects}) => {
     const {id: reportId} = useParams();
 
-    const contracts = new Set();
-    fieldReportProjects.map(fieldReportProject =>
-        contracts.add(fieldReportProject.construction_contract_number)
-    );
+    const contracts = fieldReportProjects
+        .map(fieldReportProject => {
+            return {
+                number: fieldReportProject.construction_contract_number,
+                comments: fieldReportProject.construction_contract_comments,
+            };
+        })
+        .filter((v, i, a) => a.findIndex(v2 => v2.number === v.number) === i);
 
     const listItemStyle = {
         pt: 0,
@@ -33,7 +37,10 @@ const FieldReportProjectsListSection = ({fieldReportProjects}) => {
         return (
             <List component="div" dense>
                 {fieldReportProjects.map((fieldReportProject, projectIndex) => {
-                    if (fieldReportProject.construction_contract_number === contract)
+                    if (
+                        fieldReportProject.construction_contract_number ===
+                        contract.number
+                    )
                         return (
                             <ListItem key={projectIndex} sx={listItemStyle}>
                                 <ListItemIcon
@@ -72,15 +79,22 @@ const FieldReportProjectsListSection = ({fieldReportProjects}) => {
                             return (
                                 <Fragment key={contractIndex}>
                                     <ListItem sx={listItemStyle}>
-                                        <ListItemIcon sx={{minWidth: "36px"}}>
+                                        <ListItemIcon
+                                            sx={{
+                                                minWidth: "36px",
+                                                alignSelf: "flex-start",
+                                                marginTop: "13px",
+                                            }}
+                                        >
                                             <CircleIcon sx={{fontSize: "8px"}} />
                                         </ListItemIcon>
                                         <ListItemText
                                             primary={
                                                 <Typography sx={{fontWeight: "500"}}>
-                                                    Contrato {contract}
+                                                    Contrato {contract.number}
                                                 </Typography>
                                             }
+                                            secondary={contract.comments}
                                         />
                                     </ListItem>
                                     {<ProjectsList contract={contract} />}

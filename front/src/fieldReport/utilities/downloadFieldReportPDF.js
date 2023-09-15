@@ -89,14 +89,11 @@ export function downloadFieldReportPDF() {
         const contracts = fieldReportContent.getContractsList();
 
         contracts.forEach(contract => {
-            fieldReportProjectElements.drawContractHeader(
-                doc,
-                `Contrato ${contract.code}`
-            );
+            fieldReportProjectElements.drawContractHeader(doc, contract);
 
             reportData.field_report_projects.forEach(fieldReportProject => {
                 if (
-                    fieldReportProject.construction_contract_number === contract.code[0]
+                    fieldReportProject.construction_contract_number === contract.number
                 ) {
                     fieldReportProjectElements.drawVisitedProjectSection(
                         fieldReportProject,

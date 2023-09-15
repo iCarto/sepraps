@@ -26,19 +26,24 @@ export function getFieldReportContent(reportData) {
 
     const contractsList = [];
     visitedProjects.forEach(project => {
-        contractsList.push(project.construction_contract_number);
+        contractsList.push({
+            number: project.construction_contract_number,
+            comments: project.construction_contract_comments,
+        });
     });
 
     const getContractsList = () => {
         const contracts = [];
         contractsList.forEach(contract => {
-            const existingContract = contracts.find(item => item.code[0] === contract);
+            const existingContract = contracts.find(
+                item => item.number === contract.number
+            );
 
             if (!existingContract) {
                 const contractObject = createContractObject(contract);
 
                 visitedProjects.forEach(project => {
-                    if (project.construction_contract_number === contract) {
+                    if (project.construction_contract_number === contract.number) {
                         contractObject.projects.push(createProjectEntry(project));
                     }
                 });
@@ -50,7 +55,8 @@ export function getFieldReportContent(reportData) {
 
     const createContractObject = contract => {
         return {
-            code: [contract],
+            number: contract.number,
+            comments: contract.comments,
             projects: [],
         };
     };

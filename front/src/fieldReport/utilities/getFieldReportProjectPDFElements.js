@@ -45,9 +45,16 @@ export function getFieldReportProjectPDFElements(
                 head: [
                     [
                         {
-                            content: `Contrato ${contract.code}`,
+                            content: `Contrato ${contract.number}`,
                             colSpan: 2,
                             styles: {fillColor: CUSTOM_COLORS.grey["100"]},
+                        },
+                    ],
+                    [
+                        {
+                            content: contract.comments,
+                            colSpan: 2,
+                            styles: {fontStyle: "normal"},
                         },
                     ],
                 ],
@@ -62,11 +69,12 @@ export function getFieldReportProjectPDFElements(
         });
     };
 
-    const drawContractHeader = (doc, title) => {
+    const drawContractHeader = (doc, contract) => {
         autoTable(doc, {
             startY: doc.lastAutoTable.finalY + 10,
             theme: "plain",
-            head: [[title.toUpperCase()]],
+            head: [[`Contrato ${contract.number.toUpperCase()}`]],
+            body: [[contract.comments]],
             headStyles: {
                 fillColor: CUSTOM_COLORS.primary.main,
                 textColor: CUSTOM_COLORS.white,

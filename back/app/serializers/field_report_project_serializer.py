@@ -16,6 +16,7 @@ class FieldReportProjectSerializer(BaseModelSerializer):
             "history",
             "project",
             "construction_contract_number",
+            "construction_contract_comments",
             "agreements",
             "field_report",
             "field_report_project_activities",
@@ -25,6 +26,9 @@ class FieldReportProjectSerializer(BaseModelSerializer):
     project = serializers.PrimaryKeyRelatedField(queryset=Project.objects.all())
     construction_contract_number = serializers.CharField(
         source="project.construction_contract.number", default=None, read_only=True
+    )
+    construction_contract_comments = serializers.CharField(
+        source="project.construction_contract.comments", default=None, read_only=True
     )
     field_report_project_activities = serializers.SerializerMethodField()
 
