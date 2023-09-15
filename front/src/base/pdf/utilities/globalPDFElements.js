@@ -106,20 +106,19 @@ export const globalPDFElements = {
         const pageCount = doc.internal.getNumberOfPages();
 
         for (let i = 2; i <= pageCount; i++) {
-            const footerText = `${DateUtil.formatDate(new Date())} - Página ${String(
-                i
-            )} de ${String(pageCount)}`;
+            const dateText = DateUtil.formatDate(new Date());
+            const pageText = `Página ${String(i)} de ${String(pageCount)}`;
 
-            if (i !== 0)
-                doc.setPage(i)
-                    .setFont(undefined, "normal")
-                    .setFontSize(8)
-                    .setTextColor(CUSTOM_COLORS.grey["500"])
-                    .text(
-                        footerText,
-                        this.getPageWidth(doc) - 33,
-                        this.getPageHeight(doc) + 5
-                    );
+            doc.setPage(i)
+                .setFont(undefined, "normal")
+                .setFontSize(8)
+                .setTextColor(CUSTOM_COLORS.grey["500"])
+                .text(dateText, 20, this.getPageHeight(doc) + 5)
+                .text(
+                    pageText,
+                    this.getPageWidth(doc) - 20,
+                    this.getPageHeight(doc) + 5
+                );
         }
     },
 
