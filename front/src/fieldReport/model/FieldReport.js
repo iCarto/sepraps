@@ -27,6 +27,9 @@ const fieldReport_view_adapter = fieldReport => {
             ? fieldReport["goals"].filter(item => item)
             : null;
 
+    delete fieldReport["contract_list"];
+    delete fieldReport["project_list"];
+
     delete fieldReport["folder"];
     delete fieldReport["created_by"];
     delete fieldReport["created_at"];
@@ -66,6 +69,8 @@ const createFieldReport = ({
     created_at = null,
     updated_at = null,
     updated_by = "",
+    contract_list = [],
+    project_list = [],
 } = {}) => {
     const publicApi = {
         id,
@@ -86,6 +91,8 @@ const createFieldReport = ({
         created_at,
         updated_at,
         updated_by,
+        contract_list,
+        project_list,
     };
 
     return Object.freeze(publicApi);
