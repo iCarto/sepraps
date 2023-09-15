@@ -3,6 +3,10 @@ import {format, parse, add, addDays, differenceInCalendarMonths} from "date-fns"
 import {TextUtil} from "base/format/utilities";
 import {DATE_FORMATS, USED_LOCALE} from "base/format/config/i18n";
 
+function isValidDate(d) {
+    return d instanceof Date && !isNaN(d);
+}
+
 const DateUtil = {
     // Transform to UI format date DD/MM/YYYY
     formatDate(date, dateFormat = DATE_FORMATS.CLIENT_DATEFORMAT) {
@@ -10,7 +14,10 @@ const DateUtil = {
             return "";
         }
         if (date instanceof Date) {
-            return format(date, dateFormat);
+            if (isValidDate(date)) {
+                return format(date, dateFormat);
+            }
+            return date;
         }
         if (typeof date === "string" && date.includes("T")) {
             return format(new Date(date), dateFormat);
