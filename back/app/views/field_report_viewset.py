@@ -25,7 +25,13 @@ class FieldReportFilter(filters.FilterSet):
         fields = ("search", "project")
 
     search = filters.CharFilter(method="filter_by_search_text")
-    project = filters.NumberFilter(method="filter_by_project_text")
+    project = filters.NumberFilter(method="filter_by_project")
+    creator_user = filters.BooleanFilter(method="filter_by_creator_user")
+    construction_contract = filters.CharFilter(method="filter_by_construction_contract")
+    district = filters.CharFilter(method="filter_by_district")
+    department = filters.CharFilter(method="filter_by_department")
+    date_from = filters.DateFilter(method="filter_by_date_from")
+    date_to = filters.DateFilter(method="filter_by_date_to")
 
     def filter_by_search_text(self, queryset, name, search_text):
         return queryset.filter(
@@ -33,8 +39,38 @@ class FieldReportFilter(filters.FilterSet):
             | models.Q(code__icontains=search_text)
         )
 
-    def filter_by_project_text(self, queryset, name, project_id):
+    def filter_by_project(self, queryset, name, project_id):
         return queryset.filter(field_report_projects__project=project_id)
+
+    def filter_by_creator_user(self, queryset, name, creator_user):
+        return (
+            queryset.filter(created_by=self.request.user) if creator_user else queryset
+        )
+
+    def filter_by_construction_contract(self, queryset, name, construction_contract_id):
+        return queryset.filter(
+            field_report_projects__project__construction_contract=construction_contract_id
+        ).distinct("id")
+
+    def filter_by_district(self, queryset, param_name, district):
+        return queryset.filter(
+            models.Q(
+                field_report_projects__project__linked_localities__district=district
+            )
+        ).distinct("id")
+
+    def filter_by_department(self, queryset, param_name, department):
+        return queryset.filter(
+            models.Q(
+                field_report_projects__project__linked_localities__department=department
+            )
+        ).distinct("id")
+
+    def filter_by_date_from(self, queryset, name, date_from):
+        return queryset.filter(date__gte=date_from)
+
+    def filter_by_date_to(self, queryset, name, date_to):
+        return queryset.filter(date__lte=date_to)
 
 
 class FieldReportViewSet(ModelListAuditViewSet):
