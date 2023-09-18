@@ -59,7 +59,7 @@ const FieldReportParticipantsSection = ({
                     <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
                         <AddNewFullWidthButton
                             onClick={handleOpenForm}
-                            tooltip="Añadir participante"
+                            tooltip="Añadir otro participante en la intervención"
                         />
                     </Grid>
                 </UserAuthRequired>

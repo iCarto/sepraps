@@ -72,7 +72,7 @@ const FieldReportProjectsListSection = ({fieldReportProjects}) => {
 
     return (
         <>
-            <SectionCard title="Contratos y proyectos objetivo del informe">
+            <SectionCard title="Relación de contratos y proyectos visitados">
                 {fieldReportProjects ? (
                     <List dense sx={{paddingTop: 0}}>
                         {[...contracts].map((contract, contractIndex) => {

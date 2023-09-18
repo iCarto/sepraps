@@ -22,7 +22,7 @@ export function useFieldReportsTableColumns() {
         },
         {
             id: "code",
-            label: "Memorándum",
+            label: "Número de memorándum",
             width: 10,
         },
         {
@@ -35,7 +35,7 @@ export function useFieldReportsTableColumns() {
         },
         {
             id: "reporting_person",
-            label: "Autor/a",
+            label: "Elaborado por",
             width: 15,
         },
         {

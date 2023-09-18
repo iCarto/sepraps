@@ -30,7 +30,10 @@ const ViewFieldReportPanel = () => {
                 title="Informe de viaje"
             >
                 <SectionCard title={fieldReport.name}>
-                    <SectionField label="Memorándum" value={fieldReport.code} />
+                    <SectionField
+                        label="Número de memorándum"
+                        value={fieldReport.code}
+                    />
                     <SectionField
                         label="Fecha del informe"
                         value={DateUtil.formatDate(fieldReport.date)}
@@ -42,15 +45,15 @@ const ViewFieldReportPanel = () => {
                         )} - ${DateUtil.formatDate(fieldReport?.visit_date_end)}`}
                     />
                     <SectionField
-                        label="Autor/a"
+                        label="Elaborado por"
                         value={`${fieldReport?.reporting_person}`}
                     />
                     <SectionField
-                        label="Participante/s en la intervención"
+                        label="Otros participantes en la intervención"
                         value={fieldReport?.participant_persons?.join(", ")}
                     />
                     <SectionField
-                        label="Responsable/s de aprobación"
+                        label="A la atención de"
                         value={fieldReport?.reported_persons?.join(", ")}
                     />
                 </SectionCard>

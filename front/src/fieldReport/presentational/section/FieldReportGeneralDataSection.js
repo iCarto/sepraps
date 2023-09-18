@@ -41,7 +41,7 @@ const FieldReportGeneralDataSection = ({
                     <Grid item xs>
                         <SectionField label="Nombre" value={`${fieldReport?.name}`} />
                         <SectionField
-                            label="Nº de memorandum"
+                            label="Número de memorándum"
                             value={`${fieldReport?.code}`}
                         />
                         <SectionField

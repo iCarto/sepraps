@@ -29,13 +29,16 @@ const FieldReportSummarySection = ({fieldReport, secondaryAction = null}) => {
                     fieldReport?.visit_date_start
                 )} - ${DateUtil.formatDate(fieldReport?.visit_date_end)}`}
             />
-            <SectionField label="Autor/a" value={`${fieldReport?.reporting_person}`} />
             <SectionField
-                label="Participante/s en la intervención"
+                label="Elaborado por"
+                value={`${fieldReport?.reporting_person}`}
+            />
+            <SectionField
+                label="Otros articipantes en la intervención"
                 value={fieldReport?.participant_persons?.join(", ")}
             />
             <SectionField
-                label="Responsable/s de aprobación"
+                label="A la atención de"
                 value={fieldReport?.reported_persons?.join(", ")}
             />
         </SectionCard>

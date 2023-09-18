@@ -56,7 +56,7 @@ const ViewFieldReportIntroSubPage = () => {
             </Typography>
             <AlertError error={error} />
             <AccordionUndercoverLayout
-                accordionTitle="Texto introductorio"
+                accordionTitle="Introducción del informe"
                 defaultExpanded={!!fieldReport?.report_comments_start}
             >
                 <FieldReportCommentsStartSection

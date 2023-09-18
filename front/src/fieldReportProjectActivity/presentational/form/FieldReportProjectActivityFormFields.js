@@ -8,7 +8,7 @@ const FieldReportProjectActivityFormFields = () => {
             <Grid item xs={12} md={6}>
                 <FormInputText
                     name="title"
-                    label="Título de la actividad"
+                    label="Nombre de la actividad"
                     rules={{required: "Este campo es obligatorio."}}
                 />
             </Grid>
@@ -20,7 +20,11 @@ const FieldReportProjectActivityFormFields = () => {
                 />
             </Grid>
             <Grid item xs={12}>
-                <FormTextArea name="notes" label="Descripción y comentarios" rows={8} />
+                <FormTextArea
+                    name="notes"
+                    label="Descripción de la actividad"
+                    rows={8}
+                />
             </Grid>
             <Grid item container xs={12} spacing={5}>
                 <Grid item xs={3}>

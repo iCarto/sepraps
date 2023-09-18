@@ -70,7 +70,7 @@ const ViewFieldReportCoverSubPage = () => {
                 />
             </AccordionUndercoverLayout>
             <AccordionUndercoverLayout
-                accordionTitle="Participante/s en la intervención"
+                accordionTitle="Otros participantes en la intervención"
                 defaultExpanded={!!fieldReport?.participant_persons?.length}
             >
                 <FieldReportParticipantsSection
@@ -82,7 +82,7 @@ const ViewFieldReportCoverSubPage = () => {
                 />
             </AccordionUndercoverLayout>
             <AccordionUndercoverLayout
-                accordionTitle="Responsable/s de aprobación"
+                accordionTitle="A la atención de"
                 defaultExpanded={!!fieldReport?.reported_persons?.length}
             >
                 <FieldReportReportedPersonsSection

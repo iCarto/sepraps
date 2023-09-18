@@ -15,7 +15,7 @@ const FieldReportFormGeneralDataFields = ({orientation = "column"}) => {
                 <Grid item xs={12} md={orientation === "row" ? 6 : 12}>
                     <FormInputText
                         name="code"
-                        label="Nº de memorándum"
+                        label="Número de memorándum"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
@@ -45,7 +45,7 @@ const FieldReportFormGeneralDataFields = ({orientation = "column"}) => {
                 <Grid item xs={12}>
                     <FormInputText
                         name="reporting_person"
-                        label="Autor/a del informe (nombre y cargo)"
+                        label="Elaborado por (nombre y cargo)"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
@@ -59,7 +59,7 @@ const FieldReportFormGeneralDataFields = ({orientation = "column"}) => {
                 <Grid item xs={12}>
                     <FormInputTextList
                         name="reported_persons"
-                        itemName="Responsable de aprobación (nombre y cargo)"
+                        itemName="A la atención de (nombre y cargo)"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>

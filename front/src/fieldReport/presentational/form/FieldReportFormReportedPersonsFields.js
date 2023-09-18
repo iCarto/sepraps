@@ -4,7 +4,7 @@ const FieldReportFormReportedPersonsFields = () => {
     return (
         <FormInputTextList
             name="reported_persons"
-            itemName="Responsable de aprobación (nombre y cargo)"
+            itemName="A la atención de (nombre y cargo)"
         />
     );
 };
