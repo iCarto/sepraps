@@ -5,7 +5,7 @@ import {CUSTOM_COLORS} from "Theme";
 export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportContent) {
     const drawActivitySummary = activity => {
         const doesTableFitInPrevPage =
-            doc.lastAutoTable.finalY < dimensions.pageHeight - 60;
+            doc.lastAutoTable.finalY < dimensions.pageHeight - 30;
         const tablePositionTop = doesTableFitInPrevPage
             ? doc.lastAutoTable.finalY + 5
             : doc.lastAutoTable.finalY + dimensions.pagePaddingTop;
