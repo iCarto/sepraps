@@ -34,7 +34,7 @@ const FieldReportSummarySection = ({fieldReport, secondaryAction = null}) => {
                 value={`${fieldReport?.reporting_person}`}
             />
             <SectionField
-                label="Otros articipantes en la intervención"
+                label="Otros participantes en la intervención"
                 value={fieldReport?.participant_persons?.join(", ")}
             />
             <SectionField
