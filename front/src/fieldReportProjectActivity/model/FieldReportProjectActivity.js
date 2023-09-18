@@ -32,6 +32,10 @@ const createFieldReportProjectActivity = ({
     image4 = null,
     images = [],
     folder = "",
+    created_by = "",
+    created_at = null,
+    updated_at = null,
+    updated_by = "",
 } = {}) => {
     const publicApi = {
         id,
@@ -44,6 +48,10 @@ const createFieldReportProjectActivity = ({
         image4,
         images,
         folder,
+        created_by,
+        created_at,
+        updated_at,
+        updated_by,
     };
 
     return Object.freeze(publicApi);

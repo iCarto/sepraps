@@ -5,6 +5,7 @@ import {FieldReportForm} from "../form";
 import Grid from "@mui/material/Grid";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportParticipantsSection = ({
     fieldReport,
@@ -39,25 +40,29 @@ const FieldReportParticipantsSection = ({
                     <Grid item xs>
                         <BulletList items={fieldReport.participant_persons} />
                     </Grid>
-                    <Grid
-                        item
-                        xs={"auto"}
-                        container
-                        justifyContent="flex-end"
-                        alignItems="center"
-                    >
-                        <IconButton onClick={handleOpenForm}>
-                            <EditIcon fontSize="small" />
-                        </IconButton>
-                    </Grid>
+                    <UserAuthRequired user={fieldReport.created_by}>
+                        <Grid
+                            item
+                            xs={"auto"}
+                            container
+                            justifyContent="flex-end"
+                            alignItems="center"
+                        >
+                            <IconButton onClick={handleOpenForm}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </Grid>
+                    </UserAuthRequired>
                 </Grid>
             ) : (
-                <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
-                    <AddNewFullWidthButton
-                        onClick={handleOpenForm}
-                        tooltip="Añadir participante"
-                    />
-                </Grid>
+                <UserAuthRequired user={fieldReport.created_by}>
+                    <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                        <AddNewFullWidthButton
+                            onClick={handleOpenForm}
+                            tooltip="Añadir participante"
+                        />
+                    </Grid>
+                </UserAuthRequired>
             )}
         </>
     );

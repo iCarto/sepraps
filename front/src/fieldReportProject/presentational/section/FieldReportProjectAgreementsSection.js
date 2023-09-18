@@ -5,6 +5,7 @@ import {AddNewFullWidthButton, BulletList} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportProjectAgreementsSection = ({
     project,
@@ -43,25 +44,29 @@ const FieldReportProjectAgreementsSection = ({
                     <Grid item xs>
                         <BulletList items={project?.agreements} />
                     </Grid>
-                    <Grid
-                        item
-                        xs={"auto"}
-                        container
-                        justifyContent="flex-end"
-                        alignItems="center"
-                    >
-                        <IconButton onClick={handleOpenForm}>
-                            <EditIcon fontSize="small" />
-                        </IconButton>
-                    </Grid>
+                    <UserAuthRequired user={project?.created_by}>
+                        <Grid
+                            item
+                            xs={"auto"}
+                            container
+                            justifyContent="flex-end"
+                            alignItems="center"
+                        >
+                            <IconButton onClick={handleOpenForm}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </Grid>
+                    </UserAuthRequired>
                 </Grid>
             ) : (
-                <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
-                    <AddNewFullWidthButton
-                        onClick={handleOpenForm}
-                        tooltip="Añadir acuerdo"
-                    />
-                </Grid>
+                <UserAuthRequired user={project?.created_by}>
+                    <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                        <AddNewFullWidthButton
+                            onClick={handleOpenForm}
+                            tooltip="Añadir acuerdo"
+                        />
+                    </Grid>
+                </UserAuthRequired>
             )}
         </>
     );

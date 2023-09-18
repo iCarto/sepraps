@@ -9,6 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportProjectActivityCard = ({
     activity,
@@ -63,14 +64,18 @@ const FieldReportProjectActivityCard = ({
                     color="text.secondary"
                 >
                     {onEdit && (
-                        <IconButton onClick={handleClickEdit}>
-                            <EditIcon fontSize="small" />
-                        </IconButton>
+                        <UserAuthRequired user={activity?.created_by}>
+                            <IconButton onClick={handleClickEdit}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </UserAuthRequired>
                     )}
                     {onDelete && (
-                        <IconButton onClick={handleClickDelete}>
-                            <DeleteIcon fontSize="small" />
-                        </IconButton>
+                        <UserAuthRequired user={activity?.created_by}>
+                            <IconButton onClick={handleClickDelete}>
+                                <DeleteIcon fontSize="small" />
+                            </IconButton>
+                        </UserAuthRequired>
                     )}
                 </Grid>
             </Grid>

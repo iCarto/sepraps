@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportCommentsEndSection = ({
     fieldReport,
@@ -42,25 +43,29 @@ const FieldReportCommentsEndSection = ({
                             {fieldReport[section]}
                         </Typography>
                     </Grid>
-                    <Grid
-                        item
-                        xs={"auto"}
-                        container
-                        justifyContent="flex-end"
-                        alignItems="flex-start"
-                    >
-                        <IconButton onClick={handleOpenForm}>
-                            <EditIcon fontSize="small" />
-                        </IconButton>
-                    </Grid>
+                    <UserAuthRequired user={fieldReport.created_by}>
+                        <Grid
+                            item
+                            xs={"auto"}
+                            container
+                            justifyContent="flex-end"
+                            alignItems="flex-start"
+                        >
+                            <IconButton onClick={handleOpenForm}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </Grid>
+                    </UserAuthRequired>
                 </Grid>
             ) : (
-                <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
-                    <AddNewFullWidthButton
-                        onClick={handleOpenForm}
-                        tooltip="Añadir explicación"
-                    />
-                </Grid>
+                <UserAuthRequired user={fieldReport.created_by}>
+                    <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                        <AddNewFullWidthButton
+                            onClick={handleOpenForm}
+                            tooltip="Añadir explicación"
+                        />
+                    </Grid>
+                </UserAuthRequired>
             )}
         </>
     );

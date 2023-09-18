@@ -14,6 +14,7 @@ import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportProjectsSection = () => {
     const navigate = useNavigate();
@@ -90,22 +91,24 @@ const FieldReportProjectsSection = () => {
                               );
                           })
                         : null}
-                    <Tab
-                        key={0}
-                        value={-1}
-                        id="tab-nuevo"
-                        component={RouterLink}
-                        to={{
-                            pathname: `new`,
-                        }}
-                        aria-controls="tabpanel-nuevo"
-                        label={<AddIcon />}
-                        sx={{minWidth: "48px"}}
-                    />
+                    <UserAuthRequired user={fieldReport.created_by}>
+                        <Tab
+                            key={0}
+                            value={-1}
+                            id="tab-nuevo"
+                            component={RouterLink}
+                            to={{
+                                pathname: `new`,
+                            }}
+                            aria-controls="tabpanel-nuevo"
+                            label={<AddIcon />}
+                            sx={{minWidth: "48px"}}
+                        />
+                    </UserAuthRequired>
                 </Tabs>
             </Box>
             <FieldReportProjectsTabPanels
-                fieldReportProjects={fieldReport?.field_report_projects}
+                fieldReport={fieldReport}
                 activeTabId={activeTabId}
             />
         </Paper>

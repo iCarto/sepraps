@@ -1,10 +1,11 @@
 import {TabPanel} from "base/ui/tab";
 import {FieldReportProjectsTabPanelContent, FieldReportNewProjectTabPanel} from ".";
+import {UserAuthRequired} from "base/user/utilities";
 
-const FieldReportProjectsTabPanels = ({fieldReportProjects, activeTabId}) => {
+const FieldReportProjectsTabPanels = ({fieldReport, activeTabId}) => {
     return (
         <>
-            {fieldReportProjects?.map((fieldReportProject, index) => {
+            {fieldReport.field_report_projects?.map((fieldReportProject, index) => {
                 return (
                     <TabPanel
                         key={fieldReportProject.id}
@@ -20,7 +21,9 @@ const FieldReportProjectsTabPanels = ({fieldReportProjects, activeTabId}) => {
                     </TabPanel>
                 );
             })}
-            <FieldReportNewProjectTabPanel index={-1} activeTabId={activeTabId} />
+            <UserAuthRequired user={fieldReport.created_by}>
+                <FieldReportNewProjectTabPanel index={-1} activeTabId={activeTabId} />
+            </UserAuthRequired>
         </>
     );
 };

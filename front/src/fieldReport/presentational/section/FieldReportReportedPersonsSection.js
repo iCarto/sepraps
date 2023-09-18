@@ -5,6 +5,7 @@ import {FormContainer} from "base/form/components";
 import Grid from "@mui/material/Grid";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportReportedPersonsSection = ({
     fieldReport,
@@ -39,25 +40,29 @@ const FieldReportReportedPersonsSection = ({
                     <Grid item xs>
                         <BulletList items={fieldReport.reported_persons} />
                     </Grid>
-                    <Grid
-                        item
-                        xs={"auto"}
-                        container
-                        justifyContent="flex-end"
-                        alignItems="center"
-                    >
-                        <IconButton onClick={handleOpenForm}>
-                            <EditIcon fontSize="small" />
-                        </IconButton>
-                    </Grid>
+                    <UserAuthRequired user={fieldReport.created_by}>
+                        <Grid
+                            item
+                            xs={"auto"}
+                            container
+                            justifyContent="flex-end"
+                            alignItems="center"
+                        >
+                            <IconButton onClick={handleOpenForm}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </Grid>
+                    </UserAuthRequired>
                 </Grid>
             ) : (
-                <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
-                    <AddNewFullWidthButton
-                        onClick={handleOpenForm}
-                        tooltip="Añadir responsable"
-                    />
-                </Grid>
+                <UserAuthRequired user={fieldReport.created_by}>
+                    <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                        <AddNewFullWidthButton
+                            onClick={handleOpenForm}
+                            tooltip="Añadir responsable"
+                        />
+                    </Grid>
+                </UserAuthRequired>
             )}
         </>
     );

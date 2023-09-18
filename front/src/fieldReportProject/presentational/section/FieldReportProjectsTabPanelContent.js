@@ -16,6 +16,7 @@ import {
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
     const [activeFormSection, setActiveFormSection] = useState("");
@@ -94,7 +95,7 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
                 }
             >
                 <FieldReportProjectActivitiesSection
-                    activities={fieldReportProject.field_report_project_activities}
+                    fieldReportProject={fieldReportProject}
                     isFormSectionActive={activeFormSection === "activities"}
                     onOpenForm={handleOpenForm}
                     onCloseForm={handleCloseForm}
@@ -114,11 +115,17 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
                 />
             </AccordionUndercoverLayout>
 
-            <Stack flexDirection={"row"} justifyContent="flex-end" mt={3}>
-                <Button variant="contained" color="error" onClick={handleClickDelete}>
-                    Eliminar proyecto
-                </Button>
-            </Stack>
+            <UserAuthRequired user={fieldReportProject.created_by}>
+                <Stack flexDirection={"row"} justifyContent="flex-end" mt={3}>
+                    <Button
+                        variant="contained"
+                        color="error"
+                        onClick={handleClickDelete}
+                    >
+                        Eliminar proyecto
+                    </Button>
+                </Stack>
+            </UserAuthRequired>
         </>
     );
 };

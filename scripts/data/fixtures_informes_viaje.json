@@ -42,9 +42,9 @@
                 "Los líderes se comprometen a entregar el transformador.",
                 "Los líderes se comprometen a acompañar las gestiones en la ANDE."
             ],
-            "created_by": 1,
+            "created_by": 2,
             "created_at": "2023-07-07T00:00:00.000Z",
-            "updated_by": 1,
+            "updated_by": 2,
             "updated_at": "2023-07-07T00:00:00.000Z"
         }
     },
@@ -55,9 +55,9 @@
             "project": 2,
             "field_report": 1,
             "history": "",
-            "created_by": 1,
+            "created_by": 2,
             "created_at": "2023-07-07T00:00:00.000Z",
-            "updated_by": 1,
+            "updated_by": 2,
             "updated_at": "2023-07-07T00:00:00.000Z"
         }
     },
@@ -82,9 +82,9 @@
             "title": "14:00 a 16:00 hs. - Reunión en el Centro de Operaciones, Barrail y visita en zona de obras",
             "date": "2023-04-12",
             "notes": "En la misma se mencionaron temas técnicos, actividades en relación al relevamiento topográfico, al respecto. El fiscal de obras indicó dificultad para el cierre de las manzanas en ese componente ya que el equipo utilizado no es el indicado para realizar el trabajo, con clima nublado o por el exceso de árboles en algunos patios de usuarios, dificulta la toma de señal y enlentece el trabajo, son mínimos los casos en donde no se puede realizar el trabajo a causa de la ausencia de usuarios en sus viviendas al momento del relevamiento, con el acompañamiento de la relacionista comunitaria y la trabajadora social, reagendan lo más rápido posible para el logro del relevamiento en esos casos, no se encontró negativa por parte de ningún usuario para el ingreso de los trabajadores a las viviendas.\n\nAdemás, se sumaron a la reunión los representantes de la Empresa Constructora Barrail Hnos., los temas tratados se presentan a continuación: 1. Poco avance en redes en tramos donde encuentran rocas. 2. Se encontraron terrenos con pozos ciegos en las veredas, se definió que serían adecuadas al momento de la conexión al sistema, ya que probablemente, solo requeriría de un registro. Se quedó en identificar esos casos. 3. La construcción de manzanas es muy lenta. 4. A la fecha cuentan con 40 relevamientos, que no fueron entregados a la supervisión. Se solicitó al menos entregar algunos, para verificar, antes de la entrega total. 5. En la visita a la planta de tratamiento se observaron mayor movimiento de maquinas en la zona de las lagunas.",
-            "created_by": 1,
+            "created_by": 2,
             "created_at": "2023-07-07T00:00:00.000Z",
-            "updated_by": 1,
+            "updated_by": 2,
             "updated_at": "2023-07-07T00:00:00.000Z"
         }
     },
@@ -96,9 +96,9 @@
             "title": "08:00 a 11:30 hs. - Reunión con representantes del Consorcio Saneamiento Paraguay, los fiscales y supervisores del SENASA y el Auditor Externo",
             "date": "2023-04-13",
             "notes": "Se definió no continuar con la misión por las inclemencias del tiempo, posponiendo la actividad para la siguiente semana. De igual forma se aprovechó la ocasión para la revisión de los procesos en cuanto a obras y la proyección de trabajos relacionados a las adecuaciones intraprediales.\nSe mencionó que se relevaron 150 lotes, los mismos serían entregados a la supervisión con la certificación.  \nPor otro lado, el supervisor de obras indicó que se realice el relevamiento de dónde podría ser el trasado de la red para la estación de bombeo 3, ya que el propuesto, cuenta con problemas de servidumbre de paso por parte del dueño. \nSe indicó a la Trabajadora Social, desarrollar las estrategias necesarias para el logro de las adecuaciones.  ",
-            "created_by": 1,
+            "created_by": 2,
             "created_at": "2023-07-07T00:00:00.000Z",
-            "updated_by": 1,
+            "updated_by": 2,
             "updated_at": "2023-07-07T00:00:00.000Z"
         }
     },
@@ -109,9 +109,9 @@
             "field_report_project": 2,
             "title": "11:00 a 18:00 hs: Viaje de retorno a Asunción.",
             "date": "2023-04-13",
-            "created_by": 1,
+            "created_by": 2,
             "created_at": "2023-07-07T00:00:00.000Z",
-            "updated_by": 1,
+            "updated_by": 2,
             "updated_at": "2023-07-07T00:00:00.000Z"
         }
     },

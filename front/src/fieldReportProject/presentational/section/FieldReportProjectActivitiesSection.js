@@ -12,9 +12,10 @@ import {FieldReportProjectActivitySection} from "fieldReportProjectActivity/pres
 
 import Grid from "@mui/material/Grid";
 import {DocumentService} from "base/file/service";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportProjectActivitiesSection = ({
-    activities,
+    fieldReportProject,
     isFormSectionActive,
     onOpenForm,
     onCloseForm,
@@ -123,16 +124,18 @@ const FieldReportProjectActivitiesSection = ({
 
     return (
         <>
-            {activities?.map((activity, index) => (
-                <FieldReportProjectActivitySection
-                    activity={activity}
-                    activityIndex={index}
-                    onOpenForm={handleClickEdit}
-                    onCloseForm={handleCancelForm}
-                    isFormOpen={isFormSectionActive && isFormEditOpen}
-                    key={index}
-                />
-            ))}
+            {fieldReportProject?.field_report_project_activities?.map(
+                (activity, index) => (
+                    <FieldReportProjectActivitySection
+                        activity={activity}
+                        activityIndex={index}
+                        onOpenForm={handleClickEdit}
+                        onCloseForm={handleCancelForm}
+                        isFormOpen={isFormSectionActive && isFormEditOpen}
+                        key={index}
+                    />
+                )
+            )}
             {isFormSectionActive && isFormNewOpen ? (
                 <>
                     <AlertError error={error} />
@@ -143,12 +146,14 @@ const FieldReportProjectActivitiesSection = ({
                 </>
             ) : null}
             {isFormSectionActive ? null : (
-                <Grid mt={2}>
-                    <AddNewFullWidthButton
-                        onClick={handleClickNew}
-                        tooltip="Añadir actividad"
-                    />
-                </Grid>
+                <UserAuthRequired user={fieldReportProject.created_by}>
+                    <Grid mt={2}>
+                        <AddNewFullWidthButton
+                            onClick={handleClickNew}
+                            tooltip="Añadir actividad"
+                        />
+                    </Grid>
+                </UserAuthRequired>
             )}
         </>
     );

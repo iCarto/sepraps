@@ -6,6 +6,7 @@ import {FieldReportForm} from "../form";
 import Grid from "@mui/material/Grid";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import {UserAuthRequired} from "base/user/utilities";
 
 const FieldReportGeneralDataSection = ({
     fieldReport,
@@ -58,17 +59,19 @@ const FieldReportGeneralDataSection = ({
                             value={`${fieldReport.reporting_person}`}
                         />
                     </Grid>
-                    <Grid
-                        item
-                        xs={"auto"}
-                        container
-                        justifyContent="flex-end"
-                        alignItems="center"
-                    >
-                        <IconButton onClick={handleOpenForm}>
-                            <EditIcon fontSize="small" />
-                        </IconButton>
-                    </Grid>
+                    <UserAuthRequired user={fieldReport.created_by}>
+                        <Grid
+                            item
+                            xs={"auto"}
+                            container
+                            justifyContent="flex-end"
+                            alignItems="center"
+                        >
+                            <IconButton onClick={handleOpenForm}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </Grid>
+                    </UserAuthRequired>
                 </Grid>
             )}
         </>

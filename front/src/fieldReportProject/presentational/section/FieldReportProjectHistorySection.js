@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
+import {UserAuthRequired} from "base/user/utilities";
 
 // TO-DO: Extract this and FieldReportProjectAgreementsSection.js to one abstract component
 const FieldReportProjectHistorySection = ({
@@ -46,25 +47,29 @@ const FieldReportProjectHistorySection = ({
                             {project[section]}
                         </Typography>
                     </Grid>
-                    <Grid
-                        item
-                        xs={"auto"}
-                        container
-                        justifyContent="flex-end"
-                        alignItems="flex-start"
-                    >
-                        <IconButton onClick={handleOpenForm}>
-                            <EditIcon fontSize="small" />
-                        </IconButton>
-                    </Grid>
+                    <UserAuthRequired user={project?.created_by}>
+                        <Grid
+                            item
+                            xs={"auto"}
+                            container
+                            justifyContent="flex-end"
+                            alignItems="flex-start"
+                        >
+                            <IconButton onClick={handleOpenForm}>
+                                <EditIcon fontSize="small" />
+                            </IconButton>
+                        </Grid>
+                    </UserAuthRequired>
                 </Grid>
             ) : (
-                <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
-                    <AddNewFullWidthButton
-                        onClick={handleOpenForm}
-                        tooltip="Añadir antecedentes"
-                    />
-                </Grid>
+                <UserAuthRequired user={project?.created_by}>
+                    <Grid mt={2} display={isFormOpen ? "none" : "inherit"}>
+                        <AddNewFullWidthButton
+                            onClick={handleOpenForm}
+                            tooltip="Añadir antecedentes"
+                        />
+                    </Grid>
+                </UserAuthRequired>
             )}
         </>
     );
