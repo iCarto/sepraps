@@ -40,7 +40,9 @@ class FieldReportFilter(filters.FilterSet):
         )
 
     def filter_by_project(self, queryset, name, project_id):
-        return queryset.filter(field_report_projects__project=project_id)
+        return queryset.filter(field_report_projects__project=project_id).order_by(
+            "-date"
+        )
 
     def filter_by_creator_user(self, queryset, name, creator_user):
         return (
