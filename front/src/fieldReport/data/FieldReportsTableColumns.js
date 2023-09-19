@@ -1,12 +1,11 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import {DateUtil} from "base/format/utilities";
-import {Link} from "react-router-dom";
 import {styled} from "@mui/material/styles";
+import {TextLink} from "base/navigation/components";
 
 const StyledBox = styled(Box)(({theme}) => ({
     "& *:not(:last-child):after": {
-        content: '" · "',
+        content: '" | "',
     },
     "& a": {
         whiteSpace: "nowrap",
@@ -47,12 +46,10 @@ export function useFieldReportsTableColumns() {
                     <StyledBox>
                         {item.contract_list.map(contract => (
                             <Box component="span" key={contract.id}>
-                                <Typography
-                                    component={Link}
+                                <TextLink
+                                    text={contract.label}
                                     to={`/contracts/${contract.id}/summary`}
-                                >
-                                    {contract.label}
-                                </Typography>
+                                />
                             </Box>
                         ))}
                     </StyledBox>
@@ -68,12 +65,10 @@ export function useFieldReportsTableColumns() {
                     <StyledBox>
                         {item.project_list.map(project => (
                             <Box component="span" key={project.id}>
-                                <Typography
-                                    component={Link}
+                                <TextLink
+                                    text={project.label}
                                     to={`/projects/${project.id}/summary`}
-                                >
-                                    {project.label}
-                                </Typography>
+                                />
                             </Box>
                         ))}
                     </StyledBox>

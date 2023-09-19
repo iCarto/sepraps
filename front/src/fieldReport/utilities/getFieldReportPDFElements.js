@@ -105,8 +105,8 @@ export function getFieldReportPDFElements(
             .setFontSize(dimensions.fontSizeHeadingTwo)
             .setTextColor(CUSTOM_COLORS.text.primary)
             .text(
-                `Memorándum nº: ${reportData.code}`,
-                getTextPositionY(`Memorándum n.º: ${reportData.code}`),
+                `Número de memorándum: ${reportData.code}`,
+                getTextPositionY(`Número de memorándum: ${reportData.code}`),
                 initialPositionY + 10
             );
 

@@ -15,6 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import {useEffect, useState} from "react";
+import Divider from "@mui/material/Divider";
 
 const CardContentNoPadding = styled(CardContent)(`
   padding: 3px 10px;
@@ -48,13 +49,13 @@ const FieldReportList = ({fieldReports, selectedFieldReportId, basePath}) => {
             sx={{
                 border: "1px",
                 borderStyle: "solid",
-                borderColor: "secondary.main",
+                borderColor: "darkgray",
                 p: 1,
                 height: "calc(100vh - 180px)",
-                overflow: "scroll",
+                overflow: "auto",
             }}
         >
-            <FormControl variant="outlined" sx={{mb: 2}}>
+            {/*<FormControl variant="outlined" sx={{mb: 2}}>
                 <OutlinedInput
                     id="search-field-report-input"
                     type="text"
@@ -73,8 +74,10 @@ const FieldReportList = ({fieldReports, selectedFieldReportId, basePath}) => {
                         handleSearch(event.target.value);
                     }}
                 />
-            </FormControl>
-            <Grid container direction="column" spacing={1}>
+                </FormControl>*/}
+            <Typography sx={{textAlign: "center"}}>Fecha del informe</Typography>
+            <Divider />
+            <Grid container direction="column" spacing={1} sx={{mt: 1}}>
                 {fieldReportsList &&
                     fieldReportsList.map(fieldReport => (
                         <Grid item>
@@ -87,16 +90,18 @@ const FieldReportList = ({fieldReports, selectedFieldReportId, basePath}) => {
                                         selectedFieldReportId === fieldReport.id
                                             ? "solid"
                                             : "none",
-                                    borderColor: "primary.dark",
+                                    borderColor: "#ccc",
                                     backgroundColor:
                                         selectedFieldReportId === fieldReport.id
                                             ? "secondary.lighter"
                                             : "inherit",
+                                    p: 1,
+                                    textAlign: "center",
                                 }}
                             >
                                 <CardContentNoPadding>
                                     <TextLink
-                                        text={`Memorándum ${fieldReport.code}`}
+                                        text={DateUtil.formatDate(fieldReport.date)}
                                         to={`${basePath}/${fieldReport.id.toString()}`}
                                         textStyle={{
                                             fontWeight:
@@ -105,38 +110,6 @@ const FieldReportList = ({fieldReports, selectedFieldReportId, basePath}) => {
                                                     : "inherit",
                                         }}
                                     />
-                                    <Grid
-                                        container
-                                        alignItems="flex-start"
-                                        sx={{mt: 1}}
-                                    >
-                                        <EventOutlinedIcon
-                                            sx={{fontSize: "16px", mr: 1}}
-                                        />
-                                        <Typography
-                                            variant="subtitle1"
-                                            color="text.secondary"
-                                            fontSize="0.7em"
-                                        >
-                                            {DateUtil.formatDate(fieldReport.date)}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid
-                                        container
-                                        alignItems="flex-start"
-                                        flexWrap="nowrap"
-                                    >
-                                        <PersonOutlineOutlinedIcon
-                                            sx={{fontSize: "16px", mr: 1}}
-                                        />
-                                        <Typography
-                                            variant="subtitle1"
-                                            color="text.secondary"
-                                            fontSize="0.7em"
-                                        >
-                                            {fieldReport.reporting_person}
-                                        </Typography>
-                                    </Grid>
                                 </CardContentNoPadding>
                             </Card>
                         </Grid>

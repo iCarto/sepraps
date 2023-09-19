@@ -70,13 +70,6 @@ const ViewProjectFieldReportSubPage = () => {
         <ContentLayout>
             <AlertError error={error} />
             <Grid container spacing={1}>
-                <Grid item xs={2}>
-                    <FieldReportList
-                        fieldReports={fieldReportsForProject}
-                        basePath={`/projects/${projectId}/fieldreport`}
-                        selectedFieldReportId={parseInt(fieldReportId)}
-                    />
-                </Grid>
                 <Grid item xs={10}>
                     {fieldReport && (
                         <>
@@ -103,6 +96,13 @@ const ViewProjectFieldReportSubPage = () => {
                             />
                         </>
                     )}
+                </Grid>
+                <Grid item xs={2}>
+                    <FieldReportList
+                        fieldReports={fieldReportsForProject}
+                        basePath={`/projects/${projectId}/fieldreport`}
+                        selectedFieldReportId={parseInt(fieldReportId)}
+                    />
                 </Grid>
             </Grid>
         </ContentLayout>

@@ -149,7 +149,7 @@ const FieldReportFilterForm = ({onClear = null}) => {
                     alignItems="center"
                     mb={3}
                 >
-                    <Grid item xs={4} lg={3}>
+                    <Grid item xs={4}>
                         <FormAutocomplete
                             name="construction_contract"
                             label="Contrato"
@@ -162,7 +162,7 @@ const FieldReportFilterForm = ({onClear = null}) => {
                             }
                         />
                     </Grid>
-                    <Grid item xs={4} lg={3}>
+                    <Grid item xs={4}>
                         <FormAutocomplete
                             name="department"
                             label="Departamento"
@@ -172,7 +172,7 @@ const FieldReportFilterForm = ({onClear = null}) => {
                             onChangeHandler={handleChangeDepartment}
                         />
                     </Grid>
-                    <Grid item xs={4} lg={3}>
+                    <Grid item xs={4}>
                         <FormAutocomplete
                             name="district"
                             label="Distrito"
@@ -186,7 +186,7 @@ const FieldReportFilterForm = ({onClear = null}) => {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={4} lg={3}>
+                    <Grid item xs={4}>
                         <FormDatePicker
                             name="date_from"
                             label="Desde el día"
@@ -196,7 +196,7 @@ const FieldReportFilterForm = ({onClear = null}) => {
                             }
                         />
                     </Grid>
-                    <Grid item xs={4} lg={3}>
+                    <Grid item xs={4}>
                         <FormDatePicker
                             name="date_to"
                             label="Hasta el día"
