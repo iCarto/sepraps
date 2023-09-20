@@ -7,7 +7,7 @@ export default function ListProvider({children}) {
     const {moduleFilter} = useConfigModule();
 
     const [elements, setElements] = useState([]);
-    const [view, setView] = useState("table");
+    const [view, setView] = useState("list");
     const [filter, setFilter] = useState(null);
     const [page, setPage] = useState(1);
     const [size, setSize] = useState(0);

@@ -21,14 +21,14 @@ const EntityChangeView = ({views = null}) => {
                 exclusive
                 onChange={handleChange}
             >
-                {views?.includes("table") && (
-                    <ToggleButton value="table">
-                        <FormatListBulletedOutlinedIcon fontSize="small" />
-                    </ToggleButton>
-                )}
                 {views?.includes("list") && (
                     <ToggleButton value="list">
                         <GridViewOutlinedIcon fontSize="small" />
+                    </ToggleButton>
+                )}
+                {views?.includes("table") && (
+                    <ToggleButton value="table">
+                        <FormatListBulletedOutlinedIcon fontSize="small" />
                     </ToggleButton>
                 )}
                 {views?.includes("map") && (

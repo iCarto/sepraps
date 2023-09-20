@@ -3,11 +3,15 @@ import {useNavigate} from "react-router-dom";
 import {MenuAction} from "base/ui/menu";
 import EditIcon from "@mui/icons-material/Edit";
 
-export function useMenuGenericEditAction() {
+export function useMenuGenericEditAction(handleClick = null) {
     const navigate = useNavigate();
 
     const handleClickEdit = element => {
-        navigate(`edit/${element.id}`);
+        if (handleClick) {
+            handleClick(element.id);
+        } else {
+            navigate(`edit/${element.id}`);
+        }
     };
 
     const action = (

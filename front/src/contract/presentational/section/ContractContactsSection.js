@@ -1,93 +1,71 @@
-import {useState} from "react";
-import {useNavigateWithReload} from "base/navigation/hooks";
-import {useAuth} from "base/user/provider";
-import {ContractService} from "contract/service";
-import {contract_view_adapter, createContract} from "contract/model";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
-import {ContactsTable} from "contact/presentational";
-import {DeleteContractContactDialog} from "../../container/monitoring";
-import {AlertError} from "base/error/components";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {ContractService} from "contract/service";
+import {ContactService} from "contact/service";
+import {useProviderContactsTable} from "provider/data";
+import {
+    useMenuGenericDeleteAction,
+    useMenuGenericEditAction,
+    useMenuGenericRemoveAction,
+} from "base/ui/menu/hooks";
+
 import {SectionCard} from "base/ui/section/components";
-import {RemoveItemDialog} from "base/delete/components";
+import {ContactsTable} from "contact/presentational";
 
 import Typography from "@mui/material/Typography";
+import {contract_view_adapter, createContract} from "contract/model";
 
-const ContractContactsSection = ({contract}) => {
+const ContractorContactsSection = ({contract}) => {
+    const [selectedElement, setSelectedElement] = useState(null);
+
     const navigate = useNavigateWithReload();
-    const {ROLES} = useAuth();
+    const {idInfoPanel} = useParams();
+    const {tableColumns} = useProviderContactsTable();
 
-    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const [contactToRemove, setContactToRemove] = useState(null);
-    const [error, setError] = useState("");
-
-    const handleActions = (contactId, action) => {
-        switch (action) {
-            case "remove":
-                setContactToRemove(contactId);
-                setIsRemoveDialogOpen(true);
-                break;
-            case "delete":
-                setContactToRemove(contactId);
-                setIsDeleteDialogOpen(true);
-                break;
-            case "edit":
-                handleEdit(contactId);
-                break;
-            default:
-                break;
-        }
+    const handleSelectElement = elementId => {
+        setSelectedElement(elementId);
+        navigate(`info/${elementId}`);
     };
 
-    const handleEdit = contactId => {
-        navigate(`edit/${contactId}`);
-    };
+    useEffect(() => {
+        // If the sidebar panel is open we must highlight the element
+        setSelectedElement(idInfoPanel ? parseInt(idInfoPanel) : null);
+    }, [idInfoPanel]);
 
-    const handleUpdateContract = updatedContract => {
-        console.log(contract_view_adapter({...updatedContract}));
-        ContractService.update(contract_view_adapter({...updatedContract}))
-            .then(() => {
-                navigate(`/contracts/${contract.id}/monitoring`, true);
-            })
-            .catch(error => {
-                console.log(error);
-                setError(error);
-            });
-    };
+    const {action: editAction} = useMenuGenericEditAction();
+    const {action: deleteAction, dialog: deleteDialog} = useMenuGenericDeleteAction(
+        ContactService
+    );
+    const {action: removeAction, dialog: removeDialog} = useMenuGenericRemoveAction(
+        contract,
+        "contacts",
+        ContractService,
+        entityObject => createContract(contract_view_adapter(entityObject))
+    );
 
     return (
         <>
-            <SectionCard title="Contactos de supervisión">
-                <AlertError error={error} />
-                {contract?.contacts.length ? (
+            {removeDialog}
+            {deleteDialog}
+            <SectionCard>
+                {contract.contacts.length ? (
                     <ContactsTable
+                        customTableColumns={tableColumns}
                         contacts={contract.contacts}
-                        handleActions={handleActions}
+                        elementActions={[editAction, removeAction, deleteAction]}
+                        selectedElement={selectedElement}
+                        onSelectElement={handleSelectElement}
                     />
                 ) : (
-                    <Typography py={3} sx={{fontStyle: "italic", textAlign: "center"}}>
-                        Este contrato no tiene contactos de supervisión
+                    <Typography paddingY={3} textAlign="center">
+                        Este contrato no tiene contactos.
                     </Typography>
                 )}
             </SectionCard>
-            <RemoveItemDialog
-                isDialogOpen={isRemoveDialogOpen}
-                setIsDialogOpen={setIsRemoveDialogOpen}
-                onRemove={handleUpdateContract}
-                itemToRemove={contactToRemove}
-                createEntityObject={createContract}
-                entity={contract}
-                subEntityList={contract.contacts}
-                subEntityName={"contacts"}
-            />
-            <DeleteContractContactDialog
-                contract={contract}
-                contactToDelete={contactToRemove}
-                isDialogOpen={isDeleteDialogOpen}
-                setIsDialogOpen={setIsDeleteDialogOpen}
-            />
         </>
     );
 };
 
-export default ContractContactsSection;
+export default ContractorContactsSection;

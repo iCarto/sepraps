@@ -4,7 +4,6 @@ export {
 export {default as ListProvidersPage} from "./ListProvidersPage";
 export {default as ViewProviderPage} from "./ViewProviderPage";
 export {default as ViewProviderPanel} from "./ViewProviderPanel";
-export {default as ViewProviderContactPanel} from "./ViewProviderContactPanel";
 export {default as CreateProviderPage} from "./CreateProviderPage";
 export {default as ManageProvidersPage} from "./ManageProvidersPage";
 export {default as UpdateProviderPanel} from "./UpdateProviderPanel";

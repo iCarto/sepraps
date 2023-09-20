@@ -6,7 +6,7 @@ import {EntityViewPanel} from "base/entity/components/presentational";
 import {SectionCard, SectionField} from "base/ui/section/components";
 import {NumberUtil} from "base/format/utilities";
 
-const ViewProviderContactPanel = () => {
+const ViewContactPanel = () => {
     const {contactId} = useParams();
     const [contact, setContact] = useState(null);
 
@@ -18,7 +18,7 @@ const ViewProviderContactPanel = () => {
 
     return (
         contact && (
-            <EntityViewPanel title="Contacto del prestador" showDetailButton={false}>
+            <EntityViewPanel title="Contacto" showDetailButton={false}>
                 <SectionCard title={contact.name}>
                     <SectionField label="Cargo" value={contact.post} />
                     <SectionField label="Género" value={contact.gender_name} />
@@ -35,4 +35,4 @@ const ViewProviderContactPanel = () => {
     );
 };
 
-export default ViewProviderContactPanel;
+export default ViewContactPanel;

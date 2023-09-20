@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 
-import {useProjectListView} from "project/provider";
 import {ProjectsList, ProjectsTable} from "project/presentational";
 import {SectionHeading} from "base/ui/section/components";
 import {MapProjects} from "base/map/components";
@@ -18,12 +17,13 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import {useList} from "base/entity/hooks";
 
 const ListContractProjects = ({projects}) => {
     const [selectedElement, setSelectedElement] = useState(null);
 
     const navigate = useNavigate();
-    const {view} = useProjectListView();
+    const {view} = useList();
     const {ROLES} = useAuth();
 
     const handleClickOnCard = projectId => {

@@ -28,6 +28,7 @@ const ContactFormSearchFields = ({allowedPosts = null}) => {
             id: contact?.id || "",
             name: contact?.name || "",
             gender: contact?.gender || "",
+            ci_number: contact?.ci_number || null,
             phone: contact?.phone || "",
             email: contact?.email || "",
             comments: contact?.comments || "",

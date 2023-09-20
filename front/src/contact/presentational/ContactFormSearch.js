@@ -12,6 +12,7 @@ const ContactFormSearch = ({allowedPosts = null, onSubmit}) => {
             post: "",
             id: "",
             name: "",
+            ci_number: null,
             gender: "",
             phone: "",
             email: "",

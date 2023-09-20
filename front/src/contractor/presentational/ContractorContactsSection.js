@@ -1,126 +1,89 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
-import {useAuth} from "base/user/provider";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractorService} from "contractor/service";
+import {ContactService} from "contact/service";
 import {createContractor} from "contractor/model";
+import {useProviderContactsTable} from "provider/data";
+import {
+    useMenuGenericDeleteAction,
+    useMenuGenericEditAction,
+    useMenuGenericRemoveAction,
+} from "base/ui/menu/hooks";
 
-import {EntityAddButtonGroup} from "base/entity/components/presentational";
-import {AuthAction} from "base/user/components";
-import {AccordionLayout} from "base/shared/components";
-import {RemoveItemDialog} from "base/delete/components";
-import {AlertError} from "base/error/components";
+import {SectionCard} from "base/ui/section/components";
 import {ContactsTable} from "contact/presentational";
-import {DeleteContractorContactDialog} from "contractor/container";
 
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import {AccordionLayout} from "base/shared/components";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import {AuthAction} from "base/user/components";
+import Grid from "@mui/material/Grid";
+import {EntityAddButtonGroup} from "base/entity/components/presentational";
+import {ROLES} from "base/user";
 
 const ContractorContactsSection = ({contractor}) => {
+    const [selectedElement, setSelectedElement] = useState(null);
+
     const navigate = useNavigateWithReload();
-    const {ROLES} = useAuth();
+    const {idInfoPanel} = useParams();
+    const {tableColumns} = useProviderContactsTable();
 
-    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const [contactToRemove, setContactToRemove] = useState(null);
-    const [error, setError] = useState("");
-
-    //TO-DO: Fix table width after sidebar drawer refactoring
-
-    // const tableContainerWidth = isSidePanelOpen
-    //     ? {md: "350px", lg: "550px", xl: "100%"}
-    //     : {md: "625px", lg: "100%", xl: "100%"};
-    const tableContainerWidth = {md: "350px", lg: "550px", xl: "100%"};
-
-    const handleActions = (contactId, action) => {
-        switch (action) {
-            case "remove":
-                setContactToRemove(contactId);
-                setIsRemoveDialogOpen(true);
-                break;
-            case "delete":
-                setContactToRemove(contactId);
-                setIsDeleteDialogOpen(true);
-                break;
-            case "edit":
-                handleEdit(contactId);
-                break;
-            default:
-                break;
-        }
+    const handleEditElement = elementId => {
+        setSelectedElement(elementId);
+        navigate(`contractor/contact/edit/${elementId}`);
     };
 
-    const handleEdit = contactId => {
-        navigate(`contractor/contact/edit/${contactId}`);
+    const handleSelectElement = elementId => {
+        setSelectedElement(elementId);
+        navigate(`info/${elementId}`);
     };
 
-    const handleupdate = updatedContractor => {
-        ContractorService.update(updatedContractor)
-            .then(() => {
-                navigate(`/contracts/${contractor.contract}/summary`, true);
-            })
-            .catch(error => {
-                console.log(error);
-                setError(error);
-            });
-    };
+    useEffect(() => {
+        // If the sidebar panel is open we must highlight the element
+        setSelectedElement(idInfoPanel ? parseInt(idInfoPanel) : null);
+    }, [idInfoPanel]);
+
+    const {action: editAction} = useMenuGenericEditAction(handleEditElement);
+    const {action: deleteAction, dialog: deleteDialog} = useMenuGenericDeleteAction(
+        ContactService
+    );
+    const {action: removeAction, dialog: removeDialog} = useMenuGenericRemoveAction(
+        contractor,
+        "contacts",
+        ContractorService,
+        createContractor
+    );
 
     return (
-        <>
-            <AccordionLayout
-                accordionTitle="Contactos"
-                accordionIcon={<PermContactCalendarIcon />}
-            >
-                <Grid container spacing={2}>
-                    <Grid item container xs={12} justifyContent="center">
-                        {contractor.contacts.length ? (
-                            <Box
-                                sx={{
-                                    overflowX: "auto",
-                                    overflowY: "hidden",
-                                    width: tableContainerWidth,
-                                }}
-                            >
-                                <ContactsTable
-                                    contacts={contractor.contacts}
-                                    handleActions={handleActions}
-                                />
-                            </Box>
-                        ) : (
-                            <Typography pt={3} sx={{fontStyle: "italic"}}>
-                                Este contratista aún no tiene contactos
-                            </Typography>
-                        )}
+        <AccordionLayout
+            accordionTitle="Contactos"
+            accordionIcon={<PermContactCalendarIcon />}
+        >
+            {removeDialog}
+            {deleteDialog}
+            <SectionCard>
+                {contractor.contacts.length ? (
+                    <ContactsTable
+                        customTableColumns={tableColumns}
+                        contacts={contractor.contacts}
+                        elementActions={[editAction, removeAction, deleteAction]}
+                        selectedElement={selectedElement}
+                        onSelectElement={handleSelectElement}
+                    />
+                ) : (
+                    <Typography paddingY={3} textAlign="center">
+                        Este contratista no tiene contactos.
+                    </Typography>
+                )}
+                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                    <Grid item container xs={12} mt={3} justifyContent="center">
+                        <EntityAddButtonGroup basePath="contractor/contact/" />
                     </Grid>
-                    <AuthAction
-                        roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-                    >
-                        <Grid item container xs={12} mt={3} justifyContent="center">
-                            <EntityAddButtonGroup basePath="contractor/contact/" />
-                        </Grid>
-                    </AuthAction>
-                    <AlertError error={error} />
-                </Grid>
-            </AccordionLayout>
-            <RemoveItemDialog
-                isDialogOpen={isRemoveDialogOpen}
-                setIsDialogOpen={setIsRemoveDialogOpen}
-                onRemove={handleupdate}
-                itemToRemove={contactToRemove}
-                createEntityObject={createContractor}
-                entity={contractor}
-                subEntityList={contractor.contacts}
-                subEntityName={"contacts"}
-            />
-            <DeleteContractorContactDialog
-                contractor={contractor}
-                contactToDelete={contactToRemove}
-                isDialogOpen={isDeleteDialogOpen}
-                setIsDialogOpen={setIsDeleteDialogOpen}
-            />
-        </>
+                </AuthAction>
+            </SectionCard>
+        </AccordionLayout>
     );
 };
 

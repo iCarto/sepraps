@@ -19,6 +19,7 @@ const ViewContractProjectPanel = () => {
 
     const {idInfoPanel: projectId} = useParams();
     const {id: contractId} = useParams();
+    console.log({projectId});
 
     useEffect(() => {
         ProjectService.get(projectId).then(project => {
@@ -57,7 +58,7 @@ const ViewContractProjectPanel = () => {
             subEntityList={contract.projects}
             subEntityName="projects"
         >
-            {<ProjectSection project={project} />}
+            {project && <ProjectSection project={project} />}
         </EntityViewPanel>
     );
 };

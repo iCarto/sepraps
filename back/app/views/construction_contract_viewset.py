@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db import models
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
@@ -14,9 +14,18 @@ from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
 class ConstructionContractFilter(filters.FilterSet):
+    class Meta(object):
+        model = ConstructionContract
+        fields = ("search",)
+
     status = filters.CharFilter(method="filter_by_status")
     search = filters.CharFilter(method="filter_by_search_text")
     last_modified_items = filters.CharFilter(method="filter_by_last_modified_items")
+    financing_fund = filters.CharFilter(method="filter_by_financing_fund")
+    financing_program = filters.CharFilter(method="filter_by_financing_program")
+    contractor = filters.CharFilter(method="filter_by_contractor")
+    awarding_date_min = filters.DateFilter(method="filter_by_awarding_date_min")
+    awarding_date_max = filters.DateFilter(method="filter_by_awarding_date_max")
 
     def filter_by_status(self, queryset, name, status):
         if status == "active":
@@ -25,15 +34,28 @@ class ConstructionContractFilter(filters.FilterSet):
         return queryset
 
     def filter_by_search_text(self, queryset, name, search_text):
-        return queryset.filter(Q(number__icontains=search_text))
+        return queryset.filter(models.Q(number__icontains=search_text))
 
     def filter_by_last_modified_items(self, queryset, name, last_modified_items):
         limit = int(last_modified_items)
         return queryset.filter(closed=False).order_by("-updated_at")[:limit]
 
-    class Meta(object):
-        model = ConstructionContract
-        fields = ("search",)
+    def filter_by_financing_fund(self, queryset, param_name, search_value):
+        return queryset.filter(
+            models.Q(financing_program__financing_funds__in=[int(search_value)])
+        )
+
+    def filter_by_financing_program(self, queryset, param_name, search_value):
+        return queryset.filter(models.Q(financing_program=search_value))
+
+    def filter_by_contractor(self, queryset, param_name, search_value):
+        return queryset.filter(models.Q(contractor=search_value))
+
+    def filter_by_awarding_date_min(self, queryset, name, awarding_date_min):
+        return queryset.filter(awarding_date__gte=awarding_date_min)
+
+    def filter_by_awarding_date_max(self, queryset, name, awarding_date_max):
+        return queryset.filter(awarding_date__lte=awarding_date_max)
 
 
 class ConstructionContractViewSet(ModelListViewSet):
@@ -48,8 +70,8 @@ class ConstructionContractViewSet(ModelListViewSet):
         )
         if self.request.user.belongs_to([GROUP_GESTION, GROUP_EDICION]):
             queryset = queryset.filter(
-                Q(constructioncontractcontact__contact__user=self.request.user)
-                | Q(creation_user=self.request.user)
+                models.Q(constructioncontractcontact__contact__user=self.request.user)
+                | models.Q(creation_user=self.request.user)
             ).distinct()
         return self.get_serializer_class().setup_eager_loading(queryset)
 

@@ -47,7 +47,7 @@ const EntityListPage = ({
     }, [idInfoPanel]);
 
     const getViewComponent = () => {
-        if (view === "list") {
+        if (view === "list" && views.includes(view)) {
             return (
                 <EntityCardsList
                     service={service}
@@ -56,19 +56,7 @@ const EntityListPage = ({
                 />
             );
         }
-        if (view === "table") {
-            return (
-                <EntityTable
-                    columns={tableColumns}
-                    service={service}
-                    selectedElement={selectedElement}
-                    onSelectElement={handleSelectElement}
-                    elementActions={elementActions}
-                    getCellProps={getCellProps}
-                />
-            );
-        }
-        if (view === "map") {
+        if (view === "map" && views.includes(view)) {
             return (
                 <EntityListMap
                     layer={mapLayer}
@@ -78,6 +66,16 @@ const EntityListPage = ({
                 />
             );
         }
+        return (
+            <EntityTable
+                columns={tableColumns}
+                service={service}
+                selectedElement={selectedElement}
+                onSelectElement={handleSelectElement}
+                elementActions={elementActions}
+                getCellProps={getCellProps}
+            />
+        );
         return null;
     };
 
@@ -92,14 +90,13 @@ const EntityListPage = ({
                         justifyContent="flex-start"
                         alignItems="flex-start"
                     >
-                        <Grid item xs={8} xl={6} role="form">
+                        <Grid item xs={8} role="form">
                             {filterForm || <EntityFilterForm entityName={entityName} />}
                         </Grid>
                         <Grid
                             item
                             container
                             xs={4}
-                            xl={6}
                             spacing={1}
                             direction={{xs: "column", lg: "row"}}
                             justifyContent="flex-end"

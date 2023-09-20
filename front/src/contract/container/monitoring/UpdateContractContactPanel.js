@@ -51,6 +51,7 @@ const UpdateContractContactPanel = () => {
                     name: data.name,
                     post: data.post,
                     post_label: data.post_label,
+                    ci_number: data.ci_number,
                     gender: data.gender,
                     phone: data.phone,
                     email: data.email,

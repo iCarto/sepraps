@@ -3,9 +3,7 @@ import {useLocation} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {PageMenu, PageMenuListItemButton} from "base/ui/menu";
 
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import ChecklistIcon from "@mui/icons-material/Checklist";
-import QueryStatsIcon from "@mui/icons-material/QueryStats";
+import ListIcon from "@mui/icons-material/List";
 
 const ContractPageMenu = () => {
     const {ROLES} = useAuth();
@@ -20,19 +18,7 @@ const ContractPageMenu = () => {
                 key="contracts-list"
                 to={`${basePath}/${entityUrlSlug}/list`}
                 text="Listado"
-                icon={<MapOutlinedIcon />}
-            />
-            <PageMenuListItemButton
-                key="contracts-supervision"
-                to={`${basePath}/${entityUrlSlug}/supervision`}
-                text="Supervisión"
-                icon={<ChecklistIcon />}
-            />
-            <PageMenuListItemButton
-                key="contracts-stats"
-                to={`${basePath}/${entityUrlSlug}/stats`}
-                text="Estadísticas"
-                icon={<QueryStatsIcon />}
+                icon={<ListIcon />}
             />
         </PageMenu>
     );

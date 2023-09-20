@@ -1,6 +1,5 @@
 import {Route} from "react-router-dom";
 import {UpdateContractContractorContactPanel} from "contractor/container";
-import {ProjectListViewProvider} from "project/provider";
 import {
     ListContractsPage,
     ViewContractPage,
@@ -20,6 +19,7 @@ import {
     CreateContractProjectPage,
 } from "../container";
 import {UpdateContractContactPanel} from "../container/monitoring";
+import {ViewContactPanel} from "contact/container";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -39,7 +39,7 @@ const contractRoutes = [
             >
                 <Route
                     key="contract-contractor-edit"
-                    path="contractor/edit/:contractorId"
+                    path="contractor/:contractorId/edit"
                     element={<UpdateContractContractorPanel />}
                 />
                 <Route
@@ -51,6 +51,11 @@ const contractRoutes = [
                     key="contract-contractor-contact"
                     path="contractor/contact/:action/:contactId"
                     element={<UpdateContractContractorContactPanel />}
+                />
+                <Route
+                    key="contract-contractor-view-contact"
+                    path="info/:contactId"
+                    element={<ViewContactPanel />}
                 />
                 <Route
                     key="contract-general-data"
@@ -77,6 +82,11 @@ const contractRoutes = [
                 element={<ViewContractMonitoringSubPage />}
             >
                 <Route
+                    key="contract-monitoring-view-contact"
+                    path="info/:contactId"
+                    element={<ViewContactPanel />}
+                />
+                <Route
                     key="contract-monitoring-profile-edit"
                     path=":action/:contactId"
                     element={<UpdateContractContactPanel />}
@@ -86,11 +96,7 @@ const contractRoutes = [
             <Route
                 key="contract-projects"
                 path="projects"
-                element={
-                    <ProjectListViewProvider>
-                        <ViewContractProjectsSubPage />
-                    </ProjectListViewProvider>
-                }
+                element={<ViewContractProjectsSubPage />}
             >
                 <Route
                     key="contract-project-add-existing"

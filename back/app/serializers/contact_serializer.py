@@ -40,6 +40,12 @@ class ContactSerializer(serializers.ModelSerializer):
             "comments",
             "is_staff",
         )
+        extra_kwargs = {
+            "ci_number": {"allow_null": True},
+            "phone": {"allow_null": True, "allow_blank": True},
+            "email": {"allow_null": True, "allow_blank": True},
+            "comments": {"allow_null": True, "allow_blank": True},
+        }
 
     id = serializers.IntegerField(allow_null=True)
     gender_name = serializers.SerializerMethodField()
