@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 
 import {BorderedTableCell as TableCell} from "base/table/components";
 import {MenuAction} from "base/ui/menu";
-import {ActionsMenu} from "base/ui/menu";
+import {MenuActions} from "base/ui/menu";
 import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -95,7 +95,7 @@ const QuestionnaireInstanceTableRow = ({
             <TableCell>{instance.comments}</TableCell>
             <TableCell>
                 {isInstanceEditable(instance) ? (
-                    <ActionsMenu>
+                    <MenuActions>
                         <MenuAction
                             key="edit-questionnaire"
                             icon={<EditIcon />}
@@ -103,7 +103,7 @@ const QuestionnaireInstanceTableRow = ({
                             element={instance.id}
                             handleClick={handleClick}
                         />
-                    </ActionsMenu>
+                    </MenuActions>
                 ) : null}
             </TableCell>
         </TableRow>

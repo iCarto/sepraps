@@ -11,7 +11,7 @@ import {
     TableSortingHead,
 } from "base/table/components";
 import {AuthAction} from "base/user/components";
-import {ActionsMenu} from "base/ui/menu";
+import {MenuActions} from "base/ui/menu";
 import {Spinner} from "base/shared/components";
 import {EntityNoItemsComponent} from "base/entity/components/presentational";
 
@@ -190,7 +190,7 @@ const EntityTable = ({
                                                             ROLES.SUPERVISION,
                                                         ]}
                                                     >
-                                                        <ActionsMenu>
+                                                        <MenuActions>
                                                             {elementActions.map(
                                                                 actionMenu =>
                                                                     cloneElement(
@@ -200,7 +200,7 @@ const EntityTable = ({
                                                                         }
                                                                     )
                                                             )}
-                                                        </ActionsMenu>
+                                                        </MenuActions>
                                                     </AuthAction>
                                                 </TableCell>
                                             ) : null}

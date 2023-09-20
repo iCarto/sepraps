@@ -2,7 +2,7 @@ import {MenuAction} from "base/ui/menu";
 import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 
-import {ActionsMenu} from "base/ui/menu";
+import {MenuActions} from "base/ui/menu";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -52,7 +52,7 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                                             ROLES.SUPERVISION,
                                         ]}
                                     >
-                                        <ActionsMenu>
+                                        <MenuActions>
                                             <MenuAction
                                                 key="remove-contact"
                                                 icon={<LinkOffIcon />}
@@ -60,7 +60,7 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                                                 element={locality.code}
                                                 handleClick={handleClick}
                                             />
-                                        </ActionsMenu>
+                                        </MenuActions>
                                     </AuthAction>
                                 </TableCell>
                             ) : null}

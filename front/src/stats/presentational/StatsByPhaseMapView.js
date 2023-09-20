@@ -1,5 +1,5 @@
+import {MapStats} from "base/geo";
 import {useEffect, useState} from "react";
-import {MapStats} from "base/map/components";
 import {StatsService} from "stats/service";
 
 const StatsByPhaseMapView = ({filter}) => {

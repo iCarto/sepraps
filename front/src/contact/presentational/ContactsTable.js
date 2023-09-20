@@ -6,7 +6,7 @@ import {AuthAction} from "base/user/components";
 import {useContactsTable} from "contact/data";
 
 import {TableSortingHead} from "base/table/components";
-import {ActionsMenu} from "base/ui/menu";
+import {MenuActions} from "base/ui/menu";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -103,13 +103,13 @@ const ContactsTable = ({
                                                     ROLES.SUPERVISION,
                                                 ]}
                                             >
-                                                <ActionsMenu>
+                                                <MenuActions>
                                                     {elementActions.map(actionMenu =>
                                                         cloneElement(actionMenu, {
                                                             element,
                                                         })
                                                     )}
-                                                </ActionsMenu>
+                                                </MenuActions>
                                             </AuthAction>
                                         </TableCell>
                                     ) : null}

@@ -1,4 +1,4 @@
-export {default as ActionsMenu} from "./ActionsMenu";
+export {default as MenuActions} from "./MenuActions";
 export {default as MenuAction} from "./MenuAction";
 export {default as MenuListDetailButton} from "./MenuListDetailButton";
 export {default as MenuListDocumentsButton} from "./MenuListDocumentsButton";

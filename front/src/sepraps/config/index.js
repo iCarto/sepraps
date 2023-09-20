@@ -1,1 +1,1 @@
-export const MAP_COORDINATES = [-25.28207, -57.63539];
+export const MAP_COORDINATES = [-24.08207, -57.63539];

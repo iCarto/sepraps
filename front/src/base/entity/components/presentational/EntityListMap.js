@@ -1,7 +1,9 @@
-import {useEffect} from "react";
+import Stack from "@mui/material/Stack";
 import {useList} from "base/entity/hooks";
-import {useMap} from "base/map/hooks";
-import {useMapLayerProvider} from "base/map/provider";
+import {MapActions, useMap, useMapLayerProvider} from "base/geo";
+import MapLayersMenu from "base/geo/MapLayersMenu";
+import {useMapConfig} from "base/geo/provider";
+import {useEffect, useRef} from "react";
 
 const mapStyle = {
     width: "100%",
@@ -9,23 +11,28 @@ const mapStyle = {
 };
 
 const EntityListMap = ({
-    layer: layerHook,
     service,
-    selectedElement = null,
+    layerHook,
+    layerDefaultDiscriminator = null,
     onSelectElement = null,
+    selectedElement = null,
 }) => {
-    const [{setItems, items}] = useMapLayerProvider(service);
-    const {filter, setSize} = useList();
+    const {filter} = useList();
+    const {mapFilter, setMapFilter} = useMapConfig();
 
     const {mapRef, createMap} = useMap();
+    const mapObjectRef = useRef(null);
 
-    const {createLayer, updateLayer, clearLayer, changeSelectedElement} = layerHook(
-        onSelectElement
-    );
+    const layer = layerHook(onSelectElement);
+    const [layerMapProvider] = useMapLayerProvider(service, layer, {
+        discriminator: layerDefaultDiscriminator,
+        included: true,
+    });
 
     useEffect(() => {
         const map = createMap();
-        createLayer(map);
+        layer.createLayer(map);
+        mapObjectRef.current = map;
 
         return () => {
             if (map._loaded) {
@@ -34,24 +41,39 @@ const EntityListMap = ({
         };
     }, []);
 
-    useEffect(() => {
-        service.getAll(filter).then(result => {
-            setItems(result);
-            // setSize(result.features.length);
-            setSize(result?.length);
-        });
-    }, [filter]);
+    layerMapProvider.useProvider();
 
     useEffect(() => {
-        clearLayer();
-        updateLayer(items, false, true);
-    }, [items]);
-
-    useEffect(() => {
-        changeSelectedElement(selectedElement);
+        console.log("selectedElement", {selectedElement});
+        // TODO Changes not reflected in map because useProvider() (from useMapLayerProvider) is not listening
+        /*if (setSelectedIds) {
+            setSelectedIds([selectedElement]);
+        }*/
     }, [selectedElement]);
 
-    return <div id="map" style={mapStyle} ref={mapRef} />;
+    // And this component have to check changes in moduleFilter to update mapFilter
+    useEffect(() => {
+        const newMapFilter = {...mapFilter, ...filter};
+
+        // Compare objects to avoid duplicate calls with same filter
+        if (JSON.stringify(mapFilter) !== JSON.stringify(newMapFilter)) {
+            setMapFilter({...mapFilter, ...filter});
+        }
+    }, [filter]);
+
+    return (
+        <Stack direction="row" sx={{width: "100%"}}>
+            <div id="map" style={mapStyle} ref={mapRef} />
+            <Stack>
+                <MapActions
+                    mapObjectRef={mapObjectRef}
+                    mapRef={mapRef}
+                    showMapActions={true}
+                />
+                <MapLayersMenu layerProvider={layerMapProvider} />
+            </Stack>
+        </Stack>
+    );
 };
 
 export default EntityListMap;

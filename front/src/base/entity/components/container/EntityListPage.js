@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
 import {useNavigateWithReload} from "base/navigation/hooks";
+import {useMapLayerProvider} from "base/geo";
 import {useList} from "base/entity/hooks";
 import {
     EntityCardsList,
@@ -22,7 +23,8 @@ const EntityListPage = ({
     tableColumns,
     getCellProps = null,
     card = null,
-    mapLayer = null,
+    layerHook = null,
+    layerDefaultDiscriminator = null,
     filterForm = null,
     createButton = true,
     elementActions = null,
@@ -59,10 +61,11 @@ const EntityListPage = ({
         if (view === "map" && views.includes(view)) {
             return (
                 <EntityListMap
-                    layer={mapLayer}
                     service={service}
-                    selectedElement={selectedElement}
+                    layerHook={layerHook}
+                    layerDefaultDiscriminator={layerDefaultDiscriminator}
                     onSelectElement={handleSelectElement}
+                    selectedElement={selectedElement}
                 />
             );
         }

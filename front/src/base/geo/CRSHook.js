@@ -5,14 +5,14 @@ import "leaflet/dist/leaflet.css";
 export const crsType = {
     type: "name",
     properties: {
-        name: "urn:ogc:def:crs:EPSG::25829",
+        name: "urn:ogc:def:crs:EPSG::32721",
     },
 };
 
 export function useCRS() {
-    const crs = new L.Proj.CRS(
-        "EPSG:25829",
-        "+proj=utm +zone=29 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs", //http://spatialreference.org/ref/epsg/25830/proj4/
+    const crs = null; /*new L.Proj.CRS(
+        "EPSG:32721",
+        "+proj=utm +zone=21 +south +ellps=WGS84 +datum=WGS84 +units=m +no_defs ", //https://spatialreference.org/ref/epsg/32721/proj4/
         {
             resolutions: [
                 1024,
@@ -35,7 +35,7 @@ export function useCRS() {
             //Origen de servicio teselado
             //origin:[0,0]
         }
-    );
+    );*/
 
     return {crs};
 }

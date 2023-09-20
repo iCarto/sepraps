@@ -19,20 +19,14 @@ const ServiceRequestFormat = Object.freeze({
 });
 
 const ServiceUtil = {
-    getQueryString(page, filter, sort, order, template) {
+    getQueryString(page, filter, sort, order) {
         return `${this.getPageQueryString(page)}&${this.getFilterQueryString(
             filter
-        )}&${this.getOrderQueryString(sort, order)}&${this.getTemplateString(
-            template
-        )}&`;
+        )}&${this.getOrderQueryString(sort, order)}&`;
     },
 
     getPageQueryString(page) {
         return page != null ? `page=${page}` : "";
-    },
-
-    getTemplateString(template) {
-        return template != null ? `template=${template}` : "";
     },
 
     getFilterQueryString(filter) {
@@ -52,6 +46,16 @@ const ServiceUtil = {
             return "";
         }
         return `ordering=${order === "desc" ? "-" : ""}${sort}`;
+    },
+
+    getGeoFilterQueryString(filter) {
+        if (!filter) {
+            return "";
+        }
+        if (filter["buffer"]) {
+            filter = {...filter, concello: `${filter["concello"]}_${filter["buffer"]}`};
+        }
+        return this.getFilterQueryString(filter);
     },
 
     getAcceptHeader(requestFormat) {

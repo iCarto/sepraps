@@ -54,13 +54,13 @@ class EntityService {
             ServiceUtil.getAcceptHeader(ServiceRequestFormat.GEOJSON)
         ).then(response => {
             // TODO: get crs from config
-            response["crs"] = {
+            /*response["crs"] = {
                 type: "name",
                 properties: {
                     // name: "urn:ogc:def:crs:EPSG::25829",
                     name: "urn:ogc:def:crs:EPSG::32721",
                 },
-            };
+            };*/
             return response;
         });
     }

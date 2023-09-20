@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {useOutletContext} from "react-router-dom";
 
-import {ActionsMenu} from "base/ui/menu";
+import {MenuActions} from "base/ui/menu";
 
 import styled from "@mui/material/styles/styled";
 
@@ -81,7 +81,7 @@ const SidebarPanel = ({
                 </Grid>
                 {sidebarActions && (
                     <Grid item xs="auto">
-                        <ActionsMenu>{sidebarActions}</ActionsMenu>
+                        <MenuActions>{sidebarActions}</MenuActions>
                     </Grid>
                 )}
                 <Grid item xs="auto">

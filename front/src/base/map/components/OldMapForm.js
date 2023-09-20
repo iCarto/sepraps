@@ -2,14 +2,14 @@ import {useEffect, useRef} from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet.utm";
-import {useMapIcon} from "base/map/utilities";
+import {useMapIcon} from "base/geo/hooks";
 
 const style = {
     width: "100%",
     height: "300px",
 };
 
-const MapForm = ({onClick, latitude = null, longitude = null}) => {
+const OldMapForm = ({onClick, latitude = null, longitude = null}) => {
     const getIcon = useMapIcon();
 
     const mapRef = useRef(null);
@@ -56,4 +56,4 @@ const MapForm = ({onClick, latitude = null, longitude = null}) => {
     return <div id="map" style={style} />;
 };
 
-export default MapForm;
+export default OldMapForm;

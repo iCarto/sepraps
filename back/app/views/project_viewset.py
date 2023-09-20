@@ -1,7 +1,9 @@
 from itertools import chain
 
+from django.contrib.gis.db.models import PointField
+from django.contrib.gis.geos import Point
 from django.db import models
-from django.db.models import Q
+from django.db.models import ExpressionWrapper, Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -21,10 +23,12 @@ from app.serializers.project_questionnaire_instance_serializer import (
     ProjectQuestionnaireInstanceSerializer,
 )
 from app.serializers.project_serializer import (
+    ProjectGeoSerializer,
     ProjectSerializer,
     ProjectShortSerializer,
     ProjectSummarySerializer,
 )
+from app.util import is_geojson_request
 from questionnaires.models.questionnaire import Questionnaire
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
@@ -55,15 +59,11 @@ class ProjectFilter(filters.FilterSet):
     def filter_by_locality(self, queryset, param_name, search_value):
         return queryset.filter(models.Q(main_infrastructure__locality=search_value))
 
-    def filter_by_district(self, queryset, param_name, search_value):
-        return queryset.filter(
-            models.Q(main_infrastructure__locality__district=search_value)
-        )
+    def filter_by_district(self, queryset, param_name, district):
+        return queryset.filter(models.Q(linked_localities__district=district))
 
-    def filter_by_department(self, queryset, param_name, search_value):
-        return queryset.filter(
-            models.Q(main_infrastructure__locality__department=search_value)
-        )
+    def filter_by_department(self, queryset, param_name, department):
+        return queryset.filter(models.Q(linked_localities__department=department))
 
     def filter_by_construction_contract(self, queryset, param_name, search_value):
         return queryset.filter(models.Q(construction_contract=search_value))
@@ -107,9 +107,23 @@ class ProjectViewSet(ModelListViewSet):
                 )
                 | Q(creation_user=self.request.user)
             ).distinct()
+
+        if is_geojson_request(self.request):
+            queryset = queryset.annotate(
+                location=models.Func(
+                    models.F("main_infrastructure__longitude"),
+                    models.F("main_infrastructure__latitude"),
+                    function="ST_MakePoint",
+                    template="%(function)s(%(expressions)s)",
+                    output_field=PointField(),
+                )
+            )
+
         return self.get_serializer_class().setup_eager_loading(queryset)
 
     def get_serializer_class(self):
+        if is_geojson_request(self.request):
+            return ProjectGeoSerializer
         if self.action == "list":
             template = self.request.query_params.get("template")
             if template == "short":

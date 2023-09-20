@@ -4,7 +4,6 @@ import {NumberUtil} from "base/format/utilities";
 import L from "leaflet";
 import "leaflet.utm";
 
-import {MapForm} from "base/map/components";
 import Grid from "@mui/material/Grid";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -12,6 +11,8 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import {MapForm} from "base/geo";
+import OldMapForm from "base/map/components/OldMapForm";
 
 /// TO-DO: Adapt based on GADPO
 
@@ -147,7 +148,7 @@ const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
                     </FormControl>
                 </Grid>
             </Grid>
-            <MapForm
+            <OldMapForm
                 onClick={handleMapChangeLocation}
                 latitude={NumberUtil.parseFloat(coordinates.latitude)}
                 longitude={NumberUtil.parseFloat(coordinates.longitude)}

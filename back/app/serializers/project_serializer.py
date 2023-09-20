@@ -2,6 +2,8 @@ from django.db.models import Prefetch
 from domains.mixins import BaseDomainField, BaseDomainMixin
 from domains.models import DomainCategoryChoices
 from rest_framework import serializers
+from rest_framework_gis.fields import GeometryField
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 # from django.db.models import F, Prefetch
 from app.models.construction_contract import ConstructionContract
@@ -315,3 +317,42 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
 class ProjectShortSerializer(ProjectSerializer):
     class Meta(ProjectSerializer.Meta):
         fields = ("id", "code", "closed", "linked_localities")
+
+
+class ProjectGeoSerializer(GeoFeatureModelSerializer):
+    class Meta(object):
+        model = Project
+        geo_field = "location"
+        fields = (
+            "id",
+            "code",
+            "closed",
+            "name",
+            "project_type",
+            "project_class",
+            "location",
+            "status",
+        )
+
+    name = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField()
+    location = GeometryField()
+
+    def setup_eager_loading(queryset):
+        """Perform necessary eager loading of data."""
+        return queryset.select_related("main_infrastructure").prefetch_related(
+            "linked_localities",
+            Prefetch(
+                "milestones",
+                queryset=Milestone.objects.exclude(parent__isnull=False)
+                .exclude(compliance_date__isnull=True)
+                .order_by("-ordering"),
+            ),
+        )
+
+    def get_name(self, obj):  # noqa: WPS615
+        return " - ".join(i.name for i in obj.linked_localities.all())
+
+    def get_status(self, obj):  # noqa: WPS615
+        last_milestone = obj.milestones.first()
+        return last_milestone.phase if last_milestone else None

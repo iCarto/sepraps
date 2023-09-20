@@ -1,5 +1,8 @@
 import datetime
 
+from django.contrib.gis.db.models import GeometryField
+from django.contrib.gis.db.models.functions import GeoFunc
+
 
 def dictfetchall(cursor):
     "Return all rows from a cursor as a dict"
@@ -8,10 +11,7 @@ def dictfetchall(cursor):
 
 
 def is_geojson_request(request):
-    return (
-        request.action == "list"
-        and request.request.content_type == "application/geo+json"
-    )
+    return request.accepted_renderer.format == "geojson"
 
 
 def formatDate(date):
@@ -21,3 +21,8 @@ def formatDate(date):
         int(date_split_reversed[1]),
         int(date_split_reversed[2]),
     )
+
+
+class MakePoint(GeoFunc):
+    output_field = GeometryField()
+    function = "ST_MakePoint"

@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {useController, useFormContext} from "react-hook-form";
-import {ProjUtil, crsType} from "base/map/utilities";
-import {MapForm} from "base/map/components";
 
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import {ProjUtil} from "base/geo/utilities";
+import {MapForm, crsType} from "base/geo";
 
 const FormMapGeojsonPoint = ({
     name: propsName,
