@@ -12,7 +12,8 @@ export function useMenuGenericRemoveAction(
     entity,
     entityAttribute,
     service,
-    createEntityObject
+    createEntityObject,
+    entityAttributeId = "id"
 ) {
     const navigate = useNavigateWithReload();
 
@@ -23,11 +24,12 @@ export function useMenuGenericRemoveAction(
     const subEntityList = entity[entityAttribute];
 
     const handleClickRemove = element => {
+        console.log({element});
         setIsRemoveDialogOpen(true);
         if (entityAttribute) {
             setItemToRemove(
                 subEntityList.findIndex(
-                    item => parseInt(item.id) === parseInt(element.id)
+                    item => item[entityAttributeId] === element[entityAttributeId]
                 )
             );
         }
@@ -35,14 +37,14 @@ export function useMenuGenericRemoveAction(
 
     const handleRemove = () => {
         subEntityList.splice(itemToRemove, 1);
+        const newEntityObject = createEntityObject({
+            ...entity,
+            [`${entityAttribute}`]: [...subEntityList],
+        });
+        console.log({newEntityObject});
 
         service
-            .update(
-                createEntityObject({
-                    ...entity,
-                    [`${entityAttribute}`]: [...subEntityList],
-                })
-            )
+            .update(newEntityObject)
             .then(() => {
                 navigate("", true);
             })
@@ -55,6 +57,7 @@ export function useMenuGenericRemoveAction(
     const action = (
         <MenuAction
             key="table-remove-action"
+            id="table-remove-action"
             icon={<LinkOffIcon />}
             text="Quitar"
             handleClick={handleClickRemove}

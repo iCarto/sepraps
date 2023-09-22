@@ -12,6 +12,7 @@ import {ProjectLinkedLocalitiesTable} from "project/presentational/location";
 
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import {useMenuGenericRemoveAction} from "base/ui/menu/hooks";
 
 const ProjectLinkedLocalitiesSection = ({project}) => {
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
@@ -23,67 +24,38 @@ const ProjectLinkedLocalitiesSection = ({project}) => {
 
     const isProjectClosed = project.closed;
 
-    const handleActions = (localityId, action) => {
-        switch (action) {
-            case "remove":
-                setLocalityToRemove(localityId);
-                setIsRemoveDialogOpen(true);
-                break;
-            case "edit":
-                handleEdit(localityId);
-                break;
-            default:
-                break;
-        }
-    };
-
-    const handleEdit = localityCode => {
-        navigate(`linked_localities/${localityCode}/edit`);
-    };
-
-    const handleUpdateProject = updatedProject => {
-        ProjectService.update(project_view_adapter({...updatedProject}))
-            .then(() => {
-                navigate(`/projects/${project.id}/location`, true);
-            })
-            .catch(error => {
-                console.log(error);
-                setError(error);
-            });
-        setIsRemoveDialogOpen(false);
-    };
+    const {action: removeAction, dialog: removeDialog} = useMenuGenericRemoveAction(
+        project,
+        "linked_localities",
+        ProjectService,
+        entityObject => project_view_adapter(entityObject),
+        "code"
+    );
 
     return (
         <SectionCard title="Localidades vinculadas">
             {project.linked_localities.length ? (
                 <ProjectLinkedLocalitiesTable
                     localities={project.linked_localities}
-                    handleActions={!isProjectClosed && handleActions}
+                    elementActions={!isProjectClosed && [removeAction]}
                 />
             ) : (
                 <Stack alignItems="center" spacing={3}>
                     <Typography sx={{fontStyle: "italic"}}>
                         Este proyecto aún no tiene localidades vinculadas
                     </Typography>
-                    {!isProjectClosed && (
-                        <AddNewButton
-                            basePath="linked_localities/new/add"
-                            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-                        />
-                    )}
+                </Stack>
+            )}
+            {!isProjectClosed && (
+                <Stack alignItems="center" spacing={3}>
+                    <AddNewButton
+                        basePath="linked_localities/new/add"
+                        roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                    />
                 </Stack>
             )}
             <AlertError error={error} />
-            <RemoveItemDialog
-                isDialogOpen={isRemoveDialogOpen}
-                setIsDialogOpen={setIsRemoveDialogOpen}
-                onRemove={handleUpdateProject}
-                itemToRemove={localityToRemove}
-                createEntityObject={createProject}
-                entity={project}
-                subEntityList={project.linked_localities}
-                subEntityName={"linked_localities"}
-            />
+            {removeDialog}
         </SectionCard>
     );
 };

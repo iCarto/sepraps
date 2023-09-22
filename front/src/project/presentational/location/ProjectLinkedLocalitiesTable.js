@@ -10,13 +10,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
+import {cloneElement} from "react";
 
-const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
+const ProjectLinkedLocalitiesTable = ({localities, elementActions = null}) => {
     const {ROLES} = useAuth();
-
-    const handleClick = (localityCode, buttonName) => {
-        handleActions(localityCode, buttonName.split("-")[0]);
-    };
 
     return (
         <TableContainer>
@@ -32,7 +29,9 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                         <TableCell sx={{textTransform: "uppercase"}}>
                             Departamento
                         </TableCell>
-                        {handleActions && <TableCell sx={{width: "62px"}}></TableCell>}
+                        {elementActions?.length && (
+                            <TableCell sx={{width: "62px"}}></TableCell>
+                        )}
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -43,7 +42,7 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                             </TableCell>
                             <TableCell>{locality.district_name}</TableCell>
                             <TableCell>{locality.department_name}</TableCell>
-                            {handleActions ? (
+                            {elementActions?.length ? (
                                 <TableCell>
                                     <AuthAction
                                         roles={[
@@ -53,13 +52,11 @@ const ProjectLinkedLocalitiesTable = ({localities, handleActions = null}) => {
                                         ]}
                                     >
                                         <MenuActions>
-                                            <MenuAction
-                                                key="remove-contact"
-                                                icon={<LinkOffIcon />}
-                                                text="Quitar localidad"
-                                                element={locality.code}
-                                                handleClick={handleClick}
-                                            />
+                                            {elementActions.map(actionMenu =>
+                                                cloneElement(actionMenu, {
+                                                    element: locality,
+                                                })
+                                            )}
                                         </MenuActions>
                                     </AuthAction>
                                 </TableCell>
