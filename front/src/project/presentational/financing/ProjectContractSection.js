@@ -1,38 +1,27 @@
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 
 import {AddNewButton} from "base/shared/components";
-import {SectionCard, SectionField} from "base/ui/section/components";
+import {
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "base/ui/section/components";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 const ProjectContractSection = ({contract}) => {
-    const navigate = useNavigate();
     const {ROLES} = useAuth();
 
     let project;
     [project] = useOutletContext();
     const isProjectClosed = project?.closed;
 
-    // TO-DO: Allow editing (selecting different existing contract)?
-    const secondaryActions = [
-        // <SectionCardHeaderAction
-        //     key="edit"
-        //     name="edit"
-        //     text="Modificar"
-        //     icon={<EditIcon />}
-        //     onClick={() => {
-        //         navigate("contract/edit");
-        //     }}
-        //     roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-        // />,
-    ];
-
     return (
-        <SectionCard title="Contrato de obras" secondaryActions={secondaryActions}>
+        <SectionCard title="Contrato de obras">
             {contract ? (
                 <>
                     <SectionField
