@@ -116,6 +116,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
     # ATTRIBUTES
 
     def get_folder(self, obj):
+        print(obj.folder)
         return obj.folder.media_path if obj.folder else None
 
     def get_milestones(self, obj):

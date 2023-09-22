@@ -122,6 +122,7 @@ const ViewDocumentPanel = ({
             />
         </AuthAction>,
     ];
+    console.log({sidebarActions});
 
     return (
         <SidebarPanelLayout

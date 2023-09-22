@@ -14,7 +14,7 @@ from app.models.infrastructure import Infrastructure
 from app.models.location import Locality
 from app.models.provider import Provider
 from documents.folder_utils import create_folder
-from documents.models import MediaNode
+from documents.models import MediaNode, create_folder_structure
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
 )
@@ -92,9 +92,7 @@ class Project(models.Model):
 
 @receiver(post_save, sender=Project)
 def post_create(sender, instance, created, *args, **kwargs):
-    """
-    Create project folder structure and project milestones from template
-    """
+    """Create project folder structure and project milestones from template."""
     from app.models.milestone import create_project_milestones
 
     if not created:
@@ -111,8 +109,11 @@ def post_create(sender, instance, created, *args, **kwargs):
         # + instance.project_type
         # + ".json",
 
-    root_folder = create_folder(
-        instance, field="code", created=True, children_data=data.get("folders", [])
+    classtype = type(instance).__name__
+    root_folder = create_folder_structure(
+        "{0}".format(instance.code),
+        "{0}/{1}".format(classtype.lower(), instance.code),
+        data.get("folders", []),
     )
     instance.folder = root_folder
 

@@ -52,7 +52,13 @@ const PageLayout = ({
                 }}
                 style={{minHeight: `calc(100vh - ${FOOTER_HEIGHT}px`}}
             >
-                {children ? children : <Outlet context={[...context]} />}
+                {children ? (
+                    children
+                ) : (
+                    <Outlet
+                        context={[...context, isSidebarPanelOpen, setSidebarPanelOpen]}
+                    />
+                )}
             </Box>
             {children && (
                 <SidebarPanelDrawer isSidebarPanelOpen={isSidebarPanelOpen}>

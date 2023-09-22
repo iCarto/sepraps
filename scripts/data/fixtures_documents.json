@@ -7,8 +7,8 @@
             "media_name": "image5.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 125484,
-            "storage_path": "2022-AP-001/4_Post_Construcción/image5.jpg",
-            "parent": 108,
+            "storage_path": "project/2022-AP-001/4_Post_Construcción/image5.jpg",
+            "parent": 6,
             "creation_user": 1,
             "created_at": "2022-06-16T16:26:18.696Z"
         }
@@ -21,8 +21,8 @@
             "media_name": "image1.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 125132,
-            "storage_path": "2022-AP-001/4_Post_Construcción/image1.jpg",
-            "parent": 108,
+            "storage_path": "project/2022-AP-001/4_Post_Construcción/image1.jpg",
+            "parent": 6,
             "creation_user": 1,
             "created_at": "2022-06-16T16:26:18.741Z"
         }
@@ -35,8 +35,8 @@
             "media_name": "image2.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 118387,
-            "storage_path": "2022-AP-001/4_Post_Construcción/image2.jpg",
-            "parent": 108,
+            "storage_path": "project/2022-AP-001/4_Post_Construcción/image2.jpg",
+            "parent": 6,
             "creation_user": 1,
             "created_at": "2022-06-16T16:26:18.754Z"
         }
@@ -49,8 +49,8 @@
             "media_name": "image3.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 176670,
-            "storage_path": "2022-AP-001/3_Ejecución/image3.jpg",
-            "parent": 107,
+            "storage_path": "project/2022-AP-001/3_Ejecución/image3.jpg",
+            "parent": 7,
             "creation_user": 1,
             "created_at": "2022-06-16T16:26:30.778Z"
         }
@@ -63,8 +63,8 @@
             "media_name": "image4.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 72252,
-            "storage_path": "2022-AP-001/3_Ejecución/image4.jpg",
-            "parent": 107,
+            "storage_path": "project/2022-AP-001/3_Ejecución/image4.jpg",
+            "parent": 7,
             "creation_user": 1,
             "created_at": "2022-06-16T16:26:30.792Z"
         }
@@ -77,8 +77,8 @@
             "media_name": "image5.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 93149,
-            "storage_path": "2022-AP-002/3_Ejecución/image5.jpg",
-            "parent": 113,
+            "storage_path": "project/2022-AP-002/3_Ejecución/image5.jpg",
+            "parent": 13,
             "creation_user": 1,
             "created_at": "2022-06-16T16:26:55.842Z"
         }
@@ -91,8 +91,8 @@
             "media_name": "image3.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 171834,
-            "storage_path": "2022-AP-002/3_Ejecución/image3.jpg",
-            "parent": 113,
+            "storage_path": "project/2022-AP-002/3_Ejecución/image3.jpg",
+            "parent": 13,
             "creation_user": 1,
             "created_at": "2022-06-16T16:26:55.866Z"
         }
@@ -105,8 +105,8 @@
             "media_name": "image2.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 134387,
-            "storage_path": "2022-AP-002/4_Post_Construcción/image2.jpg",
-            "parent": 114,
+            "storage_path": "project/2022-AP-002/4_Post_Construcción/image2.jpg",
+            "parent": 14,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:10.718Z"
         }
@@ -119,8 +119,8 @@
             "media_name": "image1.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 134240,
-            "storage_path": "2022-AP-002/4_Post_Construcción/image1.jpg",
-            "parent": 114,
+            "storage_path": "project/2022-AP-002/4_Post_Construcción/image1.jpg",
+            "parent": 14,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:10.767Z"
         }
@@ -133,8 +133,8 @@
             "media_name": "image4.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 95658,
-            "storage_path": "2022-AP-002/4_Post_Construcción/image4.jpg",
-            "parent": 114,
+            "storage_path": "project/2022-AP-002/4_Post_Construcción/image4.jpg",
+            "parent": 14,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:10.828Z"
         }
@@ -147,8 +147,8 @@
             "media_name": "image7.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 60627,
-            "storage_path": "2022-AP-002/4_Post_Construcción/image7.jpg",
-            "parent": 114,
+            "storage_path": "project/2022-AP-002/4_Post_Construcción/image7.jpg",
+            "parent": 14,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:10.837Z"
         }
@@ -161,8 +161,8 @@
             "media_name": "image6.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 117281,
-            "storage_path": "2022-AP-002/4_Post_Construcción/image6.jpg",
-            "parent": 114,
+            "storage_path": "project/2022-AP-002/4_Post_Construcción/image6.jpg",
+            "parent": 14,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:10.858Z"
         }
@@ -175,8 +175,8 @@
             "media_name": "image8.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 88911,
-            "storage_path": "2022-AP-002/4_Post_Construcción/image8.jpg",
-            "parent": 114,
+            "storage_path": "project/2022-AP-002/4_Post_Construcción/image8.jpg",
+            "parent": 14,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:10.863Z"
         }
@@ -189,8 +189,8 @@
             "media_name": "image4.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 556969,
-            "storage_path": "2022-AP-003/3_Ejecución/image4.jpg",
-            "parent": 119,
+            "storage_path": "project/2022-AP-003/3_Ejecución/image4.jpg",
+            "parent": 20,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:42.990Z"
         }
@@ -203,8 +203,8 @@
             "media_name": "image2.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 356638,
-            "storage_path": "2022-AP-003/3_Ejecución/image2.jpg",
-            "parent": 119,
+            "storage_path": "project/2022-AP-003/3_Ejecución/image2.jpg",
+            "parent": 20,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:43.096Z"
         }
@@ -217,8 +217,8 @@
             "media_name": "image1.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 356694,
-            "storage_path": "2022-AP-003/3_Ejecución/image1.jpg",
-            "parent": 119,
+            "storage_path": "project/2022-AP-003/3_Ejecución/image1.jpg",
+            "parent": 20,
             "creation_user": 1,
             "created_at": "2022-06-16T16:27:43.099Z"
         }
@@ -231,8 +231,8 @@
             "media_name": "image7.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 360278,
-            "storage_path": "2022-AP-004/3_Ejecución/image7.jpg",
-            "parent": 125,
+            "storage_path": "project/2022-AP-004/3_Ejecución/image7.jpg",
+            "parent": 27,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:04.249Z"
         }
@@ -245,8 +245,8 @@
             "media_name": "image1.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 272404,
-            "storage_path": "2022-AP-004/3_Ejecución/image1.jpg",
-            "parent": 125,
+            "storage_path": "project/2022-AP-004/3_Ejecución/image1.jpg",
+            "parent": 27,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:04.351Z"
         }
@@ -259,8 +259,8 @@
             "media_name": "image5.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 190487,
-            "storage_path": "2022-AP-004/3_Ejecución/image5.jpg",
-            "parent": 125,
+            "storage_path": "project/2022-AP-004/3_Ejecución/image5.jpg",
+            "parent": 27,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:04.354Z"
         }
@@ -273,8 +273,8 @@
             "media_name": "image3.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 643012,
-            "storage_path": "2022-AP-004/4_Post_Construcción/image3.jpg",
-            "parent": 126,
+            "storage_path": "project/2022-AP-004/4_Post_Construcción/image3.jpg",
+            "parent": 28,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:16.355Z"
         }
@@ -287,8 +287,8 @@
             "media_name": "image4.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 291595,
-            "storage_path": "2022-AP-004/4_Post_Construcción/image4.jpg",
-            "parent": 126,
+            "storage_path": "project/2022-AP-004/4_Post_Construcción/image4.jpg",
+            "parent": 28,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:16.488Z"
         }
@@ -301,8 +301,8 @@
             "media_name": "image6.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 344788,
-            "storage_path": "2022-AP-004/4_Post_Construcción/image6.jpg",
-            "parent": 126,
+            "storage_path": "project/2022-AP-004/4_Post_Construcción/image6.jpg",
+            "parent": 28,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:16.496Z"
         }
@@ -315,8 +315,8 @@
             "media_name": "image2.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 391506,
-            "storage_path": "2022-AP-004/4_Post_Construcción/image2.jpg",
-            "parent": 126,
+            "storage_path": "project/2022-AP-004/4_Post_Construcción/image2.jpg",
+            "parent": 28,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:16.520Z"
         }
@@ -329,8 +329,8 @@
             "media_name": "image5.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 498765,
-            "storage_path": "2022-AP-005/3_Ejecución/image5.jpg",
-            "parent": 131,
+            "storage_path": "project/2022-AP-005/3_Ejecución/image5.jpg",
+            "parent": 34,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:35.000Z"
         }
@@ -343,8 +343,8 @@
             "media_name": "image1.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 361623,
-            "storage_path": "2022-AP-005/3_Ejecución/image1.jpg",
-            "parent": 131,
+            "storage_path": "project/2022-AP-005/3_Ejecución/image1.jpg",
+            "parent": 34,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:51.312Z"
         }
@@ -357,8 +357,8 @@
             "media_name": "image2.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 474908,
-            "storage_path": "2022-AP-005/4_Post_Construcción/image2.jpg",
-            "parent": 132,
+            "storage_path": "project/2022-AP-005/4_Post_Construcción/image2.jpg",
+            "parent": 35,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:59.799Z"
         }
@@ -371,8 +371,8 @@
             "media_name": "image3.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 438386,
-            "storage_path": "2022-AP-005/4_Post_Construcción/image3.jpg",
-            "parent": 132,
+            "storage_path": "project/2022-AP-005/4_Post_Construcción/image3.jpg",
+            "parent": 35,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:59.858Z"
         }
@@ -385,8 +385,8 @@
             "media_name": "image4.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 501520,
-            "storage_path": "2022-AP-005/4_Post_Construcción/image4.jpg",
-            "parent": 132,
+            "storage_path": "project/2022-AP-005/4_Post_Construcción/image4.jpg",
+            "parent": 35,
             "creation_user": 1,
             "created_at": "2022-06-16T16:28:59.879Z"
         }
@@ -399,8 +399,8 @@
             "media_name": "image2.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 203623,
-            "storage_path": "2022-AP-006/3_Ejecución/image2.jpg",
-            "parent": 137,
+            "storage_path": "project/2022-AP-006/3_Ejecución/image2.jpg",
+            "parent": 41,
             "creation_user": 1,
             "created_at": "2022-06-16T16:29:19.927Z"
         }
@@ -413,8 +413,8 @@
             "media_name": "image3.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 359470,
-            "storage_path": "2022-AP-006/3_Ejecución/image3.jpg",
-            "parent": 137,
+            "storage_path": "project/2022-AP-006/3_Ejecución/image3.jpg",
+            "parent": 41,
             "creation_user": 1,
             "created_at": "2022-06-16T16:29:19.940Z"
         }
@@ -427,8 +427,8 @@
             "media_name": "image5.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 364943,
-            "storage_path": "2022-AP-006/3_Ejecución/image5.jpg",
-            "parent": 137,
+            "storage_path": "project/2022-AP-006/3_Ejecución/image5.jpg",
+            "parent": 41,
             "creation_user": 1,
             "created_at": "2022-06-16T16:29:19.964Z"
         }
@@ -441,8 +441,8 @@
             "media_name": "image1.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 222673,
-            "storage_path": "2022-AP-006/3_Ejecución/image1.jpg",
-            "parent": 137,
+            "storage_path": "project/2022-AP-006/3_Ejecución/image1.jpg",
+            "parent": 41,
             "creation_user": 1,
             "created_at": "2022-06-16T16:29:26.531Z"
         }
@@ -455,8 +455,8 @@
             "media_name": "image4.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 313398,
-            "storage_path": "2022-AP-006/4_Post_Construcción/image4.jpg",
-            "parent": 138,
+            "storage_path": "project/2022-AP-006/4_Post_Construcción/image4.jpg",
+            "parent": 42,
             "creation_user": 1,
             "created_at": "2022-06-16T16:29:37.418Z"
         }
