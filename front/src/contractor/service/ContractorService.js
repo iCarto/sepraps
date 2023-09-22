@@ -9,7 +9,7 @@ import {AuthApiService} from "base/api/service";
 const basePath = "/api/app/contractors";
 
 const ContractorService = {
-    getAll() {
+    getList() {
         return AuthApiService.get(basePath).then(response => {
             return createContractors(contractors_api_adapter(response));
         });

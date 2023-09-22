@@ -15,7 +15,7 @@ const ContactService = {
         });
     },
 
-    getAll() {
+    getList() {
         return AuthApiService.get(basePath).then(response => {
             return createContacts(contacts_api_adapter(response));
         });

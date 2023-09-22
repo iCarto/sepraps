@@ -29,7 +29,7 @@ const SelectContractDropDown = ({contract}) => {
     return (
         <EntityMenuDropDown
             entityInfo={entityInfo}
-            service={ContractService.getAll}
+            service={ContractService.getList}
             template={TEMPLATE.SHORT}
             getDropdownItemContent={getDropdownItemContent}
         />

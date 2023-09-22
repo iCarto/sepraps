@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
-import {ContractService} from "contract/service";
+import {ContractService, TEMPLATE} from "contract/service";
 import {LocationService} from "sepraps/location/service";
 
 import {
@@ -45,7 +45,7 @@ const FieldReportFilterForm = ({onClear = null}) => {
     useEffect(() => {
         if (expanded && !loadedDomains) {
             Promise.all([
-                ContractService.getAll(false, 1),
+                ContractService.getList({template: TEMPLATE.SHORT, closed: false}),
                 LocationService.getAdministrativeDivisions(),
             ]).then(([contracts, administrativeDivisions]) => {
                 console.log({contracts});

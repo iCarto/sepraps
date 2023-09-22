@@ -41,7 +41,7 @@ const ContractFilterForm = ({onClear = null}) => {
             Promise.all([
                 FinancingService.getFinancingFunds(),
                 FinancingService.getFinancingPrograms(),
-                ContractorService.getAll(),
+                ContractorService.getList(),
             ]).then(([financingFunds, financingPrograms, contractors]) => {
                 setFinancingFunds(financingFunds);
                 setFinancingPrograms(financingPrograms);

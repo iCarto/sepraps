@@ -25,7 +25,7 @@ const FieldReportProjectFormFields = ({section}) => {
     // TO-DO: Extract contract & project combo to new component
     useEffect(() => {
         if (Object.keys(filter).length) {
-            ProjectService.getAll(filter).then(data => {
+            ProjectService.getList(filter).then(data => {
                 const projectList = data
                     .filter(project => !fieldReporProjectIds.includes(project.id))
                     .map(project => ({

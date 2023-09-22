@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 
-import {ContractService} from "contract/service";
+import {ContractService, TEMPLATE} from "contract/service";
 import {ProviderService} from "provider/service";
 import {ContractorService} from "contractor/service";
 import {FinancingService} from "financing/service";
@@ -72,12 +72,16 @@ const StatsFilterForm = ({
                 views.includes("financingPrograms")
                     ? FinancingService.getFinancingPrograms()
                     : null,
-                views.includes("contracts") ? ContractService.getAll(false, 1) : null,
-                views.includes("contractors") ? ContractorService.getAll() : null,
+                views.includes("contracts")
+                    ? ContractService.getList({template: TEMPLATE.SHORT, closed: false})
+                    : null,
+                views.includes("contractors") ? ContractorService.getList() : null,
                 views.includes("administrativeDivisions")
                     ? LocationService.getAdministrativeDivisions()
                     : null,
-                views.includes("providers") ? ProviderService.getList(false, 1) : null,
+                views.includes("providers")
+                    ? ProviderService.getList({template: TEMPLATE.SHORT, closed: false})
+                    : null,
             ]).then(
                 ([
                     financingFunds,

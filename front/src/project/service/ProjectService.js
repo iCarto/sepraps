@@ -24,7 +24,7 @@ const entityService = createEntityService(
 );
 
 const ProjectService = {
-    getAll(filter, sort, order, format = null) {
+    getList(filter, sort, order, format = null) {
         return entityService.getList(filter, null, sort, order, format);
     },
 
