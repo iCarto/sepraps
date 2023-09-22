@@ -20,18 +20,22 @@ const QuestionnaireInstanceForm = ({
     const defaultValues = questionnaireInstance
         ? {
               id: questionnaireInstance.id,
-              year_month: new Date(
-                  questionnaireInstance.year,
-                  questionnaireInstance.month - 1,
-                  1
+              year_month: DateUtil.formatDate(
+                  new Date(
+                      questionnaireInstance.year,
+                      questionnaireInstance.month - 1,
+                      1
+                  ),
+                  "yyyy-MM-dd"
               ),
               comments: questionnaireInstance.comments || "",
           }
         : {
               id: null,
-              year_month: DateUtil.getToday(),
+              year_month: DateUtil.formatDate(DateUtil.getToday(), "yyyy-MM-dd"),
               comments: "",
           };
+    console.log({defaultValues});
 
     questionnaireFields.forEach(field => {
         defaultValues[field.code] = questionnaireInstance

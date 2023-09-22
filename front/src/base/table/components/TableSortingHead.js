@@ -6,7 +6,13 @@ import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Tooltip from "@mui/material/Tooltip";
 
-function TableSortingHead({order, attribute, onRequestSort, headCells, showActions}) {
+function TableSortingHead({
+    order,
+    attribute,
+    onRequestSort,
+    headCells,
+    showActions = false,
+}) {
     const createSortHandler = property => event => {
         onRequestSort(event, property);
     };
@@ -55,6 +61,7 @@ function TableSortingHead({order, attribute, onRequestSort, headCells, showActio
                             </TableCell>
                         </Tooltip>
                     ))}
+                    {showActions && <TableCell></TableCell>}
                 </TableRow>
             </TableHead>
         </>

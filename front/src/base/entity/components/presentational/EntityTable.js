@@ -148,7 +148,7 @@ const EntityTable = ({
                                 attribute={sort}
                                 onRequestSort={handleRequestSort}
                                 headCells={headCells}
-                                showActions={elementActions?.length}
+                                showActions={elementActions?.length > 0}
                             />
                             <TableBody>
                                 {elements?.map((element, index) => {

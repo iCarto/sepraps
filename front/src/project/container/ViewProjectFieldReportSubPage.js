@@ -23,6 +23,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import {TextLink} from "base/navigation/components";
 import {FieldReportList} from "fieldReport/presentational";
+import {PaperContainer} from "base/shared/components";
 
 const CardContentNoPadding = styled(CardContent)(`
   padding: 3px 10px;
@@ -39,13 +40,13 @@ const ViewProjectFieldReportSubPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const [fieldReportsForProject, setFieldReportsForProject] = useState(null);
+    const [fieldReportsForProject, setFieldReportsForProject] = useState([]);
 
     useEffect(() => {
         if ((projectId && !fieldReportId) || !fieldReportsForProject) {
             FieldReportService.getList({project: projectId}).then(fieldReports => {
                 setFieldReportsForProject(fieldReports);
-                if (!fieldReportId) {
+                if (!fieldReportId && fieldReports.length > 0) {
                     navigate(fieldReports[0].id.toString());
                 }
             });
@@ -69,42 +70,53 @@ const ViewProjectFieldReportSubPage = () => {
     return (
         <ContentLayout>
             <AlertError error={error} />
-            <Grid container spacing={1}>
-                <Grid item xs={10}>
-                    {fieldReport && (
-                        <>
-                            <FieldReportSummarySection
-                                fieldReport={fieldReport}
-                                secondaryAction={
-                                    <Tooltip title="Ver informe completo">
-                                        <Button
-                                            aria-label="view-field-report"
-                                            target="_blank"
-                                            href={`/field-reports/${fieldReportId}/summary`}
-                                            variant="contained"
-                                            startIcon={<OpenInNewIcon />}
-                                        >
-                                            Ver informe
-                                        </Button>
-                                    </Tooltip>
-                                }
-                            />
-                            <FieldReportProjectContent
-                                fieldReportProject={
-                                    fieldReport.field_report_projects[0]
-                                }
-                            />
-                        </>
-                    )}
+            {fieldReportsForProject.length > 0 ? (
+                <Grid container spacing={1}>
+                    <Grid item xs={10}>
+                        {fieldReport && (
+                            <>
+                                <FieldReportSummarySection
+                                    fieldReport={fieldReport}
+                                    secondaryAction={
+                                        <Tooltip title="Ver informe completo">
+                                            <Button
+                                                aria-label="view-field-report"
+                                                target="_blank"
+                                                href={`/field-reports/${fieldReportId}/summary`}
+                                                variant="contained"
+                                                startIcon={<OpenInNewIcon />}
+                                            >
+                                                Ver informe
+                                            </Button>
+                                        </Tooltip>
+                                    }
+                                />
+                                <FieldReportProjectContent
+                                    fieldReportProject={
+                                        fieldReport.field_report_projects[0]
+                                    }
+                                />
+                            </>
+                        )}
+                    </Grid>
+                    <Grid item xs={2}>
+                        <FieldReportList
+                            fieldReports={fieldReportsForProject}
+                            basePath={`/projects/${projectId}/fieldreport`}
+                            selectedFieldReportId={parseInt(fieldReportId)}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item xs={2}>
-                    <FieldReportList
-                        fieldReports={fieldReportsForProject}
-                        basePath={`/projects/${projectId}/fieldreport`}
-                        selectedFieldReportId={parseInt(fieldReportId)}
-                    />
-                </Grid>
-            </Grid>
+            ) : (
+                <PaperContainer>
+                    <Grid container justifyContent="center" my={6}>
+                        <Typography sx={{fontStyle: "italic", textAlign: "center"}}>
+                            No se han registrado informes de viaje para este proyecto
+                            todavía
+                        </Typography>
+                    </Grid>
+                </PaperContainer>
+            )}
         </ContentLayout>
     );
 };

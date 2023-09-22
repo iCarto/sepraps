@@ -16,7 +16,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
     const {questionnaireCode, instanceId, action} = useParams();
 
     const outletContext = useOutletContext();
-    const projectQuestionnaire = outletContext[1];
+    const projectQuestionnaire = outletContext[3];
 
     const basePath = `/projects/${projectQuestionnaire?.projectId}/questionnaires/${questionnaireCode}`;
 

@@ -38,6 +38,7 @@ const FormDatePicker = ({
             }}
             inputRef={field.ref}
             label={inputLabel}
+            views={views}
             value={DateUtil.parseDateFromApi(field.value)}
             disabled={disabled}
             renderInput={({inputProps, ...params}) => (

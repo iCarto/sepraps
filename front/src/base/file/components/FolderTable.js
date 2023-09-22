@@ -79,13 +79,7 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                         order={order}
                         attribute={attribute}
                         onRequestSort={handleRequestSort}
-                        headCells={[
-                            ...columns,
-                            {
-                                id: "actions",
-                                // width: 5,
-                            },
-                        ]}
+                        headCells={columns}
                     />
                     <TableBody>
                         {folderElements

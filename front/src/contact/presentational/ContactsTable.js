@@ -69,7 +69,7 @@ const ContactsTable = ({
                         attribute={attribute}
                         onRequestSort={handleRequestSort}
                         headCells={headCells}
-                        showActions={elementActions?.length}
+                        showActions={elementActions?.length > 0}
                     />
                     <TableBody>
                         {contacts.sort(sortFunction).map((element, index) => {

@@ -34,13 +34,7 @@ const StatsTable = ({tableColumns = [], elements = []}) => {
                     order={order}
                     attribute={attribute}
                     onRequestSort={handleRequestSort}
-                    headCells={[
-                        ...tableColumns,
-                        {
-                            id: "actions",
-                            width: 5,
-                        },
-                    ]}
+                    headCells={tableColumns}
                 />
                 <TableBody>
                     {elements.sort(sortFunction).map((element, index) => {
