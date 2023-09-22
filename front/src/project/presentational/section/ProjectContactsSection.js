@@ -15,24 +15,13 @@ const ProjectContactsSection = ({projectId, contacts}) => {
     const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
+    const [selectedElement, setSelectedElement] = useState(null);
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
     const [error, setError] = useState("");
 
-    const handleActions = (contactId, clickedAction) => {
-        switch (clickedAction) {
-            case "edit":
-                handleEdit(contactId);
-                break;
-            case "remove":
-                setIsRemoveDialogOpen(true);
-                break;
-            default:
-                break;
-        }
-    };
-
-    const handleEdit = contactId => {
-        navigate(`provider/contact/${contactId}/edit`);
+    const handleSelectElement = elementId => {
+        setSelectedElement(elementId);
+        navigate(`info/${elementId}`);
     };
 
     const handleUpdateProvider = updatedProvider => {
@@ -51,7 +40,11 @@ const ProjectContactsSection = ({projectId, contacts}) => {
             <SectionCard title="Contactos del proyecto">
                 <AlertError error={error} />
                 {contacts.length ? (
-                    <ContactsTable contacts={contacts} />
+                    <ContactsTable
+                        contacts={contacts}
+                        selectedElement={selectedElement}
+                        onSelectElement={handleSelectElement}
+                    />
                 ) : (
                     <Typography
                         sx={{

@@ -1,12 +1,12 @@
 from itertools import chain
 
 from django.contrib.gis.db.models import PointField
-from django.contrib.gis.geos import Point
 from django.db import models
-from django.db.models import ExpressionWrapper, Q
+from django.db.models import Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
+from domains.models import DomainEntry
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -34,6 +34,10 @@ from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
 class ProjectFilter(filters.FilterSet):
+    class Meta(object):
+        model = Project
+        fields = ("search", "main_infrastructure", "construction_contract")
+
     status = filters.CharFilter(method="filter_by_status")
     search = filters.CharFilter(method="filter_by_search_text")
     locality = filters.CharFilter(method="filter_by_locality")
@@ -76,10 +80,6 @@ class ProjectFilter(filters.FilterSet):
     def filter_by_last_modified_items(self, queryset, name, last_modified_items):
         limit = int(last_modified_items)
         return queryset.filter(closed=False).order_by("-updated_at")[:limit]
-
-    class Meta(object):
-        model = Project
-        fields = ("search", "main_infrastructure", "construction_contract")
 
 
 class ProjectViewSet(ModelListViewSet):
@@ -156,9 +156,7 @@ class ProjectViewSet(ModelListViewSet):
 
     @action(detail=True)
     def contacts(self, request, pk=None):
-        """
-        Returns a list of all the contacts for the project
-        """
+        """Returns a list of all the contacts for the project."""
         # TODO optimize query
         project = self.get_object()
 
@@ -185,7 +183,7 @@ class ProjectViewSet(ModelListViewSet):
                     key=lambda entitycontact: entitycontact.contact.name,
                 ),
                 many=True,
-                context={"request": request},
+                context={"request": request, "domain": DomainEntry.objects.all()},
             ).data
         )
 

@@ -26,6 +26,7 @@ import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
 import {AddProjectContractPanel} from "contract/container";
 import {ViewDocumentPanel} from "base/file/components";
 import {MapConfigProvider} from "base/geo/provider";
+import {ViewContactPanel} from "contact/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -116,7 +117,13 @@ const projectRoutes = [
                 key="project-contacts"
                 path="contacts"
                 element={<ViewProjectContactsSubPage />}
-            />
+            >
+                <Route
+                    key="contract-contractor-view-contact"
+                    path="info/:contactId"
+                    element={<ViewContactPanel />}
+                />
+            </Route>
             <Route
                 key="project-documents"
                 path="documents/*"

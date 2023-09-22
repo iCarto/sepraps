@@ -25,16 +25,6 @@ export function useContactsTable() {
             label: "E-mail",
             width: 10,
         },
-        {
-            id: "comments",
-            label: "Observ.",
-            width: 20,
-        },
-        {
-            id: "is_staff",
-            label: "Interno",
-            width: 5,
-        },
     ];
 
     return {tableColumns};
