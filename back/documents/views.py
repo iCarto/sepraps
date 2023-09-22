@@ -77,7 +77,7 @@ def zip_folder_documents(parent_path_in_zip, documents, zip):
     for document in documents:
         if document.media_type == "DOCUMENT":
             path_in_disk = storage.open(
-                os.path.join(settings.MEDIA_ROOT, document.media_path)
+                os.path.join(settings.MEDIA_ROOT, document.storage_path)
             )
             if os.path.isfile(path_in_disk.name):
                 path_in_zip = os.path.join(
@@ -152,7 +152,7 @@ class MediaView(views.APIView):
         filter = get_filter(media_path)
         media_node = MediaNode.objects.filter(**filter).first()
 
-        delete(os.path.join(settings.MEDIA_ROOT, media_node.media_path))
+        delete(os.path.join(settings.MEDIA_ROOT, media_node.storage_path))
         media_node.delete()
 
         return Response(status=status.HTTP_200_OK)

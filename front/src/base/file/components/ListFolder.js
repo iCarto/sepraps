@@ -82,7 +82,7 @@ const ListFolder = ({
                     />
                 )}
             </Grid>
-            {folderContainsFiles ? (
+            {folderElement ? (
                 <Grid item container xs={12} justifyContent="flex-end">
                     <Tooltip title="Descargar archivos">
                         <IconButton aria-label="download-zip" onClick={downloadFolder}>
