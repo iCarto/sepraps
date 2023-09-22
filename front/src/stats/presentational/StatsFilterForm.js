@@ -93,7 +93,7 @@ const StatsFilterForm = ({
                 ]) => {
                     setFinancingFunds(financingFunds);
                     setFinancingPrograms(financingPrograms);
-                    setContracts(contracts?.results);
+                    setContracts(contracts);
                     setContractors(contractors);
                     const {departments, districts} = administrativeDivisions;
                     setDepartments(departments);
@@ -158,10 +158,13 @@ const StatsFilterForm = ({
     };
 
     const handleChangeMonth = (field, value) => {
-        onChange(
-            field,
-            value ? `${value.getFullYear()}/${value.getMonth() + 1}` : null
-        );
+        console.log({value});
+        if (value) {
+            const date = new Date(value);
+            onChange({[field]: `${date.getFullYear()}/${date.getMonth() + 1}`});
+        } else {
+            onChange({[field]: null});
+        }
     };
 
     return (
@@ -319,7 +322,7 @@ const StatsFilterForm = ({
                                     views={["month", "year"]}
                                     margin="none"
                                     onChangeHandler={option =>
-                                        handleChangeMonth("month_from", option)
+                                        handleChangeMonth("month_to", option)
                                     }
                                 />
                             </Grid>

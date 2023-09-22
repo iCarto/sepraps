@@ -1,6 +1,6 @@
-import {MapStats} from "base/geo";
 import {useEffect, useState} from "react";
 import {StatsService} from "stats/service";
+import ProjectsMapStats from "./ProjectsMapStats";
 
 const StatsByPhaseMapView = ({filter}) => {
     const [projects, setProjects] = useState([]);
@@ -11,7 +11,7 @@ const StatsByPhaseMapView = ({filter}) => {
         });
     }, [filter]);
 
-    return <MapStats projects={projects} />;
+    return <ProjectsMapStats projects={projects} />;
 };
 
 export default StatsByPhaseMapView;

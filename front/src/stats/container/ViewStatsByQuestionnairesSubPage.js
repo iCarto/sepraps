@@ -29,6 +29,7 @@ const ViewStatsByQuestionnairesSubPage = () => {
 
     const handleFilterChange = useCallback(
         attributeValue => {
+            console.log({attributeValue});
             setFilter({...filter, ...attributeValue});
         },
         [filter, setFilter]
