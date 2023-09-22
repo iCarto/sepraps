@@ -9,3 +9,4 @@ export {
 } from "./ProjectLinkedLocalitiesSection";
 export {default as ProjectProviderSection} from "./ProjectProviderSection";
 export {default as ProjectContactsSection} from "./ProjectContactsSection";
+export {default as ProjectSectionFields} from "./ProjectSectionFields";

@@ -1,37 +1,31 @@
-import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-import {useNavigateWithReload} from "base/navigation/hooks";
 import {ContractService} from "contract/service";
-
-import {EntityViewPanel} from "base/entity/components/presentational";
-import {ContractSummary} from "../presentational";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {EntitySummaryPanel} from "base/entity/components/presentational";
+import {ContractSummaryFields} from "contract/presentational";
 
 const ViewContractPanel = () => {
-    const navigate = useNavigateWithReload();
-    const [contract, setContract] = useState(null);
-
     const {id} = useParams();
+    const navigate = useNavigateWithReload();
 
-    useEffect(() => {
-        ContractService.get(id).then(contract => {
-            setContract(contract);
-        });
-    }, [id]);
+    const getSectionData = contract => {
+        return <ContractSummaryFields contract={contract} />;
+    };
 
     const handleClickDetail = () => {
-        navigate(`/contracts/${contract.id}/summary`);
+        navigate(`/contracts/${id}/summary`);
     };
 
     return (
-        contract && (
-            <EntityViewPanel
-                onClickDetailButton={handleClickDetail}
-                title="Resumen del contrato"
-            >
-                {<ContractSummary contract={contract} />}
-            </EntityViewPanel>
-        )
+        <EntitySummaryPanel
+            service={ContractService}
+            id={id}
+            title="Contrato"
+            getSectionTitle={contract => contract?.number}
+            getSectionData={getSectionData}
+            onClickDetailButton={handleClickDetail}
+        />
     );
 };
 

@@ -10,3 +10,4 @@ export {default as EntityCard} from "./EntityCard";
 export {default as EntityListMap} from "./EntityListMap";
 export {default as EntityMenuDropDown} from "./EntityMenuDropDown";
 export {default as EntityNoItemsComponent} from "./EntityNoItemsComponent";
+export {default as EntitySummaryPanel} from "./EntitySummaryPanel";

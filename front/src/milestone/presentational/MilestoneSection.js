@@ -1,5 +1,5 @@
 import {DateUtil} from "base/format/utilities";
-import {SectionCard, SectionField} from "base/ui/section/components";
+import {SectionField} from "base/ui/section/components";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -36,7 +36,7 @@ const MilestoneSection = ({milestone}) => {
 
     return (
         milestone && (
-            <SectionCard title={milestone.short_name}>
+            <>
                 <SectionField
                     label="Fecha de cumplimiento"
                     value={
@@ -48,7 +48,7 @@ const MilestoneSection = ({milestone}) => {
                 />
                 {milestone.comments && (
                     <SectionField
-                        label="Observaciones:"
+                        label="Observaciones"
                         value={milestone.comments}
                         containerWidth="short"
                     />
@@ -64,7 +64,7 @@ const MilestoneSection = ({milestone}) => {
                         <ViewOnlyChecklist />
                     </>
                 )}
-            </SectionCard>
+            </>
         )
     );
 };

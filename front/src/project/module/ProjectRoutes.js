@@ -108,7 +108,7 @@ const projectRoutes = [
                 />
                 <Route
                     key="project-milestones-view"
-                    path=":milestoneId"
+                    path="info/:milestoneId"
                     element={<ViewMilestonePanel />}
                 />
             </Route>

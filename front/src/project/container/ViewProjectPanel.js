@@ -1,36 +1,30 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {useNavigateWithReload} from "base/navigation/hooks";
+import {useNavigate, useParams} from "react-router-dom";
 import {ProjectService} from "project/service";
 
-import {EntityViewPanel} from "base/entity/components/presentational";
-import {ProjectSection} from "project/presentational/section";
+import {EntitySummaryPanel} from "base/entity/components/presentational";
+import {ProjectSectionFields} from "project/presentational/section";
 
 const ViewProjectPanel = () => {
-    const navigate = useNavigateWithReload();
-    const [project, setProject] = useState(null);
-
     const {id} = useParams();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        ProjectService.get(id).then(project => {
-            setProject(project);
-        });
-    }, [id]);
+    const getSectionData = project => {
+        return <ProjectSectionFields project={project} />;
+    };
 
     const handleClickDetail = () => {
-        navigate(`/projects/${project.id}/summary`);
+        navigate(`/projects/${id}/summary`);
     };
 
     return (
-        project && (
-            <EntityViewPanel
-                onClickDetailButton={handleClickDetail}
-                title="Resumen del proyecto"
-            >
-                {<ProjectSection project={project} />}
-            </EntityViewPanel>
-        )
+        <EntitySummaryPanel
+            service={ProjectService}
+            id={id}
+            title="Resumen del proyecto"
+            getSectionTitle={project => project?.name}
+            getSectionData={getSectionData}
+            onClickDetailButton={handleClickDetail}
+        />
     );
 };
 

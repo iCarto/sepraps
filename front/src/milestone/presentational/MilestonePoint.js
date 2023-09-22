@@ -44,7 +44,7 @@ const MilestonePoint = ({
         if (hasEditPermission && milestone.code === activeMilestone?.code) {
             navigate(`${milestone.id}/edit`);
         } else {
-            navigate(`${milestone.id}`);
+            navigate(`info/${milestone.id}`);
         }
     };
 
