@@ -100,6 +100,11 @@ export const LayerLegend = createLayerLegend({
                     markerOptions: {...markerBaseOptions, fillColor: "#6cd98a"},
                 },
                 {
+                    text: "Ampliación",
+                    filterFn: val => val === "ampliacion",
+                    markerOptions: {...markerBaseOptions, fillColor: "#c7923e"},
+                },
+                {
                     text: "(sin datos)",
                     filterFn: val => val === null,
                     markerOptions: {...markerBaseOptions, fillColor: "lightgrey"},

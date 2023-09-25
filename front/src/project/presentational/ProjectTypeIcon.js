@@ -9,9 +9,13 @@ const ProjectTypeIcon = ({projectType, projectTypeName, size}) => {
             imgSrc = "https://cdn-icons-png.flaticon.com/512/292/292962.png";
             imgAlt = "Grifo";
             break;
-        case "Saneamiento":
+        case "alcantarillado":
             imgSrc = "https://cdn-icons-png.flaticon.com/512/3399/3399239.png";
             imgAlt = "Tubería";
+            break;
+        case "sanitarios":
+            imgSrc = "https://cdn-icons-png.flaticon.com/512/2452/2452227.png";
+            imgAlt = "Sanitario";
             break;
 
         default:
