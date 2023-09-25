@@ -55,7 +55,7 @@ const ProjectProviderSection = ({project}) => {
         setIsRemoveDialogOpen(false);
         ProjectService.update(project_view_adapter({...project, provider: null})).then(
             () => {
-                navigate("/projects/" + project.id + "/provider", true);
+                navigate("/projects/list/" + project.id + "/provider", true);
             }
         );
     };
@@ -70,7 +70,7 @@ const ProjectProviderSection = ({project}) => {
                     <SectionField
                         label="Nombre"
                         value={provider.name}
-                        linkPath={`/providers/${provider.id}/summary`}
+                        linkPath={`/providers/list/${provider.id}`}
                     />
                     <SectionField label="Tipo" value={`${provider.type_label}`} />
                     <SectionField

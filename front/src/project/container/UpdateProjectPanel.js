@@ -21,7 +21,7 @@ const UpdateProjectPanel = () => {
     const handleSubmit = project => {
         ProjectService.update(project_view_adapter({...project}))
             .then(() => {
-                navigate(`/projects/${project.id}/summary`, true);
+                navigate(`/projects/list/${project.id}/summary`, true);
             })
             .catch(error => {
                 console.log(error);

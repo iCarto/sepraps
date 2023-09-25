@@ -118,7 +118,7 @@ const QuestionnaireInstanceExpectedTable = ({
         )
             .then(() => {
                 navigate(
-                    `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
+                    `/projects/list/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}`,
                     true
                 );
             })

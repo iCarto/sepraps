@@ -6,11 +6,14 @@ const ViewProjectDocumentsSubPage = () => {
     [project] = useOutletContext();
 
     const location = useLocation();
-    const basePath = location.pathname.split("/projects/")[0];
+    const basePath = location.pathname.split("/projects/list/")[0];
 
     return (
         project && (
-            <ViewDocumentsSubPage entity={project} basePath={`${basePath}/projects`} />
+            <ViewDocumentsSubPage
+                entity={project}
+                basePath={`${basePath}/projects/list`}
+            />
         )
     );
 };

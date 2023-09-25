@@ -1,4 +1,4 @@
-import {Route} from "react-router-dom";
+import {Navigate, Route} from "react-router-dom";
 import {UpdateContractContractorContactPanel} from "contractor/container";
 import {
     ListContractsPage,
@@ -23,14 +23,7 @@ import {ViewContactPanel} from "contact/container";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
-    <Route key="contract-manage" path="" element={<ManageContractsPage />}>
-        <Route key="contract-list" path="list" element={<ListContractsPage />}>
-            <Route
-                key="contract-info"
-                path="info/:id"
-                element={<ViewContractPanel />}
-            />
-        </Route>
+    <Route key="contract-manage" path="list" element={<ManageContractsPage />}>
         <Route key="contract-detail" path=":id" element={<ViewContractPage />}>
             <Route
                 key="contract-summary"
@@ -63,7 +56,6 @@ const contractRoutes = [
                     element={<UpdateContractPanel />}
                 />
             </Route>
-
             <Route
                 key="contract-phases"
                 path="phases"
@@ -75,7 +67,6 @@ const contractRoutes = [
                     element={<UpdateContractPanel />}
                 />
             </Route>
-
             <Route
                 key="contract-monitoring"
                 path="monitoring"
@@ -92,7 +83,6 @@ const contractRoutes = [
                     element={<UpdateContractContactPanel />}
                 />
             </Route>
-
             <Route
                 key="contract-projects"
                 path="projects"
@@ -119,8 +109,17 @@ const contractRoutes = [
                 path="questionnaires/:questionnaireCode"
                 element={<ViewContractQuestionnairesSubPage />}
             ></Route>
+            <Route index element={<Navigate to="summary" replace />} />
+        </Route>
+        <Route key="contract-list" path="" element={<ListContractsPage />}>
+            <Route
+                key="contract-info"
+                path="info/:id"
+                element={<ViewContractPanel />}
+            />
         </Route>
     </Route>,
+    <Route index element={<Navigate to="list" replace />} />,
 ];
 
 export default contractRoutes;

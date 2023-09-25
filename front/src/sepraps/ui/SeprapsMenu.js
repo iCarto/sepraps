@@ -6,28 +6,23 @@ const SeprapsMenu = () => {
     const menuItems = [
         {
             name: "Contratos",
-            to: "contracts/list",
+            to: "contracts",
             pathname: "contracts",
         },
         {
             name: "Proyectos",
-            to: "projects/list",
+            to: "projects",
             pathname: "projects",
         },
         {
             name: "Prestadores de servicios",
-            to: "providers/list",
+            to: "providers",
             pathname: "providers",
         },
         {
             name: "Informes de viaje",
-            to: "field-reports/list",
+            to: "field-reports",
             pathname: "field-reports",
-        },
-        {
-            name: "Resultados",
-            to: "stats/phase",
-            pathname: "stats",
         },
     ];
 

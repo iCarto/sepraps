@@ -1,40 +1,40 @@
 import {useAuth} from "base/user/provider";
-import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
+import {SubPageMenu, SubPageMenuListItemButton} from "base/ui/menu";
 import {QuestionnairesMenu} from "questionnaire/presentational";
 import {SelectContractDropDown} from "contract/menu";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import EventNoteIcon from "@mui/icons-material/EventNote";
+import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
+import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 
 const ContractSubPageMenu = ({contract}) => {
     const {ROLES} = useAuth();
-    const basePath = `/contracts/${contract?.id}`;
+    const basePath = `/contracts/list/${contract?.id}`;
 
     return (
         <SubPageMenu
             subPageMenuDropdown={<SelectContractDropDown contract={contract} />}
         >
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="contract-detail"
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InfoOutlinedIcon />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="contract-phases"
                 to={`${basePath}/phases`}
                 text="Fases"
-                icon={<EventNoteIcon />}
+                icon={<EventNoteOutlinedIcon />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="contract-monitoring"
                 to={`${basePath}/monitoring`}
                 text="Supervisión"
-                icon={<PermContactCalendarIcon />}
+                icon={<PermContactCalendarOutlinedIcon />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="contract-projects"
                 to={`${basePath}/projects`}
                 text="Proyectos"
@@ -42,7 +42,7 @@ const ContractSubPageMenu = ({contract}) => {
             />
             <QuestionnairesMenu
                 questionnaires={contract.questionnaires}
-                basePath={`/contracts/${contract?.id}`}
+                basePath={`/contracts/list/${contract?.id}`}
             />
         </SubPageMenu>
     );

@@ -16,7 +16,7 @@ const UpdateProjectProviderPanel = () => {
     let project;
     [project] = useOutletContext();
 
-    const basePath = `/projects/${project.id}/provider`;
+    const basePath = `/projects/list/${project.id}/provider`;
 
     const handleSubmit = provider => {
         ProjectService.update(project_view_adapter({...project, provider}))

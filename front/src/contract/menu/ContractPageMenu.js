@@ -13,7 +13,7 @@ const ContractPageMenu = () => {
     const basePath = currentUrl.split(`/${entityUrlSlug}/`)[0];
 
     return (
-        <PageMenu>
+        <PageMenu collapsed={true}>
             <PageMenuListItemButton
                 key="contracts-list"
                 to={`${basePath}/${entityUrlSlug}/list`}

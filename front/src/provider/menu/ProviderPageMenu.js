@@ -2,7 +2,7 @@ import {useLocation} from "react-router-dom";
 
 import {PageMenu, PageMenuListItemButton} from "base/ui/menu";
 
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import ListIcon from "@mui/icons-material/List";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 
 const ProviderPageMenu = () => {
@@ -12,17 +12,16 @@ const ProviderPageMenu = () => {
     const basePath = currentUrl.split(`/${entityUrlSlug}/`)[0];
 
     return (
-        <PageMenu>
+        <PageMenu collapsed={true}>
             <PageMenuListItemButton
                 key="providers-list"
                 to={`${basePath}/${entityUrlSlug}/list`}
                 text="Listado"
-                icon={<MapOutlinedIcon />}
+                icon={<ListIcon />}
             />
-
             <PageMenuListItemButton
                 key="providers-stats"
-                to={`${basePath}/${entityUrlSlug}/stats/gender`}
+                to={`${basePath}/${entityUrlSlug}/stats`}
                 text="Estadísticas"
                 icon={<QueryStatsIcon />}
             />

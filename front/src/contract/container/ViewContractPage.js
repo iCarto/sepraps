@@ -16,7 +16,7 @@ const ViewContractPage = () => {
 
     useEffect(() => {
         setContract(null);
-        setModuleBasePath(`/contracts/${id}`);
+        setModuleBasePath(`/contracts/list/${id}`);
         ContractService.get(id).then(data => {
             addToModuleFilter({contract: data.id});
             setContract(data);

@@ -4,7 +4,6 @@ import {PageMenu, PageMenuListItemButton} from "base/ui/menu";
 import {QuestionnairesMenu} from "questionnaire/presentational";
 
 import LinearScaleIcon from "@mui/icons-material/LinearScale";
-import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 
 const StatsPageMenu = () => {
     const [questionnaires, setQuestionnaires] = useState([]);

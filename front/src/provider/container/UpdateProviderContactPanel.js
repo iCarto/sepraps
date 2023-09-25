@@ -17,7 +17,7 @@ const UpdateProviderContactPanel = () => {
     let provider;
     [provider] = useOutletContext();
 
-    const basePath = `/providers/${provider.id}/contacts`;
+    const basePath = `/providers/list/${provider.id}/contacts`;
 
     const selectedContact =
         action === "edit"

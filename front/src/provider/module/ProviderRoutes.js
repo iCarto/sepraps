@@ -1,4 +1,4 @@
-import {Route} from "react-router-dom";
+import {Navigate, Route} from "react-router-dom";
 import {
     CreateProviderPage,
     ListProvidersPage,
@@ -17,14 +17,7 @@ import {ViewContactPanel} from "contact/container";
 
 const providerRoutes = [
     <Route key="provider-new" path="new" element={<CreateProviderPage />} />,
-    <Route key="provider-manage" path="" element={<ManageProvidersPage />}>
-        <Route key="provider-list" path="list" element={<ListProvidersPage />}>
-            <Route
-                key="provider-info"
-                path="info/:id"
-                element={<ViewProviderPanel />}
-            />
-        </Route>
+    <Route key="provider-manage" path="list" element={<ManageProvidersPage />}>
         <Route key="provider-detail" path=":id" element={<ViewProviderPage />}>
             <Route
                 key="provider-summary"
@@ -53,20 +46,30 @@ const providerRoutes = [
                     element={<ViewContactPanel />}
                 />
             </Route>
+            <Route index element={<Navigate to="summary" replace />} />
         </Route>
-        <Route key="providers-stats" path="stats" element={<ViewProvidersStatsPage />}>
+        <Route key="provider-list" path="" element={<ListProvidersPage />}>
             <Route
-                key="providers-stats-by-gender"
-                path="gender"
-                element={<ViewStatsByGenderSubPage />}
-            ></Route>
-            <Route
-                key="providers-contacts"
-                path="contacts"
-                element={<ViewProvidersContactsSubPage />}
-            ></Route>
+                key="provider-info"
+                path="info/:id"
+                element={<ViewProviderPanel />}
+            />
         </Route>
     </Route>,
+    <Route key="providers-stats" path="stats" element={<ViewProvidersStatsPage />}>
+        <Route
+            key="providers-stats-by-gender"
+            path="gender"
+            element={<ViewStatsByGenderSubPage />}
+        ></Route>
+        <Route
+            key="providers-contacts"
+            path="contacts"
+            element={<ViewProvidersContactsSubPage />}
+        ></Route>
+        <Route index element={<Navigate to="gender" replace />} />
+    </Route>,
+    <Route index element={<Navigate to="list" replace />} />,
 ];
 
 export default providerRoutes;

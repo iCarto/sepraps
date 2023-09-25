@@ -27,7 +27,7 @@ const ProjectContractSection = ({contract}) => {
                     <SectionField
                         label="Número de contrato"
                         value={contract.number}
-                        linkPath={`/contracts/${contract.id}/summary`}
+                        linkPath={`/contracts/list/${contract.id}/summary`}
                     />
                     <SectionField
                         label="Número de licitación"

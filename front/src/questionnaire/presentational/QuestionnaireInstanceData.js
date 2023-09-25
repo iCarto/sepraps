@@ -9,7 +9,7 @@ const QuestionnaireInstanceData = ({projectQuestionnaire, isProjectClosed}) => {
 
     const handleClick = () => {
         navigate(
-            `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/new/add`
+            `/projects/list/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/new/add`
         );
     };
 

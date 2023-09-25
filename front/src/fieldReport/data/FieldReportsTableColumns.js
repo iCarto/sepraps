@@ -48,7 +48,7 @@ export function useFieldReportsTableColumns() {
                             <Box component="span" key={contract.id}>
                                 <TextLink
                                     text={contract.label}
-                                    to={`/contracts/${contract.id}/summary`}
+                                    to={`/contracts/list/${contract.id}/summary`}
                                 />
                             </Box>
                         ))}
@@ -67,7 +67,7 @@ export function useFieldReportsTableColumns() {
                             <Box component="span" key={project.id}>
                                 <TextLink
                                     text={project.label}
-                                    to={`/projects/${project.id}/summary`}
+                                    to={`/projects/list/${project.id}/summary`}
                                 />
                             </Box>
                         ))}

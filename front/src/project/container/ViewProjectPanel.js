@@ -13,7 +13,7 @@ const ViewProjectPanel = () => {
     };
 
     const handleClickDetail = () => {
-        navigate(`/projects/${id}/summary`);
+        navigate(`/projects/list/${id}`);
     };
 
     return (

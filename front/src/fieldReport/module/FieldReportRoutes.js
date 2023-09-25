@@ -1,4 +1,4 @@
-import {Route} from "react-router-dom";
+import {Navigate, Route} from "react-router-dom";
 import {
     CreateFieldReportPage,
     ListFieldReportsPage,
@@ -16,14 +16,7 @@ import {ViewDocumentPanel} from "base/file/components";
 
 const fieldReportRoutes = [
     <Route key="field-report-new" path="new" element={<CreateFieldReportPage />} />,
-    <Route key="field-report-manage" path="" element={<ManageFieldReportsPage />}>
-        <Route key="field-report-list" path="list" element={<ListFieldReportsPage />}>
-            <Route
-                key="field-report-info"
-                path="info/:id"
-                element={<ViewFieldReportPanel />}
-            />
-        </Route>
+    <Route key="field-report-manage" path="list" element={<ManageFieldReportsPage />}>
         <Route key="field-report-detail" path=":id" element={<ViewFieldReportPage />}>
             <Route
                 key="field-report-summary"
@@ -62,8 +55,17 @@ const fieldReportRoutes = [
                     element={<ViewDocumentPanel />}
                 />
             </Route>
+            <Route index element={<Navigate to="summary" replace />} />
+        </Route>
+        <Route key="field-report-list" path="" element={<ListFieldReportsPage />}>
+            <Route
+                key="field-report-info"
+                path="info/:id"
+                element={<ViewFieldReportPanel />}
+            />
         </Route>
     </Route>,
+    <Route index element={<Navigate to="list" replace />} />,
 ];
 
 export default fieldReportRoutes;

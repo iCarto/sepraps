@@ -42,7 +42,7 @@ const FieldReportProjectsSection = () => {
         } else {
             if (fieldReport?.field_report_projects?.length) {
                 navigate(
-                    `/field-reports/${fieldReport.id}/projects/${fieldReport.field_report_projects[0].id}`
+                    `/field-reports/list/${fieldReport.id}/projects/${fieldReport.field_report_projects[0].id}`
                 );
             } else {
                 setActiveTabId(-1);

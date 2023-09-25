@@ -26,7 +26,7 @@ const AddContractProjectPanel = () => {
     const handleFormSubmit = contract => {
         ContractService.update(contract_view_adapter({...contract}))
             .then(() => {
-                navigate(`/contracts/${contract.id}/projects`, true);
+                navigate(`/contracts/list/${contract.id}/projects`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -35,7 +35,7 @@ const AddContractProjectPanel = () => {
     };
 
     const handleFormCancel = () => {
-        navigate(`/contracts/${contract.id}/projects`);
+        navigate(`/contracts/list/${contract.id}/projects`);
     };
 
     return (

@@ -57,7 +57,7 @@ const ContractContractorSection = ({contract}) => {
         ContractService.update(
             contract_view_adapter({...contract, contractor: null})
         ).then(() => {
-            navigate("/contracts/" + contract.id + "/summary", true);
+            navigate("/contracts/list/" + contract.id + "/summary", true);
         });
     };
 

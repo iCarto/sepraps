@@ -14,7 +14,7 @@ const ViewContractPanel = () => {
     };
 
     const handleClickDetail = () => {
-        navigate(`/contracts/${id}/summary`);
+        navigate(`/contracts/list/${id}/summary`);
     };
 
     return (

@@ -31,3 +31,4 @@ export {
     default as ViewProjectFieldReportSubPage,
 } from "./ViewProjectFieldReportSubPage";
 export {default as ViewProjectDocumentPanel} from "./ViewProjectDocumentPanel";
+export {default as ViewProjectStatsPage} from "./ViewProjectStatsPage";

@@ -14,7 +14,7 @@ const UpdateProjectMainInfrastructurePanel = () => {
     let project;
     [project] = useOutletContext();
 
-    const basePath = `/projects/${project.id}/location`;
+    const basePath = `/projects/list/${project.id}/location`;
 
     const handleSubmit = project => {
         console.log(project);

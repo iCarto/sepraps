@@ -3,8 +3,7 @@ import {useLocation} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {PageMenu, PageMenuListItemButton} from "base/ui/menu";
 
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import ChecklistIcon from "@mui/icons-material/Checklist";
+import ListIcon from "@mui/icons-material/List";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 
 const ProjectPageMenu = () => {
@@ -15,21 +14,15 @@ const ProjectPageMenu = () => {
     const basePath = currentUrl.split(`/${entityUrlSlug}/`)[0];
 
     return (
-        <PageMenu>
+        <PageMenu collapsed={true}>
             <PageMenuListItemButton
                 key="projects-list"
                 to={`${basePath}/${entityUrlSlug}/list`}
                 text="Listado"
-                icon={<MapOutlinedIcon />}
+                icon={<ListIcon />}
             />
             <PageMenuListItemButton
-                key="projects-supervision"
-                to={`${basePath}/${entityUrlSlug}/supervision`}
-                text="Supervisión"
-                icon={<ChecklistIcon />}
-            />
-            <PageMenuListItemButton
-                key="projects-stats"
+                key="project-stats"
                 to={`${basePath}/${entityUrlSlug}/stats`}
                 text="Estadísticas"
                 icon={<QueryStatsIcon />}

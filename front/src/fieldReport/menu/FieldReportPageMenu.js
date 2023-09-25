@@ -3,7 +3,7 @@ import {useLocation} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {PageMenu, PageMenuListItemButton} from "base/ui/menu";
 
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import ListIcon from "@mui/icons-material/List";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 
 const FieldReportPageMenu = () => {
@@ -14,19 +14,12 @@ const FieldReportPageMenu = () => {
     const basePath = currentUrl.split(`/${entityUrlSlug}/`)[0];
 
     return (
-        <PageMenu>
+        <PageMenu collapsed={true}>
             <PageMenuListItemButton
                 key="field-reports-list"
-                to={`${basePath}/${entityUrlSlug}/list`}
+                to={`${basePath}/${entityUrlSlug}`}
                 text="Listado"
-                icon={<MapOutlinedIcon />}
-            />
-
-            <PageMenuListItemButton
-                key="field-reports-stats"
-                to={`${basePath}/${entityUrlSlug}/stats`}
-                text="Estadísticas"
-                icon={<QueryStatsIcon />}
+                icon={<ListIcon />}
             />
         </PageMenu>
     );

@@ -21,7 +21,7 @@ const QuestionnaireInstanceEmpty = ({projectQuestionnaire, isProjectClosed}) => 
         setSelectedOption(option);
         if (option === "add") {
             navigate(
-                `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/new/add`
+                `/projects/list/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/new/add`
             );
         }
     };

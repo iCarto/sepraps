@@ -22,7 +22,7 @@ const CreateContractProjectPage = () => {
     const handleFormSubmit = project => {
         ProjectService.create(project_view_adapter({...project}))
             .then(() => {
-                navigate(`/contracts/${contractId}/projects`, true);
+                navigate(`/contracts/list/${contractId}/projects`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -31,7 +31,7 @@ const CreateContractProjectPage = () => {
     };
 
     const handleFormCancel = () => {
-        navigate(`/contracts/${contractId}/projects`);
+        navigate(`/contracts/list/${contractId}/projects`);
     };
 
     return (

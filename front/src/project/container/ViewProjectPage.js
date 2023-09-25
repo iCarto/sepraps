@@ -16,7 +16,7 @@ const ViewProjectPage = () => {
 
     useEffect(() => {
         setProject(null);
-        setModuleBasePath(`/projects/${id}`);
+        setModuleBasePath(`/projects/list/${id}`);
         ProjectService.get(id).then(data => {
             addToModuleFilter({project: data.id});
             setProject(data);

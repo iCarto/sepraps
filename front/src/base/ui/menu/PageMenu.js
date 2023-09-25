@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {Children, cloneElement, useState} from "react";
 import {FOOTER_HEIGHT, PAGE_MENU_DRAWER_WIDTH} from "../app/config/measurements";
 
 import {PageMenuHeader} from ".";
@@ -33,8 +33,8 @@ const DrawerHeader = styled("div")(({theme}) => ({
 }));
 
 const Drawer = styled(MuiDrawer, {shouldForwardProp: prop => prop !== "open"})(
-    ({theme, open}) => ({
-        width: `${PAGE_MENU_DRAWER_WIDTH}px`,
+    ({theme, collapsed, open}) => ({
+        width: collapsed ? "70px" : `${PAGE_MENU_DRAWER_WIDTH}px`,
         flexShrink: 0,
         whiteSpace: "normal",
         boxSizing: "border-box",
@@ -50,6 +50,7 @@ const PageMenu = ({
     headerTitle = "",
     headerIcon = null,
     headerUrl = null,
+    collapsed = false,
     children,
 }) => {
     const theme = useTheme();
@@ -65,15 +66,18 @@ const PageMenu = ({
         });
     };
 
+    const arrayChildren = Children.toArray(children);
+
     return (
         <Drawer
             component="nav"
             variant="permanent"
             open={true}
+            collapsed={collapsed}
             role="left-side-page-menu"
             PaperProps={{
                 sx: {
-                    width: `${PAGE_MENU_DRAWER_WIDTH}px`,
+                    width: collapsed ? "70px" : `${PAGE_MENU_DRAWER_WIDTH}px`,
                     borderRight: "3px solid " + theme.palette.menu.primary.header.text,
                     // paddingBottom: `${FOOTER_HEIGHT}px`,
                 },
@@ -91,7 +95,9 @@ const PageMenu = ({
                     />
                 ) : null}
 
-                {children}
+                {Children.map(arrayChildren, (child, index) =>
+                    cloneElement(child, {collapsed})
+                )}
             </MenuList>
         </Drawer>
     );

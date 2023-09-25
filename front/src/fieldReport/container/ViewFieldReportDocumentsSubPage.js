@@ -6,13 +6,13 @@ const ViewFieldReportDocumentsSubPage = () => {
     [fieldReport] = useOutletContext();
 
     const location = useLocation();
-    const basePath = location.pathname.split("/field-reports/")[0];
+    const basePath = location.pathname.split("/field-reports/list/")[0];
 
     return (
         fieldReport && (
             <ViewDocumentsSubPage
                 entity={fieldReport}
-                basePath={`${basePath}/field-reports`}
+                basePath={`${basePath}/field-reports/list`}
             />
         )
     );

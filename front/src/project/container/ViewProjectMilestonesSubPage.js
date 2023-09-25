@@ -63,7 +63,7 @@ const ViewProjectMilestonesSubPage = () => {
     const handleCloseProject = () => {
         ProjectService.closeProject(project?.id)
             .then(() => {
-                navigate(`/projects/${project?.id}/milestones`, true);
+                navigate(`/projects/list/${project?.id}/milestones`, true);
             })
             .catch(error => {
                 console.log(error);

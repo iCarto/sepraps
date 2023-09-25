@@ -41,7 +41,7 @@ const ViewFieldReportPanel = () => {
     };
 
     const handleClickDetail = () => {
-        navigate(`/field-reports/${id}/summary`);
+        navigate(`/field-reports/list/${id}`);
     };
 
     return (

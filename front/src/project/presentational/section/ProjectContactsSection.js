@@ -27,7 +27,7 @@ const ProjectContactsSection = ({projectId, contacts}) => {
     const handleUpdateProvider = updatedProvider => {
         ProviderService.update(updatedProvider)
             .then(() => {
-                navigate(`/projects/${projectId}/contacts`, true);
+                navigate(`/projects/list/${projectId}/contacts`, true);
             })
             .catch(error => {
                 console.log(error);

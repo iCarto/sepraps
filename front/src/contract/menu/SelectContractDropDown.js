@@ -19,7 +19,7 @@ const SelectContractDropDown = ({contract}) => {
         ? {
               id: contract?.id,
               title: "Contrato:",
-              slug: "contracts",
+              slug: "contracts/list",
               primaryInfo: contract?.number,
               secondaryInfo: contract?.bid_request_number,
               tag: null,

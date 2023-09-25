@@ -23,7 +23,7 @@ const ProjectLocationSection = ({project}) => {
             text="Ir a la página de Ubicación"
             icon={<LaunchIcon />}
             onClick={() => {
-                navigate(`/projects/${project.id}/location`);
+                navigate(`/projects/list/${project.id}/location`);
             }}
         />,
     ];

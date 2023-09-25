@@ -16,7 +16,7 @@ const ViewProviderPage = () => {
 
     useEffect(() => {
         setProvider(null);
-        setModuleBasePath(`/providers/${id}`);
+        setModuleBasePath(`/providers/list/${id}`);
         ProviderService.get(id).then(data => {
             addToModuleFilter({provider: data.id});
             setProvider(data);

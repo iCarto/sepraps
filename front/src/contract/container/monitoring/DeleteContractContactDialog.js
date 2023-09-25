@@ -18,7 +18,7 @@ const DeleteContractContactDialog = ({
     const handleConfirmDeletion = () => {
         setIsDialogOpen(false);
         ContactService.delete(contactToDelete).then(() => {
-            navigate(`/contracts/${contract.id}/monitoring`, true);
+            navigate(`/contracts/list/${contract.id}/monitoring`, true);
         });
     };
 

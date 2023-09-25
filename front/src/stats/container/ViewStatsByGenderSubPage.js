@@ -25,6 +25,7 @@ const ViewStatsByGenderSubPage = () => {
     useEffect(() => {
         setIsLoading(true);
         StatsService.getStatsByGender(filter).then(data => {
+            console.log({data});
             setData(data);
             setIsLoading(false);
         });

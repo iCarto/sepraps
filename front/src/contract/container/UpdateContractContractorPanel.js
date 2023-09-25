@@ -14,7 +14,7 @@ const UpdateContractContractorPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const basePath = `/contracts/${contract.id}/summary`;
+    const basePath = `/contracts/list/${contract.id}/summary`;
 
     const handleSubmit = contractor => {
         ContractorService.update(

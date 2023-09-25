@@ -19,7 +19,7 @@ const ProjectFinancingSection = ({project}) => {
             text="Ir a la página de Financiación"
             icon={<LaunchIcon />}
             onClick={() => {
-                navigate(`/projects/${project.id}/financing`);
+                navigate(`/projects/list/${project.id}/financing`);
             }}
         />,
     ];

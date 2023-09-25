@@ -17,8 +17,8 @@ const UpdateContractPanel = () => {
 
     const path =
         section === "generaldata" || section === "financing_program"
-            ? `/contracts/${contract.id}/summary`
-            : `/contracts/${contract.id}/phases`;
+            ? `/contracts/list/${contract.id}/summary`
+            : `/contracts/list/${contract.id}/phases`;
 
     const handleSubmit = contract => {
         ContractService.update(contract_view_adapter({...contract}))

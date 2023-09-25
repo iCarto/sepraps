@@ -63,6 +63,7 @@ class FieldReportSummarySerializer(BaseSummarySerializer):
                 "label": field_report_project.project.construction_contract.number,
             }
             for field_report_project in obj.field_report_projects.all()
+            if field_report_project.project.construction_contract is not None
         )
         return [
             dict(t) for t in {tuple(d.items()) for d in contract_list}

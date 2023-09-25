@@ -22,7 +22,7 @@ const AddProjectContractPanel = () => {
         });
         ProjectService.update(updatedProject)
             .then(project => {
-                navigate(`/projects/${project.id}/financing`, true);
+                navigate(`/projects/list/${project.id}/financing`, true);
             })
             .catch(error => {
                 console.log(error);
@@ -31,7 +31,7 @@ const AddProjectContractPanel = () => {
     };
 
     const handleFormCancel = () => {
-        navigate(`/projects/${project.id}/financing/`);
+        navigate(`/projects/list/${project.id}/financing/`);
     };
 
     return (

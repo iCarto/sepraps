@@ -14,7 +14,7 @@ const SubPageMenuListItemButton = ({to, text, icon = null, ...props}) => {
     let resolved = useResolvedPath(to);
     let location = useLocation();
 
-    const selected = location.pathname === resolved.pathname;
+    const selected = location.pathname.startsWith(resolved.pathname);
 
     return (
         <>

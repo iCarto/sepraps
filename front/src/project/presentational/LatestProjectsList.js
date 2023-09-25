@@ -46,7 +46,7 @@ const LatestProjectsList = ({projects}) => {
                         <ListItemButton
                             sx={projectButtonStyle}
                             onClick={() => {
-                                navigate(`projects/${project.id}/summary`);
+                                navigate(`projects/list/${project.id}`);
                             }}
                         >
                             <ListItemAvatar

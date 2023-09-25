@@ -15,7 +15,7 @@ const FieldReportNewProjectTabPanel = ({index, activeTabId}) => {
 
     const [error, setError] = useState("");
 
-    const basePath = `/field-reports/${fieldReport.id}/projects`;
+    const basePath = `/field-reports/list/${fieldReport.id}/projects`;
     const navigate = useNavigateWithReload();
 
     const handleSubmit = fieldReportProject => {

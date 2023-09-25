@@ -1,64 +1,64 @@
-import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
+import {SubPageMenu, SubPageMenuListItemButton} from "base/ui/menu";
 import {QuestionnairesMenu} from "questionnaire/presentational";
 import {SelectProjectDropDown} from "project/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
-import PinDropIcon from "@mui/icons-material/PinDrop";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import FlagIcon from "@mui/icons-material/Flag";
-import FolderOpenIcon from "@mui/icons-material/FolderOpen";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import GroupsIcon from "@mui/icons-material/Groups";
+import PinDropIconOutlined from "@mui/icons-material/PinDropOutlined";
+import AccountBalanceIconOutlined from "@mui/icons-material/AccountBalanceOutlined";
+import FlagIconOutlined from "@mui/icons-material/FlagOutlined";
+import FolderOpenIconOutlined from "@mui/icons-material/FolderOpenOutlined";
+import PermContactCalendarIconOutlined from "@mui/icons-material/PermContactCalendarOutlined";
+import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 
 const ProjectSubPageMenu = ({project}) => {
-    const basePath = `/projects/${project?.id}`;
+    const basePath = `/projects/list/${project?.id}`;
 
     return (
         <SubPageMenu subPageMenuDropdown={<SelectProjectDropDown project={project} />}>
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-detail"
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InventoryRoundedIcon />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-location"
                 to={`${basePath}/location`}
                 text="Ubicación"
-                icon={<PinDropIcon />}
+                icon={<PinDropIconOutlined />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-provider"
                 to={`${basePath}/provider`}
                 text="Prestador"
-                icon={<GroupsIcon />}
+                icon={<GroupsIconOutlined />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-financing"
                 to={`${basePath}/financing`}
                 text="Financiación"
-                icon={<AccountBalanceIcon />}
+                icon={<AccountBalanceIconOutlined />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-milestones"
                 to={`${basePath}/milestones`}
                 text="Hitos"
-                icon={<FlagIcon />}
+                icon={<FlagIconOutlined />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-documents"
                 to={`${basePath}/documents`}
                 text="Documentos"
-                icon={<FolderOpenIcon />}
+                icon={<FolderOpenIconOutlined />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-contacts"
                 to={`${basePath}/contacts`}
                 text="Contactos"
-                icon={<PermContactCalendarIcon />}
+                icon={<PermContactCalendarIconOutlined />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="project-fieldreport"
                 to={`${basePath}/fieldreport`}
                 text="Informes de viaje"
@@ -66,7 +66,7 @@ const ProjectSubPageMenu = ({project}) => {
             />
             <QuestionnairesMenu
                 questionnaires={project?.questionnaires}
-                basePath={`/projects/${project?.id}`}
+                basePath={`/projects/list/${project?.id}`}
             />
         </SubPageMenu>
     );

@@ -29,7 +29,7 @@ const QuestionnaireInstanceTableRow = ({
 
     const handleClick = () => {
         navigate(
-            `/projects/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/${instance.id}/edit`
+            `/projects/list/${projectQuestionnaire.projectId}/questionnaires/${projectQuestionnaire.questionnaire.code}/${instance.id}/edit`
         );
     };
 

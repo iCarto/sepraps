@@ -18,7 +18,7 @@ const UpdateProjectQuestionnaireInstancePanel = () => {
     const outletContext = useOutletContext();
     const projectQuestionnaire = outletContext[3];
 
-    const basePath = `/projects/${projectQuestionnaire?.projectId}/questionnaires/${questionnaireCode}`;
+    const basePath = `/projects/list/${projectQuestionnaire?.projectId}/questionnaires/${questionnaireCode}`;
 
     let selectedQuestionnaireInstance = null;
     if (projectQuestionnaire) {

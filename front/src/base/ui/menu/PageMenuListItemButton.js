@@ -8,24 +8,19 @@ import ListItemText from "@mui/material/ListItemText";
 import Tooltip from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
 
-const PageMenuListItemButton = ({to, text, icon = null, ...props}) => {
+const PageMenuListItemButton = ({
+    to,
+    text,
+    icon = null,
+    collapsed = false,
+    ...props
+}) => {
     const theme = useTheme();
 
     let resolved = useResolvedPath(to);
     let location = useLocation();
 
-    const resolvedPath = resolved.pathname;
-    const targetUrlForPrimaryMenu = resolvedPath.substring(1);
-    const targetUrlForSecondaryMenu = resolvedPath.substring(
-        resolvedPath.lastIndexOf("/") + 1
-    );
-    const currentUrlSlugs = location.pathname.split("/");
-    const currentUrlFirstSlugs = [currentUrlSlugs[1], currentUrlSlugs[2]].join("/");
-    const currentUrlLastSlug = currentUrlSlugs.pop();
-
-    const isOptionSelected =
-        targetUrlForPrimaryMenu === currentUrlFirstSlugs ||
-        targetUrlForSecondaryMenu === currentUrlLastSlug;
+    const selected = location.pathname.startsWith(resolved.pathname);
 
     return (
         <>
@@ -33,13 +28,13 @@ const PageMenuListItemButton = ({to, text, icon = null, ...props}) => {
                 component={Link}
                 to={to}
                 {...props}
-                selected={isOptionSelected}
+                selected={selected}
                 sx={{
                     bgcolor: theme.palette.menu.primary.header.background,
-                    borderLeft: isOptionSelected
+                    borderLeft: selected
                         ? `5px solid ${theme.palette.menu.primary.header.text}`
                         : null,
-                    fontWeight: isOptionSelected ? "bold" : "inherit",
+                    fontWeight: selected ? "bold" : "inherit",
                 }}
             >
                 {icon && (
@@ -54,10 +49,12 @@ const PageMenuListItemButton = ({to, text, icon = null, ...props}) => {
                         </ListItemIcon>
                     </Tooltip>
                 )}
-                <ListItemText
-                    sx={{color: theme.palette.menu.primary.header.text}}
-                    primary={text}
-                />
+                {!collapsed && (
+                    <ListItemText
+                        sx={{color: theme.palette.menu.primary.header.text}}
+                        primary={text}
+                    />
+                )}
             </ListItemButton>
             <Divider />
         </>

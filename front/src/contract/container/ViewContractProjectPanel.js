@@ -33,11 +33,11 @@ const ViewContractProjectPanel = () => {
     }, [projectId]);
 
     const handleCloseSidebar = () => {
-        navigate(`/contracts/${contractId}/projects`);
+        navigate(`/contracts/list/${contractId}/projects`);
     };
 
     const handleClickDetail = () => {
-        navigate(`/projects/${project?.id}/summary`);
+        navigate(`/projects/list/${project?.id}`);
     };
 
     const handleClickRemove = () => {
@@ -56,7 +56,7 @@ const ViewContractProjectPanel = () => {
         });
         ContractService.update(contract_view_adapter({...updatedContract}))
             .then(() => {
-                navigate(`/contracts/${contractId}/projects`, true);
+                navigate(`/contracts/list/${contractId}/projects`, true);
             })
             .catch(error => {
                 console.log(error);

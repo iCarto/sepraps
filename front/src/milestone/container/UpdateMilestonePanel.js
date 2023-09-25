@@ -14,7 +14,7 @@ const UpdateMilestonePanel = () => {
     let project;
     [project] = useOutletContext();
 
-    const basePath = `/projects/${project.id}/milestones`;
+    const basePath = `/projects/list/${project.id}/milestones`;
 
     const handleSubmit = milestone => {
         MilestoneService.update(milestone)

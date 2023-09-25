@@ -1,4 +1,4 @@
-import {Route} from "react-router-dom";
+import {Navigate, Route} from "react-router-dom";
 import {
     ManageProjectsPage,
     ListProjectsPage,
@@ -21,28 +21,21 @@ import {
     ViewProjectsSupervisionPage,
     ViewProjectFieldReportSubPage,
     ViewProjectDocumentPanel,
+    ViewProjectStatsPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
 import {AddProjectContractPanel} from "contract/container";
-import {ViewDocumentPanel} from "base/file/components";
 import {MapConfigProvider} from "base/geo/provider";
 import {ViewContactPanel} from "contact/container";
+import {
+    ViewStatsByPhaseSubPage,
+    ViewStatsByQuestionnairesSubPage,
+} from "stats/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
-    <Route key="project-manage" path="" element={<ManageProjectsPage />}>
-        <Route
-            key="project-list"
-            path="list"
-            element={
-                <MapConfigProvider>
-                    <ListProjectsPage />
-                </MapConfigProvider>
-            }
-        >
-            <Route key="project-info" path="info/:id" element={<ViewProjectPanel />} />
-        </Route>
+    <Route key="project-manage" path="list" element={<ManageProjectsPage />}>
         <Route key="project-detail" path=":id" element={<ViewProjectPage />}>
             <Route
                 key="project-summary"
@@ -152,13 +145,34 @@ const projectRoutes = [
                 path="fieldreport/:fieldReportId?"
                 element={<ViewProjectFieldReportSubPage />}
             />
+            <Route index element={<Navigate to="summary" replace />} />
         </Route>
         <Route
-            key="projects-supervision"
-            path="supervision"
-            element={<ViewProjectsSupervisionPage />}
-        ></Route>
+            key="project-list"
+            path=""
+            element={
+                <MapConfigProvider>
+                    <ListProjectsPage />
+                </MapConfigProvider>
+            }
+        >
+            <Route key="project-info" path="info/:id" element={<ViewProjectPanel />} />
+        </Route>
     </Route>,
+    <Route key="project-stats" path="stats" element={<ViewProjectStatsPage />}>
+        <Route
+            key="project-stats-by-phase"
+            path="phase"
+            element={<ViewStatsByPhaseSubPage />}
+        />
+        <Route
+            key="-projectstats-by-questionnaires"
+            path="questionnaires/:questionnaireCode"
+            element={<ViewStatsByQuestionnairesSubPage />}
+        />
+        <Route index element={<Navigate to="phase" replace />} />
+    </Route>,
+    <Route index element={<Navigate to="list" replace />} />,
 ];
 
 export default projectRoutes;

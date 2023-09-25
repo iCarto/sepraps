@@ -53,7 +53,7 @@ const ViewProviderPanel = () => {
     };
 
     const handleClickDetail = () => {
-        navigate(`/providers/${id}/summary`);
+        navigate(`/providers/list/${id}`);
     };
 
     return (

@@ -1,27 +1,27 @@
-import {SubPageMenu, PageMenuListItemButton} from "base/ui/menu";
+import {SubPageMenu, SubPageMenuListItemButton} from "base/ui/menu";
 import {SelectProviderDropDown} from "provider/container";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 
 const ProviderSubPageMenu = ({provider}) => {
-    const basePath = `/providers/${provider?.id}`;
+    const basePath = `/providers/list/${provider?.id}`;
 
     return (
         <SubPageMenu
             subPageMenuDropdown={<SelectProviderDropDown provider={provider} />}
         >
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="provider-detail"
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InventoryRoundedIcon />}
             />
-            <PageMenuListItemButton
+            <SubPageMenuListItemButton
                 key="provider-contacts"
                 to={`${basePath}/contacts`}
                 text="Miembros/Contactos"
-                icon={<PermContactCalendarIcon />}
+                icon={<PermContactCalendarOutlinedIcon />}
             />
         </SubPageMenu>
     );

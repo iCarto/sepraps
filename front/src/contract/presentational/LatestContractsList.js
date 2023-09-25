@@ -44,7 +44,7 @@ const LatestContractsList = ({contracts}) => {
                         <ListItemButton
                             sx={contractButtonStyle}
                             onClick={() => {
-                                navigate(`contracts/${contract.id}/summary`);
+                                navigate(`contracts/list/${contract.id}`);
                             }}
                         >
                             <ListItemText

@@ -24,7 +24,7 @@ const SelectProjectDropDown = ({project}) => {
         ? {
               id: project?.id,
               title: "Proyecto:",
-              slug: "projects",
+              slug: "projects/list",
               primaryInfo: project?.code,
               secondaryInfo: `${project?.name}, ${project?.location}`,
               tag: project?.closed ? <ClosedProjectTag /> : null,

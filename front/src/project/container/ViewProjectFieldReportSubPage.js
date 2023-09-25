@@ -10,18 +10,10 @@ import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import {Link} from "react-router-dom";
 import CardContent from "@mui/material/CardContent";
-import {DateUtil} from "base/format/utilities";
 import {styled} from "@mui/material/styles";
 
-import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import {TextLink} from "base/navigation/components";
 import {FieldReportList} from "fieldReport/presentational";
 import {PaperContainer} from "base/shared/components";
 
@@ -82,7 +74,7 @@ const ViewProjectFieldReportSubPage = () => {
                                             <Button
                                                 aria-label="view-field-report"
                                                 target="_blank"
-                                                href={`/field-reports/${fieldReportId}/summary`}
+                                                href={`/field-reports/list/${fieldReportId}/summary`}
                                                 variant="contained"
                                                 startIcon={<OpenInNewIcon />}
                                             >
@@ -102,7 +94,7 @@ const ViewProjectFieldReportSubPage = () => {
                     <Grid item xs={2}>
                         <FieldReportList
                             fieldReports={fieldReportsForProject}
-                            basePath={`/projects/${projectId}/fieldreport`}
+                            basePath={`/projects/list/${projectId}/fieldreport`}
                             selectedFieldReportId={parseInt(fieldReportId)}
                         />
                     </Grid>
