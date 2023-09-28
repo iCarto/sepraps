@@ -47,7 +47,7 @@ const ProjectLinkedLocalitiesSection = ({project}) => {
                 </Stack>
             )}
             {!isProjectClosed && (
-                <Stack alignItems="center" spacing={3}>
+                <Stack alignItems="center" spacing={3} sx={{mt: 2}}>
                     <AddNewButton
                         basePath="linked_localities/new/add"
                         roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}

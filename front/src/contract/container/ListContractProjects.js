@@ -11,7 +11,6 @@ import {
     EntityChangeView,
 } from "base/entity/components/presentational";
 
-import {PageLayout} from "base/ui/main";
 import {PaperContainer} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -58,39 +57,37 @@ const ListContractProjects = ({projects}) => {
     };
 
     return (
-        <PageLayout subPage={false}>
-            <PaperContainer justifyContent="space-between" alignItems="center">
-                <Grid
-                    item
-                    container
-                    alignItems="flex-start"
-                    justifyContent="space-between"
-                    sx={{flexDirection: {xs: "column", md: "row"}}}
-                    mb={3}
-                >
-                    <Grid item md={6}>
-                        <SectionHeading>Proyectos del contrato</SectionHeading>
-                    </Grid>
-                    <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
-                        <Stack direction="row" justifyContent="flex-end" spacing={1}>
-                            <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                                <EntityAddButtonGroup />
-                            </AuthAction>
-                            <EntityChangeView views={["list", "table", "map"]} />
-                        </Stack>
-                    </Grid>
+        <PaperContainer justifyContent="space-between" alignItems="center">
+            <Grid
+                item
+                container
+                alignItems="flex-start"
+                justifyContent="space-between"
+                sx={{flexDirection: {xs: "column", md: "row"}}}
+                mb={3}
+            >
+                <Grid item md={6}>
+                    <SectionHeading>Proyectos del contrato</SectionHeading>
                 </Grid>
-                {projects.length ? (
-                    getViewComponent()
-                ) : (
-                    <Container sx={{textAlign: "center"}}>
-                        <Typography py={12} sx={{fontStyle: "italic"}}>
-                            Este contrato aún no tiene proyectos asignados.
-                        </Typography>
-                    </Container>
-                )}
-            </PaperContainer>
-        </PageLayout>
+                <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
+                    <Stack direction="row" justifyContent="flex-end" spacing={1}>
+                        <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                            <EntityAddButtonGroup />
+                        </AuthAction>
+                        <EntityChangeView views={["list", "table", "map"]} />
+                    </Stack>
+                </Grid>
+            </Grid>
+            {projects.length ? (
+                getViewComponent()
+            ) : (
+                <Container sx={{textAlign: "center"}}>
+                    <Typography py={12} sx={{fontStyle: "italic"}}>
+                        Este contrato aún no tiene proyectos asignados.
+                    </Typography>
+                </Container>
+            )}
+        </PaperContainer>
     );
 };
 

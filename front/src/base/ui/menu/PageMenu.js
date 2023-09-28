@@ -32,18 +32,18 @@ const DrawerHeader = styled("div")(({theme}) => ({
     ...theme.mixins.toolbar,
 }));
 
-const Drawer = styled(MuiDrawer, {shouldForwardProp: prop => prop !== "open"})(
-    ({theme, collapsed, open}) => ({
-        width: collapsed ? "70px" : `${PAGE_MENU_DRAWER_WIDTH}px`,
-        flexShrink: 0,
-        whiteSpace: "normal",
-        boxSizing: "border-box",
-        ...(!open && {
-            ...closedMixin(theme),
-            "& .MuiDrawer-paper": closedMixin(theme),
-        }),
-    })
-);
+const Drawer = styled(MuiDrawer, {
+    shouldForwardProp: prop => prop !== "open" && prop !== "collapsed",
+})(({theme, collapsed, open}) => ({
+    width: collapsed ? "70px" : `${PAGE_MENU_DRAWER_WIDTH}px`,
+    flexShrink: 0,
+    whiteSpace: "normal",
+    boxSizing: "border-box",
+    ...(!open && {
+        ...closedMixin(theme),
+        "& .MuiDrawer-paper": closedMixin(theme),
+    }),
+}));
 
 const PageMenu = ({
     headerText = "",
@@ -73,7 +73,7 @@ const PageMenu = ({
             component="nav"
             variant="permanent"
             open={true}
-            collapsed={collapsed}
+            collapsed={true}
             role="left-side-page-menu"
             PaperProps={{
                 sx: {

@@ -7,13 +7,6 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import FormControl from "@mui/material/FormControl";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import {useEffect, useState} from "react";
 import Divider from "@mui/material/Divider";
 
@@ -80,9 +73,8 @@ const FieldReportList = ({fieldReports, selectedFieldReportId, basePath}) => {
             <Grid container direction="column" spacing={1} sx={{mt: 1}}>
                 {fieldReportsList &&
                     fieldReportsList.map(fieldReport => (
-                        <Grid item>
+                        <Grid key={fieldReport.id} item>
                             <Card
-                                key={fieldReport.id}
                                 elevation={3}
                                 sx={{
                                     border: "1px",

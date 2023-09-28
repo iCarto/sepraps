@@ -6,7 +6,7 @@ import {SectionCard} from "base/ui/section/components";
 import {EntityViewSubPage} from "base/entity/components/container";
 
 const ViewContractQuestionnairesSubPage = () => {
-    const {contractId, questionnaireCode} = useParams();
+    const {id: contractId, questionnaireCode} = useParams();
 
     let contract;
     [contract] = useOutletContext();

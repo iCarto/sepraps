@@ -39,6 +39,10 @@ const ProjectFilterForm = ({onClear = null}) => {
     };
 
     useEffect(() => {
+        if (!filter || !filter.status) setFilter({status: "active"});
+    }, []);
+
+    useEffect(() => {
         if (expanded && !loadedDomains) {
             Promise.all([
                 ContractService.getList({template: TEMPLATE.SHORT, closed: false}),
