@@ -17,7 +17,7 @@ const CreateFieldReportPage = () => {
     const handleFormSubmit = fieldReport => {
         FieldReportService.create(fieldReport_view_adapter({...fieldReport}))
             .then(createdFieldReport => {
-                navigate(`${basePath}/${createdFieldReport.id}/summary`);
+                navigate(`${basePath}/list/${createdFieldReport.id}/summary`);
             })
             .catch(error => {
                 console.log(error);
