@@ -119,7 +119,11 @@ const contractRoutes = [
             />
         </Route>
     </Route>,
-    <Route index element={<Navigate to="list" replace />} />,
+    <Route
+        key="redirect-contract-index"
+        index
+        element={<Navigate to="list" replace />}
+    />,
 ];
 
 export default contractRoutes;

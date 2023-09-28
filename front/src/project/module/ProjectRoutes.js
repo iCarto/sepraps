@@ -172,7 +172,11 @@ const projectRoutes = [
         />
         <Route index element={<Navigate to="phase" replace />} />
     </Route>,
-    <Route index element={<Navigate to="list" replace />} />,
+    <Route
+        key="redirect-project-index"
+        index
+        element={<Navigate to="list" replace />}
+    />,
 ];
 
 export default projectRoutes;

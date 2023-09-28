@@ -65,7 +65,11 @@ const fieldReportRoutes = [
             />
         </Route>
     </Route>,
-    <Route index element={<Navigate to="list" replace />} />,
+    <Route
+        key="redirect-field-report-index"
+        index
+        element={<Navigate to="list" replace />}
+    />,
 ];
 
 export default fieldReportRoutes;

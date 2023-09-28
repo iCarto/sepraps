@@ -69,7 +69,11 @@ const providerRoutes = [
         ></Route>
         <Route index element={<Navigate to="gender" replace />} />
     </Route>,
-    <Route index element={<Navigate to="list" replace />} />,
+    <Route
+        key="redirect-provider-index"
+        index
+        element={<Navigate to="list" replace />}
+    />,
 ];
 
 export default providerRoutes;
