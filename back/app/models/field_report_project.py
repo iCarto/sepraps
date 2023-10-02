@@ -39,7 +39,9 @@ class FieldReportProject(BaseDocumentModel, BaseEntityModelMixin):
                 media_type="FOLDER",
                 media_name="{0}".format(self.project.code),
                 storage_path="{0}/{1}/{2}".format(
-                    self.field_report.folder.storage_path, classtype, self.project.code
+                    self.field_report.folder.storage_path,
+                    classtype.lower(),
+                    self.project.code,
                 ),
                 parent=self.field_report.folder,
                 creation_user=self.created_by,

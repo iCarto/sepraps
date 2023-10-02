@@ -41,3 +41,14 @@ activity.image3 = document
 document = MediaNode.objects.get(pk=196)
 activity.image4 = document
 activity.save()
+
+activity = FieldReportProjectActivity.objects.get(pk=7)
+document = MediaNode.objects.get(pk=203)
+activity.image1 = document
+document = MediaNode.objects.get(pk=204)
+activity.image2 = document
+document = MediaNode.objects.get(pk=205)
+activity.image3 = document
+document = MediaNode.objects.get(pk=206)
+activity.image4 = document
+activity.save()
