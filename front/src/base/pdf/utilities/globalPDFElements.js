@@ -182,4 +182,14 @@ export const globalPDFElements = {
             },
         });
     },
+
+    getTableTopPosition(finalY, dimensions) {
+        const doesTableFitInPrevPage = finalY < dimensions.pageHeight - 30;
+        const positionTop = doesTableFitInPrevPage
+            ? finalY + 5
+            : finalY + dimensions.pagePaddingTop;
+
+        const marginTop = doesTableFitInPrevPage ? 0 : dimensions.pagePaddingTop - 10;
+        return {positionTop, marginTop};
+    },
 };

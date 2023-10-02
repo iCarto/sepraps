@@ -70,8 +70,14 @@ export function getFieldReportProjectPDFElements(
     };
 
     const drawContractHeader = (doc, contract) => {
+        const tablePosition = globalPDFElements.getTableTopPosition(
+            doc.lastAutoTable.finalY,
+            dimensions
+        );
+
         autoTable(doc, {
-            startY: doc.lastAutoTable.finalY + 10,
+            startY: tablePosition.positionTop,
+            margin: {top: tablePosition.marginTop},
             theme: "plain",
             head: [[`Contrato ${contract.number.toUpperCase()}`]],
             body: [[contract.comments]],
@@ -105,8 +111,14 @@ export function getFieldReportProjectPDFElements(
 
     const drawVisitedProjectHistory = project => {
         if (project.history) {
+            const tablePosition = globalPDFElements.getTableTopPosition(
+                doc.lastAutoTable.finalY,
+                dimensions
+            );
+
             autoTable(doc, {
-                startY: doc.lastAutoTable.finalY + 5,
+                startY: tablePosition.positionTop,
+                margin: {top: tablePosition.marginTop},
                 theme: "plain",
                 head: [["Antecedentes"]],
                 headStyles: {
@@ -119,17 +131,26 @@ export function getFieldReportProjectPDFElements(
 
     const drawVisitedProjectAgreementsList = project => {
         if (project.agreements) {
-            doc.setFont(undefined, "bold")
-                .setFontSize(dimensions.fontSizeRegular)
-                .setTextColor(CUSTOM_COLORS.text.primary)
-                .text(
-                    "Acuerdos alcanzados",
-                    dimensions.pageMargin,
-                    doc.lastAutoTable.finalY + 10
-                );
+            const tablePosition = globalPDFElements.getTableTopPosition(
+                doc.lastAutoTable.finalY,
+                dimensions
+            );
+
             autoTable(doc, {
-                startY: doc.lastAutoTable.finalY + 15,
+                startY: tablePosition.positionTop,
+                margin: {top: tablePosition.marginTop},
                 theme: "plain",
+                head: [
+                    [
+                        {
+                            content: "Acuerdos alcanzados",
+                            colSpan: 2,
+                            styles: {
+                                fontStyle: "bold",
+                            },
+                        },
+                    ],
+                ],
                 body: fieldReportContent.getProjectAgreementsList(project.agreements),
                 columnStyles: {
                     0: {

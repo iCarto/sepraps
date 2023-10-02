@@ -1,22 +1,18 @@
 import {DateUtil} from "base/format/utilities";
+import {globalPDFElements} from "base/pdf/utilities";
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
 
 export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportContent) {
     const drawActivitySummary = activity => {
-        const doesTableFitInPrevPage =
-            doc.lastAutoTable.finalY < dimensions.pageHeight - 30;
-        const tablePositionTop = doesTableFitInPrevPage
-            ? doc.lastAutoTable.finalY + 5
-            : doc.lastAutoTable.finalY + dimensions.pagePaddingTop;
-
-        const tableMarginTop = doesTableFitInPrevPage
-            ? 0
-            : dimensions.pagePaddingTop - 10;
+        const tablePosition = globalPDFElements.getTableTopPosition(
+            doc.lastAutoTable.finalY,
+            dimensions
+        );
 
         autoTable(doc, {
-            startY: tablePositionTop,
-            margin: {top: tableMarginTop},
+            startY: tablePosition.positionTop,
+            margin: {top: tablePosition.marginTop},
             theme: "plain",
             head: [[`${DateUtil.formatDate(activity.date)} | ${activity.title}`]],
             headStyles: {
