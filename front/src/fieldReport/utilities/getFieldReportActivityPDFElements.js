@@ -41,7 +41,7 @@ export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportCo
     const drawActivityPicturesTable = images => {
         const tableBody = fieldReportContent.getImageTableContent(images);
 
-        const minCellHeight = 60;
+        const minCellHeight = 50;
         const textRowHeight = 11;
         const rowPairHeight = minCellHeight + textRowHeight;
         const tableHeight = (tableBody.length / 2) * rowPairHeight;
