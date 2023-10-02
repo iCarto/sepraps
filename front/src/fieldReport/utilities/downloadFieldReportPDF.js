@@ -12,16 +12,12 @@ export function downloadFieldReportPDF() {
         const fieldReportProjectElements = fieldReport.fieldReportProjectElements;
 
         const firstHeaderLogo = {
-            url: "/logo/logo_bilingue_M_Salud_Publica.png",
+            url: "/logo/logo_ministerio_salud_publica.jpg",
             label: "Ministerio de Salud Pública",
         };
         const secondHeaderLogo = {
-            url: "/logo/logo_bilingue_gobierno_PY.png",
+            url: "/logo/logo_gobierno.jpg",
             label: "Gobierno de Paraguay",
-        };
-        const thirdHeaderLogo = {
-            url: "/logo/logo_eslogan_guarani.png",
-            label: "Eslogan guaraní",
         };
         const mainLogo = {
             url: "/logo/logo_senasa_tagline.png",
@@ -31,13 +27,12 @@ export function downloadFieldReportPDF() {
         const logos = await getImagesData([
             firstHeaderLogo,
             secondHeaderLogo,
-            thirdHeaderLogo,
             mainLogo,
         ]);
 
         // First page
         fieldReportElements.drawReportFirstPageHeader(logos.slice(0, -1));
-        fieldReportElements.drawReportMainLogo(logos[3]);
+        fieldReportElements.drawReportMainLogo(logos[2]);
         fieldReportElements.drawReportTitle();
         fieldReportElements.drawReportDetailsTable();
 
