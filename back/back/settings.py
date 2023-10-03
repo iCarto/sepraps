@@ -148,6 +148,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+# Configuration for using X-Forwarded-Host header behind a Proxy to resolve host url
+USE_X_FORWARDED_HOST = True
+
 
 DEPLOYMENT = env("DEPLOYMENT")
 
