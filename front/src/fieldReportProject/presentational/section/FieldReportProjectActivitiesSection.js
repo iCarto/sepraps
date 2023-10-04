@@ -48,7 +48,13 @@ const FieldReportProjectActivitiesSection = ({
         onCloseForm(section);
     };
 
-    const handleSubmit = createdActivity => {
+    const callCallback = (callback, success) => {
+        if (callback) {
+            callback(success);
+        }
+    };
+
+    const handleSubmit = (createdActivity, callback = null) => {
         console.log({createdActivity});
         FieldReportProjectActivityService.create(
             fieldReportProjectActivity_view_adapter({
@@ -108,15 +114,18 @@ const FieldReportProjectActivitiesSection = ({
                         })
                     )
                         .then(() => {
+                            callCallback(callback, true);
                             navigate(basePath, true);
                         })
                         .catch(error => {
                             console.log(error);
+                            callCallback(callback, false);
                             setError(error);
                         });
                 })
                 .catch(error => {
                     console.log(error);
+                    callCallback(callback, false);
                     setError(error);
                 });
         });

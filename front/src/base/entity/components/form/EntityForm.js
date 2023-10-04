@@ -1,8 +1,9 @@
+import {EntityFormSubmitButton} from ".";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
-const EntityForm = ({children, onSubmit, onCancel = null}) => {
+const EntityForm = ({children, onSubmit, onCancel = null, isSubmitting = false}) => {
     return (
         <Box component="form" width="100%">
             {children}
@@ -13,9 +14,10 @@ const EntityForm = ({children, onSubmit, onCancel = null}) => {
                     </Grid>
                 )}
                 <Grid item>
-                    <Button variant="contained" onClick={() => onSubmit()}>
-                        Guardar
-                    </Button>
+                    <EntityFormSubmitButton
+                        isSubmitting={isSubmitting}
+                        onSubmit={onSubmit}
+                    />
                 </Grid>
             </Grid>
         </Box>

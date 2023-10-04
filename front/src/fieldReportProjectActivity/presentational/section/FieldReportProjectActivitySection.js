@@ -40,7 +40,13 @@ const FieldReportProjectActivitySection = ({
         onCloseForm();
     };
 
-    const handleSubmit = updatedActivity => {
+    const callCallback = (callback, success) => {
+        if (callback) {
+            callback(success);
+        }
+    };
+
+    const handleSubmit = (updatedActivity, callback = null) => {
         const imagesUploadPromises = [1, 2, 3, 4].map(imageIndex => {
             const image = updatedActivity[`image${imageIndex}`];
             if (image instanceof File) {
@@ -88,14 +94,17 @@ const FieldReportProjectActivitySection = ({
                     })
                 )
                     .then(() => {
+                        callCallback(callback, true);
                         navigate(basePath, true);
                     })
                     .catch(error => {
+                        callCallback(callback, false);
                         console.log(error);
                         setError(error);
                     });
             })
             .catch(error => {
+                callCallback(callback, false);
                 console.log(error);
                 setError(error);
             });

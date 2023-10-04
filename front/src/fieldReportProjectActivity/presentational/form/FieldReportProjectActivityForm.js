@@ -8,8 +8,11 @@ import {FieldReportProjectActivityFormFields} from ".";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import {useState} from "react";
 
 const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const defaultFormValues = {
         id: FormUtil.getFormValue(activity?.id),
         text: FormUtil.getFormValue(activity?.text),
@@ -43,6 +46,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
     };
 
     const onFormSubmit = data => {
+        setIsSubmitting(true);
         const updatedActivity = {
             id: FormUtil.getDataValue(data.id),
             text: FormUtil.getDataValue(data.text),
@@ -54,7 +58,9 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
             image3: FormUtil.getDataValue(data.image3),
             image4: FormUtil.getDataValue(data.image4),
         };
-        onSubmit(updatedActivity);
+        onSubmit(updatedActivity, success => {
+            setIsSubmitting(false);
+        });
     };
 
     return (
@@ -76,6 +82,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
                 </Grid>
                 <Grid item>
                     <EntityForm
+                        isSubmitting={isSubmitting}
                         onSubmit={formMethods.handleSubmit(onFormSubmit)}
                         onCancel={handleCancel}
                     >
