@@ -123,13 +123,13 @@ class MediaView(views.APIView):
     def post(self, request, media_path, format=None):
         file = request.data.get("file", None)
         if file:
-            path = save(os.path.join(settings.MEDIA_ROOT, media_path), file)
-
             parent_path = "/".join(media_path.split("/")[:-1])
             parent_filter = get_filter(parent_path)
             parent = MediaNode.objects.filter(**parent_filter).first()
 
             if parent:
+                path = save("{0}/{1}".format(parent.storage_path, file.name), file)
+
                 media_node = {
                     "media_type": "DOCUMENT",
                     "media_name": file.name,

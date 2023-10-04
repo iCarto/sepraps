@@ -47,7 +47,7 @@ export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportCo
         const tableHeight = (tableBody.length / 2) * rowPairHeight;
 
         const doesTableFitInPrevPage =
-            dimensions.pageHeight > doc.lastAutoTable.finalY + tableHeight;
+            dimensions.pageHeight - 5 > doc.lastAutoTable.finalY + tableHeight;
 
         const tablePositionTop = doesTableFitInPrevPage
             ? doc.lastAutoTable.finalY + 5

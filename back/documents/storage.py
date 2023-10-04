@@ -1,3 +1,6 @@
+import os
+
+from django.conf import settings
 from django.core.files.storage import default_storage
 from PIL import ExifTags, Image
 
@@ -12,6 +15,7 @@ def rotate_image(orientation, image):
 
 
 def fix_jpeg_orientation(filepath):
+    filepath = os.path.join(settings.MEDIA_ROOT, filepath)
     image = Image.open(filepath)
 
     for orientation in ExifTags.TAGS.keys():
