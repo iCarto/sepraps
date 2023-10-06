@@ -17,6 +17,7 @@ from app.views.financing_program_viewset import FinancingProgramViewSet
 from app.views.locality_viewset import LocalityViewSet
 from app.views.milestone_viewset import MilestoneViewSet
 from app.views.payment_viewset import PaymentViewSet
+from app.views.product_viewset import ProductViewSet
 from app.views.project_viewset import ProjectViewSet
 from app.views.provider_viewset import ProviderViewSet
 
@@ -39,6 +40,7 @@ router.register(
 router.register("contractors", ContractorViewSet)
 router.register("milestones", MilestoneViewSet)
 router.register("payments", PaymentViewSet)
+router.register("products", ProductViewSet)
 
 
 urlpatterns = [

@@ -2,7 +2,7 @@ from documents.models import create_folder_structure
 
 
 def sanitize_field_value(value):
-    return value.replace("/", "-")
+    return value.replace("/", "-").replace(" ", "_").replace("(", "").replace(")", "")
 
 
 def create_folder(instance, field="id", created=True, children_data=None):
