@@ -7,6 +7,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
+import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 
 const ContractSubPageMenu = ({contract}) => {
     const {ROLES} = useAuth();
@@ -39,6 +40,12 @@ const ContractSubPageMenu = ({contract}) => {
                 to={`${basePath}/projects`}
                 text="Proyectos"
                 icon={<BallotOutlinedIcon />}
+            />
+            <SubPageMenuListItemButton
+                key="contract-payments"
+                to={`${basePath}/payment`}
+                text="Pagos"
+                icon={<RequestQuoteOutlinedIcon />}
             />
             <QuestionnairesMenu
                 questionnaires={contract.questionnaires}

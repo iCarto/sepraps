@@ -12,7 +12,7 @@ const Unit = ({unit}) => {
     return (
         <Typography
             variant="subtitle1"
-            component="p"
+            component="span"
             sx={{
                 lineHeight: {xs: 1.85, sm: 1.65},
                 ml: 1,
@@ -79,7 +79,7 @@ const SectionField = ({
         <>
             <Typography
                 variant="subtitle2"
-                component="p"
+                component="span"
                 sx={{...valueStyle, ...customValueStyle} || valueStyle}
             >
                 {value}
@@ -96,7 +96,7 @@ const SectionField = ({
     const emptyField = (
         <Typography
             variant="subtitle2"
-            component="p"
+            component="span"
             sx={{...valueStyle, fontStyle: "italic"}}
         >
             —

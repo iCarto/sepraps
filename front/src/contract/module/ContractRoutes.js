@@ -17,9 +17,11 @@ import {
     ViewContractQuestionnairesSubPage,
     ViewContractPhasesSubPage,
     CreateContractProjectPage,
+    ViewContractPaymentsSubPage,
 } from "../container";
 import {UpdateContractContactPanel} from "../container/monitoring";
 import {ViewContactPanel} from "contact/container";
+import {ViewPaymentContent, CreatePaymentContent} from "payment/container";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -109,6 +111,22 @@ const contractRoutes = [
                 path="questionnaires/:questionnaireCode"
                 element={<ViewContractQuestionnairesSubPage />}
             ></Route>
+            <Route
+                key="contract-payments"
+                path="payment"
+                element={<ViewContractPaymentsSubPage />}
+            >
+                <Route
+                    key="contract-payments-new"
+                    path="new"
+                    element={<CreatePaymentContent />}
+                />
+                <Route
+                    key="contract-payments-detail"
+                    path=":paymentId"
+                    element={<ViewPaymentContent />}
+                />
+            </Route>
             <Route index element={<Navigate to="summary" replace />} />
         </Route>
         <Route key="contract-list" path="" element={<ListContractsPage />}>

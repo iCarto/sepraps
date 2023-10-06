@@ -5,6 +5,7 @@ import {
     contract_api_adapter,
 } from "contract/model";
 import {createEntityService} from "base/entity/service";
+import {AuthApiService} from "base/api/service";
 
 export const TEMPLATE = {
     SHORT: "short",
@@ -47,6 +48,12 @@ const ContractService = {
 
     update(provider) {
         return entityService.update(provider);
+    },
+
+    getPaymentsList(id) {
+        return AuthApiService.get(`${basePath}/${id}/payments`).then(response => {
+            return response;
+        });
     },
 };
 
