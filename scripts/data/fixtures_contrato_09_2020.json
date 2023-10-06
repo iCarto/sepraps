@@ -1,0 +1,174 @@
+[
+    {
+        "model": "app.contact",
+        "pk": 19,
+        "fields": {
+            "name": "Ing. Marcial Manuel López Cano",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "ci_number": "484810"
+        }
+    },
+    {
+        "model": "app.contractor",
+        "pk": 5,
+        "fields": {
+            "name": "Consorcio Alcantarillado Sanitario",
+            "contractor_type": "company",
+            "address": "Pararí nº1013 c/ Tobatí, Asunción",
+            "phone": "(021) 550-283",
+            "email": "",
+            "comments": "RUC Nº 8011365-0"
+        }
+    },
+    {
+        "model": "app.contractorcontact",
+        "fields": {
+            "entity": 5,
+            "contact": 19,
+            "post": "responsable_contratista"
+        }
+    },
+    {
+        "model": "app.ConstructionContract",
+        "pk": 6,
+        "fields": {
+            "number": "Contrato nº 09/2020",
+            "comments": "[Lote 3] Construcción de obras de sistema de alcantarillado sanitario en tres cidudades de la región oriental",
+            "bid_request_number": "LPI - 03/2019",
+            "bid_request_id": "368078",
+            "bid_request_date": "2019-12-30",
+            "bid_request_budget": 14078020590,
+            "awarding_budget": 13760139747,
+            "awarding_percentage_drop": 7.82,
+            "awarding_date": "2020-09-22",
+            "financing_program": 1,
+            "contractor": 5,
+            "execution_signature_date": "2020-11-10",
+            "execution_certificate_start_date": "2020-11-10",
+            "expected_execution_period": 450,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.infrastructure",
+        "pk": 24,
+        "fields": {
+            "locality": "0511007",
+            "latitude": -25.06367,
+            "longitude": -55.9291,
+            "altitude": 40
+        }
+    },
+    {
+        "model": "app.provider",
+        "pk": 18,
+        "fields": {
+            "name": "Junta de Saneamiento de Yhú",
+            "area": "rural",
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.contact",
+        "pk": 20,
+        "fields": {
+            "name": "Carlos Augusto Cardozo Aquino",
+            "gender": "M",
+            "phone": "0981 429 - 374 ",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "app.providercontact",
+        "fields": {
+            "entity": 18,
+            "contact": 20,
+            "post": "presidencia_prestador"
+        }
+    },
+    {
+        "model": "app.project",
+        "pk": 24,
+        "fields": {
+            "description": "Nuevo Sistema de Alcantarillado",
+            "code": "2020-AP-001",
+            "project_type": "alcantarillado",
+            "project_class": "nueva_construccion",
+            "init_date": "2020-12-01",
+            "main_infrastructure": 24,
+            "provider": 18,
+            "construction_contract": 6,
+            "linked_localities": ["0511007"],
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 1,
+        "fields": {
+            "name": "Anticipo",
+            "amount": 1266540000,
+            "status": "pagado",
+            "payment_date": "2020-12-15",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 2,
+        "fields": {
+            "name": "Mes 1",
+            "amount": 478041924,
+            "status": "no_pagado",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 3,
+        "fields": {
+            "name": "Mes 2",
+            "amount": 25062653,
+            "status": "no_pagado",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 4,
+        "fields": {
+            "name": "Mes 3",
+            "amount": 226785152,
+            "status": "no_pagado",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    }
+]

@@ -10,6 +10,7 @@ from app.models.field_report_project_activity import FieldReportProjectActivity
 from app.models.financing_fund import FinancingFund
 from app.models.financing_program import FinancingProgram
 from app.models.location import Department, District, Locality
+from app.models.payment import Payment
 from app.models.project import Project
 from app.models.provider import Provider
 
@@ -25,6 +26,7 @@ admin.site.register(FinancingProgram, FinancingProgramAdmin)
 admin.site.register(Project)
 admin.site.register(Provider)
 admin.site.register(Contact, ContactAdmin)
+admin.site.register(Payment)
 
 admin.site.register(Department)
 admin.site.register(District)

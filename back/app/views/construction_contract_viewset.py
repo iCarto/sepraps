@@ -2,14 +2,18 @@ from django.db import models
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
 from app.models.construction_contract import ConstructionContract
+from app.models.payment import Payment
 from app.serializers.construction_contract_serializer import (
     ConstructionContractSerializer,
     ConstructionContractShortSerializer,
     ConstructionContractSummarySerializer,
 )
+from app.serializers.payment_serializer import PaymentSummarySerializer
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
@@ -91,3 +95,13 @@ class ConstructionContractViewSet(ModelListViewSet):
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user
         return super().perform_create(serializer)
+
+    @action(
+        methods=["GET"], detail=True, url_path="payments", url_name="contract_payments"
+    )
+    def get_contract_payments(self, request, pk):
+        return Response(
+            PaymentSummarySerializer(
+                Payment.objects.filter(contract=pk), many=True
+            ).data
+        )

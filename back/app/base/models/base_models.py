@@ -7,7 +7,6 @@ class BaseModel(models.Model):
         abstract = True
 
     id = models.AutoField(primary_key=True, unique=True, editable=False)
-    active = models.BooleanField(null=False, default=True)
 
     def __str__(self):
         return "{0}: {1}".format(self.__class__.__name__, self.id)
@@ -26,10 +25,16 @@ class BaseTimestampedModel(models.Model):
     updated_at = models.DateTimeField(null=True, auto_now=True)
 
 
+class ActiveManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True)
+
+
 class BaseUserTrackedModel(models.Model):
     class Meta(object):
         abstract = True
 
+    active = models.BooleanField(null=False, default=True)
     created_by = models.ForeignKey(
         get_user_model(), on_delete=models.PROTECT, related_name="created_by+"
     )
@@ -38,6 +43,8 @@ class BaseUserTrackedModel(models.Model):
     )
 
 
-class BaseEntityModelMixin(BaseTimestampedModel, BaseUserTrackedModel):  # noqa: WPS215
+class BaseEntityModelMixin(
+    BaseTimestampedModel, BaseUserTrackedModel, BaseModel
+):  # noqa: WPS215
     class Meta(object):
         abstract = True
