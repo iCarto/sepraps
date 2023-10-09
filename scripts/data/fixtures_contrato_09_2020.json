@@ -281,7 +281,7 @@
             "media_name": "informe_quincenal_mes_1.pdf",
             "media_content_type": "application/pdf",
             "media_size": 14398,
-            "storage_path": "payment/1/product/justificante_anticipo/informe_quincenal_mes_1.pdf",
+            "storage_path": "payment/1/product/informe_quincenal_mes_1/informe_quincenal_mes_1.pdf",
             "parent": 217,
             "creation_user": 1,
             "created_at": "2020-12-03T00:00:00Z"
@@ -295,7 +295,7 @@
             "media_name": "imagen_prueba.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 1398,
-            "storage_path": "payment/1/product/justificante_anticipo/imagen_prueba.jpg",
+            "storage_path": "payment/1/product/informe_quincenal_mes_1/imagen_prueba.jpg",
             "parent": 217,
             "creation_user": 1,
             "created_at": "2020-12-06T00:00:00Z"

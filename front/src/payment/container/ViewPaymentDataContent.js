@@ -8,28 +8,25 @@ import {
 import {PaymentService} from "payment/service";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {PaymentForm} from "payment/presentational/form";
 import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import Grid from "@mui/material/Grid";
+import {DeleteItemDialog} from "base/delete/components";
 
 const ViewPaymentDataContent = ({contractId, payment}) => {
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-    const secondaryActions = [
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar"
-            icon={<EditIcon />}
-            onClick={() => {
-                setMode("edit");
-            }}
-        />,
-    ];
+    const handleDelete = () => {
+        PaymentService.delete(payment.id).then(() => {
+            navigate(`/contracts/list/${contractId}/payment`, true);
+        });
+    };
 
     const handleFormSubmit = payment => {
         PaymentService.update(payment_view_adapter({...payment}))
@@ -42,6 +39,27 @@ const ViewPaymentDataContent = ({contractId, payment}) => {
                 setError(error);
             });
     };
+
+    const secondaryActions = [
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Modificar"
+            icon={<EditIcon />}
+            onClick={() => {
+                setMode("edit");
+            }}
+        />,
+        <SectionCardHeaderAction
+            key="edit"
+            name="edit"
+            text="Eliminar"
+            icon={<DeleteIcon color="error" />}
+            onClick={() => {
+                setIsDeleteDialogOpen(true);
+            }}
+        />,
+    ];
 
     const getComponent = mode => {
         if (mode === "view") {
@@ -82,9 +100,16 @@ const ViewPaymentDataContent = ({contractId, payment}) => {
 
     return (
         payment && (
-            <SectionCard title="Datos del pago" secondaryActions={secondaryActions}>
-                {getComponent(mode)}
-            </SectionCard>
+            <>
+                <DeleteItemDialog
+                    isDialogOpen={isDeleteDialogOpen}
+                    setIsDialogOpen={setIsDeleteDialogOpen}
+                    onDelete={handleDelete}
+                />
+                <SectionCard title="Datos del pago" secondaryActions={secondaryActions}>
+                    {getComponent(mode)}
+                </SectionCard>
+            </>
         )
     );
 };

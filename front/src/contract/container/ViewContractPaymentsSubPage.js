@@ -9,6 +9,9 @@ import {PaymentList} from "payment/presentational";
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
+import Stack from "@mui/system/Stack";
 
 const ViewContractPaymentsSubPage = () => {
     const navigate = useNavigate();
@@ -26,7 +29,7 @@ const ViewContractPaymentsSubPage = () => {
             ContractService.getPaymentsList(contractId)
                 .then(payments => {
                     setPaymentsForContract(payments);
-                    if (isRootPath) {
+                    if (isRootPath && payments.length > 0) {
                         navigate(payments[0].id.toString());
                     }
                 })
@@ -40,28 +43,33 @@ const ViewContractPaymentsSubPage = () => {
     return (
         <ContentLayout>
             <AlertError error={error} />
-            {paymentsForContract && paymentsForContract.length > 0 ? (
-                <Grid container spacing={1}>
-                    <Grid item xs={10}>
-                        <Outlet />
-                    </Grid>
-                    <Grid item xs={2}>
-                        <PaymentList
-                            payments={paymentsForContract}
-                            basePath={`/contracts/list/${contractId}/payment`}
-                            selectedPaymentId={parseInt(paymentId)}
-                        />
-                    </Grid>
+            <Grid container spacing={1}>
+                <Grid item xs={10}>
+                    <Outlet />
+                    {isRootPath &&
+                        paymentsForContract &&
+                        paymentsForContract.length === 0 && (
+                            <PaperContainer>
+                                <Grid container justifyContent="center" my={6}>
+                                    <Typography
+                                        sx={{fontStyle: "italic", textAlign: "center"}}
+                                    >
+                                        No se han registrado pagos para este contrato
+                                        todavía
+                                    </Typography>
+                                </Grid>
+                            </PaperContainer>
+                        )}
                 </Grid>
-            ) : (
-                <PaperContainer>
-                    <Grid container justifyContent="center" my={6}>
-                        <Typography sx={{fontStyle: "italic", textAlign: "center"}}>
-                            No se han registrado pagos para este contrato todavía
-                        </Typography>
-                    </Grid>
-                </PaperContainer>
-            )}
+                <Grid item xs={2}>
+                    <PaymentList
+                        payments={paymentsForContract}
+                        basePath={`/contracts/list/${contractId}/payment`}
+                        selectedPaymentId={parseInt(paymentId)}
+                    />
+                </Grid>
+                <Grid item xs={12}></Grid>
+            </Grid>
         </ContentLayout>
     );
 };
