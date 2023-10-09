@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {useLocation, useOutletContext} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 
@@ -33,10 +33,6 @@ const ListFolder = ({
     const {ROLES} = useAuth();
     const {view} = useFolderView();
 
-    let project;
-    [project] = useOutletContext();
-
-    const isProjectClosed = project.closed;
     const folderContainsFiles = folderElement?.children?.some(child => child["size"]);
 
     useEffect(() => {

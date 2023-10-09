@@ -11,6 +11,9 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import Grid from "@mui/material/Grid";
 import {ProductService} from "product/service";
 import {ProductForm} from "product/presentational/form";
+import {ListFolder} from "base/file/components";
+import {FolderViewProvider} from "base/file/provider";
+import {ListProductFolder} from ".";
 
 const ViewPaymentDataContent = ({paymentId, product}) => {
     const navigate = useNavigateWithReload();
@@ -54,6 +57,9 @@ const ViewPaymentDataContent = ({paymentId, product}) => {
                             label="Fecha de presentación"
                             value={DateUtil.formatDate(product.presentation_date)}
                         />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <ListProductFolder folderPath={product.folder} basePath={""} />
                     </Grid>
                 </Grid>
             );
