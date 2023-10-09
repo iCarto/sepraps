@@ -1,6 +1,7 @@
 from django.db import models
 
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
+from app.models.comment import Comment
 from app.models.construction_contract import ConstructionContract
 from documents.base.base_models import BaseDocumentModel
 
@@ -32,6 +33,7 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
         null=True,
         related_name="payments",
     )
+    comments = models.ManyToManyField(Comment)
 
     def get_status_label(self):
         return dict(STATUS_CHOICES).get(self.status, self.status)
