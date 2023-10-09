@@ -4,6 +4,7 @@ import {PaymentService} from "payment/service";
 import {ViewPaymentDataContent} from ".";
 import {ViewPaymentProductsContent} from "product/container";
 import Stack from "@mui/system/Stack";
+import {ViewPaymentCommentsContent} from "comment/container";
 
 const ViewPaymentContent = () => {
     const {paymentId} = useParams();
@@ -25,6 +26,7 @@ const ViewPaymentContent = () => {
                     payment={payment}
                 />
                 <ViewPaymentProductsContent payment={payment} />
+                <ViewPaymentCommentsContent payment={payment} />
             </Stack>
         )
     );

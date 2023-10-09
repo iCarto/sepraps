@@ -1,3 +1,4 @@
+import {comments_api_adapter, createComments} from "comment/model";
 import {createProducts, products_api_adapter} from "product/model";
 
 class Payments extends Array {}
@@ -6,6 +7,11 @@ const payment_api_adapter = payment => {
     if (payment["payment_products"]) {
         payment["payment_products"] = createProducts(
             products_api_adapter(payment["payment_products"])
+        );
+    }
+    if (payment["payment_comments"]) {
+        payment["payment_comments"] = createComments(
+            comments_api_adapter(payment["payment_comments"])
         );
     }
 
@@ -44,6 +50,7 @@ const createPayment = ({
     updated_at = null,
     updated_by = "",
     payment_products = [],
+    payment_comments = [],
 } = {}) => {
     const publicApi = {
         id,
@@ -58,6 +65,7 @@ const createPayment = ({
         updated_at,
         updated_by,
         payment_products,
+        payment_comments,
     };
 
     return Object.freeze(publicApi);

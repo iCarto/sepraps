@@ -5,6 +5,8 @@ import {
     payments_api_adapter,
 } from "payment/model";
 import {createEntityService} from "base/entity/service";
+import {AuthApiService} from "base/api/service";
+import {comment_api_adapter, createComment} from "comment/model";
 
 const basePath = "/api/app/payments";
 
@@ -33,6 +35,14 @@ const PaymentService = {
 
     delete(id) {
         return entityService.delete(id);
+    },
+
+    createComment(paymentId, comment) {
+        return AuthApiService.post(`${basePath}/${paymentId}/comments`, comment).then(
+            response => {
+                return createComment(comment_api_adapter(response));
+            }
+        );
     },
 };
 
