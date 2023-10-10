@@ -3,10 +3,7 @@ import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {ProductService} from "product/service";
 import {ProductForm} from "product/presentational/form";
-import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
-import Grid from "@mui/material/Grid";
-import {SectionCard} from "base/ui/section/components";
+import {AddNewInlineItemButton, AddNewInlineItemFormBox} from "base/shared/components";
 
 const CreateProductDataContent = ({paymentId}) => {
     const navigate = useNavigateWithReload();
@@ -26,40 +23,25 @@ const CreateProductDataContent = ({paymentId}) => {
             });
     };
 
-    const getComponent = mode => {
-        if (mode === "button") {
-            return (
-                <Grid container justifyContent="center">
-                    <IconButton
-                        aria-label="delete"
-                        size="large"
-                        color="primary"
-                        onClick={() => {
-                            setMode("create");
-                        }}
-                    >
-                        <AddIcon fontSize="inherit" />
-                    </IconButton>
-                </Grid>
-            );
-        }
-        if (mode === "create") {
-            return (
-                <SectionCard>
-                    <ProductForm
-                        paymentId={paymentId}
-                        onSubmit={handleFormSubmit}
-                        onCancel={() => {
-                            setMode("view");
-                        }}
-                        error={error}
-                    />
-                </SectionCard>
-            );
-        }
-    };
-
-    return getComponent(mode);
+    return mode === "button" ? (
+        <AddNewInlineItemButton
+            onClick={() => {
+                setMode("create");
+            }}
+            label="Añadir nuevo producto"
+        />
+    ) : mode === "create" ? (
+        <AddNewInlineItemFormBox label="Añadir nuevo producto">
+            <ProductForm
+                paymentId={paymentId}
+                onSubmit={handleFormSubmit}
+                onCancel={() => {
+                    setMode("button");
+                }}
+                error={error}
+            />
+        </AddNewInlineItemFormBox>
+    ) : null;
 };
 
 export default CreateProductDataContent;

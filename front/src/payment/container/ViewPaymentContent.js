@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router";
 import {PaymentService} from "payment/service";
-import {ViewPaymentDataContent} from ".";
+import {ViewOrUpdatePaymentDataContent} from ".";
 import {ViewPaymentProductsContent} from "product/container";
 import Stack from "@mui/system/Stack";
 import {ViewPaymentCommentsContent} from "comment/container";
@@ -21,7 +21,7 @@ const ViewPaymentContent = () => {
     return (
         payment && (
             <Stack spacing={1}>
-                <ViewPaymentDataContent
+                <ViewOrUpdatePaymentDataContent
                     contractId={payment.contract}
                     payment={payment}
                 />

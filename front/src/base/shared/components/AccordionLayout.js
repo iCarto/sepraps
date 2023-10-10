@@ -45,7 +45,6 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                         sx={{
                             pl: 1,
                             lineHeight: 1,
-                            textTransform: "uppercase",
                         }}
                     >
                         {accordionTitle}

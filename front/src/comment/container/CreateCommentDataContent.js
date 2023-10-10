@@ -2,10 +2,14 @@ import {useState} from "react";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {CommentForm} from "comment/presentational/form";
 import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import Grid from "@mui/material/Grid";
-import {SectionCard} from "base/ui/section/components";
 import {comment_view_adapter} from "comment/model";
+import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import {AddNewInlineItemButton, AddNewInlineItemFormBox} from "base/shared/components";
 
 const CreateCommentDataContent = ({createService}) => {
     const navigate = useNavigateWithReload();
@@ -25,39 +29,24 @@ const CreateCommentDataContent = ({createService}) => {
             });
     };
 
-    const getComponent = mode => {
-        if (mode === "button") {
-            return (
-                <Grid container justifyContent="center">
-                    <IconButton
-                        aria-label="delete"
-                        size="large"
-                        color="primary"
-                        onClick={() => {
-                            setMode("create");
-                        }}
-                    >
-                        <AddIcon fontSize="inherit" />
-                    </IconButton>
-                </Grid>
-            );
-        }
-        if (mode === "create") {
-            return (
-                <SectionCard>
-                    <CommentForm
-                        onSubmit={handleFormSubmit}
-                        onCancel={() => {
-                            setMode("view");
-                        }}
-                        error={error}
-                    />
-                </SectionCard>
-            );
-        }
-    };
-
-    return getComponent(mode);
+    return mode === "button" ? (
+        <AddNewInlineItemButton
+            onClick={() => {
+                setMode("create");
+            }}
+            label="Añadir nuevo comentario"
+        />
+    ) : mode === "create" ? (
+        <AddNewInlineItemFormBox label="Añadir nuevo comentario">
+            <CommentForm
+                onSubmit={handleFormSubmit}
+                onCancel={() => {
+                    setMode("button");
+                }}
+                error={error}
+            />
+        </AddNewInlineItemFormBox>
+    ) : null;
 };
 
 export default CreateCommentDataContent;

@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {
+    SectionActionsMenu,
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
@@ -13,10 +14,19 @@ import Grid from "@mui/material/Grid";
 import {ProductService} from "product/service";
 import {ProductForm} from "product/presentational/form";
 import {ListProductFolder} from ".";
-import {useMenuGenericDeleteAction} from "base/ui/menu/hooks";
 import {DeleteItemDialog} from "base/delete/components";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography/Typography";
 
-const ViewPaymentDataContent = ({paymentId, product}) => {
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
+
+import Stack from "@mui/material/Stack";
+import {AccordionLayout} from "base/shared/components";
+
+const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
@@ -41,7 +51,7 @@ const ViewPaymentDataContent = ({paymentId, product}) => {
             });
     };
 
-    const secondaryActions = [
+    const actions = [
         <SectionCardHeaderAction
             key="edit"
             name="edit"
@@ -76,7 +86,15 @@ const ViewPaymentDataContent = ({paymentId, product}) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <ListProductFolder folderPath={product.folder} basePath={""} />
+                        <AccordionLayout
+                            accordionTitle="Documentos del producto"
+                            accordionIcon={<FolderOutlinedIcon />}
+                        >
+                            <ListProductFolder
+                                folderPath={product.folder}
+                                basePath={""}
+                            />
+                        </AccordionLayout>
                     </Grid>
                 </Grid>
             );
@@ -97,19 +115,39 @@ const ViewPaymentDataContent = ({paymentId, product}) => {
     };
 
     return (
-        product && (
-            <>
-                <DeleteItemDialog
-                    isDialogOpen={isDeleteDialogOpen}
-                    setIsDialogOpen={setIsDeleteDialogOpen}
-                    onDelete={handleDelete}
-                />
-                <SectionCard title={product.name} secondaryActions={secondaryActions}>
-                    {getComponent(mode)}
-                </SectionCard>
-            </>
-        )
+        <Card sx={{border: 1, borderRadius: 2, borderColor: "grey.300"}} elevation={0}>
+            <CardHeader
+                action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
+                title={
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                        <Inventory2OutlinedIcon
+                            sx={{
+                                color: "grey",
+                                fontSize: "18px",
+                            }}
+                        />
+                        <Typography color="grey">Producto:</Typography>
+                        <Typography
+                            color="primary.dark"
+                            sx={{
+                                textTransform: "uppercase",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            {product.name}
+                        </Typography>
+                    </Stack>
+                }
+                sx={{bgcolor: "grey.50"}}
+            />
+            <CardContent>{getComponent(mode)}</CardContent>
+            <DeleteItemDialog
+                isDialogOpen={isDeleteDialogOpen}
+                setIsDialogOpen={setIsDeleteDialogOpen}
+                onDelete={handleDelete}
+            />
+        </Card>
     );
 };
 
-export default ViewPaymentDataContent;
+export default ViewOrUpdateProductDataContent;

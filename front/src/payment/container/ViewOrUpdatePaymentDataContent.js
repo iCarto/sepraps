@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router";
 import {
+    SectionActionsMenu,
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
@@ -14,8 +15,29 @@ import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import Grid from "@mui/material/Grid";
 import {DeleteItemDialog} from "base/delete/components";
+import Chip from "@mui/material/Chip";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Stack from "@mui/material/Stack";
+import CardContent from "@mui/material/CardContent";
 
-const ViewPaymentDataContent = ({contractId, payment}) => {
+import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
+
+const getStatusColor = value => {
+    if (value === "no_pagado") {
+        return "error";
+    } else if (value === "pagado") {
+        return "success";
+    }
+    return null;
+};
+
+const StatusChip = ({label, value}) => (
+    <Chip label={label} color={getStatusColor(value)} />
+);
+
+const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
@@ -40,7 +62,7 @@ const ViewPaymentDataContent = ({contractId, payment}) => {
             });
     };
 
-    const secondaryActions = [
+    const actions = [
         <SectionCardHeaderAction
             key="edit"
             name="edit"
@@ -74,7 +96,15 @@ const ViewPaymentDataContent = ({contractId, payment}) => {
                         />
                     </Grid>
                     <Grid container item xs={6} direction="column">
-                        <SectionField label="Estado" value={payment.status_label} />
+                        <SectionField
+                            label="Estado"
+                            value={
+                                <StatusChip
+                                    label={payment.status_label}
+                                    value={payment.status}
+                                />
+                            }
+                        />
                         <SectionField
                             label="Fecha de pago"
                             value={DateUtil.formatDate(payment.payment_date)}
@@ -100,18 +130,43 @@ const ViewPaymentDataContent = ({contractId, payment}) => {
 
     return (
         payment && (
-            <>
+            <Card
+                sx={{border: 1, borderRadius: 2, borderColor: "grey.300"}}
+                elevation={0}
+            >
+                <CardHeader
+                    action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
+                    title={
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <RequestQuoteOutlinedIcon
+                                sx={{
+                                    color: "grey",
+                                }}
+                            />
+                            <Typography color="grey">Pago:</Typography>
+                            <Typography
+                                color="primary.main"
+                                sx={{
+                                    textTransform: "uppercase",
+                                    fontWeight: "bold",
+                                }}
+                                variant="h5"
+                            >
+                                {payment.name}
+                            </Typography>
+                        </Stack>
+                    }
+                    sx={{bgcolor: "grey.50"}}
+                />
+                <CardContent>{getComponent(mode)}</CardContent>
                 <DeleteItemDialog
                     isDialogOpen={isDeleteDialogOpen}
                     setIsDialogOpen={setIsDeleteDialogOpen}
                     onDelete={handleDelete}
                 />
-                <SectionCard title="Datos del pago" secondaryActions={secondaryActions}>
-                    {getComponent(mode)}
-                </SectionCard>
-            </>
+            </Card>
         )
     );
 };
 
-export default ViewPaymentDataContent;
+export default ViewOrUpdatePaymentDataContent;

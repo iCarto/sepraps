@@ -5,13 +5,10 @@ import {ContractService} from "contract/service";
 import {ContentLayout} from "base/ui/main";
 import {AlertError} from "base/error/components";
 import {PaperContainer} from "base/shared/components";
-import {PaymentList} from "payment/presentational";
+import {PaymentListSelector} from "payment/presentational";
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
-import Stack from "@mui/system/Stack";
 
 const ViewContractPaymentsSubPage = () => {
     const navigate = useNavigate();
@@ -62,7 +59,7 @@ const ViewContractPaymentsSubPage = () => {
                         )}
                 </Grid>
                 <Grid item xs={2}>
-                    <PaymentList
+                    <PaymentListSelector
                         payments={paymentsForContract}
                         basePath={`/contracts/list/${contractId}/payment`}
                         selectedPaymentId={parseInt(paymentId)}

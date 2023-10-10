@@ -5,8 +5,8 @@ import Stack from "@mui/system/Stack";
 const ViewPaymentProductsContent = ({payment}) => {
     return (
         payment && (
-            <SectionCard title="Productos del pago">
-                <Stack spacing={1}>
+            <SectionCard title="Productos">
+                <Stack spacing={2}>
                     {payment.payment_products.map(product => {
                         return (
                             <ViewProductDataContent

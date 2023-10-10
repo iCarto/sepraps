@@ -1,1 +1,2 @@
-export {default as PaymentList} from "./PaymentList";
+export {default as PaymentListSelector} from "./PaymentListSelector";
+export {default as PaymentListSelectorItem} from "./PaymentListSelectorItem";
