@@ -77,9 +77,10 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
             return (
                 <Grid container spacing={2}>
                     <Grid container item xs={6} direction="column">
-                        <SectionField label="Estado" value={product.status_label} />
+                        <SectionField label="Nombre" value={product.name} />
                     </Grid>
                     <Grid container item xs={6} direction="column">
+                        <SectionField label="Estado" value={product.status_label} />
                         <SectionField
                             label="Fecha de presentación"
                             value={DateUtil.formatDate(product.presentation_date)}

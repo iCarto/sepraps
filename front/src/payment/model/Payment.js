@@ -40,7 +40,10 @@ const createPayments = (data = []) => {
 const createPayment = ({
     id = null,
     name = "",
-    amount = null,
+    fixed_amount = null,
+    variable_amount = null,
+    expected_fixed_amount = null,
+    expected_variable_amount = null,
     status = "",
     status_label = "",
     payment_date = null,
@@ -56,7 +59,10 @@ const createPayment = ({
     const publicApi = {
         id,
         name,
-        amount,
+        fixed_amount,
+        variable_amount,
+        expected_fixed_amount,
+        expected_variable_amount,
         status,
         status_label,
         payment_date,

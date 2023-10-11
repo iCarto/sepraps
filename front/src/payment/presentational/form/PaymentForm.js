@@ -16,7 +16,18 @@ const PaymentForm = ({
     const defaultFormValues = {
         id: FormUtil.getFormValue(payment?.id),
         name: FormUtil.getFormValue(payment?.name),
-        amount: payment?.amount ? NumberUtil.formatDecimal(payment.amount, 0) : "",
+        fixed_amount: payment?.fixed_amount
+            ? NumberUtil.formatDecimal(payment.fixed_amount, 0)
+            : "",
+        variable_amount: payment?.variable_amount
+            ? NumberUtil.formatDecimal(payment.variable_amount, 0)
+            : "",
+        expected_fixed_amount: payment?.expected_fixed_amount
+            ? NumberUtil.formatDecimal(payment.expected_fixed_amount, 0)
+            : "",
+        expected_variable_amount: payment?.expected_variable_amount
+            ? NumberUtil.formatDecimal(payment.expected_variable_amount, 0)
+            : "",
         status: FormUtil.getFormValue(payment?.status),
         payment_date: FormUtil.getFormValue(payment?.payment_date),
     };
@@ -30,7 +41,12 @@ const PaymentForm = ({
         onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
-            amount: FormUtil.getDataValue(data.amount),
+            fixed_amount: FormUtil.getDataValue(data.fixed_amount),
+            variable_amount: FormUtil.getDataValue(data.variable_amount),
+            expected_fixed_amount: FormUtil.getDataValue(data.expected_fixed_amount),
+            expected_variable_amount: FormUtil.getDataValue(
+                data.expected_variable_amount
+            ),
             status: FormUtil.getDataValue(data.status),
             payment_date: FormUtil.getDataValue(data.payment_date),
             contract: contractId,

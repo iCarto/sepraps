@@ -16,10 +16,14 @@ const PaymentFormDataFields = () => {
                     rules={{required: "Este campo es obligatorio"}}
                 />
                 <FormInputInteger
-                    name="amount"
-                    label="Monto"
+                    name="expected_fixed_amount"
+                    label="Monto previsto fijo"
                     endAdornment="Gs."
-                    rules={{required: "Este campo es obligatorio"}}
+                />
+                <FormInputInteger
+                    name="expected_variable_amount"
+                    label="Monto previsto variable"
+                    endAdornment="Gs."
                 />
             </Grid>
             <Grid container item xs={6} direction="column">
@@ -33,6 +37,17 @@ const PaymentFormDataFields = () => {
                     ]}
                 />
                 <FormDatePicker name="payment_date" label="Fecha de pago" />
+                <FormInputInteger
+                    name="fixed_amount"
+                    label="Monto fijo"
+                    endAdornment="Gs."
+                    rules={{required: "Este campo es obligatorio"}}
+                />
+                <FormInputInteger
+                    name="variable_amount"
+                    label="Monto variable"
+                    endAdornment="Gs."
+                />
             </Grid>
         </Grid>
     );

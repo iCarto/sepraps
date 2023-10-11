@@ -130,7 +130,7 @@
         "pk": 1,
         "fields": {
             "name": "Anticipo",
-            "amount": 1266540000,
+            "fixed_amount": 1266540000,
             "status": "pagado",
             "payment_date": "2020-12-15",
             "contract": 6,
@@ -182,7 +182,7 @@
         "pk": 2,
         "fields": {
             "name": "Mes 1",
-            "amount": 478041924,
+            "fixed_amount": 478041924,
             "status": "no_pagado",
             "contract": 6,
             "comments": [2, 3],
@@ -236,7 +236,7 @@
         "pk": 3,
         "fields": {
             "name": "Mes 2",
-            "amount": 25062653,
+            "fixed_amount": 25062653,
             "status": "no_pagado",
             "contract": 6,
             "created_by": 1,
@@ -250,7 +250,7 @@
         "pk": 4,
         "fields": {
             "name": "Mes 3",
-            "amount": 226785152,
+            "fixed_amount": 226785152,
             "status": "no_pagado",
             "contract": 6,
             "created_by": 1,

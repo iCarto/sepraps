@@ -19,7 +19,19 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
 
     id = models.AutoField(primary_key=True)
     name = models.CharField("Nombre", max_length=255)
-    amount = models.DecimalField("Monto", max_digits=20, decimal_places=2)
+
+    fixed_amount = models.DecimalField(
+        "Monto fijo", max_digits=20, decimal_places=2, null=True
+    )
+    variable_amount = models.DecimalField(
+        "Monto variable", max_digits=20, decimal_places=2, null=True
+    )
+    expected_fixed_amount = models.DecimalField(
+        "Monto fijo previsto", max_digits=20, decimal_places=2, null=True
+    )
+    expected_variable_amount = models.DecimalField(
+        "Monto variable", max_digits=20, decimal_places=2, null=True
+    )
 
     status = models.CharField(
         "Estado", max_length=20, choices=STATUS_CHOICES, null=False, default="no_pagado"

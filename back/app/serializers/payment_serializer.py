@@ -15,7 +15,10 @@ class PaymentSerializer(BaseModelWithFolderSerializer):
         model = Payment
         fields = BaseModelWithFolderSerializer.Meta.fields + (
             "name",
-            "amount",
+            "fixed_amount",
+            "variable_amount",
+            "expected_fixed_amount",
+            "expected_variable_amount",
             "status",
             "status_label",
             "payment_date",
@@ -49,7 +52,7 @@ class PaymentSummarySerializer(BaseSummarySerializer):
         model = Payment
         fields = BaseSummarySerializer.Meta.fields + (
             "name",
-            "amount",
+            "fixed_amount",
             "status",
             "status_label",
             "payment_date",

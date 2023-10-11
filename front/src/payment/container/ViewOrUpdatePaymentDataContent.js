@@ -1,41 +1,22 @@
-import {useEffect, useState} from "react";
-import {useLocation, useParams} from "react-router";
-import {
-    SectionActionsMenu,
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "base/ui/section/components";
+import {useState} from "react";
+
+import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
 import {PaymentService} from "payment/service";
-import {DateUtil, NumberUtil} from "base/format/utilities";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import {PaymentData} from "payment/presentational";
 import {PaymentForm} from "payment/presentational/form";
 import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
-import Grid from "@mui/material/Grid";
 import {DeleteItemDialog} from "base/delete/components";
-import Chip from "@mui/material/Chip";
+
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import Stack from "@mui/material/Stack";
 import CardContent from "@mui/material/CardContent";
 
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
-
-const getStatusColor = value => {
-    if (value === "no_pagado") {
-        return "error";
-    } else if (value === "pagado") {
-        return "success";
-    }
-    return null;
-};
-
-const StatusChip = ({label, value}) => (
-    <Chip label={label} color={getStatusColor(value)} />
-);
 
 const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
     const navigate = useNavigateWithReload();
@@ -85,33 +66,7 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
 
     const getComponent = mode => {
         if (mode === "view") {
-            return (
-                <Grid container spacing={2}>
-                    <Grid container item xs={6} direction="column">
-                        <SectionField label="Nombre" value={payment.name} />
-                        <SectionField
-                            label="Monto"
-                            value={NumberUtil.formatInteger(payment.amount)}
-                            unit="Gs."
-                        />
-                    </Grid>
-                    <Grid container item xs={6} direction="column">
-                        <SectionField
-                            label="Estado"
-                            value={
-                                <StatusChip
-                                    label={payment.status_label}
-                                    value={payment.status}
-                                />
-                            }
-                        />
-                        <SectionField
-                            label="Fecha de pago"
-                            value={DateUtil.formatDate(payment.payment_date)}
-                        />
-                    </Grid>
-                </Grid>
-            );
+            return <PaymentData payment={payment} />;
         }
         if (mode === "edit") {
             return (
