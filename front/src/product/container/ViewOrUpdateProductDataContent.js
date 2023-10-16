@@ -21,10 +21,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography/Typography";
 
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import FolderOutlinedIcon from "@mui/icons-material/FolderOutlined";
 
 import Stack from "@mui/material/Stack";
-import {AccordionLayout} from "base/shared/components";
 
 const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
     const navigate = useNavigateWithReload();
@@ -87,15 +85,7 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <AccordionLayout
-                            accordionTitle="Documentos del producto"
-                            accordionIcon={<FolderOutlinedIcon />}
-                        >
-                            <ListProductFolder
-                                folderPath={product.folder}
-                                basePath={""}
-                            />
-                        </AccordionLayout>
+                        <ListProductFolder folderPath={product.folder} basePath={""} />
                     </Grid>
                 </Grid>
             );

@@ -32,7 +32,7 @@ const ListProductFolder = ({folderPath, basePath}) => {
     };
 
     return (
-        <Grid container justifyContent="flex-start" alignItems="center" spacing={2}>
+        <Grid container justifyContent="flex-start" alignItems="center">
             <Grid item container xs={12}>
                 {isLoading ? (
                     <Spinner />

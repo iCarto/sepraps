@@ -37,10 +37,6 @@ const PaymentData = ({payment}) => {
             <Grid container item xs={6} direction="column">
                 <SectionBox label="Pago">
                     <SectionField
-                        label="Fecha de pago"
-                        value={DateUtil.formatDate(payment.payment_date)}
-                    />
-                    <SectionField
                         label="Monto fijo"
                         value={NumberUtil.formatInteger(payment.fixed_amount)}
                         unit="Gs."
@@ -49,6 +45,10 @@ const PaymentData = ({payment}) => {
                         label="Monto variable"
                         value={NumberUtil.formatInteger(payment.variable_amount)}
                         unit="Gs."
+                    />
+                    <SectionField
+                        label="Fecha de pago"
+                        value={DateUtil.formatDate(payment.payment_date)}
                     />
                 </SectionBox>
             </Grid>

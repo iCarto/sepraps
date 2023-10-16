@@ -78,7 +78,7 @@ const ListFolder = ({
                     />
                 )}
             </Grid>
-            {folderElement ? (
+            {folderElement && folderElement?.children?.length > 0 && (
                 <Grid item container xs={12} justifyContent="flex-end">
                     <Tooltip title="Descargar archivos">
                         <IconButton aria-label="download-zip" onClick={downloadFolder}>
@@ -86,7 +86,7 @@ const ListFolder = ({
                         </IconButton>
                     </Tooltip>
                 </Grid>
-            ) : null}
+            )}
             <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                 <Grid item container xs={12} mt={4}>
                     <FileUploadSection

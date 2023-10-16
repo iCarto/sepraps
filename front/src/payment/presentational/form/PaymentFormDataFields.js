@@ -40,7 +40,6 @@ const PaymentFormDataFields = () => {
                     ]}
                 />
                 <FormBox label="Pago">
-                    <FormDatePicker name="payment_date" label="Fecha de pago" />
                     <FormInputInteger
                         name="fixed_amount"
                         label="Monto fijo"
@@ -52,6 +51,7 @@ const PaymentFormDataFields = () => {
                         label="Monto variable"
                         endAdornment="Gs."
                     />
+                    <FormDatePicker name="payment_date" label="Fecha de pago" />
                 </FormBox>
             </Grid>
         </Grid>

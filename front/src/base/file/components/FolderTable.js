@@ -131,17 +131,7 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
                             })}
                     </TableBody>
                 </Table>
-            ) : (
-                <Typography
-                    sx={{
-                        paddingTop: 6,
-                        textAlign: "center",
-                        fontStyle: "italic",
-                    }}
-                >
-                    Aún no se ha subido ningún documento
-                </Typography>
-            )}
+            ) : null}
         </TableContainer>
     );
 };

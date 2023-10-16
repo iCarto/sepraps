@@ -5,6 +5,8 @@ import SelectFileSection from "./SelectFileSection";
 import UploadingFileSection from "./UploadingFileSection";
 
 import Grid from "@mui/material/Grid";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import Button from "@mui/material/Button";
 
 const maxFileSize = value => {
     // TODO refactor
@@ -21,6 +23,7 @@ const maxFileSize = value => {
 };
 
 const FileUploadSection = ({path, onFinishUpload}) => {
+    const [view, setView] = useState("button");
     const [filesInUploadProgress, setFilesInUploadProgress] = useState([]);
 
     const formMethods = useForm({
@@ -43,11 +46,27 @@ const FileUploadSection = ({path, onFinishUpload}) => {
                 onSubmit={formMethods.handleSubmit(handleUpload)}
             >
                 <Grid item xs={12}>
-                    <SelectFileSection
-                        formFilesName="files"
-                        formFileInputName="fileInput"
-                        rules={{validate: maxFileSize}}
-                    />
+                    {view === "button" ? (
+                        <Grid container justifyContent="center">
+                            <Button
+                                id="upload-more"
+                                color="secondary"
+                                variant="outlined"
+                                onClick={() => {
+                                    setView("upload");
+                                }}
+                                endIcon={<CloudUploadIcon />}
+                            >
+                                Añadir documentos
+                            </Button>
+                        </Grid>
+                    ) : (
+                        <SelectFileSection
+                            formFilesName="files"
+                            formFileInputName="fileInput"
+                            rules={{validate: maxFileSize}}
+                        />
+                    )}
                 </Grid>
                 <Grid item xs={12}>
                     <UploadingFileSection
