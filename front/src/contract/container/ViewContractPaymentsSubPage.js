@@ -15,7 +15,6 @@ const ViewContractPaymentsSubPage = () => {
     const {id: contractId, paymentId} = useParams();
     const location = useLocation();
     const isRootPath = location.pathname.split("/").slice(-1)[0] === "payment";
-    console.log(location.pathname.split("/"), {isRootPath});
 
     const [error, setError] = useState(null);
 

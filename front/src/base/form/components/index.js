@@ -25,3 +25,4 @@ export {default as FormComboBox} from "./FormComboBox";
 export {default as FormTextAreaList} from "./FormTextAreaList";
 export {default as FormInputTextList} from "./FormInputTextList";
 export {default as FormContainer} from "./FormContainer";
+export {default as FormBox} from "./FormBox";

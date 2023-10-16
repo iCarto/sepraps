@@ -28,6 +28,7 @@ const PaymentForm = ({
         expected_variable_amount: payment?.expected_variable_amount
             ? NumberUtil.formatDecimal(payment.expected_variable_amount, 0)
             : "",
+        appraisal: FormUtil.getFormValue(payment?.appraisal),
         status: FormUtil.getFormValue(payment?.status),
         payment_date: FormUtil.getFormValue(payment?.payment_date),
     };
@@ -47,6 +48,7 @@ const PaymentForm = ({
             expected_variable_amount: FormUtil.getDataValue(
                 data.expected_variable_amount
             ),
+            appraisal: FormUtil.getDataValue(data.appraisal),
             status: FormUtil.getDataValue(data.status),
             payment_date: FormUtil.getDataValue(data.payment_date),
             contract: contractId,

@@ -12,7 +12,7 @@ const ViewPaymentCommentsContent = ({payment}) => {
             <SectionCard title="Comentarios">
                 <Stack spacing={2}>
                     {payment.payment_comments.map(comment => {
-                        return <CommentData comment={comment} />;
+                        return <CommentData key={comment.id} comment={comment} />;
                     })}
                     <CreateCommentDataContent
                         createService={comment =>

@@ -1,39 +1,36 @@
-import {styled} from "@mui/material/styles";
 import {TextLink} from "base/navigation/components";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import ListItem from "@mui/material/ListItem";
+import Stack from "@mui/material/Stack";
+import {getStatusIcon} from "./PaymentStatusChip";
+import {getAppraisalIcon} from "./PaymentAppraisalChip";
 
-const CardContentNoPadding = styled(CardContent)(`
-  padding: 3px 10px;
-  &:last-child {
-    padding-bottom: 0;
-  }
-`);
-
-const PaymentListSelectorItem = ({label, to, selected = false}) => {
+const PaymentListSelectorItem = ({payment, to, selected = false}) => {
     return (
-        <Card
-            elevation={3}
+        <ListItem
+            disablePadding
             sx={{
-                border: "1px",
-                borderStyle: selected ? "solid" : "none",
-                borderColor: "#ccc",
-                backgroundColor: selected ? "secondary.lighter" : "inherit",
+                mt: 1,
                 p: 1,
-                textAlign: "center",
+                border: selected ? 2 : 1,
+                borderRadius: 1,
+                borderStyle: "solid",
+                borderColor: selected ? "primary.dark" : "#eee",
+                backgroundColor: selected ? "secondary.lighter" : "inherit",
             }}
         >
-            <CardContentNoPadding>
+            <Stack direction="row">
+                {getStatusIcon(payment.status)}
                 <TextLink
-                    text={label}
+                    text={payment.name}
                     to={to}
                     textStyle={{
                         fontWeight: selected ? "bold" : "inherit",
+                        pl: 1,
                     }}
                 />
-            </CardContentNoPadding>
-        </Card>
+            </Stack>
+        </ListItem>
     );
 };
 

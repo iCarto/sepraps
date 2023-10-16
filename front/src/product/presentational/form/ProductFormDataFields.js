@@ -19,6 +19,8 @@ const PaymentFormDataFields = () => {
                     options={[
                         {label: "No entregado", value: "no_entregado"},
                         {label: "Entregado", value: "entregado"},
+                        {label: "Revisado", value: "revisado"},
+                        {label: "Validado", value: "validado"},
                     ]}
                 />
                 <FormDatePicker

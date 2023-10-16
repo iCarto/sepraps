@@ -1,4 +1,5 @@
 import {
+    FormBox,
     FormDatePicker,
     FormInputInteger,
     FormInputText,
@@ -15,16 +16,18 @@ const PaymentFormDataFields = () => {
                     label="Nombre del pago"
                     rules={{required: "Este campo es obligatorio"}}
                 />
-                <FormInputInteger
-                    name="expected_fixed_amount"
-                    label="Monto previsto fijo"
-                    endAdornment="Gs."
-                />
-                <FormInputInteger
-                    name="expected_variable_amount"
-                    label="Monto previsto variable"
-                    endAdornment="Gs."
-                />
+                <FormBox label="Previsión">
+                    <FormInputInteger
+                        name="expected_fixed_amount"
+                        label="Monto previsto fijo"
+                        endAdornment="Gs."
+                    />
+                    <FormInputInteger
+                        name="expected_variable_amount"
+                        label="Monto previsto variable"
+                        endAdornment="Gs."
+                    />
+                </FormBox>
             </Grid>
             <Grid container item xs={6} direction="column">
                 <FormSelect
@@ -36,18 +39,20 @@ const PaymentFormDataFields = () => {
                         {label: "Pagado", value: "pagado"},
                     ]}
                 />
-                <FormDatePicker name="payment_date" label="Fecha de pago" />
-                <FormInputInteger
-                    name="fixed_amount"
-                    label="Monto fijo"
-                    endAdornment="Gs."
-                    rules={{required: "Este campo es obligatorio"}}
-                />
-                <FormInputInteger
-                    name="variable_amount"
-                    label="Monto variable"
-                    endAdornment="Gs."
-                />
+                <FormBox label="Pago">
+                    <FormDatePicker name="payment_date" label="Fecha de pago" />
+                    <FormInputInteger
+                        name="fixed_amount"
+                        label="Monto fijo"
+                        endAdornment="Gs."
+                        rules={{required: "Este campo es obligatorio"}}
+                    />
+                    <FormInputInteger
+                        name="variable_amount"
+                        label="Monto variable"
+                        endAdornment="Gs."
+                    />
+                </FormBox>
             </Grid>
         </Grid>
     );

@@ -131,6 +131,7 @@
         "fields": {
             "name": "Anticipo",
             "fixed_amount": 1266540000,
+            "appraisal": "bien",
             "status": "pagado",
             "payment_date": "2020-12-15",
             "contract": 6,
@@ -183,6 +184,7 @@
         "fields": {
             "name": "Mes 1",
             "fixed_amount": 478041924,
+            "appraisal": "regular",
             "status": "no_pagado",
             "contract": 6,
             "comments": [2, 3],
@@ -237,6 +239,7 @@
         "fields": {
             "name": "Mes 2",
             "fixed_amount": 25062653,
+            "appraisal": "sin_valorar",
             "status": "no_pagado",
             "contract": 6,
             "created_by": 1,
@@ -251,6 +254,7 @@
         "fields": {
             "name": "Mes 3",
             "fixed_amount": 226785152,
+            "appraisal": "sin_valorar",
             "status": "no_pagado",
             "contract": 6,
             "created_by": 1,

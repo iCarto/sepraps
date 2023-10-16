@@ -7,7 +7,12 @@ from documents.folder_utils import sanitize_field_value
 from documents.models import Folder
 
 
-STATUS_CHOICES = (("entregado", "Entregado"), ("no_entregado", "No entregado"))
+STATUS_CHOICES = (
+    ("entregado", "Entregado"),
+    ("no_entregado", "No entregado"),
+    ("revisado", "Revisado"),
+    ("validado", "Validado"),
+)
 
 
 class Product(BaseDocumentModel, BaseEntityModelMixin):

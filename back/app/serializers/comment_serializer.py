@@ -6,7 +6,7 @@ from app.models.comment import Comment
 class CommentSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = Comment
-        fields = ("text", "created_by", "created_at", "updated_by", "updated_at")
+        fields = ("id", "text", "created_by", "created_at", "updated_by", "updated_at")
         extra_kwargs = {
             "created_by": {"read_only": True},
             "updated_by": {"read_only": True},

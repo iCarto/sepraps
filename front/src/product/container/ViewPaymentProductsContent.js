@@ -10,6 +10,7 @@ const ViewPaymentProductsContent = ({payment}) => {
                     {payment.payment_products.map(product => {
                         return (
                             <ViewProductDataContent
+                                key={product.id}
                                 paymentId={payment.id}
                                 product={product}
                             />

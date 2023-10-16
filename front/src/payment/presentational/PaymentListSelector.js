@@ -13,6 +13,8 @@ import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOu
 import {useNavigate} from "react-router";
 import {PaymentListSelectorItem} from ".";
 import Tooltip from "@mui/material/Tooltip";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
     const navigate = useNavigate();
@@ -52,18 +54,16 @@ const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
                 </IconButton>
             </Grid>
             <Divider />
-            <Grid container direction="column" spacing={1} sx={{mt: 1}}>
+            <List>
                 {paymentsList &&
                     paymentsList.map(payment => (
-                        <Grid key={payment.id} item>
-                            <PaymentListSelectorItem
-                                label={payment.name}
-                                to={`${basePath}/${payment.id.toString()}`}
-                                selected={selectedPaymentId === payment.id}
-                            />
-                        </Grid>
+                        <PaymentListSelectorItem
+                            payment={payment}
+                            to={`${basePath}/${payment.id.toString()}`}
+                            selected={selectedPaymentId === payment.id}
+                        />
                     ))}
-            </Grid>
+            </List>
         </Paper>
     );
 };

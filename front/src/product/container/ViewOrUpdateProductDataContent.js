@@ -62,8 +62,8 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
             }}
         />,
         <SectionCardHeaderAction
-            key="edit"
-            name="edit"
+            key="delete"
+            name="delete"
             text="Eliminar"
             icon={<DeleteIcon color="error" />}
             onClick={() => {

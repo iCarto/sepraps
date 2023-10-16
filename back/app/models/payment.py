@@ -7,6 +7,12 @@ from documents.base.base_models import BaseDocumentModel
 
 
 STATUS_CHOICES = (("pagado", "Pagado"), ("no_pagado", "No pagado"))
+APPRAISAL_CHOICES = (
+    ("bien", "Bien"),
+    ("regular", "Regular"),
+    ("mal", "Mal"),
+    ("sin_valorar", "Sin valorar"),
+)
 
 
 class Payment(BaseDocumentModel, BaseEntityModelMixin):
@@ -33,6 +39,13 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
         "Monto variable", max_digits=20, decimal_places=2, null=True
     )
 
+    appraisal = models.CharField(
+        "Valoración",
+        max_length=20,
+        choices=APPRAISAL_CHOICES,
+        null=False,
+        default="sin_valorar",
+    )
     status = models.CharField(
         "Estado", max_length=20, choices=STATUS_CHOICES, null=False, default="no_pagado"
     )
@@ -47,5 +60,10 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
     )
     comments = models.ManyToManyField(Comment)
 
-    def get_status_label(self):
+    @property
+    def appraisal_label(self):
+        return dict(APPRAISAL_CHOICES).get(self.appraisal, self.appraisal)
+
+    @property
+    def status_label(self):
         return dict(STATUS_CHOICES).get(self.status, self.status)

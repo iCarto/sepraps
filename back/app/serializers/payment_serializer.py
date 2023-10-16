@@ -19,6 +19,8 @@ class PaymentSerializer(BaseModelWithFolderSerializer):
             "variable_amount",
             "expected_fixed_amount",
             "expected_variable_amount",
+            "appraisal",
+            "appraisal_label",
             "status",
             "status_label",
             "payment_date",
@@ -27,12 +29,8 @@ class PaymentSerializer(BaseModelWithFolderSerializer):
             "payment_comments",
         )
 
-    status_label = serializers.SerializerMethodField()
     payment_products = serializers.SerializerMethodField()
     payment_comments = serializers.SerializerMethodField()
-
-    def get_status_label(self, obj):  # noqa: WPS615
-        return obj.get_status_label()
 
     def get_payment_products(self, instance):  # noqa: WPS615
         products = instance.products.all().order_by("created_at", "id")
@@ -53,12 +51,9 @@ class PaymentSummarySerializer(BaseSummarySerializer):
         fields = BaseSummarySerializer.Meta.fields + (
             "name",
             "fixed_amount",
+            "appraisal",
+            "appraisal_label",
             "status",
             "status_label",
             "payment_date",
         )
-
-    status_label = serializers.SerializerMethodField()
-
-    def get_status_label(self, obj):  # noqa: WPS615
-        return obj.get_status_label()
