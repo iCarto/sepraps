@@ -22,6 +22,8 @@ const ViewDocumentPanel = ({
     const navigate = useNavigateWithReload();
 
     const params = useParams();
+    const {idDocument} = params;
+
     const location = useLocation();
 
     const [folderElement, setFolderElement] = useState(null);
@@ -30,10 +32,19 @@ const ViewDocumentPanel = ({
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
     useEffect(() => {
-        let path = params["*"];
-        if (path) {
+        console.log({idDocument});
+        if (!idDocument) {
+            let path = params["*"];
+            if (path) {
+                setLoading(true);
+                DocumentService.get(path).then(element => {
+                    setFolderElement(element);
+                    setLoading(false);
+                });
+            }
+        } else {
             setLoading(true);
-            DocumentService.get(path).then(element => {
+            DocumentService.getDocument(idDocument).then(element => {
                 setFolderElement(element);
                 setLoading(false);
             });
@@ -72,14 +83,18 @@ const ViewDocumentPanel = ({
     };
 
     const handleCloseSidebar = (refresh = false) => {
-        navigate(
-            location.pathname
-                .split("/")
-                .slice(0, -1)
-                .join("/")
-                .replace("/detail", ""),
-            refresh
-        );
+        const previousPath = idDocument
+            ? location.pathname
+                  .split("/")
+                  .slice(0, -1)
+                  .join("/")
+                  .replace("/document", "")
+            : location.pathname
+                  .split("/")
+                  .slice(0, -1)
+                  .join("/")
+                  .replace("/detail", "");
+        navigate(previousPath, refresh);
     };
 
     const sidebarActions = [

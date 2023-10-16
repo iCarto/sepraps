@@ -102,8 +102,12 @@ class MediaView(views.APIView):
     queryset = MediaNode.objects.all()
 
     def get(self, request, media_path):
-        filter = get_filter(media_path)
-        media_node = MediaNode.objects.filter(**filter).first()
+        try:
+            id_document = int(media_path)
+            media_node = MediaNode.objects.get(pk=id_document)
+        except ValueError:
+            filter = get_filter(media_path)
+            media_node = MediaNode.objects.filter(**filter).first()
 
         if media_node:
             if media_node.media_type == "DOCUMENT":

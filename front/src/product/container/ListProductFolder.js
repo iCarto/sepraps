@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 import {AuthAction} from "base/user/components";
 
@@ -10,6 +10,8 @@ import {FileUploadSection, FolderTable} from "base/file/components";
 import Grid from "@mui/material/Grid";
 
 const ListProductFolder = ({folderPath, basePath}) => {
+    const navigate = useNavigate();
+
     const [folderElement, setFolderElement] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -31,6 +33,17 @@ const ListProductFolder = ({folderPath, basePath}) => {
         });
     };
 
+    const handleSelectElement = folderElement => {
+        // setSelectedElement(folderElement);
+        /*if (folderElement.content_type) {
+            navigate(baseDocumentsPath + "detail/" + folderElement.path);
+        } else {
+            navigate(baseDocumentsPath + folderPath);
+        }*/
+        console.log({folderElement});
+        navigate(`document/${folderElement.id}`);
+    };
+
     return (
         <Grid container justifyContent="flex-start" alignItems="center">
             <Grid item container xs={12}>
@@ -40,7 +53,7 @@ const ListProductFolder = ({folderPath, basePath}) => {
                     <FolderTable
                         folderElements={folderElement?.children}
                         selectedElement={null}
-                        onSelectElement={() => {}}
+                        onSelectElement={handleSelectElement}
                         basePath={basePath}
                     />
                 )}

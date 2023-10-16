@@ -9,6 +9,7 @@ import {PaymentListSelector} from "payment/presentational";
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 const ViewContractPaymentsSubPage = () => {
     const navigate = useNavigate();
@@ -39,8 +40,8 @@ const ViewContractPaymentsSubPage = () => {
     return (
         <ContentLayout>
             <AlertError error={error} />
-            <Grid container spacing={1}>
-                <Grid item xs={10}>
+            <Grid container>
+                <Box sx={{p: 1, width: "calc(100% - 240px)"}}>
                     <Outlet />
                     {isRootPath &&
                         paymentsForContract &&
@@ -56,15 +57,14 @@ const ViewContractPaymentsSubPage = () => {
                                 </Grid>
                             </PaperContainer>
                         )}
-                </Grid>
-                <Grid item xs={2}>
+                </Box>
+                <Box sx={{p: 1, width: "240px"}}>
                     <PaymentListSelector
                         payments={paymentsForContract}
                         basePath={`/contracts/list/${contractId}/payment`}
                         selectedPaymentId={parseInt(paymentId)}
                     />
-                </Grid>
-                <Grid item xs={12}></Grid>
+                </Box>
             </Grid>
         </ContentLayout>
     );

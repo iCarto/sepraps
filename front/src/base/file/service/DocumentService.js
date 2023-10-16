@@ -18,6 +18,12 @@ const DocumentService = {
         });
     },
 
+    getDocument(idDocument) {
+        return AuthApiService.get(basePath + idDocument).then(response => {
+            return createDocument(document_api_adapter(response));
+        });
+    },
+
     delete(path) {
         return AuthApiService.delete(basePath + path);
     },
