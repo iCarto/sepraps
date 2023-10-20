@@ -79,8 +79,8 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
                     </Grid>
                     <Grid container item xs={6} direction="column">
                         <SectionField
-                            label="Fecha de presentación"
-                            value={DateUtil.formatDate(product.presentation_date)}
+                            label="Fecha de entrega"
+                            value={DateUtil.formatDate(product.product_date)}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -116,7 +116,7 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
                                 fontSize: "18px",
                             }}
                         />
-                        <Typography color="grey">Producto:</Typography>
+                        <Typography color="grey">Entregable:</Typography>
                         <Typography
                             color="primary.dark"
                             sx={{

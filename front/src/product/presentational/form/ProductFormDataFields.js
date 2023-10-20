@@ -1,13 +1,16 @@
 import {FormDatePicker, FormInputText, FormSelect} from "base/form/components";
 import Grid from "@mui/material/Grid";
+import {useDomain} from "sepraps/domain/provider";
 
 const PaymentFormDataFields = () => {
+    const {productStatus} = useDomain();
+
     return (
         <Grid container spacing={2}>
             <Grid container item xs={12} direction="column">
                 <FormInputText
                     name="name"
-                    label="Nombre del producto"
+                    label="Nombre del entregable"
                     rules={{required: "Este campo es obligatorio"}}
                 />
             </Grid>
@@ -15,20 +18,12 @@ const PaymentFormDataFields = () => {
                 <FormSelect
                     name="status"
                     label="Estado"
-                    rules={{required: "Este campo es obligatorio"}}
-                    options={[
-                        {label: "No entregado", value: "no_entregado"},
-                        {label: "Entregado", value: "entregado"},
-                        {label: "Revisado", value: "revisado"},
-                        {label: "Validado", value: "validado"},
-                    ]}
+                    options={productStatus}
+                    showEmptyOption={true}
                 />
             </Grid>
             <Grid container item xs={6} direction="column">
-                <FormDatePicker
-                    name="presentation_date"
-                    label="Fecha de presentación"
-                />
+                <FormDatePicker name="product_date" label="Fecha de entrega" />
             </Grid>
         </Grid>
     );

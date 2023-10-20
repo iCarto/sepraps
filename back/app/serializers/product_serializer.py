@@ -1,4 +1,5 @@
-from rest_framework import serializers
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 from app.base.serializers.base_serializers import (
     BaseModelSerializer,
@@ -7,18 +8,14 @@ from app.base.serializers.base_serializers import (
 from app.models.product import Product
 
 
-class ProductSerializer(BaseModelWithFolderSerializer):
+class ProductSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = Product
         fields = BaseModelWithFolderSerializer.Meta.fields + (
             "name",
             "status",
-            "status_label",
-            "presentation_date",
+            "product_date",
             "payment",
         )
 
-    status_label = serializers.SerializerMethodField()
-
-    def get_status_label(self, obj):  # noqa: WPS615
-        return obj.get_status_label()
+    domain_fields = [BaseDomainField("status", DomainCategoryChoices.product_status)]

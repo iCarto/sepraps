@@ -7,14 +7,6 @@ from documents.folder_utils import sanitize_field_value
 from documents.models import Folder
 
 
-STATUS_CHOICES = (
-    ("entregado", "Entregado"),
-    ("no_entregado", "No entregado"),
-    ("revisado", "Revisado"),
-    ("validado", "Validado"),
-)
-
-
 class Product(BaseDocumentModel, BaseEntityModelMixin):
     class Meta(object):
         db_table = "product"
@@ -26,14 +18,8 @@ class Product(BaseDocumentModel, BaseEntityModelMixin):
     id = models.AutoField(primary_key=True)
     name = models.CharField("Nombre", max_length=255)
 
-    status = models.CharField(
-        "Estado",
-        max_length=20,
-        choices=STATUS_CHOICES,
-        null=False,
-        default="no_entregado",
-    )
-    presentation_date = models.DateField("Fecha de entrega", null=True)
+    status = models.CharField("Estado", max_length=20, null=True)
+    product_date = models.DateField("Fecha de entrega", null=True)
 
     payment = models.ForeignKey(
         Payment,
@@ -42,9 +28,6 @@ class Product(BaseDocumentModel, BaseEntityModelMixin):
         null=True,
         related_name="products",
     )
-
-    def get_status_label(self):
-        return dict(STATUS_CHOICES).get(self.status, self.status)
 
     def post_create(self, sender, created, *args, **kwargs):
         if created:

@@ -28,10 +28,10 @@ const CreateProductDataContent = ({paymentId}) => {
             onClick={() => {
                 setMode("create");
             }}
-            label="Añadir nuevo producto"
+            label="Añadir nuevo entregable"
         />
     ) : mode === "create" ? (
-        <AddNewInlineItemFormBox label="Añadir nuevo producto">
+        <AddNewInlineItemFormBox label="Añadir nuevo entregable">
             <ProductForm
                 paymentId={paymentId}
                 onSubmit={handleFormSubmit}

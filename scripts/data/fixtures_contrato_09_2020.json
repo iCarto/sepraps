@@ -149,7 +149,7 @@
         "fields": {
             "name": "Justificante anticipo",
             "status": "entregado",
-            "presentation_date": "2020-12-14",
+            "product_date": "2020-12-14",
             "payment": 1,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",
@@ -275,7 +275,6 @@
         "pk": 3,
         "fields": {
             "name": "Certificado mes 1",
-            "status": "no_entregado",
             "payment": 6,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",
@@ -288,7 +287,6 @@
         "pk": 4,
         "fields": {
             "name": "Informe mensual (mes 1)",
-            "status": "no_entregado",
             "payment": 6,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",

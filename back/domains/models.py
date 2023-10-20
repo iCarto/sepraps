@@ -11,6 +11,7 @@ class DomainCategoryChoices(models.TextChoices):
     yes_no_domain = ("dominiosino", "Sí/No")
     gender_domain = ("gender", "Género")
     payment_status = ("estado_pago", "Estado pago")
+    product_status = ("estado_entregable", "Estado entregable")
 
 
 class DomainEntry(models.Model):
