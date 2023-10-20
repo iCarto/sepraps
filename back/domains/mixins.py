@@ -1,12 +1,11 @@
+from domains.models import DomainEntry
 from domains.util.domain_entry_util import dominio_get_label
 from rest_framework import serializers
 
 
-def relation_method_factory(base_self, field_name, domain):
+def relation_method_factory(domain_values, field_name, domain):
     def wrapper(self):
-        return dominio_get_label(
-            getattr(self, field_name), domain, base_self.context["domain"]
-        )
+        return dominio_get_label(getattr(self, field_name), domain, domain_values)
 
     return wrapper
 
@@ -24,6 +23,7 @@ class BaseDomainMixin(object, metaclass=serializers.SerializerMetaclass):
     """Serializer to use as parent for those who wants to include domain fields and add a new 'xxx_label' attribute for a 'xxx' field."""
 
     domain_fields = None
+    domain_values = DomainEntry.objects.all()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -39,7 +39,7 @@ class BaseDomainMixin(object, metaclass=serializers.SerializerMetaclass):
                 self,
                 "get_{0}_label".format(domain_field.name),
                 relation_method_factory(
-                    self, domain_field.name, domain_field.domain_choices
+                    self.domain_values, domain_field.name, domain_field.domain_choices
                 ),
             )
 

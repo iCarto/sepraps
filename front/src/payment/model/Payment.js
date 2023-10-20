@@ -25,6 +25,15 @@ const payment_view_adapter = payment => {
     delete payment["updated_at"];
     delete payment["updated_by"];
 
+    delete payment["payment_products"];
+    delete payment["payment_comments"];
+    delete payment["expected_total_contract_percentage"];
+    delete payment["paid_total_contract_percentage"];
+    delete payment["expected_total_amount_cumulative"];
+    delete payment["expected_total_contract_percentage_cumulative"];
+    delete payment["paid_total_amount_cumulative"];
+    delete payment["paid_total_contract_percentage_cumulative"];
+
     return payment;
 };
 
@@ -40,12 +49,13 @@ const createPayments = (data = []) => {
 const createPayment = ({
     id = null,
     name = "",
-    fixed_amount = null,
-    variable_amount = null,
     expected_fixed_amount = null,
     expected_variable_amount = null,
-    appraisal = null,
-    appraisal_label = "",
+    expected_total_amount = null,
+    expected_payment_date = null,
+    paid_fixed_amount = null,
+    paid_variable_amount = null,
+    paid_total_amount = null,
     status = null,
     status_label = "",
     payment_date = null,
@@ -57,16 +67,24 @@ const createPayment = ({
     updated_by = "",
     payment_products = [],
     payment_comments = [],
+    expected_total_contract_percentage = null,
+    paid_total_contract_percentage = null,
+    expected_total_amount_cumulative = null,
+    expected_total_contract_percentage_cumulative = null,
+    paid_total_amount_cumulative = null,
+    paid_total_contract_percentage_cumulative = null,
+    expected_total_contract_amount = null,
 } = {}) => {
     const publicApi = {
         id,
         name,
-        fixed_amount,
-        variable_amount,
         expected_fixed_amount,
         expected_variable_amount,
-        appraisal,
-        appraisal_label,
+        expected_total_amount,
+        expected_payment_date,
+        paid_fixed_amount,
+        paid_variable_amount,
+        paid_total_amount,
         status,
         status_label,
         payment_date,
@@ -78,6 +96,13 @@ const createPayment = ({
         updated_by,
         payment_products,
         payment_comments,
+        expected_total_contract_percentage,
+        paid_total_contract_percentage,
+        expected_total_amount_cumulative,
+        expected_total_contract_percentage_cumulative,
+        paid_total_amount_cumulative,
+        paid_total_contract_percentage_cumulative,
+        expected_total_contract_amount,
     };
 
     return Object.freeze(publicApi);

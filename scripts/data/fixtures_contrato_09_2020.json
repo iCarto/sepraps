@@ -130,8 +130,9 @@
         "pk": 1,
         "fields": {
             "name": "Anticipo",
-            "fixed_amount": 1266540000,
-            "appraisal": "bien",
+            "expected_total_amount": 4128041924,
+            "expected_payment_date": "2021-01-10",
+            "paid_total_amount": 4128041924,
             "status": "pagado",
             "payment_date": "2020-12-15",
             "contract": 6,
@@ -182,10 +183,72 @@
         "model": "app.payment",
         "pk": 2,
         "fields": {
-            "name": "Mes 1",
-            "fixed_amount": 478041924,
-            "appraisal": "regular",
-            "status": "no_pagado",
+            "name": "Enero 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-02-10",
+            "status": "anulado",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 3,
+        "fields": {
+            "name": "Febrero 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2023-01-10",
+            "status": "anulado",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 4,
+        "fields": {
+            "name": "Marzo 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-04-10",
+            "status": "anulado",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 5,
+        "fields": {
+            "name": "Abril 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-05-10",
+            "status": "anulado",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 6,
+        "fields": {
+            "name": "Mayo 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-06-10",
+            "paid_total_amount": 37592100,
+            "status": "pagado",
+            "payment_date": "2021-06-15",
             "contract": 6,
             "comments": [2, 3],
             "created_by": 1,
@@ -200,7 +263,7 @@
         "fields": {
             "name": "Informe quincenal (mes 1)",
             "status": "entregado",
-            "payment": 2,
+            "payment": 6,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",
             "updated_by": 1,
@@ -213,7 +276,7 @@
         "fields": {
             "name": "Certificado mes 1",
             "status": "no_entregado",
-            "payment": 2,
+            "payment": 6,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",
             "updated_by": 1,
@@ -226,7 +289,7 @@
         "fields": {
             "name": "Informe mensual (mes 1)",
             "status": "no_entregado",
-            "payment": 2,
+            "payment": 6,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",
             "updated_by": 1,
@@ -235,12 +298,14 @@
     },
     {
         "model": "app.payment",
-        "pk": 3,
+        "pk": 7,
         "fields": {
-            "name": "Mes 2",
-            "fixed_amount": 25062653,
-            "appraisal": "sin_valorar",
-            "status": "no_pagado",
+            "name": "Junio 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-07-10",
+            "paid_total_amount": 340160720,
+            "status": "pagado",
+            "payment_date": "2021-07-06",
             "contract": 6,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",
@@ -250,12 +315,285 @@
     },
     {
         "model": "app.payment",
-        "pk": 4,
+        "pk": 8,
         "fields": {
-            "name": "Mes 3",
-            "fixed_amount": 226785152,
-            "appraisal": "sin_valorar",
-            "status": "no_pagado",
+            "name": "Julio 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-08-10",
+            "paid_total_amount": 701662589,
+            "status": "pagado",
+            "payment_date": "2021-08-10",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 9,
+        "fields": {
+            "name": "Agosto 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-09-10",
+            "paid_total_amount": 616666158,
+            "status": "pagado",
+            "payment_date": "2021-09-14",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 10,
+        "fields": {
+            "name": "Septiembre 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-10-10",
+            "paid_total_amount": 925874006,
+            "status": "pagado",
+            "payment_date": "2021-10-05",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 11,
+        "fields": {
+            "name": "Octubre 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-11-10",
+            "paid_total_amount": 931783163,
+            "status": "pagado",
+            "payment_date": "2021-11-04",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 12,
+        "fields": {
+            "name": "Noviembre 2021",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2021-12-10",
+            "paid_total_amount": 506191620,
+            "status": "pagado",
+            "payment_date": "2021-12-16",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 13,
+        "fields": {
+            "name": "Diciembre 2022",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2022-01-10",
+            "paid_total_amount": 535210814,
+            "status": "pagado",
+            "payment_date": "2022-01-17",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 14,
+        "fields": {
+            "name": "Enero 2022",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2022-02-10",
+            "paid_total_amount": 765827786,
+            "status": "pagado",
+            "payment_date": "2022-02-03",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 15,
+        "fields": {
+            "name": "Febrero 2022",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2022-03-10",
+            "paid_total_amount": 310940166,
+            "status": "pagado",
+            "payment_date": "2022-03-08",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 16,
+        "fields": {
+            "name": "Marzo 2022",
+            "expected_total_amount": 642139855,
+            "expected_payment_date": "2022-04-10",
+            "paid_total_amount": 372380555,
+            "status": "pagado",
+            "payment_date": "2022-04-05",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 17,
+        "fields": {
+            "name": "Abril 2022",
+            "paid_total_amount": 403137481,
+            "status": "pagado",
+            "payment_date": "2022-05-03",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 18,
+        "fields": {
+            "name": "Mayo 2022",
+            "paid_total_amount": 320734640,
+            "status": "pagado",
+            "payment_date": "2022-05-31",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 19,
+        "fields": {
+            "name": "Julio 2022",
+            "paid_total_amount": 367556176,
+            "status": "pagado",
+            "payment_date": "2022-08-04",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 20,
+        "fields": {
+            "name": "Agosto 2022",
+            "paid_total_amount": 106567701,
+            "status": "pagado",
+            "payment_date": "2022-09-01",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 21,
+        "fields": {
+            "name": "Septiembre 2022",
+            "paid_total_amount": 27535385,
+            "status": "pagado",
+            "payment_date": "2022-10-18",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 22,
+        "fields": {
+            "name": "Octubre 2022",
+            "paid_total_amount": 57355593,
+            "status": "pagado",
+            "payment_date": "2022-11-03",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 23,
+        "fields": {
+            "name": "Diciembre 2022",
+            "paid_total_amount": 352405101,
+            "status": "pagado",
+            "payment_date": "2023-01-12",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 24,
+        "fields": {
+            "name": "Abril 2023",
+            "paid_total_amount": 739705554,
+            "status": "pagado",
+            "payment_date": "2023-05-09",
+            "contract": 6,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 25,
+        "fields": {
+            "name": "Mayo 2023",
+            "paid_total_amount": 234681196,
+            "status": "pagado",
+            "payment_date": "2023-06-06",
             "contract": 6,
             "created_by": 1,
             "created_at": "2020-12-01T00:00:00Z",
@@ -265,7 +603,7 @@
     },
     {
         "model": "documents.medianode",
-        "pk": 222,
+        "pk": 246,
         "fields": {
             "media_type": "DOCUMENT",
             "media_name": "recibo_anticipo.pdfg",
@@ -279,28 +617,28 @@
     },
     {
         "model": "documents.medianode",
-        "pk": 223,
+        "pk": 247,
         "fields": {
             "media_type": "DOCUMENT",
             "media_name": "informe_quincenal_mes_1.pdf",
             "media_content_type": "application/pdf",
             "media_size": 14398,
-            "storage_path": "payment/1/product/informe_quincenal_mes_1/informe_quincenal_mes_1.pdf",
-            "parent": 217,
+            "storage_path": "payment/6/product/informe_quincenal_mes_1/informe_quincenal_mes_1.pdf",
+            "parent": 221,
             "creation_user": 1,
             "created_at": "2020-12-03T00:00:00Z"
         }
     },
     {
         "model": "documents.medianode",
-        "pk": 224,
+        "pk": 248,
         "fields": {
             "media_type": "DOCUMENT",
             "media_name": "imagen_prueba.jpg",
             "media_content_type": "image/jpeg",
             "media_size": 1398,
-            "storage_path": "payment/1/product/informe_quincenal_mes_1/imagen_prueba.jpg",
-            "parent": 217,
+            "storage_path": "payment/6/product/informe_quincenal_mes_1/imagen_prueba.jpg",
+            "parent": 221,
             "creation_user": 1,
             "created_at": "2020-12-06T00:00:00Z"
         }

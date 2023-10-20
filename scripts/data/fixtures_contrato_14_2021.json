@@ -1,0 +1,596 @@
+[
+    {
+        "model": "app.contact",
+        "pk": 20,
+        "fields": {
+            "name": "Julio Esteban Mendoza Ortega",
+            "gender": "M",
+            "phone": "",
+            "email": ""
+        }
+    },
+    {
+        "model": "app.contractor",
+        "pk": 6,
+        "fields": {
+            "name": "Consorcio INTEC S.A. - DYB S.A.",
+            "contractor_type": "company",
+            "address": "Charles de Gaulle nº 1575 c/ Alfredo Seirferheld, Asunción",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "app.contractorcontact",
+        "fields": {
+            "entity": 6,
+            "contact": 20,
+            "post": "responsable_contratista"
+        }
+    },
+    {
+        "model": "app.ConstructionContract",
+        "pk": 7,
+        "fields": {
+            "number": "Contrato nº 14/2021",
+            "comments": "Servicio de consultoría para la fiscalización de obras del sistema de alcantarillado sanitario condominal y asistencia técnica para las conexiones intradomiciliarias en la ciudad de Yhu",
+            "bid_request_number": "",
+            "bid_request_id": "382155",
+            "bid_request_date": "2020-07-27",
+            "bid_request_budget": 2411723706,
+            "awarding_budget": 1982855160,
+            "awarding_percentage_drop": 7.82,
+            "awarding_date": "2021-03-19",
+            "financing_program": 1,
+            "contractor": 6,
+            "execution_signature_date": "2021-06-22",
+            "execution_certificate_start_date": "2021-06-22",
+            "expected_execution_period": 630,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 26,
+        "fields": {
+            "name": "Informe preliminar",
+            "paid_total_amount": 396571032,
+            "status": "pagado",
+            "payment_date": "2021-09-23",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 27,
+        "fields": {
+            "name": "Mes 1",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2021-11-02",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 28,
+        "fields": {
+            "name": "Mes 2",
+            "paid_total_amount": 51315279,
+            "status": "pagado",
+            "payment_date": "2021-11-09",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 29,
+        "fields": {
+            "name": "Mes 3",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2021-12-16",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 30,
+        "fields": {
+            "name": "Mes 4",
+            "paid_total_amount": 56109932,
+            "status": "pagado",
+            "payment_date": "2022-01-12",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 31,
+        "fields": {
+            "name": "Mes 5",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-01-12",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 32,
+        "fields": {
+            "name": "Mes 6",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-01-13",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 33,
+        "fields": {
+            "name": "Mes 7",
+            "paid_total_amount": 51642785,
+            "status": "pagado",
+            "payment_date": "2022-01-13",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 34,
+        "fields": {
+            "name": "Mes 8",
+            "paid_total_amount": 30062438,
+            "status": "pagado",
+            "payment_date": "2022-03-08",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 35,
+        "fields": {
+            "name": "Mes 9",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-04-12",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 36,
+        "fields": {
+            "name": "Mes 10",
+            "paid_total_amount": 20638674,
+            "status": "pagado",
+            "payment_date": "2022-05-03",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 37,
+        "fields": {
+            "name": "Mes 11",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-05-10",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 38,
+        "fields": {
+            "name": "Mes 12",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-06-07",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 39,
+        "fields": {
+            "name": "Mes 13",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-08-09",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 40,
+        "fields": {
+            "name": "Mes 14",
+            "paid_total_amount": 13915221,
+            "status": "pagado",
+            "payment_date": "2022-08-09",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 41,
+        "fields": {
+            "name": "Mes 15",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-09-06",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 42,
+        "fields": {
+            "name": "Mes 16",
+            "paid_total_amount": 20371290,
+            "status": "pagado",
+            "payment_date": "2022-09-13",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 43,
+        "fields": {
+            "name": "Mes 17",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-10-11",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 44,
+        "fields": {
+            "name": "Mes 18",
+            "paid_total_amount": 5906367,
+            "status": "pagado",
+            "payment_date": "2022-11-08",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 45,
+        "fields": {
+            "name": "Mes 19",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-11-08",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 46,
+        "fields": {
+            "name": "Mes 20",
+            "paid_total_amount": 3178854,
+            "status": "pagado",
+            "payment_date": "2022-12-01",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 47,
+        "fields": {
+            "name": "Mes 21",
+            "paid_total_amount": 1526110,
+            "status": "pagado",
+            "payment_date": "2022-12-01",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 48,
+        "fields": {
+            "name": "Mes 22",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2022-12-07",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 49,
+        "fields": {
+            "name": "Mes 23",
+            "paid_total_amount": 19531562,
+            "status": "pagado",
+            "payment_date": "2023-01-12",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 50,
+        "fields": {
+            "name": "Mes 24",
+            "paid_total_amount": 88126896,
+            "status": "pagado",
+            "payment_date": "2023-02-14",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 51,
+        "fields": {
+            "name": "Mes 25",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2023-04-13",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 52,
+        "fields": {
+            "name": "Mes 26",
+            "paid_total_amount": 44063448,
+            "status": "pagado",
+            "payment_date": "2023-04-13",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 53,
+        "fields": {
+            "name": "Mes 27",
+            "paid_total_amount": 9565457,
+            "status": "pagado",
+            "payment_date": "2023-05-25",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 54,
+        "fields": {
+            "name": "Mes 28",
+            "paid_total_amount": 9840472,
+            "status": "pagado",
+            "payment_date": "2023-05-25",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 55,
+        "fields": {
+            "name": "Mes 29",
+            "paid_total_amount": 15990767,
+            "status": "pagado",
+            "payment_date": "2023-05-25",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 56,
+        "fields": {
+            "name": "Mes 30",
+            "paid_total_amount": 8364402,
+            "status": "pagado",
+            "payment_date": "2023-08-03",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 57,
+        "fields": {
+            "name": "Mes 31",
+            "paid_total_amount": 13006878,
+            "status": "pagado",
+            "payment_date": "2023-08-03",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 58,
+        "fields": {
+            "name": "Mes 32",
+            "paid_total_amount": 24601180,
+            "status": "pagado",
+            "payment_date": "2023-10-05",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 59,
+        "fields": {
+            "name": "Mes 33",
+            "paid_total_amount": 15252732,
+            "status": "pagado",
+            "payment_date": "2023-10-12",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 60,
+        "fields": {
+            "name": "Adenda 1",
+            "paid_total_amount": 88126896,
+            "status": "pagado",
+            "payment_date": "2023-09-05",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 61,
+        "fields": {
+            "name": "Adenda 2",
+            "paid_total_amount": 88126896,
+            "status": "pagado",
+            "payment_date": "2023-09-07",
+            "contract": 7,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    }
+]

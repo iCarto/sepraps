@@ -12,15 +12,12 @@ const PaymentListSelectorItem = ({payment, to, selected = false}) => {
             sx={{
                 mt: 1,
                 p: 1,
-                border: selected ? 2 : 1,
                 borderRadius: 1,
-                borderStyle: "solid",
-                borderColor: selected ? "primary.dark" : "#eee",
                 backgroundColor: selected ? "secondary.lighter" : "inherit",
             }}
         >
             <Stack direction="row">
-                {getStatusIcon(payment.status)}
+                {getStatusIcon(payment.status, !selected)}
                 <TextLink
                     text={payment.name}
                     to={to}

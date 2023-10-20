@@ -102,6 +102,6 @@ class ConstructionContractViewSet(ModelListViewSet):
     def get_contract_payments(self, request, pk):
         return Response(
             PaymentSummarySerializer(
-                Payment.objects.filter(contract=pk), many=True
+                Payment.objects.filter(contract=pk).order_by("id"), many=True
             ).data
         )

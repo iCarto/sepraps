@@ -1,10 +1,11 @@
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
 
 const SectionBox = ({label, children}) => {
     return (
-        <Box
+        <Grid
+            container
             sx={{
                 border: 1,
                 borderRadius: 2,
@@ -13,12 +14,14 @@ const SectionBox = ({label, children}) => {
                 p: 1,
             }}
         >
-            <Typography sx={{color: "grey.500", fontSize: "0.8rem"}}>
-                {label}
-            </Typography>
-            <Divider />
-            {children}
-        </Box>
+            <Grid item xs>
+                <Typography sx={{color: "grey.500", fontSize: "0.8rem"}}>
+                    {label}
+                </Typography>
+                <Divider sx={{mb: 1}} />
+                {children}
+            </Grid>
+        </Grid>
     );
 };
 

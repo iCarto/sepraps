@@ -2,24 +2,17 @@ import {SectionBox, SectionField} from "base/ui/section/components";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import Grid from "@mui/material/Grid";
 import {PaymentAppraisalChip, PaymentStatusChip} from ".";
+import Divider from "@mui/material/Divider";
 
 const PaymentData = ({payment}) => {
     return (
         <Grid container spacing={2}>
-            <Grid item xs={6}>
-                <SectionField
-                    label="Estado"
-                    value={
-                        <PaymentStatusChip
-                            label={payment.status_label}
-                            value={payment.status}
-                        />
-                    }
-                />
-            </Grid>
-            <Grid item xs={6} />
             <Grid container item xs={6} direction="column">
-                <SectionBox label="Previsión">
+                <SectionBox label="Previsto">
+                    <SectionField
+                        label="Fecha de pago prevista"
+                        value={DateUtil.formatDate(payment.expected_payment_date)}
+                    />
                     <SectionField
                         label="Monto previsto fijo"
                         value={NumberUtil.formatInteger(payment.expected_fixed_amount)}
@@ -32,23 +25,94 @@ const PaymentData = ({payment}) => {
                         )}
                         unit="Gs."
                     />
-                </SectionBox>
-            </Grid>
-            <Grid container item xs={6} direction="column">
-                <SectionBox label="Pago">
                     <SectionField
-                        label="Monto fijo"
-                        value={NumberUtil.formatInteger(payment.fixed_amount)}
+                        label="Monto previsto"
+                        value={NumberUtil.formatInteger(payment.expected_total_amount)}
                         unit="Gs."
                     />
                     <SectionField
-                        label="Monto variable"
-                        value={NumberUtil.formatInteger(payment.variable_amount)}
+                        label="% Previsto"
+                        value={NumberUtil.formatDecimal(
+                            payment.expected_total_contract_percentage
+                        )}
+                        unit="%"
+                    />
+                    <Divider sx={{my: 1}} />
+                    <SectionField
+                        label="Monto acumulado previsto"
+                        value={NumberUtil.formatInteger(
+                            payment.expected_total_amount_cumulative
+                        )}
                         unit="Gs."
+                    />
+                    <SectionField
+                        label="% Acumulado previsto"
+                        value={NumberUtil.formatDecimal(
+                            payment.expected_total_contract_percentage_cumulative
+                        )}
+                        unit="%"
+                    />
+                    <Divider sx={{my: 1}} />
+                    <SectionField
+                        label="Monto total previsto"
+                        value={NumberUtil.formatInteger(
+                            payment.expected_total_contract_amount
+                        )}
+                        unit="Gs."
+                    />
+                </SectionBox>
+            </Grid>
+            <Grid container item xs={6} direction="column">
+                <SectionBox label="Real">
+                    <SectionField
+                        label="Estado"
+                        value={
+                            <PaymentStatusChip
+                                label={payment.status_label}
+                                value={payment.status}
+                            />
+                        }
                     />
                     <SectionField
                         label="Fecha de pago"
                         value={DateUtil.formatDate(payment.payment_date)}
+                    />
+                    <SectionField
+                        label="Monto fijo pagado"
+                        value={NumberUtil.formatInteger(payment.paid_fixed_amount)}
+                        unit="Gs."
+                    />
+                    <SectionField
+                        label="Monto variable pagado"
+                        value={NumberUtil.formatInteger(payment.paid_variable_amount)}
+                        unit="Gs."
+                    />
+                    <SectionField
+                        label="Monto pagado"
+                        value={NumberUtil.formatInteger(payment.paid_total_amount)}
+                        unit="Gs."
+                    />
+                    <SectionField
+                        label="% Pagado"
+                        value={NumberUtil.formatDecimal(
+                            payment.paid_total_contract_percentage
+                        )}
+                        unit="%"
+                    />
+                    <Divider sx={{my: 1}} />
+                    <SectionField
+                        label="Monto acumulado pagado"
+                        value={NumberUtil.formatInteger(
+                            payment.paid_total_amount_cumulative
+                        )}
+                        unit="Gs."
+                    />
+                    <SectionField
+                        label="% Acumulado pagado"
+                        value={NumberUtil.formatDecimal(
+                            payment.paid_total_contract_percentage_cumulative
+                        )}
+                        unit="%"
                     />
                 </SectionBox>
             </Grid>

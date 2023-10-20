@@ -2,9 +2,9 @@ import pandas as pd
 from domains.models import DomainEntry
 
 
-domains_file = pd.ExcelFile("scripts/data/230615_MD_SEPRAPS.xls")
+domains_file = pd.ExcelFile("scripts/data/231019_MD_SEPRAPS.xls")
 
-domains_df = domains_file.parse(2)
+domains_df = domains_file.parse(9)
 
 for index, row in domains_df.iterrows():
     if index != 0:

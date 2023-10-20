@@ -10,6 +10,7 @@ class DomainCategoryChoices(models.TextChoices):
     provider_type = ("tipo_prestador", "Tipo de prestador")
     yes_no_domain = ("dominiosino", "Sí/No")
     gender_domain = ("gender", "Género")
+    payment_status = ("estado_pago", "Estado pago")
 
 
 class DomainEntry(models.Model):

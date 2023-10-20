@@ -1,26 +1,31 @@
 import Chip from "@mui/material/Chip";
 
-import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
-import MoneyOffOutlinedIcon from "@mui/icons-material/MoneyOffOutlined";
+import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
+import PaidIcon from "@mui/icons-material/Paid";
+import {cloneElement} from "react";
 
 const getStatusColor = value => {
-    if (value === "no_pagado") {
+    if (value === "anulado") {
         return "error";
     } else if (value === "pagado") {
         return "success";
     }
-    return null;
+    return "default";
 };
 
-const getStatusIcon = value => {
-    if (value === "no_pagado") {
-        return <MoneyOffOutlinedIcon sx={{color: `${getStatusColor(value)}.main`}} />;
-    } else if (value === "pagado") {
-        return (
-            <AttachMoneyOutlinedIcon sx={{color: `${getStatusColor(value)}.main`}} />
-        );
+const getStatusIcon = (value, outlined = false) => {
+    let color = "grey.400";
+    if (value === "anulado") {
+        color = "error.main";
     }
-    return null;
+    if (value === "pagado") {
+        color = "success.main";
+    }
+    const icon = outlined ? <PaidOutlinedIcon /> : <PaidIcon />;
+
+    return cloneElement(icon, {
+        sx: {color},
+    });
 };
 
 const PaymentStatusChip = ({label, value}) => (

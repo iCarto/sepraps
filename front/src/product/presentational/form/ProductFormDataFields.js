@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 const PaymentFormDataFields = () => {
     return (
         <Grid container spacing={2}>
-            <Grid container item xs={6} direction="column">
+            <Grid container item xs={12} direction="column">
                 <FormInputText
                     name="name"
                     label="Nombre del producto"
@@ -23,6 +23,8 @@ const PaymentFormDataFields = () => {
                         {label: "Validado", value: "validado"},
                     ]}
                 />
+            </Grid>
+            <Grid container item xs={6} direction="column">
                 <FormDatePicker
                     name="presentation_date"
                     label="Fecha de presentación"
