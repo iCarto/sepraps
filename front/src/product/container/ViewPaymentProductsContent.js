@@ -1,5 +1,5 @@
 import {SectionCard} from "base/ui/section/components";
-import {CreateProductDataContent, ViewProductDataContent} from ".";
+import {CreateProductDataContent, ViewOrUpdateProductDataContent} from ".";
 import Stack from "@mui/system/Stack";
 
 const ViewPaymentProductsContent = ({payment}) => {
@@ -9,7 +9,7 @@ const ViewPaymentProductsContent = ({payment}) => {
                 <Stack spacing={2}>
                     {payment.payment_products.map(product => {
                         return (
-                            <ViewProductDataContent
+                            <ViewOrUpdateProductDataContent
                                 key={product.id}
                                 paymentId={payment.id}
                                 product={product}

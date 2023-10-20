@@ -1,14 +1,7 @@
 import {useState} from "react";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {CommentForm} from "comment/presentational/form";
-import IconButton from "@mui/material/IconButton";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import Grid from "@mui/material/Grid";
 import {comment_view_adapter} from "comment/model";
-import Tooltip from "@mui/material/Tooltip";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 import {AddNewInlineItemButton, AddNewInlineItemFormBox} from "base/shared/components";
 
 const CreateCommentDataContent = ({createService}) => {
