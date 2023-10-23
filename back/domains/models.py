@@ -12,6 +12,9 @@ class DomainCategoryChoices(models.TextChoices):
     gender_domain = ("gender", "Género")
     payment_status = ("estado_pago", "Estado pago")
     product_status = ("estado_entregable", "Estado entregable")
+    total_amount_type = ("tipo_monto", "Tipo de monto total")
+    payment_frequency_type = ("frecuencia_pago", "Tipo de frecuencia de pago")
+    payment_criteria_type = ("criterio_pago", "Tipo de criterio de pago")
 
 
 class DomainEntry(models.Model):

@@ -153,6 +153,9 @@
         "fields": {
             "number": "13/2019",
             "comments": "Contrato LI-12008-19-183449 correspondiente al Grupo 1: Concepción - San Pedro de la licitación Nº 01/2019 (364644) asociada al contrato de préstamo 3601/OC-PR",
+            "total_amount_type": "maximo_minimo",
+            "payment_frequency_type": "no_mensual",
+            "payment_criteria_type": "variable",
             "bid_request_number": "LPI - 01/2019",
             "bid_request_id": "364644",
             "bid_request_date": "2019-06-04",

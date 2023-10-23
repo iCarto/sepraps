@@ -36,6 +36,9 @@
         "fields": {
             "number": "Contrato nº 09/2020",
             "comments": "[Lote 3] Construcción de obras de sistema de alcantarillado sanitario en tres cidudades de la región oriental",
+            "total_amount_type": "fijo",
+            "payment_frequency_type": "mensual",
+            "payment_criteria_type": "fijo",
             "bid_request_number": "LPI - 03/2019",
             "bid_request_id": "368078",
             "bid_request_date": "2019-12-30",

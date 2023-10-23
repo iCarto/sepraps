@@ -5,6 +5,7 @@ import {DomainProvider} from "sepraps/domain/provider";
 
 import {EntityForm} from "base/entity/components/form";
 import {ContractCreationForm, ContractModificationForm} from ".";
+import {FormUtil} from "base/form/utilities";
 
 const ContractForm = ({
     contract = null,
@@ -20,6 +21,9 @@ const ContractForm = ({
         bid_request_number: contract?.bid_request_number || "",
         bid_request_id: contract?.bid_request_id || "",
         bid_request_date: contract?.bid_request_date || "",
+        total_amount_type: FormUtil.getFormValue(contract?.total_amount_type),
+        payment_frequency_type: FormUtil.getFormValue(contract?.payment_frequency_type),
+        payment_criteria_type: FormUtil.getFormValue(contract?.payment_criteria_type),
         // TODO Guaranies don't have decimal fraction, but we have
         // to keep budgets as numbers with decimals
         bid_request_budget: contract?.bid_request_budget
@@ -59,6 +63,9 @@ const ContractForm = ({
             bid_request_number: data.bid_request_number,
             bid_request_id: data.bid_request_id,
             bid_request_date: data.bid_request_date,
+            total_amount_type: FormUtil.getDataValue(data.total_amount_type),
+            payment_frequency_type: FormUtil.getDataValue(data.payment_frequency_type),
+            payment_criteria_type: FormUtil.getDataValue(data.payment_criteria_type),
             bid_request_budget: data.bid_request_budget,
             awarding_budget: data.awarding_budget,
             awarding_percentage_drop: getAwardedPercentageDrop(

@@ -36,6 +36,9 @@
         "fields": {
             "number": "24/2019",
             "comments": "Contrato LP-12008-19-185301 correspondiente a los grupos 1 y 2 de la LPN - 01/2019 (360930) asociada al COF 01/08 de MERCOSUR",
+            "total_amount_type": "fijo",
+            "payment_frequency_type": "mensual",
+            "payment_criteria_type": "variable",
             "bid_request_number": "LPN - 01/2019",
             "bid_request_id": "360930",
             "bid_request_date": "2019-10-14",

@@ -1,6 +1,8 @@
 import itertools
 
 from django.db.models import Prefetch
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.construction_contract import ConstructionContract
@@ -28,28 +30,16 @@ from questionnaires.serializers.questionnaire_serializer import (
 )
 
 
-class ConstructionContractSerializer(serializers.ModelSerializer):
-    financing_program = serializers.PrimaryKeyRelatedField(
-        required=False, allow_null=True, queryset=FinancingProgram.objects.all()
-    )
-    contractor = ContractorSerializer(required=False, allow_null=True)
-    contacts = ContactConstructionContractSerializer(
-        source="constructioncontractcontact_set", many=True, required=False
-    )
-    projects = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Project.objects.all()
-    )
-    creation_user = serializers.CharField(
-        source="creation_user.username", required=False
-    )
-    questionnaires = serializers.SerializerMethodField()
-
+class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerializer):
     class Meta(object):
         model = ConstructionContract
         fields = (
             "id",
             "number",
             "comments",
+            "total_amount_type",
+            "payment_frequency_type",
+            "payment_criteria_type",
             "bid_request_number",
             "bid_request_id",
             "bid_request_date",
@@ -79,6 +69,31 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
             "bid_request_date": {"required": True},
             "bid_request_budget": {"required": True},
         }
+
+    financing_program = serializers.PrimaryKeyRelatedField(
+        required=False, allow_null=True, queryset=FinancingProgram.objects.all()
+    )
+    contractor = ContractorSerializer(required=False, allow_null=True)
+    contacts = ContactConstructionContractSerializer(
+        source="constructioncontractcontact_set", many=True, required=False
+    )
+    projects = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Project.objects.all()
+    )
+    creation_user = serializers.CharField(
+        source="creation_user.username", required=False
+    )
+    questionnaires = serializers.SerializerMethodField()
+
+    domain_fields = [
+        BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
+        BaseDomainField(
+            "payment_frequency_type", DomainCategoryChoices.payment_frequency_type
+        ),
+        BaseDomainField(
+            "payment_criteria_type", DomainCategoryChoices.payment_criteria_type
+        ),
+    ]
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""
@@ -197,15 +212,17 @@ class ConstructionContractSerializer(serializers.ModelSerializer):
         return instance
 
 
-class ConstructionContractSummarySerializer(serializers.ModelSerializer):
-    financing_program = FinancingProgramSerializer()
-    contractor = ContractorSummarySerializer()
-
+class ConstructionContractSummarySerializer(
+    BaseDomainMixin, serializers.ModelSerializer
+):
     class Meta(ConstructionContractSerializer.Meta):
         fields = (
             "id",
             "number",
             "comments",
+            "total_amount_type",
+            "payment_frequency_type",
+            "payment_criteria_type",
             "bid_request_number",
             "bid_request_id",
             "bid_request_date",
@@ -220,6 +237,19 @@ class ConstructionContractSummarySerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+    domain_fields = [
+        BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
+        BaseDomainField(
+            "payment_frequency_type", DomainCategoryChoices.payment_frequency_type
+        ),
+        BaseDomainField(
+            "payment_criteria_type", DomainCategoryChoices.payment_criteria_type
+        ),
+    ]
+
+    financing_program = FinancingProgramSerializer()
+    contractor = ContractorSummarySerializer()
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""

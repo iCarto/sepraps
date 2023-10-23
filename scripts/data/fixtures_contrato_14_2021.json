@@ -35,6 +35,9 @@
         "fields": {
             "number": "Contrato nº 14/2021",
             "comments": "Servicio de consultoría para la fiscalización de obras del sistema de alcantarillado sanitario condominal y asistencia técnica para las conexiones intradomiciliarias en la ciudad de Yhu",
+            "total_amount_type": "fijo",
+            "payment_frequency_type": "mensual",
+            "payment_criteria_type": "fijo_variable",
             "bid_request_number": "",
             "bid_request_id": "382155",
             "bid_request_date": "2020-07-27",

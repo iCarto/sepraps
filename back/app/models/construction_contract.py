@@ -12,6 +12,16 @@ class ConstructionContract(models.Model):
     number = models.CharField("Nombre", max_length=50)
     comments = models.TextField("Observaciones", max_length=500, null=True)
 
+    total_amount_type = models.CharField(
+        "Tipo de monto total", max_length=20, null=False
+    )
+    payment_frequency_type = models.CharField(
+        "Tipo de frecuencia de pago", max_length=20, null=False
+    )
+    payment_criteria_type = models.CharField(
+        "Tipo de criterio de pago", max_length=20, null=False
+    )
+
     bid_request_number = models.CharField("Número de llamado", max_length=50)
     bid_request_id = models.CharField("Identificador de llamado", max_length=50)
     bid_request_date = models.DateField("Fecha de llamado")

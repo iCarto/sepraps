@@ -15,6 +15,9 @@ export default function DomainProvider({children}) {
     const [providerTypes, setProviderTypes] = useState([]);
     const [paymentStatus, setPaymentStatus] = useState([]);
     const [productStatus, setProductStatus] = useState([]);
+    const [totalAmountTypes, setTotalAmountTypes] = useState([]);
+    const [paymentFrequencyTypes, setPaymentFrequencyTypes] = useState([]);
+    const [paymentCriteriaTypes, setPaymentCriteriaTypes] = useState([]);
 
     useEffect(() => {
         Promise.all([
@@ -33,6 +36,9 @@ export default function DomainProvider({children}) {
                 tipo_prestador,
                 estado_pago,
                 estado_entregable,
+                tipo_monto,
+                frecuencia_pago,
+                criterio_pago,
             } = domain;
             setYesNoDomain(dominiosino);
             setGenderDomain(gender);
@@ -44,6 +50,9 @@ export default function DomainProvider({children}) {
             setProductStatus(estado_entregable);
             setContactPosts(contact_post);
             setContractorTypes(contractor_type);
+            setTotalAmountTypes(tipo_monto);
+            setPaymentFrequencyTypes(frecuencia_pago);
+            setPaymentCriteriaTypes(criterio_pago);
         });
     }, []);
 
@@ -56,6 +65,9 @@ export default function DomainProvider({children}) {
         providerTypes,
         paymentStatus,
         productStatus,
+        totalAmountTypes,
+        paymentFrequencyTypes,
+        paymentCriteriaTypes,
         contactPosts,
         contractorTypes,
     };

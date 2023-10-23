@@ -2,7 +2,7 @@ import pandas as pd
 from domains.models import DomainEntry
 
 
-domains_file = pd.ExcelFile("scripts/data/231019_MD_SEPRAPS.xls")
+domains_file = pd.ExcelFile("scripts/data/231020_MD_SEPRAPS.xls")
 
 domains_df = domains_file.parse(9)
 

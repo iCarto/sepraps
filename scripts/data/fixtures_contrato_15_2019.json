@@ -36,6 +36,9 @@
         "fields": {
             "number": "15/2019",
             "comments": "Contrato LI-12008-19-183446 correspondiente al Grupo 5: Alto Paraná Supercarretera Norte de la licitación Nº 01/2019 (364644) asociada al contrato de préstamo 3601/OC-PR",
+            "total_amount_type": "fijo",
+            "payment_frequency_type": "mensual",
+            "payment_criteria_type": "variable",
             "bid_request_number": "01/2019",
             "bid_request_id": "364644",
             "bid_request_date": "2019-06-04",
