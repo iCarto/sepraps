@@ -2,8 +2,35 @@ import {useNavigate} from "react-router-dom";
 import {FieldUtil} from "base/ui/section/utilities";
 import {useAuth} from "base/user/provider";
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
+import {
+    SectionBox,
+    SectionCard,
+    SectionCardHeaderAction,
+    SectionField,
+} from "base/ui/section/components";
 import EditIcon from "@mui/icons-material/Edit";
+import Grid from "@mui/material/Grid";
+import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
+
+const AwardingBudgetSection = ({contract}) => {
+    return contract.total_amount_type === MAX_MIN_AMOUNT_TYPE ? (
+        <>
+            <SectionField
+                label="Monto mínimo"
+                value={NumberUtil.formatCurrency(contract.awarding_budget_min)}
+            />
+            <SectionField
+                label="Monto máximo"
+                value={NumberUtil.formatCurrency(contract.awarding_budget)}
+            />
+        </>
+    ) : (
+        <SectionField
+            label="Monto"
+            value={NumberUtil.formatCurrency(contract.awarding_budget)}
+        />
+    );
+};
 
 const ContractAwardingSection = ({contract}) => {
     const navigate = useNavigate();
@@ -24,19 +51,29 @@ const ContractAwardingSection = ({contract}) => {
 
     return (
         <SectionCard title="Adjudicación" secondaryActions={secondaryActions}>
-            {FieldUtil.getSectionField(
-                "Fecha de adjudicación",
-                DateUtil.formatDate(contract?.awarding_date)
-            )}
-            {FieldUtil.getSectionField(
-                "Monto adjudicado",
-                NumberUtil.formatCurrency(contract?.awarding_budget)
-            )}
-            {FieldUtil.getSectionField(
-                "Porcentaje de baja",
-                NumberUtil.formatDecimal(contract?.awarding_percentage_drop, 2),
-                "%"
-            )}
+            <Grid container spacing={2}>
+                <Grid container item xs={6} direction="column">
+                    <SectionBox label="Adjudicación">
+                        <SectionField
+                            label="Fecha de adjudicación"
+                            value={DateUtil.formatDate(contract?.awarding_date)}
+                        />
+                    </SectionBox>
+                </Grid>
+                <Grid container item xs={6} direction="column">
+                    <SectionBox label="Monto adjudicado">
+                        <AwardingBudgetSection contract={contract} />
+                        <SectionField
+                            label="Porcentaje de baja"
+                            value={NumberUtil.formatDecimal(
+                                contract?.awarding_percentage_drop,
+                                2
+                            )}
+                            unit="%"
+                        />
+                    </SectionBox>
+                </Grid>
+            </Grid>
         </SectionCard>
     );
 };

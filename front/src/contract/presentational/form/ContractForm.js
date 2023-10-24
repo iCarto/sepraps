@@ -26,8 +26,14 @@ const ContractForm = ({
         payment_criteria_type: FormUtil.getFormValue(contract?.payment_criteria_type),
         // TODO Guaranies don't have decimal fraction, but we have
         // to keep budgets as numbers with decimals
+        bid_request_budget_min: contract?.bid_request_budget_min
+            ? NumberUtil.formatDecimal(contract.bid_request_budget_min, 0)
+            : "",
         bid_request_budget: contract?.bid_request_budget
             ? NumberUtil.formatDecimal(contract.bid_request_budget, 0)
+            : "",
+        awarding_budget_min: contract?.awarding_budget_min
+            ? NumberUtil.formatDecimal(contract.awarding_budget_min, 0)
             : "",
         awarding_budget: contract?.awarding_budget
             ? NumberUtil.formatDecimal(contract.awarding_budget, 0)
@@ -66,8 +72,10 @@ const ContractForm = ({
             total_amount_type: FormUtil.getDataValue(data.total_amount_type),
             payment_frequency_type: FormUtil.getDataValue(data.payment_frequency_type),
             payment_criteria_type: FormUtil.getDataValue(data.payment_criteria_type),
-            bid_request_budget: data.bid_request_budget,
-            awarding_budget: data.awarding_budget,
+            bid_request_budget_min: FormUtil.getDataValue(data.bid_request_budget_min),
+            bid_request_budget: FormUtil.getDataValue(data.bid_request_budget),
+            awarding_budget_min: FormUtil.getDataValue(data.awarding_budget_min),
+            awarding_budget: FormUtil.getDataValue(data.awarding_budget),
             awarding_percentage_drop: getAwardedPercentageDrop(
                 data.bid_request_budget,
                 data.awarding_budget

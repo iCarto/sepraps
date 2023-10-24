@@ -136,7 +136,9 @@ const createContract = ({
     bid_request_number = "",
     bid_request_id = "",
     bid_request_date = null,
+    bid_request_budget_min = null,
     bid_request_budget = null,
+    awarding_budget_min = null,
     awarding_budget = null,
     awarding_percentage_drop = null,
     awarding_date = null,
@@ -168,7 +170,9 @@ const createContract = ({
         bid_request_number,
         bid_request_id,
         bid_request_date,
+        bid_request_budget_min,
         bid_request_budget,
+        awarding_budget_min,
         awarding_budget,
         awarding_percentage_drop,
         awarding_date,
@@ -190,6 +194,8 @@ const createContract = ({
 
     return Object.freeze(publicApi);
 };
+
+export const MAX_MIN_AMOUNT_TYPE = "maximo_minimo";
 
 export {
     createContract as default,

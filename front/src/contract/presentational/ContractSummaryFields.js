@@ -1,5 +1,26 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {SectionCard, SectionField} from "base/ui/section/components";
+import {SectionField} from "base/ui/section/components";
+import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
+
+const AwardingBudgetSection = ({contract}) => {
+    return contract.total_amount_type === MAX_MIN_AMOUNT_TYPE ? (
+        <>
+            <SectionField
+                label="Monto adjudicado mínimo"
+                value={NumberUtil.formatCurrency(contract.awarding_budget_min)}
+            />
+            <SectionField
+                label="Monto adjudicado máximo"
+                value={NumberUtil.formatCurrency(contract.awarding_budget)}
+            />
+        </>
+    ) : (
+        <SectionField
+            label="Monto adjudicado"
+            value={NumberUtil.formatCurrency(contract.awarding_budget)}
+        />
+    );
+};
 
 const ContractSummaryFields = ({contract}) => {
     return (
@@ -26,10 +47,7 @@ const ContractSummaryFields = ({contract}) => {
                 label="Fecha de adjudicación"
                 value={DateUtil.formatDate(contract.awarding_date)}
             />
-            <SectionField
-                label="Monto adjudicado"
-                value={NumberUtil.formatCurrency(contract.awarding_budget)}
-            />
+            <AwardingBudgetSection contract={contract} />
         </>
     );
 };
