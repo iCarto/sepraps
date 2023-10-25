@@ -5,11 +5,14 @@ import {PaymentForm} from "payment/presentational/form";
 import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {SectionCard} from "base/ui/section/components";
+import {useOutletContext} from "react-router-dom";
 
 const CreatePaymentContent = () => {
     const navigate = useNavigateWithReload();
     const location = useLocation();
     const {id: contractId} = useParams();
+
+    const [contract] = useOutletContext();
 
     const [error, setError] = useState(null);
 
@@ -31,6 +34,7 @@ const CreatePaymentContent = () => {
         <SectionCard title="Nuevo pago">
             <PaymentForm
                 contractId={contractId}
+                contract={contract}
                 onSubmit={handleFormSubmit}
                 onCancel={() => {
                     navigate(-1);

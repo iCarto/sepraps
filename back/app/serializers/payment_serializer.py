@@ -30,6 +30,9 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "status",
             "payment_date",
             "contract",
+            "contract_total_amount_type",
+            "contract_payment_frequency_type",
+            "contract_payment_criteria_type",
             "payment_products",
             "payment_comments",
             "expected_total_contract_percentage",
@@ -51,6 +54,15 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     paid_total_contract_percentage_cumulative = serializers.SerializerMethodField()
     expected_total_contract_amount = serializers.CharField(
         source="contract.awarding_budget", read_only=True
+    )
+    contract_total_amount_type = serializers.CharField(
+        source="contract.total_amount_type", read_only=True
+    )
+    contract_payment_frequency_type = serializers.CharField(
+        source="contract.payment_frequency_type", read_only=True
+    )
+    contract_payment_criteria_type = serializers.CharField(
+        source="contract.payment_criteria_type", read_only=True
     )
 
     def get_payment_products(self, instance):  # noqa: WPS615

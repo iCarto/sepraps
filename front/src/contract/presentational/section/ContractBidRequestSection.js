@@ -17,17 +17,20 @@ const BidRequestBudgetSection = ({contract}) => {
         <>
             <SectionField
                 label="Monto mínimo"
-                value={NumberUtil.formatCurrency(contract.bid_request_budget_min)}
+                value={NumberUtil.formatInteger(contract.bid_request_budget_min)}
+                unit="Gs."
             />
             <SectionField
                 label="Monto máximo"
-                value={NumberUtil.formatCurrency(contract.bid_request_budget)}
+                value={NumberUtil.formatInteger(contract.bid_request_budget)}
+                unit="Gs."
             />
         </>
     ) : (
         <SectionField
             label="Monto"
-            value={NumberUtil.formatCurrency(contract.bid_request_budget)}
+            value={NumberUtil.formatInteger(contract.bid_request_budget)}
+            unit="Gs."
         />
     );
 };

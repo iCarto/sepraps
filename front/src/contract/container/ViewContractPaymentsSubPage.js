@@ -1,5 +1,11 @@
 import {useEffect, useState} from "react";
-import {Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
+import {
+    Outlet,
+    useLocation,
+    useNavigate,
+    useOutletContext,
+    useParams,
+} from "react-router-dom";
 
 import {ContractService} from "contract/service";
 import {ContentLayout} from "base/ui/main";
@@ -16,6 +22,8 @@ const ViewContractPaymentsSubPage = () => {
     const {id: contractId, paymentId} = useParams();
     const location = useLocation();
     const isRootPath = location.pathname.split("/").slice(-1)[0] === "payment";
+
+    const [contract] = useOutletContext();
 
     const [error, setError] = useState(null);
 
@@ -42,7 +50,7 @@ const ViewContractPaymentsSubPage = () => {
             <AlertError error={error} />
             <Grid container>
                 <Box sx={{p: 1, width: "calc(100% - 240px)"}}>
-                    <Outlet />
+                    <Outlet context={[contract]} />
                     {isRootPath &&
                         paymentsForContract &&
                         paymentsForContract.length === 0 && (

@@ -5,4 +5,5 @@ export {
     contracts_api_adapter,
     contract_view_adapter,
     MAX_MIN_AMOUNT_TYPE,
+    FIXED_VARIABLE_CRITERIA_TYPE,
 } from "./Contract";

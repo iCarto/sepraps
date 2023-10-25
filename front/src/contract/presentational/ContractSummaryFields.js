@@ -7,17 +7,20 @@ const AwardingBudgetSection = ({contract}) => {
         <>
             <SectionField
                 label="Monto adjudicado mínimo"
-                value={NumberUtil.formatCurrency(contract.awarding_budget_min)}
+                value={NumberUtil.formatInteger(contract.awarding_budget_min)}
+                unit="Gs."
             />
             <SectionField
                 label="Monto adjudicado máximo"
-                value={NumberUtil.formatCurrency(contract.awarding_budget)}
+                value={NumberUtil.formatInteger(contract.awarding_budget)}
+                unit="Gs."
             />
         </>
     ) : (
         <SectionField
             label="Monto adjudicado"
-            value={NumberUtil.formatCurrency(contract.awarding_budget)}
+            value={NumberUtil.formatInteger(contract.awarding_budget)}
+            unit="Gs."
         />
     );
 };

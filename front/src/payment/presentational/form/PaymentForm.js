@@ -9,6 +9,7 @@ import {DomainProvider} from "sepraps/domain/provider";
 
 const PaymentForm = ({
     contractId,
+    contract = null,
     payment = null,
     onSubmit,
     onCancel = null,
@@ -72,7 +73,7 @@ const PaymentForm = ({
                     onSubmit={formMethods.handleSubmit(onFormSubmit)}
                     onCancel={onCancel}
                 >
-                    <PaymentFormDataFields />
+                    <PaymentFormDataFields contract={contract} />
                 </EntityForm>
             </FormProvider>
         </DomainProvider>

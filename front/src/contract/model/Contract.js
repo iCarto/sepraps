@@ -196,6 +196,7 @@ const createContract = ({
 };
 
 export const MAX_MIN_AMOUNT_TYPE = "maximo_minimo";
+export const FIXED_VARIABLE_CRITERIA_TYPE = "fijo_variable";
 
 export {
     createContract as default,

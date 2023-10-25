@@ -17,9 +17,11 @@ import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
+import {useOutletContext} from "react-router-dom";
 
 const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
     const navigate = useNavigateWithReload();
+    const [contract] = useOutletContext();
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
@@ -72,6 +74,7 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
             return (
                 <PaymentForm
                     contractId={contractId}
+                    contract={contract}
                     payment={payment}
                     onSubmit={handleFormSubmit}
                     onCancel={() => {

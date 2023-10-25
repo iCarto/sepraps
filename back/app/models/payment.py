@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
 from app.models.comment import Comment
@@ -68,3 +70,28 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
         if not contract_paid_total_amount_cumulative:
             return None
         return format_decimal(contract_paid_total_amount_cumulative)
+
+
+@receiver(pre_save, sender=Payment)
+def provider_pre_save(sender, instance, *args, **kwargs):
+    if instance and instance.contract.payment_criteria_type != "fijo_variable":
+        instance.expected_fixed_amount = None
+        instance.expected_variable_amount = None
+        instance.paid_fixed_amount = None
+        instance.paid_variable_amount = None
+    else:
+        if instance.expected_fixed_amount or instance.expected_variable_amount:
+            expected_fixed_amount = instance.expected_fixed_amount or 0
+            expected_variable_amount = instance.expected_variable_amount or 0
+            instance.expected_total_amount = (
+                expected_fixed_amount + expected_variable_amount
+            )
+        else:
+            instance.expected_total_amount = None
+        if instance.paid_fixed_amount or instance.paid_variable_amount:
+            paid_fixed_amount = instance.paid_fixed_amount or 0
+            paid_variable_amount = instance.paid_variable_amount or 0
+            instance.paid_total_amount = paid_fixed_amount + paid_variable_amount
+        else:
+            instance.paid_total_amount = None
+    return instance

@@ -58,6 +58,7 @@ const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
                 {paymentsList &&
                     paymentsList.map(payment => (
                         <PaymentListSelectorItem
+                            key={payment.id}
                             payment={payment}
                             to={`${basePath}/${payment.id.toString()}`}
                             selected={selectedPaymentId === payment.id}

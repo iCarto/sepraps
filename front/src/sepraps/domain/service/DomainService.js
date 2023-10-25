@@ -22,7 +22,6 @@ const DomainService = {
                     return a["ordering"] - b["ordering"];
                 });
             });
-            console.log({domain});
             return domain;
         });
     },
