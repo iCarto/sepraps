@@ -18,3 +18,5 @@ create_table_log_request 2022-07-15T15:27:03Z Elías Gago <egago@icarto.es> # Cr
 update_architecture_phase2 2023-09-24T08:28:24Z Elías Gago <egago@icarto.es> # Changes in content types due to architecture folder config
 create_tables_phase2 2023-09-25T16:17:49Z Elías Gago <egago@icarto.es> # Create tables for field reports and provider changes
 update_domains_new_project_types 2023-09-26T09:36:55Z Elías Gago <egago@icarto.es> # New project types for sanitary and sewage system
+create_tables_payments 2023-10-25T15:17:30Z Elías Gago <egago@icarto.es> # Create tables for payments, products, comments and alter contracts
+update_dominios_payments_contracts 2023-10-25T17:06:59Z Elías Gago <egago@icarto.es> # Include domains for payments and contracts types and status
