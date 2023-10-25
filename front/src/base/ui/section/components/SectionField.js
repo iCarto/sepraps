@@ -63,7 +63,6 @@ const SectionField = ({
     const labelStyle = {
         lineHeight: {xs: 1.5, sm: 1.25},
         mt: {xs: 0, sm: 1.5},
-        textTransform: "uppercase",
         hyphens: "auto",
     };
 
@@ -108,7 +107,7 @@ const SectionField = ({
     const typeOfField = linkPath ? linkField : regularField;
 
     return (
-        <Grid container columnSpacing={containerWidth === "long" ? 2 : 1}>
+        <Grid container columnSpacing={containerWidth === "long" ? 2 : 1} sx={{my: 1}}>
             <Grid
                 item
                 container
@@ -138,7 +137,20 @@ const SectionField = ({
                 )}
             </Grid>
             <Grid item container xs="auto" sm={6} lg={valueWidth} alignItems="flex-end">
-                <Grid item>{isValueValid ? typeOfField : emptyField}</Grid>
+                <Grid
+                    item
+                    sx={{
+                        border: 1,
+                        borderRadius: 1,
+                        borderStyle: "solid",
+                        borderColor: "grey.300",
+                        backgroundColor: "grey.100",
+                        p: 1,
+                        width: "100%",
+                    }}
+                >
+                    {isValueValid ? typeOfField : emptyField}
+                </Grid>
                 {editButton ? (
                     <Grid item xs={1}>
                         <SectionFieldEditButton onClick={navigate(editButtonPath)} />

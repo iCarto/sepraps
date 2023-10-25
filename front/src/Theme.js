@@ -162,6 +162,16 @@ const customTheme = createTheme({
             },
         },
 
+        MuiTableRow: {
+            styleOverrides: {
+                root: {
+                    "&:last-child td, &:last-child th": {
+                        borderBottom: 0,
+                    },
+                },
+            },
+        },
+
         MuiTableSortLabel: {
             styleOverrides: {
                 root: {
@@ -182,6 +192,7 @@ const customTheme = createTheme({
         MuiInputBase: {
             styleOverrides: {
                 input: {
+                    fontSize: "14px",
                     backgroundColor: CUSTOM_COLORS.white,
                     "&::placeholder": {
                         opacity: 0.15,

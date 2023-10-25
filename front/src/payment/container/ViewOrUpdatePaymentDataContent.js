@@ -114,7 +114,7 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
                             </Typography>
                         </Stack>
                     }
-                    sx={{bgcolor: "grey.50"}}
+                    sx={{bgcolor: "grey.50", borderBottom: "1px solid #ccc"}}
                 />
                 <CardContent>{getComponent(mode)}</CardContent>
                 <DeleteItemDialog
