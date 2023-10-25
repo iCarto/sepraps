@@ -114,6 +114,9 @@ const createPayment = ({
     return Object.freeze(publicApi);
 };
 
+export const PAYMENT_STATUS_PAID = "pagado";
+export const PAYMENT_STATUS_CANCELED = "anulado";
+
 export {
     createPayment as default,
     createPayments,

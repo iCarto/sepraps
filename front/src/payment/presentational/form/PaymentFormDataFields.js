@@ -14,6 +14,7 @@ import {useEffect, useState} from "react";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import {NumberUtil} from "base/format/utilities";
+import {PAYMENT_STATUS_PAID} from "payment/model";
 
 const PaidAmountFormFields = ({contract}) => {
     const [paidTotalAmount, setPaidTotalAmount] = useState("");
@@ -42,16 +43,16 @@ const PaidAmountFormFields = ({contract}) => {
         <>
             <FormInputInteger
                 name="paid_fixed_amount"
-                label="Monto previsto fijo"
+                label="Monto pagado fijo"
                 endAdornment={CURRENCY_SYMBOL}
             />
             <FormInputInteger
                 name="paid_variable_amount"
-                label="Monto previsto variable"
+                label="Monto pagado variable"
                 endAdornment={CURRENCY_SYMBOL}
             />
             <TextField
-                label="Monto previsto total"
+                label="Monto pagado total"
                 fullWidth
                 disabled={true}
                 value={paidTotalAmount}
@@ -68,7 +69,7 @@ const PaidAmountFormFields = ({contract}) => {
     ) : (
         <FormInputInteger
             name="paid_total_amount"
-            label="Monto previsto"
+            label="Monto pagado"
             endAdornment={CURRENCY_SYMBOL}
         />
     );
@@ -162,7 +163,7 @@ const PaymentFormDataFields = ({contract}) => {
             <Grid container item xs={6} direction="column">
                 <FormBox label="Real">
                     <FormSelect name="status" label="Estado" options={paymentStatus} />
-                    {status === "pagado" && (
+                    {status === PAYMENT_STATUS_PAID && (
                         <>
                             <FormDatePicker name="payment_date" label="Fecha de pago" />
                             <PaidAmountFormFields contract={contract} />
