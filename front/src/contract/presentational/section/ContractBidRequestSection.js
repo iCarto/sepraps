@@ -67,6 +67,10 @@ const ContractBidRequestSection = ({contract}) => {
                             value={contract?.bid_request_id}
                         />
                         <SectionField
+                            label="Número de lote"
+                            value={contract?.bid_request_lot_number}
+                        />
+                        <SectionField
                             label="Fecha de publicación"
                             value={DateUtil.formatDate(contract?.bid_request_date)}
                         />

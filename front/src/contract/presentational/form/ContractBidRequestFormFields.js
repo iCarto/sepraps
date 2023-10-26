@@ -49,14 +49,15 @@ const ContractBidRequestFormFields = () => {
         <>
             <FormInputText
                 name="bid_request_number"
-                label="Número de licitación"
+                label="Número"
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputText
                 name="bid_request_id"
-                label="Identificador de licitación"
+                label="Identificador"
                 rules={{required: "El campo es obligatorio"}}
             />
+            <FormInputText name="bid_request_lot_number" label="Número de lote" />
             <FormDatePicker
                 name="bid_request_date"
                 label="Fecha de publicación"

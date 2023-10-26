@@ -31,6 +31,9 @@ class ConstructionContract(models.Model):
 
     bid_request_number = models.CharField("Número de llamado", max_length=50)
     bid_request_id = models.CharField("Identificador de llamado", max_length=50)
+    bid_request_lot_number = models.TextField(
+        "Número de lote", max_length=500, null=True
+    )
     bid_request_date = models.DateField("Fecha de llamado")
     bid_request_budget_min = models.DecimalField(
         "Monto total mínimo", max_digits=20, decimal_places=2, null=True
@@ -52,6 +55,15 @@ class ConstructionContract(models.Model):
         "Porcentaje de baja de adjudicación", max_digits=5, decimal_places=2, null=True
     )
     awarding_date = models.DateField("Fecha de adjudicación", null=True)
+    awarding_professional_liability_insurance = models.CharField(
+        "Seguro de responsabilidad profesional", max_length=20, null=True
+    )
+    awarding_liability_insurance = models.CharField(
+        "Seguro de responsabilidad civil", max_length=20, null=True
+    )
+    awarding_accident_insurance = models.CharField(
+        "Seguro de accidentes", max_length=20, null=True
+    )
 
     execution_signature_date = models.DateField(
         "Fecha de firma del contrato", null=True

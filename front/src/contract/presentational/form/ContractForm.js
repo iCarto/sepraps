@@ -20,6 +20,7 @@ const ContractForm = ({
         financing_program: contract?.financing_program || null,
         bid_request_number: contract?.bid_request_number || "",
         bid_request_id: contract?.bid_request_id || "",
+        bid_request_lot_number: FormUtil.getFormValue(contract?.bid_request_lot_number),
         bid_request_date: contract?.bid_request_date || "",
         total_amount_type: FormUtil.getFormValue(contract?.total_amount_type),
         payment_frequency_type: FormUtil.getFormValue(contract?.payment_frequency_type),
@@ -39,6 +40,15 @@ const ContractForm = ({
             ? NumberUtil.formatDecimal(contract.awarding_budget, 0)
             : "",
         awarding_date: contract?.awarding_date || "",
+        awarding_professional_liability_insurance: FormUtil.getFormValue(
+            contract?.awarding_professional_liability_insurance
+        ),
+        awarding_liability_insurance: FormUtil.getFormValue(
+            contract?.awarding_liability_insurance
+        ),
+        awarding_accident_insurance: FormUtil.getFormValue(
+            contract?.awarding_accident_insurance
+        ),
         execution_signature_date: contract?.execution_signature_date || "",
         execution_certificate_start_date:
             contract?.execution_certificate_start_date || "",
@@ -68,6 +78,7 @@ const ContractForm = ({
             financing_program: data.financing_program,
             bid_request_number: data.bid_request_number,
             bid_request_id: data.bid_request_id,
+            bid_request_lot_number: data.bid_request_lot_number,
             bid_request_date: data.bid_request_date,
             total_amount_type: FormUtil.getDataValue(data.total_amount_type),
             payment_frequency_type: FormUtil.getDataValue(data.payment_frequency_type),
@@ -81,6 +92,15 @@ const ContractForm = ({
                 data.awarding_budget
             ),
             awarding_date: data.awarding_date,
+            awarding_professional_liability_insurance: FormUtil.getDataValue(
+                data.awarding_professional_liability_insurance
+            ),
+            awarding_liability_insurance: FormUtil.getDataValue(
+                data.awarding_liability_insurance
+            ),
+            awarding_accident_insurance: FormUtil.getDataValue(
+                data.awarding_accident_insurance
+            ),
             contractor: contract?.contractor,
             execution_signature_date: data.execution_signature_date,
             execution_certificate_start_date: data.execution_certificate_start_date,

@@ -42,6 +42,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "payment_criteria_type",
             "bid_request_number",
             "bid_request_id",
+            "bid_request_lot_number",
             "bid_request_date",
             "bid_request_budget_min",
             "bid_request_budget",
@@ -49,6 +50,9 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "awarding_budget",
             "awarding_percentage_drop",
             "awarding_date",
+            "awarding_professional_liability_insurance",
+            "awarding_liability_insurance",
+            "awarding_accident_insurance",
             "financing_program",
             "contractor",
             "contacts",
@@ -88,6 +92,16 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
     questionnaires = serializers.SerializerMethodField()
 
     domain_fields = [
+        BaseDomainField(
+            "awarding_professional_liability_insurance",
+            DomainCategoryChoices.yes_no_domain,
+        ),
+        BaseDomainField(
+            "awarding_liability_insurance", DomainCategoryChoices.yes_no_domain
+        ),
+        BaseDomainField(
+            "awarding_accident_insurance", DomainCategoryChoices.yes_no_domain
+        ),
         BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
         BaseDomainField(
             "payment_frequency_type", DomainCategoryChoices.payment_frequency_type
