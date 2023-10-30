@@ -18,7 +18,7 @@ const UpdateContractContractorContactPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const basePath = `/contracts/list/${contract.id}/summary`;
+    const basePath = `/contracts/list/${contract.id}/contracting`;
 
     const selectedContact =
         action === "edit"

@@ -8,6 +8,7 @@ import {contract_view_adapter} from "contract/model";
 import {EntityAddButtonGroup} from "base/entity/components/presentational";
 import {RemoveItemDialog} from "base/delete/components";
 import {
+    SectionBox,
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
@@ -18,6 +19,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
+import Grid from "@mui/material/Grid";
 
 const ContractContractorSection = ({contract}) => {
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
@@ -64,23 +66,39 @@ const ContractContractorSection = ({contract}) => {
     return (
         <SectionCard title="Contratista" secondaryActions={headerActions}>
             {contractor?.id ? (
-                <>
-                    <SectionField label="Nombre" value={contractor?.name} />
-                    <SectionField
-                        label="Tipo"
-                        value={contractor?.contractor_type_label}
-                    />
-                    <SectionField label="Dirección" value={contractor?.address} />
-                    <SectionField label="Celular" value={contractor?.phone} />
-                    <SectionField label="E-mail" value={contractor?.email} />
-                    <SectionField label="Observaciones" value={contractor?.comments} />
-                    <ContractorContactsSection contractor={contractor} />
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <SectionBox label="Datos del contratista">
+                            <SectionField label="Nombre" value={contractor?.name} />
+                            <SectionField
+                                label="Tipo"
+                                value={contractor?.contractor_type_label}
+                            />
+                            <SectionField
+                                label="Observaciones"
+                                value={contractor?.comments}
+                            />
+                        </SectionBox>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <SectionBox label="Información de contacto">
+                            <SectionField
+                                label="Dirección"
+                                value={contractor?.address}
+                            />
+                            <SectionField label="Celular" value={contractor?.phone} />
+                            <SectionField label="E-mail" value={contractor?.email} />
+                        </SectionBox>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <ContractorContactsSection contractor={contractor} />
+                    </Grid>
                     <RemoveItemDialog
                         isDialogOpen={isRemoveDialogOpen}
                         setIsDialogOpen={setIsRemoveDialogOpen}
                         onRemove={handleRemoveContractor}
                     />
-                </>
+                </Grid>
             ) : (
                 <Stack alignItems="center" spacing={2}>
                     <Typography style={{fontStyle: "italic"}}>

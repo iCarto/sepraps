@@ -18,7 +18,9 @@ export {default as ViewContractPanel} from "./ViewContractPanel";
 export {
     default as ViewContractQuestionnairesSubPage,
 } from "./ViewContractQuestionnairesSubPage";
-export {default as ViewContractPhasesSubPage} from "./ViewContractPhasesSubPage";
+export {
+    default as ViewContractContractingSubPage,
+} from "./ViewContractContractingSubPage";
 export {default as CreateContractProjectPage} from "./CreateContractProjectPage";
 export {default as ViewContractSummarySubPage} from "./ViewContractSummarySubPage";
 export {default as ListContractProjects} from "./ListContractProjects";

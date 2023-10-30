@@ -6,7 +6,7 @@ import {SelectContractDropDown} from "contract/menu";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
-import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 
 const ContractSubPageMenu = ({contract}) => {
@@ -24,10 +24,10 @@ const ContractSubPageMenu = ({contract}) => {
                 icon={<InfoOutlinedIcon />}
             />
             <SubPageMenuListItemButton
-                key="contract-phases"
-                to={`${basePath}/phases`}
-                text="Fases"
-                icon={<EventNoteOutlinedIcon />}
+                key="contract-contracting"
+                to={`${basePath}/contracting`}
+                text="Contratación"
+                icon={<HandshakeOutlinedIcon />}
             />
             <SubPageMenuListItemButton
                 key="contract-monitoring"
