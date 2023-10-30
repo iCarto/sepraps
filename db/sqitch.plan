@@ -20,3 +20,4 @@ create_tables_phase2 2023-09-25T16:17:49Z Elías Gago <egago@icarto.es> # Create
 update_domains_new_project_types 2023-09-26T09:36:55Z Elías Gago <egago@icarto.es> # New project types for sanitary and sewage system
 create_tables_payments 2023-10-25T15:17:30Z Elías Gago <egago@icarto.es> # Create tables for payments, products, comments and alter contracts
 update_dominios_payments_contracts 2023-10-25T17:06:59Z Elías Gago <egago@icarto.es> # Include domains for payments and contracts types and status
+update_contract_lot_insurances 2023-10-30T09:43:52Z Elías Gago <egago@icarto.es> # New insurances and lot fields for contract
