@@ -45,11 +45,13 @@ const PaidAmountFormFields = ({contract}) => {
                 name="paid_fixed_amount"
                 label="Monto pagado fijo"
                 endAdornment={CURRENCY_SYMBOL}
+                rules={{required: "Este campo es obligatorio"}}
             />
             <FormInputInteger
                 name="paid_variable_amount"
                 label="Monto pagado variable"
                 endAdornment={CURRENCY_SYMBOL}
+                rules={{required: "Este campo es obligatorio"}}
             />
             <TextField
                 label="Monto pagado total"
@@ -71,6 +73,7 @@ const PaidAmountFormFields = ({contract}) => {
             name="paid_total_amount"
             label="Monto pagado"
             endAdornment={CURRENCY_SYMBOL}
+            rules={{required: "Este campo es obligatorio"}}
         />
     );
 };
@@ -105,11 +108,13 @@ const ExpectedAmountFormFields = ({contract}) => {
                 name="expected_fixed_amount"
                 label="Monto previsto fijo"
                 endAdornment={CURRENCY_SYMBOL}
+                rules={{required: "Este campo es obligatorio"}}
             />
             <FormInputInteger
                 name="expected_variable_amount"
                 label="Monto previsto variable"
                 endAdornment={CURRENCY_SYMBOL}
+                rules={{required: "Este campo es obligatorio"}}
             />
             <TextField
                 label="Monto previsto total"
@@ -131,6 +136,7 @@ const ExpectedAmountFormFields = ({contract}) => {
             name="expected_total_amount"
             label="Monto previsto"
             endAdornment={CURRENCY_SYMBOL}
+            rules={{required: "Este campo es obligatorio"}}
         />
     );
 };
@@ -144,32 +150,39 @@ const PaymentFormDataFields = ({contract}) => {
 
     return (
         <Grid container spacing={2}>
-            <Grid container item xs={12} direction="column">
-                <FormInputText
-                    name="name"
-                    label="Nombre del pago"
-                    rules={{required: "Este campo es obligatorio"}}
-                />
+            <Grid container item xs={12} spacing={2}>
+                <Grid item xs={6}>
+                    <FormInputText
+                        name="name"
+                        label="Nombre del pago"
+                        rules={{required: "Este campo es obligatorio"}}
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <FormSelect name="status" label="Estado" options={paymentStatus} />
+                </Grid>
             </Grid>
             <Grid container item xs={6} direction="column">
                 <FormBox label="Previsto">
                     <FormDatePicker
                         name="expected_payment_date"
                         label="Fecha de pago prevista"
+                        rules={{required: "Este campo es obligatorio"}}
                     />
                     <ExpectedAmountFormFields contract={contract} />
                 </FormBox>
             </Grid>
             <Grid container item xs={6} direction="column">
-                <FormBox label="Real">
-                    <FormSelect name="status" label="Estado" options={paymentStatus} />
-                    {status === PAYMENT_STATUS_PAID && (
-                        <>
-                            <FormDatePicker name="payment_date" label="Fecha de pago" />
-                            <PaidAmountFormFields contract={contract} />
-                        </>
-                    )}
-                </FormBox>
+                {status === PAYMENT_STATUS_PAID && (
+                    <FormBox label="Real">
+                        <FormDatePicker
+                            name="payment_date"
+                            label="Fecha de pago"
+                            rules={{required: "Este campo es obligatorio"}}
+                        />
+                        <PaidAmountFormFields contract={contract} />
+                    </FormBox>
+                )}
             </Grid>
         </Grid>
     );

@@ -1,8 +1,7 @@
-import {FIXED_VARIABLE_CRITERIA_TYPE} from "contract/model";
+import {FIXED_VARIABLE_CRITERIA_TYPE, MAX_MIN_AMOUNT_TYPE} from "contract/model";
 import {SectionBox, SectionField} from "base/ui/section/components";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import Grid from "@mui/material/Grid";
-import {PaymentStatusChip} from ".";
 import Divider from "@mui/material/Divider";
 import {PAYMENT_STATUS_PAID} from "payment/model";
 
@@ -73,7 +72,7 @@ const PaymentData = ({payment}) => {
                     />
                     <ExpectedAmountSection payment={payment} />
                     <SectionField
-                        label="% Previsto"
+                        label="Porcentaje previsto"
                         value={NumberUtil.formatDecimal(
                             payment.expected_total_contract_percentage
                         )}
@@ -88,7 +87,7 @@ const PaymentData = ({payment}) => {
                         unit="Gs."
                     />
                     <SectionField
-                        label="% Acumulado previsto"
+                        label="Porcentaje acumulado previsto"
                         value={NumberUtil.formatDecimal(
                             payment.expected_total_contract_percentage_cumulative
                         )}
@@ -96,7 +95,11 @@ const PaymentData = ({payment}) => {
                     />
                     <Divider sx={{my: 1}} />
                     <SectionField
-                        label="Monto total previsto"
+                        label={
+                            payment.contract_total_amount_type === MAX_MIN_AMOUNT_TYPE
+                                ? "Monto adjudicado máximo"
+                                : "Monto adjudicado"
+                        }
                         value={NumberUtil.formatInteger(
                             payment.expected_total_contract_amount
                         )}
@@ -105,48 +108,37 @@ const PaymentData = ({payment}) => {
                 </SectionBox>
             </Grid>
             <Grid container item xs={6} direction="column">
-                <SectionBox label="Real">
-                    <SectionField
-                        label="Estado"
-                        value={
-                            <PaymentStatusChip
-                                label={payment.status_label}
-                                value={payment.status}
-                            />
-                        }
-                    />
-                    {payment.status === PAYMENT_STATUS_PAID && (
-                        <>
-                            <SectionField
-                                label="Fecha de pago"
-                                value={DateUtil.formatDate(payment.payment_date)}
-                            />
-                            <PaidAmountSection payment={payment} />
-                            <SectionField
-                                label="% Pagado"
-                                value={NumberUtil.formatDecimal(
-                                    payment.paid_total_contract_percentage
-                                )}
-                                unit="%"
-                            />
-                            <Divider sx={{my: 1}} />
-                            <SectionField
-                                label="Monto acumulado pagado"
-                                value={NumberUtil.formatInteger(
-                                    payment.paid_total_amount_cumulative
-                                )}
-                                unit="Gs."
-                            />
-                            <SectionField
-                                label="% Acumulado pagado"
-                                value={NumberUtil.formatDecimal(
-                                    payment.paid_total_contract_percentage_cumulative
-                                )}
-                                unit="%"
-                            />
-                        </>
-                    )}
-                </SectionBox>
+                {payment.status === PAYMENT_STATUS_PAID && (
+                    <SectionBox label="Real">
+                        <SectionField
+                            label="Fecha de pago"
+                            value={DateUtil.formatDate(payment.payment_date)}
+                        />
+                        <PaidAmountSection payment={payment} />
+                        <SectionField
+                            label="Porcentaje pagado"
+                            value={NumberUtil.formatDecimal(
+                                payment.paid_total_contract_percentage
+                            )}
+                            unit="%"
+                        />
+                        <Divider sx={{my: 1}} />
+                        <SectionField
+                            label="Monto acumulado pagado"
+                            value={NumberUtil.formatInteger(
+                                payment.paid_total_amount_cumulative
+                            )}
+                            unit="Gs."
+                        />
+                        <SectionField
+                            label="Porcentaje acumulado pagado"
+                            value={NumberUtil.formatDecimal(
+                                payment.paid_total_contract_percentage_cumulative
+                            )}
+                            unit="%"
+                        />
+                    </SectionBox>
+                )}
             </Grid>
         </Grid>
     );

@@ -84,11 +84,7 @@ const ViewOrUpdateCommentDataContent = ({comment}) => {
 
     const getComponent = mode => {
         if (mode === "view") {
-            return (
-                <CardContent sx={{fontStyle: "italic", p: 1}}>
-                    {comment.text}
-                </CardContent>
-            );
+            return <Box sx={{fontStyle: "italic", p: 0}}>{comment.text}</Box>;
         }
         if (mode === "edit") {
             return (
@@ -135,7 +131,7 @@ const ViewOrUpdateCommentDataContent = ({comment}) => {
                 sx={{p: 0}}
                 action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
             ></CardHeader>
-            <CardContent>{getComponent(mode)}</CardContent>
+            <CardContent sx={{pb: 0}}>{getComponent(mode)}</CardContent>
             <DeleteItemDialog
                 isDialogOpen={isDeleteDialogOpen}
                 setIsDialogOpen={setIsDeleteDialogOpen}

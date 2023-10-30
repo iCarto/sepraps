@@ -2,7 +2,7 @@ import {useState} from "react";
 
 import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
 import {PaymentService} from "payment/service";
-import {PaymentData} from "payment/presentational";
+import {PaymentData, PaymentStatusChip} from "payment/presentational";
 import {PaymentForm} from "payment/presentational/form";
 import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
@@ -112,6 +112,10 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
                             >
                                 {payment.name}
                             </Typography>
+                            <PaymentStatusChip
+                                label={payment.status_label}
+                                value={payment.status}
+                            />
                         </Stack>
                     }
                     sx={{bgcolor: "grey.50", borderBottom: "1px solid #ccc"}}

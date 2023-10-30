@@ -20,10 +20,15 @@ const PaymentFormDataFields = () => {
                     label="Estado"
                     options={productStatus}
                     showEmptyOption={true}
+                    rules={{required: "Este campo es obligatorio"}}
                 />
             </Grid>
             <Grid container item xs={6} direction="column">
-                <FormDatePicker name="product_date" label="Fecha de entrega" />
+                <FormDatePicker
+                    name="product_date"
+                    label="Fecha de entrega"
+                    rules={{required: "Este campo es obligatorio"}}
+                />
             </Grid>
         </Grid>
     );

@@ -54,8 +54,8 @@ const CommentData = ({comment}) => {
                 elevation={0}
                 sx={{p: 1, border: 1, borderRadius: 2, borderColor: "grey.200"}}
             >
-                <CardHeader title={getTitle(comment)} sx={{p: 0}} se></CardHeader>
-                <CardContent sx={{fontStyle: "italic", p: 1}}>
+                <CardHeader title={getTitle(comment)} sx={{p: 0}} />
+                <CardContent sx={{fontStyle: "italic", p: 0}}>
                     {comment.text}
                 </CardContent>
             </Card>

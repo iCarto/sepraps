@@ -48,32 +48,51 @@ const ViewContractPaymentsSubPage = () => {
     return (
         <ContentLayout>
             <AlertError error={error} />
-            <Grid container>
-                <Box sx={{p: 1, width: "calc(100% - 240px)"}}>
-                    <Outlet context={[contract]} />
-                    {isRootPath &&
-                        paymentsForContract &&
-                        paymentsForContract.length === 0 && (
-                            <PaperContainer>
-                                <Grid container justifyContent="center" my={6}>
-                                    <Typography
-                                        sx={{fontStyle: "italic", textAlign: "center"}}
-                                    >
-                                        No se han registrado pagos para este contrato
-                                        todavía
-                                    </Typography>
-                                </Grid>
-                            </PaperContainer>
-                        )}
-                </Box>
-                <Box sx={{p: 1, width: "240px"}}>
-                    <PaymentListSelector
-                        payments={paymentsForContract}
-                        basePath={`/contracts/list/${contractId}/payment`}
-                        selectedPaymentId={parseInt(paymentId)}
-                    />
-                </Box>
-            </Grid>
+            {!contract.awarding_budget ? (
+                <PaperContainer>
+                    <Grid container justifyContent="center" my={6}>
+                        <Typography
+                            sx={{
+                                fontStyle: "italic",
+                                textAlign: "center",
+                            }}
+                        >
+                            No se pueden gestionar los pagos porque el contrato no tiene
+                            monto adjudicado todavía
+                        </Typography>
+                    </Grid>
+                </PaperContainer>
+            ) : (
+                <Grid container>
+                    <Box sx={{p: 1, width: "calc(100% - 240px)"}}>
+                        <Outlet context={[contract]} />
+                        {isRootPath &&
+                            paymentsForContract &&
+                            paymentsForContract.length === 0 && (
+                                <PaperContainer>
+                                    <Grid container justifyContent="center" my={6}>
+                                        <Typography
+                                            sx={{
+                                                fontStyle: "italic",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            No se han registrado pagos para este
+                                            contrato todavía
+                                        </Typography>
+                                    </Grid>
+                                </PaperContainer>
+                            )}
+                    </Box>
+                    <Box sx={{p: 1, width: "240px"}}>
+                        <PaymentListSelector
+                            payments={paymentsForContract}
+                            basePath={`/contracts/list/${contractId}/payment`}
+                            selectedPaymentId={parseInt(paymentId)}
+                        />
+                    </Box>
+                </Grid>
+            )}
         </ContentLayout>
     );
 };
