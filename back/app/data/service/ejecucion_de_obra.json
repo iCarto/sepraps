@@ -1,0 +1,13 @@
+{
+    "code": "ejecucion_de_obra",
+    "name": "Ejecución de obra",
+    "work_area": "building",
+    "fields": [
+        {
+            "definitiveReceptionDate": {
+                "label": "Fecha de recepción definitiva",
+                "type": "date"
+            }
+        }
+    ]
+}

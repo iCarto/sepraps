@@ -29,9 +29,7 @@ class BaseDomainMixin(object, metaclass=serializers.SerializerMetaclass):
         super().__init__(*args, **kwargs)
         for domain_field in self.get_domain_fields():
             if domain_field.many is True:
-                self.fields[domain_field.name] = serializers.ListField(
-                    child=serializers.IntegerField()
-                )
+                self.fields[domain_field.name] = serializers.ListField()
             self.fields[
                 "{0}_label".format(domain_field.name)
             ] = serializers.SerializerMethodField()

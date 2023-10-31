@@ -49,7 +49,7 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
         on_delete=models.PROTECT,
         verbose_name="Contrato",
         null=True,
-        related_name="payments",
+        related_name="contract_payments",
     )
     comments = models.ManyToManyField(Comment)
 

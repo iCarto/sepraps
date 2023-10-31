@@ -7,12 +7,14 @@ from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
 from app.models.construction_contract import ConstructionContract
+from app.models.contract_service import ContractService
 from app.models.payment import Payment
 from app.serializers.construction_contract_serializer import (
     ConstructionContractSerializer,
     ConstructionContractShortSerializer,
     ConstructionContractSummarySerializer,
 )
+from app.serializers.contract_service_serializer import ContractServiceSerializer
 from app.serializers.payment_serializer import PaymentSummarySerializer
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
@@ -94,6 +96,11 @@ class ConstructionContractViewSet(ModelListViewSet):
 
     def perform_create(self, serializer):
         serializer.validated_data["creation_user"] = self.request.user
+        serializer.validated_data["updated_by"] = self.request.user
+        return super().perform_create(serializer)
+
+    def perform_update(self, serializer):
+        serializer.validated_data["updated_by"] = self.request.user
         return super().perform_create(serializer)
 
     @action(
@@ -103,5 +110,15 @@ class ConstructionContractViewSet(ModelListViewSet):
         return Response(
             PaymentSummarySerializer(
                 Payment.objects.filter(contract=pk).order_by("id"), many=True
+            ).data
+        )
+
+    @action(
+        methods=["GET"], detail=True, url_path="services", url_name="contract_services"
+    )
+    def get_contract_services(self, request, pk):
+        return Response(
+            ContractServiceSerializer(
+                ContractService.objects.filter(contract=pk).order_by("id"), many=True
             ).data
         )

@@ -36,6 +36,7 @@
         "fields": {
             "number": "Contrato nº 09/2020",
             "comments": "[Lote 3] Construcción de obras de sistema de alcantarillado sanitario en tres cidudades de la región oriental",
+            "services": ["ejecucion_de_obra"],
             "total_amount_type": "fijo",
             "payment_frequency_type": "mensual",
             "payment_criteria_type": "fijo",
@@ -54,6 +55,7 @@
             "closed": false,
             "creation_user": 1,
             "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
             "updated_at": "2020-12-01T00:00:00Z"
         }
     },

@@ -1,10 +1,16 @@
+import json
+import os
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from app.models.contact import Contact
 from app.models.contact_relationship import ConstructionContractContact
+from app.models.contract_service import ContractService
 from app.models.contractor import Contractor
 from app.models.financing_program import FinancingProgram
 
@@ -18,6 +24,7 @@ class ConstructionContract(models.Model):
     id = models.AutoField(primary_key=True)
     number = models.CharField("Nombre", max_length=50)
     comments = models.TextField("Observaciones", max_length=500, null=True)
+    services = ArrayField(models.CharField(max_length=50), null=False)
 
     total_amount_type = models.CharField(
         "Tipo de monto total", max_length=20, null=False
@@ -84,7 +91,12 @@ class ConstructionContract(models.Model):
     updated_at = models.DateTimeField(
         "Fecha de última modificación", null=True, auto_now=True
     )
-    creation_user = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
+    creation_user = models.ForeignKey(
+        get_user_model(), on_delete=models.PROTECT, related_name="creation_user+"
+    )
+    updated_by = models.ForeignKey(
+        get_user_model(), on_delete=models.PROTECT, related_name="updated_by+"
+    )
 
     financing_program = models.ForeignKey(
         FinancingProgram,
@@ -106,8 +118,33 @@ class ConstructionContract(models.Model):
 
 
 @receiver(pre_save, sender=ConstructionContract)
-def provider_pre_save(sender, instance, *args, **kwargs):
+def contract_pre_save(sender, instance, *args, **kwargs):
     if instance and instance.total_amount_type != "maximo_minimo":
         instance.bid_request_budget_min = None
         instance.awarding_budget_min = None
     return instance
+
+
+@receiver(post_save, sender=ConstructionContract)
+def contract_post_save(sender, instance, created, *args, **kwargs):
+    """Create services objects."""
+    contract_services_new = instance.services
+
+    if contract_services_new:
+        for service in contract_services_new:
+            print(service)
+            data = {}
+            data_path = os.path.join(
+                settings.BASE_DIR, "app", "data", "service", f"{service}.json"
+            )
+            with open(data_path) as f:
+                data = json.load(f)
+                print(data)
+                contract_service = ContractService(
+                    code=data["code"],
+                    name=data["name"],
+                    contract=instance,
+                    created_by=instance.updated_by,
+                    updated_by=instance.updated_by,
+                )
+                contract_service.save()

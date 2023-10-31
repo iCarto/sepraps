@@ -30,6 +30,10 @@ from questionnaires.serializers.questionnaire_serializer import (
 )
 
 
+class StringListField(serializers.ListField):
+    child = serializers.CharField()
+
+
 class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerializer):
     class Meta(object):
         model = ConstructionContract
@@ -37,6 +41,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "id",
             "number",
             "comments",
+            "services",
             "total_amount_type",
             "payment_frequency_type",
             "payment_criteria_type",
@@ -76,6 +81,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "bid_request_budget": {"required": True},
         }
 
+    services = serializers.ListField(child=serializers.CharField())
     financing_program = serializers.PrimaryKeyRelatedField(
         required=False, allow_null=True, queryset=FinancingProgram.objects.all()
     )
@@ -92,6 +98,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
     questionnaires = serializers.SerializerMethodField()
 
     domain_fields = [
+        BaseDomainField("services", DomainCategoryChoices.service_type, many=True),
         BaseDomainField(
             "awarding_professional_liability_insurance",
             DomainCategoryChoices.yes_no_domain,
