@@ -7,6 +7,8 @@ from app.admin.financing_program import FinancingProgramAdmin
 from app.models.comment import Comment
 from app.models.contact import Contact
 from app.models.contract_service import ContractService
+from app.models.contract_service_value import ContractServiceValue
+from app.models.contract_supervision_area import ContractSupervisionArea
 from app.models.field_report_project import FieldReportProject
 from app.models.field_report_project_activity import FieldReportProjectActivity
 from app.models.financing_fund import FinancingFund
@@ -31,6 +33,9 @@ admin.site.register(Contact, ContactAdmin)
 admin.site.register(Payment)
 admin.site.register(Comment)
 admin.site.register(ContractService)
+admin.site.register(ContractServiceValue)
+admin.site.register(ContractSupervisionArea)
+
 
 admin.site.register(Department)
 admin.site.register(District)

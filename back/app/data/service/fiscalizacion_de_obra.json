@@ -1,0 +1,6 @@
+{
+    "code": "fiscalizacion_de_obra",
+    "name": "Fiscalización de obra",
+    "supervision_areas": ["building"],
+    "properties": {}
+}

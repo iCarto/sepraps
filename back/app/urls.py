@@ -8,6 +8,7 @@ from app.views.comment_viewset import CommentViewSet
 from app.views.construction_contract_viewset import ConstructionContractViewSet
 from app.views.contact_viewset import ContactViewSet
 from app.views.contract_service_viewset import ContractServiceViewSet
+from app.views.contract_supervision_area_viewset import ContractSupervisionAreaViewSet
 from app.views.contractor_viewset import ContractorViewSet
 from app.views.field_report_project_activity_viewset import (
     FieldReportProjectActivityViewSet,
@@ -45,6 +46,7 @@ router.register("payments", PaymentViewSet)
 router.register("products", ProductViewSet)
 router.register("comments", CommentViewSet)
 router.register("contractservices", ContractServiceViewSet)
+router.register("contractsupervisionareas", ContractSupervisionAreaViewSet)
 
 
 urlpatterns = [

@@ -42,6 +42,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "number",
             "comments",
             "services",
+            "supervision_areas",
             "total_amount_type",
             "payment_frequency_type",
             "payment_criteria_type",

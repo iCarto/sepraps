@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from app.base.views.base_viewsets import ModelListViewSet
 from app.models.construction_contract import ConstructionContract
 from app.models.contract_service import ContractService
+from app.models.contract_supervision_area import ContractSupervisionArea
 from app.models.payment import Payment
 from app.serializers.construction_contract_serializer import (
     ConstructionContractSerializer,
@@ -15,6 +16,9 @@ from app.serializers.construction_contract_serializer import (
     ConstructionContractSummarySerializer,
 )
 from app.serializers.contract_service_serializer import ContractServiceSerializer
+from app.serializers.contract_supervision_area_serializer import (
+    ContractSupervisionAreaSerializer,
+)
 from app.serializers.payment_serializer import PaymentSummarySerializer
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
@@ -120,5 +124,19 @@ class ConstructionContractViewSet(ModelListViewSet):
         return Response(
             ContractServiceSerializer(
                 ContractService.objects.filter(contract=pk).order_by("id"), many=True
+            ).data
+        )
+
+    @action(
+        methods=["GET"],
+        detail=True,
+        url_path="supervisionareas/(?P<code>[^/.]+)",
+        url_name="contract_supervision_areas",
+    )
+    def get_contract_supervision_areas(self, request, code, pk):
+        print("code", code)
+        return Response(
+            ContractSupervisionAreaSerializer(
+                ContractSupervisionArea.objects.filter(code=code, contract=pk).first()
             ).data
         )

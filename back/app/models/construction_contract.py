@@ -5,12 +5,14 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.db.models import F, Func
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from app.models.contact import Contact
 from app.models.contact_relationship import ConstructionContractContact
 from app.models.contract_service import ContractService
+from app.models.contract_supervision_area import ContractSupervisionArea
 from app.models.contractor import Contractor
 from app.models.financing_program import FinancingProgram
 
@@ -116,35 +118,96 @@ class ConstructionContract(models.Model):
     def __str__(self):
         return self.number
 
+    @property
+    def supervision_areas(self):
+        return list(
+            ContractService.objects.filter(contract=self.id)
+            .annotate(
+                supervision_areas_agg=Func(F("supervision_areas"), function="unnest")
+            )
+            .values_list("supervision_areas_agg", flat=True)
+            .distinct()
+        )
+
 
 @receiver(pre_save, sender=ConstructionContract)
 def contract_pre_save(sender, instance, *args, **kwargs):
     if instance and instance.total_amount_type != "maximo_minimo":
         instance.bid_request_budget_min = None
         instance.awarding_budget_min = None
+    try:
+        instance._old_services = ConstructionContract.objects.get(
+            pk=instance.pk
+        ).services
+    except ConstructionContract.DoesNotExist:
+        instance._old_services = []
+
     return instance
 
 
 @receiver(post_save, sender=ConstructionContract)
 def contract_post_save(sender, instance, created, *args, **kwargs):
-    """Create services objects."""
-    contract_services_new = instance.services
+    """Manage services and supervision area relationships."""
 
-    if contract_services_new:
-        for service in contract_services_new:
-            print(service)
-            data = {}
-            data_path = os.path.join(
-                settings.BASE_DIR, "app", "data", "service", f"{service}.json"
-            )
-            with open(data_path) as f:
-                data = json.load(f)
-                print(data)
-                contract_service = ContractService(
-                    code=data["code"],
-                    name=data["name"],
-                    contract=instance,
-                    created_by=instance.updated_by,
-                    updated_by=instance.updated_by,
-                )
-                contract_service.save()
+    contract_services_to_delete = list(
+        set(instance._old_services) - set(instance.services)
+    )
+    contract_services_to_create = list(
+        set(instance.services) - set(instance._old_services)
+    )
+    if contract_services_to_delete or contract_services_to_create:
+        supervision_areas_old = instance.supervision_areas
+
+        update_contract_services(
+            instance, contract_services_to_delete, contract_services_to_create
+        )
+
+        supervision_areas_new = instance.supervision_areas
+        update_supervision_areas(instance, supervision_areas_old, supervision_areas_new)
+
+
+def update_contract_services(
+    contract, contract_services_to_delete, contract_services_to_create
+):
+    for service in contract_services_to_delete:
+        ContractService.objects.filter(code=service, contract=contract).delete()
+
+    for service in contract_services_to_create:
+        data = get_service_data(service)
+        contract_service = ContractService(
+            code=data["code"],
+            name=data["name"],
+            supervision_areas=data["supervision_areas"],
+            properties=data["properties"],
+            contract=contract,
+            created_by=contract.updated_by,
+            updated_by=contract.updated_by,
+        )
+        contract_service.save()
+
+
+def update_supervision_areas(contract, supervision_areas_old, supervision_areas_new):
+    supervision_areas_to_delete = list(
+        set(supervision_areas_old) - set(supervision_areas_new)
+    )
+    supervision_areas_to_create = list(
+        set(supervision_areas_new) - set(supervision_areas_old)
+    )
+    for supervision_area in supervision_areas_to_delete:
+        ContractSupervisionArea.objects.filter(
+            code=supervision_area, contract=contract
+        ).delete()
+
+    for supervision_area in supervision_areas_to_create:
+        contract_supervision_area = ContractSupervisionArea(
+            code=supervision_area, contract=contract
+        )
+        contract_supervision_area.save()
+
+
+def get_service_data(service):
+    data_path = os.path.join(
+        settings.BASE_DIR, "app", "data", "service", f"{service}.json"
+    )
+    with open(data_path) as f:
+        return json.load(f)
