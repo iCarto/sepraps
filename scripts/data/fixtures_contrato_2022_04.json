@@ -1,0 +1,84 @@
+[
+    {
+        "model": "app.contact",
+        "pk": 21,
+        "fields": {
+            "name": "José Luis Cáceres Fariña",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "ci_number": "4266217"
+        }
+    },
+    {
+        "model": "app.contact",
+        "pk": 22,
+        "fields": {
+            "name": "Ricardo de Jesús Arévalo González",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "ci_number": "609931"
+        }
+    },
+    {
+        "model": "app.contractor",
+        "pk": 6,
+        "fields": {
+            "name": "Consorcio INRA",
+            "contractor_type": "company",
+            "address": "Mencia de Sanabria c/ Bruno Guggiari N°458",
+            "phone": "09811751212",
+            "email": "ricarevalo@gmail.com",
+            "comments": "RUC Nº 80127190"
+        }
+    },
+    {
+        "model": "app.contractorcontact",
+        "fields": {
+            "entity": 6,
+            "contact": 21,
+            "post": "responsable_contratista"
+        }
+    },
+    {
+        "model": "app.contractorcontact",
+        "fields": {
+            "entity": 6,
+            "contact": 22,
+            "post": "responsable_contratista"
+        }
+    },
+    {
+        "model": "app.ConstructionContract",
+        "pk": 8,
+        "fields": {
+            "number": "Contrato nº 04/2022",
+            "comments": "Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
+            "services": ["ejecucion_de_obra"],
+            "total_amount_type": "maximo_minimo",
+            "payment_frequency_type": "mensual",
+            "payment_criteria_type": "variable",
+            "bid_request_number": "LPI - 01/2021",
+            "bid_request_id": "395508",
+            "bid_request_lot_number": "2",
+            "bid_request_date": "2021-10-22",
+            "bid_request_budget_min": 14246301924,
+            "bid_request_budget": 20899999791,
+            "awarding_budget_min": 11246301924,
+            "awarding_budget": 17302002950,
+            "awarding_percentage_drop": 7.82,
+            "awarding_date": "2021-12-13",
+            "financing_program": 1,
+            "contractor": 6,
+            "execution_signature_date": "2022-02-25",
+            "execution_certificate_start_date": "2022-07-20",
+            "expected_execution_period": 730,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    }
+]

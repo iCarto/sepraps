@@ -1,0 +1,82 @@
+[
+    {
+        "model": "app.contact",
+        "pk": 24,
+        "fields": {
+            "name": "Néstor Manuel Brítez Airaldi",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "ci_number": "1"
+        }
+    },
+    {
+        "model": "app.contact",
+        "pk": 25,
+        "fields": {
+            "name": "Gladys María Belén Brítez",
+            "gender": "F",
+            "phone": "",
+            "email": "",
+            "ci_number": "1"
+        }
+    },
+    {
+        "model": "app.contractor",
+        "pk": 8,
+        "fields": {
+            "name": "ICAP CONSULTORES E INGENIEROS",
+            "contractor_type": "company",
+            "address": "",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "app.contractorcontact",
+        "fields": {
+            "entity": 8,
+            "contact": 24,
+            "post": "responsable_contratista"
+        }
+    },
+    {
+        "model": "app.contractorcontact",
+        "fields": {
+            "entity": 8,
+            "contact": 25,
+            "post": "responsable_contratista"
+        }
+    },
+    {
+        "model": "app.ConstructionContract",
+        "pk": 10,
+        "fields": {
+            "number": "Contrato nº 11/2023",
+            "comments": "Servicio de Consultoría para la Capacitación y Asistencia Técnica Especializada durante la Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
+            "services": ["fiscalizacion_social"],
+            "total_amount_type": "fijo",
+            "payment_frequency_type": "no_mensual",
+            "payment_criteria_type": "fijo",
+            "bid_request_number": "SDP - 02/2022",
+            "bid_request_id": "41219",
+            "bid_request_lot_number": "2",
+            "bid_request_date": "2022-09-09",
+            "bid_request_budget": 2192790560,
+            "awarding_budget": 2148300000,
+            "awarding_percentage_drop": 7.82,
+            "awarding_date": "2023-04-14",
+            "financing_program": 1,
+            "contractor": 8,
+            "execution_signature_date": "2023-05-22",
+            "execution_certificate_start_date": "2023-05-22",
+            "expected_execution_period": 820,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    }
+]

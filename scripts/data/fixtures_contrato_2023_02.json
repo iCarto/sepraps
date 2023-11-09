@@ -1,0 +1,63 @@
+[
+    {
+        "model": "app.contact",
+        "pk": 23,
+        "fields": {
+            "name": "Ing. Fernando Pekholtz",
+            "gender": "M",
+            "phone": "",
+            "email": "",
+            "ci_number": "1"
+        }
+    },
+    {
+        "model": "app.contractor",
+        "pk": 7,
+        "fields": {
+            "name": "Red de Ingeniería de Servicios S.A. - REDINSA",
+            "contractor_type": "company",
+            "address": "",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "app.contractorcontact",
+        "fields": {
+            "entity": 7,
+            "contact": 23,
+            "post": "responsable_contratista"
+        }
+    },
+    {
+        "model": "app.ConstructionContract",
+        "pk": 9,
+        "fields": {
+            "number": "Contrato nº 02/2023",
+            "comments": "Servicios de Consultoría para la Fiscalización de la Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
+            "services": ["fiscalizacion_de_obra"],
+            "total_amount_type": "fijo",
+            "payment_frequency_type": "mensual",
+            "payment_criteria_type": "fijo_variable",
+            "bid_request_number": "SDP - 01/2022",
+            "bid_request_id": "41219",
+            "bid_request_lot_number": "2",
+            "bid_request_date": "2022-08-08",
+            "bid_request_budget": 2421550560,
+            "awarding_budget": 2860300000,
+            "awarding_percentage_drop": 7.82,
+            "awarding_date": "2023-02-28",
+            "financing_program": 1,
+            "contractor": 7,
+            "execution_signature_date": "2023-03-31",
+            "execution_certificate_start_date": "2023-03-31",
+            "expected_execution_period": 820,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    }
+]
