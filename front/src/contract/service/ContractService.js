@@ -3,6 +3,8 @@ import {
     createContract,
     contracts_api_adapter,
     contract_api_adapter,
+    createContractSupervisionArea,
+    contract_supervision_area_api_adapter,
 } from "contract/model";
 import {createEntityService} from "base/entity/service";
 import {AuthApiService} from "base/api/service";
@@ -54,6 +56,26 @@ const ContractService = {
         return AuthApiService.get(`${basePath}/${id}/payments`).then(response => {
             return response;
         });
+    },
+
+    getSupervisionArea(id, area) {
+        return AuthApiService.get(`${basePath}/${id}/supervisionareas/${area}`).then(
+            response =>
+                createContractSupervisionArea(
+                    contract_supervision_area_api_adapter(response)
+                )
+        );
+    },
+
+    updateSupervisionArea(supervisionArea) {
+        return AuthApiService.put(
+            `/api/app/contractsupervisionareas/${supervisionArea.id}`,
+            supervisionArea
+        ).then(response =>
+            createContractSupervisionArea(
+                contract_supervision_area_api_adapter(response)
+            )
+        );
     },
 };
 

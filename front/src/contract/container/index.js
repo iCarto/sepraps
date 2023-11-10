@@ -18,10 +18,16 @@ export {default as ViewContractPanel} from "./ViewContractPanel";
 export {
     default as ViewContractQuestionnairesSubPage,
 } from "./ViewContractQuestionnairesSubPage";
-export {
-    default as ViewContractContractingSubPage,
-} from "./ViewContractContractingSubPage";
 export {default as CreateContractProjectPage} from "./CreateContractProjectPage";
 export {default as ViewContractSummarySubPage} from "./ViewContractSummarySubPage";
 export {default as ListContractProjects} from "./ListContractProjects";
 export {default as ViewContractPaymentsSubPage} from "./ViewContractPaymentsSubPage";
+export {default as ViewContractAwardingSubPage} from "./ViewContractAwardingSubPage";
+export {default as ViewContractBudgetSubPage} from "./ViewContractBudgetSubPage";
+export {default as ViewContractExecutionSubPage} from "./ViewContractExecutionSubPage";
+export {
+    default as ViewContractSupervisionAreaSubPage,
+} from "./ViewContractSupervisionAreaSubPage";
+export {
+    default as ViewOrUpdateSupervisionAreaContent,
+} from "./ViewOrUpdateSupervisionAreaContent";

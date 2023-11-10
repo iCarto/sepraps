@@ -15,14 +15,17 @@ import {
     ManageContractsPage,
     ViewContractPanel,
     ViewContractQuestionnairesSubPage,
-    ViewContractContractingSubPage,
+    ViewContractBudgetSubPage,
     CreateContractProjectPage,
     ViewContractPaymentsSubPage,
+    ViewContractAwardingSubPage,
+    ViewContractExecutionSubPage,
+    ViewContractSupervisionAreaSubPage,
 } from "../container";
-import {UpdateContractContactPanel} from "../container/monitoring";
 import {ViewContactPanel} from "contact/container";
 import {ViewPaymentContent, CreatePaymentContent} from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
+import {SUPERVISION_AREAS} from "contract/model";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -40,9 +43,20 @@ const contractRoutes = [
                 />
             </Route>
             <Route
-                key="contract-contracting"
-                path="contracting"
-                element={<ViewContractContractingSubPage />}
+                key="contract-budget"
+                path="budget"
+                element={<ViewContractBudgetSubPage />}
+            >
+                <Route
+                    key="contract-phases-data"
+                    path=":section/:action"
+                    element={<UpdateContractPanel />}
+                />
+            </Route>
+            <Route
+                key="contract-awarding"
+                path="awarding"
+                element={<ViewContractAwardingSubPage />}
             >
                 <Route
                     key="contract-phases-data"
@@ -71,10 +85,27 @@ const contractRoutes = [
                 />
             </Route>
             <Route
-                key="contract-monitoring"
-                path="monitoring"
-                element={<ViewContractMonitoringSubPage />}
-            ></Route>
+                key="contract-budget"
+                path="budget"
+                element={<ViewContractBudgetSubPage />}
+            >
+                <Route
+                    key="contract-phases-data"
+                    path=":section/:action"
+                    element={<UpdateContractPanel />}
+                />
+            </Route>
+            <Route
+                key="contract-execution"
+                path="execution"
+                element={<ViewContractExecutionSubPage />}
+            >
+                <Route
+                    key="contract-phases-data"
+                    path=":section/:action"
+                    element={<UpdateContractPanel />}
+                />
+            </Route>
             <Route
                 key="contract-projects"
                 path="projects"
@@ -123,6 +154,24 @@ const contractRoutes = [
                     />
                 </Route>
             </Route>
+            <Route
+                key="contract-building"
+                path="building"
+                element={
+                    <ViewContractSupervisionAreaSubPage
+                        area={SUPERVISION_AREAS.BUILDING}
+                    />
+                }
+            />
+            <Route
+                key="contract-social"
+                path="social"
+                element={
+                    <ViewContractSupervisionAreaSubPage
+                        area={SUPERVISION_AREAS.SOCIAL}
+                    />
+                }
+            />
             <Route index element={<Navigate to="summary" replace />} />
         </Route>
         <Route key="contract-list" path="" element={<ListContractsPage />}>

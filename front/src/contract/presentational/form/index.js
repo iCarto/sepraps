@@ -13,3 +13,7 @@ export {
 } from "./ContractPostConstructionFormFields";
 export {default as ContractFilterForm} from "./ContractFilterForm";
 export {default as ContractFormSearch} from "./ContractFormSearch";
+export {default as ContractSupervisionAreaForm} from "./ContractSupervisionAreaForm";
+export {
+    default as ContractSupervisionAreaFormFields,
+} from "./ContractSupervisionAreaFormFields";

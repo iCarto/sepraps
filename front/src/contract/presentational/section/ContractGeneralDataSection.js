@@ -38,6 +38,10 @@ const ContractGeneralDataSection = ({contract}) => {
                     <SectionBox label="Datos del contrato">
                         <SectionField label="Número" value={contract?.number} />
                         <SectionField label="Descripción" value={contract?.comments} />
+                        <SectionField
+                            label="Servicios"
+                            value={contract?.services_label}
+                        />
                     </SectionBox>
                 </Grid>
                 <Grid item xs={6}>

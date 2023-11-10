@@ -10,3 +10,4 @@ export {
     default as ContractPostConstructionSection,
 } from "./ContractPostConstructionSection";
 export {default as ContractContactsSection} from "./ContractContactsSection";
+export {default as ContractSupervisionAreaData} from "./ContractSupervisionAreaData";

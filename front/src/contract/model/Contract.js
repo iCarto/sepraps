@@ -127,6 +127,9 @@ const createContract = ({
     id = null,
     number = "CO-000002",
     comments = "",
+    services = [],
+    services_label = "",
+    supervision_areas = [],
     total_amount_type = null,
     total_amount_type_label = "",
     payment_frequency_type = null,
@@ -168,6 +171,9 @@ const createContract = ({
         id,
         number,
         comments,
+        services,
+        services_label,
+        supervision_areas,
         total_amount_type,
         total_amount_type_label,
         payment_frequency_type,
@@ -211,6 +217,12 @@ const createContract = ({
 
 export const MAX_MIN_AMOUNT_TYPE = "maximo_minimo";
 export const FIXED_VARIABLE_CRITERIA_TYPE = "fijo_variable";
+
+export const SUPERVISION_AREAS = {
+    BUILDING: "building",
+    SOCIAL: "social",
+    ENVIRONMENTAL: "environmental",
+};
 
 export {
     createContract as default,

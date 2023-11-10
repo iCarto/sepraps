@@ -16,9 +16,11 @@ const UpdateContractPanel = () => {
     [contract] = useOutletContext();
 
     const path =
-        section === "execution"
-            ? `/contracts/list/${contract.id}/summary`
-            : `/contracts/list/${contract.id}/contracting`;
+        section === "execution" || section === "postconstruction"
+            ? `/contracts/list/${contract.id}/execution`
+            : section === "awarding"
+            ? `/contracts/list/${contract.id}/awarding`
+            : `/contracts/list/${contract.id}/budget`;
 
     const handleSubmit = contract => {
         ContractService.update(contract_view_adapter({...contract}))
