@@ -1,7 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {useEffect, useState} from "react";
-import {ContractService} from "contract/service";
+import {ContractServiceAreaService} from "contract/service";
 import {ViewOrUpdateSupervisionAreaContent} from ".";
 
 const ViewContractSupervisionAreaSubPage = ({area}) => {
@@ -11,9 +11,11 @@ const ViewContractSupervisionAreaSubPage = ({area}) => {
     const [supervisionArea, setSupervisionArea] = useState(null);
 
     useEffect(() => {
-        ContractService.getSupervisionArea(contract.id, area).then(response => {
-            setSupervisionArea(response);
-        });
+        ContractServiceAreaService.getSupervisionArea(contract.id, area).then(
+            response => {
+                setSupervisionArea(response);
+            }
+        );
     }, [area]);
 
     const sections = [

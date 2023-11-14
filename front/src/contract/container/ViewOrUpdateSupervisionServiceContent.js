@@ -4,25 +4,23 @@ import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import EditIcon from "@mui/icons-material/Edit";
-import {ContractServiceAreaService} from "contract/service";
-import {
-    SUPERVISION_AREAS,
-    contract_supervision_area_view_adapter,
-} from "contract/model";
-import {ContractSupervisionAreaData} from "contract/presentational/section";
-import {ContractSupervisionAreaForm} from "contract/presentational/form";
+import {ContractServiceService} from "contract/service";
+import {contract_service_view_adapter} from "contract/model";
+import {ContractServiceData} from "contract/presentational/section";
+import {ContractServiceForm} from "contract/presentational/form";
 
-const ViewOrUpdateSupervisionAreaContent = ({supervisionArea}) => {
+const ViewOrUpdateSupervisionServiceContent = ({contractService}) => {
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
 
-    const handleFormSubmit = supervisionArea => {
-        ContractServiceAreaService.updateSupervisionArea(
-            contract_supervision_area_view_adapter({...supervisionArea})
+    const handleFormSubmit = contractService => {
+        console.log({contractService});
+        ContractServiceService.update(
+            contract_service_view_adapter({...contractService})
         )
-            .then(updatedSupervisionArea => {
+            .then(updatedContractService => {
                 setMode("view");
                 navigate("", true);
             })
@@ -46,12 +44,12 @@ const ViewOrUpdateSupervisionAreaContent = ({supervisionArea}) => {
 
     const getComponent = mode => {
         if (mode === "view") {
-            return <ContractSupervisionAreaData supervisionArea={supervisionArea} />;
+            return <ContractServiceData contractService={contractService} />;
         }
         if (mode === "edit") {
             return (
-                <ContractSupervisionAreaForm
-                    supervisionArea={supervisionArea}
+                <ContractServiceForm
+                    contractService={contractService}
                     onSubmit={handleFormSubmit}
                     onCancel={() => {
                         setMode("view");
@@ -62,24 +60,15 @@ const ViewOrUpdateSupervisionAreaContent = ({supervisionArea}) => {
         }
     };
 
-    const getTitle = area => {
-        return area === SUPERVISION_AREAS.BUILDING
-            ? "Supervisión técnica"
-            : area === SUPERVISION_AREAS.SOCIAL
-            ? "Supervisión social"
-            : null;
-    };
-
     return (
-        supervisionArea && (
-            <SectionCard
-                title={getTitle(supervisionArea.code)}
-                secondaryActions={actions}
-            >
+        contractService &&
+        contractService.properties &&
+        Object.keys(contractService.properties).length > 0 && (
+            <SectionCard title={contractService.name} secondaryActions={actions}>
                 {getComponent(mode)}
             </SectionCard>
         )
     );
 };
 
-export default ViewOrUpdateSupervisionAreaContent;
+export default ViewOrUpdateSupervisionServiceContent;

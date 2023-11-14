@@ -11,10 +11,13 @@ const FieldUtil = {
 
     getSectionField(label, value, unit = "") {
         if (value) {
-            return <SectionField label={label} value={`${value} ${unit}`} />;
+            return (
+                <SectionField key={label} label={label} value={`${value} ${unit}`} />
+            );
         } else
             return (
                 <SectionField
+                    key={label}
                     label={label}
                     value="Pendiente"
                     valueCustomStyle={{fontStyle: "italic"}}

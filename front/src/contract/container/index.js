@@ -31,3 +31,6 @@ export {
 export {
     default as ViewOrUpdateSupervisionAreaContent,
 } from "./ViewOrUpdateSupervisionAreaContent";
+export {
+    default as ViewOrUpdateSupervisionServiceContent,
+} from "./ViewOrUpdateSupervisionServiceContent";
