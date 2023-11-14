@@ -31,6 +31,5 @@ class ContractSupervisionArea(models.Model):
         "ConstructionContract",
         on_delete=models.PROTECT,
         verbose_name="Contrato",
-        null=True,
         related_name="contract_supervision_areas",
     )

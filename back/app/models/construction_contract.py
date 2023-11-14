@@ -126,6 +126,12 @@ class ConstructionContract(models.Model):
             .distinct()
         )
 
+    @property
+    def is_supervision_contract(self):
+        return ContractSupervisionArea.objects.filter(
+            supervision_contract=self
+        ).exists()
+
 
 @receiver(pre_save, sender=ConstructionContract)
 def contract_pre_save(sender, instance, *args, **kwargs):

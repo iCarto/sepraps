@@ -7,11 +7,6 @@ from rest_framework import serializers
 
 from app.models.construction_contract import ConstructionContract
 from app.models.contact import Contact
-from app.models.contact_relationship import (
-    ConstructionContractContact,
-    ContractorContact,
-    ProviderContact,
-)
 from app.models.contractor import Contractor
 from app.models.financing_program import FinancingProgram
 from app.models.milestone import Milestone
@@ -19,7 +14,6 @@ from app.models.project import Project
 from app.serializers.contact_relationship_serializer import (
     ContactConstructionContractSerializer,
 )
-from app.serializers.contact_serializer import ContactSerializer
 from app.serializers.contractor_serializer import (
     ContractorSerializer,
     ContractorSummarySerializer,
@@ -43,6 +37,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "comments",
             "services",
             "supervision_areas",
+            "is_supervision_contract",
             "total_amount_type",
             "payment_frequency_type",
             "payment_criteria_type",
@@ -147,10 +142,6 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
         from app.serializers.project_serializer import ProjectSummarySerializer
 
         response = super().to_representation(instance)
-        if "projects" in response:
-            response["projects"] = ProjectSummarySerializer(
-                instance.projects, many=True, context=self.context
-            ).data
         if "financing_program" in response:
             response["financing_program"] = (
                 FinancingProgramSerializer(

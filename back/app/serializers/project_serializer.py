@@ -256,7 +256,6 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
             "linked_localities",
             "provider",
             "provider_name",
-            "construction_contract",
             "construction_contract_number",
             "construction_contract_bid_request_number",
             "financing_program",

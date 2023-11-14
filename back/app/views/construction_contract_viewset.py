@@ -20,6 +20,7 @@ from app.serializers.contract_supervision_area_serializer import (
     ContractSupervisionAreaSerializer,
 )
 from app.serializers.payment_serializer import PaymentSummarySerializer
+from app.serializers.project_serializer import ProjectSummarySerializer
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
@@ -114,6 +115,31 @@ class ConstructionContractViewSet(ModelListViewSet):
         return Response(
             PaymentSummarySerializer(
                 Payment.objects.filter(contract=pk).order_by("id"), many=True
+            ).data
+        )
+
+    @action(
+        methods=["GET"], detail=True, url_path="projects", url_name="contract_projects"
+    )
+    def get_contract_projects(self, request, pk):
+        contract = self.get_object()
+        projects = []
+        if contract.is_supervision_contract:
+            supervision_areas = ContractSupervisionArea.objects.filter(
+                supervision_contract=contract
+            )
+            projects_result = [
+                list(supervised_contract.contract.projects.all())
+                for supervised_contract in supervision_areas
+            ]
+
+            projects = [item for sublist in projects_result for item in sublist]  # flat
+
+        else:
+            projects = contract.projects
+        return Response(
+            ProjectSummarySerializer(
+                projects, many=True, context={"request": request}
             ).data
         )
 
