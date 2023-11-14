@@ -16,14 +16,40 @@ class ContractServiceSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "name",
             "properties",
         )
-        code = {"code": {"read_only": True}, "name": {"read_only": True}}
+        extra_kwargs = {
+            "code": {"read_only": True, "required": False},
+            "name": {"read_only": True, "required": False},
+        }
 
-    properties = serializers.SerializerMethodField()
+    properties = serializers.JSONField()
 
     def get_properties(self, obj):  # noqa: WPS615
         cs_properties = obj.properties
-        cs_values = obj.contract_service_values or []
-        for cs_value in cs_values.all():
+        cs_values = obj.contract_service_values.all()
+        for cs_value in cs_values:
             cs_property = [key for key in cs_properties if key == cs_value.code][0]
             cs_properties[cs_property]["value"] = cs_value.value
         return cs_properties
+
+    def update_properties(self, instance, cs_properties):
+        cs_values = instance.contract_service_values.all()
+
+        for cs_property in cs_properties:
+            cs_value = [
+                cs_value for cs_value in cs_values if cs_value.code == cs_property
+            ][0]
+            cs_value.value = cs_properties[cs_property]["value"]
+            cs_value.save()
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        if "properties" in response:
+            response["properties"] = self.get_properties(instance)
+
+        return response
+
+    def update(self, instance, validated_data):
+        cs_properties = validated_data.pop("properties", None)
+        self.update_properties(instance, cs_properties)
+
+        return instance

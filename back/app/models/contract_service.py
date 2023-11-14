@@ -1,7 +1,10 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
+from app.models.contract_service_value import ContractServiceValue
 from documents.base.base_models import BaseDocumentModel
 
 
@@ -24,3 +27,14 @@ class ContractService(BaseDocumentModel, BaseEntityModelMixin):
         verbose_name="Contrato",
         related_name="contract_services",
     )
+
+
+@receiver(post_save, sender=ContractService)
+def contract_service_post_save(sender, instance, created, *args, **kwargs):
+    if created:
+        cs_properties = instance.properties
+        for cs_property in cs_properties:
+            contract_service_value = ContractServiceValue(
+                code=cs_property, value=None, contract_service=instance
+            )
+            contract_service_value.save()
