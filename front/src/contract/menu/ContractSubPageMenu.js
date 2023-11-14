@@ -67,12 +67,6 @@ const ContractSubPageMenu = ({contract}) => {
                 expanded={true}
             />
             <SubPageMenuListItemButton
-                key="contract-monitoring"
-                to={`${basePath}/monitoring`}
-                text="Supervisión"
-                icon={<PermContactCalendarOutlinedIcon />}
-            />
-            <SubPageMenuListItemButton
                 key="contract-projects"
                 to={`${basePath}/projects`}
                 text="Proyectos"

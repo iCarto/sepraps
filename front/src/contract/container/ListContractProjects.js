@@ -18,7 +18,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {useList} from "base/entity/hooks";
 
-const ListContractProjects = ({projects}) => {
+const ListContractProjects = ({contract, projects}) => {
     const [selectedElement, setSelectedElement] = useState(null);
 
     const navigate = useNavigate();
@@ -71,9 +71,11 @@ const ListContractProjects = ({projects}) => {
                 </Grid>
                 <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
                     <Stack direction="row" justifyContent="flex-end" spacing={1}>
-                        <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                            <EntityAddButtonGroup />
-                        </AuthAction>
+                        {!contract.is_supervision_contract && (
+                            <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                                <EntityAddButtonGroup />
+                            </AuthAction>
+                        )}
                         <EntityChangeView views={["list", "table", "map"]} />
                     </Stack>
                 </Grid>

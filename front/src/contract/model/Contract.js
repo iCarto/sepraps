@@ -42,11 +42,6 @@ const contract_api_adapter = contract => {
               contract["expected_execution_end_date"]
           ) + 1
         : null;
-    if (contract.projects) {
-        contract["projects"] = contract.projects.map(project => {
-            return createProjectSummary(project_summary_api_adapter(project));
-        });
-    }
     if (contract["questionnaires"]) {
         contract["questionnaires"] = createQuestionnaires(
             questionnaires_api_adapter(contract["questionnaires"])
@@ -105,9 +100,6 @@ const contract_view_adapter = contract => {
     ]
         ? contract["execution_certificate_start_date"]
         : null;
-    contract["projects"] = contract["projects"].map(project => {
-        return project.id;
-    });
     return contract;
 };
 
@@ -125,6 +117,7 @@ const createContract = ({
     services = [],
     services_label = "",
     supervision_areas = [],
+    is_supervision_contract = false,
     total_amount_type = null,
     total_amount_type_label = "",
     payment_frequency_type = null,
@@ -168,6 +161,7 @@ const createContract = ({
         services,
         services_label,
         supervision_areas,
+        is_supervision_contract,
         total_amount_type,
         total_amount_type_label,
         payment_frequency_type,

@@ -18,7 +18,7 @@ const AddContractProjectPanel = () => {
     const handleProjectToAdd = selectedProject => {
         const updatedContract = createContract({
             ...contract,
-            projects: [...contract.projects, selectedProject],
+            projects: [...contract.projects, selectedProject.id],
         });
         handleFormSubmit(updatedContract);
     };
