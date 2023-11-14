@@ -4,7 +4,7 @@ const ContractServiceData = ({contractService}) => {
     return (
         contractService &&
         contractService.properties && (
-            <DynamicSectionFields attributes={contractService.properties} columns={1} />
+            <DynamicSectionFields attributes={contractService.properties} columns={2} />
         )
     );
 };

@@ -6,7 +6,7 @@ import {
 import {EntityViewSubPage} from "base/entity/components/container";
 import {useEffect, useState} from "react";
 import {ContractServiceService} from "contract/service";
-import {ViewOrUpdateSupervisionServiceContent} from ".";
+import {ViewOrUpdateContractContent, ViewOrUpdateSupervisionServiceContent} from ".";
 
 const ViewContractExecutionSubPage = () => {
     let contract;
@@ -22,7 +22,11 @@ const ViewContractExecutionSubPage = () => {
     }, [contract]);
 
     const sections = [
-        <ContractExecutionSection contract={contract} />,
+        <ViewOrUpdateContractContent
+            contract={contract}
+            section="execution"
+            label="Ejecución"
+        />,
         ...[
             services.map(contractService => (
                 <ViewOrUpdateSupervisionServiceContent
@@ -31,7 +35,11 @@ const ViewContractExecutionSubPage = () => {
                 />
             )),
         ],
-        <ContractPostConstructionSection contract={contract} />,
+        <ViewOrUpdateContractContent
+            contract={contract}
+            section="postconstruction"
+            label="Post-construcción"
+        />,
     ];
 
     return contract && <EntityViewSubPage sections={sections} />;

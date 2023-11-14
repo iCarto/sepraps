@@ -7,9 +7,9 @@ const FormContainer = ({children}) => {
             flexDirection="column"
             p={1}
             border={1}
-            borderColor={"grey.300"}
+            borderColor={"primary.main"}
             borderRadius={1}
-            sx={{backgroundColor: "grey.50"}}
+            sx={{backgroundColor: "#f7fdff"}}
         >
             {children}
         </Grid>

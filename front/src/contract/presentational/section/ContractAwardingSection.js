@@ -1,14 +1,5 @@
-import {useNavigate} from "react-router-dom";
-import {FieldUtil} from "base/ui/section/utilities";
-import {useAuth} from "base/user/provider";
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {
-    SectionBox,
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "base/ui/section/components";
-import EditIcon from "@mui/icons-material/Edit";
+import {SectionBox, SectionField} from "base/ui/section/components";
 import Grid from "@mui/material/Grid";
 import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
 
@@ -36,67 +27,48 @@ const AwardingBudgetSection = ({contract}) => {
 };
 
 const ContractAwardingSection = ({contract}) => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
+    const getNoDateMessage = label => (
+        <SectionField
+            label={label}
+            value="Pendiente"
+            valueCustomStyle={{fontStyle: "italic"}}
+        />
+    );
 
-    const secondaryActions = [
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar"
-            icon={<EditIcon />}
-            onClick={() => {
-                navigate("awarding/edit");
-            }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-        />,
-    ];
+    const getExpectedExecutionPeriodInfo = () => {
+        if (contract.execution_certificate_start_date) {
+            return `${contract.expected_execution_period} días (${contract.expected_execution_period_in_months} meses)`;
+        } else return `${contract.expected_execution_period} días`;
+    };
 
     return (
-        <SectionCard title="Adjudicación" secondaryActions={secondaryActions}>
-            <Grid container spacing={2}>
-                <Grid container item xs={6} direction="column">
-                    <SectionBox label="Adjudicación">
-                        <SectionField
-                            label="Fecha de adjudicación"
-                            value={DateUtil.formatDate(contract?.awarding_date)}
-                        />
-                    </SectionBox>
-                    <SectionBox label="Seguros">
-                        <SectionField
-                            label="Seguro de responsabilidad profesional"
-                            value={
-                                contract?.awarding_professional_liability_insurance_label
-                            }
-                            containerWidth="long"
-                        />
-                        <SectionField
-                            label="Seguro de responsabilidad civil"
-                            value={contract?.awarding_liability_insurance_label}
-                            containerWidth="long"
-                        />
-                        <SectionField
-                            label="Seguro de accidentes"
-                            value={contract?.awarding_accident_insurance_label}
-                            containerWidth="long"
-                        />
-                    </SectionBox>
-                </Grid>
-                <Grid container item xs={6} direction="column">
-                    <SectionBox label="Monto adjudicado">
-                        <AwardingBudgetSection contract={contract} />
-                        <SectionField
-                            label="Porcentaje de baja"
-                            value={NumberUtil.formatDecimal(
-                                contract?.awarding_percentage_drop,
-                                2
-                            )}
-                            unit="%"
-                        />
-                    </SectionBox>
-                </Grid>
+        <Grid container spacing={2}>
+            <Grid container item xs={6} direction="column">
+                <SectionField
+                    label="Fecha de adjudicación"
+                    value={DateUtil.formatDate(contract?.awarding_date)}
+                />
+                {contract?.expected_execution_period ? (
+                    <SectionField
+                        label="Plazo previsto de ejecución"
+                        value={getExpectedExecutionPeriodInfo()}
+                    />
+                ) : (
+                    getNoDateMessage("Plazo previsto de ejecución:")
+                )}
             </Grid>
-        </SectionCard>
+            <Grid container item xs={6} direction="column">
+                <AwardingBudgetSection contract={contract} />
+                <SectionField
+                    label="Porcentaje de baja"
+                    value={NumberUtil.formatDecimal(
+                        contract?.awarding_percentage_drop,
+                        2
+                    )}
+                    unit="%"
+                />
+            </Grid>
+        </Grid>
     );
 };
 

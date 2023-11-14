@@ -18,3 +18,4 @@ export {
     default as ContractSupervisionAreaFormFields,
 } from "./ContractSupervisionAreaFormFields";
 export {default as ContractServiceForm} from "./ContractServiceForm";
+export {default as ContractInsuranceFormFields} from "./ContractInsuranceFormFields";

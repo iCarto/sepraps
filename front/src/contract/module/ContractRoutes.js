@@ -5,13 +5,11 @@ import {
     ViewContractPage,
     ViewContractSummarySubPage,
     ViewContractProjectsSubPage,
-    UpdateContractPanel,
     CreateContractPage,
     UpdateContractContractorPanel,
     AddContractContractorPanel,
     ViewContractProjectPanel,
     AddContractProjectPanel,
-    ViewContractMonitoringSubPage,
     ManageContractsPage,
     ViewContractPanel,
     ViewContractQuestionnairesSubPage,
@@ -35,34 +33,17 @@ const contractRoutes = [
                 key="contract-summary"
                 path="summary"
                 element={<ViewContractSummarySubPage />}
-            >
-                <Route
-                    key="contract-general-data"
-                    path=":section/:action"
-                    element={<UpdateContractPanel />}
-                />
-            </Route>
+            />
             <Route
                 key="contract-budget"
                 path="budget"
                 element={<ViewContractBudgetSubPage />}
-            >
-                <Route
-                    key="contract-phases-data"
-                    path=":section/:action"
-                    element={<UpdateContractPanel />}
-                />
-            </Route>
+            />
             <Route
                 key="contract-awarding"
                 path="awarding"
                 element={<ViewContractAwardingSubPage />}
             >
-                <Route
-                    key="contract-phases-data"
-                    path=":section/:action"
-                    element={<UpdateContractPanel />}
-                />
                 <Route
                     key="contract-contractor-add"
                     path="contractor/add/:contractorId"
@@ -88,24 +69,12 @@ const contractRoutes = [
                 key="contract-budget"
                 path="budget"
                 element={<ViewContractBudgetSubPage />}
-            >
-                <Route
-                    key="contract-phases-data"
-                    path=":section/:action"
-                    element={<UpdateContractPanel />}
-                />
-            </Route>
+            />
             <Route
                 key="contract-execution"
                 path="execution"
                 element={<ViewContractExecutionSubPage />}
-            >
-                <Route
-                    key="contract-phases-data"
-                    path=":section/:action"
-                    element={<UpdateContractPanel />}
-                />
-            </Route>
+            />
             <Route
                 key="contract-projects"
                 path="projects"

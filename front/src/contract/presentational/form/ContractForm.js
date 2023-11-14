@@ -4,14 +4,16 @@ import {createContract} from "contract/model";
 import {DomainProvider} from "sepraps/domain/provider";
 
 import {EntityForm} from "base/entity/components/form";
-import {ContractCreationForm, ContractModificationForm} from ".";
 import {FormUtil} from "base/form/utilities";
+import {AlertError} from "base/error/components";
+import {FormContainer} from "base/form/components";
 
 const ContractForm = ({
     contract = null,
     onSubmit,
     onCancel = null,
-    updatedSection = null,
+    error = null,
+    children,
 }) => {
     const defaultFormValues = {
         id: contract?.id || "",
@@ -112,23 +114,18 @@ const ContractForm = ({
         onSubmit(updatedContract);
     };
 
-    const onFormCancel = () => {
-        onCancel();
-    };
-
     return (
         <DomainProvider>
             <FormProvider {...formMethods}>
-                {updatedSection ? (
-                    <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
-                        <ContractModificationForm section={updatedSection} />
-                    </EntityForm>
-                ) : (
-                    <ContractCreationForm
+                <AlertError error={error} />
+                <FormContainer>
+                    <EntityForm
                         onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                        onCancel={onFormCancel}
-                    />
-                )}
+                        onCancel={onCancel}
+                    >
+                        {children}
+                    </EntityForm>
+                </FormContainer>
             </FormProvider>
         </DomainProvider>
     );

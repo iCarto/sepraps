@@ -10,7 +10,13 @@ const EntityForm = ({children, onSubmit, onCancel = null, isSubmitting = false})
             <Grid container justifyContent="center" spacing={2} sx={{mt: 2}}>
                 {onCancel && (
                     <Grid item>
-                        <Button onClick={onCancel}>Cancelar</Button>
+                        <Button
+                            onClick={onCancel}
+                            variant="outlined"
+                            sx={{backgroundColor: "white"}}
+                        >
+                            Cancelar
+                        </Button>
                     </Grid>
                 )}
                 <Grid item>

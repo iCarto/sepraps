@@ -5,6 +5,7 @@ import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
 import {DynamicFormUtil} from "base/dynamicform/utilities";
 import {DynamicFormFields} from "base/dynamicform/components";
+import {FormContainer} from "base/form/components";
 
 const ContractServiceForm = ({
     contractService,
@@ -36,15 +37,17 @@ const ContractServiceForm = ({
     return (
         <FormProvider {...formMethods}>
             <AlertError error={error} />
-            <EntityForm
-                onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                onCancel={onCancel}
-            >
-                <DynamicFormFields
-                    attributes={contractService.properties}
-                    columns={1}
-                />
-            </EntityForm>
+            <FormContainer>
+                <EntityForm
+                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                    onCancel={onCancel}
+                >
+                    <DynamicFormFields
+                        attributes={contractService.properties}
+                        columns={2}
+                    />
+                </EntityForm>
+            </FormContainer>
         </FormProvider>
     );
 };

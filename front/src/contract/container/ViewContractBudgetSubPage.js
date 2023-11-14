@@ -1,17 +1,28 @@
 import {useOutletContext} from "react-router-dom";
-import {
-    ContractBidRequestSection,
-    ContractGeneralDataSection,
-} from "contract/presentational/section";
+import {ContractBidRequestSection} from "contract/presentational/section";
 import {EntityViewSubPage} from "base/entity/components/container";
+import {ViewOrUpdateContractContent} from ".";
 
 const ViewContractBudgetSubPage = () => {
     let contract;
     [contract] = useOutletContext();
 
     const sections = [
-        <ContractGeneralDataSection contract={contract} />,
-        <ContractBidRequestSection contract={contract} />,
+        <ViewOrUpdateContractContent
+            contract={contract}
+            section="generaldata"
+            label="Información"
+        />,
+        <ViewOrUpdateContractContent
+            contract={contract}
+            section="financing_program"
+            label="Financiación"
+        />,
+        <ViewOrUpdateContractContent
+            contract={contract}
+            section="bidrequest"
+            label="Licitación"
+        />,
     ];
 
     return contract && <EntityViewSubPage sections={sections} />;

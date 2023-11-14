@@ -40,6 +40,7 @@ const FormTextArea = ({
             helperText={error?.message}
             inputProps={{maxLength: maxLength}}
             InputLabelProps={{shrink: true}}
+            sx={{backgroundColor: "white"}}
         />
     );
 };

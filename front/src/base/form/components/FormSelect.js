@@ -58,7 +58,7 @@ const FormSelect = ({
                 inputRef={field.ref}
                 value={value}
                 label={inputLabel}
-                sx={styleForPlaceholder}
+                sx={{...styleForPlaceholder, backgroundColor: "white"}}
                 onChange={event => {
                     event.preventDefault();
                     setValue(event.target.value);

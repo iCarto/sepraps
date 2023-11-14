@@ -65,6 +65,7 @@ const FormAutocomplete = ({
                     error={Boolean(error)}
                     helperText={error?.message}
                     InputLabelProps={{shrink: true}}
+                    sx={{backgroundColor: "white"}}
                 />
             )}
         />

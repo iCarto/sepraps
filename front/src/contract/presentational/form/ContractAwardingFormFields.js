@@ -1,8 +1,8 @@
 import {useWatch} from "react-hook-form";
 import {CURRENCY_SYMBOL} from "base/format/config/i18n";
-import {FormDatePicker, FormInputInteger, FormSelect} from "base/form/components";
+import {FormDatePicker, FormInputInteger} from "base/form/components";
 import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
-import {useDomain} from "sepraps/domain/provider";
+import Grid from "@mui/material/Grid";
 
 const AwardingBudgetFormFields = ({totalAmountType}) => {
     return totalAmountType === MAX_MIN_AMOUNT_TYPE ? (
@@ -34,36 +34,28 @@ const AwardingBudgetFormFields = ({totalAmountType}) => {
 };
 
 const ContractAwardingFormFields = () => {
-    const {yesNoDomain} = useDomain();
-
     const totalAmountType = useWatch({
         name: "total_amount_type",
     });
 
     return (
-        <>
-            <FormDatePicker
-                name="awarding_date"
-                label="Fecha de adjudicación"
-                rules={{required: "El campo es obligatorio"}}
-            />
-            <FormSelect
-                name="awarding_professional_liability_insurance"
-                label="Seguro de responsabilidad profesional"
-                options={yesNoDomain}
-            />
-            <FormSelect
-                name="awarding_liability_insurance"
-                label="Seguro de responsabilidad civil"
-                options={yesNoDomain}
-            />
-            <FormSelect
-                name="awarding_accident_insurance"
-                label="Seguro de accidentes"
-                options={yesNoDomain}
-            />
-            <AwardingBudgetFormFields totalAmountType={totalAmountType} />
-        </>
+        <Grid container spacing={2}>
+            <Grid item xs={6}>
+                <FormDatePicker
+                    name="awarding_date"
+                    label="Fecha de adjudicación"
+                    rules={{required: "El campo es obligatorio"}}
+                />
+                <FormInputInteger
+                    name="expected_execution_period"
+                    label="Plazo previsto de ejecución"
+                    endAdornment="días"
+                />
+            </Grid>
+            <Grid item xs={6}>
+                <AwardingBudgetFormFields totalAmountType={totalAmountType} />
+            </Grid>
+        </Grid>
     );
 };
 
