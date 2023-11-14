@@ -65,7 +65,6 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "execution_signature_date",
             "execution_certificate_start_date",
             "expected_execution_period",
-            "execution_final_delivery_date",
             "warranty_end_date",
             "projects",
             "questionnaires",

@@ -35,10 +35,6 @@ const ContractExecutionFormFields = () => {
                     )}
                 </FormHelperText>
             )}
-            <FormDatePicker
-                name="execution_final_delivery_date"
-                label="Fecha de recepción definitiva"
-            />
         </>
     );
 };

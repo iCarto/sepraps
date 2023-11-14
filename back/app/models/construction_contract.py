@@ -83,9 +83,6 @@ class ConstructionContract(models.Model):
     expected_execution_period = models.IntegerField(
         "Plazo previsto de ejecución", null=True
     )
-    execution_final_delivery_date = models.DateField(
-        "Fecha de recepción definitiva", null=True
-    )
     warranty_end_date = models.DateField("Fin del periodo de garantía", null=True)
 
     closed = models.BooleanField(blank=False, null=False, default=False)

@@ -65,10 +65,6 @@ const ContractExecutionSection = ({contract}) => {
                     "Fecha prevista de fin de ejecución",
                     DateUtil.formatDate(contract?.expected_execution_end_date)
                 )}
-            {FieldUtil.getSectionField(
-                "Fecha de recepción definitiva",
-                DateUtil.formatDate(contract?.execution_final_delivery_date)
-            )}
         </SectionCard>
     );
 };

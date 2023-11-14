@@ -52,7 +52,6 @@
             "execution_signature_date": "2019-12-11",
             "execution_certificate_start_date": "2020-03-26",
             "expected_execution_period": 240,
-            "execution_final_delivery_date": null,
             "warranty_end_date": null,
             "closed": false,
             "creation_user": 1,

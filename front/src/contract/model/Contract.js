@@ -105,11 +105,6 @@ const contract_view_adapter = contract => {
     ]
         ? contract["execution_certificate_start_date"]
         : null;
-    contract["execution_final_delivery_date"] = !!contract[
-        "execution_final_delivery_date"
-    ]
-        ? contract["execution_final_delivery_date"]
-        : null;
     contract["projects"] = contract["projects"].map(project => {
         return project.id;
     });
@@ -157,7 +152,6 @@ const createContract = ({
     contacts = [],
     execution_signature_date = null,
     execution_certificate_start_date = null,
-    execution_final_delivery_date = null,
     expected_execution_period = null,
     expected_execution_period_in_months = null,
     expected_execution_end_date = null,
@@ -203,7 +197,6 @@ const createContract = ({
         expected_execution_period,
         expected_execution_period_in_months,
         execution_certificate_start_date,
-        execution_final_delivery_date,
         expected_execution_end_date,
         warranty_end_date,
         projects,
