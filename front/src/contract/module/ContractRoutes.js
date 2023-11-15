@@ -45,16 +45,6 @@ const contractRoutes = [
                 element={<ViewContractAwardingSubPage />}
             >
                 <Route
-                    key="contract-contractor-add"
-                    path="contractor/add/:contractorId"
-                    element={<AddContractContractorPanel />}
-                />
-                <Route
-                    key="contract-contractor-edit"
-                    path="contractor/:contractorId/edit"
-                    element={<UpdateContractContractorPanel />}
-                />
-                <Route
                     key="contract-monitoring-view-contact"
                     path="info/:contactId"
                     element={<ViewContactPanel />}

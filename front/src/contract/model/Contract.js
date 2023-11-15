@@ -85,16 +85,10 @@ const contract_view_adapter = contract => {
         ? contract["financing_program"].id
         : null;
 
-    // we must destructure object before its adaptation because
-    // nested objects are still inmutable inside contract object
-    if (!!contract["contractor"]) {
-        contract["contractor"] = contractor_view_adapter({...contract["contractor"]});
-        // contractor contract and contacts fields are not necessary when processing a contract
-        delete contract["contractor"]["contract"];
-        delete contract["contractor"]["contacts"];
-    } else {
-        contract["contractor"] = null;
-    }
+    contract["contractor"] = !!contract["contractor"]
+        ? contract["contractor"].id
+        : null;
+
     contract["execution_certificate_start_date"] = !!contract[
         "execution_certificate_start_date"
     ]

@@ -1,7 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 import {ContractContractorSection} from "contract/presentational/section";
 import {EntityViewSubPage} from "base/entity/components/container";
-import {ViewOrUpdateContractContent} from ".";
+import {ViewOrUpdateContractContent, ViewOrUpdateContractContractorContent} from ".";
 
 const ViewContractAwardingSubPage = () => {
     let contract;
@@ -18,7 +18,7 @@ const ViewContractAwardingSubPage = () => {
             section="insurance"
             label="Seguros"
         />,
-        <ContractContractorSection contract={contract} />,
+        <ViewOrUpdateContractContractorContent contract={contract} />,
     ];
 
     return contract && <EntityViewSubPage sections={sections} />;

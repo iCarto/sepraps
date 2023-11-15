@@ -12,3 +12,4 @@ export {default as ContainerWithLabel} from "./ContainerWithLabel";
 export {default as BulletList} from "./BulletList";
 export {default as AddNewInlineItemButton} from "./AddNewInlineItemButton";
 export {default as AddNewInlineItemFormBox} from "./AddNewInlineItemFormBox";
+export {default as NoDataContainer} from "./NoDataContainer";

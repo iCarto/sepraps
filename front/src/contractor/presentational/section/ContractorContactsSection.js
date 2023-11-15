@@ -60,6 +60,7 @@ const ContractorContactsSection = ({contractor}) => {
         <AccordionLayout
             accordionTitle="Contactos"
             accordionIcon={<PermContactCalendarIcon />}
+            defaultExpanded={true}
         >
             {removeDialog}
             {deleteDialog}

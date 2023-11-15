@@ -8,6 +8,7 @@ import {createEntityService} from "base/entity/service";
 import {AuthApiService} from "base/api/service";
 import {createPayments, payments_api_adapter} from "payment/model";
 import {createProjects, projects_api_adapter} from "project/model";
+import {contractor_api_adapter, createContractor} from "contractor/model";
 
 export const TEMPLATE = {
     SHORT: "short",
@@ -56,6 +57,13 @@ const ContractService = {
         return AuthApiService.get(`${basePath}/${id}/projects`).then(response => {
             return createProjects(projects_api_adapter(response));
         });
+    },
+
+    createContractor(contractId, contractor) {
+        return AuthApiService.post(
+            `${basePath}/${contractId}/contractor`,
+            contractor
+        ).then(response => createContractor(contractor_api_adapter(response)));
     },
 
     getPaymentsList(id) {

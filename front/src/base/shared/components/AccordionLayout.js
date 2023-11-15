@@ -6,7 +6,12 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
+const AccordionLayout = ({
+    accordionTitle,
+    accordionIcon = null,
+    defaultExpanded = false,
+    children,
+}) => {
     return (
         <Accordion
             disableGutters
@@ -19,6 +24,7 @@ const AccordionLayout = ({accordionTitle, accordionIcon = null, children}) => {
                     display: "none",
                 },
             }}
+            defaultExpanded={defaultExpanded}
         >
             <Tooltip title="Desplegar/Ocultar" followCursor>
                 <AccordionSummary

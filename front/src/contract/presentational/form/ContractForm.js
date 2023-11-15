@@ -72,7 +72,7 @@ const ContractForm = ({
         } else return null;
     };
 
-    const onFormSubmit = data => {
+    const handleFormSubmit = data => {
         const updatedContract = createContract({
             id: data.id,
             number: data.contract_number,
@@ -120,7 +120,7 @@ const ContractForm = ({
                 <AlertError error={error} />
                 <FormContainer>
                     <EntityForm
-                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onSubmit={formMethods.handleSubmit(handleFormSubmit)}
                         onCancel={onCancel}
                     >
                         {children}

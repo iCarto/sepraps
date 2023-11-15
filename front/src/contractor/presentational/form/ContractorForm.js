@@ -3,11 +3,17 @@ import {createContractor} from "contractor/model";
 
 import {LocationProvider} from "sepraps/location/provider";
 import {DomainProvider} from "sepraps/domain/provider";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import ContractorFormFields from "./ContractorFormFields";
+import {AlertError} from "base/error/components";
+import {FormContainer} from "base/form/components";
+import {EntityForm} from "base/entity/components/form";
 
-const ContractorForm = ({contractor = null, onSubmit = null, onCancel = null}) => {
+const ContractorForm = ({
+    contractor = null,
+    onSubmit = null,
+    onCancel = null,
+    error = null,
+    children,
+}) => {
     const formMethods = useForm({
         defaultValues: contractor
             ? {
@@ -49,28 +55,15 @@ const ContractorForm = ({contractor = null, onSubmit = null, onCancel = null}) =
         <LocationProvider>
             <DomainProvider>
                 <FormProvider {...formMethods}>
-                    <Grid container component="form">
-                        <ContractorFormFields />
-                    </Grid>
-                    <Grid container justifyContent="center" sx={{mt: 2}}>
-                        <Grid>
-                            {onCancel && (
-                                <Button color="inherit" onClick={onCancel}>
-                                    Cancelar
-                                </Button>
-                            )}
-                            {onSubmit && (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ml: 3}}
-                                    onClick={formMethods.handleSubmit(handleFormSubmit)}
-                                >
-                                    Guardar
-                                </Button>
-                            )}
-                        </Grid>
-                    </Grid>
+                    <AlertError error={error} />
+                    <FormContainer>
+                        <EntityForm
+                            onSubmit={formMethods.handleSubmit(handleFormSubmit)}
+                            onCancel={onCancel}
+                        >
+                            {children}
+                        </EntityForm>
+                    </FormContainer>
                 </FormProvider>
             </DomainProvider>
         </LocationProvider>

@@ -103,6 +103,7 @@ const SearchAutocomplete = ({
                             </>
                         ),
                     }}
+                    sx={{backgroundColor: "white"}}
                 />
             )}
         />
