@@ -1,7 +1,7 @@
 from django.db import models
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import permissions
+from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -19,6 +19,7 @@ from app.serializers.contract_service_serializer import ContractServiceSerialize
 from app.serializers.contract_supervision_area_serializer import (
     ContractSupervisionAreaSerializer,
 )
+from app.serializers.contractor_serializer import ContractorSerializer
 from app.serializers.payment_serializer import PaymentSummarySerializer
 from app.serializers.project_serializer import ProjectSummarySerializer
 from users.constants import GROUP_EDICION, GROUP_GESTION
@@ -160,9 +161,29 @@ class ConstructionContractViewSet(ModelListViewSet):
         url_name="contract_supervision_areas",
     )
     def get_contract_supervision_areas(self, request, code, pk):
-        print("code", code)
         return Response(
             ContractSupervisionAreaSerializer(
                 ContractSupervisionArea.objects.filter(code=code, contract=pk).first()
             ).data
         )
+
+    @action(
+        methods=["POST"],
+        detail=True,
+        url_path="contractor",
+        url_name="contract_contractor_creation",
+    )
+    def save_contract_contractor(self, request, pk):
+        contract = self.get_object()
+        if contract:
+            serializer = ContractorSerializer(data=request.data)
+            if serializer.is_valid():
+                contractor = serializer.save()
+                print(contractor)
+                contract.contractor = contractor
+                contract.save()
+                print(contract)
+                return Response(ContractorSerializer(contractor).data)
+
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)

@@ -74,13 +74,16 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "bid_request_id": {"required": True},
             "bid_request_date": {"required": True},
             "bid_request_budget": {"required": True},
+            "bid_request_lot_number": {"allow_null": True, "allow_blank": True},
         }
 
     services = serializers.ListField(child=serializers.CharField())
     financing_program = serializers.PrimaryKeyRelatedField(
         required=False, allow_null=True, queryset=FinancingProgram.objects.all()
     )
-    contractor = ContractorSerializer(required=False, allow_null=True)
+    contractor = serializers.PrimaryKeyRelatedField(
+        required=False, allow_null=True, queryset=Contractor.objects.all()
+    )
     contacts = ContactConstructionContractSerializer(
         source="constructioncontractcontact_set", many=True, required=False
     )
@@ -137,10 +140,6 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
         )
 
     def to_representation(self, instance):
-        # TODO To avoid circular dependencies with serializers we have
-        # to load this inside a function
-        from app.serializers.project_serializer import ProjectSummarySerializer
-
         response = super().to_representation(instance)
         if "financing_program" in response:
             response["financing_program"] = (
@@ -150,6 +149,14 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
                 if instance.financing_program is not None
                 else None
             )
+
+        if "contractor" in response:
+            response["contractor"] = (
+                ContractorSerializer(instance.contractor, context=self.context).data
+                if instance.contractor is not None
+                else None
+            )
+
         return response
 
     # ATTRIBUTES
@@ -173,18 +180,11 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
         return monitoring_profile
 
     def create(self, validated_data):
-        contractor_data = validated_data.pop("contractor", None)
         contacts = validated_data.pop("constructioncontractcontact_set", None)
-
-        contractor = None
-        if contractor_data:
-            contractor, _ = Contractor.objects.get_or_create(**contractor_data)
 
         projects_for_contract = validated_data.pop("projects")
 
-        construction_contract = ConstructionContract.objects.create(
-            **validated_data, contractor=contractor
-        )
+        construction_contract = ConstructionContract.objects.create(**validated_data)
         construction_contract.projects.set(projects_for_contract)
 
         if contacts:
@@ -192,27 +192,12 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
 
         return construction_contract
 
-    def update_contractor(self, instance, validated_data):
-        contractor_data = validated_data.pop("contractor", None)
-
-        contractor = None
-        if contractor_data:
-            if "id" in contractor_data and contractor_data["id"] is not None:
-                contractor = self.fields["contractor"].update(
-                    Contractor.objects.get(pk=contractor_data["id"]), contractor_data
-                )
-            else:
-                contractor = self.fields["contractor"].create(contractor_data)
-
-        instance.contractor = contractor
-
     def update_contacts(self, instance, validated_data):
         contacts = validated_data.pop("constructioncontractcontact_set", None)
         if contacts:
             self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
 
     def update(self, instance, validated_data):
-        self.update_contractor(instance, validated_data)
         self.update_contacts(instance, validated_data)
 
         projects_for_contract = validated_data.pop("projects")
