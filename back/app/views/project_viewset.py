@@ -12,9 +12,15 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
+from app.models.building_component_monitoring import BuildingComponentMonitoring
 from app.models.milestone import Milestone
 from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
+from app.serializers.building_component_monitoring_serializer import (
+    BuildingCompanyMonitoringSerializer,
+    BuildingCompanyMonitoringSummarySerializer,
+)
+from app.serializers.building_component_serializer import BuildingComponentSerializer
 from app.serializers.contact_relationship_serializer import (
     ContactRelationshipSerializer,
 )
@@ -256,3 +262,44 @@ class ProjectViewSet(ModelListViewSet):
                 context={"request": request},
             ).data
         )
+
+    @action(
+        methods=["GET", "POST"],
+        detail=True,
+        url_path="buildingcomponentmonitorings",
+        url_name="building_component_monitorings_creation",
+    )
+    def manage_project_building_component_monitorings(self, request, pk):
+        if request.method == "POST":
+            project = self.get_object()
+            if project:
+                serializer = BuildingComponentSerializer(data=request.data)
+                if serializer.is_valid():
+                    building_component = serializer.save(
+                        created_by=request.user, updated_by=request.user
+                    )
+
+                    monitoring = BuildingComponentMonitoring(
+                        building_component=building_component,
+                        project=project,
+                        created_by=request.user,
+                        updated_by=request.user,
+                    )
+                    monitoring.save()
+
+                    return Response(
+                        BuildingCompanyMonitoringSerializer(monitoring).data
+                    )
+
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == "GET":
+            return Response(
+                BuildingCompanyMonitoringSummarySerializer(
+                    BuildingComponentMonitoring.objects.filter(project=pk).order_by(
+                        "id"
+                    ),
+                    many=True,
+                ).data
+            )
+        return Response(status=status.HTTP_400_BAD_REQUEST)

@@ -5,6 +5,24 @@ from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from documents.serializers import MediaUrlSerializer
 
 
+class BaseEntityModelSerializer(serializers.ModelSerializer):
+    class Meta(object):
+        model = None
+        fields = ("id", "created_by", "created_at", "updated_by", "updated_at")
+        extra_kwargs = {
+            "created_by": {"read_only": True},
+            "updated_by": {"read_only": True},
+        }
+
+    id = serializers.IntegerField(allow_null=True, required=False)
+    created_by = serializers.CharField(
+        required=False, source="created_by.username", read_only=True
+    )
+    updated_by = serializers.CharField(
+        required=False, source="updated_by.username", read_only=True
+    )
+
+
 class BaseModelSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = None

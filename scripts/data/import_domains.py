@@ -16,9 +16,9 @@ def format_value(value):
     return re.sub("_+", "_", result)
 
 
-domains_file = pd.ExcelFile("scripts/data/231020_MD_SEPRAPS.xls")
+domains_file = pd.ExcelFile("scripts/data/231117_MD_SEPRAPS.xls")
 
-domains_df = domains_file.parse(9)
+domains_df = domains_file.parse(16)
 
 for index, row in domains_df.iterrows():
     if index != 0:

@@ -1,9 +1,6 @@
 from django.db import models
 
 
-WORK_AREA_CHOICES = (("building", "Obras"), ("social", "Social"))
-
-
 class ContractServiceValue(models.Model):
     class Meta(object):
         db_table = "contract_service_value"

@@ -166,10 +166,8 @@ class ConstructionContractViewSet(ModelListViewSet):
             serializer = ContractorSerializer(data=request.data)
             if serializer.is_valid():
                 contractor = serializer.save()
-                print(contractor)
                 contract.contractor = contractor
                 contract.save()
-                print(contract)
                 return Response(ContractorSerializer(contractor).data)
 
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

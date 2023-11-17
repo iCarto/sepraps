@@ -16,6 +16,8 @@ class DomainCategoryChoices(models.TextChoices):
     total_amount_type = ("tipo_monto", "Tipo de monto total")
     payment_frequency_type = ("frecuencia_pago", "Tipo de frecuencia de pago")
     payment_criteria_type = ("criterio_pago", "Tipo de criterio de pago")
+    execution_status_type = ("estado_ejecucion", "Tipo de estado de ejecución")
+    quality_status_type = ("estado_cualitativo", "Tipo de estado cualitativo")
 
 
 class DomainEntry(models.Model):

@@ -176,5 +176,36 @@
         {
             "code": "tendido_red_mensual"
         }
-    ]
+    ],
+    "components": {
+        "tanque": {
+            "name": "Tanque",
+            "properties": {
+                "altura": {
+                    "label": "Altura",
+                    "type": "integer",
+                    "unit": "m."
+                },
+                "capacidad": {
+                    "label": "Capacidad",
+                    "type": "decimal",
+                    "unit": "m3"
+                }
+            }
+        },
+        "fuente_provision": {
+            "name": "Fuente de provisión",
+            "properties": {
+                "profundidad": {
+                    "label": "Altura",
+                    "type": "decimal",
+                    "unit": "m."
+                },
+                "estudioHidrogeologico": {
+                    "label": "Estudio Hidrogeológico",
+                    "type": "yesNoDomain"
+                }
+            }
+        }
+    }
 }
