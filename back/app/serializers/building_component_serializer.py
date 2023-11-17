@@ -29,8 +29,10 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
         cs_properties = obj.properties
         cs_values = obj.building_component_values.all()
         for cs_value in cs_values:
-            cs_property = [key for key in cs_properties if key == cs_value.code][0]
-            cs_properties[cs_property]["value"] = cs_value.value
+            cs_property = [key for key in cs_properties if key == cs_value.code]
+            if cs_property:
+                cs_property = cs_property[0]
+                cs_properties[cs_property]["value"] = cs_value.value
         return cs_properties
 
     def update_properties(self, instance, cs_properties):

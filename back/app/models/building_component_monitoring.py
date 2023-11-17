@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.db import models
 
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
+from app.models.comment import Comment
 from app.util import format_decimal
 from documents.base.base_models import BaseDocumentModel
 
@@ -42,6 +43,7 @@ class BuildingComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
     project = models.ForeignKey(
         "Project", on_delete=models.CASCADE, related_name="project_monitorings"
     )
+    comments = models.ManyToManyField(Comment)
 
     @property
     def total_amount(self):

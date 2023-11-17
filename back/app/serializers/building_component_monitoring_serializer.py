@@ -8,6 +8,7 @@ from app.base.serializers.base_serializers import (
 )
 from app.models.building_component_monitoring import BuildingComponentMonitoring
 from app.serializers.building_component_serializer import BuildingComponentSerializer
+from app.serializers.comment_serializer import CommentSerializer
 
 
 class BuildingCompanyMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
@@ -25,9 +26,11 @@ class BuildingCompanyMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
             "physical_progress_percentage",
             "real_end_date",
             "building_component",
+            "comments",
         )
 
     building_component = BuildingComponentSerializer(required=False, read_only=True)
+    comments = CommentSerializer(read_only=True, many=True)
 
     domain_fields = [
         BaseDomainField(

@@ -47,7 +47,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     domain_fields = [BaseDomainField("status", DomainCategoryChoices.payment_status)]
 
     payment_products = serializers.SerializerMethodField()
-    payment_comments = serializers.SerializerMethodField()
+    payment_comments = CommentSerializer(source="comments", read_only=True, many=True)
     expected_total_contract_percentage = serializers.SerializerMethodField()
     expected_total_contract_percentage_cumulative = serializers.SerializerMethodField()
     paid_total_contract_percentage = serializers.SerializerMethodField()
@@ -69,12 +69,6 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
         products = instance.products.all().order_by("created_at", "id")
         return ProductSerializer(
             products, read_only=True, many=True, context=self.context
-        ).data
-
-    def get_payment_comments(self, instance):  # noqa: WPS615
-        comments = instance.comments.all().order_by("created_at", "id")
-        return CommentSerializer(
-            comments, read_only=True, many=True, context=self.context
         ).data
 
     def get_expected_total_contract_percentage(self, instance):  # noqa: WPS615
