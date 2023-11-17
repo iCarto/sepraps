@@ -121,7 +121,7 @@
     },
     {
         "model": "app.comment",
-        "pk": 1,
+        "pk": 3,
         "fields": {
             "text": "Comentario de prueba sobre el anticipo",
             "created_by": 1,
@@ -164,7 +164,7 @@
     },
     {
         "model": "app.comment",
-        "pk": 2,
+        "pk": 4,
         "fields": {
             "text": "Comentario de prueba A mes 1",
             "created_by": 1,
@@ -175,7 +175,7 @@
     },
     {
         "model": "app.comment",
-        "pk": 3,
+        "pk": 5,
         "fields": {
             "text": "Comentario de prueba B mes 1",
             "created_by": 1,
