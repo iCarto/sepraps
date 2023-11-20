@@ -16,6 +16,7 @@ from app.models.building_component_monitoring import BuildingComponentMonitoring
 from app.models.milestone import Milestone
 from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
+from app.models.social_component_monitoring import SocialComponentMonitoring
 from app.serializers.building_component_monitoring_serializer import (
     BuildingCompanyMonitoringSerializer,
     BuildingCompanyMonitoringSummarySerializer,
@@ -33,6 +34,10 @@ from app.serializers.project_serializer import (
     ProjectSerializer,
     ProjectShortSerializer,
     ProjectSummarySerializer,
+)
+from app.serializers.social_component_monitoring_serializer import (
+    SocialComponentMonitoringSerializer,
+    SocialComponentMonitoringSummarySerializer,
 )
 from app.util import is_geojson_request
 from questionnaires.models.questionnaire import Questionnaire
@@ -267,7 +272,7 @@ class ProjectViewSet(ModelListViewSet):
         methods=["GET", "POST"],
         detail=True,
         url_path="buildingcomponentmonitorings",
-        url_name="building_component_monitorings_creation",
+        url_name="building_component_monitorings",
     )
     def manage_project_building_component_monitorings(self, request, pk):
         if request.method == "POST":
@@ -299,6 +304,39 @@ class ProjectViewSet(ModelListViewSet):
                     BuildingComponentMonitoring.objects.filter(project=pk).order_by(
                         "id"
                     ),
+                    many=True,
+                ).data
+            )
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        methods=["GET", "POST"],
+        detail=True,
+        url_path="socialcomponentmonitorings",
+        url_name="social_component_monitorings",
+    )
+    def manage_project_social_component_monitorings(self, request, pk):
+        if request.method == "POST":
+            project = self.get_object()
+            if project:
+                serializer = SocialComponentMonitoringSerializer(data=request.data)
+                if serializer.is_valid():
+                    social_component = serializer.save(
+                        project=project,
+                        created_by=request.user,
+                        updated_by=request.user,
+                    )
+
+                    return Response(
+                        SocialComponentMonitoringSerializer(social_component).data
+                    )
+
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == "GET":
+            return Response(
+                SocialComponentMonitoringSummarySerializer(
+                    SocialComponentMonitoring.objects.filter(project=pk).order_by("id"),
                     many=True,
                 ).data
             )

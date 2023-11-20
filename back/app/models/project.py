@@ -9,11 +9,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
-from app.models.building_component import create_project_components
+from app.models.building_component import create_project_building_components
 from app.models.construction_contract import ConstructionContract
 from app.models.infrastructure import Infrastructure
 from app.models.location import Locality
 from app.models.provider import Provider
+from app.models.social_component_monitoring import create_project_social_components
 from documents.models import MediaNode, create_folder_structure
 from questionnaires.models.monthly_questionnaire_instance import (
     MonthlyQuestionnaireInstance,
@@ -131,7 +132,8 @@ def post_create(sender, instance, created, *args, **kwargs):
     instance.save()
 
     create_project_milestones(instance, data.get("milestones", []))
-    create_project_components(instance, data.get("components", {}))
+    create_project_building_components(instance, data.get("building_components", {}))
+    create_project_social_components(instance, data.get("social_components", {}))
 
 
 def get_code_for_new_project():

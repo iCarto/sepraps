@@ -41,7 +41,7 @@ class BuildingComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
         related_name="building_component_monitorings",
     )
     project = models.ForeignKey(
-        "Project", on_delete=models.CASCADE, related_name="project_monitorings"
+        "Project", on_delete=models.CASCADE, related_name="project_building_monitorings"
     )
     comments = models.ManyToManyField(Comment)
 

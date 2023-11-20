@@ -18,6 +18,11 @@ class DomainCategoryChoices(models.TextChoices):
     payment_criteria_type = ("criterio_pago", "Tipo de criterio de pago")
     execution_status_type = ("estado_ejecucion", "Tipo de estado de ejecución")
     quality_status_type = ("estado_cualitativo", "Tipo de estado cualitativo")
+    target_population_type = ("poblacion_meta", "Tipo de población meta")
+    training_method_type = (
+        "modalidad_capacitacion",
+        "Tipo de modalidad de capacitación",
+    )
 
 
 class DomainEntry(models.Model):

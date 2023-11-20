@@ -31,12 +31,12 @@ def building_component_post_save(sender, instance, created, *args, **kwargs):
             building_component_value.save()
 
 
-def create_project_components(project, components):
-    for componentCode, componentConfig in components.items():
+def create_project_building_components(project, components):
+    for component_code, component_config in components.items():
         component = BuildingComponent(
-            code=componentCode,
-            name=componentConfig.get("name"),
-            properties=componentConfig.get("properties"),
+            code=component_code,
+            name=component_config.get("name"),
+            properties=component_config.get("properties"),
             created_by=project.creation_user,
             updated_by=project.creation_user,
         )

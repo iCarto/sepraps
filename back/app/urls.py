@@ -33,6 +33,10 @@ from app.views.payment_viewset import PaymentViewSet
 from app.views.product_viewset import ProductViewSet
 from app.views.project_viewset import ProjectViewSet
 from app.views.provider_viewset import ProviderViewSet
+from app.views.social_component_monitoring_viewset import (
+    SocialComponentMonitoringViewSet,
+)
+from app.views.social_component_training_viewset import SocialComponentTrainingViewSet
 
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -60,6 +64,8 @@ router.register("contractsupervisionareas", ContractSupervisionAreaViewSet)
 
 router.register("buildingcomponents", BuildingComponentViewSet)
 router.register("buildingcomponentmonitorings", BuildingComponentMonitoringViewSet)
+router.register("socialcomponentmonitorings", SocialComponentMonitoringViewSet)
+router.register("socialcomponenttrainings", SocialComponentTrainingViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
