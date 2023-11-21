@@ -283,8 +283,13 @@ class ProjectViewSet(ModelListViewSet):
             if project:
                 serializer = BuildingComponentSerializer(data=request.data)
                 if serializer.is_valid():
+                    bc_config = get_building_components_config(project)
                     building_component = serializer.save(
-                        created_by=request.user, updated_by=request.user
+                        properties=bc_config.get(
+                            serializer.validated_data.get("code"), {}
+                        ).get("properties", {}),
+                        created_by=request.user,
+                        updated_by=request.user,
                     )
 
                     monitoring = BuildingComponentMonitoring(
@@ -353,25 +358,24 @@ class ProjectViewSet(ModelListViewSet):
     )
     def get_building_component_types(self, request, pk):
         project = self.get_object()
-        if project.project_type:
-            # Change when project type is multiple
-            data = {}
-            data_path = os.path.join(
-                settings.BASE_DIR,
-                "app",
-                "data",
-                "project",
-                f"{project.project_type}.json",
+        result = []
+        for component_code, component_config in get_building_components_config(
+            project
+        ).items():
+            result.append(
+                {"value": component_code, "label": component_config.get("name")}
             )
-            with open(data_path) as f:
-                data = json.load(f)
-                result = []
+        return Response(result)
 
-                for component_code, component_config in data.get(
-                    "building_components", {}
-                ).items():
-                    result.append(
-                        {"value": component_code, "label": component_config.get("name")}
-                    )
-                return Response(result)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+def get_building_components_config(project):
+    if not project.project_type:
+        return {}
+    # Change when project type is multiple
+    data = {}
+    data_path = os.path.join(
+        settings.BASE_DIR, "app", "data", "project", f"{project.project_type}.json"
+    )
+    with open(data_path) as f:
+        data = json.load(f)
+        return data.get("building_components", {})

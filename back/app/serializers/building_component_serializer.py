@@ -10,7 +10,7 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
         fields = BaseEntityModelSerializer.Meta.fields + ("code", "name", "properties")
         extra_kwargs = {"code": {"read_only": True, "required": False}}
 
-    properties = serializers.JSONField()
+    properties = serializers.JSONField(required=False)
 
     def get_extra_kwargs(self):
         extra_kwargs = super().get_extra_kwargs()
