@@ -1,5 +1,8 @@
+import json
+import os
 from itertools import chain
 
+from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
 from django.db.models import Q
@@ -340,4 +343,35 @@ class ProjectViewSet(ModelListViewSet):
                     many=True,
                 ).data
             )
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        methods=["GET"],
+        detail=True,
+        url_path="buildingcomponenttypes",
+        url_name="building_component_types",
+    )
+    def get_building_component_types(self, request, pk):
+        project = self.get_object()
+        if project.project_type:
+            # Change when project type is multiple
+            data = {}
+            data_path = os.path.join(
+                settings.BASE_DIR,
+                "app",
+                "data",
+                "project",
+                f"{project.project_type}.json",
+            )
+            with open(data_path) as f:
+                data = json.load(f)
+                result = []
+
+                for component_code, component_config in data.get(
+                    "building_components", {}
+                ).items():
+                    result.append(
+                        {"value": component_code, "label": component_config.get("name")}
+                    )
+                return Response(result)
         return Response(status=status.HTTP_400_BAD_REQUEST)
