@@ -9,7 +9,12 @@ from app.views import (
     payment_stats_views,
     stats_views,
 )
-from app.views import events_views, notifications_views, stats_views
+from app.views import (
+    events_views,
+    notifications_views,
+    stats_views,
+    project_stats_views,
+)
 from app.views.building_component_monitoring_viewset import (
     BuildingComponentMonitoringViewSet,
 )
@@ -81,4 +86,12 @@ urlpatterns = [
     path("paymentstats", payment_stats_views.get_payment_stats),
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
+    path(
+        "projectstats/buildingcomponents",
+        project_stats_views.get_building_components_stats,
+    ),
+    path(
+        "projectstats/buildingcomponentstotal",
+        project_stats_views.get_building_components_total_stats,
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

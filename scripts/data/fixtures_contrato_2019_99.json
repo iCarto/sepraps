@@ -1,0 +1,44 @@
+[
+    {
+        "model": "app.contractor",
+        "pk": 9,
+        "fields": {
+            "name": "TEST ICARTO",
+            "contractor_type": "company",
+            "address": "",
+            "phone": "",
+            "email": "",
+            "comments": ""
+        }
+    },
+    {
+        "model": "app.ConstructionContract",
+        "pk": 11,
+        "fields": {
+            "number": "Contrato nº 99/2019",
+            "comments": "Contrato de fiscalización de obra ICARTO",
+            "services": ["fiscalizacion_de_obra"],
+            "total_amount_type": "fijo",
+            "payment_frequency_type": "no_mensual",
+            "payment_criteria_type": "fijo",
+            "bid_request_number": "SDP - 02/2019",
+            "bid_request_id": "41",
+            "bid_request_lot_number": "1",
+            "bid_request_date": "2019-06-09",
+            "bid_request_budget": 200000000,
+            "awarding_budget": 180000000,
+            "awarding_percentage_drop": 7.82,
+            "awarding_date": "2019-11-14",
+            "financing_program": 1,
+            "contractor": 9,
+            "execution_signature_date": "2019-07-22",
+            "execution_certificate_start_date": "2019-08-22",
+            "expected_execution_period": 820,
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    }
+]

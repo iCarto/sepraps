@@ -26,6 +26,7 @@ python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contr
 python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contrato_2022_04.json"
 python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contrato_2023_02.json"
 python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contrato_2023_11.json"
+python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contrato_2019_99.json"
 python "${this_dir}/../back/manage.py" shell < "${this_dir}/data/update_milestones.py"
 python "${this_dir}/../back/manage.py" shell < "${this_dir}/data/set_featured_images.py"
 python "${this_dir}/../back/manage.py" shell < "${this_dir}/data/import_domains.py"
