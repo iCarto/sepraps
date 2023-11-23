@@ -1,0 +1,17 @@
+import {useOutletContext} from "react-router-dom";
+
+import {SectionCard} from "base/ui/section/components";
+import {ViewBuildingComponentsFinancialChart} from "buildingcomponents/container";
+
+const ViewContractProjectAnalysisSubPage = () => {
+    let contract;
+    [contract] = useOutletContext();
+
+    return (
+        <SectionCard title="Supervisión de componentes de construcción">
+            <ViewBuildingComponentsFinancialChart filter={{contract: contract.id}} />
+        </SectionCard>
+    );
+};
+
+export default ViewContractProjectAnalysisSubPage;
