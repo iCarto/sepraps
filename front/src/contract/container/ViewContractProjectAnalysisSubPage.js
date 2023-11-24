@@ -1,7 +1,10 @@
 import {useOutletContext} from "react-router-dom";
 
 import {SectionCard} from "base/ui/section/components";
-import {ViewBuildingComponentsFinancialChart} from "buildingcomponents/container";
+import {
+    ViewBuildingComponentsFinancialChart,
+    ViewBuildingComponentsFinancialData,
+} from "buildingcomponents/container";
 
 const ViewContractProjectAnalysisSubPage = () => {
     let contract;
@@ -10,6 +13,7 @@ const ViewContractProjectAnalysisSubPage = () => {
     return (
         <SectionCard title="Supervisión de componentes de construcción">
             <ViewBuildingComponentsFinancialChart filter={{contract: contract.id}} />
+            <ViewBuildingComponentsFinancialData filter={{contract: contract.id}} />
         </SectionCard>
     );
 };

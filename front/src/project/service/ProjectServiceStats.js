@@ -11,6 +11,16 @@ const ProjectStatsService = {
             return response;
         });
     },
+
+    getBuildingComponentsTotalStats(filter) {
+        return AuthApiService.get(
+            `${basePath}/buildingcomponentstotal?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`
+        ).then(response => {
+            return response;
+        });
+    },
 };
 
 export default ProjectStatsService;

@@ -1,14 +1,10 @@
 import {useEffect, useState} from "react";
-import {useOutletContext} from "react-router-dom";
 
 import {ProjectStatsService} from "project/service";
 
 import {BarChart} from "base/chart/components";
 
 const ViewBuildingComponentsFinancialChart = ({filter}) => {
-    let contract;
-    [contract] = useOutletContext();
-
     const [chartData, setChartData] = useState(null);
     const [maxChartData, setMaxChartData] = useState(null);
 
