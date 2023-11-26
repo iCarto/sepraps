@@ -21,6 +21,16 @@ const ProjectStatsService = {
             return response;
         });
     },
+
+    getSocialComponentTrainingsStats(groupByAttribute = "component_code", filter) {
+        return AuthApiService.get(
+            `${basePath}/socialcomponenttrainings/${groupByAttribute}?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`
+        ).then(response => {
+            return response;
+        });
+    },
 };
 
 export default ProjectStatsService;

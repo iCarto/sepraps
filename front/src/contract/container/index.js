@@ -27,3 +27,6 @@ export {
 export {
     default as ViewContractProjectAnalysisSubPage,
 } from "./ViewContractProjectAnalysisSubPage";
+export {
+    default as ViewContractProjectSocialAnalysisSubPage,
+} from "./ViewContractProjectSocialAnalysisSubPage";

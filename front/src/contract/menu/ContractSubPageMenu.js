@@ -52,6 +52,10 @@ const ContractSubPageMenu = ({contract}) => {
             to: `${basePath}/social`,
             text: "Supervisión",
         },
+        {
+            to: `${basePath}/project_social_analysis`,
+            text: "Análisis de proyectos",
+        },
     ];
 
     return (
