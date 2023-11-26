@@ -200,5 +200,10 @@
         {
             "code": "instalacion_sanitarios"
         }
-    ]
+    ],
+    "social_components": {
+        "mantienimiento_banos": {
+            "name": "Asistencia técnica y capacitación en mantenimiento de baños"
+        }
+    }
 }

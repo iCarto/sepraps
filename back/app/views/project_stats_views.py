@@ -1,3 +1,4 @@
+import pandas as pd
 from django.db import connection
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
@@ -97,3 +98,61 @@ def get_building_components_total_stats(request, format=None):
         ]
 
         return JsonResponse(result[0])
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+@renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
+def get_social_component_trainings_stats(request, group_code, format=None):
+    group_by_attribute = "scm.code"
+    if group_code == "target_population":
+        group_by_attribute = "sct.target_population"
+    elif group_code == "method":
+        group_by_attribute = "sct.method"
+
+    query = """
+            SELECT
+                {group_by_attribute} as code,
+                sum(number_of_woman) as number_of_woman,
+                sum(number_of_men) as number_of_men,
+                round((cast(sum(number_of_woman) as decimal) / (sum(number_of_woman) + sum(number_of_men))) * 100)::numeric as women_percentage,
+                sum(number_of_hours) as number_of_hours
+            FROM social_component_training sct
+                INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
+                JOIN (
+                    {join_query}
+                ) projects ON projects.project_id = scm.project_id
+            GROUP BY {group_by_attribute}
+            ORDER BY {group_by_attribute}
+            """
+
+    with connection.cursor() as cursor:
+        cursor.execute(
+            query.format(
+                group_by_attribute=group_by_attribute,
+                join_query=get_filter_join_query(request.GET),
+            )
+        )
+        result = dictfetchall(cursor)
+
+        if not result:
+            df = pd.DataFrame(
+                [["total", 0, 0, 0, 0]],
+                columns=[
+                    "code",
+                    "number_of_woman",
+                    "number_of_men",
+                    "women_percentage",
+                    "number_of_hours",
+                ],
+            )
+            return Response(df)
+
+        df = pd.DataFrame(result)
+        df.loc["Total"] = df[
+            ["number_of_woman", "number_of_men", "number_of_hours"]
+        ].sum(numeric_only=True)
+        df.at["Total", "women_percentage"] = df["women_percentage"].mean()
+        df.at["Total", "code"] = "total"
+
+        return Response(df)

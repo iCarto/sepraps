@@ -73,10 +73,10 @@ def get_geodf_from_response(response):
 
 
 def get_df_from_response(response):
-    if not response:
-        return pd.DataFrame()
     if isinstance(response, pd.DataFrame):
         return response
+    if not response:
+        return pd.DataFrame()
     return pd.DataFrame(response)
 
 
