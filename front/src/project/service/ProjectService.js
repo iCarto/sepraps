@@ -12,6 +12,10 @@ import {
     project_questionnaire_api_adapter,
 } from "questionnaire/model";
 import {createEntityService} from "base/entity/service";
+import createBuildingComponentMonitoring, {
+    building_component_monitoring_api_adapter,
+    createBuildingComponentMonitorings,
+} from "buildingComponentMonitoring/model/BuildingComponentMonitoring";
 
 const basePath = "/api/app/projects";
 
@@ -81,6 +85,35 @@ const ProjectService = {
                 return createPhases(phases_api_adapter(phases));
             }
         );
+    },
+
+    getProjectBuildingComponentTypes(projectId) {
+        return AuthApiService.get(
+            `${basePath}/${projectId}/buildingcomponenttypes`
+        ).then(response => {
+            return response;
+        });
+    },
+
+    getProjectBuildingComponents(projectId) {
+        return AuthApiService.get(
+            `${basePath}/${projectId}/buildingcomponentmonitorings`
+        ).then(response => {
+            return createBuildingComponentMonitorings(
+                building_component_monitoring_api_adapter(response)
+            );
+        });
+    },
+
+    createProjectBuildingComponent(projectId, buildingComponent) {
+        return AuthApiService.post(
+            `${basePath}/${projectId}/buildingcomponentmonitorings`,
+            buildingComponent
+        ).then(response => {
+            return createBuildingComponentMonitoring(
+                building_component_monitoring_api_adapter(response)
+            );
+        });
     },
 
     updateProjectWithPatch(project) {
