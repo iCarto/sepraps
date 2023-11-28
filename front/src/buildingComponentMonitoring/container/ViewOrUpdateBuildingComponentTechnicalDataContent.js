@@ -1,7 +1,10 @@
 import {useState} from "react";
+import {BuildingComponentService} from "buildingComponent/service";
+import {building_component_view_adapter} from "buildingComponent/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {BuildingCompontentTechnicalData} from "buildingComponentMonitoring/presentational";
+import {BuildingComponentTechnicalDataForm} from "buildingComponentMonitoring/presentational/form";
 
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -11,19 +14,18 @@ const ViewOrUpdateBuildingComponentTechnicalDataContent = ({buildingComponent}) 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
 
-    const handleFormSubmit = contractService => {
-        console.log({contractService});
-        // ContractServiceService.update(
-        //     contract_service_view_adapter({...contractService})
-        // )
-        //     .then(updatedContractService => {
-        //         setMode("view");
-        //         navigate("", true);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         setError(error);
-        //     });
+    const handleFormSubmit = updatedData => {
+        BuildingComponentService.update(
+            building_component_view_adapter({...buildingComponent, ...updatedData})
+        )
+            .then(updatedBuildingComponent => {
+                setMode("view");
+                navigate("", true);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error);
+            });
     };
 
     const actions = [
@@ -47,17 +49,16 @@ const ViewOrUpdateBuildingComponentTechnicalDataContent = ({buildingComponent}) 
             );
         }
         if (mode === "edit") {
-            return;
-            // return (
-            //     <ContractServiceForm
-            //         buildingComponent={buildingComponent}
-            //         onSubmit={handleFormSubmit}
-            //         onCancel={() => {
-            //             setMode("view");
-            //         }}
-            //         error={error}
-            //     />
-            // );
+            return (
+                <BuildingComponentTechnicalDataForm
+                    buildingComponent={buildingComponent}
+                    onSubmit={handleFormSubmit}
+                    onCancel={() => {
+                        setMode("view");
+                    }}
+                    error={error}
+                />
+            );
         }
     };
 
