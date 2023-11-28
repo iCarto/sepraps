@@ -1,4 +1,8 @@
-import {SubPageMenu, SubPageMenuListItemButton} from "base/ui/menu";
+import {
+    SubPageMenu,
+    SubPageMenuListGroup,
+    SubPageMenuListItemButton,
+} from "base/ui/menu";
 import {QuestionnairesMenu} from "questionnaire/presentational";
 import {SelectProjectDropDown} from "project/menu";
 
@@ -10,9 +14,17 @@ import FolderOpenIconOutlined from "@mui/icons-material/FolderOpenOutlined";
 import PermContactCalendarIconOutlined from "@mui/icons-material/PermContactCalendarOutlined";
 import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
+import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/list/${project?.id}`;
+
+    const buildingSupervisionAreaSubmenuItems = [
+        {
+            to: `${basePath}/buildingcomponent`,
+            text: "Componentes",
+        },
+    ];
 
     return (
         <SubPageMenu subPageMenuDropdown={<SelectProjectDropDown project={project} />}>
@@ -67,6 +79,12 @@ const ProjectSubPageMenu = ({project}) => {
             <QuestionnairesMenu
                 questionnaires={project?.questionnaires}
                 basePath={`/projects/list/${project?.id}`}
+            />
+            <SubPageMenuListGroup
+                headerTitle="Supervisión de obra"
+                headerIcon={<HandymanOutlinedIcon />}
+                items={buildingSupervisionAreaSubmenuItems}
+                expanded={true}
             />
         </SubPageMenu>
     );

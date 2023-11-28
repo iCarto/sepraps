@@ -22,6 +22,7 @@ import {
     ViewProjectFieldReportSubPage,
     ViewProjectDocumentPanel,
     ViewProjectStatsPage,
+    ViewProjectBuildingComponentSubPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -32,6 +33,11 @@ import {
     ViewStatsByPhaseSubPage,
     ViewStatsByQuestionnairesSubPage,
 } from "stats/container";
+import {ViewDocumentPanel} from "base/file/components";
+import {
+    CreateBuildingComponentContent,
+    ViewBuildingComponentContent,
+} from "buildingComponentMonitoring/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -139,6 +145,28 @@ const projectRoutes = [
                     path=":instanceId/:action"
                     element={<UpdateProjectQuestionnaireInstancePanel />}
                 />
+            </Route>
+            <Route
+                key="project-building-components"
+                path="buildingcomponent"
+                element={<ViewProjectBuildingComponentSubPage />}
+            >
+                <Route
+                    key="project-building-components-new"
+                    path="new"
+                    element={<CreateBuildingComponentContent />}
+                />
+                <Route
+                    key="project-building-components-detail"
+                    path=":buildingComponentId"
+                    element={<ViewBuildingComponentContent />}
+                >
+                    <Route
+                        key="project-building-components-detail-documents-view"
+                        path="document/:idDocument"
+                        element={<ViewDocumentPanel />}
+                    />
+                </Route>
             </Route>
             <Route
                 key="project-fieldreport-detail"
