@@ -6,6 +6,7 @@ import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/se
 import {SIDEBAR_PANEL_DRAWER_WIDTH} from "base/ui/app/config/measurements";
 
 import {
+    ViewOrUpdateBuildingComponentFilesDataContent,
     ViewOrUpdateBuildingComponentMonitoringDataContent,
     ViewOrUpdateBuildingComponentTechnicalDataContent,
 } from ".";
@@ -63,7 +64,9 @@ const ViewBuildingComponentContent = () => {
                             buildingComponentMonitoring?.building_component
                         }
                     />
-                    {/* <ViewPaymentProductsContent payment={buildingComponentMonitoring} /> */}
+                    <ViewOrUpdateBuildingComponentFilesDataContent
+                        buildingComponentMonitoring={buildingComponentMonitoring}
+                    />
                     <ViewBuildingComponentMonitoringCommentsContent
                         buildingComponentMonitoring={buildingComponentMonitoring}
                     />
