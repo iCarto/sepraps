@@ -4,3 +4,6 @@ export {default as ListCommentFolder} from "./ListCommentFolder";
 export {
     default as ViewOrUpdateCommentDataContent,
 } from "./ViewOrUpdateCommentDataContent";
+export {
+    default as ViewBuildingComponentMonitoringCommentsContent,
+} from "./ViewBuildingComponentMonitoringCommentsContent";
