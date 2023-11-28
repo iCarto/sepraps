@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useOutletContext} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
 import {building_component_monitoring_view_adapter} from "buildingComponentMonitoring/model";
@@ -7,28 +7,24 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
-import {PaymentForm} from "payment/presentational/form";
+import {
+    BuildingComponentMonitoringData,
+    BuildingComponentStatusChip,
+} from "buildingComponentMonitoring/presentational";
+import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
 
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import Stack from "@mui/material/Stack";
 import CardContent from "@mui/material/CardContent";
-
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {
-    BuildingComponentMonitoringData,
-    BuildingComponentStatusChip,
-} from "buildingComponentMonitoring/presentational";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 
-const ViewOrUpdateBuildingComponentMonitoringDataContent = ({
-    projectId,
-    buildingComponent,
-}) => {
+const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent}) => {
     const navigate = useNavigateWithReload();
-    const [project] = useOutletContext();
+    const {id: projectId} = useParams();
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
@@ -36,7 +32,7 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({
 
     const handleDelete = () => {
         BuildingComponentMonitoringService.delete(buildingComponent.id).then(() => {
-            navigate(`/contracts/list/${projectId}/buildingcomponent`, true);
+            navigate(`/projects/list/${projectId}/buildingcomponent`, true);
         });
     };
 
@@ -85,10 +81,8 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({
         }
         if (mode === "edit") {
             return (
-                <PaymentForm
-                    contractId={projectId}
-                    contract={project}
-                    payment={buildingComponent}
+                <BuildingComponentMonitoringForm
+                    bcMonitoring={buildingComponent}
                     onSubmit={handleFormSubmit}
                     onCancel={() => {
                         setMode("view");

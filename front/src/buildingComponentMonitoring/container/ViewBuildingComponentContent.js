@@ -56,7 +56,6 @@ const ViewBuildingComponentContent = () => {
             <PageContainer open={isSidebarPanelOpen}>
                 <Stack spacing={1}>
                     <ViewOrUpdateBuildingComponentMonitoringDataContent
-                        projectId={buildingComponentMonitoring.project}
                         buildingComponent={buildingComponentMonitoring}
                     />
                     <ViewOrUpdateBuildingComponentTechnicalDataContent
