@@ -10,14 +10,6 @@ export {
 } from "./Contract";
 
 export {
-    default as createContractSupervisionArea,
-    createContractSupervisionAreas,
-    contract_supervision_area_api_adapter,
-    contract_supervision_areas_api_adapter,
-    contract_supervision_area_view_adapter,
-} from "./ContractSupervisionArea";
-
-export {
     default as createContractService,
     createContractServices,
     contract_service_api_adapter,
