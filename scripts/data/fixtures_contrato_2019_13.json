@@ -1006,5 +1006,41 @@
             "contract": null,
             "contractor": null
         }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 1,
+            "project": 1,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 1,
+            "project": 2,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 1,
+            "project": 3,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 1,
+            "project": 4,
+            "construction": true
+        }
     }
 ]

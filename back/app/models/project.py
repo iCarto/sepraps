@@ -41,7 +41,7 @@ class Project(models.Model):
         on_delete=models.PROTECT,
         verbose_name=ConstructionContract._meta.verbose_name,
         null=True,
-        related_name="projects",
+        related_name="contract_projects",
     )
     provider = models.ForeignKey(
         Provider,

@@ -11,6 +11,7 @@ from django.dispatch import receiver
 
 from app.models.contact import Contact
 from app.models.contact_relationship import ConstructionContractContact
+from app.models.contract_project import ContractProject
 from app.models.contract_service import ContractService
 from app.models.contract_supervision_area import ContractSupervisionArea
 from app.models.contractor import Contractor
@@ -97,6 +98,7 @@ class ConstructionContract(models.Model):
         get_user_model(), on_delete=models.PROTECT, related_name="updated_by+"
     )
 
+    projects = models.ManyToManyField("Project", through=ContractProject)
     financing_program = models.ForeignKey(
         FinancingProgram,
         on_delete=models.PROTECT,
