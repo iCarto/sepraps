@@ -17,7 +17,7 @@ import {ContactsTable} from "contact/presentational";
 import Typography from "@mui/material/Typography";
 import {contract_view_adapter, createContract} from "contract/model";
 
-const ContractorContactsSection = ({contract}) => {
+const ContractContactsSection = ({contract}) => {
     const [selectedElement, setSelectedElement] = useState(null);
 
     const navigate = useNavigateWithReload();
@@ -68,4 +68,4 @@ const ContractorContactsSection = ({contract}) => {
     );
 };
 
-export default ContractorContactsSection;
+export default ContractContactsSection;

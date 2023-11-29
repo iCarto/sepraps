@@ -30,3 +30,4 @@ export {
 export {
     default as ViewContractProjectSocialAnalysisSubPage,
 } from "./ViewContractProjectSocialAnalysisSubPage";
+export {default as ViewContractStaffSubPage} from "./ViewContractStaffSubPage";

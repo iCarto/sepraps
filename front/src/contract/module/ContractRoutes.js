@@ -18,6 +18,8 @@ import {
     ViewContractExecutionSubPage,
     ViewContractProjectAnalysisSubPage,
     ViewContractProjectSocialAnalysisSubPage,
+    ViewContractSupervisionAreaSubPage,
+    ViewContractStaffSubPage,
 } from "../container";
 import {ViewContactPanel} from "contact/container";
 import {ViewPaymentContent, CreatePaymentContent} from "payment/container";
@@ -112,6 +114,11 @@ const contractRoutes = [
                     />
                 </Route>
             </Route>
+            <Route
+                key="contract-building"
+                path="building_staff"
+                element={<ViewContractStaffSubPage area={SUPERVISION_AREAS.BUILDING} />}
+            />
             <Route
                 key="contract-project-analysis"
                 path="project_analysis"
