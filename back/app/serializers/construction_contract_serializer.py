@@ -14,6 +14,9 @@ from app.models.project import Project
 from app.serializers.contact_relationship_serializer import (
     ContactConstructionContractSerializer,
 )
+from app.serializers.contract_supervision_area_serializer import (
+    ContractSupervisionAreaSerializer,
+)
 from app.serializers.contractor_serializer import (
     ContractorSerializer,
     ContractorSummarySerializer,
@@ -37,7 +40,6 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "comments",
             "services",
             "supervision_areas",
-            "is_supervision_contract",
             "total_amount_type",
             "payment_frequency_type",
             "payment_criteria_type",
@@ -94,6 +96,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
         source="creation_user.username", required=False
     )
     questionnaires = serializers.SerializerMethodField()
+    supervision_areas = ContractSupervisionAreaSerializer(many=True, read_only=True)
 
     domain_fields = [
         BaseDomainField("services", DomainCategoryChoices.service_type, many=True),

@@ -13,7 +13,7 @@ class ContractServiceValue(models.Model):
 
     contract_service = models.ForeignKey(
         "ContractService",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         null=True,
         related_name="contract_service_values",
     )

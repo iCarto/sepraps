@@ -7,5 +7,9 @@
             "label": "Fecha de recepción definitiva",
             "type": "date"
         }
+    },
+    "staff": {
+        "building": ["supervisor_obra", "fiscal_obra", "residente_obra"],
+        "social": ["supervisor_social", "coordinador_social"]
     }
 }

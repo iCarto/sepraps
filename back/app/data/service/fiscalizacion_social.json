@@ -2,5 +2,8 @@
     "code": "fiscalizacion_social",
     "name": "Fiscalización social",
     "supervision_areas": ["social"],
-    "properties": {}
+    "properties": {},
+    "staff": {
+        "social": ["supervisor_social", "coordinador_social"]
+    }
 }

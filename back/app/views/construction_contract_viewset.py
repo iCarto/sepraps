@@ -124,20 +124,7 @@ class ConstructionContractViewSet(ModelListViewSet):
     )
     def get_contract_projects(self, request, pk):
         contract = self.get_object()
-        projects = []
-        if contract.is_supervision_contract:
-            supervision_areas = ContractSupervisionArea.objects.filter(
-                supervision_contract=contract
-            )
-            projects_result = [
-                list(supervised_contract.contract.projects.all())
-                for supervised_contract in supervision_areas
-            ]
-
-            projects = [item for sublist in projects_result for item in sublist]  # flat
-
-        else:
-            projects = contract.projects
+        projects = contract.projects
         return Response(
             ProjectSummarySerializer(
                 projects, many=True, context={"request": request}
@@ -157,13 +144,13 @@ class ConstructionContractViewSet(ModelListViewSet):
     @action(
         methods=["GET"],
         detail=True,
-        url_path="supervisionareas/(?P<code>[^/.]+)",
+        url_path="supervisionareas/(?P<area>[^/.]+)",
         url_name="contract_supervision_areas",
     )
-    def get_contract_supervision_areas(self, request, code, pk):
+    def get_contract_supervision_areas(self, request, area, pk):
         return Response(
             ContractSupervisionAreaSerializer(
-                ContractSupervisionArea.objects.filter(code=code, contract=pk).first()
+                ContractSupervisionArea.objects.filter(area=area, contract=pk).first()
             ).data
         )
 

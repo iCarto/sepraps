@@ -115,23 +115,6 @@ class ConstructionContract(models.Model):
     def __str__(self):
         return self.number
 
-    @property
-    def supervision_areas(self):
-        return list(
-            ContractService.objects.filter(contract=self.id)
-            .annotate(
-                supervision_areas_agg=Func(F("supervision_areas"), function="unnest")
-            )
-            .values_list("supervision_areas_agg", flat=True)
-            .distinct()
-        )
-
-    @property
-    def is_supervision_contract(self):
-        return ContractSupervisionArea.objects.filter(
-            supervision_contract=self
-        ).exists()
-
 
 @receiver(pre_save, sender=ConstructionContract)
 def contract_pre_save(sender, instance, *args, **kwargs):
@@ -159,14 +142,10 @@ def contract_post_save(sender, instance, created, *args, **kwargs):
         set(instance.services) - set(instance._old_services)
     )
     if contract_services_to_delete or contract_services_to_create:
-        supervision_areas_old = instance.supervision_areas
-
         update_contract_services(
             instance, contract_services_to_delete, contract_services_to_create
         )
-
-        supervision_areas_new = instance.supervision_areas
-        update_supervision_areas(instance, supervision_areas_old, supervision_areas_new)
+        update_supervision_areas(instance)
 
 
 def update_contract_services(
@@ -189,21 +168,24 @@ def update_contract_services(
         contract_service.save()
 
 
-def update_supervision_areas(contract, supervision_areas_old, supervision_areas_new):
-    supervision_areas_to_delete = list(
-        set(supervision_areas_old) - set(supervision_areas_new)
-    )
-    supervision_areas_to_create = list(
-        set(supervision_areas_new) - set(supervision_areas_old)
-    )
-    for supervision_area in supervision_areas_to_delete:
-        ContractSupervisionArea.objects.filter(
-            code=supervision_area, contract=contract
-        ).delete()
+def update_supervision_areas(contract):
+    contract.supervision_areas.all().delete()
 
-    for supervision_area in supervision_areas_to_create:
+    service_areas_to_store = {}
+    for service in contract.services:
+        data = get_service_data(service)
+        service_areas = data.get("supervision_areas", [])
+        for area in service_areas:
+            service_areas_to_store[area] = list(
+                set(
+                    data.get("staff", {}).get(area, [])
+                    + service_areas_to_store.get(area, [])
+                )
+            )
+
+    for area_code, staff_values in service_areas_to_store.items():
         contract_supervision_area = ContractSupervisionArea(
-            code=supervision_area, contract=contract
+            area=area_code, contract=contract, staff=staff_values
         )
         contract_supervision_area.save()
 

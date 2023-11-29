@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
@@ -14,22 +15,12 @@ class ContractSupervisionArea(models.Model):
         verbose_name = "Área de supervisión"
         verbose_name_plural = "Áreas de supervisión"
 
-    code = models.CharField("Código", max_length=20, choices=SUPERVISION_AREA_CHOICES)
-
-    supervisor = models.ForeignKey(
-        "Contact", null=True, on_delete=models.PROTECT, related_name="supervisor+"
-    )
-    supervision_contract = models.ForeignKey(
-        "ConstructionContract",
-        on_delete=models.PROTECT,
-        verbose_name="Contrato de supervisión",
-        null=True,
-        related_name="supervised_contracts",
-    )
+    area = models.CharField("Código", max_length=20, choices=SUPERVISION_AREA_CHOICES)
+    staff = ArrayField(models.CharField(max_length=50), null=False)
 
     contract = models.ForeignKey(
         "ConstructionContract",
         on_delete=models.PROTECT,
         verbose_name="Contrato",
-        related_name="contract_supervision_areas",
+        related_name="supervision_areas",
     )
