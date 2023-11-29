@@ -5,9 +5,7 @@ export {
 export {
     default as ViewOrUpdateBuildingComponentTechnicalDataContent,
 } from "./ViewOrUpdateBuildingComponentTechnicalDataContent";
-export {
-    default as CreateBuildingComponentContent,
-} from "./CreateBuildingComponentContent";
+
 export {default as ListBuildingComponentFolder} from "./ListBuildingComponentFolder";
 export {
     default as ViewOrUpdateBuildingComponentFilesDataContent,

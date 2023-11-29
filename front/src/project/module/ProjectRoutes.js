@@ -34,10 +34,8 @@ import {
     ViewStatsByQuestionnairesSubPage,
 } from "stats/container";
 import {ViewDocumentPanel} from "base/file/components";
-import {
-    CreateBuildingComponentContent,
-    ViewBuildingComponentContent,
-} from "buildingComponentMonitoring/container";
+import {ViewBuildingComponentContent} from "buildingComponentMonitoring/container";
+import {CreateBuildingComponentContent} from "buildingComponent/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
