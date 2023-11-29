@@ -30,3 +30,4 @@ export {default as ViewOrUpdateContractContent} from "./ViewOrUpdateContractCont
 export {
     default as ViewOrUpdateContractContractorContent,
 } from "./ViewOrUpdateContractContractorContent";
+export {default as ViewContractStaffSubPage} from "./ViewContractStaffSubPage";

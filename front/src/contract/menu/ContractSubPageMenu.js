@@ -11,7 +11,6 @@ import {SelectContractDropDown} from "contract/menu";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
-import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
@@ -38,17 +37,22 @@ const ContractSubPageMenu = ({contract}) => {
 
     const buildingSupervisionAreaSubmenuItems = [
         {
-            to: `${basePath}/building`,
-            text: "Supervisión",
+            to: `${basePath}/building_staff`,
+            text: "Plantel",
         },
     ];
 
     const socialSupervisionAreaSubmenuItems = [
         {
-            to: `${basePath}/social`,
-            text: "Supervisión",
+            to: `${basePath}/social_staff`,
+            text: "Plantel",
         },
     ];
+
+    const contractSupervisionAreas = contract?.supervision_areas
+        ? contract?.supervision_areas?.map(supervisionArea => supervisionArea.area)
+        : [];
+    console.log({contractSupervisionAreas});
 
     return (
         <SubPageMenu
@@ -78,7 +82,7 @@ const ContractSubPageMenu = ({contract}) => {
                 text="Pagos"
                 icon={<RequestQuoteOutlinedIcon />}
             />
-            {contract?.supervision_areas?.includes(SUPERVISION_AREAS.BUILDING) && (
+            {contractSupervisionAreas.includes(SUPERVISION_AREAS.BUILDING) && (
                 <SubPageMenuListGroup
                     headerTitle="Área Técnica"
                     headerIcon={<EngineeringOutlinedIcon />}
@@ -86,7 +90,7 @@ const ContractSubPageMenu = ({contract}) => {
                     expanded={true}
                 />
             )}
-            {contract?.supervision_areas?.includes(SUPERVISION_AREAS.SOCIAL) && (
+            {contractSupervisionAreas.includes(SUPERVISION_AREAS.SOCIAL) && (
                 <SubPageMenuListGroup
                     headerTitle="Área Social"
                     headerIcon={<GroupsOutlinedIcon />}
