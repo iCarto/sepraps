@@ -1,6 +1,8 @@
 from decimal import Decimal
 
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
 from app.models.comment import Comment
@@ -22,17 +24,17 @@ class BuildingComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
     expected_amount = models.DecimalField(
         "Monto previsto", max_digits=20, decimal_places=2, null=True
     )
-    expected_end_date = models.DateField("Fecha de fin prevista", null=True)
+    expected_end_date = models.DateField("Fecha de finalización prevista", null=True)
 
     paid_amount = models.DecimalField(
-        "Monto pagado", max_digits=20, decimal_places=2, null=True
+        "Monto real actual", max_digits=20, decimal_places=2, null=True
     )
     pending_amount = models.DecimalField(
         "Monto pendiente", max_digits=20, decimal_places=2, null=True
     )
-    real_end_date = models.DateField("Fecha de fin real", null=True)
+    real_end_date = models.DateField("Fecha de finalización real", null=True)
     physical_progress_percentage = models.DecimalField(
-        "Porcentaje de progreso físico", max_digits=5, decimal_places=2, null=True
+        "Porcentaje de avance físico", max_digits=5, decimal_places=2, null=True
     )
 
     building_component = models.ForeignKey(
@@ -57,3 +59,9 @@ class BuildingComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
             total_amount = Decimal(self.total_amount)
             return format_decimal((total_amount / (self.expected_amount)) * 100)
         return None
+
+
+@receiver(pre_save, sender=BuildingComponentMonitoring)
+def component_pre_save(sender, instance, *args, **kwargs):
+    if instance.execution_status == "finalizado":
+        instance.pending_amount = 0
