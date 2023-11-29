@@ -468,5 +468,59 @@
             "questionnaire_instance": 21,
             "questionnaire": "certificacion_mensual"
         }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 2,
+            "project": 5,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 2,
+            "project": 6,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 2,
+            "project": 7,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 2,
+            "project": 8,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 2,
+            "project": 9,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 2,
+            "project": 10,
+            "construction": true
+        }
     }
 ]

@@ -124,10 +124,9 @@ class ConstructionContractViewSet(ModelListViewSet):
     )
     def get_contract_projects(self, request, pk):
         contract = self.get_object()
-        projects = contract.projects
         return Response(
             ProjectSummarySerializer(
-                projects, many=True, context={"request": request}
+                contract.projects, many=True, context={"request": request}
             ).data
         )
 
