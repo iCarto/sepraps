@@ -18,12 +18,6 @@ export {default as ViewContractAwardingSubPage} from "./ViewContractAwardingSubP
 export {default as ViewContractBudgetSubPage} from "./ViewContractBudgetSubPage";
 export {default as ViewContractExecutionSubPage} from "./ViewContractExecutionSubPage";
 export {
-    default as ViewContractSupervisionAreaSubPage,
-} from "./ViewContractSupervisionAreaSubPage";
-export {
-    default as ViewOrUpdateSupervisionAreaContent,
-} from "./ViewOrUpdateSupervisionAreaContent";
-export {
     default as ViewOrUpdateSupervisionServiceContent,
 } from "./ViewOrUpdateSupervisionServiceContent";
 export {default as ViewOrUpdateContractContent} from "./ViewOrUpdateContractContent";
