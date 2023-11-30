@@ -15,6 +15,7 @@ import PermContactCalendarIconOutlined from "@mui/icons-material/PermContactCale
 import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
 
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/list/${project?.id}`;
@@ -22,6 +23,13 @@ const ProjectSubPageMenu = ({project}) => {
     const buildingSupervisionAreaSubmenuItems = [
         {
             to: `${basePath}/buildingcomponent`,
+            text: "Componentes",
+        },
+    ];
+
+    const socialSupervisionAreaSubmenuItems = [
+        {
+            to: `${basePath}/socialcomponent`,
             text: "Componentes",
         },
     ];
@@ -84,6 +92,12 @@ const ProjectSubPageMenu = ({project}) => {
                 headerTitle="Supervisión de obra"
                 headerIcon={<HandymanOutlinedIcon />}
                 items={buildingSupervisionAreaSubmenuItems}
+                expanded={true}
+            />
+            <SubPageMenuListGroup
+                headerTitle="Supervisión social"
+                headerIcon={<Diversity3Icon />}
+                items={socialSupervisionAreaSubmenuItems}
                 expanded={true}
             />
         </SubPageMenu>

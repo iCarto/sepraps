@@ -35,3 +35,6 @@ export {default as ViewProjectStatsPage} from "./ViewProjectStatsPage";
 export {
     default as ViewProjectBuildingComponentSubPage,
 } from "./ViewProjectBuildingComponentSubPage";
+export {
+    default as ViewProjectSocialComponentSubPage,
+} from "./ViewProjectSocialComponentSubPage";

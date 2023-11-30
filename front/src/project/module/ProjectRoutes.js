@@ -23,6 +23,7 @@ import {
     ViewProjectDocumentPanel,
     ViewProjectStatsPage,
     ViewProjectBuildingComponentSubPage,
+    ViewProjectSocialComponentSubPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -38,6 +39,10 @@ import {
     CreateBuildingComponentContent,
     ViewBuildingComponentContent,
 } from "buildingComponent/container";
+import {
+    CreateSocialComponentContent,
+    ViewSocialComponentContent,
+} from "socialComponentMonitoring/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -168,7 +173,7 @@ const projectRoutes = [
                     />
                 </Route>
             </Route>
-            {/* <Route
+            <Route
                 key="project-social-components"
                 path="socialcomponent"
                 element={<ViewProjectSocialComponentSubPage />}
@@ -189,7 +194,7 @@ const projectRoutes = [
                         element={<ViewDocumentPanel />}
                     />
                 </Route>
-            </Route> */}
+            </Route>
             <Route
                 key="project-fieldreport-detail"
                 path="fieldreport/:fieldReportId?"
