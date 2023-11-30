@@ -3,6 +3,7 @@ export const DYNAMIC_TYPES = {
     INTEGER: "integer",
     DECIMAL: "decimal",
     DATE: "date",
+    DOMAIN: "domain",
 };
 
 export {default as DynamicFormUtil} from "./DynamicFormUtil";

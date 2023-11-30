@@ -1,6 +1,5 @@
-import Grid from "@mui/material/Grid";
-import {FieldUtil} from "base/ui/section/utilities";
 import {DynamicFieldUtil} from "../utilities";
+import Grid from "@mui/material/Grid";
 
 const DynamicSectionFields = ({attributes, columns = 2}) => {
     return (

@@ -1,4 +1,5 @@
-import {SectionField} from "../components";
+import {DomainProvider} from "sepraps/domain/provider";
+import {SectionDomainField, SectionField} from "../components";
 
 const FieldUtil = {
     getValue(value, unit) {
@@ -11,9 +12,7 @@ const FieldUtil = {
 
     getSectionField(label, value, unit = "") {
         if (value) {
-            return (
-                <SectionField key={label} label={label} value={`${value} ${unit}`} />
-            );
+            return <SectionField key={label} label={label} value={value} unit={unit} />;
         } else
             return (
                 <SectionField
@@ -23,6 +22,14 @@ const FieldUtil = {
                     valueCustomStyle={{fontStyle: "italic"}}
                 />
             );
+    },
+
+    getSectionDomainField(label, value, domain) {
+        return (
+            <DomainProvider>
+                <SectionDomainField label={label} value={value} fieldDomain={domain} />
+            </DomainProvider>
+        );
     },
 };
 

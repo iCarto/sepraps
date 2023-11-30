@@ -14,10 +14,17 @@ const DynamicFieldUtil = {
         if (attributeSchema.type === DYNAMIC_TYPES.DECIMAL) {
             value = NumberUtil.formatDecimal(value);
         }
+        if (attributeSchema.type === DYNAMIC_TYPES.DOMAIN) {
+            return FieldUtil.getSectionDomainField(
+                attributeSchema.label,
+                value,
+                attributeSchema.domain
+            );
+        }
         return FieldUtil.getSectionField(
             attributeSchema.label,
             value,
-            attributeSchema.units
+            attributeSchema.unit
         );
     },
 };

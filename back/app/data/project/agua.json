@@ -184,7 +184,7 @@
                 "altura": {
                     "label": "Altura",
                     "type": "integer",
-                    "unit": "m."
+                    "unit": "m"
                 },
                 "capacidad": {
                     "label": "Capacidad",
@@ -199,11 +199,12 @@
                 "profundidad": {
                     "label": "Altura",
                     "type": "decimal",
-                    "unit": "m."
+                    "unit": "m"
                 },
                 "estudioHidrogeologico": {
-                    "label": "Estudio Hidrogeológico",
-                    "type": "yesNoDomain"
+                    "label": "Estudio hidrogeológico",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
                 }
             }
         }

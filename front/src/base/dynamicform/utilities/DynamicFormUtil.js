@@ -1,11 +1,13 @@
+import {DomainProvider} from "sepraps/domain/provider";
+import {FormUtil} from "base/form/utilities";
+import {DYNAMIC_TYPES} from ".";
 import {
     FormDatePicker,
     FormInputDecimal,
     FormInputInteger,
     FormInputText,
 } from "base/form/components";
-import {FormUtil} from "base/form/utilities";
-import {DYNAMIC_TYPES} from ".";
+import {DynamicFormSelect} from "../components";
 
 const DynamicFormUtil = {
     getFormDefaultValues(attributes) {
@@ -49,7 +51,7 @@ const DynamicFormUtil = {
                     key={attributeName}
                     name={attributeName}
                     label={attributeSchema.label}
-                    endAdornment={attributeSchema.units}
+                    endAdornment={attributeSchema.unit}
                 />
             );
         }
@@ -59,8 +61,20 @@ const DynamicFormUtil = {
                     key={attributeName}
                     name={attributeName}
                     label={attributeSchema.label}
-                    endAdornment={attributeSchema.units}
+                    endAdornment={attributeSchema.unit}
                 />
+            );
+        }
+        if (attributeSchema.type === DYNAMIC_TYPES.DOMAIN) {
+            return (
+                <DomainProvider>
+                    <DynamicFormSelect
+                        key={attributeName}
+                        name={attributeName}
+                        label={attributeSchema.label}
+                        fieldDomain={attributeSchema.domain}
+                    />
+                </DomainProvider>
             );
         }
         return (
@@ -68,7 +82,7 @@ const DynamicFormUtil = {
                 key={attributeName}
                 name={attributeName}
                 label={attributeSchema.label}
-                endAdornment={attributeSchema.units}
+                endAdornment={attributeSchema.unit}
             />
         );
     },
