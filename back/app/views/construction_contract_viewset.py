@@ -7,6 +7,7 @@ from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
 from app.models.construction_contract import ConstructionContract
+from app.models.contact_relationship import ContractContact
 from app.models.contract_service import ContractService
 from app.models.contract_supervision_area import ContractSupervisionArea
 from app.models.payment import Payment
@@ -15,6 +16,7 @@ from app.serializers.construction_contract_serializer import (
     ConstructionContractShortSerializer,
     ConstructionContractSummarySerializer,
 )
+from app.serializers.contact_relationship_serializer import ContractContactSerializer
 from app.serializers.contract_service_serializer import ContractServiceSerializer
 from app.serializers.contract_supervision_area_serializer import (
     ContractSupervisionAreaSerializer,
@@ -82,7 +84,7 @@ class ConstructionContractViewSet(ModelListViewSet):
         )
         if self.request.user.belongs_to([GROUP_GESTION, GROUP_EDICION]):
             queryset = queryset.filter(
-                models.Q(constructioncontractcontact__contact__user=self.request.user)
+                models.Q(contractcontact__contact__user=self.request.user)
                 | models.Q(creation_user=self.request.user)
             ).distinct()
         return self.get_serializer_class().setup_eager_loading(queryset)
@@ -139,6 +141,39 @@ class ConstructionContractViewSet(ModelListViewSet):
                 ContractService.objects.filter(contract=pk).order_by("id"), many=True
             ).data
         )
+
+    @action(
+        methods=["GET"], detail=True, url_path="contacts", url_name="contract_contacts"
+    )
+    def get_contract_contacts(self, request, pk):
+        queryset = ContractContact.objects.filter(entity=pk).order_by("id")
+        area = request.GET.get("area", None)
+        if area:
+            area_posts = (
+                ContractSupervisionArea.objects.filter(contract=pk, area=area)
+                .values_list("staff", flat=True)
+                .first()
+            ) or []
+            queryset = queryset.filter(post__in=area_posts)
+        return Response(ContractContactSerializer(queryset, many=True).data)
+
+    @action(
+        methods=["GET"],
+        detail=True,
+        url_path="relatedcontracts",
+        url_name="related_contracts",
+    )
+    def get_contract_related_contracts(self, request, pk):
+        queryset = ContractContact.objects.filter(entity=pk).order_by("id")
+        area = request.GET.get("area", None)
+        if area:
+            area_posts = (
+                ContractSupervisionArea.objects.filter(contract=pk, area=area)
+                .values_list("staff", flat=True)
+                .first()
+            ) or []
+            queryset = queryset.filter(post__in=area_posts)
+        return Response(ContractContactSerializer(queryset, many=True).data)
 
     @action(
         methods=["GET"],

@@ -1,7 +1,7 @@
 [
     {
         "model": "app.contact",
-        "pk": 24,
+        "pk": 25,
         "fields": {
             "name": "Néstor Manuel Brítez Airaldi",
             "gender": "M",
@@ -12,7 +12,7 @@
     },
     {
         "model": "app.contact",
-        "pk": 25,
+        "pk": 26,
         "fields": {
             "name": "Gladys María Belén Brítez",
             "gender": "F",
@@ -109,6 +109,44 @@
         "fields": {
             "contract": 10,
             "project": 6
+        }
+    },
+    {
+        "model": "app.contact",
+        "pk": 27,
+        "fields": {
+            "name": "Supervisors social 02/2023",
+            "gender": "F",
+            "phone": "(021) 123123",
+            "email": "supervisora_social_2023@test.com",
+            "comments": "Supervisora social de este nuevo contrato"
+        }
+    },
+    {
+        "model": "app.contractcontact",
+        "fields": {
+            "entity": 10,
+            "contact": 27,
+            "post": "supervisor_social"
+        }
+    },
+    {
+        "model": "app.contact",
+        "pk": 28,
+        "fields": {
+            "name": "Coordinador social 02/2023",
+            "gender": "M",
+            "phone": "(021) 554366",
+            "email": "coordinador_social_2023@test.com",
+            "comments": "Coordinador social de este nuevo contrato"
+        }
+    },
+    {
+        "model": "app.contractcontact",
+        "fields": {
+            "entity": 10,
+            "contact": 28,
+            "post": "coordinador_social"
         }
     }
 ]

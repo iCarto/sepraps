@@ -11,9 +11,7 @@ from app.models.contractor import Contractor
 from app.models.financing_program import FinancingProgram
 from app.models.milestone import Milestone
 from app.models.project import Project
-from app.serializers.contact_relationship_serializer import (
-    ContactConstructionContractSerializer,
-)
+from app.serializers.contact_relationship_serializer import ContractContactSerializer
 from app.serializers.contract_supervision_area_serializer import (
     ContractSupervisionAreaSerializer,
 )
@@ -58,7 +56,6 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "awarding_accident_insurance",
             "financing_program",
             "contractor",
-            "contacts",
             "execution_signature_date",
             "execution_certificate_start_date",
             "expected_execution_period",
@@ -85,9 +82,6 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
     )
     contractor = serializers.PrimaryKeyRelatedField(
         required=False, allow_null=True, queryset=Contractor.objects.all()
-    )
-    contacts = ContactConstructionContractSerializer(
-        source="constructioncontractcontact_set", many=True, required=False
     )
     projects = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Project.objects.all()
