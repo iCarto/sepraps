@@ -114,13 +114,14 @@ class ProjectViewSet(ModelListViewSet):
         queryset = Project.objects.order_by("-updated_at")
         if self.action == "milestones":
             return queryset
-        if self.request.user.belongs_to([GROUP_GESTION, GROUP_EDICION]):
-            queryset = queryset.filter(
-                Q(
-                    construction_contract__constructioncontractcontact__contact__user=self.request.user
-                )
-                | Q(creation_user=self.request.user)
-            ).distinct()
+        # Removing this condition until user roles are done
+        # if self.request.user.belongs_to([GROUP_GESTION, GROUP_EDICION]):
+        #     queryset = queryset.filter(
+        #         Q(
+        #             construction_contract__constructioncontractcontact__contact__user=self.request.user
+        #         )
+        #         | Q(creation_user=self.request.user)
+        #     ).distinct()
 
         if is_geojson_request(self.request):
             queryset = queryset.annotate(
@@ -180,15 +181,16 @@ class ProjectViewSet(ModelListViewSet):
 
         contract_contacts = []
         contractor_contacts = []
-        if project.construction_contract:
-            contract_contacts = (
-                project.construction_contract.constructioncontractcontact_set.all()
-            )
+        # TODO: Find contacts from associated project contracts
+        # if project.construction_contract:
+        #    contract_contacts = (
+        #        project.construction_contract.constructioncontractcontact_set.all()
+        #    )
 
-            if project.construction_contract.contractor:
-                contractor_contacts = (
-                    project.construction_contract.contractor.contractorcontact_set.all()
-                )
+        #    if project.construction_contract.contractor:
+        #        contractor_contacts = (
+        #            project.construction_contract.contractor.contractorcontact_set.all()
+        #        )
 
         return Response(
             ContactRelationshipSerializer(

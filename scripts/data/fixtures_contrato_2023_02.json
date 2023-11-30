@@ -107,5 +107,24 @@
             "contract": 9,
             "project": 6
         }
+    },
+    {
+        "model": "app.contact",
+        "pk": 24,
+        "fields": {
+            "name": "Supervisor de Obra 02/2023",
+            "gender": "F",
+            "phone": "(021) 678-678",
+            "email": "supervisor_2023@test.com",
+            "comments": "Supervisor de obra de este nuevo contrato"
+        }
+    },
+    {
+        "model": "app.contractcontact",
+        "fields": {
+            "entity": 9,
+            "contact": 24,
+            "post": "supervisor_obra"
+        }
     }
 ]

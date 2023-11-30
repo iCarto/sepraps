@@ -10,7 +10,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from app.models.contact import Contact
-from app.models.contact_relationship import ConstructionContractContact
+from app.models.contact_relationship import ContractContact
 from app.models.contract_project import ContractProject
 from app.models.contract_service import ContractService
 from app.models.contract_supervision_area import ContractSupervisionArea
@@ -112,7 +112,7 @@ class ConstructionContract(models.Model):
         null=True,
         related_name="contract",
     )
-    contacts = models.ManyToManyField(Contact, through=ConstructionContractContact)
+    contacts = models.ManyToManyField(Contact, through=ContractContact)
 
     def __str__(self):
         return self.number

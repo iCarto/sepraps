@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from app.models.contact import Contact
 from app.models.contact_relationship import (
-    ConstructionContractContact,
+    ContractContact,
     ContractorContact,
     ProviderContact,
 )
@@ -132,17 +132,17 @@ class ContactContractorSerializer(ContactRelationshipSerializer):
         return ContactContractorListSerializer(*args, **kwargs)
 
 
-class ContactConstructionContractListSerializer(ContactRelationshipListSerializer):
+class ContractContactListSerializer(ContactRelationshipListSerializer):
     def get_contact_relationship_model(self):
-        return ContactConstructionContractSerializer.Meta.model
+        return ContractContactSerializer.Meta.model
 
 
-class ContactConstructionContractSerializer(ContactRelationshipSerializer):
+class ContractContactSerializer(ContactRelationshipSerializer):
     class Meta(ContactRelationshipSerializer.Meta):
-        model = ConstructionContractContact
-        list_serializer_class = ContactConstructionContractListSerializer
+        model = ContractContact
+        list_serializer_class = ContractContactListSerializer
 
     @classmethod
     def many_init(cls, *args, **kwargs):
         kwargs["child"] = cls()
-        return ContactConstructionContractListSerializer(*args, **kwargs)
+        return ContractContactListSerializer(*args, **kwargs)
