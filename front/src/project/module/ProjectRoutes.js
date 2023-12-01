@@ -34,8 +34,10 @@ import {
     ViewStatsByQuestionnairesSubPage,
 } from "stats/container";
 import {ViewDocumentPanel} from "base/file/components";
-import {ViewBuildingComponentContent} from "buildingComponentMonitoring/container";
-import {CreateBuildingComponentContent} from "buildingComponent/container";
+import {
+    CreateBuildingComponentContent,
+    ViewBuildingComponentContent,
+} from "buildingComponent/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -166,6 +168,28 @@ const projectRoutes = [
                     />
                 </Route>
             </Route>
+            {/* <Route
+                key="project-social-components"
+                path="socialcomponent"
+                element={<ViewProjectSocialComponentSubPage />}
+            >
+                <Route
+                    key="project-social-components-new"
+                    path="new"
+                    element={<CreateSocialComponentContent />}
+                />
+                <Route
+                    key="project-social-components-detail"
+                    path=":socialComponentId"
+                    element={<ViewSocialComponentContent />}
+                >
+                    <Route
+                        key="project-social-components-detail-documents-view"
+                        path="document/:idDocument"
+                        element={<ViewDocumentPanel />}
+                    />
+                </Route>
+            </Route> */}
             <Route
                 key="project-fieldreport-detail"
                 path="fieldreport/:fieldReportId?"

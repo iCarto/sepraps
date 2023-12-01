@@ -11,7 +11,7 @@ import {ProjectService} from "project/service";
 import {ContentLayout} from "base/ui/main";
 import {AlertError} from "base/error/components";
 import {PaperContainer} from "base/shared/components";
-import {BuildingComponentListSelector} from "buildingComponentMonitoring/presentational";
+import {BuildingComponentListSelector} from "buildingComponent/presentational";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";

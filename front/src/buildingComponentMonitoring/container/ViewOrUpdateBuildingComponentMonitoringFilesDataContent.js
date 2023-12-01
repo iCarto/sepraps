@@ -1,12 +1,12 @@
-import {ListBuildingComponentFolder} from ".";
+import {ListBuildingComponentMonitoringFolder} from ".";
 import {SectionCard} from "base/ui/section/components";
 
-const ViewOrUpdateBuildingComponentFilesDataContent = ({
+const ViewOrUpdateBuildingComponentMonitoringFilesDataContent = ({
     buildingComponentMonitoring,
 }) => {
     return (
         <SectionCard title="Archivos adjuntos">
-            <ListBuildingComponentFolder
+            <ListBuildingComponentMonitoringFolder
                 folderPath={buildingComponentMonitoring.folder}
                 basePath={""}
             />
@@ -14,4 +14,4 @@ const ViewOrUpdateBuildingComponentFilesDataContent = ({
     );
 };
 
-export default ViewOrUpdateBuildingComponentFilesDataContent;
+export default ViewOrUpdateBuildingComponentMonitoringFilesDataContent;

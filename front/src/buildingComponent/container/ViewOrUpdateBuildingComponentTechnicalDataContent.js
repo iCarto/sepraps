@@ -3,8 +3,8 @@ import {BuildingComponentService} from "buildingComponent/service";
 import {building_component_view_adapter} from "buildingComponent/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
-import {BuildingCompontentTechnicalData} from "buildingComponentMonitoring/presentational";
 import {BuildingComponentTechnicalDataForm} from "buildingComponentMonitoring/presentational/form";
+import {BuildingCompontentTechnicalData} from "buildingComponent/presentational";
 
 import EditIcon from "@mui/icons-material/Edit";
 

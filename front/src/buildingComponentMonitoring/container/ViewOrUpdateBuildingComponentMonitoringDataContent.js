@@ -7,11 +7,9 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
-import {
-    BuildingComponentMonitoringData,
-    BuildingComponentStatusChip,
-} from "buildingComponentMonitoring/presentational";
+import {BuildingComponentMonitoringData} from "buildingComponentMonitoring/presentational";
 import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
+import {BuildingComponentStatusChip} from "socialComponentMonitoring/presentational";
 
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";

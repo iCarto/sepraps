@@ -49,8 +49,8 @@ const getStatusIcon = (value, outlined = false) => {
     });
 };
 
-const BuildingComponentStatusChip = ({label, value}) => (
+const BuildingComponentMonitoringStatusChips = ({label, value}) => (
     <Chip label={label} color={getStatusColor(value)} icon={getStatusIcon(value)} />
 );
 
-export {BuildingComponentStatusChip as default, getStatusIcon};
+export {BuildingComponentMonitoringStatusChips as default, getStatusIcon};

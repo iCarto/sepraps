@@ -10,7 +10,7 @@ import {FileUploadSection, FolderTable} from "base/file/components";
 
 import Grid from "@mui/material/Grid";
 
-const ListBuildingComponentFolder = ({folderPath, basePath}) => {
+const ListBuildingComponentMonitoringFolder = ({folderPath, basePath}) => {
     const navigate = useNavigate();
 
     const [folderElement, setFolderElement] = useState(null);
@@ -63,4 +63,4 @@ const ListBuildingComponentFolder = ({folderPath, basePath}) => {
     );
 };
 
-export default ListBuildingComponentFolder;
+export default ListBuildingComponentMonitoringFolder;

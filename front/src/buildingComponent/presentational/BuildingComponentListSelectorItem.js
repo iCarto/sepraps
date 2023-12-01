@@ -1,4 +1,4 @@
-import {getStatusIcon} from "./BuildingComponentStatusChip";
+import {getStatusIcon} from "payment/presentational/PaymentStatusChip";
 import {TextLink} from "base/navigation/components";
 
 import ListItem from "@mui/material/ListItem";
