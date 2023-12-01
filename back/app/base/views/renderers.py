@@ -72,12 +72,20 @@ def get_geodf_from_response(response):
     return df  # noqa: WPS331
 
 
+def get_df_from_response(response):
+    if isinstance(response, pd.DataFrame):
+        return response
+    if not response:
+        return pd.DataFrame()
+    return pd.DataFrame(response)
+
+
 class DataFrameJSONRenderer(renderers.BaseRenderer):
     media_type = "application/json"
     format = "json"
 
     def render(self, response, media_type=None, renderer_context=None):
-        df = get_geodf_from_response(response)
+        df = get_df_from_response(response)
         df = format_float_columns(df)
 
         return pd.io.json.dumps(df.to_dict(orient="list"))
@@ -90,7 +98,7 @@ class DataFrameCSVFileRenderer(renderers.BaseRenderer):
     render_style = "binary"
 
     def render(self, response, media_type=None, renderer_context=None):
-        df = get_geodf_from_response(response)
+        df = get_df_from_response(response)
         df = format_float_columns(df)
 
         if renderer_context is not None:
