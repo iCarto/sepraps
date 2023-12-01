@@ -16,6 +16,11 @@ import createBuildingComponentMonitoring, {
     building_component_monitoring_api_adapter,
     createBuildingComponentMonitorings,
 } from "buildingComponentMonitoring/model/BuildingComponentMonitoring";
+import {
+    createSocialComponentMonitorings,
+    createSocialComponentMonitoring,
+    social_component_monitoring_api_adapter,
+} from "socialComponentMonitoring/model";
 
 const basePath = "/api/app/projects";
 
@@ -112,6 +117,35 @@ const ProjectService = {
         ).then(response => {
             return createBuildingComponentMonitoring(
                 building_component_monitoring_api_adapter(response)
+            );
+        });
+    },
+
+    getProjectSocialComponentTypes(projectId) {
+        return AuthApiService.get(`${basePath}/${projectId}/socialcomponenttypes`).then(
+            response => {
+                return response;
+            }
+        );
+    },
+
+    getProjectSocialComponents(projectId) {
+        return AuthApiService.get(
+            `${basePath}/${projectId}/socialcomponentmonitorings`
+        ).then(response => {
+            return createSocialComponentMonitorings(
+                social_component_monitoring_api_adapter(response)
+            );
+        });
+    },
+
+    createProjectSocialComponent(projectId, socialComponent) {
+        return AuthApiService.post(
+            `${basePath}/${projectId}/socialcomponentmonitorings`,
+            socialComponent
+        ).then(response => {
+            return createSocialComponentMonitoring(
+                social_component_monitoring_api_adapter(response)
             );
         });
     },
