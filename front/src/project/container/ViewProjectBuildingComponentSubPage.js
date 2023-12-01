@@ -43,7 +43,7 @@ const ViewProjectBuildingComponentSubPage = () => {
                 console.log({error});
                 setError(error);
             });
-    }, [projectId, , location.state?.lastRefreshDate]);
+    }, [projectId, location.state?.lastRefreshDate]);
 
     return (
         <ContentLayout>

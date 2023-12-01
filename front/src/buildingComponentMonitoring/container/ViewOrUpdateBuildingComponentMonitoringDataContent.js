@@ -7,9 +7,11 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
-import {BuildingComponentMonitoringData} from "buildingComponentMonitoring/presentational";
+import {
+    BuildingComponentMonitoringData,
+    BuildingComponentMonitoringStatusChip,
+} from "buildingComponentMonitoring/presentational";
 import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
-import {BuildingComponentStatusChip} from "socialComponentMonitoring/presentational";
 
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -114,7 +116,7 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent})
                             >
                                 {buildingComponent.building_component?.name}
                             </Typography>
-                            <BuildingComponentStatusChip
+                            <BuildingComponentMonitoringStatusChip
                                 label={
                                     buildingComponent.execution_status_label ||
                                     "Estado sin especificar"
