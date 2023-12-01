@@ -462,6 +462,7 @@
         "pk": 45,
         "fields": {
             "name": "Abril 2023",
+            "expected_payment_date": "2023-05-01",
             "paid_fixed_amount": null,
             "paid_variable_amount": 35396696,
             "paid_total_amount": 35396696,
@@ -479,6 +480,7 @@
         "pk": 46,
         "fields": {
             "name": "Julio 2023",
+            "expected_payment_date": "2023-08-01",
             "paid_fixed_amount": null,
             "paid_variable_amount": 21371280,
             "paid_total_amount": 21371280,
@@ -496,6 +498,7 @@
         "pk": 47,
         "fields": {
             "name": "Septiembre 2023",
+            "expected_payment_date": "2023-10-01",
             "paid_fixed_amount": null,
             "paid_variable_amount": 39853912,
             "paid_total_amount": 39853912,
