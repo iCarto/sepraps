@@ -367,6 +367,23 @@ class ProjectViewSet(ModelListViewSet):
             )
         return Response(result)
 
+    @action(
+        methods=["GET"],
+        detail=True,
+        url_path="socialcomponenttypes",
+        url_name="social_component_types",
+    )
+    def get_social_component_types(self, request, pk):
+        project = self.get_object()
+        result = []
+        for component_code, component_config in get_social_components_config(
+            project
+        ).items():
+            result.append(
+                {"value": component_code, "label": component_config.get("name")}
+            )
+        return Response(result)
+
 
 def get_building_components_config(project):
     if not project.project_type:
@@ -379,3 +396,16 @@ def get_building_components_config(project):
     with open(data_path) as f:
         data = json.load(f)
         return data.get("building_components", {})
+
+
+def get_social_components_config(project):
+    if not project.project_type:
+        return {}
+    # Change when project type is multiple
+    data = {}
+    data_path = os.path.join(
+        settings.BASE_DIR, "app", "data", "project", f"{project.project_type}.json"
+    )
+    with open(data_path) as f:
+        data = json.load(f)
+        return data.get("social_components", {})
