@@ -17,6 +17,7 @@ const SearchAutocomplete = ({
     getFilterOption = null,
     search,
     handleSelect,
+    defaultValue = null,
 }) => {
     // If "loading" and "data" are managed in different state
     // properties, component will re-render on every change.
@@ -61,17 +62,21 @@ const SearchAutocomplete = ({
             id="check-autocomplete"
             options={state.data}
             noOptionsText={"No hay opciones disponibles"}
+            defaultValue={defaultValue}
             onChange={handleSelectOption}
             getOptionLabel={data => data[optionLabel]}
             filterOptions={createFilterOptions({
                 stringify: option =>
                     getFilterOption ? getFilterOption(option) : option[optionLabel],
             })}
-            renderOption={(props, option, {selected}) => (
-                <Box component="li" {...props} key={option.id}>
-                    {optionComponent(option)}
-                </Box>
-            )}
+            renderOption={(props, option, {selected}) => {
+                console.log(option);
+                return (
+                    <Box component="li" {...props} key={option.id}>
+                        {optionComponent(option)}
+                    </Box>
+                );
+            }}
             forcePopupIcon={false}
             loading={state.loading}
             renderInput={params => (

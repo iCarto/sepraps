@@ -13,6 +13,7 @@ const FormSelect = ({
     rules = {},
     onChangeHandler = null,
     showEmptyOption = false,
+    multiple = false,
     disabled = false,
     margin = "dense",
 }) => {
@@ -68,6 +69,7 @@ const FormSelect = ({
                     }
                 }}
                 disabled={disabled}
+                multiple={multiple}
                 notched
             >
                 {value === placeholderValue && !showEmptyOption ? (

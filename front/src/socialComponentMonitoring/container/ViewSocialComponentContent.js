@@ -6,6 +6,7 @@ import {SocialComponentMonitoringService} from "socialComponentMonitoring/servic
 import {SIDEBAR_PANEL_DRAWER_WIDTH} from "base/ui/app/config/measurements";
 
 import {ViewOrUpdateSocialComponentMonitoringDataContent} from ".";
+import {ViewSocialComponentTrainingsContent} from "training/container";
 import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {ViewOrUpdateCommentsContent} from "component/container";
 import {SidebarPanelDrawer} from "base/ui/sidebar";
@@ -37,12 +38,16 @@ const ViewSocialComponentContent = () => {
     const {socialComponentId} = useParams();
 
     const [socialComponentMonitoring, setSocialComponentMonitoring] = useState(null);
+    const [trainings, setTrainings] = useState(null);
     const location = useLocation();
 
     useEffect(() => {
         setSocialComponentMonitoring(null);
         SocialComponentMonitoringService.get(socialComponentId).then(data => {
             setSocialComponentMonitoring(data);
+        });
+        SocialComponentMonitoringService.getTrainings(socialComponentId).then(data => {
+            setTrainings(data);
         });
     }, [socialComponentId, location.state?.lastRefreshDate]);
 
@@ -52,6 +57,10 @@ const ViewSocialComponentContent = () => {
                 <Stack spacing={1}>
                     <ViewOrUpdateSocialComponentMonitoringDataContent
                         socialComponent={socialComponentMonitoring}
+                    />
+                    <ViewSocialComponentTrainingsContent
+                        socialComponent={socialComponentMonitoring}
+                        trainings={trainings}
                     />
                     <ViewOrUpdateFilesDataContent
                         folderPath={socialComponentMonitoring.folder}

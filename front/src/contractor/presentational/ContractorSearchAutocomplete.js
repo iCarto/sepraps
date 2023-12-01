@@ -4,7 +4,7 @@ import {SearchAutocomplete} from "base/search/components";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const ContractorSearchAutocomplete = ({handleSelect}) => {
+const ContractorSearchAutocomplete = ({handleSelect, defaultValue = null}) => {
     const optionComponent = option => {
         return (
             <Stack>
@@ -26,6 +26,7 @@ const ContractorSearchAutocomplete = ({handleSelect}) => {
             optionComponent={optionComponent}
             search={ContractorService.getAllBySearchText}
             handleSelect={handleSelect}
+            defaultValue={defaultValue}
         />
     );
 };

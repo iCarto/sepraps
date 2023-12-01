@@ -1,3 +1,5 @@
+import {createEntityService} from "base/entity/service";
+import {AuthApiService} from "base/api/service";
 import {
     createSocialComponentMonitoring,
     createSocialComponentMonitorings,
@@ -5,8 +7,7 @@ import {
     social_component_monitorings_api_adapter,
 } from "socialComponentMonitoring/model";
 import {comment_api_adapter, createComment} from "comment/model";
-import {createEntityService} from "base/entity/service";
-import {AuthApiService} from "base/api/service";
+import {createTraining, createTrainings, training_api_adapter} from "training/model";
 
 const basePath = "/api/app/socialcomponentmonitorings";
 
@@ -43,6 +44,23 @@ const SocialComponentMonitoringService = {
             comment
         ).then(response => {
             return createComment(comment_api_adapter(response));
+        });
+    },
+
+    getTrainings(socialComponentMonitoringId) {
+        return AuthApiService.get(
+            `${basePath}/${socialComponentMonitoringId}/socialcomponenttrainings`
+        ).then(response => {
+            return createTrainings(training_api_adapter(response));
+        });
+    },
+
+    createTraining(socialComponentMonitoringId, training) {
+        return AuthApiService.post(
+            `${basePath}/${socialComponentMonitoringId}/socialcomponenttrainings`,
+            training
+        ).then(response => {
+            return createTraining(training_api_adapter(response));
         });
     },
 };
