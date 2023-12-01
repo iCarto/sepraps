@@ -6,8 +6,6 @@ import {
     ViewContractSummarySubPage,
     ViewContractProjectsSubPage,
     CreateContractPage,
-    UpdateContractContractorPanel,
-    AddContractContractorPanel,
     ViewContractProjectPanel,
     AddContractProjectPanel,
     ManageContractsPage,
@@ -18,7 +16,6 @@ import {
     ViewContractPaymentsSubPage,
     ViewContractAwardingSubPage,
     ViewContractExecutionSubPage,
-    ViewContractSupervisionAreaSubPage,
     ViewContractStaffSubPage,
 } from "../container";
 import {ViewContactPanel} from "contact/container";

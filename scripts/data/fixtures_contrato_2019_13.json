@@ -160,10 +160,10 @@
             "bid_request_number": "LPI - 01/2019",
             "bid_request_id": "364644",
             "bid_request_date": "2019-06-04",
-            "bid_request_budget_min": 3225719032,
-            "bid_request_budget": 4625709063,
-            "awarding_budget_min": 3163954345,
-            "awarding_budget": 4263960181,
+            "bid_request_budget_min": 500000000,
+            "bid_request_budget": 700000000,
+            "awarding_budget_min": 460000000,
+            "awarding_budget": 630000000,
             "awarding_percentage_drop": 7.82,
             "awarding_date": "2019-11-15",
             "financing_program": 1,
@@ -573,6 +573,120 @@
             "contract": 1,
             "project": 4,
             "construction": true
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 56,
+        "fields": {
+            "name": "Informe inicial",
+            "expected_fixed_amount": 100000000,
+            "expected_total_amount": 100000000,
+            "expected_payment_date": "2023-09-01",
+            "paid_fixed_amount": 100000000,
+            "paid_total_amount": 100000000,
+            "status": "pagado",
+            "payment_date": "2023-09-15",
+            "contract": 1,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 57,
+        "fields": {
+            "name": "Septiembre 2023",
+            "expected_fixed_amount": 50000000,
+            "expected_total_amount": 50000000,
+            "expected_payment_date": "2023-09-01",
+            "paid_fixed_amount": null,
+            "paid_total_amount": null,
+            "status": "anulado",
+            "payment_date": null,
+            "contract": 1,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 58,
+        "fields": {
+            "name": "Octubre 2023",
+            "expected_fixed_amount": 130000000,
+            "expected_total_amount": 130000000,
+            "expected_payment_date": "2023-10-01",
+            "paid_fixed_amount": 90000000,
+            "paid_total_amount": 90000000,
+            "status": "pagado",
+            "payment_date": "2023-10-15",
+            "contract": 1,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 59,
+        "fields": {
+            "name": "Noviembre 2023",
+            "expected_fixed_amount": 150000000,
+            "expected_total_amount": 150000000,
+            "expected_payment_date": "2023-11-01",
+            "paid_fixed_amount": 140000000,
+            "paid_total_amount": 140000000,
+            "status": "pagado",
+            "payment_date": "2023-11-15",
+            "contract": 1,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 60,
+        "fields": {
+            "name": "Diciembre 2023",
+            "expected_fixed_amount": 80000000,
+            "expected_total_amount": 80000000,
+            "expected_payment_date": "2023-12-01",
+            "paid_fixed_amount": null,
+            "paid_total_amount": null,
+            "status": "no_pagado",
+            "payment_date": null,
+            "contract": 1,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 61,
+        "fields": {
+            "name": "Enero 2024",
+            "expected_fixed_amount": 120000000,
+            "expected_total_amount": 120000000,
+            "expected_payment_date": "2024-01-01",
+            "paid_fixed_amount": null,
+            "paid_total_amount": null,
+            "status": "no_pagado",
+            "payment_date": null,
+            "contract": 1,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
         }
     }
 ]
