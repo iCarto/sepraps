@@ -8,9 +8,9 @@ import {SIDEBAR_PANEL_DRAWER_WIDTH} from "base/ui/app/config/measurements";
 import {
     ViewOrUpdateBuildingComponentMonitoringFilesDataContent,
     ViewOrUpdateBuildingComponentMonitoringDataContent,
+    ViewBuildingComponentMonitoringCommentsContent,
 } from "../../buildingComponentMonitoring/container";
 import {ViewOrUpdateBuildingComponentTechnicalDataContent} from ".";
-import {ViewBuildingComponentMonitoringCommentsContent} from "comment/container";
 import {SidebarPanelDrawer} from "base/ui/sidebar";
 
 import styled from "@mui/material/styles/styled";

@@ -7,3 +7,6 @@ export {
 export {
     default as ListBuildingComponentMonitoringFolder,
 } from "./ListBuildingComponentMonitoringFolder";
+export {
+    default as ViewBuildingComponentMonitoringCommentsContent,
+} from "./ViewBuildingComponentMonitoringCommentsContent";

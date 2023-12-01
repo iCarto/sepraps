@@ -1,6 +1,9 @@
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
 
-import {CreateCommentDataContent, ViewOrUpdateCommentDataContent} from ".";
+import {
+    CreateCommentDataContent,
+    ViewOrUpdateCommentDataContent,
+} from "../../comment/container";
 import {SectionCard} from "base/ui/section/components";
 
 import Stack from "@mui/system/Stack";
