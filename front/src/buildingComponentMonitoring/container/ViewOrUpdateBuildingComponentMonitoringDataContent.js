@@ -5,18 +5,13 @@ import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/se
 import {building_component_monitoring_view_adapter} from "buildingComponentMonitoring/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
+import {ComponentCardHeader} from "component/presentational";
+import {SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
-import {
-    BuildingComponentMonitoringData,
-    BuildingComponentMonitoringStatusChip,
-} from "buildingComponentMonitoring/presentational";
+import {BuildingComponentMonitoringData} from "buildingComponentMonitoring/presentational";
 import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
 
-import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import Stack from "@mui/material/Stack";
 import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -96,36 +91,11 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent})
     return (
         buildingComponent && (
             <Card sx={{border: 1, borderColor: "grey.300"}} elevation={0}>
-                <CardHeader
-                    action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
-                    title={
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <HandymanOutlinedIcon
-                                sx={{
-                                    color: "grey",
-                                }}
-                            />
-                            <Typography color="grey">Componente:</Typography>
-                            <Typography
-                                color="primary.main"
-                                sx={{
-                                    textTransform: "uppercase",
-                                    fontWeight: "bold",
-                                }}
-                                variant="h5"
-                            >
-                                {buildingComponent.building_component?.name}
-                            </Typography>
-                            <BuildingComponentMonitoringStatusChip
-                                label={
-                                    buildingComponent.execution_status_label ||
-                                    "Estado sin especificar"
-                                }
-                                value={buildingComponent.execution_status}
-                            />
-                        </Stack>
-                    }
-                    sx={{bgcolor: "grey.50", borderBottom: "1px solid #ccc"}}
+                <ComponentCardHeader
+                    component={buildingComponent}
+                    componentName={buildingComponent.building_component?.name}
+                    actions={actions}
+                    icon={<HandymanOutlinedIcon />}
                 />
                 <CardContent>{getComponent(mode)}</CardContent>
                 <DeleteItemDialog

@@ -5,12 +5,10 @@ import {Outlet} from "react-router-dom";
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
 import {SIDEBAR_PANEL_DRAWER_WIDTH} from "base/ui/app/config/measurements";
 
-import {
-    ViewOrUpdateBuildingComponentMonitoringFilesDataContent,
-    ViewOrUpdateBuildingComponentMonitoringDataContent,
-    ViewBuildingComponentMonitoringCommentsContent,
-} from "../../buildingComponentMonitoring/container";
+import {ViewOrUpdateBuildingComponentMonitoringDataContent} from "../../buildingComponentMonitoring/container";
 import {ViewOrUpdateBuildingComponentTechnicalDataContent} from ".";
+import {ViewOrUpdateCommentsContent} from "component/container";
+import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {SidebarPanelDrawer} from "base/ui/sidebar";
 
 import styled from "@mui/material/styles/styled";
@@ -63,11 +61,12 @@ const ViewBuildingComponentContent = () => {
                             buildingComponentMonitoring?.building_component
                         }
                     />
-                    <ViewOrUpdateBuildingComponentMonitoringFilesDataContent
-                        buildingComponentMonitoring={buildingComponentMonitoring}
+                    <ViewOrUpdateFilesDataContent
+                        folderPath={buildingComponentMonitoring.folder}
                     />
-                    <ViewBuildingComponentMonitoringCommentsContent
-                        buildingComponentMonitoring={buildingComponentMonitoring}
+                    <ViewOrUpdateCommentsContent
+                        entity={buildingComponentMonitoring}
+                        service={BuildingComponentMonitoringService}
                     />
                 </Stack>
                 <SidebarPanelDrawer isSidebarPanelOpen={isSidebarPanelOpen}>

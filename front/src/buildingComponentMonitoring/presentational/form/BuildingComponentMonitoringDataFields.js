@@ -2,7 +2,7 @@ import {useWatch} from "react-hook-form";
 
 import {NumberUtil} from "base/format/utilities";
 import {CURRENCY_SYMBOL} from "base/format/config/i18n";
-import {COMPONENT_EXECUTION_STATUS_COMPLETED} from "buildingComponentMonitoring/model/BuildingComponentMonitoring";
+import {COMPONENT_EXECUTION_STATUS_COMPLETED} from "component/config";
 import {useDomain} from "sepraps/domain/provider";
 
 import {

@@ -11,7 +11,7 @@ import {ProjectService} from "project/service";
 import {ContentLayout} from "base/ui/main";
 import {AlertError} from "base/error/components";
 import {PaperContainer} from "base/shared/components";
-import {BuildingComponentListSelector} from "buildingComponent/presentational";
+import {ComponentListSelector} from "component/presentational";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -70,10 +70,10 @@ const ViewProjectBuildingComponentSubPage = () => {
                         )}
                 </Box>
                 <Box sx={{p: 1, width: "240px"}}>
-                    <BuildingComponentListSelector
-                        buildingComponents={buildingComponentMonitorings}
+                    <ComponentListSelector
+                        components={buildingComponentMonitorings}
                         basePath={`/projects/list/${projectId}/buildingcomponent`}
-                        selectedBuildingComponentId={parseInt(buildingComponentId)}
+                        selectedComponentId={parseInt(buildingComponentId)}
                     />
                 </Box>
             </Grid>

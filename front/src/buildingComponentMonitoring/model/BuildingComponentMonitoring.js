@@ -3,6 +3,7 @@ import {
     building_component_api_adapter,
 } from "buildingComponent/model";
 import {comments_api_adapter, createComments} from "comment/model";
+import {COMPONENT_EXECUTION_STATUS_COMPLETED} from "component/config";
 
 class BuildingComponentMonitorings extends Array {}
 
@@ -107,9 +108,6 @@ const createBuildingComponentMonitoring = ({
 
     return Object.freeze(publicApi);
 };
-
-export const COMPONENT_EXECUTION_STATUS_COMPLETED = "finalizado";
-export const COMPONENT_EXECUTION_STATUS_IN_PROGRESS = "en_proceso";
 
 export {
     createBuildingComponentMonitoring as default,
