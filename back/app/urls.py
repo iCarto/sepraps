@@ -3,7 +3,12 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework import routers
 
-from app.views import events_views, notifications_views, stats_views
+from app.views import (
+    events_views,
+    notifications_views,
+    payment_stats_views,
+    stats_views,
+)
 from app.views.comment_viewset import CommentViewSet
 from app.views.construction_contract_viewset import ConstructionContractViewSet
 from app.views.contact_viewset import ContactViewSet
@@ -60,6 +65,7 @@ urlpatterns = [
     path("stats/projectandcontract", stats_views.get_project_and_contract_stats),
     path("stats/projectbyphase", stats_views.get_project_by_phase_stats),
     path("stats/projectbyphasemap", stats_views.get_projects_by_phase_map),
+    path("paymentstats", payment_stats_views.get_payment_stats),
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
