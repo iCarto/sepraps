@@ -62,7 +62,6 @@ const SectionField = ({
 
     const labelStyle = {
         lineHeight: {xs: 1.5, sm: 1.25},
-        mt: {xs: 0, sm: 1.5},
         hyphens: "auto",
     };
 
@@ -115,6 +114,7 @@ const SectionField = ({
                 sm={5}
                 lg={labelWidth}
                 alignItems="flex-start"
+                alignContent="center"
             >
                 {tooltipText && (
                     <Tooltip title={tooltipText} arrow enterDelay={500}>
@@ -136,7 +136,15 @@ const SectionField = ({
                     </Typography>
                 )}
             </Grid>
-            <Grid item container xs="auto" sm={6} lg={valueWidth} alignItems="flex-end">
+            <Grid
+                item
+                container
+                xs="auto"
+                sm={6}
+                lg={valueWidth}
+                alignItems="flex-end"
+                alignContent="center"
+            >
                 <Grid
                     item
                     sx={{
