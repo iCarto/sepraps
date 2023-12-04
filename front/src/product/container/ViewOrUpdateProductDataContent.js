@@ -1,28 +1,22 @@
 import {useState} from "react";
-import {
-    SectionActionsMenu,
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "base/ui/section/components";
-import {DateUtil} from "base/format/utilities";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import {ProductService} from "product/service";
 import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
-import Grid from "@mui/material/Grid";
-import {ProductService} from "product/service";
+import {DateUtil} from "base/format/utilities";
+import {
+    SectionCardHeaderAction,
+    SectionField,
+    SubSectionCardHeader,
+} from "base/ui/section/components";
+import {DeleteItemDialog} from "base/delete/components";
 import {ProductForm} from "product/presentational/form";
 import {ListProductFolder} from ".";
-import {DeleteItemDialog} from "base/delete/components";
+import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography/Typography";
-
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-
-import Stack from "@mui/material/Stack";
 
 const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
     const navigate = useNavigateWithReload();
@@ -106,29 +100,11 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
 
     return (
         <Card sx={{border: 1, borderRadius: 2, borderColor: "grey.300"}} elevation={0}>
-            <CardHeader
-                action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
-                title={
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                        <Inventory2OutlinedIcon
-                            sx={{
-                                color: "grey",
-                                fontSize: "18px",
-                            }}
-                        />
-                        <Typography color="grey">Entregable:</Typography>
-                        <Typography
-                            color="primary.dark"
-                            sx={{
-                                textTransform: "uppercase",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            {product.name}
-                        </Typography>
-                    </Stack>
-                }
-                sx={{bgcolor: "grey.50"}}
+            <SubSectionCardHeader
+                titleLabel="Entregable"
+                titleValue={product.name}
+                icon={<Inventory2OutlinedIcon />}
+                actions={actions}
             />
             <CardContent>{getComponent(mode)}</CardContent>
             <DeleteItemDialog
