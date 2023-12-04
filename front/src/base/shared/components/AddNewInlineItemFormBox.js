@@ -14,9 +14,11 @@ const AddNewInlineItemFormBox = ({label, children}) => (
             bgcolor: "grey.50",
         }}
     >
-        <Stack direction="row" spacing={1} sx={{mb: 2}}>
+        <Stack direction="row" spacing={1} sx={{mb: 3}}>
             <AddCircleOutlineOutlinedIcon sx={{color: "grey"}} />
-            <Typography color="primary.main">{label}</Typography>
+            <Typography color="grey.700" sx={{textTransform: "uppercase"}}>
+                {label}
+            </Typography>
         </Stack>
         {children}
     </Box>
