@@ -4,7 +4,7 @@ import {SectionCard} from "base/ui/section/components";
 import {
     ViewBuildingComponentsFinancialChart,
     ViewBuildingComponentsFinancialData,
-} from "buildingcomponents/container";
+} from "buildingComponent/container";
 
 const ViewContractProjectAnalysisSubPage = () => {
     let contract;
