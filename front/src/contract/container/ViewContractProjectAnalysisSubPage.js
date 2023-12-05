@@ -5,6 +5,7 @@ import {
     ViewBuildingComponentsFinancialChart,
     ViewBuildingComponentsFinancialData,
 } from "buildingComponent/container";
+import Grid from "@mui/material/Grid";
 
 const ViewContractProjectAnalysisSubPage = () => {
     let contract;
@@ -12,8 +13,18 @@ const ViewContractProjectAnalysisSubPage = () => {
 
     return (
         <SectionCard title="Supervisión de componentes de construcción">
-            <ViewBuildingComponentsFinancialChart filter={{contract: contract.id}} />
-            <ViewBuildingComponentsFinancialData filter={{contract: contract.id}} />
+            {contract ? (
+                <>
+                    <Grid width={{xs: "100%", lg: "60%", xl: "50%"}} pt={1} pb={2}>
+                        <ViewBuildingComponentsFinancialChart
+                            filter={{contract: contract.id}}
+                        />
+                    </Grid>
+                    <ViewBuildingComponentsFinancialData
+                        filter={{contract: contract.id}}
+                    />
+                </>
+            ) : null}
         </SectionCard>
     );
 };
