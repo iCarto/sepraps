@@ -38,6 +38,7 @@ import {ViewDocumentPanel} from "base/file/components";
 import {
     CreateBuildingComponentContent,
     ViewBuildingComponentContent,
+    ViewProjectComponentsAnalysisSubPage,
 } from "buildingComponent/container";
 import {
     CreateSocialComponentContent,
@@ -173,6 +174,11 @@ const projectRoutes = [
                     />
                 </Route>
             </Route>
+            <Route
+                key="project-component-analysis"
+                path="componentanalysis"
+                element={<ViewProjectComponentsAnalysisSubPage />}
+            ></Route>
             <Route
                 key="project-social-components"
                 path="socialcomponent"

@@ -25,6 +25,10 @@ const ProjectSubPageMenu = ({project}) => {
             to: `${basePath}/buildingcomponent`,
             text: "Componentes",
         },
+        {
+            to: `${basePath}/componentanalysis`,
+            text: "Análisis",
+        },
     ];
 
     const socialSupervisionAreaSubmenuItems = [
