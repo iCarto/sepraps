@@ -58,7 +58,7 @@ const ViewHomePage = () => {
     }, []);
 
     return (
-        <PageLayout style={{p: 2}}>
+        <PageLayout style={{padding: "1rem"}}>
             <Grid container spacing={2} justifyContent="space-between">
                 <Grid
                     item

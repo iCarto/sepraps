@@ -12,7 +12,7 @@ import styled from "@mui/material/styles/styled";
 import Box from "@mui/material/Box";
 
 const PageContainer = styled("div", {shouldForwardProp: prop => prop !== "open"})(
-    ({theme, open}) => ({
+    ({theme, open, style}) => ({
         flexGrow: 1,
         transition: theme.transitions.create("margin", {
             easing: theme.transitions.easing.sharp,
@@ -26,6 +26,7 @@ const PageContainer = styled("div", {shouldForwardProp: prop => prop !== "open"}
             }),
             marginRight: SIDEBAR_PANEL_DRAWER_WIDTH,
         }),
+        ...style,
     })
 );
 
@@ -42,7 +43,7 @@ const PageLayout = ({
     const drawerWidth = subPage ? SUBPAGE_MENU_DRAWER_WIDTH : PAGE_MENU_DRAWER_WIDTH;
 
     return (
-        <PageContainer open={isSidebarPanelOpen} sx={{...style}}>
+        <PageContainer open={isSidebarPanelOpen} style={{...style}}>
             {menu}
             <Box
                 role="page-container"
