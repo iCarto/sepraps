@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
@@ -19,17 +20,19 @@ class SocialComponentTraining(BaseDocumentModel, BaseEntityModelMixin):
     start_date = models.DateField("Fecha de inicio", null=True)
     end_date = models.DateField("Fecha de fin", null=True)
 
-    target_population = models.CharField("Población meta", max_length=50, null=True)
+    target_population = ArrayField(
+        models.CharField("Población meta", max_length=50), null=True
+    )
     method = models.CharField("Modalidad", max_length=50, null=True)
 
-    number_of_woman = models.IntegerField("Número de mujeres", null=True)
+    number_of_women = models.IntegerField("Número de mujeres", null=True)
     number_of_men = models.IntegerField("Número de hombres", null=True)
     number_of_hours = models.IntegerField("Número de horas", null=True)
     number_of_digital_materials = models.IntegerField(
-        "Número de materiales digitales", null=True
+        "Número de materiales digitales entregados", null=True
     )
     number_of_printed_materials = models.IntegerField(
-        "Número de materiales impresos", null=True
+        "Número de materiales impresos entregados", null=True
     )
 
     social_component_monitoring = models.ForeignKey(
@@ -52,16 +55,16 @@ class SocialComponentTraining(BaseDocumentModel, BaseEntityModelMixin):
 
     @property
     def number_of_participants(self):
-        if not self.number_of_woman and not self.number_of_men:
+        if not self.number_of_women and not self.number_of_men:
             return None
-        return (self.number_of_woman or 0) + (self.number_of_men or 0)
+        return (self.number_of_women or 0) + (self.number_of_men or 0)
 
     @property
     def woman_percentage(self):
         number_of_participants = self.number_of_participants
-        if not self.number_of_woman or not number_of_participants:
+        if not self.number_of_women or not number_of_participants:
             return 0
-        return format_decimal((self.number_of_woman / number_of_participants) * 100)
+        return format_decimal((self.number_of_women / number_of_participants) * 100)
 
     @property
     def men_percentage(self):

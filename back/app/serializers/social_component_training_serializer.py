@@ -20,7 +20,7 @@ class SocialComponentTrainingSerializer(BaseDomainMixin, BaseModelSerializer):
             "end_date",
             "target_population",
             "method",
-            "number_of_woman",
+            "number_of_women",
             "number_of_men",
             "number_of_participants",
             "woman_percentage",
@@ -32,9 +32,11 @@ class SocialComponentTrainingSerializer(BaseDomainMixin, BaseModelSerializer):
             "contractor",
         )
 
+    target_population = serializers.ListField(child=serializers.CharField())
+
     domain_fields = [
         BaseDomainField(
-            "target_population", DomainCategoryChoices.target_population_type
+            "target_population", DomainCategoryChoices.target_population_type, many=True
         ),
         BaseDomainField("method", DomainCategoryChoices.training_method_type),
     ]
