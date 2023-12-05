@@ -50,6 +50,7 @@ def get_building_components_stats(request, format=None):
     query = """
             SELECT
                 bc.code,
+                bc.name,
                 coalesce(sum(bcm.expected_amount), 0) as expected_amount,
                 coalesce(sum(bcm.paid_amount), 0) as paid_amount,
                 coalesce(sum(bcm.pending_amount), 0) as pending_amount
@@ -58,7 +59,7 @@ def get_building_components_stats(request, format=None):
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = bcm.project_id
-            GROUP BY bc.code
+            GROUP BY bc.code, bc.name
             ORDER BY bc.code
             """
 
