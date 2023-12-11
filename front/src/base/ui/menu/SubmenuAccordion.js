@@ -19,9 +19,16 @@ const AccordionSummary = styled(props => (
     },
 }));
 
-const SubmenuAccordion = ({accordionTitle, defaultExpanded = false, children}) => {
+const SubmenuAccordion = ({
+    handleClick,
+    accordionTitle,
+    expanded,
+    defaultExpanded = false,
+    children,
+}) => {
     return (
         <Accordion
+            expanded={expanded}
             defaultExpanded={defaultExpanded}
             disableGutters
             elevation={0}
@@ -42,6 +49,7 @@ const SubmenuAccordion = ({accordionTitle, defaultExpanded = false, children}) =
                     pl: 0,
                     backgroundColor: "grey.200",
                 }}
+                onClick={handleClick}
             >
                 <Typography
                     variant="overline"

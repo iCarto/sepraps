@@ -1,6 +1,9 @@
-import useTheme from "@mui/material/styles/useTheme";
+import {useEffect, useState} from "react";
+import {usePageMenu} from "./provider";
+
 import {SubPageMenuListGroupItemButton, SubmenuAccordion} from ".";
 
+import useTheme from "@mui/material/styles/useTheme";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -16,23 +19,39 @@ import Box from "@mui/material/Box";
  *     * icon
  *
  * If `menuListSubItems` is composed of objects, then the `createButtons` prop must be set to `true`, so that the objects can be used to create their corresponding button.
+ *
+ * `defaultExpanded` may be set to `true` only when there is just one list group in the menu.
  */
 
 const SubPageMenuListGroup = ({
+    id = "",
     headerTitle = "",
     headerIcon = null,
     items = [],
-    expanded = true,
+    defaultExpanded = false,
 }) => {
     const theme = useTheme();
+    const {opened, setOpened, selectedGroup} = usePageMenu();
+    const [showChildren, setShowChildren] = useState(false);
 
     const submenuItems = items.map((menuListSubItem, index) => (
         <SubPageMenuListGroupItemButton
+            parentId={id}
             key={index}
             text={menuListSubItem.text}
             to={menuListSubItem.to}
         />
     ));
+
+    const onClickHeader = () => {
+        setOpened(id);
+        setShowChildren(prevState => !prevState);
+    };
+
+    useEffect(() => {
+        setShowChildren(opened === id);
+        if (defaultExpanded) setOpened(id);
+    }, [opened]);
 
     const SubmenuTitle = () => {
         return (
@@ -46,7 +65,10 @@ const SubPageMenuListGroup = ({
                 <ListItemIcon
                     style={{
                         minWidth: "35px",
-                        color: theme.palette.menu.primary.header.text,
+                        color:
+                            selectedGroup === id
+                                ? theme.palette.menu.primary.header.text
+                                : theme.palette.menu.primary.header.icon,
                     }}
                 >
                     {headerIcon}
@@ -61,7 +83,9 @@ const SubPageMenuListGroup = ({
             {headerTitle ? (
                 <SubmenuAccordion
                     accordionTitle={<SubmenuTitle />}
-                    defaultExpanded={expanded}
+                    expanded={showChildren}
+                    defaultExpanded={defaultExpanded}
+                    handleClick={onClickHeader}
                 >
                     <Box
                         sx={{

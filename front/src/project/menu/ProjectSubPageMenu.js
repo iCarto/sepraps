@@ -89,16 +89,16 @@ const ProjectSubPageMenu = ({project}) => {
                 basePath={`/projects/list/${project?.id}`}
             />
             <SubPageMenuListGroup
+                id="building_monitoring"
                 headerTitle="Supervisión de obra"
                 headerIcon={<HandymanOutlinedIcon />}
                 items={buildingSupervisionAreaSubmenuItems}
-                expanded={true}
             />
             <SubPageMenuListGroup
+                id="social_monitoring"
                 headerTitle="Supervisión social"
                 headerIcon={<Diversity3Icon />}
                 items={socialSupervisionAreaSubmenuItems}
-                expanded={true}
             />
         </SubPageMenu>
     );

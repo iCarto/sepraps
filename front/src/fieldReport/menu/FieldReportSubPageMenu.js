@@ -6,7 +6,6 @@ import {
 } from "base/ui/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
-
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
 
@@ -40,10 +39,11 @@ const FieldReportSubPageMenu = ({fieldReport}) => {
                 icon={<InventoryRoundedIcon />}
             />
             <SubPageMenuListGroup
+                id="content"
                 headerTitle="Contenido"
                 headerIcon={<FormatListBulletedOutlinedIcon />}
                 items={contentSubmenuItems}
-                expanded={true}
+                defaultExpanded
             />
             <SubPageMenuListItemButton
                 key="field-report-documents"

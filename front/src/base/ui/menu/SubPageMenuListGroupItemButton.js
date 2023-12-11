@@ -1,4 +1,6 @@
+import {useEffect} from "react";
 import {Link, useLocation, useResolvedPath} from "react-router-dom";
+import {usePageMenu} from "./provider";
 
 import useTheme from "@mui/material/styles/useTheme";
 
@@ -9,13 +11,27 @@ import Divider from "@mui/material/Divider";
 
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 
-const SubPageMenuListGroupItemButton = ({to, text, icon = null, ...props}) => {
+const SubPageMenuListGroupItemButton = ({
+    parentId,
+    to,
+    text,
+    icon = null,
+    ...props
+}) => {
     const theme = useTheme();
+    const {setOpened, setSelectedGroup} = usePageMenu();
 
     let resolved = useResolvedPath(to);
     let location = useLocation();
 
     const selected = location.pathname.startsWith(resolved.pathname);
+
+    useEffect(() => {
+        if (selected) {
+            setSelectedGroup(parentId);
+            setOpened(parentId);
+        }
+    }, [location]);
 
     return (
         <>

@@ -73,10 +73,10 @@ const ContractSubPageMenu = ({contract}) => {
                 icon={<InfoOutlinedIcon />}
             />
             <SubPageMenuListGroup
+                id="phases"
                 headerTitle="Fases"
                 headerIcon={<ListAltOutlinedIcon />}
                 items={phasesSubmenuItems}
-                expanded={true}
             />
             <SubPageMenuListItemButton
                 key="contract-projects"
@@ -92,18 +92,18 @@ const ContractSubPageMenu = ({contract}) => {
             />
             {contractSupervisionAreas.includes(SUPERVISION_AREAS.BUILDING) && (
                 <SubPageMenuListGroup
+                    id="building_supervision_area"
                     headerTitle="Área Técnica"
                     headerIcon={<EngineeringOutlinedIcon />}
                     items={buildingSupervisionAreaSubmenuItems}
-                    expanded={true}
                 />
             )}
             {contractSupervisionAreas.includes(SUPERVISION_AREAS.SOCIAL) && (
                 <SubPageMenuListGroup
+                    id="social_supervision_area"
                     headerTitle="Área Social"
                     headerIcon={<GroupsOutlinedIcon />}
                     items={socialSupervisionAreaSubmenuItems}
-                    expanded={true}
                 />
             )}
             <QuestionnairesMenu

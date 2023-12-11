@@ -1,8 +1,9 @@
-import {SubPageMenuListGroup} from "base/ui/menu";
-import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import {useEffect, useState} from "react";
 import {FieldReportService} from "fieldReport/service";
 import {DateUtil} from "base/format/utilities";
+import {SubPageMenuListGroup} from "base/ui/menu";
+
+import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 
 const FieldReportProjectMenu = ({projectId, basePath}) => {
     const [fieldReportsForProject, setFieldReportsForProject] = useState([]);
@@ -24,6 +25,7 @@ const FieldReportProjectMenu = ({projectId, basePath}) => {
 
     return (
         <SubPageMenuListGroup
+            id="field_report"
             headerTitle="Informes de viaje"
             headerIcon={<AssignmentOutlinedIcon />}
             items={fieldReportsForProject}

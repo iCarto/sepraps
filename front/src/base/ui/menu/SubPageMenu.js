@@ -1,4 +1,5 @@
 import {SUBPAGE_MENU_DRAWER_WIDTH} from "../app/config/measurements";
+import {PageMenuProvider} from "./provider";
 
 import {SubPageMenuHeader} from ".";
 
@@ -25,22 +26,23 @@ const SubPageMenu = ({
     };
 
     return (
-        <Box component="nav" sx={menuStyles}>
-            <MenuList sx={{color: "white"}} dense disablePadding>
-                {subPageMenuDropdown || (
-                    <SubPageMenuHeader
-                        headerText={headerText || "-"}
-                        headerTitle={headerTitle}
-                        headerTag={headerTag}
-                        isSubMenu={true}
-                    >
-                        {headerContent}
-                    </SubPageMenuHeader>
-                )}
-
-                {children}
-            </MenuList>
-        </Box>
+        <PageMenuProvider>
+            <Box component="nav" sx={menuStyles}>
+                <MenuList sx={{color: "white"}} dense disablePadding>
+                    {subPageMenuDropdown || (
+                        <SubPageMenuHeader
+                            headerText={headerText || "-"}
+                            headerTitle={headerTitle}
+                            headerTag={headerTag}
+                            isSubMenu={true}
+                        >
+                            {headerContent}
+                        </SubPageMenuHeader>
+                    )}
+                    {children}
+                </MenuList>
+            </Box>
+        </PageMenuProvider>
     );
 };
 

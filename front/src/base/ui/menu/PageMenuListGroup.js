@@ -1,12 +1,15 @@
-import useTheme from "@mui/material/styles/useTheme";
+import {useEffect, useState} from "react";
+import {usePageMenu} from "./provider";
 
 import {SubPageMenuListGroupItemButton} from ".";
+
+import useTheme from "@mui/material/styles/useTheme";
+import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Box from "@mui/material/Box";
 
 /**
  * This component accepts an array of items (`menuListSubItems`). These items can be of 2 types:
@@ -19,26 +22,48 @@ import Box from "@mui/material/Box";
  * If `menuListSubItems` is composed of objects, then the `createButtons` prop must be set to `true`, so that the objects can be used to create their corresponding button.
  */
 
-const PageMenuListGroup = ({headerTitle = "", headerIcon = null, items = []}) => {
+const PageMenuListGroup = ({
+    id = "",
+    headerTitle = "",
+    headerIcon = null,
+    items = [],
+}) => {
     const theme = useTheme();
+    const {opened, setOpened, selectedGroup} = usePageMenu();
+    const [showChildren, setShowChildren] = useState(false);
 
     const menuItems = items.map((menuListSubItem, index) => (
         <SubPageMenuListGroupItemButton
+            parentId={id}
             key={index}
             text={menuListSubItem.text}
             to={menuListSubItem.to}
         />
     ));
 
+    const onClickHeader = () => {
+        setOpened(id);
+    };
+
+    useEffect(() => {
+        setShowChildren(opened === id);
+    }, [opened]);
+
     return (
         <>
             {headerTitle ? (
-                <ListItem sx={{bgcolor: theme.palette.menu.primary.header.background}}>
+                <ListItem
+                    sx={{bgcolor: theme.palette.menu.primary.header.background}}
+                    onClick={onClickHeader}
+                >
                     {headerIcon && (
                         <ListItemIcon
                             style={{
                                 minWidth: "35px",
-                                color: theme.palette.menu.primary.header.text,
+                                color:
+                                    selectedGroup === id
+                                        ? theme.palette.menu.primary.header.text
+                                        : theme.palette.menu.primary.header.icon,
                             }}
                         >
                             {headerIcon}
@@ -53,7 +78,14 @@ const PageMenuListGroup = ({headerTitle = "", headerIcon = null, items = []}) =>
                 </ListItem>
             ) : null}
 
-            <Box sx={{bgcolor: theme.palette.menu.primary.options.background}}>
+            <Box
+                sx={{
+                    bgcolor: theme.palette.menu.primary.options.background,
+                    transition: "all 0.5s ease-in-out",
+                    display: showChildren ? "inherit" : "none",
+                    overflow: "hidden",
+                }}
+            >
                 {menuItems.length ? (
                     <List dense disablePadding>
                         {menuItems}
