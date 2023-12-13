@@ -1,6 +1,6 @@
 export {
-    default as BuildingCompontentTechnicalData,
-} from "./BuildingCompontentTechnicalData";
+    default as BuildingComponentTechnicalData,
+} from "./BuildingComponentTechnicalData";
 export {
     default as BuildingComponentsFinancialDataBox,
 } from "./BuildingComponentsFinancialDataBox";

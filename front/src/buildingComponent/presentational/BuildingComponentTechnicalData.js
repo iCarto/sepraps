@@ -1,6 +1,6 @@
 import {DynamicSectionFields} from "base/dynamicform/components";
 
-const BuildingCompontentTechnicalData = ({buildingComponent}) => {
+const BuildingComponentTechnicalData = ({buildingComponent}) => {
     return (
         buildingComponent &&
         buildingComponent.properties && (
@@ -12,4 +12,4 @@ const BuildingCompontentTechnicalData = ({buildingComponent}) => {
     );
 };
 
-export default BuildingCompontentTechnicalData;
+export default BuildingComponentTechnicalData;

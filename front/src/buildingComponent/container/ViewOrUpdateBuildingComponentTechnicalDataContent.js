@@ -4,7 +4,7 @@ import {building_component_view_adapter} from "buildingComponent/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {BuildingComponentTechnicalDataForm} from "buildingComponentMonitoring/presentational/form";
-import {BuildingCompontentTechnicalData} from "buildingComponent/presentational";
+import {BuildingComponentTechnicalData} from "buildingComponent/presentational";
 
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -43,9 +43,7 @@ const ViewOrUpdateBuildingComponentTechnicalDataContent = ({buildingComponent}) 
     const getComponent = mode => {
         if (mode === "view") {
             return (
-                <BuildingCompontentTechnicalData
-                    buildingComponent={buildingComponent}
-                />
+                <BuildingComponentTechnicalData buildingComponent={buildingComponent} />
             );
         }
         if (mode === "edit") {

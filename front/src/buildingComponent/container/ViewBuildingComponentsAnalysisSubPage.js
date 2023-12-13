@@ -7,7 +7,7 @@ import {
 } from "buildingComponent/container";
 import Grid from "@mui/material/Grid";
 
-const ViewProjectComponentsAnalysisSubPage = () => {
+const ViewBuildingComponentsAnalysisSubPage = () => {
     let project;
     [project] = useOutletContext();
 
@@ -29,4 +29,4 @@ const ViewProjectComponentsAnalysisSubPage = () => {
     );
 };
 
-export default ViewProjectComponentsAnalysisSubPage;
+export default ViewBuildingComponentsAnalysisSubPage;
