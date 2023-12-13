@@ -1,6 +1,7 @@
-import {BarChart} from "base/chart/components";
-import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsFilter";
 import {CUSTOM_COLORS} from "Theme";
+import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsFilter";
+import {BarChart} from "base/chart/components";
+import {TextUtil} from "base/format/utilities";
 
 const COLORS = {
     number_of_women: {
@@ -23,6 +24,18 @@ const barProperties = {
     borderWidth: 2,
 };
 
+const parseLabels = labels => {
+    return labels.map(headCell => {
+        if (Array.isArray(headCell)) {
+            const parsedStrings = headCell.map(string =>
+                TextUtil.convertDBTags(string)
+            );
+            return parsedStrings;
+        }
+        return TextUtil.convertDBTags(headCell);
+    });
+};
+
 const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
     const parseChartData = chartData => {
         const result = Object.keys(chartData).reduce((acc, key) => {
@@ -39,7 +52,9 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
     };
 
     const chartTrainingData = parseChartData(trainingData);
-    console.log({chartTrainingData});
+    const labels = chartTrainingData.code;
+
+    const parsedLabels = parseLabels(labels);
 
     const getDatasets = trainingDataType => {
         if (trainingDataType === TRAINING_DATA_FILTER.DATA_TYPE.WOMEN_MEN.code) {
@@ -49,6 +64,9 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
                     label: "Nº de mujeres",
                     borderColor: COLORS.number_of_women.main,
                     backgroundColor: COLORS.number_of_women.light,
+                    datalabels: {
+                        color: "#ffff",
+                    },
                     ...barProperties,
                 },
                 {
@@ -67,6 +85,9 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
                     label: "% de mujeres",
                     borderColor: COLORS.primary.main,
                     backgroundColor: COLORS.primary.light,
+                    datalabels: {
+                        color: "#ffff",
+                    },
                     ...barProperties,
                 },
             ];
@@ -78,9 +99,43 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
                     label: "Nº de horas",
                     borderColor: COLORS.primary.main,
                     backgroundColor: COLORS.primary.light,
+                    datalabels: {
+                        color: "#ffff",
+                    },
                     ...barProperties,
                 },
             ];
+        }
+        return [];
+    };
+
+    const formatLegendLabels = chart => {
+        const data = chart.data;
+
+        if (data.labels.length && data.datasets.length) {
+            return data.datasets.map((dataset, index) => {
+                const meta = chart.getDatasetMeta(0);
+                const style = meta.controller.getStyle(index);
+
+                let total = dataset.data.reduce((acc, currentValue) => {
+                    return acc + currentValue;
+                }, 0);
+
+                if (
+                    trainingDataType ===
+                    TRAINING_DATA_FILTER.DATA_TYPE.WOMEN_PERCENTAGE.code
+                )
+                    total = parseInt(trainingData.women_percentage.slice(-1)[0]);
+
+                return {
+                    text: `${dataset.label}: ${total}`,
+                    fillStyle: dataset.backgroundColor,
+                    strokeStyle: dataset.borderColor,
+                    lineWidth: style.borderWidth,
+                    hidden: !chart.getDataVisibility(index),
+                    index: index,
+                };
+            });
         }
         return [];
     };
@@ -89,12 +144,38 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
         trainingData && (
             <BarChart
                 title="Componentes"
-                labels={chartTrainingData.code}
+                labels={parsedLabels}
                 datasets={getDatasets(trainingDataType)}
                 options={{
                     plugins: {
                         legend: {
                             position: "right",
+                            labels: {
+                                font: {
+                                    weight: "bold",
+                                },
+                                generateLabels(chart) {
+                                    return formatLegendLabels(chart);
+                                },
+                            },
+                            onClick(e, legendItem, legend) {
+                                return;
+                            },
+                        },
+                        datalabels: {
+                            labels: {
+                                title: {
+                                    font: {
+                                        weight: "bold",
+                                    },
+                                },
+                            },
+                        },
+                    },
+
+                    scales: {
+                        y: {
+                            grace: 5,
                         },
                     },
                 }}

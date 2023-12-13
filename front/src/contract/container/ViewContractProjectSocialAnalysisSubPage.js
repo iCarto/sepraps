@@ -1,7 +1,7 @@
 import {useOutletContext} from "react-router-dom";
 
 import {SectionCard} from "base/ui/section/components";
-import {ViewSocialComponentsTrainingsChart} from "socialcomponents/container";
+import {ViewSocialComponentsTrainingsChart} from "socialComponent/container";
 
 const ViewContractProjectSocialAnalysisSubPage = () => {
     let contract;

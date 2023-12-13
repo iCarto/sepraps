@@ -44,6 +44,7 @@ import {
     CreateSocialComponentContent,
     ViewSocialComponentContent,
 } from "socialComponentMonitoring/container";
+import {ViewSocialComponentsAnalysisSubPage} from "socialComponent/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -201,6 +202,11 @@ const projectRoutes = [
                     />
                 </Route>
             </Route>
+            <Route
+                key="project-social-component-analysis"
+                path="socialcomponentanalysis"
+                element={<ViewSocialComponentsAnalysisSubPage />}
+            ></Route>
             <Route
                 key="project-fieldreport-detail"
                 path="fieldreport/:fieldReportId?"

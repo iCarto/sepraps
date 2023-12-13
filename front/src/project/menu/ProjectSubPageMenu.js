@@ -36,6 +36,10 @@ const ProjectSubPageMenu = ({project}) => {
             to: `${basePath}/socialcomponent`,
             text: "Componentes",
         },
+        {
+            to: `${basePath}/socialcomponentanalysis`,
+            text: "Análisis",
+        },
     ];
 
     return (
