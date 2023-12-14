@@ -1,3 +1,5 @@
+import {useEffect, useRef} from "react";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -8,12 +10,11 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-import {useRef} from "react";
 import {Bar} from "react-chartjs-2";
 import {DateUtil} from "base/format/utilities";
 
-import DownloadChartButton from "./DownloadChartButton";
 import Grid from "@mui/material/Grid";
+import DownloadChartButton from "./DownloadChartButton";
 
 const whiteBackgroundPlugin = {
     id: "custom_canvas_background_color",
@@ -35,10 +36,19 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
-    whiteBackgroundPlugin
+    whiteBackgroundPlugin,
+    ChartDataLabels
 );
 
-const BarChart = ({title, labels, datasets, options = {}}) => {
+const BarChart = ({title, labels, datasets, options = {}, plugins = []}) => {
+    useEffect(() => {
+        plugins.map(plugin => ChartJS.register(plugin));
+
+        return () => {
+            plugins.map(plugin => ChartJS.unregister(plugin));
+        };
+    }, []);
+
     const chartRef = useRef(null);
 
     const chartOptions = {
