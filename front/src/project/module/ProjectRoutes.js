@@ -177,7 +177,7 @@ const projectRoutes = [
             </Route>
             <Route
                 key="project-component-analysis"
-                path="componentanalysis"
+                path="bcomponentanalysis"
                 element={<ViewBuildingComponentsAnalysisSubPage />}
             ></Route>
             <Route
@@ -204,7 +204,7 @@ const projectRoutes = [
             </Route>
             <Route
                 key="project-social-component-analysis"
-                path="socialcomponentanalysis"
+                path="scomponentanalysis"
                 element={<ViewSocialComponentsAnalysisSubPage />}
             ></Route>
             <Route

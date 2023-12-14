@@ -26,7 +26,7 @@ const ProjectSubPageMenu = ({project}) => {
             text: "Componentes",
         },
         {
-            to: `${basePath}/componentanalysis`,
+            to: `${basePath}/bcomponentanalysis`,
             text: "Análisis",
         },
     ];
@@ -37,7 +37,7 @@ const ProjectSubPageMenu = ({project}) => {
             text: "Componentes",
         },
         {
-            to: `${basePath}/socialcomponentanalysis`,
+            to: `${basePath}/scomponentanalysis`,
             text: "Análisis",
         },
     ];
