@@ -1,15 +1,9 @@
-const phaseColors = {
-    other: "#ff9800",
-    design: "#ff9800",
-    contracting: "#fdd835",
-    execution: "#e3eb90",
-    "post-execution": "#8bc34a",
-};
+import {theme} from "Theme";
 
 export function useColorMilestone() {
     let getMilestoneColor = (milestone = null) => {
         if (["funding_allocation", "approval_technical_folder"].includes(milestone)) {
-            return phaseColors["design"];
+            return theme.palette["design"].main;
         }
         if (
             [
@@ -18,7 +12,7 @@ export function useColorMilestone() {
                 "contract_signing",
             ].includes(milestone)
         ) {
-            return phaseColors["contracting"];
+            return theme.palette["contracting"].main;
         }
         if (
             [
@@ -29,12 +23,12 @@ export function useColorMilestone() {
                 "final_settlement",
             ].includes(milestone)
         ) {
-            return phaseColors["execution"];
+            return theme.palette["execution"].main;
         }
         if (["end_of_warranty"].includes(milestone)) {
-            return phaseColors["post-execution"];
+            return theme.palette["post-execution"].main;
         }
-        return phaseColors["other"];
+        return theme.palette["other"].main;
     };
 
     return getMilestoneColor;
