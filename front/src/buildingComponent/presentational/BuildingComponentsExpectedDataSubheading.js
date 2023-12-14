@@ -3,8 +3,6 @@ import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 
 import {theme} from "Theme";
 import Typography from "@mui/material/Typography";
-import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
-import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 
@@ -18,41 +16,18 @@ const BuildingComponentsExpectedDataSubheading = ({data}) => {
 
     return (
         <Stack direction="row" alignItems="center">
-            {isRealAmountWithinExpectation ? (
-                <ArrowCircleDownIcon
-                    fontSize="medium"
-                    sx={{
-                        color: isRealAmountWithinExpectation
-                            ? theme.palette.expected.main
-                            : theme.palette.error.dark,
-                    }}
-                />
-            ) : (
-                <ArrowCircleUpIcon fontSize="medium" color={"error"} />
-            )}
-            <Typography component="span" mx={0.5} fontWeight={600} fontSize={18}>
-                {NumberUtil.formatMillions(Math.abs(difference))}
-                {/* {NumberUtil.formatMillions(difference)} */}
-            </Typography>
-            <Typography fontSize={18}>{CURRENCY_SYMBOL} margen </Typography>
-            {/* <Typography
-                component="span"
-                ml={0.5}
-                fontSize={18}
-                color={
-                    isRealAmountWithinExpectation
-                        ? theme.palette.expected.main
-                        : theme.palette.error.dark
-                }
-            >
-                {differencePercentage || 0}%
-            </Typography> */}
             <Chip
-                label={`${differencePercentage || 0}%`}
+                label={
+                    <Typography fontSize={14}>
+                        <Typography component="span" fontWeight={600} fontSize={14}>
+                            {NumberUtil.formatMillions(difference)}
+                        </Typography>{" "}
+                        {CURRENCY_SYMBOL} margen{" "}
+                    </Typography>
+                }
                 size="small"
                 variant="outlined"
                 sx={{
-                    marginLeft: 1,
                     color: isRealAmountWithinExpectation
                         ? theme.palette.expected.main
                         : theme.palette.error.dark,

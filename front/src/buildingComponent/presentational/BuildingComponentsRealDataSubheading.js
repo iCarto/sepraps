@@ -13,29 +13,21 @@ const BuildingComponentsRealDataSubheading = ({data}) => {
     );
     return (
         <Stack direction="row" alignItems="center">
-            <Typography fontSize={18}>
-                <Typography component="span" fontWeight={600} fontSize={18}>
-                    {NumberUtil.formatMillions(data.pending_amount)}
-                </Typography>{" "}
-                {CURRENCY_SYMBOL} pendiente{" "}
-                {/* <Typography
-                    component="span"
-                    color={theme.palette.pending.dark}
-                    fontSize={18}
-                    lineHeight={1}
-                >
-                    {pendingPercentage || 0}%
-                </Typography> */}
-            </Typography>
             <Chip
-                label={`${pendingPercentage || 0}%`}
-                sx={{
-                    marginLeft: 1,
-                    color: theme.palette.pending.dark,
-                    borderColor: theme.palette.pending.main,
-                }}
+                label={
+                    <Typography fontSize={14}>
+                        <Typography component="span" fontWeight={600} fontSize={14}>
+                            {NumberUtil.formatMillions(data.pending_amount)}
+                        </Typography>{" "}
+                        {CURRENCY_SYMBOL} pendiente{" "}
+                    </Typography>
+                }
                 size="small"
                 variant="outlined"
+                sx={{
+                    color: theme.palette.pending.dark,
+                    borderColor: theme.palette.pending.light,
+                }}
             />
         </Stack>
     );
