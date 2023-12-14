@@ -1,8 +1,44 @@
 import {useEffect, useState} from "react";
 
+import {CUSTOM_COLORS, theme} from "Theme";
+
 import {ProjectStatsService} from "project/service";
 
+import {NumberUtil} from "base/format/utilities";
 import {BarChart} from "base/chart/components";
+
+// Custom plugin for total sum on top of bar
+// https://youtu.be/ARXBu4OOseg?si=_O5IQiBo2owD_Jp9
+const totalAmountTopLabels = {
+    id: "totalamounttoplabels",
+    afterDatasetsDraw(chart, args, pluginOptions) {
+        const {
+            ctx,
+            scales: {x, y},
+        } = chart;
+
+        chart.data.datasets[0].data.forEach((datapoint, index) => {
+            const datasetArray = [];
+
+            chart.data.datasets.forEach(dataset => {
+                datasetArray.push(dataset.data[index]);
+            });
+
+            const totalAmount = NumberUtil.formatMillions(
+                datasetArray[0] + datasetArray[1]
+            );
+
+            ctx.font = "bold 12px sans-serif";
+            ctx.fillStyle = CUSTOM_COLORS.grey[700];
+            ctx.textAlign = "center";
+            ctx.fillText(
+                `Total: ${totalAmount}`,
+                x.getPixelForValue(index),
+                chart.getDatasetMeta(1).data[index].y - 10
+            );
+        });
+    },
+};
 
 const ViewBuildingComponentsFinancialChart = ({filter}) => {
     const [chartData, setChartData] = useState(null);
@@ -10,7 +46,7 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
 
     const parseChartData = chartData => {
         const result = Object.keys(chartData)
-            .filter(key => key !== "code")
+            .filter(key => key !== "code" && key !== "name")
             .reduce((acc, key) => {
                 acc[key] = chartData[key].map(parseFloat);
                 return acc;
@@ -19,16 +55,18 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
     };
     const getMaxChartData = chartData => {
         let maxValue = 0;
-        chartData.paid_amount.forEach((value, index) => {
-            const expectedValue = chartData.expected_amount[index];
-            const realValue = chartData.pending_amount[index] + value;
-            if (expectedValue > maxValue) {
-                maxValue = expectedValue;
-            }
-            if (realValue > maxValue) {
-                maxValue = realValue;
-            }
-        });
+        if (Object.keys(chartData).length) {
+            chartData.paid_amount.forEach((value, index) => {
+                const expectedValue = chartData.expected_amount[index];
+                const realValue = chartData.pending_amount[index] + value;
+                if (expectedValue > maxValue) {
+                    maxValue = expectedValue;
+                }
+                if (realValue > maxValue) {
+                    maxValue = realValue;
+                }
+            });
+        }
         return maxValue;
     };
 
@@ -41,59 +79,62 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
         });
     }, []);
 
-    const colors = {
-        paid: {
-            main: "#5B9BD5",
-            lightest: "#EFF5FB",
-            light: "#AECDEA",
-            dark: "#2E72B2",
-        },
-        pending: {
-            main: "#8B6A36",
-            lightest: "#F9F6F0",
-            light: "#CCAD7B",
-            dark: "#765A2E",
-        },
-        expected: {
-            main: "#ED7D31",
-            lightest: "#FDF3EC",
-            light: "#F5B88E",
-            dark: "#CE5D12",
-        },
+    const formatLabel = value => {
+        if (value) return `${NumberUtil.formatMillions(value)} `;
+        else return null;
     };
 
     return (
         chartData && (
             <BarChart
                 title="Componentes"
-                labels={chartData.code}
+                labels={chartData.name}
+                plugins={[totalAmountTopLabels]}
                 datasets={[
                     {
                         data: chartData.paid_amount,
                         label: "Pagado",
                         barPercentage: 0.3,
                         borderWidth: 2,
-                        borderColor: colors.paid.main,
-                        backgroundColor: colors.paid.light,
+                        borderColor: theme.palette.paid.main,
+                        backgroundColor: theme.palette.paid.light,
+                        datalabels: {
+                            align: "center",
+                            color: "#ffff",
+                            formatter: function(value, context) {
+                                return formatLabel(value);
+                            },
+                        },
                     },
                     {
                         data: chartData.pending_amount,
                         label: "Pendiente",
                         barPercentage: 0.3,
                         borderWidth: 2,
-                        borderColor: colors.pending.main,
-                        backgroundColor: colors.pending.light,
+                        borderColor: theme.palette.pending.main,
+                        backgroundColor: theme.palette.pending.light,
+                        datalabels: {
+                            align: "center",
+                            formatter: function(value, context) {
+                                return formatLabel(value);
+                            },
+                        },
                     },
                     {
                         data: chartData.expected_amount,
                         label: "Previsto",
                         barPercentage: 0.4,
                         borderWidth: 2,
-                        borderColor: colors.expected.main,
-                        backgroundColor: colors.expected.light,
+                        borderColor: theme.palette.expected.main,
+                        backgroundColor: theme.palette.expected.light,
                         // This binds the dataset to the right x & y axis
                         xAxisID: "right-x-axis",
                         yAxisID: "right-y-axis",
+                        datalabels: {
+                            labels: {
+                                title: null,
+                            },
+                        },
                     },
                 ]}
                 options={{
@@ -101,7 +142,17 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
                         legend: {
                             position: "right",
                         },
+                        datalabels: {
+                            labels: {
+                                title: {
+                                    font: {
+                                        weight: "bold",
+                                    },
+                                },
+                            },
+                        },
                     },
+
                     scales: {
                         x: {
                             stacked: true,
@@ -111,6 +162,7 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
                         y: {
                             stacked: true,
                             suggestedMax: maxChartData,
+                            grace: 50000000,
                         },
                         "right-x-axis": {
                             axis: "x",
