@@ -67,6 +67,14 @@ const NumberUtil = {
         }
     },
 
+    formatMillions(value, displaySymbol = true) {
+        const oneMillion = 1000000;
+        const numericValue = value / oneMillion;
+
+        if (displaySymbol) return `${numericValue}M`;
+        return numericValue;
+    },
+
     formatKilometersAndMeters(meters) {
         return Math.trunc(meters / 1000) + " km " + (meters % 1000) + " m";
     },
