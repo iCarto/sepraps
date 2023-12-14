@@ -33,6 +33,9 @@ const StatsByPhaseChart = ({data}) => {
             legend: {
                 display: false,
             },
+            datalabels: {
+                display: false,
+            },
         },
     };
 
