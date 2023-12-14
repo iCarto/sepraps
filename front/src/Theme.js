@@ -4,6 +4,15 @@ import {HEADER_HEIGHT} from "base/ui/app/config/measurements";
 
 import teal from "@mui/material/colors/teal";
 import grey from "@mui/material/colors/grey";
+import amber from "@mui/material/colors/amber";
+import red from "@mui/material/colors/red";
+import orange from "@mui/material/colors/orange";
+import lightGreen from "@mui/material/colors/lightGreen";
+import yellow from "@mui/material/colors/yellow";
+import lime from "@mui/material/colors/lime";
+import indigo from "@mui/material/colors/indigo";
+import deepPurple from "@mui/material/colors/deepPurple";
+import lightBlue from "@mui/material/colors/lightBlue";
 
 // For the palette, only the "main" variant is required. If no other variant is provided, "dark" & "light" variants will be calculated by default through the createTheme method.
 // Specific colors can be imported from the MUI color palettes https://mui.com/material-ui/customization/color/ to be used as objects containing all the different hues and shades of that specific palette.
@@ -43,6 +52,19 @@ export const CUSTOM_COLORS = {
     },
     grey: grey,
     white: "#fff",
+
+    // COLORS FOR PROJECT PHASES
+    design: orange,
+    contracting: yellow,
+    execution: lime,
+    "post-execution": lightGreen,
+    other: red,
+
+    // COLORS FOR FINANCIAL MONITORING:
+    paid: deepPurple,
+    pending: amber,
+    expected: lightBlue,
+    "monto-total": indigo,
 };
 
 const customTheme = createTheme({
@@ -56,7 +78,12 @@ const customTheme = createTheme({
             light: CUSTOM_COLORS.secondary.light,
             lighter: CUSTOM_COLORS.secondary.lighter,
         },
-        success: CUSTOM_COLORS.success,
+        success: {
+            main: CUSTOM_COLORS.success[600],
+            light: CUSTOM_COLORS.success[200],
+            lighter: CUSTOM_COLORS.success[100],
+            dark: CUSTOM_COLORS.success[800],
+        },
         error: {
             main: CUSTOM_COLORS.error.main,
             dark: CUSTOM_COLORS.error.dark,
@@ -73,7 +100,7 @@ const customTheme = createTheme({
                     text: CUSTOM_COLORS.secondary.dark,
                 },
                 options: {
-                    background: "#f5f5f5",
+                    background: "#f5f5f",
                     text: "#7c8b95",
                 },
             },
@@ -92,40 +119,63 @@ const customTheme = createTheme({
         // COLORS FOR PROJECT PHASES
         design: {
             // ORANGE
-            main: "#ff9800",
-            light: "#ffefc2",
-            lighter: "#ffefc2",
+            main: CUSTOM_COLORS.design[500],
+            light: CUSTOM_COLORS.design[50],
+            lighter: CUSTOM_COLORS.design[50],
             dark: "#b26a00",
         },
         contracting: {
             // YELLOW
-            main: "#fdd835",
-            light: "#fff391",
-            lighter: "#fffacf",
-
+            main: CUSTOM_COLORS.contracting[600],
+            light: CUSTOM_COLORS.contracting[200],
+            lighter: CUSTOM_COLORS.contracting[50],
             dark: "#b2a429",
         },
         execution: {
             // LIME
-            main: "#c0ca33",
-            light: "#e3eb90",
-            lighter: "#f3f6cf",
-
-            dark: "#8f9a27",
+            main: CUSTOM_COLORS.execution[600],
+            light: CUSTOM_COLORS.execution[200],
+            lighter: CUSTOM_COLORS.execution[100],
+            dark: CUSTOM_COLORS.execution[800],
         },
         "post-execution": {
-            // GREEN
-            main: "#8bc34a",
-            light: "#bedd9a",
-            lighter: "#dcedc8",
-
-            dark: "#618833",
+            // LIGHT GREEN
+            main: CUSTOM_COLORS["post-execution"][500],
+            light: CUSTOM_COLORS["post-execution"][200],
+            lighter: CUSTOM_COLORS["post-execution"][100],
+            dark: CUSTOM_COLORS["post-execution"][800],
         },
         other: {
             // RED
-            main: "#ff0a0a",
-            light: "#f2aeae",
-            dark: "#aa2e25",
+            main: CUSTOM_COLORS.other[600],
+            light: CUSTOM_COLORS.other[200],
+            dark: CUSTOM_COLORS.other[800],
+        },
+
+        // COLORS FOR FINANCIAL MONITORING:
+        paid: {
+            main: CUSTOM_COLORS.paid[500],
+            light: CUSTOM_COLORS.paid[300],
+            lighter: CUSTOM_COLORS.paid[100],
+            dark: CUSTOM_COLORS.paid[900],
+        },
+        pending: {
+            main: CUSTOM_COLORS.pending[500],
+            light: CUSTOM_COLORS.pending[300],
+            lighter: CUSTOM_COLORS.pending[100],
+            dark: CUSTOM_COLORS.pending[900],
+        },
+        expected: {
+            main: CUSTOM_COLORS.expected[500],
+            light: CUSTOM_COLORS.expected[300],
+            lighter: CUSTOM_COLORS.expected[100],
+            dark: CUSTOM_COLORS.expected[900],
+        },
+        "monto-total": {
+            main: CUSTOM_COLORS["monto-total"][500],
+            light: CUSTOM_COLORS["monto-total"][300],
+            lighter: CUSTOM_COLORS["monto-total"][100],
+            dark: CUSTOM_COLORS["monto-total"][900],
         },
     },
 
