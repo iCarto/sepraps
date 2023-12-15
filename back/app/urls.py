@@ -7,13 +7,8 @@ from app.views import (
     events_views,
     notifications_views,
     payment_stats_views,
-    stats_views,
-)
-from app.views import (
-    events_views,
-    notifications_views,
-    stats_views,
     project_stats_views,
+    stats_views,
 )
 from app.views.building_component_monitoring_viewset import (
     BuildingComponentMonitoringViewSet,
@@ -95,7 +90,11 @@ urlpatterns = [
         project_stats_views.get_building_components_total_stats,
     ),
     path(
+        "projectstats/socialcomponenttrainingssum",
+        project_stats_views.get_social_component_trainings_sum_stats,
+    ),
+    path(
         "projectstats/socialcomponenttrainings/<str:group_code>",
-        project_stats_views.get_social_component_trainings_stats,
+        project_stats_views.get_social_component_trainings_multi_stats,
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

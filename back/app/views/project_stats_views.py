@@ -104,7 +104,7 @@ def get_building_components_total_stats(request, format=None):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
-def get_social_component_trainings_stats(request, group_code, format=None):
+def get_social_component_trainings_multi_stats(request, group_code, format=None):
     group_by_attribute = "scm.code"
     if group_code == "target_population":
         group_by_attribute = "sct.target_population"
@@ -155,5 +155,81 @@ def get_social_component_trainings_stats(request, group_code, format=None):
         ].sum(numeric_only=True)
         df.at["Total", "women_percentage"] = df["women_percentage"].mean()
         df.at["Total", "code"] = "total"
+
+        return Response(df)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+@renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
+def get_social_component_trainings_sum_stats(request, format=None):
+    query = """
+            SELECT
+                sct.id,
+                to_char(sct.start_date, 'yyyy-mm-dd') as start_date,
+                to_char(sct.end_date, 'yyyy-mm-dd') as end_date,
+                sct.method,
+                d_method.value as method_label,
+                sct.target_population,
+                (SELECT array_agg(d.value) FROM dominios d WHERE d."key" = ANY(sct.target_population)) AS target_population_label,
+                coalesce(sct.number_of_women,0) + coalesce(sct.number_of_men, 0) as number_of_participants,
+                sct.number_of_women,
+                round((cast(number_of_women as decimal) / (coalesce(sct.number_of_women,0) + coalesce(sct.number_of_men, 0))) * 100, 2)::numeric as women_percentage,
+                sct.number_of_hours,
+                sct.number_of_digital_materials,
+                sct.number_of_printed_materials,
+                cc2."number" as contract_number,
+                c."name" as contractor_name
+            FROM social_component_training sct
+                INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
+                JOIN (
+                    {join_query}
+                ) projects ON projects.project_id = scm.project_id
+                LEFT JOIN construction_contract cc2 on cc2.id = sct.contract_id
+                LEFT JOIN contractor c on c.id = sct.contractor_id
+                LEFT JOIN dominios d_method on d_method."key" = sct."method"
+            """
+
+    with connection.cursor() as cursor:
+        cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))
+        result = dictfetchall(cursor)
+
+        if not result:
+            df = pd.DataFrame(
+                [["total", 0, 0, 0, 0]],
+                columns=[
+                    "code",
+                    "number_of_women",
+                    "number_of_men",
+                    "women_percentage",
+                    "number_of_hours",
+                ],
+            )
+            return Response(df)
+
+        df = pd.DataFrame(result)
+        df.loc["Total"] = df[
+            [
+                "number_of_women",
+                "number_of_participants",
+                "number_of_hours",
+                "number_of_digital_materials",
+                "number_of_printed_materials",
+            ]
+        ].sum(numeric_only=True)
+        df.at["Total", "women_percentage"] = df["women_percentage"].mean()
+        # df.at["Total", "code"] = "total"
+
+        # Convert to nullable integers
+        df = df.astype(
+            {
+                "number_of_women": "Int64",
+                "number_of_participants": "Int64",
+                "number_of_hours": "Int64",
+                "number_of_digital_materials": "Int64",
+                "number_of_printed_materials": "Int64",
+            }
+        )
+        df.at["Total", "contract_number"] = "Total"
 
         return Response(df)
