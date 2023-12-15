@@ -9,7 +9,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 
 const COLORS = {
-    number_of_woman: {
+    number_of_women: {
         main: "#54457F",
         lightest: "#E8E4F1",
         light: "#9688BF",
@@ -50,7 +50,7 @@ const SocialComponentsTrainingsTable = ({trainingData, trainingDataType}) => {
     const tableCells =
         trainingDataType === TRAINING_DATA_FILTER.DATA_TYPE.WOMEN_MEN.code
             ? [
-                  trainingData.number_of_woman.map(value => parseInt(value)),
+                  trainingData.number_of_women.map(value => parseInt(value)),
                   trainingData.number_of_men.map(value => parseInt(value)),
               ]
             : trainingDataType === TRAINING_DATA_FILTER.DATA_TYPE.WOMEN_PERCENTAGE.code

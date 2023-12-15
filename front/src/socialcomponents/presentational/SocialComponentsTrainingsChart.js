@@ -3,7 +3,7 @@ import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsFilter";
 import {CUSTOM_COLORS} from "Theme";
 
 const COLORS = {
-    number_of_woman: {
+    number_of_women: {
         main: "#54457F",
         lightest: "#E8E4F1",
         light: "#9688BF",
@@ -45,10 +45,10 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
         if (trainingDataType === TRAINING_DATA_FILTER.DATA_TYPE.WOMEN_MEN.code) {
             return [
                 {
-                    data: chartTrainingData.number_of_woman,
+                    data: chartTrainingData.number_of_women,
                     label: "Nº de mujeres",
-                    borderColor: COLORS.number_of_woman.main,
-                    backgroundColor: COLORS.number_of_woman.light,
+                    borderColor: COLORS.number_of_women.main,
+                    backgroundColor: COLORS.number_of_women.light,
                     ...barProperties,
                 },
                 {

@@ -113,9 +113,9 @@ def get_social_component_trainings_stats(request, group_code, format=None):
     query = """
             SELECT
                 {group_by_attribute} as code,
-                sum(number_of_woman) as number_of_woman,
+                sum(number_of_women) as number_of_women,
                 sum(number_of_men) as number_of_men,
-                round((cast(sum(number_of_woman) as decimal) / (sum(number_of_woman) + sum(number_of_men))) * 100)::numeric as women_percentage,
+                round((cast(sum(number_of_women) as decimal) / (sum(number_of_women) + sum(number_of_men))) * 100)::numeric as women_percentage,
                 sum(number_of_hours) as number_of_hours
             FROM social_component_training sct
                 INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
@@ -140,7 +140,7 @@ def get_social_component_trainings_stats(request, group_code, format=None):
                 [["total", 0, 0, 0, 0]],
                 columns=[
                     "code",
-                    "number_of_woman",
+                    "number_of_women",
                     "number_of_men",
                     "women_percentage",
                     "number_of_hours",
@@ -150,7 +150,7 @@ def get_social_component_trainings_stats(request, group_code, format=None):
 
         df = pd.DataFrame(result)
         df.loc["Total"] = df[
-            ["number_of_woman", "number_of_men", "number_of_hours"]
+            ["number_of_women", "number_of_men", "number_of_hours"]
         ].sum(numeric_only=True)
         df.at["Total", "women_percentage"] = df["women_percentage"].mean()
         df.at["Total", "code"] = "total"
