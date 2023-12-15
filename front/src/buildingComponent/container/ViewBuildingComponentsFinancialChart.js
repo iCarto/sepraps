@@ -162,7 +162,7 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
                         y: {
                             stacked: true,
                             suggestedMax: maxChartData,
-                            grace: 50000000,
+                            grace: "5%",
                         },
                         "right-x-axis": {
                             axis: "x",
@@ -173,6 +173,7 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
                             stacked: true,
                             display: false,
                             suggestedMax: maxChartData,
+                            grace: "5%",
                         },
                     },
                 }}
