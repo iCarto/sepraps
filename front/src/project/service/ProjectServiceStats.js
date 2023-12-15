@@ -22,6 +22,17 @@ const ProjectStatsService = {
         });
     },
 
+    getSocialComponentTrainingsTotalStats(filter, format = null) {
+        return AuthApiService.get(
+            `${basePath}/socialcomponenttrainingssum?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`,
+            ServiceUtil.getAcceptHeader(format)
+        ).then(response => {
+            return response;
+        });
+    },
+
     getSocialComponentTrainingsStats(groupByAttribute = "component_code", filter) {
         return AuthApiService.get(
             `${basePath}/socialcomponenttrainings/${groupByAttribute}?${ServiceUtil.getFilterQueryString(
