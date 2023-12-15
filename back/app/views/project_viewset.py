@@ -16,6 +16,7 @@ from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
 from app.models.building_component_monitoring import BuildingComponentMonitoring
+from app.models.connection import Connection
 from app.models.milestone import Milestone
 from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
@@ -25,6 +26,7 @@ from app.serializers.building_component_monitoring_serializer import (
     BuildingCompanyMonitoringSummarySerializer,
 )
 from app.serializers.building_component_serializer import BuildingComponentSerializer
+from app.serializers.connection_serializer import ConnectionSerializer
 from app.serializers.contact_relationship_serializer import (
     ContactRelationshipSerializer,
 )
@@ -385,6 +387,17 @@ class ProjectViewSet(ModelListViewSet):
                 {"value": component_code, "label": component_config.get("name")}
             )
         return Response(result)
+
+    @action(
+        methods=["GET"], detail=True, url_path="connections", url_name="connections"
+    )
+    def get_connections(self, request, pk):
+        project = self.get_object()
+        connection = Connection.objects.filter(project=project)
+
+        serializer = ConnectionSerializer(connection, many=True)
+
+        return Response(serializer.data)
 
 
 def get_building_components_config(project):

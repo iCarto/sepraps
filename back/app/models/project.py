@@ -94,6 +94,7 @@ class Project(models.Model):
 @receiver(post_save, sender=Project)
 def post_create(sender, instance, created, *args, **kwargs):
     """Create project folder structure and project milestones from template."""
+    from app.models.connection import create_project_connection
     from app.models.milestone import create_project_milestones
 
     if not created:
@@ -134,6 +135,7 @@ def post_create(sender, instance, created, *args, **kwargs):
     create_project_milestones(instance, data.get("milestones", []))
     create_project_building_components(instance, data.get("building_components", {}))
     create_project_social_components(instance, data.get("social_components", {}))
+    create_project_connection(instance)
 
 
 def get_code_for_new_project():

@@ -15,6 +15,7 @@ from app.views.building_component_monitoring_viewset import (
 )
 from app.views.building_component_viewset import BuildingComponentViewSet
 from app.views.comment_viewset import CommentViewSet
+from app.views.connection_viewset import ConnectionViewSet
 from app.views.construction_contract_viewset import ConstructionContractViewSet
 from app.views.contact_viewset import ContactViewSet
 from app.views.contract_service_viewset import ContractServiceViewSet
@@ -66,6 +67,7 @@ router.register("buildingcomponents", BuildingComponentViewSet)
 router.register("buildingcomponentmonitorings", BuildingComponentMonitoringViewSet)
 router.register("socialcomponentmonitorings", SocialComponentMonitoringViewSet)
 router.register("socialcomponenttrainings", SocialComponentTrainingViewSet)
+router.register("connections", ConnectionViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
