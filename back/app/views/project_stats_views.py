@@ -14,7 +14,7 @@ def get_filter_join_query(params):
         SELECT DISTINCT ON (p.id) p.id as project_id
         FROM project p
         LEFT JOIN construction_contract cc on cc.id = p.construction_contract_id
-	    LEFT JOIN contract_supervision_area csa on csa.code = 'building' and csa.contract_id = cc.id
+	    LEFT JOIN contract_supervision_area csa on csa.contract_id = cc.id
         LEFT JOIN financing_program fp on fp.id = cc.financing_program_id
         LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
         LEFT JOIN project_linked_localities pll on pll.project_id = p.id
