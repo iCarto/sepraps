@@ -24,6 +24,7 @@ import {
     ViewProjectBuildingComponentSubPage,
     ViewProjectSocialComponentSubPage,
     ViewProjectSocialAnalysisSubPage,
+    ViewProjectConnectionsSubPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -180,6 +181,17 @@ const projectRoutes = [
                 path="bcomponentanalysis"
                 element={<ViewBuildingComponentsAnalysisSubPage />}
             ></Route>
+            <Route
+                key="project-connections-detail"
+                path="connections/:connectionId"
+                element={<ViewProjectConnectionsSubPage />}
+            >
+                <Route
+                    key="project-connections-detail-documents-view"
+                    path="document/:idDocument"
+                    element={<ViewDocumentPanel />}
+                />
+            </Route>
             <Route
                 key="project-social-components"
                 path="socialcomponent"

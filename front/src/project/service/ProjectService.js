@@ -21,6 +21,7 @@ import {
     createSocialComponentMonitoring,
     social_component_monitoring_api_adapter,
 } from "socialComponentMonitoring/model";
+import {connection_api_adapter, createConnections} from "connection/model";
 
 const basePath = "/api/app/projects";
 
@@ -137,6 +138,14 @@ const ProjectService = {
                 social_component_monitoring_api_adapter(response)
             );
         });
+    },
+
+    getProjectConnections(projectId) {
+        return AuthApiService.get(`${basePath}/${projectId}/connections`).then(
+            response => {
+                return createConnections(connection_api_adapter(response));
+            }
+        );
     },
 
     createProjectSocialComponent(projectId, socialComponent) {

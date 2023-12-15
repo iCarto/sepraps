@@ -41,3 +41,6 @@ export {
 export {
     default as ViewProjectSocialAnalysisSubPage,
 } from "./ViewProjectSocialAnalysisSubPage";
+export {
+    default as ViewProjectConnectionsSubPage,
+} from "./ViewProjectConnectionsSubPage";
