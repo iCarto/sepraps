@@ -92,10 +92,6 @@ const ProjectSubPageMenu = ({project}) => {
                 text="Informes de viaje"
                 icon={<DirectionsCarFilledOutlinedIcon />}
             />
-            <QuestionnairesMenu
-                questionnaires={project?.questionnaires}
-                basePath={`/projects/list/${project?.id}`}
-            />
             <SubPageMenuListGroup
                 id="building_monitoring"
                 headerTitle="Área técnica"
@@ -107,6 +103,10 @@ const ProjectSubPageMenu = ({project}) => {
                 headerTitle="Área social"
                 headerIcon={<Diversity1OutlinedIcon />}
                 items={socialSupervisionAreaSubmenuItems}
+            />
+            <QuestionnairesMenu
+                questionnaires={project?.questionnaires}
+                basePath={`/projects/list/${project?.id}`}
             />
         </SubPageMenu>
     );

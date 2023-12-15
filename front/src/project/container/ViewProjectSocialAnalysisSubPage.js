@@ -3,12 +3,12 @@ import {useOutletContext} from "react-router-dom";
 import {ViewSocialComponentsAnalysisSubPage} from "socialComponent/container";
 
 const ViewContractProjectSocialAnalysisSubPage = () => {
-    let contract;
-    [contract] = useOutletContext();
+    let project;
+    [project] = useOutletContext();
 
     return (
-        contract && (
-            <ViewSocialComponentsAnalysisSubPage filter={{contract: contract.id}} />
+        project && (
+            <ViewSocialComponentsAnalysisSubPage filter={{project: project.id}} />
         )
     );
 };

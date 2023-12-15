@@ -38,3 +38,6 @@ export {
 export {
     default as ViewProjectSocialComponentSubPage,
 } from "./ViewProjectSocialComponentSubPage";
+export {
+    default as ViewProjectSocialAnalysisSubPage,
+} from "./ViewProjectSocialAnalysisSubPage";

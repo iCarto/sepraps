@@ -18,12 +18,12 @@ import {
     AddProjectLinkedLocalitiesPanel,
     UpdateProjectQuestionnaireInstancePanel,
     ViewProjectProviderSubPage,
-    ViewProjectsSupervisionPage,
     ViewProjectFieldReportSubPage,
     ViewProjectDocumentPanel,
     ViewProjectStatsPage,
     ViewProjectBuildingComponentSubPage,
     ViewProjectSocialComponentSubPage,
+    ViewProjectSocialAnalysisSubPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -205,7 +205,7 @@ const projectRoutes = [
             <Route
                 key="project-social-component-analysis"
                 path="scomponentanalysis"
-                element={<ViewSocialComponentsAnalysisSubPage />}
+                element={<ViewProjectSocialAnalysisSubPage />}
             ></Route>
             <Route
                 key="project-fieldreport-detail"

@@ -32,10 +32,7 @@ function a11yProps(index) {
     };
 }
 
-const ViewSocialComponentsAnalysisSubPage = () => {
-    let project;
-    [project] = useOutletContext();
-
+const ViewSocialComponentsAnalysisSubPage = ({filter}) => {
     const [tabValue, setTabValue] = useState(0);
 
     const handleTabChange = (event, newValue) => {
@@ -44,34 +41,26 @@ const ViewSocialComponentsAnalysisSubPage = () => {
 
     useEffect(() => {
         setTabValue(0);
-    }, [project]);
+    }, [filter]);
 
     return (
         <SectionCard title="Supervisión de componentes sociales">
-            {project ? (
-                <>
-                    <Box sx={{borderBottom: 1, borderColor: "divider"}}>
-                        <Tabs
-                            value={tabValue}
-                            onChange={handleTabChange}
-                            aria-label="tab-social-components-analysis"
-                        >
-                            <Tab label="Tabla" {...a11yProps(0)} />
-                            <Tab label="Gráfico" {...a11yProps(1)} />
-                        </Tabs>
-                    </Box>
-                    <TabPanel value={tabValue} index={0}>
-                        <ViewSocialComponentsTrainingsTotalsTab
-                            filter={{project: project.id}}
-                        />
-                    </TabPanel>
-                    <TabPanel value={tabValue} index={1}>
-                        <ViewSocialComponentsTrainingsChart
-                            filter={{project: project.id}}
-                        />
-                    </TabPanel>
-                </>
-            ) : null}
+            <Box sx={{borderBottom: 1, borderColor: "divider"}}>
+                <Tabs
+                    value={tabValue}
+                    onChange={handleTabChange}
+                    aria-label="tab-social-components-analysis"
+                >
+                    <Tab label="Tabla" {...a11yProps(0)} />
+                    <Tab label="Gráfico" {...a11yProps(1)} />
+                </Tabs>
+            </Box>
+            <TabPanel value={tabValue} index={0}>
+                <ViewSocialComponentsTrainingsTotalsTab filter={filter} />
+            </TabPanel>
+            <TabPanel value={tabValue} index={1}>
+                <ViewSocialComponentsTrainingsChart filter={filter} />
+            </TabPanel>
         </SectionCard>
     );
 };
