@@ -65,7 +65,7 @@ const ProjectSubPageMenu = ({project}) => {
             <SubPageMenuListItemButton
                 key="project-financing"
                 to={`${basePath}/financing`}
-                text="Financiación"
+                text="Contratos"
                 icon={<AccountBalanceIconOutlined />}
             />
             <SubPageMenuListItemButton
