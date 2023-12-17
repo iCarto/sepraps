@@ -9,6 +9,7 @@ import red from "@mui/material/colors/red";
 import orange from "@mui/material/colors/orange";
 import lightGreen from "@mui/material/colors/lightGreen";
 import yellow from "@mui/material/colors/yellow";
+import brown from "@mui/material/colors/yellow";
 import lime from "@mui/material/colors/lime";
 import indigo from "@mui/material/colors/indigo";
 import deepPurple from "@mui/material/colors/deepPurple";
@@ -61,9 +62,9 @@ export const CUSTOM_COLORS = {
     other: red,
 
     // COLORS FOR FINANCIAL MONITORING:
-    paid: deepPurple,
+    paid: lightBlue,
     pending: amber,
-    expected: lightBlue,
+    expected: orange,
     "monto-total": indigo,
 };
 
@@ -166,8 +167,8 @@ const customTheme = createTheme({
             dark: CUSTOM_COLORS.pending[900],
         },
         expected: {
-            main: CUSTOM_COLORS.expected[500],
-            light: CUSTOM_COLORS.expected[300],
+            main: CUSTOM_COLORS.expected[300],
+            light: CUSTOM_COLORS.expected[100],
             lighter: CUSTOM_COLORS.expected[100],
             dark: CUSTOM_COLORS.expected[900],
         },
