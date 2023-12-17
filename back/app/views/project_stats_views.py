@@ -21,7 +21,7 @@ def get_filter_join_query(params):
         LEFT JOIN locality l on l.code = pll.locality_id
         INNER JOIN district di on di.code = l.district_id
         INNER JOIN department de on de.code = l.department_id
-        WHERE 1 = 1
+        WHERE p.closed = False
         {filter_conditions}
     """
     filter_conditions = []
@@ -59,6 +59,7 @@ def get_building_components_stats(request, format=None):
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = bcm.project_id
+            WHERE bcm.active = True
             GROUP BY bc.code, bc.name
             ORDER BY bc.code
             """
@@ -87,6 +88,7 @@ def get_building_components_total_stats(request, format=None):
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = bcm.project_id
+            WHERE bcm.active = True
             """
 
     with connection.cursor() as cursor:
@@ -123,6 +125,7 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = scm.project_id
+            WHERE sct.active = True and scm.active = True
             GROUP BY {group_by_attribute}
             ORDER BY {group_by_attribute}
             """
@@ -188,6 +191,7 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 LEFT JOIN construction_contract cc2 on cc2.id = sct.contract_id
                 LEFT JOIN contractor c on c.id = sct.contractor_id
                 LEFT JOIN dominios d_method on d_method."key" = sct."method"
+            WHERE sct.active = True and scm.active = True
             """
 
     with connection.cursor() as cursor:
