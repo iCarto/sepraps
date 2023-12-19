@@ -9,7 +9,6 @@ const FormBox = ({label, children}) => {
                 border: 1,
                 borderRadius: 2,
                 borderColor: "grey.200",
-                mt: 3,
                 p: 1,
             }}
         >

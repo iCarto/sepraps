@@ -46,7 +46,7 @@ const ViewProjectSocialComponentSubPage = () => {
         <ContentLayout>
             <AlertError error={error} />
             <Grid container>
-                <Box sx={{p: 1, width: "calc(100% - 240px)"}}>
+                <Box sx={{width: "calc(100% - 240px)"}}>
                     <Outlet context={[project]} />
                     {isRootPath &&
                         socialComponentMonitorings &&
@@ -66,7 +66,7 @@ const ViewProjectSocialComponentSubPage = () => {
                             </PaperContainer>
                         )}
                 </Box>
-                <Box sx={{p: 1, width: "240px"}}>
+                <Box sx={{pl: 1, width: "240px"}}>
                     <ComponentListSelector
                         components={socialComponentMonitorings}
                         basePath={`/projects/list/${projectId}/socialcomponent`}

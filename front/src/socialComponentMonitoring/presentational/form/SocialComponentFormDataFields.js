@@ -8,7 +8,7 @@ const SocialComponentFormDataFields = ({projectId}) => {
     const componentTypes = useGetSocialComponentTypes(projectId);
 
     return (
-        <Grid container columnSpacing={2}>
+        <Grid container spacing={2}>
             <Grid container item xs={12} spacing={2}>
                 <Grid item xs={4}>
                     <FormInputText
