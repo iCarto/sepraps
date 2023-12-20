@@ -4,31 +4,11 @@ import {Outlet} from "react-router-dom";
 import {
     FOOTER_HEIGHT,
     PAGE_MENU_DRAWER_WIDTH,
-    SIDEBAR_PANEL_DRAWER_WIDTH,
     SUBPAGE_MENU_DRAWER_WIDTH,
 } from "base/ui/app/config/measurements";
 import {SidebarPanelDrawer} from "base/ui/sidebar";
-import styled from "@mui/material/styles/styled";
 import Box from "@mui/material/Box";
-
-const PageContainer = styled("div", {shouldForwardProp: prop => prop !== "open"})(
-    ({theme, open, style}) => ({
-        flexGrow: 1,
-        transition: theme.transitions.create("margin", {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginRight: 0,
-        ...(open && {
-            transition: theme.transitions.create("margin", {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginRight: SIDEBAR_PANEL_DRAWER_WIDTH,
-        }),
-        ...style,
-    })
-);
+import ContentContainer from "./ContentContainer";
 
 const PageLayout = ({
     children = null,
@@ -43,7 +23,7 @@ const PageLayout = ({
     const drawerWidth = subPage ? SUBPAGE_MENU_DRAWER_WIDTH : PAGE_MENU_DRAWER_WIDTH;
 
     return (
-        <PageContainer open={isSidebarPanelOpen} style={{...style}}>
+        <ContentContainer open={isSidebarPanelOpen} style={{...style}}>
             {menu}
             <Box
                 role="page-container"
@@ -66,7 +46,7 @@ const PageLayout = ({
                     <Outlet context={[...context, setSidebarPanelOpen]} />
                 </SidebarPanelDrawer>
             )}
-        </PageContainer>
+        </ContentContainer>
     );
 };
 

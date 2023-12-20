@@ -93,7 +93,11 @@ const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => 
 
     return (
         socialComponent && (
-            <Card sx={{border: 1, borderColor: "grey.300"}} elevation={0}>
+            <Card
+                sx={{border: 1, borderColor: "grey.300"}}
+                elevation={0}
+                component="section"
+            >
                 <ComponentCardHeader
                     component={socialComponent}
                     componentName={socialComponent.name}

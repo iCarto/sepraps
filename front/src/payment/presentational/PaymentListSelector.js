@@ -1,20 +1,16 @@
-import {styled} from "@mui/material/styles";
-import {TextLink} from "base/navigation/components";
-
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
+
+import {PaymentListSelectorItem} from ".";
+
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import {useNavigate} from "react-router";
-import {PaymentListSelectorItem} from ".";
-import Tooltip from "@mui/material/Tooltip";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 
 const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
     const navigate = useNavigate();

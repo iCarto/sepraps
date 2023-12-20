@@ -90,7 +90,11 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent})
 
     return (
         buildingComponent && (
-            <Card sx={{border: 1, borderColor: "grey.300"}} elevation={0}>
+            <Card
+                sx={{border: 1, borderColor: "grey.300"}}
+                elevation={0}
+                component="section"
+            >
                 <ComponentCardHeader
                     component={buildingComponent}
                     componentName={buildingComponent.building_component?.name}

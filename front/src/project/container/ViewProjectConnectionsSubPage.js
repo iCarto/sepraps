@@ -28,18 +28,16 @@ const ViewProjectConnectionsSubPage = () => {
     return (
         connection && (
             <ContentLayout>
-                <Stack spacing={1}>
-                    <ViewOrUpdateConnectionsDataContent
-                        connection={connection}
-                        projectId={projectId}
-                    />
-                    <ViewOrUpdateFilesDataContent folderPath={connection.folder} />
-                    <ViewOrUpdateCommentsContent
-                        entity={connection}
-                        service={ConnectionService}
-                    />
-                    <EntityAuditSection entity={connection} />
-                </Stack>
+                <ViewOrUpdateConnectionsDataContent
+                    connection={connection}
+                    projectId={projectId}
+                />
+                <ViewOrUpdateFilesDataContent folderPath={connection.folder} />
+                <ViewOrUpdateCommentsContent
+                    entity={connection}
+                    service={ConnectionService}
+                />
+                <EntityAuditSection entity={connection} />
             </ContentLayout>
         )
     );

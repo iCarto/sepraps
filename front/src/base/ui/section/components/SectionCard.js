@@ -31,6 +31,7 @@ const SectionCard = ({
         <Card
             sx={isSidePanelOpen ? cardStyleForSidePanel : cardStyle}
             variant="outlined"
+            component="section"
         >
             {secondaryAction || secondaryActions || title ? (
                 <CardHeader

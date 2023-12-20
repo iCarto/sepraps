@@ -7,3 +7,4 @@ export const FOOTER_HEIGHT = 84;
 export const PAGE_MENU_DRAWER_WIDTH = 220;
 export const SUBPAGE_MENU_DRAWER_WIDTH = 210;
 export const SIDEBAR_PANEL_DRAWER_WIDTH = 440;
+export const SELECTOR_RIGHT_PANEL_WIDTH = 240;

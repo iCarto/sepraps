@@ -7,8 +7,8 @@ import {
     useParams,
 } from "react-router-dom";
 
+import {SELECTOR_RIGHT_PANEL_WIDTH} from "base/ui/app/config/measurements";
 import {ProjectService} from "project/service";
-import {ContentLayout} from "base/ui/main";
 import {AlertError} from "base/error/components";
 import {PaperContainer} from "base/shared/components";
 import {ComponentListSelector} from "component/presentational";
@@ -46,38 +46,38 @@ const ViewProjectBuildingComponentSubPage = () => {
     }, [projectId, location.state?.lastRefreshDate]);
 
     return (
-        <ContentLayout>
+        <Grid container role="subpage-content-container">
             <AlertError error={error} />
-            <Grid container>
-                <Box sx={{width: "calc(100% - 240px)"}}>
-                    <Outlet context={[project]} />
-                    {isRootPath &&
-                        buildingComponentMonitorings &&
-                        buildingComponentMonitorings.length === 0 && (
-                            <PaperContainer>
-                                <Grid container justifyContent="center" my={6}>
-                                    <Typography
-                                        sx={{
-                                            fontStyle: "italic",
-                                            textAlign: "center",
-                                        }}
-                                    >
-                                        Este proyecto no tiene ningún componente
-                                        todavía.
-                                    </Typography>
-                                </Grid>
-                            </PaperContainer>
-                        )}
-                </Box>
-                <Box sx={{pl: 1, width: "240px"}}>
-                    <ComponentListSelector
-                        components={buildingComponentMonitorings}
-                        basePath={`/projects/list/${projectId}/buildingcomponent`}
-                        selectedComponentId={parseInt(buildingComponentId)}
-                    />
-                </Box>
-            </Grid>
-        </ContentLayout>
+            <Box sx={{width: `calc(100% - ${SELECTOR_RIGHT_PANEL_WIDTH}px)`}}>
+                <Outlet context={[project]} />
+                {isRootPath &&
+                    buildingComponentMonitorings &&
+                    buildingComponentMonitorings.length === 0 && (
+                        <PaperContainer>
+                            <Grid container justifyContent="center" my={6}>
+                                <Typography
+                                    sx={{
+                                        fontStyle: "italic",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    Este proyecto no tiene ningún componente todavía.
+                                </Typography>
+                            </Grid>
+                        </PaperContainer>
+                    )}
+            </Box>
+            <Box
+                component="aside"
+                sx={{pl: 1, width: `${SELECTOR_RIGHT_PANEL_WIDTH}px`}}
+            >
+                <ComponentListSelector
+                    components={buildingComponentMonitorings}
+                    basePath={`/projects/list/${projectId}/buildingcomponent`}
+                    selectedComponentId={parseInt(buildingComponentId)}
+                />
+            </Box>
+        </Grid>
     );
 };
 
