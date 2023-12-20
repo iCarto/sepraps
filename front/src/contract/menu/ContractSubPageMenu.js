@@ -14,8 +14,7 @@ import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
-import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
-import Diversity1OutlinedIcon from "@mui/icons-material/Diversity1Outlined";
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 
 const ContractSubPageMenu = ({contract}) => {
     const {ROLES} = useAuth();
@@ -95,7 +94,7 @@ const ContractSubPageMenu = ({contract}) => {
                 <SubPageMenuListGroup
                     id="building_supervision_area"
                     headerTitle="Área Técnica"
-                    headerIcon={<EngineeringOutlinedIcon />}
+                    headerIcon={<HandymanOutlinedIcon />}
                     items={buildingSupervisionAreaSubmenuItems}
                 />
             )}
@@ -103,7 +102,7 @@ const ContractSubPageMenu = ({contract}) => {
                 <SubPageMenuListGroup
                     id="social_supervision_area"
                     headerTitle="Área Social"
-                    headerIcon={<Diversity1OutlinedIcon />}
+                    headerIcon={<HandshakeOutlinedIcon />}
                     items={socialSupervisionAreaSubmenuItems}
                 />
             )}

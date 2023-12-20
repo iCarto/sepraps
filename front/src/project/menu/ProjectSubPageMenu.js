@@ -14,8 +14,8 @@ import FolderOpenIconOutlined from "@mui/icons-material/FolderOpenOutlined";
 import PermContactCalendarIconOutlined from "@mui/icons-material/PermContactCalendarOutlined";
 import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
-import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
-import Diversity1OutlinedIcon from "@mui/icons-material/Diversity1Outlined";
+import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/list/${project?.id}`;
@@ -95,13 +95,13 @@ const ProjectSubPageMenu = ({project}) => {
             <SubPageMenuListGroup
                 id="building_monitoring"
                 headerTitle="Área técnica"
-                headerIcon={<EngineeringOutlinedIcon />}
+                headerIcon={<HandymanOutlinedIcon />}
                 items={buildingSupervisionAreaSubmenuItems}
             />
             <SubPageMenuListGroup
                 id="social_monitoring"
                 headerTitle="Área social"
-                headerIcon={<Diversity1OutlinedIcon />}
+                headerIcon={<HandshakeOutlinedIcon />}
                 items={socialSupervisionAreaSubmenuItems}
             />
             <QuestionnairesMenu
