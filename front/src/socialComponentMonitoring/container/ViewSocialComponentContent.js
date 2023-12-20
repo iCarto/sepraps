@@ -13,6 +13,7 @@ import {SidebarPanelDrawer} from "base/ui/sidebar";
 
 import styled from "@mui/material/styles/styled";
 import Stack from "@mui/system/Stack";
+import {EntityAuditSection} from "base/entity/components/presentational/sections";
 
 const PageContainer = styled("div", {shouldForwardProp: prop => prop !== "open"})(
     ({theme, open}) => ({
@@ -69,6 +70,7 @@ const ViewSocialComponentContent = () => {
                         entity={socialComponentMonitoring}
                         service={SocialComponentMonitoringService}
                     />
+                    <EntityAuditSection entity={socialComponentMonitoring} />
                 </Stack>
                 <SidebarPanelDrawer isSidebarPanelOpen={isSidebarPanelOpen}>
                     <Outlet context={[setSidebarPanelOpen]} />
