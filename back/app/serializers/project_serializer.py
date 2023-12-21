@@ -25,21 +25,6 @@ from questionnaires.serializers.questionnaire_serializer import (
 
 
 class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
-    code = serializers.CharField(required=False, read_only=True)
-    closed = serializers.BooleanField(required=False)
-    main_infrastructure = InfrastructureSerializer()
-    linked_localities = LocalitySerializer(many=True)
-    provider = ProviderSerializer(required=False, allow_null=True)
-    construction_contract = serializers.PrimaryKeyRelatedField(
-        required=False, allow_null=True, queryset=ConstructionContract.objects.all()
-    )
-    milestones = serializers.SerializerMethodField(required=False, read_only=True)
-    creation_user = serializers.CharField(
-        source="creation_user.username", required=False
-    )
-    folder = serializers.SerializerMethodField()
-    questionnaires = QuestionnaireShortSerializer(many=True, read_only=True)
-
     class Meta(object):
         model = Project
         fields = (
@@ -58,10 +43,27 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "milestones",
             "folder",
             "questionnaires",
+            "related_contracts",
             "creation_user",
             "created_at",
             "updated_at",
         )
+
+    code = serializers.CharField(required=False, read_only=True)
+    closed = serializers.BooleanField(required=False)
+    main_infrastructure = InfrastructureSerializer()
+    linked_localities = LocalitySerializer(many=True)
+    provider = ProviderSerializer(required=False, allow_null=True)
+    construction_contract = ConstructionContractSummarySerializer(read_only=True)
+    milestones = serializers.SerializerMethodField(required=False, read_only=True)
+    creation_user = serializers.CharField(
+        source="creation_user.username", required=False
+    )
+    folder = serializers.SerializerMethodField()
+    questionnaires = QuestionnaireShortSerializer(many=True, read_only=True)
+    related_contracts = ConstructionContractSummarySerializer(
+        source="related_contracts_list", many=True, read_only=True
+    )
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""
@@ -71,9 +73,6 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "main_infrastructure__locality__department",
             "main_infrastructure__locality__district",
             "provider",
-            "construction_contract",
-            "construction_contract__financing_program",
-            "construction_contract__contractor",
         ).prefetch_related(
             "linked_localities",
             Prefetch(
@@ -83,8 +82,6 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
                 # queryset=ProviderContact.objects.prefetch_related("contact"),
                 # To make this working we need a "provider" attribute in ProviderContact and not "entity"
             ),
-            "construction_contract__financing_program__financing_funds",
-            "construction_contract__contractor__contacts",
             Prefetch(
                 "milestones",
                 queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
@@ -95,14 +92,6 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        if "construction_contract" in response:
-            response["construction_contract"] = (
-                ConstructionContractSummarySerializer(
-                    instance.construction_contract, context=self.context
-                ).data
-                if instance.construction_contract is not None
-                else None
-            )
         if "featured_image" in response:
             response["featured_image"] = (
                 MediaUrlSerializer(instance.featured_image, context=self.context).data[
@@ -270,11 +259,7 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""
         return queryset.select_related(
-            "main_infrastructure",
-            "provider",
-            "construction_contract",
-            "construction_contract__financing_program",
-            "featured_image",
+            "main_infrastructure", "provider", "featured_image"
         ).prefetch_related(
             "linked_localities",
             Prefetch(

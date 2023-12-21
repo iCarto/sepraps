@@ -157,7 +157,6 @@
             "description": "Nuevo sistema de abastecimiento de agua potable",
             "init_date": "2019-01-01",
             "main_infrastructure": 18,
-            "construction_contract": 5,
             "provider": null,
             "closed": false,
             "creation_user": 1,
@@ -177,7 +176,6 @@
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 19,
-            "construction_contract": 5,
             "provider": null,
             "closed": false,
             "creation_user": 1,
@@ -197,7 +195,6 @@
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 20,
-            "construction_contract": 5,
             "provider": null,
             "closed": false,
             "creation_user": 1,
@@ -217,7 +214,6 @@
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 21,
-            "construction_contract": 5,
             "provider": null,
             "closed": false,
             "creation_user": 1,
@@ -237,7 +233,6 @@
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 22,
-            "construction_contract": 5,
             "provider": null,
             "closed": false,
             "creation_user": 1,
@@ -257,7 +252,6 @@
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 23,
-            "construction_contract": 5,
             "provider": null,
             "closed": false,
             "creation_user": 1,
@@ -3692,6 +3686,60 @@
             "project": 23,
             "questionnaire_instance": 124,
             "questionnaire": "certificacion_mensual"
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 5,
+            "project": 18,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 5,
+            "project": 19,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 5,
+            "project": 20,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 5,
+            "project": 21,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 5,
+            "project": 22,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 5,
+            "project": 23,
+            "construction": true
         }
     }
 ]

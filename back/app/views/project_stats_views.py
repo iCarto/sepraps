@@ -13,7 +13,8 @@ def get_filter_join_query(params):
     join_query = """
         SELECT DISTINCT ON (p.id) p.id as project_id
         FROM project p
-        LEFT JOIN construction_contract cc on cc.id = p.construction_contract_id
+        LEFT JOIN contract_project cp ON cp.project_id = p.id
+        LEFT JOIN construction_contract cc on cc.id = cp.contract_id
 	    LEFT JOIN contract_supervision_area csa on csa.contract_id = cc.id
         LEFT JOIN financing_program fp on fp.id = cc.financing_program_id
         LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
@@ -28,7 +29,7 @@ def get_filter_join_query(params):
     if filter := params.get("project"):
         filter_conditions.append(f"and p.id = {filter}")
     if filter := params.get("contract"):
-        filter_conditions.append(f"and p.construction_contract_id = {filter}")
+        filter_conditions.append(f"and cc.id = {filter}")
     if filter := params.get("supervision_contract"):
         filter_conditions.append(f"and csa.supervision_contract_id = {filter}")
     if filter := params.get("district"):

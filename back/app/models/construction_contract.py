@@ -114,6 +114,16 @@ class ConstructionContract(models.Model):
     )
     contacts = models.ManyToManyField(Contact, through=ContractContact)
 
+    @property
+    def related_contracts(self):
+        projects = self.projects.all()
+        return (
+            ConstructionContract.objects.filter(projects__in=projects)
+            .exclude(pk=self.id)
+            .distinct()
+            .order_by("id")
+        )
+
     def __str__(self):
         return self.number
 

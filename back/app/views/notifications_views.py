@@ -25,7 +25,8 @@ def get_provider_missing_contacts_notifications(filters, user):
             FROM provider prov
                 LEFT JOIN provider_contact pc ON pc.entity_id = prov.id
                 JOIN project p ON p.provider_id = prov.id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = p.construction_contract_id
+                LEFT JOIN contract_project cp on cp.project_id = p.id
+                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE pc.contact_id IS NULL
             {filter_conditions}
@@ -37,7 +38,7 @@ def get_provider_missing_contacts_notifications(filters, user):
             filter_conditions.append("and p.id = ANY(%s)")
             filter_conditions_params.append(filter)
         if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and p.construction_contract_id = ANY(%s)")
+            filter_conditions.append("and cp.contract_id = ANY(%s)")
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
@@ -73,7 +74,8 @@ def get_no_updates_in_project_notifications(filters, user):
             FROM project p
                 LEFT JOIN project_linked_localities pll on pll.project_id = p.id
                 LEFT JOIN locality l on l.code = pll.locality_id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = p.construction_contract_id
+                LEFT JOIN contract_project cp on cp.project_id = p.id
+                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE p.updated_at <= date_trunc('day', NOW() - interval '3 month')
             {filter_conditions}
@@ -85,7 +87,7 @@ def get_no_updates_in_project_notifications(filters, user):
             filter_conditions.append("and p.id = ANY(%s)")
             filter_conditions_params.append(filter)
         if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and p.construction_contract_id = ANY(%s)")
+            filter_conditions.append("and cp.contract_id = ANY(%s)")
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
@@ -125,7 +127,8 @@ def get_incomplete_monthly_certification_notifications(filters, user):
                 JOIN monthly_questionnaire_value mqv ON mqv.questionnaire_instance_id = mqi.id
                 JOIN project_questionnaire_instance pqi ON pqi.questionnaire_instance_id = mqi.id
                 JOIN project p ON p.id = pqi.project_id
-                JOIN construction_contract cc ON cc.id = p.construction_contract_id
+                JOIN contract_project cp on cp.project_id = p.id
+                JOIN construction_contract cc ON cc.id = cp.contract_id
                 LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE (to_char(make_date(mqi."year", mqi."month", 1), 'YYYY-MM') < to_char(CURRENT_DATE - INTERVAL '1 month', 'YYYY-MM')
@@ -138,7 +141,7 @@ def get_incomplete_monthly_certification_notifications(filters, user):
         filter_conditions = []
         filter_conditions_params = []
         if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and p.construction_contract_id = ANY(%s)")
+            filter_conditions.append("and cc.id = ANY(%s)")
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
@@ -180,13 +183,13 @@ def get_contracts_milestone_compliance_notifications(
             WITH cc_projects AS(
                 SELECT cc.id, count(*) AS projects_number
                 FROM construction_contract cc
-                    JOIN project p ON p.construction_contract_id = cc.id
+                    JOIN contract_project cp on cp.contract_id = cc.id
                 GROUP BY cc.id
             ), cc_projects_milestones AS (
                 SELECT cc.id, count(*) AS projects_number_milestone_completed
                 FROM construction_contract cc
-                    JOIN project p ON p.construction_contract_id = cc.id
-                    JOIN milestone m ON m.project_id = p.id
+                    JOIN contract_project cp on cp.contract_id = cc.id
+                    JOIN milestone m ON m.project_id = cp.project_id
                 WHERE
                     m.code = '{milestone_code}' AND m.compliance_date IS NOT NULL
                 GROUP BY cc.id

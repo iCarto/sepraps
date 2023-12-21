@@ -23,6 +23,11 @@ from questionnaires.models.questionnaire import Questionnaire
 
 
 class Project(models.Model):
+    class Meta(object):
+        db_table = "project"
+        verbose_name = "Proyecto"
+        verbose_name_plural = "Proyectos"
+
     id = models.AutoField(primary_key=True)
     code = models.CharField("Código", unique=True, max_length=30)
     project_type = models.CharField("Tipo de proyecto", max_length=50, null=True)
@@ -36,13 +41,6 @@ class Project(models.Model):
         verbose_name=Infrastructure._meta.verbose_name,
     )
 
-    construction_contract = models.ForeignKey(
-        ConstructionContract,
-        on_delete=models.PROTECT,
-        verbose_name=ConstructionContract._meta.verbose_name,
-        null=True,
-        related_name="contract_projects",
-    )
     provider = models.ForeignKey(
         Provider,
         on_delete=models.PROTECT,
@@ -82,10 +80,27 @@ class Project(models.Model):
         "Fecha de última modificación", null=True, auto_now=True
     )
 
-    class Meta(object):
-        db_table = "project"
-        verbose_name = "Proyecto"
-        verbose_name_plural = "Proyectos"
+    @property
+    def construction_contract(self):
+        contract_project = (
+            self.related_contracts.filter(
+                contract__services__contains=["ejecucion_de_obra"]
+            )
+            .order_by("contract__execution_signature_date", "contract")
+            .first()
+        )
+        if contract_project:
+            return contract_project.contract
+        return None
+
+    @property
+    def related_contracts_list(self):
+        return [
+            contract_project.contract
+            for contract_project in self.related_contracts.order_by(
+                "contract__execution_signature_date", "contract"
+            ).all()
+        ]
 
     def __str__(self):
         return self.code

@@ -2,8 +2,8 @@ from django.db import connection
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from app.models.contact import GENDER_CHOICES
 
+from app.models.contact import GENDER_CHOICES
 from app.models.milestone import PHASE_CHOICES
 from app.util import dictfetchall
 from questionnaires import services as questtionnaire_services
@@ -26,7 +26,8 @@ def get_monthly_questionnaire_stats(
             FROM project_questionnaire_instance pqi
                 LEFT JOIN monthly_questionnaire_instance mqi ON mqi.id = pqi.questionnaire_instance_id
                 LEFT JOIN project p ON p.id = pqi.project_id
-                LEFT JOIN construction_contract cc on cc.id = p.construction_contract_id
+                LEFT JOIN contract_project cp on cp.project_id = p.id
+                LEFT JOIN construction_contract cc on cc.id = cp.contract_id
                 LEFT JOIN financing_program fp on fp.id = cc.financing_program_id
                 LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
                 LEFT JOIN project_linked_localities pll on pll.project_id = p.id
@@ -45,7 +46,7 @@ def get_monthly_questionnaire_stats(
         filter_conditions.append(f"and pqi.project_id = {filter}")
     if filter := request.GET.get("construction_contract"):
         show_expanded = True
-        filter_conditions.append(f"and p.construction_contract_id = {filter}")
+        filter_conditions.append(f"and cc.id = {filter}")
     if filter := request.GET.get("district"):
         filter_conditions.append(f"and l.district_id = '{filter}'")
     if filter := request.GET.get("department"):
@@ -166,7 +167,8 @@ def get_project_and_contract_stats(request, format=None):
         query = """
             SELECT 'opened_projects' as name, COUNT(DISTINCT p.id) as total
             FROM project p
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = p.construction_contract_id
+                LEFT JOIN contract_project cp on cp.project_id = p.id
+                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE p.closed = FALSE {project_filter_conditions}
             UNION
@@ -212,10 +214,11 @@ def get_project_by_phase_stats(request, format=None):
                 inner join milestone m on p.id = m.project_id
                 left join project_linked_localities pll on pll.project_id = p.id
                 left join locality l on l.code = pll.locality_id
-                left join construction_contract cc on cc.id = p.construction_contract_id
+                left join contract_project cp on cp.project_id = p.id
+                left join construction_contract cc on cc.id = cp.contract_id
                 left join financing_program fp on fp.id = cc.financing_program_id
                 left join financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = p.construction_contract_id
+                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
             where m.compliance_date is null
             {project_filter_conditions}
@@ -234,9 +237,7 @@ def get_project_by_phase_stats(request, format=None):
         project_filter_conditions = []
         if request.GET.get("construction_contract"):
             project_filter_conditions.append(
-                "and p.construction_contract_id = {}".format(
-                    request.GET.get("construction_contract")
-                )
+                "and cc.id = {}".format(request.GET.get("construction_contract"))
             )
         if request.GET.get("district"):
             project_filter_conditions.append(
@@ -292,7 +293,8 @@ def get_projects_by_phase_map(request, format=None):
                     m.phase
             from project p
                 inner join milestone m on p.id = m.project_id
-                left join construction_contract cc on cc.id = p.construction_contract_id
+                left join contract_project cp on cp.project_id = p.id
+                left join construction_contract cc on cc.id = cp.contract_id
                 left join financing_program fp on fp.id = cc.financing_program_id
                 left join financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
                 left join infrastructure i on i.id = p.main_infrastructure_id
@@ -300,7 +302,7 @@ def get_projects_by_phase_map(request, format=None):
                 left join locality l on l.code = pll.locality_id
                 inner join district di on di.code = l.district_id
                 inner join department de on de.code = l.department_id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = p.construction_contract_id
+                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
             where m.compliance_date is null
             {project_filter_conditions}
@@ -310,7 +312,7 @@ def get_projects_by_phase_map(request, format=None):
         project_filter_conditions = []
         if request.GET.get("construction_contract"):
             project_filter_conditions.append(
-                "and p.construction_contract_id = {}".format(
+                "and cp.contract_id = {}".format(
                     request.GET.get("construction_contract")
                 )
             )

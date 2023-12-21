@@ -94,12 +94,20 @@
             "init_date": "2019-12-17",
             "main_infrastructure": 17,
             "provider": 17,
-            "construction_contract": 4,
             "linked_localities": ["0409004", "0409006", "0409170"],
             "closed": false,
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 4,
+            "project": 17,
+            "construction": true
         }
     }
 ]

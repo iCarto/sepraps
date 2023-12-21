@@ -160,24 +160,6 @@ class ConstructionContractViewSet(ModelListViewSet):
     @action(
         methods=["GET"],
         detail=True,
-        url_path="relatedcontracts",
-        url_name="related_contracts",
-    )
-    def get_contract_related_contracts(self, request, pk):
-        queryset = ContractContact.objects.filter(entity=pk).order_by("id")
-        area = request.GET.get("area", None)
-        if area:
-            area_posts = (
-                ContractSupervisionArea.objects.filter(contract=pk, area=area)
-                .values_list("staff", flat=True)
-                .first()
-            ) or []
-            queryset = queryset.filter(post__in=area_posts)
-        return Response(ContractContactSerializer(queryset, many=True).data)
-
-    @action(
-        methods=["GET"],
-        detail=True,
         url_path="supervisionareas/(?P<area>[^/.]+)",
         url_name="contract_supervision_areas",
     )

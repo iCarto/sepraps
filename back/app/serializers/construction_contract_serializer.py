@@ -28,6 +28,65 @@ class StringListField(serializers.ListField):
     child = serializers.CharField()
 
 
+class ConstructionContractSummarySerializer(
+    BaseDomainMixin, serializers.ModelSerializer
+):
+    class Meta(object):
+        model = ConstructionContract
+        fields = (
+            "id",
+            "number",
+            "comments",
+            "services",
+            "total_amount_type",
+            "payment_frequency_type",
+            "payment_criteria_type",
+            "bid_request_number",
+            "bid_request_id",
+            "bid_request_date",
+            "bid_request_budget_min",
+            "bid_request_budget",
+            "awarding_budget_min",
+            "awarding_budget",
+            "awarding_date",
+            "financing_program",
+            "contractor",
+            "execution_signature_date",
+            "execution_certificate_start_date",
+            "expected_execution_period",
+            "created_at",
+            "updated_at",
+        )
+
+    services = serializers.ListField(child=serializers.CharField())
+
+    domain_fields = [
+        BaseDomainField("services", DomainCategoryChoices.service_type, many=True),
+        BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
+        BaseDomainField(
+            "payment_frequency_type", DomainCategoryChoices.payment_frequency_type
+        ),
+        BaseDomainField(
+            "payment_criteria_type", DomainCategoryChoices.payment_criteria_type
+        ),
+    ]
+
+    financing_program = FinancingProgramSerializer()
+    contractor = ContractorSummarySerializer()
+
+    def setup_eager_loading(queryset):
+        """Perform necessary eager loading of data."""
+        return queryset.select_related(
+            "contractor", "financing_program"
+        ).prefetch_related("financing_program__financing_funds")
+
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        for field in fields:
+            fields[field].read_only = True
+        return fields
+
+
 class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerializer):
     class Meta(object):
         model = ConstructionContract
@@ -61,6 +120,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "warranty_end_date",
             "projects",
             "questionnaires",
+            "related_contracts",
             "creation_user",
             "created_at",
             "updated_by",
@@ -92,6 +152,9 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
     updated_by = serializers.CharField(source="updated_by.username", required=False)
     questionnaires = serializers.SerializerMethodField()
     supervision_areas = ContractSupervisionAreaSerializer(many=True, read_only=True)
+    related_contracts = serializers.ListField(
+        child=ConstructionContractSummarySerializer(), read_only=True
+    )
 
     domain_fields = [
         BaseDomainField("services", DomainCategoryChoices.service_type, many=True),
@@ -207,60 +270,6 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
 
         instance.save()
         return instance
-
-
-class ConstructionContractSummarySerializer(
-    BaseDomainMixin, serializers.ModelSerializer
-):
-    class Meta(ConstructionContractSerializer.Meta):
-        fields = (
-            "id",
-            "number",
-            "comments",
-            "total_amount_type",
-            "payment_frequency_type",
-            "payment_criteria_type",
-            "bid_request_number",
-            "bid_request_id",
-            "bid_request_date",
-            "bid_request_budget_min",
-            "bid_request_budget",
-            "awarding_budget_min",
-            "awarding_budget",
-            "awarding_date",
-            "financing_program",
-            "contractor",
-            "execution_signature_date",
-            "execution_certificate_start_date",
-            "expected_execution_period",
-            "created_at",
-            "updated_at",
-        )
-
-    domain_fields = [
-        BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
-        BaseDomainField(
-            "payment_frequency_type", DomainCategoryChoices.payment_frequency_type
-        ),
-        BaseDomainField(
-            "payment_criteria_type", DomainCategoryChoices.payment_criteria_type
-        ),
-    ]
-
-    financing_program = FinancingProgramSerializer()
-    contractor = ContractorSummarySerializer()
-
-    def setup_eager_loading(queryset):
-        """Perform necessary eager loading of data."""
-        return queryset.select_related(
-            "contractor", "financing_program"
-        ).prefetch_related("financing_program__financing_funds")
-
-    def get_fields(self, *args, **kwargs):
-        fields = super().get_fields(*args, **kwargs)
-        for field in fields:
-            fields[field].read_only = True
-        return fields
 
 
 class ConstructionContractShortSerializer(ConstructionContractSerializer):
