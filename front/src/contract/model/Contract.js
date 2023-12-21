@@ -92,6 +92,9 @@ const contract_view_adapter = contract => {
     ]
         ? contract["execution_certificate_start_date"]
         : null;
+
+    delete contract["related_contracts"];
+
     return contract;
 };
 
@@ -109,6 +112,7 @@ const createContract = ({
     services = [],
     services_label = "",
     supervision_areas = [],
+    related_contracts = [],
     is_supervision_contract = false,
     total_amount_type = null,
     total_amount_type_label = "",
@@ -155,6 +159,7 @@ const createContract = ({
         services,
         services_label,
         supervision_areas,
+        related_contracts,
         is_supervision_contract,
         total_amount_type,
         total_amount_type_label,

@@ -1,4 +1,9 @@
-import {createContract, contract_api_adapter} from "contract/model";
+import {
+    createContract,
+    contract_api_adapter,
+    contracts_api_adapter,
+    createContracts,
+} from "contract/model";
 import {createQuestionnaires, questionnaires_api_adapter} from "questionnaire/model";
 import {
     createInfrastructure,
@@ -20,6 +25,11 @@ const project_api_adapter = project => {
     if (project.construction_contract) {
         project["construction_contract"] = createContract(
             contract_api_adapter(project.construction_contract)
+        );
+    }
+    if (project.related_contracts) {
+        project["related_contracts"] = createContracts(
+            contracts_api_adapter(project.related_contracts)
         );
     }
     if (project["linked_localities"]) {
@@ -88,6 +98,7 @@ const project_view_adapter = project => {
         ? project["construction_contract"].id || project["construction_contract"]
         : null;
 
+    delete project["related_contracts"];
     delete project["name"];
     delete project["location"];
     delete project["milestones"];
@@ -126,6 +137,7 @@ const createProject = ({
     construction_contract_number = null,
     construction_contract_bid_request_number = null,
     financing_program_name = null,
+    related_contracts = [],
     folder = "",
     milestones = [],
     questionnaires = [],
@@ -153,6 +165,7 @@ const createProject = ({
         construction_contract_number,
         construction_contract_bid_request_number,
         financing_program_name,
+        related_contracts,
         folder,
         milestones,
         questionnaires,

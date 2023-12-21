@@ -6,7 +6,7 @@ import {
     ViewProjectPage,
     ViewProjectSummarySubPage,
     ViewProjectLocationSubPage,
-    ViewProjectFinancingSubPage,
+    ViewProjectContractsSubPage,
     ViewProjectMilestonesSubPage,
     ViewProjectContactsSubPage,
     ViewProjectDocumentsSubPage,
@@ -97,7 +97,7 @@ const projectRoutes = [
             <Route
                 key="project-financing"
                 path="financing"
-                element={<ViewProjectFinancingSubPage />}
+                element={<ViewProjectContractsSubPage />}
             >
                 <Route
                     key="project-contract-update"

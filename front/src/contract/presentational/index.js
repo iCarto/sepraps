@@ -5,3 +5,7 @@ export {default as ContractSearchAutocomplete} from "./ContractSearchAutocomplet
 export {default as ContractSummary} from "./ContractSummary";
 export {default as ContractSummaryFields} from "./ContractSummaryFields";
 export {default as LatestContractsList} from "./LatestContractsList";
+export {default as RelatedContractsTable} from "./RelatedContractsTable";
+export {
+    default as ContractRelatedContractsSection,
+} from "./ContractRelatedContractsSection";

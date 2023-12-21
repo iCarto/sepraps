@@ -17,6 +17,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {useList} from "base/entity/hooks";
+import Button from "@mui/material/Button";
 
 const ListContractProjects = ({contract, projects}) => {
     const [selectedElement, setSelectedElement] = useState(null);
@@ -73,7 +74,16 @@ const ListContractProjects = ({contract, projects}) => {
                     <Stack direction="row" justifyContent="flex-end" spacing={1}>
                         {!contract.is_supervision_contract && (
                             <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                                <EntityAddButtonGroup />
+                                <Button
+                                    id="add-button"
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={() => {
+                                        navigate(`add/existing`);
+                                    }}
+                                >
+                                    Añadir
+                                </Button>
                             </AuthAction>
                         )}
                         <EntityChangeView views={["list", "table", "map"]} />

@@ -8,7 +8,7 @@ import {SelectProjectDropDown} from "project/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import PinDropIconOutlined from "@mui/icons-material/PinDropOutlined";
-import AccountBalanceIconOutlined from "@mui/icons-material/AccountBalanceOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import FlagIconOutlined from "@mui/icons-material/FlagOutlined";
 import FolderOpenIconOutlined from "@mui/icons-material/FolderOpenOutlined";
 import PermContactCalendarIconOutlined from "@mui/icons-material/PermContactCalendarOutlined";
@@ -70,7 +70,7 @@ const ProjectSubPageMenu = ({project}) => {
                 key="project-financing"
                 to={`${basePath}/financing`}
                 text="Contratos"
-                icon={<AccountBalanceIconOutlined />}
+                icon={<WorkOutlineOutlinedIcon />}
             />
             <SubPageMenuListItemButton
                 key="project-milestones"
