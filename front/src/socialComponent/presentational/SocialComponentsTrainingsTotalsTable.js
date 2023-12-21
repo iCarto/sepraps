@@ -116,7 +116,7 @@ const SocialComponentsTrainingsTotalsTable = ({trainingData}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {trainingData.id.map((row, rowIndex) => (
+                    {trainingData?.id?.map((row, rowIndex) => (
                         <TableRow key={rowIndex} hover sx={rowStyle}>
                             {headCells.map((headCell, cellIndex) => (
                                 <TableCell key={cellIndex} align="center">
