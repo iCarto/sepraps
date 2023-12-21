@@ -59,17 +59,12 @@ const ViewPaymentFinancialChart = ({filter}) => {
             legend: {
                 position: "right",
             },
+            datalabels: {
+                display: false,
+            },
             annotation: {
                 annotations: {
                     line1: {
-                        type: "line",
-                        yMin: paidTotalAmount,
-                        yMax: paidTotalAmount,
-                        borderColor: colors.paid.light,
-                        backgroundColor: colors.paid.light,
-                        borderWidth: 2,
-                    },
-                    line2: {
                         type: "line",
                         yMin: expectedTotalAmount,
                         yMax: expectedTotalAmount,
@@ -92,7 +87,7 @@ const ViewPaymentFinancialChart = ({filter}) => {
                 datasets={[
                     {
                         data: chartData.cum_paid_total_amount,
-                        label: "Pagado",
+                        label: "Aprobado",
                         borderWidth: 3,
                         borderColor: colors.paid.main,
                         backgroundColor: colors.paid.main,
