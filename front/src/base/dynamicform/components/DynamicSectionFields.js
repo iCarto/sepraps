@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 
 const DynamicSectionFields = ({attributes, columns = 2}) => {
     return (
-        <Grid container spacing={2}>
+        <Grid container columnSpacing={2}>
             {Object.entries(attributes).map(([attributeName, attributeSchema]) => (
                 <Grid item xs={12 / columns} key={attributeName}>
                     {DynamicFieldUtil.getSectionField(attributeName, attributeSchema)}
