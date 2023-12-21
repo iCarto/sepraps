@@ -43,18 +43,18 @@ const PaidAmountFormFields = ({contract}) => {
         <>
             <FormInputInteger
                 name="paid_fixed_amount"
-                label="Monto pagado fijo"
+                label="Monto aprobado fijo"
                 endAdornment={CURRENCY_SYMBOL}
                 rules={{required: "Este campo es obligatorio"}}
             />
             <FormInputInteger
                 name="paid_variable_amount"
-                label="Monto pagado variable"
+                label="Monto aprobado variable"
                 endAdornment={CURRENCY_SYMBOL}
                 rules={{required: "Este campo es obligatorio"}}
             />
             <TextField
-                label="Monto pagado total"
+                label="Monto aprobado total"
                 fullWidth
                 disabled={true}
                 value={paidTotalAmount}
@@ -71,7 +71,7 @@ const PaidAmountFormFields = ({contract}) => {
     ) : (
         <FormInputInteger
             name="paid_total_amount"
-            label="Monto pagado"
+            label="Monto aprobado"
             endAdornment={CURRENCY_SYMBOL}
             rules={{required: "Este campo es obligatorio"}}
         />
@@ -163,7 +163,7 @@ const PaymentFormDataFields = ({contract}) => {
                 </Grid>
             </Grid>
             <Grid container item xs={6} direction="column">
-                <FormBox label="Previsto">
+                <FormBox label="Previsión">
                     <FormDatePicker
                         name="expected_approval_date"
                         label="Fecha de aprobación prevista"
@@ -174,7 +174,7 @@ const PaymentFormDataFields = ({contract}) => {
             </Grid>
             <Grid container item xs={6} direction="column">
                 {status === PAYMENT_STATUS_PAID && (
-                    <FormBox label="Real">
+                    <FormBox label="Aprobación">
                         <FormDatePicker
                             name="approval_date"
                             label="Fecha de aprobación"

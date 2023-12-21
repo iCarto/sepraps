@@ -37,24 +37,24 @@ const PaidAmountSection = ({payment}) => {
     return payment.contract_payment_criteria_type === FIXED_VARIABLE_CRITERIA_TYPE ? (
         <>
             <SectionField
-                label="Monto pagado fijo"
+                label="Monto aprobado fijo"
                 value={NumberUtil.formatInteger(payment.paid_fixed_amount)}
                 unit="Gs."
             />
             <SectionField
-                label="Monto pagado variable"
+                label="Monto aprobado variable"
                 value={NumberUtil.formatInteger(payment.paid_variable_amount)}
                 unit="Gs."
             />
             <SectionField
-                label="Monto pagado total"
+                label="Monto aprobado total"
                 value={NumberUtil.formatInteger(payment.paid_total_amount)}
                 unit="Gs."
             />
         </>
     ) : (
         <SectionField
-            label="Monto pagado"
+            label="Monto aprobado"
             value={NumberUtil.formatInteger(payment.paid_total_amount)}
             unit="Gs."
         />
@@ -65,7 +65,7 @@ const PaymentData = ({payment}) => {
     return (
         <Grid container spacing={2}>
             <Grid container item xs={6} direction="column">
-                <SectionBox label="Previsto">
+                <SectionBox label="Previsión">
                     <SectionField
                         label="Fecha de aprobación prevista"
                         value={DateUtil.formatDate(payment.expected_approval_date)}
@@ -109,14 +109,14 @@ const PaymentData = ({payment}) => {
             </Grid>
             <Grid container item xs={6} direction="column">
                 {payment.status === PAYMENT_STATUS_PAID && (
-                    <SectionBox label="Real">
+                    <SectionBox label="Aprobación">
                         <SectionField
                             label="Fecha de aprobación"
                             value={DateUtil.formatDate(payment.approval_date)}
                         />
                         <PaidAmountSection payment={payment} />
                         <SectionField
-                            label="Porcentaje pagado"
+                            label="Porcentaje aprobado"
                             value={NumberUtil.formatDecimal(
                                 payment.paid_total_contract_percentage
                             )}
@@ -124,14 +124,14 @@ const PaymentData = ({payment}) => {
                         />
                         <Divider sx={{my: 1}} />
                         <SectionField
-                            label="Monto acumulado pagado"
+                            label="Monto acumulado aprobado"
                             value={NumberUtil.formatInteger(
                                 payment.paid_total_amount_cumulative
                             )}
                             unit="Gs."
                         />
                         <SectionField
-                            label="Porcentaje acumulado pagado"
+                            label="Porcentaje acumulado aprobado"
                             value={NumberUtil.formatDecimal(
                                 payment.paid_total_contract_percentage_cumulative
                             )}
