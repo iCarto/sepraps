@@ -1,6 +1,9 @@
 import {useWatch} from "react-hook-form";
 
-import {COMPONENT_EXECUTION_STATUS_COMPLETED} from "component/config";
+import {
+    COMPONENT_EXECUTION_STATUS_COMPLETED,
+    COMPONENT_EXECUTION_STATUS_IN_PROGRESS,
+} from "component/config";
 
 import {useDomain} from "sepraps/domain/provider";
 
@@ -19,6 +22,10 @@ const SocialComponentMonitoringDataFields = () => {
     const execution_status = useWatch({
         name: "execution_status",
     });
+
+    const displayMonitoringFields =
+        execution_status === COMPONENT_EXECUTION_STATUS_IN_PROGRESS ||
+        execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED;
 
     return (
         <Grid container spacing={2}>
@@ -47,23 +54,25 @@ const SocialComponentMonitoringDataFields = () => {
                     />
                 </FormBox>
             </Grid>
-            <Grid container item xs={6} direction="column">
-                <FormBox label="Seguimiento">
-                    {execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED && (
-                        <FormDatePicker
-                            name="real_end_date"
-                            label="Fecha de finalización real"
+            {displayMonitoringFields ? (
+                <Grid container item xs={6} direction="column">
+                    <FormBox label="Seguimiento">
+                        {execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED && (
+                            <FormDatePicker
+                                name="real_end_date"
+                                label="Fecha de finalización real"
+                                rules={{required: "Este campo es obligatorio"}}
+                            />
+                        )}
+                        <FormInputInteger
+                            name="progress_percentage"
+                            label="Porcentaje de avance"
+                            endAdornment={"%"}
                             rules={{required: "Este campo es obligatorio"}}
                         />
-                    )}
-                    <FormInputInteger
-                        name="progress_percentage"
-                        label="Porcentaje de avance"
-                        endAdornment={"%"}
-                        rules={{required: "Este campo es obligatorio"}}
-                    />
-                </FormBox>
-            </Grid>
+                    </FormBox>
+                </Grid>
+            ) : null}
         </Grid>
     );
 };

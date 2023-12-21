@@ -2,7 +2,10 @@ import {useWatch} from "react-hook-form";
 
 import {NumberUtil} from "base/format/utilities";
 import {CURRENCY_SYMBOL} from "base/format/config/i18n";
-import {COMPONENT_EXECUTION_STATUS_COMPLETED} from "component/config";
+import {
+    COMPONENT_EXECUTION_STATUS_COMPLETED,
+    COMPONENT_EXECUTION_STATUS_IN_PROGRESS,
+} from "component/config";
 import {useDomain} from "sepraps/domain/provider";
 
 import {
@@ -63,8 +66,12 @@ const BuildingComponentMonitoringDataFields = () => {
             : (parseFloat(paid_amount) || 0) + (parseFloat(pending_amount) || 0);
 
     const financialProgressPercentage = NumberUtil.formatFloat(
-        (totalAmount / expected_amount) * 100
+        ((parseFloat(totalAmount) || 0) / (parseFloat(expected_amount) || 0)) * 100
     );
+
+    const displayMonitoringFields =
+        execution_status === COMPONENT_EXECUTION_STATUS_IN_PROGRESS ||
+        execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED;
 
     return (
         <Grid container spacing={2}>
@@ -99,56 +106,58 @@ const BuildingComponentMonitoringDataFields = () => {
                     />
                 </FormBox>
             </Grid>
-            <Grid container item xs={6} direction="column">
-                <FormBox label="Seguimiento">
-                    {execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED && (
-                        <FormDatePicker
-                            name="real_end_date"
-                            label="Fecha de finalización real"
+            {displayMonitoringFields ? (
+                <Grid container item xs={6} direction="column">
+                    <FormBox label="Seguimiento">
+                        {execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED && (
+                            <FormDatePicker
+                                name="real_end_date"
+                                label="Fecha de finalización real"
+                                rules={{required: "Este campo es obligatorio"}}
+                            />
+                        )}
+                        <FormInputInteger
+                            name="paid_amount"
+                            label="Monto real actual"
+                            endAdornment={CURRENCY_SYMBOL}
                             rules={{required: "Este campo es obligatorio"}}
                         />
-                    )}
-                    <FormInputInteger
-                        name="paid_amount"
-                        label="Monto real actual"
-                        endAdornment={CURRENCY_SYMBOL}
-                        rules={{required: "Este campo es obligatorio"}}
-                    />
-                    <PendingAmountField executionStatus={execution_status} />
-                    <TextField
-                        label="Monto total"
-                        value={totalAmount}
-                        disabled={true}
-                        InputLabelProps={{shrink: true}}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    {CURRENCY_SYMBOL}
-                                </InputAdornment>
-                            ),
-                        }}
-                        fullWidth
-                    />
-                    <TextField
-                        label="Porcentaje de avance financiero"
-                        value={financialProgressPercentage}
-                        disabled={true}
-                        InputLabelProps={{shrink: true}}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">%</InputAdornment>
-                            ),
-                        }}
-                        fullWidth
-                    />
-                    <FormInputInteger
-                        name="physical_progress_percentage"
-                        label="Porcentaje de avance físico"
-                        endAdornment={"%"}
-                        rules={{required: "Este campo es obligatorio"}}
-                    />
-                </FormBox>
-            </Grid>
+                        <PendingAmountField executionStatus={execution_status} />
+                        <TextField
+                            label="Monto total"
+                            value={totalAmount}
+                            disabled={true}
+                            InputLabelProps={{shrink: true}}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        {CURRENCY_SYMBOL}
+                                    </InputAdornment>
+                                ),
+                            }}
+                            fullWidth
+                        />
+                        <TextField
+                            label="Porcentaje de avance financiero"
+                            value={financialProgressPercentage}
+                            disabled={true}
+                            InputLabelProps={{shrink: true}}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">%</InputAdornment>
+                                ),
+                            }}
+                            fullWidth
+                        />
+                        <FormInputInteger
+                            name="physical_progress_percentage"
+                            label="Porcentaje de avance físico"
+                            endAdornment={"%"}
+                            rules={{required: "Este campo es obligatorio"}}
+                        />
+                    </FormBox>
+                </Grid>
+            ) : null}
         </Grid>
     );
 };

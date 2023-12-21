@@ -16,7 +16,6 @@ const BuildingComponentForm = ({
 }) => {
     const defaultFormValues = {
         name: FormUtil.getFormValue(buildingComponent?.name),
-        code: FormUtil.getFormValue(buildingComponent?.code),
         expected_end_date: FormUtil.getFormValue(buildingComponent?.expected_end_date),
         execution_status: FormUtil.getFormValue(buildingComponent?.execution_status),
     };
@@ -29,7 +28,7 @@ const BuildingComponentForm = ({
     const onFormSubmit = data => {
         onSubmit({
             name: FormUtil.getDataValue(data.name),
-            code: FormUtil.getDataValue(data.code),
+            code: "otro",
             expected_end_date: FormUtil.getDataValue(data.expected_end_date),
             execution_status: FormUtil.getDataValue(data.execution_status),
         });
