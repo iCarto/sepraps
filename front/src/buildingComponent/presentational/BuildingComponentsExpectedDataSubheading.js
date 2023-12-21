@@ -29,10 +29,10 @@ const BuildingComponentsExpectedDataSubheading = ({data}) => {
                 variant="outlined"
                 sx={{
                     color: isRealAmountWithinExpectation
-                        ? theme.palette.expected.main
+                        ? theme.palette.expected.dark
                         : theme.palette.error.dark,
                     borderColor: isRealAmountWithinExpectation
-                        ? theme.palette.expected.main
+                        ? theme.palette.expected.dark
                         : theme.palette.error.main,
                 }}
             />

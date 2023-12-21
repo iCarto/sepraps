@@ -26,7 +26,7 @@ const BuildingComponentsRealDataSubheading = ({data}) => {
                 variant="outlined"
                 sx={{
                     color: theme.palette.pending.dark,
-                    borderColor: theme.palette.pending.light,
+                    borderColor: theme.palette.pending.dark,
                 }}
             />
         </Stack>
