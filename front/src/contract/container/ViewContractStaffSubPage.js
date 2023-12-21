@@ -8,7 +8,7 @@ const ViewContractStaffSubPage = ({area}) => {
     let contract;
     [contract] = useOutletContext();
 
-    const sections = [<ContractContactsSection contract={contract} />];
+    const sections = [<ContractContactsSection contract={contract} area={area} />];
 
     const subPageActions = [<EntityAddButtonGroup />];
 

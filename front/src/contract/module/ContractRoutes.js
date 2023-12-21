@@ -25,6 +25,7 @@ import {ViewContactPanel} from "contact/container";
 import {ViewPaymentContent, CreatePaymentContent} from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
 import {SUPERVISION_AREAS} from "contract/model";
+import {UpdateContractContactPanel} from "contract/container/monitoring";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -118,7 +119,13 @@ const contractRoutes = [
                 key="contract-building"
                 path="building_staff"
                 element={<ViewContractStaffSubPage area={SUPERVISION_AREAS.BUILDING} />}
-            />
+            >
+                <Route
+                    key="contract-building-update-contact"
+                    path="edit/:contactId"
+                    element={<UpdateContractContactPanel />}
+                />
+            </Route>
             <Route
                 key="contract-project-analysis"
                 path="project_analysis"

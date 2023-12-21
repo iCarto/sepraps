@@ -17,8 +17,9 @@ import {ContactsTable} from "contact/presentational";
 import Typography from "@mui/material/Typography";
 import {contract_view_adapter, createContract} from "contract/model";
 
-const ContractContactsSection = ({contract}) => {
+const ContractContactsSection = ({contract, area = null}) => {
     const [selectedElement, setSelectedElement] = useState(null);
+    const [contacts, setContacts] = useState([]);
 
     const navigate = useNavigateWithReload();
     const {idInfoPanel} = useParams();
@@ -28,6 +29,12 @@ const ContractContactsSection = ({contract}) => {
         setSelectedElement(elementId);
         navigate(`info/${elementId}`);
     };
+
+    useEffect(() => {
+        ContractService.getContacts(contract.id, area).then(contacts => {
+            setContacts(contacts);
+        });
+    }, [contract, area]);
 
     useEffect(() => {
         // If the sidebar panel is open we must highlight the element
@@ -50,10 +57,10 @@ const ContractContactsSection = ({contract}) => {
             {removeDialog}
             {deleteDialog}
             <SectionCard>
-                {contract.contacts.length ? (
+                {contacts.length ? (
                     <ContactsTable
                         customTableColumns={tableColumns}
-                        contacts={contract.contacts}
+                        contacts={contacts}
                         elementActions={[editAction, removeAction, deleteAction]}
                         selectedElement={selectedElement}
                         onSelectElement={handleSelectElement}

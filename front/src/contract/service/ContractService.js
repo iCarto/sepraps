@@ -9,6 +9,7 @@ import {AuthApiService} from "base/api/service";
 import {createPayments, payments_api_adapter} from "payment/model";
 import {createProjects, projects_api_adapter} from "project/model";
 import {contractor_api_adapter, createContractor} from "contractor/model";
+import {contacts_api_adapter, createContacts} from "contact/model";
 
 export const TEMPLATE = {
     SHORT: "short",
@@ -69,6 +70,14 @@ const ContractService = {
     getPaymentsList(id) {
         return AuthApiService.get(`${basePath}/${id}/payments`).then(response => {
             return createPayments(payments_api_adapter(response));
+        });
+    },
+
+    getContacts(id, area = null) {
+        return AuthApiService.get(
+            `${basePath}/${id}/contacts${area ? `?area=${area}` : ""}`
+        ).then(response => {
+            return createContacts(contacts_api_adapter(response));
         });
     },
 };
