@@ -91,7 +91,7 @@ const ViewContractPaymentsSubPage = () => {
                     </Typography>
                 </Grid>
             ) : (
-                <Box>
+                <Box sx={{width: "100%"}}>
                     <Tabs
                         value={tabIndex}
                         onChange={handleChangeTab}
