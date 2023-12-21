@@ -176,5 +176,164 @@
         {
             "code": "tendido_red_mensual"
         }
-    ]
+    ],
+    "building_components": {
+        "planta_tratamiento": {
+            "name": "Planta de tratamiento",
+            "properties": {
+                "avance_movimiento_suelo": {
+                    "label": "Avance movimiento de suelo",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "instalacion_membranas": {
+                    "label": "Instalación de membranas",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "construccion_interconexiones": {
+                    "label": "Construcción de interconexiones",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "desarenador": {
+                    "label": "Desarenador",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "lecho_secado": {
+                    "label": "Lecho de secado",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "empastado": {
+                    "label": "Empastado",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                }
+            }
+        },
+        "redes_conexiones": {
+            "name": "Redes básicas, condominales y conexiones",
+            "properties": {
+                "canerias_red_basica_instaladas": {
+                    "label": "Cañerías instaladas (red básica)",
+                    "type": "integer"
+                },
+                "canerias_red_condominal_instaladas": {
+                    "label": "Cañerías instaladas (red condominal)",
+                    "type": "integer"
+                },
+                "conexiones_domiciliarias_instaladas": {
+                    "label": "Conexiones domiciliarias instaladas",
+                    "type": "integer"
+                }
+            }
+        },
+        "estaciones_bombeo": {
+            "name": "Estaciones de bombeo",
+            "properties": {
+                "cantidad_bombas": {
+                    "label": "Cantidad de bombas",
+                    "type": "integer"
+                },
+                "capacidad_bombas": {
+                    "label": "Capacidad de bombas",
+                    "type": "decimal",
+                    "unit": "m³/s"
+                },
+                "potencia_bombas": {
+                    "label": "Potencia de bombas",
+                    "type": "decimal",
+                    "unit": "HP"
+                },
+                "longitud_caneria_impulsion": {
+                    "label": "Longitud de cañería de impulsión",
+                    "type": "decimal",
+                    "unit": "m"
+                },
+                "extension_linea_electrica": {
+                    "label": "Extensión de línea eléctrica",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "permiso_municipal": {
+                    "label": "Permiso municipal",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "casetas_operaciones": {
+                    "label": "Casetas de operaciones",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "obras_civiles": {
+                    "label": "Obras civiles",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "linea_impulsion": {
+                    "label": "Línea de impulsión",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "instalaciones_electromecanicas": {
+                    "label": "Instalaciones electromecánicas",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                }
+            }
+        },
+        "mejoramiento_agua": {
+            "name": "Mejoramiento de agua",
+            "properties": {
+                "fuente_provision": {
+                    "label": "Fuente de provisión",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "instalaciones_electromecanicas": {
+                    "label": "Instalaciones electromecánicas",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "tanque_elevado": {
+                    "label": "Tanque elevado",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "casetas_operaciones": {
+                    "label": "Casetas de operaciones",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "extension_linea_electrica": {
+                    "label": "Extensión de línea eléctrica",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "red_distribucion": {
+                    "label": "Red de distribución",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "cercado_perimetral": {
+                    "label": "Cercado perimetral",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                }
+            }
+        }
+    },
+    "social_components": {
+        "alcantarillado_sanitario": {
+            "name": "Capacitación en administración y gestión del sistema de alcantarillado sanitario"
+        },
+        "operacion_mantenimiento_alcantarillado": {
+            "name": "Capacitación en operación y mantenimiento del sistema de alcantarillado sanitario"
+        },
+        "adecuacion_intradomiciliaria_alcantarillado": {
+            "name": "Capacitación y asistencia técnica y social para adecuación intradomiciliaria de alcantarillado sanitario"
+        }
+    }
 }

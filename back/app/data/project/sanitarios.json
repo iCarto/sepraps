@@ -201,8 +201,53 @@
             "code": "instalacion_sanitarios"
         }
     ],
+    "building_components": {
+        "banos": {
+            "name": "Baños",
+            "properties": {
+                "cantidad": {
+                    "label": "Cantidad",
+                    "type": "integer"
+                },
+                "avance": {
+                    "label": "Avance",
+                    "type": "domain",
+                    "domain": "phasesDomain"
+                }
+            }
+        },
+        "letrinas": {
+            "name": "Letrinas",
+            "properties": {
+                "cantidad": {
+                    "label": "Cantidad",
+                    "type": "integer"
+                },
+                "sistema_disposicion": {
+                    "label": "Sistema de disposición",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "provision": {
+                    "label": "Provisión",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "instalacion": {
+                    "label": "Instalación",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "entrega": {
+                    "label": "Entrega",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                }
+            }
+        }
+    },
     "social_components": {
-        "mantienimiento_banos": {
+        "mantenimiento_banos": {
             "name": "Asistencia técnica y capacitación en mantenimiento de baños"
         }
     }
