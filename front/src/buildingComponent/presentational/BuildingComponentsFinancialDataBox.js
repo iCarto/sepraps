@@ -22,7 +22,7 @@ const BuildingComponentsFinancialDataBox = ({
             alignItems="center"
             sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 2}}
         >
-            <Grid item xs={8} pl="3rem">
+            <Grid item xs={9} pl="1rem">
                 <Typography
                     component="span"
                     variant="overline"
@@ -48,7 +48,7 @@ const BuildingComponentsFinancialDataBox = ({
                 </Stack>
                 {subheading}
             </Grid>
-            <Grid item container xs={4} justifyContent="center" alignItems="center">
+            <Grid item container xs={3} justifyContent="center" alignItems="center">
                 <div style={{position: "relative"}}>
                     <CircularProgress
                         variant="determinate"

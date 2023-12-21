@@ -68,11 +68,18 @@ const NumberUtil = {
     },
 
     formatMillions(value, displaySymbol = true) {
-        const oneMillion = 1000000;
-        const numericValue = value / oneMillion;
+        if (!value || value === "0") return displaySymbol ? "0M" : "0";
 
-        if (displaySymbol) return `${numericValue}M`;
-        return numericValue;
+        const oneMillion = 1000000;
+        const valueInMillions = this.formatFloat(value / oneMillion);
+
+        const formattedValueInMillions = valueInMillions.endsWith(",00")
+            ? valueInMillions.slice(0, -3)
+            : valueInMillions;
+
+        if (displaySymbol) return `${formattedValueInMillions}M`;
+
+        return formattedValueInMillions;
     },
 
     formatKilometersAndMeters(meters) {
