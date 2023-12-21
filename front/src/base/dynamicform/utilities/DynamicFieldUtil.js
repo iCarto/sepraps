@@ -27,6 +27,17 @@ const DynamicFieldUtil = {
             attributeSchema.unit
         );
     },
+
+    getOrderedAttributes(attributes) {
+        return Object.entries(attributes)
+            .sort(([, a], [, b]) => {
+                if (!a["order"] || !b["order"]) {
+                    return 0;
+                }
+                return a["order"] - b["order"];
+            })
+            .reduce((r, [k, v]) => ({...r, [k]: v}), {});
+    },
 };
 
 export default DynamicFieldUtil;

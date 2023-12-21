@@ -3,9 +3,15 @@
     "name": "Ejecución de obra",
     "supervision_areas": ["building", "social"],
     "properties": {
+        "executionCertificateDate": {
+            "label": "Fecha del acta de inicio",
+            "type": "date",
+            "order": 1
+        },
         "finalDeliveryDate": {
             "label": "Fecha de recepción definitiva",
-            "type": "date"
+            "type": "date",
+            "order": 2
         }
     },
     "staff": {

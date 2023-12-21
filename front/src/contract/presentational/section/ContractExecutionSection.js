@@ -11,12 +11,12 @@ const ContractExecutionSection = ({contract}) => {
                     DateUtil.formatDate(contract?.execution_signature_date)
                 )}
                 {FieldUtil.getSectionField(
-                    "Fecha del acta de inicio",
-                    DateUtil.formatDate(contract?.execution_certificate_start_date)
+                    "Fecha de inicio del contrato",
+                    DateUtil.formatDate(contract?.execution_start_date)
                 )}
             </Grid>
             <Grid item xs={6}>
-                {contract?.execution_certificate_start_date &&
+                {contract?.execution_start_date &&
                     FieldUtil.getSectionField(
                         "Fecha prevista de fin de ejecución",
                         DateUtil.formatDate(contract?.expected_execution_end_date)

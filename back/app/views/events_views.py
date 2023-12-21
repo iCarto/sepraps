@@ -27,12 +27,12 @@ def get_end_of_contract_events(filters, user):
             SELECT DISTINCT
                 cc.id as contract_id,
                 cc.number as contract_number,
-                (cc.execution_certificate_start_date + CAST(cc.expected_execution_period||' days' AS Interval))::date as expected_end_date,
-                DATE_PART('day', cc.execution_certificate_start_date + CAST(cc.expected_execution_period||' days' AS Interval) - current_date)::int as days_left
+                (cc.execution_start_date + CAST(cc.expected_execution_period||' days' AS Interval))::date as expected_end_date,
+                DATE_PART('day', cc.execution_start_date + CAST(cc.expected_execution_period||' days' AS Interval) - current_date)::int as days_left
             FROM construction_contract cc
                 LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
-            WHERE cc.execution_certificate_start_date + CAST(cc.expected_execution_period||' days' AS Interval) >= current_date
+            WHERE cc.execution_start_date + CAST(cc.expected_execution_period||' days' AS Interval) >= current_date
             {filter_conditions}
             """
         filter_conditions = []

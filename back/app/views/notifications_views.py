@@ -201,7 +201,7 @@ def get_contracts_milestone_compliance_notifications(
                 LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE ccp.projects_number = ccpm.projects_number_milestone_completed
-                AND cc.execution_certificate_start_date IS NULL
+                AND cc.execution_start_date IS NULL
                 {filter_conditions}
             """
         filter_conditions = []

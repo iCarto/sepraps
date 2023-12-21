@@ -53,8 +53,7 @@ const ContractForm = ({
             contract?.awarding_accident_insurance
         ),
         execution_signature_date: contract?.execution_signature_date || "",
-        execution_certificate_start_date:
-            contract?.execution_certificate_start_date || "",
+        execution_start_date: contract?.execution_start_date || "",
         expected_execution_period: contract?.expected_execution_period || "",
         warranty_end_date: contract?.warranty_end_date || "",
     };
@@ -106,7 +105,7 @@ const ContractForm = ({
             ),
             contractor: contract?.contractor,
             execution_signature_date: data.execution_signature_date,
-            execution_certificate_start_date: data.execution_certificate_start_date,
+            execution_start_date: data.execution_start_date,
             expected_execution_period: data.expected_execution_period,
             warranty_end_date: data.warranty_end_date,
             projects: contract ? contract.projects : [],

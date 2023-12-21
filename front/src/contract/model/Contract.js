@@ -24,7 +24,7 @@ const contract_api_adapter = contract => {
         : null;
     contract["expected_execution_end_date"] = contract["expected_execution_period"]
         ? DateUtil.getDateAfterDays(
-              contract["execution_certificate_start_date"],
+              contract["execution_start_date"],
               contract["expected_execution_period"]
           )
         : null;
@@ -33,7 +33,7 @@ const contract_api_adapter = contract => {
         "expected_execution_period"
     ]
         ? DateUtil.getMonths(
-              contract["execution_certificate_start_date"],
+              contract["execution_start_date"],
               contract["expected_execution_end_date"]
           ) + 1
         : null;
@@ -87,10 +87,8 @@ const contract_view_adapter = contract => {
         ? contract["contractor"].id
         : null;
 
-    contract["execution_certificate_start_date"] = !!contract[
-        "execution_certificate_start_date"
-    ]
-        ? contract["execution_certificate_start_date"]
+    contract["execution_start_date"] = !!contract["execution_start_date"]
+        ? contract["execution_start_date"]
         : null;
 
     delete contract["related_contracts"];
@@ -140,7 +138,7 @@ const createContract = ({
     contractor = null,
     contacts = [],
     execution_signature_date = null,
-    execution_certificate_start_date = null,
+    execution_start_date = null,
     expected_execution_period = null,
     expected_execution_period_in_months = null,
     expected_execution_end_date = null,
@@ -189,7 +187,7 @@ const createContract = ({
         execution_signature_date,
         expected_execution_period,
         expected_execution_period_in_months,
-        execution_certificate_start_date,
+        execution_start_date,
         expected_execution_end_date,
         warranty_end_date,
         projects,

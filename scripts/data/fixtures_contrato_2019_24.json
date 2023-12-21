@@ -50,7 +50,7 @@
             "financing_program": 2,
             "contractor": 3,
             "execution_signature_date": "2019-12-17",
-            "execution_certificate_start_date": "2019-12-17",
+            "execution_start_date": "2019-12-17",
             "expected_execution_period": 240,
             "warranty_end_date": "2021-12-11",
             "closed": false,

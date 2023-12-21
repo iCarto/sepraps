@@ -36,7 +36,7 @@ const ContractAwardingSection = ({contract}) => {
     );
 
     const getExpectedExecutionPeriodInfo = () => {
-        if (contract.execution_certificate_start_date) {
+        if (contract.execution_start_date) {
             return `${contract.expected_execution_period} días (${contract.expected_execution_period_in_months} meses)`;
         } else return `${contract.expected_execution_period} días`;
     };

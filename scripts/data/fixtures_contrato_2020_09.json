@@ -50,7 +50,7 @@
             "financing_program": 1,
             "contractor": 5,
             "execution_signature_date": "2020-11-10",
-            "execution_certificate_start_date": "2020-11-10",
+            "execution_start_date": "2020-11-10",
             "expected_execution_period": 450,
             "closed": false,
             "creation_user": 1,

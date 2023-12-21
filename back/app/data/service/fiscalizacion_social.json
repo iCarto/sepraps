@@ -2,7 +2,13 @@
     "code": "fiscalizacion_social",
     "name": "Fiscalización social",
     "supervision_areas": ["social"],
-    "properties": {},
+    "properties": {
+        "proceedToExecutionDate": {
+            "label": "Fecha de la orden de proceder",
+            "type": "date",
+            "order": 1
+        }
+    },
     "staff": {
         "social": ["supervisor_social", "coordinador_social"]
     }

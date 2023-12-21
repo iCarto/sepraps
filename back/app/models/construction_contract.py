@@ -78,9 +78,7 @@ class ConstructionContract(models.Model):
     execution_signature_date = models.DateField(
         "Fecha de firma del contrato", null=True
     )
-    execution_certificate_start_date = models.DateField(
-        "Fecha del acta de inicio", null=True
-    )
+    execution_start_date = models.DateField("Fecha de inicio del contrato", null=True)
     expected_execution_period = models.IntegerField(
         "Plazo previsto de ejecución", null=True
     )

@@ -49,7 +49,7 @@
             "financing_program": 1,
             "contractor": 6,
             "execution_signature_date": "2021-06-22",
-            "execution_certificate_start_date": "2021-06-22",
+            "execution_start_date": "2021-06-22",
             "expected_execution_period": 630,
             "closed": false,
             "creation_user": 1,
