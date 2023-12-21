@@ -23,15 +23,15 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "expected_fixed_amount",
             "expected_variable_amount",
             "expected_total_amount",
-            "expected_payment_date",
+            "expected_approval_date",
             "paid_fixed_amount",
             "paid_variable_amount",
             "paid_total_amount",
             "status",
-            "payment_date",
+            "approval_date",
             "contract",
             "contract_total_amount_type",
-            "contract_payment_frequency_type",
+            "contract_product_frequency_type",
             "contract_payment_criteria_type",
             "payment_products",
             "payment_comments",
@@ -44,7 +44,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "expected_total_contract_amount",
         )
 
-    domain_fields = [BaseDomainField("status", DomainCategoryChoices.payment_status)]
+    domain_fields = [BaseDomainField("status", DomainCategoryChoices.product_status)]
 
     payment_products = serializers.SerializerMethodField()
     payment_comments = CommentSerializer(source="comments", read_only=True, many=True)
@@ -58,8 +58,8 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     contract_total_amount_type = serializers.CharField(
         source="contract.total_amount_type", read_only=True
     )
-    contract_payment_frequency_type = serializers.CharField(
-        source="contract.payment_frequency_type", read_only=True
+    contract_product_frequency_type = serializers.CharField(
+        source="contract.product_frequency_type", read_only=True
     )
     contract_payment_criteria_type = serializers.CharField(
         source="contract.payment_criteria_type", read_only=True
@@ -125,7 +125,7 @@ class PaymentSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
             "name",
             "paid_total_amount",
             "status",
-            "payment_date",
+            "approval_date",
         )
 
-    domain_fields = [BaseDomainField("status", DomainCategoryChoices.payment_status)]
+    domain_fields = [BaseDomainField("status", DomainCategoryChoices.product_status)]

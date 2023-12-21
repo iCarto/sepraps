@@ -19,7 +19,7 @@
             "comments": "Contrato de fiscalización de obra ICARTO",
             "services": ["fiscalizacion_de_obra"],
             "total_amount_type": "fijo",
-            "payment_frequency_type": "no_mensual",
+            "product_frequency_type": "no_mensual",
             "payment_criteria_type": "fijo",
             "bid_request_number": "SDP - 02/2019",
             "bid_request_id": "41",

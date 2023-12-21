@@ -7,7 +7,7 @@
             "comments": "Contrato LI-12008-19-183448 correspondiente al Grupo 3: Guairá - Itapúa - Alto Paraná (Sur) de la licitación Nº 01/2019 (364644) asociada al contrato de préstamo 3601/OC-PR",
             "services": ["ejecucion_de_obra"],
             "total_amount_type": "fijo",
-            "payment_frequency_type": "mensual",
+            "product_frequency_type": "mensual",
             "payment_criteria_type": "variable",
             "bid_request_number": "LPI - 01/2019",
             "bid_request_id": "364644",

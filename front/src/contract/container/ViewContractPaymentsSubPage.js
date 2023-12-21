@@ -86,7 +86,7 @@ const ViewContractPaymentsSubPage = () => {
                             textAlign: "center",
                         }}
                     >
-                        No se pueden gestionar los pagos porque el contrato no tiene
+                        No se pueden gestionar los productos porque el contrato no tiene
                         monto adjudicado todavía
                     </Typography>
                 </Grid>
@@ -120,8 +120,8 @@ const ViewContractPaymentsSubPage = () => {
                                                         textAlign: "center",
                                                     }}
                                                 >
-                                                    No se han registrado pagos para este
-                                                    contrato todavía
+                                                    No se han registrado productos para
+                                                    este contrato todavía
                                                 </Typography>
                                             </Grid>
                                         </PaperContainer>

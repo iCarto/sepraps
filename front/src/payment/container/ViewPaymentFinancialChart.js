@@ -87,7 +87,7 @@ const ViewPaymentFinancialChart = ({filter}) => {
     return (
         chartData && (
             <LineChart
-                title="Supervisión pagos"
+                title="Supervisión de productos"
                 labels={chartData.name}
                 datasets={[
                     {

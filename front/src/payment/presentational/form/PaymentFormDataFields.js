@@ -142,7 +142,7 @@ const ExpectedAmountFormFields = ({contract}) => {
 };
 
 const PaymentFormDataFields = ({contract}) => {
-    const {paymentStatus} = useDomain();
+    const {productStatus} = useDomain();
 
     const status = useWatch({
         name: "status",
@@ -154,19 +154,19 @@ const PaymentFormDataFields = ({contract}) => {
                 <Grid item xs={6}>
                     <FormInputText
                         name="name"
-                        label="Nombre del pago"
+                        label="Nombre del producto"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </Grid>
                 <Grid item xs={6}>
-                    <FormSelect name="status" label="Estado" options={paymentStatus} />
+                    <FormSelect name="status" label="Estado" options={productStatus} />
                 </Grid>
             </Grid>
             <Grid container item xs={6} direction="column">
                 <FormBox label="Previsto">
                     <FormDatePicker
-                        name="expected_payment_date"
-                        label="Fecha de pago prevista"
+                        name="expected_approval_date"
+                        label="Fecha de aprobación prevista"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                     <ExpectedAmountFormFields contract={contract} />
@@ -176,8 +176,8 @@ const PaymentFormDataFields = ({contract}) => {
                 {status === PAYMENT_STATUS_PAID && (
                     <FormBox label="Real">
                         <FormDatePicker
-                            name="payment_date"
-                            label="Fecha de pago"
+                            name="approval_date"
+                            label="Fecha de aprobación"
                             rules={{required: "Este campo es obligatorio"}}
                         />
                         <PaidAmountFormFields contract={contract} />

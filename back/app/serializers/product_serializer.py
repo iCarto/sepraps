@@ -18,4 +18,6 @@ class ProductSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "payment",
         )
 
-    domain_fields = [BaseDomainField("status", DomainCategoryChoices.product_status)]
+    domain_fields = [
+        BaseDomainField("status", DomainCategoryChoices.deliverable_status)
+    ]

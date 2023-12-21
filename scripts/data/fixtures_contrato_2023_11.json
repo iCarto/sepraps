@@ -57,7 +57,7 @@
             "comments": "Servicio de Consultoría para la Capacitación y Asistencia Técnica Especializada durante la Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
             "services": ["fiscalizacion_social"],
             "total_amount_type": "fijo",
-            "payment_frequency_type": "no_mensual",
+            "product_frequency_type": "no_mensual",
             "payment_criteria_type": "fijo",
             "bid_request_number": "SDP - 02/2022",
             "bid_request_id": "41219",

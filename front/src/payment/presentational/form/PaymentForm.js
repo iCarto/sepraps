@@ -27,7 +27,7 @@ const PaymentForm = ({
         expected_total_amount: payment?.expected_total_amount
             ? NumberUtil.formatDecimal(payment.expected_total_amount, 0)
             : "",
-        expected_payment_date: FormUtil.getFormValue(payment?.expected_payment_date),
+        expected_approval_date: FormUtil.getFormValue(payment?.expected_approval_date),
         paid_fixed_amount: payment?.paid_fixed_amount
             ? NumberUtil.formatDecimal(payment.paid_fixed_amount, 0)
             : "",
@@ -38,7 +38,7 @@ const PaymentForm = ({
             ? NumberUtil.formatDecimal(payment.paid_total_amount, 0)
             : "",
         status: FormUtil.getFormValue(payment?.status, "no_pagado"),
-        payment_date: FormUtil.getFormValue(payment?.payment_date),
+        approval_date: FormUtil.getFormValue(payment?.approval_date),
     };
 
     const formMethods = useForm({
@@ -55,11 +55,11 @@ const PaymentForm = ({
                 data.expected_variable_amount
             ),
             expected_total_amount: FormUtil.getDataValue(data.expected_total_amount),
-            expected_payment_date: FormUtil.getDataValue(data.expected_payment_date),
+            expected_approval_date: FormUtil.getDataValue(data.expected_approval_date),
             paid_fixed_amount: FormUtil.getDataValue(data.paid_fixed_amount),
             paid_variable_amount: FormUtil.getDataValue(data.paid_variable_amount),
             paid_total_amount: FormUtil.getDataValue(data.paid_total_amount),
-            payment_date: FormUtil.getDataValue(data.payment_date),
+            approval_date: FormUtil.getDataValue(data.approval_date),
             status: FormUtil.getDataValue(data.status),
             contract: contractId,
         });

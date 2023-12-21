@@ -29,7 +29,7 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
     expected_total_amount = models.DecimalField(
         "Monto previsto", max_digits=20, decimal_places=2, null=True
     )
-    expected_payment_date = models.DateField("Fecha de pago prevista", null=True)
+    expected_approval_date = models.DateField("Fecha de aprobación prevista", null=True)
 
     paid_fixed_amount = models.DecimalField(
         "Monto fijo", max_digits=20, decimal_places=2, null=True
@@ -41,8 +41,8 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
         "Monto", max_digits=20, decimal_places=2, null=True
     )
 
-    status = models.CharField("Estado", max_length=20, null=False, default="no_pagado")
-    payment_date = models.DateField("Fecha de pago", null=True)
+    status = models.CharField("Estado", max_length=20, null=False, default="pendiente")
+    approval_date = models.DateField("Fecha de aprobación", null=True)
 
     contract = models.ForeignKey(
         ConstructionContract,

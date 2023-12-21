@@ -32,7 +32,7 @@ const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
             }}
         >
             <Grid container justifyContent="space-around" alignItems="center">
-                <Typography>Lista de pagos</Typography>
+                <Typography>Lista de productos</Typography>
                 <IconButton
                     aria-label="add-new-payment-button"
                     color="primary"
@@ -43,7 +43,7 @@ const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
                 >
                     <Tooltip
                         id="add-new-payment-button-tooltip"
-                        title="Añadir nuevo pago"
+                        title="Añadir nuevo producto"
                     >
                         <AddCircleOutlineOutlinedIcon fontSize="inherit" />
                     </Tooltip>

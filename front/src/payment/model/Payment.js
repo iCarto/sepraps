@@ -52,13 +52,13 @@ const createPayment = ({
     expected_fixed_amount = null,
     expected_variable_amount = null,
     expected_total_amount = null,
-    expected_payment_date = null,
+    expected_approval_date = null,
     paid_fixed_amount = null,
     paid_variable_amount = null,
     paid_total_amount = null,
     status = null,
     status_label = "",
-    payment_date = null,
+    approval_date = null,
     contract = null,
     folder = "",
     created_by = "",
@@ -68,7 +68,7 @@ const createPayment = ({
     payment_products = [],
     payment_comments = [],
     contract_total_amount_type = null,
-    contract_payment_frequency_type = null,
+    contract_product_frequency_type = null,
     contract_payment_criteria_type = null,
     expected_total_contract_percentage = null,
     paid_total_contract_percentage = null,
@@ -84,13 +84,13 @@ const createPayment = ({
         expected_fixed_amount,
         expected_variable_amount,
         expected_total_amount,
-        expected_payment_date,
+        expected_approval_date,
         paid_fixed_amount,
         paid_variable_amount,
         paid_total_amount,
         status,
         status_label,
-        payment_date,
+        approval_date,
         contract,
         folder,
         created_by,
@@ -100,7 +100,7 @@ const createPayment = ({
         payment_products,
         payment_comments,
         contract_total_amount_type,
-        contract_payment_frequency_type,
+        contract_product_frequency_type,
         contract_payment_criteria_type,
         expected_total_contract_percentage,
         paid_total_contract_percentage,
@@ -114,8 +114,8 @@ const createPayment = ({
     return Object.freeze(publicApi);
 };
 
-export const PAYMENT_STATUS_PAID = "pagado";
-export const PAYMENT_STATUS_CANCELED = "anulado";
+export const PRODUCT_STATUS_PAID = "aprobado";
+export const PRODUCT_STATUS_REJECTED = "rechazado";
 
 export {
     createPayment as default,

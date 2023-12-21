@@ -49,8 +49,8 @@ const ContractBidRequestSection = ({contract}) => {
                 />
                 <BidRequestBudgetSection contract={contract} />
                 <SectionField
-                    label="Frecuencia de pago"
-                    value={contract?.payment_frequency_type_label}
+                    label="Frecuencia de entrega de productos"
+                    value={contract?.product_frequency_type_label}
                 />
                 <SectionField
                     label="Criterio de pago"

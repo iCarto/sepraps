@@ -39,7 +39,7 @@ class ConstructionContractSummarySerializer(
             "comments",
             "services",
             "total_amount_type",
-            "payment_frequency_type",
+            "product_frequency_type",
             "payment_criteria_type",
             "bid_request_number",
             "bid_request_id",
@@ -64,7 +64,7 @@ class ConstructionContractSummarySerializer(
         BaseDomainField("services", DomainCategoryChoices.service_type, many=True),
         BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
         BaseDomainField(
-            "payment_frequency_type", DomainCategoryChoices.payment_frequency_type
+            "product_frequency_type", DomainCategoryChoices.product_frequency_type
         ),
         BaseDomainField(
             "payment_criteria_type", DomainCategoryChoices.payment_criteria_type
@@ -97,7 +97,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "services",
             "supervision_areas",
             "total_amount_type",
-            "payment_frequency_type",
+            "product_frequency_type",
             "payment_criteria_type",
             "bid_request_number",
             "bid_request_id",
@@ -170,7 +170,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
         ),
         BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
         BaseDomainField(
-            "payment_frequency_type", DomainCategoryChoices.payment_frequency_type
+            "product_frequency_type", DomainCategoryChoices.product_frequency_type
         ),
         BaseDomainField(
             "payment_criteria_type", DomainCategoryChoices.payment_criteria_type

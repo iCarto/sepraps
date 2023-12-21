@@ -38,7 +38,7 @@
             "comments": "Servicios de Consultoría para la Fiscalización de la Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
             "services": ["fiscalizacion_de_obra"],
             "total_amount_type": "fijo",
-            "payment_frequency_type": "mensual",
+            "product_frequency_type": "mensual",
             "payment_criteria_type": "fijo_variable",
             "bid_request_number": "SDP - 01/2022",
             "bid_request_id": "41219",

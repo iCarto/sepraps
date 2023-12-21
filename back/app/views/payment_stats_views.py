@@ -16,7 +16,7 @@ def get_payment_stats(request, format=None):
                 SELECT
                     contracts.contract_id,
                     contracts.contract_expected_total_amount,
-                    max(pm.payment_date) as last_payment_date,
+                    max(pm.approval_date) as last_approval_date,
                     sum(pm.paid_total_amount) as contract_paid_total_amount
                 FROM payment pm
                     JOIN (
@@ -37,10 +37,10 @@ def get_payment_stats(request, format=None):
                 payments.name,
                 CASE
                     WHEN payments.status != 'no_pagado'
-                        THEN sum(payments.paid_total_amount) OVER (ORDER BY payments.expected_payment_date rows BETWEEN UNBOUNDED PRECEDING AND current row)
+                        THEN sum(payments.paid_total_amount) OVER (ORDER BY payments.expected_approval_date rows BETWEEN UNBOUNDED PRECEDING AND current row)
                     ELSE null
                 END AS cum_paid_total_amount,
-                sum(payments.new_expected_total_amount) OVER (ORDER BY payments.expected_payment_date rows BETWEEN UNBOUNDED PRECEDING AND current row) AS cum_expected_total_amount,
+                sum(payments.new_expected_total_amount) OVER (ORDER BY payments.expected_approval_date rows BETWEEN UNBOUNDED PRECEDING AND current row) AS cum_expected_total_amount,
                 payments.contract_expected_total_amount,
                 payments.contract_paid_total_amount
             FROM (

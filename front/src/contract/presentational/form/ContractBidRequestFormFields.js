@@ -40,7 +40,7 @@ const BidRequestBudgetFormFields = ({totalAmountType}) => {
 };
 
 const ContractBidRequestFormFields = () => {
-    const {totalAmountTypes, paymentFrequencyTypes, paymentCriteriaTypes} = useDomain();
+    const {totalAmountTypes, productFrequencyTypes, paymentCriteriaTypes} = useDomain();
 
     const totalAmountType = useWatch({
         name: "total_amount_type",
@@ -75,9 +75,9 @@ const ContractBidRequestFormFields = () => {
                 />
                 <BidRequestBudgetFormFields totalAmountType={totalAmountType} />
                 <FormSelect
-                    name="payment_frequency_type"
-                    label="Frecuencia de pago"
-                    options={paymentFrequencyTypes}
+                    name="product_frequency_type"
+                    label="Frecuencia de entrega de productos"
+                    options={productFrequencyTypes}
                     rules={{required: "El campo es obligatorio"}}
                 />
                 <FormSelect

@@ -57,7 +57,7 @@
             "comments": "Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
             "services": ["ejecucion_de_obra"],
             "total_amount_type": "maximo_minimo",
-            "payment_frequency_type": "mensual",
+            "product_frequency_type": "mensual",
             "payment_criteria_type": "variable",
             "bid_request_number": "LPI - 01/2021",
             "bid_request_id": "395508",

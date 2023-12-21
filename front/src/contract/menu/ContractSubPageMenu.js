@@ -87,7 +87,7 @@ const ContractSubPageMenu = ({contract}) => {
             <SubPageMenuListItemButton
                 key="contract-payments"
                 to={`${basePath}/payment`}
-                text="Pagos"
+                text="Productos"
                 icon={<RequestQuoteOutlinedIcon />}
             />
             {contractSupervisionAreas.includes(SUPERVISION_AREAS.BUILDING) && (

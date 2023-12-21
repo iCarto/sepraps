@@ -67,8 +67,8 @@ const PaymentData = ({payment}) => {
             <Grid container item xs={6} direction="column">
                 <SectionBox label="Previsto">
                     <SectionField
-                        label="Fecha de pago prevista"
-                        value={DateUtil.formatDate(payment.expected_payment_date)}
+                        label="Fecha de aprobación prevista"
+                        value={DateUtil.formatDate(payment.expected_approval_date)}
                     />
                     <ExpectedAmountSection payment={payment} />
                     <SectionField
@@ -111,8 +111,8 @@ const PaymentData = ({payment}) => {
                 {payment.status === PAYMENT_STATUS_PAID && (
                     <SectionBox label="Real">
                         <SectionField
-                            label="Fecha de pago"
-                            value={DateUtil.formatDate(payment.payment_date)}
+                            label="Fecha de aprobación"
+                            value={DateUtil.formatDate(payment.approval_date)}
                         />
                         <PaidAmountSection payment={payment} />
                         <SectionField

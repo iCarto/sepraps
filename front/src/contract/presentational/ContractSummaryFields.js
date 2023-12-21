@@ -34,8 +34,8 @@ const ContractSummaryFields = ({contract}) => {
                 value={contract.total_amount_type_label}
             />
             <SectionField
-                label="Frecuencia de pago"
-                value={contract.payment_frequency_type_label}
+                label="Frecuencia de entrega de productos"
+                value={contract.product_frequency_type_label}
             />
             <SectionField
                 label="Criterio de pago"

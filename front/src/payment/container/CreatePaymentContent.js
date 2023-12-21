@@ -31,7 +31,7 @@ const CreatePaymentContent = () => {
     };
 
     return (
-        <SectionCard title="Nuevo pago">
+        <SectionCard title="Nuevo producto">
             <PaymentForm
                 contractId={contractId}
                 contract={contract}

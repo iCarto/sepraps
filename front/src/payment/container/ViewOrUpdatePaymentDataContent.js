@@ -101,7 +101,7 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
                                     color: "grey",
                                 }}
                             />
-                            <Typography color="grey">Pago:</Typography>
+                            <Typography color="grey">Producto:</Typography>
                             <Typography
                                 color="primary.main"
                                 sx={{

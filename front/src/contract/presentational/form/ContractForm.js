@@ -26,7 +26,7 @@ const ContractForm = ({
         bid_request_lot_number: FormUtil.getFormValue(contract?.bid_request_lot_number),
         bid_request_date: contract?.bid_request_date || "",
         total_amount_type: FormUtil.getFormValue(contract?.total_amount_type),
-        payment_frequency_type: FormUtil.getFormValue(contract?.payment_frequency_type),
+        product_frequency_type: FormUtil.getFormValue(contract?.product_frequency_type),
         payment_criteria_type: FormUtil.getFormValue(contract?.payment_criteria_type),
         // TODO Guaranies don't have decimal fraction, but we have
         // to keep budgets as numbers with decimals
@@ -84,7 +84,7 @@ const ContractForm = ({
             bid_request_lot_number: data.bid_request_lot_number,
             bid_request_date: data.bid_request_date,
             total_amount_type: FormUtil.getDataValue(data.total_amount_type),
-            payment_frequency_type: FormUtil.getDataValue(data.payment_frequency_type),
+            product_frequency_type: FormUtil.getDataValue(data.product_frequency_type),
             payment_criteria_type: FormUtil.getDataValue(data.payment_criteria_type),
             bid_request_budget_min: FormUtil.getDataValue(data.bid_request_budget_min),
             bid_request_budget: FormUtil.getDataValue(data.bid_request_budget),

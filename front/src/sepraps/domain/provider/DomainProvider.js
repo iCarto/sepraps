@@ -14,11 +14,11 @@ export default function DomainProvider({children}) {
     const [contractorTypes, setContractorTypes] = useState([]);
     const [providerAreas, setProviderAreas] = useState([]);
     const [providerTypes, setProviderTypes] = useState([]);
-    const [paymentStatus, setPaymentStatus] = useState([]);
     const [productStatus, setProductStatus] = useState([]);
+    const [deliverableStatus, setDeliverableStatus] = useState([]);
     const [serviceTypes, setServiceTypes] = useState([]);
     const [totalAmountTypes, setTotalAmountTypes] = useState([]);
-    const [paymentFrequencyTypes, setPaymentFrequencyTypes] = useState([]);
+    const [productFrequencyTypes, setProductFrequencyTypes] = useState([]);
     const [paymentCriteriaTypes, setPaymentCriteriaTypes] = useState([]);
     const [qualityStatusTypes, setQualityStatusTypes] = useState([]);
     const [executionStatusTypes, setExecutionStatusTypes] = useState([]);
@@ -41,11 +41,11 @@ export default function DomainProvider({children}) {
                 contractor_type,
                 area_prestador,
                 tipo_prestador,
-                estado_pago,
+                estado_producto,
                 estado_entregable,
                 tipo_servicio,
                 tipo_monto,
-                frecuencia_pago,
+                frecuencia_producto,
                 criterio_pago,
                 estado_cualitativo,
                 estado_ejecucion,
@@ -59,13 +59,13 @@ export default function DomainProvider({children}) {
             setProjectClasses(project_class);
             setProviderAreas(area_prestador);
             setProviderTypes(tipo_prestador);
-            setPaymentStatus(estado_pago);
-            setProductStatus(estado_entregable);
+            setProductStatus(estado_producto);
+            setDeliverableStatus(estado_entregable);
             setContactPosts(contact_post);
             setContractorTypes(contractor_type);
             setServiceTypes(tipo_servicio);
             setTotalAmountTypes(tipo_monto);
-            setPaymentFrequencyTypes(frecuencia_pago);
+            setProductFrequencyTypes(frecuencia_producto);
             setPaymentCriteriaTypes(criterio_pago);
             setQualityStatusTypes(estado_cualitativo);
             setExecutionStatusTypes(estado_ejecucion);
@@ -82,11 +82,11 @@ export default function DomainProvider({children}) {
         projectClasses,
         providerAreas,
         providerTypes,
-        paymentStatus,
         productStatus,
+        deliverableStatus,
         serviceTypes,
         totalAmountTypes,
-        paymentFrequencyTypes,
+        productFrequencyTypes,
         paymentCriteriaTypes,
         contactPosts,
         contractorTypes,

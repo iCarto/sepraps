@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {useDomain} from "sepraps/domain/provider";
 
 const PaymentFormDataFields = () => {
-    const {productStatus} = useDomain();
+    const {deliverableStatus} = useDomain();
 
     return (
         <Grid container spacing={2}>
@@ -18,7 +18,7 @@ const PaymentFormDataFields = () => {
                 <FormSelect
                     name="status"
                     label="Estado"
-                    options={productStatus}
+                    options={deliverableStatus}
                     showEmptyOption={true}
                     rules={{required: "Este campo es obligatorio"}}
                 />
