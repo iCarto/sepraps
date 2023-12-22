@@ -60,6 +60,8 @@ const project_api_adapter = project => {
         );
     }
 
+    project["created_by"] = project["creation_user"] || null;
+
     return project;
 };
 
@@ -92,7 +94,7 @@ const project_view_adapter = project => {
     delete project["active_milestone"];
     delete project["folder"];
     delete project["featured_image"];
-    delete project["creation_user"];
+    delete project["created_by"];
     delete project["created_at"];
     delete project["updated_at"];
 
@@ -127,7 +129,7 @@ const createProject = ({
     folder = "",
     milestones = [],
     questionnaires = [],
-    creation_user = "",
+    created_by = "",
     created_at = null,
     updated_at = null,
 } = {}) => {
@@ -154,7 +156,7 @@ const createProject = ({
         folder,
         milestones,
         questionnaires,
-        creation_user,
+        created_by,
         created_at,
         updated_at,
     };

@@ -13,7 +13,9 @@ const EntityAuditSection = ({entity}) => {
                 label="Fecha de última modificación"
                 value={DateUtil.formatDateTime(entity.updated_at)}
             />
-            <SectionField label="Modificado por" value={entity.updated_by} />
+            {entity.updated_by ? (
+                <SectionField label="Modificado por" value={entity.updated_by} />
+            ) : null}
         </SectionCard>
     );
 };

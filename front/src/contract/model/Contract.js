@@ -1,10 +1,5 @@
-import {createProjectSummary, project_summary_api_adapter} from "project/model";
 import {contacts_api_adapter, createContacts} from "contact/model";
-import {
-    contractor_view_adapter,
-    createContractor,
-    contractor_api_adapter,
-} from "contractor/model";
+import {createContractor, contractor_api_adapter} from "contractor/model";
 import {createQuestionnaires, questionnaires_api_adapter} from "questionnaire/model";
 import {createFinancingProgram, financing_program_api_adapter} from "financing/model";
 import {DateUtil, NumberUtil} from "base/format/utilities";
@@ -53,6 +48,9 @@ const contract_api_adapter = contract => {
             contacts_api_adapter(contract["contacts"])
         );
     }
+
+    contract["created_by"] = contract["creation_user"] || null;
+
     return contract;
 };
 
@@ -145,7 +143,9 @@ const createContract = ({
     warranty_end_date = null,
     projects = [],
     questionnaires = [],
+    created_by = "",
     created_at = null,
+    updated_by = "",
     updated_at = null,
 } = {}) => {
     const publicApi = {
@@ -189,7 +189,9 @@ const createContract = ({
         warranty_end_date,
         projects,
         questionnaires,
+        created_by,
         created_at,
+        updated_by,
         updated_at,
     };
 
