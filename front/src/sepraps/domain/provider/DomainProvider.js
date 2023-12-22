@@ -7,6 +7,7 @@ let DomainContext = createContext(null);
 export default function DomainProvider({children}) {
     const [yesNoDomain, setYesNoDomain] = useState([]);
     const [genderDomain, setGenderDomain] = useState([]);
+    const [phasesDomain, setPhasesDomain] = useState([]);
     const [projectTypes, setProjectTypes] = useState([]);
     const [projectClasses, setProjectClasses] = useState([]);
     const [contactPosts, setContactPosts] = useState([]);
@@ -33,6 +34,7 @@ export default function DomainProvider({children}) {
             const {
                 dominiosino,
                 gender,
+                etapas,
                 project_type,
                 project_class,
                 contact_post,
@@ -52,6 +54,7 @@ export default function DomainProvider({children}) {
             } = domain;
             setYesNoDomain(dominiosino);
             setGenderDomain(gender);
+            setPhasesDomain(etapas);
             setProjectTypes(project_type);
             setProjectClasses(project_class);
             setProviderAreas(area_prestador);
@@ -74,6 +77,7 @@ export default function DomainProvider({children}) {
     let value = {
         yesNoDomain,
         genderDomain,
+        phasesDomain,
         projectTypes,
         projectClasses,
         providerAreas,
