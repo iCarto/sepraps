@@ -11,7 +11,6 @@ from app.models.contractor import Contractor
 from app.models.financing_program import FinancingProgram
 from app.models.milestone import Milestone
 from app.models.project import Project
-from app.serializers.contact_relationship_serializer import ContractContactSerializer
 from app.serializers.contract_supervision_area_serializer import (
     ContractSupervisionAreaSerializer,
 )
@@ -64,6 +63,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "questionnaires",
             "creation_user",
             "created_at",
+            "updated_by",
             "updated_at",
         )
         extra_kwargs = {
@@ -89,6 +89,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
     creation_user = serializers.CharField(
         source="creation_user.username", required=False
     )
+    updated_by = serializers.CharField(source="updated_by.username", required=False)
     questionnaires = serializers.SerializerMethodField()
     supervision_areas = ContractSupervisionAreaSerializer(many=True, read_only=True)
 
