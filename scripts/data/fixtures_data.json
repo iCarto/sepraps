@@ -66,6 +66,33 @@
         "model": "domains.domainentry",
         "pk": null,
         "fields": {
+            "category": "etapas",
+            "key": "etapa_1",
+            "value": "Etapa 1"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "etapas",
+            "key": "etapa_2",
+            "value": "Etapa 2"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "etapas",
+            "key": "etapa_3",
+            "value": "Etapa 3"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
             "category": "project_type",
             "key": "agua",
             "value": "Agua Potable"
