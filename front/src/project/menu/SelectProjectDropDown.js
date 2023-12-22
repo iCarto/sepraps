@@ -34,7 +34,7 @@ const SelectProjectDropDown = ({project}) => {
     return (
         <EntityMenuDropDown
             entityInfo={entityInfo}
-            service={ProjectService.getList}
+            service={ProjectService.getListSummary}
             template={TEMPLATE.SHORT}
             getDropdownItemContent={getDropdownItemContent}
         />

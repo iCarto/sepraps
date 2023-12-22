@@ -22,6 +22,7 @@ import {
     social_component_monitoring_api_adapter,
 } from "socialComponentMonitoring/model";
 import {connection_api_adapter, createConnections} from "connection/model";
+import {ServiceUtil} from "base/api/utilities";
 
 const basePath = "/api/app/projects";
 
@@ -36,6 +37,15 @@ const entityService = createEntityService(
 const ProjectService = {
     getList(filter, sort, order, format = null) {
         return entityService.getList(filter, null, sort, order, format);
+    },
+
+    // TODO: Review for projects
+    getListSummary(filter) {
+        return AuthApiService.get(
+            `${basePath}?template=short&${ServiceUtil.getFilterQueryString(filter)}`
+        ).then(response => {
+            return createProjectsSummaries(projects_summaries_api_adapter(response));
+        });
     },
 
     getPaginatedList(filter, page, sort, order) {
