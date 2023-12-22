@@ -9,7 +9,7 @@ import Tooltip from "@mui/material/Tooltip";
 function TableSortingHead({
     order,
     attribute,
-    onRequestSort,
+    onRequestSort = null,
     headCells,
     showActions = false,
 }) {
@@ -39,25 +39,28 @@ function TableSortingHead({
                                 sortDirection={
                                     attribute === headCell.id ? order : false
                                 }
-                                sx={{paddingRight: 1}}
+                                sx={{paddingRight: 1, textTransform: "uppercase"}}
                             >
-                                <TableSortLabel
-                                    sx={{textTransform: "uppercase"}}
-                                    active={attribute === headCell.id}
-                                    direction={
-                                        attribute === headCell.id ? order : "asc"
-                                    }
-                                    onClick={createSortHandler(headCell.id)}
-                                >
-                                    {headCell.label}
-                                    {attribute === headCell.id ? (
-                                        <Box component="span" sx={visuallyHidden}>
-                                            {order === "desc"
-                                                ? "sorted descending"
-                                                : "sorted ascending"}
-                                        </Box>
-                                    ) : null}
-                                </TableSortLabel>
+                                {onRequestSort ? (
+                                    <TableSortLabel
+                                        active={attribute === headCell.id}
+                                        direction={
+                                            attribute === headCell.id ? order : "asc"
+                                        }
+                                        onClick={createSortHandler(headCell.id)}
+                                    >
+                                        {headCell.label}
+                                        {attribute === headCell.id ? (
+                                            <Box component="span" sx={visuallyHidden}>
+                                                {order === "desc"
+                                                    ? "sorted descending"
+                                                    : "sorted ascending"}
+                                            </Box>
+                                        ) : null}
+                                    </TableSortLabel>
+                                ) : (
+                                    headCell.label
+                                )}
                             </TableCell>
                         </Tooltip>
                     ))}

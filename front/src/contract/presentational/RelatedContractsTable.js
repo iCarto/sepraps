@@ -1,13 +1,14 @@
 import {useContractTable} from "contract/data";
-import {EntityTable} from "base/entity/components/presentational";
+import {UnpaginatedTable} from "base/table/components";
 
 const RelatedContractsTable = ({contracts}) => {
-    const {tableColumns} = useContractTable();
+    const {tableColumns} = useContractTable("short");
 
     return (
-        <EntityTable
+        <UnpaginatedTable
             columns={tableColumns}
             service={() => Promise.resolve({results: contracts})}
+            sortable={false}
         />
     );
 };
