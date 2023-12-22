@@ -51,7 +51,7 @@ class FieldReportFilter(filters.FilterSet):
 
     def filter_by_construction_contract(self, queryset, name, construction_contract_id):
         return queryset.filter(
-            field_report_projects__project__construction_contract=construction_contract_id
+            field_report_projects__project__related_contracts__in=construction_contract_id
         ).distinct("id")
 
     def filter_by_district(self, queryset, param_name, district):
@@ -82,8 +82,8 @@ class FieldReportViewSet(ModelListAuditViewSet):
         models.Prefetch(
             "field_report_projects",
             queryset=FieldReportProject.objects.select_related(
-                "project", "project__construction_contract"
-            ),
+                "project"
+            ).prefetch_related("project__related_contracts"),
         ),
     ).all()
     serializer_class = FieldReportSerializer
@@ -105,8 +105,10 @@ class FieldReportViewSet(ModelListAuditViewSet):
             models.Prefetch(
                 "field_report_projects",
                 queryset=FieldReportProject.objects.filter(project=int(project_id))
-                .prefetch_related("field_report_project_activities")
-                .select_related("project", "project__construction_contract"),
+                .select_related("project")
+                .prefetch_related(
+                    "field_report_project_activities", "project__related_contracts"
+                ),
             ),
         ).get(pk=pk)
         return Response(

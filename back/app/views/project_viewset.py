@@ -86,11 +86,12 @@ class ProjectFilter(filters.FilterSet):
         return queryset.filter(models.Q(linked_localities__department=department))
 
     def filter_by_construction_contract(self, queryset, param_name, search_value):
-        return queryset.filter(models.Q(construction_contract=search_value))
+        print(search_value)
+        return queryset.filter(models.Q(related_contracts__contract=search_value))
 
     def filter_by_financing_program(self, queryset, param_name, search_value):
         return queryset.filter(
-            models.Q(construction_contract__financing_program=search_value)
+            models.Q(related_contracts__contract__financing_program=search_value)
         )
 
     def filter_by_last_modified_items(self, queryset, name, last_modified_items):
@@ -105,8 +106,7 @@ class ProjectViewSet(ModelListViewSet):
         "main_infrastructure__locality__department",
         "main_infrastructure__locality__district",
         "provider",
-        "construction_contract",
-    )
+    ).prefetch_related("related_contracts__contract")
     serializer_class = ProjectSerializer
     permission_classes = [permissions.DjangoModelPermissions]
     filter_backends = [DjangoFilterBackend]
