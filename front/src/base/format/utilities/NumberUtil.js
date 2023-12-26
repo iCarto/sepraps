@@ -73,9 +73,12 @@ const NumberUtil = {
         const oneMillion = 1000000;
         const valueInMillions = this.formatFloat(value / oneMillion);
 
-        const formattedValueInMillions = valueInMillions.endsWith(",00")
-            ? valueInMillions.slice(0, -3)
-            : valueInMillions;
+        let formattedValueInMillions = 0;
+        if (valueInMillions) {
+            formattedValueInMillions = valueInMillions.endsWith(",00")
+                ? valueInMillions.slice(0, -3)
+                : valueInMillions;
+        }
 
         if (displaySymbol) return `${formattedValueInMillions}M`;
 
