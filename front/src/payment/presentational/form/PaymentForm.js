@@ -6,6 +6,7 @@ import {PaymentFormDataFields} from ".";
 import {AlertError} from "base/error/components";
 import {NumberUtil} from "base/format/utilities";
 import {DomainProvider} from "sepraps/domain/provider";
+import {PRODUCT_STATUS_PENDING} from "payment/model";
 
 const PaymentForm = ({
     contractId,
@@ -37,7 +38,7 @@ const PaymentForm = ({
         paid_total_amount: payment?.paid_total_amount
             ? NumberUtil.formatDecimal(payment.paid_total_amount, 0)
             : "",
-        status: FormUtil.getFormValue(payment?.status, "no_pagado"),
+        status: FormUtil.getFormValue(payment?.status, PRODUCT_STATUS_PENDING),
         approval_date: FormUtil.getFormValue(payment?.approval_date),
     };
 

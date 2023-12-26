@@ -36,7 +36,7 @@ def get_payment_stats(request, format=None):
             SELECT
                 payments.name,
                 CASE
-                    WHEN payments.status != 'no_pagado'
+                    WHEN payments.status != 'pendiente'
                         THEN sum(payments.paid_total_amount) OVER (ORDER BY payments.expected_approval_date rows BETWEEN UNBOUNDED PRECEDING AND current row)
                     ELSE null
                 END AS cum_paid_total_amount,
@@ -47,7 +47,7 @@ def get_payment_stats(request, format=None):
                 SELECT
                     *,
                     CASE
-                        WHEN status = 'no_pagado' THEN expected_total_amount
+                        WHEN status = 'pendiente' THEN expected_total_amount
                         ELSE paid_total_amount
                     END as new_expected_total_amount
                 FROM payment pm

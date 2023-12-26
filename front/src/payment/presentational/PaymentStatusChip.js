@@ -3,12 +3,12 @@ import Chip from "@mui/material/Chip";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import PaidIcon from "@mui/icons-material/Paid";
 import {cloneElement} from "react";
-import {PAYMENT_STATUS_CANCELED, PAYMENT_STATUS_PAID} from "payment/model";
+import {PRODUCT_STATUS_REJECTED, PRODUCT_STATUS_PAID} from "payment/model";
 
 const getStatusColor = value => {
-    if (value === PAYMENT_STATUS_CANCELED) {
+    if (value === PRODUCT_STATUS_REJECTED) {
         return "error";
-    } else if (value === PAYMENT_STATUS_PAID) {
+    } else if (value === PRODUCT_STATUS_PAID) {
         return "success";
     }
     return "default";
@@ -16,10 +16,10 @@ const getStatusColor = value => {
 
 const getStatusIcon = (value, outlined = false) => {
     let color = "grey.400";
-    if (value === PAYMENT_STATUS_CANCELED) {
+    if (value === PRODUCT_STATUS_REJECTED) {
         color = "error.main";
     }
-    if (value === PAYMENT_STATUS_PAID) {
+    if (value === PRODUCT_STATUS_PAID) {
         color = "success.main";
     }
     const icon = outlined ? <PaidOutlinedIcon /> : <PaidIcon />;

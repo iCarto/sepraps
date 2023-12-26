@@ -3,7 +3,7 @@ import {SectionBox, SectionField} from "base/ui/section/components";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
-import {PAYMENT_STATUS_PAID} from "payment/model";
+import {PRODUCT_STATUS_PAID} from "payment/model";
 
 const ExpectedAmountSection = ({payment}) => {
     return payment.contract_payment_criteria_type === FIXED_VARIABLE_CRITERIA_TYPE ? (
@@ -108,7 +108,7 @@ const PaymentData = ({payment}) => {
                 </SectionBox>
             </Grid>
             <Grid container item xs={6} direction="column">
-                {payment.status === PAYMENT_STATUS_PAID && (
+                {payment.status === PRODUCT_STATUS_PAID && (
                     <SectionBox label="Aprobación">
                         <SectionField
                             label="Fecha de aprobación"

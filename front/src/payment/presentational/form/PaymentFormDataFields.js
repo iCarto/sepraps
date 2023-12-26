@@ -14,7 +14,7 @@ import {useEffect, useState} from "react";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import {NumberUtil} from "base/format/utilities";
-import {PAYMENT_STATUS_PAID} from "payment/model";
+import {PRODUCT_STATUS_PAID} from "payment/model";
 
 const PaidAmountFormFields = ({contract}) => {
     const [paidTotalAmount, setPaidTotalAmount] = useState("");
@@ -173,7 +173,7 @@ const PaymentFormDataFields = ({contract}) => {
                 </FormBox>
             </Grid>
             <Grid container item xs={6} direction="column">
-                {status === PAYMENT_STATUS_PAID && (
+                {status === PRODUCT_STATUS_PAID && (
                     <FormBox label="Aprobación">
                         <FormDatePicker
                             name="approval_date"
