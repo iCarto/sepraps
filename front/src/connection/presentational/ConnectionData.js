@@ -56,7 +56,6 @@ const ConnectionData = ({connection}) => {
                             <SectionField
                                 label="Cobertura"
                                 value={NumberUtil.formatDecimal(connection.coverage)}
-                                unit="%"
                             />
                         </Grid>
                     </Grid>
