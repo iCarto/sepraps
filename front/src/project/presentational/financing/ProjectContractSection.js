@@ -86,12 +86,6 @@ const ProjectContractSection = ({contract}) => {
                     <Typography sx={{fontStyle: "italic"}}>
                         Este proyecto aún no ha sido asignado a ningún contrato
                     </Typography>
-                    {isProjectClosed ? null : (
-                        <AddNewButton
-                            basePath="contract/new/add"
-                            roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-                        />
-                    )}
                 </Stack>
             )}
         </SectionCard>
