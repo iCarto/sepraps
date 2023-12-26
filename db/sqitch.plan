@@ -24,3 +24,4 @@ update_contract_lot_insurances 2023-10-30T09:43:52Z Elías Gago <egago@icarto.es
 create_tables_services_areas 2023-12-22T07:17:03Z Elías Gago <egago@icarto.es> # Create tables for contract services and supervision areas
 create_tables_project_components 2023-12-22T07:19:25Z Elías Gago <egago@icarto.es> # Create tables for building and social project components
 update_payments_by_products 2023-12-22T07:25:25Z Elías Gago <egago@icarto.es> # Replace payment attributes by product
+create_table_connection 2023-12-23T07:25:25Z Elías Gago <egago@icarto.es> # Create tables for social components connections
