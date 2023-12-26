@@ -92,6 +92,11 @@ const contract_view_adapter = contract => {
         : null;
 
     delete contract["related_contracts"];
+    delete contract["folder"];
+    delete contract["creation_user"];
+    delete contract["created_at"];
+    delete contract["updated_at"];
+    delete contract["updated_by"];
 
     return contract;
 };
