@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from app.base.serializers.base_serializers import BaseEntityModelSerializer
 from app.models.building_component import BuildingComponent
+from app.models.building_component_value import BuildingComponentValue
 
 
 class BuildingComponentSerializer(BaseEntityModelSerializer):
@@ -39,9 +40,15 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
         cs_values = instance.building_component_values.all()
 
         for cs_property_code, cs_property_data in cs_properties.items():
-            cs_value = [
+            cs_value_found = [
                 cs_value for cs_value in cs_values if cs_value.code == cs_property_code
-            ][0]
+            ]
+            if not cs_value_found:
+                cs_value = BuildingComponentValue(
+                    code=cs_property_code, value=None, building_component=instance
+                )
+            else:
+                cs_value = cs_value_found[0]
             cs_value.value = cs_property_data["value"]
             cs_value.save()
 
