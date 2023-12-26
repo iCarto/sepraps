@@ -29,6 +29,7 @@ def get_payment_stats(request, format=None):
                         LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
                         LEFT JOIN payment pm on pm.contract_id = cc.id
                         WHERE 1 = 1
+                        and pm.active = True
                         {filter_conditions}
                     ) contracts ON contracts.contract_id = pm.contract_id
                 GROUP BY contracts.contract_id, contracts.contract_expected_total_amount
@@ -52,6 +53,7 @@ def get_payment_stats(request, format=None):
                     END as new_expected_total_amount
                 FROM payment pm
                 JOIN contract_last_payment clp ON clp.contract_id = pm.contract_id
+                WHERE pm.active = True
             ) payments
             """
 
