@@ -16,7 +16,7 @@ const ViewProjectContractsSubPage = () => {
         <ProjectContractSection contract={project?.construction_contract} />,
         <ProjectOtherContractsSection
             contracts={project?.related_contracts.filter(
-                contract => contract.id !== project?.construction_contract.id
+                contract => contract.id !== project?.construction_contract?.id
             )}
         />,
     ];
