@@ -1,21 +1,21 @@
 import {useState, useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useAuth} from "base/user/provider";
-import {AuthAction} from "base/user/components";
 
-import {useDownloadDocument} from "base/file/utilities";
 import {DocumentService} from "base/file/service";
-import {Spinner} from "base/shared/components";
+import {useAuth} from "base/user/provider";
+
 import {FileUploadSection, FolderTable} from "base/file/components";
+import {AuthAction} from "base/user/components";
+import {Spinner} from "base/shared/components";
+
 import Grid from "@mui/material/Grid";
 
-const ListProductFolder = ({folderPath, basePath}) => {
+const ListEntityFolder = ({folderPath, basePath}) => {
     const navigate = useNavigate();
 
     const [folderElement, setFolderElement] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const downloadDocument = useDownloadDocument();
     const location = useLocation();
     const {ROLES} = useAuth();
 
@@ -34,13 +34,6 @@ const ListProductFolder = ({folderPath, basePath}) => {
     };
 
     const handleSelectElement = folderElement => {
-        // setSelectedElement(folderElement);
-        /*if (folderElement.content_type) {
-            navigate(baseDocumentsPath + "detail/" + folderElement.path);
-        } else {
-            navigate(baseDocumentsPath + folderPath);
-        }*/
-        console.log({folderElement});
         navigate(`document/${folderElement.id}`);
     };
 
@@ -70,4 +63,4 @@ const ListProductFolder = ({folderPath, basePath}) => {
     );
 };
 
-export default ListProductFolder;
+export default ListEntityFolder;

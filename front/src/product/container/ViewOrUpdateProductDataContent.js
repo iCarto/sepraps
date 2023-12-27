@@ -10,7 +10,8 @@ import {
 } from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
 import {ProductForm} from "product/presentational/form";
-import {ListProductFolder} from ".";
+import {ListEntityFolder} from "base/file/components";
+
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -78,7 +79,7 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <ListProductFolder folderPath={product.folder} basePath={""} />
+                        <ListEntityFolder folderPath={product.folder} basePath={""} />
                     </Grid>
                 </Grid>
             );

@@ -17,3 +17,4 @@ export {default as FileUploadButton} from "./FileUploadButton";
 export {default as PendingFile} from "./PendingFile";
 export {default as SelectFileSection} from "./SelectFileSection";
 export {default as FeaturedDocumentDownload} from "./FeaturedDocumentDownload";
+export {default as ListEntityFolder} from "./ListEntityFolder";

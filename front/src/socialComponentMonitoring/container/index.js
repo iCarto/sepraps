@@ -3,4 +3,3 @@ export {default as ViewSocialComponentContent} from "./ViewSocialComponentConten
 export {
     default as ViewOrUpdateSocialComponentMonitoringDataContent,
 } from "./ViewOrUpdateSocialComponentMonitoringDataContent";
-export {default as ListSocialComponentFolder} from "./ListSocialComponentFolder";
