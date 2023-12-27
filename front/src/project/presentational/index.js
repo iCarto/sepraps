@@ -6,3 +6,5 @@ export {default as ClosedProjectsSwitch} from "./ClosedProjectsSwitch";
 export {default as ClosedProjectTag} from "./ClosedProjectTag";
 export {default as LatestProjectsList} from "./LatestProjectsList";
 export {default as ProjectTypeIcon} from "./ProjectTypeIcon";
+export {default as ProjectSelectorDialog} from "./ProjectSelectorDialog";
+export {default as ProjectCheckBoxList} from "./ProjectCheckBoxList";

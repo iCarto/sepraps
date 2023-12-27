@@ -19,3 +19,4 @@ export {
 } from "./ContractSupervisionAreaFormFields";
 export {default as ContractServiceForm} from "./ContractServiceForm";
 export {default as ContractInsuranceFormFields} from "./ContractInsuranceFormFields";
+export {default as ContractProjectsFilterForm} from "./ContractProjectsFilterForm";

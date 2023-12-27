@@ -1,26 +1,27 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useAuth} from "base/user/provider";
-import {AuthAction} from "base/user/components";
 
-import {ProjectsList, ProjectsTable} from "project/presentational";
+import {useAuth} from "base/user/provider";
+import {useList} from "base/entity/hooks";
+
+import {AddNewButton, PaperContainer} from "base/shared/components";
 import {SectionHeading} from "base/ui/section/components";
 import {MapProjects} from "base/map/components";
+import {EntityChangeView} from "base/entity/components/presentational";
 import {
-    EntityAddButtonGroup,
-    EntityChangeView,
-} from "base/entity/components/presentational";
+    ProjectSelectorDialog,
+    ProjectsList,
+    ProjectsTable,
+} from "project/presentational";
 
-import {PaperContainer} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import {useList} from "base/entity/hooks";
-import Button from "@mui/material/Button";
 
 const ListContractProjects = ({contract, projects}) => {
     const [selectedElement, setSelectedElement] = useState(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const navigate = useNavigate();
     const {view} = useList();
@@ -30,9 +31,16 @@ const ListContractProjects = ({contract, projects}) => {
         navigate(`project/${projectId}`);
     };
 
-    const onSelectProject = project => {
+    const handleSelectProject = project => {
         setSelectedElement(project);
         navigate(`project/${project.id}`);
+    };
+
+    const handleClickAddButton = () => {
+        setIsDialogOpen(true);
+    };
+    const handleCloseDialog = () => {
+        setIsDialogOpen(false);
     };
 
     const getViewComponent = () => {
@@ -44,7 +52,7 @@ const ListContractProjects = ({contract, projects}) => {
                 <MapProjects
                     projects={projects}
                     selectedElement={selectedElement}
-                    onSelectElement={onSelectProject}
+                    onSelectElement={handleSelectProject}
                 />
             );
         }
@@ -52,54 +60,57 @@ const ListContractProjects = ({contract, projects}) => {
             <ProjectsTable
                 projects={projects}
                 selectedElement={selectedElement}
-                onSelectElement={onSelectProject}
+                onSelectElement={handleSelectProject}
             />
         );
     };
 
     return (
-        <PaperContainer justifyContent="space-between" alignItems="center">
-            <Grid
-                item
-                container
-                alignItems="flex-start"
-                justifyContent="space-between"
-                sx={{flexDirection: {xs: "column", md: "row"}}}
-                mb={3}
-            >
-                <Grid item md={6}>
-                    <SectionHeading>Proyectos del contrato</SectionHeading>
+        <>
+            <PaperContainer justifyContent="space-between" alignItems="center">
+                <Grid
+                    item
+                    container
+                    alignItems="flex-start"
+                    justifyContent="space-between"
+                    sx={{flexDirection: {xs: "column", md: "row"}}}
+                    mb={3}
+                >
+                    <Grid item md={6}>
+                        <SectionHeading>Proyectos del contrato</SectionHeading>
+                    </Grid>
+                    <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
+                        <Stack direction="row" justifyContent="flex-end" spacing={1}>
+                            {!contract.is_supervision_contract && (
+                                <AddNewButton
+                                    roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}
+                                    onClick={handleClickAddButton}
+                                />
+                            )}
+                            <EntityChangeView views={["list", "table", "map"]} />
+                        </Stack>
+                    </Grid>
                 </Grid>
-                <Grid item md={6} sx={{mt: {xs: 2, md: 0}}}>
-                    <Stack direction="row" justifyContent="flex-end" spacing={1}>
-                        {!contract.is_supervision_contract && (
-                            <AuthAction roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                                <Button
-                                    id="add-button"
-                                    color="primary"
-                                    variant="contained"
-                                    onClick={() => {
-                                        navigate(`add/existing`);
-                                    }}
-                                >
-                                    Añadir
-                                </Button>
-                            </AuthAction>
-                        )}
-                        <EntityChangeView views={["list", "table", "map"]} />
-                    </Stack>
-                </Grid>
-            </Grid>
-            {projects.length ? (
-                getViewComponent()
-            ) : (
-                <Container sx={{textAlign: "center"}}>
-                    <Typography py={12} sx={{fontStyle: "italic"}}>
-                        Este contrato aún no tiene proyectos asignados.
-                    </Typography>
-                </Container>
-            )}
-        </PaperContainer>
+                {projects.length ? (
+                    getViewComponent()
+                ) : (
+                    <Container sx={{textAlign: "center"}}>
+                        <Typography py={12} sx={{fontStyle: "italic"}}>
+                            Este contrato aún no tiene proyectos asignados.
+                        </Typography>
+                    </Container>
+                )}
+            </PaperContainer>
+
+            {isDialogOpen ? (
+                <ProjectSelectorDialog
+                    isDialogOpen={isDialogOpen}
+                    onCloseDialog={handleCloseDialog}
+                    contract={contract}
+                    projects={projects}
+                />
+            ) : null}
+        </>
     );
 };
 
