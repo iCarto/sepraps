@@ -15,7 +15,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Diversity3Icon from "@mui/icons-material/Diversity3";
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 
 const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => {
     const navigate = useNavigateWithReload();
@@ -102,7 +102,7 @@ const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => 
                     component={socialComponent}
                     componentName={socialComponent.name}
                     actions={actions}
-                    icon={<Diversity3Icon />}
+                    icon={<HandshakeOutlinedIcon />}
                 />
                 <CardContent>{getComponent(mode)}</CardContent>
                 <DeleteItemDialog
