@@ -10,8 +10,6 @@ import {ViewOrUpdateConnectionsDataContent} from "../../connection/container";
 import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {ViewOrUpdateCommentsContent} from "component/container";
 
-import Stack from "@mui/system/Stack";
-
 const ViewProjectConnectionsSubPage = () => {
     const {id: projectId} = useParams();
 

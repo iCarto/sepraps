@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useOutletContext} from "react-router-dom";
 
 import {connection_view_adapter} from "connection/model";
 import {ConnectionService} from "connection/service";
@@ -12,6 +13,8 @@ import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ViewOrUpdateConnectionsDataContent = ({connection, projectId}) => {
+    let project;
+    [project] = useOutletContext();
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
@@ -43,13 +46,19 @@ const ViewOrUpdateConnectionsDataContent = ({connection, projectId}) => {
 
     const getComponent = mode => {
         if (mode === "view") {
-            return <ConnectionData connection={connection} />;
+            return (
+                <ConnectionData
+                    connection={connection}
+                    projectClass={project?.project_class}
+                />
+            );
         }
         if (mode === "edit") {
             return (
                 <ConnectionForm
                     projectId={projectId}
                     connection={connection}
+                    projectClass={project?.project_class}
                     onSubmit={handleFormSubmit}
                     onCancel={() => {
                         setMode("view");

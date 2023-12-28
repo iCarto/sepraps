@@ -4,7 +4,7 @@ import {NumberUtil} from "base/format/utilities";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 
-const ConnectionData = ({connection}) => {
+const ConnectionData = ({connection, projectClass}) => {
     return (
         <Grid container columnSpacing={2}>
             <Grid container item xs={6} direction="column">
@@ -23,12 +23,14 @@ const ConnectionData = ({connection}) => {
             </Grid>
             <Grid container item xs={6} direction="column">
                 <SectionBox label="Conexiones">
-                    <SectionField
-                        label="Número de conexiones existentes"
-                        value={NumberUtil.formatInteger(
-                            connection.number_of_existing_connections
-                        )}
-                    />
+                    {projectClass === "mejora" ? (
+                        <SectionField
+                            label="Número de conexiones existentes"
+                            value={NumberUtil.formatInteger(
+                                connection.number_of_existing_connections
+                            )}
+                        />
+                    ) : null}
                     <SectionField
                         label="Número de conexiones previstas"
                         value={NumberUtil.formatInteger(
@@ -55,7 +57,8 @@ const ConnectionData = ({connection}) => {
                         <Grid item xs={6}>
                             <SectionField
                                 label="Cobertura"
-                                value={NumberUtil.formatDecimal(connection.coverage)}
+                                value={NumberUtil.formatInteger(connection.coverage)}
+                                unit="personas nuevas"
                             />
                         </Grid>
                     </Grid>

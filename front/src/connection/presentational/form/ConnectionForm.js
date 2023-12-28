@@ -11,6 +11,7 @@ import {AlertError} from "base/error/components";
 const ConnectionForm = ({
     projectId,
     connection = null,
+    projectClass,
     onSubmit,
     onCancel = null,
     error = null,
@@ -62,7 +63,7 @@ const ConnectionForm = ({
                     onSubmit={formMethods.handleSubmit(onFormSubmit)}
                     onCancel={onCancel}
                 >
-                    <ConnectionFormDataFields />
+                    <ConnectionFormDataFields projectClass={projectClass} />
                 </EntityForm>
             </FormProvider>
         </DomainProvider>
