@@ -10,6 +10,7 @@ from app.views import (
     project_stats_views,
     stats_views,
 )
+from app.views.amendment_viewset import AmendmentViewSet
 from app.views.building_component_monitoring_viewset import (
     BuildingComponentMonitoringViewSet,
 )
@@ -68,6 +69,7 @@ router.register("buildingcomponentmonitorings", BuildingComponentMonitoringViewS
 router.register("socialcomponentmonitorings", SocialComponentMonitoringViewSet)
 router.register("socialcomponenttrainings", SocialComponentTrainingViewSet)
 router.register("connections", ConnectionViewSet)
+router.register("amendments", AmendmentViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

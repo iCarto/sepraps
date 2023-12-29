@@ -6,11 +6,13 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
+from app.models.amendment import Amendment
 from app.models.construction_contract import ConstructionContract
 from app.models.contact_relationship import ContractContact
 from app.models.contract_service import ContractService
 from app.models.contract_supervision_area import ContractSupervisionArea
 from app.models.payment import Payment
+from app.serializers.amendment_serializer import AmendmentSerializer
 from app.serializers.construction_contract_serializer import (
     ConstructionContractSerializer,
     ConstructionContractShortSerializer,
@@ -118,6 +120,19 @@ class ConstructionContractViewSet(ModelListViewSet):
         return Response(
             PaymentSummarySerializer(
                 Payment.objects.filter(contract=pk).order_by("id"), many=True
+            ).data
+        )
+
+    @action(
+        methods=["GET"],
+        detail=True,
+        url_path="amendments",
+        url_name="contract_amendments",
+    )
+    def get_contract_amendments(self, request, pk):
+        return Response(
+            AmendmentSerializer(
+                Amendment.objects.filter(contract=pk).order_by("id"), many=True
             ).data
         )
 
