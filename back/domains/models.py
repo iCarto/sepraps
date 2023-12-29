@@ -24,6 +24,7 @@ class DomainCategoryChoices(models.TextChoices):
         "modalidad_capacitacion",
         "Tipo de modalidad de capacitación",
     )
+    amendment_type = ("amendment_type", "Tipo de adenda")
 
 
 class DomainEntry(models.Model):

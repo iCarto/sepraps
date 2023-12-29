@@ -306,6 +306,33 @@
         }
     },
     {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "amendment_type",
+            "key": "amount",
+            "value": "Monto"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "amendment_type",
+            "key": "expected_execution_period",
+            "value": "Plazo previsto de ejecución"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "amendment_type",
+            "key": "mixed",
+            "value": "Mixto"
+        }
+    },
+    {
         "model": "app.financingprogram",
         "pk": 1,
         "fields": {
