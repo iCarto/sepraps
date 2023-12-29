@@ -24,6 +24,7 @@ export default function DomainProvider({children}) {
     const [executionStatusTypes, setExecutionStatusTypes] = useState([]);
     const [targetPopulationTypes, setTargetPopulationTypes] = useState([]);
     const [trainingMethodTypes, setTrainingMethodTypes] = useState([]);
+    const [amendmentTypes, setAmendmentTypes] = useState([]);
 
     useEffect(() => {
         Promise.all([
@@ -51,6 +52,7 @@ export default function DomainProvider({children}) {
                 estado_ejecucion,
                 poblacion_meta,
                 modalidad_capacitacion,
+                amendment_type,
             } = domain;
             setYesNoDomain(dominiosino);
             setGenderDomain(gender);
@@ -71,6 +73,7 @@ export default function DomainProvider({children}) {
             setExecutionStatusTypes(estado_ejecucion);
             setTargetPopulationTypes(poblacion_meta);
             setTrainingMethodTypes(modalidad_capacitacion);
+            setAmendmentTypes(amendment_type);
         });
     }, []);
 
@@ -94,6 +97,7 @@ export default function DomainProvider({children}) {
         executionStatusTypes,
         targetPopulationTypes,
         trainingMethodTypes,
+        amendmentTypes,
     };
 
     return <DomainContext.Provider value={value}>{children}</DomainContext.Provider>;

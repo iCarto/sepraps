@@ -1,19 +1,29 @@
-import {useOutletContext} from "react-router-dom";
-import {EntityViewSubPage} from "base/entity/components/container";
 import {useEffect, useState} from "react";
-import {ContractServiceService} from "contract/service";
-import {ViewOrUpdateContractContent, ViewOrUpdateSupervisionServiceContent} from ".";
+import {useOutletContext} from "react-router-dom";
+
+import {ContractService, ContractServiceService} from "contract/service";
+
+import {EntityViewSubPage} from "base/entity/components/container";
+import {
+    ViewContractAmendmentsContent,
+    ViewOrUpdateContractContent,
+    ViewOrUpdateSupervisionServiceContent,
+} from ".";
 
 const ViewContractExecutionSubPage = () => {
     let contract;
     [contract] = useOutletContext();
 
     const [services, setServices] = useState([]);
+    const [amendments, setAmendments] = useState([]);
 
     useEffect(() => {
-        ContractServiceService.getServices(contract.id).then(services => {
-            console.log({services});
+        Promise.all([
+            ContractServiceService.getServices(contract.id),
+            ContractService.getAmendmentsList(contract.id),
+        ]).then(([services, amendments]) => {
             setServices(services);
+            setAmendments(amendments);
         });
     }, [contract]);
 
@@ -34,6 +44,7 @@ const ViewContractExecutionSubPage = () => {
             section="postconstruction"
             label="Post-construcción"
         />,
+        <ViewContractAmendmentsContent amendments={amendments} contract={contract} />,
     ];
 
     return contract && <EntityViewSubPage sections={sections} />;

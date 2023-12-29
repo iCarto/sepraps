@@ -10,6 +10,7 @@ import {createPayments, payments_api_adapter} from "payment/model";
 import {createProjects, projects_api_adapter} from "project/model";
 import {contractor_api_adapter, createContractor} from "contractor/model";
 import {contacts_api_adapter, createContacts} from "contact/model";
+import {amendments_api_adapter, createAmendments} from "amendment/model";
 
 export const TEMPLATE = {
     SHORT: "short",
@@ -78,6 +79,12 @@ const ContractService = {
             `${basePath}/${id}/contacts${area ? `?area=${area}` : ""}`
         ).then(response => {
             return createContacts(contacts_api_adapter(response));
+        });
+    },
+
+    getAmendmentsList(id) {
+        return AuthApiService.get(`${basePath}/${id}/amendments`).then(response => {
+            return createAmendments(amendments_api_adapter(response));
         });
     },
 };

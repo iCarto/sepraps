@@ -1,5 +1,5 @@
 import {Navigate, Route} from "react-router-dom";
-import {UpdateContractContractorContactPanel} from "contractor/container";
+import {SUPERVISION_AREAS} from "contract/model";
 import {
     ListContractsPage,
     ViewContractPage,
@@ -18,14 +18,13 @@ import {
     ViewContractExecutionSubPage,
     ViewContractProjectAnalysisSubPage,
     ViewContractProjectSocialAnalysisSubPage,
-    ViewContractSupervisionAreaSubPage,
     ViewContractStaffSubPage,
-} from "../container";
+} from "contract/container";
+import {UpdateContractContactPanel} from "contract/container/monitoring";
+import {UpdateContractContractorContactPanel} from "contractor/container";
 import {ViewContactPanel} from "contact/container";
 import {ViewPaymentContent, CreatePaymentContent} from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
-import {SUPERVISION_AREAS} from "contract/model";
-import {UpdateContractContactPanel} from "contract/container/monitoring";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -66,7 +65,13 @@ const contractRoutes = [
                 key="contract-execution"
                 path="execution"
                 element={<ViewContractExecutionSubPage />}
-            />
+            >
+                <Route
+                    key="contract-amendments-detail-documents-view"
+                    path="document/:idDocument"
+                    element={<ViewDocumentPanel />}
+                />
+            </Route>
             <Route
                 key="contract-projects"
                 path="projects"
