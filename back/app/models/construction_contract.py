@@ -5,7 +5,6 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.db.models import F, Func
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
@@ -121,6 +120,40 @@ class ConstructionContract(models.Model):
             .distinct()
             .order_by("id")
         )
+
+    @property
+    def amended_awarding_budget(self):
+        from app.models.amendment import Amendment
+
+        amendments = Amendment.objects.filter(contract=self)
+        extra_amounts = [
+            amendment.extra_amount for amendment in amendments if amendment.extra_amount
+        ]
+
+        if self.awarding_budget:
+            amended_awarding_budget = (
+                self.awarding_budget + sum(extra_amounts) if extra_amounts else None
+            )
+
+            return amended_awarding_budget
+
+    @property
+    def amended_expected_execution_period(self):
+        from app.models.amendment import Amendment
+
+        amendments = Amendment.objects.filter(contract=self)
+        extra_periods = [
+            amendment.extra_period for amendment in amendments if amendment.extra_period
+        ]
+
+        if self.expected_execution_period:
+            amended_expected_execution_period = (
+                self.expected_execution_period + sum(extra_periods)
+                if extra_periods
+                else None
+            )
+
+            return amended_expected_execution_period
 
     def __str__(self):
         return self.number

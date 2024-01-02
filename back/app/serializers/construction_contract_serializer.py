@@ -54,6 +54,8 @@ class ConstructionContractSummarySerializer(
             "execution_signature_date",
             "execution_start_date",
             "expected_execution_period",
+            "amended_awarding_budget",
+            "amended_expected_execution_period",
             "created_at",
             "updated_at",
         )
@@ -121,6 +123,8 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "projects",
             "questionnaires",
             "related_contracts",
+            "amended_awarding_budget",
+            "amended_expected_execution_period",
             "creation_user",
             "created_at",
             "updated_by",
