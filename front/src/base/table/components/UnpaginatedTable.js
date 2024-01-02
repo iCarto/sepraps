@@ -75,15 +75,13 @@ const UnpaginatedTable = ({
         }
     };
 
-    const headCells = columns;
-
     return (
         <>
             <AlertError error={error} />
             {loading ? (
                 <Spinner />
             ) : noElements ? (
-                <EntityNoItemsComponent isFilterEmpty={isFilterEmpty} />
+                <EntityNoItemsComponent isFilterEmpty={true} />
             ) : (
                 elements && (
                     <TableContainer sx={{width: "100%"}}>
@@ -96,7 +94,7 @@ const UnpaginatedTable = ({
                                 order={order}
                                 attribute={sort}
                                 onRequestSort={sortable ? handleRequestSort : null}
-                                headCells={headCells}
+                                headCells={columns}
                             />
                             <TableBody>
                                 {elements?.map((element, index) => {
