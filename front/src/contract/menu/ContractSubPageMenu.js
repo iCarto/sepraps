@@ -33,6 +33,10 @@ const ContractSubPageMenu = ({contract}) => {
             to: `${basePath}/execution`,
             text: "Ejecución",
         },
+        {
+            to: `${basePath}/post-execution`,
+            text: "Post-construcción",
+        },
     ];
 
     const buildingSupervisionAreaSubmenuItems = [

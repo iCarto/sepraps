@@ -34,3 +34,6 @@ export {default as ViewContractStaffSubPage} from "./ViewContractStaffSubPage";
 export {
     default as ViewContractAmendmentsContent,
 } from "./ViewContractAmendmentsContent";
+export {
+    default as ViewContractPostExecutionSubPage,
+} from "./ViewContractPostExecutionSubPage";

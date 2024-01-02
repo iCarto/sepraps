@@ -19,6 +19,7 @@ import {
     ViewContractProjectAnalysisSubPage,
     ViewContractProjectSocialAnalysisSubPage,
     ViewContractStaffSubPage,
+    ViewContractPostExecutionSubPage,
 } from "contract/container";
 import {UpdateContractContactPanel} from "contract/container/monitoring";
 import {UpdateContractContractorContactPanel} from "contractor/container";
@@ -72,6 +73,11 @@ const contractRoutes = [
                     element={<ViewDocumentPanel />}
                 />
             </Route>
+            <Route
+                key="contract-post-execution"
+                path="post-execution"
+                element={<ViewContractPostExecutionSubPage />}
+            ></Route>
             <Route
                 key="contract-projects"
                 path="projects"
