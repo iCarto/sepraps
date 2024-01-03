@@ -1,9 +1,12 @@
-import {DateUtil, NumberUtil} from "base/format/utilities";
-import {SectionBox, SectionField} from "base/ui/section/components";
-import Grid from "@mui/material/Grid";
 import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
+import {DateUtil, NumberUtil} from "base/format/utilities";
 
-const AwardingBudgetSection = ({contract}) => {
+import {TextLinkForTooltip} from "base/navigation/components";
+import {SectionField} from "base/ui/section/components";
+
+import Grid from "@mui/material/Grid";
+
+const AwardingBudgetSection = ({contract, basePath = ""}) => {
     return contract.total_amount_type === MAX_MIN_AMOUNT_TYPE ? (
         <>
             <SectionField
@@ -16,17 +19,42 @@ const AwardingBudgetSection = ({contract}) => {
                 value={NumberUtil.formatInteger(contract.awarding_budget)}
                 unit="Gs."
             />
+            <SectionField
+                label="Monto máximo"
+                value={NumberUtil.formatInteger(contract.awarding_budget)}
+                unit="Gs."
+                tooltipText={
+                    contract.amended_awarding_budget ? (
+                        <TextLinkForTooltip
+                            text="Ver adendas posteriores"
+                            to={`${basePath}/execution`}
+                        />
+                    ) : (
+                        ""
+                    )
+                }
+            />
         </>
     ) : (
         <SectionField
             label="Monto"
             value={NumberUtil.formatInteger(contract.awarding_budget)}
             unit="Gs."
+            tooltipText={
+                contract.amended_awarding_budget ? (
+                    <TextLinkForTooltip
+                        text="Ver adendas posteriores"
+                        to={`${basePath}/execution`}
+                    />
+                ) : (
+                    ""
+                )
+            }
         />
     );
 };
 
-const ContractAwardingSection = ({contract}) => {
+const ContractAwardingSection = ({contract, basePath = ""}) => {
     const getNoDateMessage = label => (
         <SectionField
             label={label}
@@ -52,13 +80,23 @@ const ContractAwardingSection = ({contract}) => {
                     <SectionField
                         label="Plazo previsto de ejecución"
                         value={getExpectedExecutionPeriodInfo()}
+                        tooltipText={
+                            contract.amended_expected_execution_period ? (
+                                <TextLinkForTooltip
+                                    text="Ver adendas posteriores"
+                                    to={`${basePath}/execution`}
+                                />
+                            ) : (
+                                ""
+                            )
+                        }
                     />
                 ) : (
                     getNoDateMessage("Plazo previsto de ejecución:")
                 )}
             </Grid>
             <Grid container item xs={6} direction="column">
-                <AwardingBudgetSection contract={contract} />
+                <AwardingBudgetSection contract={contract} basePath={basePath} />
                 <SectionField
                     label="Porcentaje de baja"
                     value={NumberUtil.formatDecimal(

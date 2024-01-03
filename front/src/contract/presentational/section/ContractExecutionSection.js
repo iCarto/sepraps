@@ -3,6 +3,7 @@ import {FieldUtil} from "base/ui/section/utilities";
 import Grid from "@mui/material/Grid";
 
 const ContractExecutionSection = ({contract}) => {
+    console.log(contract);
     return (
         <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -20,6 +21,15 @@ const ContractExecutionSection = ({contract}) => {
                     FieldUtil.getSectionField(
                         "Fecha prevista de fin de ejecución",
                         DateUtil.formatDate(contract?.expected_execution_end_date)
+                    )}
+                {contract?.amended_expected_execution_end_date &&
+                    FieldUtil.getSectionField(
+                        "Fecha prevista de fin de ejecución ampliada",
+                        DateUtil.formatDate(
+                            contract?.amended_expected_execution_end_date
+                        ),
+                        "",
+                        "Ver adendas"
                     )}
             </Grid>
         </Grid>

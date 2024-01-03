@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useLocation} from "react-router-dom";
 
 import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {useNavigateWithReload} from "base/navigation/hooks";
@@ -29,6 +30,8 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const ViewOrUpdateContractContent = ({contract, section, label}) => {
     const navigate = useNavigateWithReload();
+    const location = useLocation();
+    const basePath = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
@@ -56,7 +59,7 @@ const ViewOrUpdateContractContent = ({contract, section, label}) => {
             return <ContractBidRequestSection contract={contract} />;
         }
         if (section === "awarding") {
-            return <ContractAwardingSection contract={contract} />;
+            return <ContractAwardingSection contract={contract} basePath={basePath} />;
         }
         if (section === "insurance") {
             return <ContractInsuranceSection contract={contract} />;

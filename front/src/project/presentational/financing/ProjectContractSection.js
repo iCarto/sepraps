@@ -4,13 +4,8 @@ import {useAuth} from "base/user/provider";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 
-import {AddNewButton} from "base/shared/components";
-import {
-    SectionBox,
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "base/ui/section/components";
+import {SectionBox, SectionCard, SectionField} from "base/ui/section/components";
+import {TextLinkForTooltip} from "base/navigation/components";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -21,6 +16,52 @@ const ProjectContractSection = ({contract}) => {
     let project;
     [project] = useOutletContext();
     const isProjectClosed = project?.closed;
+
+    const contractExecutionSubpagePath = `/contracts/list/${contract.id}/execution`;
+
+    const getAwardedBudgetField = () => {
+        const awardedBudget =
+            contract.amended_awarding_budget || contract.awarding_budget;
+
+        return FieldUtil.getSectionField(
+            "Monto adjudicado",
+            NumberUtil.formatCurrency(awardedBudget),
+            "",
+            contract.amended_awarding_budget ? (
+                <TextLinkForTooltip
+                    text="Ver adendas"
+                    to={contractExecutionSubpagePath}
+                />
+            ) : (
+                ""
+            )
+        );
+    };
+
+    const getExecutionPeriodField = () => {
+        const expectedExecutionPeriod =
+            contract.amended_expected_execution_period ||
+            contract.expected_execution_period;
+        const expectedExecutionEndDate =
+            contract.amended_expected_execution_end_date ||
+            contract.expected_execution_end_date;
+
+        return FieldUtil.getSectionField(
+            "Plazo previsto de ejecución del contrato",
+            `${expectedExecutionPeriod} días (hasta el ${DateUtil.formatDate(
+                expectedExecutionEndDate
+            )})`,
+            "",
+            contract.amended_expected_execution_period ? (
+                <TextLinkForTooltip
+                    text="Ver adendas"
+                    to={contractExecutionSubpagePath}
+                />
+            ) : (
+                ""
+            )
+        );
+    };
 
     return (
         <SectionCard title="Contrato de obras">
@@ -42,23 +83,12 @@ const ProjectContractSection = ({contract}) => {
                         )}
                     </Grid>
                     <Grid item xs={6}>
-                        {FieldUtil.getSectionField(
-                            "Monto adjudicado",
-                            NumberUtil.formatCurrency(contract.awarding_budget)
-                        )}
+                        {getAwardedBudgetField()}
                         {FieldUtil.getSectionField(
                             "Fecha de firma del contrato",
                             DateUtil.formatDate(contract.execution_signature_date)
                         )}
-                        {FieldUtil.getSectionField(
-                            "Plazo previsto de ejecución del contrato",
-                            contract.expected_execution_period &&
-                                `${
-                                    contract.expected_execution_period
-                                } días (hasta el ${DateUtil.formatDate(
-                                    contract.expected_execution_end_date
-                                )})`
-                        )}
+                        {getExecutionPeriodField()}
                     </Grid>
                     <Grid item xs={12}>
                         <SectionBox label="Programa de financiación">

@@ -6,6 +6,18 @@ import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlin
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 
 export function useContractCard() {
+    const getExecutionPeriod = element => {
+        if (
+            !element.expected_execution_period &&
+            !element.amended_expected_execution_period
+        )
+            return "Pendiente";
+        else if (element.amended_expected_execution_period) {
+            return `${element.amended_expected_execution_period} días (${element.amended_expected_execution_period_in_months} meses)`;
+        } else
+            return `${element.expected_execution_period} días (${element.expected_execution_period_in_months} meses)`;
+    };
+
     const cardFields = [
         {
             label: "Programa de financiación",
@@ -18,10 +30,12 @@ export function useContractCard() {
             label: "Plazo previsto de ejecución",
             icon: <DateRangeOutlinedIcon fontSize="small" />,
             formatFunction: element => {
-                return element.expected_execution_period
-                    ? `${element.expected_execution_period} días (${element.expected_execution_period_in_months} meses)`
-                    : "Pendiente";
+                return getExecutionPeriod(element);
             },
+            note: element =>
+                element.amended_expected_execution_period
+                    ? "Modificado en adenda/s"
+                    : null,
         },
         {
             label: "Fecha de adjudicación",
@@ -34,8 +48,13 @@ export function useContractCard() {
             label: "Monto adjudicado",
             icon: <MonetizationOnOutlinedIcon fontSize="small" />,
             formatFunction: element => {
-                return NumberUtil.formatCurrency(element.awarding_budget);
+                return (
+                    NumberUtil.formatCurrency(element.amended_awarding_budget) ||
+                    NumberUtil.formatCurrency(element.awarding_budget)
+                );
             },
+            note: element =>
+                element.amended_awarding_budget ? "Modificado en adenda/s" : null,
         },
         {
             label: "Contratista",

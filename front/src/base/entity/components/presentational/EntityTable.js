@@ -22,6 +22,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Pagination from "@mui/material/Pagination";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 
 const pageSize = parseInt(process.env.REACT_APP_PAGE_SIZE);
 
@@ -128,6 +130,10 @@ const EntityTable = ({
           ]
         : columns;
 
+    const getValueNote = (cellAttribute, element) => {
+        return cellAttribute.note ? cellAttribute.note(element) : null;
+    };
+
     return (
         <>
             <AlertError error={error} />
@@ -163,6 +169,10 @@ const EntityTable = ({
                                             }
                                         >
                                             {columns.map((cellAttribute, index) => {
+                                                const valueNote = getValueNote(
+                                                    cellAttribute,
+                                                    element
+                                                );
                                                 return (
                                                     <TableCustomCell
                                                         key={index}
@@ -178,6 +188,14 @@ const EntityTable = ({
                                                                   element
                                                               )
                                                             : element[cellAttribute.id]}
+                                                        {valueNote ? (
+                                                            <Tooltip title={valueNote}>
+                                                                <Typography component="span">
+                                                                    {" "}
+                                                                    *
+                                                                </Typography>
+                                                            </Tooltip>
+                                                        ) : null}
                                                     </TableCustomCell>
                                                 );
                                             })}

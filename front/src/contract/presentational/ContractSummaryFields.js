@@ -17,11 +17,20 @@ const AwardingBudgetSection = ({contract}) => {
             />
         </>
     ) : (
-        <SectionField
-            label="Monto adjudicado"
-            value={NumberUtil.formatInteger(contract.awarding_budget)}
-            unit="Gs."
-        />
+        <>
+            <SectionField
+                label="Monto adjudicado"
+                value={NumberUtil.formatInteger(contract.awarding_budget)}
+                unit="Gs."
+            />
+            {contract.amended_awarding_budget ? (
+                <SectionField
+                    label="Monto ampliado en adenda/s"
+                    value={NumberUtil.formatInteger(contract.amended_awarding_budget)}
+                    unit="Gs."
+                />
+            ) : null}
+        </>
     );
 };
 

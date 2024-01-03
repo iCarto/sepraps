@@ -10,9 +10,17 @@ const FieldUtil = {
         } else return "—";
     },
 
-    getSectionField(label, value, unit = "") {
+    getSectionField(label, value, unit = "", tooltipText = null) {
         if (value) {
-            return <SectionField key={label} label={label} value={value} unit={unit} />;
+            return (
+                <SectionField
+                    key={label}
+                    label={label}
+                    value={value}
+                    unit={unit}
+                    tooltipText={tooltipText}
+                />
+            );
         } else
             return (
                 <SectionField

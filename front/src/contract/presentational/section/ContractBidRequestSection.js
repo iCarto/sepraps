@@ -1,8 +1,8 @@
+import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 
-import {SectionBox, SectionField} from "base/ui/section/components";
+import {SectionField} from "base/ui/section/components";
 import Grid from "@mui/material/Grid";
-import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
 
 const BidRequestBudgetSection = ({contract}) => {
     return contract.total_amount_type === MAX_MIN_AMOUNT_TYPE ? (

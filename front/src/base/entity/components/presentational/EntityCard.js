@@ -13,6 +13,10 @@ const EntityCard = ({entity, entityFields, cardHeader = null, onClick = null}) =
         }
     };
 
+    const getFieldNote = (entityField, entity) => {
+        return entityField.note ? entityField.note(entity) : null;
+    };
+
     return (
         <Card
             id={entity.id}
@@ -32,16 +36,27 @@ const EntityCard = ({entity, entityFields, cardHeader = null, onClick = null}) =
             )}
             <CardContent sx={{bgcolor: "grey.100"}}>
                 <Stack spacing={1}>
-                    {entityFields.map((entityField, index) => (
-                        <Stack key={index} direction="row" spacing={2}>
-                            <Tooltip title={entityField.label}>
-                                {entityField.icon}
-                            </Tooltip>
-                            <Typography variant="body2">
-                                {FieldUtil.getValue(entityField.formatFunction(entity))}
-                            </Typography>
-                        </Stack>
-                    ))}
+                    {entityFields.map((entityField, index) => {
+                        const fieldNote = getFieldNote(entityField, entity);
+
+                        return (
+                            <Stack key={index} direction="row" spacing={2}>
+                                <Tooltip title={entityField.label}>
+                                    {entityField.icon}
+                                </Tooltip>
+                                <Typography variant="body2">
+                                    {FieldUtil.getValue(
+                                        entityField.formatFunction(entity)
+                                    )}
+                                    {fieldNote ? (
+                                        <Tooltip title={fieldNote}>
+                                            <Typography component="span"> *</Typography>
+                                        </Tooltip>
+                                    ) : null}
+                                </Typography>
+                            </Stack>
+                        );
+                    })}
                 </Stack>
             </CardContent>
         </Card>

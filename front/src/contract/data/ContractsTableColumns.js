@@ -1,8 +1,17 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {TextLink} from "base/navigation/components";
 import {FieldUtil} from "base/ui/section/utilities";
+import {TextLink} from "base/navigation/components";
 
 export function useContractTable(display = "regular") {
+    const getExecutionPeriod = element => {
+        if (element.amended_expected_execution_period) {
+            return FieldUtil.getValue(
+                element.amended_expected_execution_period,
+                "días"
+            );
+        } else return FieldUtil.getValue(element.expected_execution_period, "días");
+    };
+
     let tableColumns = [
         {
             id: "number",
@@ -22,8 +31,12 @@ export function useContractTable(display = "regular") {
             label: "Plazo previsto",
             width: 10,
             formatFunction: element => {
-                return FieldUtil.getValue(element.expected_execution_period, "días");
+                return getExecutionPeriod(element);
             },
+            note: element =>
+                element.amended_expected_execution_period
+                    ? "Modificado en adenda/s"
+                    : null,
         },
         {
             id: "awarding_date",
@@ -38,8 +51,13 @@ export function useContractTable(display = "regular") {
             label: "Monto adjudicado",
             width: 15,
             formatFunction: element => {
-                return NumberUtil.formatCurrency(element.awarding_budget);
+                return (
+                    NumberUtil.formatCurrency(element.amended_awarding_budget) ||
+                    NumberUtil.formatCurrency(element.awarding_budget)
+                );
             },
+            note: element =>
+                element.amended_awarding_budget ? "Modificado en adenda/s" : null,
         },
         {
             id: "contractor.name",
@@ -93,7 +111,10 @@ export function useContractTable(display = "regular") {
                 label: "Fecha fin ejec.",
                 width: 10,
                 formatFunction: element => {
-                    return DateUtil.formatDate(element.expected_execution_end_date);
+                    return DateUtil.formatDate(
+                        element.amended_expected_execution_end_date ||
+                            element.expected_execution_end_date
+                    );
                 },
             },
             {
@@ -101,7 +122,9 @@ export function useContractTable(display = "regular") {
                 label: "Monto adjudicado",
                 width: 15,
                 formatFunction: element => {
-                    return NumberUtil.formatCurrency(element.awarding_budget);
+                    return NumberUtil.formatCurrency(
+                        element.amended_awarding_budget || element.awarding_budget
+                    );
                 },
             },
             {

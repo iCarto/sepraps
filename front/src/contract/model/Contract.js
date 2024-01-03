@@ -37,6 +37,25 @@ const contract_api_adapter = contract => {
               contract["expected_execution_end_date"]
           ) + 1
         : null;
+
+    contract["amended_expected_execution_end_date"] = contract[
+        "amended_expected_execution_period"
+    ]
+        ? DateUtil.getDateAfterDays(
+              contract["execution_start_date"],
+              contract["amended_expected_execution_period"]
+          )
+        : null;
+
+    contract["amended_expected_execution_period_in_months"] = contract[
+        "amended_expected_execution_period"
+    ]
+        ? DateUtil.getMonths(
+              contract["execution_start_date"],
+              contract["amended_expected_execution_end_date"]
+          ) + 1
+        : null;
+
     if (contract["questionnaires"]) {
         contract["questionnaires"] = createQuestionnaires(
             questionnaires_api_adapter(contract["questionnaires"])
@@ -62,6 +81,9 @@ const contract_view_adapter = contract => {
     contract["awarding_budget"] = !!contract["awarding_budget"]
         ? contract["awarding_budget"]
         : null;
+    contract["amended_awarding_budget"] = !!contract["amended_awarding_budget"]
+        ? contract["amended_awarding_budget"]
+        : null;
     contract["bid_request_date"] = !!contract["bid_request_date"]
         ? contract["bid_request_date"]
         : null;
@@ -73,6 +95,18 @@ const contract_view_adapter = contract => {
         : null;
     contract["expected_execution_period"] = !!contract["expected_execution_period"]
         ? NumberUtil.parseInteger(contract["expected_execution_period"])
+        : null;
+    contract["amended_expected_execution_period"] = !!contract[
+        "amended_expected_execution_period"
+    ]
+        ? NumberUtil.parseInteger(contract["amended_expected_execution_period"])
+        : null;
+    contract["amended_expected_execution_period_in_months"] = !!contract[
+        "amended_expected_execution_period_in_months"
+    ]
+        ? NumberUtil.parseInteger(
+              contract["amended_expected_execution_period_in_months"]
+          )
         : null;
 
     contract["warranty_end_date"] = !!contract["warranty_end_date"]
@@ -150,6 +184,10 @@ const createContract = ({
     warranty_end_date = null,
     projects = [],
     questionnaires = [],
+    amended_awarding_budget = null,
+    amended_expected_execution_period = null,
+    amended_expected_execution_period_in_months = null,
+    amended_expected_execution_end_date = null,
     created_by = "",
     created_at = null,
     updated_by = "",
@@ -197,6 +235,10 @@ const createContract = ({
         warranty_end_date,
         projects,
         questionnaires,
+        amended_awarding_budget,
+        amended_expected_execution_period,
+        amended_expected_execution_period_in_months,
+        amended_expected_execution_end_date,
         created_by,
         created_at,
         updated_by,

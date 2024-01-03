@@ -79,7 +79,6 @@ const EntityListPage = ({
                 getCellProps={getCellProps}
             />
         );
-        return null;
     };
 
     return (
