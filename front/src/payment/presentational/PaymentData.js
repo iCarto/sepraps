@@ -94,17 +94,29 @@ const PaymentData = ({payment}) => {
                         unit="%"
                     />
                     <Divider sx={{my: 1}} />
-                    <SectionField
-                        label={
-                            payment.contract_total_amount_type === MAX_MIN_AMOUNT_TYPE
-                                ? "Monto adjudicado máximo"
-                                : "Monto adjudicado"
-                        }
-                        value={NumberUtil.formatInteger(
-                            payment.expected_total_contract_amount
-                        )}
-                        unit="Gs."
-                    />
+
+                    {payment.amended_expected_total_contract_amount ? (
+                        <SectionField
+                            label="Monto adjudicado ampliado"
+                            value={NumberUtil.formatInteger(
+                                payment.amended_expected_total_contract_amount
+                            )}
+                            unit="Gs."
+                        />
+                    ) : (
+                        <SectionField
+                            label={
+                                payment.contract_total_amount_type ===
+                                MAX_MIN_AMOUNT_TYPE
+                                    ? "Monto adjudicado máximo"
+                                    : "Monto adjudicado"
+                            }
+                            value={NumberUtil.formatInteger(
+                                payment.expected_total_contract_amount
+                            )}
+                            unit="Gs."
+                        />
+                    )}
                 </SectionBox>
             </Grid>
             <Grid container item xs={6} direction="column">

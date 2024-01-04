@@ -77,6 +77,7 @@ const createPayment = ({
     paid_total_amount_cumulative = null,
     paid_total_contract_percentage_cumulative = null,
     expected_total_contract_amount = null,
+    amended_expected_total_contract_amount = null,
 } = {}) => {
     const publicApi = {
         id,
@@ -109,6 +110,7 @@ const createPayment = ({
         paid_total_amount_cumulative,
         paid_total_contract_percentage_cumulative,
         expected_total_contract_amount,
+        amended_expected_total_contract_amount,
     };
 
     return Object.freeze(publicApi);
