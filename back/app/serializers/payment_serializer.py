@@ -42,6 +42,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "paid_total_amount_cumulative",
             "paid_total_contract_percentage_cumulative",
             "expected_total_contract_amount",
+            "amended_expected_total_contract_amount",
         )
 
     domain_fields = [BaseDomainField("status", DomainCategoryChoices.product_status)]
@@ -54,6 +55,9 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     paid_total_contract_percentage_cumulative = serializers.SerializerMethodField()
     expected_total_contract_amount = serializers.CharField(
         source="contract.awarding_budget", read_only=True
+    )
+    amended_expected_total_contract_amount = serializers.CharField(
+        source="contract.amended_awarding_budget", read_only=True
     )
     contract_total_amount_type = serializers.CharField(
         source="contract.total_amount_type", read_only=True
@@ -73,7 +77,10 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     def get_expected_total_contract_percentage(self, instance):  # noqa: WPS615
         instance_expected_total_amount = instance.expected_total_amount
-        contract_expected_total_amount = instance.contract.awarding_budget
+        contract_expected_total_amount = (
+            instance.contract.amended_awarding_budget
+            or instance.contract.awarding_budget
+        )
         if not instance_expected_total_amount or not contract_expected_total_amount:
             return None
         return format_decimal(
@@ -86,7 +93,10 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
         self, instance
     ):  # noqa: WPS615
         expected_total_amount_cumulative = instance.expected_total_amount_cumulative
-        contract_expected_total_amount = instance.contract.awarding_budget
+        contract_expected_total_amount = (
+            instance.contract.amended_awarding_budget
+            or instance.contract.awarding_budget
+        )
         if not expected_total_amount_cumulative or not contract_expected_total_amount:
             return None
         return format_decimal(
@@ -97,7 +107,10 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     def get_paid_total_contract_percentage(self, instance):  # noqa: WPS615
         instance_paid_total_amount = instance.paid_total_amount
-        contract_expected_total_amount = instance.contract.awarding_budget
+        contract_expected_total_amount = (
+            instance.contract.amended_awarding_budget
+            or instance.contract.awarding_budget
+        )
         if not instance_paid_total_amount or not contract_expected_total_amount:
             return None
         return format_decimal(
@@ -108,7 +121,10 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     def get_paid_total_contract_percentage_cumulative(self, instance):  # noqa: WPS615
         paid_total_amount_cumulative = instance.paid_total_amount_cumulative
-        contract_expected_total_amount = instance.contract.awarding_budget
+        contract_expected_total_amount = (
+            instance.contract.amended_awarding_budget
+            or instance.contract.awarding_budget
+        )
         if not paid_total_amount_cumulative or not contract_expected_total_amount:
             return None
         return format_decimal(
