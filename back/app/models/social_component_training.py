@@ -18,7 +18,7 @@ class SocialComponentTraining(BaseDocumentModel, BaseEntityModelMixin):
     objects = ActiveManager()
 
     start_date = models.DateField("Fecha de inicio", null=True)
-    end_date = models.DateField("Fecha de fin", null=True)
+    end_date = models.DateField("Fecha de finalización", null=True)
 
     target_population = ArrayField(
         models.CharField("Población meta", max_length=50), null=True

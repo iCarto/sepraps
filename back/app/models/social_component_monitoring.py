@@ -18,8 +18,8 @@ class SocialComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
     execution_status = models.CharField("Estado de ejecución", max_length=20, null=True)
     quality_status = models.CharField("Estado cualitativo", max_length=20, null=True)
 
-    expected_end_date = models.DateField("Fecha de fin prevista", null=True)
-    real_end_date = models.DateField("Fecha de fin real", null=True)
+    expected_end_date = models.DateField("Fecha de finalización prevista", null=True)
+    real_end_date = models.DateField("Fecha de finalización real", null=True)
     progress_percentage = models.DecimalField(
         "Porcentaje de progreso", max_digits=5, decimal_places=2, null=True
     )
