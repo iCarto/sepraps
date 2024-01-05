@@ -33,16 +33,16 @@ const ProjectSubPageMenu = ({project}) => {
 
     const socialSupervisionAreaSubmenuItems = [
         {
-            to: `${basePath}/connections/${project?.id}`,
-            text: "Conexiones",
-        },
-        {
             to: `${basePath}/socialcomponent`,
             text: "Componentes",
         },
         {
             to: `${basePath}/scomponentanalysis`,
             text: "Análisis",
+        },
+        {
+            to: `${basePath}/connections/${project?.id}`,
+            text: "Conexiones",
         },
     ];
 
