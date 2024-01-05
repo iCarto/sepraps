@@ -18,6 +18,7 @@ import {
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import Divider from "@mui/material/Divider";
 
 const PendingAmountField = ({executionStatus}) => {
     return executionStatus === COMPONENT_EXECUTION_STATUS_COMPLETED ? (
@@ -62,12 +63,12 @@ const BuildingComponentMonitoringFormDataFields = () => {
 
     const totalAmount =
         execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED
-            ? paid_amount
+            ? paid_amount || 0
             : (parseFloat(paid_amount) || 0) + (parseFloat(pending_amount) || 0);
 
-    const financialProgressPercentage = NumberUtil.formatFloat(
-        ((parseFloat(totalAmount) || 0) / (parseFloat(expected_amount) || 0)) * 100
-    );
+    const financialProgressPercentage = expected_amount
+        ? NumberUtil.formatFloat((totalAmount / expected_amount) * 100)
+        : 0;
 
     const displayMonitoringFields =
         execution_status === COMPONENT_EXECUTION_STATUS_IN_PROGRESS ||
@@ -83,13 +84,15 @@ const BuildingComponentMonitoringFormDataFields = () => {
                         options={executionStatusTypes}
                     />
                 </Grid>
-                <Grid item xs={6}>
-                    <FormSelect
-                        name="quality_status"
-                        label="Estado cualitativo"
-                        options={qualityStatusTypes}
-                    />
-                </Grid>
+                {execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED ? (
+                    <Grid item xs={6}>
+                        <FormDatePicker
+                            name="real_end_date"
+                            label="Fecha de finalización real"
+                            rules={{required: "Este campo es obligatorio"}}
+                        />
+                    </Grid>
+                ) : null}
             </Grid>
             <Grid container item xs={6} direction="column">
                 <FormBox label="Previsión inicial">
@@ -109,13 +112,6 @@ const BuildingComponentMonitoringFormDataFields = () => {
             {displayMonitoringFields ? (
                 <Grid container item xs={6} direction="column">
                     <FormBox label="Seguimiento">
-                        {execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED && (
-                            <FormDatePicker
-                                name="real_end_date"
-                                label="Fecha de finalización real"
-                                rules={{required: "Este campo es obligatorio"}}
-                            />
-                        )}
                         <FormInputInteger
                             name="paid_amount"
                             label="Monto real actual"
@@ -149,10 +145,17 @@ const BuildingComponentMonitoringFormDataFields = () => {
                             }}
                             fullWidth
                         />
+                        <Divider sx={{my: 1}} />
                         <FormInputInteger
                             name="physical_progress_percentage"
                             label="Porcentaje de avance físico"
                             endAdornment={"%"}
+                            rules={{required: "Este campo es obligatorio"}}
+                        />
+                        <FormSelect
+                            name="quality_status"
+                            label="Estado cualitativo"
+                            options={qualityStatusTypes}
                             rules={{required: "Este campo es obligatorio"}}
                         />
                     </FormBox>
