@@ -7,19 +7,16 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 
 const BuildingComponentsRealDataSubheading = ({data}) => {
-    const pendingPercentage = NumberUtil.formatDecimal(
-        (data.pending_amount / data.real_amount) * 100,
-        0
-    );
     return (
         <Stack direction="row" alignItems="center">
             <Chip
                 label={
                     <Typography fontSize={14}>
+                        Pendiente{" "}
                         <Typography component="span" fontWeight={600} fontSize={14}>
-                            {NumberUtil.formatMillions(data.pending_amount)}
+                            {NumberUtil.formatMillions(data.pending_amount)}{" "}
+                            {CURRENCY_SYMBOL}
                         </Typography>{" "}
-                        {CURRENCY_SYMBOL} pendiente{" "}
                     </Typography>
                 }
                 size="small"

@@ -8,10 +8,6 @@ import Chip from "@mui/material/Chip";
 
 const BuildingComponentsExpectedDataSubheading = ({data}) => {
     const difference = data.expected_amount - data.real_amount;
-    const differencePercentage = NumberUtil.formatDecimal(
-        (difference / data.expected_amount) * 100,
-        0
-    );
     const isRealAmountWithinExpectation = difference >= 0;
 
     return (
@@ -19,10 +15,10 @@ const BuildingComponentsExpectedDataSubheading = ({data}) => {
             <Chip
                 label={
                     <Typography fontSize={14}>
+                        Desvío{" "}
                         <Typography component="span" fontWeight={600} fontSize={14}>
-                            {NumberUtil.formatMillions(difference)}
-                        </Typography>{" "}
-                        {CURRENCY_SYMBOL} margen{" "}
+                            {NumberUtil.formatMillions(difference)} {CURRENCY_SYMBOL}
+                        </Typography>
                     </Typography>
                 }
                 size="small"

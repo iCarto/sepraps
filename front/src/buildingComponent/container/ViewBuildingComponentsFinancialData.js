@@ -21,9 +21,27 @@ const ViewBuildingComponentsFinancialData = ({filter}) => {
         );
     }, []);
 
+    const getExpectedFinancialData = financialData => (
+        <BuildingComponentsFinancialDataBox
+            headline="Monto total vs. previsión inicial"
+            mainValues={{
+                first: financialData.real_amount,
+                second: financialData.expected_amount,
+            }}
+            subheading={
+                <BuildingComponentsExpectedDataSubheading data={financialData} />
+            }
+            percentage={{
+                value: financialData.real_expected_percentage,
+            }}
+            colorNamePrimary="monto-total"
+            colorNameSecondary="expected"
+        />
+    );
+
     const getRealFinancialData = financialData => (
         <BuildingComponentsFinancialDataBox
-            headline="Pagado vs. total"
+            headline="Monto pagado vs. monto total"
             mainValues={{
                 first: financialData.paid_amount,
                 second: financialData.real_amount,
@@ -35,33 +53,14 @@ const ViewBuildingComponentsFinancialData = ({filter}) => {
         />
     );
 
-    const getExpectedFinancialData = financialData => (
-        <BuildingComponentsFinancialDataBox
-            headline="Total vs. previsto"
-            mainValues={{
-                first: financialData.real_amount,
-                second: financialData.expected_amount,
-            }}
-            subheading={
-                <BuildingComponentsExpectedDataSubheading data={financialData} />
-            }
-            percentage={{
-                label: "Gastado",
-                value: financialData.real_expected_percentage,
-            }}
-            colorNamePrimary="monto-total"
-            colorNameSecondary="expected"
-        />
-    );
-
     return (
         financialData && (
             <Grid container spacing={2}>
                 <Grid item xs={6}>
-                    {getRealFinancialData(financialData)}
+                    {getExpectedFinancialData(financialData)}
                 </Grid>
                 <Grid item xs={6}>
-                    {getExpectedFinancialData(financialData)}
+                    {getRealFinancialData(financialData)}
                 </Grid>
             </Grid>
         )
