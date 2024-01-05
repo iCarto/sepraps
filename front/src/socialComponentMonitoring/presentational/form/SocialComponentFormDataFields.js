@@ -16,7 +16,7 @@ const SocialComponentFormDataFields = ({projectId}) => {
             <Grid item xs={4}>
                 <FormDatePicker
                     name="expected_end_date"
-                    label="Fecha de fin prevista"
+                    label="Fecha de finalización prevista"
                     rules={{required: "Este campo es obligatorio"}}
                 />
             </Grid>

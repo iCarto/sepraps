@@ -44,7 +44,7 @@ const BuildingComponentFormDataFields = ({projectId}) => {
                 <FormBox label="Previsión">
                     <FormDatePicker
                         name="expected_end_date"
-                        label="Fecha de fin prevista"
+                        label="Fecha de finalización prevista"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                     <FormInputInteger

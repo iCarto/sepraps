@@ -20,7 +20,7 @@ const TrainingData = ({training = null}) => {
             </Grid>
             <Grid container item xs={6} md={4}>
                 <SectionField
-                    label="Fecha de fin"
+                    label="Fecha de finalización"
                     value={DateUtil.formatDate(training.end_date)}
                 />
             </Grid>

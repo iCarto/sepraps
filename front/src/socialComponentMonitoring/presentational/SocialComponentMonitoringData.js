@@ -9,7 +9,7 @@ const SocialComponentMonitoringData = ({socialComponentMonitoring}) => {
             <Grid container item xs={6} direction="column">
                 <SectionBox label="Previsión inicial">
                     <SectionField
-                        label="Fecha de fin prevista"
+                        label="Fecha de finalización prevista"
                         value={DateUtil.formatDate(
                             socialComponentMonitoring.expected_end_date
                         )}

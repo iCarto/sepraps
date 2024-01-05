@@ -38,7 +38,7 @@ const SocialComponentsTrainingsTotalsTable = ({trainingData}) => {
         },
         {
             id: "end_date",
-            label: "Fecha de fin",
+            label: "Fecha de finalización",
             width: 8,
             formatFunction: value => {
                 return DateUtil.formatDate(value);

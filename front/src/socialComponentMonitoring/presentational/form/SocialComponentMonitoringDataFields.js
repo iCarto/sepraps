@@ -49,7 +49,7 @@ const SocialComponentMonitoringDataFields = () => {
                 <FormBox label="Previsión inicial">
                     <FormDatePicker
                         name="expected_end_date"
-                        label="Fecha de fin prevista"
+                        label="Fecha de finalización prevista"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </FormBox>

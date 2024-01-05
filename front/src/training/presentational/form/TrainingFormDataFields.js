@@ -63,7 +63,7 @@ const TrainingFormDataFields = ({contract = null, contractor = null}) => {
             <Grid item xs={6}>
                 <FormDatePicker
                     name="end_date"
-                    label="Fecha de fin"
+                    label="Fecha de finalización"
                     rules={{required: "Este campo es obligatorio"}}
                 />
             </Grid>
