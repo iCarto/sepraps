@@ -16,7 +16,7 @@ import {
 
 import Grid from "@mui/material/Grid";
 
-const SocialComponentMonitoringDataFields = () => {
+const SocialComponentMonitoringFormDataFields = () => {
     const {executionStatusTypes, qualityStatusTypes} = useDomain();
 
     const execution_status = useWatch({
@@ -77,4 +77,4 @@ const SocialComponentMonitoringDataFields = () => {
     );
 };
 
-export default SocialComponentMonitoringDataFields;
+export default SocialComponentMonitoringFormDataFields;

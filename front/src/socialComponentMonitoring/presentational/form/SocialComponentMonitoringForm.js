@@ -5,7 +5,7 @@ import {NumberUtil} from "base/format/utilities";
 import {FormUtil} from "base/form/utilities";
 
 import {EntityForm} from "base/entity/components/form";
-import {SocialComponentMonitoringDataFields} from ".";
+import {SocialComponentMonitoringFormDataFields} from ".";
 import {AlertError} from "base/error/components";
 
 const SocialComponentMonitoringForm = ({
@@ -49,7 +49,7 @@ const SocialComponentMonitoringForm = ({
                     onSubmit={formMethods.handleSubmit(onFormSubmit)}
                     onCancel={onCancel}
                 >
-                    <SocialComponentMonitoringDataFields />
+                    <SocialComponentMonitoringFormDataFields />
                 </EntityForm>
             </FormProvider>
         </DomainProvider>

@@ -2,8 +2,8 @@ export {
     default as SocialComponentMonitoringForm,
 } from "./SocialComponentMonitoringForm";
 export {
-    default as SocialComponentMonitoringDataFields,
-} from "./SocialComponentMonitoringDataFields";
+    default as SocialComponentMonitoringFormDataFields,
+} from "./SocialComponentMonitoringFormDataFields";
 export {default as SocialComponentForm} from "./SocialComponentForm";
 export {
     default as SocialComponentFormDataFields,

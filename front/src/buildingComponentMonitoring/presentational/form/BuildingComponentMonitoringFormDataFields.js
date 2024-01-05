@@ -44,7 +44,7 @@ const PendingAmountField = ({executionStatus}) => {
     );
 };
 
-const BuildingComponentMonitoringDataFields = () => {
+const BuildingComponentMonitoringFormDataFields = () => {
     const {executionStatusTypes, qualityStatusTypes} = useDomain();
 
     const execution_status = useWatch({
@@ -162,4 +162,4 @@ const BuildingComponentMonitoringDataFields = () => {
     );
 };
 
-export default BuildingComponentMonitoringDataFields;
+export default BuildingComponentMonitoringFormDataFields;

@@ -5,7 +5,7 @@ import {NumberUtil} from "base/format/utilities";
 import {FormUtil} from "base/form/utilities";
 
 import {EntityForm} from "base/entity/components/form";
-import {BuildingComponentMonitoringDataFields} from ".";
+import {BuildingComponentMonitoringFormDataFields} from ".";
 import {AlertError} from "base/error/components";
 
 const BuildingComponentMonitoringForm = ({
@@ -69,7 +69,7 @@ const BuildingComponentMonitoringForm = ({
                     onSubmit={formMethods.handleSubmit(onFormSubmit)}
                     onCancel={onCancel}
                 >
-                    <BuildingComponentMonitoringDataFields />
+                    <BuildingComponentMonitoringFormDataFields />
                 </EntityForm>
             </FormProvider>
         </DomainProvider>
