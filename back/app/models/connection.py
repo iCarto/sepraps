@@ -46,13 +46,13 @@ class Connection(BaseDocumentModel, BaseEntityModelMixin):
     @property
     def connected_households_percentage(self):
         number_of_households = self.number_of_households
-        number_of_actual_connections = self.number_of_actual_connections
-
-        if not number_of_households or not number_of_actual_connections:
-            return 0
-        return format_decimal(
-            (number_of_actual_connections / number_of_households) * 100
+        number_of_connections = (self.number_of_actual_connections or 0) + (
+            self.number_of_existing_connections or 0
         )
+
+        if not number_of_households or not number_of_connections:
+            return 0
+        return format_decimal((number_of_connections / number_of_households) * 100)
 
     @property
     def coverage(self):
