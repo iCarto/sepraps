@@ -1,5 +1,4 @@
 import {useOutletContext} from "react-router-dom";
-import {ContractContractorSection} from "contract/presentational/section";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {ViewOrUpdateContractContent, ViewOrUpdateContractContractorContent} from ".";
 

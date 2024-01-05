@@ -1,8 +1,4 @@
 import {useOutletContext} from "react-router-dom";
-import {
-    ContractExecutionSection,
-    ContractPostConstructionSection,
-} from "contract/presentational/section";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {useEffect, useState} from "react";
 import {ContractServiceService} from "contract/service";
@@ -27,14 +23,12 @@ const ViewContractExecutionSubPage = () => {
             section="execution"
             label="Ejecución"
         />,
-        ...[
-            services.map(contractService => (
-                <ViewOrUpdateSupervisionServiceContent
-                    key={contractService.id}
-                    contractService={contractService}
-                />
-            )),
-        ],
+        ...services.map(contractService => (
+            <ViewOrUpdateSupervisionServiceContent
+                key={contractService.id}
+                contractService={contractService}
+            />
+        )),
         <ViewOrUpdateContractContent
             contract={contract}
             section="postconstruction"

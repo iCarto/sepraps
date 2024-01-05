@@ -8,17 +8,14 @@ const ContractInsuranceSection = ({contract}) => {
                 <SectionField
                     label="Seguro de responsabilidad profesional"
                     value={contract?.awarding_professional_liability_insurance_label}
-                    containerWidth="long"
                 />
                 <SectionField
                     label="Seguro de responsabilidad civil"
                     value={contract?.awarding_liability_insurance_label}
-                    containerWidth="long"
                 />
                 <SectionField
                     label="Seguro de accidentes"
                     value={contract?.awarding_accident_insurance_label}
-                    containerWidth="long"
                 />
             </Grid>
         </Grid>

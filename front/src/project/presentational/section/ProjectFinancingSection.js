@@ -8,6 +8,7 @@ import {
     SectionSubheading,
 } from "base/ui/section/components";
 import LaunchIcon from "@mui/icons-material/Launch";
+import Grid from "@mui/material/Grid";
 
 const ProjectFinancingSection = ({project}) => {
     const navigate = useNavigate();
@@ -72,10 +73,18 @@ const ProjectFinancingSection = ({project}) => {
             title="Financiación"
             secondaryActions={project.closed ? null : headerActions}
         >
-            <SectionSubheading heading="Contrato" />
-            {getContractInfo(project?.construction_contract)}
-            <SectionSubheading heading="Programa" />
-            {getFinancingProgramInfo(project?.construction_contract?.financing_program)}
+            <Grid container columnSpacing={2}>
+                <Grid item md={6}>
+                    <SectionSubheading heading="Contrato" />
+                    {getContractInfo(project?.construction_contract)}
+                </Grid>
+                <Grid item md={6}>
+                    <SectionSubheading heading="Programa" />
+                    {getFinancingProgramInfo(
+                        project?.construction_contract?.financing_program
+                    )}
+                </Grid>
+            </Grid>
         </SectionCard>
     );
 };
