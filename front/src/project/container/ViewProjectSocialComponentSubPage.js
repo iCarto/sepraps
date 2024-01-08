@@ -73,6 +73,7 @@ const ViewProjectSocialComponentSubPage = () => {
                     components={socialComponentMonitorings}
                     basePath={`/projects/list/${projectId}/socialcomponent`}
                     selectedComponentId={parseInt(socialComponentId)}
+                    reduceItemsFontSize
                 />
             </Box>
         </Grid>

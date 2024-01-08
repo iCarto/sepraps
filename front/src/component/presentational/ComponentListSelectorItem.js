@@ -4,7 +4,12 @@ import {TextLink} from "base/navigation/components";
 import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
 
-const ComponentListSelectorItem = ({component, to, selected = false}) => {
+const ComponentListSelectorItem = ({
+    component,
+    to,
+    selected = false,
+    reduceItemsFontSize = false,
+}) => {
     return (
         <ListItem
             disablePadding
@@ -22,6 +27,7 @@ const ComponentListSelectorItem = ({component, to, selected = false}) => {
                     to={to}
                     textStyle={{
                         fontWeight: selected ? "bold" : "inherit",
+                        fontSize: reduceItemsFontSize ? "14px" : "inherit",
                         pl: 1,
                     }}
                 />

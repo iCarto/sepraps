@@ -83,7 +83,7 @@ const ViewOrUpdateTrainingDataContent = ({socialComponentId, training}) => {
     return (
         <Card sx={{border: 1, borderRadius: 2, borderColor: "grey.300"}} elevation={0}>
             <SubSectionCardHeader
-                titleLabel="Capacitación"
+                titleLabel="Actividad"
                 titleValue={`${DateUtil.formatDate(training.start_date).toString()} - ${
                     training.target_population_label
                 }`}

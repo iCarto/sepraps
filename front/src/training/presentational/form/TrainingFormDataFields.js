@@ -36,23 +36,42 @@ const TrainingFormDataFields = ({contract = null, contractor = null}) => {
     const {reset, getValues} = useFormContext();
 
     const handleSelectSocialContract = contract => {
-        const values = getValues();
-        reset({
-            ...values,
-            contract: contract.id,
-        });
+        if (contract) {
+            const values = getValues();
+            reset({
+                ...values,
+                contract: contract.id,
+            });
+        }
     };
 
     const handleSelectSocialContractor = contractor => {
-        const values = getValues();
-        reset({
-            ...values,
-            contractor: contractor.id,
-        });
+        if (contractor) {
+            const values = getValues();
+            reset({
+                ...values,
+                contractor: contractor.id,
+            });
+        }
     };
 
     return (
         <Grid container columnSpacing={2}>
+            <Grid item xs={6}>
+                <ContractSearchAutocomplete
+                    handleSelect={handleSelectSocialContract}
+                    defaultValue={contract}
+                    required
+                />
+            </Grid>
+            <Grid item xs={6}>
+                <ContractorSearchAutocomplete
+                    handleSelect={handleSelectSocialContractor}
+                    defaultValue={contractor}
+                    required
+                />
+            </Grid>
+
             <Grid item xs={6}>
                 <FormDatePicker
                     name="start_date"
@@ -78,7 +97,7 @@ const TrainingFormDataFields = ({contract = null, contractor = null}) => {
             <Grid item xs={6}>
                 <FormInputInteger
                     name="number_of_hours"
-                    label="Horas de capacitación"
+                    label="Duración"
                     endAdornment="h"
                     rules={{required: "Este campo es obligatorio"}}
                 />
@@ -92,19 +111,8 @@ const TrainingFormDataFields = ({contract = null, contractor = null}) => {
                     rules={{required: "Este campo es obligatorio"}}
                 />
             </Grid>
-            <Grid item xs={6}>
-                <ContractSearchAutocomplete
-                    handleSelect={handleSelectSocialContract}
-                    defaultValue={contract}
-                />
-            </Grid>
-            <Grid item xs={6}>
-                <ContractorSearchAutocomplete
-                    handleSelect={handleSelectSocialContractor}
-                    defaultValue={contractor}
-                />
-            </Grid>
-            <Grid item xs={6}>
+
+            <Grid item xs={6} mt={1}>
                 <FormBox label="Participantes">
                     <FormInputInteger name="number_of_women" label="Mujeres" />
                     <FormInputInteger name="number_of_men" label="Hombres" />
@@ -122,15 +130,15 @@ const TrainingFormDataFields = ({contract = null, contractor = null}) => {
                     />
                 </FormBox>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} mt={1}>
                 <FormBox label="Materiales">
                     <FormInputInteger
                         name="number_of_digital_materials"
-                        label="Nº de materiales digitales entregados"
+                        label="Materiales digitales entregados"
                     />
                     <FormInputInteger
                         name="number_of_printed_materials"
-                        label="Nº de materiales impresos entregados"
+                        label="Materiales impresos entregados"
                     />
                     <TextField
                         label="Total"

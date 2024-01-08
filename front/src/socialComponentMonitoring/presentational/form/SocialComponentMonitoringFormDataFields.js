@@ -37,13 +37,16 @@ const SocialComponentMonitoringFormDataFields = () => {
                         options={executionStatusTypes}
                     />
                 </Grid>
-                <Grid item xs={6}>
-                    <FormSelect
-                        name="quality_status"
-                        label="Estado cualitativo"
-                        options={qualityStatusTypes}
-                    />
-                </Grid>
+                {displayMonitoringFields ? (
+                    <Grid item xs={6}>
+                        <FormSelect
+                            name="quality_status"
+                            label="Estado cualitativo"
+                            options={qualityStatusTypes}
+                            rules={{required: "Este campo es obligatorio"}}
+                        />
+                    </Grid>
+                ) : null}
             </Grid>
             <Grid container item xs={6} direction="column">
                 <FormBox label="Previsión inicial">

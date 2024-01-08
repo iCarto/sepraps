@@ -31,10 +31,10 @@ const CreateTrainingDataContent = ({socialComponentId}) => {
             onClick={() => {
                 setMode("create");
             }}
-            label="Añadir nueva capacitación"
+            label="Añadir nueva capacitación/asistencia técnica"
         />
     ) : mode === "create" ? (
-        <AddNewInlineItemFormBox label="Nueva capacitación">
+        <AddNewInlineItemFormBox label="Nueva capacitación/asistencia técnica">
             <TrainingForm
                 socialComponentId={socialComponentId}
                 onSubmit={handleFormSubmit}

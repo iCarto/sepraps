@@ -12,7 +12,12 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
-const ComponentListSelector = ({components, selectedComponentId, basePath}) => {
+const ComponentListSelector = ({
+    components,
+    selectedComponentId,
+    basePath,
+    reduceItemsFontSize = false,
+}) => {
     const navigate = useNavigate();
     const [componentsList, setComponentsList] = useState([]);
 
@@ -58,6 +63,7 @@ const ComponentListSelector = ({components, selectedComponentId, basePath}) => {
                             component={component}
                             to={`${basePath}/${component.id.toString()}`}
                             selected={selectedComponentId === component.id}
+                            reduceItemsFontSize={reduceItemsFontSize}
                         />
                     ))}
             </List>

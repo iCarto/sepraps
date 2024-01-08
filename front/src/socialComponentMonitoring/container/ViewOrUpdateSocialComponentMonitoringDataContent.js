@@ -7,15 +7,16 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
-import {ComponentCardHeader} from "component/presentational";
-import {SocialComponentMonitoringData} from "socialComponentMonitoring/presentational";
+import {
+    SocialComponentCardHeader,
+    SocialComponentMonitoringData,
+} from "socialComponentMonitoring/presentational";
 import {SocialComponentMonitoringForm} from "socialComponentMonitoring/presentational/form";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 
 const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => {
     const navigate = useNavigateWithReload();
@@ -98,11 +99,10 @@ const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => 
                 elevation={0}
                 component="section"
             >
-                <ComponentCardHeader
+                <SocialComponentCardHeader
                     component={socialComponent}
                     componentName={socialComponent.name}
                     actions={actions}
-                    icon={<HandshakeOutlinedIcon />}
                 />
                 <CardContent>{getComponent(mode)}</CardContent>
                 <DeleteItemDialog

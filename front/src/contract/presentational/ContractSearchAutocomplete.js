@@ -5,7 +5,11 @@ import {SearchAutocomplete} from "base/search/components";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const ContractSearchAutocomplete = ({handleSelect, defaultValue = null}) => {
+const ContractSearchAutocomplete = ({
+    handleSelect,
+    defaultValue = null,
+    required = false,
+}) => {
     const optionComponent = option => {
         return (
             <Stack>
@@ -20,7 +24,7 @@ const ContractSearchAutocomplete = ({handleSelect, defaultValue = null}) => {
 
     return (
         <SearchAutocomplete
-            label="Buscar un contrato"
+            label={required ? "Buscar un contrato *" : "Buscar un contrato"}
             optionLabel="number"
             optionComponent={optionComponent}
             search={ContractService.getBySearchText}

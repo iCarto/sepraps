@@ -5,7 +5,7 @@ import Stack from "@mui/system/Stack";
 const ViewSocialComponentTrainingsContent = ({socialComponent, trainings}) => {
     return (
         socialComponent && (
-            <SectionCard title="Capacitaciones">
+            <SectionCard title="Capacitaciones y asistencias técnicas">
                 <Stack spacing={2}>
                     {trainings?.map(training => {
                         return (
