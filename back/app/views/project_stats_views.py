@@ -175,6 +175,9 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
 @permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
 def get_social_component_trainings_sum_stats(request, format=None):
+    social_component_monitoring_id = request.GET.get(
+        "social_component_monitoring_id", None
+    )
     query = """
             SELECT
                 sct.id,
@@ -191,7 +194,8 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 sct.number_of_digital_materials,
                 sct.number_of_printed_materials,
                 cc2."number" as contract_number,
-                c."name" as contractor_name
+                c."name" as contractor_name,
+                scm."name" as social_component_monitoring_name
             FROM social_component_training sct
                 INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
                 JOIN (
@@ -202,6 +206,9 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 LEFT JOIN dominios d_method on d_method."key" = sct."method"
             WHERE sct.active = True and scm.active = True
             """
+
+    if social_component_monitoring_id:
+        query += f" AND scm.id = {social_component_monitoring_id}"
 
     with connection.cursor() as cursor:
         cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))
