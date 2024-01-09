@@ -2,6 +2,7 @@ import {FormProvider, useForm} from "react-hook-form";
 
 import {FormUtil} from "base/form/utilities";
 import {NumberUtil} from "base/format/utilities";
+import {useGetBuildingComponentTypes} from "buildingComponent/utilities";
 import {DomainProvider} from "sepraps/domain/provider";
 
 import {BuildingComponentFormDataFields} from ".";
@@ -15,9 +16,12 @@ const BuildingComponentForm = ({
     onCancel = null,
     error = null,
 }) => {
+    const bcTypes = useGetBuildingComponentTypes(projectId);
+
     const defaultFormValues = {
         name: FormUtil.getFormValue(buildingComponent?.name),
         code: FormUtil.getFormValue(buildingComponent?.code),
+        code_label: FormUtil.getFormValue(buildingComponent?.code_label),
         quality_status: FormUtil.getFormValue(buildingComponent?.quality_status),
         expected_amount: FormUtil.getFormValue(
             NumberUtil.formatDecimal(buildingComponent?.expected_amount, 0)
@@ -50,9 +54,14 @@ const BuildingComponentForm = ({
     });
 
     const onFormSubmit = data => {
+        const codeLabel =
+            FormUtil.getDataValue(data.code_label) ||
+            bcTypes.find(type => type.value === data.code).label;
+
         onSubmit({
             name: FormUtil.getDataValue(data.name),
             code: FormUtil.getDataValue(data.code),
+            code_label: codeLabel,
             execution_status: FormUtil.getDataValue(data.execution_status),
             quality_status: FormUtil.getDataValue(data.quality_status),
             expected_amount: FormUtil.getDataValue(data.expected_amount),
@@ -77,7 +86,7 @@ const BuildingComponentForm = ({
                     onSubmit={formMethods.handleSubmit(onFormSubmit)}
                     onCancel={onCancel}
                 >
-                    <BuildingComponentFormDataFields projectId={projectId} />
+                    <BuildingComponentFormDataFields bcTypes={bcTypes} />
                 </EntityForm>
             </FormProvider>
         </DomainProvider>

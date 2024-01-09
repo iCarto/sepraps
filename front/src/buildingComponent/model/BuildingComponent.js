@@ -27,6 +27,7 @@ const createBuildingComponents = (data = []) => {
 const createBuildingComponent = ({
     id = null,
     code = "",
+    code_label = "",
     name = "",
     properties = null,
     created_by = "",
@@ -37,6 +38,7 @@ const createBuildingComponent = ({
     const publicApi = {
         id,
         code,
+        code_label,
         name,
         properties,
         created_by,

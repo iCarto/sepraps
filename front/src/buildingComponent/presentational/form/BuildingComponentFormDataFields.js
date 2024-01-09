@@ -7,7 +7,6 @@ import {
     COMPONENT_EXECUTION_STATUS_IN_PROGRESS,
 } from "component/config";
 import {useDomain} from "sepraps/domain/provider";
-import {useGetBuildingComponentTypes} from "buildingComponent/utilities";
 import {
     FormBox,
     FormDatePicker,
@@ -46,9 +45,8 @@ const PendingAmountField = ({executionStatus}) => {
     );
 };
 
-const BuildingComponentFormDataFields = ({projectId}) => {
+const BuildingComponentFormDataFields = ({bcTypes}) => {
     const {executionStatusTypes, qualityStatusTypes} = useDomain();
-    const bcTypes = useGetBuildingComponentTypes(projectId);
 
     const execution_status = useWatch({
         name: "execution_status",
