@@ -16,82 +16,128 @@ const rowStyle = {
     },
 };
 
-const SocialComponentsTrainingsTotalsTable = ({trainingData}) => {
-    const headCells = [
-        {
-            id: "contract_number",
-            label: "Contrato",
-            width: 8,
-        },
-        {
-            id: "contractor_name",
-            label: "Contratista",
-            width: 8,
-        },
-        {
-            id: "start_date",
-            label: "Fecha de inicio",
-            width: 8,
-            formatFunction: value => {
-                return DateUtil.formatDate(value);
-            },
-        },
-        {
-            id: "end_date",
-            label: "Fecha de finalización",
-            width: 8,
-            formatFunction: value => {
-                return DateUtil.formatDate(value);
-            },
-        },
-        {
-            id: "target_population_label",
-            label: "Población meta",
-            width: 15,
-            formatFunction: value => {
-                return value && value.join(", ");
-            },
-        },
-        {
-            id: "method_label",
-            label: "Método",
-            width: 8,
-        },
-        {
-            id: "number_of_participants",
-            label: "Nº de participantes",
-            width: 7,
-        },
-        {
-            id: "number_of_women",
-            label: "Nº de mujeres",
-            width: 7,
-        },
-        {
-            id: "women_percentage",
-            label: "Porcentaje de mujeres",
-            width: 7,
-        },
-        {
-            id: "number_of_hours",
-            label: "Nº de horas",
-            width: 7,
-        },
-        {
-            id: "number_of_digital_materials",
-            label: "Nº de materiales digitales",
-            width: 7,
-        },
-        {
-            id: "number_of_printed_materials",
-            label: "Nº de materiales impresos",
-            width: 7,
-        },
-    ];
+const SocialComponentsTrainingsTotalsTable = ({
+    trainingData,
+    totalsOnly = false,
+    small = false,
+}) => {
+    const headCells = !totalsOnly
+        ? [
+              {
+                  id: "contract_number",
+                  label: "Contrato",
+                  width: 6,
+              },
+              {
+                  id: "contractor_name",
+                  label: "Contratista",
+                  width: 8,
+              },
+              {
+                  id: "social_component_monitoring_name",
+                  label: "Servicio",
+                  width: 10,
+              },
+              {
+                  id: "start_date",
+                  label: "Fecha de inicio",
+                  width: 8,
+                  formatFunction: value => {
+                      return DateUtil.formatDate(value);
+                  },
+              },
+              {
+                  id: "end_date",
+                  label: "Fecha de finalización",
+                  width: 8,
+                  formatFunction: value => {
+                      return DateUtil.formatDate(value);
+                  },
+              },
+              {
+                  id: "target_population_label",
+                  label: "Población meta",
+                  width: 15,
+                  formatFunction: value => {
+                      return value && value.join(", ");
+                  },
+              },
+              {
+                  id: "method_label",
+                  label: "Método",
+                  width: 8,
+              },
+              {
+                  id: "number_of_participants",
+                  label: "Participantes",
+                  width: 7,
+              },
+              {
+                  id: "number_of_women",
+                  label: "Mujeres",
+                  width: 6,
+              },
+              {
+                  id: "women_percentage",
+                  label: "% mujeres",
+                  width: 6,
+              },
+              {
+                  id: "number_of_hours",
+                  label: "Horas",
+                  width: 6,
+              },
+              {
+                  id: "number_of_digital_materials",
+                  label: "Materiales digitales",
+                  width: 6,
+              },
+              {
+                  id: "number_of_printed_materials",
+                  label: "Materiales impresos",
+                  width: 6,
+              },
+          ]
+        : [
+              {
+                  id: "number_of_participants",
+                  label: "Participantes",
+                  width: 7,
+              },
+              {
+                  id: "number_of_women",
+                  label: "Mujeres",
+                  width: 6,
+              },
+              {
+                  id: "women_percentage",
+                  label: "% mujeres",
+                  width: 6,
+              },
+              {
+                  id: "number_of_hours",
+                  label: "Horas",
+                  width: 6,
+              },
+              {
+                  id: "number_of_digital_materials",
+                  label: "Materiales digitales",
+                  width: 6,
+              },
+              {
+                  id: "number_of_printed_materials",
+                  label: "Materiales impresos",
+                  width: 6,
+              },
+          ];
 
     return (
         <TableContainer sx={{overflowX: "auto"}}>
-            <Table aria-labelledby="Data table" sx={{tableLayout: "fixed"}}>
+            <Table
+                aria-labelledby="Data table"
+                sx={{tableLayout: "fixed"}}
+                size={small ? "small" : "medium"}
+            >
                 <colgroup>
                     {headCells.map((headCell, index) => (
                         <col key={index} width={headCell.width + "%"} />
@@ -99,20 +145,22 @@ const SocialComponentsTrainingsTotalsTable = ({trainingData}) => {
                 </colgroup>
                 <TableHead>
                     <TableRow>
-                        {headCells.map(headCell => (
-                            <Tooltip
-                                key={headCell.id}
-                                title={headCell.title || ""}
-                                disableHoverListener={!headCell.title}
-                            >
-                                <TableCell
+                        {headCells.map(headCell => {
+                            return (
+                                <Tooltip
                                     key={headCell.id}
-                                    sx={{paddingRight: 1, textAlign: "center"}}
+                                    title={headCell.title || ""}
+                                    disableHoverListener={!headCell.title}
                                 >
-                                    {headCell.label}
-                                </TableCell>
-                            </Tooltip>
-                        ))}
+                                    <TableCell
+                                        key={headCell.id}
+                                        sx={{paddingRight: 1, textAlign: "center"}}
+                                    >
+                                        {headCell.label}
+                                    </TableCell>
+                                </Tooltip>
+                            );
+                        })}
                     </TableRow>
                 </TableHead>
                 <TableBody>

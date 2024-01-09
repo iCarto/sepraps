@@ -6,7 +6,7 @@ import {
     SocialComponentsDownloadButton,
     SocialComponentsTrainingsTotalsTable,
 } from "socialComponent/presentational";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 
 const ViewSocialComponentsTrainingsTotalsTab = ({filter}) => {
     const [trainingData, setTrainingData] = useState(null);
@@ -21,18 +21,17 @@ const ViewSocialComponentsTrainingsTotalsTab = ({filter}) => {
 
     return (
         trainingData && (
-            <Grid container justifyContent="flex-end">
+            <Stack alignItems="flex-end" spacing={1}>
                 <SocialComponentsTrainingsTotalsTable trainingData={trainingData} />
                 <SocialComponentsDownloadButton
                     service={format => {
-                        console.log("paso");
                         return ProjectStatsService.getSocialComponentTrainingsTotalStats(
                             filter,
                             format
                         );
                     }}
                 />
-            </Grid>
+            </Stack>
         )
     );
 };
