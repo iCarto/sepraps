@@ -46,13 +46,14 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
 
     const parseChartData = chartData => {
         const result = Object.keys(chartData)
-            .filter(key => key !== "code" && key !== "name")
+            .filter(key => key !== "code" && key !== "code_label" && key !== "name")
             .reduce((acc, key) => {
                 acc[key] = chartData[key].map(parseFloat);
                 return acc;
             }, {});
         return {...chartData, ...result};
     };
+
     const getMaxChartData = chartData => {
         let maxValue = 0;
         if (Object.keys(chartData).length) {
@@ -72,7 +73,7 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
 
     useEffect(() => {
         ProjectStatsService.getBuildingComponentsStats(filter).then(chartData => {
-            console.log({chartData});
+            console.log(chartData);
             const parsedChartData = parseChartData(chartData);
             setChartData(parsedChartData);
             setMaxChartData(getMaxChartData(parsedChartData));

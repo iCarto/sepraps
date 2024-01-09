@@ -15,7 +15,7 @@ const ViewContractProjectAnalysisSubPage = () => {
         <SectionCard title="Supervisión de componentes de construcción">
             {contract ? (
                 <>
-                    <Grid width={{xs: "100%", lg: "60%", xl: "50%"}} pt={1} pb={2}>
+                    <Grid width={{xs: "100%", lg: "80%", xl: "75%"}} pt={1} pb={2}>
                         <ViewBuildingComponentsFinancialChart
                             filter={{contract: contract.id}}
                         />
