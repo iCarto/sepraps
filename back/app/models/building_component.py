@@ -16,6 +16,7 @@ class BuildingComponent(BaseEntityModelMixin):
     objects = ActiveManager()
 
     code = models.CharField("Código", max_length=50)
+    code_label = models.CharField("Etiqueta de código", max_length=255)
     name = models.CharField("Nombre", max_length=255)
     properties = models.JSONField("Campos", null=True)
 
@@ -35,6 +36,7 @@ def create_project_building_components(project, components):
     for component_code, component_config in components.items():
         component = BuildingComponent(
             code=component_code,
+            code_label=component_config.get("name"),
             name=component_config.get("name"),
             properties=component_config.get("properties"),
             created_by=project.creation_user,

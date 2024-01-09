@@ -48,10 +48,13 @@ def get_filter_join_query(params):
 @permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
 def get_building_components_stats(request, format=None):
+    group_by_column = "bc.code_label"
+    if request.GET.get("project"):
+        group_by_column = "bc.name"
+
     query = """
             SELECT
-                bc.code,
-                bc.name,
+                {group_by_column} as name,
                 coalesce(sum(bcm.expected_amount), 0) as expected_amount,
                 coalesce(sum(bcm.paid_amount), 0) as paid_amount,
                 coalesce(sum(bcm.pending_amount), 0) as pending_amount
@@ -61,12 +64,17 @@ def get_building_components_stats(request, format=None):
                     {join_query}
                 ) projects ON projects.project_id = bcm.project_id
             WHERE bcm.active = True
-            GROUP BY bc.code, bc.name
-            ORDER BY bc.code
+            GROUP BY {group_by_column}
+            ORDER BY {group_by_column}
             """
 
     with connection.cursor() as cursor:
-        cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))
+        cursor.execute(
+            query.format(
+                group_by_column=group_by_column,
+                join_query=get_filter_join_query(request.GET),
+            )
+        )
         result = dictfetchall(cursor)
 
         return Response(result)

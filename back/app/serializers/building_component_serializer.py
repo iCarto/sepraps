@@ -8,7 +8,12 @@ from app.models.building_component_value import BuildingComponentValue
 class BuildingComponentSerializer(BaseEntityModelSerializer):
     class Meta(BaseEntityModelSerializer.Meta):
         model = BuildingComponent
-        fields = BaseEntityModelSerializer.Meta.fields + ("code", "name", "properties")
+        fields = BaseEntityModelSerializer.Meta.fields + (
+            "code",
+            "code_label",
+            "name",
+            "properties",
+        )
         extra_kwargs = {"code": {"read_only": True, "required": False}}
 
     properties = serializers.JSONField(required=False)
