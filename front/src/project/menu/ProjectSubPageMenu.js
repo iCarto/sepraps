@@ -87,7 +87,7 @@ const ProjectSubPageMenu = ({project}) => {
             <SubPageMenuListItemButton
                 key="project-contacts"
                 to={`${basePath}/contacts`}
-                text="Contactos"
+                text="Plantel"
                 icon={<PermContactCalendarIconOutlined />}
             />
             <SubPageMenuListItemButton

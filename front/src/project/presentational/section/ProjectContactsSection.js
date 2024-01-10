@@ -37,7 +37,7 @@ const ProjectContactsSection = ({projectId, contacts}) => {
 
     return (
         <>
-            <SectionCard title="Contactos del proyecto">
+            <SectionCard title="Plantel del proyecto">
                 <AlertError error={error} />
                 {contacts.length ? (
                     <ContactsTable
