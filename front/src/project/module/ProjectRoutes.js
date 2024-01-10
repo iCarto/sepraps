@@ -45,6 +45,7 @@ import {
     CreateSocialComponentContent,
     ViewSocialComponentContent,
 } from "socialComponentMonitoring/container";
+import ViewBuildingComponentMonitoringDocumentPanel from "buildingComponentMonitoring/container/ViewBuildingComponentMonitoringDocumentPanel";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -171,7 +172,7 @@ const projectRoutes = [
                     <Route
                         key="project-building-components-detail-documents-view"
                         path="document/:idDocument"
-                        element={<ViewDocumentPanel />}
+                        element={<ViewBuildingComponentMonitoringDocumentPanel />}
                     />
                 </Route>
             </Route>

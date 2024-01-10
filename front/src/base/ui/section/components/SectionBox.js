@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 
-const SectionBox = ({label, children}) => {
+const SectionBox = ({label = "", children}) => {
     return (
         <Grid
             container
@@ -14,10 +14,14 @@ const SectionBox = ({label, children}) => {
             }}
         >
             <Grid item xs>
-                <Typography sx={{color: "grey.500", fontSize: "0.8rem"}}>
-                    {label}
-                </Typography>
-                <Divider sx={{mb: 1}} />
+                {label ? (
+                    <>
+                        <Typography sx={{color: "grey.500", fontSize: "0.8rem"}}>
+                            {label}
+                        </Typography>
+                        <Divider sx={{mb: 1}} />{" "}
+                    </>
+                ) : null}
                 {children}
             </Grid>
         </Grid>

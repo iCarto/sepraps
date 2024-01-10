@@ -32,6 +32,7 @@ const building_component_monitoring_api_adapter = buildingComponentMonitoring =>
 
 const building_component_monitoring_view_adapter = buildingComponentMonitoring => {
     delete buildingComponentMonitoring["folder"];
+    delete buildingComponentMonitoring["featured_image"];
     delete buildingComponentMonitoring["created_by"];
     delete buildingComponentMonitoring["created_at"];
     delete buildingComponentMonitoring["updated_at"];
@@ -75,6 +76,7 @@ const createBuildingComponentMonitoring = ({
     comments = [],
     project = null,
     folder = "",
+    featured_image = "",
     created_by = "",
     created_at = null,
     updated_by = "",
@@ -100,6 +102,7 @@ const createBuildingComponentMonitoring = ({
         comments,
         project,
         folder,
+        featured_image,
         created_by,
         created_at,
         updated_at,

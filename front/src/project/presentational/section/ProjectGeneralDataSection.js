@@ -74,7 +74,6 @@ const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
                             alt={project?.name}
                             sx={{
                                 display: {xs: "none", sm: "block"},
-                                borderRadius: 1,
                                 opacity: project?.closed === true ? 0.4 : 1,
                             }}
                         />

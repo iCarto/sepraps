@@ -33,6 +33,10 @@ const BuildingComponentMonitoringService = {
         return entityService.update(entity);
     },
 
+    updateWithPatch(entity) {
+        return entityService.updateWithPatch(entity);
+    },
+
     delete(id) {
         return entityService.delete(id);
     },

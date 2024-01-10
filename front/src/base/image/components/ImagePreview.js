@@ -48,11 +48,17 @@ const ImagePreview = ({path: url, alt = "", width = null, height = null, sx = {}
                     backgroundSize: "cover",
                     backgroundPosition: "top",
                     backgroundRepeat: "no-repeat",
+                    borderRadius: 1,
                     ...sx,
                 }}
             />
         ) : (
-            <Box component="img" alt={alt} src={imageUrl} sx={{width: "100%", ...sx}} />
+            <Box
+                component="img"
+                alt={alt}
+                src={imageUrl}
+                sx={{width: "100%", borderRadius: 1, ...sx}}
+            />
         );
     };
 
