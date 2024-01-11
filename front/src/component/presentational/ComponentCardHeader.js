@@ -10,7 +10,13 @@ import Stack from "@mui/material/Stack";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 
-const ComponentCardHeader = ({componentName = "", component, actions = null, icon}) => {
+const ComponentCardHeader = ({
+    componentName = "",
+    component,
+    actions = null,
+    icon,
+    label = "",
+}) => {
     const componentStatusLabel =
         component?.execution_status === COMPONENT_EXECUTION_STATUS_IN_PROGRESS
             ? `${component?.execution_status_label} — ${NumberUtil.formatDecimal(
@@ -22,22 +28,29 @@ const ComponentCardHeader = ({componentName = "", component, actions = null, ico
         <CardHeader
             action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
             title={
-                <Stack direction="row" alignItems="center" spacing={1}>
-                    {cloneElement(icon, {
-                        sx: {color: "grey"},
-                    })}
-                    <Typography color="grey">Componente:</Typography>
-                    <Typography
-                        color="primary.main"
-                        sx={{
-                            textTransform: "uppercase",
-                            fontWeight: "bold",
-                            maxWidth: "70%",
-                        }}
-                        variant="h5"
-                    >
-                        {componentName}
-                    </Typography>
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="flex-start"
+                    mr={3}
+                >
+                    <Stack direction="row" alignItems="center" spacing={2}>
+                        {cloneElement(icon, {
+                            sx: {color: "grey"},
+                        })}
+                        {label ? <Typography color="grey">{label}:</Typography> : null}
+                        <Typography
+                            color="primary.main"
+                            sx={{
+                                textTransform: "uppercase",
+                                fontWeight: "bold",
+                                lineHeight: 1.2,
+                            }}
+                            variant="h5"
+                        >
+                            {componentName}
+                        </Typography>
+                    </Stack>
                     <ComponentStatusChip
                         label={componentStatusLabel}
                         value={component?.execution_status}

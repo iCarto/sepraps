@@ -5,18 +5,17 @@ import {SocialComponentMonitoringService} from "socialComponentMonitoring/servic
 import {social_component_monitoring_view_adapter} from "socialComponentMonitoring/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
+import {ComponentCardHeader} from "component/presentational";
 import {SectionCardHeaderAction} from "base/ui/section/components";
-import {DeleteItemDialog} from "base/delete/components";
-import {
-    SocialComponentCardHeader,
-    SocialComponentMonitoringData,
-} from "socialComponentMonitoring/presentational";
+import {SocialComponentMonitoringData} from "socialComponentMonitoring/presentational";
 import {SocialComponentMonitoringForm} from "socialComponentMonitoring/presentational/form";
+import {DeleteItemDialog} from "base/delete/components";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 
 const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => {
     const navigate = useNavigateWithReload();
@@ -99,10 +98,11 @@ const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => 
                 elevation={0}
                 component="section"
             >
-                <SocialComponentCardHeader
+                <ComponentCardHeader
                     component={socialComponent}
                     componentName={socialComponent.name}
                     actions={actions}
+                    icon={<HandshakeOutlinedIcon />}
                 />
                 <CardContent>{getComponent(mode)}</CardContent>
                 <DeleteItemDialog

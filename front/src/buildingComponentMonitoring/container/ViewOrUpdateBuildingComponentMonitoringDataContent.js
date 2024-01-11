@@ -136,6 +136,7 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
                     component={bcMonitoring}
                     componentName={bcMonitoring.building_component?.name}
                     actions={actions}
+                    label="Componente"
                     icon={<HandymanOutlinedIcon />}
                 />
                 <CardContent>{getComponent(mode)}</CardContent>
