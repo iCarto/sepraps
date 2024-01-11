@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 
 import SelectFileSection from "./SelectFileSection";
@@ -26,6 +26,8 @@ const FileUploadSection = ({path, onFinishUpload}) => {
     const [view, setView] = useState("button");
     const [filesInUploadProgress, setFilesInUploadProgress] = useState([]);
 
+    const selectFileSectionRef = useRef(null);
+
     const formMethods = useForm({
         defaultValues: {
             fileInput: "", // aux field to manage file input
@@ -33,9 +35,31 @@ const FileUploadSection = ({path, onFinishUpload}) => {
         },
     });
 
+    useEffect(() => {
+        const handleClick = event => {
+            handleClickOutsideSelectFileSection(event);
+        };
+
+        document.addEventListener("mousedown", handleClick);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
+    }, []);
+
     const handleUpload = data => {
         setFilesInUploadProgress(data.files);
         formMethods.reset();
+    };
+
+    const handleClickOutsideSelectFileSection = event => {
+        // If clicked area is NOT select file section, then set view back to "button"
+        if (
+            selectFileSectionRef.current &&
+            !selectFileSectionRef.current.contains(event.target)
+        ) {
+            setView("button");
+        }
     };
 
     return (
@@ -61,11 +85,13 @@ const FileUploadSection = ({path, onFinishUpload}) => {
                             </Button>
                         </Grid>
                     ) : (
-                        <SelectFileSection
-                            formFilesName="files"
-                            formFileInputName="fileInput"
-                            rules={{validate: maxFileSize}}
-                        />
+                        <div ref={selectFileSectionRef}>
+                            <SelectFileSection
+                                formFilesName="files"
+                                formFileInputName="fileInput"
+                                rules={{validate: maxFileSize}}
+                            />
+                        </div>
                     )}
                 </Grid>
                 <Grid item xs={12}>
