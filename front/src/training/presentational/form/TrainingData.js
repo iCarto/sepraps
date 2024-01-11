@@ -1,5 +1,5 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {SectionField} from "base/ui/section/components";
+import {SectionBox, SectionField} from "base/ui/section/components";
 import {ListTableFolder} from "base/file/components";
 import Grid from "@mui/material/Grid";
 
@@ -14,12 +14,6 @@ const TrainingData = ({training = null}) => {
         <Grid container columnSpacing={2}>
             <Grid item xs={6}>
                 <SectionField label="Contrato" value={training?.contract?.number} />
-            </Grid>
-            <Grid item xs={6}>
-                <SectionField label="Consultora" value={training?.contractor?.name} />
-            </Grid>
-
-            <Grid container item xs={6}>
                 <SectionField
                     label="Fecha/s de realización"
                     value={
@@ -30,18 +24,6 @@ const TrainingData = ({training = null}) => {
                             : DateUtil.formatDate(training.start_date)
                     }
                 />
-            </Grid>
-            <Grid container item xs={6}>
-                <SectionField label="Modalidad" value={training.method_label} />
-            </Grid>
-
-            <Grid container item xs={6}>
-                <SectionField
-                    label="Población meta"
-                    value={training.target_population_label}
-                />
-            </Grid>
-            <Grid container item xs={6}>
                 <SectionField
                     label="Duración"
                     value={training.number_of_hours}
@@ -49,10 +31,24 @@ const TrainingData = ({training = null}) => {
                 />
             </Grid>
 
-            <Grid container item xs={6}>
-                <SectionField label="Participantes" value={totalParticipants} />
+            <Grid item xs={6}>
+                <SectionField label="Consultora" value={training?.contractor?.name} />
+                <SectionField label="Modalidad" value={training.method_label} />
+                <SectionField
+                    label="Población meta"
+                    value={training.target_population_label}
+                />
             </Grid>
-            <Grid container item xs={6}>
+
+            <Grid item xs={6}>
+                <SectionField label="Participantes" value={totalParticipants} />
+                <SectionField
+                    label="Materiales impresos entregados"
+                    value={training.number_of_printed_materials}
+                />
+            </Grid>
+
+            <Grid item xs={6}>
                 <SectionField
                     label="Mujeres"
                     value={
@@ -61,23 +57,16 @@ const TrainingData = ({training = null}) => {
                             : 0
                     }
                 />
-            </Grid>
-
-            <Grid container item xs={6}>
-                <SectionField
-                    label="Materiales impresos entregados"
-                    value={training.number_of_printed_materials}
-                />
-            </Grid>
-            <Grid container item xs={6}>
                 <SectionField
                     label="Materiales digitales entregados"
                     value={training.number_of_digital_materials}
                 />
             </Grid>
 
-            <Grid item xs={12}>
-                <ListTableFolder folderPath={training.folder} basePath={""} />
+            <Grid item xs={12} mt={3}>
+                <SectionBox label="Archivos">
+                    <ListTableFolder folderPath={training.folder} basePath={""} />
+                </SectionBox>
             </Grid>
         </Grid>
     );
