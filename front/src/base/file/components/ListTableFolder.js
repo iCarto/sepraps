@@ -39,20 +39,23 @@ const ListTableFolder = ({folderPath, basePath}) => {
 
     return (
         <Grid container justifyContent="flex-start" alignItems="center">
-            <Grid item container xs={12}>
-                {isLoading ? (
+            {isLoading ? (
+                <Grid item container xs={12} mb={4}>
                     <Spinner />
-                ) : (
+                </Grid>
+            ) : null}
+            {folderElement?.children.length ? (
+                <Grid item container xs={12} mb={4}>
                     <FolderTable
                         folderElements={folderElement?.children}
                         selectedElement={null}
                         onSelectElement={handleSelectElement}
                         basePath={basePath}
                     />
-                )}
-            </Grid>
+                </Grid>
+            ) : null}
             <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                <Grid item container xs={12} mt={4}>
+                <Grid item container xs={12}>
                     <FileUploadSection
                         path={folderPath}
                         onFinishUpload={reloadFolder}

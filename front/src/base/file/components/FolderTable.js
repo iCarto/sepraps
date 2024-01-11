@@ -11,7 +11,6 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import Typography from "@mui/material/Typography";
 
 const columns = [
     {
@@ -74,7 +73,11 @@ const FolderTable = ({basePath, folderElements, selectedElement, onSelectElement
     return (
         <TableContainer sx={{overflowX: "auto"}}>
             {folderElements?.length ? (
-                <Table sx={{tableLayout: "fixed"}} aria-labelledby="Files table">
+                <Table
+                    sx={{tableLayout: "fixed"}}
+                    aria-labelledby="Files table"
+                    size="small"
+                >
                     <TableSortingHead
                         order={order}
                         attribute={attribute}
