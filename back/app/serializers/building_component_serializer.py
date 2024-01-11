@@ -68,4 +68,4 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
         cs_properties = validated_data.pop("properties", None)
         self.update_properties(instance, cs_properties)
 
-        return instance
+        return super().update(instance, validated_data)
