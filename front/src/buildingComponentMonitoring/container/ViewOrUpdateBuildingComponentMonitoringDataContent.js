@@ -2,6 +2,8 @@ import {useState} from "react";
 import {useParams} from "react-router-dom";
 
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
+import {BuildingComponentService} from "buildingComponent/service";
+import {building_component_view_adapter} from "buildingComponent/model";
 import {building_component_monitoring_view_adapter} from "buildingComponentMonitoring/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
@@ -10,14 +12,17 @@ import {SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
 import {BuildingComponentMonitoringData} from "buildingComponentMonitoring/presentational";
 import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
+import {BuildingComponentNameForm} from "buildingComponent/presentational/form";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
 
-const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent}) => {
+const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
     const navigate = useNavigateWithReload();
     const {id: projectId} = useParams();
 
@@ -26,16 +31,31 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
     const handleDelete = () => {
-        BuildingComponentMonitoringService.delete(buildingComponent.id).then(() => {
+        BuildingComponentMonitoringService.delete(bcMonitoring.id).then(() => {
             navigate(`/projects/list/${projectId}/buildingcomponent`, true);
         });
     };
 
-    const handleFormSubmit = buildingComponentMonitoring => {
-        BuildingComponentMonitoringService.update(
-            building_component_monitoring_view_adapter({...buildingComponentMonitoring})
-        )
-            .then(updatedBuildingComponentMonitoring => {
+    const handleBcMonitoringFormSubmit = updatedBcMonitoring => {
+        updateEntity(
+            {...updatedBcMonitoring},
+            BuildingComponentMonitoringService,
+            building_component_monitoring_view_adapter
+        );
+    };
+
+    const handleBuildingComponentFormSubmit = updatedBuildingComponent => {
+        updateEntity(
+            {...bcMonitoring.building_component, ...updatedBuildingComponent},
+            BuildingComponentService,
+            building_component_view_adapter
+        );
+    };
+
+    const updateEntity = (formData, updateService, dataAdapter) => {
+        updateService
+            .update(dataAdapter(formData))
+            .then(updatedData => {
                 setMode("view");
                 navigate("", true);
             })
@@ -49,10 +69,19 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent})
         <SectionCardHeaderAction
             key="edit"
             name="edit"
-            text="Modificar"
-            icon={<EditIcon />}
+            text="Editar seguimiento"
+            icon={<DonutLargeOutlinedIcon />}
             onClick={() => {
                 setMode("edit");
+            }}
+        />,
+        <SectionCardHeaderAction
+            key="edit-name"
+            name="edit-name"
+            text="Editar nombre"
+            icon={<DriveFileRenameOutlineIcon />}
+            onClick={() => {
+                setMode("edit-name");
             }}
         />,
         <SectionCardHeaderAction
@@ -68,17 +97,25 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent})
 
     const getComponent = mode => {
         if (mode === "view") {
-            return (
-                <BuildingComponentMonitoringData
-                    buildingComponentMonitoring={buildingComponent}
-                />
-            );
+            return <BuildingComponentMonitoringData bcMonitoring={bcMonitoring} />;
         }
         if (mode === "edit") {
             return (
                 <BuildingComponentMonitoringForm
-                    bcMonitoring={buildingComponent}
-                    onSubmit={handleFormSubmit}
+                    bcMonitoring={bcMonitoring}
+                    onSubmit={handleBcMonitoringFormSubmit}
+                    onCancel={() => {
+                        setMode("view");
+                    }}
+                    error={error}
+                />
+            );
+        }
+        if (mode === "edit-name") {
+            return (
+                <BuildingComponentNameForm
+                    buildingComponent={bcMonitoring.building_component}
+                    onSubmit={handleBuildingComponentFormSubmit}
                     onCancel={() => {
                         setMode("view");
                     }}
@@ -89,15 +126,15 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({buildingComponent})
     };
 
     return (
-        buildingComponent && (
+        bcMonitoring && (
             <Card
                 sx={{border: 1, borderColor: "grey.300"}}
                 elevation={0}
                 component="section"
             >
                 <ComponentCardHeader
-                    component={buildingComponent}
-                    componentName={buildingComponent.building_component?.name}
+                    component={bcMonitoring}
+                    componentName={bcMonitoring.building_component?.name}
                     actions={actions}
                     icon={<HandymanOutlinedIcon />}
                 />

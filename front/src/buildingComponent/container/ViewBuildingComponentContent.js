@@ -29,7 +29,7 @@ const ViewBuildingComponentContent = () => {
         buildingComponentMonitoring && (
             <ContentLayoutWithAside>
                 <ViewOrUpdateBuildingComponentMonitoringDataContent
-                    buildingComponent={buildingComponentMonitoring}
+                    bcMonitoring={buildingComponentMonitoring}
                 />
                 <ViewOrUpdateBuildingComponentTechnicalDataContent
                     buildingComponent={buildingComponentMonitoring?.building_component}
