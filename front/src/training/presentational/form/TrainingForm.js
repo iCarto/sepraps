@@ -5,14 +5,9 @@ import {FormUtil} from "base/form/utilities";
 import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
 import {DomainProvider} from "sepraps/domain/provider";
+import {FormContainer} from "base/form/components";
 
-const TrainingForm = ({
-    socialComponentId,
-    training = null,
-    onSubmit,
-    onCancel = null,
-    error = null,
-}) => {
+const TrainingForm = ({training = null, onSubmit, onCancel = null, error = null}) => {
     const defaultFormValues = {
         id: FormUtil.getFormValue(training?.id),
         start_date: FormUtil.getFormValue(training?.start_date),
@@ -68,15 +63,17 @@ const TrainingForm = ({
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <AlertError error={error} />
-                <EntityForm
-                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                    onCancel={onCancel}
-                >
-                    <TrainingFormDataFields
-                        contract={training?.contract}
-                        contractor={training?.contractor}
-                    />
-                </EntityForm>
+                <FormContainer>
+                    <EntityForm
+                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onCancel={onCancel}
+                    >
+                        <TrainingFormDataFields
+                            contract={training?.contract}
+                            contractor={training?.contractor}
+                        />
+                    </EntityForm>
+                </FormContainer>
             </FormProvider>
         </DomainProvider>
     );

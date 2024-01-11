@@ -28,7 +28,7 @@ const SocialComponentMonitoringFormDataFields = () => {
         execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED;
 
     return (
-        <Grid container spacing={2}>
+        <Grid container columnSpacing={2} rowSpacing={1}>
             <Grid container item xs={12} spacing={2}>
                 <Grid item xs={6}>
                     <FormSelect

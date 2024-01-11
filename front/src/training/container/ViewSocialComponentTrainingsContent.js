@@ -11,7 +11,6 @@ const ViewSocialComponentTrainingsContent = ({socialComponent, trainings}) => {
                         return (
                             <ViewOrUpdateTrainingDataContent
                                 key={training.id}
-                                socialComponentId={socialComponent.id}
                                 training={training}
                             />
                         );

@@ -8,7 +8,7 @@ const FormBox = ({label, children}) => {
             sx={{
                 border: 1,
                 borderRadius: 2,
-                borderColor: "grey.200",
+                borderColor: "grey.300",
                 p: 1,
             }}
         >

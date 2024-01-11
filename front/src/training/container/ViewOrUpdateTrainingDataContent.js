@@ -15,7 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LocalLibraryOutlinedIcon from "@mui/icons-material/LocalLibraryOutlined";
 
-const ViewOrUpdateTrainingDataContent = ({socialComponentId, training}) => {
+const ViewOrUpdateTrainingDataContent = ({training}) => {
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
@@ -30,7 +30,7 @@ const ViewOrUpdateTrainingDataContent = ({socialComponentId, training}) => {
 
     const handleFormSubmit = training => {
         TrainingService.update(training_view_adapter({...training}))
-            .then(updatedTraining => {
+            .then(() => {
                 setMode("view");
                 navigate("", true);
             })
@@ -68,7 +68,6 @@ const ViewOrUpdateTrainingDataContent = ({socialComponentId, training}) => {
         if (mode === "edit") {
             return (
                 <TrainingForm
-                    socialComponentId={socialComponentId}
                     training={training}
                     onSubmit={handleFormSubmit}
                     onCancel={() => {
