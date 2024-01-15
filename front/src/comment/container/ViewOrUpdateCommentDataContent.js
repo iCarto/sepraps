@@ -1,23 +1,23 @@
 import {forwardRef, useState} from "react";
-import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
-import {DateUtil} from "base/format/utilities";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import {payment_view_adapter} from "payment/model";
-import {useNavigateWithReload} from "base/navigation/hooks";
-import {DeleteItemDialog} from "base/delete/components";
 
+import {CommentService} from "comment/service";
+import {payment_view_adapter} from "payment/model";
+import {DateUtil} from "base/format/utilities";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
+import {DeleteItemDialog} from "base/delete/components";
+import {CommentForm} from "comment/presentational/form";
+
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography/Typography";
-import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
-import Stack from "@mui/material/Stack";
-
+import Typography from "@mui/material/Typography/Typography";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
-import {CommentForm} from "comment/presentational/form";
-import {CommentService} from "comment/service";
 
 const TypographyStyled = props => (
     <Typography variant="caption" {...props} sx={{...props.sx, color: "grey"}}>
@@ -130,8 +130,10 @@ const ViewOrUpdateCommentDataContent = ({comment}) => {
                 title={getTitle(comment)}
                 sx={{p: 0}}
                 action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
-            ></CardHeader>
-            <CardContent sx={{pb: 0}}>{getComponent(mode)}</CardContent>
+            />
+            <CardContent sx={{"&.MuiCardContent-root": {pb: 1}}}>
+                {getComponent(mode)}
+            </CardContent>
             <DeleteItemDialog
                 isDialogOpen={isDeleteDialogOpen}
                 setIsDialogOpen={setIsDeleteDialogOpen}
