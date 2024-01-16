@@ -13,3 +13,4 @@ export {default as BulletList} from "./BulletList";
 export {default as AddNewInlineItemButton} from "./AddNewInlineItemButton";
 export {default as AddNewInlineItemFormBox} from "./AddNewInlineItemFormBox";
 export {default as NoDataContainer} from "./NoDataContainer";
+export {default as AppraisalChip} from "./AppraisalChip";

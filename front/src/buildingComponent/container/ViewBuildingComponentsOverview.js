@@ -1,32 +1,30 @@
+import {useState, useEffect} from "react";
 import {useOutletContext} from "react-router-dom";
+import {ProjectService} from "project/service";
 
-import {SectionCard} from "base/ui/section/components";
-import {
-    ViewBuildingComponentsFinancialChart,
-    ViewBuildingComponentsFinancialData,
-} from "buildingComponent/container";
-import Grid from "@mui/material/Grid";
+import {ViewBuildingComponentsFinancialData} from "buildingComponent/container";
+import {BuildingComponentsSummaryList} from "buildingComponent/presentational";
+import Stack from "@mui/material/Stack";
 
 const ViewBuildingComponentsOverview = () => {
     let project;
     [project] = useOutletContext();
 
-    return (
-        <SectionCard title="Vista general">
-            {project ? (
-                <>
-                    <Grid width={{xs: "100%", lg: "60%", xl: "50%"}} pt={1} pb={2}>
-                        <ViewBuildingComponentsFinancialChart
-                            filter={{project: project.id}}
-                        />
-                    </Grid>
-                    <ViewBuildingComponentsFinancialData
-                        filter={{project: project.id}}
-                    />
-                </>
-            ) : null}
-        </SectionCard>
-    );
+    const [bcMonitorings, setBCMonitorings] = useState(null);
+
+    useEffect(() => {
+        if (project)
+            ProjectService.getProjectBuildingComponents(project.id).then(data => {
+                setBCMonitorings(data);
+            });
+    }, [project]);
+
+    return project ? (
+        <Stack spacing={2}>
+            <ViewBuildingComponentsFinancialData filter={{project: project.id}} />
+            <BuildingComponentsSummaryList bcMonitorings={bcMonitorings} />
+        </Stack>
+    ) : null;
 };
 
 export default ViewBuildingComponentsOverview;

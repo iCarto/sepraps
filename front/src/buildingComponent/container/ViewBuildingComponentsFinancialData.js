@@ -3,9 +3,8 @@ import {useEffect, useState} from "react";
 import {ProjectStatsService} from "project/service";
 
 import {
-    BuildingComponentsExpectedDataSubheading,
-    BuildingComponentsFinancialDataBox,
-    BuildingComponentsRealDataSubheading,
+    BuildingComponentsFinancialData,
+    BuildingComponentsProgress,
 } from "buildingComponent/presentational";
 
 import Grid from "@mui/material/Grid";
@@ -21,46 +20,14 @@ const ViewBuildingComponentsFinancialData = ({filter}) => {
         );
     }, []);
 
-    const getExpectedFinancialData = financialData => (
-        <BuildingComponentsFinancialDataBox
-            headline="Monto total vs. previsión inicial"
-            mainValues={{
-                first: financialData.real_amount,
-                second: financialData.expected_amount,
-            }}
-            subheading={
-                <BuildingComponentsExpectedDataSubheading data={financialData} />
-            }
-            percentage={{
-                value: financialData.real_expected_percentage,
-            }}
-            colorNamePrimary="monto-total"
-            colorNameSecondary="expected"
-        />
-    );
-
-    const getRealFinancialData = financialData => (
-        <BuildingComponentsFinancialDataBox
-            headline="Monto pagado vs. monto total"
-            mainValues={{
-                first: financialData.paid_amount,
-                second: financialData.real_amount,
-            }}
-            subheading={<BuildingComponentsRealDataSubheading data={financialData} />}
-            percentage={{label: "Pagado", value: financialData.paid_real_percentage}}
-            colorNamePrimary="paid"
-            colorNameSecondary="pending"
-        />
-    );
-
     return (
         financialData && (
             <Grid container spacing={2}>
-                <Grid item xs={6}>
-                    {getExpectedFinancialData(financialData)}
+                <Grid item xs={12}>
+                    <BuildingComponentsFinancialData financialData={financialData} />
                 </Grid>
-                <Grid item xs={6}>
-                    {getRealFinancialData(financialData)}
+                <Grid item xs={12}>
+                    <BuildingComponentsProgress financialData={financialData} />
                 </Grid>
             </Grid>
         )

@@ -10,3 +10,10 @@ export {
 export {
     default as BuildingComponentsRealDataSubheading,
 } from "./BuildingComponentsRealDataSubheading";
+export {
+    default as BuildingComponentsFinancialData,
+} from "./BuildingComponentsFinancialData";
+export {default as BuildingComponentsProgress} from "./BuildingComponentsProgress";
+export {
+    default as BuildingComponentsSummaryList,
+} from "./BuildingComponentsSummaryList";
