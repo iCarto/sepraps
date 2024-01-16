@@ -5,9 +5,9 @@ import {FieldReportProjectService} from "fieldReportProject/service";
 import {fieldReportProject_view_adapter} from "fieldReportProject/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {TabPanel} from "base/ui/tab";
 import {AlertError} from "base/error/components";
 import {FieldReportProjectForm} from "fieldReportProject/presentational/form";
+import {TabPanel} from "base/ui/tab/components";
 
 const FieldReportNewProjectTabPanel = ({index, activeTabId}) => {
     let fieldReport;

@@ -6,15 +6,16 @@ import {
     useNavigate,
 } from "react-router-dom";
 
+import {UserAuthRequired} from "base/user/utilities";
+import {TabUtil} from "base/ui/tab/utilities";
 import {FieldReportProjectsTabPanels} from ".";
 import Paper from "@mui/material/Paper";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {UserAuthRequired} from "base/user/utilities";
+import AddIcon from "@mui/icons-material/Add";
 
 const FieldReportProjectsSection = () => {
     const navigate = useNavigate();
@@ -26,13 +27,6 @@ const FieldReportProjectsSection = () => {
 
     const contracts = new Set();
     fieldReport.field_report_projects.map(project => contracts.add(project.contract));
-
-    function a11yProps(projectId) {
-        return {
-            id: `tab-${projectId}`,
-            "aria-controls": `tabpanel-${projectId}`,
-        };
-    }
 
     useEffect(() => {
         if (fieldReportProjectId) {
@@ -66,7 +60,7 @@ const FieldReportProjectsSection = () => {
     );
 
     return (
-        <Paper sx={{width: "100%", pb: 1}}>
+        <Paper sx={{width: "100%", p: 3, pt: 2}}>
             <Box sx={{borderBottom: 1, borderColor: "divider"}}>
                 <Tabs
                     value={activeTabId}
@@ -85,7 +79,7 @@ const FieldReportProjectsSection = () => {
                                           pathname: `${fieldReportProject.id}`,
                                       }}
                                       label={getTabLabel(fieldReportProject)}
-                                      {...a11yProps(fieldReportProject.id)}
+                                      {...TabUtil.a11yProps(fieldReportProject.id)}
                                       value={fieldReportProject.id}
                                   />
                               );

@@ -1,4 +1,4 @@
-import {TabPanel} from "base/ui/tab";
+import {TabPanel} from "base/ui/tab/components";
 import {FieldReportProjectsTabPanelContent, FieldReportNewProjectTabPanel} from ".";
 import {UserAuthRequired} from "base/user/utilities";
 
