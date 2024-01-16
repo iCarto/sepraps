@@ -1,27 +1,26 @@
 import {useState} from "react";
 
-import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
 import {PaymentService} from "payment/service";
-import {PaymentData, PaymentStatusChip} from "payment/presentational";
-import {PaymentForm} from "payment/presentational/form";
 import {payment_view_adapter} from "payment/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
+
+import {SectionActionsMenu, SectionCardHeaderAction} from "base/ui/section/components";
+import {PaymentData, PaymentStatusChip} from "payment/presentational";
+import {PaymentForm} from "payment/presentational/form";
 import {DeleteItemDialog} from "base/delete/components";
 
-import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import Stack from "@mui/material/Stack";
 import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
-import {useOutletContext} from "react-router-dom";
 
-const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
+const ViewOrUpdatePaymentDataContent = ({contract, payment}) => {
     const navigate = useNavigateWithReload();
-    const [contract] = useOutletContext();
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
@@ -29,7 +28,7 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
 
     const handleDelete = () => {
         PaymentService.delete(payment.id).then(() => {
-            navigate(`/contracts/list/${contractId}/payment`, true);
+            navigate(`/contracts/list/${contract.id}/payment`, true);
         });
     };
 
@@ -73,7 +72,6 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
         if (mode === "edit") {
             return (
                 <PaymentForm
-                    contractId={contractId}
                     contract={contract}
                     payment={payment}
                     onSubmit={handleFormSubmit}
@@ -89,8 +87,9 @@ const ViewOrUpdatePaymentDataContent = ({contractId, payment}) => {
     return (
         payment && (
             <Card
-                sx={{border: 1, borderRadius: 2, borderColor: "grey.300"}}
+                sx={{border: 1, borderColor: "grey.300"}}
                 elevation={0}
+                component="section"
             >
                 <CardHeader
                     action={<SectionActionsMenu>{actions}</SectionActionsMenu>}

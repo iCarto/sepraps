@@ -12,7 +12,7 @@ const CreatePaymentContent = () => {
     const location = useLocation();
     const {id: contractId} = useParams();
 
-    const [contract] = useOutletContext();
+    const {contract} = useOutletContext();
 
     const [error, setError] = useState(null);
 

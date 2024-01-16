@@ -1,9 +1,8 @@
+import {getStatusIcon} from "./PaymentStatusChip";
 import {TextLink} from "base/navigation/components";
 
-import ListItem from "@mui/material/ListItem";
 import Stack from "@mui/material/Stack";
-import {getStatusIcon} from "./PaymentStatusChip";
-import {getAppraisalIcon} from "./PaymentAppraisalChip";
+import ListItem from "@mui/material/ListItem";
 
 const PaymentListSelectorItem = ({payment, to, selected = false}) => {
     return (

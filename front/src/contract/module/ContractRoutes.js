@@ -24,7 +24,11 @@ import {
 import {UpdateContractContactPanel} from "contract/container/monitoring";
 import {UpdateContractContractorContactPanel} from "contractor/container";
 import {ViewContactPanel} from "contact/container";
-import {ViewPaymentContent, CreatePaymentContent} from "payment/container";
+import {
+    ViewPaymentContent,
+    CreatePaymentContent,
+    ViewPaymentsAnalysisContent,
+} from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
 
 const contractRoutes = [
@@ -125,6 +129,11 @@ const contractRoutes = [
                         element={<ViewDocumentPanel />}
                     />
                 </Route>
+                <Route
+                    key="contract-payments-analysis"
+                    path="analysis"
+                    element={<ViewPaymentsAnalysisContent />}
+                />
             </Route>
             <Route
                 key="contract-building"

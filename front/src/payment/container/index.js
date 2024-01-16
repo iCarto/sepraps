@@ -4,3 +4,4 @@ export {
 } from "./ViewOrUpdatePaymentDataContent";
 export {default as CreatePaymentContent} from "./CreatePaymentContent";
 export {default as ViewPaymentFinancialChart} from "./ViewPaymentFinancialChart";
+export {default as ViewPaymentsAnalysisContent} from "./ViewPaymentsAnalysisContent";

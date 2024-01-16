@@ -7,9 +7,9 @@ import {AlertError} from "base/error/components";
 import {NumberUtil} from "base/format/utilities";
 import {DomainProvider} from "sepraps/domain/provider";
 import {PRODUCT_STATUS_PENDING} from "payment/model";
+import {FormContainer} from "base/form/components";
 
 const PaymentForm = ({
-    contractId,
     contract = null,
     payment = null,
     onSubmit,
@@ -62,7 +62,7 @@ const PaymentForm = ({
             paid_total_amount: FormUtil.getDataValue(data.paid_total_amount),
             approval_date: FormUtil.getDataValue(data.approval_date),
             status: FormUtil.getDataValue(data.status),
-            contract: contractId,
+            contract: contract.id,
         });
     };
 
@@ -70,12 +70,14 @@ const PaymentForm = ({
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <AlertError error={error} />
-                <EntityForm
-                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                    onCancel={onCancel}
-                >
-                    <PaymentFormDataFields contract={contract} />
-                </EntityForm>
+                <FormContainer>
+                    <EntityForm
+                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onCancel={onCancel}
+                    >
+                        <PaymentFormDataFields contract={contract} />
+                    </EntityForm>
+                </FormContainer>
             </FormProvider>
         </DomainProvider>
     );
