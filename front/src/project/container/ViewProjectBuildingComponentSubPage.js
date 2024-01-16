@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {
     Outlet,
     useLocation,
@@ -7,15 +7,13 @@ import {
     useParams,
 } from "react-router-dom";
 
-import {SELECTOR_RIGHT_PANEL_WIDTH} from "base/ui/app/config/measurements";
 import {ProjectService} from "project/service";
+
 import {AlertError} from "base/error/components";
 import {PaperContainer} from "base/shared/components";
 import {ComponentListSelector} from "component/presentational";
-
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import {TabContainer} from "base/ui/tab/components";
+import {SubpageWithSelectorContainer} from "base/ui/main";
 
 const ViewProjectBuildingComponentSubPage = () => {
     const navigate = useNavigate();
@@ -31,6 +29,11 @@ const ViewProjectBuildingComponentSubPage = () => {
         null
     );
 
+    const defaultBCMonitoringId = useMemo(() => {
+        if (buildingComponentMonitorings)
+            return buildingComponentMonitorings[0]?.id?.toString();
+    }, [buildingComponentMonitorings]);
+
     useEffect(() => {
         ProjectService.getProjectBuildingComponents(projectId)
             .then(items => {
@@ -45,39 +48,57 @@ const ViewProjectBuildingComponentSubPage = () => {
             });
     }, [projectId, location.state?.lastRefreshDate]);
 
-    return (
-        <Grid container role="subpage-content-container">
-            <AlertError error={error} />
-            <Box sx={{width: `calc(100% - ${SELECTOR_RIGHT_PANEL_WIDTH}px)`}}>
-                <Outlet context={[project]} />
-                {isRootPath &&
-                    buildingComponentMonitorings &&
-                    buildingComponentMonitorings.length === 0 && (
-                        <PaperContainer>
-                            <Grid container justifyContent="center" my={6}>
-                                <Typography
-                                    sx={{
-                                        fontStyle: "italic",
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    Este proyecto no tiene ningún componente todavía.
-                                </Typography>
-                            </Grid>
-                        </PaperContainer>
-                    )}
-            </Box>
-            <Box
-                component="aside"
-                sx={{pl: 1, width: `${SELECTOR_RIGHT_PANEL_WIDTH}px`}}
-            >
-                <ComponentListSelector
-                    components={buildingComponentMonitorings}
-                    basePath={`/projects/list/${projectId}/buildingcomponent`}
-                    selectedComponentId={parseInt(buildingComponentId)}
+    const tabs = [
+        {
+            label: "Vista general",
+            path: "overview",
+            content: <Outlet context={[project]} />,
+        },
+        {
+            label: "Componentes",
+            path: defaultBCMonitoringId,
+            content: (
+                <SubpageWithSelectorContainer
+                    context={[project]}
+                    itemsName="componentes de construcción"
+                    itemSelector={
+                        <ComponentListSelector
+                            components={buildingComponentMonitorings}
+                            basePath={`/projects/list/${projectId}/buildingcomponent`}
+                            selectedComponentId={parseInt(buildingComponentId)}
+                        />
+                    }
+                    noItems={
+                        isRootPath &&
+                        buildingComponentMonitorings &&
+                        buildingComponentMonitorings.length === 0
+                    }
                 />
-            </Box>
-        </Grid>
+            ),
+        },
+        {
+            label: "Análisis",
+            path: "analysis",
+            content: (
+                <SubpageWithSelectorContainer
+                    context={[project]}
+                    itemSelector={
+                        <ComponentListSelector
+                            components={buildingComponentMonitorings}
+                            basePath={`/projects/list/${projectId}/buildingcomponent`}
+                            selectedComponentId={parseInt(buildingComponentId)}
+                        />
+                    }
+                />
+            ),
+        },
+    ];
+
+    return (
+        <PaperContainer>
+            <AlertError error={error} />
+            <TabContainer tabs={tabs} />
+        </PaperContainer>
     );
 };
 

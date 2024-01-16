@@ -1,13 +1,10 @@
 import {useOutletContext} from "react-router-dom";
 
 import {SectionCard} from "base/ui/section/components";
-import {
-    ViewBuildingComponentsFinancialChart,
-    ViewBuildingComponentsFinancialData,
-} from "buildingComponent/container";
+import {ViewBuildingComponentsFinancialChart} from "buildingComponent/container";
 import Grid from "@mui/material/Grid";
 
-const ViewBuildingComponentsAnalysisSubPage = () => {
+const ViewBuildingComponentsAnalysisContent = () => {
     let project;
     [project] = useOutletContext();
 
@@ -15,18 +12,15 @@ const ViewBuildingComponentsAnalysisSubPage = () => {
         <SectionCard title="Supervisión de componentes de construcción">
             {project ? (
                 <>
-                    <Grid width={{xs: "100%", lg: "60%", xl: "50%"}} pt={1} pb={2}>
+                    <Grid width={{xs: "100%", lg: "80%", xl: "75%"}} pt={1} pb={2}>
                         <ViewBuildingComponentsFinancialChart
                             filter={{project: project.id}}
                         />
                     </Grid>
-                    <ViewBuildingComponentsFinancialData
-                        filter={{project: project.id}}
-                    />
                 </>
             ) : null}
         </SectionCard>
     );
 };
 
-export default ViewBuildingComponentsAnalysisSubPage;
+export default ViewBuildingComponentsAnalysisContent;

@@ -12,5 +12,8 @@ export {
     default as ViewBuildingComponentsFinancialData,
 } from "./ViewBuildingComponentsFinancialData";
 export {
-    default as ViewBuildingComponentsAnalysisSubPage,
-} from "./ViewBuildingComponentsAnalysisSubPage";
+    default as ViewBuildingComponentsAnalysisContent,
+} from "./ViewBuildingComponentsAnalysisContent";
+export {
+    default as ViewBuildingComponentsOverview,
+} from "./ViewBuildingComponentsOverview";

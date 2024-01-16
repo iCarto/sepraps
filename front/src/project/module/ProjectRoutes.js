@@ -39,7 +39,8 @@ import {ViewDocumentPanel} from "base/file/components";
 import {
     CreateBuildingComponentContent,
     ViewBuildingComponentContent,
-    ViewBuildingComponentsAnalysisSubPage,
+    ViewBuildingComponentsAnalysisContent,
+    ViewBuildingComponentsOverview,
 } from "buildingComponent/container";
 import {
     CreateSocialComponentContent,
@@ -160,6 +161,11 @@ const projectRoutes = [
                 element={<ViewProjectBuildingComponentSubPage />}
             >
                 <Route
+                    key="project-component-overview"
+                    path="overview"
+                    element={<ViewBuildingComponentsOverview />}
+                />
+                <Route
                     key="project-building-components-new"
                     path="new"
                     element={<CreateBuildingComponentContent />}
@@ -175,12 +181,12 @@ const projectRoutes = [
                         element={<ViewBuildingComponentMonitoringDocumentPanel />}
                     />
                 </Route>
+                <Route
+                    key="project-component-analysis"
+                    path="analysis"
+                    element={<ViewBuildingComponentsAnalysisContent />}
+                />
             </Route>
-            <Route
-                key="project-component-analysis"
-                path="bcomponentanalysis"
-                element={<ViewBuildingComponentsAnalysisSubPage />}
-            ></Route>
             <Route
                 key="project-connections-detail"
                 path="connections/:connectionId"
