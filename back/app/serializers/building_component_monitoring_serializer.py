@@ -50,6 +50,8 @@ class BuildingCompanyMonitoringSummarySerializer(
             "name",
             "execution_status",
             "quality_status",
+            "financial_progress_percentage",
+            "physical_progress_percentage",
         )
 
     code = serializers.CharField(
