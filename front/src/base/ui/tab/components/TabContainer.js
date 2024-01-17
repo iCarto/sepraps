@@ -3,25 +3,29 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 import {useTabLogic} from "../hooks";
 import {TabUtil} from "../utilities";
+import {RouterUtil} from "base/navigation/utilities";
 
 import {TabPanel} from ".";
+import {AlertError} from "base/error/components";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Divider from "@mui/material/Divider";
 
-const TabContainer = ({tabs}) => {
+const TabContainer = ({tabs, error = ""}) => {
     const {tabIndex, handleChangeTab} = useTabLogic();
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    useEffect(() => {
-        const currentTabPath = location.pathname.split("/").slice(-1)[0];
-        const currentTabIndex = tabs.findIndex(tab => tab.path === currentTabPath);
+    const currentPath = RouterUtil.getLastUrlSegment(location);
+    const currentTabIndex = tabs.findIndex(
+        tab => tab.path === currentPath || tab.pathsForIndex?.includes(currentPath)
+    );
 
+    useEffect(() => {
         handleChangeTab(null, currentTabIndex);
-    }, [location.pathname]);
+    }, [currentPath, currentTabIndex]);
 
     const handleClickTab = path => {
         navigate(path);
@@ -40,6 +44,7 @@ const TabContainer = ({tabs}) => {
                 ))}
             </Tabs>
             <Divider />
+            <AlertError error={error} />
             {tabs.map((tab, index) => (
                 <TabPanel key={index} index={index} visible={tabIndex === index}>
                     {tab.content}

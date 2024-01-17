@@ -7,8 +7,13 @@ const RouterUtil = {
             ? ""
             : decodeURIComponent(results[1].replace(/\+/g, " "));
     },
+
     hasUrlParameter(queryString, name) {
         return this.getUrlParameter(queryString, name) !== "";
+    },
+
+    getLastUrlSegment(location) {
+        return location.pathname.split("/").slice(-1)[0];
     },
 };
 

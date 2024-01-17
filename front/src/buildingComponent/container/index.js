@@ -1,7 +1,9 @@
 export {
     default as CreateBuildingComponentContent,
 } from "./CreateBuildingComponentContent";
-export {default as ViewBuildingComponentContent} from "./ViewBuildingComponentContent";
+export {
+    default as BuildingComponentContent,
+} from "../presentational/BuildingComponentContent";
 export {
     default as ViewOrUpdateBuildingComponentTechnicalDataContent,
 } from "./ViewOrUpdateBuildingComponentTechnicalDataContent";
@@ -17,3 +19,4 @@ export {
 export {
     default as ViewBuildingComponentsOverview,
 } from "./ViewBuildingComponentsOverview";
+export {default as ViewBuildingComponentContent} from "./ViewBuildingComponentContent";

@@ -22,8 +22,8 @@ const ProjectSubPageMenu = ({project}) => {
 
     const buildingSupervisionAreaSubmenuItems = [
         {
-            to: `${basePath}/buildingcomponent/overview`,
-            text: "Componentes",
+            to: `${basePath}/buildingcomponents/overview`,
+            text: "Supervisión",
         },
     ];
 

@@ -1,12 +1,10 @@
 import Grid from "@mui/material/Grid";
 import ProgressBar from "base/progress/components/ProgressBar";
+import {ContainerGridWithBorder} from "base/ui/section/components";
 
 const BuildingComponentsProgress = ({financialData}) => {
     return (
-        <Grid
-            container
-            sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 2}}
-        >
+        <ContainerGridWithBorder>
             <Grid item xs={6} p={2} pr={5}>
                 <ProgressBar
                     label="Avance financiero"
@@ -19,7 +17,7 @@ const BuildingComponentsProgress = ({financialData}) => {
                     progressValue={financialData.physical_progress_percentage}
                 />
             </Grid>
-        </Grid>
+        </ContainerGridWithBorder>
     );
 };
 

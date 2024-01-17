@@ -21,7 +21,7 @@ import {
     ViewProjectFieldReportSubPage,
     ViewProjectDocumentPanel,
     ViewProjectStatsPage,
-    ViewProjectBuildingComponentSubPage,
+    ViewProjectBuildingComponentsSubPage,
     ViewProjectSocialComponentSubPage,
     ViewProjectSocialAnalysisSubPage,
     ViewProjectConnectionsSubPage,
@@ -157,8 +157,8 @@ const projectRoutes = [
             </Route>
             <Route
                 key="project-building-components"
-                path="buildingcomponent"
-                element={<ViewProjectBuildingComponentSubPage />}
+                path="buildingcomponents"
+                element={<ViewProjectBuildingComponentsSubPage />}
             >
                 <Route
                     key="project-component-overview"

@@ -68,22 +68,7 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                                     {bcMonitoring.name}{" "}
                                                 </Typography>
                                             }
-                                            secondary={
-                                                <>
-                                                    <Typography
-                                                        sx={{display: "inline"}}
-                                                        component="span"
-                                                        variant="body2"
-                                                        color="text.primary"
-                                                    >
-                                                        {bcMonitoring.location}
-                                                    </Typography>
-                                                    —{" "}
-                                                    {
-                                                        bcMonitoring.execution_status_label
-                                                    }
-                                                </>
-                                            }
+                                            secondary={`— ${bcMonitoring.execution_status_label}`}
                                         />
                                         <Stack sx={{width: "30%"}}>
                                             <ProgressBarSmall

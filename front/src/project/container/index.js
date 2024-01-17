@@ -33,8 +33,8 @@ export {
 export {default as ViewProjectDocumentPanel} from "./ViewProjectDocumentPanel";
 export {default as ViewProjectStatsPage} from "./ViewProjectStatsPage";
 export {
-    default as ViewProjectBuildingComponentSubPage,
-} from "./ViewProjectBuildingComponentSubPage";
+    default as ViewProjectBuildingComponentsSubPage,
+} from "./ViewProjectBuildingComponentsSubPage";
 export {
     default as ViewProjectSocialComponentSubPage,
 } from "./ViewProjectSocialComponentSubPage";

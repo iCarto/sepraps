@@ -1,22 +1,24 @@
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router";
+import {useOutletContext} from "react-router-dom";
 
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
+import {RouterUtil} from "base/navigation/utilities";
 
-import {ContentLayoutWithAside} from "base/ui/main";
-import {ViewOrUpdateBuildingComponentMonitoringDataContent} from "../../buildingComponentMonitoring/container";
-import {ViewOrUpdateBuildingComponentTechnicalDataContent} from ".";
-import {ViewOrUpdateCommentsContent} from "component/container";
-import {ViewOrUpdateFilesDataContent} from "base/file/components";
-import {EntityAuditSection} from "base/entity/components/presentational/sections";
+import {SubpageWithSelectorContainer} from "base/ui/main";
+import {BuildingComponentContent} from ".";
+import {ComponentListSelector} from "component/presentational";
 
 const ViewBuildingComponentContent = () => {
-    const {buildingComponentId} = useParams();
+    const {bcMonitorings} = useOutletContext();
+    const {id: projectId, buildingComponentId} = useParams();
+
+    const location = useLocation();
+    const isRootPath = RouterUtil.getLastUrlSegment(location) === "buildingcomponents";
 
     const [buildingComponentMonitoring, setBuildingComponentMonitoring] = useState(
         null
     );
-    const location = useLocation();
 
     useEffect(() => {
         setBuildingComponentMonitoring(null);
@@ -26,24 +28,21 @@ const ViewBuildingComponentContent = () => {
     }, [buildingComponentId, location.state?.lastRefreshDate]);
 
     return (
-        buildingComponentMonitoring && (
-            <ContentLayoutWithAside>
-                <ViewOrUpdateBuildingComponentMonitoringDataContent
-                    bcMonitoring={buildingComponentMonitoring}
+        <SubpageWithSelectorContainer
+            itemsName="componentes de construcción"
+            itemSelector={
+                <ComponentListSelector
+                    components={bcMonitorings}
+                    basePath={`/projects/list/${projectId}/buildingcomponents`}
+                    selectedComponentId={parseInt(buildingComponentId)}
                 />
-                <ViewOrUpdateBuildingComponentTechnicalDataContent
-                    buildingComponent={buildingComponentMonitoring?.building_component}
-                />
-                <ViewOrUpdateFilesDataContent
-                    folderPath={buildingComponentMonitoring.folder}
-                />
-                <ViewOrUpdateCommentsContent
-                    entity={buildingComponentMonitoring}
-                    service={BuildingComponentMonitoringService}
-                />
-                <EntityAuditSection entity={buildingComponentMonitoring} />
-            </ContentLayoutWithAside>
-        )
+            }
+            noItems={isRootPath && bcMonitorings && bcMonitorings.length === 0}
+        >
+            <BuildingComponentContent
+                buildingComponentMonitoring={buildingComponentMonitoring}
+            />
+        </SubpageWithSelectorContainer>
     );
 };
 

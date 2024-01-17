@@ -32,7 +32,7 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
 
     const handleDelete = () => {
         BuildingComponentMonitoringService.delete(bcMonitoring.id).then(() => {
-            navigate(`/projects/list/${projectId}/buildingcomponent`, true);
+            navigate(`/projects/list/${projectId}/buildingcomponents`, true);
         });
     };
 
