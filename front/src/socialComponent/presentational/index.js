@@ -14,3 +14,4 @@ export {
 export {
     default as SocialComponentsDownloadButton,
 } from "./SocialComponentsDownloadButton";
+export {default as SocialComponentContent} from "./SocialComponentContent";

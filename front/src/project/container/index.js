@@ -39,8 +39,8 @@ export {
     default as ViewProjectSocialComponentSubPage,
 } from "./ViewProjectSocialComponentSubPage";
 export {
-    default as ViewProjectSocialAnalysisSubPage,
-} from "./ViewProjectSocialAnalysisSubPage";
+    default as ViewProjectConnectionsContent,
+} from "./ViewProjectConnectionsContent";
 export {
-    default as ViewProjectConnectionsSubPage,
-} from "./ViewProjectConnectionsSubPage";
+    default as ViewProjectSocialAnalysisContent,
+} from "./ViewProjectSocialAnalysisContent";

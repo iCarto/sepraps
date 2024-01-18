@@ -27,7 +27,7 @@ const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => 
 
     const handleDelete = () => {
         SocialComponentMonitoringService.delete(socialComponent.id).then(() => {
-            navigate(`/projects/list/${projectId}/socialcomponent`, true);
+            navigate(`/projects/list/${projectId}/socialcomponents`, true);
         });
     };
 

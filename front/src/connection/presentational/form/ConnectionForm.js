@@ -5,6 +5,7 @@ import {NumberUtil} from "base/format/utilities";
 import {DomainProvider} from "sepraps/domain/provider";
 
 import {ConnectionFormDataFields} from ".";
+import {FormContainer} from "base/form/components";
 import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
 
@@ -59,12 +60,14 @@ const ConnectionForm = ({
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <AlertError error={error} />
-                <EntityForm
-                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                    onCancel={onCancel}
-                >
-                    <ConnectionFormDataFields projectClass={projectClass} />
-                </EntityForm>
+                <FormContainer>
+                    <EntityForm
+                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onCancel={onCancel}
+                    >
+                        <ConnectionFormDataFields projectClass={projectClass} />
+                    </EntityForm>
+                </FormContainer>
             </FormProvider>
         </DomainProvider>
     );

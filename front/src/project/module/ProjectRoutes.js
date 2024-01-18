@@ -23,8 +23,8 @@ import {
     ViewProjectStatsPage,
     ViewProjectBuildingComponentsSubPage,
     ViewProjectSocialComponentSubPage,
-    ViewProjectSocialAnalysisSubPage,
-    ViewProjectConnectionsSubPage,
+    ViewProjectConnectionsContent,
+    ViewProjectSocialAnalysisContent,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -47,6 +47,7 @@ import {
     ViewSocialComponentContent,
 } from "socialComponentMonitoring/container";
 import ViewBuildingComponentMonitoringDocumentPanel from "buildingComponentMonitoring/container/ViewBuildingComponentMonitoringDocumentPanel";
+import {ViewSocialComponentsOverview} from "socialComponent/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -161,7 +162,7 @@ const projectRoutes = [
                 element={<ViewProjectBuildingComponentsSubPage />}
             >
                 <Route
-                    key="project-component-overview"
+                    key="project-building-components-overview"
                     path="overview"
                     element={<ViewBuildingComponentsOverview />}
                 />
@@ -187,22 +188,17 @@ const projectRoutes = [
                     element={<ViewBuildingComponentsAnalysisContent />}
                 />
             </Route>
-            <Route
-                key="project-connections-detail"
-                path="connections/:connectionId"
-                element={<ViewProjectConnectionsSubPage />}
-            >
-                <Route
-                    key="project-connections-detail-documents-view"
-                    path="document/:idDocument"
-                    element={<ViewDocumentPanel />}
-                />
-            </Route>
+
             <Route
                 key="project-social-components"
-                path="socialcomponent"
+                path="socialcomponents"
                 element={<ViewProjectSocialComponentSubPage />}
             >
+                <Route
+                    key="project-social-components-overview"
+                    path="overview"
+                    element={<ViewSocialComponentsOverview />}
+                />
                 <Route
                     key="project-social-components-new"
                     path="new"
@@ -219,12 +215,23 @@ const projectRoutes = [
                         element={<ViewDocumentPanel />}
                     />
                 </Route>
+                <Route
+                    key="project-connections-detail"
+                    path="connections"
+                    element={<ViewProjectConnectionsContent />}
+                >
+                    <Route
+                        key="project-connections-detail-documents-view"
+                        path="document/:idDocument"
+                        element={<ViewDocumentPanel />}
+                    />
+                </Route>
+                <Route
+                    key="project-social-component-analysis"
+                    path="analysis"
+                    element={<ViewProjectSocialAnalysisContent />}
+                />
             </Route>
-            <Route
-                key="project-social-component-analysis"
-                path="scomponentanalysis"
-                element={<ViewProjectSocialAnalysisSubPage />}
-            ></Route>
             <Route
                 key="project-fieldreport-detail"
                 path="fieldreport/:fieldReportId?"

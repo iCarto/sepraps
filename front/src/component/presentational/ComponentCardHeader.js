@@ -32,7 +32,8 @@ const ComponentCardHeader = ({
                     direction="row"
                     justifyContent="space-between"
                     alignItems="flex-start"
-                    mr={3}
+                    spacing={2}
+                    mr={1}
                 >
                     <Stack direction="row" alignItems="center" spacing={2}>
                         {cloneElement(icon, {

@@ -7,3 +7,4 @@ export {
 export {
     default as ViewSocialComponentsTrainingsTotalsTab,
 } from "./ViewSocialComponentsTrainingsTotalsTab";
+export {default as ViewSocialComponentsOverview} from "./ViewSocialComponentsOverview";

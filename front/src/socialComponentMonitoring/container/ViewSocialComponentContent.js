@@ -1,26 +1,25 @@
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router";
+import {useOutletContext} from "react-router-dom";
 
 import {SocialComponentMonitoringService} from "socialComponentMonitoring/service";
-
-import {ViewOrUpdateSocialComponentMonitoringDataContent} from ".";
-import {
-    ViewSocialComponentTrainingsContent,
-    ViewSocialComponentTrainingsStats,
-} from "training/container";
-import {ViewOrUpdateFilesDataContent} from "base/file/components";
-import {ViewOrUpdateCommentsContent} from "component/container";
-import {EntityAuditSection} from "base/entity/components/presentational/sections";
-import {ContentLayoutWithAside} from "base/ui/main";
 import {ProjectStatsService} from "project/service";
+import {RouterUtil} from "base/navigation/utilities";
+
+import {SubpageWithSelectorContainer} from "base/ui/main";
+import {SocialComponentContent} from "socialComponent/presentational";
+import {ComponentListSelector} from "component/presentational";
 
 const ViewSocialComponentContent = () => {
-    const {socialComponentId} = useParams();
+    const {scMonitorings} = useOutletContext();
+    const {id: projectId, socialComponentId} = useParams();
+    const location = useLocation();
+
+    const isRootPath = RouterUtil.getLastUrlSegment(location) === "buildingcomponents";
 
     const [socialComponentMonitoring, setSocialComponentMonitoring] = useState(null);
     const [trainings, setTrainings] = useState(null);
     const [trainingsData, setTrainingsData] = useState(null);
-    const location = useLocation();
 
     const filterForStats = {
         social_component_monitoring_id: socialComponentId,
@@ -60,29 +59,25 @@ const ViewSocialComponentContent = () => {
     }, [socialComponentId, location.state?.lastRefreshDate]);
 
     return (
-        socialComponentMonitoring && (
-            <ContentLayoutWithAside>
-                <ViewOrUpdateSocialComponentMonitoringDataContent
-                    socialComponent={socialComponentMonitoring}
+        <SubpageWithSelectorContainer
+            itemsName="componentes sociales"
+            itemSelector={
+                <ComponentListSelector
+                    components={scMonitorings}
+                    basePath={`/projects/list/${projectId}/socialcomponents`}
+                    selectedComponentId={parseInt(socialComponentId)}
+                    reduceItemsFontSize
                 />
-                <ViewSocialComponentTrainingsStats
-                    trainingData={trainingsData}
-                    filter={filterForStats}
-                />
-                <ViewSocialComponentTrainingsContent
-                    socialComponent={socialComponentMonitoring}
-                    trainings={trainings}
-                />
-                <ViewOrUpdateFilesDataContent
-                    folderPath={socialComponentMonitoring.folder}
-                />
-                <ViewOrUpdateCommentsContent
-                    entity={socialComponentMonitoring}
-                    service={SocialComponentMonitoringService}
-                />
-                <EntityAuditSection entity={socialComponentMonitoring} />
-            </ContentLayoutWithAside>
-        )
+            }
+            noItems={isRootPath && scMonitorings && scMonitorings.length === 0}
+        >
+            <SocialComponentContent
+                socialComponentMonitoring={socialComponentMonitoring}
+                trainingsData={trainingsData}
+                filterForStats={filterForStats}
+                trainings={trainings}
+            />
+        </SubpageWithSelectorContainer>
     );
 };
 

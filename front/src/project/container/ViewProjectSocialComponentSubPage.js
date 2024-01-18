@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {
     Outlet,
     useLocation,
@@ -7,26 +7,36 @@ import {
     useParams,
 } from "react-router-dom";
 
-import {SELECTOR_RIGHT_PANEL_WIDTH} from "base/ui/app/config/measurements";
 import {ProjectService} from "project/service";
-import {AlertError} from "base/error/components";
-import {PaperContainer} from "base/shared/components";
-import {ComponentListSelector} from "component/presentational";
+import {RouterUtil} from "base/navigation/utilities";
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import {PaperContainer} from "base/shared/components";
+import {TabContainer} from "base/ui/tab/components";
 
 const ViewProjectSocialComponentSubPage = () => {
     const navigate = useNavigate();
-    const {id: projectId, socialComponentId} = useParams();
+    const {id: projectId, socialComponentId, idDocument} = useParams();
+
     const location = useLocation();
-    const isRootPath = location.pathname.split("/").slice(-1)[0] === "socialcomponent";
+    const isRootPath = RouterUtil.getLastUrlSegment(location) === "socialcomponents";
 
     const [project] = useOutletContext();
 
-    const [error, setError] = useState(null);
     const [socialComponentMonitorings, setSocialComponentMonitorings] = useState(null);
+    const [connection, setConnection] = useState(null);
+    const [error, setError] = useState(null);
+
+    const contextForOutlet = {
+        project: project,
+        scMonitorings: socialComponentMonitorings,
+        connection: connection,
+    };
+
+    const defaultSCMonitoringId = useMemo(() => {
+        if (socialComponentId) return socialComponentId;
+        if (socialComponentMonitorings)
+            return socialComponentMonitorings[0]?.id?.toString();
+    }, [socialComponentId, socialComponentMonitorings]);
 
     useEffect(() => {
         ProjectService.getProjectSocialComponents(projectId)
@@ -40,43 +50,49 @@ const ViewProjectSocialComponentSubPage = () => {
                 console.log({error});
                 setError(error);
             });
+        ProjectService.getProjectConnections(projectId)
+            .then(items => {
+                // TO-DO: A project always has ONLY 1 connection instance. Check data model.
+                setConnection(items[0]);
+                if (isRootPath && items.length > 0) {
+                    navigate(items[0].id.toString());
+                }
+            })
+            .catch(error => {
+                console.log({error});
+                setError(error);
+            });
     }, [projectId, location.state?.lastRefreshDate]);
 
+    const tabs = [
+        {
+            label: "Vista general",
+            path: "overview",
+            content: <Outlet context={contextForOutlet} />,
+        },
+        {
+            label: "Componentes",
+            path: defaultSCMonitoringId,
+            pathsForIndex: [idDocument, "new"],
+            content: <Outlet context={contextForOutlet} />,
+        },
+        {
+            label: "Conexiones",
+            path: "connections",
+            pathsForIndex: [idDocument],
+            content: <Outlet context={contextForOutlet} />,
+        },
+        {
+            label: "Análisis",
+            path: "analysis",
+            content: <Outlet context={contextForOutlet} />,
+        },
+    ];
+
     return (
-        <Grid container role="subpage-content-container">
-            <AlertError error={error} />
-            <Box sx={{width: `calc(100% - ${SELECTOR_RIGHT_PANEL_WIDTH}px)`}}>
-                <Outlet context={[project]} />
-                {isRootPath &&
-                    socialComponentMonitorings &&
-                    socialComponentMonitorings.length === 0 && (
-                        <PaperContainer>
-                            <Grid container justifyContent="center" my={6}>
-                                <Typography
-                                    sx={{
-                                        fontStyle: "italic",
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    Este proyecto no tiene ningún componente social
-                                    todavía.
-                                </Typography>
-                            </Grid>
-                        </PaperContainer>
-                    )}
-            </Box>
-            <Box
-                component="aside"
-                sx={{pl: 1, width: `${SELECTOR_RIGHT_PANEL_WIDTH}px`}}
-            >
-                <ComponentListSelector
-                    components={socialComponentMonitorings}
-                    basePath={`/projects/list/${projectId}/socialcomponent`}
-                    selectedComponentId={parseInt(socialComponentId)}
-                    reduceItemsFontSize
-                />
-            </Box>
-        </Grid>
+        <PaperContainer>
+            <TabContainer tabs={tabs} error={error} />
+        </PaperContainer>
     );
 };
 
