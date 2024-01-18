@@ -1,8 +1,14 @@
 import {comments_api_adapter, createComments} from "comment/model";
+import {createTrainings, trainings_api_adapter} from "training/model";
 
 class SocialComponentMonitorings extends Array {}
 
 const social_component_monitoring_api_adapter = socialComponentMonitoring => {
+    if (socialComponentMonitoring["trainings"]) {
+        socialComponentMonitoring["trainings"] = createTrainings(
+            trainings_api_adapter(socialComponentMonitoring["trainings"])
+        );
+    }
     if (socialComponentMonitoring["comments"]) {
         socialComponentMonitoring["comments"] = createComments(
             comments_api_adapter(socialComponentMonitoring["comments"])
@@ -13,6 +19,7 @@ const social_component_monitoring_api_adapter = socialComponentMonitoring => {
 };
 
 const social_component_monitoring_view_adapter = socialComponentMonitoring => {
+    delete socialComponentMonitoring["trainings"];
     delete socialComponentMonitoring["folder"];
     delete socialComponentMonitoring["created_by"];
     delete socialComponentMonitoring["created_at"];
@@ -48,6 +55,7 @@ const createSocialComponentMonitoring = ({
     expected_end_date = "",
     real_end_date = "",
     progress_percentage = "",
+    trainings = [],
     comments = [],
     project = null,
     folder = "",
@@ -67,6 +75,7 @@ const createSocialComponentMonitoring = ({
         expected_end_date,
         real_end_date,
         progress_percentage,
+        trainings,
         comments,
         project,
         folder,

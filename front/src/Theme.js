@@ -223,6 +223,14 @@ const customTheme = createTheme({
             },
         },
 
+        MuiTableCell: {
+            styleOverrides: {
+                head: {
+                    lineHeight: "1rem",
+                },
+            },
+        },
+
         MuiTableSortLabel: {
             styleOverrides: {
                 root: {

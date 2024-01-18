@@ -10,3 +10,4 @@ export {default as SectionFieldEditButton} from "./SectionFieldEditButton";
 export {default as SectionBox} from "./SectionBox";
 export {default as SectionDomainField} from "./SectionDomainField";
 export {default as SubSectionCardHeader} from "./SubSectionCardHeader";
+export {default as ContainerGridWithBorder} from "./ContainerGridWithBorder";

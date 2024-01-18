@@ -22,6 +22,7 @@ const ProjectStatsService = {
         });
     },
 
+    // All trainings details
     getSocialComponentTrainingsTotalStats(filter, format = null) {
         return AuthApiService.get(
             `${basePath}/socialcomponenttrainingssum?${ServiceUtil.getFilterQueryString(
@@ -29,16 +30,19 @@ const ProjectStatsService = {
             )}`,
             ServiceUtil.getAcceptHeader(format)
         ).then(response => {
+            console.log("getSocialComponentTrainingsTotalStats", response);
             return response;
         });
     },
 
+    // Training totals by component (men, women, women %, etc.) -- get_social_component_trainings_multi_stats()
     getSocialComponentTrainingsStats(groupByAttribute = "component_code", filter) {
         return AuthApiService.get(
             `${basePath}/socialcomponenttrainings/${groupByAttribute}?${ServiceUtil.getFilterQueryString(
                 filter
             )}`
         ).then(response => {
+            console.log("getSocialComponentTrainingsStats", response);
             return response;
         });
     },

@@ -5,26 +5,14 @@ import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {ContentLayoutWithAside} from "base/ui/main";
 import {ViewOrUpdateCommentsContent} from "component/container";
 import {ViewOrUpdateSocialComponentMonitoringDataContent} from "socialComponentMonitoring/container";
-import {
-    ViewSocialComponentTrainingsContent,
-    ViewSocialComponentTrainingsStats,
-} from "training/container";
+import {ViewSocialComponentTrainingsContent} from "training/container";
 
-const SocialComponentContent = ({
-    socialComponentMonitoring,
-    trainingsData,
-    filterForStats,
-    trainings,
-}) => {
+const SocialComponentContent = ({socialComponentMonitoring, trainings}) => {
     return (
         socialComponentMonitoring && (
             <ContentLayoutWithAside>
                 <ViewOrUpdateSocialComponentMonitoringDataContent
                     socialComponent={socialComponentMonitoring}
-                />
-                <ViewSocialComponentTrainingsStats
-                    trainingData={trainingsData}
-                    filter={filterForStats}
                 />
                 <ViewSocialComponentTrainingsContent
                     socialComponent={socialComponentMonitoring}

@@ -15,3 +15,10 @@ export {
     default as SocialComponentsDownloadButton,
 } from "./SocialComponentsDownloadButton";
 export {default as SocialComponentContent} from "./SocialComponentContent";
+export {
+    default as SocialComponentsTotalsContent,
+} from "./SocialComponentsTotalsContent";
+export {default as SocialComponentsSummaryList} from "./SocialComponentsSummaryList";
+export {
+    default as SocialComponentTrainingsSummaryTable,
+} from "./SocialComponentTrainingsSummaryTable";

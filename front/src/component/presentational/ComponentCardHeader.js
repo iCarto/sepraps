@@ -20,7 +20,8 @@ const ComponentCardHeader = ({
     const componentStatusLabel =
         component?.execution_status === COMPONENT_EXECUTION_STATUS_IN_PROGRESS
             ? `${component?.execution_status_label} — ${NumberUtil.formatDecimal(
-                  component?.physical_progress_percentage
+                  component?.physical_progress_percentage ||
+                      component?.progress_percentage
               )}%`
             : component?.execution_status_label || "Estado sin especificar";
 
