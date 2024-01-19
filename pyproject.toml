@@ -1,30 +1,6 @@
 [tool.pyright]
 executionEnvironments = [{ root = "back" }]
 
-[tool.black]
-line-length = 88
-skip-string-normalization = false
-preview = false
-skip-magic-trailing-comma = true
-safe = true
-# extend-exclude = '''
-# /(
-#   some_folder_here
-#
-# )/
-# '''
-
-[tool.isort]
-py_version = "311"
-profile = "black"
-atomic = true # `true` cuando la versión de python target y que corre isort es la misma
-lines_after_imports = 2
-filter_files = true
-skip_gitignore = true
-combine_as_imports = true # Revisar
-# known_third_party = []
-known_first_party = ["users", "app", "back", "documents", "log", "questionnaires"] # Ajustar en cada proyecto
-
 [build-system]
 requires = ["setuptools==65.5.0"]
 build-backend = "setuptools.build_meta"
@@ -71,3 +47,27 @@ include-package-data = true
 "sepraps.static" = ["**"]
 "sepraps.templates" = ["**"]
 "sepraps.app.data" = ["**"]
+
+[tool.ruff]
+extend = "./config/pyproject.toml"
+
+extend-exclude = [
+    "/**/migrations/*", # folders excluded when working with django
+]
+
+[tool.ruff.lint]
+extend-ignore = ["ANN", "ERA", "TCH"]
+
+
+[tool.ruff.lint.isort]
+# https://docs.astral.sh/ruff/settings/#isort-known-third-party
+known-first-party = [
+    "app",
+    "back",
+    "documents",
+    "domains",
+    "users",
+    "questionnaires",
+    "log",
+]
+

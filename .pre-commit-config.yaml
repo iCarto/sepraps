@@ -1,22 +1,21 @@
 fail_fast: false
 repos:
+    - repo: https://github.com/astral-sh/ruff-pre-commit
+      # Ruff version.
+      rev: v0.1.9
+      hooks:
+          # Run the linter.
+          - id: ruff
+            types_or: [python, pyi, jupyter]
+            args: [--fix]
+            verbose: true
+          # Run the formatter.
+          - id: ruff-format
+            types_or: [python, pyi, jupyter]
+            verbose: true
+
     - repo: local
       hooks:
-          - id: black
-            name: black
-            entry: black
-            language: system
-            verbose: true
-            files: \.ipynb$
-            types_or: [python, jupyter]
-
-          - id: isort
-            name: isort
-            entry: isort
-            language: system
-            verbose: true
-            types: [python]
-
           - id: stylelint
             name: stylelint
             entry: npx stylelint
@@ -58,11 +57,4 @@ repos:
             entry: shellcheck
             language: system
             types: [shell]
-            verbose: true
-
-          - id: flake8
-            name: flake8
-            entry: flake8
-            language: system
-            types: [python]
             verbose: true
