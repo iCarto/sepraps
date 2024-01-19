@@ -15,7 +15,7 @@ def get_filter_join_query(params):
         FROM project p
         LEFT JOIN contract_project cp ON cp.project_id = p.id
         LEFT JOIN construction_contract cc on cc.id = cp.contract_id
-	    LEFT JOIN contract_supervision_area csa on csa.contract_id = cc.id
+        LEFT JOIN contract_supervision_area csa on csa.contract_id = cc.id
         LEFT JOIN financing_program fp on fp.id = cc.financing_program_id
         LEFT JOIN financing_program_financing_funds fpff on fpff.financingprogram_id = fp.id
         LEFT JOIN project_linked_localities pll on pll.project_id = p.id
@@ -91,7 +91,9 @@ def get_building_components_total_stats(request, format=None):
                 coalesce(sum(bcm.paid_amount), 0) + coalesce(sum(bcm.pending_amount), 0) as real_amount,
                 round((((coalesce(sum(bcm.paid_amount), 0) + coalesce(sum(bcm.pending_amount), 0)) / coalesce(nullif(sum(bcm.expected_amount), 0),1)) * 100)::numeric) as real_expected_percentage,
                 round(((coalesce(sum(bcm.paid_amount), 0) / coalesce(nullif(sum(bcm.expected_amount), 0), 1)) * 100)::numeric) as paid_expected_percentage,
-                round(((coalesce(sum(bcm.paid_amount), 0) / coalesce(nullif(coalesce(sum(bcm.paid_amount), 0) + coalesce(sum(bcm.pending_amount), 0),0),1)) * 100)::numeric) as paid_real_percentage
+                round(((coalesce(sum(bcm.paid_amount), 0) / coalesce(nullif(coalesce(sum(bcm.paid_amount), 0) + coalesce(sum(bcm.pending_amount), 0),0),1)) * 100)::numeric) as paid_real_percentage,
+                round(coalesce(avg(coalesce((bcm.paid_amount + bcm.pending_amount) / nullif(bcm.expected_amount, 0), 0) * 100), 0)) as financial_progress_percentage,
+                round(coalesce(avg(coalesce(bcm.physical_progress_percentage, 0)), 0)) as physical_progress_percentage
             FROM building_component_monitoring bcm
                 JOIN building_component bc on bc.id = bcm.building_component_id
                 JOIN (
@@ -127,8 +129,10 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
                 {group_by_attribute} as code,
                 sum(number_of_women) as number_of_women,
                 sum(number_of_men) as number_of_men,
-                round((cast(sum(number_of_women) as decimal) / (sum(number_of_women) + sum(number_of_men))) * 100)::numeric as women_percentage,
-                sum(number_of_hours) as number_of_hours
+                (sum(number_of_women) + sum(number_of_men)) as number_of_participants,
+                (cast(sum(number_of_women) as decimal) / (sum(number_of_women) + sum(number_of_men))) * 100 as women_percentage,
+                sum(number_of_hours) as number_of_hours,
+                count(*) as number_of_trainings
             FROM social_component_training sct
                 INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
                 JOIN (
@@ -150,22 +154,34 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
 
         if not result:
             df = pd.DataFrame(
-                [["total", 0, 0, 0, 0]],
+                [["total", 0, 0, 0, 0, 0, 0]],
                 columns=[
                     "code",
                     "number_of_women",
                     "number_of_men",
+                    "number_of_participants",
                     "women_percentage",
                     "number_of_hours",
+                    "number_of_trainings",
                 ],
             )
             return Response(df)
 
         df = pd.DataFrame(result)
         df.loc["Total"] = df[
-            ["number_of_women", "number_of_men", "number_of_hours"]
+            [
+                "number_of_women",
+                "number_of_men",
+                "number_of_participants",
+                "women_percentage",
+                "number_of_hours",
+                "number_of_trainings",
+            ]
         ].sum(numeric_only=True)
-        df.at["Total", "women_percentage"] = df["women_percentage"].mean()
+        # df.at["Total", "women_percentage"] = df["women_percentage"].mean()
+        df.at["Total", "women_percentage"] = (
+            df["number_of_women"].sum() / df["number_of_participants"].sum()
+        ) * 100
         df.at["Total", "code"] = "total"
 
         return Response(df)
