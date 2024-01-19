@@ -6,7 +6,8 @@ from app.serializers.comment_serializer import CommentSerializer
 class ConnectionSerializer(BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = Connection
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "id",
             "number_of_households",
             "population",

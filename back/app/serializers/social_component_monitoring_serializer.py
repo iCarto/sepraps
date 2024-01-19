@@ -11,7 +11,8 @@ from domains.models import DomainCategoryChoices
 class SocialComponentMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = SocialComponentMonitoring
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "code",
             "name",
             "execution_status",
@@ -37,7 +38,8 @@ class SocialComponentMonitoringSummarySerializer(
 ):
     class Meta(BaseSummarySerializer.Meta):
         model = SocialComponentMonitoring
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "code",
             "name",
             "execution_status",

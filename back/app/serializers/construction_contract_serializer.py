@@ -265,7 +265,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
         instance.projects.set(projects_for_contract)
 
         # nested entities properties were removed in previous methods
-        for key in validated_data.keys():
+        for key in validated_data:
             setattr(instance, key, validated_data.get(key, getattr(instance, key)))
 
         instance.save()

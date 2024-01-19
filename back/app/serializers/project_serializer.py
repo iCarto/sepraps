@@ -104,7 +104,6 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
     # ATTRIBUTES
 
     def get_folder(self, obj):
-        print(obj.folder)
         return obj.folder.media_path if obj.folder else None
 
     def get_milestones(self, obj):
@@ -151,7 +150,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
 
         if main_infrastructure_data:
             main_infrastructure = instance.main_infrastructure
-            for key in main_infrastructure_data.keys():
+            for key in main_infrastructure_data:
                 setattr(
                     main_infrastructure,
                     key,
@@ -200,7 +199,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
         self.update_featured_image(instance, validated_data)
 
         # nested entities properties were removed in previous methods
-        for key in validated_data.keys():
+        for key in validated_data:
             setattr(instance, key, validated_data.get(key, getattr(instance, key)))
 
         instance.save()

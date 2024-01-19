@@ -12,7 +12,8 @@ from app.serializers.field_report_project_serializer import FieldReportProjectSe
 class FieldReportSerializer(BaseModelWithFolderSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = FieldReport
-        fields = BaseModelWithFolderSerializer.Meta.fields + (
+        fields = (
+            *BaseModelWithFolderSerializer.Meta.fields,
             "name",
             "code",
             "date",
@@ -35,7 +36,8 @@ class FieldReportSerializer(BaseModelWithFolderSerializer):
 class FieldReportSummarySerializer(BaseSummarySerializer):
     class Meta(BaseSummarySerializer.Meta):
         model = FieldReport
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "name",
             "code",
             "date",

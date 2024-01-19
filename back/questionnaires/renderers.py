@@ -44,7 +44,6 @@ class DataFrameJSONRenderer(renderers.BaseRenderer):
     format = "json"
 
     def render(self, response, media_type=None, renderer_context=None):
-        print(response)
         if isinstance(response, pd.DataFrame):
             df = response
             float_column_names = df.select_dtypes(include=["float64"]).columns.tolist()

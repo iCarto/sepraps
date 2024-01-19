@@ -46,9 +46,6 @@ def provider_pre_save(sender, instance, *args, **kwargs):
     if instance.type == "junta_de_saneamiento":
         instance.is_legalized = True
         instance.local_resolution_number = ""
-    if (
-        instance.type == "comision_de_agua"
-        or instance.type == "comision_de_saneamiento"
-    ):
+    if instance.type in ("comision_de_agua", "comision_de_saneamiento"):
         instance.legal_status_number = ""
     return instance

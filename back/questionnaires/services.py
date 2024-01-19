@@ -14,7 +14,7 @@ def has_value(x):
 
 
 def parse_list_to_float(values):
-    return list(map(lambda x: locale.atof(x) if x else None, values))
+    return [locale.atof(x) if x else None for x in values]
 
 
 def is_list_empty(values):
@@ -22,7 +22,7 @@ def is_list_empty(values):
 
 
 def get_last_value_from_serie(series):
-    last_value = series.loc[lambda x: pd.isna(x) == False].tail(1).values
+    last_value = series.loc[lambda x: pd.isna(x) is False].tail(1).values
     return last_value[0] if last_value else None
 
 
@@ -36,18 +36,17 @@ def get_variation_value(value, reference_value, total_value):
 
 def get_variation(df, column, reference_column):
     total_base_value = get_last_value_from_serie(df[reference_column])
-    variation_series = df.apply(
+    return df.apply(
         lambda x: get_variation_value(x[column], x[reference_column], total_base_value),
         axis=1,
     )
-    return variation_series
 
 
 def update_extended_with_real_value(df):
     # Get index for last month with expected value
     if "expected_values" in df:
         last_expected_value = (
-            df["expected_values"].loc[lambda x: pd.isna(x) == False].tail(1)
+            df["expected_values"].loc[lambda x: pd.isna(x) is False].tail(1)
         )
         # Find the real value for that month
         first_real_value_after_end = df.loc[
@@ -160,9 +159,9 @@ def create_dataframe_decimal2(index, real_values, expected_values, extended_valu
     real_values = parse_list_to_float(real_values)
     expected_values = parse_list_to_float(expected_values)
     extended_values = parse_list_to_float(extended_values)
-    df = create_dataframe_numeric(index, real_values, expected_values, extended_values)
-
-    return df
+    return create_dataframe_numeric(
+        index, real_values, expected_values, extended_values
+    )
 
 
 def create_dataframe_str(index, real_values, expected_values, extended_values):
@@ -251,7 +250,7 @@ def flat_values_list(values_list, datatype):
     """
     if len(values_list) == 0:
         return None
-    if all([elem == None for elem in values_list]):
+    if all(elem is None for elem in values_list):
         return None
     if len(values_list) == 1:
         return values_list[0]
@@ -275,7 +274,7 @@ def get_monthly_questionnaire_instances_dataframe(
 
     year_month_values = get_year_month_values(field_code, instances)
 
-    df = create_dataframe(
+    return create_dataframe(
         field_datatype,
         list(year_month_values.keys()),
         [
@@ -294,6 +293,3 @@ def get_monthly_questionnaire_instances_dataframe(
         else [],
     )
     # df = df.fillna(NONE_VALUE)
-
-    print(df)
-    return df

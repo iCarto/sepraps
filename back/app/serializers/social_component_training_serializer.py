@@ -15,7 +15,8 @@ from domains.models import DomainCategoryChoices
 class SocialComponentTrainingSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = SocialComponentTraining
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "start_date",
             "end_date",
             "target_population",

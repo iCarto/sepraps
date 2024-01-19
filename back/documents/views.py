@@ -33,8 +33,8 @@ def preview(request, media_path, format=None):
     media_node = MediaNode.objects.filter(**filter).first()
     if media_node.media_type == "DOCUMENT":
         file = open(os.path.join(settings.MEDIA_ROOT, media_node.storage_path))
-        response = FileResponse(file)
-        return response
+        return FileResponse(file)
+    return None
 
 
 @api_view(["GET"])
@@ -50,6 +50,7 @@ def download(request, media_path, format=None):
         return FileResponse(
             zip_file, as_attachment=True, filename=media_node.media_name + ".zip"
         )
+    return None
 
 
 def create_zip_file(documentos):

@@ -9,4 +9,4 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"users", UserViewSet)
 router.register(r"groups", GroupViewSet)
 
-urlpatterns = [path("", include(router.urls))] + jwt.urlpatterns
+urlpatterns = [path("", include(router.urls)), *jwt.urlpatterns]

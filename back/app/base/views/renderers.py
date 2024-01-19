@@ -68,8 +68,7 @@ def get_geodf_from_response(response):
         # working with empty dataframe
         df = geopandas.GeoDataFrame(columns=["id", geom_field], geometry=geom_field)
 
-    df = df.set_crs(f"epsg:{settings.STORAGE_SRID!s}")
-    return df
+    return df.set_crs(f"epsg:{settings.STORAGE_SRID!s}")
 
 
 def get_df_from_response(response):
@@ -160,6 +159,7 @@ class DataFrameShapefileFileRenderer(renderers.BaseRenderer):
                 shutil.rmtree(temp_dir)
 
                 return buffer.getvalue()
+        return None
 
 
 class GeojsonRenderer(renderers.JSONRenderer):

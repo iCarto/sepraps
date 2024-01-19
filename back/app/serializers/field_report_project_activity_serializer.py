@@ -6,7 +6,8 @@ from documents.serializers import MediaUrlSerializer
 class FieldReportProjectActivitySerializer(BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = FieldReportProjectActivity
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "title",
             "date",
             "notes",

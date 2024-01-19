@@ -14,7 +14,8 @@ from domains.models import DomainCategoryChoices
 class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = Provider
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "name",
             "area",
             "type",
@@ -73,7 +74,7 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
             self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
 
         # nested entities properties were removed in previous methods
-        for key in validated_data.keys():
+        for key in validated_data:
             setattr(instance, key, validated_data.get(key, getattr(instance, key)))
 
         instance.save()
@@ -88,7 +89,8 @@ class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):
 class ProviderSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
     class Meta(BaseSummarySerializer.Meta):
         model = Provider
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "name",
             "area",
             "type",

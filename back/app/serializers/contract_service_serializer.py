@@ -11,7 +11,8 @@ from domains.mixins import BaseDomainMixin
 class ContractServiceSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = ContractService
-        fields = BaseModelWithFolderSerializer.Meta.fields + (
+        fields = (
+            *BaseModelWithFolderSerializer.Meta.fields,
             "code",
             "name",
             "properties",
@@ -27,7 +28,7 @@ class ContractServiceSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
         cs_properties = obj.properties
         cs_values = obj.contract_service_values.all()
         for cs_value in cs_values:
-            cs_property = [key for key in cs_properties if key == cs_value.code][0]
+            cs_property = next(key for key in cs_properties if key == cs_value.code)
             cs_properties[cs_property]["value"] = cs_value.value
         return cs_properties
 
@@ -35,9 +36,9 @@ class ContractServiceSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
         cs_values = instance.contract_service_values.all()
 
         for cs_property in cs_properties:
-            cs_value = [
+            cs_value = next(
                 cs_value for cs_value in cs_values if cs_value.code == cs_property
-            ][0]
+            )
             cs_value.value = cs_properties[cs_property]["value"]
             cs_value.save()
 

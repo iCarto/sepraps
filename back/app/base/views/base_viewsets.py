@@ -12,7 +12,8 @@ from questionnaires.renderers import DataFrameCSVFileRenderer
 class ModelListViewSet(ListSummaryMixin, ListGeoMixin, viewsets.ModelViewSet):
     """Viewset class with list and geo serializers."""
 
-    renderer_classes = tuple(api_settings.DEFAULT_RENDERER_CLASSES) + (
+    renderer_classes = (
+        *tuple(api_settings.DEFAULT_RENDERER_CLASSES),
         GeojsonRenderer,
         DataFrameCSVFileRenderer,
         DataFrameShapefileFileRenderer,

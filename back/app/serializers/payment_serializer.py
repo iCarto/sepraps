@@ -18,7 +18,8 @@ from domains.models import DomainCategoryChoices
 class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = Payment
-        fields = BaseModelWithFolderSerializer.Meta.fields + (
+        fields = (
+            *BaseModelWithFolderSerializer.Meta.fields,
             "name",
             "expected_fixed_amount",
             "expected_variable_amount",
@@ -119,7 +120,8 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 class PaymentSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
     class Meta(BaseSummarySerializer.Meta):
         model = Payment
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "name",
             "paid_total_amount",
             "status",

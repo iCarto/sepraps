@@ -135,12 +135,10 @@ def post_create(sender, instance, created, *args, **kwargs):
 
     instance.questionnaires.set(
         Questionnaire.objects.filter(
-            code__in=list(
-                map(
-                    lambda questionnaire: questionnaire.get("code"),
-                    data.get("questionnaires", []),
-                )
-            )
+            code__in=[
+                questionnaire.get("code")
+                for questionnaire in data.get("questionnaires", [])
+            ]
         )
     )
 
@@ -155,7 +153,7 @@ def post_create(sender, instance, created, *args, **kwargs):
 def get_code_for_new_project():
     """Returns a new code with format YYYY-type-000
     where 'YYYY' is current year and '000' is the number
-    order for projects created this year
+    order for projects created this year.
     """
     year = timezone.now().year
 

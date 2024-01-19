@@ -85,7 +85,6 @@ class ProjectFilter(filters.FilterSet):
         return queryset.filter(models.Q(linked_localities__department=department))
 
     def filter_by_construction_contract(self, queryset, param_name, search_value):
-        print(search_value)
         return queryset.filter(models.Q(related_contracts__contract=search_value))
 
     def filter_by_financing_program(self, queryset, param_name, search_value):
@@ -159,6 +158,7 @@ class ProjectViewSet(ModelListViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.validated_data)
+        return None
 
     @action(detail=True, methods=["put"], url_path="close")
     def close_project(self, request, pk=None):
@@ -206,7 +206,7 @@ class ProjectViewSet(ModelListViewSet):
 
     @action(detail=True)
     def milestones(self, request, pk=None):
-        """Returns a list of all the milestones for the project"""
+        """Returns a list of all the milestones for the project."""
         project = self.get_object()
         milestones = (
             Milestone.objects.filter(project=project)
@@ -227,7 +227,7 @@ class ProjectViewSet(ModelListViewSet):
         url_path="questionnaire_instances/(?P<questionnaire_code>\w+)",  # noqa: W605
     )
     def questionnaire_instances(self, request, questionnaire_code, pk=None):
-        """Returns a list of all the instances of the questionnaire for the project"""
+        """Returns a list of all the instances of the questionnaire for the project."""
         project = self.get_object()
         questionnaire = Questionnaire.objects.get(pk=questionnaire_code)
         instances = ProjectQuestionnaireInstance.objects.filter(
@@ -244,11 +244,11 @@ class ProjectViewSet(ModelListViewSet):
             if not serializer.is_valid():
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             serializer.update(
-                instance=dict(
-                    project=project,
-                    questionnaire=questionnaire,
-                    questionnaire_instances=questionnaire_instances,
-                ),
+                instance={
+                    "project": project,
+                    "questionnaire": questionnaire,
+                    "questionnaire_instances": questionnaire_instances,
+                },
                 validated_data=serializer.validated_data,
             )
 
@@ -261,11 +261,11 @@ class ProjectViewSet(ModelListViewSet):
 
         return Response(
             ProjectQuestionnaireInstanceSerializer(
-                dict(
-                    project=project,
-                    questionnaire=questionnaire,
-                    questionnaire_instances=questionnaire_instances,
-                ),
+                {
+                    "project": project,
+                    "questionnaire": questionnaire,
+                    "questionnaire_instances": questionnaire_instances,
+                },
                 context={"request": request},
             ).data
         )

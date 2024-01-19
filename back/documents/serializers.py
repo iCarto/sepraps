@@ -5,7 +5,7 @@ from documents.models import MediaNode
 
 class HashHyperlinkedIdentityField(serializers.HyperlinkedIdentityField):
     def get_url(self, obj, view_name, request, format):
-        """Adds a hash in the query string useful for caching resources"""
+        """Adds a hash in the query string useful for caching resources."""
         url = super().get_url(obj, view_name, request, format)
         return url + "?date={}".format(obj.created_at.strftime("%Y%m%d%H%M%S%f"))
 

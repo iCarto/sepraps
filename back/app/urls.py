@@ -99,4 +99,5 @@ urlpatterns = [
         "projectstats/socialcomponenttrainings/<str:group_code>",
         project_stats_views.get_social_component_trainings_multi_stats,
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+]

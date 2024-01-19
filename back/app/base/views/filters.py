@@ -12,3 +12,4 @@ class MappedOrderingFilter(OrderingFilter):
                 field_map_with_desc[field_key] = field_value
                 field_map_with_desc[f"-{field_key}"] = f"-{field_value}"
             return [field_map_with_desc.get(o, o) for o in ordering]
+        return None

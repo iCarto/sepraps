@@ -10,7 +10,8 @@ from domains.models import DomainCategoryChoices
 class ProductSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = Product
-        fields = BaseModelWithFolderSerializer.Meta.fields + (
+        fields = (
+            *BaseModelWithFolderSerializer.Meta.fields,
             "name",
             "status",
             "product_date",

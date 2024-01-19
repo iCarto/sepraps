@@ -12,13 +12,14 @@ def rotate_image(orientation, image):
         return image.rotate(270, expand=True)
     elif orientation == 8:
         return image.rotate(90, expand=True)
+    return None
 
 
 def fix_jpeg_orientation(filepath):
     filepath = os.path.join(settings.MEDIA_ROOT, filepath)
     image = Image.open(filepath)
 
-    for orientation in ExifTags.TAGS.keys():
+    for orientation in ExifTags.TAGS:
         if ExifTags.TAGS[orientation] == "Orientation":
             break
 

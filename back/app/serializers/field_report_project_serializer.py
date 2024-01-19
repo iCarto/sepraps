@@ -12,7 +12,8 @@ from app.serializers.project_serializer import ProjectShortSerializer
 class FieldReportProjectSerializer(BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = FieldReportProject
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "history",
             "project",
             "construction_contract_number",

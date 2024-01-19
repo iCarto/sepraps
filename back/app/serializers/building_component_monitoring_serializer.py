@@ -14,7 +14,8 @@ from domains.models import DomainCategoryChoices
 class BuildingCompanyMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = BuildingComponentMonitoring
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "execution_status",
             "quality_status",
             "expected_amount",
@@ -45,7 +46,8 @@ class BuildingCompanyMonitoringSummarySerializer(
 ):
     class Meta(BaseSummarySerializer.Meta):
         model = BuildingComponentMonitoring
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "code",
             "name",
             "execution_status",
