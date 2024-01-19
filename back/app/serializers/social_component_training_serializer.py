@@ -23,7 +23,7 @@ class SocialComponentTrainingSerializer(BaseDomainMixin, BaseModelSerializer):
             "number_of_women",
             "number_of_men",
             "number_of_participants",
-            "woman_percentage",
+            "women_percentage",
             "men_percentage",
             "number_of_hours",
             "number_of_digital_materials",

@@ -60,7 +60,7 @@ class SocialComponentTraining(BaseDocumentModel, BaseEntityModelMixin):
         return (self.number_of_women or 0) + (self.number_of_men or 0)
 
     @property
-    def woman_percentage(self):
+    def women_percentage(self):
         number_of_participants = self.number_of_participants
         if not self.number_of_women or not number_of_participants:
             return 0
