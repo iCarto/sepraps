@@ -326,3 +326,8 @@ if not DEBUG:
             }
         },
     }
+    
+SHELL_PLUS_IMPORTS = ["from django.db import models"]
+SHELL_PLUS_PRINT_SQL = True
+SHELL_PLUS_PRINT_SQL_TRUNCATE = None
+
