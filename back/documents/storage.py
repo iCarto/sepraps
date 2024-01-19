@@ -22,10 +22,8 @@ def fix_jpeg_orientation(filepath):
         if ExifTags.TAGS[orientation] == "Orientation":
             break
 
-    exif = image._getexif()  # noqa: WPS437
-    exif_orientation = (
-        exif[orientation] if exif and orientation in exif else None  # noqa: WPS441
-    )
+    exif = image._getexif()
+    exif_orientation = exif[orientation] if exif and orientation in exif else None
     if exif_orientation:
         image = rotate_image(exif_orientation, image)
 
@@ -33,7 +31,7 @@ def fix_jpeg_orientation(filepath):
         image.close()
 
 
-def open(file, mode="rb"):  # noqa: WPS125
+def open(file, mode="rb"):
     return default_storage.open(file, mode)
 
 
@@ -45,7 +43,7 @@ def save(path, file):
             fix_jpeg_orientation(path)
         except (AttributeError, KeyError, IndexError):
             # cases: image don't have getexif
-            pass  # noqa: WPS420
+            pass
 
     return saved_file
 

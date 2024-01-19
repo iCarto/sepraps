@@ -1,5 +1,3 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import (
@@ -9,6 +7,8 @@ from app.base.serializers.base_serializers import (
 from app.models.project import Project
 from app.models.provider import Provider
 from app.serializers.contact_relationship_serializer import ContactProviderSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class ProviderSerializer(BaseDomainMixin, BaseModelSerializer):

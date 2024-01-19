@@ -2,7 +2,7 @@ class ListPaginationMixin(object):
     @property
     def paginator(self):
         """The paginator instance associated with the view, or `None`."""
-        if not hasattr(self, "_paginator"):  # noqa: WPS421
+        if not hasattr(self, "_paginator"):
             if self.get_pagination_class() is None:
                 self._paginator = None
             else:
@@ -16,7 +16,7 @@ class ListPaginationMixin(object):
 class ListGeoMixin(object):
     geo_serializer_class = None
 
-    def get_geo_serializer_class(self):  # noqa: WPS615
+    def get_geo_serializer_class(self):
         """Return the class to use for the serializer in a 'list' action.
 
         Defaults to using `self.geo_serializer_class`.
@@ -33,7 +33,7 @@ class ListGeoMixin(object):
 class ListSummaryMixin(object):
     summary_serializer_class = None
 
-    def get_summary_serializer_class(self):  # noqa: WPS615
+    def get_summary_serializer_class(self):
         """Return the class to use for the serializer in a 'list' action.
 
         Defaults to using `self.summary_serializer_class`.

@@ -132,7 +132,7 @@ class MediaView(views.APIView):
             parent = MediaNode.objects.filter(**parent_filter).first()
 
             if parent:
-                path = save("{0}/{1}".format(parent.storage_path, file.name), file)
+                path = save(f"{parent.storage_path}/{file.name}", file)
 
                 media_node = {
                     "media_type": "DOCUMENT",

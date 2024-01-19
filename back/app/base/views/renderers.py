@@ -25,7 +25,7 @@ def format_float(x):
     if pd.isna(x):
         return None
     if isinstance(x, numbers.Number):
-        return locale.format_string("%.2f", x)  # noqa: WPS323
+        return locale.format_string("%.2f", x)
     return x
 
 
@@ -68,8 +68,8 @@ def get_geodf_from_response(response):
         # working with empty dataframe
         df = geopandas.GeoDataFrame(columns=["id", geom_field], geometry=geom_field)
 
-    df = df.set_crs("epsg:{0}".format(str(settings.STORAGE_SRID)))
-    return df  # noqa: WPS331
+    df = df.set_crs(f"epsg:{settings.STORAGE_SRID!s}")
+    return df
 
 
 def get_df_from_response(response):
@@ -133,7 +133,7 @@ class DataFrameShapefileFileRenderer(renderers.BaseRenderer):
     charset = None
     render_style = "binary"
 
-    def render(self, response, media_type=None, renderer_context=None):  # noqa: WPS210
+    def render(self, response, media_type=None, renderer_context=None):
         df = get_geodf_from_response(response)
         df = format_float_columns(df)
 
@@ -144,7 +144,7 @@ class DataFrameShapefileFileRenderer(renderers.BaseRenderer):
 
             renderer_context["response"][
                 "Content-Disposition"
-            ] = "attachment; filename={0}".format(filename)
+            ] = f"attachment; filename={filename}"
 
             # temp dir to store shp aux files and then create zip inside with to_file
             with tempfile.TemporaryDirectory() as temp_dir:

@@ -46,9 +46,7 @@ class FieldReport(BaseDocumentModel, BaseEntityModelMixin):
             classtype = type(self).__name__
             field_value = sanitize_field_value(self.code)
             root_folder = create_folder_structure(
-                "{0}".format(field_value),
-                "{0}/{1}".format(classtype.lower(), field_value),
-                [],
+                f"{field_value}", f"{classtype.lower()}/{field_value}", []
             )
             self.folder = root_folder
 

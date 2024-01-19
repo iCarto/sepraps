@@ -1,5 +1,3 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.contact import Contact
@@ -9,6 +7,8 @@ from app.models.contact_relationship import (
     ProviderContact,
 )
 from app.serializers.contact_serializer import ContactSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class ContactRelationshipListSerializer(serializers.ListSerializer):

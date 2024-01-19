@@ -42,9 +42,7 @@ def get_end_of_contract_events(filters, user):
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(
@@ -92,9 +90,7 @@ def get_end_of_warranty_events(filters, user):
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(

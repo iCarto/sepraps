@@ -1,11 +1,11 @@
 from django.db.models import Q
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from domains.models import DomainEntry
 from rest_framework import viewsets
 
 from app.models.contractor import Contractor
 from app.serializers.contractor_serializer import ContractorSerializer
+from domains.models import DomainEntry
 
 
 class ContractorFilter(filters.FilterSet):

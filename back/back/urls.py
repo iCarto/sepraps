@@ -21,7 +21,7 @@ urlpatterns = [
 ]
 
 if "drf_spectacular" in settings.INSTALLED_APPS:
-    from drf_spectacular.views import (  # noqa: WPS433
+    from drf_spectacular.views import (
         SpectacularAPIView,
         SpectacularRedocView,
         SpectacularSwaggerView,
@@ -49,6 +49,6 @@ if settings.DEPLOYMENT == "dev":
     )
 
 if settings.DEBUG:
-    import debug_toolbar  # noqa: WPS433
+    import debug_toolbar
 
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]

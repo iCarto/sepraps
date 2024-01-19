@@ -246,8 +246,7 @@ def get_year_month_values(field_code, instances):
 
 
 def flat_values_list(values_list, datatype):
-    """
-    If data are integers or decimals sums all the values of the list.
+    """If data are integers or decimals sums all the values of the list.
     Used for aggregated filters like contracts or programs.
     """
     if len(values_list) == 0:

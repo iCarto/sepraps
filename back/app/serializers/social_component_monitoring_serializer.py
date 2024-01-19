@@ -1,12 +1,11 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
-
 from app.base.serializers.base_serializers import (
     BaseModelSerializer,
     BaseSummarySerializer,
 )
 from app.models.social_component_monitoring import SocialComponentMonitoring
 from app.serializers.comment_serializer import CommentSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class SocialComponentMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):

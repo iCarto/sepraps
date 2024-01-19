@@ -15,8 +15,8 @@ def create_folder(instance, field="id", created=True, children_data=None):
     classtype = type(instance).__name__
     field_value = sanitize_field_value(str(getattr(instance, field)))
     root_folder = create_folder_structure(
-        "{0}_{1}".format(classtype, field_value),
-        "{0}/{1}".format(classtype.lower(), field_value),
+        f"{classtype}_{field_value}",
+        f"{classtype.lower()}/{field_value}",
         children_data,
     )
     instance.folder = root_folder

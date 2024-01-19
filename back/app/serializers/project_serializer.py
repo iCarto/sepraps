@@ -1,12 +1,9 @@
 from django.db.models import Prefetch
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 from rest_framework_gis.fields import GeometryField
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 # from django.db.models import F, Prefetch
-from app.models.construction_contract import ConstructionContract
 from app.models.infrastructure import Infrastructure
 from app.models.milestone import Milestone
 from app.models.project import Project, get_code_for_new_project
@@ -19,6 +16,8 @@ from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
 from app.serializers.provider_serializer import ProviderSerializer
 from documents.serializers import MediaUrlSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from questionnaires.serializers.questionnaire_serializer import (
     QuestionnaireShortSerializer,
 )
@@ -76,7 +75,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
         ).prefetch_related(
             "linked_localities",
             Prefetch(
-                "provider__contacts",
+                "provider__contacts"
                 # TODO this is not working: multiple queries are executed
                 # https://stackoverflow.com/questions/35093204/django-prefetch-related-with-m2m-through-relationship
                 # queryset=ProviderContact.objects.prefetch_related("contact"),
@@ -335,9 +334,9 @@ class ProjectGeoSerializer(GeoFeatureModelSerializer):
             ),
         )
 
-    def get_name(self, obj):  # noqa: WPS615
+    def get_name(self, obj):
         return " - ".join(i.name for i in obj.linked_localities.all())
 
-    def get_status(self, obj):  # noqa: WPS615
+    def get_status(self, obj):
         last_milestone = obj.milestones.first()
         return last_milestone.phase if last_milestone else None

@@ -1,8 +1,6 @@
 import itertools
 
 from django.db.models import Prefetch
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.construction_contract import ConstructionContract
@@ -19,6 +17,8 @@ from app.serializers.contractor_serializer import (
     ContractorSummarySerializer,
 )
 from app.serializers.financing_program_serializer import FinancingProgramSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from questionnaires.serializers.questionnaire_serializer import (
     QuestionnaireShortSerializer,
 )

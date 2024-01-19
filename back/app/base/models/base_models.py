@@ -9,12 +9,10 @@ class BaseModel(models.Model):
     id = models.AutoField(primary_key=True, unique=True, editable=False)
 
     def __str__(self):
-        return "{0}: {1}".format(self.__class__.__name__, self.id)
+        return f"{self.__class__.__name__}: {self.id}"
 
     def __repr__(self):
-        return "{classname}({attributes!r})".format(
-            classname=self.__class__.__name__, attributes=self.__dict__
-        )
+        return f"{self.__class__.__name__}({self.__dict__!r})"
 
 
 class BaseTimestampedModel(models.Model):
@@ -43,8 +41,6 @@ class BaseUserTrackedModel(models.Model):
     )
 
 
-class BaseEntityModelMixin(
-    BaseTimestampedModel, BaseUserTrackedModel, BaseModel
-):  # noqa: WPS215
+class BaseEntityModelMixin(BaseTimestampedModel, BaseUserTrackedModel, BaseModel):
     class Meta(object):
         abstract = True

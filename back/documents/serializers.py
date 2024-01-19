@@ -1,5 +1,3 @@
-from cgitb import lookup
-
 from rest_framework import serializers
 
 from documents.models import MediaNode

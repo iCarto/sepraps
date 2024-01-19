@@ -10,7 +10,6 @@ from django.dispatch import receiver
 from django.utils import timezone
 
 from app.models.building_component import create_project_building_components
-from app.models.construction_contract import ConstructionContract
 from app.models.infrastructure import Infrastructure
 from app.models.location import Locality
 from app.models.provider import Provider
@@ -128,8 +127,8 @@ def post_create(sender, instance, created, *args, **kwargs):
 
     classtype = type(instance).__name__
     root_folder = create_folder_structure(
-        "{0}".format(instance.code),
-        "{0}/{1}".format(classtype.lower(), instance.code),
+        f"{instance.code}",
+        f"{classtype.lower()}/{instance.code}",
         data.get("folders", []),
     )
     instance.folder = root_folder
@@ -154,12 +153,10 @@ def post_create(sender, instance, created, *args, **kwargs):
 
 
 def get_code_for_new_project():
-    """
-    Returns a new code with format YYYY-type-000
+    """Returns a new code with format YYYY-type-000
     where 'YYYY' is current year and '000' is the number
     order for projects created this year
     """
-
     year = timezone.now().year
 
     try:

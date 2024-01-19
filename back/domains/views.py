@@ -1,6 +1,7 @@
+from rest_framework import permissions, viewsets
+
 from domains.models import DomainEntry
 from domains.serializers import DomainEntrySerializer
-from rest_framework import permissions, viewsets
 
 
 class DomainEntryViewSet(viewsets.ReadOnlyModelViewSet):

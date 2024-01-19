@@ -5,7 +5,6 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.db.models import F, Func
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
@@ -144,7 +143,6 @@ def contract_pre_save(sender, instance, *args, **kwargs):
 @receiver(post_save, sender=ConstructionContract)
 def contract_post_save(sender, instance, created, *args, **kwargs):
     """Manage services and supervision area relationships."""
-
     contract_services_to_delete = list(
         set(instance._old_services) - set(instance.services)
     )

@@ -1,9 +1,9 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.contractor import Contractor
 from app.serializers.contact_relationship_serializer import ContactContractorSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class ContractorSerializer(BaseDomainMixin, serializers.ModelSerializer):

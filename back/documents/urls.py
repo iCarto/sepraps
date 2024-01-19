@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 
 from documents.views import MediaView, download, preview
 

@@ -1,7 +1,6 @@
 from django.db import models
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from domains.models import DomainEntry
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -13,6 +12,7 @@ from app.serializers.field_report_serializer import (
     FieldReportSerializer,
     FieldReportSummarySerializer,
 )
+from domains.models import DomainEntry
 
 
 class FieldReportOrderingFilter(MappedOrderingFilter):

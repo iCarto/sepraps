@@ -7,7 +7,7 @@ from django.contrib.gis.db.models.functions import GeoFunc
 def dictfetchall(cursor):
     """Return all rows from a cursor as a dict."""
     columns = [col[0] for col in cursor.description]
-    return [dict(zip(columns, row)) for row in cursor.fetchall()]
+    return [dict(zip(columns, row, strict=False)) for row in cursor.fetchall()]
 
 
 def is_geojson_request(request):
@@ -24,7 +24,7 @@ def format_date(date):
 
 
 def format_decimal(value):
-    return "{0:.2f}".format(value)
+    return f"{value:.2f}"
 
 
 class MakePoint(GeoFunc):

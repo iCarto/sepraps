@@ -32,7 +32,7 @@ class FieldReportProjectSerializer(BaseModelSerializer):
     )
     field_report_project_activities = serializers.SerializerMethodField()
 
-    def get_field_report_project_activities(self, instance):  # noqa: WPS615
+    def get_field_report_project_activities(self, instance):
         activities = instance.field_report_project_activities.all().order_by(
             "date", "id"
         )

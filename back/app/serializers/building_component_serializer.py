@@ -26,7 +26,7 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
 
         return extra_kwargs
 
-    def get_properties(self, obj):  # noqa: WPS615
+    def get_properties(self, obj):
         cs_properties = obj.properties
         cs_values = obj.building_component_values.all()
         for cs_value in cs_values:

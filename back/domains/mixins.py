@@ -1,6 +1,7 @@
+from rest_framework import serializers
+
 from domains.models import DomainEntry
 from domains.util.domain_entry_util import dominio_get_label
-from rest_framework import serializers
 
 
 def relation_method_factory(domain_values, field_name, domain):
@@ -31,17 +32,17 @@ class BaseDomainMixin(object, metaclass=serializers.SerializerMetaclass):
             if domain_field.many is True:
                 self.fields[domain_field.name] = serializers.ListField()
             self.fields[
-                "{0}_label".format(domain_field.name)
+                f"{domain_field.name}_label"
             ] = serializers.SerializerMethodField()
             setattr(
                 self,
-                "get_{0}_label".format(domain_field.name),
+                f"get_{domain_field.name}_label",
                 relation_method_factory(
                     self.domain_values, domain_field.name, domain_field.domain_choices
                 ),
             )
 
-    def get_domain_fields(self):  # noqa: WPS615
+    def get_domain_fields(self):
         """Return the class to use for the serializer in a 'list' action.
 
         Defaults to using `self.domain_fields`.

@@ -37,7 +37,7 @@ class FieldReportProject(BaseDocumentModel, BaseEntityModelMixin):
             classtype = type(self).__name__
             folder = Folder(
                 media_type="FOLDER",
-                media_name="{0}".format(self.project.code),
+                media_name=f"{self.project.code}",
                 storage_path="{0}/{1}/{2}".format(
                     self.field_report.folder.storage_path,
                     classtype.lower(),

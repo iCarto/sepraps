@@ -1,5 +1,3 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import (
@@ -9,6 +7,8 @@ from app.base.serializers.base_serializers import (
 from app.models.building_component_monitoring import BuildingComponentMonitoring
 from app.serializers.building_component_serializer import BuildingComponentSerializer
 from app.serializers.comment_serializer import CommentSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class BuildingCompanyMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):

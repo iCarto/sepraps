@@ -1,11 +1,10 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
-
 from app.base.serializers.base_serializers import (
     BaseModelSerializer,
     BaseModelWithFolderSerializer,
 )
 from app.models.product import Product
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class ProductSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):

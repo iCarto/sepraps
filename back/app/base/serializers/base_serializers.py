@@ -78,7 +78,7 @@ class BaseModelSerializer(serializers.ModelSerializer):
             )
         return response
 
-    def get_folder(self, obj):  # noqa: WPS615
+    def get_folder(self, obj):
         return obj.folder.media_path if obj.folder else None
 
 
@@ -107,7 +107,7 @@ class BaseModelWithFolderSerializer(serializers.ModelSerializer):
         required=False, source="updated_by.username", read_only=True
     )
 
-    def get_folder(self, obj):  # noqa: WPS615
+    def get_folder(self, obj):
         return obj.folder.media_path if obj.folder else None
 
 

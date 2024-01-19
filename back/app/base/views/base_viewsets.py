@@ -21,7 +21,7 @@ class ModelListViewSet(ListSummaryMixin, ListGeoMixin, viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "list":
-            if (  # noqa: WPS337
+            if (
                 self.request.accepted_renderer
                 and self.request.accepted_renderer.format == "geojson"
             ):
@@ -64,14 +64,10 @@ class ModelStatsViewSetMixin(object):
             # if searching stats data is not needed
 
             if self.use_stats():
-                query = "select * from {0}".format(
-                    self.get_stats_database_view()
-                )  # noqa; S608
+                query = f"select * from {self.get_stats_database_view()}"  # noqa; S608
                 if self.action == "retrieve":
                     pk = self.kwargs.get("pk")
-                    query += " where {lookup_field} = {pk}".format(
-                        lookup_field=self.get_stats_database_lookup_field(), pk=pk
-                    )
+                    query += f" where {self.get_stats_database_lookup_field()} = {pk}"
 
                 with connection.cursor() as cursor:
                     cursor.execute(query)

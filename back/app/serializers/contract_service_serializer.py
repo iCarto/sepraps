@@ -1,4 +1,3 @@
-from domains.mixins import BaseDomainMixin
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import (
@@ -6,6 +5,7 @@ from app.base.serializers.base_serializers import (
     BaseModelWithFolderSerializer,
 )
 from app.models.contract_service import ContractService
+from domains.mixins import BaseDomainMixin
 
 
 class ContractServiceSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
@@ -23,7 +23,7 @@ class ContractServiceSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     properties = serializers.JSONField()
 
-    def get_properties(self, obj):  # noqa: WPS615
+    def get_properties(self, obj):
         cs_properties = obj.properties
         cs_values = obj.contract_service_values.all()
         for cs_value in cs_values:

@@ -1,6 +1,7 @@
 from django.urls import include, path
-from domains.views import DomainEntryViewSet
 from rest_framework import routers
+
+from domains.views import DomainEntryViewSet
 
 
 router = routers.DefaultRouter(trailing_slash=False)

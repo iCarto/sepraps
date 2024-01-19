@@ -61,9 +61,7 @@ class Locality(models.Model):
 
 
 def get_code_for_new_locality(department, district):
-    """
-    Returns a new code with format #departmentcodedistrictcode000
-    """
+    """Returns a new code with format #departmentcodedistrictcode000"""
     last_created_locality = (
         Locality.objects.filter(
             department=department, district=district, code__startswith="#"

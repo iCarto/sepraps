@@ -9,7 +9,6 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from domains.models import DomainEntry
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -45,8 +44,8 @@ from app.serializers.social_component_monitoring_serializer import (
     SocialComponentMonitoringSummarySerializer,
 )
 from app.util import is_geojson_request
+from domains.models import DomainEntry
 from questionnaires.models.questionnaire import Questionnaire
-from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
 class ProjectFilter(filters.FilterSet):
@@ -207,9 +206,7 @@ class ProjectViewSet(ModelListViewSet):
 
     @action(detail=True)
     def milestones(self, request, pk=None):
-        """
-        Returns a list of all the milestones for the project
-        """
+        """Returns a list of all the milestones for the project"""
         project = self.get_object()
         milestones = (
             Milestone.objects.filter(project=project)
@@ -230,9 +227,7 @@ class ProjectViewSet(ModelListViewSet):
         url_path="questionnaire_instances/(?P<questionnaire_code>\w+)",  # noqa: W605
     )
     def questionnaire_instances(self, request, questionnaire_code, pk=None):
-        """
-        Returns a list of all the instances of the questionnaire for the project
-        """
+        """Returns a list of all the instances of the questionnaire for the project"""
         project = self.get_object()
         questionnaire = Questionnaire.objects.get(pk=questionnaire_code)
         instances = ProjectQuestionnaireInstance.objects.filter(

@@ -35,7 +35,7 @@ class Product(BaseDocumentModel, BaseEntityModelMixin):
             media_name = sanitize_field_value(self.name)
             folder = Folder(
                 media_type="FOLDER",
-                media_name="{0}".format(media_name),
+                media_name=f"{media_name}",
                 storage_path="{0}/{1}/{2}".format(
                     self.payment.folder.storage_path,
                     classtype.lower(),

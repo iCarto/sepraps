@@ -1,5 +1,3 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import BaseModelSerializer
@@ -10,6 +8,8 @@ from app.serializers.construction_contract_serializer import (
     ConstructionContractShortSerializer,
 )
 from app.serializers.contractor_serializer import ContractorSummarySerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class SocialComponentTrainingSerializer(BaseDomainMixin, BaseModelSerializer):
