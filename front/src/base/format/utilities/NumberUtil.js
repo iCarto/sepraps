@@ -21,6 +21,47 @@ const NumberUtil = {
         return floatNumber.toFixed(decimalSize).replace(".", ",");
     },
 
+    /**
+     * Formats a numerical or string value to a specified decimal size,
+     * removing trailing zeros when possible.
+     *
+     * @param {number|string} value - The numerical or string value to be formatted.
+     * @param {number} [decimalSize=2] - The desired decimal size (default is 2).
+     * @returns {string} - The formatted value as a string.
+     *
+     * @example
+     * // Returns "123.4"
+     * const result = formatDecimalWithoutZero(123.42, 1);
+     *
+     * @example
+     * // Returns "456.78"
+     * const result = formatDecimalWithoutZero("456.7800");
+     */
+    formatDecimalWithoutZeros(value, decimalSize = 2) {
+        if (value === null || value === undefined || value === "") {
+            return "";
+        }
+
+        let floatValue;
+
+        if (typeof value === "number") {
+            floatValue = value;
+        } else if (typeof value === "string") {
+            floatValue = parseFloat(value.replace(",", "."));
+        } else {
+            return value;
+        }
+
+        const fixedNumber = floatValue.toFixed(decimalSize);
+        const hasNonZeroDecimals = parseFloat(fixedNumber) % 1 !== 0;
+
+        const formattedNumber = hasNonZeroDecimals
+            ? fixedNumber.replace(".", ",")
+            : parseFloat(fixedNumber).toString();
+
+        return formattedNumber;
+    },
+
     formatDecimal2(value) {
         if (!value) {
             return "";
