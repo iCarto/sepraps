@@ -1,22 +1,12 @@
-import {CUSTOM_COLORS} from "Theme";
+import {theme} from "Theme";
 import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsFilter";
 import {BarChart} from "base/chart/components";
 import {TextUtil} from "base/format/utilities";
 
 const COLORS = {
-    number_of_women: {
-        main: "#54457F",
-        lightest: "#E8E4F1",
-        light: "#9688BF",
-        dark: "#1B1528",
-    },
-    number_of_men: {
-        main: "#707E45",
-        lightest: "#E5E9D8",
-        light: "#B1BD89",
-        dark: "#232716",
-    },
-    primary: CUSTOM_COLORS.primary,
+    number_of_women: theme.palette.gender1,
+    number_of_men: theme.palette.gender2,
+    primary: theme.palette.primary,
 };
 
 const barProperties = {
@@ -61,7 +51,7 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
             return [
                 {
                     data: chartTrainingData.number_of_women,
-                    label: "Nº de mujeres",
+                    label: "Mujeres",
                     borderColor: COLORS.number_of_women.main,
                     backgroundColor: COLORS.number_of_women.light,
                     datalabels: {
@@ -71,7 +61,7 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
                 },
                 {
                     data: chartTrainingData.number_of_men,
-                    label: "Nº de varones",
+                    label: "Varones",
                     borderColor: COLORS.number_of_men.main,
                     backgroundColor: COLORS.number_of_men.light,
                     ...barProperties,
@@ -83,8 +73,8 @@ const SocialComponentsTrainingsChart = ({trainingData, trainingDataType}) => {
                 {
                     data: chartTrainingData.women_percentage,
                     label: "% de mujeres",
-                    borderColor: COLORS.primary.main,
-                    backgroundColor: COLORS.primary.light,
+                    borderColor: COLORS.number_of_women.main,
+                    backgroundColor: COLORS.number_of_women.light,
                     datalabels: {
                         color: "#ffff",
                     },

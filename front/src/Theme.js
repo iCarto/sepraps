@@ -61,11 +61,13 @@ export const CUSTOM_COLORS = {
     "post-execution": lightGreen,
     other: red,
 
-    // COLORS FOR FINANCIAL MONITORING:
+    // COLORS FOR STATS/MONITORING:
     paid: lightBlue,
     pending: amber,
     expected: orange,
-    "monto-total": indigo,
+    real: lime,
+    gender1: indigo,
+    gender2: lightGreen,
 };
 
 const customTheme = createTheme({
@@ -153,7 +155,7 @@ const customTheme = createTheme({
             dark: CUSTOM_COLORS.other[800],
         },
 
-        // COLORS FOR FINANCIAL MONITORING:
+        // COLORS FOR STATS/MONITORING:
         paid: {
             main: CUSTOM_COLORS.paid[500],
             light: CUSTOM_COLORS.paid[300],
@@ -172,11 +174,23 @@ const customTheme = createTheme({
             lighter: CUSTOM_COLORS.expected[100],
             dark: CUSTOM_COLORS.expected[900],
         },
-        "monto-total": {
-            main: CUSTOM_COLORS["monto-total"][500],
-            light: CUSTOM_COLORS["monto-total"][300],
-            lighter: CUSTOM_COLORS["monto-total"][100],
-            dark: CUSTOM_COLORS["monto-total"][900],
+        real: {
+            main: CUSTOM_COLORS.real[500],
+            light: CUSTOM_COLORS.real[300],
+            lighter: CUSTOM_COLORS.real[100],
+            dark: CUSTOM_COLORS.real[900],
+        },
+        gender1: {
+            main: CUSTOM_COLORS.gender1[500],
+            light: CUSTOM_COLORS.gender1[300],
+            lighter: CUSTOM_COLORS.gender1[100],
+            dark: CUSTOM_COLORS.gender1[900],
+        },
+        gender2: {
+            main: CUSTOM_COLORS.gender2[500],
+            light: CUSTOM_COLORS.gender2[300],
+            lighter: CUSTOM_COLORS.gender2[100],
+            dark: CUSTOM_COLORS.gender2[900],
         },
     },
 

@@ -24,7 +24,7 @@ const ProgressBarSmall = ({label = "", progressValue, progressStyle = {}}) => {
                     </span>
                 </Typography>
             ) : null}
-            <Tooltip title={!label ? `${progressValue}%` : null}>
+            <Tooltip title={!label ? FieldUtil.getValue(progressValue, "%") : null}>
                 <LinearProgress
                     variant="determinate"
                     valueBuffer={progressValue}

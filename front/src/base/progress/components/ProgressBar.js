@@ -1,5 +1,6 @@
 import {theme} from "Theme";
 import {ProgressUtil} from "../utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 import LinearProgress from "@mui/material/LinearProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -37,9 +38,9 @@ const ProgressBar = ({label = "", progressValue}) => {
                     transform: tagPosition,
                 }}
             >
-                {progressValue}%
+                {FieldUtil.getValue(progressValue, "%")}
             </Typography>
-            <Tooltip title={`${progressValue}%`}>
+            <Tooltip title={FieldUtil.getValue(progressValue, "%")}>
                 <LinearProgress
                     valueBuffer={progressValue}
                     variant="determinate"

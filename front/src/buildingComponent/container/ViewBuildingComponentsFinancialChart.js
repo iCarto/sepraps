@@ -101,7 +101,7 @@ const ViewBuildingComponentsFinancialChart = ({filter}) => {
                         backgroundColor: theme.palette.paid.light,
                         datalabels: {
                             align: "center",
-                            color: "#ffff",
+                            backgroundColor: "rgba(250, 250, 250, .5)",
                             formatter: function(value, context) {
                                 return formatLabel(value);
                             },

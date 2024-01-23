@@ -23,7 +23,7 @@ const BuildingComponentsFinancialData = ({financialData}) => {
                     percentage={{
                         value: financialData.real_expected_percentage,
                     }}
-                    colorNamePrimary="monto-total"
+                    colorNamePrimary="expected"
                     colorNameSecondary="expected"
                 />
             </Grid>
@@ -42,7 +42,7 @@ const BuildingComponentsFinancialData = ({financialData}) => {
                         value: financialData.paid_real_percentage,
                     }}
                     colorNamePrimary="paid"
-                    colorNameSecondary="pending"
+                    colorNameSecondary="paid"
                 />
             </Grid>
         </Grid>

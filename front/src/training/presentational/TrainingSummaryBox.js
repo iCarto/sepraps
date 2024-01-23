@@ -49,8 +49,8 @@ const TrainingSummaryBox = ({trainingsTotals}) => {
             <Grid item container xs={3} justifyContent="center" alignItems="center">
                 <SimplePieChart
                     percentageLabel="Mujeres"
-                    colorNameSecondary="primary"
-                    colorNamePrimary="warning"
+                    colorNamePrimary="gender1"
+                    colorNameSecondary="gender1"
                     percentageValue={NumberUtil.formatDecimalWithoutZeros(
                         trainingsTotals.women_percentage,
                         1
