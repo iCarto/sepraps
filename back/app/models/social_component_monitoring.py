@@ -29,6 +29,14 @@ class SocialComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
     )
     comments = models.ManyToManyField(Comment)
 
+    @property
+    def trainings(self):
+        from app.models.social_component_training import SocialComponentTraining
+
+        return SocialComponentTraining.objects.filter(
+            social_component_monitoring_id=self.id
+        )
+
 
 def create_project_social_components(project, components):
     for component_code, component_config in components.items():

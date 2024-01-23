@@ -1,9 +1,14 @@
+from rest_framework import serializers
+
 from app.base.serializers.base_serializers import (
     BaseModelSerializer,
     BaseSummarySerializer,
 )
 from app.models.social_component_monitoring import SocialComponentMonitoring
 from app.serializers.comment_serializer import CommentSerializer
+from app.serializers.social_component_training_serializer import (
+    SocialComponentTrainingSerializer,
+)
 from domains.mixins import BaseDomainField, BaseDomainMixin
 from domains.models import DomainCategoryChoices
 
@@ -43,7 +48,10 @@ class SocialComponentMonitoringSummarySerializer(
             "progress_percentage",
             "execution_status",
             "quality_status",
+            "trainings",
         )
+
+    trainings = serializers.SerializerMethodField(required=False, read_only=True)
 
     domain_fields = [
         BaseDomainField(
@@ -51,3 +59,8 @@ class SocialComponentMonitoringSummarySerializer(
         ),
         BaseDomainField("quality_status", DomainCategoryChoices.quality_status_type),
     ]
+
+    def get_trainings(self, instance):
+        return SocialComponentTrainingSerializer(
+            instance.trainings.all(), many=True
+        ).data
