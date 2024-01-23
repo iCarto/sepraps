@@ -4,13 +4,13 @@ import {useNavigate} from "react-router";
 import {PaymentListSelectorItem} from ".";
 
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import Box from "@mui/material/Box";
 
 const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
     const navigate = useNavigate();
@@ -21,18 +21,18 @@ const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
     }, [payments]);
 
     return (
-        <Paper
+        <Box
             sx={{
-                border: "1px",
-                borderStyle: "solid",
-                borderColor: "darkgray",
+                ml: 1,
                 p: 1,
-                height: "calc(100vh - 180px)",
-                overflow: "auto",
+                backgroundColor: "grey.50",
+                borderRadius: 1,
             }}
         >
             <Grid container justifyContent="space-around" alignItems="center">
-                <Typography>Lista de productos</Typography>
+                <Typography color="primary.main" sx={{textTransform: "uppercase"}}>
+                    Productos
+                </Typography>
                 <IconButton
                     aria-label="add-new-payment-button"
                     color="primary"
@@ -49,19 +49,30 @@ const PaymentListSelector = ({payments, selectedPaymentId, basePath}) => {
                     </Tooltip>
                 </IconButton>
             </Grid>
-            <Divider />
-            <List>
+            <List
+                sx={{
+                    border: 1,
+                    borderColor: "grey.400",
+                    backgroundColor: "grey.300",
+                    borderRadius: 1,
+                    maxHeight: "600px",
+                    overflow: "auto",
+                }}
+            >
                 {paymentsList &&
-                    paymentsList.map(payment => (
-                        <PaymentListSelectorItem
-                            key={payment.id}
-                            payment={payment}
-                            to={`${basePath}/${payment.id.toString()}`}
-                            selected={selectedPaymentId === payment.id}
-                        />
+                    paymentsList.map((payment, index) => (
+                        <>
+                            {index != 0 && <Divider />}
+                            <PaymentListSelectorItem
+                                key={payment.id}
+                                payment={payment}
+                                to={`${basePath}/${payment.id.toString()}`}
+                                selected={selectedPaymentId === payment.id}
+                            />
+                        </>
                     ))}
             </List>
-        </Paper>
+        </Box>
     );
 };
 

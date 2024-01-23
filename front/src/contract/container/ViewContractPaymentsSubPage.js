@@ -72,21 +72,23 @@ const ViewContractPaymentsSubPage = () => {
     return (
         <PaperContainer>
             {!contract.awarding_budget ? (
-                <Grid container justifyContent="center" my={6}>
-                    <Typography
-                        sx={{
-                            fontStyle: "italic",
-                            textAlign: "center",
-                        }}
-                    >
-                        No se pueden gestionar los productos porque el contrato no tiene
-                        monto adjudicado todavía
-                    </Typography>
-                </Grid>
+                <PaperContainer>
+                    <Grid container justifyContent="center" my={6}>
+                        <Typography
+                            sx={{
+                                fontStyle: "italic",
+                                textAlign: "center",
+                            }}
+                        >
+                            No se pueden gestionar los productos porque el contrato no
+                            tiene monto adjudicado todavía
+                        </Typography>
+                    </Grid>
+                </PaperContainer>
             ) : (
                 <TabContainer tabs={tabs} error={error} />
             )}
-        </PaperContainer>
+        </Box>
     );
 };
 

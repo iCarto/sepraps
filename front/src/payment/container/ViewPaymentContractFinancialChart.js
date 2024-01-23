@@ -9,6 +9,8 @@ import {
     PaymentFinancialChartContractAnnotations,
     PaymentFinancialChartUtil,
 } from "payment/presentational/chart";
+import {SectionCard} from "base/ui/section/components";
+import Grid from "@mui/material/Grid";
 
 const ViewPaymentContractFinancialChart = ({
     filter,
@@ -125,39 +127,46 @@ const ViewPaymentContractFinancialChart = ({
 
     return (
         chartData && (
-            <Box sx={{maxWidth: "1000px"}}>
-                <LineChart
-                    title="Supervisión de productos"
-                    labels={chartData.month}
-                    datasets={[
-                        {
-                            data: chartData.cum_approved_total_amount,
-                            label: "Aprobado",
-                            borderWidth: 3,
-                            borderColor: FINANCIAL_CHART_COLORS.approved.main,
-                            backgroundColor: FINANCIAL_CHART_COLORS.approved.main,
-                            spanGaps: true,
-                        },
-                        {
-                            data: chartData.cum_expected_total_amount,
-                            label: "Previsto",
-                            borderWidth: 2,
-                            borderColor: FINANCIAL_CHART_COLORS.expected.main,
-                            backgroundColor: FINANCIAL_CHART_COLORS.expected.light,
-                            spanGaps: true,
-                        },
-                        {
-                            type: "bar",
-                            data: chartData.month_expected_amount,
-                            label: "Productos previstos",
-                            borderWidth: 2,
-                            borderColor: FINANCIAL_CHART_COLORS.expected.main,
-                            backgroundColor: FINANCIAL_CHART_COLORS.expected.light,
-                        },
-                    ]}
-                    options={chartOptions}
-                />
-            </Box>
+            <SectionCard title="Seguimiento financiero">
+                <Grid container justifyContent="center">
+                    <Box sx={{maxWidth: "1000px"}}>
+                        <LineChart
+                            title="Supervisión de productos"
+                            labels={chartData.month}
+                            datasets={[
+                                {
+                                    data: chartData.cum_approved_total_amount,
+                                    label: "Aprobado",
+                                    borderWidth: 3,
+                                    borderColor: FINANCIAL_CHART_COLORS.approved.main,
+                                    backgroundColor:
+                                        FINANCIAL_CHART_COLORS.approved.main,
+                                    spanGaps: true,
+                                },
+                                {
+                                    data: chartData.cum_expected_total_amount,
+                                    label: "Previsto",
+                                    borderWidth: 2,
+                                    borderColor: FINANCIAL_CHART_COLORS.expected.main,
+                                    backgroundColor:
+                                        FINANCIAL_CHART_COLORS.expected.light,
+                                    spanGaps: true,
+                                },
+                                {
+                                    type: "bar",
+                                    data: chartData.month_expected_amount,
+                                    label: "Productos previstos",
+                                    borderWidth: 2,
+                                    borderColor: FINANCIAL_CHART_COLORS.expected.main,
+                                    backgroundColor:
+                                        FINANCIAL_CHART_COLORS.expected.light,
+                                },
+                            ]}
+                            options={chartOptions}
+                        />
+                    </Box>
+                </Grid>
+            </SectionCard>
         )
     );
 };

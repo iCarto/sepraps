@@ -33,4 +33,4 @@ const PaymentStatusChip = ({label, value}) => (
     <Chip label={label} color={getStatusColor(value)} icon={getStatusIcon(value)} />
 );
 
-export {PaymentStatusChip as default, getStatusIcon};
+export {PaymentStatusChip as default, getStatusIcon, getStatusColor};

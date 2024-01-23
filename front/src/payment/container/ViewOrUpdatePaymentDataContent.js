@@ -54,15 +54,6 @@ const ViewOrUpdatePaymentDataContent = ({contract, payment}) => {
                 setMode("edit");
             }}
         />,
-        <SectionCardHeaderAction
-            key="delete"
-            name="delete"
-            text="Eliminar"
-            icon={<DeleteIcon color="error" />}
-            onClick={() => {
-                setIsDeleteDialogOpen(true);
-            }}
-        />,
     ];
 
     const getComponent = mode => {
