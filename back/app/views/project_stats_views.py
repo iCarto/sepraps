@@ -193,9 +193,10 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
 @permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
 def get_social_component_trainings_sum_stats(request, format=None):
-    social_component_monitoring_id = request.GET.get(
-        "social_component_monitoring_id", None
-    )
+    social_component_monitoring = request.GET.get("social_component_monitoring", None)
+    contract = request.GET.get("contract", None)
+    contractor = request.GET.get("contractor", None)
+
     query = """
             SELECT
                 sct.id,
@@ -211,9 +212,12 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 sct.number_of_hours,
                 sct.number_of_digital_materials,
                 sct.number_of_printed_materials,
-                cc2."number" as contract_number,
-                c."name" as contractor_name,
-                scm."name" as social_component_monitoring_name
+                cc2.number as contract_number,
+                cc2.id as contract_id,
+                c.name as contractor_name,
+                c.id as contractor_id,
+                scm.name as social_component_monitoring_name,
+                scm.id as social_component_monitoring_id
             FROM social_component_training sct
                 INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
                 JOIN (
@@ -225,8 +229,12 @@ def get_social_component_trainings_sum_stats(request, format=None):
             WHERE sct.active = True and scm.active = True
             """
 
-    if social_component_monitoring_id:
-        query += f" AND scm.id = {social_component_monitoring_id}"
+    if social_component_monitoring:
+        query += f" AND scm.id = {social_component_monitoring}"
+    if contract:
+        query += f" AND cc2.id = {contract}"
+    if contractor:
+        query += f" AND c.id = {contractor}"
 
     with connection.cursor() as cursor:
         cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))
@@ -261,6 +269,10 @@ def get_social_component_trainings_sum_stats(request, format=None):
         # Convert to nullable integers
         df = df.astype(
             {
+                "id": "Int64",
+                "social_component_monitoring_id": "Int64",
+                "contract_id": "Int64",
+                "contractor_id": "Int64",
                 "number_of_women": "Int64",
                 "number_of_participants": "Int64",
                 "number_of_hours": "Int64",
