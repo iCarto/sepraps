@@ -47,10 +47,12 @@ def get_filter_join_query(params):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
-def get_building_components_stats(request, format=None):
+def get_building_components_stats(request, group_code, format=None):
     group_by_column = "bc.code_label"
     if request.GET.get("project"):
         group_by_column = "bc.name"
+    if group_code == "component_code":
+        group_by_column = "bc.code_label"
 
     query = """
             SELECT

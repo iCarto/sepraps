@@ -86,7 +86,7 @@ urlpatterns = [
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
     path(
-        "projectstats/buildingcomponents",
+        "projectstats/buildingcomponents/<str:group_code>",
         project_stats_views.get_building_components_stats,
     ),
     path(
