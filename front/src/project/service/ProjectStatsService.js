@@ -4,9 +4,11 @@ import {AuthApiService} from "../../base/api/service";
 const basePath = "/api/app/projectstats";
 
 const ProjectStatsService = {
-    getBuildingComponentsStats(filter) {
+    getBuildingComponentsStats(groupByAttribute = "component_code", filter) {
         return AuthApiService.get(
-            `${basePath}/buildingcomponents?${ServiceUtil.getFilterQueryString(filter)}`
+            `${basePath}/buildingcomponents/${groupByAttribute}?${ServiceUtil.getFilterQueryString(
+                filter
+            )}`
         ).then(response => {
             return response;
         });
