@@ -2,12 +2,13 @@ import {useLocation, useOutletContext, useParams} from "react-router-dom";
 
 import {
     ViewSocialComponentsTrainingsChart,
-    ViewSocialComponentsTrainingsTotalsTab,
+    ViewSocialComponentsTrainingsTotalsTable,
 } from "socialComponent/container";
 
 import {SubpageWithSelectorContainer} from "base/ui/main";
 import {SectionCard} from "base/ui/section/components";
 import {ComponentListSelector} from "component/presentational";
+import Stack from "@mui/material/Stack";
 
 const ViewProjectSocialAnalysisContent = () => {
     const {scMonitorings} = useOutletContext();
@@ -30,10 +31,16 @@ const ViewProjectSocialAnalysisContent = () => {
             }
             noItems={isRootPath && scMonitorings && scMonitorings.length === 0}
         >
-            <SectionCard title="Supervisión de componentes sociales">
-                <ViewSocialComponentsTrainingsTotalsTab filter={{project: projectId}} />
-                <ViewSocialComponentsTrainingsChart filter={{project: projectId}} />
-            </SectionCard>
+            <Stack spacing={2}>
+                <SectionCard>
+                    <ViewSocialComponentsTrainingsChart filter={{project: projectId}} />
+                </SectionCard>
+                <SectionCard>
+                    <ViewSocialComponentsTrainingsTotalsTable
+                        filter={{project: projectId}}
+                    />
+                </SectionCard>
+            </Stack>
         </SubpageWithSelectorContainer>
     );
 };

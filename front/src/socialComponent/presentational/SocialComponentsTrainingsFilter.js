@@ -50,8 +50,8 @@ const SocialComponentsTrainingsFilter = ({
     };
 
     return (
-        <Grid container justifyContent="flex-start" spacing={3}>
-            <Grid item xs={3}>
+        <Grid container justifyContent="flex-start" spacing={2}>
+            <Grid item xs={4}>
                 <FormControl fullWidth>
                     <InputLabel id="chart-data-type-select-label">Mostrar</InputLabel>
                     <Select
@@ -69,7 +69,7 @@ const SocialComponentsTrainingsFilter = ({
                     </Select>
                 </FormControl>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
                 <FormControl fullWidth>
                     <InputLabel id="chart-data-type-select-label">
                         Agrupado por

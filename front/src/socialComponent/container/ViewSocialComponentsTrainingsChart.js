@@ -5,7 +5,6 @@ import {ProjectStatsService} from "project/service";
 import {
     SocialComponentsTrainingsChart,
     SocialComponentsTrainingsFilter,
-    SocialComponentsTrainingsTable,
     TRAINING_DATA_FILTER,
 } from "socialComponent/presentational";
 import Grid from "@mui/material/Grid";
@@ -47,12 +46,6 @@ const ViewSocialComponentsTrainingsChart = ({filter}) => {
                             trainingDataType={trainingDataType}
                         />
                     </Box>
-                </Grid>
-                <Grid>
-                    <SocialComponentsTrainingsTable
-                        trainingData={trainingData}
-                        trainingDataType={trainingDataType}
-                    />
                 </Grid>
             </Grid>
         )

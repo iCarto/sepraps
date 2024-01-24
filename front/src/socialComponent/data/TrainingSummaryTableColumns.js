@@ -12,7 +12,7 @@ export function useTrainingSummaryTable() {
         },
         {
             id: "contractor_name",
-            label: "Contratista",
+            label: "Consultora",
             width: 15,
             formatFunction: item => {
                 return item.contractor?.name;

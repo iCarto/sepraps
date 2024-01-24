@@ -5,6 +5,6 @@ export {
     default as ViewSocialComponentsTrainingsChart,
 } from "./ViewSocialComponentsTrainingsChart";
 export {
-    default as ViewSocialComponentsTrainingsTotalsTab,
-} from "./ViewSocialComponentsTrainingsTotalsTab";
+    default as ViewSocialComponentsTrainingsTotalsTable,
+} from "./ViewSocialComponentsTrainingsTotalsTable";
 export {default as ViewSocialComponentsOverview} from "./ViewSocialComponentsOverview";

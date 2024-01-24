@@ -22,3 +22,6 @@ export {default as SocialComponentsSummaryList} from "./SocialComponentsSummaryL
 export {
     default as SocialComponentTrainingsSummaryTable,
 } from "./SocialComponentTrainingsSummaryTable";
+export {
+    default as SocialComponentsTrainingsTableFilter,
+} from "./SocialComponentsTrainingsTableFilter";

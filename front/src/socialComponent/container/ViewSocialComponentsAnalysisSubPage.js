@@ -4,7 +4,7 @@ import {useOutletContext} from "react-router-dom";
 import {SectionCard} from "base/ui/section/components";
 import {
     ViewSocialComponentsTrainingsChart,
-    ViewSocialComponentsTrainingsTotalsTab,
+    ViewSocialComponentsTrainingsTotalsTable,
 } from ".";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs/Tabs";
@@ -56,7 +56,7 @@ const ViewSocialComponentsAnalysisSubPage = ({filter}) => {
                 </Tabs>
             </Box>
             <TabPanel value={tabValue} index={0}>
-                <ViewSocialComponentsTrainingsTotalsTab filter={filter} />
+                <ViewSocialComponentsTrainingsTotalsTable filter={filter} />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
                 <ViewSocialComponentsTrainingsChart filter={filter} />
