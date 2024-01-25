@@ -1,22 +1,26 @@
 import {useEffect, useState} from "react";
 
 import {ProjectStatsService} from "project/service";
+import {useTrainingTotalsTable} from "socialComponent/data";
 
-import {
-    SocialComponentsDownloadButton,
-    SocialComponentsTrainingsTableFilterForm,
-    SocialComponentsTrainingsTotalsTable,
-} from "socialComponent/presentational";
+import {SocialComponentsTrainingsTableFilterForm} from "socialComponent/presentational";
+import {TableDownloadButton, TotalsTable} from "base/table/components";
 import {AlertError} from "base/error/components";
+import {Spinner} from "base/shared/components";
 import Stack from "@mui/material/Stack";
+import Alert from "@mui/material/Alert";
 
 const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
+    const {tableColumns} = useTrainingTotalsTable();
+
     const [trainingData, setTrainingData] = useState(null);
     const [tableFilter, setTableFilter] = useState(null);
     const [isTrainingDataEmpty, setIsTrainingDataEmpty] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
+        setIsLoading(true);
         ProjectStatsService.getSocialComponentTrainingsTotalStats({
             ...filter,
             ...tableFilter,
@@ -24,6 +28,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
             .then(chartData => {
                 setTrainingData(chartData);
                 setIsTrainingDataEmpty(getIsTrainingDataEmpty(chartData));
+                setIsLoading(false);
             })
             .catch(error => {
                 setError(error);
@@ -34,7 +39,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
     const getIsTrainingDataEmpty = trainingData => {
         const combinedTrainingDataValues = Object.values(trainingData).flat();
         return combinedTrainingDataValues.every(
-            value => value === 0 || value === "Total"
+            value => value === 0 || value === "total"
         );
     };
 
@@ -42,27 +47,40 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
         setTableFilter(updatedTableFilter);
     };
 
-    return trainingData && !isTrainingDataEmpty ? (
+    return (
         <>
             <AlertError error={error} />
-            <Stack alignItems="flex-end" spacing={3}>
-                <SocialComponentsTrainingsTableFilterForm
-                    trainingData={trainingData}
-                    filter={tableFilter}
-                    onChangeFilter={handleTableFilter}
-                />
-                <SocialComponentsTrainingsTotalsTable trainingData={trainingData} />
-                <SocialComponentsDownloadButton
-                    service={format => {
-                        return ProjectStatsService.getSocialComponentTrainingsTotalStats(
-                            {...filter, ...tableFilter},
-                            format
-                        );
-                    }}
-                />
+            <Stack spacing={3}>
+                {trainingData && !isTrainingDataEmpty ? (
+                    <SocialComponentsTrainingsTableFilterForm
+                        trainingData={trainingData}
+                        filter={tableFilter}
+                        onChangeFilter={handleTableFilter}
+                    />
+                ) : null}
+                {isLoading ? (
+                    <Spinner />
+                ) : trainingData && !isTrainingDataEmpty ? (
+                    <>
+                        <TotalsTable
+                            dataRows={trainingData}
+                            tableColumns={tableColumns}
+                        />
+                        <TableDownloadButton
+                            service={format => {
+                                return ProjectStatsService.getSocialComponentTrainingsTotalStats(
+                                    {...filter, ...tableFilter},
+                                    format
+                                );
+                            }}
+                        />
+                    </>
+                ) : (
+                    <Alert severity="info">No hay capacitaciones para mostrar</Alert>
+                )}
             </Stack>
         </>
-    ) : null;
+    );
 };
 
 export default ViewSocialComponentsTrainingsTotalsTable;

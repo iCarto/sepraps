@@ -11,9 +11,6 @@ export {
 export {
     default as SocialComponentsTrainingsTotalsTable,
 } from "./SocialComponentsTrainingsTotalsTable";
-export {
-    default as SocialComponentsDownloadButton,
-} from "./SocialComponentsDownloadButton";
 export {default as SocialComponentContent} from "./SocialComponentContent";
 export {
     default as SocialComponentsTotalsContent,

@@ -1,5 +1,4 @@
 import {TABLE_ROW_STYLE} from "base/table/components";
-import {useTrainingTotalsTable} from "socialComponent/data";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -8,14 +7,12 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import Tooltip from "@mui/material/Tooltip";
 
-// TO-DO: REMOVE
-const SocialComponentsTrainingsTotalsTable = ({trainingData, small = false}) => {
-    const {tableColumns} = useTrainingTotalsTable();
-
+const TotalsTable = ({dataRows, tableColumns, small = false}) => {
+    console.log(dataRows, tableColumns);
     return (
         <TableContainer sx={{overflowX: "auto"}}>
             <Table
-                aria-labelledby="Data table"
+                aria-labelledby="Totals table"
                 sx={{tableLayout: "fixed"}}
                 size={small ? "small" : "medium"}
             >
@@ -45,17 +42,19 @@ const SocialComponentsTrainingsTotalsTable = ({trainingData, small = false}) => 
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {trainingData?.id?.map((row, rowIndex) => (
+                    {dataRows?.id?.map((row, rowIndex) => (
                         <TableRow key={rowIndex} hover sx={TABLE_ROW_STYLE}>
-                            {tableColumns.map((headCell, cellIndex) => (
-                                <TableCell key={cellIndex} align="center">
-                                    {headCell.formatFunction
-                                        ? headCell.formatFunction(
-                                              trainingData[headCell.id][rowIndex]
-                                          )
-                                        : trainingData[headCell.id][rowIndex]}
-                                </TableCell>
-                            ))}
+                            {tableColumns.map((headCell, cellIndex) => {
+                                return (
+                                    <TableCell key={cellIndex} align="center">
+                                        {headCell.formatFunction
+                                            ? headCell.formatFunction(
+                                                  dataRows[headCell.id][rowIndex]
+                                              )
+                                            : dataRows[headCell.id][rowIndex]}
+                                    </TableCell>
+                                );
+                            })}
                         </TableRow>
                     ))}
                 </TableBody>
@@ -64,4 +63,4 @@ const SocialComponentsTrainingsTotalsTable = ({trainingData, small = false}) => 
     );
 };
 
-export default SocialComponentsTrainingsTotalsTable;
+export default TotalsTable;

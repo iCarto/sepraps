@@ -9,6 +9,8 @@ import {
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs/Tabs";
 import Tab from "@mui/material/Tab";
+import {ProjectStatsService} from "project/service";
+import {ViewConnectionsTotalsTable} from "connection/container";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -56,6 +58,7 @@ const ViewSocialComponentsAnalysisSubPage = ({filter}) => {
                 </Tabs>
             </Box>
             <TabPanel value={tabValue} index={0}>
+                <ViewConnectionsTotalsTable filter={filter} />
                 <ViewSocialComponentsTrainingsTotalsTable filter={filter} />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>

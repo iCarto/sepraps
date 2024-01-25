@@ -7,7 +7,7 @@ import {useAuth} from "base/user/provider";
 import {AlertError} from "base/error/components";
 import {
     TableCustomCell,
-    TableDownloadButton,
+    EntityTableDownloadButton,
     TableSortingHead,
 } from "base/table/components";
 import {AuthAction} from "base/user/components";
@@ -230,7 +230,7 @@ const EntityTable = ({
                         {page && (
                             <Grid container justifyContent="space-between" sx={{mt: 3}}>
                                 <Grid item>
-                                    <TableDownloadButton
+                                    <EntityTableDownloadButton
                                         service={service}
                                         filter={filter}
                                         sort={sort}

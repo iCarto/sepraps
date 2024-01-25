@@ -12,8 +12,9 @@ import ListItemText from "@mui/material/ListItemText";
 
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
-const SocialComponentsDownloadButton = ({service}) => {
+const EntityTableDownloadButton = ({service, filter, sort, order}) => {
     const download = useDownload();
 
     const [error, setError] = useState(null);
@@ -31,7 +32,8 @@ const SocialComponentsDownloadButton = ({service}) => {
 
     const downloadData = format => {
         setError(null);
-        service(format)
+        service
+            .getList(filter, sort, order, format)
             .then(response => {
                 download(response);
             })
@@ -42,6 +44,11 @@ const SocialComponentsDownloadButton = ({service}) => {
 
     const handleDownloadCSV = () => {
         downloadData(ServiceRequestFormat.CSV);
+        handleClose();
+    };
+
+    const handleDownloadShapefile = () => {
+        downloadData(ServiceRequestFormat.SHP);
         handleClose();
     };
 
@@ -67,10 +74,16 @@ const SocialComponentsDownloadButton = ({service}) => {
                     </ListItemIcon>
                     <ListItemText>CSV</ListItemText>
                 </MenuItem>
+                <MenuItem onClick={handleDownloadShapefile}>
+                    <ListItemIcon>
+                        <PlaceOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText>Shapefile</ListItemText>
+                </MenuItem>
             </Menu>
             {error && <AlertError error={error} />}
         </div>
     );
 };
 
-export default SocialComponentsDownloadButton;
+export default EntityTableDownloadButton;

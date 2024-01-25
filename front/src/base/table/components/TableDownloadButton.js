@@ -12,9 +12,8 @@ import ListItemText from "@mui/material/ListItemText";
 
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 
-const TableDownloadButton = ({service, filter, sort, order}) => {
+const TableDownloadButton = ({service}) => {
     const download = useDownload();
 
     const [error, setError] = useState(null);
@@ -32,8 +31,7 @@ const TableDownloadButton = ({service, filter, sort, order}) => {
 
     const downloadData = format => {
         setError(null);
-        service
-            .getList(filter, sort, order, format)
+        service(format)
             .then(response => {
                 download(response);
             })
@@ -44,11 +42,6 @@ const TableDownloadButton = ({service, filter, sort, order}) => {
 
     const handleDownloadCSV = () => {
         downloadData(ServiceRequestFormat.CSV);
-        handleClose();
-    };
-
-    const handleDownloadShapefile = () => {
-        downloadData(ServiceRequestFormat.SHP);
         handleClose();
     };
 
@@ -73,12 +66,6 @@ const TableDownloadButton = ({service, filter, sort, order}) => {
                         <TextSnippetOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText>CSV</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={handleDownloadShapefile}>
-                    <ListItemIcon>
-                        <PlaceOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText>Shapefile</ListItemText>
                 </MenuItem>
             </Menu>
             {error && <AlertError error={error} />}
