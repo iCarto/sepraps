@@ -4,7 +4,8 @@ import {AuthApiService} from "../../base/api/service";
 const basePath = "/api/app/projectstats";
 
 const ProjectStatsService = {
-    getBuildingComponentsStats(groupByAttribute = "component_code", filter) {
+    getBuildingComponentsStats(groupByAttribute, filter) {
+        groupByAttribute = groupByAttribute || "component_code";
         return AuthApiService.get(
             `${basePath}/buildingcomponents/${groupByAttribute}?${ServiceUtil.getFilterQueryString(
                 filter
@@ -45,6 +46,15 @@ const ProjectStatsService = {
             )}`
         ).then(response => {
             console.log("getSocialComponentTrainingsStats", response);
+            return response;
+        });
+    },
+
+    getConnectionsTotalStats(filter, format = null) {
+        return AuthApiService.get(
+            `${basePath}/connectionstotal?${ServiceUtil.getFilterQueryString(filter)}`,
+            ServiceUtil.getAcceptHeader(format)
+        ).then(response => {
             return response;
         });
     },

@@ -283,3 +283,82 @@ def get_social_component_trainings_sum_stats(request, format=None):
         df.at["Total", "contract_number"] = "Total"
 
         return Response(df)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_connections_total_stats(request, format=None):
+    number_of_people_per_household = 5
+
+    query = """
+            SELECT
+                conn.id as id,
+                project.code as project_code,
+                conn.number_of_households * %(people_per_household)s as population,
+                conn.number_of_planned_connections as number_of_planned_connections,
+                conn.number_of_actual_connections as number_of_actual_connections,
+                conn.number_of_households as number_of_households,
+                round((cast(coalesce(conn.number_of_actual_connections, 0) + coalesce(conn.number_of_existing_connections, 0) as decimal) / coalesce(conn.number_of_households, 1)) * 100, 2)::numeric as connected_households_percentage
+            FROM connection conn
+                JOIN (
+                    {join_query}
+                ) projects ON projects.project_id = conn.project_id
+                JOIN project ON conn.project_id = project.id
+            WHERE conn.active = True
+            """
+
+    with connection.cursor() as cursor:
+        cursor.execute(
+            query.format(join_query=get_filter_join_query(request.GET)),
+            {"people_per_household": number_of_people_per_household},
+        )
+        result = dictfetchall(cursor)
+
+        if not result:
+            df = pd.DataFrame(
+                [["total", 0, 0, 0, 0, 0, 0]],
+                columns=[
+                    "id",
+                    "project_code",
+                    "population",
+                    "number_of_planned_connections",
+                    "number_of_actual_connections",
+                    "number_of_households",
+                    "connected_households_percentage",
+                ],
+            )
+            return Response(df)
+
+        df = pd.DataFrame(result)
+
+        df.loc["Total"] = df[
+            [
+                "population",
+                "number_of_planned_connections",
+                "number_of_actual_connections",
+                "number_of_households",
+            ]
+        ].sum(numeric_only=True)
+
+        df.at["Total", "connected_households_percentage"] = df[
+            "connected_households_percentage"
+        ].mean()
+
+        # Convert to nullable integers
+        df = df.astype(
+            {
+                "id": "Int64",
+                "population": "Int64",
+                "number_of_planned_connections": "Int64",
+                "number_of_actual_connections": "Int64",
+                "number_of_households": "Int64",
+                "connected_households_percentage": "Int64",
+            }
+        )
+
+        data_list = df.to_dict(orient="list")
+
+        last_index = len(data_list["project_code"]) - 1
+        data_list["project_code"][last_index] = "Total"
+
+        return Response(data_list)
