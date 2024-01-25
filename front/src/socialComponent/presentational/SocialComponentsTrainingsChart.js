@@ -1,5 +1,5 @@
 import {theme} from "Theme";
-import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsFilter";
+import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsChartFilter";
 import {BarChart} from "base/chart/components";
 import {TextUtil} from "base/format/utilities";
 

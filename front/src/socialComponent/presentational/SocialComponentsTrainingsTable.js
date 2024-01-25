@@ -1,5 +1,5 @@
 import {TextUtil} from "base/format/utilities";
-import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsFilter";
+import {TRAINING_DATA_FILTER} from "./SocialComponentsTrainingsChartFilter";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";

@@ -4,7 +4,7 @@ import {ProjectStatsService} from "project/service";
 
 import {
     SocialComponentsTrainingsChart,
-    SocialComponentsTrainingsFilter,
+    SocialComponentsTrainingsChartFilter,
     TRAINING_DATA_FILTER,
 } from "socialComponent/presentational";
 import Grid from "@mui/material/Grid";
@@ -32,7 +32,7 @@ const ViewSocialComponentsTrainingsChart = ({filter}) => {
         trainingData && (
             <Grid container>
                 <Grid item container xs={8}>
-                    <SocialComponentsTrainingsFilter
+                    <SocialComponentsTrainingsChartFilter
                         trainingDataType={trainingDataType}
                         onChangeTrainingDataType={value => setTrainingDataType(value)}
                         trainingDataGroupedBy={trainingDataGroupedBy}

@@ -4,7 +4,7 @@ import {ProjectStatsService} from "project/service";
 
 import {
     SocialComponentsDownloadButton,
-    SocialComponentsTrainingsTableFilter,
+    SocialComponentsTrainingsTableFilterForm,
     SocialComponentsTrainingsTotalsTable,
 } from "socialComponent/presentational";
 import {AlertError} from "base/error/components";
@@ -12,11 +12,15 @@ import Stack from "@mui/material/Stack";
 
 const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
     const [trainingData, setTrainingData] = useState(null);
+    const [tableFilter, setTableFilter] = useState(null);
     const [isTrainingDataEmpty, setIsTrainingDataEmpty] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
-        ProjectStatsService.getSocialComponentTrainingsTotalStats(filter)
+        ProjectStatsService.getSocialComponentTrainingsTotalStats({
+            ...filter,
+            ...tableFilter,
+        })
             .then(chartData => {
                 setTrainingData(chartData);
                 setIsTrainingDataEmpty(getIsTrainingDataEmpty(chartData));
@@ -25,7 +29,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
                 setError(error);
                 console.log(error);
             });
-    }, [filter]);
+    }, [filter, tableFilter]);
 
     const getIsTrainingDataEmpty = trainingData => {
         const combinedTrainingDataValues = Object.values(trainingData).flat();
@@ -34,20 +38,24 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
         );
     };
 
+    const handleTableFilter = updatedTableFilter => {
+        setTableFilter(updatedTableFilter);
+    };
+
     return trainingData && !isTrainingDataEmpty ? (
         <>
             <AlertError error={error} />
-            <Stack alignItems="flex-end" spacing={1}>
-                <SocialComponentsTrainingsTableFilter
+            <Stack alignItems="flex-end" spacing={3}>
+                <SocialComponentsTrainingsTableFilterForm
                     trainingData={trainingData}
-                    filterBy={undefined}
-                    onChangeFilter={undefined}
+                    filter={tableFilter}
+                    onChangeFilter={handleTableFilter}
                 />
                 <SocialComponentsTrainingsTotalsTable trainingData={trainingData} />
                 <SocialComponentsDownloadButton
                     service={format => {
                         return ProjectStatsService.getSocialComponentTrainingsTotalStats(
-                            filter,
+                            {...filter, ...tableFilter},
                             format
                         );
                     }}

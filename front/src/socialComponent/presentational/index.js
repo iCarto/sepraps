@@ -5,9 +5,9 @@ export {
     default as SocialComponentsTrainingsTable,
 } from "./SocialComponentsTrainingsTable";
 export {
-    default as SocialComponentsTrainingsFilter,
+    default as SocialComponentsTrainingsChartFilter,
     TRAINING_DATA_FILTER,
-} from "./SocialComponentsTrainingsFilter";
+} from "./SocialComponentsTrainingsChartFilter";
 export {
     default as SocialComponentsTrainingsTotalsTable,
 } from "./SocialComponentsTrainingsTotalsTable";
@@ -23,5 +23,5 @@ export {
     default as SocialComponentTrainingsSummaryTable,
 } from "./SocialComponentTrainingsSummaryTable";
 export {
-    default as SocialComponentsTrainingsTableFilter,
-} from "./SocialComponentsTrainingsTableFilter";
+    default as SocialComponentsTrainingsTableFilterForm,
+} from "./SocialComponentsTrainingsTableFilterForm";

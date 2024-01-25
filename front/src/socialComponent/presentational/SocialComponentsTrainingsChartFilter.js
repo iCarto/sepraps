@@ -35,7 +35,7 @@ const TRAINING_DATA_FILTER = {
     },
 };
 
-const SocialComponentsTrainingsFilter = ({
+const SocialComponentsTrainingsChartFilter = ({
     trainingDataType,
     onChangeTrainingDataType,
     trainingDataGroupedBy,
@@ -50,7 +50,7 @@ const SocialComponentsTrainingsFilter = ({
     };
 
     return (
-        <Grid container justifyContent="flex-start" spacing={2}>
+        <Grid container justifyContent="flex-start" spacing={1}>
             <Grid item xs={4}>
                 <FormControl fullWidth>
                     <InputLabel id="chart-data-type-select-label">Mostrar</InputLabel>
@@ -95,4 +95,4 @@ const SocialComponentsTrainingsFilter = ({
     );
 };
 
-export {SocialComponentsTrainingsFilter as default, TRAINING_DATA_FILTER};
+export {SocialComponentsTrainingsChartFilter as default, TRAINING_DATA_FILTER};
