@@ -123,9 +123,7 @@ class ConstructionContract(models.Model):
 
     @property
     def total_awarding_budget(self):
-        from app.models.amendment import Amendment
-
-        amendments = Amendment.objects.filter(contract=self)
+        amendments = self.contract_amendments.all()
         extra_amounts = [
             amendment.extra_amount for amendment in amendments if amendment.extra_amount
         ]
@@ -135,9 +133,7 @@ class ConstructionContract(models.Model):
 
     @property
     def total_expected_execution_period(self):
-        from app.models.amendment import Amendment
-
-        amendments = Amendment.objects.filter(contract=self)
+        amendments = self.contract_amendments.all()
         extra_periods = [
             amendment.extra_period for amendment in amendments if amendment.extra_period
         ]

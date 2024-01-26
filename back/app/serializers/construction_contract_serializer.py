@@ -80,7 +80,7 @@ class ConstructionContractSummarySerializer(
         """Perform necessary eager loading of data."""
         return queryset.select_related(
             "contractor", "financing_program"
-        ).prefetch_related("financing_program__financing_funds")
+        ).prefetch_related("financing_program__financing_funds", "contract_amendments")
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
