@@ -22,6 +22,7 @@ const ViewContractPaymentsSubPage = () => {
     const isRootPath = location.pathname.split("/").slice(-1)[0] === "payment";
 
     const [contract] = useOutletContext();
+    console.log({contract});
 
     const [error, setError] = useState(null);
     const [paymentsForContract, setPaymentsForContract] = useState(null);
@@ -62,6 +63,11 @@ const ViewContractPaymentsSubPage = () => {
             content: <Outlet context={contextForOutlet} />,
         },
     ];
+
+    const filterStartDate = contract.execution_start_date;
+    const filterEndDate =
+        contract.amended_expected_execution_end_date ||
+        contract.expected_execution_end_date;
 
     return (
         <PaperContainer>

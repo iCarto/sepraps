@@ -107,7 +107,8 @@ const DateUtil = {
         return today;
     },
     formatYearAndMonth(date) {
-        return `${new Date(date).getMonth() + 1}/${new Date(date).getFullYear()}`;
+        const month = `${new Date(date).getMonth() + 1}`.padStart(2, "0");
+        return `${month}-${new Date(date).getFullYear()}`;
     },
 };
 
