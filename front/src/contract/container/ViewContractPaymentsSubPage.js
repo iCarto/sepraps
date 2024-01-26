@@ -68,6 +68,8 @@ const ViewContractPaymentsSubPage = () => {
     const filterEndDate =
         contract.amended_expected_execution_end_date ||
         contract.expected_execution_end_date;
+    const total_difference =
+        100 - (contract.total_awarding_budget / contract.total_amount) * 100;
 
     return (
         <PaperContainer>

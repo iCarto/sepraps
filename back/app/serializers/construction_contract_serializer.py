@@ -56,6 +56,9 @@ class ConstructionContractSummarySerializer(
             "expected_execution_period",
             "total_awarding_budget",
             "total_expected_execution_period",
+            "total_amount_approved",
+            "total_amount_pending",
+            "total_amount",
             "created_at",
             "updated_at",
         )
@@ -80,7 +83,11 @@ class ConstructionContractSummarySerializer(
         """Perform necessary eager loading of data."""
         return queryset.select_related(
             "contractor", "financing_program"
-        ).prefetch_related("financing_program__financing_funds", "contract_amendments")
+        ).prefetch_related(
+            "financing_program__financing_funds",
+            "contract_amendments",
+            "contract_payments",
+        )
 
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
@@ -125,6 +132,9 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "related_contracts",
             "total_awarding_budget",
             "total_expected_execution_period",
+            "total_amount_approved",
+            "total_amount_pending",
+            "total_amount",
             "creation_user",
             "created_at",
             "updated_by",
@@ -193,6 +203,8 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "projects__provider",
             "projects__main_infrastructure",
             "projects__questionnaires",
+            "contract_amendments",
+            "contract_payments",
             # Prefetch(
             #     "contacts", queryset=ProviderContact.objects.select_related("contact")
             # ),

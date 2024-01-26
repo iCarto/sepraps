@@ -5,7 +5,6 @@ from django.dispatch import receiver
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
 from app.models.comment import Comment
 from app.models.construction_contract import ConstructionContract
-from app.util import format_decimal
 from documents.base.base_models import BaseDocumentModel
 
 
@@ -56,20 +55,27 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
     @property
     def expected_total_amount_cumulative(self):
         contract_expected_total_amount_cumulative = Payment.objects.filter(
-            contract=self.contract, id__lte=self.id
+            contract=self.contract,
+            status="pendiente",
+            expected_approval_date__lte=self.expected_approval_date,
         ).aggregate(total=models.Sum("expected_total_amount"))["total"]
         if not contract_expected_total_amount_cumulative:
             return None
-        return format_decimal(contract_expected_total_amount_cumulative)
+        return (
+            contract_expected_total_amount_cumulative
+            + self.paid_total_amount_cumulative
+        )
 
     @property
     def paid_total_amount_cumulative(self):
         contract_paid_total_amount_cumulative = Payment.objects.filter(
-            contract=self.contract, id__lte=self.id
+            contract=self.contract,
+            status="aprobado",
+            approval_date__lte=(self.approval_date or self.expected_approval_date),
         ).aggregate(total=models.Sum("paid_total_amount"))["total"]
         if not contract_paid_total_amount_cumulative:
             return None
-        return format_decimal(contract_paid_total_amount_cumulative)
+        return contract_paid_total_amount_cumulative
 
 
 @receiver(pre_save, sender=Payment)

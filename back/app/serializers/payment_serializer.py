@@ -39,6 +39,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "paid_total_contract_percentage",
             "expected_total_amount_cumulative",
             "expected_total_contract_percentage_cumulative",
+            "expected_awarded_contract_percentage_cumulative",
             "paid_total_amount_cumulative",
             "paid_total_contract_percentage_cumulative",
             "expected_total_contract_amount",
@@ -51,6 +52,9 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     payment_comments = CommentSerializer(source="comments", read_only=True, many=True)
     expected_total_contract_percentage = serializers.SerializerMethodField()
     expected_total_contract_percentage_cumulative = serializers.SerializerMethodField()
+    expected_awarded_contract_percentage_cumulative = (
+        serializers.SerializerMethodField()
+    )
     paid_total_contract_percentage = serializers.SerializerMethodField()
     paid_total_contract_percentage_cumulative = serializers.SerializerMethodField()
     expected_total_contract_amount = serializers.CharField(
@@ -77,9 +81,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     def get_expected_total_contract_percentage(self, instance):
         instance_expected_total_amount = instance.expected_total_amount
-        contract_expected_total_amount = (
-            instance.contract.total_awarding_budget or instance.contract.awarding_budget
-        )
+        contract_expected_total_amount = instance.contract.total_amount
         if not instance_expected_total_amount or not contract_expected_total_amount:
             return None
         return format_decimal(
@@ -90,9 +92,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     def get_expected_total_contract_percentage_cumulative(self, instance):
         expected_total_amount_cumulative = instance.expected_total_amount_cumulative
-        contract_expected_total_amount = (
-            instance.contract.total_awarding_budget or instance.contract.awarding_budget
-        )
+        contract_expected_total_amount = instance.contract.total_amount
         if not expected_total_amount_cumulative or not contract_expected_total_amount:
             return None
         return format_decimal(
@@ -101,11 +101,20 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             / Decimal(contract_expected_total_amount)
         )
 
+    def get_expected_awarded_contract_percentage_cumulative(self, instance):
+        expected_total_amount_cumulative = instance.expected_total_amount_cumulative
+        contract_awarded_amount = instance.contract.total_awarding_budget
+        if not expected_total_amount_cumulative or not contract_awarded_amount:
+            return None
+        return format_decimal(
+            100
+            * Decimal(expected_total_amount_cumulative)
+            / Decimal(contract_awarded_amount)
+        )
+
     def get_paid_total_contract_percentage(self, instance):
         instance_paid_total_amount = instance.paid_total_amount
-        contract_expected_total_amount = (
-            instance.contract.total_awarding_budget or instance.contract.awarding_budget
-        )
+        contract_expected_total_amount = instance.contract.total_amount
         if not instance_paid_total_amount or not contract_expected_total_amount:
             return None
         return format_decimal(
@@ -116,9 +125,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     def get_paid_total_contract_percentage_cumulative(self, instance):
         paid_total_amount_cumulative = instance.paid_total_amount_cumulative
-        contract_expected_total_amount = (
-            instance.contract.total_awarding_budget or instance.contract.awarding_budget
-        )
+        contract_expected_total_amount = instance.contract.total_amount
         if not paid_total_amount_cumulative or not contract_expected_total_amount:
             return None
         return format_decimal(

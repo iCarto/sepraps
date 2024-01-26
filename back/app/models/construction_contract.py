@@ -145,6 +145,31 @@ class ConstructionContract(models.Model):
             )
         return None
 
+    @property
+    def total_amount_approved(self):
+        payments = self.contract_payments.all()
+        payments_amount_approved = [
+            payment.paid_total_amount
+            for payment in payments
+            if payment.status == "aprobado" and payment.paid_total_amount is not None
+        ]
+        return sum(payments_amount_approved)
+
+    @property
+    def total_amount_pending(self):
+        payments = self.contract_payments.all()
+        payments_amount_pending = [
+            payment.expected_total_amount
+            for payment in payments
+            if payment.status == "pendiente"
+            and payment.expected_total_amount is not None
+        ]
+        return sum(payments_amount_pending)
+
+    @property
+    def total_amount(self):
+        return self.total_amount_approved + self.total_amount_pending
+
     def __str__(self):
         return self.number
 

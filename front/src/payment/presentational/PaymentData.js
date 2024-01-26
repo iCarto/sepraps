@@ -3,7 +3,14 @@ import {SectionBox, SectionField} from "base/ui/section/components";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
-import {PRODUCT_STATUS_PAID} from "payment/model";
+import {PRODUCT_STATUS_PAID, PRODUCT_STATUS_PENDING} from "payment/model";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
+import {theme} from "Theme";
+import {PaymentDataProgress} from ".";
 
 const ExpectedAmountSection = ({payment}) => {
     return payment.contract_payment_criteria_type === FIXED_VARIABLE_CRITERIA_TYPE ? (
@@ -71,51 +78,28 @@ const PaymentData = ({payment}) => {
                         value={DateUtil.formatDate(payment.expected_approval_date)}
                     />
                     <ExpectedAmountSection payment={payment} />
-                    <SectionField
-                        label="Porcentaje previsto"
-                        value={NumberUtil.formatDecimal(
-                            payment.expected_total_contract_percentage
-                        )}
-                        unit="%"
-                    />
-                    <Divider sx={{my: 1}} />
-                    <SectionField
-                        label="Monto acumulado previsto"
-                        value={NumberUtil.formatInteger(
-                            payment.expected_total_amount_cumulative
-                        )}
-                        unit="Gs."
-                    />
-                    <SectionField
-                        label="Porcentaje acumulado previsto"
-                        value={NumberUtil.formatDecimal(
-                            payment.expected_total_contract_percentage_cumulative
-                        )}
-                        unit="%"
-                    />
-                    <Divider sx={{my: 1}} />
-
-                    {payment.amended_expected_total_contract_amount ? (
-                        <SectionField
-                            label="Monto adjudicado ampliado"
-                            value={NumberUtil.formatInteger(
-                                payment.amended_expected_total_contract_amount
-                            )}
-                            unit="Gs."
-                        />
-                    ) : (
-                        <SectionField
-                            label={
-                                payment.contract_total_amount_type ===
-                                MAX_MIN_AMOUNT_TYPE
-                                    ? "Monto adjudicado máximo"
-                                    : "Monto adjudicado"
-                            }
-                            value={NumberUtil.formatInteger(
-                                payment.expected_total_contract_amount
-                            )}
-                            unit="Gs."
-                        />
+                    {payment.status === PRODUCT_STATUS_PENDING && (
+                        <>
+                            <Divider sx={{my: 2}} />
+                            <Stack direction="row" justifyContent="space-around">
+                                <PaymentDataProgress
+                                    label="Individual"
+                                    value={payment.expected_total_contract_percentage}
+                                />
+                                <PaymentDataProgress
+                                    label="Total"
+                                    value={
+                                        payment.expected_total_contract_percentage_cumulative
+                                    }
+                                />
+                                <PaymentDataProgress
+                                    label="Adjudicado"
+                                    value={
+                                        payment.expected_awarded_contract_percentage_cumulative
+                                    }
+                                />
+                            </Stack>
+                        </>
                     )}
                 </SectionBox>
             </Grid>
@@ -127,28 +111,19 @@ const PaymentData = ({payment}) => {
                             value={DateUtil.formatDate(payment.approval_date)}
                         />
                         <PaidAmountSection payment={payment} />
-                        <SectionField
-                            label="Porcentaje aprobado"
-                            value={NumberUtil.formatDecimal(
-                                payment.paid_total_contract_percentage
-                            )}
-                            unit="%"
-                        />
-                        <Divider sx={{my: 1}} />
-                        <SectionField
-                            label="Monto acumulado aprobado"
-                            value={NumberUtil.formatInteger(
-                                payment.paid_total_amount_cumulative
-                            )}
-                            unit="Gs."
-                        />
-                        <SectionField
-                            label="Porcentaje acumulado aprobado"
-                            value={NumberUtil.formatDecimal(
-                                payment.paid_total_contract_percentage_cumulative
-                            )}
-                            unit="%"
-                        />
+                        <Divider sx={{my: 2}} />
+                        <Stack direction="row" justifyContent="space-around">
+                            <PaymentDataProgress
+                                label="Individual"
+                                value={payment.paid_total_contract_percentage}
+                            />
+                            <PaymentDataProgress
+                                label="Total"
+                                value={
+                                    payment.paid_total_contract_percentage_cumulative
+                                }
+                            />
+                        </Stack>
                     </SectionBox>
                 )}
             </Grid>
