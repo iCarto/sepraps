@@ -21,13 +21,13 @@ const ProjectContractSection = ({contract}) => {
 
     const getAwardedBudgetField = () => {
         const awardedBudget =
-            contract.amended_awarding_budget || contract.awarding_budget;
+            contract.total_awarding_budget || contract.awarding_budget;
 
         return FieldUtil.getSectionField(
             "Monto adjudicado",
             NumberUtil.formatCurrency(awardedBudget),
             "",
-            contract.amended_awarding_budget ? (
+            contract.total_awarding_budget ? (
                 <TextLinkForTooltip
                     text="Ver adendas"
                     to={contractExecutionSubpagePath}
@@ -40,7 +40,7 @@ const ProjectContractSection = ({contract}) => {
 
     const getExecutionPeriodField = () => {
         const expectedExecutionPeriod =
-            contract.amended_expected_execution_period ||
+            contract.total_expected_execution_period ||
             contract.expected_execution_period;
         const expectedExecutionEndDate =
             contract.amended_expected_execution_end_date ||
@@ -52,7 +52,7 @@ const ProjectContractSection = ({contract}) => {
                 expectedExecutionEndDate
             )})`,
             "",
-            contract.amended_expected_execution_period ? (
+            contract.total_expected_execution_period ? (
                 <TextLinkForTooltip
                     text="Ver adendas"
                     to={contractExecutionSubpagePath}

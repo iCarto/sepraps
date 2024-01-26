@@ -4,11 +4,8 @@ import {TextLink} from "base/navigation/components";
 
 export function useContractTable(display = "regular") {
     const getExecutionPeriod = element => {
-        if (element.amended_expected_execution_period) {
-            return FieldUtil.getValue(
-                element.amended_expected_execution_period,
-                "días"
-            );
+        if (element.total_expected_execution_period) {
+            return FieldUtil.getValue(element.total_expected_execution_period, "días");
         } else return FieldUtil.getValue(element.expected_execution_period, "días");
     };
 
@@ -34,7 +31,7 @@ export function useContractTable(display = "regular") {
                 return getExecutionPeriod(element);
             },
             note: element =>
-                element.amended_expected_execution_period
+                element.total_expected_execution_period
                     ? "Modificado en adenda/s"
                     : null,
         },
@@ -52,12 +49,12 @@ export function useContractTable(display = "regular") {
             width: 15,
             formatFunction: element => {
                 return (
-                    NumberUtil.formatCurrency(element.amended_awarding_budget) ||
+                    NumberUtil.formatCurrency(element.total_awarding_budget) ||
                     NumberUtil.formatCurrency(element.awarding_budget)
                 );
             },
             note: element =>
-                element.amended_awarding_budget ? "Modificado en adenda/s" : null,
+                element.total_awarding_budget ? "Modificado en adenda/s" : null,
         },
         {
             id: "contractor.name",
@@ -123,7 +120,7 @@ export function useContractTable(display = "regular") {
                 width: 15,
                 formatFunction: element => {
                     return NumberUtil.formatCurrency(
-                        element.amended_awarding_budget || element.awarding_budget
+                        element.total_awarding_budget || element.awarding_budget
                     );
                 },
             },

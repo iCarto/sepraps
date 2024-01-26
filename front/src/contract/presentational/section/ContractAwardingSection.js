@@ -18,13 +18,8 @@ const AwardingBudgetSection = ({contract, basePath = ""}) => {
                 label="Monto máximo"
                 value={NumberUtil.formatInteger(contract.awarding_budget)}
                 unit="Gs."
-            />
-            <SectionField
-                label="Monto máximo"
-                value={NumberUtil.formatInteger(contract.awarding_budget)}
-                unit="Gs."
                 tooltipText={
-                    contract.amended_awarding_budget ? (
+                    contract.total_awarding_budget ? (
                         <TextLinkForTooltip
                             text="Ver adendas posteriores"
                             to={`${basePath}/execution`}
@@ -41,7 +36,7 @@ const AwardingBudgetSection = ({contract, basePath = ""}) => {
             value={NumberUtil.formatInteger(contract.awarding_budget)}
             unit="Gs."
             tooltipText={
-                contract.amended_awarding_budget ? (
+                contract.total_awarding_budget ? (
                     <TextLinkForTooltip
                         text="Ver adendas posteriores"
                         to={`${basePath}/execution`}
@@ -81,7 +76,7 @@ const ContractAwardingSection = ({contract, basePath = ""}) => {
                         label="Plazo previsto de ejecución"
                         value={getExpectedExecutionPeriodInfo()}
                         tooltipText={
-                            contract.amended_expected_execution_period ? (
+                            contract.total_expected_execution_period ? (
                                 <TextLinkForTooltip
                                     text="Ver adendas posteriores"
                                     to={`${basePath}/execution`}

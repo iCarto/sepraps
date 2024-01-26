@@ -88,7 +88,7 @@ const ViewContractPaymentsSubPage = () => {
             ) : (
                 <TabContainer tabs={tabs} error={error} />
             )}
-        </Box>
+        </PaperContainer>
     );
 };
 

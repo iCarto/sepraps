@@ -9,11 +9,11 @@ export function useContractCard() {
     const getExecutionPeriod = element => {
         if (
             !element.expected_execution_period &&
-            !element.amended_expected_execution_period
+            !element.total_expected_execution_period
         )
             return "Pendiente";
-        else if (element.amended_expected_execution_period) {
-            return `${element.amended_expected_execution_period} días (${element.amended_expected_execution_period_in_months} meses)`;
+        else if (element.total_expected_execution_period) {
+            return `${element.total_expected_execution_period} días (${element.total_expected_execution_period_in_months} meses)`;
         } else
             return `${element.expected_execution_period} días (${element.expected_execution_period_in_months} meses)`;
     };
@@ -33,7 +33,7 @@ export function useContractCard() {
                 return getExecutionPeriod(element);
             },
             note: element =>
-                element.amended_expected_execution_period
+                element.total_expected_execution_period
                     ? "Modificado en adenda/s"
                     : null,
         },
@@ -49,12 +49,12 @@ export function useContractCard() {
             icon: <MonetizationOnOutlinedIcon fontSize="small" />,
             formatFunction: element => {
                 return (
-                    NumberUtil.formatCurrency(element.amended_awarding_budget) ||
+                    NumberUtil.formatCurrency(element.total_awarding_budget) ||
                     NumberUtil.formatCurrency(element.awarding_budget)
                 );
             },
             note: element =>
-                element.amended_awarding_budget ? "Modificado en adenda/s" : null,
+                element.total_awarding_budget ? "Modificado en adenda/s" : null,
         },
         {
             label: "Contratista",

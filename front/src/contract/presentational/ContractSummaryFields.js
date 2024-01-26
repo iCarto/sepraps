@@ -23,10 +23,10 @@ const AwardingBudgetSection = ({contract}) => {
                 value={NumberUtil.formatInteger(contract.awarding_budget)}
                 unit="Gs."
             />
-            {contract.amended_awarding_budget ? (
+            {contract.total_awarding_budget ? (
                 <SectionField
                     label="Monto ampliado en adenda/s"
-                    value={NumberUtil.formatInteger(contract.amended_awarding_budget)}
+                    value={NumberUtil.formatInteger(contract.total_awarding_budget)}
                     unit="Gs."
                 />
             ) : null}

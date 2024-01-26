@@ -83,7 +83,7 @@ const ExecutionPeriodAmendmentData = ({amendment, contract}) => {
                     value={`${parseInt(
                         amendment.cumulative_contract_amended_execution_period
                     )} días (${
-                        contract.amended_expected_execution_period_in_months
+                        contract.total_expected_execution_period_in_months
                     } meses)`}
                 />
             </Grid>

@@ -122,38 +122,32 @@ class ConstructionContract(models.Model):
         )
 
     @property
-    def amended_awarding_budget(self):
+    def total_awarding_budget(self):
         from app.models.amendment import Amendment
 
         amendments = Amendment.objects.filter(contract=self)
         extra_amounts = [
             amendment.extra_amount for amendment in amendments if amendment.extra_amount
         ]
-
         if self.awarding_budget:
-            amended_awarding_budget = (
-                self.awarding_budget + sum(extra_amounts) if extra_amounts else None
-            )
-
-            return amended_awarding_budget
+            return self.awarding_budget + sum(extra_amounts) if extra_amounts else None
+        return None
 
     @property
-    def amended_expected_execution_period(self):
+    def total_expected_execution_period(self):
         from app.models.amendment import Amendment
 
         amendments = Amendment.objects.filter(contract=self)
         extra_periods = [
             amendment.extra_period for amendment in amendments if amendment.extra_period
         ]
-
         if self.expected_execution_period:
-            amended_expected_execution_period = (
+            return (
                 self.expected_execution_period + sum(extra_periods)
                 if extra_periods
                 else None
             )
-
-            return amended_expected_execution_period
+        return None
 
     def __str__(self):
         return self.number
@@ -177,7 +171,6 @@ def contract_pre_save(sender, instance, *args, **kwargs):
 @receiver(post_save, sender=ConstructionContract)
 def contract_post_save(sender, instance, created, *args, **kwargs):
     """Manage services and supervision area relationships."""
-
     contract_services_to_delete = list(
         set(instance._old_services) - set(instance.services)
     )

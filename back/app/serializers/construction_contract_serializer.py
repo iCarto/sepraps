@@ -1,8 +1,6 @@
 import itertools
 
 from django.db.models import Prefetch
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.construction_contract import ConstructionContract
@@ -19,6 +17,8 @@ from app.serializers.contractor_serializer import (
     ContractorSummarySerializer,
 )
 from app.serializers.financing_program_serializer import FinancingProgramSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from questionnaires.serializers.questionnaire_serializer import (
     QuestionnaireShortSerializer,
 )
@@ -54,8 +54,8 @@ class ConstructionContractSummarySerializer(
             "execution_signature_date",
             "execution_start_date",
             "expected_execution_period",
-            "amended_awarding_budget",
-            "amended_expected_execution_period",
+            "total_awarding_budget",
+            "total_expected_execution_period",
             "created_at",
             "updated_at",
         )
@@ -123,8 +123,8 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "projects",
             "questionnaires",
             "related_contracts",
-            "amended_awarding_budget",
-            "amended_expected_execution_period",
+            "total_awarding_budget",
+            "total_expected_execution_period",
             "creation_user",
             "created_at",
             "updated_by",

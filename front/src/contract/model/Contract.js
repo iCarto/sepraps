@@ -39,16 +39,16 @@ const contract_api_adapter = contract => {
         : null;
 
     contract["amended_expected_execution_end_date"] = contract[
-        "amended_expected_execution_period"
+        "total_expected_execution_period"
     ]
         ? DateUtil.getDateAfterDays(
               contract["execution_start_date"],
-              contract["amended_expected_execution_period"]
+              contract["total_expected_execution_period"]
           )
         : null;
 
-    contract["amended_expected_execution_period_in_months"] = contract[
-        "amended_expected_execution_period"
+    contract["total_expected_execution_period_in_months"] = contract[
+        "total_expected_execution_period"
     ]
         ? DateUtil.getMonths(
               contract["execution_start_date"],
@@ -81,8 +81,8 @@ const contract_view_adapter = contract => {
     contract["awarding_budget"] = !!contract["awarding_budget"]
         ? contract["awarding_budget"]
         : null;
-    contract["amended_awarding_budget"] = !!contract["amended_awarding_budget"]
-        ? contract["amended_awarding_budget"]
+    contract["total_awarding_budget"] = !!contract["total_awarding_budget"]
+        ? contract["total_awarding_budget"]
         : null;
     contract["bid_request_date"] = !!contract["bid_request_date"]
         ? contract["bid_request_date"]
@@ -96,17 +96,15 @@ const contract_view_adapter = contract => {
     contract["expected_execution_period"] = !!contract["expected_execution_period"]
         ? NumberUtil.parseInteger(contract["expected_execution_period"])
         : null;
-    contract["amended_expected_execution_period"] = !!contract[
-        "amended_expected_execution_period"
+    contract["total_expected_execution_period"] = !!contract[
+        "total_expected_execution_period"
     ]
-        ? NumberUtil.parseInteger(contract["amended_expected_execution_period"])
+        ? NumberUtil.parseInteger(contract["total_expected_execution_period"])
         : null;
-    contract["amended_expected_execution_period_in_months"] = !!contract[
-        "amended_expected_execution_period_in_months"
+    contract["total_expected_execution_period_in_months"] = !!contract[
+        "total_expected_execution_period_in_months"
     ]
-        ? NumberUtil.parseInteger(
-              contract["amended_expected_execution_period_in_months"]
-          )
+        ? NumberUtil.parseInteger(contract["total_expected_execution_period_in_months"])
         : null;
 
     contract["warranty_end_date"] = !!contract["warranty_end_date"]
@@ -184,9 +182,9 @@ const createContract = ({
     warranty_end_date = null,
     projects = [],
     questionnaires = [],
-    amended_awarding_budget = null,
-    amended_expected_execution_period = null,
-    amended_expected_execution_period_in_months = null,
+    total_awarding_budget = null,
+    total_expected_execution_period = null,
+    total_expected_execution_period_in_months = null,
     amended_expected_execution_end_date = null,
     created_by = "",
     created_at = null,
@@ -235,9 +233,9 @@ const createContract = ({
         warranty_end_date,
         projects,
         questionnaires,
-        amended_awarding_budget,
-        amended_expected_execution_period,
-        amended_expected_execution_period_in_months,
+        total_awarding_budget,
+        total_expected_execution_period,
+        total_expected_execution_period_in_months,
         amended_expected_execution_end_date,
         created_by,
         created_at,
