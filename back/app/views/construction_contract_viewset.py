@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.functions import Coalesce
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions, status
@@ -119,7 +120,12 @@ class ConstructionContractViewSet(ModelListViewSet):
     def get_contract_payments(self, request, pk):
         return Response(
             PaymentSummarySerializer(
-                Payment.objects.filter(contract=pk).order_by("id"), many=True
+                Payment.objects.filter(contract=pk)
+                .annotate(
+                    payment_date=Coalesce("approval_date", "expected_approval_date")
+                )
+                .order_by("payment_date"),
+                many=True,
             ).data
         )
 

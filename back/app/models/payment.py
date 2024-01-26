@@ -94,4 +94,10 @@ def provider_pre_save(sender, instance, *args, **kwargs):
             instance.paid_total_amount = paid_fixed_amount + paid_variable_amount
         else:
             instance.paid_total_amount = None
+
+    if instance and instance.status != "aprobado":
+        instance.paid_fixed_amount = None
+        instance.paid_variable_amount = None
+        instance.paid_total_amount = None
+        instance.approval_date = None
     return instance

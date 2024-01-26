@@ -1,3 +1,4 @@
+from django.db.models.functions import Coalesce
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,7 +13,9 @@ from app.serializers.payment_serializer import (
 
 
 class PaymentViewSet(ModelListAuditViewSet):
-    queryset = Payment.objects.all()
+    queryset = Payment.objects.annotate(
+        payment_date=Coalesce("approval_date", "expected_approval_date")
+    ).order_by("payment_date")
     serializer_class = PaymentSerializer
     summary_serializer_class = PaymentSummarySerializer
 
