@@ -32,12 +32,12 @@ const ViewBuildingComponentsFinancialData = ({filter}) => {
             {financialData ? (
                 <>
                     <Grid item xs={12}>
+                        <BuildingComponentsProgress financialData={financialData} />
+                    </Grid>
+                    <Grid item xs={12}>
                         <BuildingComponentsFinancialData
                             financialData={financialData}
                         />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <BuildingComponentsProgress financialData={financialData} />
                     </Grid>
                 </>
             ) : (

@@ -8,7 +8,7 @@ import {
 const BuildingComponentsFinancialData = ({financialData}) => {
     return (
         <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
                 <BuildingComponentsFinancialDataBox
                     headline="Monto total vs. previsión inicial"
                     mainValues={{
@@ -27,7 +27,7 @@ const BuildingComponentsFinancialData = ({financialData}) => {
                     colorNameSecondary="expected"
                 />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
                 <BuildingComponentsFinancialDataBox
                     headline="Monto pagado vs. monto total"
                     mainValues={{

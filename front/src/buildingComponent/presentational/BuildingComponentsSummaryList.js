@@ -70,7 +70,7 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                             }
                                             secondary={`— ${bcMonitoring.execution_status_label}`}
                                         />
-                                        <Stack sx={{width: "30%"}}>
+                                        <Stack sx={{minWidth: "25%"}}>
                                             <ProgressBarSmall
                                                 label="Avance financiero"
                                                 progressValue={NumberUtil.parseInteger(
@@ -85,12 +85,19 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                                 )}
                                             />
                                         </Stack>
-                                        <Stack sx={{width: "12%", pl: 3}}>
+                                        <Stack
+                                            sx={{
+                                                width: "5%",
+                                                pl: 3,
+                                                alignItems: "center",
+                                            }}
+                                        >
                                             <AppraisalChip
                                                 label={
                                                     bcMonitoring.quality_status_label
                                                 }
                                                 value={bcMonitoring.quality_status}
+                                                hideLabel
                                             />
                                         </Stack>
                                     </ListItemButton>

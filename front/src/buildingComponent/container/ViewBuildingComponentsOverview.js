@@ -2,16 +2,20 @@ import {useOutletContext} from "react-router-dom";
 
 import {ViewBuildingComponentsFinancialData} from "buildingComponent/container";
 import {BuildingComponentsSummaryList} from "buildingComponent/presentational";
-import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 
 const ViewBuildingComponentsOverview = () => {
     const {project, bcMonitorings} = useOutletContext();
 
     return project && bcMonitorings ? (
-        <Stack spacing={2}>
-            <ViewBuildingComponentsFinancialData filter={{project: project.id}} />
-            <BuildingComponentsSummaryList bcMonitorings={bcMonitorings} />
-        </Stack>
+        <Grid container spacing={2}>
+            <Grid item xs={5}>
+                <ViewBuildingComponentsFinancialData filter={{project: project.id}} />
+            </Grid>
+            <Grid item xs={7}>
+                <BuildingComponentsSummaryList bcMonitorings={bcMonitorings} />
+            </Grid>
+        </Grid>
     ) : null;
 };
 
