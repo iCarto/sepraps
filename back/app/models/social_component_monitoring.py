@@ -31,11 +31,7 @@ class SocialComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
 
     @property
     def trainings(self):
-        from app.models.social_component_training import SocialComponentTraining
-
-        return SocialComponentTraining.objects.filter(
-            social_component_monitoring_id=self.id
-        )
+        return self.social_component_monitoring_trainings.all()
 
 
 def create_project_social_components(project, components):

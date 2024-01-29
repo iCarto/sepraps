@@ -51,7 +51,9 @@ class SocialComponentMonitoringSummarySerializer(
             "trainings",
         )
 
-    trainings = serializers.SerializerMethodField(required=False, read_only=True)
+    trainings = serializers.ListField(
+        child=SocialComponentTrainingSerializer(), read_only=True
+    )
 
     domain_fields = [
         BaseDomainField(
@@ -60,7 +62,12 @@ class SocialComponentMonitoringSummarySerializer(
         BaseDomainField("quality_status", DomainCategoryChoices.quality_status_type),
     ]
 
-    def get_trainings(self, instance):
-        return SocialComponentTrainingSerializer(
-            instance.trainings.all(), many=True
-        ).data
+    def setup_eager_loading(queryset):
+        """Perform necessary eager loading of data."""
+        return queryset.select_related(
+            "social_component_monitoring", "contract", "contractor"
+        ).prefetch_related(
+            "social_component_monitoring_trainings",
+            "contract_social_trainings",
+            "contractor_social_trainings",
+        )
