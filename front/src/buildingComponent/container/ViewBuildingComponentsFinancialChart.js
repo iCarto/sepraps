@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 
 import {ProjectStatsService} from "project/service";
+import {BC_DATA_FILTER} from "buildingComponent/presentational/BuildingComponentsFilter";
 
 import {
     BuildingComponentsFilter,
@@ -9,7 +10,6 @@ import {
 import {Spinner} from "base/shared/components";
 import {AlertError} from "base/error/components";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 
 const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}) => {
     const [chartData, setChartData] = useState(null);
@@ -28,7 +28,11 @@ const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}
                 setError(error);
                 console.log(error);
             });
-    }, [groupedBy, filter]);
+    }, [groupedBy, , filter]);
+
+    useEffect(() => {
+        if (displayGroupedBy) setGroupedBy(BC_DATA_FILTER.GROUPED_BY.UNGROUPED.code);
+    }, [displayGroupedBy]);
 
     const handleChangeGroupedBy = value => {
         setGroupedBy(value);
@@ -39,16 +43,18 @@ const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}
     ) : (
         <>
             <AlertError error={error} />
-            <Grid width={{xs: "100%", lg: "80%", xl: "75%"}}>
-                {displayGroupedBy ? (
-                    <BuildingComponentsFilter
-                        groupedBy={groupedBy}
-                        onChangeGroupedBy={handleChangeGroupedBy}
-                    />
-                ) : null}
-                <Box mt={2}>
+            <Grid container mt={1}>
+                <Grid item xs={9}>
                     <BuildingComponentsFinancialChart chartDataRaw={chartData} />
-                </Box>
+                </Grid>
+                {displayGroupedBy ? (
+                    <Grid item xs={3}>
+                        <BuildingComponentsFilter
+                            groupedBy={groupedBy}
+                            onChangeGroupedBy={handleChangeGroupedBy}
+                        />
+                    </Grid>
+                ) : null}
             </Grid>
         </>
     );
