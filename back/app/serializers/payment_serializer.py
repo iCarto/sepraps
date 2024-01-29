@@ -18,7 +18,8 @@ from domains.models import DomainCategoryChoices
 class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = Payment
-        fields = BaseModelWithFolderSerializer.Meta.fields + (
+        fields = (
+            *BaseModelWithFolderSerializer.Meta.fields,
             "name",
             "expected_fixed_amount",
             "expected_variable_amount",
@@ -46,7 +47,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "amended_expected_total_contract_amount",
         )
 
-    domain_fields = [BaseDomainField("status", DomainCategoryChoices.product_status)]
+    domain_fields = (BaseDomainField("status", DomainCategoryChoices.product_status),)
 
     payment_products = serializers.SerializerMethodField()
     payment_comments = CommentSerializer(source="comments", read_only=True, many=True)
@@ -138,12 +139,14 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 class PaymentSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
     class Meta(BaseSummarySerializer.Meta):
         model = Payment
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "name",
-            "paid_total_amount",
             "status",
-            "approval_date",
+            "expected_total_amount",
             "expected_approval_date",
+            "paid_total_amount",
+            "approval_date",
         )
 
-    domain_fields = [BaseDomainField("status", DomainCategoryChoices.product_status)]
+    domain_fields = (BaseDomainField("status", DomainCategoryChoices.product_status),)

@@ -7,3 +7,4 @@ export {default as ViewPaymentsAnalysisContent} from "./ViewPaymentsAnalysisCont
 export {
     default as ViewPaymentContractFinancialChart,
 } from "./ViewPaymentContractFinancialChart";
+export {default as ViewPaymentContractOverview} from "./ViewPaymentContractOverview";

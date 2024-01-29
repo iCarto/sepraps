@@ -2,7 +2,11 @@ import {getStatusIcon} from "./PaymentStatusChip";
 import {TextLink} from "base/navigation/components";
 
 import Stack from "@mui/material/Stack";
+<<<<<<< HEAD
 import ListItem from "@mui/material/ListItem";
+=======
+import {getStatusIcon} from "./PaymentStatusChip";
+>>>>>>> 8045f210 (Product calendar in overview)
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {DateUtil} from "base/format/utilities";
