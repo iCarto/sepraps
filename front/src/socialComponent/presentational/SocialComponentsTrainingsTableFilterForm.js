@@ -3,6 +3,10 @@ import {FormAutocomplete, FormClearButtonSmall} from "base/form/components";
 import Grid from "@mui/material/Grid";
 
 const getFilterOptionsObject = (dataObject, keyForId, keyForLabel) => {
+    if (!dataObject || typeof dataObject !== "object") {
+        return [];
+    }
+
     const ids = [...new Set(dataObject[keyForId])] || [];
     const labels = [...new Set(dataObject[keyForLabel])] || [];
 

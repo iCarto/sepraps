@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 
+import {theme} from "Theme";
 import {useTabLogic} from "../hooks";
 import {TabUtil} from "../utilities";
 import {RouterUtil} from "base/navigation/utilities";
@@ -32,7 +33,11 @@ const TabContainer = ({tabs, error = ""}) => {
     };
 
     return (
-        <Box sx={{width: "100%"}}>
+        <Box
+            sx={{
+                width: "100%",
+            }}
+        >
             <Tabs value={tabIndex} onChange={handleChangeTab} aria-label="tabs">
                 {tabs.map((tab, index) => (
                     <Tab
@@ -43,7 +48,7 @@ const TabContainer = ({tabs, error = ""}) => {
                     />
                 ))}
             </Tabs>
-            <Divider />
+            <Divider color={theme.palette.secondary.light} />
             <AlertError error={error} />
             {tabs.map((tab, index) => (
                 <TabPanel key={index} index={index} visible={tabIndex === index}>

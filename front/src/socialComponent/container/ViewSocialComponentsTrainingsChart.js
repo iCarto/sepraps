@@ -10,7 +10,6 @@ import {
 import {AlertError} from "base/error/components";
 import {Spinner} from "base/shared/components";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 
 const ViewSocialComponentsTrainingsChart = ({filter}) => {
     const [trainingData, setTrainingData] = useState(null);
@@ -42,25 +41,27 @@ const ViewSocialComponentsTrainingsChart = ({filter}) => {
     return isLoading ? (
         <Spinner />
     ) : (
-        <Grid container>
+        <>
             <AlertError error={error} />
-            <Grid item container xs={8}>
-                <SocialComponentsTrainingsChartFilter
-                    trainingDataType={trainingDataType}
-                    onChangeTrainingDataType={value => setTrainingDataType(value)}
-                    trainingDataGroupedBy={trainingDataGroupedBy}
-                    onChangeTrainingDataGroupedBy={value =>
-                        setTrainingDataGroupedBy(value)
-                    }
-                />
-                <Box mt={2}>
+            <Grid container mt={1}>
+                <Grid item xs={9}>
                     <SocialComponentsTrainingsChart
                         trainingData={trainingData}
                         trainingDataType={trainingDataType}
                     />
-                </Box>
+                </Grid>
+                <Grid item xs={3}>
+                    <SocialComponentsTrainingsChartFilter
+                        trainingDataType={trainingDataType}
+                        onChangeTrainingDataType={value => setTrainingDataType(value)}
+                        trainingDataGroupedBy={trainingDataGroupedBy}
+                        onChangeTrainingDataGroupedBy={value =>
+                            setTrainingDataGroupedBy(value)
+                        }
+                    />
+                </Grid>
             </Grid>
-        </Grid>
+        </>
     );
 };
 

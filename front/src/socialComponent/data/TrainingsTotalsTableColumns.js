@@ -1,4 +1,4 @@
-import {DateUtil} from "base/format/utilities";
+import {DateUtil, NumberUtil} from "base/format/utilities";
 
 export function useTrainingTotalsTable() {
     const tableColumns = [
@@ -54,7 +54,10 @@ export function useTrainingTotalsTable() {
         {
             id: "women_percentage",
             label: "% mujeres",
-            width: 5,
+            width: 10,
+            formatFunction: value => {
+                return `${NumberUtil.formatDecimalWithoutZeros(value)} %`;
+            },
         },
         {
             id: "number_of_hours",

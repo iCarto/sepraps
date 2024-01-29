@@ -51,32 +51,36 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
         <>
             <AlertError error={error} />
             <Stack spacing={3}>
-                {trainingData && !isTrainingDataEmpty ? (
-                    <SocialComponentsTrainingsTableFilterForm
-                        trainingData={trainingData}
-                        filter={tableFilter}
-                        onChangeFilter={handleTableFilter}
-                    />
-                ) : null}
+                <SocialComponentsTrainingsTableFilterForm
+                    trainingData={trainingData}
+                    filter={tableFilter}
+                    onChangeFilter={handleTableFilter}
+                />
                 {isLoading ? (
                     <Spinner />
-                ) : trainingData && !isTrainingDataEmpty ? (
-                    <>
-                        <TotalsTable
-                            dataRows={trainingData}
-                            tableColumns={tableColumns}
-                        />
-                        <TableDownloadButton
-                            service={format => {
-                                return ProjectStatsService.getSocialComponentTrainingsTotalStats(
-                                    {...filter, ...tableFilter},
-                                    format
-                                );
-                            }}
-                        />
-                    </>
                 ) : (
-                    <Alert severity="info">No hay capacitaciones para mostrar</Alert>
+                    <>
+                        {trainingData && !isTrainingDataEmpty ? (
+                            <>
+                                <TotalsTable
+                                    dataRows={trainingData}
+                                    tableColumns={tableColumns}
+                                />
+                                <TableDownloadButton
+                                    service={format => {
+                                        return ProjectStatsService.getSocialComponentTrainingsTotalStats(
+                                            {...filter, ...tableFilter},
+                                            format
+                                        );
+                                    }}
+                                />
+                            </>
+                        ) : (
+                            <Alert severity="info">
+                                No hay capacitaciones para mostrar.
+                            </Alert>
+                        )}
+                    </>
                 )}
             </Stack>
         </>
