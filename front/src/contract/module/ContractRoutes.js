@@ -16,10 +16,10 @@ import {
     ViewContractPaymentsSubPage,
     ViewContractAwardingSubPage,
     ViewContractExecutionSubPage,
-    ViewContractProjectAnalysisSubPage,
-    ViewContractProjectSocialAnalysisSubPage,
+    ViewContractBuildingAnalysisSubPage,
     ViewContractStaffSubPage,
     ViewContractPostExecutionSubPage,
+    ViewContractSocialAnalysisSubPage,
 } from "contract/container";
 import {UpdateContractContactPanel} from "contract/container/monitoring";
 import {UpdateContractContractorContactPanel} from "contractor/container";
@@ -149,7 +149,7 @@ const contractRoutes = [
             <Route
                 key="contract-project-analysis"
                 path="project_analysis"
-                element={<ViewContractProjectAnalysisSubPage />}
+                element={<ViewContractBuildingAnalysisSubPage />}
             />
             <Route
                 key="contract-social"
@@ -159,7 +159,7 @@ const contractRoutes = [
             <Route
                 key="contract-project-social-analysis"
                 path="project_social_analysis"
-                element={<ViewContractProjectSocialAnalysisSubPage />}
+                element={<ViewContractSocialAnalysisSubPage />}
             />
             <Route index element={<Navigate to="summary" replace />} />
         </Route>

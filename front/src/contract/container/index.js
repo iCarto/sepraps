@@ -25,11 +25,8 @@ export {
     default as ViewOrUpdateContractContractorContent,
 } from "./ViewOrUpdateContractContractorContent";
 export {
-    default as ViewContractProjectAnalysisSubPage,
-} from "./ViewContractProjectAnalysisSubPage";
-export {
-    default as ViewContractProjectSocialAnalysisSubPage,
-} from "./ViewContractProjectSocialAnalysisSubPage";
+    default as ViewContractBuildingAnalysisSubPage,
+} from "./ViewContractBuildingAnalysisSubPage";
 export {default as ViewContractStaffSubPage} from "./ViewContractStaffSubPage";
 export {
     default as ViewContractAmendmentsContent,
@@ -37,3 +34,9 @@ export {
 export {
     default as ViewContractPostExecutionSubPage,
 } from "./ViewContractPostExecutionSubPage";
+export {
+    default as ViewContractSocialAnalysisSubPage,
+} from "./ViewContractSocialAnalysisSubPage";
+export {
+    default as ViewContractBuildingAnalysisOverview,
+} from "./ViewContractBuildingAnalysisOverview";

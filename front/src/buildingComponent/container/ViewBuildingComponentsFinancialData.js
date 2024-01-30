@@ -24,11 +24,11 @@ const ViewBuildingComponentsFinancialData = ({filter}) => {
                 console.log(error);
                 setError(error);
             });
-    }, []);
+    }, [filter]);
 
     return (
         <Grid container spacing={2}>
-            {error && <AlertError error={error} />}
+            <AlertError error={error} />
             {financialData ? (
                 <>
                     <Grid item xs={12}>

@@ -6,7 +6,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
 const ProgressBarSmall = ({label = "", progressValue, progressStyle = {}}) => {
-    const barProgress = progressValue >= 100 ? 100 : progressValue;
+    const parsedValue = parseInt(progressValue) || 0;
+    const barProgress = parsedValue >= 100 ? 100 : parsedValue;
 
     return (
         <>
@@ -27,7 +28,7 @@ const ProgressBarSmall = ({label = "", progressValue, progressStyle = {}}) => {
             <Tooltip title={!label ? FieldUtil.getValue(progressValue, "%") : null}>
                 <LinearProgress
                     variant="determinate"
-                    valueBuffer={progressValue}
+                    valueBuffer={parsedValue}
                     value={barProgress}
                     aria-valuenow={progressValue}
                     aria-valuemin={0}

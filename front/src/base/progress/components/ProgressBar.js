@@ -11,7 +11,8 @@ const ProgressBar = ({label = "", progressValue}) => {
             ? `translateX(50%)`
             : `translateX(calc(${progressValue}% - 3px))`;
 
-    const barProgress = progressValue >= 100 ? 100 : progressValue;
+    const parsedValue = parseInt(progressValue) || 0;
+    const barProgress = parsedValue >= 100 ? 100 : parsedValue;
 
     return (
         <>
@@ -42,7 +43,7 @@ const ProgressBar = ({label = "", progressValue}) => {
             </Typography>
             <Tooltip title={FieldUtil.getValue(progressValue, "%")}>
                 <LinearProgress
-                    valueBuffer={progressValue}
+                    valueBuffer={parsedValue}
                     variant="determinate"
                     value={barProgress}
                     aria-valuenow={progressValue}

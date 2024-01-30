@@ -21,14 +21,14 @@ const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}
         setIsLoading(true);
         ProjectStatsService.getBuildingComponentsStats(groupedBy, filter)
             .then(chartData => {
-                setChartData(chartData);
                 setIsLoading(false);
+                setChartData(chartData);
             })
             .catch(error => {
                 setError(error);
                 console.log(error);
             });
-    }, [groupedBy, , filter]);
+    }, [groupedBy, filter]);
 
     useEffect(() => {
         if (displayGroupedBy) setGroupedBy(BC_DATA_FILTER.GROUPED_BY.UNGROUPED.code);

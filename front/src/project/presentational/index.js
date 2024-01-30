@@ -8,3 +8,6 @@ export {default as LatestProjectsList} from "./LatestProjectsList";
 export {default as ProjectTypeIcon} from "./ProjectTypeIcon";
 export {default as ProjectSelectorDialog} from "./ProjectSelectorDialog";
 export {default as ProjectCheckBoxList} from "./ProjectCheckBoxList";
+export {
+    default as ProjectsBuildingAnalysisSummaryList,
+} from "./ProjectsBuildingAnalysisSummaryList";
