@@ -9,3 +9,4 @@ export {default as RelatedContractsTable} from "./RelatedContractsTable";
 export {
     default as ContractRelatedContractsSection,
 } from "./ContractRelatedContractsSection";
+export {default as ContractFinancialDataSummary} from "./ContractFinancialDataSummary";

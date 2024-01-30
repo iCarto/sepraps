@@ -65,7 +65,7 @@ class ConstructionContractSummarySerializer(
 
     services = serializers.ListField(child=serializers.CharField())
 
-    domain_fields = [
+    domain_fields = (
         BaseDomainField("services", DomainCategoryChoices.service_type, many=True),
         BaseDomainField("total_amount_type", DomainCategoryChoices.total_amount_type),
         BaseDomainField(
@@ -74,7 +74,7 @@ class ConstructionContractSummarySerializer(
         BaseDomainField(
             "payment_criteria_type", DomainCategoryChoices.payment_criteria_type
         ),
-    ]
+    )
 
     financing_program = FinancingProgramSerializer()
     contractor = ContractorSummarySerializer()
@@ -130,11 +130,13 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
             "projects",
             "questionnaires",
             "related_contracts",
+            "total_amendments_amount",
             "total_awarding_budget",
             "total_expected_execution_period",
             "total_amount_approved",
             "total_amount_pending",
             "total_amount",
+            "total_amount_percentage",
             "creation_user",
             "created_at",
             "updated_by",
@@ -169,8 +171,14 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
     related_contracts = serializers.ListField(
         child=ConstructionContractSummarySerializer(), read_only=True
     )
+    total_amendments_amount = serializers.DecimalField(decimal_places=2, max_digits=32)
+    total_awarding_budget = serializers.DecimalField(decimal_places=2, max_digits=32)
+    total_amount_approved = serializers.DecimalField(decimal_places=2, max_digits=32)
+    total_amount_pending = serializers.DecimalField(decimal_places=2, max_digits=32)
+    total_amount = serializers.DecimalField(decimal_places=2, max_digits=32)
+    total_amount_percentage = serializers.DecimalField(decimal_places=2, max_digits=10)
 
-    domain_fields = [
+    domain_fields = (
         BaseDomainField("services", DomainCategoryChoices.service_type, many=True),
         BaseDomainField(
             "awarding_professional_liability_insurance",
@@ -189,7 +197,7 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
         BaseDomainField(
             "payment_criteria_type", DomainCategoryChoices.payment_criteria_type
         ),
-    ]
+    )
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""

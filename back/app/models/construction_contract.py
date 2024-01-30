@@ -122,14 +122,19 @@ class ConstructionContract(models.Model):
         )
 
     @property
-    def total_awarding_budget(self):
+    def total_amendments_amount(self):
         amendments = self.contract_amendments.all()
-        extra_amounts = [
+        amendments_amount = [
             amendment.extra_amount for amendment in amendments if amendment.extra_amount
         ]
-        if self.awarding_budget:
-            return self.awarding_budget + sum(extra_amounts) if extra_amounts else None
-        return None
+        return sum(amendments_amount) if amendments_amount else None
+
+    @property
+    def total_awarding_budget(self):
+        total_amendments_amount = self.total_amendments_amount
+        if self.awarding_budget and total_amendments_amount:
+            return self.awarding_budget + total_amendments_amount
+        return self.awarding_budget
 
     @property
     def total_expected_execution_period(self):
@@ -169,6 +174,12 @@ class ConstructionContract(models.Model):
     @property
     def total_amount(self):
         return self.total_amount_approved + self.total_amount_pending
+
+    @property
+    def total_amount_percentage(self):
+        if self.total_awarding_budget:
+            return (self.total_amount / self.total_awarding_budget) * 100
+        return None
 
     def __str__(self):
         return self.number

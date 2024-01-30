@@ -24,7 +24,7 @@ const PaymentCalendarYear = ({year, payments}) => {
                     <Grid
                         key={`${year}-${month}`}
                         item
-                        xs={3}
+                        xs={6}
                         sx={{
                             p: 1,
                         }}
