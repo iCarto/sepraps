@@ -24,7 +24,9 @@ const SubPageMenuListGroupItemButton = ({
     let resolved = useResolvedPath(to);
     let location = useLocation();
 
-    const selected = location.pathname.startsWith(resolved.pathname);
+    const selected =
+        location.pathname.includes(resolved.pathname) ||
+        location.pathname.includes(parentId);
 
     useEffect(() => {
         if (selected) {

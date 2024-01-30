@@ -14,7 +14,7 @@ const ViewSocialComponentContent = () => {
     const {id: projectId, socialComponentId} = useParams();
     const location = useLocation();
 
-    const isRootPath = RouterUtil.getLastUrlSegment(location) === "buildingcomponents";
+    const isRootPath = RouterUtil.getLastUrlSegment(location) === "socialcomponents";
 
     const [socialComponentMonitoring, setSocialComponentMonitoring] = useState(null);
     const [trainings, setTrainings] = useState(null);

@@ -85,13 +85,13 @@ const ProjectSubPageMenu = ({project}) => {
                 icon={<DirectionsCarFilledOutlinedIcon />}
             />
             <SubPageMenuListGroup
-                id="building_monitoring"
+                id="buildingcomponents"
                 headerTitle="Área técnica"
                 headerIcon={<HandymanOutlinedIcon />}
                 items={buildingSupervisionAreaSubmenuItems}
             />
             <SubPageMenuListGroup
-                id="social_monitoring"
+                id="socialcomponents"
                 headerTitle="Área social"
                 headerIcon={<HandshakeOutlinedIcon />}
                 items={socialSupervisionAreaSubmenuItems}
