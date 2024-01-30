@@ -24,78 +24,84 @@ const SocialComponentsSummaryList = ({socialComponents}) => {
     const basePath = location.pathname.split("/overview")[0];
 
     return (
-        <Grid sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 4}}>
-            <Typography
-                component="span"
-                variant="overline"
-                fontSize={16}
-                color={theme.palette.grey[600]}
-                lineHeight={1}
-            >
-                Componentes sociales{" "}
-                <span style={{fontWeight: 800}}>({socialComponents.length})</span>
-            </Typography>
-            <List sx={{m: 0}}>
-                {socialComponents.map((component, index) => {
-                    return (
-                        <div key={index}>
-                            <ListItem disableGutters sx={{py: 0}}>
-                                <CollapsableListItem
-                                    accordionSummary={
-                                        <ListItemButton
-                                            sx={{ml: 0}}
-                                            onClick={() =>
-                                                navigate(`${basePath}/${component.id}`)
-                                            }
-                                        >
-                                            <ListItemText
-                                                id={`${component.code}-summary`}
-                                                primary={
-                                                    <Typography fontWeight={600}>
-                                                        {component.name}
-                                                    </Typography>
+        socialComponents && (
+            <Grid sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 4}}>
+                <Typography
+                    component="span"
+                    variant="overline"
+                    fontSize={16}
+                    color={theme.palette.grey[600]}
+                    lineHeight={1}
+                >
+                    Componentes sociales{" "}
+                    <span style={{fontWeight: 800}}>({socialComponents.length})</span>
+                </Typography>
+                <List sx={{m: 0}}>
+                    {socialComponents.map((component, index) => {
+                        return (
+                            <div key={index}>
+                                <ListItem disableGutters sx={{py: 0}}>
+                                    <CollapsableListItem
+                                        accordionSummary={
+                                            <ListItemButton
+                                                sx={{ml: 0}}
+                                                onClick={() =>
+                                                    navigate(
+                                                        `${basePath}/${component.id}`
+                                                    )
                                                 }
-                                                secondary={`— ${component.execution_status_label}`}
-                                                sx={{width: "60%"}}
-                                            />
-                                            <Stack sx={{width: "30%", pb: 2, px: 3}}>
-                                                <ProgressBarSmall
-                                                    label="Avance"
-                                                    progressValue={NumberUtil.parseInteger(
-                                                        component.progress_percentage
-                                                    )}
-                                                />
-                                            </Stack>
-                                            <Stack sx={{width: "10%"}}>
-                                                <AppraisalChip
-                                                    label={
-                                                        component.quality_status_label
+                                            >
+                                                <ListItemText
+                                                    id={`${component.code}-summary`}
+                                                    primary={
+                                                        <Typography fontWeight={600}>
+                                                            {component.name}
+                                                        </Typography>
                                                     }
-                                                    value={component.quality_status}
+                                                    secondary={`— ${component.execution_status_label}`}
+                                                    sx={{width: "60%"}}
                                                 />
-                                            </Stack>
-                                        </ListItemButton>
-                                    }
-                                >
-                                    {component.trainings.length ? (
-                                        <Box px={2} py={1}>
-                                            <SocialComponentTrainingsSummaryTable
-                                                trainings={component.trainings}
-                                            />
-                                        </Box>
-                                    ) : (
-                                        <Alert severity="info">
-                                            No hay actividades para mostrar.
-                                        </Alert>
-                                    )}
-                                </CollapsableListItem>
-                            </ListItem>
-                            <Divider component="li" sx={{mb: 1}} />
-                        </div>
-                    );
-                })}
-            </List>
-        </Grid>
+                                                <Stack
+                                                    sx={{width: "30%", pb: 2, px: 3}}
+                                                >
+                                                    <ProgressBarSmall
+                                                        label="Avance"
+                                                        progressValue={NumberUtil.parseInteger(
+                                                            component.progress_percentage
+                                                        )}
+                                                    />
+                                                </Stack>
+                                                <Stack sx={{width: "10%"}}>
+                                                    <AppraisalChip
+                                                        label={
+                                                            component.quality_status_label
+                                                        }
+                                                        value={component.quality_status}
+                                                    />
+                                                </Stack>
+                                            </ListItemButton>
+                                        }
+                                    >
+                                        {component.trainings.length ? (
+                                            <Box px={2} py={1}>
+                                                <SocialComponentTrainingsSummaryTable
+                                                    trainings={component.trainings}
+                                                />
+                                            </Box>
+                                        ) : (
+                                            <Alert severity="info">
+                                                No hay actividades para mostrar.
+                                            </Alert>
+                                        )}
+                                    </CollapsableListItem>
+                                </ListItem>
+                                <Divider component="li" sx={{mb: 1}} />
+                            </div>
+                        );
+                    })}
+                </List>
+            </Grid>
+        )
     );
 };
 

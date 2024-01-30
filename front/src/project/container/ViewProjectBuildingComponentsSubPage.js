@@ -10,8 +10,8 @@ import {
 import {ProjectService} from "project/service";
 import {RouterUtil} from "base/navigation/utilities";
 
-import {PaperContainer} from "base/shared/components";
 import {TabContainer} from "base/ui/tab/components";
+import Box from "@mui/material/Box";
 
 const ViewProjectBuildingComponentsSubPage = () => {
     const navigate = useNavigate();
@@ -72,9 +72,9 @@ const ViewProjectBuildingComponentsSubPage = () => {
     ];
 
     return (
-        <PaperContainer>
+        <Box>
             <TabContainer tabs={tabs} error={error} />
-        </PaperContainer>
+        </Box>
     );
 };
 

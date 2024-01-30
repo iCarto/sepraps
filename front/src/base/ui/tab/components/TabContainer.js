@@ -13,6 +13,14 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Divider from "@mui/material/Divider";
 import {Grid} from "@mui/material";
+import styled from "@mui/material/styles/styled";
+
+const StyledTab = styled(Tab)({
+    borderRight: "1px solid #eaeaea",
+    "&.Mui-selected": {
+        backgroundColor: "white",
+    },
+});
 
 const TabContainer = ({tabs, info = null, error = null}) => {
     const {tabIndex, handleChangeTab} = useTabLogic();
@@ -39,11 +47,25 @@ const TabContainer = ({tabs, info = null, error = null}) => {
                 width: "100%",
             }}
         >
-            <Grid container>
-                <Grid item xs={info ? 8 : 12}>
-                    <Tabs value={tabIndex} onChange={handleChangeTab} aria-label="tabs">
+            <Grid
+                container
+                sx={{
+                    backgroundColor: "grey.100",
+                }}
+            >
+                <Grid item xs={info ? 7 : 12}>
+                    <Tabs
+                        value={tabIndex}
+                        onChange={handleChangeTab}
+                        aria-label="tabs"
+                        TabProps={{
+                            style: {
+                                backgroundColor: "red",
+                            },
+                        }}
+                    >
                         {tabs.map((tab, index) => (
-                            <Tab
+                            <StyledTab
                                 key={index}
                                 label={tab.label}
                                 {...TabUtil.a11yProps(index)}
@@ -55,12 +77,23 @@ const TabContainer = ({tabs, info = null, error = null}) => {
                     </Tabs>
                 </Grid>
                 {info && (
-                    <Grid item xs={4}>
+                    <Grid
+                        item
+                        xs={5}
+                        container
+                        alignItems="center"
+                        justifyContent="center"
+                        sx={{
+                            borderLeft: 1,
+                            borderColor: "grey.200",
+                            backgroundColor: "white",
+                        }}
+                    >
                         {info}
                     </Grid>
                 )}
             </Grid>
-            <Divider color={theme.palette.secondary.light} />
+            <Divider />
             <AlertError error={error} />
             {tabs.map((tab, index) => (
                 <TabPanel key={index} index={index} visible={tabIndex === index}>

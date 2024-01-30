@@ -11,7 +11,7 @@ const TabPanel = props => {
             aria-labelledby={`tab-${index}`}
             {...other}
         >
-            {visible && <Box sx={{pt: 2}}>{children}</Box>}
+            {visible && <Box sx={{pt: 1}}>{children}</Box>}
         </div>
     );
 };

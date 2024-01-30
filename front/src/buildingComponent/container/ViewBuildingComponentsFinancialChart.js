@@ -10,6 +10,7 @@ import {
 import {Spinner} from "base/shared/components";
 import {AlertError} from "base/error/components";
 import Grid from "@mui/material/Grid";
+import {SectionCard} from "base/ui/section/components";
 
 const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}) => {
     const [chartData, setChartData] = useState(null);
@@ -41,7 +42,7 @@ const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}
     return isLoading ? (
         <Spinner />
     ) : (
-        <>
+        <SectionCard title="Seguimiento financiero">
             <AlertError error={error} />
             <Grid container mt={1}>
                 <Grid item xs={9}>
@@ -56,7 +57,7 @@ const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}
                     </Grid>
                 ) : null}
             </Grid>
-        </>
+        </SectionCard>
     );
 };
 

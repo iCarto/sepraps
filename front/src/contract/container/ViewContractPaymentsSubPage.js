@@ -15,6 +15,7 @@ import {TabContainer} from "base/ui/tab/components";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import {ContractFinancialDataSummary} from "contract/presentational";
+import Box from "@mui/material/Box";
 
 const ViewContractPaymentsSubPage = () => {
     const navigate = useNavigate();
@@ -71,7 +72,7 @@ const ViewContractPaymentsSubPage = () => {
     ];
 
     return (
-        <PaperContainer>
+        <Box>
             {!contract.awarding_budget ? (
                 <PaperContainer>
                     <Grid container justifyContent="center" my={6}>
@@ -93,7 +94,7 @@ const ViewContractPaymentsSubPage = () => {
                     info={<ContractFinancialDataSummary contract={contract} />}
                 />
             )}
-        </PaperContainer>
+        </Box>
     );
 };
 

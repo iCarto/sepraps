@@ -2,6 +2,7 @@ import {useOutletContext} from "react-router-dom";
 import {PaymentCalendar, PaymentsFinancialData} from "payment/presentational";
 import {SectionCard} from "base/ui/section/components";
 import Stack from "@mui/material/Stack";
+import PaperComponent from "base/shared/components/PaperComponent";
 
 const ViewPaymentContractOverview = () => {
     const {contract, payments} = useOutletContext();
@@ -28,15 +29,17 @@ const ViewPaymentContractOverview = () => {
     return (
         payments && (
             <Stack direction="row" spacing={1}>
-                <SectionCard title="Datos financieros">
+                <PaperComponent>
                     <PaymentsFinancialData contract={contract} />
-                </SectionCard>
-                <SectionCard title="Calendario de productos">
-                    <PaymentCalendar
-                        years={contractYears}
-                        payments={paymentsWithDate}
-                    />
-                </SectionCard>
+                </PaperComponent>
+                <PaperComponent>
+                    <SectionCard title="Calendario de productos">
+                        <PaymentCalendar
+                            years={contractYears}
+                            payments={paymentsWithDate}
+                        />
+                    </SectionCard>
+                </PaperComponent>
             </Stack>
         )
     );

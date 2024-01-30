@@ -1,12 +1,10 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import {theme} from "Theme";
 
 import {NumberUtil} from "base/format/utilities";
 import {ImagePreview} from "base/image/components";
 import {ProgressBarSmall} from "base/progress/components";
 import {AppraisalChip} from "base/shared/components";
 
-import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
@@ -16,6 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import {SectionCard} from "base/ui/section/components";
 
 const BuildingComponentsSummaryList = ({bcMonitorings}) => {
     const navigate = useNavigate();
@@ -24,17 +23,7 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
 
     return (
         bcMonitorings && (
-            <Grid sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 4}}>
-                <Typography
-                    component="span"
-                    variant="overline"
-                    fontSize={16}
-                    color={theme.palette.grey[600]}
-                    lineHeight={1}
-                >
-                    Componentes de obra{" "}
-                    <span style={{fontWeight: 800}}>({bcMonitorings.length})</span>
-                </Typography>
+            <SectionCard title={`Componentes de obra (${bcMonitorings.length})`}>
                 <List sx={{m: 0}}>
                     {bcMonitorings.map(bcMonitoring => {
                         return (
@@ -111,7 +100,7 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                         );
                     })}
                 </List>
-            </Grid>
+            </SectionCard>
         )
     );
 };
