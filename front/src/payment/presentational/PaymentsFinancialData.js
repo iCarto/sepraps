@@ -127,7 +127,7 @@ const PaymentsFinancialData = ({contract}) => {
                         </Grid>
                     </Grid>
                 }
-                colorNamePrimary="monto-total"
+                colorNamePrimary="expected"
                 colorNameSecondary="expected"
             />
         );
@@ -149,7 +149,7 @@ const PaymentsFinancialData = ({contract}) => {
                         success={percentage <= 100}
                     />
                 }
-                colorNamePrimary="monto-total"
+                colorNamePrimary="paid"
                 colorNameSecondary="expected"
             />
         );

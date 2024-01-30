@@ -1,8 +1,11 @@
-import Stack from "@mui/material/Stack";
-import {SectionCard} from "base/ui/section/components";
+import {useOutletContext} from "react-router-dom";
 import {PaymentCalendar, PaymentsFinancialData} from "payment/presentational";
+import {SectionCard} from "base/ui/section/components";
+import Stack from "@mui/material/Stack";
 
-const ViewPaymentContractOverview = ({payments, contract}) => {
+const ViewPaymentContractOverview = () => {
+    const {contract, payments} = useOutletContext();
+
     const startDate = new Date(contract.execution_start_date);
     const endDate = new Date(
         contract.amended_expected_execution_end_date ||

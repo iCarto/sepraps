@@ -26,7 +26,7 @@ const PaymentDataProgress = ({label, value}) => {
                     color:
                         percentage.value > 100
                             ? theme.palette.error.dark
-                            : theme.palette["monto-total"].lighter,
+                            : theme.palette["paid"].lighter,
                 }}
             />
             <CircularProgress

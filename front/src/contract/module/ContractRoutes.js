@@ -28,6 +28,7 @@ import {
     ViewPaymentContent,
     CreatePaymentContent,
     ViewPaymentsAnalysisContent,
+    ViewPaymentContractOverview,
 } from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
 
@@ -113,6 +114,11 @@ const contractRoutes = [
                 path="payment"
                 element={<ViewContractPaymentsSubPage />}
             >
+                <Route
+                    key="contract-payments-overview"
+                    path="overview"
+                    element={<ViewPaymentContractOverview />}
+                />
                 <Route
                     key="contract-payments-new"
                     path="new"

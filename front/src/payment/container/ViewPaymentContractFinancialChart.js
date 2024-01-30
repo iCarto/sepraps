@@ -11,14 +11,9 @@ import {
 } from "payment/presentational/chart";
 import {SectionCard} from "base/ui/section/components";
 import Grid from "@mui/material/Grid";
+import {DateUtil} from "base/format/utilities";
 
-const ViewPaymentContractFinancialChart = ({
-    filter,
-    maxAmount = null,
-    maxAmendedAmount = null,
-    maxEndDate = null,
-    maxAmendedEndDate = null,
-}) => {
+const ViewPaymentContractFinancialChart = ({contract}) => {
     const [chartData, setChartData] = useState(null);
 
     const parseChartData = chartData => {
@@ -100,11 +95,28 @@ const ViewPaymentContractFinancialChart = ({
     };
 
     useEffect(() => {
-        PaymentStatsService.getPaymentStats(filter).then(chartData => {
+        const filterStartDate = contract.execution_start_date;
+        const filterEndDate =
+            contract.amended_expected_execution_end_date ||
+            contract.expected_execution_end_date;
+
+        PaymentStatsService.getPaymentStats({
+            contract: contract.id,
+            start_date: DateUtil.formatDateForAPI(filterStartDate),
+            end_date: DateUtil.formatDateForAPI(filterEndDate),
+        }).then(chartData => {
             const parsedChartData = parseChartData(chartData);
             setChartData(parsedChartData);
         });
     }, []);
+
+    const maxAmount = contract.awarding_budget_min
+        ? [contract.awarding_budget_min, contract.awarding_budget]
+        : contract.awarding_budget;
+
+    const maxAmendedAmount = contract.total_awarding_budget;
+    const maxEndDate = contract.expected_execution_end_date;
+    const maxAmendedEndDate = contract.amended_expected_execution_end_date;
 
     const chartOptions = {
         scales: PaymentFinancialChartUtil.getScalesConfig(),
@@ -127,46 +139,41 @@ const ViewPaymentContractFinancialChart = ({
 
     return (
         chartData && (
-            <SectionCard title="Seguimiento financiero">
-                <Grid container justifyContent="center">
-                    <Box sx={{maxWidth: "1000px"}}>
-                        <LineChart
-                            title="Supervisión de productos"
-                            labels={chartData.month}
-                            datasets={[
-                                {
-                                    data: chartData.cum_approved_total_amount,
-                                    label: "Aprobado",
-                                    borderWidth: 3,
-                                    borderColor: FINANCIAL_CHART_COLORS.approved.main,
-                                    backgroundColor:
-                                        FINANCIAL_CHART_COLORS.approved.main,
-                                    spanGaps: true,
-                                },
-                                {
-                                    data: chartData.cum_expected_total_amount,
-                                    label: "Previsto",
-                                    borderWidth: 2,
-                                    borderColor: FINANCIAL_CHART_COLORS.expected.main,
-                                    backgroundColor:
-                                        FINANCIAL_CHART_COLORS.expected.light,
-                                    spanGaps: true,
-                                },
-                                {
-                                    type: "bar",
-                                    data: chartData.month_expected_amount,
-                                    label: "Productos previstos",
-                                    borderWidth: 2,
-                                    borderColor: FINANCIAL_CHART_COLORS.expected.main,
-                                    backgroundColor:
-                                        FINANCIAL_CHART_COLORS.expected.light,
-                                },
-                            ]}
-                            options={chartOptions}
-                        />
-                    </Box>
-                </Grid>
-            </SectionCard>
+            <Grid container justifyContent="center">
+                <Box sx={{maxWidth: "1000px"}}>
+                    <LineChart
+                        title="Supervisión de productos"
+                        labels={chartData.month}
+                        datasets={[
+                            {
+                                data: chartData.cum_approved_total_amount,
+                                label: "Aprobado",
+                                borderWidth: 3,
+                                borderColor: FINANCIAL_CHART_COLORS.approved.main,
+                                backgroundColor: FINANCIAL_CHART_COLORS.approved.main,
+                                spanGaps: true,
+                            },
+                            {
+                                data: chartData.cum_expected_total_amount,
+                                label: "Previsto",
+                                borderWidth: 2,
+                                borderColor: FINANCIAL_CHART_COLORS.expected.main,
+                                backgroundColor: FINANCIAL_CHART_COLORS.expected.light,
+                                spanGaps: true,
+                            },
+                            {
+                                type: "bar",
+                                data: chartData.month_expected_amount,
+                                label: "Productos previstos",
+                                borderWidth: 2,
+                                borderColor: FINANCIAL_CHART_COLORS.expected.main,
+                                backgroundColor: FINANCIAL_CHART_COLORS.expected.light,
+                            },
+                        ]}
+                        options={chartOptions}
+                    />
+                </Box>
+            </Grid>
         )
     );
 };

@@ -14,6 +14,7 @@ import {TabContainer} from "base/ui/tab/components";
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import {ContractFinancialDataSummary} from "contract/presentational";
 
 const ViewContractPaymentsSubPage = () => {
     const navigate = useNavigate();
@@ -52,6 +53,11 @@ const ViewContractPaymentsSubPage = () => {
 
     const tabs = [
         {
+            label: "Vista general",
+            path: "overview",
+            content: <Outlet context={contextForOutlet} />,
+        },
+        {
             label: "Productos",
             path: defaultPaymentId,
             pathsForIndex: [idDocument, "new"],
@@ -63,12 +69,6 @@ const ViewContractPaymentsSubPage = () => {
             content: <Outlet context={contextForOutlet} />,
         },
     ];
-
-    const filterStartDate = contract.execution_start_date;
-    const filterEndDate =
-        contract.amended_expected_execution_end_date ||
-        contract.expected_execution_end_date;
-    const total_difference = contract.total_amount_percentage - 100;
 
     return (
         <PaperContainer>
@@ -87,7 +87,11 @@ const ViewContractPaymentsSubPage = () => {
                     </Grid>
                 </PaperContainer>
             ) : (
-                <TabContainer tabs={tabs} error={error} />
+                <TabContainer
+                    tabs={tabs}
+                    error={error}
+                    info={<ContractFinancialDataSummary contract={contract} />}
+                />
             )}
         </PaperContainer>
     );
