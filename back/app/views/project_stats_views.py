@@ -217,7 +217,9 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 c.name as contractor_name,
                 c.id as contractor_id,
                 scm.name as social_component_monitoring_name,
-                scm.id as social_component_monitoring_id
+                scm.id as social_component_monitoring_id,
+                project.code as project_code,
+                project.id as project_id
             FROM social_component_training sct
                 INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
                 JOIN (
@@ -226,6 +228,7 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 LEFT JOIN construction_contract cc2 on cc2.id = sct.contract_id
                 LEFT JOIN contractor c on c.id = sct.contractor_id
                 LEFT JOIN dominios d_method on d_method."key" = sct."method"
+                LEFT JOIN project ON project.id = scm.project_id
             WHERE sct.active = True and scm.active = True
             """
 
@@ -273,6 +276,7 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 "social_component_monitoring_id": "Int64",
                 "contract_id": "Int64",
                 "contractor_id": "Int64",
+                "project_id": "Int64",
                 "number_of_women": "Int64",
                 "number_of_participants": "Int64",
                 "number_of_hours": "Int64",
@@ -280,7 +284,7 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 "number_of_printed_materials": "Int64",
             }
         )
-        df.at["Total", "contract_number"] = "Total"
+        df.at["Total", "social_component_monitoring_name"] = "Total"
 
         return Response(df)
 
