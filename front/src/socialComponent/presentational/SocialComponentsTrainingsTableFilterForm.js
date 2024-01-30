@@ -22,12 +22,8 @@ const SocialComponentsTrainingsTableFilterForm = ({
     filter,
     onChangeFilter,
     onClear = null,
+    displayProjectFilter = false,
 }) => {
-    const serviceOptions = getFilterOptionsObject(
-        trainingData,
-        "social_component_monitoring_id",
-        "social_component_monitoring_name"
-    );
     const contractOptions = getFilterOptionsObject(
         trainingData,
         "contract_id",
@@ -38,11 +34,22 @@ const SocialComponentsTrainingsTableFilterForm = ({
         "contractor_id",
         "contractor_name"
     );
+    const projectOptions = getFilterOptionsObject(
+        trainingData,
+        "project_id",
+        "project_code"
+    );
+    const serviceOptions = getFilterOptionsObject(
+        trainingData,
+        "social_component_monitoring_id",
+        "social_component_monitoring_name"
+    );
 
     const formMethods = useForm({
         defaultValues: {
             contract: filter?.contract || "",
             contractor: filter?.contractor || "",
+            project: filter?.project || "",
             social_component_monitoring: filter?.social_component_monitoring || "",
         },
     });
@@ -56,6 +63,7 @@ const SocialComponentsTrainingsTableFilterForm = ({
             contract: "",
             contractor: "",
             social_component_monitoring: "",
+            project: "",
         });
         if (onClear) {
             onClear();
@@ -81,19 +89,6 @@ const SocialComponentsTrainingsTableFilterForm = ({
                 </Grid>
                 <Grid item sx={{flex: 1}}>
                     <FormAutocomplete
-                        name="contract"
-                        label="Contrato"
-                        options={contractOptions}
-                        optionLabelAttribute="label"
-                        onChangeHandler={option =>
-                            handleChangeFilter({
-                                contract: option ? option.id : null,
-                            })
-                        }
-                    />
-                </Grid>
-                <Grid item sx={{flex: 1}}>
-                    <FormAutocomplete
                         name="contractor"
                         label="Consultora"
                         options={contractorOptions}
@@ -105,6 +100,35 @@ const SocialComponentsTrainingsTableFilterForm = ({
                         }
                     />
                 </Grid>
+                <Grid item sx={{flex: 1}}>
+                    <FormAutocomplete
+                        name="contract"
+                        label="Contrato"
+                        options={contractOptions}
+                        optionLabelAttribute="label"
+                        onChangeHandler={option =>
+                            handleChangeFilter({
+                                contract: option ? option.id : null,
+                            })
+                        }
+                    />
+                </Grid>
+                {displayProjectFilter ? (
+                    <Grid item sx={{flex: 1}}>
+                        <FormAutocomplete
+                            name="project"
+                            label="Proyecto"
+                            options={projectOptions}
+                            optionLabelAttribute="label"
+                            onChangeHandler={option =>
+                                handleChangeFilter({
+                                    project: option ? option.id : null,
+                                })
+                            }
+                        />
+                    </Grid>
+                ) : null}
+
                 <Grid item>
                     <FormClearButtonSmall handleClear={handleClearAllFilters} />
                 </Grid>

@@ -11,13 +11,14 @@ import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 
 const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
-    const {tableColumns} = useTrainingTotalsTable();
-
     const [trainingData, setTrainingData] = useState(null);
     const [tableFilter, setTableFilter] = useState(null);
     const [isTrainingDataEmpty, setIsTrainingDataEmpty] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+
+    const isContractTable = Object.keys(filter).includes("contract");
+    const {tableColumns} = useTrainingTotalsTable(isContractTable);
 
     useEffect(() => {
         setIsLoading(true);
@@ -50,11 +51,12 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
     return (
         <>
             <AlertError error={error} />
-            <Stack spacing={3}>
+            <Stack alignItems="flex-end" spacing={3}>
                 <SocialComponentsTrainingsTableFilterForm
                     trainingData={trainingData}
                     filter={tableFilter}
                     onChangeFilter={handleTableFilter}
+                    displayProjectFilter={isContractTable}
                 />
                 {isLoading ? (
                     <Spinner />

@@ -1,11 +1,11 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
 
-export function useTrainingTotalsTable() {
+export function useTrainingTotalsTable(displayProject) {
     const tableColumns = [
         {
-            id: "contract_number",
-            label: "Contrato",
-            width: 10,
+            id: "social_component_monitoring_name",
+            label: "Servicio",
+            width: 20,
         },
         {
             id: "contractor_name",
@@ -13,9 +13,9 @@ export function useTrainingTotalsTable() {
             width: 10,
         },
         {
-            id: "social_component_monitoring_name",
-            label: "Servicio",
-            width: 20,
+            id: "contract_number",
+            label: "Contrato",
+            width: 10,
         },
         {
             id: "start_date",
@@ -65,6 +65,13 @@ export function useTrainingTotalsTable() {
             width: 5,
         },
     ];
+
+    if (displayProject)
+        tableColumns.splice(3, 0, {
+            id: "project_code",
+            label: "Proyecto",
+            width: 10,
+        });
 
     return {tableColumns};
 }
