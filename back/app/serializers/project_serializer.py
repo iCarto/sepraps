@@ -1,12 +1,11 @@
 from django.db.models import Prefetch
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 from rest_framework_gis.fields import GeometryField
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
+from app.models.building_component_monitoring import BuildingComponentMonitoring
+
 # from django.db.models import F, Prefetch
-from app.models.construction_contract import ConstructionContract
 from app.models.infrastructure import Infrastructure
 from app.models.milestone import Milestone
 from app.models.project import Project, get_code_for_new_project
@@ -19,6 +18,8 @@ from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
 from app.serializers.provider_serializer import ProviderSerializer
 from documents.serializers import MediaUrlSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 from questionnaires.serializers.questionnaire_serializer import (
     QuestionnaireShortSerializer,
 )
@@ -44,6 +45,8 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "folder",
             "questionnaires",
             "related_contracts",
+            "physical_progress_percentage",
+            "financial_progress_percentage",
             "creation_user",
             "created_at",
             "updated_at",
@@ -76,7 +79,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
         ).prefetch_related(
             "linked_localities",
             Prefetch(
-                "provider__contacts",
+                "provider__contacts"
                 # TODO this is not working: multiple queries are executed
                 # https://stackoverflow.com/questions/35093204/django-prefetch-related-with-m2m-through-relationship
                 # queryset=ProviderContact.objects.prefetch_related("contact"),
@@ -88,6 +91,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
                     "ordering"
                 ),
             ),
+            "project_building_monitorings",
         )
 
     def to_representation(self, instance):
@@ -231,6 +235,8 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
     longitude = serializers.CharField(
         source="main_infrastructure.longitude", default=None
     )
+    physical_progress_percentage = serializers.SerializerMethodField()
+    financial_progress_percentage = serializers.SerializerMethodField()
 
     class Meta(ProjectSerializer.Meta):
         fields = (
@@ -250,11 +256,19 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
             "financing_program",
             "financing_program_name",
             "milestones",
+            "physical_progress_percentage",
+            "financial_progress_percentage",
             "latitude",
             "longitude",
             "created_at",
             "updated_at",
         )
+
+    def get_physical_progress_percentage(self, obj):
+        return obj.physical_progress_percentage
+
+    def get_financial_progress_percentage(self, obj):
+        return obj.financial_progress_percentage
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""
@@ -269,6 +283,10 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
                 ),
             ),
             "questionnaires",
+            Prefetch(
+                "project_building_monitorings",
+                queryset=BuildingComponentMonitoring.objects.select_related(),
+            ),
         )
 
     def to_representation(self, instance):
@@ -335,9 +353,9 @@ class ProjectGeoSerializer(GeoFeatureModelSerializer):
             ),
         )
 
-    def get_name(self, obj):  # noqa: WPS615
+    def get_name(self, obj):
         return " - ".join(i.name for i in obj.linked_localities.all())
 
-    def get_status(self, obj):  # noqa: WPS615
+    def get_status(self, obj):
         last_milestone = obj.milestones.first()
         return last_milestone.phase if last_milestone else None
