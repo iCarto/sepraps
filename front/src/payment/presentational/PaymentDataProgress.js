@@ -31,7 +31,7 @@ const PaymentDataProgress = ({label, value}) => {
             />
             <CircularProgress
                 variant="determinate"
-                value={percentage.value}
+                value={parseFloat(percentage.value)}
                 size={120}
                 thickness={5}
                 sx={{color: theme.palette["expected"].main}}

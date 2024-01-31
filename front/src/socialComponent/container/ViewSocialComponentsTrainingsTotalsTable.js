@@ -51,7 +51,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
     return (
         <>
             <AlertError error={error} />
-            <Stack alignItems="flex-end" spacing={3}>
+            <Stack spacing={3}>
                 <SocialComponentsTrainingsTableFilterForm
                     trainingData={trainingData}
                     filter={tableFilter}

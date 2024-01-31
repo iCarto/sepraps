@@ -26,12 +26,14 @@ const DialogLayout = ({
         handleDialog(false);
     };
 
-    const dialogStyle = fullHeight && {
-        "& .MuiDialog-paper": {
-            minHeight: "calc(100% - 64px)",
-        },
-        ...style,
-    };
+    const dialogStyle = fullHeight
+        ? {
+              "& .MuiDialog-paper": {
+                  minHeight: "calc(100% - 64px)",
+              },
+              ...style,
+          }
+        : {};
 
     return (
         <Dialog

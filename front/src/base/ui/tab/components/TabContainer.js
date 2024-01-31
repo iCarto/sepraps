@@ -54,16 +54,7 @@ const TabContainer = ({tabs, info = null, error = null}) => {
                 }}
             >
                 <Grid item xs={info ? 7 : 12}>
-                    <Tabs
-                        value={tabIndex}
-                        onChange={handleChangeTab}
-                        aria-label="tabs"
-                        TabProps={{
-                            style: {
-                                backgroundColor: "red",
-                            },
-                        }}
-                    >
+                    <Tabs value={tabIndex} onChange={handleChangeTab} aria-label="tabs">
                         {tabs.map((tab, index) => (
                             <StyledTab
                                 key={index}

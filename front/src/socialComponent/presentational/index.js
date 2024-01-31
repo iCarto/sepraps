@@ -9,9 +9,6 @@ export {
     TRAINING_DATA_FILTER,
 } from "./SocialComponentsTrainingsChartFilter";
 export {
-    default as SocialComponentsTrainingsTotalsTable,
-} from "./SocialComponentsTrainingsTotalsTable";
-export {
     default as SocialComponentsTotalsContent,
 } from "./SocialComponentsTotalsContent";
 export {default as SocialComponentsSummaryList} from "./SocialComponentsSummaryList";

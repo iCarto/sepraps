@@ -9,6 +9,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import Box from "@mui/material/Box";
 
 const ListSelector = ({
     title,
@@ -18,8 +19,6 @@ const ListSelector = ({
     showNewButton = true,
 }) => {
     const navigate = useNavigate();
-
-    console.log({items});
 
     return (
         <Paper
@@ -67,10 +66,10 @@ const ListSelector = ({
             >
                 {items &&
                     items.map((item, index) => (
-                        <>
+                        <Box key={item.id}>
                             {index != 0 && <Divider sx={{borderColor: "grey.200"}} />}
                             {renderItem(item)}
-                        </>
+                        </Box>
                     ))}
             </List>
         </Paper>
