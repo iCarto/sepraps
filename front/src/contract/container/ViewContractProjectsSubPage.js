@@ -17,7 +17,9 @@ const ViewContractProjectsSubPage = () => {
         });
     }, [contract]);
 
-    const sections = [<ListContractProjects contract={contract} projects={projects} />];
+    const sections = [
+        <ListContractProjects contract={contract} contractProjects={projects} />,
+    ];
 
     return contract && <EntityViewSubPage sections={sections} />;
 };
