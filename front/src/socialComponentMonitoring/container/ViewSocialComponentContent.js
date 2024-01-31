@@ -7,7 +7,8 @@ import {RouterUtil} from "base/navigation/utilities";
 
 import {SubpageWithSelectorContainer} from "base/ui/main";
 import {SocialComponentContent} from "socialComponent/presentational";
-import {ComponentListSelector} from "component/presentational";
+import {ListSelector, ListSelectorItem} from "base/shared/components";
+import {getStatusIcon} from "component/presentational/ComponentStatusChip";
 
 const ViewSocialComponentContent = () => {
     const {scMonitorings} = useOutletContext();
@@ -41,14 +42,24 @@ const ViewSocialComponentContent = () => {
         <SubpageWithSelectorContainer
             itemsName="componentes sociales"
             itemSelector={
-                <ComponentListSelector
-                    components={scMonitorings}
+                <ListSelector
+                    title="Componentes"
+                    items={scMonitorings}
+                    renderItem={scComponent => (
+                        <ListSelectorItem
+                            key={scComponent.id}
+                            heading={scComponent.name}
+                            icon={getStatusIcon(scComponent.execution_status)}
+                            to={`/projects/list/${projectId}/socialcomponents/${scComponent.id}`}
+                            selected={parseInt(socialComponentId) === scComponent.id}
+                            headingFontSize={13}
+                        />
+                    )}
                     basePath={`/projects/list/${projectId}/socialcomponents`}
-                    selectedComponentId={parseInt(socialComponentId)}
-                    reduceItemsFontSize
                 />
             }
             noItems={isRootPath && scMonitorings && scMonitorings.length === 0}
+            selectorSize={3}
         >
             <SocialComponentContent
                 socialComponentMonitoring={socialComponentMonitoring}

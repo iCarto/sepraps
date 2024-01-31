@@ -2,24 +2,19 @@ import {SELECTOR_RIGHT_PANEL_WIDTH} from "base/ui/app/config/measurements";
 
 import {PaperContainer} from "base/shared/components";
 
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 const SubpageWithSelectorContainer = ({
     itemSelector = null,
     itemsName = "",
+    selectorSize = 2,
     noItems = false,
     children = null,
 }) => {
     return (
-        <Stack direction="row" spacing={2}>
-            <Box
-                sx={{
-                    width: `calc(100% - ${SELECTOR_RIGHT_PANEL_WIDTH}px)`,
-                }}
-            >
+        <Grid container spacing={1} wrap="nowrap" sx={{overflow: "auto"}}>
+            <Grid item xs={12 - selectorSize}>
                 {children}
                 {noItems && (
                     <PaperContainer>
@@ -35,11 +30,15 @@ const SubpageWithSelectorContainer = ({
                         </Grid>
                     </PaperContainer>
                 )}
-            </Box>
-            <Box component="aside" sx={{width: `${SELECTOR_RIGHT_PANEL_WIDTH}px`}}>
+            </Grid>
+            <Grid
+                item
+                xs={selectorSize}
+                sx={{minWidth: `${SELECTOR_RIGHT_PANEL_WIDTH}px`}}
+            >
                 {itemSelector}
-            </Box>
-        </Stack>
+            </Grid>
+        </Grid>
     );
 };
 

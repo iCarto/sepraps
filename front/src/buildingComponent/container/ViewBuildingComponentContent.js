@@ -8,6 +8,8 @@ import {RouterUtil} from "base/navigation/utilities";
 import {SubpageWithSelectorContainer} from "base/ui/main";
 import {BuildingComponentContent} from ".";
 import {ComponentListSelector} from "component/presentational";
+import {ListSelector, ListSelectorItem} from "base/shared/components";
+import {getStatusIcon} from "component/presentational/ComponentStatusChip";
 
 const ViewBuildingComponentContent = () => {
     const {bcMonitorings} = useOutletContext();
@@ -27,17 +29,29 @@ const ViewBuildingComponentContent = () => {
         });
     }, [buildingComponentId, location.state?.lastRefreshDate]);
 
+    console.log({buildingComponentId});
+
     return (
         <SubpageWithSelectorContainer
             itemsName="componentes de construcción"
             itemSelector={
-                <ComponentListSelector
-                    components={bcMonitorings}
+                <ListSelector
+                    title="Componentes"
+                    items={bcMonitorings}
+                    renderItem={bcComponent => (
+                        <ListSelectorItem
+                            key={bcComponent.id}
+                            heading={bcComponent.name}
+                            icon={getStatusIcon(bcComponent.execution_status)}
+                            to={`/projects/list/${projectId}/buildingcomponents/${bcComponent.id}`}
+                            selected={parseInt(buildingComponentId) === bcComponent.id}
+                        />
+                    )}
                     basePath={`/projects/list/${projectId}/buildingcomponents`}
-                    selectedComponentId={parseInt(buildingComponentId)}
                 />
             }
             noItems={isRootPath && bcMonitorings && bcMonitorings.length === 0}
+            selectorSize={3}
         >
             <BuildingComponentContent
                 buildingComponentMonitoring={buildingComponentMonitoring}
