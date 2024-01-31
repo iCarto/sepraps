@@ -19,7 +19,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const ListContractProjects = ({contract, projects}) => {
+const ListContractProjects = ({contract, contractProjects}) => {
     const [selectedElement, setSelectedElement] = useState(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -45,12 +45,14 @@ const ListContractProjects = ({contract, projects}) => {
 
     const getViewComponent = () => {
         if (view === "list") {
-            return <ProjectsList projects={projects} onClick={handleClickOnCard} />;
+            return (
+                <ProjectsList projects={contractProjects} onClick={handleClickOnCard} />
+            );
         }
         if (view === "map") {
             return (
                 <MapProjects
-                    projects={projects}
+                    projects={contractProjects}
                     selectedElement={selectedElement}
                     onSelectElement={handleSelectProject}
                 />
@@ -58,7 +60,7 @@ const ListContractProjects = ({contract, projects}) => {
         }
         return (
             <ProjectsTable
-                projects={projects}
+                projects={contractProjects}
                 selectedElement={selectedElement}
                 onSelectElement={handleSelectProject}
             />
@@ -91,7 +93,7 @@ const ListContractProjects = ({contract, projects}) => {
                         </Stack>
                     </Grid>
                 </Grid>
-                {projects.length ? (
+                {contractProjects.length ? (
                     getViewComponent()
                 ) : (
                     <Container sx={{textAlign: "center"}}>
@@ -107,7 +109,7 @@ const ListContractProjects = ({contract, projects}) => {
                     isDialogOpen={isDialogOpen}
                     onCloseDialog={handleCloseDialog}
                     contract={contract}
-                    projects={projects}
+                    contractProjects={contractProjects}
                 />
             ) : null}
         </>

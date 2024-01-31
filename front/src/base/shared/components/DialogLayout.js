@@ -29,11 +29,15 @@ const DialogLayout = ({
     const dialogStyle = fullHeight
         ? {
               "& .MuiDialog-paper": {
-                  minHeight: "calc(100% - 64px)",
+                  minHeight: "calc(100% - 24px)",
+                  ...style,
               },
-              ...style,
           }
-        : {};
+        : {
+              "& .MuiDialog-paper": {
+                  ...style,
+              },
+          };
 
     return (
         <Dialog
@@ -45,9 +49,7 @@ const DialogLayout = ({
             sx={dialogStyle}
         >
             <DialogTitle id={dialogLabel}>{dialogTitle}</DialogTitle>
-            <Stack px={3} pb={2}>
-                {dialogHeading}
-            </Stack>
+            {dialogHeading ? <Stack px={3}>{dialogHeading}</Stack> : null}
             <DialogContent>
                 {dialogContentText ? (
                     <DialogContentText id={`${dialogLabel} dialog`}>
