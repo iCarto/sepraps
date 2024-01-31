@@ -27,7 +27,6 @@ class Project(models.Model):
         verbose_name = "Proyecto"
         verbose_name_plural = "Proyectos"
 
-    id = models.AutoField(primary_key=True)
     code = models.CharField("Código", unique=True, max_length=30)
     project_type = models.CharField("Tipo de proyecto", max_length=50, null=True)
     project_class = models.CharField("Clase de proyecto", max_length=50, null=True)
@@ -65,7 +64,7 @@ class Project(models.Model):
     )
 
     # This field only exists to retrieve questionnaires list for project menu
-    # TODO Explore if there is another solution for this use case
+    # TODO: Explore if there is another solution for this use case
     questionnaires = models.ManyToManyField(Questionnaire)
     questionnaires_instances = models.ManyToManyField(
         MonthlyQuestionnaireInstance, through="ProjectQuestionnaireInstance"
@@ -167,12 +166,10 @@ def post_create(sender, instance, created, *args, **kwargs):
 
     instance.questionnaires.set(
         Questionnaire.objects.filter(
-            code__in=list(
-                map(
-                    lambda questionnaire: questionnaire.get("code"),
-                    data.get("questionnaires", []),
-                )
-            )
+            code__in=[
+                questionnaire.get("code")
+                for questionnaire in data.get("questionnaires", [])
+            ]
         )
     )
 
@@ -187,7 +184,7 @@ def post_create(sender, instance, created, *args, **kwargs):
 def get_code_for_new_project():
     """Returns a new code with format YYYY-type-000
     where 'YYYY' is current year and '000' is the number
-    order for projects created this year
+    order for projects created this year.
     """
     year = timezone.now().year
 
@@ -199,5 +196,5 @@ def get_code_for_new_project():
     except ObjectDoesNotExist:
         new_code = "001"
 
-    # TODO change AP for project type code
+    # TODO: change AP for project type code
     return str(year) + "-AP-" + new_code
