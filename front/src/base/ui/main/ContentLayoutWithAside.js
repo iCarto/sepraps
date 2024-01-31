@@ -22,7 +22,11 @@ const ContentLayoutWithAside = ({children, context = []}) => {
                 }
             >
                 <Stack spacing={1}>
-                    {children ? children : <Outlet context={[...context]} />}
+                    {children ? (
+                        children
+                    ) : (
+                        <Outlet context={[...context, setSidebarPanelOpen]} />
+                    )}
                 </Stack>
             </ContentContainer>
             {children && (

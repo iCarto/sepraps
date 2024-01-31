@@ -32,7 +32,7 @@ const SubSectionCardHeader = ({
                     </Typography>
                 </Stack>
             }
-            sx={{bgcolor: "grey.50"}}
+            sx={{bgcolor: "grey.50", borderBottom: 1, borderColor: "grey.200"}}
         />
     );
 };

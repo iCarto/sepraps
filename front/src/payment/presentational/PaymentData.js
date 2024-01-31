@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 
 import {theme} from "Theme";
 import {PaymentDataProgress} from ".";
+import Paper from "@mui/material/Paper";
 
 const ExpectedAmountSection = ({payment}) => {
     return payment.contract_payment_criteria_type === FIXED_VARIABLE_CRITERIA_TYPE ? (
@@ -79,8 +80,7 @@ const PaymentData = ({payment}) => {
                     />
                     <ExpectedAmountSection payment={payment} />
                     {payment.status === PRODUCT_STATUS_PENDING && (
-                        <>
-                            <Divider sx={{my: 2}} />
+                        <Paper elevation={1} sx={{mt: 2, p: 1}}>
                             <Stack direction="row" justifyContent="space-around">
                                 <PaymentDataProgress
                                     label="Individual"
@@ -99,7 +99,7 @@ const PaymentData = ({payment}) => {
                                     }
                                 />
                             </Stack>
-                        </>
+                        </Paper>
                     )}
                 </SectionBox>
             </Grid>
@@ -111,19 +111,20 @@ const PaymentData = ({payment}) => {
                             value={DateUtil.formatDate(payment.approval_date)}
                         />
                         <PaidAmountSection payment={payment} />
-                        <Divider sx={{my: 2}} />
-                        <Stack direction="row" justifyContent="space-around">
-                            <PaymentDataProgress
-                                label="Individual"
-                                value={payment.paid_total_contract_percentage}
-                            />
-                            <PaymentDataProgress
-                                label="Total"
-                                value={
-                                    payment.paid_total_contract_percentage_cumulative
-                                }
-                            />
-                        </Stack>
+                        <Paper elevation={1} sx={{mt: 2, p: 1}}>
+                            <Stack direction="row" justifyContent="space-around">
+                                <PaymentDataProgress
+                                    label="Individual"
+                                    value={payment.paid_total_contract_percentage}
+                                />
+                                <PaymentDataProgress
+                                    label="Total"
+                                    value={
+                                        payment.paid_total_contract_percentage_cumulative
+                                    }
+                                />
+                            </Stack>
+                        </Paper>
                     </SectionBox>
                 )}
             </Grid>

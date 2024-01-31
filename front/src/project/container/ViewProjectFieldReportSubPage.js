@@ -9,11 +9,11 @@ import {FieldReportProjectContent} from "fieldReportProject/presentational/secti
 
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
 import {AlertError} from "base/error/components";
-import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import {ListSelector, ListSelectorItem} from "base/shared/components";
+import {EntityContent} from "base/entity/components/presentational";
+
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 
 const ViewProjectFieldReportSubPage = () => {
     const navigate = useNavigate();
@@ -79,27 +79,16 @@ const ViewProjectFieldReportSubPage = () => {
             <ContentLayoutWithAside>
                 <AlertError error={error} />
                 {fieldReport && (
-                    <>
-                        <FieldReportSummarySection
-                            fieldReport={fieldReport}
-                            secondaryAction={
-                                <Tooltip title="Ver informe completo">
-                                    <Button
-                                        aria-label="view-field-report"
-                                        target="_blank"
-                                        href={`/field-reports/list/${fieldReportId}/summary`}
-                                        variant="contained"
-                                        startIcon={<OpenInNewIcon />}
-                                    >
-                                        Ver informe
-                                    </Button>
-                                </Tooltip>
-                            }
-                        />
+                    <EntityContent
+                        entityLabel="Informe de viaje"
+                        entityName={fieldReport.code}
+                        entityIcon={<DirectionsCarFilledOutlinedIcon />}
+                    >
+                        <FieldReportSummarySection fieldReport={fieldReport} />
                         <FieldReportProjectContent
                             fieldReportProject={fieldReport.field_report_projects[0]}
                         />
-                    </>
+                    </EntityContent>
                 )}
             </ContentLayoutWithAside>
         </SubpageWithSelectorContainer>

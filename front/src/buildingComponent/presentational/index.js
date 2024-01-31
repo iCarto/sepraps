@@ -17,7 +17,6 @@ export {default as BuildingComponentsProgress} from "./BuildingComponentsProgres
 export {
     default as BuildingComponentsSummaryList,
 } from "./BuildingComponentsSummaryList";
-export {default as BuildingComponentContent} from "./BuildingComponentContent";
 export {
     default as BuildingComponentsFinancialChart,
 } from "./BuildingComponentsFinancialChart";

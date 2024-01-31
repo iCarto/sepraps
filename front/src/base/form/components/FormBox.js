@@ -6,13 +6,15 @@ const FormBox = ({label, children}) => {
     return (
         <Box
             sx={{
-                border: 1,
+                border: 0,
                 borderRadius: 2,
                 borderColor: "grey.300",
                 p: 1,
             }}
         >
-            <Typography sx={{color: "grey.500", fontSize: "0.8rem"}}>
+            <Typography
+                sx={{color: "grey.500", fontSize: "0.8rem", textTransform: "uppercase"}}
+            >
                 {label}
             </Typography>
             <Divider />

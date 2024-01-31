@@ -1,12 +1,12 @@
 import {useNavigate} from "react-router";
 
+import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
 
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
@@ -22,10 +22,11 @@ const ListSelector = ({
     console.log({items});
 
     return (
-        <Box
+        <Paper
+            elevation={3}
             sx={{
                 p: 1,
-                backgroundColor: "grey.50",
+                backgroundColor: "grey.100",
                 borderRadius: 1,
             }}
         >
@@ -56,22 +57,23 @@ const ListSelector = ({
             <List
                 sx={{
                     border: 1,
-                    borderColor: "grey.400",
-                    backgroundColor: "grey.300",
+                    borderColor: "grey.300",
+                    backgroundColor: "grey.200",
                     borderRadius: 1,
                     maxHeight: "600px",
                     overflow: "auto",
+                    p: 0,
                 }}
             >
                 {items &&
                     items.map((item, index) => (
                         <>
-                            {index != 0 && <Divider />}
+                            {index != 0 && <Divider sx={{borderColor: "grey.200"}} />}
                             {renderItem(item)}
                         </>
                     ))}
             </List>
-        </Box>
+        </Paper>
     );
 };
 

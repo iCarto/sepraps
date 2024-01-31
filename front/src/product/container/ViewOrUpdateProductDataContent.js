@@ -18,6 +18,7 @@ import CardContent from "@mui/material/CardContent";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import Divider from "@mui/material/Divider";
 
 const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
     const navigate = useNavigateWithReload();
@@ -79,6 +80,7 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
+                        <Divider sx={{mb: 1}} />
                         <ListEntityFolder folderPath={product.folder} basePath={""} />
                     </Grid>
                 </Grid>

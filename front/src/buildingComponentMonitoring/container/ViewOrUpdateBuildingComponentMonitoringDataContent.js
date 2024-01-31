@@ -1,40 +1,24 @@
 import {useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
 import {BuildingComponentService} from "buildingComponent/service";
 import {building_component_view_adapter} from "buildingComponent/model";
 import {building_component_monitoring_view_adapter} from "buildingComponentMonitoring/model";
-import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {ComponentCardHeader} from "component/presentational";
-import {SectionCardHeaderAction} from "base/ui/section/components";
-import {DeleteItemDialog} from "base/delete/components";
+import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {BuildingComponentMonitoringData} from "buildingComponentMonitoring/presentational";
 import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
 import {BuildingComponentNameForm} from "buildingComponent/presentational/form";
 
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
 
 const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
     const navigate = useNavigateWithReload();
-    const {id: projectId} = useParams();
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-
-    const handleDelete = () => {
-        BuildingComponentMonitoringService.delete(bcMonitoring.id).then(() => {
-            navigate(`/projects/list/${projectId}/buildingcomponents`, true);
-        });
-    };
 
     const handleBcMonitoringFormSubmit = updatedBcMonitoring => {
         updateEntity(
@@ -84,15 +68,6 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
                 setMode("edit-name");
             }}
         />,
-        <SectionCardHeaderAction
-            key="delete"
-            name="delete"
-            text="Eliminar"
-            icon={<DeleteIcon color="error" />}
-            onClick={() => {
-                setIsDeleteDialogOpen(true);
-            }}
-        />,
     ];
 
     const getComponent = mode => {
@@ -127,25 +102,9 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
 
     return (
         bcMonitoring && (
-            <Card
-                sx={{border: 1, borderColor: "grey.300"}}
-                elevation={0}
-                component="section"
-            >
-                <ComponentCardHeader
-                    component={bcMonitoring}
-                    componentName={bcMonitoring.building_component?.name}
-                    actions={actions}
-                    label="Componente"
-                    icon={<HandymanOutlinedIcon />}
-                />
-                <CardContent>{getComponent(mode)}</CardContent>
-                <DeleteItemDialog
-                    isDialogOpen={isDeleteDialogOpen}
-                    setIsDialogOpen={setIsDeleteDialogOpen}
-                    onDelete={handleDelete}
-                />
-            </Card>
+            <SectionCard title="Seguimiento" secondaryActions={actions}>
+                {getComponent(mode)}
+            </SectionCard>
         )
     );
 };

@@ -11,18 +11,27 @@ import {ViewPaymentCommentsContent} from "comment/container";
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
 import {ListSelector, ListSelectorItem} from "base/shared/components";
 import {DateUtil} from "base/format/utilities";
-import {getStatusIcon} from "payment/presentational/PaymentStatusChip";
+import {EntityContent} from "base/entity/components/presentational";
+
+import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
+import {SectionCardHeaderAction} from "base/ui/section/components";
+
+import DeleteIcon from "@mui/icons-material/Delete";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {DeleteItemDialog} from "base/delete/components";
+import {PaymentStatusChip, getStatusIcon} from "payment/presentational";
+import {EntityAuditSection} from "base/entity/components/presentational/sections";
 
 const ViewPaymentContent = () => {
     const {contract, payments} = useOutletContext();
     const {paymentId} = useParams();
 
-    console.log({paymentId});
-
     const location = useLocation();
+    const navigate = useNavigateWithReload();
     const isRootPath = RouterUtil.getLastUrlSegment(location) === "payment";
     const basePath = location.pathname.split("/payment")[0] + "/payment";
 
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [payment, setPayment] = useState(null);
 
     useEffect(() => {
@@ -31,6 +40,24 @@ const ViewPaymentContent = () => {
             setPayment(data);
         });
     }, [paymentId, location.state?.lastRefreshDate]);
+
+    const handleDelete = () => {
+        PaymentService.delete(payment.id).then(() => {
+            navigate(`/contracts/list/${contract.id}/payment`, true);
+        });
+    };
+
+    const actions = [
+        <SectionCardHeaderAction
+            key="delete"
+            name="delete"
+            text="Eliminar"
+            icon={<DeleteIcon color="error" />}
+            onClick={() => {
+                setIsDeleteDialogOpen(true);
+            }}
+        />,
+    ];
 
     return (
         <SubpageWithSelectorContainer
@@ -63,9 +90,33 @@ const ViewPaymentContent = () => {
             noItems={isRootPath && payments && payments.length === 0}
         >
             <ContentLayoutWithAside>
-                <ViewOrUpdatePaymentDataContent contract={contract} payment={payment} />
-                <ViewPaymentProductsContent payment={payment} />
-                <ViewPaymentCommentsContent payment={payment} />
+                {payment && (
+                    <EntityContent
+                        entityLabel="Producto"
+                        entityName={payment.name}
+                        entityIcon={<RequestQuoteOutlinedIcon />}
+                        chip={
+                            <PaymentStatusChip
+                                label={payment.status_label}
+                                value={payment.status}
+                            />
+                        }
+                        actions={actions}
+                    >
+                        <ViewOrUpdatePaymentDataContent
+                            contract={contract}
+                            payment={payment}
+                        />
+                        <ViewPaymentProductsContent payment={payment} />
+                        <ViewPaymentCommentsContent payment={payment} />
+                        <EntityAuditSection entity={payment} />
+                        <DeleteItemDialog
+                            isDialogOpen={isDeleteDialogOpen}
+                            setIsDialogOpen={setIsDeleteDialogOpen}
+                            onDelete={handleDelete}
+                        />
+                    </EntityContent>
+                )}
             </ContentLayoutWithAside>
         </SubpageWithSelectorContainer>
     );

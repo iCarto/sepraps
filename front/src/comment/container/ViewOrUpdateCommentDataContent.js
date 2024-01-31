@@ -122,13 +122,10 @@ const ViewOrUpdateCommentDataContent = ({comment}) => {
     };
 
     return (
-        <Card
-            elevation={0}
-            sx={{p: 1, border: 1, borderRadius: 2, borderColor: "grey.200"}}
-        >
+        <Card elevation={0}>
             <CardHeader
                 title={getTitle(comment)}
-                sx={{p: 0}}
+                sx={{p: 0, borderBottom: 1, borderColor: "grey.200"}}
                 action={<SectionActionsMenu>{actions}</SectionActionsMenu>}
             />
             <CardContent sx={{"&.MuiCardContent-root": {pb: 1}}}>

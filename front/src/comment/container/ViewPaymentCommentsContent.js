@@ -4,7 +4,6 @@ import {CreateCommentDataContent, ViewOrUpdateCommentDataContent} from ".";
 import {SectionCard} from "base/ui/section/components";
 
 import Stack from "@mui/system/Stack";
-import CommentData from "comment/presentational/CommentData";
 
 const ViewPaymentCommentsContent = ({payment}) => {
     return (
