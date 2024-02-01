@@ -4,6 +4,11 @@ import {ImagePreview} from "base/image/components";
 import {SectionBox, SectionField} from "base/ui/section/components";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import {ProgressBar, ProgressBarSmall} from "base/progress/components";
+import Stack from "@mui/material/Stack";
+import {LightHeading} from "base/ui/headings/components";
+import Paper from "@mui/material/Paper";
+import {AppraisalChip} from "base/shared/components";
 
 const BuildingComponentMonitoringData = ({bcMonitoring}) => {
     const [monitoringGridHeight, setMonitoringGridHeight] = useState(0);
@@ -80,14 +85,7 @@ const BuildingComponentMonitoringData = ({bcMonitoring}) => {
                         value={NumberUtil.formatInteger(bcMonitoring.total_amount)}
                         unit="Gs."
                     />
-                    <SectionField
-                        label="Porcentaje de avance financiero"
-                        value={NumberUtil.formatDecimal(
-                            bcMonitoring.financial_progress_percentage
-                        )}
-                        unit="%"
-                    />
-                    <Divider sx={{my: 1}} />
+                    <Divider />
                     <SectionField
                         label="Porcentaje de avance físico"
                         value={NumberUtil.formatDecimal(
@@ -99,6 +97,23 @@ const BuildingComponentMonitoringData = ({bcMonitoring}) => {
                         label="Estado cualitativo"
                         value={bcMonitoring.quality_status_label}
                     />
+                    <Paper elevation={1} sx={{mt: 2, p: 2, backgroundColor: "grey.50"}}>
+                        <LightHeading>Resultado</LightHeading>
+                        <Stack spacing={1} sx={{mt: 1}}>
+                            <ProgressBarSmall
+                                label="Avance financiero"
+                                progressValue={
+                                    bcMonitoring.financial_progress_percentage
+                                }
+                            />
+                            <ProgressBarSmall
+                                label="Avance físico"
+                                progressValue={
+                                    bcMonitoring.physical_progress_percentage
+                                }
+                            />
+                        </Stack>
+                    </Paper>
                 </SectionBox>
             </Grid>
         </Grid>
