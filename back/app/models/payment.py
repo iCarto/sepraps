@@ -54,28 +54,27 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
 
     @property
     def expected_total_amount_cumulative(self):
+        if not self.expected_approval_date:
+            return 0
         contract_expected_total_amount_cumulative = Payment.objects.filter(
             contract=self.contract,
             status="pendiente",
             expected_approval_date__lte=self.expected_approval_date,
         ).aggregate(total=models.Sum("expected_total_amount"))["total"]
-        if not contract_expected_total_amount_cumulative:
-            return None
-        return (
-            contract_expected_total_amount_cumulative
-            + self.paid_total_amount_cumulative
+        return (contract_expected_total_amount_cumulative or 0) + (
+            self.paid_total_amount_cumulative or 0
         )
 
     @property
     def paid_total_amount_cumulative(self):
+        if not self.approval_date and not self.expected_approval_date:
+            return 0
         contract_paid_total_amount_cumulative = Payment.objects.filter(
             contract=self.contract,
             status="aprobado",
             approval_date__lte=(self.approval_date or self.expected_approval_date),
         ).aggregate(total=models.Sum("paid_total_amount"))["total"]
-        if not contract_paid_total_amount_cumulative:
-            return None
-        return contract_paid_total_amount_cumulative
+        return contract_paid_total_amount_cumulative or 0
 
 
 @receiver(pre_save, sender=Payment)

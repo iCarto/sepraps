@@ -16,34 +16,26 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import {ContractFinancialDataSummary} from "contract/presentational";
 import Box from "@mui/material/Box";
+import {RouterUtil} from "base/navigation/utilities";
 
 const ViewContractPaymentsSubPage = () => {
-    const navigate = useNavigate();
-    const {id: contractId, paymentId, idDocument} = useParams();
+    const {id: contractId} = useParams();
+
     const location = useLocation();
-    const isRootPath = location.pathname.split("/").slice(-1)[0] === "payment";
+    const basePath = RouterUtil.getPathForSegment(location, "payment");
 
     const [contract] = useOutletContext();
-    console.log({contract});
 
     const [error, setError] = useState(null);
     const [paymentsForContract, setPaymentsForContract] = useState(null);
 
     const contextForOutlet = {contract: contract, payments: paymentsForContract};
 
-    const defaultPaymentId = useMemo(() => {
-        if (paymentId) return paymentId;
-        if (paymentsForContract) return paymentsForContract[0]?.id?.toString();
-    }, [paymentId, paymentsForContract]);
-
     useEffect(() => {
         if (!paymentsForContract) {
             ContractService.getPaymentsList(contractId)
                 .then(payments => {
                     setPaymentsForContract(payments);
-                    if (isRootPath && payments.length > 0) {
-                        navigate(payments[0].id.toString());
-                    }
                 })
                 .catch(error => {
                     console.log({error});
@@ -60,8 +52,7 @@ const ViewContractPaymentsSubPage = () => {
         },
         {
             label: "Productos",
-            path: defaultPaymentId,
-            pathsForIndex: [idDocument, "new"],
+            path: "list",
             content: <Outlet context={contextForOutlet} />,
         },
         {
@@ -92,6 +83,7 @@ const ViewContractPaymentsSubPage = () => {
                     tabs={tabs}
                     error={error}
                     info={<ContractFinancialDataSummary contract={contract} />}
+                    basePath={basePath}
                 />
             )}
         </Box>

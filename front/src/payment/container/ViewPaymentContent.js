@@ -28,22 +28,25 @@ const ViewPaymentContent = () => {
 
     const location = useLocation();
     const navigate = useNavigateWithReload();
-    const isRootPath = RouterUtil.getLastUrlSegment(location) === "payment";
-    const basePath = location.pathname.split("/payment")[0] + "/payment";
+    const basePath = RouterUtil.getPathForSegment(location, "payment/list");
 
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [payment, setPayment] = useState(null);
 
     useEffect(() => {
         setPayment(null);
-        PaymentService.get(paymentId).then(data => {
-            setPayment(data);
-        });
-    }, [paymentId, location.state?.lastRefreshDate]);
+        if (paymentId) {
+            PaymentService.get(paymentId).then(data => {
+                setPayment(data);
+            });
+        } else if (payments?.length > 0) {
+            navigate(payments[0].id.toString());
+        }
+    }, [paymentId]);
 
     const handleDelete = () => {
         PaymentService.delete(payment.id).then(() => {
-            navigate(`/contracts/list/${contract.id}/payment`, true);
+            navigate(basePath, true);
         });
     };
 
@@ -87,7 +90,7 @@ const ViewPaymentContent = () => {
                     basePath={basePath}
                 />
             }
-            noItems={isRootPath && payments && payments.length === 0}
+            noItems={payments?.length === 0}
         >
             <ContentLayoutWithAside>
                 {payment && (

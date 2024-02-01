@@ -121,12 +121,12 @@ const contractRoutes = [
                 />
                 <Route
                     key="contract-payments-new"
-                    path="new"
+                    path="list/new"
                     element={<CreatePaymentContent />}
                 />
                 <Route
                     key="contract-payments-detail"
-                    path=":paymentId"
+                    path="list/:paymentId?"
                     element={<ViewPaymentContent />}
                 >
                     <Route

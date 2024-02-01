@@ -8,14 +8,11 @@ import Grid from "@mui/material/Grid";
 const ViewPaymentContractOverview = () => {
     const {contract, payments} = useOutletContext();
 
-    const startDate = new Date(contract.execution_start_date);
-    const endDate = new Date(
+    let startDate = new Date(contract.execution_start_date);
+    let endDate = new Date(
         contract.amended_expected_execution_end_date ||
             contract.expected_execution_end_date
     );
-    const contractYears = Array(endDate.getFullYear() - startDate.getFullYear() + 1)
-        .fill()
-        .map((_, idx) => startDate.getFullYear() + idx);
 
     const paymentsWithDate =
         payments &&
@@ -26,6 +23,22 @@ const ViewPaymentContractOverview = () => {
                 paymentDate: paymentDate ? new Date(paymentDate) : null,
             };
         });
+
+    if (paymentsWithDate?.length > 0) {
+        if (paymentsWithDate[0].paymentDate.getTime() < startDate.getTime()) {
+            startDate = paymentsWithDate[paymentsWithDate.length - 1].paymentDate;
+        }
+        if (
+            paymentsWithDate[paymentsWithDate.length - 1].paymentDate.getTime() >
+            endDate.getTime()
+        ) {
+            endDate = paymentsWithDate[paymentsWithDate.length - 1].paymentDate;
+        }
+    }
+
+    const contractYears = Array(endDate.getFullYear() - startDate.getFullYear() + 1)
+        .fill()
+        .map((_, idx) => startDate.getFullYear() + idx);
 
     return (
         payments && (

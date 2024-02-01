@@ -36,21 +36,22 @@ const PaymentsFinancialDataBox = ({
                     {headline}
                 </Typography>
                 <Stack direction="row" alignItems="baseline">
-                    <Typography
-                        component="span"
-                        fontSize={42}
-                        sx={{whiteSpace: "nowrap"}}
-                    >
-                        {NumberUtil.formatMillions(firstValue)} {CURRENCY_SYMBOL}
+                    <Typography component="span" fontSize={34}>
+                        {NumberUtil.formatMillions(firstValue)}{" "}
+                        <Typography component="span" fontSize="0.3em">
+                            {CURRENCY_SYMBOL}
+                        </Typography>
                     </Typography>
                     <Typography
                         component="span"
-                        fontSize={36}
+                        fontSize={24}
                         ml={1}
                         color={theme.palette.grey[600]}
-                        sx={{whiteSpace: "nowrap"}}
                     >
-                        / {NumberUtil.formatMillions(secondValue)} {CURRENCY_SYMBOL}
+                        / {NumberUtil.formatMillions(secondValue)}{" "}
+                        <Typography component="span" fontSize="0.3em">
+                            {CURRENCY_SYMBOL}
+                        </Typography>
                     </Typography>
                 </Stack>
                 {subheading}

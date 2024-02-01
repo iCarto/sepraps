@@ -33,7 +33,7 @@ const PaymentCalendarItem = ({payment}) => {
                 {day}
             </Box>
             <TextLink
-                to={`${basePath}/${payment.id}`}
+                to={`${basePath}/list/${payment.id}`}
                 text={payment.name}
                 textStyle={{fontWeight: "bold"}}
             />

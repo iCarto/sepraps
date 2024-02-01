@@ -114,7 +114,10 @@ const ViewPaymentContractFinancialChart = ({contract}) => {
         ? [contract.awarding_budget_min, contract.awarding_budget]
         : contract.awarding_budget;
 
-    const maxAmendedAmount = contract.total_awarding_budget;
+    const maxAmendedAmount =
+        contract.total_awarding_budget !== maxAmount
+            ? contract.total_awarding_budget
+            : null;
     const maxEndDate = contract.expected_execution_end_date;
     const maxAmendedEndDate = contract.amended_expected_execution_end_date;
 

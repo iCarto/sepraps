@@ -14,7 +14,7 @@ const SubpageWithSelectorContainer = ({
 }) => {
     return (
         <Grid container spacing={1} wrap="nowrap" sx={{overflow: "auto"}}>
-            <Grid item xs={12 - selectorSize}>
+            <Grid item xs>
                 {children}
                 {noItems && (
                     <PaperContainer>

@@ -22,20 +22,19 @@ const StyledTab = styled(Tab)({
     },
 });
 
-const TabContainer = ({tabs, info = null, error = null}) => {
+const TabContainer = ({tabs, basePath, info = null, error = null}) => {
     const {tabIndex, handleChangeTab} = useTabLogic();
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    const currentPath = RouterUtil.getLastUrlSegment(location);
-    const currentTabIndex = tabs.findIndex(
-        tab => tab.path === currentPath || tab.pathsForIndex?.includes(currentPath)
+    const currentTabIndex = tabs.findIndex(tab =>
+        location.pathname.startsWith(`${basePath}/${tab.path}`)
     );
 
     useEffect(() => {
         handleChangeTab(null, currentTabIndex);
-    }, [currentPath, currentTabIndex]);
+    }, [location.pathname, currentTabIndex]);
 
     const handleClickTab = path => {
         navigate(path);

@@ -15,6 +15,13 @@ const RouterUtil = {
     getLastUrlSegment(location) {
         return location.pathname.split("/").slice(-1)[0];
     },
+
+    getPathForSegment(location, segment) {
+        return location.pathname.substring(
+            0,
+            location.pathname.indexOf(segment) + segment.length
+        );
+    },
 };
 
 export default RouterUtil;
