@@ -8,15 +8,17 @@ import {
     SocialComponentsTotalsContent,
     TRAINING_DATA_FILTER,
 } from "socialComponent/presentational";
+import {PaperComponent, Spinner} from "base/shared/components";
+import {AlertError} from "base/error/components";
 
 import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-import {PaperComponent} from "base/shared/components";
 
 const ViewSocialComponentsOverview = () => {
     const {project, scMonitorings, connection} = useOutletContext();
 
     const [trainingsTotals, setTrainingsTotals] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     const trainingDataGroupedBy = TRAINING_DATA_FILTER.GROUPED_BY.COMPONENT.code;
     const filter = {project: project?.id};
@@ -30,25 +32,36 @@ const ViewSocialComponentsOverview = () => {
     };
 
     useEffect(() => {
+        setIsLoading(true);
         ProjectStatsService.getSocialComponentTrainingsStats(
             trainingDataGroupedBy,
             filter
         )
             .then(data => {
                 setTrainingsTotals(getTotalsOnly(data));
+                setIsLoading(false);
             })
             .catch(error => {
+                setError(error);
                 console.log(error);
+                setIsLoading(false);
             });
     }, [project]);
 
     return (
         <Stack spacing={1}>
             <PaperComponent>
-                <SocialComponentsTotalsContent
-                    trainingsTotals={trainingsTotals}
-                    connection={connection}
-                />
+                {isLoading ? (
+                    <Spinner />
+                ) : (
+                    <>
+                        <AlertError error={error} />
+                        <SocialComponentsTotalsContent
+                            trainingsTotals={trainingsTotals}
+                            connection={connection}
+                        />
+                    </>
+                )}
             </PaperComponent>
             <PaperComponent>
                 <SocialComponentsSummaryList socialComponents={scMonitorings} />
