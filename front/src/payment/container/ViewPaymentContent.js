@@ -42,7 +42,7 @@ const ViewPaymentContent = () => {
         } else if (payments?.length > 0) {
             navigate(payments[0].id.toString());
         }
-    }, [paymentId]);
+    }, [paymentId, location.state?.lastRefreshDate]);
 
     const handleDelete = () => {
         PaymentService.delete(payment.id).then(() => {

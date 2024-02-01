@@ -1,11 +1,5 @@
-import {useEffect, useMemo, useState} from "react";
-import {
-    Outlet,
-    useLocation,
-    useNavigate,
-    useOutletContext,
-    useParams,
-} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Outlet, useLocation, useOutletContext, useParams} from "react-router-dom";
 
 import {ProjectService} from "project/service";
 import {RouterUtil} from "base/navigation/utilities";
@@ -14,11 +8,10 @@ import {TabContainer} from "base/ui/tab/components";
 import Box from "@mui/material/Box";
 
 const ViewProjectSocialComponentSubPage = () => {
-    const navigate = useNavigate();
-    const {id: projectId, socialComponentId, idDocument} = useParams();
+    const {id: projectId} = useParams();
 
     const location = useLocation();
-    const isRootPath = RouterUtil.getLastUrlSegment(location) === "socialcomponents";
+    const basePath = RouterUtil.getPathForSegment(location, "socialcomponents");
 
     const [project] = useOutletContext();
 
@@ -32,19 +25,10 @@ const ViewProjectSocialComponentSubPage = () => {
         connection: connection,
     };
 
-    const defaultSCMonitoringId = useMemo(() => {
-        if (socialComponentId) return socialComponentId;
-        if (socialComponentMonitorings)
-            return socialComponentMonitorings[0]?.id?.toString();
-    }, [socialComponentId, socialComponentMonitorings]);
-
     useEffect(() => {
         ProjectService.getProjectSocialComponents(projectId)
             .then(items => {
                 setSocialComponentMonitorings(items);
-                if (isRootPath && items.length > 0) {
-                    navigate(items[0].id.toString());
-                }
             })
             .catch(error => {
                 console.log({error});
@@ -54,9 +38,6 @@ const ViewProjectSocialComponentSubPage = () => {
             .then(items => {
                 // TO-DO: A project always has ONLY 1 connection instance. Check data model.
                 setConnection(items[0]);
-                if (isRootPath && items.length > 0) {
-                    navigate(items[0].id.toString());
-                }
             })
             .catch(error => {
                 console.log({error});
@@ -72,14 +53,12 @@ const ViewProjectSocialComponentSubPage = () => {
         },
         {
             label: "Componentes",
-            path: defaultSCMonitoringId,
-            pathsForIndex: [idDocument, "new"],
+            path: "list",
             content: <Outlet context={contextForOutlet} />,
         },
         {
             label: "Conexiones",
             path: "connections",
-            pathsForIndex: [idDocument],
             content: <Outlet context={contextForOutlet} />,
         },
         {
@@ -91,7 +70,7 @@ const ViewProjectSocialComponentSubPage = () => {
 
     return (
         <Box>
-            <TabContainer tabs={tabs} error={error} />
+            <TabContainer tabs={tabs} error={error} basePath={basePath} />
         </Box>
     );
 };

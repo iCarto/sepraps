@@ -168,12 +168,12 @@ const projectRoutes = [
                 />
                 <Route
                     key="project-building-components-new"
-                    path="new"
+                    path="list/new"
                     element={<CreateBuildingComponentContent />}
                 />
                 <Route
                     key="project-building-components-detail"
-                    path=":buildingComponentId"
+                    path="list/:buildingComponentId?"
                     element={<ViewBuildingComponentContent />}
                 >
                     <Route
@@ -201,12 +201,12 @@ const projectRoutes = [
                 />
                 <Route
                     key="project-social-components-new"
-                    path="new"
+                    path="list/new"
                     element={<CreateSocialComponentContent />}
                 />
                 <Route
                     key="project-social-components-detail"
-                    path=":socialComponentId"
+                    path="list/:socialComponentId?"
                     element={<ViewSocialComponentContent />}
                 >
                     <Route

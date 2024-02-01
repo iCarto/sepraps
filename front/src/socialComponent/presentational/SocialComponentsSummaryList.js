@@ -47,7 +47,7 @@ const SocialComponentsSummaryList = ({socialComponents}) => {
                                                 sx={{ml: 0}}
                                                 onClick={() =>
                                                     navigate(
-                                                        `${basePath}/${component.id}`
+                                                        `${basePath}/list/${component.id}`
                                                     )
                                                 }
                                             >

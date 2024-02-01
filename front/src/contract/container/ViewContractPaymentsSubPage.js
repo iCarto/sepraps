@@ -42,7 +42,7 @@ const ViewContractPaymentsSubPage = () => {
                     setError(error);
                 });
         }
-    }, [contractId]);
+    }, [contractId, location.state?.lastRefreshDate]);
 
     const tabs = [
         {

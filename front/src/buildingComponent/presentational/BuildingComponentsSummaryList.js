@@ -31,7 +31,7 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                 <ListItem
                                     key={bcMonitoring.id}
                                     onClick={() =>
-                                        navigate(`${basePath}/${bcMonitoring.id}`)
+                                        navigate(`${basePath}/list/${bcMonitoring.id}`)
                                     }
                                     disablePadding
                                 >

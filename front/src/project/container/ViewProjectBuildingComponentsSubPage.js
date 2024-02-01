@@ -1,11 +1,5 @@
-import {useEffect, useMemo, useState} from "react";
-import {
-    Outlet,
-    useLocation,
-    useNavigate,
-    useOutletContext,
-    useParams,
-} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Outlet, useLocation, useOutletContext, useParams} from "react-router-dom";
 
 import {ProjectService} from "project/service";
 import {RouterUtil} from "base/navigation/utilities";
@@ -14,11 +8,10 @@ import {TabContainer} from "base/ui/tab/components";
 import Box from "@mui/material/Box";
 
 const ViewProjectBuildingComponentsSubPage = () => {
-    const navigate = useNavigate();
-    const {id: projectId, buildingComponentId, idDocument} = useParams();
+    const {id: projectId} = useParams();
 
     const location = useLocation();
-    const isRootPath = RouterUtil.getLastUrlSegment(location) === "buildingcomponents";
+    const basePath = RouterUtil.getPathForSegment(location, "buildingcomponents");
 
     const [project] = useOutletContext();
 
@@ -32,19 +25,10 @@ const ViewProjectBuildingComponentsSubPage = () => {
         bcMonitorings: buildingComponentMonitorings,
     };
 
-    const defaultBCMonitoringId = useMemo(() => {
-        if (buildingComponentId) return buildingComponentId;
-        if (buildingComponentMonitorings)
-            return buildingComponentMonitorings[0]?.id?.toString();
-    }, [buildingComponentId, buildingComponentMonitorings]);
-
     useEffect(() => {
         ProjectService.getProjectBuildingComponents(projectId)
             .then(items => {
                 setBuildingComponentMonitorings(items);
-                if (isRootPath && items.length > 0) {
-                    navigate(items[0].id.toString());
-                }
             })
             .catch(error => {
                 console.log({error});
@@ -60,8 +44,7 @@ const ViewProjectBuildingComponentsSubPage = () => {
         },
         {
             label: "Componentes",
-            path: defaultBCMonitoringId,
-            pathsForIndex: [idDocument, "new"],
+            path: "list",
             content: <Outlet context={contextForOutlet} />,
         },
         {
@@ -73,7 +56,7 @@ const ViewProjectBuildingComponentsSubPage = () => {
 
     return (
         <Box>
-            <TabContainer tabs={tabs} error={error} />
+            <TabContainer tabs={tabs} error={error} basePath={basePath} />
         </Box>
     );
 };

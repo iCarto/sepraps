@@ -31,9 +31,9 @@ const ViewBuildingComponentContent = () => {
     const {bcMonitorings} = useOutletContext();
     const {id: projectId, buildingComponentId} = useParams();
 
-    const navigate = useNavigateWithReload();
     const location = useLocation();
-    const isRootPath = RouterUtil.getLastUrlSegment(location) === "buildingcomponents";
+    const navigate = useNavigateWithReload();
+    const basePath = RouterUtil.getPathForSegment(location, "buildingcomponents/list");
 
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [buildingComponentMonitoring, setBuildingComponentMonitoring] = useState(
@@ -42,15 +42,19 @@ const ViewBuildingComponentContent = () => {
 
     useEffect(() => {
         setBuildingComponentMonitoring(null);
-        BuildingComponentMonitoringService.get(buildingComponentId).then(data => {
-            setBuildingComponentMonitoring(data);
-        });
+        if (buildingComponentId) {
+            BuildingComponentMonitoringService.get(buildingComponentId).then(data => {
+                setBuildingComponentMonitoring(data);
+            });
+        } else if (bcMonitorings?.length > 0) {
+            navigate(bcMonitorings[0].id.toString());
+        }
     }, [buildingComponentId, location.state?.lastRefreshDate]);
 
     const handleDelete = () => {
         BuildingComponentMonitoringService.delete(buildingComponentMonitoring.id).then(
             () => {
-                navigate(`/projects/list/${projectId}/buildingcomponents`, true);
+                navigate(basePath, true);
             }
         );
     };
@@ -91,14 +95,14 @@ const ViewBuildingComponentContent = () => {
                             key={bcComponent.id}
                             heading={bcComponent.name}
                             icon={getStatusIcon(bcComponent.execution_status)}
-                            to={`/projects/list/${projectId}/buildingcomponents/${bcComponent.id}`}
+                            to={`${basePath}/${bcComponent.id}`}
                             selected={parseInt(buildingComponentId) === bcComponent.id}
                         />
                     )}
-                    basePath={`/projects/list/${projectId}/buildingcomponents`}
+                    basePath={basePath}
                 />
             }
-            noItems={isRootPath && bcMonitorings && bcMonitorings.length === 0}
+            noItems={bcMonitorings?.length === 0}
             selectorSize={3}
         >
             <ContentLayoutWithAside>

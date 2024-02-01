@@ -32,8 +32,7 @@ const ViewSocialComponentContent = () => {
 
     const navigate = useNavigateWithReload();
     const location = useLocation();
-
-    const isRootPath = RouterUtil.getLastUrlSegment(location) === "socialcomponents";
+    const basePath = RouterUtil.getPathForSegment(location, "socialcomponents/list");
 
     const [socialComponentMonitoring, setSocialComponentMonitoring] = useState(null);
     const [trainings, setTrainings] = useState(null);
@@ -42,27 +41,31 @@ const ViewSocialComponentContent = () => {
     const handleDelete = () => {
         SocialComponentMonitoringService.delete(socialComponentMonitoring.id).then(
             () => {
-                navigate(`/projects/list/${projectId}/socialcomponents`, true);
+                navigate(basePath, true);
             }
         );
     };
 
     useEffect(() => {
         setSocialComponentMonitoring(null);
-        SocialComponentMonitoringService.get(socialComponentId)
-            .then(data => {
-                setSocialComponentMonitoring(data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        SocialComponentMonitoringService.getTrainings(socialComponentId)
-            .then(data => {
-                setTrainings(data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        if (socialComponentId) {
+            SocialComponentMonitoringService.get(socialComponentId)
+                .then(data => {
+                    setSocialComponentMonitoring(data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            SocialComponentMonitoringService.getTrainings(socialComponentId)
+                .then(data => {
+                    setTrainings(data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } else if (scMonitorings?.length > 0) {
+            navigate(scMonitorings[0].id.toString());
+        }
     }, [socialComponentId, location.state?.lastRefreshDate]);
 
     const actions = [
@@ -101,15 +104,15 @@ const ViewSocialComponentContent = () => {
                             key={scComponent.id}
                             heading={scComponent.name}
                             icon={getStatusIcon(scComponent.execution_status)}
-                            to={`/projects/list/${projectId}/socialcomponents/${scComponent.id}`}
+                            to={`${basePath}/${scComponent.id}`}
                             selected={parseInt(socialComponentId) === scComponent.id}
                             headingFontSize={13}
                         />
                     )}
-                    basePath={`/projects/list/${projectId}/socialcomponents`}
+                    basePath={basePath}
                 />
             }
-            noItems={isRootPath && scMonitorings && scMonitorings.length === 0}
+            noItems={scMonitorings?.length === 0}
             selectorSize={3}
         >
             <ContentLayoutWithAside>
