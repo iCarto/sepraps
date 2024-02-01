@@ -2,15 +2,15 @@ import {useOutletContext} from "react-router-dom";
 
 import {ViewBuildingComponentsFinancialData} from "buildingComponent/container";
 import {BuildingComponentsSummaryList} from "buildingComponent/presentational";
-import Grid from "@mui/material/Grid";
 import {PaperComponent} from "base/shared/components";
+import Grid from "@mui/material/Grid";
 
 const ViewBuildingComponentsOverview = () => {
     const {project, bcMonitorings} = useOutletContext();
 
     return project && bcMonitorings ? (
         <Grid container spacing={1}>
-            <Grid item xs={5}>
+            <Grid item xs={5} sx={{height: "fit-content"}}>
                 <PaperComponent>
                     <ViewBuildingComponentsFinancialData
                         filter={{project: project.id}}

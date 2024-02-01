@@ -2,7 +2,6 @@ import {TextLink} from "base/navigation/components";
 
 import Stack from "@mui/material/Stack";
 import ListItem from "@mui/material/ListItem";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";

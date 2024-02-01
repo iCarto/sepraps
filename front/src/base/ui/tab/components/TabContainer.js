@@ -1,19 +1,19 @@
 import {useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 
-import {theme} from "Theme";
-import {useTabLogic} from "../hooks";
-import {TabUtil} from "../utilities";
 import {RouterUtil} from "base/navigation/utilities";
+import {TabUtil} from "../utilities";
+import {useTabLogic} from "../hooks";
 
 import {TabPanel} from ".";
 import {AlertError} from "base/error/components";
+
+import styled from "@mui/material/styles/styled";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Divider from "@mui/material/Divider";
-import {Grid} from "@mui/material";
-import styled from "@mui/material/styles/styled";
 
 const StyledTab = styled(Tab)({
     borderRight: "1px solid #eaeaea",
