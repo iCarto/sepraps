@@ -1,6 +1,7 @@
 import {theme} from "Theme";
 import {ProgressUtil} from "../utilities";
 import {FieldUtil} from "base/ui/section/utilities";
+import {LightHeading} from "base/ui/headings/components";
 import LinearProgress from "@mui/material/LinearProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -16,17 +17,7 @@ const ProgressBar = ({label = "", progressValue}) => {
 
     return (
         <>
-            {label ? (
-                <Typography
-                    component="span"
-                    variant="overline"
-                    fontSize={16}
-                    color={theme.palette.grey[600]}
-                    lineHeight={1}
-                >
-                    {label}
-                </Typography>
-            ) : null}
+            {label ? <LightHeading>{label}</LightHeading> : null}
             <Typography
                 component="span"
                 display="block"

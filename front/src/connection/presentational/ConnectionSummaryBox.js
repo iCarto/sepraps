@@ -2,6 +2,7 @@ import {theme} from "Theme";
 import {NumberUtil} from "base/format/utilities";
 import {ContainerGridWithBorder} from "base/ui/section/components";
 import {SimplePieChart} from "base/chart/components";
+import {LightHeading} from "base/ui/headings/components";
 
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -11,15 +12,7 @@ const ConnectionSummaryBox = ({connection}) => {
     return (
         <ContainerGridWithBorder>
             <Grid item xs={9} pl="1rem">
-                <Typography
-                    component="span"
-                    variant="overline"
-                    fontSize={16}
-                    color={theme.palette.grey[600]}
-                    lineHeight={1}
-                >
-                    Conexiones reales/previstas
-                </Typography>
+                <LightHeading>Conexiones reales/previstas</LightHeading>
                 <Stack direction="row" alignItems="baseline">
                     <Typography component="span" fontSize={42}>
                         {connection?.number_of_actual_connections || 0}

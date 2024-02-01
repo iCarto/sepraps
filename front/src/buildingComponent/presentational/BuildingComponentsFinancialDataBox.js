@@ -4,6 +4,7 @@ import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 import {theme} from "Theme";
 import {SimplePieChart} from "base/chart/components";
 import {ContainerGridWithBorder} from "base/ui/section/components";
+import {LightHeading} from "base/ui/headings/components";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -19,15 +20,7 @@ const BuildingComponentsFinancialDataBox = ({
     return (
         <ContainerGridWithBorder>
             <Grid item xs={9} pl="1rem">
-                <Typography
-                    component="span"
-                    variant="overline"
-                    fontSize={16}
-                    color={theme.palette.grey[600]}
-                    lineHeight={1}
-                >
-                    {headline}
-                </Typography>
+                <LightHeading>{headline}</LightHeading>
                 <Stack direction="row" alignItems="baseline">
                     <Typography component="span" fontSize={42}>
                         {NumberUtil.formatMillions(mainValues.first)} {CURRENCY_SYMBOL}

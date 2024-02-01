@@ -1,11 +1,11 @@
 import {useLocation, useNavigate} from "react-router-dom";
 
-import {theme} from "Theme";
 import {NumberUtil} from "base/format/utilities";
 
 import {ProgressBarSmall} from "base/progress/components";
 import {AppraisalChip, CollapsableListItem} from "base/shared/components";
 import {SocialComponentTrainingsSummaryTable} from ".";
+import {LightHeading} from "base/ui/headings/components";
 
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -26,16 +26,10 @@ const SocialComponentsSummaryList = ({socialComponents}) => {
     return (
         socialComponents && (
             <Grid sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 4}}>
-                <Typography
-                    component="span"
-                    variant="overline"
-                    fontSize={16}
-                    color={theme.palette.grey[600]}
-                    lineHeight={1}
-                >
+                <LightHeading>
                     Componentes sociales{" "}
                     <span style={{fontWeight: 800}}>({socialComponents.length})</span>
-                </Typography>
+                </LightHeading>
                 <List sx={{m: 0}}>
                     {socialComponents.map((component, index) => {
                         return (

@@ -3,6 +3,7 @@ import {theme} from "Theme";
 import {NumberUtil} from "base/format/utilities";
 import {SimplePieChart} from "base/chart/components";
 import {ContainerGridWithBorder} from "base/ui/section/components";
+import {LightHeading} from "base/ui/headings/components";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -34,14 +35,7 @@ const TrainingSummaryBox = ({trainingsTotals}) => {
                             </Typography>
                         </Grid>
                         <Grid item container xs={10} alignItems="flex-end">
-                            <Typography
-                                component="span"
-                                variant="overline"
-                                fontSize={16}
-                                color={theme.palette.grey[600]}
-                            >
-                                {item.label}
-                            </Typography>
+                            <LightHeading>{item.label}</LightHeading>
                         </Grid>
                     </Fragment>
                 ))}

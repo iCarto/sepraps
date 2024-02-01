@@ -2,6 +2,7 @@ import {NumberUtil} from "base/format/utilities";
 import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 
 import {theme} from "Theme";
+import {LightHeading} from "base/ui/headings/components";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -26,15 +27,7 @@ const PaymentsFinancialDataBox = ({
             sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 2}}
         >
             <Grid item xs={9} pl="1rem">
-                <Typography
-                    component="span"
-                    variant="overline"
-                    fontSize={16}
-                    color={theme.palette.grey[600]}
-                    lineHeight={1}
-                >
-                    {headline}
-                </Typography>
+                <LightHeading>{headline}</LightHeading>
                 <Stack direction="row" alignItems="baseline">
                     <Typography component="span" fontSize={34}>
                         {NumberUtil.formatMillions(firstValue)}{" "}

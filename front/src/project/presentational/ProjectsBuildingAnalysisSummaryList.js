@@ -1,10 +1,10 @@
 import {Fragment} from "react";
 import {useNavigate} from "react-router-dom";
-import {theme} from "Theme";
 
 import {NumberUtil} from "base/format/utilities";
 import {ImagePreview} from "base/image/components";
 import {ProgressBarSmall} from "base/progress/components";
+import {LightHeading} from "base/ui/headings/components";
 
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -23,15 +23,9 @@ const ProjectsBuildingAnalysisSummaryList = ({projects}) => {
     return (
         projects && (
             <Grid sx={{border: 1, borderColor: "lightgrey", borderRadius: 5, p: 4}}>
-                <Typography
-                    component="span"
-                    variant="overline"
-                    fontSize={16}
-                    lineHeight={1}
-                    color={theme.palette.grey[600]}
-                >
+                <LightHeading>
                     Proyectos <span style={{fontWeight: 800}}>({projects.length})</span>
-                </Typography>
+                </LightHeading>
                 <List sx={{m: 0}}>
                     {projects.map(project => {
                         return (
