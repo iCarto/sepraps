@@ -14,6 +14,7 @@ const PaymentsFinancialData = ({contract}) => {
                 firstValue={contract.total_amount}
                 secondValue={contract.total_awarding_budget}
                 percentageValue={contract.total_amount_percentage}
+                percentageColor="expected"
                 subheading={
                     <PaymentsFinancialDataSubheading
                         label="Desvío"
@@ -127,8 +128,6 @@ const PaymentsFinancialData = ({contract}) => {
                         </Grid>
                     </Grid>
                 }
-                colorNamePrimary="expected"
-                colorNameSecondary="expected"
             />
         );
     };
@@ -149,8 +148,6 @@ const PaymentsFinancialData = ({contract}) => {
                         success={percentage <= 100}
                     />
                 }
-                colorNamePrimary="paid"
-                colorNameSecondary="expected"
             />
         );
     };

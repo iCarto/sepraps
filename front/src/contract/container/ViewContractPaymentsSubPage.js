@@ -64,7 +64,7 @@ const ViewContractPaymentsSubPage = () => {
 
     return (
         <Box>
-            {!contract.awarding_budget ? (
+            {!contract.awarding_budget || !contract.execution_start_date ? (
                 <PaperContainer>
                     <Grid container justifyContent="center" my={6}>
                         <Typography
@@ -74,7 +74,7 @@ const ViewContractPaymentsSubPage = () => {
                             }}
                         >
                             No se pueden gestionar los productos porque el contrato no
-                            tiene monto adjudicado todavía
+                            tiene fecha de inicio de ejecución o monto adjudicado
                         </Typography>
                     </Grid>
                 </PaperContainer>

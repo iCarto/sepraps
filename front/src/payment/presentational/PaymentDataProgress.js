@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 
 import {theme} from "Theme";
 
-const PaymentDataProgress = ({label, value}) => {
+const PaymentDataProgress = ({label, value, color = "paid"}) => {
     const percentage = {
         label: label,
-        value: value,
+        value: parseInt(value),
     };
 
     return (
@@ -31,10 +31,15 @@ const PaymentDataProgress = ({label, value}) => {
             />
             <CircularProgress
                 variant="determinate"
-                value={parseFloat(percentage.value)}
+                value={percentage.value}
                 size={120}
                 thickness={5}
-                sx={{color: theme.palette["expected"].main}}
+                sx={{
+                    color:
+                        percentage.value === 100
+                            ? theme.palette.success.light
+                            : theme.palette[color].main,
+                }}
             />
             <Stack
                 sx={{
@@ -58,6 +63,7 @@ const PaymentDataProgress = ({label, value}) => {
                     variant="overline"
                     lineHeight={1}
                     fontSize="10px"
+                    textAlign="center"
                 >
                     {percentage.label || ""}
                 </Typography>

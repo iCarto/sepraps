@@ -28,10 +28,10 @@ const payment_view_adapter = payment => {
     delete payment["payment_products"];
     delete payment["payment_comments"];
     delete payment["expected_total_contract_percentage"];
-    delete payment["paid_total_contract_percentage"];
+    delete payment["expected_awarded_contract_percentage"];
+    delete payment["expected_awarded_contract_percentage_cumulative"];
     delete payment["expected_total_amount_cumulative"];
     delete payment["expected_total_contract_percentage_cumulative"];
-    delete payment["expected_awarded_contract_percentage_cumulative"];
     delete payment["paid_total_amount_cumulative"];
     delete payment["paid_total_contract_percentage_cumulative"];
 
@@ -73,11 +73,13 @@ const createPayment = ({
     contract_payment_criteria_type = null,
     expected_total_contract_percentage = null,
     paid_total_contract_percentage = null,
+    expected_awarded_contract_percentage = null,
+    expected_awarded_contract_percentage_cumulative = null,
     expected_total_amount_cumulative = null,
     expected_total_contract_percentage_cumulative = null,
-    expected_awarded_contract_percentage_cumulative = null,
     paid_total_amount_cumulative = null,
-    paid_total_contract_percentage_cumulative = null,
+    paid_awarded_contract_percentage = null,
+    paid_awarded_contract_percentage_cumulative = null,
     expected_total_contract_amount = null,
     amended_expected_total_contract_amount = null,
 } = {}) => {
@@ -107,11 +109,13 @@ const createPayment = ({
         contract_payment_criteria_type,
         expected_total_contract_percentage,
         paid_total_contract_percentage,
+        expected_awarded_contract_percentage,
+        expected_awarded_contract_percentage_cumulative,
         expected_total_amount_cumulative,
         expected_total_contract_percentage_cumulative,
-        expected_awarded_contract_percentage_cumulative,
         paid_total_amount_cumulative,
-        paid_total_contract_percentage_cumulative,
+        paid_awarded_contract_percentage,
+        paid_awarded_contract_percentage_cumulative,
         expected_total_contract_amount,
         amended_expected_total_contract_amount,
     };

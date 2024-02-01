@@ -37,12 +37,13 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "payment_products",
             "payment_comments",
             "expected_total_contract_percentage",
-            "paid_total_contract_percentage",
+            "expected_awarded_contract_percentage",
+            "expected_awarded_contract_percentage_cumulative",
             "expected_total_amount_cumulative",
             "expected_total_contract_percentage_cumulative",
-            "expected_awarded_contract_percentage_cumulative",
             "paid_total_amount_cumulative",
-            "paid_total_contract_percentage_cumulative",
+            "paid_awarded_contract_percentage",
+            "paid_awarded_contract_percentage_cumulative",
             "expected_total_contract_amount",
             "amended_expected_total_contract_amount",
         )
@@ -51,13 +52,14 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
 
     payment_products = serializers.SerializerMethodField()
     payment_comments = CommentSerializer(source="comments", read_only=True, many=True)
-    expected_total_contract_percentage = serializers.SerializerMethodField()
-    expected_total_contract_percentage_cumulative = serializers.SerializerMethodField()
+    expected_awarded_contract_percentage = serializers.SerializerMethodField()
     expected_awarded_contract_percentage_cumulative = (
         serializers.SerializerMethodField()
     )
-    paid_total_contract_percentage = serializers.SerializerMethodField()
-    paid_total_contract_percentage_cumulative = serializers.SerializerMethodField()
+    expected_total_contract_percentage = serializers.SerializerMethodField()
+    expected_total_contract_percentage_cumulative = serializers.SerializerMethodField()
+    paid_awarded_contract_percentage = serializers.SerializerMethodField()
+    paid_awarded_contract_percentage_cumulative = serializers.SerializerMethodField()
     expected_total_contract_amount = serializers.CharField(
         source="contract.awarding_budget", read_only=True
     )
@@ -79,6 +81,28 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
         return ProductSerializer(
             products, read_only=True, many=True, context=self.context
         ).data
+
+    def get_expected_awarded_contract_percentage(self, instance):
+        instance_expected_total_amount = instance.expected_total_amount
+        contract_awarded_amount = instance.contract.total_awarding_budget
+        if not instance_expected_total_amount or not contract_awarded_amount:
+            return None
+        return format_decimal(
+            100
+            * Decimal(instance_expected_total_amount)
+            / Decimal(contract_awarded_amount)
+        )
+
+    def get_expected_awarded_contract_percentage_cumulative(self, instance):
+        expected_total_amount_cumulative = instance.expected_total_amount_cumulative
+        contract_awarded_amount = instance.contract.total_awarding_budget
+        if not expected_total_amount_cumulative or not contract_awarded_amount:
+            return None
+        return format_decimal(
+            100
+            * Decimal(expected_total_amount_cumulative)
+            / Decimal(contract_awarded_amount)
+        )
 
     def get_expected_total_contract_percentage(self, instance):
         instance_expected_total_amount = instance.expected_total_amount
@@ -102,37 +126,24 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             / Decimal(contract_expected_total_amount)
         )
 
-    def get_expected_awarded_contract_percentage_cumulative(self, instance):
-        expected_total_amount_cumulative = instance.expected_total_amount_cumulative
-        contract_awarded_amount = instance.contract.total_awarding_budget
-        if not expected_total_amount_cumulative or not contract_awarded_amount:
-            return None
-        return format_decimal(
-            100
-            * Decimal(expected_total_amount_cumulative)
-            / Decimal(contract_awarded_amount)
-        )
-
-    def get_paid_total_contract_percentage(self, instance):
+    def get_paid_awarded_contract_percentage(self, instance):
         instance_paid_total_amount = instance.paid_total_amount
-        contract_expected_total_amount = instance.contract.total_amount
-        if not instance_paid_total_amount or not contract_expected_total_amount:
+        contract_awarded_amount = instance.contract.total_awarding_budget
+        if not instance_paid_total_amount or not contract_awarded_amount:
             return None
         return format_decimal(
-            100
-            * Decimal(instance_paid_total_amount)
-            / Decimal(contract_expected_total_amount)
+            100 * Decimal(instance_paid_total_amount) / Decimal(contract_awarded_amount)
         )
 
-    def get_paid_total_contract_percentage_cumulative(self, instance):
+    def get_paid_awarded_contract_percentage_cumulative(self, instance):
         paid_total_amount_cumulative = instance.paid_total_amount_cumulative
-        contract_expected_total_amount = instance.contract.total_amount
-        if not paid_total_amount_cumulative or not contract_expected_total_amount:
+        contract_awarded_amount = instance.contract.total_awarding_budget
+        if not paid_total_amount_cumulative or not contract_awarded_amount:
             return None
         return format_decimal(
             100
             * Decimal(paid_total_amount_cumulative)
-            / Decimal(contract_expected_total_amount)
+            / Decimal(contract_awarded_amount)
         )
 
 

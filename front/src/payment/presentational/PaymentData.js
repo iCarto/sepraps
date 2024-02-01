@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import {theme} from "Theme";
 import {PaymentDataProgress} from ".";
 import Paper from "@mui/material/Paper";
+import {LightHeading} from "base/ui/headings/components";
 
 const ExpectedAmountSection = ({payment}) => {
     return payment.contract_payment_criteria_type === FIXED_VARIABLE_CRITERIA_TYPE ? (
@@ -80,25 +81,46 @@ const PaymentData = ({payment}) => {
                     />
                     <ExpectedAmountSection payment={payment} />
                     {payment.status === PRODUCT_STATUS_PENDING && (
-                        <Paper elevation={1} sx={{mt: 2, p: 1}}>
-                            <Stack direction="row" justifyContent="space-around">
+                        <Paper
+                            elevation={1}
+                            sx={{mt: 2, p: 2, backgroundColor: "grey.50"}}
+                        >
+                            <LightHeading>Resultado</LightHeading>
+                            <Stack
+                                direction="row"
+                                justifyContent="space-around"
+                                sx={{my: 1}}
+                            >
                                 <PaymentDataProgress
-                                    label="Individual"
-                                    value={payment.expected_total_contract_percentage}
+                                    label="Previsto"
+                                    value={NumberUtil.formatDecimal(
+                                        payment.expected_awarded_contract_percentage,
+                                        0
+                                    )}
+                                    color="expected"
                                 />
                                 <PaymentDataProgress
-                                    label="Total"
-                                    value={
-                                        payment.expected_total_contract_percentage_cumulative
-                                    }
-                                />
-                                <PaymentDataProgress
-                                    label="Adjudicado"
-                                    value={
-                                        payment.expected_awarded_contract_percentage_cumulative
-                                    }
+                                    label="Acumulado previsto"
+                                    value={NumberUtil.formatDecimal(
+                                        payment.expected_awarded_contract_percentage_cumulative,
+                                        0
+                                    )}
+                                    color="expected"
                                 />
                             </Stack>
+                            <Divider />
+                            <SectionField
+                                label="Monto acumulado previsto"
+                                value={NumberUtil.formatInteger(
+                                    payment.expected_total_amount_cumulative
+                                )}
+                                unit="Gs."
+                                valueCustomStyle={{
+                                    fontWeight: "bold",
+                                    fontSize: "1.1em",
+                                    color: "grey.500",
+                                }}
+                            />
                         </Paper>
                     )}
                 </SectionBox>
@@ -111,19 +133,40 @@ const PaymentData = ({payment}) => {
                             value={DateUtil.formatDate(payment.approval_date)}
                         />
                         <PaidAmountSection payment={payment} />
-                        <Paper elevation={1} sx={{mt: 2, p: 1}}>
-                            <Stack direction="row" justifyContent="space-around">
+                        <Paper
+                            elevation={1}
+                            sx={{mt: 2, p: 2, backgroundColor: "grey.50"}}
+                        >
+                            <LightHeading>Resultado</LightHeading>
+                            <Stack
+                                direction="row"
+                                justifyContent="space-around"
+                                sx={{my: 1}}
+                            >
                                 <PaymentDataProgress
-                                    label="Individual"
-                                    value={payment.paid_total_contract_percentage}
+                                    label="Previsto"
+                                    value={payment.paid_awarded_contract_percentage}
                                 />
                                 <PaymentDataProgress
-                                    label="Total"
+                                    label="Acumulado total"
                                     value={
-                                        payment.paid_total_contract_percentage_cumulative
+                                        payment.paid_awarded_contract_percentage_cumulative
                                     }
                                 />
                             </Stack>
+                            <Divider />
+                            <SectionField
+                                label="Monto acumulado aprobado"
+                                value={NumberUtil.formatInteger(
+                                    payment.paid_total_amount_cumulative
+                                )}
+                                unit="Gs."
+                                valueCustomStyle={{
+                                    fontWeight: "bold",
+                                    fontSize: "1.1em",
+                                    color: "grey.500",
+                                }}
+                            />
                         </Paper>
                     </SectionBox>
                 )}
