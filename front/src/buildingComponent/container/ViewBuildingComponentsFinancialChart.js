@@ -10,22 +10,17 @@ import {
 import {PaperComponent, Spinner} from "base/shared/components";
 import {AlertError} from "base/error/components";
 import Grid from "@mui/material/Grid";
-import {useOutletContext} from "react-router-dom";
 import Box from "@mui/material/Box";
 
-const ViewBuildingComponentsFinancialChart = ({displayGroupedBy = false}) => {
+const ViewBuildingComponentsFinancialChart = ({filter, displayGroupedBy = false}) => {
     const [chartData, setChartData] = useState(null);
     const [groupedBy, setGroupedBy] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const {contract} = useOutletContext();
-
     useEffect(() => {
         setIsLoading(true);
-        ProjectStatsService.getBuildingComponentsStats(groupedBy, {
-            contract: contract.id,
-        })
+        ProjectStatsService.getBuildingComponentsStats(groupedBy, filter)
             .then(chartData => {
                 setIsLoading(false);
                 setChartData(chartData);
@@ -34,7 +29,7 @@ const ViewBuildingComponentsFinancialChart = ({displayGroupedBy = false}) => {
                 setError(error);
                 console.log(error);
             });
-    }, [groupedBy, contract]);
+    }, [groupedBy, filter]);
 
     useEffect(() => {
         if (displayGroupedBy) setGroupedBy(BC_DATA_FILTER.GROUPED_BY.UNGROUPED.code);

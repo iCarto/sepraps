@@ -24,6 +24,7 @@ import {
     ViewContractSocialComponentsTrainingsTableContent,
     ViewContractSocialComponentsTrainingsChartContent,
     ViewContractSocialComponentsConnectionsTableContent,
+    ViewContractBuildingComponentsFinancialChartContent,
 } from "contract/container";
 import {UpdateContractContactPanel} from "contract/container/monitoring";
 import {UpdateContractContractorContactPanel} from "contractor/container";
@@ -35,7 +36,6 @@ import {
     ViewPaymentContractOverview,
 } from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
-import {ViewBuildingComponentsFinancialChart} from "buildingComponent/container";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -170,9 +170,7 @@ const contractRoutes = [
                 <Route
                     key="contract-project-analysis-chart"
                     path="chart"
-                    element={
-                        <ViewBuildingComponentsFinancialChart displayGroupedBy={true} />
-                    }
+                    element={<ViewContractBuildingComponentsFinancialChartContent />}
                 />
             </Route>
             <Route

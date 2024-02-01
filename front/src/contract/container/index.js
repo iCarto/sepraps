@@ -49,3 +49,6 @@ export {
 export {
     default as ViewContractSocialComponentsConnectionsTableContent,
 } from "./ViewContractSocialComponentsConnectionsTableContent";
+export {
+    default as ViewContractBuildingComponentsFinancialChartContent,
+} from "./ViewContractBuildingComponentsFinancialChartContent";
