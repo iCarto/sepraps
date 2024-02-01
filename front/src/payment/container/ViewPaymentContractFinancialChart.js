@@ -9,7 +9,6 @@ import {
     PaymentFinancialChartContractAnnotations,
     PaymentFinancialChartUtil,
 } from "payment/presentational/chart";
-import {SectionCard} from "base/ui/section/components";
 import Grid from "@mui/material/Grid";
 import {DateUtil} from "base/format/utilities";
 

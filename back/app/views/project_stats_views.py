@@ -356,7 +356,6 @@ def get_connections_total_stats(request, format=None):
                 "number_of_planned_connections": "Int64",
                 "number_of_actual_connections": "Int64",
                 "number_of_households": "Int64",
-                "connected_households_percentage": "Int64",
             }
         )
 

@@ -45,7 +45,7 @@ const ContractSubPageMenu = ({contract}) => {
             text: "Plantel",
         },
         {
-            to: `${basePath}/project_analysis`,
+            to: `${basePath}/project_analysis/overview`,
             text: "Análisis de proyectos",
         },
     ];
@@ -56,7 +56,7 @@ const ContractSubPageMenu = ({contract}) => {
             text: "Plantel",
         },
         {
-            to: `${basePath}/project_social_analysis`,
+            to: `${basePath}/project_social_analysis/overview`,
             text: "Análisis de proyectos",
         },
     ];

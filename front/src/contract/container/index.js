@@ -40,3 +40,12 @@ export {
 export {
     default as ViewContractBuildingAnalysisOverview,
 } from "./ViewContractBuildingAnalysisOverview";
+export {
+    default as ViewContractSocialComponentsTrainingsTableContent,
+} from "./ViewContractSocialComponentsTrainingsTableContent";
+export {
+    default as ViewContractSocialComponentsTrainingsChartContent,
+} from "./ViewContractSocialComponentsTrainingsChartContent";
+export {
+    default as ViewContractSocialComponentsConnectionsTableContent,
+} from "./ViewContractSocialComponentsConnectionsTableContent";

@@ -20,6 +20,10 @@ import {
     ViewContractStaffSubPage,
     ViewContractPostExecutionSubPage,
     ViewContractSocialAnalysisSubPage,
+    ViewContractBuildingAnalysisOverview,
+    ViewContractSocialComponentsTrainingsTableContent,
+    ViewContractSocialComponentsTrainingsChartContent,
+    ViewContractSocialComponentsConnectionsTableContent,
 } from "contract/container";
 import {UpdateContractContactPanel} from "contract/container/monitoring";
 import {UpdateContractContractorContactPanel} from "contractor/container";
@@ -31,6 +35,7 @@ import {
     ViewPaymentContractOverview,
 } from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
+import {ViewBuildingComponentsFinancialChart} from "buildingComponent/container";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -156,7 +161,20 @@ const contractRoutes = [
                 key="contract-project-analysis"
                 path="project_analysis"
                 element={<ViewContractBuildingAnalysisSubPage />}
-            />
+            >
+                <Route
+                    key="contract-project-analysis-overview"
+                    path="overview"
+                    element={<ViewContractBuildingAnalysisOverview />}
+                />
+                <Route
+                    key="contract-project-analysis-chart"
+                    path="chart"
+                    element={
+                        <ViewBuildingComponentsFinancialChart displayGroupedBy={true} />
+                    }
+                />
+            </Route>
             <Route
                 key="contract-social"
                 path="social_staff"
@@ -166,7 +184,23 @@ const contractRoutes = [
                 key="contract-project-social-analysis"
                 path="project_social_analysis"
                 element={<ViewContractSocialAnalysisSubPage />}
-            />
+            >
+                <Route
+                    key="contract-project-analysis-components-table"
+                    path="overview"
+                    element={<ViewContractSocialComponentsTrainingsTableContent />}
+                />
+                <Route
+                    key="contract-project-analysis-components-chart"
+                    path="components_chart"
+                    element={<ViewContractSocialComponentsTrainingsChartContent />}
+                />
+                <Route
+                    key="contract-project-analysis-connections-table"
+                    path="connections_table"
+                    element={<ViewContractSocialComponentsConnectionsTableContent />}
+                />
+            </Route>
             <Route index element={<Navigate to="summary" replace />} />
         </Route>
         <Route key="contract-list" path="" element={<ListContractsPage />}>

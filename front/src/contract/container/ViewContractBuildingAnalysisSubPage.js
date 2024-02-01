@@ -1,33 +1,33 @@
-import {useParams} from "react-router-dom";
+import {Outlet, useLocation, useOutletContext} from "react-router-dom";
 
-import {ViewContractBuildingAnalysisOverview} from ".";
-import {ViewBuildingComponentsFinancialChart} from "buildingComponent/container";
-import {TabContainerWithoutNavigation} from "base/ui/tab/components";
-import {PaperContainer} from "base/shared/components";
+import {TabContainer} from "base/ui/tab/components";
+import {RouterUtil} from "base/navigation/utilities";
+import Box from "@mui/material/Box";
 
 const ViewContractBuildingAnalysisSubPage = () => {
-    const {id: contractId} = useParams();
+    const location = useLocation();
+    const basePath = RouterUtil.getPathForSegment(location, "project_analysis");
+
+    const [contract] = useOutletContext();
+    const contextForOutlet = {contract: contract};
 
     const tabs = [
         {
             label: "Vista general",
-            content: <ViewContractBuildingAnalysisOverview contractId={contractId} />,
+            path: "overview",
+            content: <Outlet context={contextForOutlet} />,
         },
         {
             label: "Gráfico",
-            content: (
-                <ViewBuildingComponentsFinancialChart filter={{contract: contractId}} />
-            ),
+            path: "chart",
+            content: <Outlet context={contextForOutlet} />,
         },
     ];
 
     return (
-        <PaperContainer>
-            <TabContainerWithoutNavigation
-                label="contract-building-analysis"
-                tabs={tabs}
-            />
-        </PaperContainer>
+        <Box>
+            <TabContainer tabs={tabs} basePath={basePath} />
+        </Box>
     );
 };
 

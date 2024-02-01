@@ -1,44 +1,38 @@
-import {useParams} from "react-router-dom";
+import {Outlet, useLocation, useOutletContext} from "react-router-dom";
 
-import {
-    ViewSocialComponentsTrainingsChart,
-    ViewSocialComponentsTrainingsTotalsTable,
-} from "../../socialComponent/container";
-import {ViewConnectionsTotalsTable} from "connection/container";
-import {TabContainerWithoutNavigation} from "base/ui/tab/components";
-import {PaperContainer} from "base/shared/components";
+import {TabContainer} from "base/ui/tab/components";
+import {RouterUtil} from "base/navigation/utilities";
+import Box from "@mui/material/Box";
 
 const ViewContractSocialAnalysisSubPage = () => {
-    const {id: contractId} = useParams();
+    const location = useLocation();
+    const basePath = RouterUtil.getPathForSegment(location, "project_social_analysis");
+
+    const [contract] = useOutletContext();
+    const contextForOutlet = {contract: contract};
 
     const tabs = [
         {
             label: "Tabla servicios",
-            content: (
-                <ViewSocialComponentsTrainingsTotalsTable
-                    filter={{contract: contractId}}
-                />
-            ),
+            path: "overview",
+            content: <Outlet context={contextForOutlet} />,
         },
         {
             label: "Gráfico servicios",
-            content: (
-                <ViewSocialComponentsTrainingsChart filter={{contract: contractId}} />
-            ),
+            path: "components_chart",
+            content: <Outlet context={contextForOutlet} />,
         },
         {
             label: "Tabla conexiones",
-            content: <ViewConnectionsTotalsTable filter={{contract: contractId}} />,
+            path: "connections_table",
+            content: <Outlet context={contextForOutlet} />,
         },
     ];
 
     return (
-        <PaperContainer>
-            <TabContainerWithoutNavigation
-                label="contract-social-analysis"
-                tabs={tabs}
-            />
-        </PaperContainer>
+        <Box>
+            <TabContainer tabs={tabs} basePath={basePath} />
+        </Box>
     );
 };
 

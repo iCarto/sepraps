@@ -51,7 +51,13 @@ const EntityMenuDropDown = ({
             return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/${urlSlugs[2]}`;
         }
         if (
-            ["payment", "buildingcomponents", "socialcomponents"].includes(urlSlugs[1])
+            [
+                "payment",
+                "buildingcomponents",
+                "socialcomponents",
+                "project_analysis",
+                "project_social_analysis",
+            ].includes(urlSlugs[1])
         ) {
             return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/overview`;
         }
