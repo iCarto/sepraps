@@ -13,6 +13,10 @@ import {AlertError} from "base/error/components";
 import {ListSelector, ListSelectorItem} from "base/shared/components";
 import {EntityContent} from "base/entity/components/presentational";
 
+import Tooltip from "@mui/material/Tooltip";
+import Button from "@mui/material/Button";
+
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 
 const ViewProjectFieldReportSubPage = () => {
@@ -84,7 +88,22 @@ const ViewProjectFieldReportSubPage = () => {
                         entityName={fieldReport.code}
                         entityIcon={<DirectionsCarFilledOutlinedIcon />}
                     >
-                        <FieldReportSummarySection fieldReport={fieldReport} />
+                        <FieldReportSummarySection
+                            fieldReport={fieldReport}
+                            secondaryAction={
+                                <Tooltip title="Ver informe completo">
+                                    <Button
+                                        aria-label="view-field-report"
+                                        target="_blank"
+                                        href={`/field-reports/list/${fieldReport.id}/summary`}
+                                        variant="contained"
+                                        startIcon={<OpenInNewIcon />}
+                                    >
+                                        Ver informe
+                                    </Button>
+                                </Tooltip>
+                            }
+                        />
                         <FieldReportProjectContent
                             fieldReportProject={fieldReport.field_report_projects[0]}
                         />

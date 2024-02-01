@@ -1,14 +1,9 @@
 import {DateUtil} from "base/format/utilities";
 import {SectionCard, SectionField} from "base/ui/section/components";
 
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Tooltip from "@mui/material/Tooltip";
-import Button from "@mui/material/Button";
-
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const FieldReportSummarySection = ({fieldReport, secondaryAction = null}) => {
     return (
@@ -21,19 +16,7 @@ const FieldReportSummarySection = ({fieldReport, secondaryAction = null}) => {
                 >
                     {fieldReport?.name}
                 </Typography>
-                <Box sx={{minWidth: "150px"}}>
-                    <Tooltip title="Ver informe completo">
-                        <Button
-                            aria-label="view-field-report"
-                            target="_blank"
-                            href={`/field-reports/list/${fieldReport.id}/summary`}
-                            variant="contained"
-                            startIcon={<OpenInNewIcon />}
-                        >
-                            Ver informe
-                        </Button>
-                    </Tooltip>
-                </Box>
+                <Box sx={{minWidth: "150px"}}>{secondaryAction}</Box>
             </Stack>
             <SectionField
                 label="Fecha del informe"
