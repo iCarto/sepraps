@@ -3,6 +3,7 @@ import {PaymentCalendar, PaymentsFinancialData} from "payment/presentational";
 import {SectionCard} from "base/ui/section/components";
 import Stack from "@mui/material/Stack";
 import PaperComponent from "base/shared/components/PaperComponent";
+import Grid from "@mui/material/Grid";
 
 const ViewPaymentContractOverview = () => {
     const {contract, payments} = useOutletContext();
@@ -28,19 +29,23 @@ const ViewPaymentContractOverview = () => {
 
     return (
         payments && (
-            <Stack direction="row" spacing={1}>
-                <PaperComponent>
-                    <PaymentsFinancialData contract={contract} />
-                </PaperComponent>
-                <PaperComponent>
-                    <SectionCard title="Calendario de productos">
-                        <PaymentCalendar
-                            years={contractYears}
-                            payments={paymentsWithDate}
-                        />
-                    </SectionCard>
-                </PaperComponent>
-            </Stack>
+            <Grid container spacing={1} alignItems="flex-start">
+                <Grid item xs={6}>
+                    <PaperComponent>
+                        <PaymentsFinancialData contract={contract} />
+                    </PaperComponent>
+                </Grid>
+                <Grid item xs={6}>
+                    <PaperComponent>
+                        <SectionCard title="Calendario de productos">
+                            <PaymentCalendar
+                                years={contractYears}
+                                payments={paymentsWithDate}
+                            />
+                        </SectionCard>
+                    </PaperComponent>
+                </Grid>
+            </Grid>
         )
     );
 };

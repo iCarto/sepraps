@@ -18,6 +18,8 @@ const ContractInsuranceFormFields = () => {
                     label="Seguro de responsabilidad civil"
                     options={yesNoDomain}
                 />
+            </Grid>
+            <Grid item xs={6}>
                 <FormSelect
                     name="awarding_accident_insurance"
                     label="Seguro de accidentes"

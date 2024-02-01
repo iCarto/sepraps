@@ -10,12 +10,12 @@ const AwardingBudgetSection = ({contract, basePath = ""}) => {
     return contract.total_amount_type === MAX_MIN_AMOUNT_TYPE ? (
         <>
             <SectionField
-                label="Monto mínimo"
+                label="Monto mínimo adjudicado"
                 value={NumberUtil.formatInteger(contract.awarding_budget_min)}
                 unit="Gs."
             />
             <SectionField
-                label="Monto máximo"
+                label="Monto máximo adjudicado"
                 value={NumberUtil.formatInteger(contract.awarding_budget)}
                 unit="Gs."
                 tooltipText={
@@ -32,7 +32,7 @@ const AwardingBudgetSection = ({contract, basePath = ""}) => {
         </>
     ) : (
         <SectionField
-            label="Monto"
+            label="Monto adjudicado"
             value={NumberUtil.formatInteger(contract.awarding_budget)}
             unit="Gs."
             tooltipText={

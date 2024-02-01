@@ -8,19 +8,19 @@ const BidRequestBudgetSection = ({contract}) => {
     return contract.total_amount_type === MAX_MIN_AMOUNT_TYPE ? (
         <>
             <SectionField
-                label="Monto mínimo"
+                label="Monto mínimo licitado"
                 value={NumberUtil.formatInteger(contract.bid_request_budget_min)}
                 unit="Gs."
             />
             <SectionField
-                label="Monto máximo"
+                label="Monto máximo licitado"
                 value={NumberUtil.formatInteger(contract.bid_request_budget)}
                 unit="Gs."
             />
         </>
     ) : (
         <SectionField
-            label="Monto"
+            label="Monto licitado"
             value={NumberUtil.formatInteger(contract.bid_request_budget)}
             unit="Gs."
         />

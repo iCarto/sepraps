@@ -171,12 +171,24 @@ class ConstructionContractSerializer(BaseDomainMixin, serializers.ModelSerialize
     related_contracts = serializers.ListField(
         child=ConstructionContractSummarySerializer(), read_only=True
     )
-    total_amendments_amount = serializers.DecimalField(decimal_places=2, max_digits=32)
-    total_awarding_budget = serializers.DecimalField(decimal_places=2, max_digits=32)
-    total_amount_approved = serializers.DecimalField(decimal_places=2, max_digits=32)
-    total_amount_pending = serializers.DecimalField(decimal_places=2, max_digits=32)
-    total_amount = serializers.DecimalField(decimal_places=2, max_digits=32)
-    total_amount_percentage = serializers.DecimalField(decimal_places=2, max_digits=10)
+    total_amendments_amount = serializers.DecimalField(
+        decimal_places=2, max_digits=32, read_only=True
+    )
+    total_awarding_budget = serializers.DecimalField(
+        decimal_places=2, max_digits=32, read_only=True
+    )
+    total_amount_approved = serializers.DecimalField(
+        decimal_places=2, max_digits=32, read_only=True
+    )
+    total_amount_pending = serializers.DecimalField(
+        decimal_places=2, max_digits=32, read_only=True
+    )
+    total_amount = serializers.DecimalField(
+        decimal_places=2, max_digits=32, read_only=True
+    )
+    total_amount_percentage = serializers.DecimalField(
+        decimal_places=2, max_digits=10, read_only=True
+    )
 
     domain_fields = (
         BaseDomainField("services", DomainCategoryChoices.service_type, many=True),

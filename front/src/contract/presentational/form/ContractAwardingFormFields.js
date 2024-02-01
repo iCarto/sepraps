@@ -10,14 +10,14 @@ const AwardingBudgetFormFields = ({totalAmountType}) => {
             <FormInputInteger
                 key="max_min_awarding_budget_min"
                 name="awarding_budget_min"
-                label="Monto mínimo"
+                label="Monto mínimo adjudicado"
                 endAdornment={CURRENCY_SYMBOL}
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputInteger
                 key="max_min_awarding_budget"
                 name="awarding_budget"
-                label="Monto máximo"
+                label="Monto máximo adjudicado"
                 endAdornment={CURRENCY_SYMBOL}
                 rules={{required: "El campo es obligatorio"}}
             />
@@ -26,7 +26,7 @@ const AwardingBudgetFormFields = ({totalAmountType}) => {
         <FormInputInteger
             key="awarding_budget"
             name="awarding_budget"
-            label="Monto"
+            label="Monto adjudicado"
             endAdornment={CURRENCY_SYMBOL}
             rules={{required: "El campo es obligatorio"}}
         />

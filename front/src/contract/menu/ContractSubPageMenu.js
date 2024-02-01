@@ -90,7 +90,8 @@ const ContractSubPageMenu = ({contract}) => {
             />
             <SubPageMenuListItemButton
                 key="contract-payments"
-                to={`${basePath}/payment`}
+                to={`${basePath}/payment/overview`}
+                resolvedPathName={`${basePath}/payment`}
                 text="Productos"
                 icon={<RequestQuoteOutlinedIcon />}
             />

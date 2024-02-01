@@ -109,21 +109,15 @@ const NumberUtil = {
     },
 
     formatMillions(value, displaySymbol = true) {
-        if (!value || value === "0") return displaySymbol ? "0M" : "0";
+        // TODO review when changing to currency config
+        const formattedValueInMillions =
+            Math.abs(value) > 999999
+                ? Math.sign(value) * (Math.abs(value) / 1000000).toFixed(0)
+                : Math.sign(value) * Math.abs(value);
 
-        const oneMillion = 1000000;
-        const valueInMillions = this.formatFloat(value / oneMillion);
-
-        let formattedValueInMillions = 0;
-        if (valueInMillions) {
-            formattedValueInMillions = valueInMillions.endsWith(",00")
-                ? valueInMillions.slice(0, -3)
-                : valueInMillions;
-        }
-
-        if (displaySymbol) return `${formattedValueInMillions}M`;
-
-        return formattedValueInMillions;
+        return `${formattedValueInMillions
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}${displaySymbol ? "M" : ""}`;
     },
 
     formatKilometersAndMeters(meters) {

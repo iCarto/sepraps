@@ -8,13 +8,21 @@ import ListItemText from "@mui/material/ListItemText";
 import Tooltip from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
 
-const SubPageMenuListItemButton = ({to, text, icon = null, ...props}) => {
+const SubPageMenuListItemButton = ({
+    to,
+    text,
+    icon = null,
+    resolvedPathName = null,
+    ...props
+}) => {
     const theme = useTheme();
 
     let resolved = useResolvedPath(to);
     let location = useLocation();
 
-    const selected = location.pathname.startsWith(resolved.pathname);
+    const selected = location.pathname.startsWith(
+        resolvedPathName || resolved.pathname
+    );
 
     return (
         <>

@@ -16,14 +16,14 @@ const BidRequestBudgetFormFields = ({totalAmountType}) => {
             <FormInputInteger
                 key="max_min_bid_request_budget_min"
                 name="bid_request_budget_min"
-                label="Monto mínimo"
+                label="Monto mínimo licitado"
                 endAdornment={CURRENCY_SYMBOL}
                 rules={{required: "El campo es obligatorio"}}
             />
             <FormInputInteger
                 key="max_min_bid_request_budget_min"
                 name="bid_request_budget"
-                label="Monto máximo"
+                label="Monto máximo licitado"
                 endAdornment={CURRENCY_SYMBOL}
                 rules={{required: "El campo es obligatorio"}}
             />
@@ -32,7 +32,7 @@ const BidRequestBudgetFormFields = ({totalAmountType}) => {
         <FormInputInteger
             key="bid_request_budget"
             name="bid_request_budget"
-            label="Monto"
+            label="Monto licitado"
             endAdornment={CURRENCY_SYMBOL}
             rules={{required: "El campo es obligatorio"}}
         />

@@ -1,3 +1,4 @@
+import {useLocation} from "react-router-dom";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import {DateUtil} from "base/format/utilities";
@@ -7,6 +8,9 @@ import {getStatusIcon} from "./PaymentStatusChip";
 const PaymentCalendarItem = ({payment}) => {
     const paymentDate = payment.approval_date || payment.expected_approval_date;
     const day = DateUtil.getDayInDate(paymentDate);
+
+    const location = useLocation();
+    const basePath = location.pathname.split("/overview")[0];
 
     return (
         <Stack
@@ -28,7 +32,11 @@ const PaymentCalendarItem = ({payment}) => {
             >
                 {day}
             </Box>
-            <TextLink to={``} text={payment.name} textStyle={{fontWeight: "bold"}} />
+            <TextLink
+                to={`${basePath}/${payment.id}`}
+                text={payment.name}
+                textStyle={{fontWeight: "bold"}}
+            />
             {getStatusIcon(payment.status)}
         </Stack>
     );

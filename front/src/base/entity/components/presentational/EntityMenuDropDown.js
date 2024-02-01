@@ -47,10 +47,15 @@ const EntityMenuDropDown = ({
             .substring(location.pathname.indexOf(entityInfo?.id) + 1)
             .split("/");
 
-        if (urlSlugs[1] !== "questionnaires") {
-            return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}`;
+        if (urlSlugs[1] === "questionnaires") {
+            return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/${urlSlugs[2]}`;
         }
-        return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/${urlSlugs[2]}`;
+        if (
+            ["payment", "buildingcomponents", "socialcomponents"].includes(urlSlugs[1])
+        ) {
+            return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/overview`;
+        }
+        return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}`;
     };
 
     const handleClick = event => {

@@ -7,35 +7,6 @@ import {ContactSearchAutocomplete} from "contact/presentational";
 import Grid from "@mui/material/Grid";
 import ContractSearchAutocomplete from "../ContractSearchAutocomplete";
 
-const AwardingBudgetFormFields = ({totalAmountType}) => {
-    return totalAmountType === MAX_MIN_AMOUNT_TYPE ? (
-        <>
-            <FormInputInteger
-                key="max_min_awarding_budget_min"
-                name="awarding_budget_min"
-                label="Monto mínimo"
-                endAdornment={CURRENCY_SYMBOL}
-                rules={{required: "El campo es obligatorio"}}
-            />
-            <FormInputInteger
-                key="max_min_awarding_budget"
-                name="awarding_budget"
-                label="Monto máximo"
-                endAdornment={CURRENCY_SYMBOL}
-                rules={{required: "El campo es obligatorio"}}
-            />
-        </>
-    ) : (
-        <FormInputInteger
-            key="awarding_budget"
-            name="awarding_budget"
-            label="Monto"
-            endAdornment={CURRENCY_SYMBOL}
-            rules={{required: "El campo es obligatorio"}}
-        />
-    );
-};
-
 const ContractSupervisionAreaFormFields = () => {
     const {yesNoDomain} = useDomain();
 
