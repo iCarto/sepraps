@@ -47,7 +47,7 @@ export const CUSTOM_COLORS = {
         main: "#d32f2f",
         dark: "#c62828",
     },
-    pageBackground: "#e0e0e0",
+    pageBackground: {primary: "#e0e0e0", secondary: "#f7fdff"},
     text: {
         primary: "#283838",
     },
@@ -91,7 +91,10 @@ const customTheme = createTheme({
             main: CUSTOM_COLORS.error.main,
             dark: CUSTOM_COLORS.error.dark,
         },
-        pageBackground: CUSTOM_COLORS.pageBackground,
+        pageBackground: {
+            primary: CUSTOM_COLORS.pageBackground.primary,
+            secondary: CUSTOM_COLORS.pageBackground.secondary,
+        },
         white: CUSTOM_COLORS.white,
         text: {
             primary: CUSTOM_COLORS.text.primary,

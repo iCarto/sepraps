@@ -15,7 +15,7 @@ const PageWithMenuLayout = ({menu, children}) => {
                     height: "100vh",
                     backgroundColor: "white",
                     borderRight: 1,
-                    borderColor: theme => theme.palette.pageBackground,
+                    borderColor: theme => theme.palette.pageBackground.primary,
                 }}
             >
                 {menu}

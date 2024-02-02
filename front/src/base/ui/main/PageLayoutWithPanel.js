@@ -34,7 +34,7 @@ const Main = styled("main", {shouldForwardProp: prop => prop !== "open"})(
         }),
         backgroundColor:
             theme.palette.mode === "light"
-                ? theme.palette.pageBackground
+                ? theme.palette.pageBackground.primary
                 : theme.palette.grey[900],
         height: "calc(100vh - 64px)",
         minHeight: "100%",
@@ -64,7 +64,7 @@ const PageLayoutWithPanel = ({
                 maxWidth="lg"
                 sx={{
                     p: 3,
-                    backgroundColor: theme.palette.pageBackground,
+                    backgroundColor: theme.palette.pageBackground.primary,
                 }}
             >
                 {props.children}
