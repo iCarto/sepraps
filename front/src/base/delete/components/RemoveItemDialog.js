@@ -13,7 +13,7 @@ const RemoveItemDialog = ({isDialogOpen, setIsDialogOpen, onRemove}) => {
     return (
         <DialogLayout
             dialogTitle={`¿Quiere quitar este elemento de la lista?`}
-            dialogContentText={`El elemento se borrará se eliminará de esta lista.`}
+            dialogContentText={`El elemento se eliminará de esta lista.`}
             mainActionText="Quitar"
             mainActionClick={handleConfirmRemoval}
             handleDialog={handleDialog}
