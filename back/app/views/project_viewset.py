@@ -9,7 +9,6 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from domains.models import DomainEntry
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -45,8 +44,8 @@ from app.serializers.social_component_monitoring_serializer import (
     SocialComponentMonitoringSummarySerializer,
 )
 from app.util import is_geojson_request
+from domains.models import DomainEntry
 from questionnaires.models.questionnaire import Questionnaire
-from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
 class ProjectFilter(filters.FilterSet):
@@ -86,13 +85,14 @@ class ProjectFilter(filters.FilterSet):
         return queryset.filter(models.Q(linked_localities__department=department))
 
     def filter_by_construction_contract(self, queryset, param_name, search_value):
-        print(search_value)
-        return queryset.filter(models.Q(related_contracts__contract=search_value))
+        return queryset.filter(
+            models.Q(related_contracts__contract=search_value)
+        ).distinct()
 
     def filter_by_financing_program(self, queryset, param_name, search_value):
         return queryset.filter(
             models.Q(related_contracts__contract__financing_program=search_value)
-        )
+        ).distinct()
 
     def filter_by_last_modified_items(self, queryset, name, last_modified_items):
         limit = int(last_modified_items)
@@ -207,9 +207,7 @@ class ProjectViewSet(ModelListViewSet):
 
     @action(detail=True)
     def milestones(self, request, pk=None):
-        """
-        Returns a list of all the milestones for the project
-        """
+        """Returns a list of all the milestones for the project"""
         project = self.get_object()
         milestones = (
             Milestone.objects.filter(project=project)
@@ -230,9 +228,7 @@ class ProjectViewSet(ModelListViewSet):
         url_path="questionnaire_instances/(?P<questionnaire_code>\w+)",  # noqa: W605
     )
     def questionnaire_instances(self, request, questionnaire_code, pk=None):
-        """
-        Returns a list of all the instances of the questionnaire for the project
-        """
+        """Returns a list of all the instances of the questionnaire for the project"""
         project = self.get_object()
         questionnaire = Questionnaire.objects.get(pk=questionnaire_code)
         instances = ProjectQuestionnaireInstance.objects.filter(
