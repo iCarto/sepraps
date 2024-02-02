@@ -1,3 +1,4 @@
+import {theme} from "Theme";
 import Grid from "@mui/material/Grid";
 
 const FormContainer = ({children}) => {
@@ -9,7 +10,7 @@ const FormContainer = ({children}) => {
             border={1}
             borderColor={"primary.main"}
             borderRadius={1}
-            sx={{backgroundColor: "#f7fdff"}}
+            sx={{backgroundColor: theme.palette.pageBackground.secondary}}
         >
             {children}
         </Grid>
