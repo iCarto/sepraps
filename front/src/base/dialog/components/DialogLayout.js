@@ -12,11 +12,11 @@ const DialogLayout = ({
     dialogLabel = "",
     dialogContent = null,
     dialogContentText = "",
-    mainActionClick = null,
     mainActionColor = "info",
     mainActionText = "",
+    onMainActionClick = null,
     onCloseDialog = null,
-    isDialogOpen = null,
+    isDialogOpen = false,
     fullHeight = false,
     fullWidth = false,
     maxWidth = "sm",
@@ -54,18 +54,24 @@ const DialogLayout = ({
                 ) : null}
                 {dialogContent}
             </DialogContent>
-            <DialogActions>
-                <Button onClick={onCloseDialog} autoFocus>
-                    Cancelar
-                </Button>
-                <Button
-                    onClick={mainActionClick}
-                    color={mainActionColor}
-                    variant="contained"
-                >
-                    {mainActionText}
-                </Button>
-            </DialogActions>
+            {onCloseDialog || onMainActionClick ? (
+                <DialogActions>
+                    {onCloseDialog ? (
+                        <Button onClick={onCloseDialog} autoFocus>
+                            Cancelar
+                        </Button>
+                    ) : null}
+                    {onMainActionClick ? (
+                        <Button
+                            onClick={onMainActionClick}
+                            color={mainActionColor}
+                            variant="contained"
+                        >
+                            {mainActionText}
+                        </Button>
+                    ) : null}
+                </DialogActions>
+            ) : null}
         </Dialog>
     );
 };

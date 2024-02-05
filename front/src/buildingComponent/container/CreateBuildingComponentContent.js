@@ -10,6 +10,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {BuildingComponentForm} from "buildingComponent/presentational/form";
 import {SectionCard} from "base/ui/section/components";
 
+// TO-DO: Remove unused component
 const CreateBuildingComponentContent = () => {
     const navigate = useNavigateWithReload();
     const location = useLocation();
@@ -18,7 +19,7 @@ const CreateBuildingComponentContent = () => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = data => {
-        ProjectService.createProjectBuildingComponent(
+        ProjectService.createProjectBuildingComponentMonitoring(
             projectId,
             building_component_view_adapter({...data})
         )

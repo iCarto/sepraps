@@ -1,3 +1,4 @@
+import {CUSTOM_COLORS} from "Theme";
 import {Spinner} from "base/shared/components";
 import List from "@mui/material/List";
 import Card from "@mui/material/Card";
@@ -19,7 +20,7 @@ const TransferList = ({
     isLoading = false,
 }) => {
     return (
-        <Card sx={{border: "1px solid #7FBCE1"}}>
+        <Card sx={{border: `1px solid ${CUSTOM_COLORS.secondary.main}`}}>
             <CardHeader
                 sx={{px: 2, py: 1}}
                 avatar={

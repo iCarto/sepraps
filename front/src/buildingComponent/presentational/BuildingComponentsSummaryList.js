@@ -46,21 +46,27 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                             <Avatar>
                                                 <ImagePreview
                                                     path={bcMonitoring.featured_image}
-                                                    alt={bcMonitoring.name}
+                                                    alt={
+                                                        bcMonitoring.building_component
+                                                            .name
+                                                    }
                                                     width="50px"
                                                     height="50px"
                                                 />
                                             </Avatar>
                                         </ListItemAvatar>
                                         <ListItemText
-                                            id={`building-components-summary-${bcMonitoring.code}`}
+                                            id={`building-components-summary-${bcMonitoring.building_component.code}`}
                                             primary={
                                                 <Typography
                                                     sx={{display: "inline"}}
                                                     component="span"
                                                     fontWeight={600}
                                                 >
-                                                    {bcMonitoring.name}{" "}
+                                                    {
+                                                        bcMonitoring.building_component
+                                                            .name
+                                                    }{" "}
                                                 </Typography>
                                             }
                                             secondary={`— ${bcMonitoring.execution_status_label}`}

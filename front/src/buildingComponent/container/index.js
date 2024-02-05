@@ -17,3 +17,9 @@ export {
     default as ViewBuildingComponentsOverview,
 } from "./ViewBuildingComponentsOverview";
 export {default as ViewBuildingComponentContent} from "./ViewBuildingComponentContent";
+export {
+    default as CreateBuildingComponentDialog,
+} from "./CreateBuildingComponentDialog";
+export {
+    default as ImportBuildingComponentsDialog,
+} from "./ImportBuildingComponentsDialog";
