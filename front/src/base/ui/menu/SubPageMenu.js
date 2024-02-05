@@ -10,6 +10,7 @@ import MenuList from "@mui/material/MenuList";
 const SubPageMenu = ({
     headerTitle = "",
     headerText = "",
+    headerSecondary = null,
     headerTag = null,
     headerContent = null,
     subPageMenuDropdown = null,
@@ -32,9 +33,9 @@ const SubPageMenu = ({
                     {subPageMenuDropdown || (
                         <SubPageMenuHeader
                             headerText={headerText || "-"}
+                            headerSecondary={headerSecondary}
                             headerTitle={headerTitle}
                             headerTag={headerTag}
-                            isSubMenu={true}
                         >
                             {headerContent}
                         </SubPageMenuHeader>

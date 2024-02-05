@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 const SelectProviderDropDown = ({provider}) => {
-    const getDropdownItemContent = eachProvider => {
+    const renderDropdownItem = eachProvider => {
         return (
             <Stack>
                 <Typography variant="caption" sx={{ml: 1}}>
@@ -14,22 +14,13 @@ const SelectProviderDropDown = ({provider}) => {
         );
     };
 
-    const entityInfo = provider
-        ? {
-              id: provider?.id,
-              title: "Prestador:",
-              slug: "providers",
-              primaryInfo: provider?.name,
-              secondaryInfo: "",
-              tag: null,
-          }
-        : null;
-
     return (
         <EntityMenuDropDown
-            entityInfo={entityInfo}
+            title="Prestador"
+            primary={provider?.name}
+            basePath={"/providers/list"}
             service={ProviderService.getList}
-            getDropdownItemContent={getDropdownItemContent}
+            renderDropdownItem={renderDropdownItem}
         />
     );
 };

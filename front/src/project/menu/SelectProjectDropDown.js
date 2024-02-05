@@ -1,12 +1,13 @@
 import {ProjectService} from "project/service";
-import {EntityMenuDropDown} from "base/entity/components/presentational";
-import {ClosedProjectTag} from "project/presentational";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import {TEMPLATE} from "contract/service";
 
+import {EntityMenuDropDown} from "base/entity/components/presentational";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
+
 const SelectProjectDropDown = ({project}) => {
-    const getDropdownItemContent = eachProject => {
+    const renderDropdownItem = eachProject => {
         return (
             <Stack>
                 <Typography>{eachProject.name}</Typography>
@@ -18,25 +19,22 @@ const SelectProjectDropDown = ({project}) => {
         );
     };
 
-    console.log(project);
-
-    const entityInfo = project
-        ? {
-              id: project?.id,
-              title: "Proyecto:",
-              slug: "projects/list",
-              primaryInfo: project?.code,
-              secondaryInfo: `${project?.name}, ${project?.location}`,
-              tag: project?.closed ? <ClosedProjectTag /> : null,
-          }
-        : null;
-
     return (
         <EntityMenuDropDown
-            entityInfo={entityInfo}
+            title="Proyecto"
+            primary={project?.code}
+            secondary={project ? `${project?.name}, ${project?.location}` : null}
+            tag={
+                <Stack spacing={1}>
+                    {project?.closed && (
+                        <Chip size="small" label="Archivado" color="error" />
+                    )}
+                </Stack>
+            }
+            basePath={"/projects/list"}
             service={ProjectService.getListSummary}
             template={TEMPLATE.SHORT}
-            getDropdownItemContent={getDropdownItemContent}
+            renderDropdownItem={renderDropdownItem}
         />
     );
 };

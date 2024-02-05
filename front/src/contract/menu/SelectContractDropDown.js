@@ -2,9 +2,10 @@ import {ContractService, TEMPLATE} from "contract/service";
 import {EntityMenuDropDown} from "base/entity/components/presentational";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
 
 const SelectContractDropDown = ({contract}) => {
-    const getDropdownItemContent = eachContract => {
+    const renderDropdownItem = eachContract => {
         return (
             <Stack>
                 <Typography>{eachContract.number}</Typography>
@@ -15,23 +16,28 @@ const SelectContractDropDown = ({contract}) => {
         );
     };
 
-    const entityInfo = contract
-        ? {
-              id: contract?.id,
-              title: "Contrato:",
-              slug: "contracts/list",
-              primaryInfo: contract?.number,
-              secondaryInfo: contract?.bid_request_number,
-              tag: null,
-          }
-        : null;
-
     return (
         <EntityMenuDropDown
-            entityInfo={entityInfo}
+            title="Contrato"
+            primary={contract?.number}
+            secondary={contract?.bid_request_number}
+            tag={
+                <Stack spacing={1}>
+                    {contract.services_label.split(",").map(service => (
+                        <Chip
+                            key={service}
+                            size="small"
+                            label={service}
+                            color="secondary"
+                            sx={{color: "white"}}
+                        />
+                    ))}
+                </Stack>
+            }
+            basePath={"/contracts/list"}
             service={ContractService.getList}
             template={TEMPLATE.SHORT}
-            getDropdownItemContent={getDropdownItemContent}
+            renderDropdownItem={renderDropdownItem}
         />
     );
 };

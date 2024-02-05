@@ -1,35 +1,31 @@
-import {SubPageMenuHeaderButton} from "base/ui/menu";
+import {SubPageMenuHeaderItem} from "base/ui/menu";
 import useTheme from "@mui/material/styles/useTheme";
 
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 
 const SubPageMenuHeader = ({
-    to = "",
     headerText = "",
+    headerSecondary = "",
     headerTitle = "",
     headerTag = null,
-    isSubMenu = false,
     children,
 }) => {
     const theme = useTheme();
 
     return (
         <Paper
-            elevation={8}
+            elevation={0}
             square
             sx={{
-                borderRightColor: "white",
-                borderTop: "5px solid " + theme.palette.menu.primary.header.text,
-                mb: 1,
+                my: 1,
             }}
         >
-            <SubPageMenuHeaderButton
-                headerText={headerText}
-                headerTitle={headerTitle}
-                headerTag={headerTag}
-                isSubMenu={isSubMenu}
-                to={to}
+            <SubPageMenuHeaderItem
+                primary={headerText}
+                secondary={headerSecondary}
+                title={headerTitle}
+                tag={headerTag}
             />
             <Box sx={{bgcolor: theme.palette.menu.secondary.header.background}}>
                 {children}

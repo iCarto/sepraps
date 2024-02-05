@@ -2,27 +2,25 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 
 import {useList} from "base/entity/hooks";
-import {DropdownMenuItemLink, SubPageMenuHeaderButton} from "base/ui/menu";
+import {DropdownMenuItemLink, SubPageMenuHeaderItem} from "base/ui/menu";
 
-import useTheme from "@mui/material/styles/useTheme";
 import Paper from "@mui/material/Paper";
 import Menu from "@mui/material/Menu";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
+
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Divider from "@mui/material/Divider";
 
 const EntityMenuDropDown = ({
     service,
     template = "",
-    entityInfo = {
-        id: "",
-        title: "",
-        slug: "",
-        primaryInfo: "",
-        secondaryInfo: "",
-        tag: null,
-    },
-    getDropdownItemContent = null,
+    title = "",
+    primary = "",
+    secondary = "",
+    body = null,
+    tag = null,
+    renderDropdownItem = null,
+    basePath,
 }) => {
     const [elements, setElements] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -30,7 +28,6 @@ const EntityMenuDropDown = ({
 
     const {filter} = useList();
     const location = useLocation();
-    const theme = useTheme();
 
     const isOpen = Boolean(anchorElement);
 
@@ -43,12 +40,10 @@ const EntityMenuDropDown = ({
     }, [filter]);
 
     const getUrl = itemId => {
-        const urlSlugs = location.pathname
-            .substring(location.pathname.indexOf(entityInfo?.id) + 1)
-            .split("/");
+        const urlSlugs = location.pathname.replace(basePath + "/", "").split("/");
 
         if (urlSlugs[1] === "questionnaires") {
-            return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/${urlSlugs[2]}`;
+            return `${basePath}/${itemId}/${urlSlugs[1]}/${urlSlugs[2]}`;
         }
         if (
             [
@@ -59,9 +54,9 @@ const EntityMenuDropDown = ({
                 "project_social_analysis",
             ].includes(urlSlugs[1])
         ) {
-            return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}/overview`;
+            return `${basePath}/${itemId}/${urlSlugs[1]}/overview`;
         }
-        return `/${entityInfo?.slug}/${itemId}/${urlSlugs[1]}`;
+        return `${basePath}/${itemId}/${urlSlugs[1]}`;
     };
 
     const handleClick = event => {
@@ -72,60 +67,35 @@ const EntityMenuDropDown = ({
         setAnchorElement(null);
     };
 
-    const entityBasicInfo = (
-        <Stack>
-            <Typography
-                sx={{
-                    pt: 1,
-                    fontSize: 20,
-                    fontWeight: 800,
-                    lineHeight: 1.25,
-                }}
-            >
-                {entityInfo?.primaryInfo}
-            </Typography>
-            <Typography
-                variant="overline"
-                sx={{
-                    pt: 0.75,
-                    lineHeight: 1.25,
-                    fontWeight: 500,
-                    letterSpacing: "0.5px",
-                }}
-            >
-                {entityInfo?.secondaryInfo}
-            </Typography>
-        </Stack>
-    );
-
     return (
         <>
             <Paper
-                elevation={8}
+                elevation={0}
                 square
                 sx={{
-                    borderRightColor: "white",
-                    borderTop: "5px solid " + theme.palette.menu.primary.header.text,
                     mb: 1,
                 }}
             >
-                {entityInfo ? (
-                    <SubPageMenuHeaderButton
-                        headerText={entityBasicInfo}
-                        headerTitle={entityInfo?.title}
-                        headerTag={entityInfo?.tag}
-                        isDropDown={true}
-                        onClick={handleClick}
-                        isPopUpOpen={isOpen}
-                    />
-                ) : (
-                    <Stack
-                        sx={{p: 0.5, justifyContent: "center", alignItems: "center"}}
-                    >
-                        <CircularProgress size={30} />
-                    </Stack>
-                )}
+                <SubPageMenuHeaderItem
+                    primary={primary}
+                    secondary={secondary}
+                    title={title}
+                    tag={tag}
+                    action={
+                        elements?.length > 0 && (
+                            <Button
+                                size="small"
+                                endIcon={<ArrowDropDownIcon />}
+                                sx={{textTransform: "lowercase", color: "grey.400"}}
+                                onClick={handleClick}
+                            >
+                                cambiar
+                            </Button>
+                        )
+                    }
+                />
             </Paper>
+            <Divider />
 
             {elements.length && (
                 <Menu
@@ -153,10 +123,9 @@ const EntityMenuDropDown = ({
                                 key={item.id}
                                 id={item.id}
                                 to={getUrl(item.id)}
-                                selected={item.id === entityInfo?.id}
                                 onClick={handleClose}
                             >
-                                {getDropdownItemContent(item)}
+                                {renderDropdownItem(item)}
                             </DropdownMenuItemLink>
                         );
                     })}
