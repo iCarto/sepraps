@@ -100,11 +100,6 @@ const contractRoutes = [
                 element={<ViewContractProjectsSubPage />}
             >
                 <Route
-                    key="contract-project-add-existing"
-                    path="add/existing"
-                    element={<AddContractProjectPanel />}
-                />
-                <Route
                     key="contract-project-view"
                     path="project/:idInfoPanel"
                     element={<ViewContractProjectPanel />}
