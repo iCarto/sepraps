@@ -1,9 +1,9 @@
 import {DateUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 import Grid from "@mui/material/Grid";
+import {ContractServiceUtil} from "contract/utilities";
 
-const ContractExecutionSection = ({contract}) => {
-    console.log(contract);
+const ContractExecutionSection = ({contract, services = null}) => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -12,7 +12,7 @@ const ContractExecutionSection = ({contract}) => {
                     DateUtil.formatDate(contract?.execution_signature_date)
                 )}
                 {FieldUtil.getSectionField(
-                    "Fecha de inicio del contrato",
+                    ContractServiceUtil.getExecutionStartDateLabel(services),
                     DateUtil.formatDate(contract?.execution_start_date)
                 )}
             </Grid>

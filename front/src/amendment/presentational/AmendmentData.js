@@ -17,7 +17,12 @@ const DeviationChip = ({deviationValue, tooltipText = ""}) => {
                 label={
                     <Typography fontSize={14}>
                         Variación{" "}
-                        <Typography fontWeight={600} fontSize={14} display="inline">
+                        <Typography
+                            component="span"
+                            fontWeight={600}
+                            fontSize={14}
+                            display="inline"
+                        >
                             {NumberUtil.formatDecimal(deviationValue)} %
                         </Typography>
                     </Typography>

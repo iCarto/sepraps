@@ -64,7 +64,6 @@ const ContractSubPageMenu = ({contract}) => {
     const contractSupervisionAreas = contract?.supervision_areas
         ? contract?.supervision_areas?.map(supervisionArea => supervisionArea.area)
         : [];
-    console.log({contractSupervisionAreas});
 
     return (
         <SubPageMenu

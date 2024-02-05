@@ -2,6 +2,9 @@
     "code": "fiscalizacion_social",
     "name": "Fiscalización social",
     "supervision_areas": ["social"],
+    "labels": {
+        "executionStartDate": "Fecha de la orden de proceder"
+    },
     "properties": {
         "proceedToExecutionDate": {
             "label": "Fecha de la orden de proceder",

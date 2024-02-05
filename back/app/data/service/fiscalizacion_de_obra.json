@@ -2,13 +2,10 @@
     "code": "fiscalizacion_de_obra",
     "name": "Fiscalización de obra",
     "supervision_areas": ["building"],
-    "properties": {
-        "proceedToExecutionDate": {
-            "label": "Fecha de la orden de proceder",
-            "type": "date",
-            "order": 1
-        }
+    "labels": {
+        "executionStartDate": "Fecha de la orden de proceder"
     },
+    "properties": {},
     "staff": {
         "building": ["supervisor_obra", "fiscal_obra"]
     }

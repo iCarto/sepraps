@@ -28,7 +28,7 @@ import {
 
 import EditIcon from "@mui/icons-material/Edit";
 
-const ViewOrUpdateContractContent = ({contract, section, label}) => {
+const ViewOrUpdateContractContent = ({contract, section, label, services = null}) => {
     const navigate = useNavigateWithReload();
     const location = useLocation();
     const basePath = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
@@ -65,7 +65,7 @@ const ViewOrUpdateContractContent = ({contract, section, label}) => {
             return <ContractInsuranceSection contract={contract} />;
         }
         if (section === "execution") {
-            return <ContractExecutionSection contract={contract} />;
+            return <ContractExecutionSection contract={contract} services={services} />;
         }
         if (section === "postconstruction") {
             return <ContractPostConstructionSection contract={contract} />;
@@ -89,7 +89,7 @@ const ViewOrUpdateContractContent = ({contract, section, label}) => {
             return <ContractInsuranceFormFields />;
         }
         if (section === "execution") {
-            return <ContractExecutionFormFields />;
+            return <ContractExecutionFormFields services={services} />;
         }
         if (section === "postconstruction") {
             return <ContractPostConstructionFormFields />;

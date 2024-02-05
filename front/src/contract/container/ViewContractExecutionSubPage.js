@@ -30,6 +30,7 @@ const ViewContractExecutionSubPage = () => {
     const sections = [
         <ViewOrUpdateContractContent
             contract={contract}
+            services={services}
             section="execution"
             label="Ejecución"
         />,
@@ -39,11 +40,6 @@ const ViewContractExecutionSubPage = () => {
                 contractService={contractService}
             />
         )),
-        <ViewOrUpdateContractContent
-            contract={contract}
-            section="postconstruction"
-            label="Post-construcción"
-        />,
         <ViewContractAmendmentsContent amendments={amendments} contract={contract} />,
     ];
 

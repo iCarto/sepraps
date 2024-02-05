@@ -19,6 +19,7 @@ class ContractService(BaseDocumentModel, BaseEntityModelMixin):
     code = models.CharField("Código", max_length=50)
     name = models.CharField("Nombre", max_length=255)
     supervision_areas = ArrayField(models.CharField(max_length=50), null=False)
+    labels = models.JSONField("Etiquetas", null=True)
     properties = models.JSONField("Campos", null=True)
 
     contract = models.ForeignKey(

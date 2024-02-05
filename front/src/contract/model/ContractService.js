@@ -22,12 +22,14 @@ const createContractService = ({
     id = null,
     code = null,
     name = null,
+    labels = null,
     properties = [],
 } = {}) => {
     const publicApi = {
         id,
         code,
         name,
+        labels,
         properties,
     };
 

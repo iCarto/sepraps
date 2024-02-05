@@ -1,10 +1,11 @@
 import {useWatch} from "react-hook-form";
 import {DateUtil} from "base/format/utilities";
-import {FormDatePicker, FormInputInteger} from "base/form/components";
+import {FormDatePicker} from "base/form/components";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
+import {ContractServiceUtil} from "contract/utilities";
 
-const ContractExecutionFormFields = () => {
+const ContractExecutionFormFields = ({services = null}) => {
     const execution_start_date = useWatch({
         name: "execution_start_date",
     });
@@ -22,7 +23,7 @@ const ContractExecutionFormFields = () => {
                 />
                 <FormDatePicker
                     name="execution_start_date"
-                    label="Fecha de acta de inicio"
+                    label={ContractServiceUtil.getExecutionStartDateLabel(services)}
                 />
                 {expected_execution_period && execution_start_date && (
                     <FormHelperText sx={{marginLeft: 1, color: "info.main"}}>

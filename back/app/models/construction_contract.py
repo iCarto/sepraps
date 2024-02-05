@@ -228,6 +228,7 @@ def update_contract_services(
             code=data["code"],
             name=data["name"],
             supervision_areas=data["supervision_areas"],
+            labels=data["labels"],
             properties=data["properties"],
             contract=contract,
             created_by=contract.updated_by,

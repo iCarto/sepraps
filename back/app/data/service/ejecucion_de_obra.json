@@ -2,12 +2,10 @@
     "code": "ejecucion_de_obra",
     "name": "Ejecución de obra",
     "supervision_areas": ["building", "social"],
+    "labels": {
+        "executionStartDate": "Fecha del acta de inicio"
+    },
     "properties": {
-        "executionCertificateDate": {
-            "label": "Fecha del acta de inicio",
-            "type": "date",
-            "order": 1
-        },
         "finalDeliveryDate": {
             "label": "Fecha de recepción definitiva",
             "type": "date",
