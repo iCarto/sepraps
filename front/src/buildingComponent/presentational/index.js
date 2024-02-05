@@ -21,3 +21,6 @@ export {
     default as BuildingComponentsFinancialChart,
 } from "./BuildingComponentsFinancialChart";
 export {default as BuildingComponentsFilter} from "./BuildingComponentsFilter";
+export {
+    default as BuildingComponentListItemButton,
+} from "./BuildingComponentListItemButton";

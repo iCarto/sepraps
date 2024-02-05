@@ -37,7 +37,6 @@ import {
 } from "stats/container";
 import {ViewDocumentPanel} from "base/file/components";
 import {
-    CreateBuildingComponentContent,
     ViewBuildingComponentContent,
     ViewBuildingComponentsAnalysisContent,
     ViewBuildingComponentsOverview,
@@ -165,11 +164,6 @@ const projectRoutes = [
                     key="project-building-components-overview"
                     path="overview"
                     element={<ViewBuildingComponentsOverview />}
-                />
-                <Route
-                    key="project-building-components-new"
-                    path="list/new"
-                    element={<CreateBuildingComponentContent />}
                 />
                 <Route
                     key="project-building-components-detail"

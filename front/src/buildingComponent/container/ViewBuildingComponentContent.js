@@ -3,39 +3,46 @@ import {useLocation, useParams} from "react-router";
 import {useOutletContext} from "react-router-dom";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {COMPONENT_EXECUTION_STATUS_IN_PROGRESS} from "component/config";
 import {RouterUtil} from "base/navigation/utilities";
-import {NumberUtil} from "base/format/utilities";
 
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
 
-import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
-import {EntityContent} from "base/entity/components/presentational";
-import {ViewOrUpdateBuildingComponentTechnicalDataContent} from ".";
-import {ListSelector, ListSelectorItem} from "base/shared/components";
+import {ViewOrUpdateBuildingComponentMonitoringDataContent} from "buildingComponentMonitoring/container";
+import {
+    CreateBuildingComponentDialog,
+    ImportBuildingComponentsDialog,
+    ViewOrUpdateBuildingComponentTechnicalDataContent,
+} from "buildingComponent/container";
 import ComponentStatusChip, {
     getStatusIcon,
 } from "component/presentational/ComponentStatusChip";
-import {ViewOrUpdateBuildingComponentMonitoringDataContent} from "buildingComponentMonitoring/container";
-import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {ViewOrUpdateCommentsContent} from "component/container";
+import {ViewOrUpdateFilesDataContent} from "base/file/components";
+import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
+import {EntityContent} from "base/entity/components/presentational";
+import {ListSelector, ListSelectorItem} from "base/shared/components";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
-import {DeleteItemDialog} from "base/delete/components";
-
 import {SectionCardHeaderAction} from "base/ui/section/components";
+import {DeleteItemDialog} from "base/delete/components";
 
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewBuildingComponentContent = () => {
-    const {bcMonitorings} = useOutletContext();
-    const {id: projectId, buildingComponentId} = useParams();
+    const {project, bcMonitorings} = useOutletContext();
+    const {buildingComponentId} = useParams();
 
     const location = useLocation();
     const navigate = useNavigateWithReload();
     const basePath = RouterUtil.getPathForSegment(location, "buildingcomponents/list");
 
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isCreateBComponentDialogOpen, setIsCreateBComponentDialogOpen] = useState(
+        false
+    );
+    const [isImportBComponentsDialogOpen, setIsImportBComponentsDialogOpen] = useState(
+        false
+    );
     const [buildingComponentMonitoring, setBuildingComponentMonitoring] = useState(
         null
     );
@@ -71,18 +78,6 @@ const ViewBuildingComponentContent = () => {
         />,
     ];
 
-    const componentStatusLabel =
-        buildingComponentMonitoring?.execution_status ===
-        COMPONENT_EXECUTION_STATUS_IN_PROGRESS
-            ? `${
-                  buildingComponentMonitoring?.execution_status_label
-              } — ${NumberUtil.formatDecimal(
-                  buildingComponentMonitoring?.physical_progress_percentage ||
-                      buildingComponentMonitoring?.progress_percentage
-              )}%`
-            : buildingComponentMonitoring?.execution_status_label ||
-              "Estado sin especificar";
-
     return (
         <SubpageWithSelectorContainer
             itemsName="componentes de construcción"
@@ -90,16 +85,22 @@ const ViewBuildingComponentContent = () => {
                 <ListSelector
                     title="Componentes"
                     items={bcMonitorings}
-                    renderItem={bcComponent => (
+                    renderItem={bcComponentMonitoring => (
                         <ListSelectorItem
-                            key={bcComponent.id}
-                            heading={bcComponent.name}
-                            icon={getStatusIcon(bcComponent.execution_status)}
-                            to={`${basePath}/${bcComponent.id}`}
-                            selected={parseInt(buildingComponentId) === bcComponent.id}
+                            key={bcComponentMonitoring.id}
+                            heading={bcComponentMonitoring.building_component.name}
+                            icon={getStatusIcon(bcComponentMonitoring.execution_status)}
+                            to={`${basePath}/${bcComponentMonitoring.id}`}
+                            selected={
+                                parseInt(buildingComponentId) ===
+                                bcComponentMonitoring.id
+                            }
                         />
                     )}
                     basePath={basePath}
+                    onClickCreateButton={() => setIsCreateBComponentDialogOpen(true)}
+                    onClickImportButton={() => setIsImportBComponentsDialogOpen(true)}
+                    showAddButton={false}
                 />
             }
             noItems={bcMonitorings?.length === 0}
@@ -115,8 +116,7 @@ const ViewBuildingComponentContent = () => {
                         entityIcon={<HandymanOutlinedIcon />}
                         chip={
                             <ComponentStatusChip
-                                label={componentStatusLabel}
-                                value={buildingComponentMonitoring?.execution_status}
+                                component={buildingComponentMonitoring}
                             />
                         }
                         actions={actions}
@@ -137,6 +137,7 @@ const ViewBuildingComponentContent = () => {
                             service={BuildingComponentMonitoringService}
                         />
                         <EntityAuditSection entity={buildingComponentMonitoring} />
+
                         <DeleteItemDialog
                             isDialogOpen={isDeleteDialogOpen}
                             setIsDialogOpen={setIsDeleteDialogOpen}
@@ -144,6 +145,16 @@ const ViewBuildingComponentContent = () => {
                         />
                     </EntityContent>
                 )}
+
+                <CreateBuildingComponentDialog
+                    isDialogOpen={isCreateBComponentDialogOpen}
+                    onCloseDialog={() => setIsCreateBComponentDialogOpen(false)}
+                />
+                <ImportBuildingComponentsDialog
+                    isDialogOpen={isImportBComponentsDialogOpen}
+                    onCloseDialog={() => setIsImportBComponentsDialogOpen(false)}
+                    project={project}
+                />
             </ContentLayoutWithAside>
         </SubpageWithSelectorContainer>
     );

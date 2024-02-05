@@ -13,6 +13,7 @@ let timerID;
 const SearchAutocomplete = ({
     label,
     optionLabel,
+    optionLabelSecondary = "",
     optionComponent,
     getFilterOption = null,
     search,
@@ -57,6 +58,12 @@ const SearchAutocomplete = ({
         }, WAIT_INTERVAL);
     };
 
+    const getOptionLabel = data => {
+        if (optionLabelSecondary)
+            return `${data[optionLabel]} - ${data[optionLabelSecondary]}`;
+        else return data[optionLabel];
+    };
+
     return (
         <Autocomplete
             id="check-autocomplete"
@@ -64,13 +71,12 @@ const SearchAutocomplete = ({
             noOptionsText={"No hay opciones disponibles"}
             defaultValue={defaultValue}
             onChange={handleSelectOption}
-            getOptionLabel={data => data[optionLabel]}
+            getOptionLabel={data => getOptionLabel(data)}
             filterOptions={createFilterOptions({
                 stringify: option =>
                     getFilterOption ? getFilterOption(option) : option[optionLabel],
             })}
             renderOption={(props, option, {selected}) => {
-                console.log(option);
                 return (
                     <Box component="li" {...props} key={option.id}>
                         {optionComponent(option)}
