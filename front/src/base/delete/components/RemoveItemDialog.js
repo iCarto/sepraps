@@ -1,4 +1,4 @@
-import {DialogLayout} from "base/shared/components";
+import {DialogLayout} from "base/dialog/components";
 
 const RemoveItemDialog = ({isDialogOpen, setIsDialogOpen, onRemove}) => {
     const handleDialog = isOpen => {

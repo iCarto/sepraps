@@ -9,7 +9,7 @@ import {theme} from "Theme";
 import {ProjectListItemButton} from "project/presentational";
 import {SelectAllTransferList} from "base/list/components";
 import {ContractProjectsFilterForm} from "contract/presentational/form";
-import {DialogLayout} from "base/shared/components";
+import {DialogLayout} from "base/dialog/components";
 import {AlertError} from "base/error/components";
 
 import Typography from "@mui/material/Typography";
@@ -83,10 +83,6 @@ const ProjectSelectorDialog = ({
         setSelectedProjects(contractProjects);
     }, [contractProjects]);
 
-    const handleCloseDialog = isOpen => {
-        onCloseDialog();
-    };
-
     const handleFilterChange = newFilter => {
         const statusFilter = {status: "active"};
 
@@ -114,7 +110,7 @@ const ProjectSelectorDialog = ({
         ContractService.update(contract_view_adapter({...contract}))
             .then(() => {
                 navigate(`/contracts/list/${contract.id}/projects`, true);
-                onCloseDialog(false);
+                onCloseDialog();
             })
             .catch(error => {
                 console.log(error);
@@ -144,7 +140,7 @@ const ProjectSelectorDialog = ({
             }
             mainActionText="Guardar"
             mainActionClick={handleConfirmAddition}
-            handleDialog={handleCloseDialog}
+            onCloseDialog={onCloseDialog}
             isDialogOpen={isDialogOpen}
             style={{backgroundColor: theme.palette.pageBackground.secondary}}
             fullHeight

@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import {useAuth} from "base/user/provider";
 import {useList} from "base/entity/hooks";
+import {useDialog} from "base/dialog/hooks";
 
 import {AddNewButton, PaperContainer} from "base/shared/components";
 import {SectionHeading} from "base/ui/section/components";
@@ -20,8 +21,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 const ListContractProjects = ({contract, contractProjects}) => {
+    const {isDialogOpen, openDialog, closeDialog} = useDialog();
+
     const [selectedElement, setSelectedElement] = useState(null);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const navigate = useNavigate();
     const {view} = useList();
@@ -34,13 +36,6 @@ const ListContractProjects = ({contract, contractProjects}) => {
     const handleSelectProject = project => {
         setSelectedElement(project);
         navigate(`project/${project.id}`);
-    };
-
-    const handleClickAddButton = () => {
-        setIsDialogOpen(true);
-    };
-    const handleCloseDialog = () => {
-        setIsDialogOpen(false);
     };
 
     const getViewComponent = () => {
@@ -86,7 +81,7 @@ const ListContractProjects = ({contract, contractProjects}) => {
                             {!contract.is_supervision_contract && (
                                 <AddNewButton
                                     roles={[ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-                                    onClick={handleClickAddButton}
+                                    onClick={openDialog}
                                 />
                             )}
                             <EntityChangeView views={["list", "table", "map"]} />
@@ -107,7 +102,7 @@ const ListContractProjects = ({contract, contractProjects}) => {
             {isDialogOpen ? (
                 <ProjectSelectorDialog
                     isDialogOpen={isDialogOpen}
-                    onCloseDialog={handleCloseDialog}
+                    onCloseDialog={closeDialog}
                     contract={contract}
                     contractProjects={contractProjects}
                 />
