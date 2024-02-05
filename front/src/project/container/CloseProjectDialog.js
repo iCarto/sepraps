@@ -1,4 +1,4 @@
-import {DialogLayout} from "base/shared/components";
+import {DialogLayout} from "base/dialog/components";
 
 const CloseProjectDialog = ({onClosure = null, isDialogOpen, setIsDialogOpen}) => {
     const handleDialog = isOpen => {

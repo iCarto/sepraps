@@ -1,7 +1,7 @@
 import {ContactService} from "contact/service";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {DialogLayout} from "base/shared/components";
+import {DialogLayout} from "base/dialog/components";
 
 const DeleteContractorContactDialog = ({
     contractor = null,

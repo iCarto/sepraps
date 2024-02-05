@@ -15,17 +15,13 @@ const DialogLayout = ({
     mainActionClick = null,
     mainActionColor = "info",
     mainActionText = "",
-    handleDialog = null,
+    onCloseDialog = null,
     isDialogOpen = null,
     fullHeight = false,
     fullWidth = false,
     maxWidth = "sm",
     style = null,
 }) => {
-    const handleCloseDialog = () => {
-        handleDialog(false);
-    };
-
     const dialogStyle = fullHeight
         ? {
               "& .MuiDialog-paper": {
@@ -59,7 +55,7 @@ const DialogLayout = ({
                 {dialogContent}
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleCloseDialog} autoFocus>
+                <Button onClick={onCloseDialog} autoFocus>
                     Cancelar
                 </Button>
                 <Button

@@ -1,4 +1,4 @@
-import {DialogLayout} from "../../shared/components";
+import {DialogLayout} from "base/dialog/components";
 import {DocumentService} from "../service";
 
 const DeleteDocumentDialog = ({
