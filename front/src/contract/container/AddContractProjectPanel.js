@@ -7,6 +7,7 @@ import {contract_view_adapter, createContract} from "contract/model";
 import {ProjectFormSearch} from "project/presentational/form";
 import {EntityUpdatePanel} from "base/entity/components/presentational";
 
+// TO-DO: Unused component
 const AddContractProjectPanel = () => {
     const [error, setError] = useState("");
 
