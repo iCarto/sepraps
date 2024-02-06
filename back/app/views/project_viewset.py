@@ -14,6 +14,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from app.base.views.base_viewsets import ModelListViewSet
+from app.models.building_component import BuildingComponent
 from app.models.building_component_monitoring import BuildingComponentMonitoring
 from app.models.connection import Connection
 from app.models.milestone import Milestone
@@ -281,31 +282,36 @@ class ProjectViewSet(ModelListViewSet):
         if request.method == "POST":
             project = self.get_object()
             if project:
-                serializer = BuildingComponentSerializer(data=request.data)
-                if serializer.is_valid():
-                    bc_config = get_building_components_config(project)
-                    building_component = serializer.save(
-                        properties=bc_config.get(
-                            serializer.validated_data.get("code"), {}
-                        ).get("properties", {}),
-                        created_by=request.user,
-                        updated_by=request.user,
-                    )
+                building_component_data = request.data.get("building_component", None)
+                building_component = None
 
-                    monitoring = BuildingComponentMonitoring(
-                        building_component=building_component,
-                        project=project,
-                        created_by=request.user,
-                        updated_by=request.user,
+                if building_component_data:
+                    building_component = BuildingComponent.objects.get(
+                        id=building_component_data["id"]
                     )
-                    monitoring.save()
+                else:
+                    serializer = BuildingComponentSerializer(data=request.data)
+                    if serializer.is_valid():
+                        bc_config = get_building_components_config(project)
+                        building_component = serializer.save(
+                            properties=bc_config.get(
+                                serializer.validated_data.get("code"), {}
+                            ).get("properties", {}),
+                            created_by=request.user,
+                            updated_by=request.user,
+                        )
 
-                    return Response(
-                        BuildingComponentMonitoringSerializer(monitoring).data
-                    )
+                monitoring = BuildingComponentMonitoring(
+                    building_component=building_component,
+                    project=project,
+                    created_by=request.user,
+                    updated_by=request.user,
+                )
+                monitoring.save()
 
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(BuildingComponentMonitoringSerializer(monitoring).data)
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
         elif request.method == "GET":
             return Response(
                 BuildingComponentMonitoringSummarySerializer(
