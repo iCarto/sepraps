@@ -26,7 +26,7 @@ const ViewProjectBuildingComponentsSubPage = () => {
     };
 
     useEffect(() => {
-        ProjectService.getProjectBuildingComponents(projectId)
+        ProjectService.getProjectBuildingComponentMonitorings(projectId)
             .then(items => {
                 setBuildingComponentMonitorings(items);
             })

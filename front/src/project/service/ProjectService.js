@@ -111,7 +111,7 @@ const ProjectService = {
         });
     },
 
-    getProjectBuildingComponents(projectId) {
+    getProjectBuildingComponentMonitorings(projectId) {
         return AuthApiService.get(
             `${basePath}/${projectId}/buildingcomponentmonitorings`
         ).then(response => {
@@ -121,10 +121,19 @@ const ProjectService = {
         });
     },
 
-    createProjectBuildingComponent(projectId, buildingComponent) {
+    /**
+     * Creates a monitoring for a project's building component.
+     * If the buildingComponentMonitoring parameter includes a "building_component" attribute, then the monitoring will be created for an existing component.
+     * Otherwise, a new component will be created first, and then a new monitoring for that component will be created.
+     * The attributes for the newly-created bcMonitoring will always be empty, except for the project.
+     *
+     * @param {string} projectId - The ID of the project.
+     * @param {object} buildingComponentMonitoring - The building component object.
+     */
+    createProjectBuildingComponentMonitoring(projectId, buildingComponentMonitoring) {
         return AuthApiService.post(
             `${basePath}/${projectId}/buildingcomponentmonitorings`,
-            buildingComponent
+            buildingComponentMonitoring
         ).then(response => {
             return createBuildingComponentMonitoring(
                 building_component_monitoring_api_adapter(response)
