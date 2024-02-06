@@ -12,7 +12,7 @@ from domains.mixins import BaseDomainField, BaseDomainMixin
 from domains.models import DomainCategoryChoices
 
 
-class BuildingCompanyMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
+class BuildingComponentMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = BuildingComponentMonitoring
         fields = (
@@ -42,7 +42,7 @@ class BuildingCompanyMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
     )
 
 
-class BuildingCompanyMonitoringSummarySerializer(
+class BuildingComponentMonitoringSummarySerializer(
     BaseDomainMixin, BaseSummarySerializer
 ):
     class Meta(BaseSummarySerializer.Meta):
