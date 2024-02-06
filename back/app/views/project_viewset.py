@@ -21,8 +21,8 @@ from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
 from app.models.social_component_monitoring import SocialComponentMonitoring
 from app.serializers.building_component_monitoring_serializer import (
-    BuildingCompanyMonitoringSerializer,
-    BuildingCompanyMonitoringSummarySerializer,
+    BuildingComponentMonitoringSerializer,
+    BuildingComponentMonitoringSummarySerializer,
 )
 from app.serializers.building_component_serializer import BuildingComponentSerializer
 from app.serializers.connection_serializer import ConnectionSerializer
@@ -301,14 +301,14 @@ class ProjectViewSet(ModelListViewSet):
                     monitoring.save()
 
                     return Response(
-                        BuildingCompanyMonitoringSerializer(monitoring).data
+                        BuildingComponentMonitoringSerializer(monitoring).data
                     )
 
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response(status=status.HTTP_400_BAD_REQUEST)
         elif request.method == "GET":
             return Response(
-                BuildingCompanyMonitoringSummarySerializer(
+                BuildingComponentMonitoringSummarySerializer(
                     BuildingComponentMonitoring.objects.filter(project=pk).order_by(
                         "id"
                     ),

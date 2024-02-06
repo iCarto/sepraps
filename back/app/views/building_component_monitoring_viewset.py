@@ -5,14 +5,14 @@ from rest_framework.response import Response
 from app.base.views.base_viewsets import ModelListAuditViewSet
 from app.models.building_component_monitoring import BuildingComponentMonitoring
 from app.serializers.building_component_monitoring_serializer import (
-    BuildingCompanyMonitoringSerializer,
+    BuildingComponentMonitoringSerializer,
 )
 from app.serializers.comment_serializer import CommentSerializer
 
 
 class BuildingComponentMonitoringViewSet(ModelListAuditViewSet):
     queryset = BuildingComponentMonitoring.objects.all()
-    serializer_class = BuildingCompanyMonitoringSerializer
+    serializer_class = BuildingComponentMonitoringSerializer
 
     @action(
         methods=["POST"],
