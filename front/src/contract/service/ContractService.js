@@ -74,6 +74,12 @@ const ContractService = {
         });
     },
 
+    createPaymentsList(id, payments) {
+        return AuthApiService.post(`${basePath}/${id}/payments`, payments).then(
+            response => createPayments(payments_api_adapter(response))
+        );
+    },
+
     getContacts(id, area = null) {
         return AuthApiService.get(
             `${basePath}/${id}/contacts${area ? `?area=${area}` : ""}`

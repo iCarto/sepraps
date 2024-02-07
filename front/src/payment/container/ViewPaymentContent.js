@@ -21,6 +21,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {DeleteItemDialog} from "base/delete/components";
 import {PaymentStatusChip, getStatusIcon} from "payment/presentational";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
+import Button from "@mui/material/Button";
 
 const ViewPaymentContent = () => {
     const {contract, payments} = useOutletContext();
@@ -91,6 +92,16 @@ const ViewPaymentContent = () => {
                 />
             }
             noItems={payments?.length === 0}
+            newItems={
+                <Button
+                    variant="outlined"
+                    onClick={() => {
+                        navigate("wizard");
+                    }}
+                >
+                    Añadir productos
+                </Button>
+            }
         >
             <ContentLayoutWithAside>
                 {payment && (

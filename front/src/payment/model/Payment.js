@@ -127,6 +127,8 @@ export const PRODUCT_STATUS_PAID = "aprobado";
 export const PRODUCT_STATUS_REJECTED = "rechazado";
 export const PRODUCT_STATUS_PENDING = "pendiente";
 
+export const PRODUCT_FREQUENCY_MONTHLY = "mensual";
+
 export {
     createPayment as default,
     createPayments,

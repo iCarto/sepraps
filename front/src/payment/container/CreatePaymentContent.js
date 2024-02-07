@@ -33,7 +33,6 @@ const CreatePaymentContent = () => {
     return (
         <SectionCard title="Nuevo producto">
             <PaymentForm
-                contractId={contractId}
                 contract={contract}
                 onSubmit={handleFormSubmit}
                 onCancel={() => {

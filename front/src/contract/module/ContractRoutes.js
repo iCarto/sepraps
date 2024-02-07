@@ -25,6 +25,7 @@ import {
     ViewContractSocialComponentsTrainingsChartContent,
     ViewContractSocialComponentsConnectionsTableContent,
     ViewContractBuildingComponentsFinancialChartContent,
+    CreateContractPaymentsWizard,
 } from "contract/container";
 import {UpdateContractContactPanel} from "contract/container/monitoring";
 import {UpdateContractContractorContactPanel} from "contractor/container";
@@ -123,6 +124,11 @@ const contractRoutes = [
                     key="contract-payments-overview"
                     path="overview"
                     element={<ViewPaymentContractOverview />}
+                />
+                <Route
+                    key="contract-payments-new"
+                    path="list/wizard"
+                    element={<CreateContractPaymentsWizard />}
                 />
                 <Route
                     key="contract-payments-new"

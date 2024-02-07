@@ -4,12 +4,14 @@ import {PaperContainer} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 const SubpageWithSelectorContainer = ({
     itemSelector = null,
     itemsName = "",
     selectorSize = 2,
     noItems = false,
+    newItems = null,
     children = null,
 }) => {
     return (
@@ -18,16 +20,22 @@ const SubpageWithSelectorContainer = ({
                 {children}
                 {noItems && (
                     <PaperContainer>
-                        <Grid container justifyContent="center" my={6}>
+                        <Stack
+                            alignItems="center"
+                            justifyContent="center"
+                            my={6}
+                            spacing={2}
+                            sx={{width: "100%"}}
+                        >
                             <Typography
                                 sx={{
                                     fontStyle: "italic",
-                                    textAlign: "center",
                                 }}
                             >
                                 No hay {itemsName} para mostrar.
                             </Typography>
-                        </Grid>
+                            {newItems}
+                        </Stack>
                     </PaperContainer>
                 )}
             </Grid>

@@ -52,3 +52,4 @@ export {
 export {
     default as ViewContractBuildingComponentsFinancialChartContent,
 } from "./ViewContractBuildingComponentsFinancialChartContent";
+export {default as CreateContractPaymentsWizard} from "./CreateContractPaymentsWizard";

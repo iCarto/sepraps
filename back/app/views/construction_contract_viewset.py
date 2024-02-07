@@ -25,7 +25,10 @@ from app.serializers.contract_supervision_area_serializer import (
     ContractSupervisionAreaSerializer,
 )
 from app.serializers.contractor_serializer import ContractorSerializer
-from app.serializers.payment_serializer import PaymentSummarySerializer
+from app.serializers.payment_serializer import (
+    PaymentSerializer,
+    PaymentSummarySerializer,
+)
 from app.serializers.project_serializer import ProjectSummarySerializer
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
@@ -115,19 +118,32 @@ class ConstructionContractViewSet(ModelListViewSet):
         return super().perform_create(serializer)
 
     @action(
-        methods=["GET"], detail=True, url_path="payments", url_name="contract_payments"
+        methods=["GET", "POST"],
+        detail=True,
+        url_path="payments",
+        url_name="contract_payments",
     )
     def get_contract_payments(self, request, pk):
-        return Response(
-            PaymentSummarySerializer(
-                Payment.objects.filter(contract=pk)
-                .annotate(
-                    payment_date=Coalesce("approval_date", "expected_approval_date")
+        if request.method == "POST":
+            contract = self.get_object()
+            serializer = PaymentSerializer(data=request.data, many=True)
+            if serializer.is_valid():
+                serializer.save(
+                    contract=contract, created_by=request.user, updated_by=request.user
                 )
-                .order_by("payment_date"),
-                many=True,
-            ).data
-        )
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        elif request.method == "GET":
+            return Response(
+                PaymentSummarySerializer(
+                    Payment.objects.filter(contract=pk)
+                    .annotate(
+                        payment_date=Coalesce("approval_date", "expected_approval_date")
+                    )
+                    .order_by("payment_date"),
+                    many=True,
+                ).data
+            )
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     @action(
         methods=["GET"],

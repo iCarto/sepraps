@@ -24,11 +24,11 @@ const ViewPaymentContractOverview = () => {
         });
 
     if (paymentsWithDate?.length > 0) {
-        if (paymentsWithDate[0].paymentDate.getTime() < startDate.getTime()) {
+        if (paymentsWithDate[0].paymentDate?.getTime() < startDate.getTime()) {
             startDate = paymentsWithDate[paymentsWithDate.length - 1].paymentDate;
         }
         if (
-            paymentsWithDate[paymentsWithDate.length - 1].paymentDate.getTime() >
+            paymentsWithDate[paymentsWithDate.length - 1].paymentDate?.getTime() >
             endDate.getTime()
         ) {
             endDate = paymentsWithDate[paymentsWithDate.length - 1].paymentDate;
