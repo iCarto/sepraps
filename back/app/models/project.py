@@ -176,7 +176,10 @@ def post_create(sender, instance, created, *args, **kwargs):
     instance.save()
 
     create_project_milestones(instance, data.get("milestones", []))
-    create_project_building_components(instance, data.get("building_components", {}))
+    if instance.project_class == "nueva_construccion":
+        create_project_building_components(
+            instance, data.get("building_components", {})
+        )
     create_project_social_components(instance, data.get("social_components", {}))
     create_project_connection(instance)
 
