@@ -4,6 +4,7 @@ import {
     COMPONENT_EXECUTION_STATUS_IN_PROGRESS,
     COMPONENT_EXECUTION_STATUS_COMPLETED,
 } from "component/config";
+import {NumberUtil} from "base/format/utilities";
 
 import Chip from "@mui/material/Chip";
 import CheckCircleOutlineOutlinedIcon from "@mui/icons-material/CheckCircleOutlineOutlined";
@@ -49,8 +50,19 @@ const getStatusIcon = (value, outlined = false) => {
     });
 };
 
-const ComponentStatusChip = ({label, value}) => (
-    <Chip label={label} color={getStatusColor(value)} icon={getStatusIcon(value)} />
+const getComponentStatusLabel = component =>
+    component?.execution_status === COMPONENT_EXECUTION_STATUS_IN_PROGRESS
+        ? `${component?.execution_status_label} — ${NumberUtil.formatDecimal(
+              component?.physical_progress_percentage || component?.progress_percentage
+          )}%`
+        : component?.execution_status_label || "Estado sin especificar";
+
+const ComponentStatusChip = ({component}) => (
+    <Chip
+        label={getComponentStatusLabel(component)}
+        color={getStatusColor(component.execution_status)}
+        icon={getStatusIcon(component.execution_status)}
+    />
 );
 
 export {ComponentStatusChip as default, getStatusIcon};
