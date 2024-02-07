@@ -2,8 +2,9 @@ import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router";
 import {useOutletContext} from "react-router-dom";
 
-import {SocialComponentMonitoringService} from "socialComponentMonitoring/service";
 import {RouterUtil} from "base/navigation/utilities";
+import {useNavigateWithReload} from "base/navigation/hooks";
+import {SocialComponentMonitoringService} from "socialComponentMonitoring/service";
 
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
 import {ListSelector, ListSelectorItem} from "base/shared/components";
@@ -18,17 +19,14 @@ import {EntityAuditSection} from "base/entity/components/presentational/sections
 import {DeleteItemDialog} from "base/delete/components";
 import {EntityContent} from "base/entity/components/presentational";
 
-import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
-import {NumberUtil} from "base/format/utilities";
-import {COMPONENT_EXECUTION_STATUS_IN_PROGRESS} from "component/config";
-import {useNavigateWithReload} from "base/navigation/hooks";
 import {SectionCardHeaderAction} from "base/ui/section/components";
 
+import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewSocialComponentContent = () => {
     const {scMonitorings} = useOutletContext();
-    const {id: projectId, socialComponentId} = useParams();
+    const {socialComponentId} = useParams();
 
     const navigate = useNavigateWithReload();
     const location = useLocation();
@@ -80,18 +78,6 @@ const ViewSocialComponentContent = () => {
         />,
     ];
 
-    const componentStatusLabel =
-        socialComponentMonitoring?.execution_status ===
-        COMPONENT_EXECUTION_STATUS_IN_PROGRESS
-            ? `${
-                  socialComponentMonitoring?.execution_status_label
-              } — ${NumberUtil.formatDecimal(
-                  socialComponentMonitoring?.physical_progress_percentage ||
-                      socialComponentMonitoring?.progress_percentage
-              )}%`
-            : socialComponentMonitoring?.execution_status_label ||
-              "Estado sin especificar";
-
     return (
         <SubpageWithSelectorContainer
             itemsName="componentes sociales"
@@ -123,8 +109,7 @@ const ViewSocialComponentContent = () => {
                         entityIcon={<HandshakeOutlinedIcon />}
                         chip={
                             <ComponentStatusChip
-                                label={componentStatusLabel}
-                                value={socialComponentMonitoring?.execution_status}
+                                component={socialComponentMonitoring}
                             />
                         }
                         actions={actions}
