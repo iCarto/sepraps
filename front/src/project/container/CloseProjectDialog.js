@@ -2,7 +2,7 @@ import {DialogLayout} from "base/dialog/components";
 
 const CloseProjectDialog = ({onClosure = null, isDialogOpen, setIsDialogOpen}) => {
     const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
+        setIsDialogOpen(false);
     };
 
     const handleClosure = () => {
@@ -13,9 +13,9 @@ const CloseProjectDialog = ({onClosure = null, isDialogOpen, setIsDialogOpen}) =
             dialogLabel="Close project"
             dialogTitle="¿Quiere archivar este proyecto?"
             dialogContentText="Si hace clic en Archivar, el proyecto se cerrará y no aparecerá en los proyectos activos."
-            mainActionClick={handleClosure}
+            onMainActionClick={handleClosure}
             mainActionText="Archivar"
-            handleDialog={handleDialog}
+            onHandleDialog={handleDialog}
             isDialogOpen={isDialogOpen}
         />
     );
