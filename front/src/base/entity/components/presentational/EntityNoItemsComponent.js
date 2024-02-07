@@ -13,8 +13,8 @@ const EntityNoItemsComponent = ({isFilterEmpty = true}) => {
     );
 
     return (
-        <Grid container justifyContent="center" my={6}>
-            <Typography py={12} sx={{fontStyle: "italic", textAlign: "center"}}>
+        <Grid container justifyContent="center" my={2}>
+            <Typography sx={{fontStyle: "italic", textAlign: "center"}}>
                 {noElementsMessage}
             </Typography>
         </Grid>

@@ -9,7 +9,7 @@ const ContractGeneralDataSection = ({contract}) => {
             <Grid item xs={6}>
                 <SectionField label="Número" value={contract?.number} />
                 <SectionField
-                    label="Servicios"
+                    label="Servicios prestados"
                     value={contract.services_label.split(",").map(service => (
                         <Chip
                             key={service}

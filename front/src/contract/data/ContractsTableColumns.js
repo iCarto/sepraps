@@ -134,7 +134,7 @@ export function useContractTable(display = "regular") {
             },
             {
                 id: "services_label",
-                label: "Servicios",
+                label: "Servicios prestados",
                 width: 20,
             },
         ];

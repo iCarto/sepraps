@@ -15,9 +15,8 @@ const ProjectContractSection = ({contract}) => {
 
     let project;
     [project] = useOutletContext();
-    const isProjectClosed = project?.closed;
 
-    const contractExecutionSubpagePath = `/contracts/list/${contract.id}/execution`;
+    const contractExecutionSubpagePath = `/contracts/list/${contract?.id}/execution`;
 
     const getAwardedBudgetField = () => {
         const awardedBudget =
@@ -114,7 +113,7 @@ const ProjectContractSection = ({contract}) => {
             ) : (
                 <Stack alignItems="center" spacing={3}>
                     <Typography sx={{fontStyle: "italic"}}>
-                        Este proyecto aún no ha sido asignado a ningún contrato
+                        Este proyecto aún no ha sido asignado a ningún contrato de obras
                     </Typography>
                 </Stack>
             )}

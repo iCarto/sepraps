@@ -16,7 +16,7 @@ const ContractGeneralDataFormFields = () => {
                 />
                 <FormSelectMultiple
                     name="services"
-                    label="Servicios"
+                    label="Servicios prestados"
                     options={serviceTypes}
                     rules={{required: "El campo es obligatorio"}}
                 />
