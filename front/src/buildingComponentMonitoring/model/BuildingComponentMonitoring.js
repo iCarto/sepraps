@@ -58,8 +58,6 @@ const createBuildingComponentMonitorings = (data = []) => {
 
 const createBuildingComponentMonitoring = ({
     id = null,
-    code = "",
-    name = "",
     execution_status = "",
     execution_status_label = "",
     quality_status = "",
@@ -84,8 +82,6 @@ const createBuildingComponentMonitoring = ({
 } = {}) => {
     const publicApi = {
         id,
-        code,
-        name,
         execution_status,
         execution_status_label,
         quality_status,
