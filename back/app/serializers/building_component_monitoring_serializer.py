@@ -1,5 +1,3 @@
-from rest_framework import serializers
-
 from app.base.serializers.base_serializers import (
     BaseModelSerializer,
     BaseSummarySerializer,
@@ -28,6 +26,7 @@ class BuildingComponentMonitoringSerializer(BaseDomainMixin, BaseModelSerializer
             "physical_progress_percentage",
             "real_end_date",
             "building_component",
+            "project",
             "comments",
         )
 
@@ -49,21 +48,16 @@ class BuildingComponentMonitoringSummarySerializer(
         model = BuildingComponentMonitoring
         fields = (
             *BaseSummarySerializer.Meta.fields,
-            "code",
-            "name",
             "execution_status",
             "quality_status",
             "financial_progress_percentage",
             "physical_progress_percentage",
             "featured_image",
+            "building_component",
+            "project",
         )
 
-    code = serializers.CharField(
-        required=False, source="building_component.code", read_only=True
-    )
-    name = serializers.CharField(
-        required=False, source="building_component.name", read_only=True
-    )
+    building_component = BuildingComponentSerializer(required=False, read_only=True)
 
     domain_fields = (
         BaseDomainField(
