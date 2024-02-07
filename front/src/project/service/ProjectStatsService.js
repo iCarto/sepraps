@@ -27,6 +27,7 @@ const ProjectStatsService = {
 
     // All trainings details
     getSocialComponentTrainingsTotalStats(filter, format = null) {
+        console.log({format});
         return AuthApiService.get(
             `${basePath}/socialcomponenttrainingssum?${ServiceUtil.getFilterQueryString(
                 filter

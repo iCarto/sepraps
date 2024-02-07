@@ -12,6 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import TextSnippetOutlinedIcon from "@mui/icons-material/TextSnippetOutlined";
+import ViewCompactAltOutlinedIcon from "@mui/icons-material/ViewCompactAltOutlined";
 
 const TableDownloadButton = ({service}) => {
     const download = useDownload();
@@ -45,6 +46,11 @@ const TableDownloadButton = ({service}) => {
         handleClose();
     };
 
+    const handleDownloadExcel = () => {
+        downloadData(ServiceRequestFormat.EXCEL);
+        handleClose();
+    };
+
     return (
         <div>
             <Tooltip title="Descargar tabla" placement="bottom-end">
@@ -61,6 +67,12 @@ const TableDownloadButton = ({service}) => {
                     "aria-labelledby": "basic-button",
                 }}
             >
+                <MenuItem onClick={handleDownloadExcel}>
+                    <ListItemIcon>
+                        <ViewCompactAltOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText>Excel</ListItemText>
+                </MenuItem>
                 <MenuItem onClick={handleDownloadCSV}>
                     <ListItemIcon>
                         <TextSnippetOutlinedIcon />

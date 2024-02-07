@@ -6,6 +6,7 @@ const ServiceResponseContentType = Object.freeze({
     JPG: "image/jpg",
     PDF: "application/pdf",
     JSON: "application/json",
+    EXCEL: "application/vnd.ms-excel",
 });
 
 const ServiceRequestFormat = Object.freeze({
@@ -16,6 +17,7 @@ const ServiceRequestFormat = Object.freeze({
     JPG: "jpg",
     PDF: "pdf",
     JSON: "json",
+    EXCEL: "excel",
 });
 
 const ServiceUtil = {
@@ -83,6 +85,14 @@ const ServiceUtil = {
             case ServiceRequestFormat.PDF:
                 return {
                     Accept: ServiceResponseContentType.PDF,
+                };
+            case ServiceRequestFormat.PDF:
+                return {
+                    Accept: ServiceResponseContentType.PDF,
+                };
+            case ServiceRequestFormat.EXCEL:
+                return {
+                    Accept: ServiceResponseContentType.EXCEL,
                 };
             default:
                 return {

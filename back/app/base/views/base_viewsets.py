@@ -4,15 +4,17 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.settings import api_settings
 
 from app.base.views.mixin import AuditViewMixin, ListGeoMixin, ListSummaryMixin
-from app.base.views.renderers import DataFrameShapefileFileRenderer, GeojsonRenderer
+from app.base.views.renderers.dataframecsvfile import DataFrameCSVFileRenderer
+from app.base.views.renderers.dataframeshapefile import DataFrameShapefileFileRenderer
+from app.base.views.renderers.geojson import GeojsonRenderer
 from app.util import dictfetchall
-from questionnaires.renderers import DataFrameCSVFileRenderer
 
 
 class ModelListViewSet(ListSummaryMixin, ListGeoMixin, viewsets.ModelViewSet):
     """Viewset class with list and geo serializers."""
 
-    renderer_classes = tuple(api_settings.DEFAULT_RENDERER_CLASSES) + (
+    renderer_classes = (
+        *tuple(api_settings.DEFAULT_RENDERER_CLASSES),
         GeojsonRenderer,
         DataFrameCSVFileRenderer,
         DataFrameShapefileFileRenderer,
@@ -21,7 +23,7 @@ class ModelListViewSet(ListSummaryMixin, ListGeoMixin, viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "list":
-            if (  # noqa: WPS337
+            if (
                 self.request.accepted_renderer
                 and self.request.accepted_renderer.format == "geojson"
             ):
@@ -64,14 +66,10 @@ class ModelStatsViewSetMixin(object):
             # if searching stats data is not needed
 
             if self.use_stats():
-                query = "select * from {0}".format(
-                    self.get_stats_database_view()
-                )  # noqa; S608
+                query = f"select * from {self.get_stats_database_view()}"  # noqa; S608
                 if self.action == "retrieve":
                     pk = self.kwargs.get("pk")
-                    query += " where {lookup_field} = {pk}".format(
-                        lookup_field=self.get_stats_database_lookup_field(), pk=pk
-                    )
+                    query += f" where {self.get_stats_database_lookup_field()} = {pk}"
 
                 with connection.cursor() as cursor:
                     cursor.execute(query)

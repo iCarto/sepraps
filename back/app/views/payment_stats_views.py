@@ -6,7 +6,8 @@ from rest_framework.decorators import api_view, permission_classes, renderer_cla
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from app.base.views.renderers import DataFrameCSVFileRenderer, DataFrameJSONRenderer
+from app.base.views.renderers.dataframecsvfile import DataFrameCSVFileRenderer
+from app.base.views.renderers.dataframejson import DataFrameJSONRenderer
 from app.util import dictfetchall
 
 

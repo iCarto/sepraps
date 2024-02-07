@@ -5,11 +5,13 @@ from rest_framework.decorators import api_view, permission_classes, renderer_cla
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from app.base.views.renderers import DataFrameCSVFileRenderer, DataFrameJSONRenderer
+from app.base.views.renderers.dataframecsvfile import DataFrameCSVFileRenderer
+from app.base.views.renderers.dataframeexcelfile import DataFrameExcelFileRenderer
+from app.base.views.renderers.dataframejson import DataFrameJSONRenderer
 from app.util import dictfetchall
 
 
-def get_filter_join_query(params):
+def get_filter_join_query(params):  # noqa: C901, PLR0912
     join_query = """
         SELECT DISTINCT ON (p.id) p.id as project_id
         FROM project p
@@ -26,20 +28,20 @@ def get_filter_join_query(params):
         {filter_conditions}
     """
     filter_conditions = []
-    if filter := params.get("project"):
-        filter_conditions.append(f"and p.id = {filter}")
-    if filter := params.get("contract"):
-        filter_conditions.append(f"and cc.id = {filter}")
-    if filter := params.get("supervision_contract"):
-        filter_conditions.append(f"and csa.supervision_contract_id = {filter}")
-    if filter := params.get("district"):
-        filter_conditions.append(f"and l.district_id = '{filter}'")
-    if filter := params.get("department"):
-        filter_conditions.append(f"and l.department_id = '{filter}'")
-    if filter := params.get("financing_program"):
-        filter_conditions.append(f"and cc.financing_program_id = {filter}")
-    if filter := params.get("financing_fund"):
-        filter_conditions.append(f"and fpff.financingfund_id = {filter}")
+    if filter_param := params.get("project"):
+        filter_conditions.append(f"and p.id = {filter_param}")
+    if filter_param := params.get("contract"):
+        filter_conditions.append(f"and cc.id = {filter_param}")
+    if filter_param := params.get("supervision_contract"):
+        filter_conditions.append(f"and csa.supervision_contract_id = {filter_param}")
+    if filter_param := params.get("district"):
+        filter_conditions.append(f"and l.district_id = '{filter_param}'")
+    if filter_param := params.get("department"):
+        filter_conditions.append(f"and l.department_id = '{filter_param}'")
+    if filter_param := params.get("financing_program"):
+        filter_conditions.append(f"and cc.financing_program_id = {filter_param}")
+    if filter_param := params.get("financing_fund"):
+        filter_conditions.append(f"and fpff.financingfund_id = {filter_param}")
 
     return join_query.format(filter_conditions=" ".join(filter_conditions))
 
@@ -107,7 +109,7 @@ def get_building_components_total_stats(request, format=None):
     with connection.cursor() as cursor:
         cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))
         # result = cursor.fetchall()
-        columns = cursor.description
+        columns = cursor.description or []
         result = [
             {columns[index][0]: column for index, column in enumerate(value)}
             for value in cursor.fetchall()
@@ -118,7 +120,7 @@ def get_building_components_total_stats(request, format=None):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-@renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
+@renderer_classes([DataFrameJSONRenderer])
 def get_social_component_trainings_multi_stats(request, group_code, format=None):
     group_by_attribute = "scm.code"
     if group_code == "target_population":
@@ -155,7 +157,7 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
         result = dictfetchall(cursor)
 
         if not result:
-            df = pd.DataFrame(
+            result_df = pd.DataFrame(
                 [["total", 0, 0, 0, 0, 0, 0]],
                 columns=[
                     "code",
@@ -167,10 +169,10 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
                     "number_of_trainings",
                 ],
             )
-            return Response(df)
+            return Response(result_df)
 
-        df = pd.DataFrame(result)
-        df.loc["Total"] = df[
+        result_df = pd.DataFrame(result)
+        result_df.loc["Total"] = result_df[
             [
                 "number_of_women",
                 "number_of_men",
@@ -181,17 +183,62 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
             ]
         ].sum(numeric_only=True)
         # df.at["Total", "women_percentage"] = df["women_percentage"].mean()
-        df.at["Total", "women_percentage"] = (
-            df["number_of_women"].sum() / df["number_of_participants"].sum()
+        result_df.at["Total", "women_percentage"] = (
+            result_df["number_of_women"].sum()
+            / result_df["number_of_participants"].sum()
         ) * 100
-        df.at["Total", "code"] = "total"
+        result_df.at["Total", "code"] = "total"
 
-        return Response(df)
+        return Response(result_df)
+
+
+TRAINING_STATS_SUM_EXPORT_FIELDS = {
+    "social_component_monitoring_name": {
+        "name": "Componente",
+        "type": "string",
+        "width": 50,
+    },
+    "project_code": {"name": "Proyecto", "type": "string", "width": 15},
+    "contract_number": {"name": "Contrato", "type": "string", "width": 15},
+    "contractor_name": {"name": "Contratista", "type": "string", "width": 20},
+    "start_date": {"name": "Fecha de inicio", "type": "date", "width": 15},
+    "end_date": {"name": "Fecha de fin", "type": "date", "width": 15},
+    "method_label": {"name": "Método", "type": "string", "width": 15},
+    "target_population_label": {
+        "name": "Población meta",
+        "type": "string",
+        "width": 25,
+    },
+    "number_of_participants": {"name": "Participantes", "type": "integer", "width": 15},
+    "number_of_women": {"name": "Mujeres", "type": "integer", "width": 15},
+    "women_percentage": {"name": "% Mujeres", "type": "float", "width": 15},
+    "number_of_hours": {"name": "Horas", "type": "integer", "width": 10},
+    "number_of_digital_materials": {
+        "name": "Materiales digitales",
+        "type": "integer",
+        "width": 15,
+    },
+    "number_of_printed_materials": {
+        "name": "Materiales impresos",
+        "type": "integer",
+        "width": 15,
+    },
+}
+
+
+class TrainingSumStatsCSVRenderer(DataFrameCSVFileRenderer):
+    fields = TRAINING_STATS_SUM_EXPORT_FIELDS
+
+
+class TrainingSumStatsExcelRenderer(DataFrameExcelFileRenderer):
+    fields = TRAINING_STATS_SUM_EXPORT_FIELDS
 
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-@renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
+@renderer_classes(
+    [DataFrameJSONRenderer, TrainingSumStatsCSVRenderer, TrainingSumStatsExcelRenderer]
+)
 def get_social_component_trainings_sum_stats(request, format=None):
     social_component_monitoring = request.GET.get("social_component_monitoring", None)
     contract = request.GET.get("contract", None)
@@ -244,7 +291,7 @@ def get_social_component_trainings_sum_stats(request, format=None):
         result = dictfetchall(cursor)
 
         if not result:
-            df = pd.DataFrame(
+            result_df = pd.DataFrame(
                 [["total", 0, 0, 0, 0]],
                 columns=[
                     "code",
@@ -254,10 +301,10 @@ def get_social_component_trainings_sum_stats(request, format=None):
                     "number_of_hours",
                 ],
             )
-            return Response(df)
+            return Response(result_df)
 
-        df = pd.DataFrame(result)
-        df.loc["Total"] = df[
+        result_df = pd.DataFrame(result)
+        result_df.loc["Total"] = result_df[
             [
                 "number_of_women",
                 "number_of_participants",
@@ -266,13 +313,15 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 "number_of_printed_materials",
             ]
         ].sum(numeric_only=True)
-        df.at["Total", "women_percentage"] = df["women_percentage"].mean()
+        result_df.at["Total", "women_percentage"] = result_df["women_percentage"].mean()
         # df.at["Total", "code"] = "total"
 
         # Convert to nullable integers
-        df = df.astype(
+        result_df = result_df.astype(
             {
                 "id": "Int64",
+                "start_date": "datetime64[ns]",
+                "end_date": "datetime64[ns]",
                 "social_component_monitoring_id": "Int64",
                 "contract_id": "Int64",
                 "contractor_id": "Int64",
@@ -284,9 +333,9 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 "number_of_printed_materials": "Int64",
             }
         )
-        df.at["Total", "social_component_monitoring_name"] = "Total"
+        result_df.at["Total", "social_component_monitoring_name"] = "Total"
 
-        return Response(df)
+        return Response(result_df)
 
 
 @api_view(["GET"])
@@ -319,7 +368,7 @@ def get_connections_total_stats(request, format=None):
         result = dictfetchall(cursor)
 
         if not result:
-            df = pd.DataFrame(
+            result_df = pd.DataFrame(
                 [["total", 0, 0, 0, 0, 0, 0]],
                 columns=[
                     "id",
@@ -331,11 +380,11 @@ def get_connections_total_stats(request, format=None):
                     "connected_households_percentage",
                 ],
             )
-            return Response(df)
+            return Response(result_df)
 
-        df = pd.DataFrame(result)
+        result_df = pd.DataFrame(result)
 
-        df.loc["Total"] = df[
+        result_df.loc["Total"] = result_df[
             [
                 "population",
                 "number_of_planned_connections",
@@ -344,12 +393,12 @@ def get_connections_total_stats(request, format=None):
             ]
         ].sum(numeric_only=True)
 
-        df.at["Total", "connected_households_percentage"] = df[
+        result_df.at["Total", "connected_households_percentage"] = result_df[
             "connected_households_percentage"
         ].mean()
 
         # Convert to nullable integers
-        df = df.astype(
+        result_df = result_df.astype(
             {
                 "id": "Int64",
                 "population": "Int64",
@@ -359,7 +408,7 @@ def get_connections_total_stats(request, format=None):
             }
         )
 
-        data_list = df.to_dict(orient="list")
+        data_list = result_df.to_dict(orient="list")
 
         last_index = len(data_list["project_code"]) - 1
         data_list["project_code"][last_index] = "Total"
