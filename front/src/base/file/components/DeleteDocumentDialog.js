@@ -8,7 +8,7 @@ const DeleteDocumentDialog = ({
     setIsDialogOpen,
 }) => {
     const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
+        setIsDialogOpen(false);
     };
 
     const handleConfirmDeletion = () => {
@@ -26,10 +26,10 @@ const DeleteDocumentDialog = ({
             dialogLabel="Delete document"
             dialogTitle="¿Quiere eliminar este archivo?"
             dialogContentText="Si hace clic en Eliminar, el archivo se eliminará y no se podrá recuperar."
-            mainActionClick={handleConfirmDeletion}
+            onMainActionClick={handleConfirmDeletion}
             mainActionText="Eliminar"
             mainActionColor="error"
-            handleDialog={handleDialog}
+            onHandleDialog={handleDialog}
             isDialogOpen={isDialogOpen}
         />
     );

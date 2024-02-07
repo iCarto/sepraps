@@ -139,8 +139,8 @@ const ProjectSelectorDialog = ({
                 />
             }
             mainActionText="Guardar"
-            mainActionClick={handleConfirmAddition}
-            onCloseDialog={onCloseDialog}
+            onMainActionClick={handleConfirmAddition}
+            onHandleDialog={onCloseDialog}
             isDialogOpen={isDialogOpen}
             style={{backgroundColor: theme.palette.pageBackground.secondary}}
             fullHeight

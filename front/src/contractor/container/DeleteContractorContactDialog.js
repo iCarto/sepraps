@@ -12,7 +12,7 @@ const DeleteContractorContactDialog = ({
     const navigate = useNavigateWithReload();
 
     const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
+        setIsDialogOpen(false);
     };
 
     const handleConfirmDeletion = () => {
@@ -27,10 +27,10 @@ const DeleteContractorContactDialog = ({
             dialogLabel="Delete contact"
             dialogTitle="¿Quiere eliminar este contacto definitivamente?"
             dialogContentText="Si hace clic en Eliminar, el contacto se borrará definitivamente. Este contacto no se podrá recuperar."
-            mainActionClick={handleConfirmDeletion}
+            onMainActionClick={handleConfirmDeletion}
             mainActionText="Eliminar"
             mainActionColor="error"
-            handleDialog={handleDialog}
+            onHandleDialog={handleDialog}
             isDialogOpen={isDialogOpen}
         />
     );

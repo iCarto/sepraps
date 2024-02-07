@@ -2,7 +2,7 @@ import {DialogLayout} from "base/dialog/components";
 
 const DeleteItemDialog = ({isDialogOpen, setIsDialogOpen, onDelete}) => {
     const handleDialog = isOpen => {
-        setIsDialogOpen(isOpen);
+        setIsDialogOpen(false);
     };
 
     const handleConfirmDeletion = () => {
@@ -14,10 +14,10 @@ const DeleteItemDialog = ({isDialogOpen, setIsDialogOpen, onDelete}) => {
         <DialogLayout
             dialogTitle={`¿Quiere eliminar este elemento definitivamente?`}
             dialogContentText={`Si hace clic en Eliminar, el elemento se borrará y no se podrá recuperar.`}
-            mainActionClick={handleConfirmDeletion}
+            onMainActionClick={handleConfirmDeletion}
             mainActionText="Eliminar"
             mainActionColor="error"
-            handleDialog={handleDialog}
+            onHandleDialog={handleDialog}
             isDialogOpen={isDialogOpen}
         />
     );
