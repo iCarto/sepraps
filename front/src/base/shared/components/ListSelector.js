@@ -24,8 +24,7 @@ const ListSelector = ({
     renderItem,
     basePath = null,
     showAddButton = true,
-    onClickCreateButton = null,
-    onClickImportButton = null,
+    onClickMenuButton = null,
 }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -58,7 +57,7 @@ const ListSelector = ({
                 <Typography color="primary.main" sx={{textTransform: "uppercase"}}>
                     {title}
                 </Typography>
-                {showAddButton ? (
+                {showAddButton && !onClickMenuButton ? (
                     <IconButton
                         aria-label="add-new-button"
                         color="primary"
@@ -72,7 +71,7 @@ const ListSelector = ({
                         </Tooltip>
                     </IconButton>
                 ) : null}
-                {onClickImportButton ? (
+                {onClickMenuButton ? (
                     <div>
                         <Tooltip title="Nuevo componente" placement="bottom-end">
                             <IconButton
@@ -91,13 +90,13 @@ const ListSelector = ({
                                 "aria-labelledby": "basic-button",
                             }}
                         >
-                            <MenuItem onClick={onClickCreateButton}>
+                            <MenuItem onClick={() => onClickMenuButton("create")}>
                                 <ListItemIcon>
                                     <AddIcon />
                                 </ListItemIcon>
                                 <ListItemText>Crear nuevo</ListItemText>
                             </MenuItem>
-                            <MenuItem onClick={onClickImportButton}>
+                            <MenuItem onClick={() => onClickMenuButton("import")}>
                                 <ListItemIcon>
                                     <InputIcon />
                                 </ListItemIcon>
