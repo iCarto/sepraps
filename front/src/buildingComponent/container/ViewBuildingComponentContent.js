@@ -13,6 +13,7 @@ import {
     ImportBuildingComponentsDialog,
     ViewOrUpdateBuildingComponentTechnicalDataContent,
 } from "buildingComponent/container";
+import {BuildingComponentNameForm} from "buildingComponent/presentational/form";
 import ComponentStatusChip, {
     getStatusIcon,
 } from "component/presentational/ComponentStatusChip";
@@ -20,12 +21,14 @@ import {ViewOrUpdateCommentsContent} from "component/container";
 import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
 import {EntityContent} from "base/entity/components/presentational";
-import {ListSelector, ListSelectorItem} from "base/shared/components";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
+import {ListSelector, ListSelectorItem} from "base/shared/components";
 import {SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
+import {AlertError} from "base/error/components";
 
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewBuildingComponentContent = () => {
@@ -36,44 +39,58 @@ const ViewBuildingComponentContent = () => {
     const navigate = useNavigateWithReload();
     const basePath = RouterUtil.getPathForSegment(location, "buildingcomponents/list");
 
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const [isCreateBComponentDialogOpen, setIsCreateBComponentDialogOpen] = useState(
-        false
-    );
-    const [isImportBComponentsDialogOpen, setIsImportBComponentsDialogOpen] = useState(
-        false
-    );
-    const [buildingComponentMonitoring, setBuildingComponentMonitoring] = useState(
-        null
-    );
+    const [bCMonitoring, setBCMonitoring] = useState(null);
+    const [headerMode, setHeaderMode] = useState("view");
+    const [openDialog, setOpenDialog] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        setBuildingComponentMonitoring(null);
+        setBCMonitoring(null);
         if (buildingComponentId) {
-            BuildingComponentMonitoringService.get(buildingComponentId).then(data => {
-                setBuildingComponentMonitoring(data);
-            });
+            BuildingComponentMonitoringService.get(buildingComponentId)
+                .then(data => {
+                    setBCMonitoring(data);
+                })
+                .catch(error => {
+                    handleError(error);
+                });
         } else if (bcMonitorings?.length > 0) {
             navigate(bcMonitorings[0].id.toString());
         }
     }, [buildingComponentId, location.state?.lastRefreshDate]);
 
     const handleDelete = () => {
-        BuildingComponentMonitoringService.delete(buildingComponentMonitoring.id).then(
-            () => {
+        BuildingComponentMonitoringService.delete(bCMonitoring.id)
+            .then(() => {
                 navigate(basePath, true);
-            }
-        );
+            })
+            .catch(error => {
+                handleError(error);
+            });
+    };
+
+    const handleError = error => {
+        console.log(error);
+        setError(error);
     };
 
     const actions = [
+        <SectionCardHeaderAction
+            key="edit-name"
+            name="edit-name"
+            text="Modificar nombre"
+            icon={<DriveFileRenameOutlineIcon />}
+            onClick={() => {
+                setHeaderMode("edit-name");
+            }}
+        />,
         <SectionCardHeaderAction
             key="delete"
             name="delete"
             text="Eliminar"
             icon={<DeleteIcon color="error" />}
             onClick={() => {
-                setIsDeleteDialogOpen(true);
+                setOpenDialog("delete");
             }}
         />,
     ];
@@ -85,6 +102,8 @@ const ViewBuildingComponentContent = () => {
                 <ListSelector
                     title="Componentes"
                     items={bcMonitorings}
+                    basePath={basePath}
+                    onClickMenuButton={setOpenDialog}
                     renderItem={bcComponentMonitoring => (
                         <ListSelectorItem
                             key={bcComponentMonitoring.id}
@@ -97,62 +116,60 @@ const ViewBuildingComponentContent = () => {
                             }
                         />
                     )}
-                    basePath={basePath}
-                    onClickCreateButton={() => setIsCreateBComponentDialogOpen(true)}
-                    onClickImportButton={() => setIsImportBComponentsDialogOpen(true)}
-                    showAddButton={false}
                 />
             }
             noItems={bcMonitorings?.length === 0}
             selectorSize={3}
         >
             <ContentLayoutWithAside>
-                {buildingComponentMonitoring && (
+                {bCMonitoring && (
                     <EntityContent
                         entityLabel="Componente"
-                        entityName={
-                            buildingComponentMonitoring.building_component?.name
-                        }
+                        entityName={bCMonitoring.building_component?.name}
                         entityIcon={<HandymanOutlinedIcon />}
-                        chip={
-                            <ComponentStatusChip
-                                component={buildingComponentMonitoring}
+                        chip={<ComponentStatusChip component={bCMonitoring} />}
+                        actions={actions}
+                        headerMode={headerMode}
+                        EditForm={
+                            <BuildingComponentNameForm
+                                buildingComponent={bCMonitoring?.building_component}
+                                onCloseForm={() => {
+                                    setHeaderMode("view");
+                                }}
                             />
                         }
-                        actions={actions}
                     >
+                        <AlertError error={error} />
                         <ViewOrUpdateBuildingComponentMonitoringDataContent
-                            bcMonitoring={buildingComponentMonitoring}
+                            bcMonitoring={bCMonitoring}
                         />
                         <ViewOrUpdateBuildingComponentTechnicalDataContent
-                            buildingComponent={
-                                buildingComponentMonitoring?.building_component
-                            }
+                            buildingComponent={bCMonitoring?.building_component}
                         />
                         <ViewOrUpdateFilesDataContent
-                            folderPath={buildingComponentMonitoring.folder}
+                            folderPath={bCMonitoring.folder}
                         />
                         <ViewOrUpdateCommentsContent
-                            entity={buildingComponentMonitoring}
+                            entity={bCMonitoring}
                             service={BuildingComponentMonitoringService}
                         />
-                        <EntityAuditSection entity={buildingComponentMonitoring} />
+                        <EntityAuditSection entity={bCMonitoring} />
 
                         <DeleteItemDialog
-                            isDialogOpen={isDeleteDialogOpen}
-                            setIsDialogOpen={setIsDeleteDialogOpen}
+                            isDialogOpen={openDialog === "delete"}
+                            setIsDialogOpen={setOpenDialog}
                             onDelete={handleDelete}
                         />
                     </EntityContent>
                 )}
 
                 <CreateBuildingComponentDialog
-                    isDialogOpen={isCreateBComponentDialogOpen}
-                    onCloseDialog={() => setIsCreateBComponentDialogOpen(false)}
+                    isDialogOpen={openDialog === "create"}
+                    onCloseDialog={() => setOpenDialog(null)}
                 />
                 <ImportBuildingComponentsDialog
-                    isDialogOpen={isImportBComponentsDialogOpen}
-                    onCloseDialog={() => setIsImportBComponentsDialogOpen(false)}
+                    isDialogOpen={openDialog === "import"}
+                    onCloseDialog={() => setOpenDialog(null)}
                     project={project}
                 />
             </ContentLayoutWithAside>

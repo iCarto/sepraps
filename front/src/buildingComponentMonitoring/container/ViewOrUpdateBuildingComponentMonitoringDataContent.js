@@ -2,17 +2,13 @@ import {useState} from "react";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {BuildingComponentMonitoringService} from "buildingComponentMonitoring/service";
-import {BuildingComponentService} from "buildingComponent/service";
-import {building_component_view_adapter} from "buildingComponent/model";
 import {building_component_monitoring_view_adapter} from "buildingComponentMonitoring/model";
 
 import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {BuildingComponentMonitoringData} from "buildingComponentMonitoring/presentational";
 import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
-import {BuildingComponentNameForm} from "buildingComponent/presentational/form";
 
-import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
     const navigate = useNavigateWithReload();
@@ -25,14 +21,6 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
             {...updatedBcMonitoring},
             BuildingComponentMonitoringService,
             building_component_monitoring_view_adapter
-        );
-    };
-
-    const handleBuildingComponentFormSubmit = updatedBuildingComponent => {
-        updateEntity(
-            {...bcMonitoring.building_component, ...updatedBuildingComponent},
-            BuildingComponentService,
-            building_component_view_adapter
         );
     };
 
@@ -53,19 +41,10 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
         <SectionCardHeaderAction
             key="edit"
             name="edit"
-            text="Editar seguimiento"
-            icon={<DonutLargeOutlinedIcon />}
+            text="Modificar"
+            icon={<EditIcon />}
             onClick={() => {
                 setMode("edit");
-            }}
-        />,
-        <SectionCardHeaderAction
-            key="edit-name"
-            name="edit-name"
-            text="Editar nombre"
-            icon={<DriveFileRenameOutlineIcon />}
-            onClick={() => {
-                setMode("edit-name");
             }}
         />,
     ];
@@ -79,18 +58,6 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
                 <BuildingComponentMonitoringForm
                     bcMonitoring={bcMonitoring}
                     onSubmit={handleBcMonitoringFormSubmit}
-                    onCancel={() => {
-                        setMode("view");
-                    }}
-                    error={error}
-                />
-            );
-        }
-        if (mode === "edit-name") {
-            return (
-                <BuildingComponentNameForm
-                    buildingComponent={bcMonitoring.building_component}
-                    onSubmit={handleBuildingComponentFormSubmit}
                     onCancel={() => {
                         setMode("view");
                     }}
