@@ -1,7 +1,7 @@
-import {DateUtil, NumberUtil} from "base/format/utilities";
+import {DateUtil} from "base/format/utilities";
+import {SocialComponentMonitoringStatusData} from ".";
 import {SectionBox, SectionField} from "base/ui/section/components";
 import Grid from "@mui/material/Grid";
-import {COMPONENT_EXECUTION_STATUS_COMPLETED} from "component/config";
 
 const SocialComponentMonitoringData = ({socialComponentMonitoring}) => {
     return (
@@ -18,25 +18,16 @@ const SocialComponentMonitoringData = ({socialComponentMonitoring}) => {
             </Grid>
             <Grid container item xs={6} direction="column">
                 <SectionBox label="Seguimiento">
-                    {socialComponentMonitoring.execution_status ===
-                    COMPONENT_EXECUTION_STATUS_COMPLETED ? (
-                        <SectionField
-                            label="Fecha de finalización real"
-                            value={DateUtil.formatDate(
-                                socialComponentMonitoring.real_end_date
-                            )}
-                        />
-                    ) : null}
                     <SectionField
-                        label="Porcentaje de avance"
-                        value={NumberUtil.formatDecimal(
-                            socialComponentMonitoring.progress_percentage
+                        label="Fecha de finalización real"
+                        value={DateUtil.formatDate(
+                            socialComponentMonitoring.real_end_date
                         )}
-                        unit="%"
                     />
-                    <SectionField
-                        label="Estado cualitativo"
-                        value={socialComponentMonitoring.quality_status_label}
+                </SectionBox>
+                <SectionBox label="Estado">
+                    <SocialComponentMonitoringStatusData
+                        socialComponentMonitoring={socialComponentMonitoring}
                     />
                 </SectionBox>
             </Grid>

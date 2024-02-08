@@ -6,6 +6,7 @@ import {DomainProvider} from "sepraps/domain/provider";
 import {SocialComponentFormDataFields} from ".";
 import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
+import {FormContainer} from "base/form/components";
 
 const BuildingComponentForm = ({
     projectId,
@@ -38,12 +39,14 @@ const BuildingComponentForm = ({
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <AlertError error={error} />
-                <EntityForm
-                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                    onCancel={onCancel}
-                >
-                    <SocialComponentFormDataFields projectId={projectId} />
-                </EntityForm>
+                <FormContainer>
+                    <EntityForm
+                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onCancel={onCancel}
+                    >
+                        <SocialComponentFormDataFields projectId={projectId} />
+                    </EntityForm>
+                </FormContainer>
             </FormProvider>
         </DomainProvider>
     );

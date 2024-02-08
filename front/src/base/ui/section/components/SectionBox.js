@@ -11,25 +11,21 @@ const SectionBox = ({label = "", children}) => {
                 border: 0,
                 borderRadius: 2,
                 borderColor: "grey.200",
-                p: 1,
             }}
         >
             <Grid item xs>
                 {label ? (
-                    <>
-                        <Typography
-                            sx={{
-                                color: "grey.500",
-                                fontSize: "0.8rem",
-                                textTransform: "uppercase",
-                            }}
-                        >
-                            {label}
-                        </Typography>
-                        <Divider sx={{mb: 1}} />{" "}
-                    </>
+                    <Typography
+                        sx={{
+                            color: "grey.500",
+                            fontSize: "0.8rem",
+                            textTransform: "uppercase",
+                        }}
+                    >
+                        {label}
+                    </Typography>
                 ) : null}
-                <Box sx={{px: 1}}>{children}</Box>
+                <Divider /> <Box sx={{p: 1}}>{children}</Box>
             </Grid>
         </Grid>
     );
