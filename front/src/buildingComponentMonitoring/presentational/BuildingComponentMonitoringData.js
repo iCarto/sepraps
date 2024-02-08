@@ -1,14 +1,10 @@
 import {useEffect, useRef, useState} from "react";
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {ImagePreview} from "base/image/components";
+import {BuildingComponentMonitoringStatusData} from ".";
+
 import {SectionBox, SectionField} from "base/ui/section/components";
+import {ImagePreview} from "base/image/components";
 import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
-import {ProgressBar, ProgressBarSmall} from "base/progress/components";
-import Stack from "@mui/material/Stack";
-import {LightHeading} from "base/ui/headings/components";
-import Paper from "@mui/material/Paper";
-import {AppraisalChip} from "base/shared/components";
 
 const BuildingComponentMonitoringData = ({bcMonitoring}) => {
     const [monitoringGridHeight, setMonitoringGridHeight] = useState(0);
@@ -17,7 +13,7 @@ const BuildingComponentMonitoringData = ({bcMonitoring}) => {
     const monitoringGridRef = useRef(null);
     const previsionGridRef = useRef(null);
 
-    const imageHeight = monitoringGridHeight - previsionGridHeight - 40;
+    const imageHeight = monitoringGridHeight - previsionGridHeight - 30;
 
     useEffect(() => {
         if (monitoringGridRef.current) {
@@ -30,7 +26,7 @@ const BuildingComponentMonitoringData = ({bcMonitoring}) => {
 
     return (
         <Grid container spacing={2}>
-            <Grid container item xs={6} spacing={2} height={monitoringGridHeight}>
+            <Grid container item xs={6} height={monitoringGridHeight}>
                 <Grid item xs={12} ref={previsionGridRef}>
                     <SectionBox label="Previsión inicial">
                         <SectionField
@@ -85,35 +81,12 @@ const BuildingComponentMonitoringData = ({bcMonitoring}) => {
                         value={NumberUtil.formatInteger(bcMonitoring.total_amount)}
                         unit="Gs."
                     />
-                    <Divider />
-                    <SectionField
-                        label="Porcentaje de avance físico"
-                        value={NumberUtil.formatDecimal(
-                            bcMonitoring.physical_progress_percentage
-                        )}
-                        unit="%"
+                </SectionBox>
+
+                <SectionBox label="Estado">
+                    <BuildingComponentMonitoringStatusData
+                        bcMonitoring={bcMonitoring}
                     />
-                    <SectionField
-                        label="Estado cualitativo"
-                        value={bcMonitoring.quality_status_label}
-                    />
-                    <Paper elevation={1} sx={{mt: 2, p: 2, backgroundColor: "grey.50"}}>
-                        <LightHeading>Resultado</LightHeading>
-                        <Stack spacing={1} sx={{mt: 1}}>
-                            <ProgressBarSmall
-                                label="Avance financiero"
-                                progressValue={
-                                    bcMonitoring.financial_progress_percentage
-                                }
-                            />
-                            <ProgressBarSmall
-                                label="Avance físico"
-                                progressValue={
-                                    bcMonitoring.physical_progress_percentage
-                                }
-                            />
-                        </Stack>
-                    </Paper>
                 </SectionBox>
             </Grid>
         </Grid>

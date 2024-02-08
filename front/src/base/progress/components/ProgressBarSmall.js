@@ -5,7 +5,12 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
-const ProgressBarSmall = ({label = "", progressValue, progressStyle = {}}) => {
+const ProgressBarSmall = ({
+    label = "",
+    labelVariant = "body2",
+    progressValue,
+    progressStyle = {},
+}) => {
     const parsedValue = parseInt(progressValue) || 0;
     const barProgress = parsedValue >= 100 ? 100 : parsedValue;
 
@@ -14,7 +19,7 @@ const ProgressBarSmall = ({label = "", progressValue, progressStyle = {}}) => {
             {label ? (
                 <Typography
                     component="span"
-                    variant="body2"
+                    variant={labelVariant}
                     color={theme.palette.grey[600]}
                     lineHeight={1}
                 >

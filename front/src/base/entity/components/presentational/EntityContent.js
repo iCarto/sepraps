@@ -47,7 +47,7 @@ const EntityContent = ({
                 title={
                     <Stack
                         direction="row"
-                        alignItems="center"
+                        alignItems="flex-start"
                         justifyContent="space-between"
                         spacing={1}
                         sx={{mr: 1}}
@@ -55,6 +55,7 @@ const EntityContent = ({
                         <Stack
                             direction="row"
                             alignItems="center"
+                            justifyContent="flex-start"
                             spacing={1}
                             sx={{width: "100%"}}
                         >
