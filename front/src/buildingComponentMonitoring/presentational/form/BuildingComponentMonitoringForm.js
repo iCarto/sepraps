@@ -15,6 +15,7 @@ const BuildingComponentMonitoringForm = ({
     onCancel = null,
     error = null,
 }) => {
+    console.log(bcMonitoring);
     const defaultFormValues = {
         id: FormUtil.getFormValue(bcMonitoring?.id),
         execution_status: FormUtil.getFormValue(bcMonitoring?.execution_status),
@@ -59,6 +60,7 @@ const BuildingComponentMonitoringForm = ({
             ),
             expected_end_date: FormUtil.getDataValue(data.expected_end_date),
             real_end_date: FormUtil.getDataValue(data.real_end_date),
+            project: bcMonitoring?.project,
         });
     };
 
