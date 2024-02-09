@@ -22,7 +22,7 @@ const SocialComponentsTrainingsTableFilterForm = ({
     filter,
     onChangeFilter,
     onClear = null,
-    displayProjectFilter = false,
+    isContractTable = false,
 }) => {
     const contractOptions = getFilterOptionsObject(
         trainingData,
@@ -113,7 +113,7 @@ const SocialComponentsTrainingsTableFilterForm = ({
                         }
                     />
                 </Grid>
-                {displayProjectFilter ? (
+                {isContractTable ? (
                     <Grid item sx={{flex: 1}}>
                         <FormAutocomplete
                             name="project"
