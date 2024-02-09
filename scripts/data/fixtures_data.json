@@ -103,6 +103,15 @@
         "pk": null,
         "fields": {
             "category": "project_type",
+            "key": "agua_lluvia",
+            "value": "Agua - Chaco"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "project_type",
             "key": "alcantarillado",
             "value": "Alcantarillado"
         }
@@ -330,6 +339,285 @@
             "category": "amendment_type",
             "key": "mixed",
             "value": "Mixto"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_tanque",
+            "key": "hormigon",
+            "value": "Hormigón"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_tanque",
+            "key": "metalico",
+            "value": "Metálico"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_tanque",
+            "key": "fibra_de_vidrio",
+            "value": "Fibra de vidrio"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_tanque",
+            "key": "otro",
+            "value": "Otro"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_energia",
+            "key": "monofasica",
+            "value": "Monofásica"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_energia",
+            "key": "trifasica",
+            "value": "Trifásica"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_canheria",
+            "key": "pvc",
+            "value": "PVC"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_canheria",
+            "key": "hierro_galvanizado",
+            "value": "Hierro Galvanizado"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_canheria",
+            "key": "pead",
+            "value": "PEAD"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_canheria",
+            "key": "otro",
+            "value": "Otro"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_caseta",
+            "key": "tipo_s_techo_de_chapa",
+            "value": "Tipo S (Techo de chapa)"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_caseta",
+            "key": "tipo_4_techo_de_hormigon",
+            "value": "Tipo 4 (Techo de hormigón)"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "nan",
+            "key": "tipo_a",
+            "value": "Tipo A"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_caseta",
+            "key": "prefabricada",
+            "value": "Prefabricada"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_caseta",
+            "key": "otro",
+            "value": "Otro"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "material_caseta",
+            "key": "manposteria",
+            "value": "Manpostería"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "material_caseta",
+            "key": "fibra_de_vidrio",
+            "value": "Fibra de vidrio"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "material_caseta",
+            "key": "otro",
+            "value": "Otro"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_aljibe",
+            "key": "fibra_de_vidrio",
+            "value": "Fibra de vidrio"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_aljibe",
+            "key": "otro",
+            "value": "Otro"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "ubicacion_aljibe",
+            "key": "superficial",
+            "value": "Superficial"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "ubicacion_aljibe",
+            "key": "enterrado",
+            "value": "Enterrado"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "material_letrinas",
+            "key": "tipo_a",
+            "value": "Tipo A"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "material_letrinas",
+            "key": "tipo_b",
+            "value": "Tipo B"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "material_letrinas",
+            "key": "otro",
+            "value": "Otro"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "sistema_disposicion",
+            "key": "pozo_absorbente",
+            "value": "Pozo absorbente"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "sistema_disposicion",
+            "key": "zanja_de_infiltracion",
+            "value": "Zanja de infiltración"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "sistema_disposicion",
+            "key": "otro",
+            "value": "Otro"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_laguna",
+            "key": "facultativas",
+            "value": "Facultativas"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_laguna",
+            "key": "maduracion",
+            "value": "Maduración"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "tipo_laguna",
+            "key": "otros",
+            "value": "Otros"
         }
     },
     {
