@@ -22,19 +22,19 @@ const TrainingSummaryBox = ({trainingsTotals}) => {
 
     return (
         <ContainerGridWithBorder>
-            <Grid item container xs={9} columnSpacing={1} pl={5}>
+            <Grid item container xs={9} columnSpacing={1} pl={5} alignItems="baseline">
                 {summaryData.map((item, index) => (
                     <Fragment key={index}>
-                        <Grid item container xs={2} justifyContent="flex-end">
+                        <Grid item xs={2}>
                             <Typography
-                                component="span"
                                 fontSize={36}
                                 color={theme.palette.text.primary}
+                                textAlign="end"
                             >
                                 {NumberUtil.formatInteger(item.value)}
                             </Typography>
                         </Grid>
-                        <Grid item container xs={10} alignItems="flex-end">
+                        <Grid item xs={10}>
                             <LightHeading>{item.label}</LightHeading>
                         </Grid>
                     </Fragment>
