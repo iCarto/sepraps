@@ -25,6 +25,16 @@ class DomainCategoryChoices(models.TextChoices):
         "Tipo de modalidad de capacitación",
     )
     amendment_type = ("amendment_type", "Tipo de adenda")
+    material_letrinas = ("material_letrinas", "Material de las letrinas")
+    tipo_aljibe = ("tipo_aljibe", "Tipo de aljibe")
+    tipo_laguna = ("tipo_laguna", "Tipo de laguna")
+    tipo_tanque = ("tipo_tanque", "Tipo de tanque")
+    sistema_disposicion = ("sistema_disposicion", "Sistema de disposición")
+    tipo_caseta = ("tipo_caseta", "Tipo de caseta")
+    tipo_canheria = ("tipo_canheria", "Tipo de cañería")
+    material_caseta = ("material_caseta", "Material de la caseta")
+    tipo_energia = ("tipo_energia", "Tipo de energía")
+    ubicacion_aljibe = ("ubicacion_aljibe", "Ubicación del aljibe")
 
 
 class DomainEntry(models.Model):
