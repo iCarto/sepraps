@@ -177,16 +177,16 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
                 "number_of_women",
                 "number_of_men",
                 "number_of_participants",
-                "women_percentage",
                 "number_of_hours",
                 "number_of_trainings",
             ]
         ].sum(numeric_only=True)
-        # df.at["Total", "women_percentage"] = df["women_percentage"].mean()
+
         result_df.at["Total", "women_percentage"] = (
             result_df["number_of_women"].sum()
             / result_df["number_of_participants"].sum()
         ) * 100
+
         result_df.at["Total", "code"] = "total"
 
         return Response(result_df)
@@ -313,8 +313,10 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 "number_of_printed_materials",
             ]
         ].sum(numeric_only=True)
-        result_df.at["Total", "women_percentage"] = result_df["women_percentage"].mean()
-        # df.at["Total", "code"] = "total"
+        result_df.at["Total", "women_percentage"] = (
+            result_df["number_of_women"].sum()
+            / result_df["number_of_participants"].sum()
+        ) * 100
 
         # Convert to nullable integers
         result_df = result_df.astype(
