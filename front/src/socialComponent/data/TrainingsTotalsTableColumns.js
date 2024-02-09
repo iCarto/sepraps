@@ -1,6 +1,6 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
 
-export function useTrainingTotalsTable(displayProject) {
+export function useTrainingTotalsTable(isContractTable) {
     const tableColumns = [
         {
             id: "social_component_monitoring_name",
@@ -54,7 +54,7 @@ export function useTrainingTotalsTable(displayProject) {
         {
             id: "women_percentage",
             label: "% mujeres",
-            width: 10,
+            width: 5,
             formatFunction: value => {
                 return `${NumberUtil.formatDecimalWithoutZeros(value)} %`;
             },
@@ -66,12 +66,13 @@ export function useTrainingTotalsTable(displayProject) {
         },
     ];
 
-    if (displayProject)
+    if (isContractTable) {
         tableColumns.splice(3, 0, {
             id: "project_code",
             label: "Proyecto",
             width: 10,
         });
+    }
 
     return {tableColumns};
 }

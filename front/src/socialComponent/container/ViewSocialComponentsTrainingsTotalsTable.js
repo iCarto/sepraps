@@ -56,7 +56,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
                     trainingData={trainingData}
                     filter={tableFilter}
                     onChangeFilter={handleTableFilter}
-                    displayProjectFilter={isContractTable}
+                    isContractTable={isContractTable}
                 />
                 {isLoading ? (
                     <Spinner />
@@ -78,7 +78,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
                                 />
                             </>
                         ) : (
-                            <Alert severity="info">
+                            <Alert severity="info" sx={{width: "100%"}}>
                                 No hay capacitaciones para mostrar.
                             </Alert>
                         )}
