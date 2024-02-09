@@ -265,7 +265,7 @@ def get_social_component_trainings_sum_stats(request, format=None):
                 c.id as contractor_id,
                 scm.name as social_component_monitoring_name,
                 scm.id as social_component_monitoring_id,
-                project.code as project_code,
+                CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as project_code,
                 project.id as project_id
             FROM social_component_training sct
                 INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
@@ -348,12 +348,12 @@ def get_connections_total_stats(request, format=None):
     query = """
             SELECT
                 conn.id as id,
-                project.code as project_code,
                 conn.number_of_households * %(people_per_household)s as population,
                 conn.number_of_planned_connections as number_of_planned_connections,
                 conn.number_of_actual_connections as number_of_actual_connections,
                 conn.number_of_households as number_of_households,
-                round((cast(coalesce(conn.number_of_actual_connections, 0) + coalesce(conn.number_of_existing_connections, 0) as decimal) / coalesce(conn.number_of_households, 1)) * 100, 2)::numeric as connected_households_percentage
+                round((cast(coalesce(conn.number_of_actual_connections, 0) + coalesce(conn.number_of_existing_connections, 0) as decimal) / coalesce(conn.number_of_households, 1)) * 100, 2)::numeric as connected_households_percentage,
+                CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as project_code
             FROM connection conn
                 JOIN (
                     {join_query}
@@ -410,9 +410,8 @@ def get_connections_total_stats(request, format=None):
             }
         )
 
+        result_df = result_df.where(pd.notna(result_df), None)
+        result_df.at["Total", "project_code"] = "Total"
         data_list = result_df.to_dict(orient="list")
-
-        last_index = len(data_list["project_code"]) - 1
-        data_list["project_code"][last_index] = "Total"
 
         return Response(data_list)
