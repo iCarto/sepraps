@@ -294,9 +294,12 @@ class ProjectViewSet(ModelListViewSet):
                     if serializer.is_valid():
                         bc_config = get_building_components_config(project)
                         building_component = serializer.save(
-                            properties=bc_config.get(
+                            technical_properties=bc_config.get(
                                 serializer.validated_data.get("code"), {}
-                            ).get("properties", {}),
+                            ).get("technical_properties", {}),
+                            validation_properties=bc_config.get(
+                                serializer.validated_data.get("code"), {}
+                            ).get("validation_properties", {}),
                             created_by=request.user,
                             updated_by=request.user,
                         )
