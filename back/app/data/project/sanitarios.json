@@ -204,21 +204,7 @@
     "building_components": {
         "letrinas": {
             "name": "Letrinas",
-            "properties": {
-                "material": {
-                    "label": "Material",
-                    "type": "domain",
-                    "domain": "toiletMaterialTypes"
-                },
-                "sistema_disposicion": {
-                    "label": "Sistemas de disposición",
-                    "type": "domain",
-                    "domain": "disposalSystemTypes"
-                },
-                "cantidad": {
-                    "label": "Cantidad",
-                    "type": "integer"
-                },
+            "validation_properties": {
                 "provision": {
                     "label": "Unidades provistas",
                     "type": "integer"
@@ -231,35 +217,53 @@
                     "label": "Unidades terminadas",
                     "type": "integer"
                 }
-            }
-        },
-        "banos": {
-            "name": "Baños",
-            "properties": {
+            },
+            "technical_properties": {
                 "material": {
                     "label": "Material",
                     "type": "domain",
-                    "domain": "toiletMaterialTypes"
+                    "domain": "toiletMaterialType"
                 },
                 "sistema_disposicion": {
                     "label": "Sistemas de disposición",
                     "type": "domain",
-                    "domain": "disposalSystemTypes"
+                    "domain": "disposalSystemType"
                 },
                 "cantidad": {
                     "label": "Cantidad",
                     "type": "integer"
-                },
-                "provision": {
+                }
+            }
+        },
+        "banos": {
+            "name": "Baños",
+            "validation_properties": {
+                "01_provision": {
                     "label": "Unidades terminadas etapa 1",
                     "type": "integer"
                 },
-                "instalacion": {
+                "02_instalacion": {
                     "label": "Unidades terminadas etapa 2",
                     "type": "integer"
                 },
-                "entrega": {
+                "03_entrega": {
                     "label": "Unidades terminadas etapa 3",
+                    "type": "integer"
+                }
+            },
+            "technical_properties": {
+                "material": {
+                    "label": "Material",
+                    "type": "domain",
+                    "domain": "toiletMaterialType"
+                },
+                "sistema_disposicion": {
+                    "label": "Sistemas de disposición",
+                    "type": "domain",
+                    "domain": "disposalSystemType"
+                },
+                "cantidad": {
+                    "label": "Cantidad",
                     "type": "integer"
                 }
             }

@@ -180,28 +180,7 @@
     "building_components": {
         "planta_de_tratamiento": {
             "name": "Planta de tratamiento",
-            "properties": {
-                "tipo_tratamiento": {
-                    "label": "Tipo de tratamiento",
-                    "type": "text"
-                },
-                "tipo_lagunas": {
-                    "label": "Tipo de lagunas",
-                    "type": "domain",
-                    "domain": "pondType"
-                },
-                "cantidad_lagunas": {
-                    "label": "Cantidad de lagunas",
-                    "type": "integer"
-                },
-                "coordenada_x": {
-                    "label": "Coordenada X",
-                    "type": "integer"
-                },
-                "coordenada_y": {
-                    "label": "Coordenada Y",
-                    "type": "integer"
-                },
+            "validation_properties": {
                 "intalacion_membranas": {
                     "label": "Instalación de membranas",
                     "type": "domain",
@@ -227,31 +206,34 @@
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
+            },
+            "technical_properties": {
+                "tipo_tratamiento": {
+                    "label": "Tipo de tratamiento",
+                    "type": "text"
+                },
+                "tipo_lagunas": {
+                    "label": "Tipo de lagunas",
+                    "type": "domain",
+                    "domain": "pondType"
+                },
+                "cantidad_lagunas": {
+                    "label": "Cantidad de lagunas",
+                    "type": "integer"
+                },
+                "coordenada_x": {
+                    "label": "Coordenada X",
+                    "type": "integer"
+                },
+                "coordenada_y": {
+                    "label": "Coordenada Y",
+                    "type": "integer"
+                }
             }
         },
         "redes_basicas_condominiales_y_conexiones": {
             "name": "Redes básicas, condominiales y conexiones",
-            "properties": {
-                "tipo_canheria_basica": {
-                    "label": "Tipo de cañería básica",
-                    "type": "domain",
-                    "domain": "tipo_canheria"
-                },
-                "longitud_caneria_basica": {
-                    "label": "Longitud cañería básica",
-                    "type": "decimal",
-                    "unit": "m"
-                },
-                "tipo_canheria_dondominal": {
-                    "label": "Tipo de cañería condominal",
-                    "type": "domain",
-                    "domain": "tipo_canheria"
-                },
-                "longitud_caneria_condominal": {
-                    "label": "Longitud cañería condominal",
-                    "type": "decimal",
-                    "unit": "m"
-                },
+            "validation_properties": {
                 "red_basica_instalada": {
                     "label": "Metros de red básica instalada",
                     "type": "integer"
@@ -264,43 +246,33 @@
                     "label": "Número de conexiones",
                     "type": "integer"
                 }
+            },
+            "technical_properties": {
+                "tipo_canheria_basica": {
+                    "label": "Tipo de cañería básica",
+                    "type": "domain",
+                    "domain": "pipeType"
+                },
+                "longitud_caneria_basica": {
+                    "label": "Longitud cañería básica",
+                    "type": "decimal",
+                    "unit": "m"
+                },
+                "tipo_canheria_dondominal": {
+                    "label": "Tipo de cañería condominal",
+                    "type": "domain",
+                    "domain": "pipeType"
+                },
+                "longitud_caneria_condominal": {
+                    "label": "Longitud cañería condominal",
+                    "type": "decimal",
+                    "unit": "m"
+                }
             }
         },
         "estacion_de_bombeo": {
             "name": "Estación de bombeo",
-            "properties": {
-                "potencia_bomba": {
-                    "label": "Potencia de las bombas",
-                    "type": "decimal",
-                    "unit": "HP"
-                },
-                "cantidad_bombas": {
-                    "label": "Cantidad de bombas",
-                    "type": "integer"
-                },
-                "tipo_energia": {
-                    "label": "Tipo de energía",
-                    "type": "domain",
-                    "domain": "tipo_energia"
-                },
-                "tipo_canheria": {
-                    "label": "Tipo de cañería",
-                    "type": "domain",
-                    "domain": "tipo_canheria"
-                },
-                "longitud_canheria": {
-                    "label": "Longitud de la cañería de impulsión",
-                    "type": "decimal",
-                    "unit": "m"
-                },
-                "coordenada_x": {
-                    "label": "Coordenada X",
-                    "type": "integer"
-                },
-                "coordenada_y": {
-                    "label": "Coordenada Y",
-                    "type": "integer"
-                },
+            "validation_properties": {
                 "permiso_municipal": {
                     "label": "Permiso municipal",
                     "type": "domain",
@@ -330,6 +302,40 @@
                     "label": "Obras civiles realizadas",
                     "type": "domain",
                     "domain": "yesNoDomain"
+                }
+            },
+            "technical_properties": {
+                "potencia_bomba": {
+                    "label": "Potencia de las bombas",
+                    "type": "decimal",
+                    "unit": "HP"
+                },
+                "cantidad_bombas": {
+                    "label": "Cantidad de bombas",
+                    "type": "integer"
+                },
+                "tipo_energia": {
+                    "label": "Tipo de energía",
+                    "type": "domain",
+                    "domain": "energyType"
+                },
+                "tipo_canheria": {
+                    "label": "Tipo de cañería",
+                    "type": "domain",
+                    "domain": "pipeType"
+                },
+                "longitud_canheria": {
+                    "label": "Longitud de la cañería de impulsión",
+                    "type": "decimal",
+                    "unit": "m"
+                },
+                "coordenada_x": {
+                    "label": "Coordenada X",
+                    "type": "integer"
+                },
+                "coordenada_y": {
+                    "label": "Coordenada Y",
+                    "type": "integer"
                 }
             }
         }
