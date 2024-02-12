@@ -202,46 +202,65 @@
         }
     ],
     "building_components": {
-        "banos": {
-            "name": "Baños",
-            "properties": {
-                "cantidad": {
-                    "label": "Cantidad",
-                    "type": "integer"
-                },
-                "avance": {
-                    "label": "Avance",
-                    "type": "domain",
-                    "domain": "phasesDomain"
-                }
-            }
-        },
         "letrinas": {
             "name": "Letrinas",
             "properties": {
+                "material": {
+                    "label": "Material",
+                    "type": "domain",
+                    "domain": "toiletMaterialTypes"
+                },
+                "sistema_disposicion": {
+                    "label": "Sistemas de disposición",
+                    "type": "domain",
+                    "domain": "disposalSystemTypes"
+                },
                 "cantidad": {
                     "label": "Cantidad",
                     "type": "integer"
                 },
-                "sistema_disposicion": {
-                    "label": "Sistema de disposición",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                },
                 "provision": {
-                    "label": "Provisión",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
+                    "label": "Unidades provistas",
+                    "type": "integer"
                 },
                 "instalacion": {
-                    "label": "Instalación",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
+                    "label": "Unidades instaladas",
+                    "type": "integer"
                 },
                 "entrega": {
-                    "label": "Entrega",
+                    "label": "Unidades terminadas",
+                    "type": "integer"
+                }
+            }
+        },
+        "banos": {
+            "name": "Baños",
+            "properties": {
+                "material": {
+                    "label": "Material",
                     "type": "domain",
-                    "domain": "yesNoDomain"
+                    "domain": "toiletMaterialTypes"
+                },
+                "sistema_disposicion": {
+                    "label": "Sistemas de disposición",
+                    "type": "domain",
+                    "domain": "disposalSystemTypes"
+                },
+                "cantidad": {
+                    "label": "Cantidad",
+                    "type": "integer"
+                },
+                "provision": {
+                    "label": "Unidades terminadas etapa 1",
+                    "type": "integer"
+                },
+                "instalacion": {
+                    "label": "Unidades terminadas etapa 2",
+                    "type": "integer"
+                },
+                "entrega": {
+                    "label": "Unidades terminadas etapa 3",
+                    "type": "integer"
                 }
             }
         }
