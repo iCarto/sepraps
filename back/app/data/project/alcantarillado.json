@@ -178,147 +178,156 @@
         }
     ],
     "building_components": {
-        "planta_tratamiento": {
+        "planta_de_tratamiento": {
             "name": "Planta de tratamiento",
             "properties": {
-                "avance_movimiento_suelo": {
-                    "label": "Avance movimiento de suelo",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
+                "tipo_tratamiento": {
+                    "label": "Tipo de tratamiento",
+                    "type": "text"
                 },
-                "instalacion_membranas": {
+                "tipo_lagunas": {
+                    "label": "Tipo de lagunas",
+                    "type": "domain",
+                    "domain": "pondType"
+                },
+                "cantidad_lagunas": {
+                    "label": "Cantidad de lagunas",
+                    "type": "integer"
+                },
+                "coordenada_x": {
+                    "label": "Coordenada X",
+                    "type": "integer"
+                },
+                "coordenada_y": {
+                    "label": "Coordenada Y",
+                    "type": "integer"
+                },
+                "intalacion_membranas": {
                     "label": "Instalación de membranas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "construccion_interconexiones": {
+                "interconexiones": {
                     "label": "Construcción de interconexiones",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "desarenador": {
-                    "label": "Desarenador",
+                    "label": "Desarenador instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "lecho_secado": {
-                    "label": "Lecho de secado",
+                    "label": "Lecho de secado instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "empastado": {
-                    "label": "Empastado",
+                    "label": "Empastado realizado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             }
         },
-        "redes_conexiones": {
-            "name": "Redes básicas, condominales y conexiones",
+        "redes_basicas_condominiales_y_conexiones": {
+            "name": "Redes básicas, condominiales y conexiones",
             "properties": {
-                "canerias_red_basica_instaladas": {
-                    "label": "Cañerías instaladas (red básica)",
+                "tipo_canheria_basica": {
+                    "label": "Tipo de cañería básica",
+                    "type": "domain",
+                    "domain": "tipo_canheria"
+                },
+                "longitud_caneria_basica": {
+                    "label": "Longitud cañería básica",
+                    "type": "decimal",
+                    "unit": "m"
+                },
+                "tipo_canheria_dondominal": {
+                    "label": "Tipo de cañería condominal",
+                    "type": "domain",
+                    "domain": "tipo_canheria"
+                },
+                "longitud_caneria_condominal": {
+                    "label": "Longitud cañería condominal",
+                    "type": "decimal",
+                    "unit": "m"
+                },
+                "red_basica_instalada": {
+                    "label": "Metros de red básica instalada",
                     "type": "integer"
                 },
-                "canerias_red_condominal_instaladas": {
-                    "label": "Cañerías instaladas (red condominal)",
+                "red_condominal_instalada": {
+                    "label": "Metros de red condominal instalada",
                     "type": "integer"
                 },
-                "conexiones_domiciliarias_instaladas": {
-                    "label": "Conexiones domiciliarias instaladas",
+                "conexiones_domiciliarias": {
+                    "label": "Número de conexiones",
                     "type": "integer"
                 }
             }
         },
-        "estaciones_bombeo": {
-            "name": "Estaciones de bombeo",
+        "estacion_de_bombeo": {
+            "name": "Estación de bombeo",
             "properties": {
+                "potencia_bomba": {
+                    "label": "Potencia de las bombas",
+                    "type": "decimal",
+                    "unit": "HP"
+                },
                 "cantidad_bombas": {
                     "label": "Cantidad de bombas",
                     "type": "integer"
                 },
-                "capacidad_bombas": {
-                    "label": "Capacidad de bombas",
-                    "type": "decimal",
-                    "unit": "m³/s"
+                "tipo_energia": {
+                    "label": "Tipo de energía",
+                    "type": "domain",
+                    "domain": "tipo_energia"
                 },
-                "potencia_bombas": {
-                    "label": "Potencia de bombas",
-                    "type": "decimal",
-                    "unit": "HP"
+                "tipo_canheria": {
+                    "label": "Tipo de cañería",
+                    "type": "domain",
+                    "domain": "tipo_canheria"
                 },
-                "longitud_caneria_impulsion": {
-                    "label": "Longitud de cañería de impulsión",
+                "longitud_canheria": {
+                    "label": "Longitud de la cañería de impulsión",
                     "type": "decimal",
                     "unit": "m"
                 },
-                "extension_linea_electrica": {
-                    "label": "Extensión de línea eléctrica",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
+                "coordenada_x": {
+                    "label": "Coordenada X",
+                    "type": "integer"
+                },
+                "coordenada_y": {
+                    "label": "Coordenada Y",
+                    "type": "integer"
                 },
                 "permiso_municipal": {
                     "label": "Permiso municipal",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "casetas_operaciones": {
-                    "label": "Casetas de operaciones",
+                "extension_electrica": {
+                    "label": "Extensión eléctrica realizada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "obras_civiles": {
-                    "label": "Obras civiles",
+                "instalaciones_electromecanicas": {
+                    "label": "Instalaciones electromecánicas realizadas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "linea_impulsion": {
-                    "label": "Línea de impulsión",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                },
-                "instalaciones_electromecanicas": {
-                    "label": "Instalaciones electromecánicas",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                }
-            }
-        },
-        "mejoramiento_agua": {
-            "name": "Mejoramiento de agua",
-            "properties": {
-                "fuente_provision": {
-                    "label": "Fuente de provisión",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                },
-                "instalaciones_electromecanicas": {
-                    "label": "Instalaciones electromecánicas",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                },
-                "tanque_elevado": {
-                    "label": "Tanque elevado",
+                    "label": "Línea de impulsión realizada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "casetas_operaciones": {
-                    "label": "Casetas de operaciones",
+                    "label": "Casetas de operaciones instaladas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "extension_linea_electrica": {
-                    "label": "Extensión de línea eléctrica",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                },
-                "red_distribucion": {
-                    "label": "Red de distribución",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                },
-                "cercado_perimetral": {
-                    "label": "Cercado perimetral",
+                "obras_civiles": {
+                    "label": "Obras civiles realizadas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }

@@ -178,38 +178,31 @@
         }
     ],
     "building_components": {
-        "tanque": {
-            "name": "Tanque elevado",
-            "properties": {
-                "altura": {
-                    "label": "Altura",
-                    "type": "integer",
-                    "unit": "m"
-                },
-                "capacidad": {
-                    "label": "Capacidad",
-                    "type": "decimal",
-                    "unit": "m³"
-                }
-            }
-        },
-        "fuente_provision": {
+        "fuente_de_provision": {
             "name": "Fuente de provisión",
             "properties": {
                 "profundidad": {
-                    "label": "Altura",
+                    "label": "Profundidad",
                     "type": "decimal",
                     "unit": "m"
                 },
                 "diametro": {
                     "label": "Diámetro",
                     "type": "decimal",
-                    "unit": "cm"
+                    "unit": "pulgadas"
                 },
                 "caudal": {
                     "label": "Caudal",
                     "type": "decimal",
-                    "unit": "m³/s"
+                    "unit": "m3/h"
+                },
+                "coordenada_x": {
+                    "label": "Coordenada X",
+                    "type": "integer"
+                },
+                "coordenada_y": {
+                    "label": "Coordenada Y",
+                    "type": "integer"
                 },
                 "estudio_hidrogeologico": {
                     "label": "Estudio hidrogeológico",
@@ -221,19 +214,72 @@
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "prueba_bombeo_y_perfilaje": {
-                    "label": "Prueba de bombeo y perfilaje eléctrico",
+                "prueba_bombeo": {
+                    "label": "Prueba de bombeo",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "analisis_calidad_agua": {
-                    "label": "Análisis de calidad de agua",
+                "perfilaje_electrico": {
+                    "label": "Perfilaje eléctrico",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "analisis_agua": {
+                    "label": "Análisis de calidad del agua",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             }
         },
-        "equipamiento_electromecanico": {
+        "tanque_elevado": {
+            "name": "Tanque elevado",
+            "properties": {
+                "tipo": {
+                    "label": "Tipo",
+                    "type": "domain",
+                    "domain": "tankType"
+                },
+                "capacidad": {
+                    "label": "Capacidad",
+                    "type": "decimal",
+                    "unit": "m3"
+                },
+                "coordenada_x": {
+                    "label": "Coordenada X",
+                    "type": "integer"
+                },
+                "coordenada_y": {
+                    "label": "Coordenada Y",
+                    "type": "integer"
+                },
+                "estudio_suelo": {
+                    "label": "Estudio del suelo",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "fundacion": {
+                    "label": "Cálculo y ejecución de fundación",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "montaje": {
+                    "label": "Estructura / Montaje",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "instalaciones_hidraulicas": {
+                    "label": "Instalaciones hidráulicas",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "pararayos_otros": {
+                    "label": "Pararrayos y sistema de puesta a tierra instalado",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                }
+            }
+        },
+        "equipamiento_electromecanico_e_hidraulico": {
             "name": "Equipamiento electromecánico e hidráulico",
             "properties": {
                 "potencia": {
@@ -241,101 +287,113 @@
                     "type": "decimal",
                     "unit": "HP"
                 },
+                "tipo_energia": {
+                    "label": "Tipo de energía",
+                    "type": "domain",
+                    "domain": "energyType"
+                },
+                "tipo_canheria": {
+                    "label": "Tipo de cañería",
+                    "type": "domain",
+                    "domain": "pipeType"
+                },
                 "profundidad_instalacion": {
-                    "label": "Profundidad de instalación",
+                    "label": "Profundidad de la instalación",
                     "type": "decimal",
                     "unit": "m"
                 },
                 "caudal_operacion": {
                     "label": "Caudal de operación",
                     "type": "decimal",
-                    "unit": "m³/s"
+                    "unit": "m3/h"
+                },
+                "instalacion_electrobomba": {
+                    "label": "Provisión e instalación de electrobomba",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "automatizacion": {
+                    "label": "Automatización realizada",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
+                },
+                "instalacion_bomba_cloro": {
+                    "label": "Provisión e instalación de bomba dosificadora de cloro",
+                    "type": "domain",
+                    "domain": "yesNoDomain"
                 }
             }
         },
-        "casetas_operaciones": {
-            "name": "Casetas de operaciones",
+        "caseta_de_operaciones": {
+            "name": "Caseta de operaciones",
             "properties": {
+                "tipo_caseta": {
+                    "label": "Tipo de caseta",
+                    "type": "domain",
+                    "domain": "boothType"
+                },
+                "material_caseta": {
+                    "label": "Material de la caseta",
+                    "type": "domain",
+                    "domain": "boothMaterialType"
+                },
                 "aprobacion_municipal": {
                     "label": "Aprobación municipal",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "obras_civiles": {
-                    "label": "Obras civiles",
+                    "label": "Obras civiles realizadas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "instalacion_electrica": {
-                    "label": "Instalación eléctrica",
+                    "label": "Intalación eléctrica",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "croquis_ubicacion": {
+                "croquis": {
                     "label": "Croquis de ubicación",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             }
         },
-        "extension_linea_electrica": {
+        "extension_de_linea_electrica": {
             "name": "Extensión de línea eléctrica",
             "properties": {
                 "longitud": {
                     "label": "Longitud",
-                    "type": "decimal",
+                    "type": "integer",
                     "unit": "m"
                 },
-                "potencia_transformador": {
-                    "label": "Potencia de transformador",
-                    "type": "decimal",
-                    "unit": "HP"
+                "tipo_energia": {
+                    "label": "Tipo de energía",
+                    "type": "domain",
+                    "domain": "energyType"
                 },
-                "consulta_previa_ANDE": {
+                "potencia_transformador": {
+                    "label": "Potencia del transformador",
+                    "type": "decimal",
+                    "unit": "KVA"
+                },
+                "consulta_ande": {
                     "label": "Consulta previa a la ANDE",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "extension_linea": {
-                    "label": "Extensión de línea",
+                    "label": "Extensión de línea realizada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "transformador": {
-                    "label": "Transformador",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                }
-            }
-        },
-        "red_distribucion_conexiones": {
-            "name": "Red de distribución, conexiones domiciliarias, aductora e hidrómetros",
-            "properties": {
-                "cantidad_conexiones_domiciliarias": {
-                    "label": "Cantidad de conexiones domiciliarias",
-                    "type": "integer"
-                },
-                "cantidad_medidores": {
-                    "label": "Cantidad de medidores",
-                    "type": "integer"
-                },
-                "longitud_aductora": {
-                    "label": "Longitud de aductora",
-                    "type": "decimal",
-                    "unit": "m"
-                },
-                "red_distribucion": {
-                    "label": "Red de distribución",
+                    "label": "Transformador instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "conexiones_domiciliarias": {
-                    "label": "Conexiones domiciliarias",
-                    "type": "domain",
-                    "domain": "yesNoDomain"
-                },
-                "aductora": {
-                    "label": "Aductora",
+                "medidor_ande": {
+                    "label": "Medidor de ANDE",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
@@ -345,27 +403,64 @@
             "name": "Cercado perimetral",
             "properties": {
                 "predio": {
-                    "label": "Predio",
+                    "label": "Predio al que corresponde",
                     "type": "text"
                 },
                 "dimensiones": {
-                    "label": "Dimensiones",
-                    "type": "text"
+                    "label": "Dimensiones (AnchoxLargoxAlto)",
+                    "type": "text",
+                    "unit": "m"
                 },
                 "postes": {
-                    "label": "Postes",
+                    "label": "Postes construidos",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "tejidos_alambre": {
-                    "label": "Tejidos de alambre",
+                    "label": "Tejidos de alambre construidos",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
                 "portones": {
-                    "label": "Portones",
+                    "label": "Portones construidos",
                     "type": "domain",
                     "domain": "yesNoDomain"
+                }
+            }
+        },
+        "red_conexiones_aductora_e_hidrometros": {
+            "name": "Red, conexiones, aductora e hidrómetros",
+            "properties": {
+                "tipo_canheria": {
+                    "label": "Tipo de cañería",
+                    "type": "domain",
+                    "domain": "pipeType"
+                },
+                "n_medidores": {
+                    "label": "Cantidad de medidores",
+                    "type": "integer"
+                },
+                "longitud_aduptora": {
+                    "label": "Longitud de aduptora",
+                    "type": "decimal",
+                    "unit": "m"
+                },
+                "red_distribucion": {
+                    "label": "Metros de red de distribución instalada",
+                    "type": "integer",
+                    "unit": "m"
+                },
+                "conexiones": {
+                    "label": "Número de conexiones",
+                    "type": "integer"
+                },
+                "n_aductora": {
+                    "label": "Número de aductoras instaladas",
+                    "type": "integer"
+                },
+                "n_hidrometro": {
+                    "label": "Número de hidrómetros instalados",
+                    "type": "integer"
                 }
             }
         }
