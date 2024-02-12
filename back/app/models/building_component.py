@@ -18,16 +18,25 @@ class BuildingComponent(BaseEntityModelMixin):
     code = models.CharField("Código", max_length=50)
     code_label = models.CharField("Etiqueta de código", max_length=255)
     name = models.CharField("Nombre", max_length=255)
-    properties = models.JSONField("Campos", null=True)
+    technical_properties = models.JSONField("Datos técnicos", null=True)
+    validation_properties = models.JSONField("Datos de validación", null=True)
 
 
 @receiver(post_save, sender=BuildingComponent)
 def building_component_post_save(sender, instance, created, *args, **kwargs):
     if created:
-        bc_properties = instance.properties
-        for bc_property in bc_properties:
+        technical_properties = instance.technical_properties
+        validation_properties = instance.validation_properties
+
+        for technical_property in technical_properties:
             building_component_value = BuildingComponentValue(
-                code=bc_property, value=None, building_component=instance
+                code=technical_property, value=None, building_component=instance
+            )
+            building_component_value.save()
+
+        for validation_property in validation_properties:
+            building_component_value = BuildingComponentValue(
+                code=validation_property, value=None, building_component=instance
             )
             building_component_value.save()
 
@@ -38,7 +47,8 @@ def create_project_building_components(project, components):
             code=component_code,
             code_label=component_config.get("name"),
             name=component_config.get("name"),
-            properties=component_config.get("properties"),
+            technical_properties=component_config.get("technical_properties"),
+            validation_properties=component_config.get("validation_properties"),
             created_by=project.creation_user,
             updated_by=project.creation_user,
         )

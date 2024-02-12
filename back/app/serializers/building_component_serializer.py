@@ -12,11 +12,13 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
             "code",
             "code_label",
             "name",
-            "properties",
+            "technical_properties",
+            "validation_properties",
         )
         extra_kwargs = {"code": {"read_only": True, "required": False}}
 
-    properties = serializers.JSONField(required=False)
+    technical_properties = serializers.JSONField(required=False)
+    validation_properties = serializers.JSONField(required=False)
 
     def get_extra_kwargs(self):
         extra_kwargs = super().get_extra_kwargs()
@@ -31,8 +33,13 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
 
         return extra_kwargs
 
-    def get_properties(self, obj):  # noqa: WPS615
-        cs_properties = obj.properties
+    def get_properties(self, obj, property_type):
+        if property_type == "technical":
+            cs_properties = obj.technical_properties
+        elif property_type == "validation":
+            cs_properties = obj.validation_properties
+        else:
+            cs_properties = {}
         cs_values = obj.building_component_values.all()
         for cs_value in cs_values:
             cs_property = [key for key in cs_properties if key == cs_value.code]
@@ -41,7 +48,7 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
                 cs_properties[cs_property]["value"] = cs_value.value
         return cs_properties
 
-    def update_properties(self, instance, cs_properties):
+    def update_properties(self, instance, cs_properties, property_type):
         cs_values = instance.building_component_values.all()
 
         for cs_property_code, cs_property_data in cs_properties.items():
@@ -59,13 +66,15 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        if "properties" in response:
-            response["properties"] = self.get_properties(instance)
-
+        response["technical_properties"] = self.get_properties(instance, "technical")
+        response["validation_properties"] = self.get_properties(instance, "validation")
         return response
 
     def update(self, instance, validated_data):
-        cs_properties = validated_data.pop("properties", None)
-        self.update_properties(instance, cs_properties)
+        technical_properties = validated_data.pop("technical_properties", None)
+        validation_properties = validated_data.pop("validation_properties", None)
+
+        self.update_properties(instance, technical_properties, "technical")
+        self.update_properties(instance, validation_properties, "validation")
 
         return super().update(instance, validated_data)
