@@ -25,6 +25,18 @@ export default function DomainProvider({children}) {
     const [targetPopulationTypes, setTargetPopulationTypes] = useState([]);
     const [trainingMethodTypes, setTrainingMethodTypes] = useState([]);
     const [amendmentTypes, setAmendmentTypes] = useState([]);
+    // Domains for component properties --------------->
+    const [cisternType, setCisternType] = useState([]);
+    const [cisternLocation, setCisternLocation] = useState([]);
+    const [tankType, setTankType] = useState([]);
+    const [pipeType, setPipeType] = useState([]);
+    const [pondType, setPondType] = useState([]);
+    const [energyType, setEnergyType] = useState([]);
+    const [disposalSystemType, setDisposalSystemType] = useState([]);
+    const [boothType, setBoothType] = useState([]);
+    const [boothMaterialType, setBoothMaterialType] = useState([]);
+    const [toiletMaterialType, setToiletMaterialType] = useState([]);
+    // <-------------------------------------
 
     useEffect(() => {
         Promise.all([
@@ -53,6 +65,16 @@ export default function DomainProvider({children}) {
                 poblacion_meta,
                 modalidad_capacitacion,
                 amendment_type,
+                material_letrinas,
+                tipo_aljibe,
+                tipo_laguna,
+                tipo_tanque,
+                sistema_disposicion,
+                tipo_caseta,
+                tipo_canheria,
+                material_caseta,
+                tipo_energia,
+                ubicacion_aljibe,
             } = domain;
             setYesNoDomain(dominiosino);
             setGenderDomain(gender);
@@ -74,6 +96,16 @@ export default function DomainProvider({children}) {
             setTargetPopulationTypes(poblacion_meta);
             setTrainingMethodTypes(modalidad_capacitacion);
             setAmendmentTypes(amendment_type);
+            setToiletMaterialType(material_letrinas);
+            setCisternType(tipo_aljibe);
+            setPondType(tipo_laguna);
+            setTankType(tipo_tanque);
+            setDisposalSystemType(sistema_disposicion);
+            setBoothType(tipo_caseta);
+            setPipeType(tipo_canheria);
+            setBoothMaterialType(material_caseta);
+            setEnergyType(tipo_energia);
+            setCisternLocation(ubicacion_aljibe);
         });
     }, []);
 
@@ -98,6 +130,16 @@ export default function DomainProvider({children}) {
         targetPopulationTypes,
         trainingMethodTypes,
         amendmentTypes,
+        toiletMaterialType,
+        cisternType,
+        pondType,
+        tankType,
+        disposalSystemType,
+        boothType,
+        pipeType,
+        boothMaterialType,
+        energyType,
+        cisternLocation,
     };
 
     return <DomainContext.Provider value={value}>{children}</DomainContext.Provider>;
