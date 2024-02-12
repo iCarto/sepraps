@@ -68,6 +68,21 @@ export const CUSTOM_COLORS = {
     real: lime,
     gender1: indigo,
     gender2: lightGreen,
+
+    // COLORS FOR TYPE OF PROJECT:
+    project_type: {
+        water_provision: "#5383cf",
+        water_provision_rain: "#3A6E91",
+        sewerage: "#cf9f53",
+        sanitation: "#36ad57",
+        other: "lightgrey",
+    },
+    project_class: {
+        new_construction: "#6cd98a",
+        renovation: "#9ead36",
+        expansion: "#c7923e",
+        other: "lightgrey",
+    },
 };
 
 const customTheme = createTheme({
