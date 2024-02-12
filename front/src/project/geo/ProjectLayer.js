@@ -1,3 +1,4 @@
+import {CUSTOM_COLORS, theme} from "Theme";
 import {mapOverlayPanes} from "base/geo";
 import {createLayerLegend, useLayerObject} from "base/geo/layer";
 
@@ -33,27 +34,42 @@ export const LayerLegend = createLayerLegend({
                 {
                     text: "Diseño",
                     filterFn: val => val === "design",
-                    markerOptions: {...markerBaseOptions, fillColor: "#ff9800"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: theme.palette.design.main,
+                    },
                 },
                 {
                     text: "Contratación",
                     filterFn: val => val === "contracting",
-                    markerOptions: {...markerBaseOptions, fillColor: "#fdd835"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: theme.palette.contracting.main,
+                    },
                 },
                 {
                     text: "Ejecución",
                     filterFn: val => val === "execution",
-                    markerOptions: {...markerBaseOptions, fillColor: "#e3eb90"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: theme.palette.execution.main,
+                    },
                 },
                 {
                     text: "Post-construcción",
                     filterFn: val => val === "post-execution",
-                    markerOptions: {...markerBaseOptions, fillColor: "#8bc34a"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: theme.palette["post-execution"].main,
+                    },
                 },
                 {
                     text: "(sin datos)",
                     filterFn: val => val === null,
-                    markerOptions: {...markerBaseOptions, fillColor: "lightgrey"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: "lightgrey",
+                    },
                 },
             ],
         },
@@ -65,22 +81,42 @@ export const LayerLegend = createLayerLegend({
                 {
                     text: "Agua potable",
                     filterFn: val => val === "agua",
-                    markerOptions: {...markerBaseOptions, fillColor: "#5383cf"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_type.water_provision,
+                    },
+                },
+                {
+                    text: "Agua - Chaco",
+                    filterFn: val => val === "agua_lluvia",
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_type.water_provision_rain,
+                    },
                 },
                 {
                     text: "Alcantarillado",
                     filterFn: val => val === "alcantarillado",
-                    markerOptions: {...markerBaseOptions, fillColor: "#cf9f53"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_type.sewerage,
+                    },
                 },
                 {
                     text: "USB",
                     filterFn: val => val === "sanitarios",
-                    markerOptions: {...markerBaseOptions, fillColor: "#36ad57"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_type.sanitation,
+                    },
                 },
                 {
                     text: "(sin datos)",
                     filterFn: val => val === null,
-                    markerOptions: {...markerBaseOptions, fillColor: "lightgrey"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_type.other,
+                    },
                 },
             ],
         },
@@ -92,22 +128,34 @@ export const LayerLegend = createLayerLegend({
                 {
                     text: "Mejora",
                     filterFn: val => val === "mejora",
-                    markerOptions: {...markerBaseOptions, fillColor: "#9ead36"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_class.renovation,
+                    },
                 },
                 {
                     text: "Nueva construcción",
                     filterFn: val => val === "nueva_construccion",
-                    markerOptions: {...markerBaseOptions, fillColor: "#6cd98a"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_class.new_construction,
+                    },
                 },
                 {
                     text: "Ampliación",
                     filterFn: val => val === "ampliacion",
-                    markerOptions: {...markerBaseOptions, fillColor: "#c7923e"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_class.expansion,
+                    },
                 },
                 {
                     text: "(sin datos)",
                     filterFn: val => val === null,
-                    markerOptions: {...markerBaseOptions, fillColor: "lightgrey"},
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.project_class.other,
+                    },
                 },
             ],
         },
