@@ -11,7 +11,7 @@ import {ViewOrUpdateBuildingComponentMonitoringDataContent} from "buildingCompon
 import {
     CreateBuildingComponentDialog,
     ImportBuildingComponentsDialog,
-    ViewOrUpdateBuildingComponentTechnicalDataContent,
+    ViewOrUpdateBuildingComponentDataContent,
 } from "buildingComponent/container";
 import {BuildingComponentNameForm} from "buildingComponent/presentational/form";
 import ComponentStatusChip, {
@@ -143,8 +143,15 @@ const ViewBuildingComponentContent = () => {
                         <ViewOrUpdateBuildingComponentMonitoringDataContent
                             bcMonitoring={bCMonitoring}
                         />
-                        <ViewOrUpdateBuildingComponentTechnicalDataContent
+                        <ViewOrUpdateBuildingComponentDataContent
                             buildingComponent={bCMonitoring?.building_component}
+                            sectionName="Datos técnicos"
+                            propertiesKey="technical_properties"
+                        />
+                        <ViewOrUpdateBuildingComponentDataContent
+                            buildingComponent={bCMonitoring?.building_component}
+                            sectionName="Datos de validación"
+                            propertiesKey="validation_properties"
                         />
                         <ViewOrUpdateFilesDataContent
                             folderPath={bCMonitoring.folder}
