@@ -8,7 +8,11 @@ import {BuildingComponentTechnicalData} from "buildingComponent/presentational";
 
 import EditIcon from "@mui/icons-material/Edit";
 
-const ViewOrUpdateBuildingComponentTechnicalDataContent = ({buildingComponent}) => {
+const ViewOrUpdateBuildingComponentDataContent = ({
+    buildingComponent,
+    sectionName,
+    propertiesKey,
+}) => {
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
@@ -43,13 +47,16 @@ const ViewOrUpdateBuildingComponentTechnicalDataContent = ({buildingComponent}) 
     const getComponent = mode => {
         if (mode === "view") {
             return (
-                <BuildingComponentTechnicalData buildingComponent={buildingComponent} />
+                <BuildingComponentTechnicalData
+                    data={buildingComponent[propertiesKey]}
+                />
             );
         }
         if (mode === "edit") {
             return (
                 <BuildingComponentTechnicalDataForm
                     buildingComponent={buildingComponent}
+                    propertiesKey={propertiesKey}
                     onSubmit={handleFormSubmit}
                     onCancel={() => {
                         setMode("view");
@@ -60,14 +67,12 @@ const ViewOrUpdateBuildingComponentTechnicalDataContent = ({buildingComponent}) 
         }
     };
 
-    return (
-        buildingComponent.properties &&
-        Object.keys(buildingComponent.properties).length > 0 && (
-            <SectionCard title="Datos técnicos" secondaryActions={actions}>
-                {getComponent(mode)}
-            </SectionCard>
-        )
-    );
+    return buildingComponent[propertiesKey] &&
+        Object.keys(buildingComponent[propertiesKey]).length > 0 ? (
+        <SectionCard title={sectionName} secondaryActions={actions}>
+            {getComponent(mode)}
+        </SectionCard>
+    ) : null;
 };
 
-export default ViewOrUpdateBuildingComponentTechnicalDataContent;
+export default ViewOrUpdateBuildingComponentDataContent;
