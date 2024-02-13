@@ -89,7 +89,7 @@ const BuildingComponentsFinancialChart = ({chartDataRaw}) => {
                 datasets={[
                     {
                         data: chartData.paid_amount,
-                        label: "Pagado",
+                        label: "Aprobado",
                         barPercentage: 0.3,
                         borderWidth: 2,
                         borderColor: theme.palette.paid.main,

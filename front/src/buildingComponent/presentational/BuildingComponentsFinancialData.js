@@ -29,7 +29,7 @@ const BuildingComponentsFinancialData = ({financialData}) => {
             </Grid>
             <Grid item xs={12}>
                 <BuildingComponentsFinancialDataBox
-                    headline="Monto pagado vs. monto total"
+                    headline="Monto aprobado vs. monto total"
                     mainValues={{
                         first: financialData.paid_amount,
                         second: financialData.real_amount,
@@ -38,7 +38,7 @@ const BuildingComponentsFinancialData = ({financialData}) => {
                         <BuildingComponentsRealDataSubheading data={financialData} />
                     }
                     percentage={{
-                        label: "Pagado",
+                        label: "Aprobado",
                         value: financialData.paid_real_percentage,
                     }}
                     colorNamePrimary="paid"

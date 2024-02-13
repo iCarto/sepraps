@@ -8,7 +8,7 @@ const ConnectionFormDataFields = ({projectClass}) => {
                 <FormBox label="Datos demográficos">
                     <FormInputInteger
                         name="number_of_households"
-                        label="Nº de viviendas"
+                        label="Viviendas totales"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </FormBox>
@@ -18,18 +18,18 @@ const ConnectionFormDataFields = ({projectClass}) => {
                     {projectClass === "mejora" ? (
                         <FormInputInteger
                             name="number_of_existing_connections"
-                            label="Nº de conexiones existentes"
+                            label="Conexiones existentes"
                             rules={{required: "Este campo es obligatorio"}}
                         />
                     ) : null}
                     <FormInputInteger
                         name="number_of_planned_connections"
-                        label="Nº de conexiones previstas"
+                        label="Conexiones previstas"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                     <FormInputInteger
                         name="number_of_actual_connections"
-                        label="Nº de conexiones reales"
+                        label="Conexiones reales"
                         rules={{required: "Este campo es obligatorio"}}
                     />
                 </FormBox>
