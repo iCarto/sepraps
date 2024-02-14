@@ -56,9 +56,15 @@ def get_building_components_stats(request, group_code, format=None):
     if group_code == "component_code":
         group_by_column = "bc.code_label"
 
+    name = group_by_column + " as name"
+
+    if group_code == "project_code":
+        group_by_column = "project.code, project.id"
+        name = "CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as name"
+
     query = """
             SELECT
-                {group_by_column} as name,
+                {name},
                 coalesce(sum(bcm.expected_amount), 0) as expected_amount,
                 coalesce(sum(bcm.paid_amount), 0) as paid_amount,
                 coalesce(sum(bcm.pending_amount), 0) as pending_amount
@@ -67,6 +73,7 @@ def get_building_components_stats(request, group_code, format=None):
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = bcm.project_id
+                LEFT JOIN project ON project.id = bcm.project_id
             WHERE bcm.active = True
             GROUP BY {group_by_column}
             ORDER BY {group_by_column}
@@ -75,6 +82,7 @@ def get_building_components_stats(request, group_code, format=None):
     with connection.cursor() as cursor:
         cursor.execute(
             query.format(
+                name=name,
                 group_by_column=group_by_column,
                 join_query=get_filter_join_query(request.GET),
             )
@@ -128,9 +136,15 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
     elif group_code == "method":
         group_by_attribute = "sct.method"
 
+    code = group_by_attribute + " as code"
+
+    if group_code == "project_code":
+        group_by_attribute = "project.code, project.id"
+        code = "CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as code"
+
     query = """
             SELECT
-                {group_by_attribute} as code,
+                {code},
                 sum(number_of_women) as number_of_women,
                 sum(number_of_men) as number_of_men,
                 (sum(number_of_women) + sum(number_of_men)) as number_of_participants,
@@ -142,6 +156,7 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = scm.project_id
+                LEFT JOIN project ON project.id = scm.project_id
             WHERE sct.active = True and scm.active = True
             GROUP BY {group_by_attribute}
             ORDER BY {group_by_attribute}
@@ -150,6 +165,7 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
     with connection.cursor() as cursor:
         cursor.execute(
             query.format(
+                code=code,
                 group_by_attribute=group_by_attribute,
                 join_query=get_filter_join_query(request.GET),
             )
