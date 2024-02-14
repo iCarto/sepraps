@@ -180,19 +180,36 @@ class ConstructionContractViewSet(ModelListViewSet):
         )
 
     @action(
-        methods=["GET"], detail=True, url_path="contacts", url_name="contract_contacts"
+        methods=["GET", "POST"],
+        detail=True,
+        url_path="contacts",
+        url_name="contract_contacts",
     )
     def get_contract_contacts(self, request, pk):
-        queryset = ContractContact.objects.filter(entity=pk).order_by("id")
-        area = request.GET.get("area", None)
-        if area:
-            area_posts = (
-                ContractSupervisionArea.objects.filter(contract=pk, area=area)
-                .values_list("staff", flat=True)
-                .first()
-            ) or []
-            queryset = queryset.filter(post__in=area_posts)
-        return Response(ContractContactSerializer(queryset, many=True).data)
+        if request.method == "POST":
+            request_data = request.data
+            request_data["entity"] = pk
+            serializer = ContractContactSerializer(data=request_data)
+            print(request_data)
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            contact = serializer.save(created_by=request.user, updated_by=request.user)
+            return Response(
+                ContractContactSerializer(contact).data, status=status.HTTP_201_CREATED
+            )
+        if request.method == "GET":
+            queryset = ContractContact.objects.filter(entity=pk).order_by("id")
+            area = request.GET.get("area", None)
+            if area:
+                area_posts = (
+                    ContractSupervisionArea.objects.filter(contract=pk, area=area)
+                    .values_list("staff", flat=True)
+                    .first()
+                ) or []
+                queryset = queryset.filter(post__in=area_posts)
+            return Response(ContractContactSerializer(queryset, many=True).data)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
     @action(
         methods=["GET"],

@@ -18,6 +18,7 @@ from app.views.building_component_viewset import BuildingComponentViewSet
 from app.views.comment_viewset import CommentViewSet
 from app.views.connection_viewset import ConnectionViewSet
 from app.views.construction_contract_viewset import ConstructionContractViewSet
+from app.views.contact_relationship_viewset import ContractContactViewSet
 from app.views.contact_viewset import ContactViewSet
 from app.views.contract_service_viewset import ContractServiceViewSet
 from app.views.contract_supervision_area_viewset import ContractSupervisionAreaViewSet
@@ -51,6 +52,7 @@ router.register("fieldreports", FieldReportViewSet)
 router.register("fieldreportprojects", FieldReportProjectViewSet)
 router.register("fieldreportprojectactivities", FieldReportProjectActivityViewSet)
 router.register("contacts", ContactViewSet)
+router.register("contractcontacts", ContractContactViewSet)
 router.register(
     "constructioncontracts",
     ConstructionContractViewSet,
