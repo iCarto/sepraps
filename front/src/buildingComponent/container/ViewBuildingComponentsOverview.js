@@ -10,14 +10,14 @@ const ViewBuildingComponentsOverview = () => {
 
     return project && bcMonitorings ? (
         <Grid container spacing={1}>
-            <Grid item xs={5} sx={{height: "fit-content"}}>
+            <Grid item xs={6} sx={{height: "fit-content"}}>
                 <PaperComponent>
                     <ViewBuildingComponentsFinancialData
                         filter={{project: project.id}}
                     />
                 </PaperComponent>
             </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={6}>
                 <PaperComponent>
                     <BuildingComponentsSummaryList bcMonitorings={bcMonitorings} />
                 </PaperComponent>

@@ -10,6 +10,7 @@ const ContainerGridWithBorder = ({children}) => {
                 borderColor: "lightgrey",
                 borderRadius: 5,
                 p: 2,
+                pr: 3,
             }}
         >
             {children}

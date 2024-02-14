@@ -5,13 +5,13 @@ import {ContainerGridWithBorder} from "base/ui/section/components";
 const BuildingComponentsProgress = ({financialData}) => {
     return (
         <ContainerGridWithBorder>
-            <Grid item xs={12} p={2}>
+            <Grid item xs={12} p={2} pr={0}>
                 <ProgressBar
                     label="Avance financiero"
                     progressValue={financialData.financial_progress_percentage}
                 />
             </Grid>
-            <Grid item xs={12} p={2}>
+            <Grid item xs={12} p={2} pr={0}>
                 <ProgressBar
                     label="Avance físico"
                     progressValue={financialData.physical_progress_percentage}

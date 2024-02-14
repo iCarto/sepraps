@@ -19,7 +19,7 @@ const BuildingComponentsFinancialDataBox = ({
 }) => {
     return (
         <ContainerGridWithBorder>
-            <Grid item xs={9} pl="1rem">
+            <Grid item xs={10} pl="1rem">
                 <LightHeading>{headline}</LightHeading>
                 <Stack direction="row" alignItems="baseline">
                     <Typography component="span" fontSize={42}>
@@ -37,7 +37,7 @@ const BuildingComponentsFinancialDataBox = ({
                 </Stack>
                 {subheading}
             </Grid>
-            <Grid item container xs={3} justifyContent="center" alignItems="center">
+            <Grid item container xs={2} justifyContent="flex-start" alignItems="center">
                 <SimplePieChart
                     percentageValue={percentage.value}
                     percentageLabel={percentage.label}
