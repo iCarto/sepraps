@@ -6,21 +6,41 @@ import MenuItem from "@mui/material/MenuItem";
 
 const BC_DATA_FILTER = {
     GROUPED_BY: {
-        COMPONENT: {
-            code: "component_code",
-            label: "Componente de construcción",
-        },
         UNGROUPED: {
             code: "ungrouped",
             label: "Sin agrupar",
         },
+        COMPONENT: {
+            code: "component_code",
+            label: "Tipo de componente",
+        },
     },
 };
 
-const BuildingComponentsFilter = ({groupedBy, onChangeGroupedBy}) => {
+const CONTRACT_BC_DATA_FILTER = {
+    GROUPED_BY: {
+        COMPONENT: {
+            code: "component_code",
+            label: "Tipo de componente",
+        },
+        PROJECT: {
+            code: "project_code",
+            label: "Proyecto",
+        },
+    },
+};
+
+const getFilter = globalFilter => {
+    if (Object.keys(globalFilter).includes("contract")) return CONTRACT_BC_DATA_FILTER;
+    else return BC_DATA_FILTER;
+};
+
+const BuildingComponentsFilter = ({groupedBy, onChangeGroupedBy, globalFilter}) => {
     const handleChangeTrainingDataGroupedBy = event => {
         onChangeGroupedBy(event.target.value);
     };
+
+    const dataFilter = getFilter(globalFilter);
 
     return (
         <Grid container direction="column" spacing={1}>
@@ -36,7 +56,7 @@ const BuildingComponentsFilter = ({groupedBy, onChangeGroupedBy}) => {
                         label="Agrupado por"
                         onChange={handleChangeTrainingDataGroupedBy}
                     >
-                        {Object.values(BC_DATA_FILTER.GROUPED_BY).map(groupedBy => (
+                        {Object.values(dataFilter.GROUPED_BY).map(groupedBy => (
                             <MenuItem key={groupedBy.code} value={groupedBy.code}>
                                 {groupedBy.label}
                             </MenuItem>
@@ -48,4 +68,4 @@ const BuildingComponentsFilter = ({groupedBy, onChangeGroupedBy}) => {
     );
 };
 
-export {BuildingComponentsFilter as default, BC_DATA_FILTER};
+export {BuildingComponentsFilter as default, BC_DATA_FILTER, CONTRACT_BC_DATA_FILTER};

@@ -8,10 +8,7 @@ const ViewBuildingComponentsAnalysisContent = () => {
 
     return (
         <SectionCard>
-            <ViewBuildingComponentsFinancialChart
-                filter={{project: projectId}}
-                displayGroupedBy
-            />
+            <ViewBuildingComponentsFinancialChart filter={{project: projectId}} />
         </SectionCard>
     );
 };
