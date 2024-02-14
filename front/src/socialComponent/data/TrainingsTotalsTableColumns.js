@@ -20,7 +20,7 @@ export function useTrainingTotalsTable(displayProject) {
         {
             id: "start_date",
             label: "Inicio",
-            width: 10,
+            width: 5,
             formatFunction: value => {
                 return DateUtil.formatDate(value);
             },

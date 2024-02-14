@@ -1,3 +1,5 @@
+import {NumberUtil} from "base/format/utilities";
+
 export function useConnectionsTotalsTable() {
     const tableColumns = [
         {
@@ -24,7 +26,7 @@ export function useConnectionsTotalsTable() {
             id: "connected_households_percentage",
             label: "Viviendas conectadas",
             formatFunction: value => {
-                return `${value} %`;
+                return `${NumberUtil.formatDecimalWithoutZeros(value)} %`;
             },
         },
     ];
