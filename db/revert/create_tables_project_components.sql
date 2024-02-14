@@ -147,4 +147,25 @@ CREATE INDEX "project_construction_contract_id_322d4664" ON "project" ("construc
 
 DELETE FROM public.media_node WHERE storage_path like '%buildingcomponentmonitoring%' or storage_path like '%socialcomponentmonitoring%';
 
+--
+-- Remove permissions configuration
+--
+DELETE FROM auth_group_permissions gp WHERE gp.permission_id in (select p.id from auth_permission p WHERE p.codename like '%_buildingcomponent');
+DELETE FROM auth_permission WHERE codename like '%_buildingcomponent';
+DELETE FROM auth_group_permissions gp WHERE gp.permission_id in (select p.id from auth_permission p WHERE p.codename like '%_buildingcomponentvalue');
+DELETE FROM auth_permission WHERE codename like '%_buildingcomponentvalue';
+DELETE FROM auth_group_permissions gp WHERE gp.permission_id in (select p.id from auth_permission p WHERE p.codename like '%_buildingcomponentmonitoring');
+DELETE FROM auth_permission WHERE codename like '%_buildingcomponentmonitoring';
+DELETE FROM auth_group_permissions gp WHERE gp.permission_id in (select p.id from auth_permission p WHERE p.codename like '%_socialcomponenttraining');
+DELETE FROM auth_permission WHERE codename like '%_socialcomponenttraining';
+DELETE FROM auth_group_permissions gp WHERE gp.permission_id in (select p.id from auth_permission p WHERE p.codename like '%_socialcomponentmonitoring');
+DELETE FROM auth_permission WHERE codename like '%_socialcomponentmonitoring';
+DELETE FROM auth_group_permissions gp WHERE gp.permission_id in (select p.id from auth_permission p WHERE p.codename like '%_contractproject');
+DELETE FROM auth_permission WHERE codename like '%_contractproject';
+
+--
+-- Remove content types
+--
+DELETE FROM django_content_type where app_label = 'app' and model in ('buildingcomponent', 'buildingcomponentvalue', 'buildingcomponentmonitoring', 'socialcomponenttraining', 'socialcomponentmonitoring', 'contractproject');
+
 COMMIT;

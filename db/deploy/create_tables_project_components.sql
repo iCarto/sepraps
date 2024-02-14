@@ -310,5 +310,298 @@ UPDATE social_component_monitoring scm
 SET folder_id = mn.id
 FROM media_node mn where mn.storage_path = 'socialcomponentmonitoring/' || scm.id;
 
+-- Create permissions
+
+INSERT INTO
+    public.django_content_type (app_label, model)
+VALUES
+    ('app', 'buildingcomponent'),
+    ('app', 'buildingcomponentvalue'),
+    ('app', 'buildingcomponentmonitoring');
+
+INSERT INTO public.auth_permission ("name",codename,content_type_id) VALUES
+	 ('Can add Componente de construcción','add_buildingcomponent',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponent'
+        )),
+	 ('Can change Componente de construcción','change_buildingcomponent',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponent'
+        )),
+	 ('Can delete Componente de construcción','delete_buildingcomponent',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponent'
+        )),
+	 ('Can view Componente de construcción','view_buildingcomponent',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponent'
+        ));
+
+INSERT INTO public.auth_permission ("name",codename,content_type_id) VALUES
+	 ('Can add building component value','add_buildingcomponentvalue',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentvalue'
+        )),
+	 ('Can change building component value','change_buildingcomponentvalue',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentvalue'
+        )),
+	 ('Can delete building component value','delete_buildingcomponentvalue',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentvalue'
+        )),
+	 ('Can view building component value','view_buildingcomponentvalue',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentvalue'
+        ));
+
+INSERT INTO public.auth_permission ("name",codename,content_type_id) VALUES
+	 ('Can add Seguimiento de componente de construcción','add_buildingcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentmonitoring'
+        )),
+	 ('Can change Seguimiento de componente de construcción','change_buildingcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentmonitoring'
+        )),
+	 ('Can delete Seguimiento de componente de construcción','delete_buildingcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentmonitoring'
+        )),
+	 ('Can view Seguimiento de componente de construcción','view_buildingcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'buildingcomponentmonitoring'
+        ));
+
+INSERT INTO auth_group_permissions (group_id, permission_id)
+WITH
+	t1 AS (select id from auth_group g where g."name" in ('edicion', 'gestion', 'supervision')),
+	t2 AS (select id from auth_permission p where p.codename like '%_buildingcomponentmonitoring')
+select t1.id, t2.id
+from t1,t2;
+
+INSERT INTO auth_group_permissions (group_id, permission_id)
+WITH
+	t1 AS (select id from auth_group g where g."name" in ('edicion', 'gestion', 'supervision')),
+	t2 AS (select id from auth_permission p where p.codename like '%_buildingcomponentvalue')
+select t1.id, t2.id
+from t1,t2;
+
+INSERT INTO auth_group_permissions (group_id, permission_id)
+WITH
+	t1 AS (select id from auth_group g where g."name" in ('edicion', 'gestion', 'supervision')),
+	t2 AS (select id from auth_permission p where p.codename like '%_buildingcomponent')
+select t1.id, t2.id
+from t1,t2;
+
+INSERT INTO
+    public.django_content_type (app_label, model)
+VALUES
+    ('app', 'socialcomponenttraining'),
+    ('app', 'socialcomponentmonitoring');
+
+INSERT INTO public.auth_permission ("name",codename,content_type_id) VALUES
+	 ('Can add Formación de componente social','add_socialcomponenttraining',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponenttraining'
+        )),
+	 ('Can change Formación de componente social','change_socialcomponenttraining',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponenttraining'
+        )),
+	 ('Can delete Formación de componente social','delete_socialcomponenttraining',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponenttraining'
+        )),
+	 ('Can view Formación de componente social','view_socialcomponenttraining',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponenttraining'
+        ));
+
+
+INSERT INTO public.auth_permission ("name",codename,content_type_id) VALUES
+	 ('Can add Seguimiento de componente social','add_socialcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponentmonitoring'
+        )),
+	 ('Can change Seguimiento de componente social','change_socialcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponentmonitoring'
+        )),
+	 ('Can delete Seguimiento de componente social','delete_socialcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponentmonitoring'
+        )),
+	 ('Can view Seguimiento de componente social','view_socialcomponentmonitoring',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'socialcomponentmonitoring'
+        ));
+
+
+INSERT INTO auth_group_permissions (group_id, permission_id)
+WITH
+	t1 AS (select id from auth_group g where g."name" in ('edicion', 'gestion', 'supervision')),
+	t2 AS (select id from auth_permission p where p.codename like '%_socialcomponenttraining')
+select t1.id, t2.id
+from t1,t2;
+
+INSERT INTO auth_group_permissions (group_id, permission_id)
+WITH
+	t1 AS (select id from auth_group g where g."name" in ('edicion', 'gestion', 'supervision')),
+	t2 AS (select id from auth_permission p where p.codename like '%_socialcomponentmonitoring')
+select t1.id, t2.id
+from t1,t2;
+
+INSERT INTO
+    public.django_content_type (app_label, model)
+VALUES
+    ('app', 'contractproject');
+
+INSERT INTO public.auth_permission ("name",codename,content_type_id) VALUES
+	 ('Can add contract project','add_contractproject',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'contractproject'
+        )),
+	 ('Can change contract project','change_contractproject',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'contractproject'
+        )),
+	 ('Can delete contract project','delete_contractproject',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'contractproject'
+        )),
+	 ('Can view contract project','view_contractproject',(
+            SELECT
+                id
+            FROM
+                django_content_type
+            where
+                app_label = 'app'
+                AND model = 'contractproject'
+        ));
+
+
+INSERT INTO auth_group_permissions (group_id, permission_id)
+WITH
+	t1 AS (select id from auth_group g where g."name" in ('edicion', 'gestion', 'supervision')),
+	t2 AS (select id from auth_permission p where p.codename like '%_contractproject')
+select t1.id, t2.id
+from t1,t2;
+
 
 COMMIT;
