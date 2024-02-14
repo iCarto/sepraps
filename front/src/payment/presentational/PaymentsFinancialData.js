@@ -18,7 +18,7 @@ const PaymentsFinancialData = ({contract}) => {
                 subheading={
                     <PaymentsFinancialDataSubheading
                         label="Desvío"
-                        value={contract.total_awarding_budget - contract.total_amount}
+                        value={contract.total_amount - contract.total_awarding_budget}
                         success={contract.total_amount_percentage <= 100}
                     />
                 }

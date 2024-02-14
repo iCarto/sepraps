@@ -1,14 +1,13 @@
 import {NumberUtil} from "base/format/utilities";
 import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 
-import {theme} from "Theme";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 
 const BuildingComponentsExpectedDataSubheading = ({data}) => {
-    const difference = data.expected_amount - data.real_amount;
-    const isRealAmountWithinExpectation = difference >= 0;
+    const difference = data.real_amount - data.expected_amount;
+    const isRealAmountWithinExpectation = difference <= 0;
 
     return (
         <Stack direction="row" alignItems="center">
@@ -25,11 +24,11 @@ const BuildingComponentsExpectedDataSubheading = ({data}) => {
                 variant="outlined"
                 sx={{
                     color: isRealAmountWithinExpectation
-                        ? theme.palette.expected.dark
-                        : theme.palette.error.dark,
+                        ? "success.main"
+                        : "error.dark",
                     borderColor: isRealAmountWithinExpectation
-                        ? theme.palette.expected.dark
-                        : theme.palette.error.main,
+                        ? "success.main"
+                        : "error.dark",
                 }}
             />
         </Stack>
