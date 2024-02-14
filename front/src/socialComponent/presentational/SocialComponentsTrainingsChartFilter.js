@@ -32,6 +32,10 @@ const TRAINING_DATA_FILTER = {
             code: "method",
             label: "Modalidad",
         },
+        PROJECT: {
+            code: "project_code",
+            label: "Proyecto",
+        },
     },
 };
 
