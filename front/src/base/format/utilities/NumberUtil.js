@@ -11,6 +11,9 @@ const countOccurrencesOfSubstring = (string, substring) => {
 
 const NumberUtil = {
     formatDecimal(value, decimalSize = 2) {
+        if (value === 0) {
+            return value;
+        }
         if (!value) {
             return "";
         }

@@ -1,10 +1,9 @@
-import {NumberUtil} from "base/format/utilities";
-import {PaymentsFinancialDataBox, PaymentsFinancialDataSubheading} from ".";
+import {
+    PaymentsExpectedFinancialDataSummary,
+    PaymentsFinancialDataBox,
+    PaymentsFinancialDataSubheading,
+} from ".";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 
 const PaymentsFinancialData = ({contract}) => {
     const getExpectedFinancialData = contract => {
@@ -22,119 +21,15 @@ const PaymentsFinancialData = ({contract}) => {
                         success={contract.total_amount_percentage <= 100}
                     />
                 }
-                body={
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <Stack
-                                sx={{
-                                    p: 1,
-                                    border: 1,
-                                    borderColor: "grey.200",
-                                    borderRadius: 1,
-                                    color: "grey.500",
-                                }}
-                            >
-                                <Box>
-                                    <Typography
-                                        component="span"
-                                        variant="caption"
-                                        sx={{fontWeight: "bold"}}
-                                    >
-                                        Monto total:{" "}
-                                    </Typography>
-                                    <Typography
-                                        component="span"
-                                        variant="caption"
-                                        sx={{fontWeight: "bold"}}
-                                    >
-                                        {NumberUtil.formatInteger(
-                                            contract.total_amount
-                                        )}
-                                    </Typography>
-                                </Box>
-                                <Divider />
-                                <Box sx={{ml: 1}}>
-                                    <Typography component="span" variant="caption">
-                                        Monto aprobado:{" "}
-                                    </Typography>
-                                    <Typography component="span" variant="caption">
-                                        {NumberUtil.formatInteger(
-                                            contract.total_amount_approved
-                                        )}
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ml: 1}}>
-                                    <Typography component="span" variant="caption">
-                                        Monto pendiente:{" "}
-                                    </Typography>
-                                    <Typography component="span" variant="caption">
-                                        {NumberUtil.formatInteger(
-                                            contract.total_amount_pending
-                                        )}
-                                    </Typography>
-                                </Box>
-                            </Stack>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Stack
-                                sx={{
-                                    p: 1,
-                                    border: 1,
-                                    borderColor: "grey.200",
-                                    borderRadius: 1,
-                                    color: "grey.500",
-                                }}
-                            >
-                                <Box>
-                                    <Typography
-                                        component="span"
-                                        variant="caption"
-                                        sx={{fontWeight: "bold"}}
-                                    >
-                                        Monto adjudicado total:{" "}
-                                    </Typography>
-                                    <Typography
-                                        component="span"
-                                        variant="caption"
-                                        sx={{fontWeight: "bold"}}
-                                    >
-                                        {NumberUtil.formatInteger(
-                                            contract.total_awarding_budget
-                                        )}
-                                    </Typography>
-                                </Box>
-                                <Divider />
-                                <Box sx={{ml: 1}}>
-                                    <Typography component="span" variant="caption">
-                                        Monto adjudicado:{" "}
-                                    </Typography>
-                                    <Typography component="span" variant="caption">
-                                        {NumberUtil.formatInteger(
-                                            contract.awarding_budget
-                                        )}
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ml: 1}}>
-                                    <Typography component="span" variant="caption">
-                                        Monto adendas:{" "}
-                                    </Typography>
-                                    <Typography component="span" variant="caption">
-                                        {NumberUtil.formatInteger(
-                                            contract.total_amendments_amount
-                                        )}
-                                    </Typography>
-                                </Box>
-                            </Stack>
-                        </Grid>
-                    </Grid>
-                }
+                body={<PaymentsExpectedFinancialDataSummary contract={contract} />}
             />
         );
     };
 
     const getRealFinancialData = contract => {
         const percentage =
-            (contract.total_amount_approved / contract.total_amount) * 100;
+            (contract.total_amount_approved / contract.total_amount) * 100 || 0;
+
         return (
             <PaymentsFinancialDataBox
                 headline="Monto aprobado vs. Monto total"

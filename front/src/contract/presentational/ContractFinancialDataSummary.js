@@ -1,18 +1,13 @@
-import Typography from "@mui/material/Typography";
 import {NumberUtil} from "base/format/utilities";
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
+import Typography from "@mui/material/Typography";
 
 const ContractFinancialDataSummary = ({contract}) => {
     const total_difference = contract.total_amount_percentage - 100;
 
     return (
-        <Stack
-            direction="row"
-            spacing={2}
-            justifyContent="space-around"
-            alignItems="center"
-        >
+        <Stack direction="row" spacing={2}>
             <Stack direction="row" alignItems="center" spacing={1}>
                 <Typography variant="overline">Adjudicado:</Typography>
                 <Chip

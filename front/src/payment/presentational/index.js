@@ -11,3 +11,6 @@ export {
     default as PaymentsFinancialDataSubheading,
 } from "./PaymentsFinancialDataSubheading";
 export {default as PaymentCalendarItem} from "./PaymentCalendarItem";
+export {
+    default as PaymentsExpectedFinancialDataSummary,
+} from "./PaymentsExpectedFinancialDataSummary";

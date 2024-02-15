@@ -1,7 +1,6 @@
 import {useEffect} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 
-import {RouterUtil} from "base/navigation/utilities";
 import {TabUtil} from "../utilities";
 import {useTabLogic} from "../hooks";
 
@@ -52,7 +51,7 @@ const TabContainer = ({tabs, basePath, info = null, error = null}) => {
                     backgroundColor: "grey.100",
                 }}
             >
-                <Grid item xs={info ? 7 : 12}>
+                <Grid item flexGrow={1}>
                     <Tabs value={tabIndex} onChange={handleChangeTab} aria-label="tabs">
                         {tabs.map((tab, index) => (
                             <StyledTab
@@ -69,11 +68,12 @@ const TabContainer = ({tabs, basePath, info = null, error = null}) => {
                 {info && (
                     <Grid
                         item
-                        xs={5}
+                        xs
                         container
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="flex-end"
                         sx={{
+                            px: 2,
                             borderLeft: 1,
                             borderColor: "grey.200",
                             backgroundColor: "white",

@@ -1,7 +1,6 @@
 import {useOutletContext} from "react-router-dom";
 import {useContractCalendar} from "contract/presentational/hooks";
 import {PaymentCalendarItem, PaymentsFinancialData} from "payment/presentational";
-import {SectionCard} from "base/ui/section/components";
 import {ContractCalendar} from "contract/presentational";
 import {PaperComponent} from "base/shared/components";
 
@@ -25,14 +24,12 @@ const ViewPaymentContractOverview = () => {
                 </Grid>
                 <Grid item xs={6}>
                     <PaperComponent>
-                        <SectionCard title="Calendario de productos">
-                            <ContractCalendar
-                                years={contractYears}
-                                items={contractItemsWithDate}
-                                itemsLabel="productos"
-                                itemComponent={PaymentCalendarItem}
-                            />
-                        </SectionCard>
+                        <ContractCalendar
+                            years={contractYears}
+                            items={contractItemsWithDate}
+                            itemsLabel="productos"
+                            itemComponent={PaymentCalendarItem}
+                        />
                     </PaperComponent>
                 </Grid>
             </Grid>
