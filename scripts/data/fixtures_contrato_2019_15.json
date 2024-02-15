@@ -3741,5 +3741,1274 @@
             "project": 23,
             "construction": true
         }
+    },
+    {
+        "model": "app.amendment",
+        "pk": 3,
+        "fields": {
+            "signature_date": "2021-11-05",
+            "amendment_type": "amount",
+            "extra_amount": 56538541,
+            "extra_period": 0,
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 71,
+        "fields": {
+            "name": "Certificado Nº 1",
+            "expected_fixed_amount": 43764009,
+            "expected_total_amount": 43764009,
+            "expected_approval_date": "2020-03-01",
+            "paid_fixed_amount": 357103071,
+            "paid_total_amount": 357103071,
+            "status": "aprobado",
+            "approval_date": "2020-03-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-03-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-03-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 72,
+        "fields": {
+            "name": "Certificado Nº 2",
+            "expected_fixed_amount": 356885065,
+            "expected_total_amount": 356885065,
+            "expected_approval_date": "2020-04-01",
+            "paid_fixed_amount": 156098034,
+            "paid_total_amount": 156098034,
+            "status": "aprobado",
+            "approval_date": "2020-04-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-04-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-04-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 73,
+        "fields": {
+            "name": "Certificado Nº 3",
+            "expected_fixed_amount": 444934083,
+            "expected_total_amount": 444934083,
+            "expected_approval_date": "2020-05-01",
+            "paid_fixed_amount": 325843066,
+            "paid_total_amount": 325843066,
+            "status": "aprobado",
+            "approval_date": "2020-05-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-05-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-05-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 74,
+        "fields": {
+            "name": "Certificado Nº 4",
+            "expected_fixed_amount": 732526136,
+            "expected_total_amount": 732526136,
+            "expected_approval_date": "2020-06-01",
+            "paid_fixed_amount": 360750073,
+            "paid_total_amount": 360750073,
+            "status": "aprobado",
+            "approval_date": "2020-06-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-06-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-06-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 75,
+        "fields": {
+            "name": "Certificado Nº 5",
+            "expected_fixed_amount": 690846127,
+            "expected_total_amount": 690846127,
+            "expected_approval_date": "2020-07-01",
+            "paid_fixed_amount": 357624072,
+            "paid_total_amount": 357624072,
+            "status": "aprobado",
+            "approval_date": "2020-07-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-07-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-07-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 76,
+        "fields": {
+            "name": "Certificado Nº 6",
+            "expected_fixed_amount": 922170172,
+            "expected_total_amount": 922170172,
+            "expected_approval_date": "2020-08-01",
+            "paid_fixed_amount": 948959181,
+            "paid_total_amount": 948959181,
+            "status": "aprobado",
+            "approval_date": "2020-08-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-08-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-08-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 77,
+        "fields": {
+            "name": "Certificado Nº 7",
+            "expected_fixed_amount": 1174334217,
+            "expected_total_amount": 1174334217,
+            "expected_approval_date": "2020-09-01",
+            "paid_fixed_amount": 339910069,
+            "paid_total_amount": 339910069,
+            "status": "aprobado",
+            "approval_date": "2020-09-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-09-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-09-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 78,
+        "fields": {
+            "name": "Certificado Nº 8",
+            "expected_fixed_amount": 633536118,
+            "expected_total_amount": 633536118,
+            "expected_approval_date": "2020-10-01",
+            "paid_fixed_amount": 328448067,
+            "paid_total_amount": 328448067,
+            "status": "aprobado",
+            "approval_date": "2020-10-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-10-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-10-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 79,
+        "fields": {
+            "name": "Certificado Nº 9",
+            "expected_fixed_amount": 211005040,
+            "expected_total_amount": 211005040,
+            "expected_approval_date": "2020-11-01",
+            "paid_fixed_amount": 431085085,
+            "paid_total_amount": 431085085,
+            "status": "aprobado",
+            "approval_date": "2020-11-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 80,
+        "fields": {
+            "name": "Certificado Nº 10",
+            "expected_fixed_amount": 0,
+            "expected_total_amount": 0,
+            "expected_approval_date": "2020-12-01",
+            "paid_fixed_amount": 574984129,
+            "paid_total_amount": 574984129,
+            "status": "aprobado",
+            "approval_date": "2020-12-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 81,
+        "fields": {
+            "name": "Certificado Nº 11",
+            "expected_fixed_amount": 0,
+            "expected_total_amount": 0,
+            "expected_approval_date": "2021-01-01",
+            "paid_fixed_amount": 110062866,
+            "paid_total_amount": 110062866,
+            "status": "aprobado",
+            "approval_date": "2021-01-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 82,
+        "fields": {
+            "name": "Certificado Nº 12",
+            "expected_fixed_amount": 0,
+            "expected_total_amount": 0,
+            "expected_approval_date": "2021-02-01",
+            "paid_fixed_amount": 220125732,
+            "paid_total_amount": 220125732,
+            "status": "aprobado",
+            "approval_date": "2021-02-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 83,
+        "fields": {
+            "name": "Certificado Nº 13",
+            "expected_fixed_amount": 0,
+            "expected_total_amount": 0,
+            "expected_approval_date": "2021-03-01",
+            "paid_fixed_amount": 550314330,
+            "paid_total_amount": 550314330,
+            "status": "aprobado",
+            "approval_date": "2021-03-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 84,
+        "fields": {
+            "name": "Certificado Nº 14",
+            "expected_fixed_amount": 0,
+            "expected_total_amount": 0,
+            "expected_approval_date": "2021-04-01",
+            "paid_fixed_amount": 101312586,
+            "paid_total_amount": 101312586,
+            "status": "aprobado",
+            "approval_date": "2021-04-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.payment",
+        "pk": 85,
+        "fields": {
+            "name": "Certificado Nº 18",
+            "expected_fixed_amount": 0,
+            "expected_total_amount": 0,
+            "expected_approval_date": "2021-05-01",
+            "paid_fixed_amount": 103919147,
+            "paid_total_amount": 103919147,
+            "status": "aprobado",
+            "approval_date": "2021-05-01",
+            "contract": 5,
+            "created_by": 1,
+            "created_at": "2021-05-02T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2021-05-02T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 79,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "code": "tanque_elevado",
+            "code_label": "Tanque elevado",
+            "name": "Tanque elevado de 60 m³",
+            "technical_properties": {
+                "tipo": {
+                    "type": "domain",
+                    "label": "Tipo",
+                    "domain": "tankType",
+                    "value": null
+                },
+                "capacidad": {
+                    "type": "decimal",
+                    "unit": "m3",
+                    "label": "Capacidad",
+                    "value": 60
+                },
+                "coordenada_x": {
+                    "type": "integer",
+                    "label": "Coordenada X",
+                    "value": null
+                },
+                "coordenada_y": {
+                    "type": "integer",
+                    "label": "Coordenada Y",
+                    "value": null
+                }
+            },
+            "validation_properties": {
+                "montaje": {
+                    "type": "domain",
+                    "label": "Estructura / Montaje",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "fundacion": {
+                    "type": "domain",
+                    "label": "Cálculo y ejecución de fundación",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "estudio_suelo": {
+                    "type": "domain",
+                    "label": "Estudio del suelo",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "pararayos_otros": {
+                    "type": "domain",
+                    "label": "Pararrayos y sistema de puesta a tierra instalado",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "instalaciones_hidraulicas": {
+                    "type": "domain",
+                    "label": "Instalaciones hidráulicas",
+                    "domain": "yesNoDomain",
+                    "value": null
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 83,
+        "fields": {
+            "created_by": 1,
+            "created_at": "2024-02-16T05:26:36.384272-03:00",
+            "updated_by": 1,
+            "updated_at": "2024-02-16T05:26:36.384288-03:00",
+            "code": "cercado_perimetral",
+            "code_label": "Cercado perimetral",
+            "name": "Cercado perimetral (predio pozo)",
+            "technical_properties": {
+                "predio": {
+                    "type": "text",
+                    "label": "Predio al que corresponde",
+                    "value": "Pozo"
+                },
+                "dimensiones": {
+                    "type": "text",
+                    "unit": "m",
+                    "label": "Dimensiones (AnchoxLargoxAlto)",
+                    "value": null
+                }
+            },
+            "validation_properties": {
+                "postes": {
+                    "type": "domain",
+                    "label": "Postes construidos",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "portones": {
+                    "type": "domain",
+                    "label": "Portones construidos",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "tejidos_alambre": {
+                    "type": "domain",
+                    "label": "Tejidos de alambre construidos",
+                    "domain": "yesNoDomain",
+                    "value": null
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 125,
+        "fields": {
+            "created_by": 1,
+            "created_at": "2024-02-16T05:26:36.384272-03:00",
+            "updated_by": 1,
+            "updated_at": "2024-02-16T05:26:36.384288-03:00",
+            "code": "cercado_perimetral",
+            "code_label": "Cercado perimetral",
+            "name": "Cercado perimetral (predio tanque)",
+            "technical_properties": {
+                "predio": {
+                    "type": "text",
+                    "label": "Predio al que corresponde",
+                    "value": "Tanque"
+                },
+                "dimensiones": {
+                    "type": "text",
+                    "unit": "m",
+                    "label": "Dimensiones (AnchoxLargoxAlto)",
+                    "value": null
+                }
+            },
+            "validation_properties": {
+                "postes": {
+                    "type": "domain",
+                    "label": "Postes construidos",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "portones": {
+                    "type": "domain",
+                    "label": "Portones construidos",
+                    "domain": "yesNoDomain",
+                    "value": null
+                },
+                "tejidos_alambre": {
+                    "type": "domain",
+                    "label": "Tejidos de alambre construidos",
+                    "domain": "yesNoDomain",
+                    "value": null
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 126,
+        "fields": {
+            "created_by": 1,
+            "created_at": "2024-02-16T05:26:46.325089-03:00",
+            "updated_by": 1,
+            "updated_at": "2024-02-16T05:26:46.325103-03:00",
+            "code": "banos",
+            "code_label": "Baños",
+            "name": "Unidades sanitarias",
+            "technical_properties": {
+                "cantidad": {
+                    "type": "integer",
+                    "label": "Cantidad",
+                    "value": null
+                },
+                "material": {
+                    "type": "domain",
+                    "label": "Material",
+                    "domain": "toiletMaterialType",
+                    "value": null
+                },
+                "sistema_disposicion": {
+                    "type": "domain",
+                    "label": "Sistemas de disposición",
+                    "domain": "disposalSystemType",
+                    "value": null
+                }
+            },
+            "validation_properties": {
+                "03_entrega": {
+                    "type": "integer",
+                    "label": "Unidades terminadas etapa 3",
+                    "value": null
+                },
+                "01_provision": {
+                    "type": "integer",
+                    "label": "Unidades terminadas etapa 1",
+                    "value": null
+                },
+                "02_instalacion": {
+                    "type": "integer",
+                    "label": "Unidades terminadas etapa 2",
+                    "value": null
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 78,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 407,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "bien",
+            "expected_amount": 129015366,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 87652356,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 100,
+            "building_component": 78,
+            "project": 18,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 79,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 408,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "bien",
+            "expected_amount": 371749110,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 368369872,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 100,
+            "building_component": 79,
+            "project": 18,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 80,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 409,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "regular",
+            "expected_amount": 68015257,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 58745666,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 95,
+            "building_component": 80,
+            "project": 18,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 81,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 410,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "regular",
+            "expected_amount": 16250526,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 18652515,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 100,
+            "building_component": 81,
+            "project": 18,
+            "comments": [8]
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 82,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 411,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "bien",
+            "expected_amount": 99134217,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 86313593,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 100,
+            "building_component": 82,
+            "project": 18,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 83,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 412,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 17528239,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 0,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 0,
+            "building_component": 83,
+            "project": 18,
+            "comments": [6]
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 84,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 413,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 197767431,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 297480801,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 0,
+            "building_component": 84,
+            "project": 18,
+            "comments": [7]
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 125,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 561,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "bien",
+            "expected_amount": 21046015,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 21046015,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 100,
+            "building_component": 125,
+            "project": 18,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 126,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 562,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "bien",
+            "expected_amount": 75793680,
+            "expected_end_date": "2020-11-30",
+            "paid_amount": 79203485,
+            "pending_amount": 0,
+            "real_end_date": "2021-03-01",
+            "physical_progress_percentage": 100,
+            "building_component": 126,
+            "project": 18,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.comment",
+        "pk": 6,
+        "fields": {
+            "text": "No se ejecutó",
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.comment",
+        "pk": 7,
+        "fields": {
+            "text": "Faltan conexiones domiciliarias",
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.comment",
+        "pk": 8,
+        "fields": {
+            "text": "No se ejecutó toda la extensión eléctrica",
+            "created_by": 1,
+            "created_at": "2020-12-01T00:00:00Z",
+            "updated_by": 1,
+            "updated_at": "2020-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 1,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": null,
+            "approved_amount": 357103071,
+            "payment": 71,
+            "project": 19,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 2,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 411,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": null,
+            "approved_amount": 171317673,
+            "payment": 73,
+            "project": 19,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 3,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 412,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": null,
+            "approved_amount": 154525393,
+            "payment": 73,
+            "project": 20,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 4,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 413,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": null,
+            "approved_amount": 156098034,
+            "payment": 72,
+            "project": 20,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 5,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 414,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": null,
+            "approved_amount": 360750073,
+            "payment": 74,
+            "project": 20,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 6,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 415,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": null,
+            "approved_amount": 287206366,
+            "payment": 75,
+            "project": 20,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 7,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 416,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": null,
+            "approved_amount": 70417706,
+            "payment": 75,
+            "project": 21,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 8,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 417,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 948959181,
+            "approved_amount": 948959181,
+            "payment": 76,
+            "project": 21,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 9,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 418,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 134820880,
+            "approved_amount": 144820880,
+            "payment": 77,
+            "project": 21,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 10,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 419,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 18000000,
+            "approved_amount": 17922542,
+            "payment": 80,
+            "project": 18,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 11,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 420,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 100000000,
+            "approved_amount": 110062866,
+            "payment": 81,
+            "project": 18,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 12,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 421,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 240000000,
+            "approved_amount": 220125732,
+            "payment": 82,
+            "project": 18,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 13,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 422,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 500000000,
+            "approved_amount": 550314330,
+            "payment": 83,
+            "project": 18,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 14,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 423,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 150000000,
+            "approved_amount": 101312586,
+            "payment": 84,
+            "project": 18,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 15,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 424,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 17726247,
+            "approved_amount": 17726247,
+            "payment": 85,
+            "project": 18,
+            "notes": "El importe certificado supone un 1,78% de avance con respecto al certificado anterior, lo que sitúa el avance financiero total del proyecto en el 102,12%.",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 16,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 425,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 8475304,
+            "approved_amount": 8475304,
+            "payment": 85,
+            "project": 19,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 17,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 426,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 40000000,
+            "approved_amount": 39799400,
+            "payment": 85,
+            "project": 20,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 18,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 427,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 8500000,
+            "approved_amount": 8540861,
+            "payment": 85,
+            "project": 21,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 19,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 428,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 20000000,
+            "approved_amount": 20263462,
+            "payment": 85,
+            "project": 22,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 20,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 429,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 10000000,
+            "approved_amount": 9113873,
+            "payment": 85,
+            "project": 23,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 21,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 430,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 180000000,
+            "approved_amount": 195089189,
+            "payment": 77,
+            "project": 22,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 22,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 431,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 300000000,
+            "approved_amount": 328448067,
+            "payment": 78,
+            "project": 22,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 23,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 432,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 330000000,
+            "approved_amount": 328996021,
+            "payment": 79,
+            "project": 22,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 24,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 433,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 100000000,
+            "approved_amount": 102089064,
+            "payment": 79,
+            "project": 23,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "pk": 25,
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 434,
+            "featured_image": null,
+            "featured_document": null,
+            "expected_amount": 600000000,
+            "approved_amount": 557061587,
+            "payment": 80,
+            "project": 23,
+            "notes": "",
+            "comments": []
+        }
     }
 ]
