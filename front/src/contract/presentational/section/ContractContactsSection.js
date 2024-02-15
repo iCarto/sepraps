@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 import {useNavigateWithReload} from "base/navigation/hooks";
-import {ContractService} from "contract/service";
+import {ContractContactService, ContractService} from "contract/service";
 import {ContactService} from "contact/service";
 import {useProviderContactsTable} from "provider/data";
 import {
@@ -43,13 +43,10 @@ const ContractContactsSection = ({contract, area = null}) => {
 
     const {action: editAction} = useMenuGenericEditAction();
     const {action: deleteAction, dialog: deleteDialog} = useMenuGenericDeleteAction(
-        ContactService
+        element => ContactService.delete(element.contact_id)
     );
     const {action: removeAction, dialog: removeDialog} = useMenuGenericRemoveAction(
-        contract,
-        "contacts",
-        ContractService,
-        entityObject => createContract(contract_view_adapter(entityObject))
+        element => ContractContactService.delete(element.id)
     );
 
     return (

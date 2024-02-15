@@ -8,20 +8,43 @@ import {RemoveItemDialog} from "base/delete/components";
 
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 
-export function useMenuGenericRemoveAction(service) {
+export function useMenuGenericRemoveFromListAction(
+    entity,
+    entityAttribute,
+    service,
+    createEntityObject,
+    entityAttributeId = "id"
+) {
     const navigate = useNavigateWithReload();
 
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
-    const [element, setElement] = useState(false);
+    const [itemToRemove, setItemToRemove] = useState(null);
     const [error, setError] = useState("");
 
+    const subEntityList = entity[entityAttribute];
+
     const handleClickRemove = element => {
+        console.log({element});
         setIsRemoveDialogOpen(true);
-        setElement(element);
+        if (entityAttribute) {
+            setItemToRemove(
+                subEntityList.findIndex(
+                    item => item[entityAttributeId] === element[entityAttributeId]
+                )
+            );
+        }
     };
 
     const handleRemove = () => {
-        service(element)
+        subEntityList.splice(itemToRemove, 1);
+        const newEntityObject = createEntityObject({
+            ...entity,
+            [`${entityAttribute}`]: [...subEntityList],
+        });
+        console.log({newEntityObject});
+
+        service
+            .update(newEntityObject)
             .then(() => {
                 navigate("", true);
             })

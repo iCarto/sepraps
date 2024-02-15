@@ -12,7 +12,7 @@ import {ProjectLinkedLocalitiesTable} from "project/presentational/location";
 
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import {useMenuGenericRemoveAction} from "base/ui/menu/hooks";
+import {useMenuGenericRemoveFromListAction} from "base/ui/menu/hooks";
 
 const ProjectLinkedLocalitiesSection = ({project}) => {
     const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
@@ -24,7 +24,10 @@ const ProjectLinkedLocalitiesSection = ({project}) => {
 
     const isProjectClosed = project.closed;
 
-    const {action: removeAction, dialog: removeDialog} = useMenuGenericRemoveAction(
+    const {
+        action: removeAction,
+        dialog: removeDialog,
+    } = useMenuGenericRemoveFromListAction(
         project,
         "linked_localities",
         ProjectService,

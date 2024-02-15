@@ -8,7 +8,7 @@ const ListProvidersPage = () => {
     const {tableColumns} = useProviderTableColumns();
 
     const {action: deleteAction, dialog: deleteDialog} = useMenuGenericDeleteAction(
-        ProviderService
+        element => ProviderService.delete(element.id)
     );
 
     return (

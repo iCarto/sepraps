@@ -10,13 +10,7 @@ const ContactFormSearch = ({allowedPosts = null, onSubmit}) => {
     const formMethods = useForm({
         defaultValues: {
             post: "",
-            id: "",
-            name: "",
-            ci_number: null,
-            gender: "",
-            phone: "",
-            email: "",
-            comments: "",
+            contact_id: "",
         },
         reValidateMode: "onSubmit",
     });

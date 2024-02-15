@@ -27,7 +27,10 @@ import {
     ViewContractBuildingComponentsFinancialChartContent,
     CreateContractPaymentsWizard,
 } from "contract/container";
-import {UpdateContractContactPanel} from "contract/container/monitoring";
+import {
+    CreateContractContactPanel,
+    UpdateContractContactPanel,
+} from "contract/container/monitoring";
 import {UpdateContractContractorContactPanel} from "contractor/container";
 import {ViewContactPanel} from "contact/container";
 import {
@@ -158,9 +161,16 @@ const contractRoutes = [
                 element={<ViewContractStaffSubPage area={SUPERVISION_AREAS.BUILDING} />}
             >
                 <Route
-                    key="contract-building-update-contact"
-                    path="edit/:contactId"
-                    element={<UpdateContractContactPanel />}
+                    key="contract-building-view-contact"
+                    path="info/:contactId"
+                    element={<ViewContactPanel />}
+                />
+                <Route
+                    key="contract-building-manage-contact"
+                    path=":action/:contactId"
+                    element={
+                        <UpdateContractContactPanel area={SUPERVISION_AREAS.BUILDING} />
+                    }
                 />
             </Route>
             <Route
@@ -183,7 +193,20 @@ const contractRoutes = [
                 key="contract-social"
                 path="social_staff"
                 element={<ViewContractStaffSubPage area={SUPERVISION_AREAS.SOCIAL} />}
-            />
+            >
+                <Route
+                    key="contract-social-view-contact"
+                    path="info/:contactId"
+                    element={<ViewContactPanel />}
+                />
+                <Route
+                    key="contract-social-manage-contact"
+                    path=":action/:contactId"
+                    element={
+                        <UpdateContractContactPanel area={SUPERVISION_AREAS.SOCIAL} />
+                    }
+                />
+            </Route>
             <Route
                 key="contract-project-social-analysis"
                 path="project_social_analysis"

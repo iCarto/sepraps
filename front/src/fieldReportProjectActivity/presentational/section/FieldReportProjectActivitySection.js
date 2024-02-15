@@ -29,7 +29,9 @@ const FieldReportProjectActivitySection = ({
     const {
         dialog: deleteDialog,
         handleClickDelete: onClickDelete,
-    } = useMenuGenericDeleteAction(FieldReportProjectActivityService);
+    } = useMenuGenericDeleteAction(element =>
+        FieldReportProjectActivityService.delete(element.id)
+    );
 
     const handleClickEdit = () => {
         onOpenForm(activity.id);

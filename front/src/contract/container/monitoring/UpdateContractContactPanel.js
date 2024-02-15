@@ -1,28 +1,24 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useOutletContext, useParams} from "react-router-dom";
 
-import {ContractService} from "contract/service";
-import {contract_view_adapter, createContract} from "contract/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
 import {ContactForm, ContactFormSearch} from "contact/presentational";
 import {EntityUpdatePanel} from "base/entity/components/presentational";
+import {contact_view_adapter} from "contact/model";
+import {ContractContactService} from "contract/service";
 
-const UpdateContractContactPanel = () => {
+const UpdateContractContactPanel = ({area}) => {
     const {action, contactId} = useParams();
 
+    const [contact, setContact] = useState(null);
     const [error, setError] = useState("");
     const navigate = useNavigateWithReload();
 
     let contract;
     [contract] = useOutletContext();
 
-    const basePath = `/contracts/list/${contract.id}/monitoring`;
-
-    const selectedContact =
-        action === "edit"
-            ? contract.contacts.find(contact => contact.id === parseInt(contactId))
-            : null;
+    const basePath = `/contracts/list/${contract.id}/${area}_staff`;
 
     const allowedPosts = [
         "residente_obra",
@@ -33,37 +29,42 @@ const UpdateContractContactPanel = () => {
         "otro_contacto",
     ];
 
-    const handleSubmit = data => {
-        const contacts = [...contract.contacts];
-        if (selectedContact) {
-            let contactToRemoveIndex = contacts.findIndex(
-                contact => contact.id === selectedContact.id
-            );
-            contacts.splice(contactToRemoveIndex, 1);
+    useEffect(() => {
+        if (action === "edit") {
+            ContractContactService.get(contactId)
+                .then(contact => {
+                    setContact(contact);
+                    console.log({contact});
+                })
+                .catch(error => {
+                    console.log({error});
+                    setError(error);
+                });
         }
+    }, [contactId]);
 
-        const updatedContract = createContract({
-            ...contract,
-            contacts: [
-                ...contacts,
-                {
-                    id: data.id,
-                    name: data.name,
-                    post: data.post,
-                    post_label: data.post_label,
-                    ci_number: data.ci_number,
-                    gender: data.gender,
-                    phone: data.phone,
-                    email: data.email,
-                    comments: data.comments,
-                },
-            ],
-        });
-        handleFormSubmit(updatedContract);
+    const handleSubmit = contact => {
+        const submitService =
+            action === "edit"
+                ? ContractContactService.update(
+                      contact_view_adapter({...contact, entity: contract.id})
+                  )
+                : ContractContactService.create(
+                      contract.id,
+                      contact_view_adapter({...contact})
+                  );
+        submitService
+            .then(() => {
+                navigate(basePath, true);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error);
+            });
     };
 
-    const handleFormSubmit = updatedContract => {
-        ContractService.update(contract_view_adapter({...updatedContract}))
+    const handleAddExistingSubmit = existingContact => {
+        ContractContactService.create(contract.id, {...existingContact})
             .then(() => {
                 navigate(basePath, true);
             })
@@ -79,19 +80,23 @@ const UpdateContractContactPanel = () => {
 
     return (
         <EntityUpdatePanel
-            title={action === "edit" ? `Modificar contacto` : `Asignar contacto`}
+            title="Modificar contacto"
             form={
                 contactId === "existing" ? (
                     <ContactFormSearch
                         allowedPosts={allowedPosts}
-                        onSubmit={handleSubmit}
+                        onSubmit={handleAddExistingSubmit}
                     />
+                ) : contactId === "new" ? (
+                    <ContactForm allowedPosts={allowedPosts} onSubmit={handleSubmit} />
                 ) : (
-                    <ContactForm
-                        contact={selectedContact}
-                        allowedPosts={allowedPosts}
-                        onSubmit={handleSubmit}
-                    />
+                    contact && (
+                        <ContactForm
+                            contact={contact}
+                            allowedPosts={allowedPosts}
+                            onSubmit={handleSubmit}
+                        />
+                    )
                 )
             }
             onCancel={handleFormCancel}

@@ -9,7 +9,12 @@ import {AuthApiService} from "base/api/service";
 import {createPayments, payments_api_adapter} from "payment/model";
 import {createProjects, projects_api_adapter} from "project/model";
 import {contractor_api_adapter, createContractor} from "contractor/model";
-import {contacts_api_adapter, createContacts} from "contact/model";
+import {
+    contact_api_adapter,
+    contacts_api_adapter,
+    createContact,
+    createContacts,
+} from "contact/model";
 import {amendments_api_adapter, createAmendments} from "amendment/model";
 
 export const TEMPLATE = {

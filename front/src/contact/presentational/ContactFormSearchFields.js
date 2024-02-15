@@ -25,13 +25,7 @@ const ContactFormSearchFields = ({allowedPosts = null}) => {
         const values = getValues();
         reset({
             ...values,
-            id: contact?.id || "",
-            name: contact?.name || "",
-            gender: contact?.gender || "",
-            ci_number: contact?.ci_number || null,
-            phone: contact?.phone || "",
-            email: contact?.email || "",
-            comments: contact?.comments || "",
+            contact_id: contact?.id || "",
         });
     };
 

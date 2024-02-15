@@ -25,7 +25,9 @@ const FieldReportProjectsTabPanelContent = ({fieldReportProject}) => {
     const {
         dialog: deleteDialog,
         handleClickDelete: onClickDelete,
-    } = useMenuGenericDeleteAction(FieldReportProjectService);
+    } = useMenuGenericDeleteAction(element =>
+        FieldReportProjectService.delete(element.id)
+    );
 
     const basePath = useLocation();
     const navigate = useNavigateWithReload();

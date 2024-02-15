@@ -9,7 +9,7 @@ import {useProviderContactsTable} from "provider/data";
 import {
     useMenuGenericDeleteAction,
     useMenuGenericEditAction,
-    useMenuGenericRemoveAction,
+    useMenuGenericRemoveFromListAction,
 } from "base/ui/menu/hooks";
 
 import {SectionCard} from "base/ui/section/components";
@@ -47,9 +47,12 @@ const ContractorContactsSection = ({contractor}) => {
 
     const {action: editAction} = useMenuGenericEditAction(handleEditElement);
     const {action: deleteAction, dialog: deleteDialog} = useMenuGenericDeleteAction(
-        ContactService
+        element => ContactService.delete(element.contact_id)
     );
-    const {action: removeAction, dialog: removeDialog} = useMenuGenericRemoveAction(
+    const {
+        action: removeAction,
+        dialog: removeDialog,
+    } = useMenuGenericRemoveFromListAction(
         contractor,
         "contacts",
         ContractorService,

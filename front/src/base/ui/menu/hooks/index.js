@@ -3,3 +3,4 @@ export * from "./MenuGenericViewActionHook";
 export * from "./MenuGenericDeleteActionHook";
 export * from "./MenuGenericDefaultActionsHook";
 export * from "./MenuGenericRemoveActionHook";
+export * from "./MenuGenericRemoveFromListActionHook";

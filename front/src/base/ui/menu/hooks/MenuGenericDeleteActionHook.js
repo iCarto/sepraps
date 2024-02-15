@@ -24,8 +24,7 @@ export function useMenuGenericDeleteAction(service) {
     };
 
     const handleDelete = () => {
-        service
-            .delete(itemToDelete.id)
+        service(itemToDelete)
             .then(() => {
                 navigate(location.pathname, true);
             })
@@ -38,6 +37,7 @@ export function useMenuGenericDeleteAction(service) {
     const action = (
         <MenuAction
             key="table-delete-action"
+            id="table-delete-action"
             icon={<DeleteIcon color="error" />}
             text="Eliminar"
             handleClick={handleClickDelete}

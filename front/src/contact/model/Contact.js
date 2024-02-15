@@ -6,6 +6,10 @@ const contact_api_adapter = contact => {
 
 const contacts_api_adapter = contacts => contacts.map(contact_api_adapter);
 
+const contact_view_adapter = contact => {
+    return contact;
+};
+
 const createContacts = (data = []) => {
     const contacts = Contacts.from(data, contact => createContact(contact));
     return contacts;
@@ -13,6 +17,7 @@ const createContacts = (data = []) => {
 
 const createContact = ({
     id = null,
+    contact_id = null,
     name = "",
     post = "",
     post_label = "",
@@ -26,6 +31,7 @@ const createContact = ({
 } = {}) => {
     const publicApi = {
         id,
+        contact_id,
         name,
         post,
         post_label,
@@ -46,4 +52,5 @@ export {
     createContacts,
     contact_api_adapter,
     contacts_api_adapter,
+    contact_view_adapter,
 };

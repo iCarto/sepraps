@@ -8,7 +8,7 @@ const ListFieldReportsPage = () => {
     const {tableColumns} = useFieldReportsTableColumns();
 
     const {action: deleteAction, dialog: deleteDialog} = useMenuGenericDeleteAction(
-        FieldReportService
+        element => FieldReportService.delete(element.id)
     );
 
     return (
