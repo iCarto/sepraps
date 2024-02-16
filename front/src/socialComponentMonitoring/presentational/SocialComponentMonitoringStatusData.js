@@ -25,9 +25,7 @@ const SocialComponentMonitoringStatusData = ({socialComponentMonitoring}) => {
             <Grid item xs={7}>
                 <ProgressBarSmall
                     label="Porcentaje de avance"
-                    progressValue={NumberUtil.formatDecimalWithoutZeros(
-                        socialComponentMonitoring.progress_percentage
-                    )}
+                    progressValue={socialComponentMonitoring.progress_percentage}
                     labelVariant={"subtitle2"}
                 />
             </Grid>

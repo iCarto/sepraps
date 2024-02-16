@@ -1,4 +1,5 @@
 import {theme} from "Theme";
+import {NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 import {ProgressUtil} from "../utilities";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -13,6 +14,7 @@ const ProgressBarSmall = ({
 }) => {
     const parsedValue = parseInt(progressValue) || 0;
     const barProgress = parsedValue >= 100 ? 100 : parsedValue;
+    console.log({progressValue});
 
     return (
         <>
@@ -38,7 +40,9 @@ const ProgressBarSmall = ({
                     aria-valuenow={progressValue}
                     aria-valuemin={0}
                     aria-valuemax={100}
-                    color={ProgressUtil.getProgressColor(progressValue)}
+                    color={ProgressUtil.getProgressColor(
+                        NumberUtil.parseFloat(progressValue)
+                    )}
                     sx={{
                         height: 10,
                         borderRadius: 4,

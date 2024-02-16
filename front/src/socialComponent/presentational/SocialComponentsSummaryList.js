@@ -60,16 +60,16 @@ const SocialComponentsSummaryList = ({socialComponents}) => {
                                                 >
                                                     <ProgressBarSmall
                                                         label="Avance"
-                                                        progressValue={NumberUtil.parseInteger(
+                                                        progressValue={NumberUtil.formatDecimalWithoutZeros(
                                                             component.progress_percentage
                                                         )}
                                                     />
                                                 </Stack>
                                                 <Stack sx={{width: "10%"}}>
                                                     <AppraisalChip
-                                                        label={
+                                                        label={NumberUtil.formatDecimalWithoutZeros(
                                                             component.quality_status_label
-                                                        }
+                                                        )}
                                                         value={component.quality_status}
                                                     />
                                                 </Stack>

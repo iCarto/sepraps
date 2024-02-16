@@ -16,6 +16,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
 
 const BuildingComponentsSummaryList = ({bcMonitorings}) => {
     const navigate = useNavigate();
@@ -33,9 +34,8 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                 <List sx={{m: 0}}>
                     {bcMonitorings.map(bcMonitoring => {
                         return (
-                            <>
+                            <Box key={bcMonitoring.id}>
                                 <ListItem
-                                    key={bcMonitoring.id}
                                     onClick={() =>
                                         navigate(`${basePath}/list/${bcMonitoring.id}`)
                                     }
@@ -74,16 +74,16 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                         <Stack sx={{minWidth: "25%"}}>
                                             <ProgressBarSmall
                                                 label="Avance financiero"
-                                                progressValue={NumberUtil.parseInteger(
+                                                progressValue={
                                                     bcMonitoring.financial_progress_percentage
-                                                )}
+                                                }
                                                 progressStyle={{mb: 1}}
                                             />
                                             <ProgressBarSmall
                                                 label="Avance físico"
-                                                progressValue={NumberUtil.parseInteger(
+                                                progressValue={
                                                     bcMonitoring.physical_progress_percentage
-                                                )}
+                                                }
                                             />
                                         </Stack>
                                         <Stack
@@ -108,7 +108,7 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                     component="li"
                                     sx={{my: 0.5}}
                                 />
-                            </>
+                            </Box>
                         );
                     })}
                 </List>

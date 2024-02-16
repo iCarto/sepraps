@@ -30,9 +30,6 @@ const BuildingComponentMonitoringForm = ({
         pending_amount: FormUtil.getFormValue(
             NumberUtil.formatDecimal(bcMonitoring?.pending_amount, 0)
         ),
-        financial_progress_percentage: FormUtil.getFormValue(
-            NumberUtil.formatDecimal(bcMonitoring?.financial_progress_percentage, 0)
-        ),
         physical_progress_percentage: bcMonitoring?.physical_progress_percentage
             ? NumberUtil.formatDecimal(bcMonitoring?.physical_progress_percentage, 0)
             : "",
@@ -52,9 +49,6 @@ const BuildingComponentMonitoringForm = ({
             expected_amount: FormUtil.getDataValue(data.expected_amount),
             paid_amount: FormUtil.getDataValue(data.paid_amount),
             pending_amount: FormUtil.getDataValue(data.pending_amount),
-            financial_progress_percentage: FormUtil.getDataValue(
-                data.financial_progress_percentage
-            ),
             physical_progress_percentage: FormUtil.getDataValue(
                 data.physical_progress_percentage
             ),

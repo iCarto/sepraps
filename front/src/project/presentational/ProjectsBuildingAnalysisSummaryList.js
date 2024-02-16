@@ -63,14 +63,14 @@ const ProjectsBuildingAnalysisSummaryList = ({projects}) => {
                                         <Stack sx={{minWidth: "30%"}}>
                                             <ProgressBarSmall
                                                 label="Avance financiero"
-                                                progressValue={NumberUtil.parseInteger(
+                                                progressValue={NumberUtil.formatDecimalWithoutZeros(
                                                     project.financial_progress_percentage
                                                 )}
                                                 progressStyle={{mb: 1}}
                                             />
                                             <ProgressBarSmall
                                                 label="Avance físico"
-                                                progressValue={NumberUtil.parseInteger(
+                                                progressValue={NumberUtil.formatDecimalWithoutZeros(
                                                     project.physical_progress_percentage
                                                 )}
                                             />
