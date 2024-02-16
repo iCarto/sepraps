@@ -22,6 +22,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
 
     useEffect(() => {
         setIsLoading(true);
+        console.log({tableFilter});
         ProjectStatsService.getSocialComponentTrainingsTotalStats({
             ...filter,
             ...tableFilter,

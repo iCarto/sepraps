@@ -257,8 +257,8 @@ class TrainingSumStatsExcelRenderer(DataFrameExcelFileRenderer):
 )
 def get_social_component_trainings_sum_stats(request, format=None):
     social_component_monitoring = request.GET.get("social_component_monitoring", None)
-    contract = request.GET.get("contract", None)
-    contractor = request.GET.get("contractor", None)
+    social_component_contract = request.GET.get("social_component_contract", None)
+    social_component_contractor = request.GET.get("social_component_contractor", None)
 
     query = """
             SELECT
@@ -297,10 +297,10 @@ def get_social_component_trainings_sum_stats(request, format=None):
 
     if social_component_monitoring:
         query += f" AND scm.id = {social_component_monitoring}"
-    if contract:
-        query += f" AND cc2.id = {contract}"
-    if contractor:
-        query += f" AND c.id = {contractor}"
+    if social_component_contract:
+        query += f" AND cc2.id = {social_component_contract}"
+    if social_component_contractor:
+        query += f" AND c.id = {social_component_contractor}"
 
     with connection.cursor() as cursor:
         cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))

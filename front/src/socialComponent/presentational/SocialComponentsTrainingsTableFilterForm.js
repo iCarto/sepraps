@@ -47,10 +47,12 @@ const SocialComponentsTrainingsTableFilterForm = ({
 
     const formMethods = useForm({
         defaultValues: {
-            contract: filter?.contract || "",
-            contractor: filter?.contractor || "",
-            project: filter?.project || "",
+            // "social_component_xxxx" filters are related directly with social components trainings
+            social_component_contract: filter?.social_component_contract || "",
+            social_component_contractor: filter?.social_component_contractor || "",
             social_component_monitoring: filter?.social_component_monitoring || "",
+            // "project" filter is related with a fk to project where the training is associated through social component
+            project: filter?.project || "",
         },
     });
 
@@ -60,8 +62,8 @@ const SocialComponentsTrainingsTableFilterForm = ({
 
     const handleClearAllFilters = () => {
         formMethods.reset({
-            contract: "",
-            contractor: "",
+            social_component_contract: "",
+            social_component_contractor: "",
             social_component_monitoring: "",
             project: "",
         });
@@ -89,26 +91,26 @@ const SocialComponentsTrainingsTableFilterForm = ({
                 </Grid>
                 <Grid item sx={{flex: 1}}>
                     <FormAutocomplete
-                        name="contractor"
+                        name="social_component_contractor"
                         label="Consultora"
                         options={contractorOptions}
                         optionLabelAttribute="label"
                         onChangeHandler={option =>
                             handleChangeFilter({
-                                contractor: option ? option.id : null,
+                                social_component_contractor: option ? option.id : null,
                             })
                         }
                     />
                 </Grid>
                 <Grid item sx={{flex: 1}}>
                     <FormAutocomplete
-                        name="contract"
+                        name="social_component_contract"
                         label="Contrato"
                         options={contractOptions}
                         optionLabelAttribute="label"
                         onChangeHandler={option =>
                             handleChangeFilter({
-                                contract: option ? option.id : null,
+                                social_component_contract: option ? option.id : null,
                             })
                         }
                     />
