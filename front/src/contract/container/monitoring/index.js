@@ -1,3 +1,2 @@
 export {default as UpdateContractContactPanel} from "./UpdateContractContactPanel";
-export {default as DeleteContractContactDialog} from "./DeleteContractContactDialog";
-export {default as CreateContractContactPanel} from "./CreateContractContactPanel";
+export {default as ViewContractContactPanel} from "./ViewContractContactPanel";

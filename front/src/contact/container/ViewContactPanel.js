@@ -1,13 +1,8 @@
-import {useParams} from "react-router-dom";
-
 import {EntitySummaryPanel} from "base/entity/components/presentational";
 import {SectionField} from "base/ui/section/components";
 import {NumberUtil} from "base/format/utilities";
-import {ContractContactService} from "contract/service";
 
-const ViewContactPanel = () => {
-    const {contactId} = useParams();
-
+const ViewContactPanel = ({service, id}) => {
     const getSectionData = contact => {
         return (
             <>
@@ -26,8 +21,8 @@ const ViewContactPanel = () => {
 
     return (
         <EntitySummaryPanel
-            service={ContractContactService}
-            id={contactId}
+            service={service}
+            id={id}
             title="Contacto"
             getSectionTitle={contact => contact?.name}
             getSectionData={getSectionData}

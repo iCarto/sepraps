@@ -7,13 +7,13 @@ import {
     createContacts,
 } from "contact/model";
 
-const basePathContracts = "/api/app/constructioncontracts";
-const basePathContractsContacts = "/api/app/contractcontacts";
+const basePathProviders = "/api/app/providers";
+const basePathProviderContacts = "/api/app/providercontacts";
 
-const ContractContactService = {
+const ProviderContactService = {
     getList(contractId, filter) {
         return AuthApiService.get(
-            `${basePathContracts}/${contractId}/contacts?${ServiceUtil.getFilterQueryString(
+            `${basePathProviders}/${contractId}/contacts?${ServiceUtil.getFilterQueryString(
                 filter
             )}`
         ).then(response => {
@@ -23,13 +23,13 @@ const ContractContactService = {
 
     create(contractId, contact) {
         return AuthApiService.post(
-            `${basePathContracts}/${contractId}/contacts`,
+            `${basePathProviders}/${contractId}/contacts`,
             contact
         ).then(response => createContact(contact_api_adapter(response)));
     },
 
     get(id) {
-        return AuthApiService.get(`${basePathContractsContacts}/${id}`).then(
+        return AuthApiService.get(`${basePathProviderContacts}/${id}`).then(
             response => {
                 return createContact(contact_api_adapter(response));
             }
@@ -38,7 +38,7 @@ const ContractContactService = {
 
     update(contact) {
         return AuthApiService.put(
-            `${basePathContractsContacts}/${contact.id}`,
+            `${basePathProviderContacts}/${contact.id}`,
             contact
         ).then(response => {
             return createContact(contact_api_adapter(response));
@@ -46,8 +46,8 @@ const ContractContactService = {
     },
 
     delete(id) {
-        return AuthApiService.delete(`${basePathContractsContacts}/${id}`);
+        return AuthApiService.delete(`${basePathProviderContacts}/${id}`);
     },
 };
 
-export default ContractContactService;
+export default ProviderContactService;

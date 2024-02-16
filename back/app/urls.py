@@ -18,7 +18,11 @@ from app.views.building_component_viewset import BuildingComponentViewSet
 from app.views.comment_viewset import CommentViewSet
 from app.views.connection_viewset import ConnectionViewSet
 from app.views.construction_contract_viewset import ConstructionContractViewSet
-from app.views.contact_relationship_viewset import ContractContactViewSet
+from app.views.contact_relationship_viewset import (
+    ContractContactViewSet,
+    ContractorContactViewSet,
+    ProviderContactViewSet,
+)
 from app.views.contact_viewset import ContactViewSet
 from app.views.contract_service_viewset import ContractServiceViewSet
 from app.views.contract_supervision_area_viewset import ContractSupervisionAreaViewSet
@@ -48,6 +52,7 @@ router.register("financingprograms", FinancingProgramViewSet)
 router.register("localities", LocalityViewSet)
 router.register("projects", ProjectViewSet)
 router.register("providers", ProviderViewSet)
+router.register("providercontacts", ProviderContactViewSet)
 router.register("fieldreports", FieldReportViewSet)
 router.register("fieldreportprojects", FieldReportProjectViewSet)
 router.register("fieldreportprojectactivities", FieldReportProjectActivityViewSet)
@@ -59,6 +64,7 @@ router.register(
     basename="constructioncontracts",
 )
 router.register("contractors", ContractorViewSet)
+router.register("contractorcontacts", ContractorContactViewSet)
 router.register("milestones", MilestoneViewSet)
 router.register("payments", PaymentViewSet)
 router.register("products", ProductViewSet)
@@ -106,4 +112,5 @@ urlpatterns = [
     path(
         "projectstats/connectionstotal", project_stats_views.get_connections_total_stats
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
+]

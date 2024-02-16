@@ -190,7 +190,6 @@ class ConstructionContractViewSet(ModelListViewSet):
             request_data = request.data
             request_data["entity"] = pk
             serializer = ContractContactSerializer(data=request_data)
-            print(request_data)
             if not serializer.is_valid():
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

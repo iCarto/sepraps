@@ -28,11 +28,13 @@ import {
     CreateContractPaymentsWizard,
 } from "contract/container";
 import {
-    CreateContractContactPanel,
     UpdateContractContactPanel,
+    ViewContractContactPanel,
 } from "contract/container/monitoring";
-import {UpdateContractContractorContactPanel} from "contractor/container";
-import {ViewContactPanel} from "contact/container";
+import {
+    UpdateContractContractorContactPanel,
+    ViewContractorContactPanel,
+} from "contractor/container";
 import {
     ViewPaymentContent,
     CreatePaymentContent,
@@ -63,11 +65,11 @@ const contractRoutes = [
                 <Route
                     key="contract-monitoring-view-contact"
                     path="info/:contactId"
-                    element={<ViewContactPanel />}
+                    element={<ViewContractorContactPanel />}
                 />
                 <Route
                     key="contract-contractor-contact"
-                    path="contractor/contact/:action/:contactId"
+                    path="contractor_staff/:action/:contactId"
                     element={<UpdateContractContractorContactPanel />}
                 />
             </Route>
@@ -163,7 +165,7 @@ const contractRoutes = [
                 <Route
                     key="contract-building-view-contact"
                     path="info/:contactId"
-                    element={<ViewContactPanel />}
+                    element={<ViewContractContactPanel />}
                 />
                 <Route
                     key="contract-building-manage-contact"
@@ -197,7 +199,7 @@ const contractRoutes = [
                 <Route
                     key="contract-social-view-contact"
                     path="info/:contactId"
-                    element={<ViewContactPanel />}
+                    element={<ViewContractContactPanel />}
                 />
                 <Route
                     key="contract-social-manage-contact"

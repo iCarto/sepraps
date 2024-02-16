@@ -1,16 +1,12 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.models.contractor import Contractor
-from app.serializers.contact_relationship_serializer import ContactContractorSerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class ContractorSerializer(BaseDomainMixin, serializers.ModelSerializer):
     id = serializers.IntegerField(allow_null=True, required=False)
-    contacts = ContactContractorSerializer(
-        source="contractorcontact_set", many=True, required=False
-    )
 
     class Meta(object):
         model = Contractor
@@ -22,7 +18,6 @@ class ContractorSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "phone",
             "email",
             "comments",
-            "contacts",
         )
         extra_kwargs = {
             "address": {"allow_null": True, "allow_blank": True},
@@ -32,36 +27,9 @@ class ContractorSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "comments": {"allow_null": True, "allow_blank": True},
         }
 
-    domain_fields = [
-        BaseDomainField("contractor_type", DomainCategoryChoices.contractor_type)
-    ]
-
-    def create(self, validated_data):
-        contacts = validated_data.pop("contractorcontact_set", None)
-
-        contractor = Contractor.objects.create(**validated_data)
-
-        # calling to ContactProviderListSerializer.update() we can make all modifications
-        # for contacts inside the provider
-        if contacts:
-            self.fields["contacts"].update(contractor, [], contacts)
-
-        return contractor
-
-    def update(self, instance, validated_data):
-        # calling to ContactProviderListSerializer.update() we can make all modifications
-        # for contacts inside the provider
-        contacts = validated_data.pop("contractorcontact_set", None)
-        if contacts:
-            self.fields["contacts"].update(instance, instance.contacts.all(), contacts)
-
-        # nested entities properties were removed in previous methods
-        for key in validated_data.keys():
-            setattr(instance, key, validated_data.get(key, getattr(instance, key)))
-
-        instance.save()
-
-        return instance
+    domain_fields = (
+        BaseDomainField("contractor_type", DomainCategoryChoices.contractor_type),
+    )
 
 
 class ContractorSummarySerializer(ContractorSerializer):
@@ -82,6 +50,6 @@ class ContractorSummarySerializer(ContractorSerializer):
             fields[field].read_only = True
         return fields
 
-    domain_fields = [
-        BaseDomainField("contractor_type", DomainCategoryChoices.contractor_type)
-    ]
+    domain_fields = (
+        BaseDomainField("contractor_type", DomainCategoryChoices.contractor_type),
+    )

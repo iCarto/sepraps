@@ -4,3 +4,4 @@ export {
 export {
     default as DeleteContractorContactDialog,
 } from "./DeleteContractorContactDialog";
+export {default as ViewContractorContactPanel} from "./ViewContractorContactPanel";
