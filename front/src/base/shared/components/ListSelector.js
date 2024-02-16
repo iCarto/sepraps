@@ -90,13 +90,23 @@ const ListSelector = ({
                                 "aria-labelledby": "basic-button",
                             }}
                         >
-                            <MenuItem onClick={() => onClickMenuButton("create")}>
+                            <MenuItem
+                                onClick={() => {
+                                    handleCloseMenu();
+                                    onClickMenuButton("create");
+                                }}
+                            >
                                 <ListItemIcon>
                                     <AddIcon />
                                 </ListItemIcon>
                                 <ListItemText>Crear nuevo</ListItemText>
                             </MenuItem>
-                            <MenuItem onClick={() => onClickMenuButton("import")}>
+                            <MenuItem
+                                onClick={() => {
+                                    handleCloseMenu();
+                                    onClickMenuButton("import");
+                                }}
+                            >
                                 <ListItemIcon>
                                     <InputIcon />
                                 </ListItemIcon>

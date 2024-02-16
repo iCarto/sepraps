@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 import {ProjectService} from "project/service";
 import {building_component_view_adapter} from "buildingComponent/model";
@@ -10,10 +10,11 @@ import {DialogLayout} from "base/dialog/components";
 
 const CreateBuildingComponentDialog = ({isDialogOpen, onCloseDialog}) => {
     const navigate = useNavigateWithReload();
-    const location = useLocation();
-    const {id: projectId, buildingComponentId} = useParams();
+    const {id: projectId} = useParams();
 
     const [error, setError] = useState("");
+
+    const basePath = `/projects/list/${projectId}/buildingcomponents/list`;
 
     const handleFormSubmit = data => {
         ProjectService.createProjectBuildingComponentMonitoring(
@@ -22,13 +23,7 @@ const CreateBuildingComponentDialog = ({isDialogOpen, onCloseDialog}) => {
         )
             .then(createdBCMonitoring => {
                 onCloseDialog();
-                navigate(
-                    location.pathname.replace(
-                        buildingComponentId,
-                        createdBCMonitoring.id
-                    ),
-                    true
-                );
+                navigate(`${basePath}/${createdBCMonitoring.id}`, true);
             })
             .catch(error => {
                 console.log(error);
