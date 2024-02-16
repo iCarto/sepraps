@@ -7,18 +7,18 @@ const UpdateContractContactPanel = ({area}) => {
     let contract;
     [contract] = useOutletContext();
 
+    const getAllowedPosts = contract => {
+        const supervisionArea = contract?.supervision_areas.find(
+            supervision_area => supervision_area.area === area
+        );
+        return supervisionArea ? supervisionArea.staff : [];
+    };
+
     return (
         <UpdateContactPanel
             service={ContractContactService}
             basePath={`/contracts/list/${contract.id}/${area}_staff`}
-            allowedPosts={[
-                "residente_obra",
-                "fiscal_obra",
-                "supervisor_obra",
-                "coordinador_social",
-                "supervisor_social",
-                "otro_contacto",
-            ]}
+            allowedPosts={getAllowedPosts(contract)}
             entityId={contract.id}
         />
     );
