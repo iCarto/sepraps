@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
 from django.db.models import Q
+from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
@@ -15,6 +16,7 @@ from rest_framework.response import Response
 from app.base.views.base_viewsets import ModelListViewSet
 from app.models.building_component import BuildingComponent
 from app.models.building_component_monitoring import BuildingComponentMonitoring
+from app.models.certification import Certification
 from app.models.connection import Connection
 from app.models.milestone import Milestone
 from app.models.project import Project
@@ -25,6 +27,10 @@ from app.serializers.building_component_monitoring_serializer import (
     BuildingComponentMonitoringSummarySerializer,
 )
 from app.serializers.building_component_serializer import BuildingComponentSerializer
+from app.serializers.certification_serializer import (
+    CertificationSerializer,
+    CertificationSummarySerializer,
+)
 from app.serializers.connection_serializer import ConnectionSerializer
 from app.serializers.milestone_serializer import MilestoneSerializer
 from app.serializers.project_questionnaire_instance_serializer import (
@@ -58,12 +64,12 @@ class ProjectFilter(filters.FilterSet):
     financing_program = filters.CharFilter(method="filter_by_financing_program")
     last_modified_items = filters.CharFilter(method="filter_by_last_modified_items")
 
-    def filter_by_status(self, queryset, name, status):
+    def filter_by_status(self, queryset, name, status):  # noqa: ARG002
         if status == "active":
             return queryset.filter(closed=False)
         return queryset
 
-    def filter_by_search_text(self, queryset, name, search_text):
+    def filter_by_search_text(self, queryset, name, search_text):  # noqa: ARG002
         return queryset.filter(
             Q(linked_localities__name__icontains=search_text)
             | Q(linked_localities__district__name__icontains=search_text)
@@ -71,26 +77,26 @@ class ProjectFilter(filters.FilterSet):
             | Q(code__icontains=search_text)
         ).distinct()
 
-    def filter_by_locality(self, queryset, param_name, search_value):
+    def filter_by_locality(self, queryset, param_name, search_value):  # noqa: ARG002
         return queryset.filter(models.Q(main_infrastructure__locality=search_value))
 
-    def filter_by_district(self, queryset, param_name, district):
+    def filter_by_district(self, queryset, param_name, district):  # noqa: ARG002
         return queryset.filter(models.Q(linked_localities__district=district))
 
-    def filter_by_department(self, queryset, param_name, department):
+    def filter_by_department(self, queryset, param_name, department):  # noqa: ARG002
         return queryset.filter(models.Q(linked_localities__department=department))
 
-    def filter_by_construction_contract(self, queryset, param_name, search_value):
+    def filter_by_construction_contract(self, queryset, param_name, search_value):  # noqa: ARG002
         return queryset.filter(
             models.Q(related_contracts__contract=search_value)
         ).distinct()
 
-    def filter_by_financing_program(self, queryset, param_name, search_value):
+    def filter_by_financing_program(self, queryset, param_name, search_value):  # noqa: ARG002
         return queryset.filter(
             models.Q(related_contracts__contract__financing_program=search_value)
         ).distinct()
 
-    def filter_by_last_modified_items(self, queryset, name, last_modified_items):
+    def filter_by_last_modified_items(self, queryset, name, last_modified_items):  # noqa: ARG002
         limit = int(last_modified_items)
         return queryset.filter(closed=False).order_by("-updated_at")[:limit]
 
@@ -158,7 +164,7 @@ class ProjectViewSet(ModelListViewSet):
             return Response(serializer.validated_data)
 
     @action(detail=True, methods=["put"], url_path="close")
-    def close_project(self, request, pk=None):
+    def close_project(self, request, pk=None):  # noqa: ARG002
         project = self.get_object()
 
         project.closed = True
@@ -168,8 +174,42 @@ class ProjectViewSet(ModelListViewSet):
         return HttpResponse(status=200)
 
     @action(detail=True)
-    def milestones(self, request, pk=None):
-        """Returns a list of all the milestones for the project"""
+    def contacts(self, request, pk=None):  # noqa: ARG002
+        """Returns a list of all the contacts for the project."""
+        # TODO(egago): optimize query
+        project = self.get_object()
+
+        provider_contacts = []
+        if project.provider:
+            provider_contacts = project.provider.providercontact_set.all()
+
+        contract_contacts = []
+        contractor_contacts = []
+        # TODO(egago): Find contacts from associated project contracts
+        # if project.construction_contract:
+        #    contract_contacts = (
+        #        project.construction_contract.constructioncontractcontact_set.all()
+        #    )
+
+        #    if project.construction_contract.contractor:
+        #        contractor_contacts = (
+        #            project.construction_contract.contractor.contractorcontact_set.all()
+        #        )
+
+        return Response(
+            ContactRelationshipSerializer(
+                sorted(
+                    chain(provider_contacts, contract_contacts, contractor_contacts),
+                    key=lambda entitycontact: entitycontact.contact.name,
+                ),
+                many=True,
+                context={"request": request, "domain": DomainEntry.objects.all()},
+            ).data
+        )
+
+    @action(detail=True)
+    def milestones(self, request, pk=None):  # noqa: ARG002
+        """Returns a list of all the milestones for the project."""
         project = self.get_object()
         milestones = (
             Milestone.objects.filter(project=project)
@@ -189,8 +229,8 @@ class ProjectViewSet(ModelListViewSet):
         methods=["get", "put"],
         url_path="questionnaire_instances/(?P<questionnaire_code>\w+)",  # noqa: W605
     )
-    def questionnaire_instances(self, request, questionnaire_code, pk=None):
-        """Returns a list of all the instances of the questionnaire for the project"""
+    def questionnaire_instances(self, request, questionnaire_code, pk=None):  # noqa: ARG002
+        """Returns a list of all the instances of the questionnaire for the project."""
         project = self.get_object()
         questionnaire = Questionnaire.objects.get(pk=questionnaire_code)
         instances = ProjectQuestionnaireInstance.objects.filter(
@@ -207,11 +247,11 @@ class ProjectViewSet(ModelListViewSet):
             if not serializer.is_valid():
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             serializer.update(
-                instance=dict(
-                    project=project,
-                    questionnaire=questionnaire,
-                    questionnaire_instances=questionnaire_instances,
-                ),
+                instance={
+                    "project": project,
+                    "questionnaire": questionnaire,
+                    "questionnaire_instances": questionnaire_instances,
+                },
                 validated_data=serializer.validated_data,
             )
 
@@ -224,11 +264,11 @@ class ProjectViewSet(ModelListViewSet):
 
         return Response(
             ProjectQuestionnaireInstanceSerializer(
-                dict(
-                    project=project,
-                    questionnaire=questionnaire,
-                    questionnaire_instances=questionnaire_instances,
-                ),
+                {
+                    "project": project,
+                    "questionnaire": questionnaire,
+                    "questionnaire_instances": questionnaire_instances,
+                },
                 context={"request": request},
             ).data
         )
@@ -274,17 +314,15 @@ class ProjectViewSet(ModelListViewSet):
                 monitoring.save()
 
                 return Response(BuildingComponentMonitoringSerializer(monitoring).data)
-            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        elif request.method == "GET":
-            return Response(
-                BuildingComponentMonitoringSummarySerializer(
-                    BuildingComponentMonitoring.objects.filter(project=pk).order_by(
-                        "id"
-                    ),
-                    many=True,
-                ).data
+        if request.method == "GET":
+            bc_monitorings = BuildingComponentMonitoring.objects.filter(
+                project=pk
+            ).order_by("id")
+            serializer = BuildingComponentMonitoringSummarySerializer(
+                bc_monitorings, many=True
             )
+            return Response(serializer.data)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
     @action(
@@ -310,12 +348,14 @@ class ProjectViewSet(ModelListViewSet):
                     )
 
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        elif request.method == "GET":
+        if request.method == "GET":
+            sc_monitorings = SocialComponentMonitoring.objects.filter(
+                project=pk
+            ).order_by("id")
+
             return Response(
                 SocialComponentMonitoringSummarySerializer(
-                    SocialComponentMonitoring.objects.filter(project=pk).order_by("id"),
-                    many=True,
+                    sc_monitorings, many=True
                 ).data
             )
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -326,7 +366,7 @@ class ProjectViewSet(ModelListViewSet):
         url_path="buildingcomponenttypes",
         url_name="building_component_types",
     )
-    def get_building_component_types(self, request, pk):
+    def get_building_component_types(self, request, pk):  # noqa: ARG002
         project = self.get_object()
         result = []
         for component_code, component_config in get_building_components_config(
@@ -343,7 +383,7 @@ class ProjectViewSet(ModelListViewSet):
         url_path="socialcomponenttypes",
         url_name="social_component_types",
     )
-    def get_social_component_types(self, request, pk):
+    def get_social_component_types(self, request, pk):  # noqa: ARG002
         project = self.get_object()
         result = []
         for component_code, component_config in get_social_components_config(
@@ -357,13 +397,52 @@ class ProjectViewSet(ModelListViewSet):
     @action(
         methods=["GET"], detail=True, url_path="connections", url_name="connections"
     )
-    def get_connections(self, request, pk):
+    def get_connections(self, request, pk):  # noqa: ARG002
         project = self.get_object()
         connection = Connection.objects.filter(project=project)
 
         serializer = ConnectionSerializer(connection, many=True)
 
         return Response(serializer.data)
+
+    @action(
+        methods=["GET", "POST"],
+        detail=True,
+        url_path="certifications",
+        url_name="certifications",
+    )
+    def manage_project_certifications(self, request, pk):
+        if request.method == "POST":
+            project = self.get_object()
+            if project:
+                serializer = CertificationSerializer(data=request.data)
+                if serializer.is_valid():
+                    certification = serializer.save(
+                        project=project,
+                        created_by=request.user,
+                        updated_by=request.user,
+                    )
+
+                    return Response(CertificationSerializer(certification).data)
+
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        if request.method == "GET":
+            certifications = (
+                Certification.objects.filter(project=pk)
+                .annotate(
+                    approval_date=Coalesce(
+                        "payment__approval_date", "payment__expected_approval_date"
+                    )
+                )
+                .order_by("approval_date")
+            )
+            serializer = CertificationSummarySerializer(
+                certifications, many=True, context={"request": request}
+            )
+            return Response(serializer.data)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 def get_building_components_config(project):

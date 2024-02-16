@@ -47,6 +47,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "related_contracts",
             "physical_progress_percentage",
             "financial_progress_percentage",
+            "bm_total_expected_amount",
             "creation_user",
             "created_at",
             "updated_at",
@@ -213,6 +214,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
     closed = serializers.BooleanField()
     linked_localities = LocalitySerializer(many=True)
     provider_name = serializers.CharField(source="provider.name", default=None)
@@ -237,11 +239,13 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
     )
     physical_progress_percentage = serializers.SerializerMethodField()
     financial_progress_percentage = serializers.SerializerMethodField()
+    number_of_bcomponents = serializers.SerializerMethodField()
 
     class Meta(ProjectSerializer.Meta):
         fields = (
             "id",
             "code",
+            "name",
             "closed",
             "project_type",
             "project_class",
@@ -258,6 +262,7 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
             "milestones",
             "physical_progress_percentage",
             "financial_progress_percentage",
+            "number_of_bcomponents",
             "latitude",
             "longitude",
             "created_at",
@@ -269,6 +274,12 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
 
     def get_financial_progress_percentage(self, obj):
         return obj.financial_progress_percentage
+
+    def get_number_of_bcomponents(self, obj):
+        return obj.project_building_monitorings.count()
+
+    def get_name(self, obj):
+        return " - ".join(i.name for i in obj.linked_localities.all())
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""

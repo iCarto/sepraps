@@ -16,7 +16,6 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
 
     objects = ActiveManager()
 
-    id = models.AutoField(primary_key=True)
     name = models.CharField("Nombre", max_length=255)
 
     expected_fixed_amount = models.DecimalField(
@@ -75,6 +74,10 @@ class Payment(BaseDocumentModel, BaseEntityModelMixin):
             approval_date__lte=(self.approval_date or self.expected_approval_date),
         ).aggregate(total=models.Sum("paid_total_amount"))["total"]
         return contract_paid_total_amount_cumulative or 0
+
+    @property
+    def certifications(self):
+        return self.payment_certifications.all()
 
 
 @receiver(pre_save, sender=Payment)

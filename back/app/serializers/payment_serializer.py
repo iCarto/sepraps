@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.db import models
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import (
@@ -46,6 +47,8 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             "paid_awarded_contract_percentage_cumulative",
             "expected_total_contract_amount",
             "amended_expected_total_contract_amount",
+            "certifications",
+            "certifications_total_amount",
         )
 
     domain_fields = (BaseDomainField("status", DomainCategoryChoices.product_status),)
@@ -75,6 +78,8 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
     contract_payment_criteria_type = serializers.CharField(
         source="contract.payment_criteria_type", read_only=True
     )
+    certifications = serializers.SerializerMethodField()
+    certifications_total_amount = serializers.SerializerMethodField()
 
     def get_payment_products(self, instance):
         products = instance.products.all().order_by("created_at", "id")
@@ -144,6 +149,25 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             100
             * Decimal(paid_total_amount_cumulative)
             / Decimal(contract_awarded_amount)
+        )
+
+    def get_certifications(self, instance):
+        from app.serializers.certification_serializer import (
+            CertificationSummarySerializer,
+        )
+
+        certifications = instance.certifications.all()
+        return CertificationSummarySerializer(
+            certifications, read_only=True, many=True, context=self.context
+        ).data
+
+    def get_certifications_total_amount(self, instance):
+        certifications = instance.certifications.all()
+        return (
+            certifications.aggregate(total_amount=models.Sum("approved_amount"))[
+                "total_amount"
+            ]
+            or 0
         )
 
 

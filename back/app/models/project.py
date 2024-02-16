@@ -68,6 +68,7 @@ class Project(models.Model):
 
     # This field only exists to retrieve questionnaires list for project menu
     # TODO: Explore if there is another solution for this use case
+    # TODO(cmartin): remove if we are not using questionnaires any more
     questionnaires = models.ManyToManyField(Questionnaire)
     questionnaires_instances = models.ManyToManyField(
         MonthlyQuestionnaireInstance, through="ProjectQuestionnaireInstance"
@@ -132,6 +133,15 @@ class Project(models.Model):
         )
 
         return round(total_progress / len(building_monitorings))
+
+    @property
+    def bm_total_expected_amount(self):
+        building_monitorings = self.project_building_monitorings.all()
+
+        if not building_monitorings:
+            return 0
+
+        return sum(bm.expected_amount for bm in building_monitorings)
 
     def __str__(self):
         return self.code
