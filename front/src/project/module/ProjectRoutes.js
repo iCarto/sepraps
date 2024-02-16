@@ -24,6 +24,7 @@ import {
     ViewProjectConnectionsContent,
     ViewProjectSocialAnalysisContent,
     ViewProjectContactPanel,
+    ViewProjectCertificationsSubPage,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -44,6 +45,12 @@ import {
 import ViewBuildingComponentMonitoringDocumentPanel from "buildingComponentMonitoring/container/ViewBuildingComponentMonitoringDocumentPanel";
 import {ViewSocialComponentsOverview} from "socialComponent/container";
 import {ContactService} from "contact/service";
+import {
+    CreateCertificationContent,
+    ViewCertificationContent,
+    ViewCertificationsAnalysisContent,
+    ViewCertificationsOverview,
+} from "certification/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -155,6 +162,39 @@ const projectRoutes = [
                     key="project-component-analysis"
                     path="analysis"
                     element={<ViewBuildingComponentsAnalysisContent />}
+                />
+            </Route>
+
+            <Route
+                key="project-certifications"
+                path="certifications"
+                element={<ViewProjectCertificationsSubPage />}
+            >
+                <Route
+                    key="project-certifications-new"
+                    path="list/new"
+                    element={<CreateCertificationContent />}
+                />
+                <Route
+                    key="project-certifications-overview"
+                    path="overview"
+                    element={<ViewCertificationsOverview />}
+                />
+                <Route
+                    key="project-certifications-detail"
+                    path="list/:certificationId?"
+                    element={<ViewCertificationContent />}
+                >
+                    <Route
+                        key="project-certifications-detail-documents-view"
+                        path="document/:idDocument"
+                        element={<ViewDocumentPanel />}
+                    />
+                </Route>
+                <Route
+                    key="project-certifications-analysis"
+                    path="analysis"
+                    element={<ViewCertificationsAnalysisContent />}
                 />
             </Route>
 

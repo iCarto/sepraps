@@ -101,6 +101,8 @@ const project_view_adapter = project => {
     delete project["related_contracts"];
     delete project["financial_progress_percentage"];
     delete project["physical_progress_percentage"];
+    delete project["number_of_bcomponents"];
+    delete project["bm_total_expected_amount"];
     delete project["name"];
     delete project["location"];
     delete project["milestones"];
@@ -142,6 +144,8 @@ const createProject = ({
     related_contracts = [],
     financial_progress_percentage = null,
     physical_progress_percentage = null,
+    number_of_bcomponents = null,
+    bm_total_expected_amount = null,
     folder = "",
     milestones = [],
     questionnaires = [],
@@ -172,6 +176,8 @@ const createProject = ({
         related_contracts,
         financial_progress_percentage,
         physical_progress_percentage,
+        number_of_bcomponents,
+        bm_total_expected_amount,
         folder,
         milestones,
         questionnaires,

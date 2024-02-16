@@ -23,6 +23,11 @@ import {
 } from "socialComponentMonitoring/model";
 import {connection_api_adapter, createConnections} from "connection/model";
 import {ServiceUtil} from "base/api/utilities";
+import {
+    certification_api_adapter,
+    createCertification,
+    createCertifications,
+} from "certification/model";
 
 const basePath = "/api/app/projects";
 
@@ -153,14 +158,6 @@ const ProjectService = {
         });
     },
 
-    getProjectConnections(projectId) {
-        return AuthApiService.get(`${basePath}/${projectId}/connections`).then(
-            response => {
-                return createConnections(connection_api_adapter(response));
-            }
-        );
-    },
-
     createProjectSocialComponent(projectId, socialComponent) {
         return AuthApiService.post(
             `${basePath}/${projectId}/socialcomponentmonitorings`,
@@ -169,6 +166,31 @@ const ProjectService = {
             return createSocialComponentMonitoring(
                 social_component_monitoring_api_adapter(response)
             );
+        });
+    },
+
+    getProjectConnections(projectId) {
+        return AuthApiService.get(`${basePath}/${projectId}/connections`).then(
+            response => {
+                return createConnections(connection_api_adapter(response));
+            }
+        );
+    },
+
+    getProjectCertifications(projectId) {
+        return AuthApiService.get(`${basePath}/${projectId}/certifications`).then(
+            response => {
+                return createCertifications(certification_api_adapter(response));
+            }
+        );
+    },
+
+    createProjectCertification(projectId, certification) {
+        return AuthApiService.post(
+            `${basePath}/${projectId}/certification`,
+            certification
+        ).then(response => {
+            return createCertification(certification_api_adapter(response));
         });
     },
 

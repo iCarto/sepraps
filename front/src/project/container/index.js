@@ -45,3 +45,6 @@ export {
     default as ViewProjectSocialAnalysisContent,
 } from "./ViewProjectSocialAnalysisContent";
 export {default as ViewProjectContactPanel} from "./ViewProjectContactPanel";
+export {
+    default as ViewProjectCertificationsSubPage,
+} from "./ViewProjectCertificationsSubPage";

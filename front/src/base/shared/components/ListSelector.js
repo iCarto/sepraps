@@ -67,7 +67,7 @@ const ListSelector = ({
                         }}
                     >
                         <Tooltip id="add-new-button-tooltip" title="Añadir nuevo">
-                            <AddCircleOutlineOutlinedIcon fontSize="inherit" />
+                            <AddCircleOutlineOutlinedIcon color="primary" />
                         </Tooltip>
                     </IconButton>
                 ) : null}
