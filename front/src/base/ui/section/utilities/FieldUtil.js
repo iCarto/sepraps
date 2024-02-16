@@ -1,4 +1,3 @@
-import {DomainProvider} from "sepraps/domain/provider";
 import {SectionDomainField, SectionField} from "../components";
 
 const FieldUtil = {
@@ -33,11 +32,8 @@ const FieldUtil = {
     },
 
     getSectionDomainField(label, value, domain) {
-        return (
-            <DomainProvider>
-                <SectionDomainField label={label} value={value} fieldDomain={domain} />
-            </DomainProvider>
-        );
+        // Remember to include <DomainProvider> in some place of parents components tree
+        return <SectionDomainField label={label} value={value} fieldDomain={domain} />;
     },
 };
 

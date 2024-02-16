@@ -1,4 +1,3 @@
-import {DomainProvider} from "sepraps/domain/provider";
 import {FormUtil} from "base/form/utilities";
 import {DYNAMIC_TYPES} from ".";
 import {
@@ -66,15 +65,14 @@ const DynamicFormUtil = {
             );
         }
         if (attributeSchema.type === DYNAMIC_TYPES.DOMAIN) {
+            // Remember to include <DomainProvider> in some place of parents components tree
             return (
-                <DomainProvider>
-                    <DynamicFormSelect
-                        key={attributeName}
-                        name={attributeName}
-                        label={attributeSchema.label}
-                        fieldDomain={attributeSchema.domain}
-                    />
-                </DomainProvider>
+                <DynamicFormSelect
+                    key={attributeName}
+                    name={attributeName}
+                    label={attributeSchema.label}
+                    fieldDomain={attributeSchema.domain}
+                />
             );
         }
         return (

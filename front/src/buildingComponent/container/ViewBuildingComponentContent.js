@@ -30,6 +30,7 @@ import {AlertError} from "base/error/components";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {DomainProvider} from "sepraps/domain/provider";
 
 const ViewBuildingComponentContent = () => {
     const {project, bcMonitorings} = useOutletContext();
@@ -143,16 +144,18 @@ const ViewBuildingComponentContent = () => {
                         <ViewOrUpdateBuildingComponentMonitoringDataContent
                             bcMonitoring={bCMonitoring}
                         />
-                        <ViewOrUpdateBuildingComponentDataContent
-                            buildingComponent={bCMonitoring?.building_component}
-                            sectionName="Datos técnicos"
-                            propertiesKey="technical_properties"
-                        />
-                        <ViewOrUpdateBuildingComponentDataContent
-                            buildingComponent={bCMonitoring?.building_component}
-                            sectionName="Datos de validación"
-                            propertiesKey="validation_properties"
-                        />
+                        <DomainProvider>
+                            <ViewOrUpdateBuildingComponentDataContent
+                                buildingComponent={bCMonitoring?.building_component}
+                                sectionName="Datos técnicos"
+                                propertiesKey="technical_properties"
+                            />
+                            <ViewOrUpdateBuildingComponentDataContent
+                                buildingComponent={bCMonitoring?.building_component}
+                                sectionName="Datos de validación"
+                                propertiesKey="validation_properties"
+                            />
+                        </DomainProvider>
                         <ViewOrUpdateFilesDataContent
                             folderPath={bCMonitoring.folder}
                         />
