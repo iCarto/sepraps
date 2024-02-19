@@ -31,27 +31,31 @@ const SubPageMenuListGroup = ({
     defaultExpanded = false,
 }) => {
     const theme = useTheme();
-    const {opened, setOpened, selectedGroup} = usePageMenu();
+    const {expandedGroup, setExpandedGroup} = usePageMenu();
     const [showChildren, setShowChildren] = useState(false);
 
-    const submenuItems = items.map((menuListSubItem, index) => (
-        <SubPageMenuListGroupItemButton
-            parentId={id}
-            key={index}
-            text={menuListSubItem.text}
-            to={menuListSubItem.to}
-        />
-    ));
+    const submenuItems = items.map((menuListSubItem, index) => {
+        return (
+            <SubPageMenuListGroupItemButton
+                key={index}
+                text={menuListSubItem.text}
+                to={menuListSubItem.to}
+                urlSlug={menuListSubItem.urlSlug}
+                parentId={id}
+            />
+        );
+    });
 
     const onClickHeader = () => {
-        setOpened(id);
+        setExpandedGroup(id);
         setShowChildren(prevState => !prevState);
     };
 
     useEffect(() => {
-        setShowChildren(opened === id);
-        if (defaultExpanded) setOpened(id);
-    }, [opened]);
+        setShowChildren(expandedGroup === id);
+
+        if (defaultExpanded) setExpandedGroup(id);
+    }, [expandedGroup, id, defaultExpanded]);
 
     const SubmenuTitle = () => {
         return (
@@ -66,7 +70,7 @@ const SubPageMenuListGroup = ({
                     style={{
                         minWidth: "35px",
                         color:
-                            selectedGroup === id
+                            expandedGroup === id
                                 ? theme.palette.menu.primary.header.text
                                 : theme.palette.menu.primary.header.icon,
                     }}
@@ -83,7 +87,7 @@ const SubPageMenuListGroup = ({
             {headerTitle ? (
                 <SubmenuAccordion
                     accordionTitle={<SubmenuTitle />}
-                    // expanded={showChildren} Always show expanded until users are familir with it
+                    //expanded={showChildren} Always show expanded until users are familir with it
                     expanded={true}
                     defaultExpanded={defaultExpanded}
                     handleClick={onClickHeader}

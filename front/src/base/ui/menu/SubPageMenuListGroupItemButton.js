@@ -12,26 +12,26 @@ import Divider from "@mui/material/Divider";
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 
 const SubPageMenuListGroupItemButton = ({
-    parentId,
-    to,
     text,
+    to,
+    urlSlug,
+    parentId,
     icon = null,
     ...props
 }) => {
     const theme = useTheme();
-    const {setOpened, setSelectedGroup} = usePageMenu();
+    const {setExpandedGroup} = usePageMenu();
 
     let resolved = useResolvedPath(to);
     let location = useLocation();
 
     const selected =
         location.pathname.includes(resolved.pathname) ||
-        location.pathname.includes(parentId);
+        location.pathname.includes(urlSlug);
 
     useEffect(() => {
         if (selected) {
-            setSelectedGroup(parentId);
-            setOpened(parentId);
+            setExpandedGroup(parentId);
         }
     }, [location]);
 

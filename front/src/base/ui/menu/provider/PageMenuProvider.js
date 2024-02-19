@@ -3,19 +3,15 @@ import {useState, createContext, useContext} from "react";
 let PageMenuContext = createContext(null);
 
 export default function PageMenuProvider({children}) {
-    const [opened, setOpened] = useState(null);
-    const [selectedGroup, setSelectedGroup] = useState(null);
+    const [expandedGroup, setExpandedGroup] = useState(null);
 
     const clearSelected = () => {
-        setOpened(null);
-        setSelectedGroup(null);
+        setExpandedGroup(null);
     };
 
     let value = {
-        opened,
-        setOpened,
-        selectedGroup,
-        setSelectedGroup,
+        expandedGroup,
+        setExpandedGroup,
         clearSelected,
     };
 

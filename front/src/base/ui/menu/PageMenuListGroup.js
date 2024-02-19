@@ -29,7 +29,7 @@ const PageMenuListGroup = ({
     items = [],
 }) => {
     const theme = useTheme();
-    const {opened, setOpened, selectedGroup} = usePageMenu();
+    const {expandedGroup, setExpandedGroup} = usePageMenu();
     const [showChildren, setShowChildren] = useState(false);
 
     const menuItems = items.map((menuListSubItem, index) => (
@@ -38,16 +38,17 @@ const PageMenuListGroup = ({
             key={index}
             text={menuListSubItem.text}
             to={menuListSubItem.to}
+            urlSlug={menuListSubItem.urlSlug}
         />
     ));
 
     const onClickHeader = () => {
-        setOpened(id);
+        setExpandedGroup(id);
     };
 
     useEffect(() => {
-        setShowChildren(opened === id);
-    }, [opened]);
+        setShowChildren(expandedGroup === id);
+    }, [expandedGroup, id]);
 
     return (
         <>
@@ -61,7 +62,7 @@ const PageMenuListGroup = ({
                             style={{
                                 minWidth: "35px",
                                 color:
-                                    selectedGroup === id
+                                    expandedGroup === id
                                         ? theme.palette.menu.primary.header.text
                                         : theme.palette.menu.primary.header.icon,
                             }}
