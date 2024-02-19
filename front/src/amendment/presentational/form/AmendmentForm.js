@@ -6,6 +6,7 @@ import {FormUtil} from "base/form/utilities";
 import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
 import {AmendmentFormDataFields} from ".";
+import {NumberUtil} from "base/format/utilities";
 
 const AmendmentForm = ({
     contractId,
@@ -18,7 +19,9 @@ const AmendmentForm = ({
         id: FormUtil.getFormValue(amendment?.id),
         signature_date: FormUtil.getFormValue(amendment?.signature_date),
         amendment_type: FormUtil.getFormValue(amendment?.amendment_type),
-        extra_amount: FormUtil.getFormValue(amendment?.extra_amount),
+        extra_amount: FormUtil.getFormValue(
+            NumberUtil.formatDecimal(amendment?.extra_amount, 0)
+        ),
         extra_period: FormUtil.getFormValue(amendment?.extra_period),
     };
 
