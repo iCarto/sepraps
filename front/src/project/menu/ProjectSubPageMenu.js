@@ -23,10 +23,12 @@ const ProjectSubPageMenu = ({project}) => {
         {
             to: `${basePath}/buildingcomponents/overview`,
             text: "Supervisión",
+            urlSlug: "buildingcomponents",
         },
         {
             to: `${basePath}/certifications/overview`,
             text: "Certificaciones",
+            urlSlug: "certifications",
         },
     ];
 
@@ -34,6 +36,7 @@ const ProjectSubPageMenu = ({project}) => {
         {
             to: `${basePath}/socialcomponents/overview`,
             text: "Supervisión",
+            urlSlug: "socialcomponents",
         },
     ];
 
@@ -88,7 +91,7 @@ const ProjectSubPageMenu = ({project}) => {
                 icon={<DirectionsCarFilledOutlinedIcon />}
             />
             <SubPageMenuListGroup
-                id="buildingcomponents"
+                id="building-supervision"
                 headerTitle="Área técnica"
                 headerIcon={<HandymanOutlinedIcon />}
                 items={buildingSupervisionAreaSubmenuItems}
