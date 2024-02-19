@@ -18,13 +18,18 @@ class SocialComponentMonitoringViewSet(ModelListAuditViewSet):
     queryset = SocialComponentMonitoring.objects.all()
     serializer_class = SocialComponentMonitoringSerializer
 
+    def get_queryset(self):
+        return self.queryset.select_related("project").prefetch_related(
+            "comments", "social_component_monitoring_trainings"
+        )
+
     @action(
         methods=["POST"],
         detail=True,
         url_path="comments",
         url_name="social_component_monitoring_comments",
     )
-    def save_building_component_monitoring_social(self, request, pk):
+    def save_building_component_monitoring_social(self, request):
         sc_monitoring = self.get_object()
         if sc_monitoring:
             serializer = CommentSerializer(data=request.data)

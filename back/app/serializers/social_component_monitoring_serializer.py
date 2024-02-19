@@ -16,7 +16,8 @@ from domains.models import DomainCategoryChoices
 class SocialComponentMonitoringSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = SocialComponentMonitoring
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
             "code",
             "name",
             "execution_status",
@@ -42,7 +43,8 @@ class SocialComponentMonitoringSummarySerializer(
 ):
     class Meta(BaseSummarySerializer.Meta):
         model = SocialComponentMonitoring
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "code",
             "name",
             "progress_percentage",
@@ -61,13 +63,3 @@ class SocialComponentMonitoringSummarySerializer(
         ),
         BaseDomainField("quality_status", DomainCategoryChoices.quality_status_type),
     ]
-
-    def setup_eager_loading(queryset):
-        """Perform necessary eager loading of data."""
-        return queryset.select_related(
-            "social_component_monitoring", "contract", "contractor"
-        ).prefetch_related(
-            "social_component_monitoring_trainings",
-            "contract_social_trainings",
-            "contractor_social_trainings",
-        )
