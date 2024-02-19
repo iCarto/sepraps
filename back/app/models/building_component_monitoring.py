@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -55,9 +53,8 @@ class BuildingComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
 
     @property
     def financial_progress_percentage(self):
-        if self.total_amount and self.expected_amount:
-            total_amount = Decimal(self.total_amount)
-            return format_decimal((total_amount / (self.expected_amount)) * 100)
+        if self.paid_amount and self.expected_amount:
+            return format_decimal((self.paid_amount / (self.expected_amount)) * 100)
         return None
 
 
