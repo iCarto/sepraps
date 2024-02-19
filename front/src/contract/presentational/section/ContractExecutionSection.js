@@ -16,22 +16,23 @@ const ContractExecutionSection = ({contract, services = null}) => {
                     DateUtil.formatDate(contract?.execution_start_date)
                 )}
             </Grid>
-            <Grid item xs={6}>
-                {contract?.execution_start_date &&
-                    FieldUtil.getSectionField(
+            {contract?.execution_start_date && (
+                <Grid item xs={6}>
+                    {FieldUtil.getSectionField(
                         "Fecha prevista de fin de ejecución",
                         DateUtil.formatDate(contract?.expected_execution_end_date)
                     )}
-                {contract?.amended_expected_execution_end_date &&
-                    FieldUtil.getSectionField(
-                        "Fecha prevista de fin de ejecución ampliada",
-                        DateUtil.formatDate(
-                            contract?.amended_expected_execution_end_date
-                        ),
-                        "",
-                        "Ver adendas"
-                    )}
-            </Grid>
+                    {contract?.amended_expected_execution_end_date &&
+                        FieldUtil.getSectionField(
+                            "Fecha prevista de fin de ejecución ampliada",
+                            DateUtil.formatDate(
+                                contract?.amended_expected_execution_end_date
+                            ),
+                            "",
+                            "Ver adendas"
+                        )}
+                </Grid>
+            )}
         </Grid>
     );
 };

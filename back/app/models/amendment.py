@@ -41,7 +41,7 @@ class Amendment(BaseDocumentModel, BaseEntityModelMixin):
 
         return (
             format_decimal(self.contract.awarding_budget + cumulative_amended_amount)
-            if cumulative_amended_amount
+            if self.contract.awarding_budget and cumulative_amended_amount
             else self.contract.awarding_budget
         )
 
@@ -59,7 +59,8 @@ class Amendment(BaseDocumentModel, BaseEntityModelMixin):
                 self.contract.expected_execution_period
                 + cumulative_amended_execution_period
             )
-            if cumulative_amended_execution_period
+            if self.contract.expected_execution_period
+            and cumulative_amended_execution_period
             else self.contract.expected_execution_period
         )
 

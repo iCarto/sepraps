@@ -39,7 +39,9 @@ const DeviationChip = ({deviationValue, tooltipText = ""}) => {
 };
 
 const AmountAmendmentData = ({amendment, contract}) => {
-    const deviation = (amendment.extra_amount / contract.awarding_budget) * 100;
+    const deviation = contract.awarding_budget
+        ? (amendment.extra_amount / contract.awarding_budget) * 100
+        : null;
 
     return (
         <>
@@ -59,19 +61,22 @@ const AmountAmendmentData = ({amendment, contract}) => {
                     unit={CURRENCY_SYMBOL}
                 />
             </Grid>
-            <Grid container item xs justifyContent="center" alignItems="center">
-                <DeviationChip
-                    deviationValue={deviation}
-                    tooltipText="Con respecto al contrato original"
-                />
-            </Grid>
+            {deviation && (
+                <Grid container item xs justifyContent="center" alignItems="center">
+                    <DeviationChip
+                        deviationValue={deviation}
+                        tooltipText="Con respecto al contrato original"
+                    />
+                </Grid>
+            )}
         </>
     );
 };
 
 const ExecutionPeriodAmendmentData = ({amendment, contract}) => {
-    const deviation =
-        (amendment.extra_period / contract.expected_execution_period) * 100;
+    const deviation = contract.expected_execution_period
+        ? (amendment.extra_period / contract.expected_execution_period) * 100
+        : null;
 
     return (
         <>
@@ -85,19 +90,25 @@ const ExecutionPeriodAmendmentData = ({amendment, contract}) => {
             <Grid container item xs={5}>
                 <SectionField
                     label="Plazo de ejecución del contrato ampliado"
-                    value={`${parseInt(
+                    value={
                         amendment.cumulative_contract_amended_execution_period
-                    )} días (${
-                        contract.total_expected_execution_period_in_months
-                    } meses)`}
+                            ? `${parseInt(
+                                  amendment.cumulative_contract_amended_execution_period
+                              )} días (${
+                                  contract.total_expected_execution_period_in_months
+                              } meses)`
+                            : ""
+                    }
                 />
             </Grid>
-            <Grid container item xs justifyContent="center" alignItems="center">
-                <DeviationChip
-                    deviationValue={deviation}
-                    tooltipText="Con respecto al contrato original"
-                />
-            </Grid>
+            {deviation && (
+                <Grid container item xs justifyContent="center" alignItems="center">
+                    <DeviationChip
+                        deviationValue={deviation}
+                        tooltipText="Con respecto al contrato original"
+                    />
+                </Grid>
+            )}
         </>
     );
 };

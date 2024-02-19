@@ -41,15 +41,18 @@ const ProjectContractSection = ({contract}) => {
         const expectedExecutionPeriod =
             contract.total_expected_execution_period ||
             contract.expected_execution_period;
+
         const expectedExecutionEndDate =
             contract.amended_expected_execution_end_date ||
             contract.expected_execution_end_date;
 
         return FieldUtil.getSectionField(
             "Plazo previsto de ejecución del contrato",
-            `${expectedExecutionPeriod} días (hasta el ${DateUtil.formatDate(
-                expectedExecutionEndDate
-            )})`,
+            expectedExecutionPeriod
+                ? `${expectedExecutionPeriod} días (hasta el ${DateUtil.formatDate(
+                      expectedExecutionEndDate
+                  )})`
+                : "",
             "",
             contract.total_expected_execution_period ? (
                 <TextLinkForTooltip
@@ -95,13 +98,13 @@ const ProjectContractSection = ({contract}) => {
                                 <Grid item xs={6}>
                                     <SectionField
                                         label="Programa de financiación"
-                                        value={contract.financing_program.name}
+                                        value={contract.financing_program?.name}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
                                     <SectionField
                                         label="Financiador"
-                                        value={contract.financing_program.financing_funds
+                                        value={contract.financing_program?.financing_funds
                                             .map(financing_fund => financing_fund.name)
                                             .join(", ")}
                                     />
