@@ -49,12 +49,12 @@ export function useTrainingTotalsTable(isContractTable) {
         {
             id: "number_of_participants",
             label: "Participantes",
-            width: 10,
+            width: 8,
         },
         {
             id: "women_percentage",
             label: "% mujeres",
-            width: 5,
+            width: 7,
             formatFunction: value => {
                 return `${NumberUtil.formatDecimalWithoutZeros(value)} %`;
             },

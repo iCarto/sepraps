@@ -5,13 +5,7 @@
     "labels": {
         "executionStartDate": "Fecha de la orden de proceder"
     },
-    "properties": {
-        "proceedToExecutionDate": {
-            "label": "Fecha de la orden de proceder",
-            "type": "date",
-            "order": 1
-        }
-    },
+    "properties": {},
     "staff": {
         "social": ["supervisor_social", "coordinador_social"]
     }

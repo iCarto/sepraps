@@ -1,6 +1,7 @@
 from datetime import datetime
 from io import BytesIO
 
+import pandas as pd
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side, numbers
 from openpyxl.utils import get_column_letter
@@ -19,6 +20,8 @@ def initialize_workbook(df):
     ws = wb.active
 
     for r in dataframe_to_rows(df, index=False, header=True):
+        # Remove NaN values because Excel transformation fails
+        r[:] = ["" if pd.isna(x) else x for x in r]
         ws.append(r)
 
     return wb
@@ -100,6 +103,7 @@ class DataFrameExcelFileRenderer(renderers.BaseRenderer):
 
         wb = initialize_workbook(response_df)
         ws = wb.active
+
         apply_styles_and_formats(ws, self.fields)
         apply_header_styles(ws)
         apply_footer_styles(ws)

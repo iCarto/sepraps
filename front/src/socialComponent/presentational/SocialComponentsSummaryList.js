@@ -67,9 +67,9 @@ const SocialComponentsSummaryList = ({socialComponents}) => {
                                                 </Stack>
                                                 <Stack sx={{width: "10%"}}>
                                                     <AppraisalChip
-                                                        label={NumberUtil.formatDecimalWithoutZeros(
+                                                        label={
                                                             component.quality_status_label
-                                                        )}
+                                                        }
                                                         value={component.quality_status}
                                                     />
                                                 </Stack>

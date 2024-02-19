@@ -12,7 +12,7 @@ const UpdateContractContractorContactPanel = () => {
             service={ContractorContactService}
             basePath={`/contracts/list/${contract.id}/awarding`}
             allowedPosts={["responsable_contratista", "residente_obra"]}
-            entityId={contract.id}
+            entityId={contract.contractor.id}
         />
     );
 };
