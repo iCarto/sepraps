@@ -33,19 +33,20 @@ const ViewSocialComponentsOverview = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        ProjectStatsService.getSocialComponentTrainingsStats(
-            trainingDataGroupedBy,
-            filter
-        )
-            .then(data => {
-                setTrainingsTotals(getTotalsOnly(data));
-                setIsLoading(false);
-            })
-            .catch(error => {
-                setError(error);
-                console.log(error);
-                setIsLoading(false);
-            });
+        if (project)
+            ProjectStatsService.getSocialComponentTrainingsStats(
+                trainingDataGroupedBy,
+                filter
+            )
+                .then(data => {
+                    setTrainingsTotals(getTotalsOnly(data));
+                    setIsLoading(false);
+                })
+                .catch(error => {
+                    setError(error);
+                    console.log(error);
+                    setIsLoading(false);
+                });
     }, [project]);
 
     return (
