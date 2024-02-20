@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 
-const ContainerGridWithBorder = ({children}) => {
+const ContainerGridWithBorder = ({children, ...props}) => {
     return (
         <Grid
             container
@@ -11,6 +11,7 @@ const ContainerGridWithBorder = ({children}) => {
                 borderRadius: 5,
                 p: 2,
                 pr: 3,
+                ...props,
             }}
         >
             {children}

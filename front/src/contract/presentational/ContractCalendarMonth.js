@@ -1,12 +1,11 @@
 import {DateUtil} from "base/format/utilities";
-import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 
 const ContractCalendarMonth = ({month, items, itemComponent: ItemComponent}) => {
     return (
-        <Box
+        <Stack
             sx={{
                 p: 1,
                 border: 1,
@@ -16,16 +15,14 @@ const ContractCalendarMonth = ({month, items, itemComponent: ItemComponent}) => 
                 minHeight: "50px",
             }}
         >
-            <Stack>
-                <Typography variant="caption" color="grey.400">
-                    {DateUtil.getMonthName(month + 1)}
-                </Typography>
-                <Divider />
-                {items.map(item => {
-                    return <ItemComponent key={item.id} item={item} />;
-                })}
-            </Stack>
-        </Box>
+            <Typography variant="caption" color="grey.400">
+                {DateUtil.getMonthName(month + 1)}
+            </Typography>
+            <Divider />
+            {items.map(item => {
+                return <ItemComponent key={item.id} item={item} />;
+            })}
+        </Stack>
     );
 };
 

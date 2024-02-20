@@ -51,16 +51,9 @@ const ContractCalendarYear = ({year, items, itemsLabel, itemComponent}) => {
             </Button>
             <Divider />
             <Collapse in={expanded} timeout="auto" sx={{width: "100%"}}>
-                <Grid container>
+                <Grid container spacing={1} mt={0.5} mb={1}>
                     {[...Array(12).keys()].map(month => (
-                        <Grid
-                            key={`${year}-${month}`}
-                            item
-                            xs={6}
-                            sx={{
-                                p: 1,
-                            }}
-                        >
+                        <Grid item xs={6} key={`${year}-${month}`}>
                             <ContractCalendarMonth
                                 month={month}
                                 items={findItemsForMonth(items, year, month)}
