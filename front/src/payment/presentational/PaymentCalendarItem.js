@@ -1,11 +1,12 @@
 import {useLocation} from "react-router-dom";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import {DateUtil} from "base/format/utilities";
 import {TextLink} from "base/navigation/components";
 import {getStatusIcon} from "./PaymentStatusChip";
 
-const PaymentCalendarItem = ({payment}) => {
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+
+const PaymentCalendarItem = ({item: payment}) => {
     const paymentDate = payment.approval_date || payment.expected_approval_date;
     const day = DateUtil.getDayInDate(paymentDate);
 

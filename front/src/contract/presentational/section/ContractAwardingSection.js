@@ -87,7 +87,7 @@ const ContractAwardingSection = ({contract, basePath = ""}) => {
                         }
                     />
                 ) : (
-                    getNoDateMessage("Plazo previsto de ejecución:")
+                    getNoDateMessage("Plazo previsto de ejecución")
                 )}
             </Grid>
             <Grid container item xs={6} direction="column">

@@ -1,22 +1,16 @@
-import {useEffect, useMemo, useState} from "react";
-import {
-    Outlet,
-    useLocation,
-    useNavigate,
-    useOutletContext,
-    useParams,
-} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Outlet, useLocation, useOutletContext, useParams} from "react-router-dom";
 
+import {RouterUtil} from "base/navigation/utilities";
 import {ContractService} from "contract/service";
 
+import {ContractFinancialDataSummary} from "contract/presentational";
 import {PaperContainer} from "base/shared/components";
 import {TabContainer} from "base/ui/tab/components";
 
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import {ContractFinancialDataSummary} from "contract/presentational";
 import Box from "@mui/material/Box";
-import {RouterUtil} from "base/navigation/utilities";
+import Typography from "@mui/material/Typography";
 
 const ViewContractPaymentsSubPage = () => {
     const {id: contractId} = useParams();
@@ -64,7 +58,9 @@ const ViewContractPaymentsSubPage = () => {
 
     return (
         <Box>
-            {!contract.awarding_budget || !contract.execution_start_date ? (
+            {!contract.awarding_budget ||
+            !contract.execution_start_date ||
+            !contract.expected_execution_period ? (
                 <PaperContainer>
                     <Grid container justifyContent="center" my={6}>
                         <Typography
@@ -74,7 +70,8 @@ const ViewContractPaymentsSubPage = () => {
                             }}
                         >
                             No se pueden gestionar los productos porque el contrato no
-                            tiene fecha de inicio de ejecución o monto adjudicado
+                            tiene fecha de inicio, plazo previsto de ejecución o monto
+                            adjudicado.
                         </Typography>
                     </Grid>
                 </PaperContainer>
