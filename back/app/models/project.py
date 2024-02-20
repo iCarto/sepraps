@@ -27,6 +27,9 @@ class Project(models.Model):
         verbose_name = "Proyecto"
         verbose_name_plural = "Proyectos"
 
+    id = models.AutoField(
+        primary_key=True
+    )  # Keep it, because if we remove this property there is a type change in db to bigint
     code = models.CharField("Código", unique=True, max_length=30)
     project_type = models.CharField("Tipo de proyecto", max_length=50, null=True)
     project_class = models.CharField("Clase de proyecto", max_length=50, null=True)
