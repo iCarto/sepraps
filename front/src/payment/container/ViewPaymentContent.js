@@ -2,26 +2,25 @@ import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router";
 import {useOutletContext} from "react-router-dom";
 
-import {PaymentService} from "payment/service";
+import {useNavigateWithReload} from "base/navigation/hooks";
 import {RouterUtil} from "base/navigation/utilities";
+import {DateUtil} from "base/format/utilities";
+import {PaymentService} from "payment/service";
 
-import {ViewOrUpdatePaymentDataContent} from ".";
+import {ViewOrUpdatePaymentDataContent, ViewPaymentCertificationsContent} from ".";
 import {ViewPaymentProductsContent} from "product/container";
 import {ViewPaymentCommentsContent} from "comment/container";
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
 import {ListSelector, ListSelectorItem} from "base/shared/components";
-import {DateUtil} from "base/format/utilities";
 import {EntityContent} from "base/entity/components/presentational";
-
-import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 import {SectionCardHeaderAction} from "base/ui/section/components";
-
-import DeleteIcon from "@mui/icons-material/Delete";
-import {useNavigateWithReload} from "base/navigation/hooks";
 import {DeleteItemDialog} from "base/delete/components";
 import {PaymentStatusChip, getStatusIcon} from "payment/presentational";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
+
 import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 
 const ViewPaymentContent = () => {
     const {contract, payments} = useOutletContext();
@@ -121,6 +120,9 @@ const ViewPaymentContent = () => {
                             contract={contract}
                             payment={payment}
                         />
+                        {payment?.certifications?.length ? (
+                            <ViewPaymentCertificationsContent payment={payment} />
+                        ) : null}
                         <ViewPaymentProductsContent payment={payment} />
                         <ViewPaymentCommentsContent payment={payment} />
                         <EntityAuditSection entity={payment} />

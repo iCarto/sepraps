@@ -1,3 +1,4 @@
+import {certifications_api_adapter, createCertifications} from "certification/model";
 import {comments_api_adapter, createComments} from "comment/model";
 import {createProducts, products_api_adapter} from "product/model";
 
@@ -7,6 +8,11 @@ const payment_api_adapter = payment => {
     if (payment["payment_products"]) {
         payment["payment_products"] = createProducts(
             products_api_adapter(payment["payment_products"])
+        );
+    }
+    if (payment["certifications"]) {
+        payment["certifications"] = createCertifications(
+            certifications_api_adapter(payment["certifications"])
         );
     }
     if (payment["payment_comments"]) {
@@ -27,6 +33,8 @@ const payment_view_adapter = payment => {
 
     delete payment["payment_products"];
     delete payment["payment_comments"];
+    delete payment["certifications"];
+    delete payment["certifications_total_amount"];
     delete payment["expected_total_contract_percentage"];
     delete payment["expected_awarded_contract_percentage"];
     delete payment["expected_awarded_contract_percentage_cumulative"];
@@ -68,6 +76,8 @@ const createPayment = ({
     updated_by = "",
     payment_products = [],
     payment_comments = [],
+    certifications = [],
+    certifications_total_amount = null,
     contract_total_amount_type = null,
     contract_product_frequency_type = null,
     contract_payment_criteria_type = null,
@@ -104,6 +114,8 @@ const createPayment = ({
         updated_by,
         payment_products,
         payment_comments,
+        certifications,
+        certifications_total_amount,
         contract_total_amount_type,
         contract_product_frequency_type,
         contract_payment_criteria_type,

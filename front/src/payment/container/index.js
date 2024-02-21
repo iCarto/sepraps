@@ -8,3 +8,7 @@ export {
     default as ViewPaymentContractFinancialChart,
 } from "./ViewPaymentContractFinancialChart";
 export {default as ViewPaymentContractOverview} from "./ViewPaymentContractOverview";
+export {
+    getTotal,
+    default as ViewPaymentCertificationsContent,
+} from "./ViewPaymentCertificationsContent";
