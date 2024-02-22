@@ -127,9 +127,7 @@ class Project(models.Model):
             return 0
 
         total_progress = sum(
-            (float(bm.paid_amount or 0) + float(bm.pending_amount or 0))
-            / float(bm.expected_amount or 1)
-            * 100
+            float(bm.paid_amount or 0) / float(bm.expected_amount or 1) * 100
             for bm in building_monitorings
         )
 

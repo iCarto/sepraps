@@ -104,7 +104,7 @@ def get_building_components_total_stats(request, format=None):
                 round((((coalesce(sum(bcm.paid_amount), 0) + coalesce(sum(bcm.pending_amount), 0)) / coalesce(nullif(sum(bcm.expected_amount), 0),1)) * 100)::numeric) as real_expected_percentage,
                 round(((coalesce(sum(bcm.paid_amount), 0) / coalesce(nullif(sum(bcm.expected_amount), 0), 1)) * 100)::numeric) as paid_expected_percentage,
                 round(((coalesce(sum(bcm.paid_amount), 0) / coalesce(nullif(coalesce(sum(bcm.paid_amount), 0) + coalesce(sum(bcm.pending_amount), 0),0),1)) * 100)::numeric) as paid_real_percentage,
-                round(coalesce(avg(coalesce((bcm.paid_amount + bcm.pending_amount) / nullif(bcm.expected_amount, 0), 0) * 100), 0)) as financial_progress_percentage,
+                round(coalesce(avg(coalesce(bcm.paid_amount/ nullif(bcm.expected_amount, 0), 0) * 100), 0)) as financial_progress_percentage,
                 round(coalesce(avg(coalesce(bcm.physical_progress_percentage, 0)), 0)) as physical_progress_percentage
             FROM building_component_monitoring bcm
                 JOIN building_component bc on bc.id = bcm.building_component_id
