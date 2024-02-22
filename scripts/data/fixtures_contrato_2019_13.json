@@ -687,36 +687,18 @@
         "model": "app.BuildingComponentValue",
         "pk": 1,
         "fields": {
-            "code": "altura",
+            "code": "profundidad",
             "building_component": 1,
-            "value": "12"
+            "value": "100"
         }
     },
     {
         "model": "app.BuildingComponentValue",
         "pk": 2,
         "fields": {
-            "code": "capacidad",
+            "code": "diametro",
             "building_component": 1,
-            "value": "2400"
-        }
-    },
-    {
-        "model": "app.BuildingComponentValue",
-        "pk": 3,
-        "fields": {
-            "code": "profundidad",
-            "building_component": 2,
-            "value": "76"
-        }
-    },
-    {
-        "model": "app.BuildingComponentValue",
-        "pk": 4,
-        "fields": {
-            "code": "estudioHidrogeologico",
-            "building_component": 2,
-            "value": "True"
+            "value": "2"
         }
     },
     {

@@ -35,7 +35,9 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
         return extra_kwargs
 
     def get_properties(self, obj, property_name):
-        cs_properties = getattr(obj, property_name, {})
+        cs_properties = getattr(obj, property_name)
+        if not cs_properties:
+            return {}
 
         cs_values = obj.building_component_values.all()
         for cs_value in cs_values:

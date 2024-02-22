@@ -10,7 +10,6 @@ class BuildingComponentValue(models.Model):
 
     building_component = models.ForeignKey(
         "BuildingComponent",
-        on_delete=models.PROTECT,
-        null=True,
+        on_delete=models.CASCADE,
         related_name="building_component_values",
     )
