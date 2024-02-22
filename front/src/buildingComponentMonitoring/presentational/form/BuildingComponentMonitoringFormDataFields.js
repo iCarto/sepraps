@@ -67,7 +67,9 @@ const BuildingComponentMonitoringFormDataFields = () => {
             : (parseFloat(paid_amount) || 0) + (parseFloat(pending_amount) || 0);
 
     const financialProgressPercentage = expected_amount
-        ? NumberUtil.formatFloat((totalAmount / expected_amount) * 100)
+        ? NumberUtil.formatFloat(
+              ((parseFloat(paid_amount) || 0) / expected_amount) * 100
+          )
         : 0;
 
     const displayMonitoringFields =
