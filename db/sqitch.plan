@@ -30,3 +30,4 @@ update_tables_dynamic_fields 2024-02-20T13:19:27Z Elías Gago <egago@icarto.es> 
 update_supervision_staff_and_domains 2024-02-22T12:27:22Z Elías Gago <egago@icarto.es> # Update fields for supervision staff and new domains
 update_content_type_connections 2024-02-22T16:06:35Z Elías Gago <egago@icarto.es> # Add connection content type and permissions
 update_content_type_contacts 2024-02-22T16:55:22Z Elías Gago <egago@icarto.es> # Add contacts content type and permissions
+update_content_type_cs_value 2024-02-22T17:44:45Z Elías Gago <egago@icarto.es> # Add contract service value content type and permissions
