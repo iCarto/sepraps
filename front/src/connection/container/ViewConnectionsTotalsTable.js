@@ -53,7 +53,7 @@ const ViewConnectionsTotalsTable = ({filter}) => {
                     />
                     <TableDownloadButton
                         service={format => {
-                            return ProjectStatsService.getSocialComponentTrainingsTotalStats(
+                            return ProjectStatsService.getConnectionsTotalStats(
                                 {...filter},
                                 format
                             );

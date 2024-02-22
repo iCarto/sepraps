@@ -356,8 +356,49 @@ def get_social_component_trainings_sum_stats(request, format=None):
         return Response(result_df)
 
 
+CONNECTIONS_STATS_SUM_EXPORT_FIELDS = {
+    "project_code": {"name": "Proyecto", "type": "string", "width": 50},
+    "population": {"name": "Habitantes", "type": "integer", "width": 15},
+    "number_of_households": {
+        "name": "Viviendas totales",
+        "type": "integer",
+        "width": 15,
+    },
+    "number_of_planned_connections": {
+        "name": "Conexiones previstas",
+        "type": "integer",
+        "width": 15,
+    },
+    "number_of_actual_connections": {
+        "name": "Conexiones reales",
+        "type": "integer",
+        "width": 15,
+    },
+    "connected_households_percentage": {
+        "name": "Viviendas conectadas",
+        "type": "float",
+        "width": 15,
+    },
+}
+
+
+class ConnectionsSumStatsCSVRenderer(DataFrameCSVFileRenderer):
+    fields = CONNECTIONS_STATS_SUM_EXPORT_FIELDS
+
+
+class ConnectionsSumStatsExcelRenderer(DataFrameExcelFileRenderer):
+    fields = CONNECTIONS_STATS_SUM_EXPORT_FIELDS
+
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
+@renderer_classes(
+    [
+        DataFrameJSONRenderer,
+        ConnectionsSumStatsCSVRenderer,
+        ConnectionsSumStatsExcelRenderer,
+    ]
+)
 def get_connections_total_stats(request, format=None):
     number_of_people_per_household = 5
 
