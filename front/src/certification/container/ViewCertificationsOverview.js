@@ -1,9 +1,12 @@
 import {useOutletContext} from "react-router-dom";
 import {useContractCalendar} from "contract/presentational/hooks";
-import {PaymentsFinancialData} from "payment/presentational";
 import {ContractCalendar} from "contract/presentational";
-import {CertificationCalendarItem} from "certification/presentational";
-import PaperComponent from "base/shared/components/PaperComponent";
+import {
+    CertificationCalendarItem,
+    CertificationsSummaryBox,
+} from "certification/presentational";
+import {PaperComponent} from "base/shared/components";
+
 import Grid from "@mui/material/Grid";
 
 const ViewCertificationsOverview = () => {
@@ -18,7 +21,10 @@ const ViewCertificationsOverview = () => {
             <Grid container spacing={1} alignItems="flex-start">
                 <Grid item xs={6}>
                     <PaperComponent>
-                        {/* <PaymentsFinancialData contract={project} /> */}
+                        <CertificationsSummaryBox
+                            certifications={certifications}
+                            contract={project?.construction_contract}
+                        />
                     </PaperComponent>
                 </Grid>
                 <Grid item xs={6}>

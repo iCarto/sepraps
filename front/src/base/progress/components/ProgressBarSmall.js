@@ -14,7 +14,6 @@ const ProgressBarSmall = ({
 }) => {
     const parsedValue = parseInt(progressValue) || 0;
     const barProgress = parsedValue >= 100 ? 100 : parsedValue;
-    console.log({progressValue});
 
     return (
         <>
