@@ -108,8 +108,6 @@
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-005",
-            "project_type": "agua",
-            "project_class": "mejora",
             "init_date": "2019-11-12",
             "main_infrastructure": 5,
             "provider": 5,
@@ -118,6 +116,14 @@
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 5,
+            "work_type": "agua",
+            "work_class": "mejora"
         }
     },
     {
@@ -206,8 +212,6 @@
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-006",
-            "project_type": "agua",
-            "project_class": "mejora",
             "init_date": "2019-11-12",
             "main_infrastructure": 6,
             "provider": 6,
@@ -216,6 +220,14 @@
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 6,
+            "work_type": "agua",
+            "work_class": "mejora"
         }
     },
     {
@@ -247,8 +259,6 @@
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
             "code": "2019-AP-007",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "init_date": "2019-11-12",
             "main_infrastructure": 7,
             "provider": 7,
@@ -257,6 +267,14 @@
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 7,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
         }
     },
     {
@@ -288,8 +306,6 @@
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-008",
-            "project_type": "agua",
-            "project_class": "mejora",
             "init_date": "2019-11-12",
             "main_infrastructure": 8,
             "provider": 8,
@@ -298,6 +314,14 @@
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 8,
+            "work_type": "agua",
+            "work_class": "mejora"
         }
     },
     {
@@ -329,8 +353,6 @@
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-009",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "init_date": "2019-11-12",
             "main_infrastructure": 9,
             "provider": 9,
@@ -339,6 +361,14 @@
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 9,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
         }
     },
     {
@@ -370,8 +400,6 @@
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
             "code": "2019-AP-010",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "init_date": "2019-11-12",
             "main_infrastructure": 10,
             "provider": 10,
@@ -380,6 +408,14 @@
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 10,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
         }
     },
     {

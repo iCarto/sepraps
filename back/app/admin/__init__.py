@@ -16,6 +16,7 @@ from app.models.financing_program import FinancingProgram
 from app.models.location import Department, District, Locality
 from app.models.payment import Payment
 from app.models.project import Project
+from app.models.project_work import ProjectWork
 from app.models.provider import Provider
 
 
@@ -28,6 +29,7 @@ admin.site.index_title = "Bienvenido al sitio de Administración de SEPRAPS"
 admin.site.register(FinancingFund, FinancingFundAdmin)
 admin.site.register(FinancingProgram, FinancingProgramAdmin)
 admin.site.register(Project)
+admin.site.register(ProjectWork)
 admin.site.register(Provider)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Payment)

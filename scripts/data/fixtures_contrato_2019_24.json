@@ -89,8 +89,6 @@
         "fields": {
             "description": "Culminación de la construcción de planta de tratamiento y redes colectoras de desagüe cloacal",
             "code": "2019-AP-017",
-            "project_type": "agua",
-            "project_class": "mejora",
             "init_date": "2019-12-17",
             "main_infrastructure": 17,
             "provider": 17,
@@ -99,6 +97,14 @@
             "creation_user": 1,
             "created_at": "2019-12-01T00:00:00Z",
             "updated_at": "2019-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 17,
+            "work_type": "agua",
+            "work_class": "mejora"
         }
     },
     {
