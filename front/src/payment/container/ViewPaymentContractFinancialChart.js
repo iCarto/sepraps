@@ -1,97 +1,20 @@
 import {useEffect, useState} from "react";
 
 import {PaymentStatsService} from "payment/service";
-
-import {LineChart} from "base/chart/components";
-import Box from "@mui/material/Box";
-import {
-    FINANCIAL_CHART_COLORS,
-    PaymentFinancialChartContractAnnotations,
-    PaymentFinancialChartUtil,
-} from "payment/presentational/chart";
-import Grid from "@mui/material/Grid";
 import {DateUtil} from "base/format/utilities";
+import {PaymentFinancialChartUtil} from "payment/presentational/chart";
+import {
+    ContractFinancialChartAnnotations,
+    ContractFinancialChartUtil,
+    FINANCIAL_CHART_CONTRACT_COLORS,
+} from "contract/presentational/chart";
+import {LineChart} from "base/chart/components";
+
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 const ViewPaymentContractFinancialChart = ({contract}) => {
     const [chartData, setChartData] = useState(null);
-
-    const parseChartData = chartData => {
-        const result = Object.keys(chartData)
-            .filter(key => !["month", "payment_name"].includes(key))
-            .reduce((acc, key) => {
-                acc[key] = chartData[key].map(value => {
-                    const parsedValue = parseFloat(value);
-                    return isNaN(parsedValue) ? null : parsedValue;
-                });
-                return acc;
-            }, {});
-
-        // Get last month approved amount and position in array
-        const currentApprovedAmount = Math.max.apply(
-            Math,
-            result["cum_approved_total_amount"]
-        );
-        const currentApprovedAmountPosition = result[
-            "cum_approved_total_amount"
-        ].indexOf(currentApprovedAmount);
-
-        // put 0's at first columns and nulls on last columns for approved
-        result["cum_approved_total_amount"] = result["cum_approved_total_amount"].map(
-            (value, index) => {
-                if (!value) {
-                    return 0;
-                }
-                if (index > currentApprovedAmountPosition) {
-                    return null;
-                }
-                return value;
-            }
-        );
-
-        const hasForecast = result["cum_expected_total_amount"].some(
-            value => value != null
-        );
-        if (hasForecast) {
-            // sum current approved amount to expected
-            result["cum_expected_total_amount"] = result[
-                "cum_expected_total_amount"
-            ].map((value, index) => {
-                if (index > currentApprovedAmountPosition) {
-                    return value + currentApprovedAmount;
-                }
-                return null;
-            });
-            result["cum_expected_total_amount"][
-                currentApprovedAmountPosition
-            ] = currentApprovedAmount;
-        }
-
-        // remove no increased data points
-        result["cum_approved_total_amount"] = result["cum_approved_total_amount"].map(
-            (value, index) => {
-                if (
-                    index != 0 &&
-                    value === result["cum_approved_total_amount"][index - 1]
-                ) {
-                    return null;
-                }
-                return value;
-            }
-        );
-        result["cum_expected_total_amount"] = result["cum_expected_total_amount"].map(
-            (value, index) => {
-                if (
-                    index != 0 &&
-                    value === result["cum_expected_total_amount"][index - 1]
-                ) {
-                    return null;
-                }
-                return value;
-            }
-        );
-
-        return {...chartData, ...result};
-    };
 
     useEffect(() => {
         const filterStartDate = contract.execution_start_date;
@@ -104,7 +27,7 @@ const ViewPaymentContractFinancialChart = ({contract}) => {
             start_date: DateUtil.formatDateForAPI(filterStartDate),
             end_date: DateUtil.formatDateForAPI(filterEndDate),
         }).then(chartData => {
-            const parsedChartData = parseChartData(chartData);
+            const parsedChartData = PaymentFinancialChartUtil.parseChartData(chartData);
             setChartData(parsedChartData);
         });
     }, []);
@@ -121,13 +44,13 @@ const ViewPaymentContractFinancialChart = ({contract}) => {
     const maxAmendedEndDate = contract.amended_expected_execution_end_date;
 
     const chartOptions = {
-        scales: PaymentFinancialChartUtil.getScalesConfig(),
+        scales: ContractFinancialChartUtil.getScalesConfig(),
         plugins: {
             legend: PaymentFinancialChartUtil.getLegendConfig(),
-            datalabels: PaymentFinancialChartUtil.getDatalabelsConfig(),
+            datalabels: ContractFinancialChartUtil.getDatalabelsConfig(),
             tooltip: PaymentFinancialChartUtil.getTooltipConfig(chartData),
             annotation: {
-                annotations: PaymentFinancialChartContractAnnotations.getAnnotations(
+                annotations: ContractFinancialChartAnnotations.getAnnotations(
                     maxAmount,
                     maxAmendedAmount,
                     maxEndDate,
@@ -136,8 +59,6 @@ const ViewPaymentContractFinancialChart = ({contract}) => {
             },
         },
     };
-
-    console.log({chartData});
 
     return (
         chartData && (
@@ -151,16 +72,20 @@ const ViewPaymentContractFinancialChart = ({contract}) => {
                                 data: chartData.cum_approved_total_amount,
                                 label: "Aprobado",
                                 borderWidth: 3,
-                                borderColor: FINANCIAL_CHART_COLORS.approved.main,
-                                backgroundColor: FINANCIAL_CHART_COLORS.approved.main,
+                                borderColor:
+                                    FINANCIAL_CHART_CONTRACT_COLORS.approved.main,
+                                backgroundColor:
+                                    FINANCIAL_CHART_CONTRACT_COLORS.approved.main,
                                 spanGaps: true,
                             },
                             {
                                 data: chartData.cum_expected_total_amount,
                                 label: "Previsto",
                                 borderWidth: 2,
-                                borderColor: FINANCIAL_CHART_COLORS.expected.main,
-                                backgroundColor: FINANCIAL_CHART_COLORS.expected.light,
+                                borderColor:
+                                    FINANCIAL_CHART_CONTRACT_COLORS.expected.main,
+                                backgroundColor:
+                                    FINANCIAL_CHART_CONTRACT_COLORS.expected.light,
                                 spanGaps: true,
                             },
                             {
@@ -168,8 +93,10 @@ const ViewPaymentContractFinancialChart = ({contract}) => {
                                 data: chartData.month_expected_amount,
                                 label: "Productos previstos",
                                 borderWidth: 2,
-                                borderColor: FINANCIAL_CHART_COLORS.expected.main,
-                                backgroundColor: FINANCIAL_CHART_COLORS.expected.light,
+                                borderColor:
+                                    FINANCIAL_CHART_CONTRACT_COLORS.expected.main,
+                                backgroundColor:
+                                    FINANCIAL_CHART_CONTRACT_COLORS.expected.light,
                             },
                         ]}
                         options={chartOptions}

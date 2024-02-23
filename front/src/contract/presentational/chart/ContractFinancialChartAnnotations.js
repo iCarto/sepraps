@@ -1,24 +1,7 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {FINANCIAL_CHART_COLORS} from "./PaymentFinancialChartUtil";
+import {FINANCIAL_CHART_CONTRACT_COLORS} from ".";
 
-const FINANCIAL_CHART_CONTRACT_COLORS = {
-    approved: FINANCIAL_CHART_COLORS.approved,
-    expected: FINANCIAL_CHART_COLORS.expected,
-    money: {
-        main: "#8B6A36",
-        lightest: "#F9F6F0",
-        light: "#CCAD7B",
-        dark: "#765A2E",
-    },
-    time: {
-        main: "#AAAAAA",
-        lightest: "#EEEEEE",
-        light: "#DDDDDD",
-        dark: "#777777",
-    },
-};
-
-const PaymentFinancialChartContractAnnotations = {
+const ContractFinancialChartAnnotations = {
     getAnnotations(maxAmount, maxAmendedAmount, maxEndDate, maxAmendedEndDate) {
         const annotations = {};
 
@@ -130,4 +113,4 @@ const PaymentFinancialChartContractAnnotations = {
     },
 };
 
-export default PaymentFinancialChartContractAnnotations;
+export default ContractFinancialChartAnnotations;
