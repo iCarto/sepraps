@@ -1,6 +1,6 @@
 import {useOutletContext} from "react-router-dom";
 
-import {ViewPaymentContractFinancialChart} from ".";
+import {ViewCertificationsByProjectFinancialChart} from ".";
 import {SectionCard} from "base/ui/section/components";
 
 const ViewCertificationsAnalysisContent = () => {
@@ -8,7 +8,9 @@ const ViewCertificationsAnalysisContent = () => {
 
     return (
         <SectionCard title="Seguimiento financiero">
-            {/* <ViewPaymentContractFinancialChart contract={contract} /> */}
+            {project ? (
+                <ViewCertificationsByProjectFinancialChart project={project} />
+            ) : null}
         </SectionCard>
     );
 };
