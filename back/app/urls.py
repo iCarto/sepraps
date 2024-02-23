@@ -4,6 +4,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from app.views import (
+    certification_stats_views,
     events_views,
     notifications_views,
     payment_stats_views,
@@ -93,6 +94,7 @@ urlpatterns = [
     path("stats/projectbyphase", stats_views.get_project_by_phase_stats),
     path("stats/projectbyphasemap", stats_views.get_projects_by_phase_map),
     path("paymentstats", payment_stats_views.get_payment_stats),
+    path("certificationstats", certification_stats_views.get_certification_stats),
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
     path(

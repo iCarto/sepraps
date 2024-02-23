@@ -141,7 +141,13 @@ class Project(models.Model):
         if not building_monitorings:
             return 0
 
-        return sum(bm.expected_amount for bm in building_monitorings)
+        expected_amounts = [
+            bm.expected_amount
+            for bm in building_monitorings
+            if bm.expected_amount is not None
+        ]
+
+        return sum(expected_amounts)
 
     def __str__(self):
         return self.code
