@@ -2,7 +2,6 @@ from django.db import models
 
 from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
 from app.models.comment import Comment
-from app.models.project import Project
 from app.util import format_decimal
 from documents.base.base_models import BaseDocumentModel
 
@@ -30,10 +29,7 @@ class Connection(BaseDocumentModel, BaseEntityModelMixin):
         "Número de conexiones reales", null=True
     )
     project = models.ForeignKey(
-        Project,
-        on_delete=models.CASCADE,
-        verbose_name=Project._meta.verbose_name,
-        related_name="connections",
+        "Project", on_delete=models.CASCADE, related_name="connections"
     )
     comments = models.ManyToManyField(Comment)
 

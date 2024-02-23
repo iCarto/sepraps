@@ -16,24 +16,22 @@ from app.serializers.construction_contract_serializer import (
 from app.serializers.infrastructure_serializer import InfrastructureSerializer
 from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
+from app.serializers.project_work_serializer import ProjectWorkSerializer
 from app.serializers.provider_serializer import ProviderSerializer
 from documents.serializers import MediaUrlSerializer
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from questionnaires.serializers.questionnaire_serializer import (
     QuestionnaireShortSerializer,
 )
 
 
-class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = Project
         fields = (
             "id",
             "code",
             "closed",
-            "project_type",
-            "project_class",
+            "project_works",
             "description",
             "init_date",
             "featured_image",
@@ -56,6 +54,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
     closed = serializers.BooleanField(required=False)
     main_infrastructure = InfrastructureSerializer()
     linked_localities = LocalitySerializer(many=True)
+    project_works = ProjectWorkSerializer(many=True)
     provider = ProviderSerializer(required=False, allow_null=True)
     construction_contract = ConstructionContractSummarySerializer(read_only=True)
     milestones = serializers.SerializerMethodField(required=False, read_only=True)
@@ -77,6 +76,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "main_infrastructure__locality__district",
             "provider",
         ).prefetch_related(
+            "project_works",
             "linked_localities",
             Prefetch(
                 "provider__contacts"
@@ -109,18 +109,12 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
     # ATTRIBUTES
 
     def get_folder(self, obj):
-        print(obj.folder)
         return obj.folder.media_path if obj.folder else None
 
     def get_milestones(self, obj):
         return MilestoneSummarySerializer(
             obj.milestones.exclude(parent__isnull=False).order_by("ordering"), many=True
         ).data
-
-    domain_fields = [
-        BaseDomainField("project_type", DomainCategoryChoices.project_type),
-        BaseDomainField("project_class", DomainCategoryChoices.project_class),
-    ]
 
     # OPERATIONS
 
@@ -139,6 +133,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             else:
                 provider = self.fields["provider"].create(provider_data)
 
+        project_works_data = validated_data.pop("project_works")
         linked_localities_data = validated_data.pop("linked_localities")
 
         project = Project.objects.create(
@@ -148,6 +143,11 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
         project.linked_localities.set(
             self.fields["linked_localities"].update([], linked_localities_data)
         )
+
+        project_works = self.fields["project_works"].create(
+            [{"project": project, **pw_data} for pw_data in project_works_data]
+        )
+        project.project_works.set(project_works)
 
         return project
 
@@ -193,6 +193,47 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             )
         )
 
+    def update_project_works(self, instance, validated_data):
+        # TODO(egago): Improve the performance and quality of this method
+        # Remove and create for a current set
+        if "project_works" in validated_data:
+            project_works_data = validated_data.pop("project_works", None)
+            project_works_to_delete = []
+            current_project_works = instance.project_works.all()
+            for project_work in current_project_works:
+                found = False
+                for project_work_data in project_works_data:
+                    if (
+                        project_work_data.get("work_type") == project_work.work_type
+                        and project_work_data.get("work_class")
+                        == project_work.work_class
+                    ):
+                        found = True
+                if not found:
+                    project_works_to_delete.append(project_work)
+
+            project_works_to_create = []
+            for project_work_data in project_works_data:
+                found = False
+                for project_work in current_project_works:
+                    if (
+                        project_work_data.get("work_type") == project_work.work_type
+                        and project_work_data.get("work_class")
+                        == project_work.work_class
+                    ):
+                        found = True
+                if not found:
+                    project_works_to_create.append(project_work_data)
+
+            self.fields["project_works"].create(
+                [
+                    {"project": instance, **pw_data}
+                    for pw_data in project_works_to_create
+                ]
+            )
+            for project_work in project_works_to_delete:
+                project_work.delete()
+
     def update_featured_image(self, instance, validated_data):
         if "featured_image" in validated_data:
             featured_image_data = validated_data.pop("featured_image", None)
@@ -202,6 +243,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
         self.update_main_infrastructure(instance, validated_data)
         self.update_provider(instance, validated_data)
         self.update_linked_localities(instance, validated_data)
+        self.update_project_works(instance, validated_data)
         self.update_featured_image(instance, validated_data)
 
         # nested entities properties were removed in previous methods
@@ -212,7 +254,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
         return instance
 
 
-class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
+class ProjectSummarySerializer(serializers.ModelSerializer):
     closed = serializers.BooleanField()
     linked_localities = LocalitySerializer(many=True)
     provider_name = serializers.CharField(source="provider.name", default=None)
@@ -243,8 +285,7 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
             "id",
             "code",
             "closed",
-            "project_type",
-            "project_class",
+            "project_works",
             "description",
             "init_date",
             "featured_image",
@@ -264,6 +305,8 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
             "updated_at",
         )
 
+    project_works = ProjectWorkSerializer(many=True)
+
     def get_physical_progress_percentage(self, obj):
         return obj.physical_progress_percentage
 
@@ -276,6 +319,7 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
             "main_infrastructure", "provider", "featured_image"
         ).prefetch_related(
             "linked_localities",
+            "project_works",
             Prefetch(
                 "milestones",
                 queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
@@ -308,11 +352,6 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
                 fields[field].read_only = True
         return fields
 
-    domain_fields = [
-        BaseDomainField("project_type", DomainCategoryChoices.project_type),
-        BaseDomainField("project_class", DomainCategoryChoices.project_class),
-    ]
-
     def get_milestones(self, obj):
         return MilestoneSummarySerializer(obj.milestones, many=True).data
 
@@ -326,20 +365,12 @@ class ProjectGeoSerializer(GeoFeatureModelSerializer):
     class Meta(object):
         model = Project
         geo_field = "location"
-        fields = (
-            "id",
-            "code",
-            "closed",
-            "name",
-            "project_type",
-            "project_class",
-            "location",
-            "status",
-        )
+        fields = ("id", "code", "closed", "name", "project_works", "location", "status")
 
     name = serializers.SerializerMethodField()
     status = serializers.SerializerMethodField()
     location = GeometryField()
+    project_works = ProjectWorkSerializer(many=True)
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""

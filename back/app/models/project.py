@@ -1,7 +1,3 @@
-import json
-import os
-
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
@@ -10,8 +6,10 @@ from django.dispatch import receiver
 from django.utils import timezone
 
 from app.models.building_component import create_project_building_components
+from app.models.connection import create_project_connection
 from app.models.infrastructure import Infrastructure
 from app.models.location import Locality
+from app.models.milestone import create_project_milestones
 from app.models.provider import Provider
 from app.models.social_component_monitoring import create_project_social_components
 from documents.models import MediaNode, create_folder_structure
@@ -31,8 +29,6 @@ class Project(models.Model):
         primary_key=True
     )  # Keep it, because if we remove this property there is a type change in db to bigint
     code = models.CharField("Código", unique=True, max_length=30)
-    project_type = models.CharField("Tipo de proyecto", max_length=50, null=True)
-    project_class = models.CharField("Clase de proyecto", max_length=50, null=True)
     description = models.CharField("Descripción", max_length=255)
     init_date = models.DateField("Fecha de inicio")
 
@@ -133,6 +129,38 @@ class Project(models.Model):
 
         return round(total_progress / len(building_monitorings))
 
+    def create_structure_data(self, data):
+        if not self.folder:
+            # if there is no folder, the project is new, so default structure for
+            # folder, questionnaires and milestones is created
+            classtype = type(self).__name__
+            root_folder = create_folder_structure(
+                f"{self.code}",
+                f"{classtype.lower()}/{self.code}",
+                data.get("folders", []),
+            )
+            self.folder = root_folder
+
+            self.questionnaires.set(
+                Questionnaire.objects.filter(
+                    code__in=[
+                        questionnaire.get("code")
+                        for questionnaire in data.get("questionnaires", [])
+                    ]
+                )
+            )
+
+            self.save()
+
+            create_project_milestones(self, data.get("milestones", []))
+
+    def create_components_data(self, work_class, data):
+        if work_class == "nueva_construccion":
+            create_project_building_components(
+                self, data.get("building_components", {})
+            )
+        create_project_social_components(self, data.get("social_components", {}))
+
     def __str__(self):
         return self.code
 
@@ -140,48 +168,8 @@ class Project(models.Model):
 @receiver(post_save, sender=Project)
 def post_create(sender, instance, created, *args, **kwargs):
     """Create project folder structure and project milestones from template."""
-    from app.models.connection import create_project_connection
-    from app.models.milestone import create_project_milestones
-
     if not created:
         return
-
-    data = {}
-    data_path = os.path.join(
-        settings.BASE_DIR, "app", "data", "project", f"{instance.project_type}.json"
-    )
-    with open(data_path) as f:
-        data = json.load(f)
-        # settings.MONITORING_TEMPLATES_FOLDER
-        # + "/project/"
-        # + instance.project_type
-        # + ".json",
-
-    classtype = type(instance).__name__
-    root_folder = create_folder_structure(
-        f"{instance.code}",
-        f"{classtype.lower()}/{instance.code}",
-        data.get("folders", []),
-    )
-    instance.folder = root_folder
-
-    instance.questionnaires.set(
-        Questionnaire.objects.filter(
-            code__in=[
-                questionnaire.get("code")
-                for questionnaire in data.get("questionnaires", [])
-            ]
-        )
-    )
-
-    instance.save()
-
-    create_project_milestones(instance, data.get("milestones", []))
-    if instance.project_class == "nueva_construccion":
-        create_project_building_components(
-            instance, data.get("building_components", {})
-        )
-    create_project_social_components(instance, data.get("social_components", {}))
     create_project_connection(instance)
 
 

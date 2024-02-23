@@ -152,8 +152,6 @@
         "pk": 18,
         "fields": {
             "code": "2022-AP-001",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "description": "Nuevo sistema de abastecimiento de agua potable",
             "init_date": "2019-01-01",
             "main_infrastructure": 18,
@@ -167,12 +165,18 @@
         }
     },
     {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 18,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
+        }
+    },
+    {
         "model": "app.project",
         "pk": 19,
         "fields": {
             "code": "2022-AP-002",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 19,
@@ -186,12 +190,18 @@
         }
     },
     {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 19,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
+        }
+    },
+    {
         "model": "app.project",
         "pk": 20,
         "fields": {
             "code": "2022-AP-003",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 20,
@@ -205,12 +215,18 @@
         }
     },
     {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 20,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
+        }
+    },
+    {
         "model": "app.project",
         "pk": 21,
         "fields": {
             "code": "2022-AP-004",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 21,
@@ -224,12 +240,18 @@
         }
     },
     {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 21,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
+        }
+    },
+    {
         "model": "app.project",
         "pk": 22,
         "fields": {
             "code": "2022-AP-005",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 22,
@@ -243,12 +265,18 @@
         }
     },
     {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 22,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
+        }
+    },
+    {
         "model": "app.project",
         "pk": 23,
         "fields": {
             "code": "2022-AP-006",
-            "project_type": "agua",
-            "project_class": "nueva_construccion",
             "description": "Nuevo sistema de abastecimiento de agua",
             "init_date": "2019-01-01",
             "main_infrastructure": 23,
@@ -259,6 +287,14 @@
             "updated_at": "2022-06-10T14:42:44.873Z",
             "linked_localities": ["1006100"],
             "questionnaires": ["tendido_red_mensual", "certificacion_mensual"]
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 23,
+            "work_type": "agua",
+            "work_class": "nueva_construccion"
         }
     },
     {

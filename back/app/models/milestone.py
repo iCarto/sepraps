@@ -1,7 +1,5 @@
 from django.db import models
 
-from app.models.project import Project
-
 
 PHASE_CHOICES = [
     ("design", "1. Diseño"),
@@ -21,10 +19,7 @@ class Milestone(models.Model):
     compliance_date = models.DateField("Fecha de cumplimiento", blank=True, null=True)
     comments = models.TextField("Observaciones", max_length=500, blank=True, null=True)
     project = models.ForeignKey(
-        Project,
-        on_delete=models.CASCADE,
-        verbose_name=Project._meta.verbose_name,
-        related_name="milestones",
+        "Project", on_delete=models.CASCADE, related_name="milestones"
     )
     parent = models.ForeignKey(
         "self", on_delete=models.CASCADE, blank=True, null=True, related_name="children"
