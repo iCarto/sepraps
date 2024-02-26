@@ -7,6 +7,7 @@ import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
 import {AmendmentFormDataFields} from ".";
 import {NumberUtil} from "base/format/utilities";
+import {FormContainer} from "base/form/components";
 
 const AmendmentForm = ({
     contractId,
@@ -45,12 +46,14 @@ const AmendmentForm = ({
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <AlertError error={error} />
-                <EntityForm
-                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                    onCancel={onCancel}
-                >
-                    <AmendmentFormDataFields />
-                </EntityForm>
+                <FormContainer>
+                    <EntityForm
+                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                        onCancel={onCancel}
+                    >
+                        <AmendmentFormDataFields />
+                    </EntityForm>
+                </FormContainer>
             </FormProvider>
         </DomainProvider>
     );

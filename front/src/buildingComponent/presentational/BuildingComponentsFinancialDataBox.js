@@ -23,7 +23,10 @@ const BuildingComponentsFinancialDataBox = ({
                 <LightHeading>{headline}</LightHeading>
                 <Stack direction="row" alignItems="baseline">
                     <Typography component="span" fontSize={42}>
-                        {NumberUtil.formatMillions(mainValues.first)} {CURRENCY_SYMBOL}
+                        {NumberUtil.formatMillions(mainValues.first)}
+                        <Typography component="span" fontSize={12}>
+                            {CURRENCY_SYMBOL}
+                        </Typography>
                     </Typography>
                     <Typography
                         component="span"
@@ -31,8 +34,10 @@ const BuildingComponentsFinancialDataBox = ({
                         ml={1}
                         color={theme.palette.grey[600]}
                     >
-                        / {NumberUtil.formatMillions(mainValues.second)}{" "}
-                        {CURRENCY_SYMBOL}
+                        / {NumberUtil.formatMillions(mainValues.second)}
+                        <Typography component="span" fontSize={12}>
+                            {CURRENCY_SYMBOL}
+                        </Typography>
                     </Typography>
                 </Stack>
                 {subheading}

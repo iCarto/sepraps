@@ -71,19 +71,19 @@ const BuildingComponentsSummaryList = ({bcMonitorings}) => {
                                             }
                                             secondary={`— ${bcMonitoring.execution_status_label}`}
                                         />
-                                        <Stack sx={{minWidth: "25%"}}>
+                                        <Stack sx={{minWidth: "30%"}}>
                                             <ProgressBarSmall
                                                 label="Avance financiero"
-                                                progressValue={
+                                                progressValue={NumberUtil.formatDecimalWithoutZeros(
                                                     bcMonitoring.financial_progress_percentage
-                                                }
+                                                )}
                                                 progressStyle={{mb: 1}}
                                             />
                                             <ProgressBarSmall
                                                 label="Avance físico"
-                                                progressValue={
+                                                progressValue={NumberUtil.formatDecimalWithoutZeros(
                                                     bcMonitoring.physical_progress_percentage
-                                                }
+                                                )}
                                             />
                                         </Stack>
                                         <Stack
