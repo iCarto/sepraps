@@ -1,7 +1,8 @@
 import {Fragment, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {SectionCard} from "base/ui/section/components";
+import {ContainerGridWithBorder} from "base/ui/section/components";
+import {LightHeading} from "base/ui/headings/components";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -37,13 +38,14 @@ const NotificationsWidget = ({notifications}) => {
     };
 
     return (
-        <SectionCard headingLabel={null} title="Notificaciones">
+        <ContainerGridWithBorder p={4}>
+            <LightHeading>Notificaciones ({notifications.length})</LightHeading>
             {notifications.length ? (
-                <List sx={{width: "100%", pr: 1, pt: 0, mt: -2}}>
+                <List sx={{width: "100%", px: 0}}>
                     {currentRecords?.map(notification => {
                         return (
                             <Fragment key={notification.id}>
-                                <ListItem alignItems="flex-start" sx={{pl: "8px"}}>
+                                <ListItem alignItems="flex-start" sx={{px: 0}}>
                                     <ListItemButton
                                         sx={buttonStyle}
                                         onClick={() => {
@@ -93,7 +95,7 @@ const NotificationsWidget = ({notifications}) => {
             ) : (
                 <Typography>No hay notificaciones para mostrar</Typography>
             )}
-        </SectionCard>
+        </ContainerGridWithBorder>
     );
 };
 
