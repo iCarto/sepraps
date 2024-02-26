@@ -72,7 +72,7 @@ const LayerMenu = ({layerProvider, customActions = []}) => {
         return hasDiscriminators ? (
             <MenuActions>
                 <ListSubheader component="div" id="nested-list-subheader">
-                    Simboloxía por
+                    Simbología por
                 </ListSubheader>
                 {legend.discriminatorsLegends.map(discriminatorLegend =>
                     getMenuAction(discriminatorLegend.field, discriminator)
