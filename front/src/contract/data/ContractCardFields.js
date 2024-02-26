@@ -54,7 +54,9 @@ export function useContractCard() {
                 );
             },
             note: element =>
-                element.total_awarding_budget ? "Modificado en adenda/s" : null,
+                element.total_awarding_budget != element.awarding_budget
+                    ? "Modificado en adenda/s"
+                    : null,
         },
         {
             label: "Contratista",

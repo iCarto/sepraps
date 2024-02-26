@@ -54,7 +54,9 @@ export function useContractTable(display = "regular") {
                 );
             },
             note: element =>
-                element.total_awarding_budget ? "Modificado en adenda/s" : null,
+                element.total_awarding_budget != element.awarding_budget
+                    ? "Modificado en adenda/s"
+                    : null,
         },
         {
             id: "contractor.name",
