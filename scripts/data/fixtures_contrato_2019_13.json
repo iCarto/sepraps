@@ -937,86 +937,8 @@
             "number_of_digital_materials": 2,
             "number_of_printed_materials": 4,
             "social_component_monitoring": 1,
-            "contract": null,
-            "contractor": null
-        }
-    },
-    {
-        "model": "app.socialcomponenttraining",
-        "pk": 2,
-        "fields": {
-            "created_at": "2023-11-24T10:14:42.634Z",
-            "updated_at": "2023-11-24T10:14:42.644Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 385,
-            "featured_image": null,
-            "featured_document": null,
-            "start_date": "2023-02-01",
-            "end_date": "2023-02-14",
-            "target_population": ["presidencia_prestador"],
-            "method": "in_situ",
-            "number_of_women": 3,
-            "number_of_men": 4,
-            "number_of_hours": 10,
-            "number_of_digital_materials": 2,
-            "number_of_printed_materials": 4,
-            "social_component_monitoring": 1,
-            "contract": null,
-            "contractor": null
-        }
-    },
-    {
-        "model": "app.socialcomponenttraining",
-        "pk": 3,
-        "fields": {
-            "created_at": "2023-11-24T10:15:04.809Z",
-            "updated_at": "2023-11-24T10:15:04.819Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 386,
-            "featured_image": null,
-            "featured_document": null,
-            "start_date": "2023-01-08",
-            "end_date": "2023-01-17",
-            "target_population": ["agentes_multiplicadores"],
-            "method": "in_situ",
-            "number_of_women": 20,
-            "number_of_men": 15,
-            "number_of_hours": 40,
-            "number_of_digital_materials": 2,
-            "number_of_printed_materials": 4,
-            "social_component_monitoring": 2,
-            "contract": null,
-            "contractor": null
-        }
-    },
-    {
-        "model": "app.socialcomponenttraining",
-        "pk": 4,
-        "fields": {
-            "created_at": "2023-11-24T10:16:55.280Z",
-            "updated_at": "2023-11-24T10:16:55.290Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 387,
-            "featured_image": null,
-            "featured_document": null,
-            "start_date": "2023-01-08",
-            "end_date": "2023-01-17",
-            "target_population": ["miembros_de_la_comision_directiva_prestador"],
-            "method": "taller_zonal",
-            "number_of_women": 10,
-            "number_of_men": 12,
-            "number_of_hours": 30,
-            "number_of_digital_materials": 2,
-            "number_of_printed_materials": 4,
-            "social_component_monitoring": 4,
-            "contract": null,
-            "contractor": null
+            "contract": 1,
+            "contractor": 1
         }
     },
     {
@@ -1053,6 +975,86 @@
             "contract": 1,
             "project": 4,
             "construction": true
+        }
+    },
+    {
+        "model": "app.connection",
+        "pk": 1,
+        "fields": {
+            "created_at": "2024-02-26T09:55:10.946Z",
+            "updated_at": "2024-02-26T10:41:04.428Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 26,
+            "featured_image": null,
+            "featured_document": null,
+            "number_of_households": 100,
+            "number_of_existing_connections": null,
+            "number_of_planned_connections": 80,
+            "number_of_actual_connections": 30,
+            "project": 1,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.connection",
+        "pk": 2,
+        "fields": {
+            "created_at": "2024-02-26T09:55:11.040Z",
+            "updated_at": "2024-02-26T10:41:36.795Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 44,
+            "featured_image": null,
+            "featured_document": null,
+            "number_of_households": 200,
+            "number_of_existing_connections": 10,
+            "number_of_planned_connections": 80,
+            "number_of_actual_connections": 65,
+            "project": 2,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.connection",
+        "pk": 3,
+        "fields": {
+            "created_at": "2024-02-26T09:55:11.209Z",
+            "updated_at": "2024-02-26T10:42:00.293Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 69,
+            "featured_image": null,
+            "featured_document": null,
+            "number_of_households": 130,
+            "number_of_existing_connections": null,
+            "number_of_planned_connections": 70,
+            "number_of_actual_connections": 10,
+            "project": 3,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.connection",
+        "pk": 4,
+        "fields": {
+            "created_at": "2024-02-26T09:55:11.307Z",
+            "updated_at": "2024-02-26T10:42:32.921Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 87,
+            "featured_image": null,
+            "featured_document": null,
+            "number_of_households": 350,
+            "number_of_existing_connections": 150,
+            "number_of_planned_connections": 200,
+            "number_of_actual_connections": 45,
+            "project": 4,
+            "comments": []
         }
     }
 ]
