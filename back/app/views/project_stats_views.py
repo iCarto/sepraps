@@ -364,6 +364,11 @@ CONNECTIONS_STATS_SUM_EXPORT_FIELDS = {
         "type": "integer",
         "width": 15,
     },
+    "number_of_existing_connections": {
+        "name": "Conexiones existentes",
+        "type": "integer",
+        "width": 15,
+    },
     "number_of_planned_connections": {
         "name": "Conexiones previstas",
         "type": "integer",
@@ -379,6 +384,7 @@ CONNECTIONS_STATS_SUM_EXPORT_FIELDS = {
         "type": "float",
         "width": 15,
     },
+    "coverage": {"name": "Cobertura (pers.nuevas)", "type": "integer", "width": 15},
 }
 
 
@@ -406,11 +412,16 @@ def get_connections_total_stats(request, format=None):
             SELECT
                 conn.id as id,
                 conn.number_of_households * %(people_per_household)s as population,
+                conn.number_of_households as number_of_households,
+                conn.number_of_existing_connections as number_of_existing_connections,
                 conn.number_of_planned_connections as number_of_planned_connections,
                 conn.number_of_actual_connections as number_of_actual_connections,
-                conn.number_of_households as number_of_households,
                 round((cast(coalesce(conn.number_of_actual_connections, 0) + coalesce(conn.number_of_existing_connections, 0) as decimal) / coalesce(conn.number_of_households, 1)) * 100, 2)::numeric as connected_households_percentage,
-                CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as project_code
+                CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as project_code,
+                CASE
+                    WHEN conn.number_of_actual_connections IS NULL OR conn.number_of_actual_connections = 0 THEN NULL
+                    ELSE conn.number_of_actual_connections * %(people_per_household)s
+                END AS coverage
             FROM connection conn
                 JOIN (
                     {join_query}
@@ -428,15 +439,17 @@ def get_connections_total_stats(request, format=None):
 
         if not result:
             result_df = pd.DataFrame(
-                [["total", 0, 0, 0, 0, 0, 0]],
+                [["total", 0, 0, 0, 0, 0, 0, 0]],
                 columns=[
                     "id",
                     "project_code",
                     "population",
+                    "number_of_existing_connections",
                     "number_of_planned_connections",
                     "number_of_actual_connections",
                     "number_of_households",
                     "connected_households_percentage",
+                    "coverage",
                 ],
             )
             return Response(result_df)
@@ -446,9 +459,11 @@ def get_connections_total_stats(request, format=None):
         result_df.loc["Total"] = result_df[
             [
                 "population",
+                "number_of_existing_connections",
                 "number_of_planned_connections",
                 "number_of_actual_connections",
                 "number_of_households",
+                "coverage",
             ]
         ].sum(numeric_only=True)
 
@@ -461,9 +476,11 @@ def get_connections_total_stats(request, format=None):
             {
                 "id": "Int64",
                 "population": "Int64",
+                "number_of_existing_connections": "Int64",
                 "number_of_planned_connections": "Int64",
                 "number_of_actual_connections": "Int64",
                 "number_of_households": "Int64",
+                "coverage": "Int64",
             }
         )
 

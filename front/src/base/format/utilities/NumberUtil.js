@@ -76,6 +76,9 @@ const NumberUtil = {
 
     formatInteger(value) {
         if (value || value === 0) {
+            if (typeof value === "string") {
+                return localIntegerFormatter.format(this.parseFloat(value));
+            }
             return localIntegerFormatter.format(value);
         } else return "";
     },
