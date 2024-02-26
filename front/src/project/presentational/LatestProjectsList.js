@@ -1,16 +1,16 @@
 import {useNavigate} from "react-router-dom";
 
-import {SectionSubheading} from "base/ui/section/components";
+import {ContainerGridWithBorder} from "base/ui/section/components";
+import {LightHeading} from "base/ui/headings/components";
 import {ImagePreview} from "base/image/components";
 
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
+import {theme} from "Theme";
 
 const LatestProjectsList = ({projects}) => {
     const navigate = useNavigate();
@@ -19,30 +19,30 @@ const LatestProjectsList = ({projects}) => {
         display: "flex",
         flexDirection: "column",
         minHeight: "152px",
+        border: 1,
+        borderColor: "primary.dark",
         boxShadow: 1,
         borderRadius: "4px",
         "&:hover": {
-            backgroundColor: "primary.hover",
+            backgroundColor: theme.palette.secondary.light,
         },
     };
 
     return (
-        <Card variant="outlined">
-            <CardHeader
-                title={<SectionSubheading heading="Proyectos" />}
-                sx={{pb: 0}}
-            />
+        <ContainerGridWithBorder p={4}>
+            <LightHeading>Últimos proyectos modificados</LightHeading>
             <List
                 sx={{
                     display: "flex",
                     flexDirection: "row",
                     flexWrap: {xs: "wrap", md: "noWrap"},
-                    p: 1,
-                    pt: 0,
+                    width: "100%",
+                    px: 0,
+                    pb: 0,
                 }}
             >
                 {projects.map((project, index) => (
-                    <ListItem key={index} sx={{pt: {xs: 1, xl: 0}, px: 1}}>
+                    <ListItem key={index} sx={{pr: 0, pb: 0, pl: index === 0 ? 0 : 2}}>
                         <ListItemButton
                             sx={projectButtonStyle}
                             onClick={() => {
@@ -59,7 +59,11 @@ const LatestProjectsList = ({projects}) => {
                                 }}
                             >
                                 <Avatar
-                                    sx={{width: "50px", height: "50px", boxShadow: 1}}
+                                    sx={{
+                                        width: "50px",
+                                        height: "50px",
+                                        boxShadow: 1,
+                                    }}
                                 >
                                     <ImagePreview
                                         path={project.featured_image}
@@ -81,13 +85,14 @@ const LatestProjectsList = ({projects}) => {
                                     flexDirection: "column",
                                     alignItems: "center",
                                     mt: 1.5,
+                                    mb: 0,
                                 }}
                             />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
-        </Card>
+        </ContainerGridWithBorder>
     );
 };
 

@@ -2,7 +2,8 @@ import {Fragment, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {DateUtil} from "base/format/utilities";
 
-import {SectionCard} from "base/ui/section/components";
+import {ContainerGridWithBorder} from "base/ui/section/components";
+import {LightHeading} from "base/ui/headings/components";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -53,13 +54,14 @@ const ComingEventsWidget = ({events}) => {
     };
 
     return (
-        <SectionCard headingLabel={null} title="Próximos eventos">
+        <ContainerGridWithBorder p={4}>
+            <LightHeading>Próximos eventos</LightHeading>
             {events.length ? (
-                <List sx={{width: "100%", pr: 2, pt: 0, mt: -2}}>
+                <List sx={{width: "100%", px: 0, pt: 2}} dense>
                     {currentRecords?.map(event => {
                         return (
                             <Fragment key={event.id}>
-                                <ListItem sx={{pl: "8px"}}>
+                                <ListItem sx={{px: 0}}>
                                     <ListItemButton
                                         sx={buttonStyle}
                                         onClick={() => {
@@ -120,7 +122,7 @@ const ComingEventsWidget = ({events}) => {
             ) : (
                 <Typography>No hay ninguna fecha próxima que destacar</Typography>
             )}
-        </SectionCard>
+        </ContainerGridWithBorder>
     );
 };
 

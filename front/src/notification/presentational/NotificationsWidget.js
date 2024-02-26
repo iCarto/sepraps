@@ -41,7 +41,7 @@ const NotificationsWidget = ({notifications}) => {
         <ContainerGridWithBorder p={4}>
             <LightHeading>Notificaciones ({notifications.length})</LightHeading>
             {notifications.length ? (
-                <List sx={{width: "100%", px: 0}}>
+                <List sx={{width: "100%", px: 0}} dense>
                     {currentRecords?.map(notification => {
                         return (
                             <Fragment key={notification.id}>

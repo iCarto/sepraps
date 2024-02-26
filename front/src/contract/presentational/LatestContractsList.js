@@ -1,8 +1,9 @@
 import {useNavigate} from "react-router-dom";
-import {SectionSubheading} from "base/ui/section/components";
 
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
+import {theme} from "Theme";
+import {ContainerGridWithBorder} from "base/ui/section/components";
+import {LightHeading} from "base/ui/headings/components";
+
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,33 +15,30 @@ const LatestContractsList = ({contracts}) => {
     const contractButtonStyle = {
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#fff",
         border: 1,
         borderColor: "primary.main",
         borderRadius: "4px",
         boxShadow: 1,
         "&:hover": {
-            backgroundColor: "primary.hover",
+            backgroundColor: theme.palette.secondary.light,
         },
     };
 
     return (
-        <Card variant="outlined">
-            <CardHeader
-                title={<SectionSubheading heading="Contratos" />}
-                sx={{pb: 0}}
-            />
+        <ContainerGridWithBorder p={4}>
+            <LightHeading>Últimos contratos modificados</LightHeading>
             <List
                 sx={{
                     display: "flex",
                     flexDirection: "row",
                     flexWrap: {xs: "wrap", md: "noWrap"},
-                    p: 1,
-                    pt: 0,
+                    width: "100%",
+                    px: 0,
+                    pb: 0,
                 }}
             >
                 {contracts.map((contract, index) => (
-                    <ListItem key={index} sx={{pt: {xs: 1, xl: 0}, px: 1}}>
+                    <ListItem key={index} sx={{pr: 0, pb: 0, pl: index === 0 ? 0 : 2}}>
                         <ListItemButton
                             sx={contractButtonStyle}
                             onClick={() => {
@@ -52,6 +50,7 @@ const LatestContractsList = ({contracts}) => {
                                 secondary={contract.financing_program?.financing_funds
                                     .map(financing_fund => financing_fund.short_name)
                                     .join(", ")}
+                                primaryTypographyProps={{textAlign: "center"}}
                                 secondaryTypographyProps={{textAlign: "center"}}
                                 sx={{
                                     display: "flex",
@@ -63,7 +62,7 @@ const LatestContractsList = ({contracts}) => {
                     </ListItem>
                 ))}
             </List>
-        </Card>
+        </ContainerGridWithBorder>
     );
 };
 

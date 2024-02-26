@@ -6,18 +6,18 @@ import {StatsService} from "stats/service";
 import {NotificationService} from "notification/service";
 import {EventService} from "event/service";
 
+import {LatestContractsList} from "contract/presentational";
+import {LatestProjectsList} from "project/presentational";
 import {PageLayout} from "base/ui/main";
+import {LightHeading} from "base/ui/headings/components";
 import {NotificationsWidget} from "notification/presentational";
 import {ComingEventsWidget} from "event/presentational";
-import {SectionCard} from "base/ui/section/components";
-import {SmallIconCard} from "base/shared/components";
-import {LatestProjectsList} from "project/presentational";
-import {LatestContractsList} from "contract/presentational";
+import {ContainerGridWithBorder} from "base/ui/section/components";
+import {PaperComponent, SmallIconCard, Spinner} from "base/shared/components";
 import {StatsByPhaseChart} from "stats/presentational";
 
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
 
@@ -30,30 +30,43 @@ const ViewHomePage = () => {
     const [events, setEvents] = useState([]);
     const [statsByPhaseData, setStatsByPhaseData] = useState([]);
 
+    const [projectsLoaded, setProjectsLoaded] = useState(false);
+    const [contractsLoaded, setContractsLoaded] = useState(false);
+    const [numbersLoaded, setNumbersLoaded] = useState(false);
+    const [notificationsLoaded, setNotificationsLoaded] = useState(false);
+    const [eventsLoaded, setEventsLoaded] = useState(false);
+    const [statsByPhaseDataLoaded, setStatsByPhaseDataLoaded] = useState(false);
+
     useEffect(() => {
         StatsService.getStatsByProjectsAndContracts().then(data => {
             setProjectsNumber(data.find(item => item.name === "opened_projects").total);
             setContractsNumber(
                 data.find(item => item.name === "opened_contracts").total
             );
+            setNumbersLoaded(true);
         });
         ProjectService.getList({page: 1, last_modified_items: 3}).then(data => {
             setProjects(data.results.sort((a, b) => b.updated_at - a.updated_at));
+            setProjectsLoaded(true);
         });
         ContractService.getList({page: 1, last_modified_items: 3}).then(data => {
             setContracts(data.results.sort((a, b) => b.updated_at - a.updated_at));
+            setContractsLoaded(true);
         });
-        NotificationService.getNotifications().then(data => {
+        NotificationService.get().then(data => {
             setNotifications(data);
+            setNotificationsLoaded(true);
         });
         EventService.getEvents().then(data => {
             setEvents(data.sort((a, b) => a.date - b.date));
+            setEventsLoaded(true);
         });
         StatsService.getStatsByPhase().then(data => {
             data.sort((a, b) =>
                 a.phase_name > b.phase_name ? 1 : b.phase_name > a.phase_name ? -1 : 0
             );
             setStatsByPhaseData(data);
+            setStatsByPhaseDataLoaded(true);
         });
     }, []);
 
@@ -64,88 +77,114 @@ const ViewHomePage = () => {
                     item
                     container
                     xs={12}
-                    md={6}
+                    lg={6}
                     spacing={2}
                     alignContent="flex-start"
                 >
-                    <Grid item container xs={4} spacing={2}>
-                        <Grid item xs={12}>
-                            <SmallIconCard
-                                heading="Contratos"
-                                figureContent={contractsNumber}
-                                urlPath="/contracts"
-                                icon={
-                                    <CasesOutlinedIcon
-                                        sx={{fontSize: "60px", lineHeight: 0}}
-                                    />
-                                }
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <SmallIconCard
-                                heading="Proyectos"
-                                figureContent={projectsNumber}
-                                urlPath="/projects"
-                                icon={
-                                    <BallotOutlinedIcon
-                                        sx={{fontSize: "60px", lineHeight: 0}}
-                                    />
-                                }
-                            />
-                        </Grid>
+                    <Grid item container xs={4}>
+                        <PaperComponent>
+                            {numbersLoaded ? (
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <SmallIconCard
+                                            heading="Contratos"
+                                            figureContent={contractsNumber}
+                                            urlPath="/contracts"
+                                            icon={
+                                                <CasesOutlinedIcon
+                                                    sx={{
+                                                        fontSize: "60px",
+                                                        lineHeight: 0,
+                                                    }}
+                                                />
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <SmallIconCard
+                                            heading="Proyectos"
+                                            figureContent={projectsNumber}
+                                            urlPath="/projects"
+                                            icon={
+                                                <BallotOutlinedIcon
+                                                    sx={{
+                                                        fontSize: "60px",
+                                                        lineHeight: 0,
+                                                    }}
+                                                />
+                                            }
+                                        />
+                                    </Grid>
+                                </Grid>
+                            ) : (
+                                <Spinner />
+                            )}
+                        </PaperComponent>
                     </Grid>
                     <Grid item container xs={8}>
-                        <SectionCard
-                            headingLabel={false}
-                            contentStyle={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                mt: 1,
-                            }}
-                        >
-                            <Typography
-                                variant="overline"
-                                lineHeight={1}
-                                color="grey.800"
-                                mb={3}
-                            >
-                                Proyectos por fase
-                            </Typography>
-                            <Box>
-                                <StatsByPhaseChart data={statsByPhaseData} />
-                            </Box>
-                        </SectionCard>
+                        <PaperComponent>
+                            {statsByPhaseDataLoaded ? (
+                                <ContainerGridWithBorder p={4}>
+                                    <Stack>
+                                        <LightHeading>Proyectos por fase</LightHeading>
+                                        <Stack mt={1}>
+                                            <StatsByPhaseChart
+                                                data={statsByPhaseData}
+                                            />
+                                        </Stack>
+                                    </Stack>
+                                </ContainerGridWithBorder>
+                            ) : (
+                                <Spinner />
+                            )}
+                        </PaperComponent>
                     </Grid>
                     <Grid item xs={12}>
-                        <SectionCard
-                            title="Últimas modificaciones"
-                            headingLabel={false}
-                        >
+                        <PaperComponent>
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
-                                    <LatestProjectsList projects={projects} />
+                                    {projectsLoaded ? (
+                                        <LatestProjectsList projects={projects} />
+                                    ) : (
+                                        <Spinner />
+                                    )}
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <LatestContractsList contracts={contracts} />
+                                    {contractsLoaded ? (
+                                        <LatestContractsList contracts={contracts} />
+                                    ) : (
+                                        <Spinner />
+                                    )}
                                 </Grid>
                             </Grid>
-                        </SectionCard>
+                        </PaperComponent>
                     </Grid>
                 </Grid>
                 <Grid
                     item
                     container
                     xs={12}
-                    md={6}
+                    lg={6}
                     rowSpacing={2}
                     alignContent="flex-start"
                 >
                     <Grid item xs={12}>
-                        <NotificationsWidget notifications={notifications} />
+                        <PaperComponent>
+                            {notificationsLoaded ? (
+                                <NotificationsWidget notifications={notifications} />
+                            ) : (
+                                <Spinner />
+                            )}
+                        </PaperComponent>
                     </Grid>
                     <Grid item xs={12}>
-                        <ComingEventsWidget events={events} />
+                        <PaperComponent>
+                            {eventsLoaded ? (
+                                <ComingEventsWidget events={events} />
+                            ) : (
+                                <Spinner />
+                            )}
+                        </PaperComponent>
                     </Grid>
                 </Grid>
             </Grid>

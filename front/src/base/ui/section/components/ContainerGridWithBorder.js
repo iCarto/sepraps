@@ -11,6 +11,7 @@ const ContainerGridWithBorder = ({children, ...props}) => {
                 borderRadius: 5,
                 p: 2,
                 pr: 3,
+                bgcolor: "white",
                 ...props,
             }}
         >
