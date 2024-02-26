@@ -36,7 +36,7 @@ const entityService = createEntityService(
 
 const ProjectService = {
     getList(filter, sort, order, format = null) {
-        return entityService.getList(filter, null, sort, order, format);
+        return entityService.getList(filter, null, sort, order, null, format);
     },
 
     // TODO: Review for projects
