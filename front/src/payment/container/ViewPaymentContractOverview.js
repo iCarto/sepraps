@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import {useOutletContext} from "react-router-dom";
 
 import {useContractCalendar} from "contract/presentational/hooks";
@@ -11,16 +10,7 @@ import {PaperComponent} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 
 const ViewPaymentContractOverview = () => {
-    const {contract, payments, notifications} = useOutletContext();
-
-    const [paymentNotifications, setPaymentNotifications] = useState([]);
-
-    useEffect(() => {
-        if (notifications)
-            setPaymentNotifications(
-                notifications.filter(item => item.context.section.includes("payments"))
-            );
-    }, [notifications]);
+    const {contract, payments, paymentNotifications} = useOutletContext();
 
     const {contractYears, contractItemsWithDate} = useContractCalendar(
         contract,
@@ -36,7 +26,7 @@ const ViewPaymentContractOverview = () => {
                     </PaperComponent>
                 </Grid>
                 <Grid item xs={6} container rowSpacing={1}>
-                    {notifications?.length ? (
+                    {paymentNotifications?.length ? (
                         <Grid item xs={12}>
                             <PaperComponent>
                                 <NotificationsWidget

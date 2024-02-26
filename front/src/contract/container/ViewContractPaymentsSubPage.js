@@ -22,11 +22,12 @@ const ViewContractPaymentsSubPage = () => {
 
     const [error, setError] = useState(null);
     const [paymentsForContract, setPaymentsForContract] = useState(null);
+    const [paymentNotifications, setPaymentNotifications] = useState([]);
 
     const contextForOutlet = {
         contract: contract,
         payments: paymentsForContract,
-        notifications: notifications,
+        paymentNotifications: paymentNotifications,
     };
 
     useEffect(() => {
@@ -41,6 +42,13 @@ const ViewContractPaymentsSubPage = () => {
                 });
         }
     }, [contractId, location.state?.lastRefreshDate]);
+
+    useEffect(() => {
+        if (notifications)
+            setPaymentNotifications(
+                notifications.filter(item => item.context.section.includes("payments"))
+            );
+    }, [notifications]);
 
     const tabs = [
         {
@@ -63,7 +71,7 @@ const ViewContractPaymentsSubPage = () => {
     return (
         <Box>
             {!contract.awarding_budget ||
-            contract.execution_start_date ||
+            !contract.execution_start_date ||
             !contract.expected_execution_period ? (
                 <PaperContainer>
                     <Grid container justifyContent="center" my={6}>
