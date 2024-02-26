@@ -7,7 +7,9 @@ from app.util import dictfetchall
 from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
-def create_notification(type, title, message, severity, url):
+def create_notification(type, title, message, severity, url, context=None):
+    if context is None:
+        context = {"section": "all"}
     return {
         "id": type + "-" + title,
         "type": type,
@@ -15,10 +17,15 @@ def create_notification(type, title, message, severity, url):
         "message": message,
         "severity": severity,
         "url": url,
+        "context": context,
     }
 
 
-def get_provider_missing_contacts_notifications(filters, user):
+def format_entity_name(cell, entity_name):
+    return cell if entity_name.lower() in cell.lower() else f"{entity_name} {cell}"
+
+
+def get_provider_missing_contacts_notifications(filter_params, user):
     with connection.cursor() as cursor:
         query = """
             SELECT DISTINCT prov.name AS provider_name, p.id AS project_id
@@ -33,47 +40,44 @@ def get_provider_missing_contacts_notifications(filters, user):
 
             """
         filter_conditions = []
-        filter_conditions_params = []
-        if filter := filters.get("projects"):
-            filter_conditions.append("and p.id = ANY(%s)")
-            filter_conditions_params.append(filter)
-        if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and cp.contract_id = ANY(%s)")
-            filter_conditions_params.append(filter)
+
+        if filter_param := filter_params.get("project"):
+            filter_conditions.append(f"AND p.id = {filter_param}")
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (p.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (p.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(
-            query.format(filter_conditions=" ".join(filter_conditions)),
-            filter_conditions_params,
+            query.format(filter_conditions=" ".join(filter_conditions)), filter_params
         )
 
         data = dictfetchall(cursor)
-        notifications = []
-        for row in data:
-            notifications.append(
-                create_notification(
-                    "provider_missing_contacts",
-                    row["provider_name"],
-                    "Este prestador no tiene contactos",
-                    "warning",
-                    "projects/{}/location".format(row["project_id"]),
-                )
+        section = "provider"
+
+        return [
+            create_notification(
+                "provider_missing_contacts",
+                row["provider_name"],
+                "Este prestador no tiene contactos",
+                "warning",
+                f"/projects/list/{row['project_id']}/{section}",
+                {"section": section},
             )
-        return notifications
+            for row in data
+        ]
 
 
-def get_no_updates_in_project_notifications(filters, user):
+def get_no_updates_in_project_notifications(filter_params, user):
     with connection.cursor() as cursor:
         query = """
-            SELECT DISTINCT p.id AS project_id, p.code, STRING_AGG (l."name", ' - ') project_name
+            SELECT p.id AS project_id, p.code,
+                (SELECT STRING_AGG(l."name", ' - ')
+                    FROM project_linked_localities pll
+                    LEFT JOIN locality l ON l.code = pll.locality_id
+                    WHERE pll.project_id = p.id
+                ) AS project_name
             FROM project p
-                LEFT JOIN project_linked_localities pll on pll.project_id = p.id
-                LEFT JOIN locality l on l.code = pll.locality_id
                 LEFT JOIN contract_project cp on cp.project_id = p.id
                 LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
@@ -82,102 +86,140 @@ def get_no_updates_in_project_notifications(filters, user):
             GROUP BY p.id, p.code
             """
         filter_conditions = []
-        filter_conditions_params = []
-        if filter := filters.get("projects"):
-            filter_conditions.append("and p.id = ANY(%s)")
-            filter_conditions_params.append(filter)
-        if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and cp.contract_id = ANY(%s)")
-            filter_conditions_params.append(filter)
+
+        if filter_param := filter_params.get("project"):
+            filter_conditions.append(f"AND p.id = {filter_param}")
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (p.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (p.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(
-            query.format(filter_conditions=" ".join(filter_conditions)),
-            filter_conditions_params,
+            query.format(filter_conditions=" ".join(filter_conditions)), filter_params
         )
 
         data = dictfetchall(cursor)
-        notifications = []
-        for row in data:
-            notifications.append(
-                create_notification(
-                    "no_updates_in_project",
-                    "Proyecto {} - {}".format(row["code"], row["project_name"]),
-                    "Hace más de 3 meses que no se actualiza este proyecto",
-                    "warning",
-                    "projects/{}/summary".format(row["project_id"]),
-                )
+
+        return [
+            create_notification(
+                "no_updates_in_project",
+                f"Proyecto {row['code']} - {row['project_name']}",
+                "Hace más de 3 meses que no se actualiza este proyecto",
+                "warning",
+                f"/projects/list/{row['project_id']}/summary",
             )
-        return notifications
+            for row in data
+        ]
 
 
-def get_incomplete_monthly_certification_notifications(filters, user):
-    if filters.get("projects"):
-        return []
-
+def get_certifications_inconsistent_with_components_notifications(filter_params, user):
     with connection.cursor() as cursor:
         query = """
-            SELECT DISTINCT pqi.project_id as project_id, mqi.questionnaire_id, p.code, to_char(make_date(mqi."year", mqi."month", 1), 'MM/YYYY') as year_month
-            FROM monthly_questionnaire_instance mqi
-                JOIN monthly_questionnaire_value mqv ON mqv.questionnaire_instance_id = mqi.id
-                JOIN project_questionnaire_instance pqi ON pqi.questionnaire_instance_id = mqi.id
-                JOIN project p ON p.id = pqi.project_id
-                JOIN contract_project cp on cp.project_id = p.id
-                JOIN construction_contract cc ON cc.id = cp.contract_id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
+            SELECT DISTINCT
+                p.id AS project_id,
+                p.code AS project_code
+            FROM project p
+                LEFT JOIN contract_project cp on cp.project_id = p.id
+                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
-            WHERE (to_char(make_date(mqi."year", mqi."month", 1), 'YYYY-MM') < to_char(CURRENT_DATE - INTERVAL '1 month', 'YYYY-MM')
-                OR (to_char(make_date(mqi."year", mqi."month", 1), 'YYYY-MM') = to_char(CURRENT_DATE - INTERVAL '1 month', 'YYYY-MM') AND EXTRACT('day' FROM CURRENT_DATE) > 10))
-                AND mqv.value IS NULL
-	            AND mqi.questionnaire_id = 'certificacion_mensual'
-                {filter_conditions}
-
+            WHERE
+                (
+                    SELECT COALESCE(SUM(c.approved_amount), 0)
+                    FROM certification c
+                    WHERE c.project_id = p.id
+                ) != (
+                    SELECT COALESCE(SUM(bcm.paid_amount), 0)
+                    FROM building_component_monitoring bcm
+                    WHERE bcm.project_id = p.id
+                )
+            {filter_conditions}
             """
         filter_conditions = []
-        filter_conditions_params = []
-        if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and cc.id = ANY(%s)")
-            filter_conditions_params.append(filter)
+
+        if filter_param := filter_params.get("project"):
+            filter_conditions.append(f"AND p.id = {filter_param}")
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (p.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(
-            query.format(filter_conditions=" ".join(filter_conditions)),
-            filter_conditions_params,
+            query.format(filter_conditions=" ".join(filter_conditions)), filter_params
+        )
+
+        data = dictfetchall(cursor)
+        section = "certifications"
+
+        return [
+            create_notification(
+                "certifications_inconsistent_with_components",
+                f"Proyecto {row['project_code']}",
+                "El monto aprobado en las certificaciones no coincide con el monto total aprobado para los componentes",
+                "error",
+                f"/projects/list/{row['project_id']}/{section}/overview",
+                {"section": section},
+            )
+            for row in data
+        ]
+
+
+def get_certifications_inconsistent_with_contract_payment_notifications(
+    filter_params, user
+):
+    with connection.cursor() as cursor:
+        query = """
+            SELECT
+                pay.id AS payment_id,
+                pay.name AS payment_name,
+                pay.paid_total_amount AS payment_paid_total_amount,
+                pay.contract_id,
+                cc.number AS contract_number,
+                COALESCE(SUM(cert.approved_amount), 0) AS projects_total_approved_amount
+            FROM payment pay
+            JOIN certification cert ON cert.payment_id = pay.id
+            JOIN construction_contract cc ON cc.id = pay.contract_id
+            LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
+            LEFT JOIN contact ct ON ct.id = ccc.contact_id
+            GROUP BY pay.id, pay.contract_id, cc.number, cc.creation_user_id, ct.user_id
+            HAVING pay.paid_total_amount != COALESCE(SUM(cert.approved_amount), 0)
+                {filter_conditions}
+            """
+        filter_conditions = []
+
+        if filter_param := filter_params.get("construction_contract"):
+            filter_conditions.append(f"AND pay.contract_id = {filter_param}")
+        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
+            filter_conditions.append(
+                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
+            )
+
+        cursor.execute(
+            query.format(filter_conditions=" ".join(filter_conditions)), filter_params
         )
 
         data = dictfetchall(cursor)
         notifications = []
+
         for row in data:
-            notifications.append(
-                create_notification(
-                    "incomplete_monthly_certification",
-                    "Proyecto {} - Mes {}".format(row["code"], row["year_month"]),
-                    "No se han introducido datos en la certificación presupuestaria de"
-                    " este mes",
-                    "error",
-                    "projects/{}/questionnaires/certificacion_mensual".format(
-                        row["project_id"]
-                    ),
-                )
+            contract_name = format_entity_name(row["contract_number"], "Contrato")
+            section = "payments"
+
+            notification = create_notification(
+                "payment_inconsistent_with_certifications",
+                f"{contract_name} - {row['payment_name']}",
+                "El monto de este certificado no coincide con el total aprobado en los proyectos relacionados",
+                "error",
+                f"/contracts/list/{row['contract_id']}/payment/list/{row['payment_id']}",
+                {"section": section, "payment_id": row["payment_id"]},
             )
+            notifications.append(notification)
+
         return notifications
 
 
 def get_contracts_milestone_compliance_notifications(
-    milestone_code, notification_code, notification_message, filters, user
+    milestone_code, notification_code, notification_message, filter_params, user
 ):
-    if filters.get("projects"):
-        return []
     with connection.cursor() as cursor:
         query = """
             WITH cc_projects AS(
@@ -205,15 +247,13 @@ def get_contracts_milestone_compliance_notifications(
                 {filter_conditions}
             """
         filter_conditions = []
-        filter_conditions_params = []
-        if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and cc.id = ANY(%s)")
-            filter_conditions_params.append(filter)
+
+        if filter_param := filter_params.get("construction_contract"):
+            filter_conditions.append(f"AND cc.id = {filter_param}")
+
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(
@@ -221,52 +261,130 @@ def get_contracts_milestone_compliance_notifications(
                 milestone_code=milestone_code,
                 filter_conditions=" ".join(filter_conditions),
             ),
-            filter_conditions_params,
+            filter_params,
         )
 
         data = dictfetchall(cursor)
         notifications = []
+
         for row in data:
-            notifications.append(
-                create_notification(
-                    notification_code,
-                    "Contrato {}".format(row["contract_number"]),
-                    notification_message,
-                    "error",
-                    "contracts/{}/phases".format(row["contract_id"]),
+            contract_name = format_entity_name(row["contract_number"], "Contrato")
+            section = "execution"
+
+            notification = create_notification(
+                notification_code,
+                contract_name,
+                notification_message,
+                "error",
+                f"/contracts/list/{row['contract_id']}/{section}",
+                {"section": section},
+            )
+            notifications.append(notification)
+
+        return notifications
+
+
+def get_pending_payment_notifications(filter_params, user):
+    with connection.cursor() as cursor:
+        query = """
+            SELECT DISTINCT
+                pay.contract_id,
+                cc.number AS contract_number
+            FROM payment pay
+            JOIN construction_contract cc ON cc.id = pay.contract_id
+            LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
+            LEFT JOIN contact ct ON ct.id = ccc.contact_id
+            WHERE EXISTS (
+                SELECT 1
+                FROM payment prev_pay
+                WHERE prev_pay.contract_id = pay.contract_id
+                AND (
+                    (prev_pay.approval_date IS NULL AND prev_pay.status = 'pendiente' AND pay.approval_date IS NOT NULL) AND
+                    (prev_pay.expected_approval_date IS NOT NULL AND prev_pay.expected_approval_date < pay.approval_date)
                 )
             )
+            {filter_conditions}
+            GROUP BY pay.id, pay.contract_id, cc.number, cc.creation_user_id, ct.user_id
+        """
+        filter_conditions = []
+
+        if filter_param := filter_params.get("construction_contract"):
+            filter_conditions.append(f"AND pay.contract_id = {filter_param}")
+        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
+            filter_conditions.append(
+                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
+            )
+
+        cursor.execute(
+            query.format(filter_conditions=" ".join(filter_conditions)), filter_params
+        )
+
+        data = dictfetchall(cursor)
+        notifications = []
+
+        for row in data:
+            contract_name = format_entity_name(row["contract_number"], "Contrato")
+            section = "payments"
+
+            notification = create_notification(
+                "pending_payment",
+                contract_name,
+                "Este contrato tiene productos sin aprobar",
+                "warning",
+                f"/contracts/list/{row['contract_id']}/payment/overview",
+                {"section": section},
+            )
+            notifications.append(notification)
+
         return notifications
 
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def get_notifications(request, format=None):
-    filter = {}
+def get_notifications(request, format=None):  # noqa: ARG001
+    filter_params = request.GET
 
-    if filter_param := request.GET.get("project"):
-        filter["projects"] = [int(filter_param)]
-    if filter_param := request.GET.get("construction_contract"):
-        filter["construction_contracts"] = [int(filter_param)]
+    def get_project_notifications(params):
+        return (
+            get_certifications_inconsistent_with_components_notifications(
+                filter_params, request.user
+            )
+            + get_no_updates_in_project_notifications(params, request.user)
+            + get_provider_missing_contacts_notifications(filter_params, request.user)
+        )
 
-    return Response(
-        get_contracts_milestone_compliance_notifications(
-            "start_of_works",
-            "all_work_sites_delivered",
-            "Este contrato no tiene fecha de inicio - Todos los sitios de obra se han"
-            " entregado",
-            filter,
-            request.user,
+    def get_contract_notifications(params):
+        return (
+            get_contracts_milestone_compliance_notifications(
+                "start_of_works",
+                "all_work_sites_delivered",
+                "Este contrato no tiene fecha de inicio - Todos los sitios de obra se han entregado",
+                params,
+                request.user,
+            )
+            # TODO(cmartin): the query in this method is not working properly. The condition to be met is always that the execution_start_date for the contract is null. For this notification to work when the milestone_code is 'final_reception', the date to check would be execution_final_delivery_date. However, we cannot use that date in the query, since it is a dynamic field that is not present in the database (as it is only relevant for contracts that include building execution service).
+            # + get_contracts_milestone_compliance_notifications(
+            #     "final_reception",
+            #     "all_projects_completed",
+            #     "Este contrato no tiene fecha de recepción definitiva - Se han recibido"
+            #     " todos los proyectos",
+            #     params,
+            #     request.user,
+            # )
+            + get_certifications_inconsistent_with_contract_payment_notifications(
+                params, request.user
+            )
+            + get_pending_payment_notifications(params, request.user)
         )
-        + get_contracts_milestone_compliance_notifications(
-            "final_reception",
-            "all_projects_completed",
-            "Este contrato no tiene fecha de recepción definitiva - Se han recibido"
-            " todos los proyectos",
-            filter,
-            request.user,
-        )
-        + get_incomplete_monthly_certification_notifications(filter, request.user)
-        + get_no_updates_in_project_notifications(filter, request.user)
-        + get_provider_missing_contacts_notifications(filter, request.user)
-    )
+
+    response = [
+        *get_contract_notifications(filter_params),
+        *get_project_notifications(filter_params),
+    ]
+
+    if filter_params.get("project"):
+        response = get_project_notifications(filter_params)
+    if filter_params.get("construction_contract"):
+        response = get_contract_notifications(filter_params)
+
+    return Response(response)
