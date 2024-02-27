@@ -38,13 +38,11 @@ def get_end_of_contract_events(filters, user):
         filter_conditions = []
         filter_conditions_params = []
         if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and cc.id = ANY(%s)")
+            filter_conditions.append("AND cc.id = ANY(%s)")
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(
@@ -54,15 +52,22 @@ def get_end_of_contract_events(filters, user):
 
         data = dictfetchall(cursor)
         events = []
+
         for row in data:
+            contract_number = row["contract_number"]
+            event_title = (
+                contract_number
+                if "Contrato" in contract_number
+                else f"Contrato {contract_number}"
+            )
+
             events.append(
                 create_event(
                     "end_of_contract",
                     row["expected_end_date"],
-                    "Contrato {}".format(row["contract_number"]),
-                    "El plazo previsto de ejecución de este contrato finalizará dentro"
-                    " de {} días".format(row["days_left"]),
-                    "contracts/{}/phases".format(row["contract_id"]),
+                    event_title,
+                    f"El plazo previsto de ejecución de este contrato finalizará dentro de {row['days_left']} días",
+                    f"contracts/list/{row['contract_id']}/execution",
                 )
             )
         return events
@@ -88,13 +93,11 @@ def get_end_of_warranty_events(filters, user):
         filter_conditions = []
         filter_conditions_params = []
         if filter := filters.get("construction_contracts"):
-            filter_conditions.append("and cc.id = ANY(%s)")
+            filter_conditions.append("AND cc.id = ANY(%s)")
             filter_conditions_params.append(filter)
         if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             filter_conditions.append(
-                "AND (cc.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
-                    user_id=user.id
-                )
+                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
             )
 
         cursor.execute(
@@ -105,14 +108,20 @@ def get_end_of_warranty_events(filters, user):
         data = dictfetchall(cursor)
         events = []
         for row in data:
+            contract_number = row["contract_number"]
+            event_title = (
+                contract_number
+                if "Contrato" in contract_number
+                else f"Contrato {contract_number}"
+            )
+
             events.append(
                 create_event(
                     "end_of_warranty",
                     row["warranty_end_date"],
-                    "Contrato {}".format(row["contract_number"]),
-                    "El periodo de garantía de este contrato finalizará dentro de {}"
-                    " días".format(row["days_left"]),
-                    "contracts/{}/phases".format(row["contract_id"]),
+                    event_title,
+                    f"El periodo de garantía de este contrato finalizará dentro de {row['days_left']} días",
+                    f"contracts/list/{row['contract_id']}/post-execution",
                 )
             )
         return events
