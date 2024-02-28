@@ -74,7 +74,7 @@ const ProjectProviderSection = ({project}) => {
                     />
                     <SectionField label="Tipo" value={`${provider.type_label}`} />
                     <SectionField
-                        label="Legalmente constituida"
+                        label="Legalmente constituido"
                         value={`${provider.is_legalized_label}`}
                     />
                     <RemoveItemDialog

@@ -13,14 +13,16 @@ const ViewProjectCertificationsSubPage = () => {
     const location = useLocation();
     const basePath = RouterUtil.getPathForSegment(location, "certifications");
 
-    const [project] = useOutletContext();
+    const [project, notifications] = useOutletContext();
 
     const [certifications, setCertifications] = useState(null);
+    const [certifNotifications, setCertifNotifications] = useState([]);
     const [error, setError] = useState(null);
 
     const contextForOutlet = {
         project: project,
         certifications: certifications,
+        certifNotifications: certifNotifications,
     };
 
     useEffect(() => {
@@ -33,6 +35,15 @@ const ViewProjectCertificationsSubPage = () => {
                 setError(error);
             });
     }, [projectId, location.state?.lastRefreshDate]);
+
+    useEffect(() => {
+        if (notifications)
+            setCertifNotifications(
+                notifications.filter(item =>
+                    item.context.section.includes("certifications")
+                )
+            );
+    }, [notifications]);
 
     const tabs = [
         {

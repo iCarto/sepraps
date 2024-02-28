@@ -1,13 +1,32 @@
+import {useState, useEffect} from "react";
 import {useOutletContext} from "react-router-dom";
 
 import {ProjectProviderSection} from "project/presentational/section";
 import {EntityViewSubPage} from "base/entity/components/container";
+import {NotificationsSection} from "notification/presentational";
 
 const ViewProjectProviderSubPage = () => {
     let project;
-    [project] = useOutletContext();
+    let notifications;
+    [project, notifications] = useOutletContext();
 
-    const sections = [<ProjectProviderSection project={project} />];
+    const [providerNotifications, setProviderNotifications] = useState([]);
+
+    useEffect(() => {
+        if (notifications)
+            setProviderNotifications(
+                notifications.filter(item => item.context.section.includes("provider"))
+            );
+    }, [notifications]);
+
+    let sections = [<ProjectProviderSection project={project} />];
+
+    if (providerNotifications.length) {
+        sections = [
+            <NotificationsSection notifications={providerNotifications} />,
+            ...sections,
+        ];
+    }
 
     return project && <EntityViewSubPage sections={sections} />;
 };

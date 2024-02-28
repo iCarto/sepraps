@@ -6,11 +6,16 @@ import {NumberUtil} from "base/format/utilities";
 import {SimplePieChart} from "base/chart/components";
 import {ContainerGridWithBorder} from "base/ui/section/components";
 import {LightHeading} from "base/ui/headings/components";
-import {getTotal} from "payment/container";
 
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+
+const getTotal = (items, totalColumn) => {
+    return items
+        .map(item => parseInt(item[totalColumn]))
+        .reduce((sum, i) => sum + i, 0);
+};
 
 const CertificationsSummaryBox = ({certifications, contract}) => {
     const total = getTotal(certifications, "approved_amount");

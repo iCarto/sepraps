@@ -8,9 +8,10 @@ import {
 import {PaperComponent} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
+import {NotificationsWidget} from "notification/presentational";
 
 const ViewCertificationsOverview = () => {
-    const {project, certifications} = useOutletContext();
+    const {project, certifications, certifNotifications} = useOutletContext();
     const {contractYears, contractItemsWithDate} = useContractCalendar(
         project?.construction_contract,
         certifications
@@ -27,15 +28,26 @@ const ViewCertificationsOverview = () => {
                         />
                     </PaperComponent>
                 </Grid>
-                <Grid item xs={6}>
-                    <PaperComponent>
-                        <ContractCalendar
-                            years={contractYears}
-                            items={contractItemsWithDate}
-                            itemsLabel="certificaciones"
-                            itemComponent={CertificationCalendarItem}
-                        />
-                    </PaperComponent>
+                <Grid item xs={6} container rowSpacing={1}>
+                    {certifNotifications?.length ? (
+                        <Grid item xs={12}>
+                            <PaperComponent>
+                                <NotificationsWidget
+                                    notifications={certifNotifications}
+                                />
+                            </PaperComponent>
+                        </Grid>
+                    ) : null}
+                    <Grid item xs={12}>
+                        <PaperComponent>
+                            <ContractCalendar
+                                years={contractYears}
+                                items={contractItemsWithDate}
+                                itemsLabel="certificaciones"
+                                itemComponent={CertificationCalendarItem}
+                            />
+                        </PaperComponent>
+                    </Grid>
                 </Grid>
             </Grid>
         )
