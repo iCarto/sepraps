@@ -5,6 +5,7 @@ import {usePaymentCertificationsTable} from "payment/data";
 import {SectionCard} from "base/ui/section/components";
 import {TotalsSpanningTable} from "base/table/components";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import {useOutletContext} from "react-router-dom";
 
 export const getTotal = (items, totalColumn) => {
     return items
@@ -14,8 +15,10 @@ export const getTotal = (items, totalColumn) => {
 
 const ViewPaymentCertificationsContent = ({payment}) => {
     const {tableColumns} = usePaymentCertificationsTable();
+    const context = useOutletContext();
+    console.log(context);
 
-    const tableTotal = getTotal(payment?.certifications, "approved_amount");
+    const tableTotal = payment.certifications_total_amount;
     const parsedTableTotal = NumberUtil.formatInteger(tableTotal);
 
     const areTotalsEqual = parseInt(payment.paid_total_amount) === tableTotal;

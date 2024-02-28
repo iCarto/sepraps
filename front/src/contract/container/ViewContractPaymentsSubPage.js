@@ -18,12 +18,16 @@ const ViewContractPaymentsSubPage = () => {
     const location = useLocation();
     const basePath = RouterUtil.getPathForSegment(location, "payment");
 
-    const [contract] = useOutletContext();
+    const [contract, notifications] = useOutletContext();
 
     const [error, setError] = useState(null);
     const [paymentsForContract, setPaymentsForContract] = useState(null);
 
-    const contextForOutlet = {contract: contract, payments: paymentsForContract};
+    const contextForOutlet = {
+        contract: contract,
+        payments: paymentsForContract,
+        notifications: notifications,
+    };
 
     useEffect(() => {
         if (!paymentsForContract) {
@@ -59,7 +63,7 @@ const ViewContractPaymentsSubPage = () => {
     return (
         <Box>
             {!contract.awarding_budget ||
-            !contract.execution_start_date ||
+            contract.execution_start_date ||
             !contract.expected_execution_period ? (
                 <PaperContainer>
                     <Grid container justifyContent="center" my={6}>

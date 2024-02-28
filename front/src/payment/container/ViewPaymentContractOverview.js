@@ -1,13 +1,26 @@
+import {useEffect, useState} from "react";
 import {useOutletContext} from "react-router-dom";
+
 import {useContractCalendar} from "contract/presentational/hooks";
+
 import {PaymentCalendarItem, PaymentsFinancialData} from "payment/presentational";
 import {ContractCalendar} from "contract/presentational";
+import {NotificationsWidget} from "notification/presentational";
 import {PaperComponent} from "base/shared/components";
 
 import Grid from "@mui/material/Grid";
 
 const ViewPaymentContractOverview = () => {
-    const {contract, payments} = useOutletContext();
+    const {contract, payments, notifications} = useOutletContext();
+
+    const [paymentNotifications, setPaymentNotifications] = useState([]);
+
+    useEffect(() => {
+        if (notifications)
+            setPaymentNotifications(
+                notifications.filter(item => item.context.section.includes("payments"))
+            );
+    }, [notifications]);
 
     const {contractYears, contractItemsWithDate} = useContractCalendar(
         contract,
@@ -22,15 +35,26 @@ const ViewPaymentContractOverview = () => {
                         <PaymentsFinancialData contract={contract} />
                     </PaperComponent>
                 </Grid>
-                <Grid item xs={6}>
-                    <PaperComponent>
-                        <ContractCalendar
-                            years={contractYears}
-                            items={contractItemsWithDate}
-                            itemsLabel="productos"
-                            itemComponent={PaymentCalendarItem}
-                        />
-                    </PaperComponent>
+                <Grid item xs={6} container rowSpacing={1}>
+                    {notifications?.length ? (
+                        <Grid item xs={12}>
+                            <PaperComponent>
+                                <NotificationsWidget
+                                    notifications={paymentNotifications}
+                                />
+                            </PaperComponent>
+                        </Grid>
+                    ) : null}
+                    <Grid item xs={12}>
+                        <PaperComponent>
+                            <ContractCalendar
+                                years={contractYears}
+                                items={contractItemsWithDate}
+                                itemsLabel="productos"
+                                itemComponent={PaymentCalendarItem}
+                            />
+                        </PaperComponent>
+                    </Grid>
                 </Grid>
             </Grid>
         )

@@ -2,18 +2,22 @@ import {useOutletContext} from "react-router-dom";
 
 import {contracts_api_adapter} from "contract/model";
 
+import {ViewOrUpdateContractContent} from ".";
+import {ContractRelatedContractsSection} from "contract/presentational";
+import {NotificationsSection} from "notification/presentational";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
-import {ContractRelatedContractsSection} from "contract/presentational";
-import {ViewOrUpdateContractContent} from ".";
 
 const ViewContractSummarySubPage = () => {
-    let contract;
-    [contract] = useOutletContext();
+    const context = useOutletContext();
+    const contract = context[0];
+    const notifications = context[1];
 
-    const relatedContracts = contracts_api_adapter(contract.related_contracts);
+    const relatedContracts = contract
+        ? contracts_api_adapter(contract.related_contracts)
+        : [];
 
-    const sections = [
+    let sections = [
         <ViewOrUpdateContractContent
             contract={contract}
             section="generaldata"
@@ -22,6 +26,13 @@ const ViewContractSummarySubPage = () => {
         <ContractRelatedContractsSection contracts={relatedContracts} />,
         <EntityAuditSection entity={contract} />,
     ];
+
+    if (notifications.length) {
+        sections = [
+            <NotificationsSection notifications={notifications} />,
+            ...sections,
+        ];
+    }
 
     return contract && <EntityViewSubPage sections={sections} />;
 };

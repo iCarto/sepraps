@@ -1,13 +1,14 @@
 import {useState} from "react";
 
-import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
-import {useNavigateWithReload} from "base/navigation/hooks";
-
-import EditIcon from "@mui/icons-material/Edit";
 import {ContractServiceService} from "contract/service";
 import {contract_service_view_adapter} from "contract/model";
+import {useNavigateWithReload} from "base/navigation/hooks";
+
+import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {ContractServiceData} from "contract/presentational/section";
 import {ContractServiceForm} from "contract/presentational/form";
+
+import EditIcon from "@mui/icons-material/Edit";
 
 const ViewOrUpdateSupervisionServiceContent = ({contractService}) => {
     const navigate = useNavigateWithReload();

@@ -9,13 +9,23 @@ import {
     ViewOrUpdateContractContent,
     ViewOrUpdateSupervisionServiceContent,
 } from ".";
+import {NotificationsSection} from "notification/presentational";
 
 const ViewContractExecutionSubPage = () => {
     let contract;
-    [contract] = useOutletContext();
+    let notifications;
+    [contract, notifications] = useOutletContext();
 
     const [services, setServices] = useState([]);
     const [amendments, setAmendments] = useState([]);
+    const [executionNotifications, setExecutionNotifications] = useState([]);
+
+    useEffect(() => {
+        if (notifications)
+            setExecutionNotifications(
+                notifications.filter(item => item.context.section.includes("execution"))
+            );
+    }, [notifications]);
 
     useEffect(() => {
         Promise.all([
@@ -27,7 +37,7 @@ const ViewContractExecutionSubPage = () => {
         });
     }, [contract]);
 
-    const sections = [
+    let sections = [
         <ViewOrUpdateContractContent
             contract={contract}
             services={services}
@@ -42,6 +52,13 @@ const ViewContractExecutionSubPage = () => {
         )),
         <ViewContractAmendmentsContent amendments={amendments} contract={contract} />,
     ];
+
+    if (notifications.length) {
+        sections = [
+            <NotificationsSection notifications={executionNotifications} />,
+            ...sections,
+        ];
+    }
 
     return contract && <EntityViewSubPage sections={sections} />;
 };

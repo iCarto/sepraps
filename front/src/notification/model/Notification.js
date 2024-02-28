@@ -18,6 +18,7 @@ const createNotification = ({
     message = "",
     severity = "",
     url = "",
+    context = null,
 } = {}) => {
     const publicApi = {
         id,
@@ -26,6 +27,7 @@ const createNotification = ({
         message,
         severity,
         url,
+        context,
     };
 
     return Object.freeze(publicApi);
