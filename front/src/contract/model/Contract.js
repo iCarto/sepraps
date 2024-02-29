@@ -22,12 +22,13 @@ const contract_api_adapter = contract => {
               })
           )
         : null;
-    contract["expected_execution_end_date"] = contract["expected_execution_period"]
-        ? DateUtil.getDateAfterDays(
-              contract["execution_start_date"],
-              contract["expected_execution_period"]
-          )
-        : null;
+    contract["expected_execution_end_date"] =
+        contract["execution_start_date"] && contract["expected_execution_period"]
+            ? DateUtil.getDateAfterDays(
+                  contract["execution_start_date"],
+                  contract["expected_execution_period"]
+              )
+            : null;
 
     contract["expected_execution_period_in_months"] = contract[
         "expected_execution_period"
@@ -38,23 +39,20 @@ const contract_api_adapter = contract => {
           ) + 1
         : null;
 
-    contract["amended_expected_execution_end_date"] = contract[
-        "total_expected_execution_period"
-    ]
-        ? DateUtil.getDateAfterDays(
-              contract["execution_start_date"],
-              contract["total_expected_execution_period"]
-          )
-        : null;
-
-    contract["total_expected_execution_period_in_months"] = contract[
-        "total_expected_execution_period"
-    ]
-        ? DateUtil.getMonths(
-              contract["execution_start_date"],
-              contract["amended_expected_execution_end_date"]
-          ) + 1
-        : null;
+    contract["amended_expected_execution_end_date"] =
+        contract["total_expected_execution_period"] && contract["execution_start_date"]
+            ? DateUtil.getDateAfterDays(
+                  contract["execution_start_date"],
+                  contract["total_expected_execution_period"]
+              )
+            : null;
+    contract["total_expected_execution_period_in_months"] =
+        contract["total_expected_execution_period"] && contract["execution_start_date"]
+            ? DateUtil.getMonths(
+                  contract["execution_start_date"],
+                  contract["amended_expected_execution_end_date"]
+              ) + 1
+            : null;
 
     if (contract["questionnaires"]) {
         contract["questionnaires"] = createQuestionnaires(

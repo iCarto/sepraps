@@ -78,6 +78,16 @@ const ExecutionPeriodAmendmentData = ({amendment, contract}) => {
         ? (amendment.extra_period / contract.expected_execution_period) * 100
         : null;
 
+    const extendedPeriodInMonths = contract.total_expected_execution_period_in_months
+        ? `(${contract.total_expected_execution_period_in_months} meses)`
+        : "";
+
+    const extendedPeriodValue = amendment.cumulative_contract_amended_execution_period
+        ? `${NumberUtil.formatInteger(
+              amendment.cumulative_contract_amended_execution_period
+          )} días ${extendedPeriodInMonths}`
+        : "";
+
     return (
         <>
             <Grid container item xs={5}>
@@ -90,15 +100,7 @@ const ExecutionPeriodAmendmentData = ({amendment, contract}) => {
             <Grid container item xs={5}>
                 <SectionField
                     label="Plazo de ejecución del contrato ampliado"
-                    value={
-                        amendment.cumulative_contract_amended_execution_period
-                            ? `${parseInt(
-                                  amendment.cumulative_contract_amended_execution_period
-                              )} días (${
-                                  contract.total_expected_execution_period_in_months
-                              } meses)`
-                            : ""
-                    }
+                    value={extendedPeriodValue}
                 />
             </Grid>
             {deviation && (
