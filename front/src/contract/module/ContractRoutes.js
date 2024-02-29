@@ -7,10 +7,8 @@ import {
     ViewContractProjectsSubPage,
     CreateContractPage,
     ViewContractProjectPanel,
-    AddContractProjectPanel,
     ManageContractsPage,
     ViewContractPanel,
-    ViewContractQuestionnairesSubPage,
     ViewContractBudgetSubPage,
     CreateContractProjectPage,
     ViewContractPaymentsSubPage,
@@ -110,11 +108,6 @@ const contractRoutes = [
                 path="projects/add/new"
                 element={<CreateContractProjectPage />}
             />
-            <Route
-                key="contract-questionnaire-detail"
-                path="questionnaires/:questionnaireCode"
-                element={<ViewContractQuestionnairesSubPage />}
-            ></Route>
             <Route
                 key="contract-payments"
                 path="payment"

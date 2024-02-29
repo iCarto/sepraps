@@ -3,7 +3,6 @@ import {
     SubPageMenuListGroup,
     SubPageMenuListItemButton,
 } from "base/ui/menu";
-import {QuestionnairesMenu} from "questionnaire/presentational";
 import {SelectProjectDropDown} from "project/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
@@ -95,10 +94,6 @@ const ProjectSubPageMenu = ({project}) => {
                 headerTitle="Área social"
                 headerIcon={<HandshakeOutlinedIcon />}
                 items={socialSupervisionAreaSubmenuItems}
-            />
-            <QuestionnairesMenu
-                questionnaires={project?.questionnaires}
-                basePath={`/projects/list/${project?.id}`}
             />
         </SubPageMenu>
     );

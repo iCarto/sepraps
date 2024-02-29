@@ -10,13 +10,11 @@ import {
     ViewProjectMilestonesSubPage,
     ViewProjectContactsSubPage,
     ViewProjectDocumentsSubPage,
-    ViewProjectQuestionnairesSubPage,
     UpdateProjectProviderPanel,
     UpdateProjectPanel,
     UpdateProjectMainInfrastructurePanel,
     ViewProjectPanel,
     AddProjectLinkedLocalitiesPanel,
-    UpdateProjectQuestionnaireInstancePanel,
     ViewProjectProviderSubPage,
     ViewProjectFieldReportSubPage,
     ViewProjectDocumentPanel,
@@ -32,10 +30,7 @@ import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
 import {AddProjectContractPanel} from "contract/container";
 import {MapConfigProvider} from "base/geo/provider";
 import {ViewContactPanel} from "contact/container";
-import {
-    ViewStatsByPhaseSubPage,
-    ViewStatsByQuestionnairesSubPage,
-} from "stats/container";
+import {ViewStatsByPhaseSubPage} from "stats/container";
 import {ViewDocumentPanel} from "base/file/components";
 import {
     ViewBuildingComponentContent,
@@ -136,17 +131,6 @@ const projectRoutes = [
                 />
             </Route>
             <Route
-                key="project-questionnaire-detail"
-                path="questionnaires/:questionnaireCode"
-                element={<ViewProjectQuestionnairesSubPage />}
-            >
-                <Route
-                    key="project-questionnaire-instance-edit"
-                    path=":instanceId/:action"
-                    element={<UpdateProjectQuestionnaireInstancePanel />}
-                />
-            </Route>
-            <Route
                 key="project-building-components"
                 path="buildingcomponents"
                 element={<ViewProjectBuildingComponentsSubPage />}
@@ -241,11 +225,6 @@ const projectRoutes = [
             key="project-stats-by-phase"
             path="phase"
             element={<ViewStatsByPhaseSubPage />}
-        />
-        <Route
-            key="-projectstats-by-questionnaires"
-            path="questionnaires/:questionnaireCode"
-            element={<ViewStatsByQuestionnairesSubPage />}
         />
         <Route index element={<Navigate to="phase" replace />} />
     </Route>,

@@ -6,7 +6,6 @@ import {
     SubPageMenuListGroup,
     SubPageMenuListItemButton,
 } from "base/ui/menu";
-import {QuestionnairesMenu} from "questionnaire/presentational";
 import {SelectContractDropDown} from "contract/menu";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -110,10 +109,6 @@ const ContractSubPageMenu = ({contract}) => {
                     items={socialSupervisionAreaSubmenuItems}
                 />
             )}
-            <QuestionnairesMenu
-                questionnaires={contract.questionnaires}
-                basePath={`/contracts/list/${contract?.id}`}
-            />
         </SubPageMenu>
     );
 };
