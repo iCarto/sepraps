@@ -64,6 +64,7 @@ const ViewProjectFieldReportSubPage = () => {
                 <ListSelector
                     title="Informes"
                     items={fieldReportsForProject}
+                    basePath="/field-reports"
                     renderItem={fieldReport => (
                         <ListSelectorItem
                             key={fieldReport.id}
