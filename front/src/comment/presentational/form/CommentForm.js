@@ -5,7 +5,7 @@ import {FormUtil} from "base/form/utilities";
 import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
 
-const PaymentForm = ({comment = null, onSubmit, onCancel = null, error = null}) => {
+const CommentForm = ({comment = null, onSubmit, onCancel = null, error = null}) => {
     const defaultFormValues = {
         id: FormUtil.getFormValue(comment?.id),
         text: FormUtil.getFormValue(comment?.text),
@@ -36,4 +36,4 @@ const PaymentForm = ({comment = null, onSubmit, onCancel = null, error = null}) 
     );
 };
 
-export default PaymentForm;
+export default CommentForm;

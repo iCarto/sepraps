@@ -1,7 +1,7 @@
 import {theme} from "Theme";
 import Grid from "@mui/material/Grid";
 
-const FormContainer = ({children}) => {
+const FormContainer = ({children, style = {}}) => {
     return (
         <Grid
             container
@@ -10,7 +10,7 @@ const FormContainer = ({children}) => {
             border={1}
             borderColor={"primary.main"}
             borderRadius={1}
-            sx={{backgroundColor: theme.palette.pageBackground.secondary}}
+            sx={{backgroundColor: theme.palette.pageBackground.secondary, ...style}}
         >
             {children}
         </Grid>

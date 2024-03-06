@@ -6,7 +6,7 @@ import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
 import {DomainProvider} from "sepraps/domain/provider";
 
-const PaymentForm = ({
+const ProductForm = ({
     paymentId,
     product = null,
     onSubmit,
@@ -50,4 +50,4 @@ const PaymentForm = ({
     );
 };
 
-export default PaymentForm;
+export default ProductForm;

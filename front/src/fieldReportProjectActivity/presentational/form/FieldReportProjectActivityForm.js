@@ -1,14 +1,11 @@
+import {useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 
 import {FormUtil} from "base/form/utilities";
 
 import {EntityForm} from "base/entity/components/form";
-import {FormContainer} from "base/form/components";
+import {AddNewInlineItemFormBox} from "base/shared/components";
 import {FieldReportProjectActivityFormFields} from ".";
-
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import {useState} from "react";
 
 const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,31 +62,17 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
 
     return (
         <FormProvider {...formMethods}>
-            <FormContainer>
-                <Grid item>
-                    <Typography
-                        variant="h6"
-                        component="h4"
-                        sx={{
-                            pl: 1,
-                            pb: 3,
-                            color: "primary.main",
-                            fontWeight: "500",
-                        }}
-                    >
-                        {activity ? "Editar actividad" : "Añadir actividad"}
-                    </Typography>
-                </Grid>
-                <Grid item>
-                    <EntityForm
-                        isSubmitting={isSubmitting}
-                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                        onCancel={handleCancel}
-                    >
-                        <FieldReportProjectActivityFormFields />
-                    </EntityForm>
-                </Grid>
-            </FormContainer>
+            <AddNewInlineItemFormBox
+                label={activity ? "Editar actividad" : "Añadir actividad"}
+            >
+                <EntityForm
+                    isSubmitting={isSubmitting}
+                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                    onCancel={handleCancel}
+                >
+                    <FieldReportProjectActivityFormFields />
+                </EntityForm>
+            </AddNewInlineItemFormBox>
         </FormProvider>
     );
 };
