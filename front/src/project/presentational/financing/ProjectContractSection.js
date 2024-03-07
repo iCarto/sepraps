@@ -1,5 +1,6 @@
 import {useAuth} from "base/user/provider";
 
+import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 
@@ -20,8 +21,8 @@ const ProjectContractSection = ({contract}) => {
 
         return FieldUtil.getSectionField(
             "Monto adjudicado",
-            NumberUtil.formatCurrency(awardedBudget),
-            "",
+            NumberUtil.formatInteger(awardedBudget),
+            CURRENCY_SYMBOL,
             contract.is_awarding_budget_amended ? (
                 <TextLinkForTooltip
                     text="Ver adendas"
@@ -45,9 +46,9 @@ const ProjectContractSection = ({contract}) => {
         return FieldUtil.getSectionField(
             "Plazo previsto de ejecución del contrato",
             expectedExecutionPeriod
-                ? `${expectedExecutionPeriod} días (hasta el ${DateUtil.formatDate(
-                      expectedExecutionEndDate
-                  )})`
+                ? `${NumberUtil.formatInteger(
+                      expectedExecutionPeriod
+                  )} días (hasta el ${DateUtil.formatDate(expectedExecutionEndDate)})`
                 : "",
             "",
             contract.total_expected_execution_period ? (

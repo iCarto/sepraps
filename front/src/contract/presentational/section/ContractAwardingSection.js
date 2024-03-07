@@ -60,8 +60,13 @@ const ContractAwardingSection = ({contract, basePath = ""}) => {
 
     const getExpectedExecutionPeriodInfo = () => {
         if (contract.execution_start_date) {
-            return `${contract.expected_execution_period} días (${contract.expected_execution_period_in_months} meses)`;
-        } else return `${contract.expected_execution_period} días`;
+            return `${NumberUtil.formatInteger(
+                contract.expected_execution_period
+            )} días (${contract.expected_execution_period_in_months} meses)`;
+        } else
+            return `${NumberUtil.formatInteger(
+                contract.expected_execution_period
+            )} días`;
     };
 
     return (

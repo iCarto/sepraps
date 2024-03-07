@@ -5,7 +5,10 @@ import {TextLink} from "base/navigation/components";
 export function useContractTable(display = "regular") {
     const getExecutionPeriod = element => {
         if (element.total_expected_execution_period) {
-            return FieldUtil.getValue(element.total_expected_execution_period, "días");
+            return FieldUtil.getValue(
+                NumberUtil.formatInteger(element.total_expected_execution_period),
+                "días"
+            );
         } else return FieldUtil.getValue(element.expected_execution_period, "días");
     };
 

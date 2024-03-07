@@ -1,5 +1,7 @@
 import {useNavigate} from "react-router-dom";
+import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 import {NumberUtil} from "base/format/utilities";
+import {FieldUtil} from "base/ui/section/utilities";
 
 import {
     SectionCard,
@@ -36,15 +38,13 @@ const ProjectFinancingSection = ({project}) => {
         if (contract) {
             return (
                 <>
-                    <SectionField label="Número" value={contract.number} />
-                    <SectionField
-                        label="Monto adjudicado"
-                        value={NumberUtil.formatCurrency(contract.awarding_budget)}
-                    />
-                    <SectionField
-                        label="Contratista"
-                        value={contract.contractor?.name}
-                    />
+                    {FieldUtil.getSectionField("Número", contract.number)}
+                    {FieldUtil.getSectionField(
+                        "Monto adjudicado",
+                        NumberUtil.formatInteger(contract.awarding_budget),
+                        CURRENCY_SYMBOL
+                    )}
+                    {FieldUtil.getSectionField("Contratista", contract.name)}
                 </>
             );
         }
@@ -55,13 +55,13 @@ const ProjectFinancingSection = ({project}) => {
         if (financing_program) {
             return (
                 <>
-                    <SectionField label="Programa" value={financing_program.name} />
-                    <SectionField
-                        label="Financiador/es"
-                        value={financing_program.financing_funds
+                    {FieldUtil.getSectionField("Programa", financing_program.name)}
+                    {FieldUtil.getSectionField(
+                        "Financiador/es",
+                        financing_program.financing_funds
                             .map(financing_fund => financing_fund.name)
-                            .join(", ")}
-                    />
+                            .join(", ")
+                    )}
                 </>
             );
         }

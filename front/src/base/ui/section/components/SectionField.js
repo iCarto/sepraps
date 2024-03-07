@@ -1,11 +1,10 @@
 import {useNavigate} from "react-router-dom";
 
 import {TextLink} from "base/navigation/components";
-import {SectionFieldEditButton} from ".";
-import Typography from "@mui/material/Typography";
+import {SectionFieldEditButton, SectionFieldHelpText} from ".";
 import Grid from "@mui/material/Grid";
-import SectionFieldHelpText from "./SectionFieldHelpText";
 import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const Unit = ({unit}) => {
@@ -110,10 +109,11 @@ const SectionField = ({
             <Grid
                 item
                 container
+                flexWrap={tooltipText ? "nowrap" : "wrap"}
                 xs="auto"
                 sm={5}
                 lg={labelWidth}
-                alignItems="flex-start"
+                alignItems={tooltipText ? "center" : "flex-start"}
                 alignContent="center"
             >
                 {tooltipText && (
