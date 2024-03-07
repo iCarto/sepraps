@@ -7,8 +7,8 @@ import {
     SUBPAGE_MENU_DRAWER_WIDTH,
 } from "base/ui/app/config/measurements";
 import {SidebarPanelDrawer} from "base/ui/sidebar";
+import {ContentContainer} from ".";
 import Box from "@mui/material/Box";
-import ContentContainer from "./ContentContainer";
 
 const PageLayout = ({
     children = null,

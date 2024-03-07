@@ -1,4 +1,4 @@
-import {SUBPAGE_MENU_DRAWER_WIDTH} from "../app/config/measurements";
+import {HEADER_HEIGHT, SUBPAGE_MENU_DRAWER_WIDTH} from "../app/config/measurements";
 import {PageMenuProvider} from "./provider";
 
 import {SubPageMenuHeader} from ".";
@@ -22,13 +22,19 @@ const SubPageMenu = ({
         position: "fixed",
         zIndex: 1,
         width: `${SUBPAGE_MENU_DRAWER_WIDTH}px`,
-        height: "100%",
         bgcolor: theme.palette.menu.secondary.background,
+        overflowY: "scroll",
     };
 
     return (
         <PageMenuProvider>
-            <Box component="nav" sx={menuStyles}>
+            <Box
+                component="nav"
+                sx={menuStyles}
+                style={{
+                    height: `calc(100vh - ${HEADER_HEIGHT}px`,
+                }}
+            >
                 <MenuList sx={{color: "white"}} dense disablePadding>
                     {subPageMenuDropdown || (
                         <SubPageMenuHeader
