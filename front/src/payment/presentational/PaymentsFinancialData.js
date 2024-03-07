@@ -1,9 +1,9 @@
-import Grid from "@mui/material/Grid";
-import {PaymentsFinancialDataBox, PaymentsFinancialDataSubheading} from ".";
 import {NumberUtil} from "base/format/utilities";
+import {PaymentsFinancialDataBox, PaymentsFinancialDataSubheading} from ".";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
 const PaymentsFinancialData = ({contract}) => {
@@ -47,7 +47,7 @@ const PaymentsFinancialData = ({contract}) => {
                                         variant="caption"
                                         sx={{fontWeight: "bold"}}
                                     >
-                                        {NumberUtil.formatMillions(
+                                        {NumberUtil.formatInteger(
                                             contract.total_amount
                                         )}
                                     </Typography>
@@ -58,7 +58,7 @@ const PaymentsFinancialData = ({contract}) => {
                                         Monto aprobado:{" "}
                                     </Typography>
                                     <Typography component="span" variant="caption">
-                                        {NumberUtil.formatMillions(
+                                        {NumberUtil.formatInteger(
                                             contract.total_amount_approved
                                         )}
                                     </Typography>
@@ -68,7 +68,7 @@ const PaymentsFinancialData = ({contract}) => {
                                         Monto pendiente:{" "}
                                     </Typography>
                                     <Typography component="span" variant="caption">
-                                        {NumberUtil.formatMillions(
+                                        {NumberUtil.formatInteger(
                                             contract.total_amount_pending
                                         )}
                                     </Typography>
@@ -98,7 +98,7 @@ const PaymentsFinancialData = ({contract}) => {
                                         variant="caption"
                                         sx={{fontWeight: "bold"}}
                                     >
-                                        {NumberUtil.formatMillions(
+                                        {NumberUtil.formatInteger(
                                             contract.total_awarding_budget
                                         )}
                                     </Typography>
@@ -109,7 +109,7 @@ const PaymentsFinancialData = ({contract}) => {
                                         Monto adjudicado:{" "}
                                     </Typography>
                                     <Typography component="span" variant="caption">
-                                        {NumberUtil.formatMillions(
+                                        {NumberUtil.formatInteger(
                                             contract.awarding_budget
                                         )}
                                     </Typography>
@@ -119,7 +119,7 @@ const PaymentsFinancialData = ({contract}) => {
                                         Monto adendas:{" "}
                                     </Typography>
                                     <Typography component="span" variant="caption">
-                                        {NumberUtil.formatMillions(
+                                        {NumberUtil.formatInteger(
                                             contract.total_amendments_amount
                                         )}
                                     </Typography>
