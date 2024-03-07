@@ -11,11 +11,15 @@ export function useContractCard() {
             !element.expected_execution_period &&
             !element.total_expected_execution_period
         )
-            return "Pendiente";
+            return "—";
         else if (element.total_expected_execution_period) {
-            return `${element.total_expected_execution_period} días (${element.total_expected_execution_period_in_months} meses)`;
+            return `${NumberUtil.formatInteger(
+                element.total_expected_execution_period
+            )} días (${element.total_expected_execution_period_in_months} meses)`;
         } else
-            return `${element.expected_execution_period} días (${element.expected_execution_period_in_months} meses)`;
+            return `${NumberUtil.formatInteger(
+                element.expected_execution_period
+            )} días (${element.expected_execution_period_in_months} meses)`;
     };
 
     const cardFields = [
@@ -54,9 +58,7 @@ export function useContractCard() {
                 );
             },
             note: element =>
-                element.total_awarding_budget != element.awarding_budget
-                    ? "Modificado en adenda/s"
-                    : null,
+                element.is_awarding_budget_amended ? "Modificado en adenda/s" : null,
         },
         {
             label: "Contratista",

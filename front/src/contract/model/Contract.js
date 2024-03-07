@@ -53,6 +53,11 @@ const contract_api_adapter = contract => {
                   contract["amended_expected_execution_end_date"]
               ) + 1
             : null;
+    if (contract["awarding_budget"] || contract["total_awarding_budget"])
+        contract["is_awarding_budget_amended"] =
+            parseInt(contract["total_awarding_budget"]) !==
+            parseInt(contract["awarding_budget"]);
+    else contract["is_awarding_budget_amended"] = false;
 
     if (contract["questionnaires"]) {
         contract["questionnaires"] = createQuestionnaires(
@@ -120,7 +125,7 @@ const contract_view_adapter = contract => {
     contract["execution_start_date"] = !!contract["execution_start_date"]
         ? contract["execution_start_date"]
         : null;
-
+    delete contract["is_awarding_budget_amended"];
     delete contract["related_contracts"];
     delete contract["folder"];
     delete contract["creation_user"];
@@ -189,6 +194,7 @@ const createContract = ({
     total_amount_pending = null,
     total_amount = null,
     total_amount_percentage = null,
+    is_awarding_budget_amended = null,
     created_by = "",
     created_at = null,
     updated_by = "",
@@ -245,6 +251,7 @@ const createContract = ({
         total_amount_pending,
         total_amount,
         total_amount_percentage,
+        is_awarding_budget_amended,
         created_by,
         created_at,
         updated_by,

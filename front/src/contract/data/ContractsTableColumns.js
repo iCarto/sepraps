@@ -13,7 +13,7 @@ export function useContractTable(display = "regular") {
         {
             id: "number",
             label: "Número",
-            width: 5,
+            width: 10,
         },
         {
             id: "financing_program.short_name",
@@ -54,9 +54,7 @@ export function useContractTable(display = "regular") {
                 );
             },
             note: element =>
-                element.total_awarding_budget != element.awarding_budget
-                    ? "Modificado en adenda/s"
-                    : null,
+                element.is_awarding_budget_amended ? "Modificado en adenda/s" : null,
         },
         {
             id: "contractor.name",
@@ -69,7 +67,7 @@ export function useContractTable(display = "regular") {
         {
             id: "comments",
             label: "Descripción",
-            width: 35,
+            width: 30,
         },
     ];
 

@@ -19,7 +19,7 @@ const AwardingBudgetSection = ({contract, basePath = ""}) => {
                 value={NumberUtil.formatInteger(contract.awarding_budget)}
                 unit="Gs."
                 tooltipText={
-                    contract.total_awarding_budget ? (
+                    contract.is_awarding_budget_amended ? (
                         <TextLinkForTooltip
                             text="Ver adendas posteriores"
                             to={`${basePath}/execution`}
@@ -36,7 +36,7 @@ const AwardingBudgetSection = ({contract, basePath = ""}) => {
             value={NumberUtil.formatInteger(contract.awarding_budget)}
             unit="Gs."
             tooltipText={
-                contract.total_awarding_budget ? (
+                contract.is_awarding_budget_amended ? (
                     <TextLinkForTooltip
                         text="Ver adendas posteriores"
                         to={`${basePath}/execution`}

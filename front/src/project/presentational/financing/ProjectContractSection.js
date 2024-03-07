@@ -1,4 +1,3 @@
-import {useOutletContext} from "react-router-dom";
 import {useAuth} from "base/user/provider";
 
 import {DateUtil, NumberUtil} from "base/format/utilities";
@@ -6,15 +5,12 @@ import {FieldUtil} from "base/ui/section/utilities";
 
 import {SectionBox, SectionCard, SectionField} from "base/ui/section/components";
 import {TextLinkForTooltip} from "base/navigation/components";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 
 const ProjectContractSection = ({contract}) => {
     const {ROLES} = useAuth();
-
-    let project;
-    [project] = useOutletContext();
 
     const contractExecutionSubpagePath = `/contracts/list/${contract?.id}/execution`;
 
@@ -26,7 +22,7 @@ const ProjectContractSection = ({contract}) => {
             "Monto adjudicado",
             NumberUtil.formatCurrency(awardedBudget),
             "",
-            contract.total_awarding_budget ? (
+            contract.is_awarding_budget_amended ? (
                 <TextLinkForTooltip
                     text="Ver adendas"
                     to={contractExecutionSubpagePath}

@@ -1,6 +1,7 @@
-import {DateUtil, NumberUtil} from "base/format/utilities";
-import {SectionField} from "base/ui/section/components";
 import {MAX_MIN_AMOUNT_TYPE} from "contract/model";
+import {DateUtil, NumberUtil} from "base/format/utilities";
+
+import {SectionField} from "base/ui/section/components";
 
 const AwardingBudgetSection = ({contract}) => {
     return contract.total_amount_type === MAX_MIN_AMOUNT_TYPE ? (
@@ -15,6 +16,13 @@ const AwardingBudgetSection = ({contract}) => {
                 value={NumberUtil.formatInteger(contract.awarding_budget)}
                 unit="Gs."
             />
+            {contract.is_awarding_budget_amended ? (
+                <SectionField
+                    label="Monto ampliado en adenda/s"
+                    value={NumberUtil.formatInteger(contract.total_awarding_budget)}
+                    unit="Gs."
+                />
+            ) : null}
         </>
     ) : (
         <>
@@ -23,7 +31,7 @@ const AwardingBudgetSection = ({contract}) => {
                 value={NumberUtil.formatInteger(contract.awarding_budget)}
                 unit="Gs."
             />
-            {contract.total_awarding_budget ? (
+            {contract.is_awarding_budget_amended ? (
                 <SectionField
                     label="Monto ampliado en adenda/s"
                     value={NumberUtil.formatInteger(contract.total_awarding_budget)}
@@ -53,7 +61,7 @@ const ContractSummaryFields = ({contract}) => {
             <SectionField label="Licitación" value={contract.bid_request_number} />
             <SectionField
                 label="Fecha de licitación"
-                value={contract.bid_request_date}
+                value={DateUtil.formatDate(contract.bid_request_date)}
             />
             <SectionField
                 label="Fecha de adjudicación"
