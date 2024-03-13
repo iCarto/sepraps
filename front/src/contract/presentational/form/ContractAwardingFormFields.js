@@ -50,6 +50,7 @@ const ContractAwardingFormFields = () => {
                     name="expected_execution_period"
                     label="Plazo previsto de ejecución"
                     endAdornment="días"
+                    maxLength={5}
                 />
             </Grid>
             <Grid item xs={6}>

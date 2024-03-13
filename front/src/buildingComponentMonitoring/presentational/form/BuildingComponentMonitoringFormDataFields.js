@@ -153,6 +153,7 @@ const BuildingComponentMonitoringFormDataFields = () => {
                             label="Porcentaje de avance físico"
                             endAdornment={"%"}
                             rules={{required: "Este campo es obligatorio"}}
+                            maxLength={3}
                         />
                         <FormSelect
                             name="quality_status"
