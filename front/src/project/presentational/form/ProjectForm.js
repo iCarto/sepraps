@@ -21,8 +21,19 @@ const ProjectForm = ({
     const defaultFormValues = {
         id: project?.id || null,
         code: project?.code || null,
-        project_type: project?.project_type || "",
-        project_class: project?.project_class || "",
+        project_works: project
+            ? project.project_works?.map(project_work => {
+                  return {
+                      work_type: project_work.work_type,
+                      work_class: project_work.work_class,
+                  };
+              })
+            : [
+                  {
+                      work_type: "",
+                      work_class: "",
+                  },
+              ],
         description: project?.description || "",
         init_date: project?.init_date || null,
         main_infrastructure_position: {
@@ -68,8 +79,7 @@ const ProjectForm = ({
             code: data.code,
             description: data.description,
             init_date: data.init_date,
-            project_type: data.project_type,
-            project_class: data.project_class,
+            project_works: data.project_works,
             provider: project?.provider || null,
             main_infrastructure: createInfrastructure({
                 latitude: data.main_infrastructure_position.latitude,

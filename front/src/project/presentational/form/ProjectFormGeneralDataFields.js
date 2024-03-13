@@ -1,33 +1,27 @@
-import {useDomain} from "sepraps/domain/provider";
-import {FormDatePicker, FormSelect, FormTextArea} from "base/form/components";
+import {FormDatePicker, FormTextArea} from "base/form/components";
+import ProjectFormProjectWorks from "./ProjectFormProjectWorks";
+import Grid from "@mui/material/Grid";
 
 const ProjectFormGeneralDataFields = ({layout = "row"}) => {
-    const {projectTypes, projectClasses} = useDomain();
-
     return (
         <>
-            <FormSelect
-                name="project_type"
-                label="Tipo de proyecto"
-                rules={{required: "El campo es obligatorio"}}
-                options={projectTypes}
-            />
-            <FormSelect
-                name="project_class"
-                label="Clase de proyecto"
-                rules={{required: "El campo es obligatorio"}}
-                options={projectClasses}
-            />
-            <FormTextArea
-                name="description"
-                label="Descripción del proyecto"
-                rules={{required: "El campo es obligatorio"}}
-            />
-            <FormDatePicker
-                name="init_date"
-                label="Fecha de inicio"
-                rules={{required: "El campo es obligatorio"}}
-            />
+            <Grid container spacing={2} sx={{mb: 2}}>
+                <Grid item xs={6}>
+                    <FormTextArea
+                        name="description"
+                        label="Descripción del proyecto"
+                        rules={{required: "El campo es obligatorio"}}
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <FormDatePicker
+                        name="init_date"
+                        label="Fecha de inicio"
+                        rules={{required: "El campo es obligatorio"}}
+                    />
+                </Grid>
+            </Grid>
+            <ProjectFormProjectWorks name="project_works" itemName="Tipo de trabajo" />
         </>
     );
 };
