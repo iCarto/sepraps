@@ -77,7 +77,7 @@ const NumberUtil = {
     formatInteger(value) {
         if (value || value === 0) {
             return localIntegerFormatter.format(value);
-        }
+        } else return "";
     },
 
     formatCurrency(value, showCurrencySymbol = true) {

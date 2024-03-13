@@ -34,7 +34,7 @@ const FormInputInteger = ({
         },
     });
 
-    const [value, setValue] = useState(field.value);
+    const [value, setValue] = useState(NumberUtil.formatInteger(field.value));
 
     const inputLabel = rules && rules["required"] ? `${label} *` : label;
 
@@ -44,9 +44,6 @@ const FormInputInteger = ({
         if (onBlurHandler) {
             onBlurHandler(event);
         }
-
-        const formattedValue = NumberUtil.formatInteger(value);
-        setValue(formattedValue);
     };
 
     const handleFocus = event => {
@@ -54,9 +51,29 @@ const FormInputInteger = ({
         if (onFocusHandler) {
             onFocusHandler(event);
         }
+    };
 
-        const unformattedValue = NumberUtil.cleanInteger(value);
-        setValue(unformattedValue);
+    const handleChange = event => {
+        const formValue = NumberUtil.cleanInteger(event.target.value);
+        const formattedValue = NumberUtil.formatInteger(formValue);
+
+        const cursorPosition = event.target.selectionStart;
+        // Offset caused by thousand separator in formatted value
+        const cursorOffset = formattedValue.length - event.target.value.length;
+
+        const element = event.target;
+
+        setValue(formattedValue); // UI state
+
+        // Control cursor position after rerender caused by value state update
+        window.requestAnimationFrame(() => {
+            element.selectionStart = cursorPosition + cursorOffset;
+            element.selectionEnd = cursorPosition + cursorOffset;
+        });
+
+        setTimeout(() => {
+            field.onChange(parseInt(formValue)); // data sent back to hook form
+        }, 1000);
     };
 
     let inputProps = {};
@@ -96,11 +113,7 @@ const FormInputInteger = ({
             fullWidth
             name={field.name}
             value={value}
-            onChange={event => {
-                const userValue = NumberUtil.cleanInteger(event.target.value);
-                field.onChange(parseInt(userValue)); // data send back to hook form
-                setValue(userValue); // UI state
-            }}
+            onChange={handleChange}
             onBlur={handleBlur}
             onFocus={handleFocus}
             inputRef={field.ref}
