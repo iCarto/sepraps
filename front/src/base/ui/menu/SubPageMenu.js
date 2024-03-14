@@ -23,7 +23,7 @@ const SubPageMenu = ({
         zIndex: 1,
         width: `${SUBPAGE_MENU_DRAWER_WIDTH}px`,
         bgcolor: theme.palette.menu.secondary.background,
-        overflowY: "scroll",
+        overflowY: "auto",
     };
 
     return (
