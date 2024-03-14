@@ -8,6 +8,9 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Tooltip from "@mui/material/Tooltip";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
+const WAIT_INTERVAL = 500;
+let timerID;
+
 const FormInputInteger = ({
     name: propsName,
     label,
@@ -71,9 +74,15 @@ const FormInputInteger = ({
             element.selectionEnd = cursorPosition + cursorOffset;
         });
 
-        setTimeout(() => {
-            field.onChange(parseInt(formValue)); // data sent back to hook form
-        }, 1000);
+        debounceFieldChange(formValue);
+    };
+
+    const debounceFieldChange = value => {
+        clearTimeout(timerID);
+
+        timerID = setTimeout(() => {
+            field.onChange(parseInt(value)); // Data sent back to hook form
+        }, WAIT_INTERVAL);
     };
 
     let inputProps = {};
