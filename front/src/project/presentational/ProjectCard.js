@@ -8,31 +8,12 @@ import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import Stack from "@mui/material/Stack";
 
 const projectTypeIconBoxStyle = {
     position: "absolute",
-    bottom: 0,
-    right: 0,
-    display: "flex",
-    m: 1.5,
-    mb: 2.5,
-    p: 0.75,
-    borderRadius: "50%",
-    bgcolor: "white",
-    opacity: 0.8,
-};
-
-const projectClassBoxStyle = {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    display: "flex",
-    m: 1.5,
-    mb: 2.5,
-    px: 0.5,
-    borderRadius: 1,
-    bgcolor: "white",
-    opacity: 0.8,
+    bottom: 5,
+    left: 5,
 };
 
 const ProjectCard = ({entity: project, onClick = null}) => {
@@ -48,13 +29,47 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                     height="170px"
                     sx={project.closed === true ? {opacity: 0.4} : {opacity: 1}}
                 />
-                <Box sx={projectTypeIconBoxStyle}>
-                    <ProjectTypeIcon
-                        projectType={project.project_type}
-                        projectTypeName={project.project_type_label}
-                        size="medium"
-                    />
-                </Box>
+                <Stack sx={projectTypeIconBoxStyle} spacing={1}>
+                    {project?.project_works.map(project_work => (
+                        <Stack direction="row" spacing={1}>
+                            <Box
+                                sx={{
+                                    width: 30,
+                                    height: 30,
+                                    borderRadius: "50%",
+                                    bgcolor: "white",
+                                    opacity: 0.8,
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <ProjectTypeIcon
+                                    projectType={project_work.work_type}
+                                    projectTypeName={project_work.work_type_label}
+                                    size="small"
+                                />
+                            </Box>
+                            <Tooltip title={`Clase: ${project_work.work_class_label}`}>
+                                <Box
+                                    sx={{
+                                        borderRadius: 1,
+                                        bgcolor: "white",
+                                        opacity: 0.8,
+                                        px: 1,
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <Typography variant="caption">
+                                        {project_work.work_class_label}
+                                    </Typography>
+                                </Box>
+                            </Tooltip>
+                        </Stack>
+                    ))}
+                </Stack>
                 {project.closed && (
                     <ClosedProjectTag
                         tagCustomStyle={{
@@ -66,13 +81,6 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                         }}
                     />
                 )}
-                <Tooltip title={`Clase: ${project.project_class_label}`}>
-                    <Box sx={projectClassBoxStyle}>
-                        <Typography variant="button">
-                            {project.project_class_label}
-                        </Typography>
-                    </Box>
-                </Tooltip>
             </div>
             <CardContent>
                 <Typography variant="h5" color="primary">
