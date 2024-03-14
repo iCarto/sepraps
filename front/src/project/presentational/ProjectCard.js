@@ -1,7 +1,8 @@
 import {useProjectCard} from "project/data";
+import {NumberUtil} from "base/format/utilities";
 import {EntityCard} from "base/entity/components/presentational";
-import {MilestoneTimelineShort} from "milestone/presentational";
 import {ClosedProjectTag, ProjectTypeIcon} from "project/presentational";
+import {ProgressBarSmall} from "base/progress/components";
 import {ImagePreview} from "base/image/components";
 
 import Box from "@mui/material/Box";
@@ -15,6 +16,8 @@ const projectTypeIconBoxStyle = {
     bottom: 5,
     left: 5,
 };
+
+const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
 
 const ProjectCard = ({entity: project, onClick = null}) => {
     const {cardFields} = useProjectCard();
@@ -88,7 +91,31 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                 </Typography>
                 <Typography variant="body1">{project.code}</Typography>
                 <Box sx={{mt: 2}}>
-                    <MilestoneTimelineShort milestones={project.milestones} />
+                    <ProgressBarSmall
+                        progressValue={NumberUtil.formatDecimalWithoutZeros(
+                            project.financial_progress_percentage
+                        )}
+                        tooltipLabel={
+                            project.financial_progress_percentage
+                                ? `Avance financiero: ${NumberUtil.formatDecimalWithoutZeros(
+                                      project.financial_progress_percentage
+                                  )}%`
+                                : NO_BCM_DATA_MESSAGE
+                        }
+                        progressStyle={{mb: 1}}
+                    />
+                    <ProgressBarSmall
+                        progressValue={NumberUtil.formatDecimalWithoutZeros(
+                            project.physical_progress_percentage
+                        )}
+                        tooltipLabel={
+                            project.physical_progress_percentage
+                                ? `Avance físico: ${NumberUtil.formatDecimalWithoutZeros(
+                                      project.physical_progress_percentage
+                                  )}%`
+                                : NO_BCM_DATA_MESSAGE
+                        }
+                    />
                 </Box>
             </CardContent>
         </>

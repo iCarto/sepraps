@@ -1,19 +1,23 @@
 import {theme} from "Theme";
-import {ProgressUtil} from "../utilities";
+import {NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
+import {ProgressUtil} from "../utilities";
 import {LightHeading} from "base/ui/headings/components";
 import LinearProgress from "@mui/material/LinearProgress";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
-const ProgressBar = ({label = "", progressValue}) => {
-    const tagPosition =
-        progressValue >= 100
-            ? `translateX(50%)`
-            : `translateX(calc(${progressValue}% - 3px))`;
+const ProgressBar = ({label = "", tooltipLabel = null, progressValue}) => {
+    const getTagPosition = () => {
+        if (progressValue >= 100) return `translateX(50%)`;
+        else if (progressValue >= 90 && progressValue < 100)
+            return `translateX(calc(${progressValue}% - 48px))`;
+        else return `translateX(calc(${progressValue}% - 3px))`;
+    };
+    const tagPosition = getTagPosition();
 
-    const parsedValue = parseInt(progressValue) || 0;
-    const barProgress = parsedValue >= 100 ? 100 : parsedValue;
+    const formattedValue = NumberUtil.formatDecimalWithoutZeros(progressValue) || 0;
+    const barProgress = progressValue >= 100 ? 100 : progressValue;
 
     return (
         <>
@@ -30,11 +34,11 @@ const ProgressBar = ({label = "", progressValue}) => {
                     transform: tagPosition,
                 }}
             >
-                {FieldUtil.getValue(progressValue, "%")}
+                {FieldUtil.getValue(formattedValue, "%")}
             </Typography>
-            <Tooltip title={FieldUtil.getValue(progressValue, "%")}>
+            <Tooltip title={tooltipLabel || FieldUtil.getValue(formattedValue, "%")}>
                 <LinearProgress
-                    valueBuffer={parsedValue}
+                    valueBuffer={progressValue}
                     variant="determinate"
                     value={barProgress}
                     aria-valuenow={progressValue}

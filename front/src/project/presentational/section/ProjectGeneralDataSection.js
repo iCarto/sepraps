@@ -1,9 +1,10 @@
 import {useNavigate} from "react-router-dom";
 
 import {useAuth} from "base/user/provider";
-import {DateUtil} from "base/format/utilities";
+import {DateUtil, NumberUtil} from "base/format/utilities";
 
 import {
+    SectionBox,
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
@@ -16,6 +17,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
+import {ProgressBarSmall} from "base/progress/components";
 
 const imgBoxStyle = {
     position: "absolute",
@@ -114,9 +116,33 @@ const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
                         label="Fecha de inicio"
                         value={DateUtil.formatDate(project?.init_date)}
                     />
-                </Grid>
-                <Grid item xs={12}>
-                    <ViewMilestoneTimeline />
+                    <SectionBox label="Avance">
+                        <Box
+                            sx={{
+                                border: 1,
+                                borderRadius: 1,
+                                borderStyle: "solid",
+                                borderColor: "grey.300",
+                                backgroundColor: "grey.100",
+                                p: 2,
+                                pt: 1,
+                            }}
+                        >
+                            <ProgressBarSmall
+                                label="Financiero"
+                                progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                    project.financial_progress_percentage
+                                )}
+                                progressStyle={{mb: 1}}
+                            />
+                            <ProgressBarSmall
+                                label="Físico"
+                                progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                    project.physical_progress_percentage
+                                )}
+                            />
+                        </Box>
+                    </SectionBox>
                 </Grid>
             </Grid>
         </SectionCard>

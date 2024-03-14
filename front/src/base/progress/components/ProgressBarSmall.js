@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 const ProgressBarSmall = ({
     label = "",
     labelVariant = "body2",
+    tooltipLabel = null,
     progressValue,
     progressStyle = {},
 }) => {
@@ -31,7 +32,13 @@ const ProgressBarSmall = ({
                     </span>
                 </Typography>
             ) : null}
-            <Tooltip title={!label ? FieldUtil.getValue(progressValue, "%") : null}>
+            <Tooltip
+                title={
+                    !label
+                        ? tooltipLabel || FieldUtil.getValue(progressValue, "%")
+                        : null
+                }
+            >
                 <LinearProgress
                     variant="determinate"
                     valueBuffer={parsedValue}
