@@ -6,7 +6,7 @@ const ViewProviderContactsSubPage = () => {
     let provider;
     [provider] = useOutletContext();
 
-    const sections = [<ProviderContactsSection provider={provider} />];
+    const sections = [<ProviderContactsSection providerId={provider.id} />];
 
     return provider && <EntityViewSubPage sections={sections} />;
 };

@@ -44,3 +44,4 @@ export {
 export {
     default as ViewProjectSocialAnalysisContent,
 } from "./ViewProjectSocialAnalysisContent";
+export {default as ViewProjectContactPanel} from "./ViewProjectContactPanel";

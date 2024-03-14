@@ -20,7 +20,14 @@ import {ContactsTable} from "contact/presentational";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const ViewContactsList = ({service, basePath, entityId, entityName, filter = null}) => {
+const ViewContactsList = ({
+    service,
+    basePath,
+    entityId,
+    entityName,
+    filter = null,
+    hideActions = false,
+}) => {
     const [selectedElement, setSelectedElement] = useState(null);
     const [contacts, setContacts] = useState([]);
 
@@ -29,9 +36,11 @@ const ViewContactsList = ({service, basePath, entityId, entityName, filter = nul
     const {tableColumns} = useProviderContactsTable();
 
     useEffect(() => {
-        service.getList(entityId, filter).then(contacts => {
-            setContacts(contacts);
-        });
+        if (entityId) {
+            service.getList(entityId, filter).then(contacts => {
+                setContacts(contacts);
+            });
+        }
     }, [entityId, filter]);
 
     const handleEditElement = elementId => {
@@ -41,7 +50,9 @@ const ViewContactsList = ({service, basePath, entityId, entityName, filter = nul
 
     const handleSelectElement = elementId => {
         setSelectedElement(elementId);
-        navigate(`info/${elementId}`);
+        if (!hideActions) {
+            navigate(`info/${elementId}`);
+        }
     };
 
     useEffect(() => {
@@ -65,7 +76,9 @@ const ViewContactsList = ({service, basePath, entityId, entityName, filter = nul
                 <ContactsTable
                     customTableColumns={tableColumns}
                     contacts={contacts}
-                    elementActions={[editAction, removeAction, deleteAction]}
+                    elementActions={
+                        hideActions ? [] : [editAction, removeAction, deleteAction]
+                    }
                     selectedElement={selectedElement}
                     onSelectElement={handleSelectElement}
                 />
@@ -74,11 +87,13 @@ const ViewContactsList = ({service, basePath, entityId, entityName, filter = nul
                     Este {entityName} no tiene contactos.
                 </Typography>
             )}
-            <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
-                <Grid item container xs={12} mt={3} justifyContent="center">
-                    <EntityAddButtonGroup basePath={basePath} />
-                </Grid>
-            </AuthAction>
+            {!hideActions && (
+                <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
+                    <Grid item container xs={12} mt={3} justifyContent="center">
+                        <EntityAddButtonGroup basePath={basePath} />
+                    </Grid>
+                </AuthAction>
+            )}
         </>
     );
 };

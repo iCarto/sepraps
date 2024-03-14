@@ -2,15 +2,21 @@ import {ContractContactService} from "contract/service";
 import {ViewContactsList} from "contact/container";
 import {SectionCard} from "base/ui/section/components";
 
-const ContractContactsSection = ({contract, area = null}) => {
+const ContractContactsSection = ({
+    contractId,
+    area = null,
+    title = "Plantel",
+    hideActions = false,
+}) => {
     return (
-        <SectionCard title="Plantel">
+        <SectionCard title={title}>
             <ViewContactsList
                 service={ContractContactService}
                 basePath={""}
-                entityId={contract.id}
+                entityId={contractId}
                 entityName="contrato"
                 filter={{area: area}}
+                hideActions={hideActions}
             />
         </SectionCard>
     );

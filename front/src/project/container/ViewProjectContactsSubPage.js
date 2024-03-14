@@ -1,29 +1,31 @@
-import {useEffect, useState} from "react";
-import {useOutletContext, useParams} from "react-router-dom";
-import {ProjectService} from "project/service";
+import {useOutletContext} from "react-router-dom";
 
-import {ProjectContactsSection} from "project/presentational/section";
 import {EntityViewSubPage} from "base/entity/components/container";
+import {ContractContactsSection} from "contract/presentational/section";
+import {ProviderContactsSection} from "provider/presentational/section";
 
 const ViewProjectContactsSubPage = () => {
-    const {id: projectId} = useParams();
-    const [contacts, setContacts] = useState([]);
-
     let project;
     [project] = useOutletContext();
 
-    // TO-DO: fix handling of project contacts. Should this be project-linked contacts or provider contacts instead?
-    useEffect(() => {
-        ProjectService.getProjectContacts(projectId).then(data => {
-            setContacts(data);
-        });
-    }, []);
-
-    const sections = [
-        <ProjectContactsSection projectId={projectId} contacts={contacts} />,
-    ];
-
-    return project && <EntityViewSubPage sections={sections} />;
+    return (
+        project && (
+            <EntityViewSubPage
+                sections={[
+                    <ProviderContactsSection
+                        providerId={project.provider?.id}
+                        title="Prestador de servicio"
+                        hideActions={true}
+                    />,
+                    <ContractContactsSection
+                        contractId={project.construction_contract?.id}
+                        title="Contrato de obras"
+                        hideActions={true}
+                    />,
+                ]}
+            />
+        )
+    );
 };
 
 export default ViewProjectContactsSubPage;

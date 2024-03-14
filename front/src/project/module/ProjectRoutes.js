@@ -25,6 +25,7 @@ import {
     ViewProjectSocialComponentSubPage,
     ViewProjectConnectionsContent,
     ViewProjectSocialAnalysisContent,
+    ViewProjectContactPanel,
 } from "project/container";
 import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
@@ -47,6 +48,7 @@ import {
 } from "socialComponentMonitoring/container";
 import ViewBuildingComponentMonitoringDocumentPanel from "buildingComponentMonitoring/container/ViewBuildingComponentMonitoringDocumentPanel";
 import {ViewSocialComponentsOverview} from "socialComponent/container";
+import {ContactService} from "contact/service";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -89,11 +91,6 @@ const projectRoutes = [
                     path=":action/:providerId"
                     element={<UpdateProjectProviderPanel />}
                 />
-                <Route
-                    key="project-provider-contact-update"
-                    path="provider/contact/:contactId/:action"
-                    element={<UpdateProjectProviderContactPanel />}
-                />
             </Route>
             <Route
                 key="project-financing"
@@ -126,13 +123,7 @@ const projectRoutes = [
                 key="project-contacts"
                 path="contacts"
                 element={<ViewProjectContactsSubPage />}
-            >
-                <Route
-                    key="contract-contractor-view-contact"
-                    path="info/:contactId"
-                    element={<ViewContactPanel />}
-                />
-            </Route>
+            />
             <Route
                 key="project-documents"
                 path="documents/*"

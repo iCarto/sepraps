@@ -7,7 +7,7 @@ const ViewContractStaffSubPage = ({area}) => {
     let contract;
     [contract] = useOutletContext();
 
-    const sections = [<ContractContactsSection contract={contract} area={area} />];
+    const sections = [<ContractContactsSection contractId={contract.id} area={area} />];
 
     return contract && <EntityViewSubPage sections={sections} />;
 };

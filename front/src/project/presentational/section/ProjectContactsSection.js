@@ -11,34 +11,20 @@ import {RemoveItemDialog} from "base/delete/components";
 import Typography from "@mui/material/Typography";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-const ProjectContactsSection = ({projectId, contacts}) => {
+const ProjectContactsSection = ({label, contacts}) => {
     const navigate = useNavigateWithReload();
     const {ROLES} = useAuth();
 
     const [selectedElement, setSelectedElement] = useState(null);
-    const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
-    const [error, setError] = useState("");
 
     const handleSelectElement = elementId => {
         setSelectedElement(elementId);
         navigate(`info/${elementId}`);
     };
 
-    const handleUpdateProvider = updatedProvider => {
-        ProviderService.update(updatedProvider)
-            .then(() => {
-                navigate(`/projects/list/${projectId}/contacts`, true);
-            })
-            .catch(error => {
-                console.log(error);
-                setError(error);
-            });
-    };
-
     return (
         <>
-            <SectionCard title="Plantel del proyecto">
-                <AlertError error={error} />
+            <SectionCard title={label}>
                 {contacts.length ? (
                     <ContactsTable
                         contacts={contacts}
@@ -56,11 +42,6 @@ const ProjectContactsSection = ({projectId, contacts}) => {
                     </Typography>
                 )}
             </SectionCard>
-            <RemoveItemDialog
-                isDialogOpen={isRemoveDialogOpen}
-                setIsDialogOpen={setIsRemoveDialogOpen}
-                onRemove={handleUpdateProvider}
-            />
         </>
     );
 };

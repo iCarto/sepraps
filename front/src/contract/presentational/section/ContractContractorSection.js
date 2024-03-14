@@ -12,7 +12,7 @@ const ContractContractorSection = ({contractor}) => {
                 <ContractorGeneralDataSection contractor={contractor} />
             </Grid>
             <Grid item xs={12}>
-                <ContractorContactsSection contractor={contractor} />
+                <ContractorContactsSection contractorId={contractor.id} />
             </Grid>
         </Grid>
     );

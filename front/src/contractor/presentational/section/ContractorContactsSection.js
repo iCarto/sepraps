@@ -5,7 +5,7 @@ import {AccordionLayout} from "base/shared/components";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import Box from "@mui/material/Box";
 
-const ContractorContactsSection = ({contractor}) => {
+const ContractorContactsSection = ({contractorId, hideActions = false}) => {
     return (
         <AccordionLayout
             accordionTitle="Plantel"
@@ -23,8 +23,9 @@ const ContractorContactsSection = ({contractor}) => {
                 <ViewContactsList
                     service={ContractorContactService}
                     basePath={"contractor_staff/"}
-                    entityId={contractor.id}
+                    entityId={contractorId}
                     entityName="contratista"
+                    hideActions={hideActions}
                 />
             </Box>
         </AccordionLayout>

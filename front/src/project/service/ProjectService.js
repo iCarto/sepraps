@@ -76,12 +76,6 @@ const ProjectService = {
         return entityService.updateWithPatch(entity);
     },
 
-    getProjectContacts(id) {
-        return AuthApiService.get(basePath + "/" + id + "/contacts").then(response => {
-            return createContacts(contacts_api_adapter(response));
-        });
-    },
-
     getProjectMilestones(id) {
         return AuthApiService.get(basePath + "/" + id + "/milestones").then(
             milestones => {

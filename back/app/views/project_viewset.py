@@ -1,6 +1,5 @@
 import json
 import os
-from itertools import chain
 
 from django.conf import settings
 from django.contrib.gis.db.models import PointField
@@ -27,9 +26,6 @@ from app.serializers.building_component_monitoring_serializer import (
 )
 from app.serializers.building_component_serializer import BuildingComponentSerializer
 from app.serializers.connection_serializer import ConnectionSerializer
-from app.serializers.contact_relationship_serializer import (
-    ContactRelationshipSerializer,
-)
 from app.serializers.milestone_serializer import MilestoneSerializer
 from app.serializers.project_questionnaire_instance_serializer import (
     ProjectQuestionnaireInstanceSerializer,
@@ -45,7 +41,6 @@ from app.serializers.social_component_monitoring_serializer import (
     SocialComponentMonitoringSummarySerializer,
 )
 from app.util import is_geojson_request
-from domains.models import DomainEntry
 from questionnaires.models.questionnaire import Questionnaire
 
 
@@ -171,40 +166,6 @@ class ProjectViewSet(ModelListViewSet):
         project.save()
 
         return HttpResponse(status=200)
-
-    @action(detail=True)
-    def contacts(self, request, pk=None):
-        """Returns a list of all the contacts for the project."""
-        # TODO optimize query
-        project = self.get_object()
-
-        provider_contacts = []
-        if project.provider:
-            provider_contacts = project.provider.providercontact_set.all()
-
-        contract_contacts = []
-        contractor_contacts = []
-        # TODO: Find contacts from associated project contracts
-        # if project.construction_contract:
-        #    contract_contacts = (
-        #        project.construction_contract.constructioncontractcontact_set.all()
-        #    )
-
-        #    if project.construction_contract.contractor:
-        #        contractor_contacts = (
-        #            project.construction_contract.contractor.contractorcontact_set.all()
-        #        )
-
-        return Response(
-            ContactRelationshipSerializer(
-                sorted(
-                    chain(provider_contacts, contract_contacts, contractor_contacts),
-                    key=lambda entitycontact: entitycontact.contact.name,
-                ),
-                many=True,
-                context={"request": request, "domain": DomainEntry.objects.all()},
-            ).data
-        )
 
     @action(detail=True)
     def milestones(self, request, pk=None):
