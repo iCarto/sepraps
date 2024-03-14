@@ -19,7 +19,7 @@ const ViewPaymentCertificationsContent = ({payment, inconsistentTotalAmount}) =>
         </>
     );
     const totalWarning =
-        "El total aprobado en los proyectos no coincide con el monto de este certificado";
+        "El total aprobado en los proyectos no coincide con el monto de este producto.";
 
     return (
         <SectionCard title="Certificaciones por proyecto">

@@ -207,7 +207,7 @@ def get_certifications_inconsistent_with_contract_payment_notifications(
             notification = create_notification(
                 "payment_inconsistent_with_certifications",
                 f"{contract_name} - {row['payment_name']}",
-                "El monto de este certificado no coincide con el total aprobado en los proyectos relacionados",
+                "El monto de este producto no coincide con el total de las certificaciones de los proyectos relacionados",
                 "error",
                 f"/contracts/list/{row['contract_id']}/payment/list/{row['payment_id']}",
                 {"section": section, "payment_id": row["payment_id"]},
