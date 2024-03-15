@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 
+import {theme} from "Theme";
 import {useList} from "base/entity/hooks";
 import {DropdownMenuItemLink, SubPageMenuHeaderItem} from "base/ui/menu";
 
 import Paper from "@mui/material/Paper";
 import Menu from "@mui/material/Menu";
-import Button from "@mui/material/Button";
-
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const EntityMenuDropDown = ({
     service,
@@ -17,7 +17,6 @@ const EntityMenuDropDown = ({
     title = "",
     primary = "",
     secondary = "",
-    body = null,
     tag = null,
     renderDropdownItem = null,
     basePath,
@@ -71,7 +70,6 @@ const EntityMenuDropDown = ({
         <>
             <Paper
                 elevation={0}
-                square
                 sx={{
                     mb: 1,
                 }}
@@ -83,21 +81,24 @@ const EntityMenuDropDown = ({
                     tag={tag}
                     action={
                         elements?.length > 0 && (
-                            <Button
+                            <IconButton
                                 size="small"
-                                endIcon={<ArrowDropDownIcon />}
-                                sx={{textTransform: "lowercase", color: "grey.400"}}
+                                sx={{
+                                    p: 0,
+                                    bgcolor: theme.palette.secondary.lighter,
+                                    color: "grey.600",
+                                }}
                                 onClick={handleClick}
                             >
-                                cambiar
-                            </Button>
+                                <ArrowDropDownIcon />
+                            </IconButton>
                         )
                     }
                 />
             </Paper>
             <Divider />
 
-            {elements.length && (
+            {elements.length ? (
                 <Menu
                     id="lock-menu"
                     anchorEl={anchorElement}
@@ -130,7 +131,7 @@ const EntityMenuDropDown = ({
                         );
                     })}
                 </Menu>
-            )}
+            ) : null}
         </>
     );
 };

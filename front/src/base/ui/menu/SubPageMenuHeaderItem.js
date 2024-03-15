@@ -13,7 +13,7 @@ const SubPageMenuHeaderItem = ({
 }) => {
     return (
         <Stack sx={{bgcolor: "white", border: "none", px: "5px"}}>
-            <Stack direction="row" alignItems="center">
+            <Stack direction="row" alignItems="center" pt={1} pb={0.5}>
                 <Typography
                     sx={{
                         textTransform: "uppercase",
@@ -57,7 +57,7 @@ const SubPageMenuHeaderItem = ({
                     </Typography>
                 )}
                 <Typography>{body}</Typography>
-                {tag && <Box>{tag}</Box>}
+                {tag && <Stack spacing={0.5}>{tag}</Stack>}
             </Stack>
         </Stack>
     );
