@@ -1,6 +1,7 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 import {TextLink} from "base/navigation/components";
+import {ContractServiceChips} from "contract/presentational";
 
 export function useContractTable(display = "regular") {
     const getExecutionPeriod = element => {
@@ -9,19 +10,23 @@ export function useContractTable(display = "regular") {
                 NumberUtil.formatInteger(element.total_expected_execution_period),
                 "días"
             );
-        } else return FieldUtil.getValue(element.expected_execution_period, "días");
+        } else
+            return FieldUtil.getValue(
+                NumberUtil.formatInteger(element.expected_execution_period),
+                "días"
+            );
     };
 
     let tableColumns = [
         {
             id: "number",
             label: "Número",
-            width: 10,
+            width: 8,
         },
         {
             id: "financing_program.short_name",
             label: "Programa",
-            width: 10,
+            width: 8,
             formatFunction: element => {
                 return element.financing_program?.short_name;
             },
@@ -29,7 +34,7 @@ export function useContractTable(display = "regular") {
         {
             id: "expected_execution_period",
             label: "Plazo previsto",
-            width: 10,
+            width: 8,
             formatFunction: element => {
                 return getExecutionPeriod(element);
             },
@@ -41,7 +46,7 @@ export function useContractTable(display = "regular") {
         {
             id: "awarding_date",
             label: "Fecha adj.",
-            width: 10,
+            width: 8,
             formatFunction: element => {
                 return DateUtil.formatDate(element.awarding_date);
             },
@@ -49,7 +54,7 @@ export function useContractTable(display = "regular") {
         {
             id: "awarding_budget",
             label: "Monto adjudicado",
-            width: 15,
+            width: 12,
             formatFunction: element => {
                 return (
                     NumberUtil.formatCurrency(element.total_awarding_budget) ||
@@ -68,9 +73,16 @@ export function useContractTable(display = "regular") {
             },
         },
         {
+            id: "services",
+            label: "Servicios prestados",
+            formatFunction: item => {
+                return <ContractServiceChips serviceLabels={item?.services_label} />;
+            },
+            width: 12,
+        },
+        {
             id: "comments",
             label: "Descripción",
-            width: 30,
         },
     ];
 
@@ -79,7 +91,7 @@ export function useContractTable(display = "regular") {
             {
                 id: "number",
                 label: "Número",
-                width: 10,
+                width: 15,
                 formatFunction: element => {
                     return (
                         <TextLink

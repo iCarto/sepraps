@@ -68,6 +68,7 @@ const ContractSummaryFields = ({contract}) => {
                 value={DateUtil.formatDate(contract.awarding_date)}
             />
             <AwardingBudgetSection contract={contract} />
+            <SectionField label="Servicios prestados" value={contract.services_label} />
         </>
     );
 };

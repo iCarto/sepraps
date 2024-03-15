@@ -5,8 +5,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
-const EntityCard = ({entity, entityFields, cardHeader = null, onClick = null}) => {
+const EntityCard = ({
+    entity,
+    entityFields,
+    cardHeader = null,
+    secondaryContent = null,
+    onClick = null,
+}) => {
     const handleClick = () => {
         if (onClick) {
             onClick(entity.id);
@@ -20,7 +27,6 @@ const EntityCard = ({entity, entityFields, cardHeader = null, onClick = null}) =
     return (
         <Card
             id={entity.id}
-            // variant="outlined"
             onClick={handleClick}
             sx={{cursor: onClick ? "pointer" : "inherit"}}
         >
@@ -32,6 +38,11 @@ const EntityCard = ({entity, entityFields, cardHeader = null, onClick = null}) =
                         {entity.name || entity.number}
                     </Typography>
                     <Typography variant="body2">{entity.comments}</Typography>
+                    {secondaryContent ? (
+                        <Box mt={1} mb={-0.5}>
+                            {secondaryContent}
+                        </Box>
+                    ) : null}
                 </CardContent>
             )}
             <CardContent sx={{bgcolor: "grey.100"}}>
