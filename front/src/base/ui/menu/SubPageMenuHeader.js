@@ -16,9 +16,8 @@ const SubPageMenuHeader = ({
     return (
         <Paper
             elevation={0}
-            square
             sx={{
-                my: 1,
+                mb: 1,
             }}
         >
             <SubPageMenuHeaderItem
