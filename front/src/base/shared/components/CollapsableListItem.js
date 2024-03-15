@@ -1,4 +1,4 @@
-import {styled} from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
