@@ -17,6 +17,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
+import Tooltip from "@mui/material/Tooltip";
 
 const closedProjectTagStyle = {
     position: "absolute",
@@ -59,7 +60,7 @@ const ProjectGeneralDataSection = ({project}) => {
         >
             <Grid
                 container
-                columnSpacing={2}
+                columnSpacing={4}
                 sx={{marginTop: isProjectClosed ? 0 : "-48px"}}
             >
                 <Grid item sm={3} md={4}>
@@ -77,59 +78,67 @@ const ProjectGeneralDataSection = ({project}) => {
                         )}
                     </div>
                 </Grid>
+
                 <Grid item sm={9} md={8}>
-                    <Typography variant="h4" color="grey.700" sx={{fontWeight: "bold"}}>
+                    <Typography
+                        variant="h4"
+                        color="grey.800"
+                        sx={{fontWeight: 500}}
+                        mb={1}
+                    >
                         {project?.name}
                     </Typography>
-                    <Typography
-                        variant="h5"
-                        color="grey.700"
-                        sx={{fontWeight: "bold", mb: 3}}
-                    >
+                    <Typography variant="h6" color="grey.800" fontWeight="normal">
                         {project?.location}
                     </Typography>
-                    <SectionField label="Código" value={project?.code} />
-                    <SectionField
-                        label="Tipo y clase"
-                        value={project?.project_works.map((project_work, index) => (
+                    <Typography
+                        variant="subtitle1"
+                        color="grey.700"
+                        fontWeight="normal"
+                        sx={{mb: 3}}
+                    >
+                        {project?.code} - Inicio{" "}
+                        {project?.init_date
+                            ? `el ${DateUtil.formatDate(project?.init_date)}`
+                            : "pendiente"}
+                    </Typography>
+                    <Box mb={2}>
+                        {project?.project_works.map((project_work, index) => (
                             <ProjectTypeChip
                                 projectTypeData={project_work}
                                 index={index}
                             />
                         ))}
-                    />
-                    <SectionField label="Descripción" value={project?.description} />
-                    <SectionField
-                        label="Fecha de inicio"
-                        value={DateUtil.formatDate(project?.init_date)}
-                    />
+                    </Box>
+                    {project?.description ? (
+                        <Box mb={3}>
+                            <Typography variant="body2">
+                                {project?.description}
+                            </Typography>
+                        </Box>
+                    ) : null}
+
                     <SectionBox label="Avance">
-                        <Box
-                            sx={{
-                                border: 1,
-                                borderRadius: 1,
-                                borderStyle: "solid",
-                                borderColor: "grey.300",
-                                backgroundColor: "grey.100",
-                                p: 2,
-                                pt: 1,
-                            }}
+                        <Tooltip
+                            title="Navegar a la supervisión técnica del proyecto"
                             onClick={handleClickOnProgressBox}
                         >
-                            <ProgressBarSmall
-                                label="Financiero"
-                                progressValue={NumberUtil.formatDecimalWithoutZeros(
-                                    project.financial_progress_percentage
-                                )}
-                                progressStyle={{mb: 1}}
-                            />
-                            <ProgressBarSmall
-                                label="Físico"
-                                progressValue={NumberUtil.formatDecimalWithoutZeros(
-                                    project.physical_progress_percentage
-                                )}
-                            />
-                        </Box>
+                            <div style={{cursor: "pointer"}}>
+                                <ProgressBarSmall
+                                    label="Financiero"
+                                    progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                        project.financial_progress_percentage
+                                    )}
+                                    progressStyle={{mb: 1}}
+                                />
+                                <ProgressBarSmall
+                                    label="Físico"
+                                    progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                        project.physical_progress_percentage
+                                    )}
+                                />
+                            </div>
+                        </Tooltip>
                     </SectionBox>
                 </Grid>
             </Grid>
