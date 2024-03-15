@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import {DateUtil} from "base/format/utilities";
-import {styled} from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
 import {TextLink} from "base/navigation/components";
 
 const StyledBox = styled(Box)(({theme}) => ({
