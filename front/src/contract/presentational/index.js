@@ -8,6 +8,8 @@ export {
     default as ContractRelatedContractsSection,
 } from "./ContractRelatedContractsSection";
 export {default as ContractSearchAutocomplete} from "./ContractSearchAutocomplete";
+export {default as ContractServiceChip} from "./ContractServiceChip";
+export {default as ContractServiceChips} from "./ContractServiceChips";
 export {default as ContractSummary} from "./ContractSummary";
 export {default as ContractSummaryFields} from "./ContractSummaryFields";
 export {default as LatestContractsList} from "./LatestContractsList";

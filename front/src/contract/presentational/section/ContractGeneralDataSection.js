@@ -1,7 +1,7 @@
 import {SectionField} from "base/ui/section/components";
+import {ContractServiceChips} from "..";
 
 import Grid from "@mui/material/Grid";
-import Chip from "@mui/material/Chip";
 
 const ContractGeneralDataSection = ({contract}) => {
     return (
@@ -10,14 +10,9 @@ const ContractGeneralDataSection = ({contract}) => {
                 <SectionField label="Número" value={contract?.number} />
                 <SectionField
                     label="Servicios prestados"
-                    value={contract.services_label.split(",").map(service => (
-                        <Chip
-                            key={service}
-                            size="small"
-                            label={service}
-                            sx={{mr: 1, border: 1, borderColor: "grey.400"}}
-                        />
-                    ))}
+                    value={
+                        <ContractServiceChips serviceLabels={contract.services_label} />
+                    }
                 />
             </Grid>
             <Grid item xs={6}>

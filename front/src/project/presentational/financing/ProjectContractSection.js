@@ -1,18 +1,15 @@
-import {useAuth} from "base/user/provider";
-
 import {CURRENCY_SYMBOL} from "base/format/config/i18n";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 
 import {SectionBox, SectionCard, SectionField} from "base/ui/section/components";
 import {TextLinkForTooltip} from "base/navigation/components";
+import {ContractServiceChips} from "contract/presentational";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 const ProjectContractSection = ({contract}) => {
-    const {ROLES} = useAuth();
-
     const contractExecutionSubpagePath = `/contracts/list/${contract?.id}/execution`;
 
     const getAwardedBudgetField = () => {
@@ -72,13 +69,19 @@ const ProjectContractSection = ({contract}) => {
                             value={contract.number}
                             linkPath={`/contracts/list/${contract.id}/summary`}
                         />
-                        <SectionField
-                            label="Número de licitación"
-                            value={contract.bid_request_number}
-                        />
+                        {FieldUtil.getSectionField(
+                            "Número de licitación",
+                            contract.bid_request_number
+                        )}
                         {FieldUtil.getSectionField(
                             "Contratista",
                             contract.contractor?.name
+                        )}
+                        {FieldUtil.getSectionField(
+                            "Servicios prestados",
+                            <ContractServiceChips
+                                serviceLabels={contract.services_label}
+                            />
                         )}
                     </Grid>
                     <Grid item xs={6}>
@@ -93,18 +96,18 @@ const ProjectContractSection = ({contract}) => {
                         <SectionBox label="Programa de financiación">
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
-                                    <SectionField
-                                        label="Programa de financiación"
-                                        value={contract.financing_program?.name}
-                                    />
+                                    {FieldUtil.getSectionField(
+                                        "Programa de financiación",
+                                        contract.financing_program?.name
+                                    )}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <SectionField
-                                        label="Financiador"
-                                        value={contract.financing_program?.financing_funds
+                                    {FieldUtil.getSectionField(
+                                        "Financiador",
+                                        contract.financing_program?.financing_funds
                                             .map(financing_fund => financing_fund.name)
-                                            .join(", ")}
-                                    />
+                                            .join(", ")
+                                    )}
                                 </Grid>
                             </Grid>
                         </SectionBox>
@@ -113,7 +116,8 @@ const ProjectContractSection = ({contract}) => {
             ) : (
                 <Stack alignItems="center" spacing={3}>
                     <Typography sx={{fontStyle: "italic"}}>
-                        Este proyecto aún no ha sido asignado a ningún contrato de obras
+                        Este proyecto aún no ha sido asignado a ningún contrato de
+                        obras.
                     </Typography>
                 </Stack>
             )}
