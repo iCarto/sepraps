@@ -6,9 +6,11 @@ import CardContent from "@mui/material/CardContent";
 const SectionCard = ({
     isSidePanelOpen = null,
     headingLabel = true,
+    subheader = "",
     title = "",
     secondaryAction = null,
     secondaryActions = null,
+    dense = false,
     ...props
 }) => {
     const cardStyle = {
@@ -37,8 +39,9 @@ const SectionCard = ({
                     title={
                         <SectionHeading label={headingLabel}>{title}</SectionHeading>
                     }
+                    subheader={subheader}
                     action={getActions()}
-                    sx={{pb: 1}}
+                    sx={{pb: dense ? 0 : 1}}
                 />
             ) : null}
             <CardContent sx={props.contentStyle}>{props.children}</CardContent>

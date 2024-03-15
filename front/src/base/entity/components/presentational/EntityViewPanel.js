@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import LaunchIcon from "@mui/icons-material/Launch";
 
+// TO-DO: Unused component, consider removing
 const EntityViewPanel = ({
     children,
     title,

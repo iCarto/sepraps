@@ -1,3 +1,4 @@
+import {theme} from "Theme";
 import {useProjectCard} from "project/data";
 import {NumberUtil} from "base/format/utilities";
 import {EntityCard} from "base/entity/components/presentational";
@@ -6,18 +7,29 @@ import {ProgressBarSmall} from "base/progress/components";
 import {ImagePreview} from "base/image/components";
 
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import Stack from "@mui/material/Stack";
 
-const projectTypeIconBoxStyle = {
+//TODO: avoid duplicated constant.
+const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
+
+const iconsContainerStyle = {
     position: "absolute",
-    bottom: 5,
+    top: 5,
     left: 5,
 };
 
-const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
+const iconBoxStyle = {
+    width: 30,
+    height: 30,
+    borderRadius: "50%",
+    border: `solid 2px ${theme.palette.primary.dark}`,
+    bgcolor: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
 
 const ProjectCard = ({entity: project, onClick = null}) => {
     const {cardFields} = useProjectCard();
@@ -30,47 +42,22 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                     alt={project.name}
                     width="auto"
                     height="170px"
-                    sx={project.closed === true ? {opacity: 0.4} : {opacity: 1}}
+                    sx={{opacity: project.closed ? 0.4 : 1}}
                 />
-                <Stack sx={projectTypeIconBoxStyle} spacing={1}>
-                    {project?.project_works.map(project_work => (
-                        <Stack direction="row" spacing={1}>
-                            <Box
-                                sx={{
-                                    width: 30,
-                                    height: 30,
-                                    borderRadius: "50%",
-                                    bgcolor: "white",
-                                    opacity: 0.8,
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <ProjectTypeIcon
-                                    projectType={project_work.work_type}
-                                    projectTypeName={project_work.work_type_label}
-                                    size="small"
-                                />
-                            </Box>
-                            <Tooltip title={`Clase: ${project_work.work_class_label}`}>
-                                <Box
-                                    sx={{
-                                        borderRadius: 1,
-                                        bgcolor: "white",
-                                        opacity: 0.8,
-                                        px: 1,
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <Typography variant="caption">
-                                        {project_work.work_class_label}
-                                    </Typography>
-                                </Box>
-                            </Tooltip>
-                        </Stack>
+                <Stack sx={iconsContainerStyle} direction="row">
+                    {project?.project_works.map((project_work, index) => (
+                        <Box
+                            sx={{
+                                ...iconBoxStyle,
+                                ml: index !== 0 ? -1 : 0,
+                                opacity: project.closed ? 0.4 : 0.85,
+                            }}
+                        >
+                            <ProjectTypeIcon
+                                projectWorkData={project_work}
+                                size="small"
+                            />
+                        </Box>
                     ))}
                 </Stack>
                 {project.closed && (
@@ -79,7 +66,7 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                             display: {xs: "none", md: "flex"},
                             position: "absolute",
                             top: 0,
-                            left: 0,
+                            right: 0,
                             m: 1.5,
                         }}
                     />
