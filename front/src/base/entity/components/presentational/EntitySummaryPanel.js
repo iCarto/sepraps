@@ -1,11 +1,6 @@
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import LaunchIcon from "@mui/icons-material/Launch";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import {useNavigateWithReload} from "base/navigation/hooks";
 import {SidebarPanelLayout} from "base/ui/sidebar";
 import {SectionCard} from "base/ui/section/components";
@@ -13,12 +8,19 @@ import {ImagePreview} from "base/image/components";
 import {AlertError} from "base/error/components";
 import {FeaturedDocumentDownload} from "base/file/components";
 
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import LaunchIcon from "@mui/icons-material/Launch";
+
 const EntitySummaryPanel = ({
     service,
     id,
     title,
     getSectionTitle,
     getSectionData,
+    getSectionSubheader = null,
     onClickDetailButton = null,
     showClickDetailButton = entity => true,
     children = null,
@@ -69,12 +71,19 @@ const EntitySummaryPanel = ({
             ) : (
                 entity && (
                     <>
-                        <SectionCard title={getSectionTitle(entity)}>
+                        <SectionCard
+                            title={getSectionTitle(entity)}
+                            subheader={
+                                getSectionSubheader ? getSectionSubheader(entity) : null
+                            }
+                            headingLabel={false}
+                            dense
+                        >
                             {entity.featured_image && (
                                 <Box sx={{mb: 3}}>
                                     <ImagePreview
                                         path={entity.featured_image}
-                                        alt={entity.nome}
+                                        alt={entity.name}
                                     />
                                 </Box>
                             )}
@@ -87,19 +96,19 @@ const EntitySummaryPanel = ({
                                     />
                                 </Grid>
                             )}
-                            {onClickDetailButton && showClickDetailButton(entity) && (
-                                <Grid container justifyContent="center" sx={{mt: 2}}>
-                                    <Button
-                                        variant="contained"
-                                        sx={{ml: 3}}
-                                        onClick={() => handleClickDetail(entity)}
-                                        startIcon={<LaunchIcon />}
-                                    >
-                                        Ver detalle
-                                    </Button>
-                                </Grid>
-                            )}
                         </SectionCard>
+                        {onClickDetailButton && showClickDetailButton(entity) && (
+                            <Grid container justifyContent="center" sx={{mt: 2}}>
+                                <Button
+                                    variant="contained"
+                                    sx={{ml: 3}}
+                                    onClick={() => handleClickDetail(entity)}
+                                    startIcon={<LaunchIcon />}
+                                >
+                                    Ver detalle
+                                </Button>
+                            </Grid>
+                        )}
                         {children}
                     </>
                 )

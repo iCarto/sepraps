@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import {useAuth} from "base/user/provider";
 import {DateUtil, NumberUtil} from "base/format/utilities";
@@ -9,27 +9,14 @@ import {
     SectionCardHeaderAction,
     SectionField,
 } from "base/ui/section/components";
-import {ViewMilestoneTimeline} from "milestone/container";
-import {ClosedProjectTag, ProjectTypeIcon} from "project/presentational";
+import {ClosedProjectTag, ProjectTypeChip} from "project/presentational";
 import {ImagePreview} from "base/image/components";
+import {ProgressBarSmall} from "base/progress/components";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import EditIcon from "@mui/icons-material/Edit";
-import {ProgressBarSmall} from "base/progress/components";
-
-const imgBoxStyle = {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-    display: {xs: "none", md: "flex"},
-    m: 1.5,
-    p: 0.75,
-    borderRadius: "50%",
-    bgcolor: "white",
-    opacity: 0.8,
-};
 
 const closedProjectTagStyle = {
     position: "absolute",
@@ -40,9 +27,11 @@ const closedProjectTagStyle = {
     p: 0.75,
 };
 
-const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
+const ProjectGeneralDataSection = ({project}) => {
     const navigate = useNavigate();
     const {ROLES} = useAuth();
+    const location = useLocation();
+    const basePath = location.pathname.split("/summary")[0];
 
     const isProjectClosed = project?.closed;
 
@@ -58,6 +47,10 @@ const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
             roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
         />,
     ];
+
+    const handleClickOnProgressBox = second => {
+        navigate(`${basePath}/buildingcomponents/overview`);
+    };
 
     return (
         <SectionCard
@@ -79,13 +72,6 @@ const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
                                 opacity: project?.closed === true ? 0.4 : 1,
                             }}
                         />
-                        <Box sx={imgBoxStyle}>
-                            <ProjectTypeIcon
-                                projectType={project?.project_type}
-                                projectTypeName={project?.project_type_label}
-                                size="medium"
-                            />
-                        </Box>
                         {project?.closed && (
                             <ClosedProjectTag tagCustomStyle={closedProjectTagStyle} />
                         )}
@@ -104,12 +90,13 @@ const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
                     </Typography>
                     <SectionField label="Código" value={project?.code} />
                     <SectionField
-                        label="Tipo de proyecto"
-                        value={project?.project_type_label}
-                    />
-                    <SectionField
-                        label="Clase de proyecto"
-                        value={project?.project_class_label}
+                        label="Tipo y clase"
+                        value={project?.project_works.map((project_work, index) => (
+                            <ProjectTypeChip
+                                projectTypeData={project_work}
+                                index={index}
+                            />
+                        ))}
                     />
                     <SectionField label="Descripción" value={project?.description} />
                     <SectionField
@@ -127,6 +114,7 @@ const ProjectGeneralDataSection = ({project, handleGeneratePDF = null}) => {
                                 p: 2,
                                 pt: 1,
                             }}
+                            onClick={handleClickOnProgressBox}
                         >
                             <ProgressBarSmall
                                 label="Financiero"

@@ -23,8 +23,7 @@ const ViewContractProjectPanel = () => {
     let contract;
     [contract] = useOutletContext();
 
-    const {idInfoPanel: projectId} = useParams();
-    const {id: contractId} = useParams();
+    const {id: contractId, idInfoPanel: projectId} = useParams();
 
     useEffect(() => {
         ProjectService.get(projectId).then(project => {
@@ -76,12 +75,11 @@ const ViewContractProjectPanel = () => {
             <Grid container justifyContent="center" sx={{mt: 2}}>
                 <Button
                     variant="contained"
-                    color="inherit"
                     sx={{ml: 3}}
                     onClick={handleClickDetail}
                     startIcon={<LaunchIcon />}
                 >
-                    Ir al detalle
+                    Ver detalle
                 </Button>
             </Grid>
             <RemoveItemDialog

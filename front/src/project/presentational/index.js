@@ -12,3 +12,4 @@ export {
     default as ProjectsBuildingAnalysisSummaryList,
 } from "./ProjectsBuildingAnalysisSummaryList";
 export {default as ProjectListItemButton} from "./ProjectListItemButton";
+export {default as ProjectTypeChip} from "./ProjectTypeChip";

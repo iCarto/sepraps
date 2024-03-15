@@ -2,6 +2,8 @@ import {DateUtil} from "base/format/utilities";
 import {SectionField} from "base/ui/section/components";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 const ProjectSectionFields = ({project}) => {
     const getDateInfo = date => {
@@ -28,21 +30,20 @@ const ProjectSectionFields = ({project}) => {
 
     return (
         <>
-            {project.closed ? (
-                <SectionField
-                    label="Estado"
-                    value="archivado"
-                    valueCustomStyle={{
-                        color: "error.main",
-                        textTransform: "uppercase",
-                    }}
-                />
+            <Typography
+                variant="subtitle2"
+                color="grey.700"
+                fontWeight="normal"
+                sx={{mt: 2}}
+            >
+                {project?.code}
+            </Typography>
+
+            {project?.description ? (
+                <Box>
+                    <Typography variant="body2">{project?.description}</Typography>
+                </Box>
             ) : null}
-            <SectionField label="Código" value={project?.code} />
-            <SectionField label="Ubicación" value={project?.location} />
-            <SectionField label="Clase" value={project?.project_class_label} />
-            <SectionField label="Tipo" value={project?.project_type_label} />
-            <SectionField label="Descripción" value={project?.description} />
 
             <Divider variant="middle" sx={{mx: 0, mt: 3, mb: 4}}>
                 <Chip label="Seguimiento" sx={{fontWeight: "light"}} />
