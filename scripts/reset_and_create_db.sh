@@ -49,6 +49,8 @@ else
     python "${this_dir}/../back/manage.py" migrate
 fi
 
+bash "${this_dir}"/views/create_views.sh || exit 1
+
 if [[ -z "${CREATE_EMPTY}" ]]; then
     "${this_dir}"/fixtures.sh
 fi
