@@ -1,7 +1,6 @@
-import Grid from "@mui/material/Grid";
-import {FormInputText, FormSelectMultiple, FormTextArea} from "base/form/components";
-import {FormFinancingProgramAutocomplete} from "financing/presentational";
 import {useDomain} from "sepraps/domain/provider";
+import {FormInputText, FormSelectMultiple, FormTextArea} from "base/form/components";
+import Grid from "@mui/material/Grid";
 
 const ContractGeneralDataFormFields = () => {
     const {serviceTypes} = useDomain();

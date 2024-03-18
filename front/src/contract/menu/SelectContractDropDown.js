@@ -21,8 +21,8 @@ const SelectContractDropDown = ({contract}) => {
             title="Contrato"
             primary={contract?.number}
             secondary={contract?.bid_request_number}
-            tag={contract.services_label.split(",").map(service => (
-                <ContractServiceChip service={service} />
+            tag={contract.services_label.split(",").map((service, index) => (
+                <ContractServiceChip service={service} key={index} />
             ))}
             basePath={"/contracts/list"}
             service={ContractService.getList}
