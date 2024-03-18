@@ -4,7 +4,6 @@ import {
     contracts_api_adapter,
     createContracts,
 } from "contract/model";
-import {createQuestionnaires, questionnaires_api_adapter} from "questionnaire/model";
 import {
     createInfrastructure,
     infrastructure_view_adapter,
@@ -62,11 +61,6 @@ const project_api_adapter = project => {
     if (project["milestones"]) {
         project["milestones"] = createMilestones(
             milestones_api_adapter(project["milestones"])
-        );
-    }
-    if (project["questionnaires"]) {
-        project["questionnaires"] = createQuestionnaires(
-            questionnaires_api_adapter(project["questionnaires"])
         );
     }
 
@@ -144,7 +138,6 @@ const createProject = ({
     physical_progress_percentage = null,
     folder = "",
     milestones = [],
-    questionnaires = [],
     created_by = "",
     created_at = null,
     updated_at = null,
@@ -174,7 +167,6 @@ const createProject = ({
         physical_progress_percentage,
         folder,
         milestones,
-        questionnaires,
         created_by,
         created_at,
         updated_at,

@@ -13,7 +13,10 @@ export {
 export {
     default as BuildingComponentsFinancialData,
 } from "./BuildingComponentsFinancialData";
-export {default as BuildingComponentsProgress} from "./BuildingComponentsProgress";
+export {
+    NO_BCM_DATA_MESSAGE,
+    default as BuildingComponentsProgress,
+} from "./BuildingComponentsProgress";
 export {
     default as BuildingComponentsSummaryList,
 } from "./BuildingComponentsSummaryList";

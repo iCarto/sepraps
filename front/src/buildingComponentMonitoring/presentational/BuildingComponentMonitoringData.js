@@ -40,6 +40,13 @@ const BuildingComponentMonitoringData = ({bcMonitoring}) => {
                             )}
                             unit="Gs."
                         />
+                        <SectionField
+                            label="Peso financiero en el proyecto"
+                            value={NumberUtil.formatInteger(
+                                bcMonitoring.financial_weight_percentage
+                            )}
+                            unit="%"
+                        />
                     </SectionBox>
                 </Grid>
                 <Grid
