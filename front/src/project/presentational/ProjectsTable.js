@@ -1,29 +1,48 @@
+import {theme} from "Theme";
 import {useSort} from "base/table/hooks";
 
+import {NumberUtil} from "base/format/utilities";
+import {ProgressBarSmall} from "base/progress/components";
 import {TableSortingHead} from "base/table/components";
-import {MilestoneTimelineShort} from "milestone/presentational";
+import {ProjectTypeIcon} from ".";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+
+//TODO: avoid duplicated code in project progress bars & type icons.
+const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
+
+const iconBoxStyle = {
+    width: 30,
+    height: 30,
+    borderRadius: "50%",
+    border: `solid 2px ${theme.palette.primary.dark}`,
+    bgcolor: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
 
 const headCells = [
     {
         id: "name",
         label: "Localidad",
-        width: 16,
+        width: 15,
     },
     {
         id: "code",
         label: "Código",
-        width: 12,
+        width: 15,
     },
     {
         id: "location",
         label: "Ubicación",
-        width: 16,
+        width: 15,
     },
     {
         id: "description",
@@ -31,11 +50,14 @@ const headCells = [
         width: 30,
     },
     {
-        id: "milestones",
-        label: "Estado",
+        id: "works",
+        label: "Tipo y clase",
+        width: 10,
     },
     {
-        id: "actions",
+        id: "progress",
+        label: "Avance",
+        width: 15,
     },
 ];
 
@@ -93,9 +115,55 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                     {project.description}
                                 </TableCell>
                                 <TableCell sx={project.closed && {color: "grey.500"}}>
-                                    <MilestoneTimelineShort
-                                        milestones={project.milestones}
-                                    />
+                                    <Stack direction="row" spacing={0.5}>
+                                        {project.project_works.map(
+                                            (project_work, index) => {
+                                                return (
+                                                    <Box
+                                                        sx={{
+                                                            ...iconBoxStyle,
+                                                        }}
+                                                    >
+                                                        <ProjectTypeIcon
+                                                            projectWorkData={
+                                                                project_work
+                                                            }
+                                                            size="small"
+                                                        />
+                                                    </Box>
+                                                );
+                                            }
+                                        )}
+                                    </Stack>
+                                </TableCell>
+                                <TableCell sx={project.closed && {color: "grey.500"}}>
+                                    <Box sx={{py: 0.5}}>
+                                        <ProgressBarSmall
+                                            progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                                project.financial_progress_percentage
+                                            )}
+                                            tooltipLabel={
+                                                project.financial_progress_percentage
+                                                    ? `Avance financiero: ${NumberUtil.formatDecimalWithoutZeros(
+                                                          project.financial_progress_percentage
+                                                      )}%`
+                                                    : NO_BCM_DATA_MESSAGE
+                                            }
+                                            progressStyle={{mb: 1}}
+                                        />
+                                        <ProgressBarSmall
+                                            progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                                project.physical_progress_percentage
+                                            )}
+                                            tooltipLabel={
+                                                project.physical_progress_percentage
+                                                    ? `Avance físico: ${NumberUtil.formatDecimalWithoutZeros(
+                                                          project.physical_progress_percentage
+                                                      )}%`
+                                                    : NO_BCM_DATA_MESSAGE
+                                            }
+                                        />
+                                    </Box>
                                 </TableCell>
                             </TableRow>
                         );
