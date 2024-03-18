@@ -11,11 +11,7 @@ import {
     ViewProjectContactsSubPage,
     ViewProjectDocumentsSubPage,
     ViewProjectQuestionnairesSubPage,
-    UpdateProjectProviderPanel,
-    UpdateProjectPanel,
-    UpdateProjectMainInfrastructurePanel,
     ViewProjectPanel,
-    AddProjectLinkedLocalitiesPanel,
     UpdateProjectQuestionnaireInstancePanel,
     ViewProjectProviderSubPage,
     ViewProjectFieldReportSubPage,
@@ -25,13 +21,9 @@ import {
     ViewProjectSocialComponentSubPage,
     ViewProjectConnectionsContent,
     ViewProjectSocialAnalysisContent,
-    ViewProjectContactPanel,
 } from "project/container";
-import {UpdateProjectProviderContactPanel} from "provider/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
-import {AddProjectContractPanel} from "contract/container";
 import {MapConfigProvider} from "base/geo/provider";
-import {ViewContactPanel} from "contact/container";
 import {
     ViewStatsByPhaseSubPage,
     ViewStatsByQuestionnairesSubPage,
@@ -46,9 +38,9 @@ import {
     CreateSocialComponentContent,
     ViewSocialComponentContent,
 } from "socialComponentMonitoring/container";
-import ViewBuildingComponentMonitoringDocumentPanel from "buildingComponentMonitoring/container/ViewBuildingComponentMonitoringDocumentPanel";
+
 import {ViewSocialComponentsOverview} from "socialComponent/container";
-import {ContactService} from "contact/service";
+import {ViewBuildingComponentMonitoringDocumentPanel} from "buildingComponentMonitoring/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -58,51 +50,22 @@ const projectRoutes = [
                 key="project-summary"
                 path="summary"
                 element={<ViewProjectSummarySubPage />}
-            >
-                <Route
-                    key="project-general-data"
-                    path=":section/:action"
-                    element={<UpdateProjectPanel />}
-                />
-            </Route>
+            ></Route>
             <Route
                 key="project-location"
                 path=":section"
                 element={<ViewProjectLocationSubPage />}
-            >
-                <Route
-                    key="project-main-infrastructure-edit"
-                    path="main_infrastructure/edit"
-                    element={<UpdateProjectMainInfrastructurePanel />}
-                />
-                <Route
-                    key="project-linked-localities-update"
-                    path="linked_localities/:localityCode/:action"
-                    element={<AddProjectLinkedLocalitiesPanel />}
-                />
-            </Route>
+            ></Route>
             <Route
                 key="project-provider"
                 path="provider"
                 element={<ViewProjectProviderSubPage />}
-            >
-                <Route
-                    key="project-provider-update"
-                    path=":action/:providerId"
-                    element={<UpdateProjectProviderPanel />}
-                />
-            </Route>
+            ></Route>
             <Route
                 key="project-financing"
                 path="financing"
                 element={<ViewProjectContractsSubPage />}
-            >
-                <Route
-                    key="project-contract-update"
-                    path="contract/:contractId/:action"
-                    element={<AddProjectContractPanel />}
-                />
-            </Route>
+            ></Route>
             <Route
                 key="project-milestones"
                 path="milestones"
