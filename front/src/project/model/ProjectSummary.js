@@ -1,4 +1,3 @@
-import {createMilestones, milestones_api_adapter} from "milestone/model";
 import {createLocalities, localities_api_adapter} from "location/model";
 
 class ProjectsSummaries extends Array {}
@@ -21,12 +20,6 @@ const project_summary_api_adapter = project => {
             )
         )
     ).join(", ");
-
-    if (project["milestones"]) {
-        project["milestones"] = createMilestones(
-            milestones_api_adapter(project["milestones"])
-        );
-    }
 
     return project;
 };
@@ -60,9 +53,10 @@ const createProjectSummary = ({
     construction_contract_bid_request_number = null,
     financing_program = null,
     financing_program_name = null,
-    milestones = null,
     latitude = null,
     longitude = null,
+    financial_progress_percentage = null,
+    physical_progress_percentage = null,
     created_at = null,
     updated_at = null,
 } = {}) => {
@@ -84,9 +78,10 @@ const createProjectSummary = ({
         construction_contract_bid_request_number,
         financing_program,
         financing_program_name,
-        milestones,
         latitude,
         longitude,
+        financial_progress_percentage,
+        physical_progress_percentage,
         created_at,
         updated_at,
     };

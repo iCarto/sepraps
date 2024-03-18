@@ -30,16 +30,7 @@ const ViewBuildingComponentsFinancialData = ({filter}) => {
         <Grid container spacing={2}>
             <AlertError error={error} />
             {financialData ? (
-                <>
-                    <Grid item xs={12}>
-                        <BuildingComponentsProgress financialData={financialData} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <BuildingComponentsFinancialData
-                            financialData={financialData}
-                        />
-                    </Grid>
-                </>
+                <BuildingComponentsFinancialData financialData={financialData} />
             ) : (
                 <Spinner />
             )}
