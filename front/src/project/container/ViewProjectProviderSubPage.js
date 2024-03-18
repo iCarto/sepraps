@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {useOutletContext} from "react-router-dom";
 
-import {ProjectProviderSection} from "project/presentational/section";
+import {ViewOrUpdateProjectProviderContent} from ".";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {NotificationsSection} from "notification/presentational";
 
@@ -19,7 +19,7 @@ const ViewProjectProviderSubPage = () => {
             );
     }, [notifications]);
 
-    let sections = [<ProjectProviderSection project={project} />];
+    let sections = [<ViewOrUpdateProjectProviderContent project={project} />];
 
     if (providerNotifications.length) {
         sections = [

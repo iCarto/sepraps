@@ -4,7 +4,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {ProjectService} from "project/service";
 import {project_view_adapter} from "project/model";
 
-import {ProjectForm} from "project/presentational/form";
+import {ProjectCreationFormFields, ProjectForm} from "project/presentational/form";
 import {EntityCreatePage} from "base/entity/components/container";
 
 const CreateProjectPage = () => {
@@ -33,7 +33,9 @@ const CreateProjectPage = () => {
         <EntityCreatePage
             title="Registro de proyecto"
             form={
-                <ProjectForm onSubmit={handleFormSubmit} onCancel={handleFormCancel} />
+                <ProjectForm onSubmit={handleFormSubmit} onCancel={handleFormCancel}>
+                    <ProjectCreationFormFields />
+                </ProjectForm>
             }
             error={error}
         />

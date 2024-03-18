@@ -4,13 +4,13 @@ import {NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 
 import {
+    SectionBox,
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-    SectionSubheading,
 } from "base/ui/section/components";
-import LaunchIcon from "@mui/icons-material/Launch";
 import Grid from "@mui/material/Grid";
+import LaunchIcon from "@mui/icons-material/Launch";
 
 const ProjectFinancingSection = ({project}) => {
     const navigate = useNavigate();
@@ -27,12 +27,17 @@ const ProjectFinancingSection = ({project}) => {
         />,
     ];
 
-    const noFinancingInfoMessage = (
-        <SectionField
-            value="Este proyecto aún no tiene financiación asignada"
-            valueCustomStyle={{fontStyle: "italic"}}
-        />
-    );
+    const getNoFinancingInfoMessage = label => {
+        return (
+            <SectionField
+                label={label}
+                value="Este proyecto aún no tiene financiación asignada"
+                valueCustomStyle={{
+                    fontStyle: "italic",
+                }}
+            />
+        );
+    };
 
     const getContractInfo = contract => {
         if (contract) {
@@ -48,7 +53,7 @@ const ProjectFinancingSection = ({project}) => {
                 </>
             );
         }
-        return noFinancingInfoMessage;
+        return getNoFinancingInfoMessage("Número");
     };
 
     const getFinancingProgramInfo = financing_program => {
@@ -65,7 +70,7 @@ const ProjectFinancingSection = ({project}) => {
                 </>
             );
         }
-        return noFinancingInfoMessage;
+        return getNoFinancingInfoMessage("Programa");
     };
 
     return (
@@ -75,14 +80,16 @@ const ProjectFinancingSection = ({project}) => {
         >
             <Grid container columnSpacing={2}>
                 <Grid item md={6}>
-                    <SectionSubheading heading="Contrato" />
-                    {getContractInfo(project?.construction_contract)}
+                    <SectionBox label="Contrato">
+                        {getContractInfo(project?.construction_contract)}
+                    </SectionBox>
                 </Grid>
                 <Grid item md={6}>
-                    <SectionSubheading heading="Programa" />
-                    {getFinancingProgramInfo(
-                        project?.construction_contract?.financing_program
-                    )}
+                    <SectionBox label="Programa">
+                        {getFinancingProgramInfo(
+                            project?.construction_contract?.financing_program
+                        )}
+                    </SectionBox>
                 </Grid>
             </Grid>
         </SectionCard>

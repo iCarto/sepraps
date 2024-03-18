@@ -6,17 +6,16 @@ import {createInfrastructure, createLocality} from "location/model";
 import {createProject} from "project/model";
 
 import {EntityForm} from "base/entity/components/form";
-import {
-    ProjectCreationForm,
-    ProjectModificationForm,
-} from "project/presentational/form";
+import {AlertError} from "base/error/components";
+import {FormContainer} from "base/form/components";
 
 const ProjectForm = ({
     project = null,
     contractId = null,
     onSubmit,
     onCancel = null,
-    updatedSection = null,
+    error = null,
+    children,
 }) => {
     const defaultFormValues = {
         id: project?.id || null,
@@ -73,7 +72,7 @@ const ProjectForm = ({
         reValidateMode: "onSubmit",
     });
 
-    const onFormSubmit = data => {
+    const handleFormSubmit = data => {
         const updatedProject = createProject({
             id: data.id,
             code: data.code,
@@ -105,24 +104,19 @@ const ProjectForm = ({
         onSubmit(updatedProject);
     };
 
-    const onFormCancel = () => {
-        onCancel();
-    };
-
     return (
         <LocationProvider>
             <DomainProvider>
                 <FormProvider {...formMethods}>
-                    {updatedSection ? (
-                        <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
-                            <ProjectModificationForm section={updatedSection} />
+                    <FormContainer>
+                        <AlertError error={error} />
+                        <EntityForm
+                            onSubmit={formMethods.handleSubmit(handleFormSubmit)}
+                            onCancel={onCancel}
+                        >
+                            {children}
                         </EntityForm>
-                    ) : (
-                        <ProjectCreationForm
-                            onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                            onCancel={onFormCancel}
-                        />
-                    )}
+                    </FormContainer>
                 </FormProvider>
             </DomainProvider>
         </LocationProvider>

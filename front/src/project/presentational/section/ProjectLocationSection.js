@@ -1,10 +1,10 @@
 import {useNavigate} from "react-router-dom";
 
 import {
+    SectionBox,
     SectionCard,
     SectionCardHeaderAction,
     SectionField,
-    SectionLabel,
 } from "base/ui/section/components";
 
 import {MapInfrastructure} from "base/map/components";
@@ -28,13 +28,6 @@ const ProjectLocationSection = ({project}) => {
         />,
     ];
 
-    const linkedLocalities = (
-        <>
-            <SectionLabel label="Localidades vinculadas" />
-            <ProjectLinkedLocalitiesTable localities={project?.linked_localities} />
-        </>
-    );
-
     const noLinkedLocalitiesMessage = (
         <SectionField
             label="Localidades vinculadas"
@@ -47,28 +40,25 @@ const ProjectLocationSection = ({project}) => {
         <SectionCard title="Ubicación" secondaryActions={headerActions}>
             <Grid container columnSpacing={4}>
                 <Grid item container xs={12} lg={4}>
-                    <Grid
-                        item
-                        xs={12}
-                        sx={{
-                            mt: {xs: 3, lg: 0},
-                        }}
-                    >
-                        <SectionLabel label="Infraestructura principal" />
-                    </Grid>
-                    <Grid item xs={12}>
+                    <SectionBox label="Infraestructura principal">
                         <MapInfrastructure
                             infrastructure={{
                                 latitude: project?.main_infrastructure.latitude,
                                 longitude: project?.main_infrastructure.longitude,
                             }}
                         />
-                    </Grid>
+                    </SectionBox>
                 </Grid>
                 <Grid item xs={12} lg={8}>
-                    {project?.linked_localities?.length
-                        ? linkedLocalities
-                        : noLinkedLocalitiesMessage}
+                    <SectionBox label="Localidades vinculadas">
+                        {project?.linked_localities?.length ? (
+                            <ProjectLinkedLocalitiesTable
+                                localities={project?.linked_localities}
+                            />
+                        ) : (
+                            noLinkedLocalitiesMessage
+                        )}
+                    </SectionBox>
                 </Grid>
             </Grid>
         </SectionCard>

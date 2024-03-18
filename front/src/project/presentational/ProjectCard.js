@@ -47,6 +47,7 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                 <Stack sx={iconsContainerStyle} direction="row">
                     {project?.project_works.map((project_work, index) => (
                         <Box
+                            key={index}
                             sx={{
                                 ...iconBoxStyle,
                                 ml: index !== 0 ? -1 : 0,
