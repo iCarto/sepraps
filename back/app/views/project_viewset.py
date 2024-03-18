@@ -21,6 +21,7 @@ from app.models.connection import Connection
 from app.models.milestone import Milestone
 from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
+from app.models.project_work import ProjectWork
 from app.models.social_component_monitoring import SocialComponentMonitoring
 from app.serializers.building_component_monitoring_serializer import (
     BuildingComponentMonitoringSerializer,
@@ -369,12 +370,14 @@ class ProjectViewSet(ModelListViewSet):
     def get_building_component_types(self, request, pk):  # noqa: ARG002
         project = self.get_object()
         result = []
+
         for component_code, component_config in get_building_components_config(
             project
         ).items():
             result.append(
                 {"value": component_code, "label": component_config.get("name")}
             )
+
         return Response(result)
 
     @action(
@@ -446,26 +449,52 @@ class ProjectViewSet(ModelListViewSet):
 
 
 def get_building_components_config(project):
-    if not project.project_type:
+    project_works = ProjectWork.objects.filter(project=project)
+
+    if not project_works:
         return {}
-    # Change when project type is multiple
+
     data = {}
-    data_path = os.path.join(
-        settings.BASE_DIR, "app", "data", "project", f"{project.project_type}.json"
-    )
-    with open(data_path) as f:
-        data = json.load(f)
-        return data.get("building_components", {})
+
+    for project_work in project_works:
+        data_path = os.path.join(
+            settings.BASE_DIR,
+            "app",
+            "data",
+            "project",
+            f"{project_work.work_type}.json",
+        )
+
+        with open(data_path) as f:
+            work_data = json.load(f)
+
+        building_components = work_data.get("building_components", {})
+        data.update(building_components)
+
+    return data
 
 
 def get_social_components_config(project):
-    if not project.project_type:
+    project_works = ProjectWork.objects.filter(project=project)
+
+    if not project_works:
         return {}
-    # Change when project type is multiple
+
     data = {}
-    data_path = os.path.join(
-        settings.BASE_DIR, "app", "data", "project", f"{project.project_type}.json"
-    )
-    with open(data_path) as f:
-        data = json.load(f)
-        return data.get("social_components", {})
+
+    for project_work in project_works:
+        data_path = os.path.join(
+            settings.BASE_DIR,
+            "app",
+            "data",
+            "project",
+            f"{project_work.work_type}.json",
+        )
+
+        with open(data_path) as f:
+            work_data = json.load(f)
+
+        building_components = work_data.get("social_components", {})
+        data.update(building_components)
+
+    return data
