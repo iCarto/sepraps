@@ -28,7 +28,7 @@ export function useContractTable(display = "regular") {
             label: "Programa",
             width: 8,
             formatFunction: element => {
-                return element.financing_program?.short_name;
+                return element?.financing_program?.short_name;
             },
         },
         {
@@ -39,7 +39,7 @@ export function useContractTable(display = "regular") {
                 return getExecutionPeriod(element);
             },
             note: element =>
-                element.total_expected_execution_period
+                element?.total_expected_execution_period
                     ? "Modificado en adenda/s"
                     : null,
         },
@@ -48,7 +48,7 @@ export function useContractTable(display = "regular") {
             label: "Fecha adj.",
             width: 8,
             formatFunction: element => {
-                return DateUtil.formatDate(element.awarding_date);
+                return DateUtil.formatDate(element?.awarding_date);
             },
         },
         {
@@ -57,19 +57,19 @@ export function useContractTable(display = "regular") {
             width: 12,
             formatFunction: element => {
                 return (
-                    NumberUtil.formatCurrency(element.total_awarding_budget) ||
-                    NumberUtil.formatCurrency(element.awarding_budget)
+                    NumberUtil.formatCurrency(element?.total_awarding_budget) ||
+                    NumberUtil.formatCurrency(element?.awarding_budget)
                 );
             },
             note: element =>
-                element.is_awarding_budget_amended ? "Modificado en adenda/s" : null,
+                element?.is_awarding_budget_amended ? "Modificado en adenda/s" : null,
         },
         {
             id: "contractor.name",
             label: "Contratista",
             width: 15,
             formatFunction: element => {
-                return element.contractor?.name;
+                return element?.contractor?.name;
             },
         },
         {
@@ -95,8 +95,8 @@ export function useContractTable(display = "regular") {
                 formatFunction: element => {
                     return (
                         <TextLink
-                            text={element.number}
-                            to={`/contracts/list/${element.id}/summary`}
+                            text={element?.number}
+                            to={`/contracts/list/${element?.id}/summary`}
                             textStyle={{fontSize: 14}}
                         />
                     );
@@ -107,7 +107,7 @@ export function useContractTable(display = "regular") {
                 label: "Programa",
                 width: 10,
                 formatFunction: element => {
-                    return element.financing_program?.short_name;
+                    return element?.financing_program?.short_name;
                 },
             },
             {
@@ -115,7 +115,7 @@ export function useContractTable(display = "regular") {
                 label: "Fecha inicio ejec.",
                 width: 10,
                 formatFunction: element => {
-                    return DateUtil.formatDate(element.execution_start_date);
+                    return DateUtil.formatDate(element?.execution_start_date);
                 },
             },
             {
@@ -124,8 +124,8 @@ export function useContractTable(display = "regular") {
                 width: 10,
                 formatFunction: element => {
                     return DateUtil.formatDate(
-                        element.amended_expected_execution_end_date ||
-                            element.expected_execution_end_date
+                        element?.amended_expected_execution_end_date ||
+                            element?.expected_execution_end_date
                     );
                 },
             },
@@ -135,7 +135,7 @@ export function useContractTable(display = "regular") {
                 width: 15,
                 formatFunction: element => {
                     return NumberUtil.formatCurrency(
-                        element.total_awarding_budget || element.awarding_budget
+                        element?.total_awarding_budget || element?.awarding_budget
                     );
                 },
             },
@@ -144,7 +144,7 @@ export function useContractTable(display = "regular") {
                 label: "Contratista",
                 width: 20,
                 formatFunction: element => {
-                    return element.contractor?.name;
+                    return element?.contractor?.name;
                 },
             },
             {

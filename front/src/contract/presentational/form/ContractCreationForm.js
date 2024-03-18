@@ -7,6 +7,7 @@ import {
     ContractBidRequestFormFields,
 } from ".";
 
+// TO-DO: Unused component, consider removing
 const ContractCreationForm = ({onSubmit, onCancel = null}) => {
     return (
         <Grid container spacing={3}>

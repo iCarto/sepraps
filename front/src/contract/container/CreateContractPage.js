@@ -5,6 +5,7 @@ import {ContractService} from "contract/service";
 import {contract_view_adapter} from "contract/model";
 
 import {EntityCreatePage} from "base/entity/components/container";
+import {FormSection} from "base/form/components";
 import {
     ContractBidRequestFormFields,
     ContractFinancingFormFields,
@@ -12,7 +13,6 @@ import {
     ContractGeneralDataFormFields,
 } from "contract/presentational/form";
 import Grid from "@mui/material/Grid";
-import {FormSection} from "base/form/components";
 
 const CreateContractPage = () => {
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ const CreateContractPage = () => {
             title="Registro de contrato"
             form={
                 <ContractForm onSubmit={handleFormSubmit} onCancel={handleFormCancel}>
-                    <Grid container spacing={3}>
+                    <Grid container>
                         <Grid item xs={12}>
                             <FormSection title="Información general">
                                 <ContractGeneralDataFormFields />
