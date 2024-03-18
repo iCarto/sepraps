@@ -14,6 +14,11 @@ class BuildingComponentMonitoringViewSet(ModelListAuditViewSet):
     queryset = BuildingComponentMonitoring.objects.all()
     serializer_class = BuildingComponentMonitoringSerializer
 
+    def get_queryset(self):
+        return self.queryset.select_related(
+            "project", "progress", "building_component"
+        ).prefetch_related("comments", "building_component__building_component_values")
+
     @action(
         methods=["POST"],
         detail=True,

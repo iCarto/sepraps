@@ -51,14 +51,30 @@ class BuildingComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
             return None
         return format_decimal((self.paid_amount or 0) + (self.pending_amount or 0))
 
-    @property
-    def financial_progress_percentage(self):
-        if self.paid_amount and self.expected_amount:
-            return format_decimal((self.paid_amount / (self.expected_amount)) * 100)
-        return None
-
 
 @receiver(pre_save, sender=BuildingComponentMonitoring)
-def component_pre_save(sender, instance, *args, **kwargs):
+def bc_monitoring_pre_save(sender, instance, *args, **kwargs):
     if instance.execution_status == "finalizado":
         instance.pending_amount = 0
+
+
+class BuildingComponentProgress(models.Model):
+    class Meta:
+        managed = False
+        db_table = "bcm_progress"
+
+    building_component_monitoring = models.OneToOneField(
+        BuildingComponentMonitoring,
+        on_delete=models.DO_NOTHING,
+        primary_key=True,
+        related_name="progress",
+    )
+    financial_progress_percentage = models.DecimalField(
+        "Porcentaje de avance financiero", max_digits=5, decimal_places=2, null=True
+    )
+    financial_weight = models.DecimalField(
+        "Peso financiero", max_digits=5, decimal_places=2, null=True
+    )
+
+    def __str__(self):
+        return f"{self.__class__.__name__}: {self.id}"

@@ -198,5 +198,55 @@
             "project": 25,
             "construction": true
         }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 123,
+        "fields": {
+            "created_at": "2024-03-18T09:56:30.169Z",
+            "updated_at": "2024-03-18T10:26:05.727Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 661,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": "2000000.00",
+            "expected_end_date": "2024-03-31",
+            "paid_amount": "1000000.00",
+            "pending_amount": "1000000.00",
+            "real_end_date": null,
+            "physical_progress_percentage": "50.00",
+            "building_component": 123,
+            "project": 25,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 124,
+        "fields": {
+            "created_at": "2024-03-18T09:56:30.195Z",
+            "updated_at": "2024-03-18T10:26:39.609Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 662,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": "30000000.00",
+            "expected_end_date": "2024-03-31",
+            "paid_amount": "15000000.00",
+            "pending_amount": "15000000.00",
+            "real_end_date": null,
+            "physical_progress_percentage": "50.00",
+            "building_component": 124,
+            "project": 25,
+            "comments": []
+        }
     }
 ]

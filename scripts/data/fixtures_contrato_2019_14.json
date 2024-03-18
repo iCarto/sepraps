@@ -500,56 +500,6 @@
         }
     },
     {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 9,
-        "fields": {
-            "created_at": "2023-11-17T10:14:47.014Z",
-            "updated_at": "2023-11-17T10:17:29.145Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 58,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "finalizado",
-            "quality_status": "mal",
-            "expected_amount": 240000000,
-            "expected_end_date": "2023-11-24",
-            "paid_amount": 320000000,
-            "pending_amount": 0,
-            "real_end_date": "2023-11-25",
-            "physical_progress_percentage": "100.00",
-            "building_component": 9,
-            "project": 5,
-            "comments": []
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 10,
-        "fields": {
-            "created_at": "2023-11-17T10:14:47.014Z",
-            "updated_at": "2023-11-17T10:17:29.145Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 59,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "en_proceso",
-            "quality_status": "bien",
-            "expected_amount": 500000000,
-            "expected_end_date": "2023-11-29",
-            "paid_amount": 70000000,
-            "pending_amount": 380000000,
-            "real_end_date": "2023-11-12",
-            "physical_progress_percentage": "20.00",
-            "building_component": 10,
-            "project": 5,
-            "comments": []
-        }
-    },
-    {
         "model": "app.ContractProject",
         "pk": null,
         "fields": {

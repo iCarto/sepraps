@@ -18,10 +18,8 @@ from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
 from app.serializers.project_work_serializer import ProjectWorkSerializer
 from app.serializers.provider_serializer import ProviderSerializer
+from app.util import format_decimal
 from documents.serializers import MediaUrlSerializer
-from questionnaires.serializers.questionnaire_serializer import (
-    QuestionnaireShortSerializer,
-)
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -41,14 +39,14 @@ class ProjectSerializer(serializers.ModelSerializer):
             "construction_contract",
             "milestones",
             "folder",
-            "questionnaires",
             "related_contracts",
-            "physical_progress_percentage",
-            "financial_progress_percentage",
-            "bm_total_expected_amount",
             "creation_user",
             "created_at",
             "updated_at",
+            "financial_progress_percentage",
+            "physical_progress_percentage",
+            "bm_total_expected_amount",
+            "number_of_bcomponents",
         )
 
     code = serializers.CharField(required=False, read_only=True)
@@ -63,10 +61,16 @@ class ProjectSerializer(serializers.ModelSerializer):
         source="creation_user.username", required=False
     )
     folder = serializers.SerializerMethodField()
-    questionnaires = QuestionnaireShortSerializer(many=True, read_only=True)
     related_contracts = ConstructionContractSummarySerializer(
         source="related_contracts_list", many=True, read_only=True
     )
+    financial_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    physical_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    number_of_bcomponents = serializers.SerializerMethodField()
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""
@@ -76,6 +80,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "main_infrastructure__locality__department",
             "main_infrastructure__locality__district",
             "provider",
+            "progress",
         ).prefetch_related(
             "project_works",
             "linked_localities",
@@ -116,6 +121,23 @@ class ProjectSerializer(serializers.ModelSerializer):
         return MilestoneSummarySerializer(
             obj.milestones.exclude(parent__isnull=False).order_by("ordering"), many=True
         ).data
+
+    def get_financial_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.financial_progress_percentage)
+            if obj.progress.financial_progress_percentage
+            else None
+        )
+
+    def get_physical_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.physical_progress_percentage)
+            if obj.progress.physical_progress_percentage
+            else None
+        )
+
+    def get_number_of_bcomponents(self, obj):
+        return obj.project_building_monitorings.count()
 
     # OPERATIONS
 
@@ -256,33 +278,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    closed = serializers.BooleanField()
-    linked_localities = LocalitySerializer(many=True)
-    provider_name = serializers.CharField(source="provider.name", default=None)
-    construction_contract_number = serializers.CharField(
-        source="construction_contract.number", default=None
-    )
-    construction_contract_bid_request_number = serializers.CharField(
-        source="construction_contract.bid_request_number", default=None
-    )
-    financing_program = serializers.IntegerField(
-        source="construction_contract.financing_program.id", required=False
-    )
-    financing_program_name = serializers.CharField(
-        source="construction_contract.financing_program.short_name", required=False
-    )
-    milestones = serializers.SerializerMethodField()
-    latitude = serializers.CharField(
-        source="main_infrastructure.latitude", default=None
-    )
-    longitude = serializers.CharField(
-        source="main_infrastructure.longitude", default=None
-    )
-    physical_progress_percentage = serializers.SerializerMethodField()
-    financial_progress_percentage = serializers.SerializerMethodField()
-    number_of_bcomponents = serializers.SerializerMethodField()
-
     class Meta(ProjectSerializer.Meta):
         fields = (
             "id",
@@ -300,23 +295,60 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             "construction_contract_bid_request_number",
             "financing_program",
             "financing_program_name",
-            "milestones",
-            "physical_progress_percentage",
-            "financial_progress_percentage",
-            "number_of_bcomponents",
             "latitude",
             "longitude",
             "created_at",
             "updated_at",
+            "financial_progress_percentage",
+            "physical_progress_percentage",
+            "number_of_bcomponents",
+        )
+
+    name = serializers.SerializerMethodField()
+    closed = serializers.BooleanField()
+    linked_localities = LocalitySerializer(many=True)
+    provider_name = serializers.CharField(source="provider.name", default=None)
+    construction_contract_number = serializers.CharField(
+        source="construction_contract.number", default=None
+    )
+    construction_contract_bid_request_number = serializers.CharField(
+        source="construction_contract.bid_request_number", default=None
+    )
+    financing_program = serializers.IntegerField(
+        source="construction_contract.financing_program.id", required=False
+    )
+    financing_program_name = serializers.CharField(
+        source="construction_contract.financing_program.short_name", required=False
+    )
+    latitude = serializers.CharField(
+        source="main_infrastructure.latitude", default=None
+    )
+    longitude = serializers.CharField(
+        source="main_infrastructure.longitude", default=None
+    )
+    financial_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    physical_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    number_of_bcomponents = serializers.SerializerMethodField()
+
+    def get_financial_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.financial_progress_percentage)
+            if obj.progress.financial_progress_percentage
+            else None
         )
 
     project_works = ProjectWorkSerializer(many=True)
 
     def get_physical_progress_percentage(self, obj):
-        return obj.physical_progress_percentage
-
-    def get_financial_progress_percentage(self, obj):
-        return obj.financial_progress_percentage
+        return (
+            format_decimal(obj.progress.physical_progress_percentage)
+            if obj.progress.physical_progress_percentage
+            else None
+        )
 
     def get_number_of_bcomponents(self, obj):
         return obj.project_building_monitorings.count()
@@ -324,20 +356,13 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
     def get_name(self, obj):
         return " - ".join(i.name for i in obj.linked_localities.all())
 
-    def setup_eager_loading(queryset):
+    def setup_eager_loading(self):
         """Perform necessary eager loading of data."""
-        return queryset.select_related(
-            "main_infrastructure", "provider", "featured_image"
+        return self.select_related(
+            "main_infrastructure", "provider", "featured_image", "progress"
         ).prefetch_related(
             "linked_localities",
             "project_works",
-            Prefetch(
-                "milestones",
-                queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
-                    "ordering"
-                ),
-            ),
-            "questionnaires",
             Prefetch(
                 "project_building_monitorings",
                 queryset=BuildingComponentMonitoring.objects.select_related(),
@@ -362,9 +387,6 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             if field != "id":
                 fields[field].read_only = True
         return fields
-
-    def get_milestones(self, obj):
-        return MilestoneSummarySerializer(obj.milestones, many=True).data
 
 
 class ProjectShortSerializer(ProjectSerializer):
