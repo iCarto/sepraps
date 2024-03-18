@@ -103,36 +103,6 @@ class Project(models.Model):
             ).all()
         ]
 
-    @property
-    def physical_progress_percentage(self):
-        building_monitorings = self.project_building_monitorings.all()
-
-        if not building_monitorings:
-            return 0
-
-        total_progress = sum(
-            bm.physical_progress_percentage
-            if bm.physical_progress_percentage is not None
-            else 0
-            for bm in building_monitorings
-        )
-
-        return round(total_progress / len(building_monitorings))
-
-    @property
-    def financial_progress_percentage(self):
-        building_monitorings = self.project_building_monitorings.all()
-
-        if not building_monitorings:
-            return 0
-
-        total_progress = sum(
-            float(bm.paid_amount or 0) / float(bm.expected_amount or 1) * 100
-            for bm in building_monitorings
-        )
-
-        return round(total_progress / len(building_monitorings))
-
     def __str__(self):
         return self.code
 
@@ -202,3 +172,25 @@ def get_code_for_new_project():
 
     # TODO: change AP for project type code
     return str(year) + "-AP-" + new_code
+
+
+class ProjectProgress(models.Model):
+    class Meta:
+        managed = False
+        db_table = "project_progress"
+
+    project = models.OneToOneField(
+        Project, on_delete=models.DO_NOTHING, primary_key=True, related_name="progress"
+    )
+    financial_progress_percentage = models.DecimalField(
+        "Porcentaje de avance financiero", max_digits=5, decimal_places=2, null=True
+    )
+    physical_progress_percentage = models.DecimalField(
+        "Porcentaje de avance físico", max_digits=5, decimal_places=2, null=True
+    )
+    """ financial_weight = models.DecimalField(
+        "Peso financiero", max_digits=5, decimal_places=2, null=True
+    ) """
+
+    def __str__(self):
+        return f"{self.__class__.__name__}: {self.id}"

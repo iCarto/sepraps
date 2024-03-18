@@ -17,12 +17,10 @@ from app.serializers.infrastructure_serializer import InfrastructureSerializer
 from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
 from app.serializers.provider_serializer import ProviderSerializer
+from app.util import format_decimal
 from documents.serializers import MediaUrlSerializer
 from domains.mixins import BaseDomainField, BaseDomainMixin
 from domains.models import DomainCategoryChoices
-from questionnaires.serializers.questionnaire_serializer import (
-    QuestionnaireShortSerializer,
-)
 
 
 class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
@@ -43,13 +41,12 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "construction_contract",
             "milestones",
             "folder",
-            "questionnaires",
             "related_contracts",
-            "physical_progress_percentage",
-            "financial_progress_percentage",
             "creation_user",
             "created_at",
             "updated_at",
+            "financial_progress_percentage",
+            "physical_progress_percentage",
         )
 
     code = serializers.CharField(required=False, read_only=True)
@@ -63,9 +60,14 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
         source="creation_user.username", required=False
     )
     folder = serializers.SerializerMethodField()
-    questionnaires = QuestionnaireShortSerializer(many=True, read_only=True)
     related_contracts = ConstructionContractSummarySerializer(
         source="related_contracts_list", many=True, read_only=True
+    )
+    financial_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    physical_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
     )
 
     def setup_eager_loading(queryset):
@@ -76,6 +78,7 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             "main_infrastructure__locality__department",
             "main_infrastructure__locality__district",
             "provider",
+            "progress",
         ).prefetch_related(
             "linked_localities",
             Prefetch(
@@ -109,7 +112,6 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
     # ATTRIBUTES
 
     def get_folder(self, obj):
-        print(obj.folder)
         return obj.folder.media_path if obj.folder else None
 
     def get_milestones(self, obj):
@@ -117,10 +119,24 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
             obj.milestones.exclude(parent__isnull=False).order_by("ordering"), many=True
         ).data
 
-    domain_fields = [
+    def get_financial_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.financial_progress_percentage)
+            if obj.progress.financial_progress_percentage
+            else None
+        )
+
+    def get_physical_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.physical_progress_percentage)
+            if obj.progress.physical_progress_percentage
+            else None
+        )
+
+    domain_fields = (
         BaseDomainField("project_type", DomainCategoryChoices.project_type),
         BaseDomainField("project_class", DomainCategoryChoices.project_class),
-    ]
+    )
 
     # OPERATIONS
 
@@ -213,31 +229,6 @@ class ProjectSerializer(BaseDomainMixin, serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
-    closed = serializers.BooleanField()
-    linked_localities = LocalitySerializer(many=True)
-    provider_name = serializers.CharField(source="provider.name", default=None)
-    construction_contract_number = serializers.CharField(
-        source="construction_contract.number", default=None
-    )
-    construction_contract_bid_request_number = serializers.CharField(
-        source="construction_contract.bid_request_number", default=None
-    )
-    financing_program = serializers.IntegerField(
-        source="construction_contract.financing_program.id", required=False
-    )
-    financing_program_name = serializers.CharField(
-        source="construction_contract.financing_program.short_name", required=False
-    )
-    milestones = serializers.SerializerMethodField()
-    latitude = serializers.CharField(
-        source="main_infrastructure.latitude", default=None
-    )
-    longitude = serializers.CharField(
-        source="main_infrastructure.longitude", default=None
-    )
-    physical_progress_percentage = serializers.SerializerMethodField()
-    financial_progress_percentage = serializers.SerializerMethodField()
-
     class Meta(ProjectSerializer.Meta):
         fields = (
             "id",
@@ -255,34 +246,62 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
             "construction_contract_bid_request_number",
             "financing_program",
             "financing_program_name",
-            "milestones",
-            "physical_progress_percentage",
-            "financial_progress_percentage",
             "latitude",
             "longitude",
             "created_at",
             "updated_at",
+            "financial_progress_percentage",
+            "physical_progress_percentage",
+        )
+
+    closed = serializers.BooleanField()
+    linked_localities = LocalitySerializer(many=True)
+    provider_name = serializers.CharField(source="provider.name", default=None)
+    construction_contract_number = serializers.CharField(
+        source="construction_contract.number", default=None
+    )
+    construction_contract_bid_request_number = serializers.CharField(
+        source="construction_contract.bid_request_number", default=None
+    )
+    financing_program = serializers.IntegerField(
+        source="construction_contract.financing_program.id", required=False
+    )
+    financing_program_name = serializers.CharField(
+        source="construction_contract.financing_program.short_name", required=False
+    )
+    latitude = serializers.CharField(
+        source="main_infrastructure.latitude", default=None
+    )
+    longitude = serializers.CharField(
+        source="main_infrastructure.longitude", default=None
+    )
+    financial_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    physical_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+
+    def get_financial_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.financial_progress_percentage)
+            if obj.progress.financial_progress_percentage
+            else None
         )
 
     def get_physical_progress_percentage(self, obj):
-        return obj.physical_progress_percentage
+        return (
+            format_decimal(obj.progress.physical_progress_percentage)
+            if obj.progress.physical_progress_percentage
+            else None
+        )
 
-    def get_financial_progress_percentage(self, obj):
-        return obj.financial_progress_percentage
-
-    def setup_eager_loading(queryset):
+    def setup_eager_loading(self):
         """Perform necessary eager loading of data."""
-        return queryset.select_related(
-            "main_infrastructure", "provider", "featured_image"
+        return self.select_related(
+            "main_infrastructure", "provider", "featured_image", "progress"
         ).prefetch_related(
             "linked_localities",
-            Prefetch(
-                "milestones",
-                queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
-                    "ordering"
-                ),
-            ),
-            "questionnaires",
             Prefetch(
                 "project_building_monitorings",
                 queryset=BuildingComponentMonitoring.objects.select_related(),
@@ -312,9 +331,6 @@ class ProjectSummarySerializer(BaseDomainMixin, serializers.ModelSerializer):
         BaseDomainField("project_type", DomainCategoryChoices.project_type),
         BaseDomainField("project_class", DomainCategoryChoices.project_class),
     ]
-
-    def get_milestones(self, obj):
-        return MilestoneSummarySerializer(obj.milestones, many=True).data
 
 
 class ProjectShortSerializer(ProjectSerializer):

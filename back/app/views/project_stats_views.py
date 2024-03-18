@@ -49,7 +49,7 @@ def get_filter_join_query(params):  # noqa: C901, PLR0912
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer, DataFrameCSVFileRenderer])
-def get_building_components_stats(request, group_code, format=None):
+def get_building_components_stats(request, group_code, format=None):  # noqa: ARG001
     group_by_column = "bc.code_label"
     if request.GET.get("project"):
         group_by_column = "bc.name"
@@ -94,9 +94,9 @@ def get_building_components_stats(request, group_code, format=None):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def get_building_components_total_stats(request, format=None):
+def get_building_components_total_stats(request, format=None):  # noqa: ARG001
     query = """
-            SELECT
+        SELECT
                 coalesce(sum(bcm.paid_amount), 0) as paid_amount,
                 coalesce(sum(bcm.pending_amount), 0) as pending_amount,
                 coalesce(sum(bcm.expected_amount), 0) as expected_amount,
@@ -112,7 +112,7 @@ def get_building_components_total_stats(request, format=None):
                     {join_query}
                 ) projects ON projects.project_id = bcm.project_id
             WHERE bcm.active = True
-            """
+        """
 
     with connection.cursor() as cursor:
         cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))
@@ -129,7 +129,7 @@ def get_building_components_total_stats(request, format=None):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 @renderer_classes([DataFrameJSONRenderer])
-def get_social_component_trainings_multi_stats(request, group_code, format=None):
+def get_social_component_trainings_multi_stats(request, group_code, format=None):  # noqa: ARG001
     group_by_attribute = "scm.code"
     if group_code == "target_population":
         group_by_attribute = "sct.target_population"
@@ -255,7 +255,7 @@ class TrainingSumStatsExcelRenderer(DataFrameExcelFileRenderer):
 @renderer_classes(
     [DataFrameJSONRenderer, TrainingSumStatsCSVRenderer, TrainingSumStatsExcelRenderer]
 )
-def get_social_component_trainings_sum_stats(request, format=None):
+def get_social_component_trainings_sum_stats(request, format=None):  # noqa: ARG001
     social_component_monitoring = request.GET.get("social_component_monitoring", None)
     social_component_contract = request.GET.get("social_component_contract", None)
     social_component_contractor = request.GET.get("social_component_contractor", None)
@@ -399,7 +399,7 @@ class ConnectionsSumStatsExcelRenderer(DataFrameExcelFileRenderer):
         ConnectionsSumStatsExcelRenderer,
     ]
 )
-def get_connections_total_stats(request, format=None):
+def get_connections_total_stats(request, format=None):  # noqa: ARG001
     number_of_people_per_household = 5
 
     query = """
