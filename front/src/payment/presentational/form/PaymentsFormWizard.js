@@ -62,11 +62,15 @@ const PaymentsFormWizard = ({
 
     const frequencyType = formMethods.watch("frequency_type");
     const nameTypeOptions = [
+        {value: "certificado", label: "Certificado Nº{nº}"},
         {value: "pago", label: "Pago {nº}"},
         {value: "mes_anho", label: "{mes}/{año}"},
     ];
 
     const getProductName = (nameType, index) => {
+        if (nameType === "certificado") {
+            return `Certificado Nº${index + 1}`;
+        }
         if (nameType === "pago") {
             return `Pago ${index + 1}`;
         }
