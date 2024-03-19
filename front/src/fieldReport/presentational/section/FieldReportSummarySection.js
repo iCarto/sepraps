@@ -10,13 +10,15 @@ const FieldReportSummarySection = ({fieldReport, secondaryAction = null}) => {
         <SectionCard>
             <Stack direction="row" justifyContent="space-between" sx={{mb: 2}}>
                 <Typography
-                    variant="h5"
+                    variant="h6"
                     color="grey.700"
-                    sx={{fontWeight: "bold", pb: 2}}
+                    sx={{fontWeight: "bold", mb: 3}}
                 >
                     {fieldReport?.name}
                 </Typography>
-                <Box sx={{minWidth: "150px"}}>{secondaryAction}</Box>
+                <Box sx={{minWidth: "220px", textAlign: "right"}}>
+                    {secondaryAction}
+                </Box>
             </Stack>
             <SectionField
                 label="Fecha del informe"
