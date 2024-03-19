@@ -12,7 +12,8 @@ from app.serializers.field_report_project_serializer import FieldReportProjectSe
 class FieldReportSerializer(BaseModelWithFolderSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = FieldReport
-        fields = BaseModelWithFolderSerializer.Meta.fields + (
+        fields = (
+            *BaseModelWithFolderSerializer.Meta.fields,
             "name",
             "code",
             "date",
@@ -35,7 +36,8 @@ class FieldReportSerializer(BaseModelWithFolderSerializer):
 class FieldReportSummarySerializer(BaseSummarySerializer):
     class Meta(BaseSummarySerializer.Meta):
         model = FieldReport
-        fields = BaseSummarySerializer.Meta.fields + (
+        fields = (
+            *BaseSummarySerializer.Meta.fields,
             "name",
             "code",
             "date",
@@ -47,7 +49,7 @@ class FieldReportSummarySerializer(BaseSummarySerializer):
     project_list = serializers.SerializerMethodField()
     contract_list = serializers.SerializerMethodField()
 
-    def get_project_list(self, obj):  # noqa: WPS615
+    def get_project_list(self, obj):
         return (
             {
                 "id": field_report_project.project.id,
@@ -56,7 +58,7 @@ class FieldReportSummarySerializer(BaseSummarySerializer):
             for field_report_project in obj.field_report_projects.all()
         )
 
-    def get_contract_list(self, obj):  # noqa: WPS615
+    def get_contract_list(self, obj):
         contract_list = (
             {
                 "id": field_report_project.project.construction_contract.id,
