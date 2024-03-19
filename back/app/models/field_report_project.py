@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-from app.base.models.base_models import BaseEntityModelMixin
+from app.base.models.base_models import ActiveManager, BaseEntityModelMixin
 from app.models.field_report import FieldReport
 from app.models.project import Project
 from documents.base.base_models import BaseDocumentModel
@@ -13,6 +13,8 @@ class FieldReportProject(BaseDocumentModel, BaseEntityModelMixin):
         db_table = "field_report_project"
         verbose_name = "Proyecto en informe de viaje"
         verbose_name_plural = "Proyectos en informe de viaje"
+
+    objects = ActiveManager()
 
     history = models.TextField("Antecedentes", null=True)
     agreements = ArrayField(models.TextField("Objetivo"), null=True)
@@ -37,7 +39,7 @@ class FieldReportProject(BaseDocumentModel, BaseEntityModelMixin):
             classtype = type(self).__name__
             folder = Folder(
                 media_type="FOLDER",
-                media_name="{0}".format(self.project.code),
+                media_name=f"{self.project.code}",
                 storage_path="{0}/{1}/{2}".format(
                     self.field_report.folder.storage_path,
                     classtype.lower(),
