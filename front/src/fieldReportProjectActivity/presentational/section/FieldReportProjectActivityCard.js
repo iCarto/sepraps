@@ -80,7 +80,12 @@ const FieldReportProjectActivityCard = ({
                 </Grid>
             </Grid>
             <Divider sx={{mb: 2}} />
-            <Typography variant="body1" color="text.primary" gutterBottom>
+            <Typography
+                variant="body1"
+                color="text.primary"
+                sx={{whiteSpace: "pre-wrap"}}
+                gutterBottom
+            >
                 {activity.notes}
             </Typography>
             <Grid container spacing={5} pt={2}>

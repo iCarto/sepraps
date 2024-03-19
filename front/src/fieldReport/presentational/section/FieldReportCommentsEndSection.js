@@ -39,7 +39,11 @@ const FieldReportCommentsEndSection = ({
             ) : fieldReport?.[section] ? (
                 <Grid container columnSpacing={1}>
                     <Grid item xs>
-                        <Typography variant="body1" color="text.primary">
+                        <Typography
+                            variant="body1"
+                            color="text.primary"
+                            sx={{whiteSpace: "pre-wrap"}}
+                        >
                             {fieldReport[section]}
                         </Typography>
                     </Grid>

@@ -12,7 +12,11 @@ const FieldReportProjectContent = ({fieldReportProject}) => {
                 defaultExpanded={!!fieldReportProject?.history}
             >
                 <Grid container>
-                    <Typography variant="body1" color="text.primary">
+                    <Typography
+                        variant="body1"
+                        color="text.primary"
+                        sx={{whiteSpace: "pre-wrap"}}
+                    >
                         {fieldReportProject.history}
                     </Typography>
                 </Grid>
