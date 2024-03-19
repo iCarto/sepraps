@@ -29,7 +29,7 @@ class SocialComponentMonitoringViewSet(ModelListAuditViewSet):
         url_path="comments",
         url_name="social_component_monitoring_comments",
     )
-    def save_building_component_monitoring_social(self, request):
+    def save_building_component_monitoring_social(self, request, pk):
         sc_monitoring = self.get_object()
         if sc_monitoring:
             serializer = CommentSerializer(data=request.data)
