@@ -192,4 +192,9 @@ export const globalPDFElements = {
         const marginTop = doesTableFitInPrevPage ? 0 : dimensions.pagePaddingTop - 10;
         return {positionTop, marginTop};
     },
+
+    getStartY(lastAutoTable, dimensions) {
+        if (lastAutoTable) return lastAutoTable.finalY + 8;
+        else return dimensions.pageMargin;
+    },
 };

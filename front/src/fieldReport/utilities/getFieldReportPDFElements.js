@@ -9,6 +9,12 @@ export function getFieldReportPDFElements(
     dimensions,
     fieldReportContent
 ) {
+    const getCenteredPositionX = text => {
+        return (
+            (dimensions.pageWidth + dimensions.pageMargin - doc.getTextWidth(text)) / 2
+        );
+    };
+
     const drawReportHeader = () => {
         globalPDFElements.drawHeader(doc, `Informe de viaje - ${reportData.code}`);
     };
@@ -83,21 +89,12 @@ export function getFieldReportPDFElements(
     };
 
     const drawReportTitle = () => {
-        const getTextPositionY = text => {
-            return (
-                (dimensions.pageWidth +
-                    dimensions.pageMargin -
-                    doc.getTextWidth(text)) /
-                2
-            );
-        };
-
         const initialPositionY = doc.lastAutoTable.finalY + 80;
         const title = `Informe de viaje`;
 
         doc.setFontSize(dimensions.fontSizeHeadingOne)
             .setTextColor(CUSTOM_COLORS.primary.main)
-            .text(title, getTextPositionY(title), initialPositionY, {
+            .text(title, getCenteredPositionX(title), initialPositionY, {
                 lineHeightFactor: 2,
             });
 
@@ -106,23 +103,33 @@ export function getFieldReportPDFElements(
             .setTextColor(CUSTOM_COLORS.text.primary)
             .text(
                 `Número de memorándum: ${reportData.code}`,
-                getTextPositionY(`Número de memorándum: ${reportData.code}`),
+                getCenteredPositionX(`Número de memorándum: ${reportData.code}`),
                 initialPositionY + 10
             );
 
-        doc.setFont(undefined, "normal")
-            .setFontSize(dimensions.fontSizeHeadingTwo)
-            .setTextColor(CUSTOM_COLORS.text.primary)
-            .text(
-                reportData.name,
-                getTextPositionY(reportData.name),
-                initialPositionY + 20
-            );
+        const nameLines = doc.splitTextToSize(
+            reportData.name,
+            dimensions.pageWidth - 2 * dimensions.pageMargin
+        );
+
+        const firstLinePositionY = initialPositionY + 20;
+
+        nameLines.forEach((line, index) => {
+            doc.setFont(undefined, "normal")
+                .setFontSize(dimensions.fontSizeHeadingTwo)
+                .setTextColor(CUSTOM_COLORS.text.primary)
+                .text(line, getCenteredPositionX(line), firstLinePositionY + index * 8);
+        });
+
+        const getDatePositionY = () => {
+            if (nameLines.length === 1) return initialPositionY + 30;
+            else return initialPositionY + 20 + (nameLines.length - 1) * 20;
+        };
 
         doc.text(
             `(${DateUtil.formatDate(reportData.date)})`,
-            getTextPositionY(`(${DateUtil.formatDate(reportData.date)})`),
-            initialPositionY + 30
+            getCenteredPositionX(`(${DateUtil.formatDate(reportData.date)})`),
+            getDatePositionY()
         );
     };
 
@@ -155,7 +162,7 @@ export function getFieldReportPDFElements(
     };
 
     const drawReportGoalsList = () => {
-        if (fieldReportContent.goalsList) {
+        if (fieldReportContent.goalsList.length) {
             doc.setFont(undefined, "bold")
                 .setFontSize(dimensions.fontSizeRegular)
                 .setTextColor(CUSTOM_COLORS.text.primary)
@@ -184,14 +191,41 @@ export function getFieldReportPDFElements(
         const closingText = fieldReportContent.closingText;
 
         if (closingText) {
-            doc.setFont(undefined, "italic").text(
+            let startY = globalPDFElements.getStartY(doc.lastAutoTable, dimensions);
+
+            // Split text to fit on the current page and subsequent pages
+            const textFragments = doc.splitTextToSize(
                 closingText,
-                dimensions.pageMargin,
-                doc.lastAutoTable.finalY + 8,
-                {
-                    maxWidth: dimensions.pageWidth - dimensions.pageMargin,
-                }
+                dimensions.pageWidth - dimensions.pageMargins
             );
+            // Get remaining height on the current page
+            let remainingHeight = dimensions.pageHeight - startY;
+
+            textFragments.forEach((textFragment, index) => {
+                // If remaining space on the current page is not enough for the text fragment
+                if (
+                    index > 0 &&
+                    remainingHeight < doc.getTextDimensions(textFragment).h
+                ) {
+                    doc.addPage(); // Add a new page
+                    startY = dimensions.contentPositionTop; // Reset startY for new page
+                    remainingHeight = dimensions.pageHeight - dimensions.pageMargins; // Reset remaining height
+                }
+
+                // Draw text fragment
+                doc.setFont(undefined, "italic").text(
+                    textFragment,
+                    dimensions.pageMargin,
+                    startY,
+                    {
+                        maxWidth: dimensions.pageWidth - dimensions.pageMargins,
+                    }
+                );
+
+                // Update startY and remainingHeight
+                startY += doc.getTextDimensions(textFragment).h;
+                remainingHeight -= doc.getTextDimensions(textFragment).h;
+            });
         }
     };
 
