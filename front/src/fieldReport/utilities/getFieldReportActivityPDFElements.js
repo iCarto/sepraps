@@ -1,7 +1,7 @@
-import {DateUtil} from "base/format/utilities";
-import {globalPDFElements} from "base/pdf/utilities";
 import autoTable from "jspdf-autotable";
 import {CUSTOM_COLORS} from "Theme";
+import {DateUtil} from "base/format/utilities";
+import {globalPDFElements} from "base/pdf/utilities";
 
 export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportContent) {
     const drawActivitySummary = activity => {
@@ -12,7 +12,7 @@ export function getFieldReportActivityPDFElements(doc, dimensions, fieldReportCo
 
         autoTable(doc, {
             startY: tablePosition.positionTop,
-            margin: {top: tablePosition.marginTop},
+            margin: {top: tablePosition.marginTop || tablePosition.marginTop + 30},
             theme: "plain",
             head: [[`${DateUtil.formatDate(activity.date)} | ${activity.title}`]],
             headStyles: {

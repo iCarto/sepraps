@@ -118,7 +118,7 @@ export function getFieldReportProjectPDFElements(
 
             autoTable(doc, {
                 startY: tablePosition.positionTop,
-                margin: {top: tablePosition.marginTop},
+                margin: {top: tablePosition.marginTop + 30},
                 theme: "plain",
                 head: [["Antecedentes"]],
                 headStyles: {
@@ -130,7 +130,7 @@ export function getFieldReportProjectPDFElements(
     };
 
     const drawVisitedProjectAgreementsList = project => {
-        if (project.agreements) {
+        if (project.agreements.length) {
             const tablePosition = globalPDFElements.getTableTopPosition(
                 doc.lastAutoTable.finalY,
                 dimensions
@@ -138,7 +138,9 @@ export function getFieldReportProjectPDFElements(
 
             autoTable(doc, {
                 startY: tablePosition.positionTop,
-                margin: {top: tablePosition.marginTop},
+                margin: {
+                    top: tablePosition.marginTop || tablePosition.marginTop + 30,
+                },
                 theme: "plain",
                 head: [
                     [
