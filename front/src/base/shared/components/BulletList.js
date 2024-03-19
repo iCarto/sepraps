@@ -10,6 +10,7 @@ const BulletList = ({items, getActions = null, dense = true}) => {
     const listItemStyle = {
         pt: 0,
         px: 1,
+        whiteSpace: "pre-wrap",
         "& .MuiListItemText-root": {
             maxWidth: "90%",
         },
