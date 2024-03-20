@@ -1,8 +1,6 @@
 import {useFormContext, useWatch} from "react-hook-form";
 
 import {useDomain} from "sepraps/domain/provider";
-import {ContractSearchAutocomplete} from "contract/presentational";
-import {ContractorSearchAutocomplete} from "contractor/presentational";
 import {
     FormBox,
     FormDatePicker,
@@ -13,9 +11,31 @@ import {
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import {useOutletContext} from "react-router-dom";
+import {useEffect, useState} from "react";
 
-const TrainingFormDataFields = ({contract = null, contractor = null}) => {
+const TrainingFormDataFields = ({}) => {
     const {targetPopulationTypes, trainingMethodTypes} = useDomain();
+
+    const {project} = useOutletContext();
+    const {reset, getValues} = useFormContext();
+
+    const [contractOptions, setContractOptions] = useState([]);
+    const [contractorOptions, setContractorOptions] = useState([]);
+
+    useEffect(() => {
+        const relatedContractsOptions = project.related_contracts.map(contract => {
+            return {
+                value: contract.id,
+                label: contract.number,
+            };
+        });
+        setContractOptions(relatedContractsOptions);
+        const values = getValues();
+        if (values.contract) {
+            setContractorOptions(getContractorOptions(values.contract));
+        }
+    }, [project]);
 
     const numberOfWomen = useWatch({
         name: "number_of_women",
@@ -33,42 +53,39 @@ const TrainingFormDataFields = ({contract = null, contractor = null}) => {
     const totalParticipants = (numberOfWomen || 0) + (numberOfMen || 0);
     const totalMaterials = (printedMaterials || 0) + (digitalMaterials || 0);
 
-    const {reset, getValues} = useFormContext();
-
-    const handleSelectSocialContract = contract => {
-        if (contract) {
-            const values = getValues();
-            reset({
-                ...values,
-                contract: contract.id,
-            });
-        }
+    const getContractorOptions = selectedContract => {
+        const selectedContractor = project.related_contracts.find(
+            contract => contract.id === selectedContract
+        )?.contractor;
+        return selectedContractor
+            ? [{value: selectedContractor.id, label: selectedContractor.name}]
+            : [];
     };
 
-    const handleSelectSocialContractor = contractor => {
-        if (contractor) {
-            const values = getValues();
-            reset({
-                ...values,
-                contractor: contractor.id,
-            });
-        }
+    const onChangeContract = selectedContract => {
+        reset({...getValues(), contractor: null});
+        setContractorOptions(getContractorOptions(selectedContract));
     };
 
     return (
         <Grid container columnSpacing={2}>
             <Grid item xs={6}>
-                <ContractSearchAutocomplete
-                    handleSelect={handleSelectSocialContract}
-                    defaultValue={contract}
-                    required
+                <FormSelect
+                    name="contract"
+                    label="Contrato"
+                    options={contractOptions}
+                    showEmptyOption
+                    rules={{required: "Este campo es obligatorio"}}
+                    onChangeHandler={onChangeContract}
                 />
             </Grid>
             <Grid item xs={6}>
-                <ContractorSearchAutocomplete
-                    handleSelect={handleSelectSocialContractor}
-                    defaultValue={contractor}
-                    required
+                <FormSelect
+                    name="contractor"
+                    label="Contratista"
+                    options={contractorOptions}
+                    showEmptyOption
+                    rules={{required: "Este campo es obligatorio"}}
                 />
             </Grid>
 

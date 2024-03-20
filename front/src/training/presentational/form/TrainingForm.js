@@ -68,10 +68,7 @@ const TrainingForm = ({training = null, onSubmit, onCancel = null, error = null}
                         onSubmit={formMethods.handleSubmit(onFormSubmit)}
                         onCancel={onCancel}
                     >
-                        <TrainingFormDataFields
-                            contract={training?.contract}
-                            contractor={training?.contractor}
-                        />
+                        <TrainingFormDataFields />
                     </EntityForm>
                 </FormContainer>
             </FormProvider>

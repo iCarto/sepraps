@@ -36,7 +36,6 @@ const CreateTrainingDataContent = ({socialComponentId}) => {
     ) : mode === "create" ? (
         <AddNewInlineItemFormBox label="Nueva capacitación/asistencia técnica">
             <TrainingForm
-                socialComponentId={socialComponentId}
                 onSubmit={handleFormSubmit}
                 onCancel={() => {
                     setMode("button");
