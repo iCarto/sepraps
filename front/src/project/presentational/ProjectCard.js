@@ -1,4 +1,3 @@
-import {theme} from "Theme";
 import {useProjectCard} from "project/data";
 import {NumberUtil} from "base/format/utilities";
 import {EntityCard} from "base/entity/components/presentational";
@@ -20,17 +19,6 @@ const iconsContainerStyle = {
     left: 5,
 };
 
-const iconBoxStyle = {
-    width: 30,
-    height: 30,
-    borderRadius: "50%",
-    border: `solid 2px ${theme.palette.primary.dark}`,
-    bgcolor: "white",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
-
 const ProjectCard = ({entity: project, onClick = null}) => {
     const {cardFields} = useProjectCard();
 
@@ -46,19 +34,15 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                 />
                 <Stack sx={iconsContainerStyle} direction="row">
                     {project?.project_works.map((project_work, index) => (
-                        <Box
+                        <ProjectTypeIcon
                             key={index}
-                            sx={{
-                                ...iconBoxStyle,
+                            projectWorkData={project_work}
+                            showProjectClass
+                            style={{
                                 ml: index !== 0 ? -1 : 0,
                                 opacity: project.closed ? 0.4 : 0.85,
                             }}
-                        >
-                            <ProjectTypeIcon
-                                projectWorkData={project_work}
-                                size="small"
-                            />
-                        </Box>
+                        />
                     ))}
                 </Stack>
                 {project.closed && (

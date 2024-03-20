@@ -1,25 +1,12 @@
-import {theme} from "Theme";
 import {ProjectService} from "project/service";
 import {TEMPLATE} from "contract/service";
 
 import {EntityMenuDropDown} from "base/entity/components/presentational";
-import {ProjectTypeIcon} from "project/presentational";
+import {ProjectTypeClassChip} from "project/presentational";
 import {Spinner} from "base/shared/components";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
-
-const iconBoxStyle = {
-    width: 30,
-    height: 30,
-    borderRadius: "50%",
-    border: `solid 2px ${theme.palette.primary.dark}`,
-    bgcolor: "white",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
 
 const SelectProjectDropDown = ({project}) => {
     const renderDropdownItem = eachProject => {
@@ -41,20 +28,9 @@ const SelectProjectDropDown = ({project}) => {
             secondary={project ? `${project?.name}, ${project?.location}` : null}
             tag={
                 <>
-                    <Stack direction="row">
+                    <Stack alignItems="flex-start" spacing={0.5}>
                         {project?.project_works.map((project_work, index) => (
-                            <Box
-                                sx={{
-                                    ...iconBoxStyle,
-                                    ml: index !== 0 ? -1 : 0,
-                                    opacity: 0.85,
-                                }}
-                            >
-                                <ProjectTypeIcon
-                                    projectWorkData={project_work}
-                                    size="small"
-                                />
-                            </Box>
+                            <ProjectTypeClassChip projectWorkData={project_work} />
                         ))}
                     </Stack>
                     {project?.closed && (

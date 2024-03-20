@@ -37,7 +37,6 @@ const SubPageMenuHeaderItem = ({
                 {primary && (
                     <Typography
                         sx={{
-                            pt: 1,
                             fontSize: 20,
                             fontWeight: 800,
                             lineHeight: 1.25,

@@ -119,18 +119,11 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                         {project.project_works.map(
                                             (project_work, index) => {
                                                 return (
-                                                    <Box
-                                                        sx={{
-                                                            ...iconBoxStyle,
-                                                        }}
-                                                    >
-                                                        <ProjectTypeIcon
-                                                            projectWorkData={
-                                                                project_work
-                                                            }
-                                                            size="small"
-                                                        />
-                                                    </Box>
+                                                    <ProjectTypeIcon
+                                                        key={index}
+                                                        projectWorkData={project_work}
+                                                        showProjectClass
+                                                    />
                                                 );
                                             }
                                         )}
