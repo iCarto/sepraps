@@ -1,3 +1,5 @@
+import {CUSTOM_COLORS} from "Theme";
+
 const ContractServiceUtil = {
     getExecutionStartDateLabel(services) {
         // if servicio de ejecución de obra, always use his label
@@ -13,6 +15,20 @@ const ContractServiceUtil = {
             }
         }
         return "Fecha de inicio del contrato";
+    },
+    getContractServiceColor(serviceTypes, serviceLabel) {
+        const colors = CUSTOM_COLORS.contract_service;
+
+        const servicesWithColors = serviceTypes.map((serviceType, index) => ({
+            ...serviceType,
+            color: colors[index] || CUSTOM_COLORS.contract_service.default,
+        }));
+
+        const serviceColor = servicesWithColors.find(
+            service => service.label === serviceLabel.trim()
+        )?.color;
+
+        return serviceColor;
     },
 };
 
