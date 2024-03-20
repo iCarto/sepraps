@@ -12,6 +12,8 @@ import {
     ViewProviderSummarySubPage,
     ViewProvidersContactsSubPage,
     ViewProviderContactPanel,
+    ViewProviderProjectsSubPage,
+    ViewProviderProjectPanel,
 } from "provider/container";
 import {ViewStatsByGenderSubPage} from "stats/container";
 
@@ -44,6 +46,17 @@ const providerRoutes = [
                     key="provider-contact-info"
                     path="info/:contactId"
                     element={<ViewProviderContactPanel />}
+                />
+            </Route>
+            <Route
+                key="provider-projects"
+                path="projects"
+                element={<ViewProviderProjectsSubPage />}
+            >
+                <Route
+                    key="provider-project-view"
+                    path="project/:idInfoPanel"
+                    element={<ViewProviderProjectPanel />}
                 />
             </Route>
             <Route index element={<Navigate to="summary" replace />} />
