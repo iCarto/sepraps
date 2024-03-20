@@ -3,22 +3,20 @@ import {useParams} from "react-router-dom";
 
 import {ContactService} from "contact/service";
 import {useNavigateWithReload} from "base/navigation/hooks";
-import {useProviderContactsTable} from "provider/data";
 import {
     useMenuGenericDeleteAction,
     useMenuGenericEditAction,
     useMenuGenericRemoveAction,
 } from "base/ui/menu/hooks";
-
-import {EntityAddButtonGroup} from "base/entity/components/presentational";
-import {SectionCard} from "base/ui/section/components";
-import {AuthAction} from "base/user/components";
+import {useProviderContactsTable} from "provider/data";
 import {ROLES} from "base/user";
 
+import {EntityAddButtonGroup} from "base/entity/components/presentational";
+import {AuthAction} from "base/user/components";
 import {ContactsTable} from "contact/presentational";
 
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 const ViewContactsList = ({
     service,

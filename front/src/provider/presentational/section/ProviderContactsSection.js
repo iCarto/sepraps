@@ -13,7 +13,7 @@ const ProviderContactsSection = ({
                 service={ProviderContactService}
                 basePath={""}
                 entityId={providerId}
-                entityName="contrato"
+                entityName="prestador"
                 hideActions={hideActions}
             />
         </SectionCard>
