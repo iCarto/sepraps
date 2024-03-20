@@ -1,6 +1,6 @@
 import {SectionCard} from "base/ui/section/components";
 import {ProjectSectionFields} from ".";
-import {ClosedProjectTag, ProjectTypeChip} from "..";
+import {ClosedProjectTag, ProjectTypeClassChip} from "..";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
@@ -24,15 +24,14 @@ const ProjectSection = ({project}) => {
             }
             dense
         >
-            <Stack>
+            <Stack direction="row" sx={{flexWrap: "wrap", gap: 0.5}}>
                 {project?.project_works.map((project_work, index) => (
-                    <ProjectTypeChip projectTypeData={project_work} index={index} />
+                    <ProjectTypeClassChip key={index} projectWorkData={project_work} />
                 ))}
-                <Box mt={1}>
-                    <ProjectSectionFields project={project} />
-                </Box>
             </Stack>
-            <ProjectSectionFields project={project} />
+            <Box mt={1}>
+                <ProjectSectionFields project={project} />
+            </Box>
         </SectionCard>
     );
 };

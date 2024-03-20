@@ -1,6 +1,8 @@
+import {theme} from "Theme";
+import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 
-const PROJECT_TYPE_ICONS = {
+export const PROJECT_TYPE_ICONS = {
     agua: {
         imgSrc: "https://cdn-icons-png.flaticon.com/512/292/292962.png",
         imgAlt: "Grifo",
@@ -23,23 +25,53 @@ const PROJECT_TYPE_ICONS = {
     },
 };
 
-const ProjectTypeIcon = ({projectWorkData, size}) => {
+const iconBoxStyle = {
+    width: 30,
+    height: 30,
+    borderRadius: "50%",
+    border: `solid 2px ${theme.palette.primary.dark}`,
+    bgcolor: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
+
+const ProjectTypeIcon = ({
+    projectWorkData,
+    showProjectClass = false,
+    size = "small",
+    style = {},
+}) => {
     const projectType = projectWorkData.work_type;
     const maxWidth = size === "medium" ? {width: "28px"} : {width: "20px"};
 
     const {imgSrc, imgAlt} =
-        PROJECT_TYPE_ICONS[projectWorkData.work_type] || PROJECT_TYPE_ICONS.default;
+        PROJECT_TYPE_ICONS[projectType] || PROJECT_TYPE_ICONS.default;
 
-    const tooltipTitle = (
+    const tooltipTitle = showProjectClass ? (
         <>
             <strong>{projectWorkData.work_type_label}: </strong>{" "}
             {projectWorkData.work_class_label}
         </>
+    ) : (
+        projectWorkData.work_type_label
     );
 
     return (
         <Tooltip title={tooltipTitle}>
-            <img src={imgSrc} alt={imgAlt} style={maxWidth} aria-label={projectType} />
+            <Box
+                sx={{
+                    ...iconBoxStyle,
+                    ...style,
+                }}
+            >
+                <img
+                    src={imgSrc}
+                    alt={imgAlt}
+                    style={maxWidth}
+                    aria-label={projectType}
+                />
+            </Box>
         </Tooltip>
     );
 };

@@ -1,4 +1,3 @@
-import {theme} from "Theme";
 import {NumberUtil} from "base/format/utilities";
 import {ProgressBarSmall} from "base/progress/components";
 import {ProjectTypeIcon} from "project/presentational";
@@ -7,17 +6,6 @@ import Stack from "@mui/material/Stack";
 
 //TODO: avoid duplicated constant.
 const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
-
-const iconBoxStyle = {
-    width: 30,
-    height: 30,
-    borderRadius: "50%",
-    border: `solid 2px ${theme.palette.primary.dark}`,
-    bgcolor: "white",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
 
 export function useProjectTable() {
     const tableColumns = [
@@ -46,19 +34,14 @@ export function useProjectTable() {
             label: "Tipo y clase",
             formatFunction: item => {
                 return (
-                    <Stack direction="row" spacing={0.5}>
+                    <Stack direction="row" spacing={-0.5}>
                         {item.project_works.map((project_work, index) => {
                             return (
-                                <Box
-                                    sx={{
-                                        ...iconBoxStyle,
-                                    }}
-                                >
-                                    <ProjectTypeIcon
-                                        projectWorkData={project_work}
-                                        size="small"
-                                    />
-                                </Box>
+                                <ProjectTypeIcon
+                                    key={index}
+                                    projectWorkData={project_work}
+                                    showProjectClass
+                                />
                             );
                         })}
                     </Stack>
