@@ -83,6 +83,15 @@ export const CUSTOM_COLORS = {
         expansion: "#c7923e",
         other: "lightgrey",
     },
+
+    // COLOR FOR CONTRACT SERVICE:
+    contract_service: {
+        0: "#004d40",
+        1: "#4e342e",
+        2: "#880e4f",
+        3: "#311b92",
+        default: "#455a64",
+    },
 };
 
 const customTheme = createTheme({
