@@ -17,3 +17,4 @@ export {default as AppraisalChip} from "./AppraisalChip";
 export {default as CollapsableListItem} from "./CollapsableListItem";
 export {default as ListSelector} from "./ListSelector";
 export {default as ListSelectorItem} from "./ListSelectorItem";
+export {default as GenericChip} from "./GenericChip";
