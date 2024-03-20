@@ -1,18 +1,11 @@
-import {theme} from "Theme";
-
 import {ProjectTypeIcon} from ".";
-import Chip from "@mui/material/Chip";
+import {GenericChip} from "base/shared/components";
 
 const ProjectTypeClassChip = ({projectWorkData}) => {
     return (
-        <Chip
+        <GenericChip
             icon={<ProjectTypeIcon projectWorkData={projectWorkData} />}
             label={projectWorkData.work_class_label}
-            variant="outlined"
-            sx={{
-                color: "white",
-                backgroundColor: theme.palette.primary.dark,
-            }}
         />
     );
 };

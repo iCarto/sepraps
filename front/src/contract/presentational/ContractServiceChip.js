@@ -1,19 +1,7 @@
-import {theme} from "Theme";
-import Chip from "@mui/material/Chip";
+import {GenericChip} from "base/shared/components";
 
 const ContractServiceChip = ({service: label}) => {
-    return (
-        <Chip
-            size="small"
-            label={label}
-            sx={{
-                border: 1,
-                borderColor: theme.palette.secondary.light,
-                bgcolor: theme.palette.primary.light,
-                color: "white",
-            }}
-        />
-    );
+    return <GenericChip label={label} />;
 };
 
 export default ContractServiceChip;
