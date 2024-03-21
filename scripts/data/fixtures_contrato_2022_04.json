@@ -201,7 +201,7 @@
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 123,
+        "pk": 126,
         "fields": {
             "created_at": "2024-03-18T09:56:30.169Z",
             "updated_at": "2024-03-18T10:26:05.727Z",
@@ -219,14 +219,14 @@
             "pending_amount": "1000000.00",
             "real_end_date": null,
             "physical_progress_percentage": "50.00",
-            "building_component": 123,
+            "building_component": 126,
             "project": 25,
             "comments": []
         }
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 124,
+        "pk": 127,
         "fields": {
             "created_at": "2024-03-18T09:56:30.195Z",
             "updated_at": "2024-03-18T10:26:39.609Z",
@@ -244,7 +244,7 @@
             "pending_amount": "15000000.00",
             "real_end_date": null,
             "physical_progress_percentage": "50.00",
-            "building_component": 124,
+            "building_component": 127,
             "project": 25,
             "comments": []
         }

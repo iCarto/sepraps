@@ -19,8 +19,6 @@ const iconsContainerStyle = {
     left: 5,
 };
 
-const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
-
 const ProjectCard = ({entity: project, onClick = null}) => {
     const {cardFields} = useProjectCard();
 

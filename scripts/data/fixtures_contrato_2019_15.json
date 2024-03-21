@@ -4291,7 +4291,7 @@
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 78,
+        "pk": 81,
         "fields": {
             "created_at": "2023-11-17T10:14:47.014Z",
             "updated_at": "2023-11-17T10:17:29.145Z",
@@ -4309,14 +4309,14 @@
             "pending_amount": 0,
             "real_end_date": "2021-03-01",
             "physical_progress_percentage": 100,
-            "building_component": 78,
+            "building_component": 81,
             "project": 18,
             "comments": []
         }
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 79,
+        "pk": 82,
         "fields": {
             "created_at": "2023-11-17T10:14:47.014Z",
             "updated_at": "2023-11-17T10:17:29.145Z",
@@ -4334,14 +4334,14 @@
             "pending_amount": 0,
             "real_end_date": "2021-03-01",
             "physical_progress_percentage": 100,
-            "building_component": 79,
+            "building_component": 82,
             "project": 18,
             "comments": []
         }
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 80,
+        "pk": 83,
         "fields": {
             "created_at": "2023-11-17T10:14:47.014Z",
             "updated_at": "2023-11-17T10:17:29.145Z",
@@ -4359,14 +4359,14 @@
             "pending_amount": 0,
             "real_end_date": "2021-03-01",
             "physical_progress_percentage": 95,
-            "building_component": 80,
+            "building_component": 83,
             "project": 18,
             "comments": []
         }
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 81,
+        "pk": 84,
         "fields": {
             "created_at": "2023-11-17T10:14:47.014Z",
             "updated_at": "2023-11-17T10:17:29.145Z",
@@ -4384,14 +4384,14 @@
             "pending_amount": 0,
             "real_end_date": "2021-03-01",
             "physical_progress_percentage": 100,
-            "building_component": 81,
+            "building_component": 84,
             "project": 18,
             "comments": [8]
         }
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 82,
+        "pk": 85,
         "fields": {
             "created_at": "2023-11-17T10:14:47.014Z",
             "updated_at": "2023-11-17T10:17:29.145Z",
@@ -4409,14 +4409,14 @@
             "pending_amount": 0,
             "real_end_date": "2021-03-01",
             "physical_progress_percentage": 100,
-            "building_component": 82,
+            "building_component": 85,
             "project": 18,
             "comments": []
         }
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 83,
+        "pk": 86,
         "fields": {
             "created_at": "2023-11-17T10:14:47.014Z",
             "updated_at": "2023-11-17T10:17:29.145Z",
@@ -4434,14 +4434,14 @@
             "pending_amount": 0,
             "real_end_date": "2021-03-01",
             "physical_progress_percentage": 0,
-            "building_component": 83,
+            "building_component": 86,
             "project": 18,
             "comments": [6]
         }
     },
     {
         "model": "app.buildingcomponentmonitoring",
-        "pk": 84,
+        "pk": 87,
         "fields": {
             "created_at": "2023-11-17T10:14:47.014Z",
             "updated_at": "2023-11-17T10:17:29.145Z",
@@ -4459,59 +4459,9 @@
             "pending_amount": 0,
             "real_end_date": "2021-03-01",
             "physical_progress_percentage": 0,
-            "building_component": 84,
+            "building_component": 87,
             "project": 18,
             "comments": [7]
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 125,
-        "fields": {
-            "created_at": "2023-11-17T10:14:47.014Z",
-            "updated_at": "2023-11-17T10:17:29.145Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 561,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "finalizado",
-            "quality_status": "bien",
-            "expected_amount": 21046015,
-            "expected_end_date": "2020-11-30",
-            "paid_amount": 21046015,
-            "pending_amount": 0,
-            "real_end_date": "2021-03-01",
-            "physical_progress_percentage": 100,
-            "building_component": 125,
-            "project": 18,
-            "comments": []
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 126,
-        "fields": {
-            "created_at": "2023-11-17T10:14:47.014Z",
-            "updated_at": "2023-11-17T10:17:29.145Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 562,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "finalizado",
-            "quality_status": "bien",
-            "expected_amount": 75793680,
-            "expected_end_date": "2020-11-30",
-            "paid_amount": 79203485,
-            "pending_amount": 0,
-            "real_end_date": "2021-03-01",
-            "physical_progress_percentage": 100,
-            "building_component": 126,
-            "project": 18,
-            "comments": []
         }
     },
     {
