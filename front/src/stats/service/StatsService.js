@@ -52,8 +52,8 @@ const StatsService = {
         });
     },
 
-    getStatsByProjectsAndContracts(filter = {}) {
-        return AuthApiService.get(`/api/app/stats/projectandcontract`).then(
+    getStatsForProjectsContractsAndProviders(filter = {}) {
+        return AuthApiService.get(`/api/app/stats/projectscontractsandproviders`).then(
             response => {
                 return response;
             }

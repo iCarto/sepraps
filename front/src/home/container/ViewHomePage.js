@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 
 import {ContractService} from "contract/service";
 import {ProjectService} from "project/service";
+import {ProviderService} from "provider/service";
 import {StatsService} from "stats/service";
 import {NotificationService} from "notification/service";
 import {EventService} from "event/service";
@@ -15,33 +16,41 @@ import {ComingEventsWidget} from "event/presentational";
 import {ContainerGridWithBorder} from "base/ui/section/components";
 import {PaperComponent, SmallIconCard, Spinner} from "base/shared/components";
 import {StatsByPhaseChart} from "stats/presentational";
+import {LatestProvidersList} from "provider/presentational";
 
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import CasesOutlinedIcon from "@mui/icons-material/CasesOutlined";
+import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
 
 const ViewHomePage = () => {
     const [projects, setProjects] = useState([]);
     const [contracts, setContracts] = useState([]);
+    const [providers, setProviders] = useState([]);
     const [projectsNumber, setProjectsNumber] = useState(null);
     const [contractsNumber, setContractsNumber] = useState(null);
+    const [providersNumber, setProvidersNumber] = useState(null);
     const [notifications, setNotifications] = useState([]);
     const [events, setEvents] = useState([]);
     const [statsByPhaseData, setStatsByPhaseData] = useState([]);
 
     const [projectsLoaded, setProjectsLoaded] = useState(false);
     const [contractsLoaded, setContractsLoaded] = useState(false);
+    const [providersLoaded, setProvidersLoaded] = useState(false);
     const [numbersLoaded, setNumbersLoaded] = useState(false);
     const [notificationsLoaded, setNotificationsLoaded] = useState(false);
     const [eventsLoaded, setEventsLoaded] = useState(false);
     const [statsByPhaseDataLoaded, setStatsByPhaseDataLoaded] = useState(false);
 
     useEffect(() => {
-        StatsService.getStatsByProjectsAndContracts().then(data => {
+        StatsService.getStatsForProjectsContractsAndProviders().then(data => {
             setProjectsNumber(data.find(item => item.name === "opened_projects").total);
             setContractsNumber(
                 data.find(item => item.name === "opened_contracts").total
+            );
+            setProvidersNumber(
+                data.find(item => item.name === "total_providers").total
             );
             setNumbersLoaded(true);
         });
@@ -52,6 +61,10 @@ const ViewHomePage = () => {
         ContractService.getList({page: 1, last_modified_items: 3}).then(data => {
             setContracts(data.results.sort((a, b) => b.updated_at - a.updated_at));
             setContractsLoaded(true);
+        });
+        ProviderService.getList({page: 1, last_modified_items: 3}).then(data => {
+            setProviders(data.results.sort((a, b) => b.updated_at - a.updated_at));
+            setProvidersLoaded(true);
         });
         NotificationService.get().then(data => {
             setNotifications(data);
@@ -84,7 +97,7 @@ const ViewHomePage = () => {
                     <Grid item container xs={4}>
                         <PaperComponent>
                             {numbersLoaded ? (
-                                <Grid container spacing={2}>
+                                <Grid container spacing={1}>
                                     <Grid item xs={12}>
                                         <SmallIconCard
                                             heading="Contratos"
@@ -93,7 +106,7 @@ const ViewHomePage = () => {
                                             icon={
                                                 <CasesOutlinedIcon
                                                     sx={{
-                                                        fontSize: "60px",
+                                                        fontSize: "40px",
                                                         lineHeight: 0,
                                                     }}
                                                 />
@@ -108,7 +121,22 @@ const ViewHomePage = () => {
                                             icon={
                                                 <BallotOutlinedIcon
                                                     sx={{
-                                                        fontSize: "60px",
+                                                        fontSize: "40px",
+                                                        lineHeight: 0,
+                                                    }}
+                                                />
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <SmallIconCard
+                                            heading="Prestadores"
+                                            figureContent={providersNumber}
+                                            urlPath="/providers"
+                                            icon={
+                                                <GroupsIconOutlined
+                                                    sx={{
+                                                        fontSize: "40px",
                                                         lineHeight: 0,
                                                     }}
                                                 />
@@ -152,6 +180,13 @@ const ViewHomePage = () => {
                                 <Grid item xs={12}>
                                     {contractsLoaded ? (
                                         <LatestContractsList contracts={contracts} />
+                                    ) : (
+                                        <Spinner />
+                                    )}
+                                </Grid>
+                                <Grid item xs={12}>
+                                    {providersLoaded ? (
+                                        <LatestProvidersList providers={providers} />
                                     ) : (
                                         <Spinner />
                                     )}

@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 
 import {ContainerGridWithBorder} from "base/ui/section/components";
+import {NumberUtil} from "base/format/utilities";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -14,7 +15,7 @@ const SmallIconCard = ({
     const navigate = useNavigate();
 
     return (
-        <ContainerGridWithBorder>
+        <ContainerGridWithBorder p={1}>
             <Grid item container xs={6} justifyContent="center">
                 <IconButton
                     color="primary"
@@ -35,11 +36,12 @@ const SmallIconCard = ({
             >
                 <Typography
                     variant="h3"
+                    fontSize="2.5rem"
                     component="span"
                     fontWeight="900"
                     lineHeight={1}
                 >
-                    {figureContent}
+                    {NumberUtil.formatInteger(figureContent)}
                 </Typography>
                 <Typography variant="overline" lineHeight={1}>
                     {heading}
