@@ -205,31 +205,31 @@
         "letrinas": {
             "name": "Letrinas",
             "validation_properties": {
-                "provision": {
+                "01_provision": {
                     "label": "Unidades provistas",
                     "type": "integer"
                 },
-                "instalacion": {
+                "02_instalacion": {
                     "label": "Unidades instaladas",
                     "type": "integer"
                 },
-                "entrega": {
+                "03_entrega": {
                     "label": "Unidades terminadas",
                     "type": "integer"
                 }
             },
             "technical_properties": {
-                "material": {
+                "01_material": {
                     "label": "Material",
                     "type": "domain",
                     "domain": "toiletMaterialType"
                 },
-                "sistema_disposicion": {
+                "02_sistema_disposicion": {
                     "label": "Sistemas de disposición",
                     "type": "domain",
                     "domain": "disposalSystemType"
                 },
-                "cantidad": {
+                "03_cantidad": {
                     "label": "Cantidad",
                     "type": "integer"
                 }
@@ -252,17 +252,17 @@
                 }
             },
             "technical_properties": {
-                "material": {
+                "01_material": {
                     "label": "Material",
                     "type": "domain",
                     "domain": "toiletMaterialType"
                 },
-                "sistema_disposicion": {
+                "02_sistema_disposicion": {
                     "label": "Sistemas de disposición",
                     "type": "domain",
                     "domain": "disposalSystemType"
                 },
-                "cantidad": {
+                "03_cantidad": {
                     "label": "Cantidad",
                     "type": "integer"
                 }
@@ -271,7 +271,16 @@
     },
     "social_components": {
         "mantenimiento_banos": {
-            "name": "Asistencia técnica y capacitación en mantenimiento de baños"
+            "name": "Capacitación y asistencia técnica en mantenimiento de baños"
+        },
+        "temas_significativos": {
+            "name": "Sensibilización para el cambio de comportamiento en temas significativos"
+        },
+        "prestador_servicio": {
+            "name": "Capacitación y administración de la organización como prestador de servicio"
+        },
+        "jornadas_intercambio_prestadores": {
+            "name": "Jornadas de Intercambio de experiencia técnica entre prestadores"
         }
     }
 }

@@ -181,38 +181,38 @@
         "aljibe_recogida_de_agua": {
             "name": "Aljibe (Recogida de agua)",
             "validation_properties": {
-                "provision": {
+                "01_provision": {
                     "label": "Provisión",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "instalacion": {
+                "02_instalacion": {
                     "label": "Instalación",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "tipo": {
+                "01_tipo": {
                     "label": "Tipo",
                     "type": "domain",
                     "domain": "cisternType"
                 },
-                "volumen": {
+                "02_volumen": {
                     "label": "Volumen",
                     "type": "decimal",
                     "unit": "m3"
                 },
-                "ubicacion": {
+                "03_ubicacion": {
                     "label": "Ubicación",
                     "type": "domain",
                     "domain": "cisternLocation"
                 },
-                "coordenada_x": {
+                "04_coordenada_x": {
                     "label": "Coordenada X",
                     "type": "integer"
                 },
-                "coordenada_y": {
+                "05_coordenada_y": {
                     "label": "Coordenada Y",
                     "type": "integer"
                 }
@@ -221,38 +221,38 @@
         "tinglado_recogida_de_agua": {
             "name": "Tinglado (Recogida de agua)",
             "validation_properties": {
-                "fundacion": {
+                "01_fundacion": {
                     "label": "Fundación hecha",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "estructura": {
+                "02_estructura": {
                     "label": "Estructura hecha",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "techo": {
+                "03_techo": {
                     "label": "Techo instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "dimensiones": {
+                "01_dimensiones": {
                     "label": "Dimensiones",
                     "type": "text",
                     "unit": "m2"
                 },
-                "longitud_canaletas": {
+                "02_longitud_canaletas": {
                     "label": "Longitud de las canaletas",
                     "type": "decimal",
                     "unit": "m"
                 },
-                "coordenada_x": {
+                "03_coordenada_x": {
                     "label": "Coordenada X",
                     "type": "integer"
                 },
-                "coordenada_y": {
+                "04_coordenada_y": {
                     "label": "Coordenada Y",
                     "type": "integer"
                 }
@@ -261,33 +261,33 @@
         "canaleta_recogida_de_agua": {
             "name": "Canaleta (Recogida de agua)",
             "validation_properties": {
-                "provision": {
+                "01_provision": {
                     "label": "Provisión",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "instalacion": {
+                "02_instalacion": {
                     "label": "Instalación",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "material": {
+                "01_material": {
                     "label": "Material",
                     "type": "text"
                 },
-                "medida": {
+                "02_medida": {
                     "label": "Medida (Desarrollo)",
                     "type": "decimal",
                     "unit": "cm"
                 },
-                "longitud": {
+                "03_longitud": {
                     "label": "Longitud",
                     "type": "decimal",
                     "unit": "m"
                 },
-                "n_bajadas": {
+                "04_n_bajadas": {
                     "label": "Cantidad de bajadas",
                     "type": "integer"
                 }
@@ -296,47 +296,47 @@
         "tajamar_recogida_de_agua": {
             "name": "Tajamar (Recogida de agua)",
             "validation_properties": {
-                "limpieza": {
+                "01_limpieza": {
                     "label": "Limpieza del terreno",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "excavacion": {
+                "02_excavacion": {
                     "label": "Excavación realizada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "taludes": {
+                "03_taludes": {
                     "label": "Taludes realizados",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "geomenbrana": {
+                "04_geomenbrana": {
                     "label": "Colocación de geomembrana",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "dimensiones": {
+                "01_dimensiones": {
                     "label": "Dimensiones (AnchoxLargoxProfundidad)",
                     "type": "text",
                     "unit": "m"
                 },
-                "volumen_almacenaje": {
+                "02_volumen_almacenaje": {
                     "label": "Volumen almacenado",
                     "type": "decimal",
                     "unit": "m3"
                 },
-                "material_fondo": {
+                "03_material_fondo": {
                     "label": "Material del fondo",
                     "type": "text"
                 },
-                "coordenada_x": {
+                "04_coordenada_x": {
                     "label": "Coordenada X",
                     "type": "integer"
                 },
-                "coordenada_y": {
+                "05_coordenada_y": {
                     "label": "Coordenada Y",
                     "type": "integer"
                 }
@@ -345,58 +345,58 @@
         "macrocaptacion_recogida_de_agua": {
             "name": "Macrocaptación (Recogida de agua)",
             "validation_properties": {
-                "limpieza": {
+                "01_limpieza": {
                     "label": "Limpieza del terreno",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "excavacion": {
+                "02_excavacion": {
                     "label": "Excavación realizada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "taludes": {
+                "03_taludes": {
                     "label": "Taludes realizados",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "geomenbrana": {
+                "04_geomenbrana": {
                     "label": "Colocación de geomembrana",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "dimensiones": {
+                "01_dimensiones": {
                     "label": "Dimensiones (AnchoxLargo)",
                     "type": "text",
                     "unit": "m"
                 },
-                "canelones": {
+                "02_canelones": {
                     "label": "Conformación de canelones",
                     "type": "decimal",
                     "unit": "ha"
                 },
-                "dimensiones_canal": {
+                "03_dimensiones_canal": {
                     "label": "Canal (AnchoxLargoxProfundidad)",
                     "type": "text",
                     "unit": "m"
                 },
-                "dimensiones_pulmon": {
+                "04_dimensiones_pulmon": {
                     "label": "Pulmón (AnchoxLargoxProfundidad)",
                     "type": "text",
                     "unit": "m"
                 },
-                "estructura_captacion": {
+                "05_estructura_captacion": {
                     "label": "Estructura captación",
                     "type": "text",
                     "unit": "gl"
                 },
-                "coordenada_x": {
+                "06_coordenada_x": {
                     "label": "Coordenada X",
                     "type": "integer"
                 },
-                "coordenada_y": {
+                "07_coordenada_y": {
                     "label": "Coordenada Y",
                     "type": "integer"
                 }
@@ -405,28 +405,28 @@
         "filtros_ceramicos_trat_de_agua": {
             "name": "Filtros cerámicos (Trat. de agua)",
             "validation_properties": {
-                "provision": {
+                "01_provision": {
                     "label": "Provisión",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "entrega": {
+                "02_entrega": {
                     "label": "Entrega",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "capacidad": {
+                "01_capacidad": {
                     "label": "Capacidad",
                     "type": "decimal",
                     "unit": "litros"
                 },
-                "tipo": {
+                "02_tipo": {
                     "label": "Tipo",
                     "type": "text"
                 },
-                "cantidad": {
+                "03_cantidad": {
                     "label": "Cantidad",
                     "type": "integer"
                 }
@@ -435,88 +435,88 @@
         "planta_tratamiento_trat_de_agua": {
             "name": "Planta tratamiento (Trat. de agua)",
             "validation_properties": {
-                "toma_agua": {
+                "01_toma_agua": {
                     "label": "Toma de agua instalada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "caseta": {
+                "02_caseta": {
                     "label": "Caseta instalada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "tanque": {
+                "03_tanque": {
                     "label": "Tanque instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "sistema_tratamiento": {
+                "04_sistema_tratamiento": {
                     "label": "Sistema de tratamiento instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "toma_agua": {
+                "01_toma_agua": {
                     "label": "Descripción de la toma de agua",
-                    "type": "text"
+                    "type": "text_area"
                 },
-                "tipo_caseta": {
+                "02_tipo_caseta": {
                     "label": "Tipo de caseta",
                     "type": "domain",
                     "domain": "boothType"
                 },
-                "sistema_tratamiento": {
+                "03_sistema_tratamiento": {
                     "label": "Descripción del sistema de tratamiento y tanque",
-                    "type": "text"
+                    "type": "text_area"
                 }
             }
         },
         "tanque_elevado": {
             "name": "Tanque elevado",
             "validation_properties": {
-                "estudio_suelo": {
+                "01_estudio_suelo": {
                     "label": "Estudio del suelo",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "fundacion": {
+                "02_fundacion": {
                     "label": "Cálculo y ejecución de fundación",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "montaje": {
+                "03_montaje": {
                     "label": "Estructura / Montaje",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "instalaciones_hidraulicas": {
+                "04_instalaciones_hidraulicas": {
                     "label": "Instalaciones hidráulicas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "pararayos_otros": {
+                "05_pararayos_otros": {
                     "label": "Pararrayos y sistema de puesta a tierra instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "tipo": {
+                "01_tipo": {
                     "label": "Tipo",
                     "type": "domain",
                     "domain": "tankType"
                 },
-                "capacidad": {
+                "02_capacidad": {
                     "label": "Capacidad",
                     "type": "decimal",
                     "unit": "m3"
                 },
-                "coordenada_x": {
+                "03_coordenada_x": {
                     "label": "Coordenada X",
                     "type": "integer"
                 },
-                "coordenada_y": {
+                "04_coordenada_y": {
                     "label": "Coordenada Y",
                     "type": "integer"
                 }
@@ -525,33 +525,33 @@
         "vivienda_del_cuidador": {
             "name": "Vivienda del cuidador",
             "validation_properties": {
-                "limpieza": {
+                "01_limpieza": {
                     "label": "Limpieza realizada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "replanteo": {
+                "02_replanteo": {
                     "label": "Replanteo realizado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "obras_civiles": {
+                "03_obras_civiles": {
                     "label": "Obras civiles realizadas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "instalaciones": {
+                "04_instalaciones": {
                     "label": "Instalaciones realizadas",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "tipo": {
+                "01_tipo": {
                     "label": "Tipo",
                     "type": "text"
                 },
-                "dimensiones": {
+                "02_dimensiones": {
                     "label": "Dimensiones (AnchoxLargo)",
                     "type": "text"
                 }
@@ -560,35 +560,35 @@
         "red_conexiones_aductora_e_hidrometros": {
             "name": "Red, conexiones, aductora e hidrómetros",
             "validation_properties": {
-                "red_distribucion": {
+                "01_red_distribucion": {
                     "label": "Metros de red de distribución instalada",
                     "type": "integer",
                     "unit": "m"
                 },
-                "conexiones": {
+                "02_conexiones": {
                     "label": "Número de conexiones",
                     "type": "integer"
                 },
-                "n_aductora": {
+                "03_n_aductora": {
                     "label": "Número de aductoras instaladas",
                     "type": "integer"
                 },
-                "n_hidrometro": {
+                "04_n_hidrometro": {
                     "label": "Número de hidrómetros instalados",
                     "type": "integer"
                 }
             },
             "technical_properties": {
-                "tipo_canheria": {
+                "01_tipo_canheria": {
                     "label": "Tipo de cañería",
                     "type": "domain",
                     "domain": "pipeType"
                 },
-                "n_medidores": {
+                "02_n_medidores": {
                     "label": "Cantidad de medidores",
                     "type": "integer"
                 },
-                "longitud_aductora": {
+                "03_longitud_aductora": {
                     "label": "Longitud de aductora",
                     "type": "decimal",
                     "unit": "m"
@@ -598,31 +598,31 @@
         "letrinas": {
             "name": "Letrinas",
             "validation_properties": {
-                "provision": {
+                "01_provision": {
                     "label": "Unidades provistas",
                     "type": "integer"
                 },
-                "instalacion": {
+                "02_instalacion": {
                     "label": "Unidades instaladas",
                     "type": "integer"
                 },
-                "entrega": {
+                "03_entrega": {
                     "label": "Unidades terminadas",
                     "type": "integer"
                 }
             },
             "technical_properties": {
-                "material": {
+                "01_material": {
                     "label": "Material",
                     "type": "domain",
                     "domain": "toiletMaterialType"
                 },
-                "sistema_disposicion": {
+                "02_sistema_disposicion": {
                     "label": "Sistemas de disposición",
                     "type": "domain",
                     "domain": "disposalSystemType"
                 },
-                "cantidad": {
+                "03_cantidad": {
                     "label": "Cantidad",
                     "type": "text"
                 }
@@ -631,39 +631,39 @@
         "extension_de_linea_electrica": {
             "name": "Extensión de línea eléctrica",
             "validation_properties": {
-                "consulta_ande": {
+                "01_consulta_ande": {
                     "label": "Consulta previa a la ANDE",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "extension_linea": {
+                "02_extension_linea": {
                     "label": "Extensión de línea realizada",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "transformador": {
+                "03_transformador": {
                     "label": "Transformador instalado",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "medidor_ande": {
+                "04_medidor_ande": {
                     "label": "Medidor de ANDE",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "longitud": {
+                "01_longitud": {
                     "label": "Longitud",
                     "type": "integer",
                     "unit": "m"
                 },
-                "tipo_energia": {
+                "02_tipo_energia": {
                     "label": "Tipo de energía",
                     "type": "domain",
                     "domain": "energyType"
                 },
-                "potencia_transformador": {
+                "03_potencia_transformador": {
                     "label": "Potencia del transformador",
                     "type": "decimal",
                     "unit": "KVA"
@@ -673,28 +673,28 @@
         "cercado_perimetral": {
             "name": "Cercado perimetral",
             "validation_properties": {
-                "postes": {
+                "01_postes": {
                     "label": "Postes construidos",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "tejidos_alambre": {
+                "02_tejidos_alambre": {
                     "label": "Tejidos de alambre construidos",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 },
-                "portones": {
+                "03_portones": {
                     "label": "Portones construidos",
                     "type": "domain",
                     "domain": "yesNoDomain"
                 }
             },
             "technical_properties": {
-                "predio": {
+                "01_predio": {
                     "label": "Predio al que corresponde",
                     "type": "text"
                 },
-                "dimensiones": {
+                "02_dimensiones": {
                     "label": "Dimensiones (AnchoxLargoxAlto)",
                     "type": "text",
                     "unit": "m"
@@ -706,14 +706,8 @@
         "tendido_red": {
             "name": "Asistencia técnica y capacitación en excavación y tendido de red"
         },
-        "temas_significativos": {
-            "name": "Sensibilización para el cambio de comportamiento en temas significativos"
-        },
         "operacion_mantenimiento": {
             "name": "Capacitación en operación y mantenimiento del sistema de abastecimiento de agua"
-        },
-        "prestador_servicio": {
-            "name": "Capacitación y administración de la organización como prestador de servicio"
         },
         "sistemas_abastecimiento": {
             "name": "Capacitación en administración y gestión de sistemas de abastecimiento de agua"
@@ -729,6 +723,12 @@
         },
         "mejora_calidad_agua": {
             "name": "Servicio de capacitación y provisión de productos para mejorar la calidad del agua de los sistemas de abastecimiento"
+        },
+        "temas_significativos": {
+            "name": "Sensibilización para el cambio de comportamiento en temas significativos"
+        },
+        "prestador_servicio": {
+            "name": "Capacitación y administración de la organización como prestador de servicio"
         },
         "jornadas_intercambio_prestadores": {
             "name": "Jornadas de Intercambio de experiencia técnica entre prestadores"
