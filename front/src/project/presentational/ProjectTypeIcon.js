@@ -29,7 +29,7 @@ const iconBoxStyle = {
     width: 30,
     height: 30,
     borderRadius: "50%",
-    border: `solid 2px ${theme.palette.primary.dark}`,
+    border: `solid 1px ${theme.palette.grey[400]}`,
     bgcolor: "white",
     display: "flex",
     justifyContent: "center",

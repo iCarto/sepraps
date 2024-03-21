@@ -38,11 +38,6 @@ const EntityCard = ({
                         {entity.name || entity.number}
                     </Typography>
                     <Typography variant="body2">{entity.comments}</Typography>
-                    {secondaryContent ? (
-                        <Box mt={1} mb={-0.5}>
-                            {secondaryContent}
-                        </Box>
-                    ) : null}
                 </CardContent>
             )}
             <CardContent sx={{bgcolor: "grey.100"}}>
@@ -69,6 +64,7 @@ const EntityCard = ({
                         );
                     })}
                 </Stack>
+                {secondaryContent ? <Box mt={1}>{secondaryContent}</Box> : null}
             </CardContent>
         </Card>
     );

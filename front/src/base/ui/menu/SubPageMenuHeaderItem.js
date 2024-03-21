@@ -56,7 +56,11 @@ const SubPageMenuHeaderItem = ({
                     </Typography>
                 )}
                 <Typography>{body}</Typography>
-                {tag && <Stack spacing={0.5}>{tag}</Stack>}
+                {tag && (
+                    <Stack spacing={0.5} alignItems="flex-start">
+                        {tag}
+                    </Stack>
+                )}
             </Stack>
         </Stack>
     );

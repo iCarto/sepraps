@@ -1,15 +1,16 @@
 import {theme} from "Theme";
 import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
 
-const GenericChip = ({label, icon = null}) => {
+const GenericChip = ({label, icon = null, avatar = null}) => {
     return (
         <Chip
-            icon={icon}
+            avatar={avatar && <Avatar sx={{fontWeight: "bold"}}>{avatar}</Avatar>}
+            icon={icon ? icon : null}
             label={label}
-            variant="outlined"
             sx={{
-                color: "white",
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: "grey.300",
+                fontSize: "0.75em",
             }}
         />
     );

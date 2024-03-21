@@ -5,7 +5,7 @@ const ContractServiceChips = ({serviceLabels}) => {
     return serviceLabels.length ? (
         <Stack direction="row" spacing={0.5} flexWrap="wrap">
             {serviceLabels.split(",").map((service, index) => (
-                <ContractServiceChip service={service} key={index} />
+                <ContractServiceChip service={service.trim()} key={index} />
             ))}
         </Stack>
     ) : null;
