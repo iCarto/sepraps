@@ -5,6 +5,7 @@ import {
     FormInputDecimal,
     FormInputInteger,
     FormInputText,
+    FormTextArea,
 } from "base/form/components";
 import {DynamicFormSelect} from "../components";
 
@@ -35,6 +36,17 @@ const DynamicFormUtil = {
     },
 
     getFormField(attributeName, attributeSchema) {
+        if (attributeSchema.type === DYNAMIC_TYPES.TEXT_AREA) {
+            return (
+                <FormTextArea
+                    key={attributeName}
+                    name={attributeName}
+                    label={attributeSchema.label}
+                    maxLength={500}
+                    rows={2}
+                />
+            );
+        }
         if (attributeSchema.type === DYNAMIC_TYPES.DATE) {
             return (
                 <FormDatePicker
