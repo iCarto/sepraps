@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import BaseEntityModelSerializer
@@ -69,11 +71,11 @@ class BuildingComponentSerializer(BaseEntityModelSerializer):
 
     def to_representation(self, instance):
         response = super().to_representation(instance)
-        response["technical_properties"] = self.get_properties(
-            instance, "technical_properties"
+        response["technical_properties"] = OrderedDict(
+            sorted(self.get_properties(instance, "technical_properties").items())
         )
-        response["validation_properties"] = self.get_properties(
-            instance, "validation_properties"
+        response["validation_properties"] = OrderedDict(
+            sorted(self.get_properties(instance, "validation_properties").items())
         )
         return response
 
