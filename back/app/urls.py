@@ -90,7 +90,10 @@ urlpatterns = [
     ),
     path("stats/providersgender", stats_views.get_providers_gender_stats),
     path("stats/providerscontacts", stats_views.get_providers_contacts_stats),
-    path("stats/projectandcontract", stats_views.get_project_and_contract_stats),
+    path(
+        "stats/projectscontractsandproviders",
+        stats_views.get_projects_contracts_providers_stats,
+    ),
     path("stats/projectbyphase", stats_views.get_project_by_phase_stats),
     path("stats/projectbyphasemap", stats_views.get_projects_by_phase_map),
     path("paymentstats", payment_stats_views.get_payment_stats),

@@ -29,9 +29,14 @@ class ProviderFilter(filters.FilterSet):
         fields = ("search",)
 
     search = filters.CharFilter(method="filter_by_search_text")
+    last_modified_items = filters.CharFilter(method="filter_by_last_modified_items")
 
     def filter_by_search_text(self, queryset, name, search_text):
         return queryset.filter(name__icontains=search_text)
+
+    def filter_by_last_modified_items(self, queryset, name, last_modified_items):  # noqa: ARG002
+        limit = int(last_modified_items)
+        return queryset.filter(active=True).order_by("-updated_at")[:limit]
 
 
 class ProviderViewSet(ModelListAuditViewSet):

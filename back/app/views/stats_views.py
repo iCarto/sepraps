@@ -163,7 +163,7 @@ def get_providers_contacts_stats(request, format=None):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def get_project_and_contract_stats(request, format=None):
+def get_projects_contracts_providers_stats(request, format=None):
     with connection.cursor() as cursor:
         query = """
             SELECT 'opened_projects' as name, COUNT(DISTINCT p.id) as total
@@ -177,10 +177,15 @@ def get_project_and_contract_stats(request, format=None):
             FROM construction_contract cc
                 LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
                 LEFT JOIN contact ct ON ct.id = ccc.contact_id
-            WHERE cc.closed = FALSE {contract_filter_conditions};
+            WHERE cc.closed = FALSE {contract_filter_conditions}
+            UNION
+            SELECT 'total_providers' as name, COUNT(DISTINCT pr.id) as total
+            FROM provider pr
+            WHERE pr.active = TRUE {provider_filter_conditions};
             """
         project_filter_conditions = []
         contract_filter_conditions = []
+        provider_filter_conditions = []
         if request.user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
             project_filter_conditions.append(
                 "AND (p.creation_user_id = {user_id} OR ct.user_id = {user_id})".format(
@@ -197,6 +202,7 @@ def get_project_and_contract_stats(request, format=None):
             query.format(
                 project_filter_conditions=" ".join(project_filter_conditions),
                 contract_filter_conditions=" ".join(contract_filter_conditions),
+                provider_filter_conditions=" ".join(provider_filter_conditions),
             )
         )
 
