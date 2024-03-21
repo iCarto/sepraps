@@ -4,6 +4,7 @@ export const DYNAMIC_TYPES = {
     DECIMAL: "decimal",
     DATE: "date",
     DOMAIN: "domain",
+    TEXT_AREA: "text_area",
 };
 
 export {default as DynamicFormUtil} from "./DynamicFormUtil";
