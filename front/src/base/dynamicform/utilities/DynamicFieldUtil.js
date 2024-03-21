@@ -2,6 +2,10 @@ import {DateUtil, NumberUtil} from "base/format/utilities";
 import {FieldUtil} from "base/ui/section/utilities";
 import {DYNAMIC_TYPES} from ".";
 
+const isOdd = number => {
+    return number % 2 !== 0;
+};
+
 const DynamicFieldUtil = {
     getSectionField(attributeName, attributeSchema) {
         let value = attributeSchema.value;
@@ -37,6 +41,12 @@ const DynamicFieldUtil = {
                 return a["order"] - b["order"];
             })
             .reduce((r, [k, v]) => ({...r, [k]: v}), {});
+    },
+
+    shouldBeInFirstColumn(attributeName, index) {
+        const indexIsOdd = isOdd(index);
+        if (attributeName.includes("coordenada_x") && indexIsOdd) return true;
+        else return false;
     },
 };
 
