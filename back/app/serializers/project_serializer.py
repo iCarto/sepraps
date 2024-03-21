@@ -256,6 +256,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ProjectSummarySerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
     closed = serializers.BooleanField()
     linked_localities = LocalitySerializer(many=True)
     provider_name = serializers.CharField(source="provider.name", default=None)

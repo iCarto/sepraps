@@ -130,6 +130,21 @@ class Project(models.Model):
 
         return round(total_progress / len(building_monitorings))
 
+    @property
+    def bm_total_expected_amount(self):
+        building_monitorings = self.project_building_monitorings.all()
+
+        if not building_monitorings:
+            return 0
+
+        expected_amounts = [
+            bm.expected_amount
+            for bm in building_monitorings
+            if bm.expected_amount is not None
+        ]
+
+        return sum(expected_amounts)
+
     def create_structure_data(self, data):
         if not self.folder:
             # if there is no folder, the project is new, so default structure for
