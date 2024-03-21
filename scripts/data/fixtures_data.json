@@ -453,7 +453,7 @@
         "model": "domains.domainentry",
         "pk": null,
         "fields": {
-            "category": "nan",
+            "category": "tipo_caseta",
             "key": "tipo_a",
             "value": "Tipo A"
         }
