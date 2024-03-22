@@ -10,7 +10,6 @@ export {
     default as UpdateProjectMainInfrastructurePanel,
 } from "./UpdateProjectMainInfrastructurePanel";
 export {default as UpdateProjectPanel} from "./UpdateProjectPanel";
-export {default as UpdateProjectProviderPanel} from "./UpdateProjectProviderPanel";
 export {
     default as UpdateProjectQuestionnaireInstancePanel,
 } from "./UpdateProjectQuestionnaireInstancePanel";

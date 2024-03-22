@@ -41,6 +41,7 @@ const EntityCard = ({
                 </CardContent>
             )}
             <CardContent sx={{bgcolor: "grey.100"}}>
+                {secondaryContent ? <Box mb={2}>{secondaryContent}</Box> : null}
                 <Stack spacing={1}>
                     {entityFields.map((entityField, index) => {
                         const fieldNote = getFieldNote(entityField, entity);
@@ -64,7 +65,6 @@ const EntityCard = ({
                         );
                     })}
                 </Stack>
-                {secondaryContent ? <Box mt={1}>{secondaryContent}</Box> : null}
             </CardContent>
         </Card>
     );

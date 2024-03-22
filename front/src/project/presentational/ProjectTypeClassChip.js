@@ -1,10 +1,21 @@
-import {ProjectTypeIcon} from ".";
 import {GenericChip} from "base/shared/components";
+
+export const PROJECT_TYPE_ICONS = {
+    agua: "https://cdn-icons-png.flaticon.com/512/292/292962.png",
+    agua_lluvia: "https://cdn-icons-png.flaticon.com/512/3871/3871408.png",
+    alcantarillado: "https://cdn-icons-png.flaticon.com/512/3399/3399239.png",
+    sanitarios: "https://cdn-icons-png.flaticon.com/512/2452/2452227.png",
+    default: "https://cdn-icons-png.flaticon.com/512/57/57108.png",
+};
 
 const ProjectTypeClassChip = ({projectWorkData}) => {
     return (
         <GenericChip
-            icon={<ProjectTypeIcon projectWorkData={projectWorkData} />}
+            iconSrc={
+                PROJECT_TYPE_ICONS[projectWorkData.work_type] ||
+                PROJECT_TYPE_ICONS.default
+            }
+            tooltipText={projectWorkData.work_type_label}
             label={projectWorkData.work_class_label}
         />
     );

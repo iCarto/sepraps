@@ -1,13 +1,12 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {ProjectTypeClassChip} from "project/presentational";
+import {ProjectTypeClassChip, ProjectTypeClassChips} from "project/presentational";
 import {SectionBox} from "base/ui/section/components";
 import {ProgressBarSmall} from "base/progress/components";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import Stack from "@mui/material/Stack";
 
 const ProjectBasicDataFields = ({project}) => {
     const navigate = useNavigate();
@@ -29,16 +28,12 @@ const ProjectBasicDataFields = ({project}) => {
                     ? `el ${DateUtil.formatDate(project?.init_date)}`
                     : "pendiente"}
             </Typography>
-            <Stack direction="row" mb={2} spacing={0.5}>
-                {project?.project_works.map((project_work, index) => (
-                    <ProjectTypeClassChip projectWorkData={project_work} />
-                ))}
-            </Stack>
             {project?.description ? (
                 <Box mb={3}>
                     <Typography variant="body2">{project?.description}</Typography>
                 </Box>
             ) : null}
+            <ProjectTypeClassChips projectWorks={project?.project_works} />
 
             <SectionBox label="Avance">
                 <Tooltip

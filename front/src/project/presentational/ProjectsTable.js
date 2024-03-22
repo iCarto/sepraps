@@ -4,7 +4,7 @@ import {useSort} from "base/table/hooks";
 import {NumberUtil} from "base/format/utilities";
 import {ProgressBarSmall} from "base/progress/components";
 import {TableSortingHead} from "base/table/components";
-import {ProjectTypeIcon} from ".";
+import {ProjectTypeClassChips, ProjectTypeIcon} from ".";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -47,12 +47,12 @@ const headCells = [
     {
         id: "description",
         label: "Descripción",
-        width: 30,
+        width: 25,
     },
     {
         id: "works",
         label: "Tipo y clase",
-        width: 10,
+        width: 15,
     },
     {
         id: "progress",
@@ -115,19 +115,9 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                     {project.description}
                                 </TableCell>
                                 <TableCell sx={project.closed && {color: "grey.500"}}>
-                                    <Stack direction="row" spacing={0.5}>
-                                        {project.project_works.map(
-                                            (project_work, index) => {
-                                                return (
-                                                    <ProjectTypeIcon
-                                                        key={index}
-                                                        projectWorkData={project_work}
-                                                        showProjectClass
-                                                    />
-                                                );
-                                            }
-                                        )}
-                                    </Stack>
+                                    <ProjectTypeClassChips
+                                        projectWorks={project?.project_works}
+                                    />
                                 </TableCell>
                                 <TableCell sx={project.closed && {color: "grey.500"}}>
                                     <Box sx={{py: 0.5}}>

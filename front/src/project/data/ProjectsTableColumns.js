@@ -1,6 +1,10 @@
 import {NumberUtil} from "base/format/utilities";
 import {ProgressBarSmall} from "base/progress/components";
-import {ProjectTypeIcon} from "project/presentational";
+import {
+    ProjectTypeClassChip,
+    ProjectTypeClassChips,
+    ProjectTypeIcon,
+} from "project/presentational";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
@@ -12,7 +16,7 @@ export function useProjectTable() {
         {
             id: "name",
             label: "Localidad",
-            width: 20,
+            width: 15,
         },
         {
             id: "code",
@@ -22,32 +26,20 @@ export function useProjectTable() {
         {
             id: "location",
             label: "Ubicación",
-            width: 20,
-        },
-        {
-            id: "description",
-            label: "Descripción",
-            width: 25,
+            width: 15,
         },
         {
             id: "works",
             label: "Tipo y clase",
             formatFunction: item => {
-                return (
-                    <Stack direction="row" spacing={-0.5}>
-                        {item.project_works.map((project_work, index) => {
-                            return (
-                                <ProjectTypeIcon
-                                    key={index}
-                                    projectWorkData={project_work}
-                                    showProjectClass
-                                />
-                            );
-                        })}
-                    </Stack>
-                );
+                return <ProjectTypeClassChips projectWorks={item?.project_works} />;
             },
-            width: 10,
+            width: 15,
+        },
+        {
+            id: "description",
+            label: "Descripción",
+            width: 30,
         },
         {
             id: "progress",

@@ -4,6 +4,7 @@ import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {ProjectTypeClassChips} from "..";
 
 const ProjectSectionFields = ({project}) => {
     const getDateInfo = date => {
@@ -30,12 +31,7 @@ const ProjectSectionFields = ({project}) => {
 
     return (
         <>
-            <Typography
-                variant="subtitle2"
-                color="grey.700"
-                fontWeight="normal"
-                sx={{mt: 2}}
-            >
+            <Typography variant="subtitle2" color="grey.700" fontWeight="normal">
                 {project?.code}
             </Typography>
 
@@ -45,6 +41,9 @@ const ProjectSectionFields = ({project}) => {
                 </Box>
             ) : null}
 
+            <Box sx={{mt: 2}}>
+                <ProjectTypeClassChips projectWorks={project?.project_works} />
+            </Box>
             <Divider variant="middle" sx={{mx: 0, mt: 3, mb: 4}}>
                 <Chip label="Seguimiento" sx={{fontWeight: "light"}} />
             </Divider>

@@ -5,7 +5,6 @@ export {default as SortProjectsSelect} from "./SortProjectsSelect";
 export {default as ClosedProjectsSwitch} from "./ClosedProjectsSwitch";
 export {default as ClosedProjectTag} from "./ClosedProjectTag";
 export {default as LatestProjectsList} from "./LatestProjectsList";
-export {PROJECT_TYPE_ICONS, default as ProjectTypeIcon} from "./ProjectTypeIcon";
 export {default as ProjectSelectorDialog} from "./ProjectSelectorDialog";
 export {default as ProjectCheckBoxList} from "./ProjectCheckBoxList";
 export {
@@ -13,3 +12,4 @@ export {
 } from "./ProjectsBuildingAnalysisSummaryList";
 export {default as ProjectListItemButton} from "./ProjectListItemButton";
 export {default as ProjectTypeClassChip} from "./ProjectTypeClassChip";
+export {default as ProjectTypeClassChips} from "./ProjectTypeClassChips";

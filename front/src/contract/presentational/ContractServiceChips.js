@@ -1,13 +1,15 @@
+import Grid from "@mui/material/Grid";
 import {ContractServiceChip} from ".";
-import Stack from "@mui/material/Stack";
 
 const ContractServiceChips = ({serviceLabels}) => {
     return serviceLabels.length ? (
-        <Stack direction="row" spacing={0.5} flexWrap="wrap">
+        <Grid container>
             {serviceLabels.split(",").map((service, index) => (
-                <ContractServiceChip service={service.trim()} key={index} />
+                <Grid key={index} item sx={{pr: 1, pb: 1}}>
+                    <ContractServiceChip service={service.trim()} />
+                </Grid>
             ))}
-        </Stack>
+        </Grid>
     ) : null;
 };
 

@@ -1,12 +1,22 @@
 import {theme} from "Theme";
 import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
 
-const GenericChip = ({label, icon = null, avatar = null}) => {
+const GenericChip = ({label, iconSrc = null, avatarText = null, tooltipText = ""}) => {
     return (
         <Chip
-            avatar={avatar && <Avatar sx={{fontWeight: "bold"}}>{avatar}</Avatar>}
-            icon={icon ? icon : null}
+            avatar={
+                iconSrc ? (
+                    <Tooltip title={tooltipText}>
+                        <Avatar sx={{backgroundColor: "white", p: 0.4}} src={iconSrc} />
+                    </Tooltip>
+                ) : (
+                    <Tooltip title={tooltipText}>
+                        <Avatar sx={{fontWeight: "bold"}}>{avatarText || "-"}</Avatar>
+                    </Tooltip>
+                )
+            }
             label={label}
             sx={{
                 backgroundColor: "grey.300",
