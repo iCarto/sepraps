@@ -25,6 +25,11 @@ const FormSelectMultiple = ({
         rules,
     });
 
+    const inputLabel = rules && rules["required"] ? `${label} * ` : label;
+
+    // TO-DO: Find a better way to do this: now we are adding a string ("extra") to increase the space that the hidden label is taking so that there is enough space for the info icon.
+    const hiddenLabel = tooltipText ? label + "extra" : inputLabel;
+
     const getOptionLabels = optionValues => {
         if (optionValues) {
             return optionValues
@@ -42,12 +47,9 @@ const FormSelectMultiple = ({
         return "";
     };
 
-    // TO-DO: Find a better way to do this: now we are adding a string ("extra") to increase the space that the hidden label is taking so that there is enough space for the info icon.
-    const hiddenLabel = tooltipText ? label + "extra" : label;
-
     return (
         <FormControl fullWidth error={Boolean(error)}>
-            <FormInputLabel name={name} label={label} tooltipText={tooltipText} />
+            <FormInputLabel name={name} label={inputLabel} tooltipText={tooltipText} />
             <Select
                 labelId={`${name}-label`}
                 name={name}

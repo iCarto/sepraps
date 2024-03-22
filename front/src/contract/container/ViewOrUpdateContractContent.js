@@ -25,6 +25,7 @@ import {
     ContractInsuranceFormFields,
     ContractPostConstructionFormFields,
 } from "contract/presentational/form";
+import {FormContainer} from "base/form/components";
 
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -102,16 +103,18 @@ const ViewOrUpdateContractContent = ({contract, section, label, services = null}
         }
         if (mode === "edit") {
             return (
-                <ContractForm
-                    contract={contract}
-                    onSubmit={handleFormSubmit}
-                    onCancel={() => {
-                        setMode("view");
-                    }}
-                    error={error}
-                >
-                    {getFormComponent(section)}
-                </ContractForm>
+                <FormContainer>
+                    <ContractForm
+                        contract={contract}
+                        onSubmit={handleFormSubmit}
+                        onCancel={() => {
+                            setMode("view");
+                        }}
+                        error={error}
+                    >
+                        {getFormComponent(section)}
+                    </ContractForm>
+                </FormContainer>
             );
         }
     };
