@@ -114,7 +114,7 @@ const ViewOrUpdateCommentDataContent = ({comment}) => {
                     <TypographyStyled>el usuario</TypographyStyled>
                     <TypographyStyled
                         sx={{fontWeight: "bold"}}
-                    >{` ${comment.created_by} `}</TypographyStyled>
+                    >{` ${comment.created_by_label} `}</TypographyStyled>
                     <TypographyStyled>comentó:</TypographyStyled>
                 </Box>
             </Stack>

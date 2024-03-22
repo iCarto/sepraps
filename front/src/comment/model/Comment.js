@@ -6,6 +6,7 @@ const comment_api_adapter = comment => {
 
 const comment_view_adapter = comment => {
     delete comment["created_by"];
+    delete comment["created_by_label"];
     delete comment["created_at"];
     delete comment["updated_at"];
     delete comment["updated_by"];
@@ -26,6 +27,7 @@ const createComment = ({
     id = null,
     text = "",
     created_by = "",
+    created_by_label = "",
     created_at = null,
     updated_at = null,
     updated_by = "",
@@ -34,6 +36,7 @@ const createComment = ({
         id,
         text,
         created_by,
+        created_by_label,
         created_at,
         updated_at,
         updated_by,
