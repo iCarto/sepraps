@@ -11,12 +11,15 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import {MapForm} from "base/geo";
 import OldMapForm from "base/map/components/OldMapForm";
 
 /// TO-DO: Adapt based on GADPO
 
-const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
+const FormMapCoordinates = ({
+    name: propsName,
+    orientation = "column",
+    required = false,
+}) => {
     const {getValues, reset} = useFormContext();
 
     const [utmCoords, setUtmCoords] = useState({x: "", y: "", zone: 21});
@@ -105,6 +108,7 @@ const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
                             onBlur={() => handleFormChangeLocation(utmCoords)}
                             label="Coordenada X"
                             InputLabelProps={{shrink: true}}
+                            required={required}
                         />
                     </FormControl>
                 </Grid>
@@ -124,6 +128,7 @@ const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
                             onBlur={() => handleFormChangeLocation(utmCoords)}
                             label="Coordenada Y"
                             InputLabelProps={{shrink: true}}
+                            required={required}
                         />
                     </FormControl>
                 </Grid>
@@ -141,6 +146,7 @@ const FormMapCoordinates = ({name: propsName, orientation = "column"}) => {
                                 handleFormChangeZone(utmCoords, event.target.value);
                             }}
                             input={<OutlinedInput notched label="Zona UTM" />}
+                            required={required}
                         >
                             <MenuItem value={21}>Centro y Este (Zona-21)</MenuItem>
                             <MenuItem value={20}>Oeste (Zona-20)</MenuItem>

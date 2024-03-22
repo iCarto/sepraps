@@ -6,7 +6,6 @@ import {DomainProvider} from "sepraps/domain/provider";
 import {EntityForm} from "base/entity/components/form";
 import {FormUtil} from "base/form/utilities";
 import {AlertError} from "base/error/components";
-import {FormContainer} from "base/form/components";
 
 const ContractForm = ({
     contract = null,
@@ -117,14 +116,12 @@ const ContractForm = ({
         <DomainProvider>
             <FormProvider {...formMethods}>
                 <AlertError error={error} />
-                <FormContainer>
-                    <EntityForm
-                        onSubmit={formMethods.handleSubmit(handleFormSubmit)}
-                        onCancel={onCancel}
-                    >
-                        {children}
-                    </EntityForm>
-                </FormContainer>
+                <EntityForm
+                    onSubmit={formMethods.handleSubmit(handleFormSubmit)}
+                    onCancel={onCancel}
+                >
+                    {children}
+                </EntityForm>
             </FormProvider>
         </DomainProvider>
     );

@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 
 const FormSection = ({title = "", ...props}) => {
     return (
-        <PaperContainer mt={2}>
+        <PaperContainer>
             <Grid item xs={12} mb={2}>
                 <Typography variant="h6" color="text.secondary">
                     {title}
