@@ -220,7 +220,11 @@ const projectRoutes = [
                 </MapConfigProvider>
             }
         >
-            <Route key="project-info" path="info/:id" element={<ViewProjectPanel />} />
+            <Route
+                key="project-info"
+                path="info/:idInfoPanel"
+                element={<ViewProjectPanel />}
+            />
         </Route>
     </Route>,
     <Route key="project-stats" path="stats" element={<ViewProjectStatsPage />}>

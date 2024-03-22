@@ -3,11 +3,11 @@ import {ProjectService} from "project/service";
 
 import {EntitySummaryPanel} from "base/entity/components/presentational";
 import {ProjectSectionFields} from "project/presentational/section";
-import {ClosedProjectTag, ProjectTypeClassChip} from "project/presentational";
+import {ClosedProjectTag} from "project/presentational";
 import Stack from "@mui/material/Stack";
 
 const ViewProjectPanel = () => {
-    const {id} = useParams();
+    const {idInfoPanel} = useParams();
     const navigate = useNavigate();
 
     const getCardSubheader = project => {
@@ -27,33 +27,17 @@ const ViewProjectPanel = () => {
     };
 
     const getSectionData = project => {
-        return (
-            <>
-                <Stack
-                    direction="row"
-                    mt={project.featured_image ? -2 : 0}
-                    sx={{flexWrap: "wrap", gap: 0.5}}
-                >
-                    {project?.project_works.map((project_work, index) => (
-                        <ProjectTypeClassChip
-                            key={index}
-                            projectWorkData={project_work}
-                        />
-                    ))}
-                </Stack>
-                <ProjectSectionFields project={project} />
-            </>
-        );
+        return <ProjectSectionFields project={project} />;
     };
 
     const handleClickDetail = () => {
-        navigate(`/projects/list/${id}`);
+        navigate(`/projects/list/${idInfoPanel}`);
     };
 
     return (
         <EntitySummaryPanel
             service={ProjectService}
-            id={id}
+            id={idInfoPanel}
             title="Resumen del proyecto"
             getSectionTitle={project => project.name}
             getSectionSubheader={getCardSubheader}

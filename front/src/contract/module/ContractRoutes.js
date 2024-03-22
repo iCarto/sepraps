@@ -6,7 +6,6 @@ import {
     ViewContractSummarySubPage,
     ViewContractProjectsSubPage,
     CreateContractPage,
-    ViewContractProjectPanel,
     ManageContractsPage,
     ViewContractPanel,
     ViewContractBudgetSubPage,
@@ -40,6 +39,7 @@ import {
     ViewPaymentContractOverview,
 } from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
+import {ViewProjectPanel} from "project/container";
 
 const contractRoutes = [
     <Route key="contract-new" path="new" element={<CreateContractPage />} />,
@@ -99,8 +99,8 @@ const contractRoutes = [
             >
                 <Route
                     key="contract-project-view"
-                    path="project/:idInfoPanel"
-                    element={<ViewContractProjectPanel />}
+                    path="info/:idInfoPanel"
+                    element={<ViewProjectPanel />}
                 />
             </Route>
             <Route

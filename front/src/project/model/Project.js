@@ -77,14 +77,9 @@ const project_view_adapter = project => {
     // in front-end falsy values are "" or undefined or null
     // we must destructure object before its adaptation because
     // nested objects are still inmutable inside project object
-    if (!!project["provider"]) {
-        project["provider"] = provider_view_adapter({...project["provider"]});
-        // provider project and contacts fields are not necessary when processing a project
-        delete project["provider"]["project"];
-        delete project["provider"]["contacts"];
-    } else {
-        project["provider"] = null;
-    }
+
+    project["provider"] = !!project["provider"] ? project["provider"].id : null;
+
     project["main_infrastructure"] = !!project["main_infrastructure"]
         ? infrastructure_view_adapter({...project["main_infrastructure"]})
         : null;

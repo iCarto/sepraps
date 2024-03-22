@@ -17,7 +17,7 @@ from app.serializers.infrastructure_serializer import InfrastructureSerializer
 from app.serializers.locality_serializer import LocalitySerializer
 from app.serializers.milestone_serializer import MilestoneSummarySerializer
 from app.serializers.project_work_serializer import ProjectWorkSerializer
-from app.serializers.provider_serializer import ProviderSerializer
+from app.serializers.provider_serializer import ProviderSummarySerializer
 from app.util import format_decimal
 from documents.serializers import MediaUrlSerializer
 
@@ -54,7 +54,9 @@ class ProjectSerializer(serializers.ModelSerializer):
     main_infrastructure = InfrastructureSerializer()
     linked_localities = LocalitySerializer(many=True)
     project_works = ProjectWorkSerializer(many=True)
-    provider = ProviderSerializer(required=False, allow_null=True)
+    provider = serializers.PrimaryKeyRelatedField(
+        required=False, allow_null=True, queryset=Provider.objects.all()
+    )
     construction_contract = ConstructionContractSummarySerializer(read_only=True)
     milestones = serializers.SerializerMethodField(required=False, read_only=True)
     creation_user = serializers.CharField(
@@ -85,13 +87,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             "project_works",
             "linked_localities",
             Prefetch(
-                "provider__contacts"
-                # TODO this is not working: multiple queries are executed
-                # https://stackoverflow.com/questions/35093204/django-prefetch-related-with-m2m-through-relationship
-                # queryset=ProviderContact.objects.prefetch_related("contact"),
-                # To make this working we need a "provider" attribute in ProviderContact and not "entity"
-            ),
-            Prefetch(
                 "milestones",
                 queryset=Milestone.objects.exclude(parent__isnull=False).order_by(
                     "ordering"
@@ -110,6 +105,13 @@ class ProjectSerializer(serializers.ModelSerializer):
                 if instance.featured_image is not None
                 else None
             )
+        if "provider" in response:
+            response["provider"] = (
+                ProviderSummarySerializer(instance.provider, context=self.context).data
+                if instance.provider is not None
+                else None
+            )
+
         return response
 
     # ATTRIBUTES
@@ -147,20 +149,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         main_infrastructure_data = validated_data.pop("main_infrastructure")
         infrastructure = Infrastructure.objects.create(**main_infrastructure_data)
 
-        provider_data = validated_data.pop("provider", None)
-        provider = None
-        if provider_data:
-            if provider_data.get("id"):
-                provider = Provider.objects.get(pk=provider_data["id"])
-                self.fields["provider"].update(provider, provider_data)
-            else:
-                provider = self.fields["provider"].create(provider_data)
-
         project_works_data = validated_data.pop("project_works")
         linked_localities_data = validated_data.pop("linked_localities")
 
         project = Project.objects.create(
-            main_infrastructure=infrastructure, provider=provider, **validated_data
+            main_infrastructure=infrastructure, **validated_data
         )
 
         project.linked_localities.set(
@@ -190,23 +183,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
             main_infrastructure.save()
             instance.main_infrastructure = main_infrastructure
-
-    def update_provider(self, instance, validated_data):
-        # Two different ways
-        # - provider field doesn't exists in validated_data -> is a partial update
-        # - provider = null -> remove provider from project
-        if "provider" in validated_data:
-            provider_data = validated_data.pop("provider", None)
-
-            provider = None
-            if provider_data:
-                if "id" in provider_data and provider_data["id"] is not None:
-                    provider = Provider.objects.get(pk=provider_data["id"])
-                    self.fields["provider"].update(provider, provider_data)
-                else:
-                    provider = self.fields["provider"].create(provider_data)
-
-            instance.provider = provider
 
     def update_linked_localities(self, instance, validated_data):
         instance.linked_localities.set(
@@ -264,7 +240,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         self.update_main_infrastructure(instance, validated_data)
-        self.update_provider(instance, validated_data)
         self.update_linked_localities(instance, validated_data)
         self.update_project_works(instance, validated_data)
         self.update_featured_image(instance, validated_data)
@@ -289,8 +264,6 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             "init_date",
             "featured_image",
             "linked_localities",
-            "provider",
-            "provider_name",
             "construction_contract_number",
             "construction_contract_bid_request_number",
             "financing_program",
@@ -307,7 +280,6 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     closed = serializers.BooleanField()
     linked_localities = LocalitySerializer(many=True)
-    provider_name = serializers.CharField(source="provider.name", default=None)
     construction_contract_number = serializers.CharField(
         source="construction_contract.number", default=None
     )
@@ -359,7 +331,7 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
     def setup_eager_loading(self):
         """Perform necessary eager loading of data."""
         return self.select_related(
-            "main_infrastructure", "provider", "featured_image", "progress"
+            "main_infrastructure", "featured_image", "progress"
         ).prefetch_related(
             "linked_localities",
             "project_works",

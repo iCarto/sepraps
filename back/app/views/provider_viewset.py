@@ -9,6 +9,7 @@ from app.base.views.filters import MappedOrderingFilter
 from app.models.contact_relationship import ProviderContact
 from app.models.provider import Provider
 from app.serializers.contact_relationship_serializer import ProviderContactSerializer
+from app.serializers.project_serializer import ProjectSummarySerializer
 from app.serializers.provider_serializer import (
     ProviderSerializer,
     ProviderSummarySerializer,
@@ -69,3 +70,14 @@ class ProviderViewSet(ModelListAuditViewSet):
             queryset = ProviderContact.objects.filter(entity=pk).order_by("id")
             return Response(ProviderContactSerializer(queryset, many=True).data)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        methods=["GET"], detail=True, url_path="projects", url_name="provider_projects"
+    )
+    def get_provider_projects(self, request, pk):
+        provider = self.get_object()
+        return Response(
+            ProjectSummarySerializer(
+                provider.projects, many=True, context={"request": request}
+            ).data
+        )

@@ -30,12 +30,12 @@ const ListContractProjects = ({contract, contractProjects}) => {
     const {ROLES} = useAuth();
 
     const handleClickOnCard = projectId => {
-        navigate(`project/${projectId}`);
+        navigate(`info/${projectId}`);
     };
 
     const handleSelectProject = project => {
         setSelectedElement(project);
-        navigate(`project/${project.id}`);
+        navigate(`info/${project.id}`);
     };
 
     const getViewComponent = () => {

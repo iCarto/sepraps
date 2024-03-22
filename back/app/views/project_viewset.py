@@ -33,6 +33,9 @@ from app.serializers.certification_serializer import (
     CertificationSummarySerializer,
 )
 from app.serializers.connection_serializer import ConnectionSerializer
+from app.serializers.contact_relationship_serializer import (
+    ContactRelationshipSerializer,
+)
 from app.serializers.milestone_serializer import MilestoneSerializer
 from app.serializers.project_questionnaire_instance_serializer import (
     ProjectQuestionnaireInstanceSerializer,
@@ -48,6 +51,7 @@ from app.serializers.social_component_monitoring_serializer import (
     SocialComponentMonitoringSummarySerializer,
 )
 from app.util import is_geojson_request
+from domains.models import DomainEntry
 from questionnaires.models.questionnaire import Questionnaire
 
 

@@ -16,4 +16,3 @@ export {default as SelectProviderDropDown} from "./SelectProviderDropDown";
 export {default as ViewProviderContactPanel} from "./ViewProviderContactPanel";
 export {default as ViewProviderProjectsSubPage} from "./ViewProviderProjectsSubPage";
 export {default as ListProviderProjects} from "./ListProviderProjects";
-export {default as ViewProviderProjectPanel} from "./ViewProviderProjectPanel";

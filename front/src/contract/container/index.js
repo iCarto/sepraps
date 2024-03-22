@@ -3,7 +3,6 @@ export {default as ViewContractPage} from "./ViewContractPage";
 export {default as ViewContractProjectsSubPage} from "./ViewContractProjectsSubPage";
 export {default as CreateContractPage} from "./CreateContractPage";
 export {default as AddProjectContractPanel} from "./AddProjectContractPanel";
-export {default as ViewContractProjectPanel} from "./ViewContractProjectPanel";
 export {default as AddContractProjectPanel} from "./AddContractProjectPanel";
 export {default as ManageContractsPage} from "./ManageContractsPage";
 export {default as ViewContractPanel} from "./ViewContractPanel";

@@ -19,12 +19,12 @@ const ListProviderProjects = ({providerProjects}) => {
     const {view} = useList();
 
     const handleClickOnCard = projectId => {
-        navigate(`project/${projectId}`);
+        navigate(`info/${projectId}`);
     };
 
     const handleSelectProject = project => {
         setSelectedElement(project);
-        navigate(`project/${project.id}`);
+        navigate(`info/${project.id}`);
     };
 
     const getViewComponent = () => {
