@@ -1,15 +1,16 @@
 import {FormProvider, useForm} from "react-hook-form";
 
-import {ProviderCreationForm, ProviderModificationForm} from ".";
 import {FormUtil} from "base/form/utilities";
 import {EntityForm} from "base/entity/components/form";
 import {DomainProvider} from "sepraps/domain/provider";
+import {AlertError} from "base/error/components";
 
 const ProviderForm = ({
     provider = null,
     onSubmit,
     onCancel = null,
-    updatedSection = null,
+    error = null,
+    children,
 }) => {
     const defaultFormValues = {
         id: FormUtil.getFormValue(provider?.id),
@@ -34,7 +35,7 @@ const ProviderForm = ({
         reValidateMode: "onSubmit",
     });
 
-    const onFormSubmit = data => {
+    const handleFormSubmit = data => {
         onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
@@ -55,23 +56,16 @@ const ProviderForm = ({
         });
     };
 
-    const onFormCancel = () => {
-        onCancel();
-    };
-
     return (
         <DomainProvider>
             <FormProvider {...formMethods}>
-                {updatedSection ? (
-                    <EntityForm onSubmit={formMethods.handleSubmit(onFormSubmit)}>
-                        <ProviderModificationForm section={updatedSection} />
-                    </EntityForm>
-                ) : (
-                    <ProviderCreationForm
-                        onSubmit={formMethods.handleSubmit(onFormSubmit)}
-                        onCancel={onCancel ? onFormCancel : null}
-                    />
-                )}
+                <AlertError error={error} />
+                <EntityForm
+                    onSubmit={formMethods.handleSubmit(handleFormSubmit)}
+                    onCancel={onCancel}
+                >
+                    {children}
+                </EntityForm>
             </FormProvider>
         </DomainProvider>
     );

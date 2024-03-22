@@ -4,7 +4,6 @@ import {
     ListProvidersPage,
     ManageProvidersPage,
     UpdateProviderContactPanel,
-    UpdateProviderPanel,
     ViewProviderContactsSubPage,
     ViewProviderPage,
     ViewProviderPanel,
@@ -25,13 +24,7 @@ const providerRoutes = [
                 key="provider-summary"
                 path="summary"
                 element={<ViewProviderSummarySubPage />}
-            >
-                <Route
-                    key="provider-summary-update"
-                    path=":section/:action"
-                    element={<UpdateProviderPanel />}
-                />
-            </Route>
+            ></Route>
             <Route
                 key="provider-contacts"
                 path="contacts"

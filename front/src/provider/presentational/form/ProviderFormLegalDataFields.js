@@ -24,56 +24,54 @@ const ProviderFormLegalDataFields = ({orientation = "column"}) => {
         type === "comision_de_agua" || type === "comision_de_saneamiento";
 
     return (
-        <>
-            <Grid container columnSpacing={1} alignItems="center">
-                <Grid item xs={orientation === "column" ? 12 : 6}>
-                    <FormSelect
-                        name="type"
-                        label="Tipo"
-                        options={providerTypes}
-                        rules={{required: "Este campo es obligatorio."}}
-                    />
-                </Grid>
-                <Grid item xs={orientation === "column" ? 12 : 6}>
-                    <FormCheckbox
-                        name="is_provider_contract_signed"
-                        label="Contrato permisionario firmado"
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <FormCheckbox
-                        name="is_legalized"
-                        label="Legalmente constituida"
-                        defaultChecked={isJuntaDeSaneamiento ? true : false}
-                        disabled={isJuntaDeSaneamiento ? true : false}
-                    />
-                </Grid>
-                {isLegalized || isJuntaDeSaneamiento ? (
-                    <Grid item xs={orientation === "column" ? 12 : 6}>
-                        <FormDatePicker
-                            name="legalization_date"
-                            label="Fecha de legalización"
-                        />
-                    </Grid>
-                ) : null}
-                {isJuntaDeSaneamiento ? (
-                    <Grid item xs={orientation === "column" ? 12 : 6}>
-                        <FormInputText
-                            name="legal_status_number"
-                            label="Nº de personería jurídica"
-                        />
-                    </Grid>
-                ) : null}
-                {isLegalized && isComisionDeAguaOSaneamiento ? (
-                    <Grid item xs={orientation === "column" ? 12 : 6}>
-                        <FormInputText
-                            name="local_resolution_number"
-                            label="Nº de resolución municipal"
-                        />
-                    </Grid>
-                ) : null}
+        <Grid container columnSpacing={1} alignItems="center">
+            <Grid item xs={orientation === "column" ? 12 : 6}>
+                <FormSelect
+                    name="type"
+                    label="Tipo"
+                    options={providerTypes}
+                    rules={{required: "Este campo es obligatorio."}}
+                />
             </Grid>
-        </>
+            <Grid item xs={orientation === "column" ? 12 : 6} ml={1}>
+                <FormCheckbox
+                    name="is_provider_contract_signed"
+                    label="Contrato permisionario firmado"
+                />
+            </Grid>
+            <Grid item xs={12} ml={1}>
+                <FormCheckbox
+                    name="is_legalized"
+                    label="Legalmente constituida"
+                    defaultChecked={isJuntaDeSaneamiento ? true : false}
+                    disabled={isJuntaDeSaneamiento ? true : false}
+                />
+            </Grid>
+            {isLegalized || isJuntaDeSaneamiento ? (
+                <Grid item xs={orientation === "column" ? 12 : 6}>
+                    <FormDatePicker
+                        name="legalization_date"
+                        label="Fecha de legalización"
+                    />
+                </Grid>
+            ) : null}
+            {isJuntaDeSaneamiento ? (
+                <Grid item xs={orientation === "column" ? 12 : 6}>
+                    <FormInputText
+                        name="legal_status_number"
+                        label="Nº de personería jurídica"
+                    />
+                </Grid>
+            ) : null}
+            {isLegalized && isComisionDeAguaOSaneamiento ? (
+                <Grid item xs={orientation === "column" ? 12 : 6}>
+                    <FormInputText
+                        name="local_resolution_number"
+                        label="Nº de resolución municipal"
+                    />
+                </Grid>
+            ) : null}
+        </Grid>
     );
 };
 

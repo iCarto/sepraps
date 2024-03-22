@@ -5,7 +5,13 @@ import {ProviderService} from "provider/service";
 import {provider_view_adapter} from "provider/model";
 
 import {EntityCreatePage} from "base/entity/components/container";
-import {ProviderForm} from "provider/presentational/form";
+import {
+    ProviderForm,
+    ProviderFormGeneralDataFields,
+    ProviderFormLegalDataFields,
+} from "provider/presentational/form";
+import {FormSection} from "base/form/components";
+import Stack from "@mui/material/Stack";
 
 const CreateProviderPage = () => {
     const navigate = useNavigate();
@@ -33,7 +39,16 @@ const CreateProviderPage = () => {
         <EntityCreatePage
             title="Registro de prestador"
             form={
-                <ProviderForm onSubmit={handleFormSubmit} onCancel={handleFormCancel} />
+                <ProviderForm onSubmit={handleFormSubmit} onCancel={handleFormCancel}>
+                    <Stack spacing={1}>
+                        <FormSection title="Información general">
+                            <ProviderFormGeneralDataFields />
+                        </FormSection>
+                        <FormSection title="Datos legales">
+                            <ProviderFormLegalDataFields />
+                        </FormSection>
+                    </Stack>
+                </ProviderForm>
             }
             error={error}
         />
