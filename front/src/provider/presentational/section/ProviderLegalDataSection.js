@@ -1,60 +1,43 @@
-import {useNavigate} from "react-router-dom";
-import {useAuth} from "base/user/provider";
 import {DateUtil} from "base/format/utilities";
-import {
-    SectionCard,
-    SectionCardHeaderAction,
-    SectionField,
-} from "base/ui/section/components";
-import EditIcon from "@mui/icons-material/Edit";
+import {SectionField} from "base/ui/section/components";
+import Grid from "@mui/material/Grid";
 
 const ProviderLegalDataSection = ({provider}) => {
-    const navigate = useNavigate();
-    const {ROLES} = useAuth();
-
-    const secondaryActions = [
-        <SectionCardHeaderAction
-            key="edit"
-            name="edit"
-            text="Modificar"
-            icon={<EditIcon />}
-            onClick={() => {
-                navigate("legaldata/edit");
-            }}
-            roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}
-        />,
-    ];
-
     return (
-        <SectionCard title="Datos legales" secondaryActions={secondaryActions}>
-            <SectionField label="Tipo de prestador" value={provider.type_label} />
-            <SectionField
-                label="Legalmente constituida"
-                value={provider.is_legalized_label}
-            />
-            {provider.is_legalized ? (
+        <Grid container spacing={2}>
+            <Grid item xs={6}>
+                <SectionField label="Tipo de prestador" value={provider.type_label} />
                 <SectionField
-                    label="Fecha de legalización"
-                    value={DateUtil.formatDate(provider.legalization_date)}
+                    label="Legalmente constituida"
+                    value={provider.is_legalized_label}
                 />
-            ) : null}
-            <SectionField
-                label="Contrato permisionario firmado"
-                value={provider.is_provider_contract_signed_label}
-            />
-            {provider.type === "junta_de_saneamiento" ? (
                 <SectionField
-                    label="Nº de personería jurídica"
-                    value={provider.legal_status_number}
+                    label="Contrato permisionario firmado"
+                    value={provider.is_provider_contract_signed_label}
                 />
-            ) : null}
-            {provider.is_legalized && provider.type !== "junta_de_saneamiento" ? (
-                <SectionField
-                    label="Nº de resolución municipal"
-                    value={provider.local_resolution_number}
-                />
-            ) : null}
-        </SectionCard>
+            </Grid>
+            <Grid item xs={6}>
+                <div style={{width: "100%", height: "50px"}} />
+                {provider.type === "junta_de_saneamiento" ? (
+                    <SectionField
+                        label="Nº de personería jurídica"
+                        value={provider.legal_status_number}
+                    />
+                ) : null}
+                {provider.is_legalized && provider.type !== "junta_de_saneamiento" ? (
+                    <SectionField
+                        label="Nº de resolución municipal"
+                        value={provider.local_resolution_number}
+                    />
+                ) : null}
+                {provider.is_legalized ? (
+                    <SectionField
+                        label="Fecha de legalización"
+                        value={DateUtil.formatDate(provider.legalization_date)}
+                    />
+                ) : null}
+            </Grid>
+        </Grid>
     );
 };
 
