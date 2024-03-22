@@ -33,7 +33,6 @@ export {default as ViewProjectLocationSubPage} from "./ViewProjectLocationSubPag
 export {default as ViewProjectMilestonesSubPage} from "./ViewProjectMilestonesSubPage";
 export {default as ViewProjectPage} from "./ViewProjectPage";
 export {default as ViewProjectPanel} from "./ViewProjectPanel";
-export {default as ViewProjectProviderSubPage} from "./ViewProjectProviderSubPage";
 export {
     default as ViewProjectQuestionnairesSubPage,
 } from "./ViewProjectQuestionnairesSubPage";

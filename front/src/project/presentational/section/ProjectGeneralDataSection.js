@@ -4,6 +4,9 @@ import {ImagePreview} from "base/image/components";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import Stack from "@mui/material/Stack";
+
 const closedProjectTagStyle = {
     position: "absolute",
     top: 0,
@@ -36,16 +39,29 @@ const ProjectGeneralDataSection = ({project, basicDataComponent}) => {
                         <ClosedProjectTag tagCustomStyle={closedProjectTagStyle} />
                     )}
                 </div>
+                <Stack
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={1}
+                    sx={{mt: 1}}
+                >
+                    <LocationOnOutlinedIcon fontSize="small" sx={{color: "grey.500"}} />
+                    <Typography variant="body2" fontWeight="normal" color="grey.500">
+                        {project?.location}
+                    </Typography>
+                </Stack>
             </Grid>
 
             <Grid item sm={9} md={8}>
-                <Typography variant="h4" color="grey.800" sx={{fontWeight: 500}} mb={1}>
+                <Typography variant="h4" sx={{fontWeight: 500}} mb={1}>
                     {project?.name}
                 </Typography>
-                <Typography variant="h6" color="grey.800" fontWeight="normal">
-                    {project?.location}
-                </Typography>
-
+                <Stack direction="row" alignItems="center" spacing={2} sx={{mb: 2}}>
+                    <Typography variant="h5" fontWeight="normal">
+                        {project?.code}
+                    </Typography>
+                </Stack>
                 {basicDataComponent}
             </Grid>
         </Grid>

@@ -11,7 +11,6 @@ import {
     ViewProjectContactsSubPage,
     ViewProjectDocumentsSubPage,
     ViewProjectPanel,
-    ViewProjectProviderSubPage,
     ViewProjectFieldReportSubPage,
     ViewProjectDocumentPanel,
     ViewProjectStatsPage,
@@ -57,16 +56,6 @@ const projectRoutes = [
                 key="project-location"
                 path=":section"
                 element={<ViewProjectLocationSubPage />}
-            ></Route>
-            <Route
-                key="project-provider"
-                path="provider"
-                element={<ViewProjectProviderSubPage />}
-            ></Route>
-            <Route
-                key="project-financing"
-                path="financing"
-                element={<ViewProjectContractsSubPage />}
             ></Route>
             <Route
                 key="project-milestones"

@@ -23,16 +23,10 @@ const ViewContractSummarySubPage = () => {
             section="generaldata"
             label="Información"
         />,
+        <NotificationsSection notifications={notifications} hideIfEmpty={true} />,
         <ContractRelatedContractsSection contracts={relatedContracts} />,
         <EntityAuditSection entity={contract} />,
     ];
-
-    if (notifications.length) {
-        sections = [
-            <NotificationsSection notifications={notifications} />,
-            ...sections,
-        ];
-    }
 
     return contract && <EntityViewSubPage sections={sections} />;
 };

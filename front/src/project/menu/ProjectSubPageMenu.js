@@ -16,13 +16,15 @@ import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFi
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 
+import ChromeReaderModeOutlinedIcon from "@mui/icons-material/ChromeReaderModeOutlined";
+
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/list/${project?.id}`;
 
     const buildingSupervisionAreaSubmenuItems = [
         {
             to: `${basePath}/buildingcomponents/overview`,
-            text: "Supervisión",
+            text: "Construcción",
             urlSlug: "buildingcomponents",
         },
         {
@@ -40,6 +42,24 @@ const ProjectSubPageMenu = ({project}) => {
         },
     ];
 
+    const generalAreaSubmenuItems = [
+        {
+            to: `${basePath}/fieldreport`,
+            text: "Informes de viaje",
+            urlSlug: "fieldreport",
+        },
+        {
+            to: `${basePath}/milestones`,
+            text: "Hitos",
+            urlSlug: "milestones",
+        },
+        {
+            to: `${basePath}/contacts`,
+            text: "Plantel",
+            urlSlug: "contacts",
+        },
+    ];
+
     return (
         <SubPageMenu subPageMenuDropdown={<SelectProjectDropDown project={project} />}>
             <SubPageMenuListItemButton
@@ -51,44 +71,14 @@ const ProjectSubPageMenu = ({project}) => {
             <SubPageMenuListItemButton
                 key="project-location"
                 to={`${basePath}/location`}
-                text="Ubicación"
-                icon={<PinDropIconOutlined />}
-            />
-            <SubPageMenuListItemButton
-                key="project-provider"
-                to={`${basePath}/provider`}
-                text="Prestador"
+                text="Localización"
                 icon={<GroupsIconOutlined />}
-            />
-            <SubPageMenuListItemButton
-                key="project-financing"
-                to={`${basePath}/financing`}
-                text="Contratos"
-                icon={<WorkOutlineOutlinedIcon />}
-            />
-            <SubPageMenuListItemButton
-                key="project-milestones"
-                to={`${basePath}/milestones`}
-                text="Hitos"
-                icon={<FlagIconOutlined />}
             />
             <SubPageMenuListItemButton
                 key="project-documents"
                 to={`${basePath}/documents`}
                 text="Documentos"
                 icon={<FolderOpenIconOutlined />}
-            />
-            <SubPageMenuListItemButton
-                key="project-contacts"
-                to={`${basePath}/contacts`}
-                text="Plantel"
-                icon={<PermContactCalendarIconOutlined />}
-            />
-            <SubPageMenuListItemButton
-                key="project-fieldreport"
-                to={`${basePath}/fieldreport`}
-                text="Informes de viaje"
-                icon={<DirectionsCarFilledOutlinedIcon />}
             />
             <SubPageMenuListGroup
                 id="building-supervision"
@@ -101,6 +91,12 @@ const ProjectSubPageMenu = ({project}) => {
                 headerTitle="Área social"
                 headerIcon={<HandshakeOutlinedIcon />}
                 items={socialSupervisionAreaSubmenuItems}
+            />
+            <SubPageMenuListGroup
+                id="general"
+                headerTitle="Área general"
+                headerIcon={<ChromeReaderModeOutlinedIcon />}
+                items={generalAreaSubmenuItems}
             />
         </SubPageMenu>
     );

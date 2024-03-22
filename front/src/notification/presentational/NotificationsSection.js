@@ -12,7 +12,7 @@ import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import CircleIcon from "@mui/icons-material/Circle";
 
-const NotificationsSection = ({notifications}) => {
+const NotificationsSection = ({notifications, hideIfEmpty = false}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
 
