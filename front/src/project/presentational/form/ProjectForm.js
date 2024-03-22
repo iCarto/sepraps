@@ -7,7 +7,6 @@ import {createProject} from "project/model";
 
 import {EntityForm} from "base/entity/components/form";
 import {AlertError} from "base/error/components";
-import {FormContainer} from "base/form/components";
 
 const ProjectForm = ({
     project = null,
@@ -108,15 +107,13 @@ const ProjectForm = ({
         <LocationProvider>
             <DomainProvider>
                 <FormProvider {...formMethods}>
-                    <FormContainer>
-                        <AlertError error={error} />
-                        <EntityForm
-                            onSubmit={formMethods.handleSubmit(handleFormSubmit)}
-                            onCancel={onCancel}
-                        >
-                            {children}
-                        </EntityForm>
-                    </FormContainer>
+                    <AlertError error={error} />
+                    <EntityForm
+                        onSubmit={formMethods.handleSubmit(handleFormSubmit)}
+                        onCancel={onCancel}
+                    >
+                        {children}
+                    </EntityForm>
                 </FormProvider>
             </DomainProvider>
         </LocationProvider>

@@ -1,5 +1,4 @@
 export {default as FieldReportForm} from "./FieldReportForm";
-export {default as FieldReportCreationForm} from "./FieldReportCreationForm";
 export {
     default as FieldReportFormGeneralDataFields,
 } from "./FieldReportFormGeneralDataFields";

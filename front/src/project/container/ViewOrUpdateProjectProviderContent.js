@@ -11,6 +11,7 @@ import {ProjectForm} from "project/presentational/form";
 import {ProviderFormSearch} from "provider/presentational/form";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
+import {FormContainer} from "base/form/components";
 
 const ViewOrUpdateProjectProviderContent = ({project}) => {
     const navigate = useNavigateWithReload();
@@ -84,16 +85,18 @@ const ViewOrUpdateProjectProviderContent = ({project}) => {
         }
         if (mode === "edit") {
             return (
-                <ProjectForm
-                    project={project}
-                    onSubmit={handleFormSubmit}
-                    onCancel={() => {
-                        setMode("view");
-                    }}
-                    error={error}
-                >
-                    <ProviderFormSearch onClickSelected={handleSelectProvider} />
-                </ProjectForm>
+                <FormContainer>
+                    <ProjectForm
+                        project={project}
+                        onSubmit={handleFormSubmit}
+                        onCancel={() => {
+                            setMode("view");
+                        }}
+                        error={error}
+                    >
+                        <ProviderFormSearch onClickSelected={handleSelectProvider} />
+                    </ProjectForm>
+                </FormContainer>
             );
         }
     };

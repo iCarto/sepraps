@@ -21,7 +21,7 @@ const ContractGeneralDataFormFields = () => {
                 />
             </Grid>
             <Grid item xs={6}>
-                <FormTextArea name="comments" label="Descripción" />
+                <FormTextArea name="comments" label="Descripción" rows={4} />
             </Grid>
         </Grid>
     );

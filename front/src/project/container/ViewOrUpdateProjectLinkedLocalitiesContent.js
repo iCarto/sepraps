@@ -10,6 +10,7 @@ import {
     ProjectFormLinkedLocalitiesList,
 } from "project/presentational/form";
 import {ProjectLinkedLocalitiesSection} from "project/presentational/section";
+import {FormContainer} from "base/form/components";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ViewOrUpdateProjectLinkedLocalitiesContent = ({project}) => {
@@ -50,16 +51,18 @@ const ViewOrUpdateProjectLinkedLocalitiesContent = ({project}) => {
         }
         if (mode === "edit") {
             return (
-                <ProjectForm
-                    project={project}
-                    onSubmit={handleFormSubmit}
-                    onCancel={() => {
-                        setMode("view");
-                    }}
-                    error={error}
-                >
-                    <ProjectFormLinkedLocalitiesList name="linked_localities" />
-                </ProjectForm>
+                <FormContainer>
+                    <ProjectForm
+                        project={project}
+                        onSubmit={handleFormSubmit}
+                        onCancel={() => {
+                            setMode("view");
+                        }}
+                        error={error}
+                    >
+                        <ProjectFormLinkedLocalitiesList name="linked_localities" />
+                    </ProjectForm>
+                </FormContainer>
             );
         }
     };

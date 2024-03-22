@@ -11,6 +11,7 @@ import {
     ProjectGeneralDataSection,
 } from "project/presentational/section";
 import {ProjectForm, ProjectFormGeneralDataFields} from "project/presentational/form";
+import {FormContainer} from "base/form/components";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ViewOrUpdateProjectSummaryContent = ({project}) => {
@@ -53,16 +54,18 @@ const ViewOrUpdateProjectSummaryContent = ({project}) => {
         }
         if (mode === "edit") {
             return (
-                <ProjectForm
-                    project={project}
-                    onSubmit={handleFormSubmit}
-                    onCancel={() => {
-                        setMode("view");
-                    }}
-                    error={error}
-                >
-                    <ProjectFormGeneralDataFields />
-                </ProjectForm>
+                <FormContainer>
+                    <ProjectForm
+                        project={project}
+                        onSubmit={handleFormSubmit}
+                        onCancel={() => {
+                            setMode("view");
+                        }}
+                        error={error}
+                    >
+                        <ProjectFormGeneralDataFields />
+                    </ProjectForm>
+                </FormContainer>
             );
         }
     };

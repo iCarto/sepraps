@@ -7,7 +7,8 @@ import {
     FieldReportFormCommentsStartFields,
     FieldReportFormGoalsFields,
 } from ".";
-import Grid from "@mui/material/Grid";
+import {FormSection} from "base/form/components";
+import Stack from "@mui/material/Stack";
 
 const FieldReportFormFields = ({section}) => {
     const displayCommentsStart = section === "report_comments_start";
@@ -18,43 +19,19 @@ const FieldReportFormFields = ({section}) => {
     const displayReportedPersons = section === "reported_persons";
 
     return (
-        <Grid container columnSpacing={1}>
+        <Stack spacing={1}>
             {!section ? (
-                <Grid item xs={12}>
+                <FormSection>
                     <FieldReportFormGeneralDataFields orientation={"row"} />
-                </Grid>
+                </FormSection>
             ) : null}
-            {displayBasicData ? (
-                <Grid item xs={12}>
-                    <FieldReportFormBasicDataFields />
-                </Grid>
-            ) : null}
-            {displayParticipants ? (
-                <Grid item xs={12}>
-                    <FieldReportFormParticipantsFields />
-                </Grid>
-            ) : null}
-            {displayReportedPersons ? (
-                <Grid item xs={12}>
-                    <FieldReportFormReportedPersonsFields />
-                </Grid>
-            ) : null}
-            {displayCommentsStart ? (
-                <Grid item xs={12}>
-                    <FieldReportFormCommentsStartFields />
-                </Grid>
-            ) : null}
-            {displayGoals ? (
-                <Grid item xs={12}>
-                    <FieldReportFormGoalsFields />
-                </Grid>
-            ) : null}
-            {displayCommentsEnd ? (
-                <Grid item xs={12}>
-                    <FieldReportFormCommentsEndFields />
-                </Grid>
-            ) : null}
-        </Grid>
+            {displayBasicData ? <FieldReportFormBasicDataFields /> : null}
+            {displayParticipants ? <FieldReportFormParticipantsFields /> : null}
+            {displayReportedPersons ? <FieldReportFormReportedPersonsFields /> : null}
+            {displayCommentsStart ? <FieldReportFormCommentsStartFields /> : null}
+            {displayGoals ? <FieldReportFormGoalsFields /> : null}
+            {displayCommentsEnd ? <FieldReportFormCommentsEndFields /> : null}
+        </Stack>
     );
 };
 

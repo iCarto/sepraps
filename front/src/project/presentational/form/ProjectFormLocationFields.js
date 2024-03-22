@@ -6,6 +6,7 @@ const ProjectFormLocationFields = ({orientation = "row"}) => {
             <FormMapCoordinates
                 name="main_infrastructure_position"
                 orientation={orientation}
+                required
             />
             <FormInputInteger
                 name="main_infrastructure_position.altitude"

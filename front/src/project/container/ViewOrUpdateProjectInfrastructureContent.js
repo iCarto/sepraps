@@ -7,6 +7,7 @@ import {project_view_adapter} from "project/model";
 import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {MapInfrastructure} from "base/map/components";
 import {ProjectForm, ProjectFormLocationFields} from "project/presentational/form";
+import {FormContainer} from "base/form/components";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ViewOrUpdateProjectInfrastructureContent = ({project}) => {
@@ -57,16 +58,18 @@ const ViewOrUpdateProjectInfrastructureContent = ({project}) => {
         }
         if (mode === "edit") {
             return (
-                <ProjectForm
-                    project={project}
-                    onSubmit={handleFormSubmit}
-                    onCancel={() => {
-                        setMode("view");
-                    }}
-                    error={error}
-                >
-                    <ProjectFormLocationFields orientation="horizontal" />
-                </ProjectForm>
+                <FormContainer>
+                    <ProjectForm
+                        project={project}
+                        onSubmit={handleFormSubmit}
+                        onCancel={() => {
+                            setMode("view");
+                        }}
+                        error={error}
+                    >
+                        <ProjectFormLocationFields orientation="horizontal" />
+                    </ProjectForm>
+                </FormContainer>
             );
         }
     };

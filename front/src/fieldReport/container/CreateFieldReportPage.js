@@ -36,9 +36,9 @@ const CreateFieldReportPage = () => {
                 <FieldReportForm
                     onSubmit={handleFormSubmit}
                     onCancel={handleFormCancel}
+                    error={error}
                 />
             }
-            error={error}
         />
     );
 };
