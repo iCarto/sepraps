@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 const FieldReportFormGeneralDataFields = ({orientation = "column"}) => {
     return (
         <>
-            <Grid container columnSpacing={1} mt={3}>
+            <Grid container columnSpacing={1}>
                 <Grid item xs={12}>
                     <FormInputText
                         name="name"

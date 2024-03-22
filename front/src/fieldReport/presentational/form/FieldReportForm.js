@@ -4,11 +4,13 @@ import {FormUtil} from "base/form/utilities";
 import {DomainProvider} from "sepraps/domain/provider";
 import {EntityForm} from "base/entity/components/form";
 import {FieldReportFormFields} from ".";
+import {AlertError} from "base/error/components";
 
 const FieldReportForm = ({
     fieldReport = null,
     section = "",
     onSubmit,
+    error = null,
     onCancel = null,
 }) => {
     const defaultFormValues = {
@@ -36,7 +38,7 @@ const FieldReportForm = ({
         reValidateMode: "onSubmit",
     });
 
-    const onFormSubmit = data => {
+    const handleFormSubmit = data => {
         onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
@@ -56,8 +58,9 @@ const FieldReportForm = ({
     return (
         <DomainProvider>
             <FormProvider {...formMethods}>
+                <AlertError error={error} />
                 <EntityForm
-                    onSubmit={formMethods.handleSubmit(onFormSubmit)}
+                    onSubmit={formMethods.handleSubmit(handleFormSubmit)}
                     onCancel={onCancel}
                 >
                     <FieldReportFormFields section={section} />

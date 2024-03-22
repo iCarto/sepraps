@@ -4,10 +4,11 @@ import {
     ProjectFormLinkedLocalitiesList,
     ProjectFormLocationFields,
 } from ".";
+import Stack from "@mui/material/Stack";
 
 const ProjectCreationFormFields = () => {
     return (
-        <>
+        <Stack spacing={1}>
             <FormSection title="Información general">
                 <ProjectFormGeneralDataFields />
             </FormSection>
@@ -17,7 +18,7 @@ const ProjectCreationFormFields = () => {
             <FormSection title="Infraestructura principal">
                 <ProjectFormLocationFields orientation="horizontal" />
             </FormSection>
-        </>
+        </Stack>
     );
 };
 

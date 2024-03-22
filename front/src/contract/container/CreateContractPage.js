@@ -12,7 +12,7 @@ import {
     ContractForm,
     ContractGeneralDataFormFields,
 } from "contract/presentational/form";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 
 const CreateContractPage = () => {
     const navigate = useNavigate();
@@ -41,23 +41,17 @@ const CreateContractPage = () => {
             title="Registro de contrato"
             form={
                 <ContractForm onSubmit={handleFormSubmit} onCancel={handleFormCancel}>
-                    <Grid container>
-                        <Grid item xs={12}>
-                            <FormSection title="Información general">
-                                <ContractGeneralDataFormFields />
-                            </FormSection>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormSection title="Financiación">
-                                <ContractFinancingFormFields />
-                            </FormSection>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormSection title="Licitación">
-                                <ContractBidRequestFormFields />
-                            </FormSection>
-                        </Grid>
-                    </Grid>
+                    <Stack spacing={1}>
+                        <FormSection title="Información general">
+                            <ContractGeneralDataFormFields />
+                        </FormSection>
+                        <FormSection title="Financiación">
+                            <ContractFinancingFormFields />
+                        </FormSection>
+                        <FormSection title="Licitación">
+                            <ContractBidRequestFormFields />
+                        </FormSection>
+                    </Stack>
                 </ContractForm>
             }
             error={error}

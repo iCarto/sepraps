@@ -46,6 +46,7 @@ const ProjectFormLinkedLocalitiesList = ({name: propsName}) => {
                         <FormLocationSelect
                             name={`${propsName}.${index}`}
                             orientation="horizontal"
+                            required
                         />
                     </Grid>
                     {moreThanOneField && (
