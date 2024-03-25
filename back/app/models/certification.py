@@ -17,7 +17,7 @@ class Certification(BaseDocumentModel, BaseEntityModelMixin):
         "Monto previsto", max_digits=20, decimal_places=2, null=True
     )
     approved_amount = models.DecimalField(
-        "Monto aprobado", max_digits=20, decimal_places=2, null=False
+        "Monto aprobado", max_digits=20, decimal_places=2, null=True
     )
     notes = models.TextField("Observaciones", max_length=500, null=True)
 

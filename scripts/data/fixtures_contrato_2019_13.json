@@ -163,7 +163,7 @@
             "bid_request_budget_min": 500000000,
             "bid_request_budget": 700000000,
             "awarding_budget_min": 460000000,
-            "awarding_budget": 630000000,
+            "awarding_budget": 600000000,
             "awarding_percentage_drop": 7.82,
             "awarding_date": "2022-11-15",
             "financing_program": 1,
@@ -282,15 +282,15 @@
         "pk": 1,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
-            "code": "2019-AP-001",
-            "init_date": "2019-11-12",
+            "code": "2023-AP-002",
+            "init_date": "2023-09-30",
             "main_infrastructure": 1,
             "provider": 1,
             "linked_localities": ["0104330"],
             "closed": false,
             "creation_user": 1,
-            "created_at": "2019-12-01T00:00:00Z",
-            "updated_at": "2019-12-01T00:00:00Z"
+            "created_at": "2023-12-01T00:00:00Z",
+            "updated_at": "2023-12-01T00:00:00Z"
         }
     },
     {
@@ -337,15 +337,15 @@
         "pk": 2,
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
-            "code": "2019-AP-002",
-            "init_date": "2019-11-12",
+            "code": "2023-AP-003",
+            "init_date": "2023-08-31",
             "main_infrastructure": 2,
             "provider": 2,
             "linked_localities": ["0104200"],
             "closed": false,
             "creation_user": 1,
-            "created_at": "2019-12-01T00:00:00Z",
-            "updated_at": "2019-12-01T00:00:00Z"
+            "created_at": "2023-12-01T00:00:00Z",
+            "updated_at": "2023-12-01T00:00:00Z"
         }
     },
     {
@@ -384,15 +384,15 @@
         "pk": 3,
         "fields": {
             "description": "Nuevo Sistema de Agua Potable y Unidades Básicas Sanitarias(UBS)",
-            "code": "2019-AP-003",
-            "init_date": "2019-11-12",
+            "code": "2023-AP-004",
+            "init_date": "2023-10-31",
             "main_infrastructure": 3,
             "provider": 3,
             "linked_localities": ["0104190", "0104360"],
             "closed": false,
             "creation_user": 1,
-            "created_at": "2019-12-01T00:00:00Z",
-            "updated_at": "2019-12-01T00:00:00Z"
+            "created_at": "2023-12-01T00:00:00Z",
+            "updated_at": "2023-12-01T00:00:00Z"
         }
     },
     {
@@ -439,15 +439,15 @@
         "pk": 4,
         "fields": {
             "description": "Mejoramiento de Sistema de Agua Potable y Unidad Básica Sanitaria (UBS)",
-            "code": "2019-AP-004",
-            "init_date": "2019-11-12",
+            "code": "2023-AP-005",
+            "init_date": "2023-11-12",
             "main_infrastructure": 4,
             "provider": 4,
             "linked_localities": ["0218880", "0218260"],
             "closed": false,
             "creation_user": 1,
-            "created_at": "2019-12-01T00:00:00Z",
-            "updated_at": "2019-12-01T00:00:00Z"
+            "created_at": "2023-12-01T00:00:00Z",
+            "updated_at": "2023-12-01T00:00:00Z"
         }
     },
     {
@@ -580,11 +580,11 @@
         "pk": 56,
         "fields": {
             "name": "Informe inicial",
-            "expected_fixed_amount": 100000000,
-            "expected_total_amount": 100000000,
+            "expected_fixed_amount": 70000000,
+            "expected_total_amount": 70000000,
             "expected_approval_date": "2023-06-01",
-            "paid_fixed_amount": 100000000,
-            "paid_total_amount": 100000000,
+            "paid_fixed_amount": 70000000,
+            "paid_total_amount": 70000000,
             "status": "aprobado",
             "approval_date": "2023-06-15",
             "contract": 1,
@@ -694,8 +694,8 @@
         "pk": 62,
         "fields": {
             "name": "Abril 2024",
-            "expected_fixed_amount": 100000000,
-            "expected_total_amount": 100000000,
+            "expected_fixed_amount": 50000000,
+            "expected_total_amount": 50000000,
             "expected_approval_date": "2024-04-01",
             "paid_fixed_amount": null,
             "paid_total_amount": null,
@@ -761,181 +761,6 @@
             "created_at": "2020-12-01T00:00:00Z",
             "updated_by": 2,
             "updated_at": "2020-12-01T00:00:00Z"
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 1,
-        "fields": {
-            "created_at": "2024-03-18T09:46:06.179Z",
-            "updated_at": "2024-03-18T09:50:03.305Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 9,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "finalizado",
-            "quality_status": "bien",
-            "expected_amount": "100000000.00",
-            "expected_end_date": "2024-03-31",
-            "paid_amount": "130000000.00",
-            "pending_amount": "0.00",
-            "real_end_date": "2024-03-18",
-            "physical_progress_percentage": "100.00",
-            "building_component": 1,
-            "project": 1,
-            "comments": [1, 2]
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 2,
-        "fields": {
-            "created_at": "2024-03-18T09:46:06.198Z",
-            "updated_at": "2024-03-18T09:50:39.512Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 10,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "en_proceso",
-            "quality_status": "regular",
-            "expected_amount": "200000000.00",
-            "expected_end_date": "2024-03-31",
-            "paid_amount": "120000000.00",
-            "pending_amount": "90000000.00",
-            "real_end_date": null,
-            "physical_progress_percentage": "70.00",
-            "building_component": 2,
-            "project": 1,
-            "comments": []
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 3,
-        "fields": {
-            "created_at": "2024-03-18T09:46:06.220Z",
-            "updated_at": "2024-03-18T09:51:06.613Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 11,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "en_proceso",
-            "quality_status": "bien",
-            "expected_amount": "50000000.00",
-            "expected_end_date": "2024-03-31",
-            "paid_amount": "10000000.00",
-            "pending_amount": "40000000.00",
-            "real_end_date": null,
-            "physical_progress_percentage": "18.00",
-            "building_component": 3,
-            "project": 1,
-            "comments": []
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 4,
-        "fields": {
-            "created_at": "2024-03-18T09:46:06.242Z",
-            "updated_at": "2024-03-18T09:51:32.917Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 12,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "finalizado",
-            "quality_status": "mal",
-            "expected_amount": "70000000.00",
-            "expected_end_date": "2024-03-31",
-            "paid_amount": "80000000.00",
-            "pending_amount": "0.00",
-            "real_end_date": "2024-03-23",
-            "physical_progress_percentage": "100.00",
-            "building_component": 4,
-            "project": 1,
-            "comments": []
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 5,
-        "fields": {
-            "created_at": "2024-03-18T09:46:06.269Z",
-            "updated_at": "2024-03-18T09:52:06.445Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 13,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "en_proceso",
-            "quality_status": "mal",
-            "expected_amount": "30000000.00",
-            "expected_end_date": "2024-03-31",
-            "paid_amount": "0.00",
-            "pending_amount": "30000000.00",
-            "real_end_date": null,
-            "physical_progress_percentage": "0.00",
-            "building_component": 5,
-            "project": 1,
-            "comments": []
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 6,
-        "fields": {
-            "created_at": "2024-03-18T09:46:06.297Z",
-            "updated_at": "2024-03-18T09:52:36.602Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 14,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "en_proceso",
-            "quality_status": "mal",
-            "expected_amount": "45000000.00",
-            "expected_end_date": "2024-03-31",
-            "paid_amount": "40000000.00",
-            "pending_amount": "30000000.00",
-            "real_end_date": null,
-            "physical_progress_percentage": "60.00",
-            "building_component": 6,
-            "project": 1,
-            "comments": []
-        }
-    },
-    {
-        "model": "app.buildingcomponentmonitoring",
-        "pk": 7,
-        "fields": {
-            "created_at": "2024-03-18T09:46:06.334Z",
-            "updated_at": "2024-03-18T09:53:00.639Z",
-            "active": true,
-            "created_by": 1,
-            "updated_by": 1,
-            "folder": 15,
-            "featured_image": null,
-            "featured_document": null,
-            "execution_status": "en_proceso",
-            "quality_status": "bien",
-            "expected_amount": "5000000.00",
-            "expected_end_date": "2024-03-31",
-            "paid_amount": "3000000.00",
-            "pending_amount": "2000000.00",
-            "real_end_date": null,
-            "physical_progress_percentage": "65.00",
-            "building_component": 7,
-            "project": 1,
-            "comments": []
         }
     },
     {
@@ -1168,6 +993,880 @@
             "number_of_existing_connections": 150,
             "number_of_planned_connections": 200,
             "number_of_actual_connections": 45,
+            "project": 4,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 17500000,
+            "approved_amount": 30000000,
+            "payment": 57,
+            "project": 1,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 17500000,
+            "approved_amount": 45000000,
+            "payment": 57,
+            "project": 2,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 17500000,
+            "approved_amount": 20000000,
+            "payment": 57,
+            "project": 3,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 17500000,
+            "approved_amount": 15000000,
+            "payment": 57,
+            "project": 4,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 40000000,
+            "approved_amount": 20000000,
+            "payment": 58,
+            "project": 1,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 10000000,
+            "approved_amount": 25000000,
+            "payment": 58,
+            "project": 2,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 30000000,
+            "approved_amount": 25000000,
+            "payment": 58,
+            "project": 3,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 50000000,
+            "approved_amount": 20000000,
+            "payment": 58,
+            "project": 4,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 50000000,
+            "approved_amount": 50000000,
+            "payment": 59,
+            "project": 1,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 50000000,
+            "approved_amount": 30000000,
+            "payment": 59,
+            "project": 2,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 25000000,
+            "approved_amount": 30000000,
+            "payment": 59,
+            "project": 3,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 25000000,
+            "approved_amount": 30000000,
+            "payment": 59,
+            "project": 4,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 10000000,
+            "approved_amount": 20000000,
+            "payment": 60,
+            "project": 1,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 20000000,
+            "approved_amount": 20000000,
+            "payment": 60,
+            "project": 2,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 30000000,
+            "approved_amount": 20000000,
+            "payment": 60,
+            "project": 3,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 20000000,
+            "approved_amount": 20000000,
+            "payment": 60,
+            "project": 4,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 35000000,
+            "approved_amount": null,
+            "payment": 61,
+            "project": 1,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 55000000,
+            "approved_amount": null,
+            "payment": 61,
+            "project": 2,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 35000000,
+            "approved_amount": null,
+            "payment": 61,
+            "project": 3,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 45000000,
+            "approved_amount": null,
+            "payment": 61,
+            "project": 4,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 20000000,
+            "approved_amount": null,
+            "payment": 62,
+            "project": 1,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 10000000,
+            "approved_amount": null,
+            "payment": 62,
+            "project": 2,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 10000000,
+            "approved_amount": null,
+            "payment": 62,
+            "project": 3,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.certification",
+        "fields": {
+            "created_at": "2023-11-17T10:14:47.014Z",
+            "created_by": 1,
+            "updated_at": "2023-11-17T10:17:29.145Z",
+            "updated_by": 1,
+            "active": true,
+            "folder": 410,
+            "expected_amount": 10000000,
+            "approved_amount": null,
+            "payment": 62,
+            "project": 4,
+            "notes": "",
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 1,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.179Z",
+            "updated_at": "2024-03-18T09:50:03.305Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 9,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "bien",
+            "expected_amount": 42500000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 40000000,
+            "pending_amount": 0,
+            "real_end_date": "2024-03-18",
+            "physical_progress_percentage": "100.00",
+            "building_component": 1,
+            "project": 1,
+            "comments": [1, 2]
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 2,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.198Z",
+            "updated_at": "2024-03-18T09:50:39.512Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 10,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "regular",
+            "expected_amount": 30000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 30000000,
+            "pending_amount": 15000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "70.00",
+            "building_component": 2,
+            "project": 1,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 3,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.220Z",
+            "updated_at": "2024-03-18T09:51:06.613Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 11,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 20000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 10000000,
+            "pending_amount": 15000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "18.00",
+            "building_component": 3,
+            "project": 1,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 4,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.242Z",
+            "updated_at": "2024-03-18T09:51:32.917Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 12,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "mal",
+            "expected_amount": 20000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 10000000,
+            "pending_amount": 0,
+            "real_end_date": "2024-03-23",
+            "physical_progress_percentage": "100.00",
+            "building_component": 4,
+            "project": 1,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 5,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.269Z",
+            "updated_at": "2024-03-18T09:52:06.445Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 13,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 20000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 15000000,
+            "pending_amount": 15000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "50.00",
+            "building_component": 5,
+            "project": 1,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 6,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.297Z",
+            "updated_at": "2024-03-18T09:52:36.602Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 14,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "mal",
+            "expected_amount": 10000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 5000000,
+            "pending_amount": 0,
+            "real_end_date": "2024-03-31",
+            "physical_progress_percentage": "100.00",
+            "building_component": 6,
+            "project": 1,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 7,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.334Z",
+            "updated_at": "2024-03-18T09:53:00.639Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 15,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 10000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 10000000,
+            "pending_amount": 10000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "65.00",
+            "building_component": 7,
+            "project": 1,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 8,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.179Z",
+            "updated_at": "2024-03-18T09:50:03.305Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 41,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "bien",
+            "expected_amount": 42500000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 40000000,
+            "pending_amount": 0,
+            "real_end_date": "2024-03-18",
+            "physical_progress_percentage": "100.00",
+            "building_component": 8,
+            "project": 2,
+            "comments": [1, 2]
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 9,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.198Z",
+            "updated_at": "2024-03-18T09:50:39.512Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 42,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "finalizado",
+            "quality_status": "regular",
+            "expected_amount": 30000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 30000000,
+            "pending_amount": 0,
+            "real_end_date": null,
+            "physical_progress_percentage": "100.00",
+            "building_component": 9,
+            "project": 2,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 10,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.220Z",
+            "updated_at": "2024-03-18T09:51:06.613Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 43,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 20000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 10000000,
+            "pending_amount": 10000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "18.00",
+            "building_component": 10,
+            "project": 2,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 11,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.242Z",
+            "updated_at": "2024-03-18T09:51:32.917Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 44,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 20000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 10000000,
+            "pending_amount": 10000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "60.00",
+            "building_component": 11,
+            "project": 2,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 12,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.269Z",
+            "updated_at": "2024-03-18T09:52:06.445Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 45,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 20000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 15000000,
+            "pending_amount": 15000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "50.00",
+            "building_component": 12,
+            "project": 2,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 13,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.297Z",
+            "updated_at": "2024-03-18T09:52:36.602Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 46,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 10000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 5000000,
+            "pending_amount": 10000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "50.00",
+            "building_component": 13,
+            "project": 2,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 14,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.334Z",
+            "updated_at": "2024-03-18T09:53:00.639Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 47,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 10000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 10000000,
+            "pending_amount": 20000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "65.00",
+            "building_component": 14,
+            "project": 2,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 15,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.269Z",
+            "updated_at": "2024-03-18T09:52:06.445Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 45,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 90000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 80000000,
+            "pending_amount": 10000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "80.00",
+            "building_component": 15,
+            "project": 3,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 16,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.297Z",
+            "updated_at": "2024-03-18T09:52:36.602Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 46,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "mal",
+            "expected_amount": 37500000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 10000000,
+            "pending_amount": 30000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "25.00",
+            "building_component": 16,
+            "project": 3,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 17,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.334Z",
+            "updated_at": "2024-03-18T09:53:00.639Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 47,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 10000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 5000000,
+            "pending_amount": 5000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "65.00",
+            "building_component": 17,
+            "project": 3,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 18,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.334Z",
+            "updated_at": "2024-03-18T09:53:00.639Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "code": "otro",
+            "code_label": "Otro",
+            "name": "Red para baños",
+            "technical_properties": {},
+            "validation_properties": {}
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 18,
+        "fields": {
+            "created_at": "2024-03-18T09:46:06.334Z",
+            "updated_at": "2024-03-18T09:53:00.639Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 755,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 157500000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 85000000,
+            "pending_amount": 55000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "65.00",
+            "building_component": 18,
             "project": 4,
             "comments": []
         }
