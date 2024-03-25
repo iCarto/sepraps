@@ -109,6 +109,9 @@ urlpatterns = [
         project_stats_views.get_building_components_total_stats,
     ),
     path(
+        "projectstats/bcprogresstotal", project_stats_views.get_bc_progress_total_stats
+    ),
+    path(
         "projectstats/socialcomponenttrainingssum",
         project_stats_views.get_social_component_trainings_sum_stats,
     ),

@@ -489,3 +489,103 @@ def get_connections_total_stats(request, format=None):  # noqa: ARG001
         data_list = result_df.to_dict(orient="list")
 
         return Response(data_list)
+
+
+BC_PROGRESS_EXPORT_FIELDS = {
+    "project_code": {"name": "Cod. Proyecto", "type": "string", "width": 15},
+    "project_name": {"name": "Localidad", "type": "string", "width": 30},
+    "bc_name": {"name": "Componente", "type": "string", "width": 45},
+    "financial_weight": {"name": "Peso", "type": "float", "width": 10},
+    "expected_amount": {"name": "Previsto", "type": "integer", "width": 15},
+    "paid_amount": {"name": "Aprobado", "type": "integer", "width": 15},
+    "pending_amount": {"name": "Pendiente", "type": "integer", "width": 15},
+    "difference": {"name": "Diferencia", "type": "integer", "width": 15},
+    "financial_progress_percentage": {
+        "name": "% Financiero",
+        "type": "float",
+        "width": 10,
+    },
+    "physical_progress_percentage": {"name": "% Físico", "type": "float", "width": 10},
+    "execution_status_label": {
+        "name": "Estado Ejecución",
+        "type": "string",
+        "width": 15,
+    },
+    "quality_status_label": {
+        "name": "Estado Cualitativo",
+        "type": "string",
+        "width": 15,
+    },
+}
+
+
+class BCProgressStatsCSVRenderer(DataFrameCSVFileRenderer):
+    fields = BC_PROGRESS_EXPORT_FIELDS
+
+
+class BCProgressStatsExcelRenderer(DataFrameExcelFileRenderer):
+    fields = BC_PROGRESS_EXPORT_FIELDS
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+@renderer_classes(
+    [DataFrameJSONRenderer, BCProgressStatsCSVRenderer, BCProgressStatsExcelRenderer]
+)
+def get_bc_progress_total_stats(request, format=None):  # noqa: ARG001
+    query = """
+            SELECT
+                bcm.id,
+                p2.code as project_code,
+                (SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = p2.id) as project_name,
+                bc.code as bc_code,
+                bc."name" as bc_name,
+                bp.financial_weight,
+                bcm.expected_amount,
+                bcm.pending_amount,
+                bcm.paid_amount,
+                (coalesce(bcm.paid_amount, 0) + coalesce(bcm.pending_amount, 0)) - coalesce(bcm.expected_amount, 0) as difference,
+                bp.financial_progress_percentage,
+                bp.physical_progress_percentage,
+                bcm.execution_status,
+                d_ee.value as execution_status_label,
+                bcm.quality_status,
+                d_ec.value as quality_status_label
+            FROM building_component_monitoring bcm
+                LEFT JOIN bcm_progress bp ON bp.building_component_monitoring_id = bcm.id
+                LEFT JOIN building_component bc ON bc.id = bcm.building_component_id
+                JOIN (
+                    {join_query}
+                ) projects ON projects.project_id = bcm.project_id
+                JOIN project p2 ON bcm.project_id = p2.id
+                LEFT JOIN dominios d_ee ON d_ee.category = 'estado_ejecucion' AND d_ee."key" = bcm.execution_status
+                LEFT JOIN dominios d_ec ON d_ec.category = 'estado_cualitativo' AND d_ec."key" = bcm.quality_status
+                WHERE bcm.active = True
+            """
+
+    with connection.cursor() as cursor:
+        cursor.execute(query.format(join_query=get_filter_join_query(request.GET)))
+        result = dictfetchall(cursor)
+
+        calc_cols = ["expected_amount", "pending_amount", "paid_amount", "difference"]
+        if not result:
+            result_df = pd.DataFrame(
+                [["total", 0, 0, 0, 0]], columns=["id", *calc_cols]
+            )
+            return Response(result_df)
+
+        result_df = pd.DataFrame(result)
+
+        result_df[calc_cols] = result_df[calc_cols].apply(
+            pd.to_numeric, errors="coerce"
+        )
+        result_df.loc["Total"] = result_df[calc_cols].sum(numeric_only=True)
+
+        # Convert to nullable integers
+        result_df = result_df.astype({"id": "Int64"})
+
+        result_df = result_df.where(pd.notna(result_df), None)
+        result_df.at["Total", "project_code"] = "Total"
+        data_list = result_df.to_dict(orient="list")
+
+        return Response(data_list)
