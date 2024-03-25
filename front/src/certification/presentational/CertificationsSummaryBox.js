@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 
 const getTotal = (items, totalColumn) => {
     return items
-        .map(item => parseInt(item[totalColumn]))
+        .map(item => (item[totalColumn] != null ? parseInt(item[totalColumn]) : 0))
         .reduce((sum, i) => sum + i, 0);
 };
 
@@ -29,7 +29,7 @@ const CertificationsSummaryBox = ({certifications, contract}) => {
                 </LightHeading>
                 <Stack direction="row" alignItems="baseline">
                     <Typography component="span" fontSize={34}>
-                        {NumberUtil.formatInteger(total)}{" "}
+                        {NumberUtil.formatMillions(total)}{" "}
                         <Typography component="span" fontSize={12}>
                             {CURRENCY_SYMBOL}
                         </Typography>

@@ -48,6 +48,7 @@ const EntityMenuDropDown = ({
             [
                 "payment",
                 "buildingcomponents",
+                "certifications",
                 "socialcomponents",
                 "project_analysis",
                 "project_social_analysis",
