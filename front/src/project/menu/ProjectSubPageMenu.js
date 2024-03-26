@@ -6,13 +6,8 @@ import {
 import {SelectProjectDropDown} from "project/menu";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
-import PinDropIconOutlined from "@mui/icons-material/PinDropOutlined";
-import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-import FlagIconOutlined from "@mui/icons-material/FlagOutlined";
 import FolderOpenIconOutlined from "@mui/icons-material/FolderOpenOutlined";
-import PermContactCalendarIconOutlined from "@mui/icons-material/PermContactCalendarOutlined";
 import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
-import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 

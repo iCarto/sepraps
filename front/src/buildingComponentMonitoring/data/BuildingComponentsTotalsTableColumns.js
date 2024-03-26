@@ -1,6 +1,6 @@
 import {NumberUtil} from "base/format/utilities";
 
-export function useBcProgressTotalsTable(showProject = false) {
+export function useBcProgressTotalsTable(showProject = false, showContract = false) {
     const tableColumns = [
         {
             id: "bc_name",
@@ -63,6 +63,13 @@ export function useBcProgressTotalsTable(showProject = false) {
         tableColumns.splice(0, 0, {
             id: "project_code",
             label: "Proyecto",
+            width: 10,
+        });
+    }
+    if (showContract) {
+        tableColumns.splice(0, 0, {
+            id: "contract_number",
+            label: "Contrato de obra",
             width: 10,
         });
     }

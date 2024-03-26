@@ -10,7 +10,11 @@ import {TabUtil} from "base/ui/tab/utilities";
 import {ViewBuildingComponentsProgressTotalsTable} from "buildingComponentMonitoring/container";
 import {TabPanel} from "base/ui/tab/components";
 
-const ViewBuildingComponentsAnalysisContent = ({filter, showProject = false}) => {
+const ViewBuildingComponentsAnalysisContent = ({
+    filter,
+    showProject = false,
+    showContract = false,
+}) => {
     const [tabValue, setTabValue] = useState(0);
 
     const handleTabChange = (event, newValue) => {
@@ -35,6 +39,7 @@ const ViewBuildingComponentsAnalysisContent = ({filter, showProject = false}) =>
                 <ViewBuildingComponentsProgressTotalsTable
                     filter={filter}
                     showProject={showProject}
+                    showContract={showContract}
                 />
             </TabPanel>
             <TabPanel value={tabValue} index={1} visible={tabValue === 1}>

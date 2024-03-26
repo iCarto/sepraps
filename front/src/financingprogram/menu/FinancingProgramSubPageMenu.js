@@ -1,12 +1,23 @@
-import {SubPageMenu, SubPageMenuListItemButton} from "base/ui/menu";
+import {
+    SubPageMenu,
+    SubPageMenuListGroup,
+    SubPageMenuListItemButton,
+} from "base/ui/menu";
 import {SelectFinancingProgramDropDown} from "financingprogram/container";
 
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
-import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
-import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
+import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 
 const FinancingProgramSubPageMenu = ({financingProgram}) => {
     const basePath = `/financingprograms/list/${financingProgram?.id}`;
+
+    const buildingSupervisionAreaSubmenuItems = [
+        {
+            to: `${basePath}/buildingcomponents/overview`,
+            text: "Construcción",
+            urlSlug: "buildingcomponents",
+        },
+    ];
 
     return (
         <SubPageMenu
@@ -19,6 +30,12 @@ const FinancingProgramSubPageMenu = ({financingProgram}) => {
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InventoryRoundedIcon />}
+            />
+            <SubPageMenuListGroup
+                id="building-supervision"
+                headerTitle="Área técnica"
+                headerIcon={<HandymanOutlinedIcon />}
+                items={buildingSupervisionAreaSubmenuItems}
             />
         </SubPageMenu>
     );

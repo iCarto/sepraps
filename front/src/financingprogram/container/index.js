@@ -11,3 +11,6 @@ export {
 export {
     default as ViewOrUpdateFinancingProgramGeneralDataContent,
 } from "./ViewOrUpdateFinancingProgramGeneralDataContent";
+export {
+    default as ViewFinancingProgramBuildingComponentsSubPage,
+} from "./ViewFinancingProgramBuildingComponentsSubPage";

@@ -8,14 +8,18 @@ import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import {useBcProgressTotalsTable} from "buildingComponentMonitoring/data";
 
-const ViewBuildingComponentsProgressTotalsTable = ({filter, showProject = false}) => {
+const ViewBuildingComponentsProgressTotalsTable = ({
+    filter,
+    showProject = false,
+    showContract = false,
+}) => {
     const [bcProgressData, setBcProgressData] = useState(null);
     const [tableFilter, setTableFilter] = useState(null);
     const [isEmpty, setIsEmpty] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const {tableColumns} = useBcProgressTotalsTable(showProject);
+    const {tableColumns} = useBcProgressTotalsTable(showProject, showContract);
 
     useEffect(() => {
         setIsLoading(true);

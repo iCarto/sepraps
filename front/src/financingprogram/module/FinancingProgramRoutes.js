@@ -2,6 +2,7 @@ import {Navigate, Route} from "react-router-dom";
 import {
     ListFinancingProgramsPage,
     ManageFinancingProgramsPage,
+    ViewFinancingProgramBuildingComponentsSubPage,
     ViewFinancingProgramPage,
     ViewFinancingProgramPanel,
     ViewFinancingProgramSummarySubPage,
@@ -23,6 +24,11 @@ const financingProgramRoutes = [
                 path="summary"
                 element={<ViewFinancingProgramSummarySubPage />}
             ></Route>
+            <Route
+                key="project-building-components"
+                path="buildingcomponents/overview"
+                element={<ViewFinancingProgramBuildingComponentsSubPage />}
+            />
             <Route index element={<Navigate to="summary" replace />} />
         </Route>
         <Route
