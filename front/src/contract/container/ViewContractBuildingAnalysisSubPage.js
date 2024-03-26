@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 
 const ViewContractBuildingAnalysisSubPage = () => {
     const location = useLocation();
-    const basePath = RouterUtil.getPathForSegment(location, "project_analysis");
+    const basePath = RouterUtil.getPathForSegment(location, "buildingcomponents");
 
     const [contract] = useOutletContext();
     const contextForOutlet = {contract: contract};
@@ -18,8 +18,8 @@ const ViewContractBuildingAnalysisSubPage = () => {
             content: <Outlet context={contextForOutlet} />,
         },
         {
-            label: "Gráfico",
-            path: "chart",
+            label: "Análisis",
+            path: "analysis",
             content: <Outlet context={contextForOutlet} />,
         },
     ];

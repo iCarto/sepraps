@@ -21,7 +21,7 @@ import {
     ViewContractSocialComponentsTrainingsTableContent,
     ViewContractSocialComponentsTrainingsChartContent,
     ViewContractSocialComponentsConnectionsTableContent,
-    ViewContractBuildingComponentsFinancialChartContent,
+    ViewContractBuildingComponentsAnalysisContent,
     CreateContractPaymentsWizard,
 } from "contract/container";
 import {
@@ -165,7 +165,7 @@ const contractRoutes = [
             </Route>
             <Route
                 key="contract-project-analysis"
-                path="project_analysis"
+                path="buildingcomponents"
                 element={<ViewContractBuildingAnalysisSubPage />}
             >
                 <Route
@@ -175,8 +175,8 @@ const contractRoutes = [
                 />
                 <Route
                     key="contract-project-analysis-chart"
-                    path="chart"
-                    element={<ViewContractBuildingComponentsFinancialChartContent />}
+                    path="analysis"
+                    element={<ViewContractBuildingComponentsAnalysisContent />}
                 />
             </Route>
             <Route

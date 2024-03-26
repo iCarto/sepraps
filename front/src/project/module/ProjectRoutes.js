@@ -19,6 +19,7 @@ import {
     ViewProjectConnectionsContent,
     ViewProjectSocialAnalysisContent,
     ViewProjectCertificationsSubPage,
+    ViewProjectBuildingComponentsAnalysisContent,
 } from "project/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
 import {MapConfigProvider} from "base/geo/provider";
@@ -113,7 +114,7 @@ const projectRoutes = [
                 <Route
                     key="project-component-analysis"
                     path="analysis"
-                    element={<ViewBuildingComponentsAnalysisContent />}
+                    element={<ViewProjectBuildingComponentsAnalysisContent />}
                 />
             </Route>
 

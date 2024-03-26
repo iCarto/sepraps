@@ -45,9 +45,9 @@ const ContractSubPageMenu = ({contract}) => {
             urlSlug: "building_staff",
         },
         {
-            to: `${basePath}/project_analysis/overview`,
-            text: "Análisis de proyectos",
-            urlSlug: "project_analysis",
+            to: `${basePath}/buildingcomponents/overview`,
+            text: "Construcción",
+            urlSlug: "buildingcomponents",
         },
     ];
 

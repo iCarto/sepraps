@@ -58,3 +58,6 @@ export {
 export {
     default as ViewOrUpdateProjectProviderContent,
 } from "./ViewOrUpdateProjectProviderContent";
+export {
+    default as ViewProjectBuildingComponentsAnalysisContent,
+} from "./ViewProjectBuildingComponentsAnalysisContent";

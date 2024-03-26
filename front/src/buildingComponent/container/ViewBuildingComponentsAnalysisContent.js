@@ -10,13 +10,13 @@ import {TabUtil} from "base/ui/tab/utilities";
 import {ViewBuildingComponentsProgressTotalsTable} from "buildingComponentMonitoring/container";
 import {TabPanel} from "base/ui/tab/components";
 
-const ViewBuildingComponentsAnalysisContent = () => {
-    const {id: projectId} = useParams();
+const ViewBuildingComponentsAnalysisContent = ({filter, showProject = false}) => {
     const [tabValue, setTabValue] = useState(0);
 
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
+    console.log({filter});
 
     return (
         <SectionCard>
@@ -33,11 +33,12 @@ const ViewBuildingComponentsAnalysisContent = () => {
             </Box>
             <TabPanel value={tabValue} index={0} visible={tabValue === 0}>
                 <ViewBuildingComponentsProgressTotalsTable
-                    filter={{project: projectId}}
+                    filter={filter}
+                    showProject={showProject}
                 />
             </TabPanel>
             <TabPanel value={tabValue} index={1} visible={tabValue === 1}>
-                <ViewBuildingComponentsFinancialChart filter={{project: projectId}} />
+                <ViewBuildingComponentsFinancialChart filter={filter} />
             </TabPanel>
         </SectionCard>
     );

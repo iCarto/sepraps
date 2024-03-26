@@ -49,6 +49,6 @@ export {
     default as ViewContractSocialComponentsConnectionsTableContent,
 } from "./ViewContractSocialComponentsConnectionsTableContent";
 export {
-    default as ViewContractBuildingComponentsFinancialChartContent,
-} from "./ViewContractBuildingComponentsFinancialChartContent";
+    default as ViewContractBuildingComponentsAnalysisContent,
+} from "./ViewContractBuildingComponentsAnalysisContent";
 export {default as CreateContractPaymentsWizard} from "./CreateContractPaymentsWizard";
