@@ -492,6 +492,7 @@ def get_connections_total_stats(request, format=None):  # noqa: ARG001
 
 
 BC_PROGRESS_EXPORT_FIELDS = {
+    "contract_number": {"name": "Contrato Obra", "type": "string", "width": 15},
     "project_code": {"name": "Cod. Proyecto", "type": "string", "width": 15},
     "project_name": {"name": "Localidad", "type": "string", "width": 30},
     "bc_name": {"name": "Componente", "type": "string", "width": 45},
@@ -534,17 +535,35 @@ class BCProgressStatsExcelRenderer(DataFrameExcelFileRenderer):
 )
 def get_bc_progress_total_stats(request, format=None):  # noqa: ARG001
     query = """
+                WITH contract_projects AS (
+                SELECT
+                    distinct on (p.id)
+                    p.id as project_id,
+                    p.code as project_code,
+                    cc.id as contract_id,
+                    cc.number as contract_number,
+                    cc.services,
+                    cc.execution_start_date
+                FROM project p
+                LEFT JOIN contract_project cp ON cp.project_id = p.id
+                LEFT JOIN construction_contract cc ON cc.id = cp.contract_id AND 'ejecucion_de_obra' = ANY(cc.services) AND cc.closed = False
+                ORDER BY p.id, cc.execution_start_date
+            )
             SELECT
                 bcm.id,
-                p2.code as project_code,
-                (SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = p2.id) as project_name,
+                cp.contract_number,
+                cp.project_code,
+                (SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = cp.project_id) as project_name,
                 bc.code as bc_code,
                 bc."name" as bc_name,
                 bp.financial_weight,
                 bcm.expected_amount,
                 bcm.pending_amount,
                 bcm.paid_amount,
-                (coalesce(bcm.paid_amount, 0) + coalesce(bcm.pending_amount, 0)) - coalesce(bcm.expected_amount, 0) as difference,
+                case
+                    when bcm.paid_amount is null and bcm.pending_amount is null and bcm.expected_amount is null then null
+                    else (coalesce(bcm.paid_amount, 0) + coalesce(bcm.pending_amount, 0)) - coalesce(bcm.expected_amount, 0)
+                end as difference,
                 bp.financial_progress_percentage,
                 bp.physical_progress_percentage,
                 bcm.execution_status,
@@ -557,7 +576,7 @@ def get_bc_progress_total_stats(request, format=None):  # noqa: ARG001
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = bcm.project_id
-                JOIN project p2 ON bcm.project_id = p2.id
+                LEFT JOIN contract_projects cp ON cp.project_id = bcm.project_id
                 LEFT JOIN dominios d_ee ON d_ee.category = 'estado_ejecucion' AND d_ee."key" = bcm.execution_status
                 LEFT JOIN dominios d_ec ON d_ec.category = 'estado_cualitativo' AND d_ec."key" = bcm.quality_status
                 WHERE bcm.active = True
