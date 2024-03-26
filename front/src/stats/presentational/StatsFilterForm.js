@@ -5,7 +5,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {ContractService, TEMPLATE} from "contract/service";
 import {ProviderService} from "provider/service";
 import {ContractorService} from "contractor/service";
-import {FinancingService} from "financing/service";
+import {FinancingService} from "financingprogram/service";
 import {LocationService} from "sepraps/location/service";
 import {useDomain} from "sepraps/domain/provider";
 

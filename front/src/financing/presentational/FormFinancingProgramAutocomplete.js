@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {FinancingService} from "financing/service";
+import {FinancingService} from "financingprogram/service";
 import {FormAutocomplete} from "base/form/components";
 
 const FormFinancingProgramAutocomplete = ({name, label, rules = {}}) => {

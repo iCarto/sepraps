@@ -1,7 +1,10 @@
 import {contacts_api_adapter, createContacts} from "contact/model";
 import {createContractor, contractor_api_adapter} from "contractor/model";
 import {createQuestionnaires, questionnaires_api_adapter} from "questionnaire/model";
-import {createFinancingProgram, financing_program_api_adapter} from "financing/model";
+import {
+    createFinancingProgram,
+    financing_program_api_adapter,
+} from "financingprogram/model";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 
 class Contracts extends Array {}

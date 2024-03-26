@@ -12,6 +12,7 @@ import {ModuleLayout} from "base/ui/module/components";
 import {SeprapsApp} from "sepraps/ui";
 import {ViewHomePage} from "home/container";
 import {LoginPage} from "base/user/components";
+import {FinancingProgramsModule, financingProgramRoutes} from "financingprogram/module";
 
 export default function SeprapsRoutes() {
     return (
@@ -59,6 +60,16 @@ export default function SeprapsRoutes() {
                             }
                         >
                             {providerRoutes}
+                        </Route>
+                        <Route
+                            path="financingprograms"
+                            element={
+                                <AuthRequired>
+                                    <FinancingProgramsModule />
+                                </AuthRequired>
+                            }
+                        >
+                            {financingProgramRoutes}
                         </Route>
                         <Route
                             path="field-reports"

@@ -1,6 +1,6 @@
 import {useState, useEffect, createContext, useContext} from "react";
 import {DomainService} from "sepraps/domain/service";
-import {FinancingService} from "financing/service";
+import {FinancingService} from "financingprogram/service";
 
 let DomainContext = createContext(null);
 

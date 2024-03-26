@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 
-import {FinancingService} from "financing/service";
+import {FinancingService} from "financingprogram/service";
 import {ContractService, TEMPLATE} from "contract/service";
 
 import {SearchBox} from "base/search/components";

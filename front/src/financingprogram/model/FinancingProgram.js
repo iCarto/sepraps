@@ -1,4 +1,7 @@
-import {createFinancingFunds, financing_funds_api_adapter} from "financing/model";
+import {
+    createFinancingFunds,
+    financing_funds_api_adapter,
+} from "financingprogram/model";
 
 class FinancingPrograms extends Array {}
 

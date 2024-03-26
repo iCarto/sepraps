@@ -20,6 +20,11 @@ const SeprapsMenu = () => {
             pathname: "providers",
         },
         {
+            name: "Programas",
+            to: "financingprograms",
+            pathname: "financingprograms",
+        },
+        {
             name: "Informes de viaje",
             to: "field-reports",
             pathname: "field-reports",
