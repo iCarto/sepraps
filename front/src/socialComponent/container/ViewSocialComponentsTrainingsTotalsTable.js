@@ -10,7 +10,11 @@ import {Spinner} from "base/shared/components";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 
-const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
+const ViewSocialComponentsTrainingsTotalsTable = ({
+    filter,
+    showProject = false,
+    showContract = false,
+}) => {
     const [trainingData, setTrainingData] = useState(null);
     const [tableFilter, setTableFilter] = useState(null);
     const [isTrainingDataEmpty, setIsTrainingDataEmpty] = useState(true);
@@ -18,7 +22,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({filter}) => {
     const [error, setError] = useState("");
 
     const isContractTable = Object.keys(filter).includes("contract");
-    const {tableColumns} = useTrainingTotalsTable(isContractTable);
+    const {tableColumns} = useTrainingTotalsTable(showProject, showContract);
 
     useEffect(() => {
         setIsLoading(true);

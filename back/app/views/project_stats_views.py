@@ -209,12 +209,13 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
 
 
 TRAINING_STATS_SUM_EXPORT_FIELDS = {
+    "contract_number": {"name": "Contrato obras", "type": "string", "width": 15},
+    "project_code": {"name": "Proyecto", "type": "string", "width": 15},
     "social_component_monitoring_name": {
         "name": "Componente",
         "type": "string",
         "width": 50,
     },
-    "project_code": {"name": "Proyecto", "type": "string", "width": 15},
     "contract_number": {"name": "Contrato", "type": "string", "width": 15},
     "contractor_name": {"name": "Contratista", "type": "string", "width": 20},
     "start_date": {"name": "Fecha de inicio", "type": "date", "width": 15},
@@ -261,8 +262,25 @@ def get_social_component_trainings_sum_stats(request, format=None):  # noqa: ARG
     social_component_contractor = request.GET.get("social_component_contractor", None)
 
     query = """
+            WITH contract_projects AS (
+                SELECT
+                    distinct on (p.id)
+                    p.id as project_id,
+                    p.code as project_code,
+                    cc.id as contract_id,
+                    cc.number as contract_number,
+                    cc.services,
+                    cc.execution_start_date
+                FROM project p
+                LEFT JOIN contract_project cp ON cp.project_id = p.id
+                LEFT JOIN construction_contract cc ON cc.id = cp.contract_id AND 'ejecucion_de_obra' = ANY(cc.services) AND cc.closed = False
+                ORDER BY p.id, cc.execution_start_date
+            )
             SELECT
                 sct.id,
+                cp.contract_number,
+                cp.project_code,
+                (SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = cp.project_id) as project_name,
                 to_char(sct.start_date, 'yyyy-mm-dd') as start_date,
                 to_char(sct.end_date, 'yyyy-mm-dd') as end_date,
                 sct.method,
@@ -275,19 +293,18 @@ def get_social_component_trainings_sum_stats(request, format=None):  # noqa: ARG
                 sct.number_of_hours,
                 sct.number_of_digital_materials,
                 sct.number_of_printed_materials,
-                cc2.number as contract_number,
+                cc2.number as training_contract_number,
                 cc2.id as contract_id,
-                c.name as contractor_name,
+                c.name as training_contractor_name,
                 c.id as contractor_id,
                 scm.name as social_component_monitoring_name,
-                scm.id as social_component_monitoring_id,
-                CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as project_code,
-                project.id as project_id
+                scm.id as social_component_monitoring_id
             FROM social_component_training sct
                 INNER JOIN social_component_monitoring scm ON scm.id = sct.social_component_monitoring_id
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = scm.project_id
+                LEFT JOIN contract_projects cp ON cp.project_id = scm.project_id
                 LEFT JOIN construction_contract cc2 on cc2.id = sct.contract_id
                 LEFT JOIN contractor c on c.id = sct.contractor_id
                 LEFT JOIN dominios d_method on d_method."key" = sct."method"
@@ -343,7 +360,6 @@ def get_social_component_trainings_sum_stats(request, format=None):  # noqa: ARG
                 "social_component_monitoring_id": "Int64",
                 "contract_id": "Int64",
                 "contractor_id": "Int64",
-                "project_id": "Int64",
                 "number_of_women": "Int64",
                 "number_of_participants": "Int64",
                 "number_of_hours": "Int64",
@@ -535,7 +551,7 @@ class BCProgressStatsExcelRenderer(DataFrameExcelFileRenderer):
 )
 def get_bc_progress_total_stats(request, format=None):  # noqa: ARG001
     query = """
-                WITH contract_projects AS (
+            WITH contract_projects AS (
                 SELECT
                     distinct on (p.id)
                     p.id as project_id,

@@ -27,12 +27,12 @@ const SocialComponentsTrainingsTableFilterForm = ({
     const contractOptions = getFilterOptionsObject(
         trainingData,
         "contract_id",
-        "contract_number"
+        "training_contract_number"
     );
     const contractorOptions = getFilterOptionsObject(
         trainingData,
         "contractor_id",
-        "contractor_name"
+        "training_contractor_name"
     );
     const projectOptions = getFilterOptionsObject(
         trainingData,
@@ -91,19 +91,6 @@ const SocialComponentsTrainingsTableFilterForm = ({
                 </Grid>
                 <Grid item sx={{flex: 1}}>
                     <FormAutocomplete
-                        name="social_component_contractor"
-                        label="Consultora"
-                        options={contractorOptions}
-                        optionLabelAttribute="label"
-                        onChangeHandler={option =>
-                            handleChangeFilter({
-                                social_component_contractor: option ? option.id : null,
-                            })
-                        }
-                    />
-                </Grid>
-                <Grid item sx={{flex: 1}}>
-                    <FormAutocomplete
                         name="social_component_contract"
                         label="Contrato"
                         options={contractOptions}
@@ -111,6 +98,19 @@ const SocialComponentsTrainingsTableFilterForm = ({
                         onChangeHandler={option =>
                             handleChangeFilter({
                                 social_component_contract: option ? option.id : null,
+                            })
+                        }
+                    />
+                </Grid>
+                <Grid item sx={{flex: 1}}>
+                    <FormAutocomplete
+                        name="social_component_contractor"
+                        label="Consultora"
+                        options={contractorOptions}
+                        optionLabelAttribute="label"
+                        onChangeHandler={option =>
+                            handleChangeFilter({
+                                social_component_contractor: option ? option.id : null,
                             })
                         }
                     />

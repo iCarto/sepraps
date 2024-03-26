@@ -6,6 +6,7 @@ import {
     ViewFinancingProgramPage,
     ViewFinancingProgramPanel,
     ViewFinancingProgramSummarySubPage,
+    ViewFinancingProgramTrainingsSubPage,
 } from "financingprogram/container";
 
 const financingProgramRoutes = [
@@ -28,6 +29,11 @@ const financingProgramRoutes = [
                 key="project-building-components"
                 path="buildingcomponents/overview"
                 element={<ViewFinancingProgramBuildingComponentsSubPage />}
+            />
+            <Route
+                key="project-building-components"
+                path="trainings/overview"
+                element={<ViewFinancingProgramTrainingsSubPage />}
             />
             <Route index element={<Navigate to="summary" replace />} />
         </Route>

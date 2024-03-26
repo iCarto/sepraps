@@ -14,3 +14,6 @@ export {
 export {
     default as ViewFinancingProgramBuildingComponentsSubPage,
 } from "./ViewFinancingProgramBuildingComponentsSubPage";
+export {
+    default as ViewFinancingProgramTrainingsSubPage,
+} from "./ViewFinancingProgramTrainingsSubPage";

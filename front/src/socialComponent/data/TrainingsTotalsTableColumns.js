@@ -1,6 +1,6 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
 
-export function useTrainingTotalsTable(isContractTable) {
+export function useTrainingTotalsTable(showProject, showContract) {
     const tableColumns = [
         {
             id: "social_component_monitoring_name",
@@ -8,13 +8,13 @@ export function useTrainingTotalsTable(isContractTable) {
             width: 20,
         },
         {
-            id: "contractor_name",
-            label: "Consultora",
+            id: "training_contract_number",
+            label: "Contrato",
             width: 10,
         },
         {
-            id: "contract_number",
-            label: "Contrato",
+            id: "training_contractor_name",
+            label: "Consultora",
             width: 10,
         },
         {
@@ -66,10 +66,18 @@ export function useTrainingTotalsTable(isContractTable) {
         },
     ];
 
-    if (isContractTable) {
-        tableColumns.splice(3, 0, {
+    if (showProject) {
+        tableColumns.splice(0, 0, {
             id: "project_code",
             label: "Proyecto",
+            width: 10,
+        });
+    }
+
+    if (showContract) {
+        tableColumns.splice(0, 0, {
+            id: "contract_number",
+            label: "Contrato de obra",
             width: 10,
         });
     }

@@ -1,12 +1,12 @@
 import {useOutletContext} from "react-router-dom";
 
-import {ViewBuildingComponentsAnalysisContent} from "buildingComponent/container";
+import {ViewTrainingsAnalysisContent} from "socialComponentMonitoring/container";
 
-const ViewFinancingProgramBuildingComponentsSubPage = () => {
+const ViewFinancingProgramTrainingsSubPage = () => {
     const [financingProgram] = useOutletContext();
 
     return (
-        <ViewBuildingComponentsAnalysisContent
+        <ViewTrainingsAnalysisContent
             filter={{financing_program: financingProgram.id}}
             showContract={true}
             showProject={true}
@@ -14,4 +14,4 @@ const ViewFinancingProgramBuildingComponentsSubPage = () => {
     );
 };
 
-export default ViewFinancingProgramBuildingComponentsSubPage;
+export default ViewFinancingProgramTrainingsSubPage;

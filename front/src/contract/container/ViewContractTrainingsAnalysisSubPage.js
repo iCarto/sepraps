@@ -4,27 +4,17 @@ import {TabContainer} from "base/ui/tab/components";
 import {RouterUtil} from "base/navigation/utilities";
 import Box from "@mui/material/Box";
 
-const ViewContractSocialAnalysisSubPage = () => {
+const ViewContractTrainingsAnalysisSubPage = () => {
     const location = useLocation();
-    const basePath = RouterUtil.getPathForSegment(location, "project_social_analysis");
+    const basePath = RouterUtil.getPathForSegment(location, "trainings");
 
     const [contract] = useOutletContext();
     const contextForOutlet = {contract: contract};
 
     const tabs = [
         {
-            label: "Tabla servicios",
+            label: "Análisis",
             path: "overview",
-            content: <Outlet context={contextForOutlet} />,
-        },
-        {
-            label: "Gráfico servicios",
-            path: "components_chart",
-            content: <Outlet context={contextForOutlet} />,
-        },
-        {
-            label: "Tabla conexiones",
-            path: "connections_table",
             content: <Outlet context={contextForOutlet} />,
         },
     ];
@@ -36,4 +26,4 @@ const ViewContractSocialAnalysisSubPage = () => {
     );
 };
 
-export default ViewContractSocialAnalysisSubPage;
+export default ViewContractTrainingsAnalysisSubPage;

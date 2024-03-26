@@ -50,8 +50,8 @@ const EntityMenuDropDown = ({
                 "buildingcomponents",
                 "certifications",
                 "socialcomponents",
-                "project_analysis",
-                "project_social_analysis",
+                "trainings",
+                "connections",
             ].includes(urlSlugs[1])
         ) {
             return `${basePath}/${itemId}/${urlSlugs[1]}/overview`;

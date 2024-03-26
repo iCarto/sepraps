@@ -34,17 +34,11 @@ export {
     default as ViewContractPostExecutionSubPage,
 } from "./ViewContractPostExecutionSubPage";
 export {
-    default as ViewContractSocialAnalysisSubPage,
-} from "./ViewContractSocialAnalysisSubPage";
+    default as ViewContractConnectionsAnalysisSubPage,
+} from "./ViewContractConnectionsAnalysisSubPage";
 export {
     default as ViewContractBuildingAnalysisOverview,
 } from "./ViewContractBuildingAnalysisOverview";
-export {
-    default as ViewContractSocialComponentsTrainingsTableContent,
-} from "./ViewContractSocialComponentsTrainingsTableContent";
-export {
-    default as ViewContractSocialComponentsTrainingsChartContent,
-} from "./ViewContractSocialComponentsTrainingsChartContent";
 export {
     default as ViewContractSocialComponentsConnectionsTableContent,
 } from "./ViewContractSocialComponentsConnectionsTableContent";
@@ -52,3 +46,9 @@ export {
     default as ViewContractBuildingComponentsAnalysisContent,
 } from "./ViewContractBuildingComponentsAnalysisContent";
 export {default as CreateContractPaymentsWizard} from "./CreateContractPaymentsWizard";
+export {
+    default as ViewContractTrainingsAnalysisSubPage,
+} from "./ViewContractTrainingsAnalysisSubPage";
+export {
+    default as ViewContractTrainingsAnalysisContent,
+} from "./ViewContractTrainingsAnalysisContent";

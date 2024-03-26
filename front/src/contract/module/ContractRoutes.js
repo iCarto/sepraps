@@ -16,13 +16,13 @@ import {
     ViewContractBuildingAnalysisSubPage,
     ViewContractStaffSubPage,
     ViewContractPostExecutionSubPage,
-    ViewContractSocialAnalysisSubPage,
     ViewContractBuildingAnalysisOverview,
-    ViewContractSocialComponentsTrainingsTableContent,
-    ViewContractSocialComponentsTrainingsChartContent,
     ViewContractSocialComponentsConnectionsTableContent,
     ViewContractBuildingComponentsAnalysisContent,
     CreateContractPaymentsWizard,
+    ViewContractConnectionsAnalysisSubPage,
+    ViewContractTrainingsAnalysisSubPage,
+    ViewContractTrainingsAnalysisContent,
 } from "contract/container";
 import {
     UpdateContractContactPanel,
@@ -198,23 +198,24 @@ const contractRoutes = [
                 />
             </Route>
             <Route
-                key="contract-project-social-analysis"
-                path="project_social_analysis"
-                element={<ViewContractSocialAnalysisSubPage />}
+                key="contract-project-social-trainings"
+                path="trainings"
+                element={<ViewContractTrainingsAnalysisSubPage />}
             >
                 <Route
                     key="contract-project-analysis-components-table"
                     path="overview"
-                    element={<ViewContractSocialComponentsTrainingsTableContent />}
+                    element={<ViewContractTrainingsAnalysisContent />}
                 />
-                <Route
-                    key="contract-project-analysis-components-chart"
-                    path="components_chart"
-                    element={<ViewContractSocialComponentsTrainingsChartContent />}
-                />
+            </Route>
+            <Route
+                key="contract-project-social-connections"
+                path="connections"
+                element={<ViewContractConnectionsAnalysisSubPage />}
+            >
                 <Route
                     key="contract-project-analysis-connections-table"
-                    path="connections_table"
+                    path="overview"
                     element={<ViewContractSocialComponentsConnectionsTableContent />}
                 />
             </Route>
