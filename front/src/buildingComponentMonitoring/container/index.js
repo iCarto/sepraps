@@ -4,3 +4,6 @@ export {
 export {
     default as ViewBuildingComponentMonitoringDocumentPanel,
 } from "./ViewBuildingComponentMonitoringDocumentPanel";
+export {
+    default as ViewBuildingComponentsProgressTotalsTable,
+} from "./ViewBuildingComponentsProgressTotalsTable";

@@ -59,6 +59,16 @@ const ProjectStatsService = {
             return response;
         });
     },
+
+    getBuildingComponentsProgressTotalStats(filter, format = null) {
+        console.log({format});
+        return AuthApiService.get(
+            `${basePath}/bcprogresstotal?${ServiceUtil.getFilterQueryString(filter)}`,
+            ServiceUtil.getAcceptHeader(format)
+        ).then(response => {
+            return response;
+        });
+    },
 };
 
 export default ProjectStatsService;
