@@ -1,0 +1,476 @@
+[
+    {
+        "model": "app.contractor",
+        "pk": 9,
+        "fields": {
+            "name": "ASCENT S.A.",
+            "contractor_type": "company",
+            "address": "César López Moreira N° 506 casi Aviadores del Chaco",
+            "phone": "0971 319943",
+            "email": "info@ascent.com.py",
+            "comments": "El Contrato fue firmado con la empresa Barrail Hnos. S.A. de Construcciones, que en julio de 2023 cambió su razón social, pasando a denominarse ASCENT S.A."
+        }
+    },
+    {
+        "model": "app.constructioncontract",
+        "pk": 20,
+        "fields": {
+            "number": "Contrato N° 08/2020",
+            "comments": "Construcción de Obras de Sistemas de Alcantarillado Sanitario Condominial en Tres Ciudades de la Región Oriental - Lote 1 Fram",
+            "services": ["ejecucion_de_obra"],
+            "total_amount_type": "fijo",
+            "product_frequency_type": "mensual",
+            "payment_criteria_type": "variable",
+            "bid_request_number": "LPI N° 03/2019",
+            "bid_request_id": "368.078",
+            "bid_request_lot_number": null,
+            "bid_request_date": "2020-11-04",
+            "bid_request_budget_min": null,
+            "bid_request_budget": 20450502784,
+            "awarding_budget_min": null,
+            "awarding_budget": 16117642141,
+            "awarding_percentage_drop": "21.19",
+            "awarding_date": "2020-09-22",
+            "awarding_professional_liability_insurance": null,
+            "awarding_liability_insurance": null,
+            "awarding_accident_insurance": null,
+            "execution_signature_date": "2020-10-20",
+            "execution_start_date": "2021-01-05",
+            "expected_execution_period": 540,
+            "warranty_end_date": null,
+            "closed": false,
+            "created_at": "2023-11-03T12:41:09.693Z",
+            "updated_at": "2023-11-03T13:24:44.659Z",
+            "creation_user": 1,
+            "updated_by": 1,
+            "financing_program": 1,
+            "contractor": 9
+        }
+    },
+    {
+        "model": "app.infrastructure",
+        "pk": 27,
+        "fields": {
+            "locality": "0711005",
+            "latitude": -27.08161,
+            "longitude": -56.0304,
+            "altitude": null
+        }
+    },
+    {
+        "model": "app.project",
+        "pk": 27,
+        "fields": {
+            "description": "Construcción de sistema de alcantarillado sanitario condominial para la ciudad de Fram",
+            "code": "2022-AP-007",
+            "init_date": "2022-02-25",
+            "main_infrastructure": 27,
+            "provider": null,
+            "linked_localities": ["0711005"],
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2023-12-01T00:00:00Z",
+            "updated_at": "2023-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 27,
+            "work_type": "alcantarillado",
+            "work_class": "nueva_construccion"
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 20,
+            "project": 27,
+            "construction": true
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 10,
+            "project": 27,
+            "construction": false
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 131,
+        "fields": {
+            "created_at": "2024-03-19T10:37:19.256Z",
+            "updated_at": "2024-03-20T13:27:28.780Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "code": "planta_tratamiento",
+            "code_label": "Planta de tratamiento",
+            "name": "Planta de tratamiento",
+            "technical_properties": {
+                "coordenada_x": {
+                    "type": "integer",
+                    "label": "Coordenada X"
+                },
+                "coordenada_y": {
+                    "type": "integer",
+                    "label": "Coordenada Y"
+                },
+                "tipo_lagunas": {
+                    "type": "domain",
+                    "label": "Tipo de lagunas",
+                    "domain": "pondType"
+                },
+                "cantidad_lagunas": {
+                    "type": "integer",
+                    "label": "Cantidad de lagunas"
+                },
+                "tipo_tratamiento": {
+                    "type": "text",
+                    "label": "Tipo de tratamiento"
+                }
+            },
+            "validation_properties": {
+                "empastado": {
+                    "type": "domain",
+                    "label": "Empastado realizado",
+                    "domain": "yesNoDomain"
+                },
+                "desarenador": {
+                    "type": "domain",
+                    "label": "Desarenador instalado",
+                    "domain": "yesNoDomain"
+                },
+                "lecho_secado": {
+                    "type": "domain",
+                    "label": "Lecho de secado instalado",
+                    "domain": "yesNoDomain"
+                },
+                "interconexiones": {
+                    "type": "domain",
+                    "label": "Construcción de interconexiones",
+                    "domain": "yesNoDomain"
+                },
+                "intalacion_membranas": {
+                    "type": "domain",
+                    "label": "Instalación de membranas",
+                    "domain": "yesNoDomain"
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 132,
+        "fields": {
+            "created_at": "2024-03-19T10:37:19.256Z",
+            "updated_at": "2024-03-20T13:48:12.134Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "code": "redes_basicas_condominiales_y_conexiones",
+            "code_label": "Redes básicas, condominales y conexiones",
+            "name": "Redes básicas, condominales y conexiones",
+            "technical_properties": {
+                "tipo_canheria_basica": {
+                    "type": "domain",
+                    "label": "Tipo de cañería básica",
+                    "domain": "pipeType"
+                },
+                "longitud_caneria_basica": {
+                    "type": "decimal",
+                    "unit": "m",
+                    "label": "Longitud cañería básica"
+                },
+                "tipo_canheria_dondominal": {
+                    "type": "domain",
+                    "label": "Tipo de cañería condominal",
+                    "domain": "pipeType"
+                },
+                "longitud_caneria_condominal": {
+                    "type": "decimal",
+                    "unit": "m",
+                    "label": "Longitud cañería condominal"
+                }
+            },
+            "validation_properties": {
+                "red_basica_instalada": {
+                    "type": "integer",
+                    "label": "Metros de red básica instalada"
+                },
+                "conexiones_domiciliarias": {
+                    "type": "integer",
+                    "label": "Número de conexiones"
+                },
+                "red_condominal_instalada": {
+                    "type": "integer",
+                    "label": "Metros de red condominal instalada"
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 133,
+        "fields": {
+            "created_at": "2024-03-19T10:37:19.256Z",
+            "updated_at": "2024-03-20T14:22:41.551Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "code": "estacion_de_bombeo",
+            "code_label": "Estación de bombeo",
+            "name": "Estación de Bombeo Nº2",
+            "technical_properties": {
+                "coordenada_x": {
+                    "type": "integer",
+                    "label": "Coordenada X"
+                },
+                "coordenada_y": {
+                    "type": "integer",
+                    "label": "Coordenada Y"
+                },
+                "tipo_energia": {
+                    "type": "domain",
+                    "label": "Tipo de energía",
+                    "domain": "energyType"
+                },
+                "tipo_canheria": {
+                    "type": "domain",
+                    "label": "Tipo de cañería",
+                    "domain": "pipeType"
+                },
+                "potencia_bomba": {
+                    "type": "decimal",
+                    "unit": "HP",
+                    "label": "Potencia de las bombas"
+                },
+                "cantidad_bombas": {
+                    "type": "integer",
+                    "label": "Cantidad de bombas"
+                },
+                "longitud_canheria": {
+                    "type": "decimal",
+                    "unit": "m",
+                    "label": "Longitud de la cañería de impulsión"
+                }
+            },
+            "validation_properties": {
+                "obras_civiles": {
+                    "type": "domain",
+                    "label": "Obras civiles realizadas",
+                    "domain": "yesNoDomain"
+                },
+                "linea_impulsion": {
+                    "type": "domain",
+                    "label": "Línea de impulsión realizada",
+                    "domain": "yesNoDomain"
+                },
+                "permiso_municipal": {
+                    "type": "domain",
+                    "label": "Permiso municipal",
+                    "domain": "yesNoDomain"
+                },
+                "casetas_operaciones": {
+                    "type": "domain",
+                    "label": "Casetas de operaciones instaladas",
+                    "domain": "yesNoDomain"
+                },
+                "extension_electrica": {
+                    "type": "domain",
+                    "label": "Extensión eléctrica realizada",
+                    "domain": "yesNoDomain"
+                },
+                "instalaciones_electromecanicas": {
+                    "type": "domain",
+                    "label": "Instalaciones electromecánicas realizadas",
+                    "domain": "yesNoDomain"
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponent",
+        "pk": 134,
+        "fields": {
+            "created_at": "2024-03-20T14:59:15.559Z",
+            "updated_at": "2024-03-20T15:10:50.583Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "code": "estacion_de_bombeo",
+            "code_label": "Estación de bombeo",
+            "name": "Estación de Bombeo Nº3",
+            "technical_properties": {
+                "coordenada_x": {
+                    "type": "integer",
+                    "label": "Coordenada X"
+                },
+                "coordenada_y": {
+                    "type": "integer",
+                    "label": "Coordenada Y"
+                },
+                "tipo_energia": {
+                    "type": "domain",
+                    "label": "Tipo de energía",
+                    "domain": "energyType"
+                },
+                "tipo_canheria": {
+                    "type": "domain",
+                    "label": "Tipo de cañería",
+                    "domain": "pipeType"
+                },
+                "potencia_bomba": {
+                    "type": "decimal",
+                    "unit": "HP",
+                    "label": "Potencia de las bombas"
+                },
+                "cantidad_bombas": {
+                    "type": "integer",
+                    "label": "Cantidad de bombas"
+                },
+                "longitud_canheria": {
+                    "type": "decimal",
+                    "unit": "m",
+                    "label": "Longitud de la cañería de impulsión"
+                }
+            },
+            "validation_properties": {
+                "obras_civiles": {
+                    "type": "domain",
+                    "label": "Obras civiles realizadas",
+                    "domain": "yesNoDomain"
+                },
+                "linea_impulsion": {
+                    "type": "domain",
+                    "label": "Línea de impulsión realizada",
+                    "domain": "yesNoDomain"
+                },
+                "permiso_municipal": {
+                    "type": "domain",
+                    "label": "Permiso municipal",
+                    "domain": "yesNoDomain"
+                },
+                "casetas_operaciones": {
+                    "type": "domain",
+                    "label": "Casetas de operaciones instaladas",
+                    "domain": "yesNoDomain"
+                },
+                "extension_electrica": {
+                    "type": "domain",
+                    "label": "Extensión eléctrica realizada",
+                    "domain": "yesNoDomain"
+                },
+                "instalaciones_electromecanicas": {
+                    "type": "domain",
+                    "label": "Instalaciones electromecánicas realizadas",
+                    "domain": "yesNoDomain"
+                }
+            }
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 131,
+        "fields": {
+            "created_at": "2024-03-19T10:37:19.256Z",
+            "updated_at": "2024-03-20T14:48:01.474Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 764,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "regular",
+            "expected_amount": 5348121745,
+            "expected_end_date": "2024-03-14",
+            "paid_amount": 4316418732,
+            "pending_amount": 1031703013,
+            "real_end_date": null,
+            "physical_progress_percentage": "65.00",
+            "building_component": 131,
+            "project": 27,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 132,
+        "fields": {
+            "created_at": "2024-03-19T10:37:19.256Z",
+            "updated_at": "2024-03-20T14:48:33.442Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 765,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "regular",
+            "expected_amount": 15082475320,
+            "expected_end_date": "2024-03-14",
+            "paid_amount": 9209355030,
+            "pending_amount": 5873120290,
+            "real_end_date": null,
+            "physical_progress_percentage": "81.00",
+            "building_component": 132,
+            "project": 27,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 133,
+        "fields": {
+            "created_at": "2024-03-19T10:37:19.256Z",
+            "updated_at": "2024-03-20T14:47:34.796Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 766,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "regular",
+            "expected_amount": 415681548,
+            "expected_end_date": "2024-03-14",
+            "paid_amount": 90655824,
+            "pending_amount": 325025724,
+            "real_end_date": null,
+            "physical_progress_percentage": "20.00",
+            "building_component": 133,
+            "project": 27,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 134,
+        "fields": {
+            "created_at": "2024-03-20T14:59:15.654Z",
+            "updated_at": "2024-03-20T15:25:37.008Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 766,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "regular",
+            "expected_amount": 672146845,
+            "expected_end_date": "2024-03-14",
+            "paid_amount": 201657474,
+            "pending_amount": 470489371,
+            "real_end_date": null,
+            "physical_progress_percentage": "30.00",
+            "building_component": 134,
+            "project": 27,
+            "comments": []
+        }
+    }
+]

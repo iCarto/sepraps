@@ -80,38 +80,6 @@
         }
     },
     {
-        "model": "app.ContractProject",
-        "pk": null,
-        "fields": {
-            "contract": 10,
-            "project": 1
-        }
-    },
-    {
-        "model": "app.ContractProject",
-        "pk": null,
-        "fields": {
-            "contract": 10,
-            "project": 2
-        }
-    },
-    {
-        "model": "app.ContractProject",
-        "pk": null,
-        "fields": {
-            "contract": 10,
-            "project": 5
-        }
-    },
-    {
-        "model": "app.ContractProject",
-        "pk": null,
-        "fields": {
-            "contract": 10,
-            "project": 6
-        }
-    },
-    {
         "model": "app.contact",
         "pk": 27,
         "fields": {
@@ -433,6 +401,24 @@
             "social_component_monitoring": 4,
             "contract": 10,
             "contractor": 8
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 10,
+            "project": 25,
+            "construction": false
+        }
+    },
+    {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 10,
+            "project": 26,
+            "construction": false
         }
     }
 ]

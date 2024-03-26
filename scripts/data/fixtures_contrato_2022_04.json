@@ -53,32 +53,36 @@
         "model": "app.ConstructionContract",
         "pk": 8,
         "fields": {
-            "number": "Contrato nº 04/2022",
+            "number": "Contrato N° 04/2022",
             "comments": "Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
             "services": ["ejecucion_de_obra"],
-            "total_amount_type": "maximo_minimo",
+            "total_amount_type": "fijo",
             "product_frequency_type": "mensual",
             "payment_criteria_type": "variable",
-            "bid_request_number": "LPI - 01/2021",
+            "bid_request_number": "LPI N° 01/2021",
             "bid_request_id": "395508",
-            "bid_request_lot_number": "2",
-            "bid_request_date": "2021-10-22",
-            "bid_request_budget_min": 14246301924,
-            "bid_request_budget": 20899999791,
-            "awarding_budget_min": 11246301924,
-            "awarding_budget": 17302002950,
-            "awarding_percentage_drop": 7.82,
+            "bid_request_lot_number": null,
+            "bid_request_date": "2021-08-30",
+            "bid_request_budget_min": null,
+            "bid_request_budget": 62700000000,
+            "awarding_budget_min": null,
+            "awarding_budget": 17302002960,
+            "awarding_percentage_drop": "72.41",
             "awarding_date": "2021-12-13",
-            "financing_program": 1,
-            "contractor": 6,
+            "awarding_professional_liability_insurance": null,
+            "awarding_liability_insurance": null,
+            "awarding_accident_insurance": null,
             "execution_signature_date": "2022-02-25",
             "execution_start_date": "2022-07-20",
             "expected_execution_period": 730,
+            "warranty_end_date": "2025-07-14",
             "closed": false,
+            "created_at": "2023-11-06T13:47:42.287Z",
+            "updated_at": "2023-11-08T13:10:36.411Z",
             "creation_user": 1,
-            "created_at": "2020-12-01T00:00:00Z",
             "updated_by": 1,
-            "updated_at": "2020-12-01T00:00:00Z"
+            "financing_program": 1,
+            "contractor": 6
         }
     },
     {
@@ -111,6 +115,40 @@
         "model": "app.projectwork",
         "fields": {
             "project": 25,
+            "work_type": "sanitarios",
+            "work_class": "nueva_construccion"
+        }
+    },
+    {
+        "model": "app.infrastructure",
+        "pk": 26,
+        "fields": {
+            "locality": "0510210",
+            "latitude": -25.8471,
+            "longitude": -56.14682,
+            "altitude": 10
+        }
+    },
+    {
+        "model": "app.project",
+        "pk": 26,
+        "fields": {
+            "description": "Construcción de Unidades Sanitarias Básicas en Localidades Rurales de la Región Oriental del País",
+            "code": "2023-AP-006",
+            "init_date": "2022-02-25",
+            "main_infrastructure": 26,
+            "provider": null,
+            "linked_localities": ["0510210"],
+            "closed": false,
+            "creation_user": 1,
+            "created_at": "2023-12-01T00:00:00Z",
+            "updated_at": "2023-12-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.projectwork",
+        "fields": {
+            "project": 26,
             "work_type": "sanitarios",
             "work_class": "nueva_construccion"
         }
@@ -200,6 +238,15 @@
         }
     },
     {
+        "model": "app.ContractProject",
+        "pk": null,
+        "fields": {
+            "contract": 8,
+            "project": 26,
+            "construction": true
+        }
+    },
+    {
         "model": "app.buildingcomponentmonitoring",
         "pk": 127,
         "fields": {
@@ -213,10 +260,10 @@
             "featured_document": null,
             "execution_status": "en_proceso",
             "quality_status": "bien",
-            "expected_amount": "2000000.00",
+            "expected_amount": 2000000,
             "expected_end_date": "2024-03-31",
-            "paid_amount": "1000000.00",
-            "pending_amount": "1000000.00",
+            "paid_amount": 1000000,
+            "pending_amount": 1000000,
             "real_end_date": null,
             "physical_progress_percentage": "50.00",
             "building_component": 127,
@@ -238,14 +285,64 @@
             "featured_document": null,
             "execution_status": "en_proceso",
             "quality_status": "bien",
-            "expected_amount": "30000000.00",
+            "expected_amount": 30000000,
             "expected_end_date": "2024-03-31",
-            "paid_amount": "15000000.00",
-            "pending_amount": "15000000.00",
+            "paid_amount": 15000000,
+            "pending_amount": 15000000,
             "real_end_date": null,
             "physical_progress_percentage": "50.00",
             "building_component": 128,
             "project": 25,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 129,
+        "fields": {
+            "created_at": "2024-03-18T09:56:30.169Z",
+            "updated_at": "2024-03-18T10:26:05.727Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 661,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 3000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 1000000,
+            "pending_amount": 2500000,
+            "real_end_date": null,
+            "physical_progress_percentage": "40.00",
+            "building_component": 129,
+            "project": 26,
+            "comments": []
+        }
+    },
+    {
+        "model": "app.buildingcomponentmonitoring",
+        "pk": 130,
+        "fields": {
+            "created_at": "2024-03-18T09:56:30.195Z",
+            "updated_at": "2024-03-18T10:26:39.609Z",
+            "active": true,
+            "created_by": 1,
+            "updated_by": 1,
+            "folder": 662,
+            "featured_image": null,
+            "featured_document": null,
+            "execution_status": "en_proceso",
+            "quality_status": "bien",
+            "expected_amount": 32000000,
+            "expected_end_date": "2024-03-31",
+            "paid_amount": 27000000,
+            "pending_amount": 8000000,
+            "real_end_date": null,
+            "physical_progress_percentage": "80.00",
+            "building_component": 130,
+            "project": 26,
             "comments": []
         }
     }
