@@ -52,6 +52,7 @@ def format_date_columns(df, date_format="%Y-%m-%d"):
     date_object_column_names = (
         df.select_dtypes("datetime64").dropna(axis=1, how="all")
     ).columns.tolist()
+    print(date_object_column_names)
 
     for column_name in date_object_column_names:
         df[column_name] = pd.to_datetime(df[column_name]).dt.strftime(date_format)

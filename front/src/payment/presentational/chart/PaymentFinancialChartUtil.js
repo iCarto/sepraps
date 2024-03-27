@@ -22,6 +22,9 @@ const PaymentFinancialChartUtil = {
     },
 
     parseChartData(chartData) {
+        // Remove totals row (last row) from data received
+        Object.keys(chartData).forEach(e => chartData[e].pop());
+
         const result = Object.keys(chartData)
             .filter(key => !["month", "payment_name"].includes(key))
             .reduce((acc, key) => {

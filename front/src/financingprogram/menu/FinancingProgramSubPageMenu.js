@@ -8,6 +8,7 @@ import {SelectFinancingProgramDropDown} from "financingprogram/container";
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
+import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 
 const FinancingProgramSubPageMenu = ({financingProgram}) => {
     const basePath = `/financingprograms/list/${financingProgram?.id}`;
@@ -44,6 +45,12 @@ const FinancingProgramSubPageMenu = ({financingProgram}) => {
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InventoryRoundedIcon />}
+            />
+            <SubPageMenuListItemButton
+                key="contract-payments"
+                to={`${basePath}/payments`}
+                text="Productos"
+                icon={<RequestQuoteOutlinedIcon />}
             />
             <SubPageMenuListGroup
                 id="building-supervision"

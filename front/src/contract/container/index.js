@@ -52,3 +52,6 @@ export {
 export {
     default as ViewContractTrainingsAnalysisContent,
 } from "./ViewContractTrainingsAnalysisContent";
+export {
+    default as ViewContractPaymentsAnalysisContent,
+} from "./ViewContractPaymentsAnalysisContent";

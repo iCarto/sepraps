@@ -4,9 +4,19 @@ import {AuthApiService} from "../../base/api/service";
 const basePath = "/api/app/paymentstats";
 
 const PaymentStatsService = {
-    getPaymentStats(filter) {
+    getPaymentStatsTemporal(filter, format = null) {
         return AuthApiService.get(
-            `${basePath}?${ServiceUtil.getFilterQueryString(filter)}`
+            `${basePath}/temporal?${ServiceUtil.getFilterQueryString(filter)}`,
+            ServiceUtil.getAcceptHeader(format)
+        ).then(response => {
+            return response;
+        });
+    },
+
+    getPaymentStatsTotals(filter, format = null) {
+        return AuthApiService.get(
+            `${basePath}/payments?${ServiceUtil.getFilterQueryString(filter)}`,
+            ServiceUtil.getAcceptHeader(format)
         ).then(response => {
             return response;
         });

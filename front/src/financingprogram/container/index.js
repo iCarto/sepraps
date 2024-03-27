@@ -20,3 +20,6 @@ export {
 export {
     default as ViewFinancingProgramConnectionsSubPage,
 } from "./ViewFinancingProgramConnectionsSubPage";
+export {
+    default as ViewFinancingProgramPaymentsSubPage,
+} from "./ViewFinancingProgramPaymentsSubPage";

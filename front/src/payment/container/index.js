@@ -11,3 +11,4 @@ export {default as ViewPaymentContractOverview} from "./ViewPaymentContractOverv
 export {
     default as ViewPaymentCertificationsContent,
 } from "./ViewPaymentCertificationsContent";
+export {default as ViewPaymentsTotalsTable} from "./ViewPaymentsTotalsTable";

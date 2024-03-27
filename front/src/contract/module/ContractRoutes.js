@@ -23,6 +23,7 @@ import {
     ViewContractTrainingsAnalysisSubPage,
     ViewContractTrainingsAnalysisContent,
     ViewContractConnectionsTableContent,
+    ViewContractPaymentsAnalysisContent,
 } from "contract/container";
 import {
     UpdateContractContactPanel,
@@ -142,7 +143,7 @@ const contractRoutes = [
                 <Route
                     key="contract-payments-analysis"
                     path="analysis"
-                    element={<ViewPaymentsAnalysisContent />}
+                    element={<ViewContractPaymentsAnalysisContent />}
                 />
             </Route>
             <Route
