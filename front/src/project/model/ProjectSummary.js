@@ -57,6 +57,11 @@ const createProjectSummary = ({
     longitude = null,
     financial_progress_percentage = null,
     physical_progress_percentage = null,
+    number_of_participants = null,
+    percentage_of_women = null,
+    number_of_planned_connections = null,
+    number_of_actual_connections = null,
+    percentage_of_connections = null,
     created_at = null,
     updated_at = null,
 } = {}) => {
@@ -82,6 +87,11 @@ const createProjectSummary = ({
         longitude,
         financial_progress_percentage,
         physical_progress_percentage,
+        number_of_participants,
+        percentage_of_women,
+        number_of_planned_connections,
+        number_of_actual_connections,
+        percentage_of_connections,
         created_at,
         updated_at,
     };

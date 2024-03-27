@@ -6,7 +6,7 @@ import {
 } from "provider/model";
 import {createEntityService} from "base/entity/service";
 import {AuthApiService} from "base/api/service";
-import {createProjects, projects_api_adapter} from "project/model";
+import {createProjectsSummaries, projects_summaries_api_adapter} from "project/model";
 
 const basePath = "/api/app/providers";
 
@@ -53,7 +53,7 @@ const ProviderService = {
 
     getProjectsList(id) {
         return AuthApiService.get(`${basePath}/${id}/projects`).then(response => {
-            return createProjects(projects_api_adapter(response));
+            return createProjectsSummaries(projects_summaries_api_adapter(response));
         });
     },
 };

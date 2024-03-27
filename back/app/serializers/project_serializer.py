@@ -275,6 +275,11 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             "financial_progress_percentage",
             "physical_progress_percentage",
             "number_of_bcomponents",
+            "number_of_participants",
+            "percentage_of_women",
+            "number_of_planned_connections",
+            "number_of_actual_connections",
+            "percentage_of_connections",
         )
 
     name = serializers.SerializerMethodField()
@@ -304,7 +309,24 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
     physical_progress_percentage = serializers.SerializerMethodField(
         required=False, read_only=True
     )
+    number_of_participants = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    percentage_of_women = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    number_of_planned_connections = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    number_of_actual_connections = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    percentage_of_connections = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
     number_of_bcomponents = serializers.SerializerMethodField()
+
+    project_works = ProjectWorkSerializer(many=True)
 
     def get_financial_progress_percentage(self, obj):
         return (
@@ -313,12 +335,33 @@ class ProjectSummarySerializer(serializers.ModelSerializer):
             else None
         )
 
-    project_works = ProjectWorkSerializer(many=True)
-
     def get_physical_progress_percentage(self, obj):
         return (
             format_decimal(obj.progress.physical_progress_percentage)
             if obj.progress.physical_progress_percentage
+            else None
+        )
+
+    def get_number_of_participants(self, obj):
+        return obj.progress.number_of_participants
+
+    def get_percentage_of_women(self, obj):
+        return (
+            format_decimal(obj.progress.percentage_of_women)
+            if obj.progress.percentage_of_women
+            else None
+        )
+
+    def get_number_of_planned_connections(self, obj):
+        return obj.progress.number_of_planned_connections
+
+    def get_number_of_actual_connections(self, obj):
+        return obj.progress.number_of_actual_connections
+
+    def get_percentage_of_connections(self, obj):
+        return (
+            format_decimal(obj.progress.percentage_of_connections)
+            if obj.progress.percentage_of_connections
             else None
         )
 

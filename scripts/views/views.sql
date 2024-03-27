@@ -22,11 +22,34 @@ WITH bcmp AS (
 		project_id
 	FROM bcm_progress
 	WHERE financial_weight is not null
+),
+project_progress AS (
+	SELECT
+		bcmp.project_id,
+		sum(financial_progress) as financial_progress_percentage,
+		sum(physical_progress) as physical_progress_percentage
+	FROM bcmp
+	GROUP BY bcmp.project_id
+),
+sctp AS (
+	SELECT
+		scm.project_id,
+		SUM(sct.number_of_women + sct.number_of_men) as number_of_participants,
+		ROUND((SUM(sct.number_of_women)::decimal / SUM(sct.number_of_women + sct.number_of_men)::decimal) * 100, 2) as percentage_of_women
+	FROM social_component_training sct
+	LEFT JOIN social_component_monitoring scm ON sct.social_component_monitoring_id = scm.id
+	GROUP BY scm.project_id
 )
 SELECT
 	p.id as project_id,
-	sum(financial_progress) as financial_progress_percentage,
-	sum(physical_progress) as physical_progress_percentage
+	pp.financial_progress_percentage,
+	pp.physical_progress_percentage,
+	sctp.number_of_participants,
+	sctp.percentage_of_women,
+	c.number_of_planned_connections,
+	c.number_of_actual_connections,
+	ROUND((c.number_of_actual_connections::decimal / c.number_of_planned_connections::decimal) * 100, 2) as percentage_of_connections
 FROM project p
-LEFT JOIN bcmp ON bcmp.project_id = p.id
-GROUP BY p.id;
+	LEFT JOIN project_progress pp ON pp.project_id = p.id
+	LEFT JOIN sctp ON sctp.project_id = p.id
+	LEFT JOIN "connection" c ON c.project_id = p.id;

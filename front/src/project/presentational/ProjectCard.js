@@ -1,10 +1,5 @@
 import {DateUtil, NumberUtil} from "base/format/utilities";
-import {
-    ClosedProjectTag,
-    ProjectTypeClassChip,
-    ProjectTypeClassChips,
-    ProjectTypeIcon,
-} from "project/presentational";
+import {ClosedProjectTag, ProjectTypeClassChips} from "project/presentational";
 import {ProgressBarSmall} from "base/progress/components";
 import {ImagePreview} from "base/image/components";
 
@@ -15,13 +10,14 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import Tooltip from "@mui/material/Tooltip";
 import Badge from "@mui/material/Badge";
+import Grid from "@mui/material/Grid";
 
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
-import Grid from "@mui/material/Grid";
+import HouseOutlinedIcon from "@mui/icons-material/HouseOutlined";
+import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 
 //TODO: avoid duplicated constant.
 const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
@@ -90,36 +86,84 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                 <Typography variant="h5" color="primary">
                     {project.name}
                 </Typography>
-                <Typography variant="body1">{project.code}</Typography>
-                <Grid container sx={{my: 1}}>
-                    <Grid item sx={12} md={12}>
-                        <ProgressBarSmall
-                            progressValue={NumberUtil.formatDecimalWithoutZeros(
-                                project.financial_progress_percentage
-                            )}
-                            tooltipLabel={
-                                project.financial_progress_percentage
-                                    ? `Avance financiero: ${NumberUtil.formatDecimalWithoutZeros(
-                                          project.financial_progress_percentage
-                                      )}%`
-                                    : NO_BCM_DATA_MESSAGE
-                            }
-                            progressStyle={{mb: 1}}
-                        />
-                        <ProgressBarSmall
-                            progressValue={NumberUtil.formatDecimalWithoutZeros(
-                                project.physical_progress_percentage
-                            )}
-                            tooltipLabel={
-                                project.physical_progress_percentage
-                                    ? `Avance físico: ${NumberUtil.formatDecimalWithoutZeros(
-                                          project.physical_progress_percentage
-                                      )}%`
-                                    : NO_BCM_DATA_MESSAGE
-                            }
-                        />
-                    </Grid>
-                </Grid>
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="flex-end"
+                    sx={{my: 0.5}}
+                >
+                    <Typography variant="body1">{project.code}</Typography>
+                    <Stack direction="row" justifyContent="center" spacing={2}>
+                        {project.number_of_participants && (
+                            <Tooltip
+                                title={`${project.number_of_participants} personas capacitadas (${project.percentage_of_women}% de mujeres)`}
+                            >
+                                <Stack
+                                    direction="row"
+                                    justifyContent="center"
+                                    spacing={0.5}
+                                >
+                                    <SchoolOutlinedIcon
+                                        sx={{color: "grey.500", fontSize: 18}}
+                                    />
+                                    <Typography
+                                        sx={{color: "grey.500", fontSize: "0.8rem"}}
+                                    >
+                                        {project.number_of_participants}
+                                    </Typography>
+                                </Stack>
+                            </Tooltip>
+                        )}
+                        {project.number_of_planned_connections && (
+                            <Tooltip
+                                title={`${project.number_of_actual_connections} de ${project.number_of_planned_connections} conexiones ejecutadas (${project.percentage_of_connections}%)`}
+                            >
+                                <Stack
+                                    direction="row"
+                                    justifyContent="center"
+                                    spacing={0.5}
+                                >
+                                    <HouseOutlinedIcon
+                                        sx={{color: "grey.500", fontSize: 18}}
+                                    />
+                                    <Typography
+                                        sx={{color: "grey.500", fontSize: "0.8rem"}}
+                                    >
+                                        {project.number_of_actual_connections || 0}/
+                                        {project.number_of_planned_connections}
+                                    </Typography>
+                                </Stack>
+                            </Tooltip>
+                        )}
+                    </Stack>
+                </Stack>
+                <Stack>
+                    <ProgressBarSmall
+                        progressValue={NumberUtil.formatDecimalWithoutZeros(
+                            project.financial_progress_percentage
+                        )}
+                        tooltipLabel={
+                            project.financial_progress_percentage
+                                ? `Avance financiero: ${NumberUtil.formatDecimalWithoutZeros(
+                                      project.financial_progress_percentage
+                                  )}%`
+                                : NO_BCM_DATA_MESSAGE
+                        }
+                        progressStyle={{mb: 1}}
+                    />
+                    <ProgressBarSmall
+                        progressValue={NumberUtil.formatDecimalWithoutZeros(
+                            project.physical_progress_percentage
+                        )}
+                        tooltipLabel={
+                            project.physical_progress_percentage
+                                ? `Avance físico: ${NumberUtil.formatDecimalWithoutZeros(
+                                      project.physical_progress_percentage
+                                  )}%`
+                                : NO_BCM_DATA_MESSAGE
+                        }
+                    />
+                </Stack>
             </CardContent>
             <CardContent sx={{bgcolor: "grey.100"}}>
                 <Stack spacing={1}>

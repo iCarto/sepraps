@@ -1,12 +1,7 @@
 import {NumberUtil} from "base/format/utilities";
 import {ProgressBarSmall} from "base/progress/components";
-import {
-    ProjectTypeClassChip,
-    ProjectTypeClassChips,
-    ProjectTypeIcon,
-} from "project/presentational";
+import {ProjectTypeClassChips} from "project/presentational";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 
 //TODO: avoid duplicated constant.
 const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
@@ -40,6 +35,24 @@ export function useProjectTable() {
             id: "description",
             label: "Descripción",
             width: 30,
+        },
+        {
+            id: "trainings",
+            label: "Capacitaciones",
+            width: 10,
+            formatFunction: item =>
+                item.number_of_participants
+                    ? `${item.number_of_participants} (${item.percentage_of_women}% mujeres)`
+                    : "",
+        },
+        {
+            id: "connections",
+            label: "Conexiones",
+            width: 10,
+            formatFunction: item =>
+                item.number_of_planned_connections
+                    ? `${item.number_of_actual_connections}/${item.number_of_planned_connections} (${item.percentage_of_connections}%)`
+                    : "",
         },
         {
             id: "progress",

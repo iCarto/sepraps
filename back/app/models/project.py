@@ -192,9 +192,19 @@ class ProjectProgress(models.Model):
     physical_progress_percentage = models.DecimalField(
         "Porcentaje de avance físico", max_digits=5, decimal_places=2, null=True
     )
-    """ financial_weight = models.DecimalField(
-        "Peso financiero", max_digits=5, decimal_places=2, null=True
-    ) """
+    number_of_participants = models.IntegerField("Número de participantes", null=True)
+    percentage_of_women = models.DecimalField(
+        "Porcentaje de mujeres", max_digits=5, decimal_places=2, null=True
+    )
+    number_of_planned_connections = models.IntegerField(
+        "Número de conexiones previstas", null=True
+    )
+    number_of_actual_connections = models.IntegerField(
+        "Número de conexiones ejecutadas", null=True
+    )
+    percentage_of_connections = models.DecimalField(
+        "Porcentaje de conexiones", max_digits=5, decimal_places=2, null=True
+    )
 
     def __str__(self):
         return f"{self.__class__.__name__}: {self.id}"

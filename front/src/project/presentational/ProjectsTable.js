@@ -37,7 +37,7 @@ const headCells = [
     {
         id: "code",
         label: "Código",
-        width: 15,
+        width: 10,
     },
     {
         id: "location",
@@ -53,6 +53,16 @@ const headCells = [
         id: "works",
         label: "Tipo y clase",
         width: 15,
+    },
+    {
+        id: "trainings",
+        label: "Capacitaciones",
+        width: 10,
+    },
+    {
+        id: "connections",
+        label: "Conexiones",
+        width: 12,
     },
     {
         id: "progress",
@@ -118,6 +128,16 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                     <ProjectTypeClassChips
                                         projectWorks={project?.project_works}
                                     />
+                                </TableCell>
+                                <TableCell sx={project.closed && {color: "grey.500"}}>
+                                    {project.number_of_participants
+                                        ? `${project.number_of_participants} (${project.percentage_of_women}%)`
+                                        : ""}
+                                </TableCell>
+                                <TableCell sx={project.closed && {color: "grey.500"}}>
+                                    {project.number_of_planned_connections
+                                        ? `${project.number_of_actual_connections}/${project.number_of_planned_connections} (${project.percentage_of_connections}%)`
+                                        : ""}
                                 </TableCell>
                                 <TableCell sx={project.closed && {color: "grey.500"}}>
                                     <Box sx={{py: 0.5}}>

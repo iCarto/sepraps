@@ -7,7 +7,7 @@ import {
 import {createEntityService} from "base/entity/service";
 import {AuthApiService} from "base/api/service";
 import {createPayments, payments_api_adapter} from "payment/model";
-import {createProjects, projects_api_adapter} from "project/model";
+import {createProjectsSummaries, projects_summaries_api_adapter} from "project/model";
 import {contractor_api_adapter, createContractor} from "contractor/model";
 import {contacts_api_adapter, createContacts} from "contact/model";
 import {amendments_api_adapter, createAmendments} from "amendment/model";
@@ -57,7 +57,7 @@ const ContractService = {
 
     getProjectsList(id) {
         return AuthApiService.get(`${basePath}/${id}/projects`).then(response => {
-            return createProjects(projects_api_adapter(response));
+            return createProjectsSummaries(projects_summaries_api_adapter(response));
         });
     },
 
