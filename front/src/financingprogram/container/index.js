@@ -17,3 +17,6 @@ export {
 export {
     default as ViewFinancingProgramTrainingsSubPage,
 } from "./ViewFinancingProgramTrainingsSubPage";
+export {
+    default as ViewFinancingProgramConnectionsSubPage,
+} from "./ViewFinancingProgramConnectionsSubPage";

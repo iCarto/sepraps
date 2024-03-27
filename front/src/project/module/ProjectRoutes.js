@@ -20,6 +20,7 @@ import {
     ViewProjectSocialAnalysisContent,
     ViewProjectCertificationsSubPage,
     ViewProjectBuildingComponentsAnalysisContent,
+    ViewProjectConnectionsSubPage,
 } from "project/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
 import {MapConfigProvider} from "base/geo/provider";
@@ -43,6 +44,7 @@ import {
     ViewCertificationsAnalysisContent,
     ViewCertificationsOverview,
 } from "certification/container";
+import {ViewConnectionsOverview} from "connection/container";
 
 const projectRoutes = [
     <Route key="project-new" path="new" element={<CreateProjectPage />} />,
@@ -150,7 +152,6 @@ const projectRoutes = [
                     element={<ViewCertificationsAnalysisContent />}
                 />
             </Route>
-
             <Route
                 key="project-social-components"
                 path="socialcomponents"
@@ -178,8 +179,24 @@ const projectRoutes = [
                     />
                 </Route>
                 <Route
+                    key="project-social-component-analysis"
+                    path="analysis"
+                    element={<ViewProjectSocialAnalysisContent />}
+                />
+            </Route>
+            <Route
+                key="project-connections"
+                path="connections"
+                element={<ViewProjectConnectionsSubPage />}
+            >
+                <Route
+                    key="project-social-components-overview"
+                    path="overview"
+                    element={<ViewConnectionsOverview />}
+                />
+                <Route
                     key="project-connections-detail"
-                    path="connections"
+                    path="manage"
                     element={<ViewProjectConnectionsContent />}
                 >
                     <Route
@@ -188,11 +205,6 @@ const projectRoutes = [
                         element={<ViewDocumentPanel />}
                     />
                 </Route>
-                <Route
-                    key="project-social-component-analysis"
-                    path="analysis"
-                    element={<ViewProjectSocialAnalysisContent />}
-                />
             </Route>
             <Route
                 key="project-fieldreport-detail"

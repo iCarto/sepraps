@@ -26,6 +26,11 @@ const FinancingProgramSubPageMenu = ({financingProgram}) => {
             text: "Capacitaciones",
             urlSlug: "trainings",
         },
+        {
+            to: `${basePath}/connections/overview`,
+            text: "Conexiones",
+            urlSlug: "connections",
+        },
     ];
 
     return (

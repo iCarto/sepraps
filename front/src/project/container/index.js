@@ -61,3 +61,6 @@ export {
 export {
     default as ViewProjectBuildingComponentsAnalysisContent,
 } from "./ViewProjectBuildingComponentsAnalysisContent";
+export {
+    default as ViewProjectConnectionsSubPage,
+} from "./ViewProjectConnectionsSubPage";

@@ -32,7 +32,11 @@ const TotalsTable = ({dataRows, tableColumns, small = false}) => {
                                 >
                                     <TableCell
                                         key={headCell.id}
-                                        sx={{paddingRight: 1, textAlign: "center"}}
+                                        sx={{
+                                            paddingRight: 1,
+                                            textAlign: "center",
+                                            fontSize: "0.75rem",
+                                        }}
                                     >
                                         {headCell.label}
                                     </TableCell>
@@ -46,7 +50,11 @@ const TotalsTable = ({dataRows, tableColumns, small = false}) => {
                         <TableRow key={rowIndex} hover sx={TABLE_ROW_STYLE}>
                             {tableColumns.map((headCell, cellIndex) => {
                                 return (
-                                    <TableCell key={cellIndex} align="center">
+                                    <TableCell
+                                        key={cellIndex}
+                                        align="center"
+                                        sx={{fontSize: "0.75rem"}}
+                                    >
                                         {headCell.formatFunction
                                             ? headCell.formatFunction(
                                                   dataRows[headCell.id][rowIndex]

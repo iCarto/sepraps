@@ -32,8 +32,13 @@ const ProjectSubPageMenu = ({project}) => {
     const socialSupervisionAreaSubmenuItems = [
         {
             to: `${basePath}/socialcomponents/overview`,
-            text: "Supervisión",
+            text: "Servicios",
             urlSlug: "socialcomponents",
+        },
+        {
+            to: `${basePath}/connections/overview`,
+            text: "Conexiones",
+            urlSlug: "connections",
         },
     ];
 

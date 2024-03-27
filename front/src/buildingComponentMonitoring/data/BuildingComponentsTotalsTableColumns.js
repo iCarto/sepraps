@@ -62,6 +62,11 @@ export function useBcProgressTotalsTable(showProject = false, showContract = fal
     if (showProject) {
         tableColumns.splice(0, 0, {
             id: "project_code",
+            label: "Cod. Proyecto",
+            width: 9,
+        });
+        tableColumns.splice(1, 0, {
+            id: "project_name",
             label: "Proyecto",
             width: 10,
         });

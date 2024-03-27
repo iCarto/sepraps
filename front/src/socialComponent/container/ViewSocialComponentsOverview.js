@@ -5,16 +5,17 @@ import {ProjectStatsService} from "project/service";
 
 import {
     SocialComponentsSummaryList,
-    SocialComponentsTotalsContent,
     TRAINING_DATA_FILTER,
 } from "socialComponent/presentational";
 import {PaperComponent, Spinner} from "base/shared/components";
 import {AlertError} from "base/error/components";
 
 import Stack from "@mui/material/Stack";
+import {TrainingSummaryBox} from "training/presentational";
+import Grid from "@mui/material/Grid";
 
 const ViewSocialComponentsOverview = () => {
-    const {project, scMonitorings, connection} = useOutletContext();
+    const {project, scMonitorings} = useOutletContext();
 
     const [trainingsTotals, setTrainingsTotals] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -52,17 +53,22 @@ const ViewSocialComponentsOverview = () => {
     return (
         <Stack spacing={1}>
             <PaperComponent>
-                {isLoading ? (
-                    <Spinner />
-                ) : (
-                    <>
-                        <AlertError error={error} />
-                        <SocialComponentsTotalsContent
-                            trainingsTotals={trainingsTotals}
-                            connection={connection}
-                        />
-                    </>
-                )}
+                <Grid container>
+                    <Grid item xs="auto">
+                        {isLoading ? (
+                            <Spinner />
+                        ) : (
+                            <>
+                                <AlertError error={error} />
+                                {trainingsTotals && (
+                                    <TrainingSummaryBox
+                                        trainingsTotals={trainingsTotals}
+                                    />
+                                )}
+                            </>
+                        )}
+                    </Grid>
+                </Grid>
             </PaperComponent>
             <PaperComponent>
                 <SocialComponentsSummaryList socialComponents={scMonitorings} />

@@ -69,6 +69,11 @@ export function useTrainingTotalsTable(showProject, showContract) {
     if (showProject) {
         tableColumns.splice(0, 0, {
             id: "project_code",
+            label: "Cod. Proyecto",
+            width: 9,
+        });
+        tableColumns.splice(1, 0, {
+            id: "project_name",
             label: "Proyecto",
             width: 10,
         });
@@ -78,7 +83,7 @@ export function useTrainingTotalsTable(showProject, showContract) {
         tableColumns.splice(0, 0, {
             id: "contract_number",
             label: "Contrato de obra",
-            width: 10,
+            width: 8,
         });
     }
 

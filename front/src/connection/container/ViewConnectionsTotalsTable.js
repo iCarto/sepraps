@@ -9,8 +9,12 @@ import {Spinner} from "base/shared/components";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 
-const ViewConnectionsTotalsTable = ({filter}) => {
-    const {tableColumns} = useConnectionsTotalsTable();
+const ViewConnectionsTotalsTable = ({
+    filter,
+    showProject = false,
+    showContract = false,
+}) => {
+    const {tableColumns} = useConnectionsTotalsTable(showProject, showContract);
 
     const [connectionsData, setConnectionsData] = useState(null);
     const [isDataObjectEmpty, setIsDataObjectEmpty] = useState(null);

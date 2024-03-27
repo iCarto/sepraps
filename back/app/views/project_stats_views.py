@@ -209,8 +209,9 @@ def get_social_component_trainings_multi_stats(request, group_code, format=None)
 
 
 TRAINING_STATS_SUM_EXPORT_FIELDS = {
-    "contract_number": {"name": "Contrato obras", "type": "string", "width": 15},
-    "project_code": {"name": "Proyecto", "type": "string", "width": 15},
+    "contract_number": {"name": "Contrato Obra", "type": "string", "width": 15},
+    "project_code": {"name": "Cod. Proyecto", "type": "string", "width": 15},
+    "project_name": {"name": "Localidad", "type": "string", "width": 30},
     "social_component_monitoring_name": {
         "name": "Componente",
         "type": "string",
@@ -373,7 +374,9 @@ def get_social_component_trainings_sum_stats(request, format=None):  # noqa: ARG
 
 
 CONNECTIONS_STATS_SUM_EXPORT_FIELDS = {
-    "project_code": {"name": "Proyecto", "type": "string", "width": 50},
+    "contract_number": {"name": "Contrato Obra", "type": "string", "width": 15},
+    "project_code": {"name": "Cod. Proyecto", "type": "string", "width": 15},
+    "project_name": {"name": "Localidad", "type": "string", "width": 30},
     "population": {"name": "Habitantes", "type": "integer", "width": 15},
     "number_of_households": {
         "name": "Viviendas totales",
@@ -425,15 +428,31 @@ def get_connections_total_stats(request, format=None):  # noqa: ARG001
     number_of_people_per_household = 5
 
     query = """
+            WITH contract_projects AS (
+                SELECT
+                    distinct on (p.id)
+                    p.id as project_id,
+                    p.code as project_code,
+                    cc.id as contract_id,
+                    cc.number as contract_number,
+                    cc.services,
+                    cc.execution_start_date
+                FROM project p
+                LEFT JOIN contract_project cp ON cp.project_id = p.id
+                LEFT JOIN construction_contract cc ON cc.id = cp.contract_id AND 'ejecucion_de_obra' = ANY(cc.services) AND cc.closed = False
+                ORDER BY p.id, cc.execution_start_date
+            )
             SELECT
                 conn.id as id,
+                cp.contract_number,
+                cp.project_code,
+                (SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = cp.project_id) as project_name,
                 conn.number_of_households * %(people_per_household)s as population,
                 conn.number_of_households as number_of_households,
                 conn.number_of_existing_connections as number_of_existing_connections,
                 conn.number_of_planned_connections as number_of_planned_connections,
                 conn.number_of_actual_connections as number_of_actual_connections,
                 round((cast(coalesce(conn.number_of_actual_connections, 0) + coalesce(conn.number_of_existing_connections, 0) as decimal) / coalesce(conn.number_of_households, 1)) * 100, 2)::numeric as connected_households_percentage,
-                CONCAT((SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = project.id), ' - ', project.code) as project_code,
                 CASE
                     WHEN conn.number_of_actual_connections IS NULL OR conn.number_of_actual_connections = 0 THEN NULL
                     ELSE conn.number_of_actual_connections * %(people_per_household)s
@@ -442,7 +461,7 @@ def get_connections_total_stats(request, format=None):  # noqa: ARG001
                 JOIN (
                     {join_query}
                 ) projects ON projects.project_id = conn.project_id
-                JOIN project ON conn.project_id = project.id
+                LEFT JOIN contract_projects cp ON cp.project_id = conn.project_id
             WHERE conn.active = True
             """
 
@@ -483,9 +502,18 @@ def get_connections_total_stats(request, format=None):  # noqa: ARG001
             ]
         ].sum(numeric_only=True)
 
-        result_df.at["Total", "connected_households_percentage"] = result_df[
+        """ result_df.at["Total", "connected_households_percentage"] = result_df[
             "connected_households_percentage"
-        ].mean()
+        ].mean() """
+
+        result_df.at["Total", "connected_households_percentage"] = (
+            result_df["number_of_actual_connections"].sum()
+            / (
+                result_df["number_of_existing_connections"].sum()
+                + result_df["number_of_planned_connections"].sum()
+            )
+            * 100
+        )
 
         # Convert to nullable integers
         result_df = result_df.astype(

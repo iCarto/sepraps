@@ -17,12 +17,12 @@ import {
     ViewContractStaffSubPage,
     ViewContractPostExecutionSubPage,
     ViewContractBuildingAnalysisOverview,
-    ViewContractSocialComponentsConnectionsTableContent,
     ViewContractBuildingComponentsAnalysisContent,
     CreateContractPaymentsWizard,
     ViewContractConnectionsAnalysisSubPage,
     ViewContractTrainingsAnalysisSubPage,
     ViewContractTrainingsAnalysisContent,
+    ViewContractConnectionsTableContent,
 } from "contract/container";
 import {
     UpdateContractContactPanel,
@@ -216,7 +216,7 @@ const contractRoutes = [
                 <Route
                     key="contract-project-analysis-connections-table"
                     path="overview"
-                    element={<ViewContractSocialComponentsConnectionsTableContent />}
+                    element={<ViewContractConnectionsTableContent />}
                 />
             </Route>
             <Route index element={<Navigate to="summary" replace />} />
