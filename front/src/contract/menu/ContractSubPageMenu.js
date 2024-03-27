@@ -102,22 +102,18 @@ const ContractSubPageMenu = ({contract}) => {
                 text="Productos"
                 icon={<RequestQuoteOutlinedIcon />}
             />
-            {contractSupervisionAreas.includes(SUPERVISION_AREAS.BUILDING) && (
-                <SubPageMenuListGroup
-                    id="building_supervision_area"
-                    headerTitle="Área Técnica"
-                    headerIcon={<HandymanOutlinedIcon />}
-                    items={buildingSupervisionAreaSubmenuItems}
-                />
-            )}
-            {contractSupervisionAreas.includes(SUPERVISION_AREAS.SOCIAL) && (
-                <SubPageMenuListGroup
-                    id="social_supervision_area"
-                    headerTitle="Área Social"
-                    headerIcon={<HandshakeOutlinedIcon />}
-                    items={socialSupervisionAreaSubmenuItems}
-                />
-            )}
+            <SubPageMenuListGroup
+                id="building_supervision_area"
+                headerTitle="Área Técnica"
+                headerIcon={<HandymanOutlinedIcon />}
+                items={buildingSupervisionAreaSubmenuItems}
+            />
+            <SubPageMenuListGroup
+                id="social_supervision_area"
+                headerTitle="Área Social"
+                headerIcon={<HandshakeOutlinedIcon />}
+                items={socialSupervisionAreaSubmenuItems}
+            />
         </SubPageMenu>
     );
 };
