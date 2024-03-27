@@ -13,14 +13,17 @@ const GenericChip = ({label, iconSrc = null, avatarText = null, tooltipText = ""
                     </Tooltip>
                 ) : (
                     <Tooltip title={tooltipText}>
-                        <Avatar sx={{fontWeight: "bold"}}>{avatarText || "-"}</Avatar>
+                        <Avatar sx={{backgroundColor: "white", fontWeight: "bold"}}>
+                            {avatarText || "-"}
+                        </Avatar>
                     </Tooltip>
                 )
             }
             label={label}
             sx={{
-                backgroundColor: "grey.300",
+                backgroundColor: "rgba(0, 0, 0, 0.4)",
                 fontSize: "0.75em",
+                color: "white",
             }}
         />
     );

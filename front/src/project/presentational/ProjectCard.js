@@ -21,6 +21,7 @@ import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
+import Grid from "@mui/material/Grid";
 
 //TODO: avoid duplicated constant.
 const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
@@ -33,7 +34,7 @@ const iconsContainerStyle = {
 
 const ProjectCard = ({entity: project, onClick = null}) => {
     const CardField = ({label, icon, value, badgeNote = null}) => (
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={1}>
             {badgeNote ? (
                 <Tooltip title={label + (badgeNote && ` (${badgeNote})`)}>
                     <Badge color="warning" variant="dot">
@@ -74,74 +75,95 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                         }}
                     />
                 )}
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        m: 1,
+                    }}
+                >
+                    <ProjectTypeClassChips projectWorks={project?.project_works} />
+                </Box>
             </div>
-            <CardContent>
+            <CardContent sx={{pb: 1}}>
                 <Typography variant="h5" color="primary">
                     {project.name}
                 </Typography>
                 <Typography variant="body1">{project.code}</Typography>
-                <Box sx={{my: 1}}>
-                    <ProgressBarSmall
-                        progressValue={NumberUtil.formatDecimalWithoutZeros(
-                            project.financial_progress_percentage
-                        )}
-                        tooltipLabel={
-                            project.financial_progress_percentage
-                                ? `Avance financiero: ${NumberUtil.formatDecimalWithoutZeros(
-                                      project.financial_progress_percentage
-                                  )}%`
-                                : NO_BCM_DATA_MESSAGE
-                        }
-                        progressStyle={{mb: 1}}
-                    />
-                    <ProgressBarSmall
-                        progressValue={NumberUtil.formatDecimalWithoutZeros(
-                            project.physical_progress_percentage
-                        )}
-                        tooltipLabel={
-                            project.physical_progress_percentage
-                                ? `Avance físico: ${NumberUtil.formatDecimalWithoutZeros(
-                                      project.physical_progress_percentage
-                                  )}%`
-                                : NO_BCM_DATA_MESSAGE
-                        }
-                    />
-                </Box>
-                <ProjectTypeClassChips projectWorks={project?.project_works} />
+                <Grid container sx={{my: 1}}>
+                    <Grid item sx={12} md={12}>
+                        <ProgressBarSmall
+                            progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                project.financial_progress_percentage
+                            )}
+                            tooltipLabel={
+                                project.financial_progress_percentage
+                                    ? `Avance financiero: ${NumberUtil.formatDecimalWithoutZeros(
+                                          project.financial_progress_percentage
+                                      )}%`
+                                    : NO_BCM_DATA_MESSAGE
+                            }
+                            progressStyle={{mb: 1}}
+                        />
+                        <ProgressBarSmall
+                            progressValue={NumberUtil.formatDecimalWithoutZeros(
+                                project.physical_progress_percentage
+                            )}
+                            tooltipLabel={
+                                project.physical_progress_percentage
+                                    ? `Avance físico: ${NumberUtil.formatDecimalWithoutZeros(
+                                          project.physical_progress_percentage
+                                      )}%`
+                                    : NO_BCM_DATA_MESSAGE
+                            }
+                        />
+                    </Grid>
+                </Grid>
             </CardContent>
             <CardContent sx={{bgcolor: "grey.100"}}>
                 <Stack spacing={1}>
-                    <CardField
-                        label="Ubicación"
-                        icon={<LocationOnOutlinedIcon fontSize="small" />}
-                        value={project.location}
-                    />
-                    <CardField
-                        label="Fecha de inicio"
-                        icon={<DateRangeOutlinedIcon fontSize="small" />}
-                        value={DateUtil.formatDate(project.init_date)}
-                    />
-                    <CardField
-                        label="Contrato"
-                        icon={<WorkOutlineOutlinedIcon fontSize="small" />}
-                        value={
-                            project.construction_contract_number ||
-                            project.construction_contract?.bid_request_number
-                        }
-                    />
-                    <CardField
-                        label="Programa de financiación"
-                        icon={<AccountBalanceOutlinedIcon fontSize="small" />}
-                        value={
-                            project.financing_program_name ||
-                            project.construction_contract?.financing_program?.short_name
-                        }
-                    />
-                    <CardField
-                        label="Trabajos"
-                        icon={<AssignmentOutlinedIcon fontSize="small" />}
-                        value={project.description}
-                    />
+                    <Typography variant="body2">{project.description}</Typography>
+                    <Grid container>
+                        <Grid item xs={12} md={6}>
+                            <Stack spacing={1}>
+                                <CardField
+                                    label="Contrato"
+                                    icon={<WorkOutlineOutlinedIcon fontSize="small" />}
+                                    value={
+                                        project.construction_contract_number ||
+                                        project.construction_contract
+                                            ?.bid_request_number
+                                    }
+                                />
+                                <CardField
+                                    label="Programa de financiación"
+                                    icon={
+                                        <AccountBalanceOutlinedIcon fontSize="small" />
+                                    }
+                                    value={
+                                        project.financing_program_name ||
+                                        project.construction_contract?.financing_program
+                                            ?.short_name
+                                    }
+                                />
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Stack spacing={1}>
+                                <CardField
+                                    label="Fecha de inicio"
+                                    icon={<DateRangeOutlinedIcon fontSize="small" />}
+                                    value={DateUtil.formatDate(project.init_date)}
+                                />
+                                <CardField
+                                    label="Ubicación"
+                                    icon={<LocationOnOutlinedIcon fontSize="small" />}
+                                    value={project.location}
+                                />
+                            </Stack>
+                        </Grid>
+                    </Grid>
                 </Stack>
             </CardContent>
         </Card>
