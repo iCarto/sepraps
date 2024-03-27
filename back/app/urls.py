@@ -98,7 +98,11 @@ urlpatterns = [
     path("stats/projectbyphasemap", stats_views.get_projects_by_phase_map),
     path("paymentstats/temporal", payment_stats_views.get_payment_stats_temporal),
     path("paymentstats/payments", payment_stats_views.get_payment_stats_totals),
-    path("certificationstats", certification_stats_views.get_certification_stats),
+    path(
+        "certificationstats/temporal",
+        certification_stats_views.get_certification_stats_temporal,
+    ),
+    # path("certificationstats/certifications", certification_stats_views.get_certification_stats_totals),
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
     path(

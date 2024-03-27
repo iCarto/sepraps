@@ -4,9 +4,9 @@ import {AuthApiService} from "../../base/api/service";
 const basePath = "/api/app/certificationstats";
 
 const CertificationStatsService = {
-    getCertificationStats(filter) {
+    getCertificationStatsTemporal(filter) {
         return AuthApiService.get(
-            `${basePath}?${ServiceUtil.getFilterQueryString(filter)}`
+            `${basePath}/temporal?${ServiceUtil.getFilterQueryString(filter)}`
         ).then(response => {
             return response;
         });

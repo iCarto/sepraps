@@ -23,7 +23,7 @@ const ViewCertificationsByProjectFinancialChart = ({project}) => {
             contract.amended_expected_execution_end_date ||
             contract.expected_execution_end_date;
 
-        CertificationStatsService.getCertificationStats({
+        CertificationStatsService.getCertificationStatsTemporal({
             project: project.id,
             start_date: DateUtil.formatDateForAPI(startDate),
             end_date: DateUtil.formatDateForAPI(endDate),
