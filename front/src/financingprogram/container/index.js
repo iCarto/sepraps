@@ -23,3 +23,6 @@ export {
 export {
     default as ViewFinancingProgramPaymentsSubPage,
 } from "./ViewFinancingProgramPaymentsSubPage";
+export {
+    default as ViewFinancingProgramCertificationsSubPage,
+} from "./ViewFinancingProgramCertificationsSubPage";

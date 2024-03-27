@@ -21,6 +21,7 @@ import {
     ViewProjectCertificationsSubPage,
     ViewProjectBuildingComponentsAnalysisContent,
     ViewProjectConnectionsSubPage,
+    ViewProjectCertificationsAnalysisContent,
 } from "project/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
 import {MapConfigProvider} from "base/geo/provider";
@@ -149,7 +150,7 @@ const projectRoutes = [
                 <Route
                     key="project-certifications-analysis"
                     path="analysis"
-                    element={<ViewCertificationsAnalysisContent />}
+                    element={<ViewProjectCertificationsAnalysisContent />}
                 />
             </Route>
             <Route

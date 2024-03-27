@@ -11,6 +11,15 @@ const CertificationStatsService = {
             return response;
         });
     },
+
+    getCertificationStatsTotals(filter, format = null) {
+        return AuthApiService.get(
+            `${basePath}/certifications?${ServiceUtil.getFilterQueryString(filter)}`,
+            ServiceUtil.getAcceptHeader(format)
+        ).then(response => {
+            return response;
+        });
+    },
 };
 
 export default CertificationStatsService;

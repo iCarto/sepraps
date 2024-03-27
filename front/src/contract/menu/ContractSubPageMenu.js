@@ -49,6 +49,11 @@ const ContractSubPageMenu = ({contract}) => {
             text: "Construcción",
             urlSlug: "buildingcomponents",
         },
+        {
+            to: `${basePath}/certifications/analysis`,
+            text: "Certificaciones",
+            urlSlug: "certifications",
+        },
     ];
 
     const socialSupervisionAreaSubmenuItems = [

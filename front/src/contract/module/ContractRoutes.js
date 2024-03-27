@@ -24,6 +24,8 @@ import {
     ViewContractTrainingsAnalysisContent,
     ViewContractConnectionsTableContent,
     ViewContractPaymentsAnalysisContent,
+    ViewContractCertificationsAnalysisContent,
+    ViewContractCertificationsAnalysisSubPage,
 } from "contract/container";
 import {
     UpdateContractContactPanel,
@@ -165,7 +167,7 @@ const contractRoutes = [
                 />
             </Route>
             <Route
-                key="contract-project-analysis"
+                key="contract-project-buildingcomponents"
                 path="buildingcomponents"
                 element={<ViewContractBuildingAnalysisSubPage />}
             >
@@ -178,6 +180,17 @@ const contractRoutes = [
                     key="contract-project-analysis-chart"
                     path="analysis"
                     element={<ViewContractBuildingComponentsAnalysisContent />}
+                />
+            </Route>
+            <Route
+                key="contract-project-certifications"
+                path="certifications"
+                element={<ViewContractCertificationsAnalysisSubPage />}
+            >
+                <Route
+                    key="contract-project-certifications-overview"
+                    path="analysis"
+                    element={<ViewContractCertificationsAnalysisContent />}
                 />
             </Route>
             <Route

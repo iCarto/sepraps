@@ -102,7 +102,10 @@ urlpatterns = [
         "certificationstats/temporal",
         certification_stats_views.get_certification_stats_temporal,
     ),
-    # path("certificationstats/certifications", certification_stats_views.get_certification_stats_totals),
+    path(
+        "certificationstats/certifications",
+        certification_stats_views.get_certification_stats_totals,
+    ),
     path("notifications", notifications_views.get_notifications),
     path("comingevents", events_views.get_coming_events),
     path(

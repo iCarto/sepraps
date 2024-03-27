@@ -64,3 +64,6 @@ export {
 export {
     default as ViewProjectConnectionsSubPage,
 } from "./ViewProjectConnectionsSubPage";
+export {
+    default as ViewProjectCertificationsAnalysisContent,
+} from "./ViewProjectCertificationsAnalysisContent";

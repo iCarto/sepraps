@@ -55,3 +55,9 @@ export {
 export {
     default as ViewContractPaymentsAnalysisContent,
 } from "./ViewContractPaymentsAnalysisContent";
+export {
+    default as ViewContractCertificationsAnalysisContent,
+} from "./ViewContractCertificationsAnalysisContent";
+export {
+    default as ViewContractCertificationsAnalysisSubPage,
+} from "./ViewContractCertificationsAnalysisSubPage";

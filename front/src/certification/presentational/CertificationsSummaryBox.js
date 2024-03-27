@@ -10,10 +10,15 @@ import {LightHeading} from "base/ui/headings/components";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import {PRODUCT_STATUS_PAID} from "payment/model";
 
 const getTotal = (items, totalColumn) => {
     return items
-        .map(item => (item[totalColumn] != null ? parseInt(item[totalColumn]) : 0))
+        .map(item =>
+            item[totalColumn] != null && item.payment.status === PRODUCT_STATUS_PAID
+                ? parseInt(item[totalColumn])
+                : 0
+        )
         .reduce((sum, i) => sum + i, 0);
 };
 

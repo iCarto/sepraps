@@ -3,6 +3,7 @@ import {
     ListFinancingProgramsPage,
     ManageFinancingProgramsPage,
     ViewFinancingProgramBuildingComponentsSubPage,
+    ViewFinancingProgramCertificationsSubPage,
     ViewFinancingProgramConnectionsSubPage,
     ViewFinancingProgramPage,
     ViewFinancingProgramPanel,
@@ -28,7 +29,7 @@ const financingProgramRoutes = [
                 element={<ViewFinancingProgramSummarySubPage />}
             ></Route>
             <Route
-                key="financingprogram-building-components"
+                key="financingprogram-payments"
                 path="payments"
                 element={<ViewFinancingProgramPaymentsSubPage />}
             />
@@ -36,6 +37,11 @@ const financingProgramRoutes = [
                 key="financingprogram-building-components"
                 path="buildingcomponents/overview"
                 element={<ViewFinancingProgramBuildingComponentsSubPage />}
+            />
+            <Route
+                key="financingprogram-certifications"
+                path="certifications/overview"
+                element={<ViewFinancingProgramCertificationsSubPage />}
             />
             <Route
                 key="financingprogram-trainings"

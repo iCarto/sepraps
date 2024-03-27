@@ -10,3 +10,6 @@ export {default as ViewCertificationsOverview} from "./ViewCertificationsOvervie
 export {
     default as ViewOrUpdateCertificationDataContent,
 } from "./ViewOrUpdateCertificationDataContent";
+export {
+    default as ViewCertificationsTotalsTable,
+} from "./ViewCertificationsTotalsTable";

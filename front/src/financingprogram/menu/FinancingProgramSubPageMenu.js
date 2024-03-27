@@ -19,6 +19,11 @@ const FinancingProgramSubPageMenu = ({financingProgram}) => {
             text: "Construcción",
             urlSlug: "buildingcomponents",
         },
+        {
+            to: `${basePath}/certifications/overview`,
+            text: "Certificaciones",
+            urlSlug: "certifications",
+        },
     ];
 
     const socialSupervisionAreaSubmenuItems = [

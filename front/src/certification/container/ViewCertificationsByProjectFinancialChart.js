@@ -12,33 +12,27 @@ import {LineChart} from "base/chart/components";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-const ViewCertificationsByProjectFinancialChart = ({project}) => {
+const ViewCertificationsByProjectFinancialChart = ({
+    filter,
+    filterStartDate,
+    filterEndDate,
+    maxAmount,
+    maxAmendedAmount,
+    maxEndDate,
+    maxAmendedEndDate,
+}) => {
     const [chartData, setChartData] = useState(null);
 
-    const contract = project?.construction_contract;
-
     useEffect(() => {
-        const startDate = project.init_date;
-        const endDate =
-            contract.amended_expected_execution_end_date ||
-            contract.expected_execution_end_date;
-
         CertificationStatsService.getCertificationStatsTemporal({
-            project: project.id,
-            start_date: DateUtil.formatDateForAPI(startDate),
-            end_date: DateUtil.formatDateForAPI(endDate),
+            ...filter,
+            start_date: DateUtil.formatDateForAPI(filterStartDate),
+            end_date: DateUtil.formatDateForAPI(filterEndDate),
         }).then(chartData => {
             const parsedChartData = PaymentFinancialChartUtil.parseChartData(chartData);
             setChartData(parsedChartData);
         });
     }, []);
-
-    const maxAmount = project.bm_total_expected_amount;
-
-    // TO-DO(cmatin): update when project amendments (actas) are ready
-    const maxAmendedAmount = 0;
-    const maxEndDate = contract.expected_execution_end_date;
-    const maxAmendedEndDate = contract.amended_expected_execution_end_date;
 
     const chartOptions = {
         scales: ContractFinancialChartUtil.getScalesConfig(),
