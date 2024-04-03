@@ -151,6 +151,11 @@ export function useContractTable(display = "regular") {
                 id: "services_label",
                 label: "Servicios prestados",
                 width: 20,
+                formatFunction: element => {
+                    return (
+                        <ContractServiceChips serviceLabels={element?.services_label} />
+                    );
+                },
             },
         ];
 

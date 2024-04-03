@@ -10,7 +10,7 @@ const ViewConnectionsOverview = () => {
     return (
         <PaperComponent>
             <Grid container>
-                <Grid item xs="6">
+                <Grid item xs={6}>
                     <ConnectionSummaryBox connection={connection} />
                 </Grid>
             </Grid>

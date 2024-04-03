@@ -5,7 +5,7 @@ import {
 } from "base/ui/menu";
 import {SelectProjectDropDown} from "project/menu";
 
-import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import FolderOpenIconOutlined from "@mui/icons-material/FolderOpenOutlined";
 import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
@@ -67,7 +67,7 @@ const ProjectSubPageMenu = ({project}) => {
                 key="project-detail"
                 to={`${basePath}/summary`}
                 text="Resumen"
-                icon={<InventoryRoundedIcon />}
+                icon={<InfoOutlinedIcon />}
             />
             <SubPageMenuListItemButton
                 key="project-location"

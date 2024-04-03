@@ -2,10 +2,7 @@ import {useEffect, useState} from "react";
 
 import {ProjectStatsService} from "project/service";
 
-import {
-    BuildingComponentsFinancialData,
-    BuildingComponentsProgress,
-} from "buildingComponent/presentational";
+import {BuildingComponentsFinancialData} from "buildingComponent/presentational";
 import {Spinner} from "base/shared/components";
 import {AlertError} from "base/error/components";
 
@@ -27,7 +24,7 @@ const ViewBuildingComponentsFinancialData = ({filter}) => {
     }, [filter]);
 
     return (
-        <Grid container spacing={2}>
+        <Grid container>
             <AlertError error={error} />
             {financialData ? (
                 <BuildingComponentsFinancialData financialData={financialData} />

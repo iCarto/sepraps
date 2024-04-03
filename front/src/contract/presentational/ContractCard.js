@@ -52,6 +52,7 @@ const ContractCard = ({entity: contract, onClick = null}) => {
                 onClick(contract.id);
             }}
             sx={{cursor: onClick ? "pointer" : "inherit"}}
+            elevation={3}
         >
             <CardContent>
                 <Typography variant="h5" gutterBottom color="primary">

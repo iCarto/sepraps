@@ -19,10 +19,10 @@ const BuildingComponentsFinancialDataBox = ({
 }) => {
     return (
         <ContainerGridWithBorder>
-            <Grid item xs={10} pl="1rem">
+            <Grid item xs={9} pl="1rem">
                 <LightHeading>{headline}</LightHeading>
                 <Stack direction="row" alignItems="baseline">
-                    <Typography component="span" fontSize={42}>
+                    <Typography component="span" fontSize={34}>
                         {NumberUtil.formatMillions(mainValues.first)}
                         <Typography component="span" fontSize={12}>
                             {CURRENCY_SYMBOL}
@@ -30,7 +30,7 @@ const BuildingComponentsFinancialDataBox = ({
                     </Typography>
                     <Typography
                         component="span"
-                        fontSize={36}
+                        fontSize={24}
                         ml={1}
                         color={theme.palette.grey[600]}
                     >
@@ -42,7 +42,7 @@ const BuildingComponentsFinancialDataBox = ({
                 </Stack>
                 {subheading}
             </Grid>
-            <Grid item container xs={2} justifyContent="flex-start" alignItems="center">
+            <Grid item container xs={3} justifyContent="flex-start" alignItems="center">
                 <SimplePieChart
                     percentageValue={percentage.value}
                     percentageLabel={percentage.label}

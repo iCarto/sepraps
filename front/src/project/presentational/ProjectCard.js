@@ -51,6 +51,7 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                 onClick(project.id);
             }}
             sx={{cursor: onClick ? "pointer" : "inherit"}}
+            elevation={3}
         >
             <div style={{position: "relative"}}>
                 <ImagePreview

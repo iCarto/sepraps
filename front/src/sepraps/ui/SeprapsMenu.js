@@ -5,24 +5,24 @@ import MenuItem from "@mui/material/MenuItem";
 const SeprapsMenu = () => {
     const menuItems = [
         {
-            name: "Contratos",
-            to: "contracts",
-            pathname: "contracts",
-        },
-        {
             name: "Proyectos",
             to: "projects",
             pathname: "projects",
         },
         {
-            name: "Prestadores de servicios",
-            to: "providers",
-            pathname: "providers",
+            name: "Contratos",
+            to: "contracts",
+            pathname: "contracts",
         },
         {
             name: "Programas",
             to: "financingprograms",
             pathname: "financingprograms",
+        },
+        {
+            name: "Prestadores de servicios",
+            to: "providers",
+            pathname: "providers",
         },
         {
             name: "Informes de viaje",

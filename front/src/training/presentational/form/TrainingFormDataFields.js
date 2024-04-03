@@ -82,7 +82,7 @@ const TrainingFormDataFields = ({}) => {
             <Grid item xs={6}>
                 <FormSelect
                     name="contractor"
-                    label="Contratista"
+                    label="Consultora"
                     options={contractorOptions}
                     showEmptyOption
                     rules={{required: "Este campo es obligatorio"}}
