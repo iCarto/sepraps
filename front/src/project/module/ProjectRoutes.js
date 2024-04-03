@@ -22,6 +22,8 @@ import {
     ViewProjectBuildingComponentsAnalysisContent,
     ViewProjectConnectionsSubPage,
     ViewProjectCertificationsAnalysisContent,
+    ViewProjectQuestionnairesSubPage,
+    UpdateProjectQuestionnaireInstancePanel,
 } from "project/container";
 import {UpdateMilestonePanel, ViewMilestonePanel} from "milestone/container";
 import {MapConfigProvider} from "base/geo/provider";
@@ -212,6 +214,17 @@ const projectRoutes = [
                 path="fieldreport/:fieldReportId?"
                 element={<ViewProjectFieldReportSubPage />}
             />
+            <Route
+                key="project-questionnaire-detail"
+                path="questionnaires/:questionnaireCode"
+                element={<ViewProjectQuestionnairesSubPage />}
+            >
+                <Route
+                    key="project-questionnaire-instance-edit"
+                    path=":instanceId/:action"
+                    element={<UpdateProjectQuestionnaireInstancePanel />}
+                />
+            </Route>
             <Route index element={<Navigate to="summary" replace />} />
         </Route>
         <Route

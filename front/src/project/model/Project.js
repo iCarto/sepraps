@@ -17,6 +17,7 @@ import {
     provider_api_adapter,
     provider_view_adapter,
 } from "provider/model";
+import {createQuestionnaires, questionnaires_api_adapter} from "questionnaire/model";
 
 class Projects extends Array {}
 
@@ -61,6 +62,11 @@ const project_api_adapter = project => {
     if (project["milestones"]) {
         project["milestones"] = createMilestones(
             milestones_api_adapter(project["milestones"])
+        );
+    }
+    if (project["questionnaires"]) {
+        project["questionnaires"] = createQuestionnaires(
+            questionnaires_api_adapter(project["questionnaires"])
         );
     }
 
@@ -137,6 +143,7 @@ const createProject = ({
     created_by = "",
     created_at = null,
     updated_at = null,
+    questionnaires = [],
 } = {}) => {
     const publicApi = {
         id,
@@ -165,6 +172,7 @@ const createProject = ({
         created_by,
         created_at,
         updated_at,
+        questionnaires,
     };
 
     return Object.freeze(publicApi);

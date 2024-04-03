@@ -20,6 +20,9 @@ from app.serializers.project_work_serializer import ProjectWorkSerializer
 from app.serializers.provider_serializer import ProviderSummarySerializer
 from app.util import format_decimal
 from documents.serializers import MediaUrlSerializer
+from questionnaires.serializers.questionnaire_serializer import (
+    QuestionnaireShortSerializer,
+)
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -47,6 +50,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "physical_progress_percentage",
             "bm_total_expected_amount",
             "number_of_bcomponents",
+            "questionnaires",
         )
 
     code = serializers.CharField(required=False, read_only=True)
@@ -73,6 +77,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         required=False, read_only=True
     )
     number_of_bcomponents = serializers.SerializerMethodField()
+    questionnaires = QuestionnaireShortSerializer(many=True, read_only=True)
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""

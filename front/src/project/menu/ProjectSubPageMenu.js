@@ -12,6 +12,7 @@ import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 
 import ChromeReaderModeOutlinedIcon from "@mui/icons-material/ChromeReaderModeOutlined";
+import {QuestionnairesMenu} from "questionnaire/presentational";
 
 const ProjectSubPageMenu = ({project}) => {
     const basePath = `/projects/list/${project?.id}`;
@@ -97,6 +98,10 @@ const ProjectSubPageMenu = ({project}) => {
                 headerTitle="Área general"
                 headerIcon={<ChromeReaderModeOutlinedIcon />}
                 items={generalAreaSubmenuItems}
+            />
+            <QuestionnairesMenu
+                questionnaires={project?.questionnaires}
+                basePath={`/projects/list/${project?.id}`}
             />
         </SubPageMenu>
     );
