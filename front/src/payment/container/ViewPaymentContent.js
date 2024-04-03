@@ -10,12 +10,13 @@ import {ViewOrUpdatePaymentDataContent, ViewPaymentCertificationsContent} from "
 import {ViewPaymentProductsContent} from "product/container";
 import {ViewPaymentCommentsContent} from "comment/container";
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
-import {ListSelector} from "base/shared/components";
+import {ListSelector, Spinner} from "base/shared/components";
 import {EntityContent} from "base/entity/components/presentational";
 import {SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
 import {PaymentSelectorItem, PaymentStatusChip} from "payment/presentational";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
+import {AlertError} from "base/error/components";
 
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -29,8 +30,11 @@ const ViewPaymentContent = () => {
     const navigate = useNavigateWithReload();
     const basePath = RouterUtil.getPathForSegment(location, "payment/list");
 
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [payment, setPayment] = useState(null);
+
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const paymentIdsWithNotifications = paymentNotifications.map(
         item => item.context.payment_id
@@ -43,18 +47,35 @@ const ViewPaymentContent = () => {
     useEffect(() => {
         setPayment(null);
         if (paymentId) {
-            PaymentService.get(paymentId).then(data => {
-                setPayment(data);
-            });
+            setIsLoading(true);
+            PaymentService.get(paymentId)
+                .then(data => {
+                    setPayment(data);
+                    setError(null);
+                    setIsLoading(false);
+                })
+                .catch(error => {
+                    handleError(error);
+                    setIsLoading(false);
+                });
         } else if (payments?.length > 0) {
             navigate(payments[0].id.toString());
         }
     }, [paymentId, location.state?.lastRefreshDate]);
 
     const handleDelete = () => {
-        PaymentService.delete(payment.id).then(() => {
-            navigate(basePath, true);
-        });
+        PaymentService.delete(payment.id)
+            .then(() => {
+                navigate(basePath, true);
+            })
+            .catch(error => {
+                handleError(error);
+            });
+    };
+
+    const handleError = error => {
+        console.log(error);
+        setError(error);
     };
 
     const actions = [
@@ -104,6 +125,8 @@ const ViewPaymentContent = () => {
             }
         >
             <ContentLayoutWithAside>
+                <AlertError error={error} />
+                {isLoading ? <Spinner /> : null}
                 {payment && (
                     <EntityContent
                         entityLabel="Producto"

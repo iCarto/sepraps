@@ -76,28 +76,30 @@ const TotalsSpanningTable = ({dataRows, tableColumns, total, totalTooltip = ""})
                             </TableRow>
                         );
                     })}
-                    <TableCell
-                        colSpan={3}
-                        align="right"
-                        sx={{backgroundColor: "grey.100", fontWeight: 600}}
-                    >
-                        Total
-                    </TableCell>
-                    <Tooltip title={totalTooltip}>
+                    <TableRow>
                         <TableCell
-                            sx={{
-                                display: "flex",
-                                direction: "row",
-                                justifyContent: "flex-end",
-                                alignItems: "center",
-                                backgroundColor: "grey.100",
-                                fontWeight: 600,
-                                color: totalTooltip ? "error.dark" : "inherit",
-                            }}
+                            colSpan={3}
+                            align="right"
+                            sx={{backgroundColor: "grey.100", fontWeight: 600}}
                         >
-                            {total}
+                            Total
                         </TableCell>
-                    </Tooltip>
+                        <Tooltip title={totalTooltip}>
+                            <TableCell
+                                sx={{
+                                    display: "flex",
+                                    direction: "row",
+                                    justifyContent: "flex-end",
+                                    alignItems: "center",
+                                    backgroundColor: "grey.100",
+                                    fontWeight: 600,
+                                    color: totalTooltip ? "error.dark" : "inherit",
+                                }}
+                            >
+                                {total}
+                            </TableCell>
+                        </Tooltip>
+                    </TableRow>
                 </TableBody>
             </Table>
         </TableContainer>

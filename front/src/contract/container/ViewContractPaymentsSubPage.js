@@ -31,16 +31,14 @@ const ViewContractPaymentsSubPage = () => {
     };
 
     useEffect(() => {
-        if (!paymentsForContract) {
-            ContractService.getPaymentsList(contractId)
-                .then(payments => {
-                    setPaymentsForContract(payments);
-                })
-                .catch(error => {
-                    console.log({error});
-                    setError(error);
-                });
-        }
+        ContractService.getPaymentsList(contractId)
+            .then(payments => {
+                setPaymentsForContract(payments);
+            })
+            .catch(error => {
+                console.log({error});
+                setError(error);
+            });
     }, [contractId, location.state?.lastRefreshDate]);
 
     useEffect(() => {

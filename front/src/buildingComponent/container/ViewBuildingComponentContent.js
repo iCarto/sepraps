@@ -17,12 +17,13 @@ import {BuildingComponentNameForm} from "buildingComponent/presentational/form";
 import ComponentStatusChip, {
     getStatusIcon,
 } from "component/presentational/ComponentStatusChip";
+import {DomainProvider} from "sepraps/domain/provider";
 import {ViewOrUpdateCommentsContent} from "component/container";
 import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
 import {EntityContent} from "base/entity/components/presentational";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
-import {ListSelector, ListSelectorItem} from "base/shared/components";
+import {ListSelector, ListSelectorItem, Spinner} from "base/shared/components";
 import {SectionCardHeaderAction} from "base/ui/section/components";
 import {DeleteItemDialog} from "base/delete/components";
 import {AlertError} from "base/error/components";
@@ -30,7 +31,6 @@ import {AlertError} from "base/error/components";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {DomainProvider} from "sepraps/domain/provider";
 
 const ViewBuildingComponentContent = () => {
     const {project, bcMonitorings} = useOutletContext();
@@ -43,17 +43,23 @@ const ViewBuildingComponentContent = () => {
     const [bCMonitoring, setBCMonitoring] = useState(null);
     const [headerMode, setHeaderMode] = useState("view");
     const [openDialog, setOpenDialog] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         setBCMonitoring(null);
         if (buildingComponentId) {
+            setIsLoading(true);
             BuildingComponentMonitoringService.get(buildingComponentId)
                 .then(data => {
                     setBCMonitoring(data);
+                    setError(null);
+                    setIsLoading(false);
                 })
                 .catch(error => {
                     handleError(error);
+                    setIsLoading(false);
                 });
         } else if (bcMonitorings?.length > 0) {
             navigate(bcMonitorings[0].id.toString());
@@ -123,6 +129,8 @@ const ViewBuildingComponentContent = () => {
             selectorSize={3}
         >
             <ContentLayoutWithAside>
+                <AlertError error={error} />
+                {isLoading ? <Spinner /> : null}
                 {bCMonitoring && (
                     <EntityContent
                         entityLabel="Componente"
@@ -140,7 +148,6 @@ const ViewBuildingComponentContent = () => {
                             />
                         }
                     >
-                        <AlertError error={error} />
                         <ViewOrUpdateBuildingComponentMonitoringDataContent
                             bcMonitoring={bCMonitoring}
                         />

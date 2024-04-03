@@ -7,7 +7,7 @@ import {useNavigateWithReload} from "base/navigation/hooks";
 import {SocialComponentMonitoringService} from "socialComponentMonitoring/service";
 
 import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main";
-import {ListSelector, ListSelectorItem} from "base/shared/components";
+import {ListSelector, ListSelectorItem, Spinner} from "base/shared/components";
 import ComponentStatusChip, {
     getStatusIcon,
 } from "component/presentational/ComponentStatusChip";
@@ -18,6 +18,7 @@ import {ViewOrUpdateCommentsContent} from "component/container";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
 import {DeleteItemDialog} from "base/delete/components";
 import {EntityContent} from "base/entity/components/presentational";
+import {AlertError} from "base/error/components";
 
 import {SectionCardHeaderAction} from "base/ui/section/components";
 
@@ -34,37 +35,49 @@ const ViewSocialComponentContent = () => {
 
     const [socialComponentMonitoring, setSocialComponentMonitoring] = useState(null);
     const [trainings, setTrainings] = useState(null);
-    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-    const handleDelete = () => {
-        SocialComponentMonitoringService.delete(socialComponentMonitoring.id).then(
-            () => {
-                navigate(basePath, true);
-            }
-        );
-    };
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         setSocialComponentMonitoring(null);
         if (socialComponentId) {
+            setIsLoading(true);
             SocialComponentMonitoringService.get(socialComponentId)
                 .then(data => {
                     setSocialComponentMonitoring(data);
+                    setError(null);
+                    setIsLoading(false);
                 })
                 .catch(error => {
-                    console.log(error);
+                    handleError(error);
+                    setIsLoading(false);
                 });
-            SocialComponentMonitoringService.getTrainings(socialComponentId)
-                .then(data => {
+            SocialComponentMonitoringService.getTrainings(socialComponentId).then(
+                data => {
                     setTrainings(data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+                }
+            );
         } else if (scMonitorings?.length > 0) {
             navigate(scMonitorings[0].id.toString());
         }
     }, [socialComponentId, location.state?.lastRefreshDate]);
+
+    const handleDelete = () => {
+        SocialComponentMonitoringService.delete(socialComponentMonitoring.id)
+            .then(() => {
+                navigate(basePath, true);
+            })
+            .catch(error => {
+                handleError(error);
+            });
+    };
+
+    const handleError = error => {
+        console.log(error);
+        setError(error);
+    };
 
     const actions = [
         <SectionCardHeaderAction
@@ -102,6 +115,8 @@ const ViewSocialComponentContent = () => {
             selectorSize={3}
         >
             <ContentLayoutWithAside>
+                <AlertError error={error} />
+                {isLoading ? <Spinner /> : null}
                 {socialComponentMonitoring && (
                     <EntityContent
                         entityLabel="Componente"

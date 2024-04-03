@@ -14,11 +14,14 @@ import {ContentLayoutWithAside, SubpageWithSelectorContainer} from "base/ui/main
 import {ListSelector, ListSelectorItem, Spinner} from "base/shared/components";
 import {EntityContent} from "base/entity/components/presentational";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
+import {SectionCardHeaderAction} from "base/ui/section/components";
 import {ViewOrUpdateFilesDataContent} from "base/file/components";
 import {ViewOrUpdateCommentsContent} from "component/container";
+import {DeleteItemDialog} from "base/delete/components";
 import {AlertError} from "base/error/components";
 
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const ViewCertificationContent = () => {
     const {project, certifications} = useOutletContext();
@@ -29,21 +32,23 @@ const ViewCertificationContent = () => {
     const basePath = RouterUtil.getPathForSegment(location, "certifications/list");
 
     const [certification, setCertification] = useState(null);
+
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         setCertification(null);
-        setIsLoading(true);
         if (certificationId) {
+            setIsLoading(true);
             CertificationService.get(certificationId)
                 .then(data => {
                     setCertification(data);
+                    setError(null);
                     setIsLoading(false);
                 })
                 .catch(error => {
-                    console.log(error);
-                    setError(error);
+                    handleError(error);
                     setIsLoading(false);
                 });
         } else if (certifications?.length > 0) {
@@ -51,6 +56,33 @@ const ViewCertificationContent = () => {
         }
         setIsLoading(false);
     }, [certificationId, location.state?.lastRefreshDate]);
+
+    const handleDelete = () => {
+        CertificationService.delete(certification.id)
+            .then(() => {
+                navigate(basePath, true);
+            })
+            .catch(error => {
+                handleError(error);
+            });
+    };
+
+    const handleError = error => {
+        console.log(error);
+        setError(error);
+    };
+
+    const actions = [
+        <SectionCardHeaderAction
+            key="delete"
+            name="delete"
+            text="Eliminar"
+            icon={<DeleteIcon color="error" />}
+            onClick={() => {
+                setIsDeleteDialogOpen(true);
+            }}
+        />,
+    ];
 
     return (
         <SubpageWithSelectorContainer
@@ -94,6 +126,7 @@ const ViewCertificationContent = () => {
                                 value={certification.payment?.status}
                             />
                         }
+                        actions={actions}
                     >
                         <ViewOrUpdateCertificationDataContent
                             project={project}
@@ -107,6 +140,11 @@ const ViewCertificationContent = () => {
                             service={CertificationService}
                         />
                         <EntityAuditSection entity={certification} />
+                        <DeleteItemDialog
+                            isDialogOpen={isDeleteDialogOpen}
+                            setIsDialogOpen={setIsDeleteDialogOpen}
+                            onDelete={handleDelete}
+                        />
                     </EntityContent>
                 )}
             </ContentLayoutWithAside>
