@@ -18,7 +18,7 @@ const entityService = createEntityService(
 
 const FinancingProgramService = {
     getList(filter, sort, order, format = null) {
-        return entityService.getList(filter, null, sort, order, format);
+        return entityService.getList(filter, null, sort, order, null, format);
     },
 
     getPaginatedList(filter, page, sort, order) {

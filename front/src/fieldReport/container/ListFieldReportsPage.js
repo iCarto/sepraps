@@ -22,6 +22,7 @@ const ListFieldReportsPage = () => {
                 filterForm={<FieldReportFilterForm />}
                 basePath="field-reports"
                 elementActions={[deleteAction]}
+                downloadOptions={["csv"]}
             />
         </>
     );

@@ -20,6 +20,7 @@ const ListProjectsPage = () => {
             card={ProjectCard}
             layerHook={useProjectLayer}
             layerDefaultDiscriminator={discriminators.STATUS}
+            downloadOptions={["csv"]}
         />
     );
 };

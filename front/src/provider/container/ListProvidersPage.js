@@ -22,6 +22,7 @@ const ListProvidersPage = () => {
                 filterForm={<ProviderFilterForm />}
                 basePath="providers"
                 elementActions={[deleteAction]}
+                downloadOptions={["csv"]}
             />
         </>
     );

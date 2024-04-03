@@ -38,6 +38,7 @@ const EntityTable = ({
     onSelectElement = null,
     elementActions = [],
     getCellProps = null,
+    downloadOptions = null,
 }) => {
     const location = useLocation();
 
@@ -235,6 +236,7 @@ const EntityTable = ({
                                         filter={filter}
                                         sort={sort}
                                         order={order}
+                                        options={downloadOptions}
                                     />
                                 </Grid>
                                 <Grid item>

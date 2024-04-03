@@ -19,9 +19,7 @@ const entityService = createEntityService(
 
 const FieldReportService = {
     getList(filter, sort, order, format = null) {
-        return entityService.getList(filter, null, sort, order, format).then(data => {
-            return data;
-        });
+        return entityService.getList(filter, null, sort, order, null, format);
     },
 
     getPaginatedList(filter, page, sort, order) {

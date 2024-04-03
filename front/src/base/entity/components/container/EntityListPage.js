@@ -30,6 +30,7 @@ const EntityListPage = ({
     elementActions = null,
     basePath = null,
     subPage = true,
+    downloadOptions = null,
 }) => {
     const navigate = useNavigateWithReload();
     const {idInfoPanel} = useParams();
@@ -77,6 +78,7 @@ const EntityListPage = ({
                 onSelectElement={handleSelectElement}
                 elementActions={elementActions}
                 getCellProps={getCellProps}
+                downloadOptions={downloadOptions}
             />
         );
     };

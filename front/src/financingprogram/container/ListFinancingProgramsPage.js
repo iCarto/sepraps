@@ -16,6 +16,7 @@ const ListFinancingProgramsPage = () => {
                 filterForm={<FinancingProgramFilterForm />}
                 basePath="financingprograms"
                 createButton={false}
+                downloadOptions={["csv"]}
             />
         </>
     );
