@@ -4,7 +4,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from app.util import dictfetchall
-from users.constants import GROUP_EDICION, GROUP_GESTION
 
 
 def create_notification(type, title, message, severity, url, context=None):
@@ -33,8 +32,6 @@ def get_provider_missing_contacts_notifications(filter_params, user):
                 LEFT JOIN provider_contact pc ON pc.entity_id = prov.id
                 JOIN project p ON p.provider_id = prov.id
                 LEFT JOIN contract_project cp on cp.project_id = p.id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
-                LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE pc.contact_id IS NULL
             {filter_conditions}
 
@@ -43,10 +40,6 @@ def get_provider_missing_contacts_notifications(filter_params, user):
 
         if filter_param := filter_params.get("project"):
             filter_conditions.append(f"AND p.id = {filter_param}")
-        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
-            filter_conditions.append(
-                f"AND (p.creation_user_id = {user.id} OR ct.user_id = {user.id})"
-            )
 
         cursor.execute(
             query.format(filter_conditions=" ".join(filter_conditions)), filter_params
@@ -79,8 +72,6 @@ def get_no_updates_in_project_notifications(filter_params, user):
                 ) AS project_name
             FROM project p
                 LEFT JOIN contract_project cp on cp.project_id = p.id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
-                LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE p.updated_at <= date_trunc('day', NOW() - interval '3 month')
             {filter_conditions}
             GROUP BY p.id, p.code
@@ -89,10 +80,6 @@ def get_no_updates_in_project_notifications(filter_params, user):
 
         if filter_param := filter_params.get("project"):
             filter_conditions.append(f"AND p.id = {filter_param}")
-        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
-            filter_conditions.append(
-                f"AND (p.creation_user_id = {user.id} OR ct.user_id = {user.id})"
-            )
 
         cursor.execute(
             query.format(filter_conditions=" ".join(filter_conditions)), filter_params
@@ -120,8 +107,6 @@ def get_certifications_inconsistent_with_components_notifications(filter_params,
                 p.code AS project_code
             FROM project p
                 LEFT JOIN contract_project cp on cp.project_id = p.id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cp.contract_id
-                LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE
                 (
                     SELECT COALESCE(SUM(c.approved_amount), 0)
@@ -138,10 +123,6 @@ def get_certifications_inconsistent_with_components_notifications(filter_params,
 
         if filter_param := filter_params.get("project"):
             filter_conditions.append(f"AND p.id = {filter_param}")
-        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
-            filter_conditions.append(
-                f"AND (p.creation_user_id = {user.id} OR ct.user_id = {user.id})"
-            )
 
         cursor.execute(
             query.format(filter_conditions=" ".join(filter_conditions)), filter_params
@@ -168,30 +149,24 @@ def get_certifications_inconsistent_with_contract_payment_notifications(
 ):
     with connection.cursor() as cursor:
         query = """
-            SELECT
-                pay.id AS payment_id,
-                pay.name AS payment_name,
-                pay.paid_total_amount AS payment_paid_total_amount,
-                pay.contract_id,
-                cc.number AS contract_number,
-                COALESCE(SUM(cert.approved_amount), 0) AS projects_total_approved_amount
-            FROM payment pay
-            JOIN certification cert ON cert.payment_id = pay.id
-            JOIN construction_contract cc ON cc.id = pay.contract_id
-            LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
-            LEFT JOIN contact ct ON ct.id = ccc.contact_id
-            GROUP BY pay.id, pay.contract_id, cc.number, cc.creation_user_id, ct.user_id
-            HAVING pay.paid_total_amount != COALESCE(SUM(cert.approved_amount), 0)
+                SELECT
+                    pay.id AS payment_id,
+                    pay.name AS payment_name,
+                    pay.paid_total_amount AS payment_paid_total_amount,
+                    pay.contract_id,
+                    cc.number AS contract_number,
+                    COALESCE(SUM(cert.approved_amount), 0) AS projects_total_approved_amount
+                FROM payment pay
+                JOIN certification cert ON cert.payment_id = pay.id
+                JOIN construction_contract cc ON cc.id = pay.contract_id
+                GROUP BY pay.id, pay.contract_id, cc.number
+                HAVING pay.paid_total_amount != COALESCE(SUM(cert.approved_amount), 0)
                 {filter_conditions}
             """
         filter_conditions = []
 
         if filter_param := filter_params.get("construction_contract"):
             filter_conditions.append(f"AND pay.contract_id = {filter_param}")
-        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
-            filter_conditions.append(
-                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
-            )
 
         cursor.execute(
             query.format(filter_conditions=" ".join(filter_conditions)), filter_params
@@ -240,8 +215,6 @@ def get_contracts_milestone_compliance_notifications(
             FROM cc_projects ccp
                 JOIN cc_projects_milestones ccpm ON ccpm.id = ccp.id
                 JOIN construction_contract cc ON cc.id = ccp.id
-                LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
-                LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE ccp.projects_number = ccpm.projects_number_milestone_completed
                 AND cc.execution_start_date IS NULL
                 {filter_conditions}
@@ -250,11 +223,6 @@ def get_contracts_milestone_compliance_notifications(
 
         if filter_param := filter_params.get("construction_contract"):
             filter_conditions.append(f"AND cc.id = {filter_param}")
-
-        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
-            filter_conditions.append(
-                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
-            )
 
         cursor.execute(
             query.format(
@@ -292,8 +260,6 @@ def get_pending_payment_notifications(filter_params, user):
                 cc.number AS contract_number
             FROM payment pay
             JOIN construction_contract cc ON cc.id = pay.contract_id
-            LEFT JOIN construction_contract_contact ccc ON ccc.entity_id = cc.id
-            LEFT JOIN contact ct ON ct.id = ccc.contact_id
             WHERE EXISTS (
                 SELECT 1
                 FROM payment prev_pay
@@ -304,16 +270,12 @@ def get_pending_payment_notifications(filter_params, user):
                 )
             )
             {filter_conditions}
-            GROUP BY pay.id, pay.contract_id, cc.number, cc.creation_user_id, ct.user_id
+            GROUP BY pay.id, pay.contract_id, cc.number, cc.creation_user_id
         """
         filter_conditions = []
 
         if filter_param := filter_params.get("construction_contract"):
             filter_conditions.append(f"AND pay.contract_id = {filter_param}")
-        if user.belongs_to([GROUP_EDICION, GROUP_GESTION]):
-            filter_conditions.append(
-                f"AND (cc.creation_user_id = {user.id} OR ct.user_id = {user.id})"
-            )
 
         cursor.execute(
             query.format(filter_conditions=" ".join(filter_conditions)), filter_params
