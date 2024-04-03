@@ -1,9 +1,15 @@
 import {comments_api_adapter, createComments} from "comment/model";
 import {createPayment, payment_api_adapter} from "payment/model";
+import {createProjectSummary, project_summary_api_adapter} from "project/model";
 
 class Certifications extends Array {}
 
 const certification_api_adapter = certification => {
+    if (certification["project"] && typeof certification["project"] === "object") {
+        certification["project"] = createProjectSummary(
+            project_summary_api_adapter({...certification["project"]})
+        );
+    }
     if (certification["payment"]) {
         certification["payment"] = createPayment(
             payment_api_adapter({...certification["payment"]})

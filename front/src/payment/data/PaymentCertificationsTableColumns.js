@@ -24,15 +24,12 @@ export function usePaymentCertificationsTable() {
             formatFunction: item => {
                 return item.project?.code;
             },
-            width: 30,
+            width: 20,
         },
         {
-            id: "project.number_of_bcomponents",
-            label: "Componentes de obra",
-            formatFunction: item => {
-                return item.project?.number_of_bcomponents;
-            },
-            width: 15,
+            id: "notes",
+            label: `Observaciones`,
+            width: 30,
         },
         {
             id: "approved_amount",
@@ -40,7 +37,7 @@ export function usePaymentCertificationsTable() {
             formatFunction: item => {
                 return `${NumberUtil.formatInteger(item.approved_amount)}`;
             },
-            width: 25,
+            width: 20,
         },
     ];
 

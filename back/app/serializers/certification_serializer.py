@@ -12,7 +12,7 @@ from app.serializers.payment_serializer import (
     PaymentSerializer,
     PaymentSummarySerializer,
 )
-from app.serializers.project_serializer import ProjectSummarySerializer
+from app.serializers.project_serializer import ProjectShortSerializer
 from domains.mixins import BaseDomainMixin
 
 
@@ -49,9 +49,10 @@ class CertificationSummarySerializer(BaseDomainMixin, BaseSummarySerializer):
             *BaseSummarySerializer.Meta.fields,
             "expected_amount",
             "approved_amount",
+            "notes",
             "payment",
             "project",
         )
 
     payment = PaymentSummarySerializer(read_only=True)
-    project = ProjectSummarySerializer(read_only=True)
+    project = ProjectShortSerializer(read_only=True)

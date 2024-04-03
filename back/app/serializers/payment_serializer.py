@@ -156,7 +156,7 @@ class PaymentSerializer(BaseDomainMixin, BaseModelWithFolderSerializer):
             CertificationSummarySerializer,
         )
 
-        certifications = instance.certifications.all()
+        certifications = instance.certifications.all().order_by("project__code")
         return CertificationSummarySerializer(
             certifications, read_only=True, many=True, context=self.context
         ).data
