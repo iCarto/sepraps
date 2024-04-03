@@ -33,3 +33,6 @@ update_content_type_contacts 2024-02-22T16:55:22Z Elías Gago <egago@icarto.es> 
 update_content_type_cs_value 2024-02-22T17:44:45Z Elías Gago <egago@icarto.es> # Add contract service value content type and permissions
 update_content_type_amendment 2024-03-01T09:29:26Z Elías Gago <egago@icarto.es> # Add amendment content type and permissions
 update_content_type_contract_service 2024-03-06T09:58:59Z Elías Gago <egago@icarto.es> # Add contract services content type and permissions
+create_table_certification 2024-04-02T14:20:06Z Elías Gago <egago@icarto.es> # Create table for certifications
+create_table_project_works 2024-04-02T14:22:30Z Elías Gago <egago@icarto.es> # Create table for project works
+create_views_project_progress 2024-04-02T15:38:25Z Elías Gago <egago@icarto.es> # Create views for building components and project progress
