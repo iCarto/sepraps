@@ -11,7 +11,12 @@ const UpdateContractContractorContactPanel = () => {
         <UpdateContactPanel
             service={ContractorContactService}
             basePath={`/contracts/list/${contract.id}/awarding`}
-            allowedPosts={["responsable_contratista", "residente_obra"]}
+            allowedPosts={[
+                "responsable_del_contratista",
+                "residente_de_obra",
+                "fiscal_de_obra",
+                "fiscal_social",
+            ]}
             entityId={contract.contractor.id}
         />
     );

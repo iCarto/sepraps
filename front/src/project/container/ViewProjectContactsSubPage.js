@@ -19,6 +19,7 @@ const ViewProjectContactsSubPage = () => {
                     />,
                     <ContractContactsSection
                         contractId={project.construction_contract?.id}
+                        contractor={project.construction_contract?.contractor}
                         title="Contrato de obras"
                         hideActions={true}
                     />,
