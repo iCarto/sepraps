@@ -4,7 +4,7 @@ from django.db import models
 class DomainCategoryChoices(models.TextChoices):
     project_type = ("project_type", "Tipo de proyecto")
     project_class = ("project_class", "Clase de proyecto")
-    contact_post = ("contact_post", "Cargo del contacto")
+    contact_post = ("cargo_contacto", "Cargo del contacto")
     contractor_type = ("contractor_type", "Tipo de contratista")
     provider_area = ("area_prestador", "Área del prestador")
     provider_type = ("tipo_prestador", "Tipo de prestador")

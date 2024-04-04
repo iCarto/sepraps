@@ -13,7 +13,13 @@
         }
     },
     "staff": {
-        "building": ["supervisor_obra", "fiscal_obra", "residente_obra"],
-        "social": ["supervisor_social", "coordinador_social"]
+        "building": ["supervisor_de_obra", "fiscal_de_obra"],
+        "social": [
+            "supervisor_social",
+            "coordinador_social",
+            "especialista_de_area",
+            "especialista_de_genero",
+            "especialista_ambiental"
+        ]
     }
 }

@@ -36,3 +36,4 @@ update_content_type_contract_service 2024-03-06T09:58:59Z Elías Gago <egago@ica
 create_table_certification 2024-04-02T14:20:06Z Elías Gago <egago@icarto.es> # Create table for certifications
 create_table_project_works 2024-04-02T14:22:30Z Elías Gago <egago@icarto.es> # Create table for project works
 create_views_project_progress 2024-04-02T15:38:25Z Elías Gago <egago@icarto.es> # Create views for building components and project progress
+update_contract_contacts_staff 2024-04-04T08:07:41Z Elías Gago <egago@icarto.es> # Update social and building staff for contracts areas

@@ -7,6 +7,6 @@
     },
     "properties": {},
     "staff": {
-        "building": ["supervisor_obra", "fiscal_obra"]
+        "building": ["supervisor_de_obra", "fiscal_de_obra"]
     }
 }

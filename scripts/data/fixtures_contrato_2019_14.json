@@ -15,7 +15,7 @@
         "fields": {
             "entity": 2,
             "contact": 13,
-            "post": "responsable_contratista"
+            "post": "responsable_del_contratista"
         }
     },
     {
@@ -34,7 +34,7 @@
         "fields": {
             "entity": 2,
             "contact": 14,
-            "post": "responsable_contratista"
+            "post": "responsable_del_contratista"
         }
     },
     {

@@ -7,6 +7,12 @@
     },
     "properties": {},
     "staff": {
-        "social": ["supervisor_social", "coordinador_social"]
+        "social": [
+            "supervisor_social",
+            "coordinador_social",
+            "especialista_de_area",
+            "especialista_de_genero",
+            "especialista_ambiental"
+        ]
     }
 }

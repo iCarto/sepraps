@@ -15,7 +15,7 @@
         "fields": {
             "entity": 1,
             "contact": 1,
-            "post": "responsable_contratista"
+            "post": "responsable_del_contratista"
         }
     },
     {
@@ -34,7 +34,7 @@
         "fields": {
             "entity": 1,
             "contact": 2,
-            "post": "responsable_contratista"
+            "post": "responsable_del_contratista"
         }
     },
     {
@@ -56,7 +56,7 @@
             "name": "Prueba Residente Obra",
             "gender": "F",
             "phone": "(021) 123-123",
-            "email": "residente_obra@test.com",
+            "email": "residente_de_obra@test.com",
             "comments": "Residente de obra de pruebas",
             "user": 2
         }
@@ -66,7 +66,7 @@
         "fields": {
             "entity": 1,
             "contact": 3,
-            "post": "residente_obra"
+            "post": "residente_de_obra"
         }
     },
     {
@@ -86,7 +86,7 @@
         "fields": {
             "entity": 1,
             "contact": 4,
-            "post": "fiscal_obra"
+            "post": "fiscal_de_obra"
         }
     },
     {
@@ -96,7 +96,7 @@
             "name": "Prueba Supervisor de Obra",
             "gender": "M",
             "phone": "(021) 345-345",
-            "email": "supervisor_obra@test.com",
+            "email": "supervisor_de_obra@test.com",
             "comments": "Supervisor de obra de pruebas",
             "user": 5
         }
@@ -106,7 +106,7 @@
         "fields": {
             "entity": 1,
             "contact": 5,
-            "post": "supervisor_obra"
+            "post": "supervisor_de_obra"
         }
     },
     {

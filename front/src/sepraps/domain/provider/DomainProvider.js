@@ -50,7 +50,7 @@ export default function DomainProvider({children}) {
                 etapas,
                 project_type,
                 project_class,
-                contact_post,
+                cargo_contacto,
                 contractor_type,
                 area_prestador,
                 tipo_prestador,
@@ -85,7 +85,7 @@ export default function DomainProvider({children}) {
             setProviderTypes(tipo_prestador);
             setProductStatus(estado_producto);
             setDeliverableStatus(estado_entregable);
-            setContactPosts(contact_post);
+            setContactPosts(cargo_contacto);
             setContractorTypes(contractor_type);
             setServiceTypes(tipo_servicio);
             setTotalAmountTypes(tipo_monto);
