@@ -16,6 +16,7 @@ const EntityListMap = ({
     layerDefaultDiscriminator = null,
     onSelectElement = null,
     selectedElement = null,
+    customLoader = null,
 }) => {
     const {filter} = useList();
     const {mapFilter, setMapFilter} = useMapConfig();
@@ -27,6 +28,7 @@ const EntityListMap = ({
     const [layerMapProvider] = useMapLayerProvider(service, layer, {
         discriminator: layerDefaultDiscriminator,
         included: true,
+        customLoader: customLoader,
     });
 
     useEffect(() => {
