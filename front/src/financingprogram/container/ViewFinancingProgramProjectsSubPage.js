@@ -2,13 +2,12 @@ import {useEffect, useState} from "react";
 import {useOutletContext} from "react-router-dom";
 
 import {EntityViewSubPage} from "base/entity/components/container";
-import {ListContractProjects} from "contract/container";
-import {ContractService} from "contract/service";
 import {MapConfigProvider} from "base/geo/provider";
+import {ProjectService} from "project/service";
+import {ListFinancingProgramProjects} from ".";
 
-const ViewContractProjectsSubPage = () => {
-    let contract;
-    [contract] = useOutletContext();
+const ViewFinancingProgramProjectsSubPage = () => {
+    const [financingProgram] = useOutletContext();
 
     const [projects, setProjects] = useState([]);
     const [isLoading, setIsLoading] = useState(null);
@@ -16,7 +15,7 @@ const ViewContractProjectsSubPage = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        ContractService.getProjectsList(contract.id)
+        ProjectService.getList({financing_program: financingProgram.id})
             .then(projects => {
                 setProjects(projects);
                 setIsLoading(false);
@@ -25,12 +24,12 @@ const ViewContractProjectsSubPage = () => {
                 setIsLoading(false);
                 setError(error);
             });
-    }, [contract]);
+    }, [financingProgram]);
 
     const sections = [
         <MapConfigProvider>
-            <ListContractProjects
-                contract={contract}
+            <ListFinancingProgramProjects
+                financingProgram={financingProgram}
                 projects={projects}
                 error={error}
                 isLoading={isLoading}
@@ -38,7 +37,7 @@ const ViewContractProjectsSubPage = () => {
         </MapConfigProvider>,
     ];
 
-    return contract && <EntityViewSubPage sections={sections} />;
+    return financingProgram && <EntityViewSubPage sections={sections} />;
 };
 
-export default ViewContractProjectsSubPage;
+export default ViewFinancingProgramProjectsSubPage;

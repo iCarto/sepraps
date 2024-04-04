@@ -26,3 +26,7 @@ export {
 export {
     default as ViewFinancingProgramCertificationsSubPage,
 } from "./ViewFinancingProgramCertificationsSubPage";
+export {
+    default as ViewFinancingProgramProjectsSubPage,
+} from "./ViewFinancingProgramProjectsSubPage";
+export {default as ListFinancingProgramProjects} from "./ListFinancingProgramProjects";

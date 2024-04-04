@@ -8,9 +8,11 @@ import {
     ViewFinancingProgramPage,
     ViewFinancingProgramPanel,
     ViewFinancingProgramPaymentsSubPage,
+    ViewFinancingProgramProjectsSubPage,
     ViewFinancingProgramSummarySubPage,
     ViewFinancingProgramTrainingsSubPage,
 } from "financingprogram/container";
+import {ViewProjectPanel} from "project/container";
 
 const financingProgramRoutes = [
     <Route
@@ -28,6 +30,17 @@ const financingProgramRoutes = [
                 path="summary"
                 element={<ViewFinancingProgramSummarySubPage />}
             ></Route>
+            <Route
+                key="financingprogram-projects"
+                path="projects"
+                element={<ViewFinancingProgramProjectsSubPage />}
+            >
+                <Route
+                    key="contract-project-view"
+                    path="info/:idInfoPanel"
+                    element={<ViewProjectPanel />}
+                />
+            </Route>
             <Route
                 key="financingprogram-payments"
                 path="payments"

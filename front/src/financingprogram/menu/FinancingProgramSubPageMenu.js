@@ -5,10 +5,11 @@ import {
 } from "base/ui/menu";
 import {SelectFinancingProgramDropDown} from "financingprogram/container";
 
-import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
+import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 
 const FinancingProgramSubPageMenu = ({financingProgram}) => {
     const basePath = `/financingprograms/list/${financingProgram?.id}`;
@@ -49,22 +50,28 @@ const FinancingProgramSubPageMenu = ({financingProgram}) => {
                 key="financingprogram-detail"
                 to={`${basePath}/summary`}
                 text="Resumen"
-                icon={<InventoryRoundedIcon />}
+                icon={<InfoOutlinedIcon />}
             />
             <SubPageMenuListItemButton
-                key="contract-payments"
+                key="financingprogram-projects"
+                to={`${basePath}/projects`}
+                text="Proyectos"
+                icon={<BallotOutlinedIcon />}
+            />
+            <SubPageMenuListItemButton
+                key="financingprogram-payments"
                 to={`${basePath}/payments`}
                 text="Productos"
                 icon={<RequestQuoteOutlinedIcon />}
             />
             <SubPageMenuListGroup
-                id="building-supervision"
+                id="financingprogram-building-supervision"
                 headerTitle="Área técnica"
                 headerIcon={<HandymanOutlinedIcon />}
                 items={buildingSupervisionAreaSubmenuItems}
             />
             <SubPageMenuListGroup
-                id="social-supervision"
+                id="financingprogram-social-supervision"
                 headerTitle="Área social"
                 headerIcon={<HandshakeOutlinedIcon />}
                 items={socialSupervisionAreaSubmenuItems}
