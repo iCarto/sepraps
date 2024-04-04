@@ -418,16 +418,38 @@ class ProjectGeoSerializer(GeoFeatureModelSerializer):
     class Meta(object):
         model = Project
         geo_field = "location"
-        fields = ("id", "code", "closed", "name", "project_works", "location", "status")
+        fields = (
+            "id",
+            "code",
+            "closed",
+            "name",
+            "project_works",
+            "location",
+            "status",
+            "financial_progress_percentage",
+            "physical_progress_percentage",
+            "percentage_of_connections",
+        )
 
     name = serializers.SerializerMethodField()
     status = serializers.SerializerMethodField()
     location = GeometryField()
     project_works = ProjectWorkSerializer(many=True)
+    financial_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    physical_progress_percentage = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
+    percentage_of_connections = serializers.SerializerMethodField(
+        required=False, read_only=True
+    )
 
     def setup_eager_loading(queryset):
         """Perform necessary eager loading of data."""
-        return queryset.select_related("main_infrastructure").prefetch_related(
+        return queryset.select_related(
+            "main_infrastructure", "progress"
+        ).prefetch_related(
             "linked_localities",
             Prefetch(
                 "milestones",
@@ -443,3 +465,24 @@ class ProjectGeoSerializer(GeoFeatureModelSerializer):
     def get_status(self, obj):
         last_milestone = obj.milestones.first()
         return last_milestone.phase if last_milestone else None
+
+    def get_financial_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.financial_progress_percentage)
+            if obj.progress.financial_progress_percentage
+            else None
+        )
+
+    def get_physical_progress_percentage(self, obj):
+        return (
+            format_decimal(obj.progress.physical_progress_percentage)
+            if obj.progress.physical_progress_percentage
+            else None
+        )
+
+    def get_percentage_of_connections(self, obj):
+        return (
+            format_decimal(obj.progress.percentage_of_connections)
+            if obj.progress.percentage_of_connections
+            else None
+        )

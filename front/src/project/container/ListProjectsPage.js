@@ -19,7 +19,7 @@ const ListProjectsPage = () => {
             basePath="projects"
             card={ProjectCard}
             layerHook={useProjectLayer}
-            layerDefaultDiscriminator={discriminators.STATUS}
+            layerDefaultDiscriminator={discriminators.PROJECT_TYPE}
             downloadOptions={["csv"]}
         />
     );

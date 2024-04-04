@@ -83,6 +83,14 @@ export const CUSTOM_COLORS = {
         expansion: "#c7923e",
         other: "lightgrey",
     },
+    percentages: {
+        under25: "#A3D6F4",
+        from25to50: "#6CBCEB",
+        from50to75: "#36A3DF",
+        from75to100: "#0288D1",
+        completed: "#00897B",
+        overcompleted: "#D32F2F",
+    },
 
     // COLOR FOR CONTRACT SERVICE:
     contract_service: {

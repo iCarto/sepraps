@@ -19,6 +19,9 @@ export const discriminators = Object.freeze({
     STATUS: "status",
     PROJECT_TYPE: "project_type",
     PROJECT_CLASS: "project_class",
+    FINANCIAL_PROGRESS: "financial_progress_percentage",
+    PHYSICAL_PROGRESS: "physical_progress_percentage",
+    CONNECTIONS_PROGRESS: "percentage_of_connections",
 });
 
 export const LayerLegend = createLayerLegend({
@@ -77,10 +80,14 @@ export const LayerLegend = createLayerLegend({
             field: discriminators.PROJECT_TYPE,
             text: "Tipo de proyecto",
             defaultIconOptions: markerBaseOptions,
+            getValueFn: feature =>
+                feature.properties.project_works?.map(
+                    project_work => project_work.work_type
+                ),
             entries: [
                 {
                     text: "Agua potable",
-                    filterFn: val => val === "agua",
+                    filterFn: val => val.includes("agua"),
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_type.water_provision,
@@ -88,7 +95,7 @@ export const LayerLegend = createLayerLegend({
                 },
                 {
                     text: "Agua - Chaco",
-                    filterFn: val => val === "agua_lluvia",
+                    filterFn: val => val.includes("agua_lluvia"),
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_type.water_provision_rain,
@@ -96,7 +103,7 @@ export const LayerLegend = createLayerLegend({
                 },
                 {
                     text: "Alcantarillado",
-                    filterFn: val => val === "alcantarillado",
+                    filterFn: val => val.includes("alcantarillado"),
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_type.sewerage,
@@ -104,7 +111,7 @@ export const LayerLegend = createLayerLegend({
                 },
                 {
                     text: "USB",
-                    filterFn: val => val === "sanitarios",
+                    filterFn: val => val.includes("sanitarios"),
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_type.sanitation,
@@ -112,7 +119,7 @@ export const LayerLegend = createLayerLegend({
                 },
                 {
                     text: "(sin datos)",
-                    filterFn: val => val === null,
+                    filterFn: val => !val,
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_type.other,
@@ -124,10 +131,14 @@ export const LayerLegend = createLayerLegend({
             field: discriminators.PROJECT_CLASS,
             text: "Clase de proyecto",
             defaultIconOptions: markerBaseOptions,
+            getValueFn: feature =>
+                feature.properties.project_works?.map(
+                    project_work => project_work.work_class
+                ),
             entries: [
                 {
                     text: "Mejora",
-                    filterFn: val => val === "mejora",
+                    filterFn: val => val.includes("mejora"),
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_class.renovation,
@@ -135,7 +146,7 @@ export const LayerLegend = createLayerLegend({
                 },
                 {
                     text: "Nueva construcción",
-                    filterFn: val => val === "nueva_construccion",
+                    filterFn: val => val.includes("nueva_construccion"),
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_class.new_construction,
@@ -143,7 +154,7 @@ export const LayerLegend = createLayerLegend({
                 },
                 {
                     text: "Ampliación",
-                    filterFn: val => val === "ampliacion",
+                    filterFn: val => val.includes("ampliacion"),
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_class.expansion,
@@ -151,10 +162,191 @@ export const LayerLegend = createLayerLegend({
                 },
                 {
                     text: "(sin datos)",
-                    filterFn: val => val === null,
+                    filterFn: val => !val,
                     markerOptions: {
                         ...markerBaseOptions,
                         fillColor: CUSTOM_COLORS.project_class.other,
+                    },
+                },
+            ],
+        },
+        {
+            field: discriminators.FINANCIAL_PROGRESS,
+            text: "% Avance financiero",
+            defaultIconOptions: markerBaseOptions,
+            entries: [
+                {
+                    text: "0% - 24%",
+                    filterFn: val => parseInt(val) < 25,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.under25,
+                    },
+                },
+                {
+                    text: "25% - 49%",
+                    filterFn: val => parseInt(val) < 50,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from25to50,
+                    },
+                },
+                {
+                    text: "50% - 74%",
+                    filterFn: val => parseInt(val) < 75,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from50to75,
+                    },
+                },
+                {
+                    text: "75% - 99%",
+                    filterFn: val => parseInt(val) < 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from75to100,
+                    },
+                },
+                {
+                    text: "100%",
+                    filterFn: val => parseInt(val) === 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.completed,
+                    },
+                },
+                {
+                    text: "> 100%",
+                    filterFn: val => parseInt(val) > 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.overcompleted,
+                    },
+                },
+                {
+                    text: "(sin datos)",
+                    filterFn: val => val === null,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: "lightgrey",
+                    },
+                },
+            ],
+        },
+        {
+            field: discriminators.PHYSICAL_PROGRESS,
+            text: "% Avance físico",
+            defaultIconOptions: markerBaseOptions,
+            entries: [
+                {
+                    text: "0% - 24%",
+                    filterFn: val => parseInt(val) < 25,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.under25,
+                    },
+                },
+                {
+                    text: "25% - 49%",
+                    filterFn: val => parseInt(val) < 50,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from25to50,
+                    },
+                },
+                {
+                    text: "50% - 74%",
+                    filterFn: val => parseInt(val) < 75,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from50to75,
+                    },
+                },
+                {
+                    text: "75% - 99%",
+                    filterFn: val => parseInt(val) < 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from75to100,
+                    },
+                },
+                {
+                    text: "100%",
+                    filterFn: val => parseInt(val) === 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.completed,
+                    },
+                },
+                {
+                    text: "> 100%",
+                    filterFn: val => parseInt(val) > 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.overcompleted,
+                    },
+                },
+                {
+                    text: "(sin datos)",
+                    filterFn: val => val === null,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: "lightgrey",
+                    },
+                },
+            ],
+        },
+        {
+            field: discriminators.CONNECTIONS_PROGRESS,
+            text: "% Conexiones ejecutadas",
+            defaultIconOptions: markerBaseOptions,
+            entries: [
+                {
+                    text: "0% - 24%",
+                    filterFn: val => parseInt(val) < 25,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.under25,
+                    },
+                },
+                {
+                    text: "25% - 49%",
+                    filterFn: val => parseInt(val) < 50,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from25to50,
+                    },
+                },
+                {
+                    text: "50% - 74%",
+                    filterFn: val => parseInt(val) < 75,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from50to75,
+                    },
+                },
+                {
+                    text: "75% - 99%",
+                    filterFn: val => parseInt(val) < 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.from75to100,
+                    },
+                },
+                {
+                    text: "100%",
+                    filterFn: val => parseInt(val) >= 100,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: CUSTOM_COLORS.percentages.completed,
+                    },
+                },
+                {
+                    text: "(sin datos)",
+                    filterFn: val => val === null,
+                    markerOptions: {
+                        ...markerBaseOptions,
+                        fillColor: "lightgrey",
                     },
                 },
             ],
@@ -173,6 +365,31 @@ export function useProjectLayer(onSelectElement) {
             }</b><ul class="attributes">`;
             tooltip += `<li><i>Localidad</i>: ${
                 data["name"] ? data["name"] : "---"
+            }</li>`;
+            tooltip += `<li><i>Trabajos</i>: ${
+                data["project_works"]
+                    ? data["project_works"]
+                          .map(
+                              project_work =>
+                                  `${project_work.work_type_label} - ${project_work.work_class_label}`
+                          )
+                          .join(", ")
+                    : "---"
+            }</li>`;
+            tooltip += `<li><i>%Avance financiero</i>: ${
+                data["financial_progress_percentage"]
+                    ? `${parseInt(data["financial_progress_percentage"])}%`
+                    : "---"
+            }</li>`;
+            tooltip += `<li><i>%Avance físico</i>: ${
+                data["physical_progress_percentage"]
+                    ? `${parseInt(data["physical_progress_percentage"])}%`
+                    : "---"
+            }</li>`;
+            tooltip += `<li><i>%Conexiones ejecutadas</i>: ${
+                data["percentage_of_connections"]
+                    ? `${parseInt(data["percentage_of_connections"])}%`
+                    : "---"
             }</li>`;
             return tooltip + "</ul>";
         },
