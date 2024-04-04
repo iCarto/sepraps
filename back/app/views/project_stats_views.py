@@ -506,11 +506,19 @@ def get_connections_total_stats(request, format=None):  # noqa: ARG001
             "connected_households_percentage"
         ].mean() """
 
+        calc_cols = [
+            "number_of_actual_connections",
+            "number_of_existing_connections",
+            "number_of_planned_connections",
+        ]
+        result_df[calc_cols] = result_df[calc_cols].apply(
+            pd.to_numeric, errors="coerce"
+        )
         result_df.at["Total", "connected_households_percentage"] = (
-            result_df["number_of_actual_connections"].sum()
+            result_df["number_of_actual_connections"].sum(numeric_only=True)
             / (
-                result_df["number_of_existing_connections"].sum()
-                + result_df["number_of_planned_connections"].sum()
+                result_df["number_of_existing_connections"].sum(numeric_only=True)
+                + result_df["number_of_planned_connections"].sum(numeric_only=True)
             )
             * 100
         )

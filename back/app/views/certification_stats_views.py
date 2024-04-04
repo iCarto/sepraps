@@ -243,7 +243,7 @@ def get_certification_stats_totals(request, format=None):
         ]
         if not result:
             result_df = pd.DataFrame(
-                [["total", 0, 0, 0, 0, 0]], columns=["id", *calc_cols]
+                [["total", 0, 0, 0, 0]], columns=["id", *calc_cols]
             )
             return Response(result_df)
 
