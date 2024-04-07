@@ -9,6 +9,7 @@ import {SectionCard, SectionCardHeaderAction} from "base/ui/section/components";
 import {
     ProjectBasicDataFields,
     ProjectGeneralDataSection,
+    ProjectGeneralInfoSection,
 } from "project/presentational/section";
 import {ProjectForm, ProjectFormGeneralDataFields} from "project/presentational/form";
 import {FormContainer} from "base/form/components";
@@ -50,7 +51,7 @@ const ViewOrUpdateProjectSummaryContent = ({project}) => {
 
     const getComponent = mode => {
         if (mode === "view") {
-            return <ProjectBasicDataFields project={project} />;
+            return <ProjectGeneralInfoSection project={project} />;
         }
         if (mode === "edit") {
             return (
@@ -74,15 +75,10 @@ const ViewOrUpdateProjectSummaryContent = ({project}) => {
 
     return (
         <SectionCard
-            headingLabel={false}
+            title="Información"
             secondaryActions={!isProjectClosed && secondaryActions}
         >
-            {
-                <ProjectGeneralDataSection
-                    project={project}
-                    basicDataComponent={component}
-                />
-            }
+            {component}
         </SectionCard>
     );
 };

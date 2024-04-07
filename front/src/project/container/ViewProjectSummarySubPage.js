@@ -5,7 +5,7 @@ import {ProjectProgressSection} from "project/presentational/section";
 import {EntityAuditSection} from "base/entity/components/presentational/sections";
 import {EntityViewSubPage} from "base/entity/components/container";
 import {NotificationsSection} from "notification/presentational";
-import {ViewOrUpdateProjectSummaryContent} from ".";
+import {ViewProjectSummaryContent} from ".";
 import {
     ProjectContractSection,
     ProjectOtherContractsSection,
@@ -18,7 +18,7 @@ const ViewProjectSummarySubPage = () => {
     const notifications = context[1];
 
     let sections = [
-        <ViewOrUpdateProjectSummaryContent project={project} />,
+        <ViewProjectSummaryContent project={project} />,
         <Grid container spacing={1}>
             <Grid item xs={12} md={6}>
                 <ProjectProgressSection project={project} />

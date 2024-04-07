@@ -156,6 +156,69 @@
         "model": "domains.domainentry",
         "pk": null,
         "fields": {
+            "category": "cargo_contacto",
+            "key": "representante_comunidad_beneficiaria",
+            "value": "Representante de la comunidad beneficiaria"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "cargo_contacto",
+            "key": "presidencia_prestador",
+            "value": "Presidencia"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "cargo_contacto",
+            "key": "vicepresidencia_prestador",
+            "value": "Vicepresidencia"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "cargo_contacto",
+            "key": "tesoreria_prestador",
+            "value": "Tesorería"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "cargo_contacto",
+            "key": "secretaria_prestador",
+            "value": "Secretaría"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "cargo_contacto",
+            "key": "vocal_prestador",
+            "value": "Vocal"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
+            "category": "cargo_contacto",
+            "key": "otra_prestador",
+            "value": "Otra responsabilidad"
+        }
+    },
+    {
+        "model": "domains.domainentry",
+        "pk": null,
+        "fields": {
             "category": "contractor_type",
             "key": "company",
             "value": "Empresa"

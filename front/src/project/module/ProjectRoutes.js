@@ -5,8 +5,7 @@ import {
     CreateProjectPage,
     ViewProjectPage,
     ViewProjectSummarySubPage,
-    ViewProjectLocationSubPage,
-    ViewProjectContractsSubPage,
+    ViewProjectGeneralInfoSubPage,
     ViewProjectMilestonesSubPage,
     ViewProjectContactsSubPage,
     ViewProjectDocumentsSubPage,
@@ -31,7 +30,6 @@ import {ViewStatsByPhaseSubPage} from "stats/container";
 import {ViewDocumentPanel} from "base/file/components";
 import {
     ViewBuildingComponentContent,
-    ViewBuildingComponentsAnalysisContent,
     ViewBuildingComponentsOverview,
 } from "buildingComponent/container";
 import {
@@ -61,7 +59,7 @@ const projectRoutes = [
             <Route
                 key="project-location"
                 path=":section"
-                element={<ViewProjectLocationSubPage />}
+                element={<ViewProjectGeneralInfoSubPage />}
             ></Route>
             <Route
                 key="project-milestones"

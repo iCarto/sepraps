@@ -9,11 +9,13 @@ import {
 import {SelectContractDropDown} from "contract/menu";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import BallotOutlinedIcon from "@mui/icons-material/BallotOutlined";
 import RequestQuoteOutlinedIcon from "@mui/icons-material/RequestQuoteOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
+import ChromeReaderModeOutlinedIcon from "@mui/icons-material/ChromeReaderModeOutlined";
 
 const ContractSubPageMenu = ({contract}) => {
     const {ROLES} = useAuth();
@@ -40,11 +42,6 @@ const ContractSubPageMenu = ({contract}) => {
 
     const buildingSupervisionAreaSubmenuItems = [
         {
-            to: `${basePath}/building_staff`,
-            text: "Plantel",
-            urlSlug: "building_staff",
-        },
-        {
             to: `${basePath}/buildingcomponents/overview`,
             text: "Construcción",
             urlSlug: "buildingcomponents",
@@ -58,13 +55,8 @@ const ContractSubPageMenu = ({contract}) => {
 
     const socialSupervisionAreaSubmenuItems = [
         {
-            to: `${basePath}/social_staff`,
-            text: "Plantel",
-            urlSlug: "social_staff",
-        },
-        {
             to: `${basePath}/trainings/overview`,
-            text: "Capacitaciones",
+            text: "Servicios",
             urlSlug: "trainings",
         },
         {
@@ -74,19 +66,29 @@ const ContractSubPageMenu = ({contract}) => {
         },
     ];
 
-    const contractSupervisionAreas = contract?.supervision_areas
-        ? contract?.supervision_areas?.map(supervisionArea => supervisionArea.area)
-        : [];
+    const generalAreaSubmenuItems = [
+        {
+            to: `${basePath}/contacts`,
+            text: "Plantel",
+            urlSlug: "contacts",
+        },
+    ];
 
     return (
         <SubPageMenu
             subPageMenuDropdown={<SelectContractDropDown contract={contract} />}
         >
             <SubPageMenuListItemButton
-                key="contract-detail"
+                key="contract-summary"
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InfoOutlinedIcon />}
+            />
+            <SubPageMenuListItemButton
+                key="contract-info"
+                to={`${basePath}/info`}
+                text="Información general"
+                icon={<InventoryRoundedIcon />}
             />
             <SubPageMenuListGroup
                 id="phases"
@@ -118,6 +120,12 @@ const ContractSubPageMenu = ({contract}) => {
                 headerTitle="Área Social"
                 headerIcon={<HandshakeOutlinedIcon />}
                 items={socialSupervisionAreaSubmenuItems}
+            />
+            <SubPageMenuListGroup
+                id="general"
+                headerTitle="Área general"
+                headerIcon={<ChromeReaderModeOutlinedIcon />}
+                items={generalAreaSubmenuItems}
             />
         </SubPageMenu>
     );

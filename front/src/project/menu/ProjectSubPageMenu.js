@@ -7,11 +7,11 @@ import {SelectProjectDropDown} from "project/menu";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import FolderOpenIconOutlined from "@mui/icons-material/FolderOpenOutlined";
-import GroupsIconOutlined from "@mui/icons-material/GroupsOutlined";
+import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import HandshakeOutlinedIcon from "@mui/icons-material/HandshakeOutlined";
-
 import ChromeReaderModeOutlinedIcon from "@mui/icons-material/ChromeReaderModeOutlined";
+
 import {QuestionnairesMenu} from "questionnaire/presentational";
 
 const ProjectSubPageMenu = ({project}) => {
@@ -45,6 +45,11 @@ const ProjectSubPageMenu = ({project}) => {
 
     const generalAreaSubmenuItems = [
         {
+            to: `${basePath}/contacts`,
+            text: "Plantel",
+            urlSlug: "contacts",
+        },
+        {
             to: `${basePath}/fieldreport`,
             text: "Informes de viaje",
             urlSlug: "fieldreport",
@@ -54,32 +59,21 @@ const ProjectSubPageMenu = ({project}) => {
             text: "Hitos",
             urlSlug: "milestones",
         },
-        {
-            to: `${basePath}/contacts`,
-            text: "Plantel",
-            urlSlug: "contacts",
-        },
     ];
 
     return (
         <SubPageMenu subPageMenuDropdown={<SelectProjectDropDown project={project} />}>
             <SubPageMenuListItemButton
-                key="project-detail"
+                key="project-summary"
                 to={`${basePath}/summary`}
                 text="Resumen"
                 icon={<InfoOutlinedIcon />}
             />
             <SubPageMenuListItemButton
-                key="project-location"
-                to={`${basePath}/location`}
-                text="Localización"
-                icon={<GroupsIconOutlined />}
-            />
-            <SubPageMenuListItemButton
-                key="project-documents"
-                to={`${basePath}/documents`}
-                text="Documentos"
-                icon={<FolderOpenIconOutlined />}
+                key="project-info"
+                to={`${basePath}/info`}
+                text="Información general"
+                icon={<InventoryRoundedIcon />}
             />
             <SubPageMenuListGroup
                 id="building-supervision"
@@ -98,6 +92,12 @@ const ProjectSubPageMenu = ({project}) => {
                 headerTitle="Área general"
                 headerIcon={<ChromeReaderModeOutlinedIcon />}
                 items={generalAreaSubmenuItems}
+            />
+            <SubPageMenuListItemButton
+                key="project-documents"
+                to={`${basePath}/documents`}
+                text="Documentos"
+                icon={<FolderOpenIconOutlined />}
             />
             <QuestionnairesMenu
                 questionnaires={project?.questionnaires}

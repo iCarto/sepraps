@@ -9,16 +9,6 @@ const ViewContractBudgetSubPage = () => {
     const sections = [
         <ViewOrUpdateContractContent
             contract={contract}
-            section="generaldata"
-            label="Información"
-        />,
-        <ViewOrUpdateContractContent
-            contract={contract}
-            section="financing_program"
-            label="Financiación"
-        />,
-        <ViewOrUpdateContractContent
-            contract={contract}
             section="bidrequest"
             label="Licitación"
         />,

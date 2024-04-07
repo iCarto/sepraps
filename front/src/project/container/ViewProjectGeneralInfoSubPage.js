@@ -5,11 +5,12 @@ import {
     ViewOrUpdateProjectInfrastructureContent,
     ViewOrUpdateProjectLinkedLocalitiesContent,
     ViewOrUpdateProjectProviderContent,
+    ViewOrUpdateProjectSummaryContent,
 } from ".";
 import {useEffect, useState} from "react";
 import {NotificationsSection} from "notification/presentational";
 
-const ViewProjectLocationSubPage = () => {
+const ViewProjectGeneralInfoSubPage = () => {
     let project;
     let notifications;
     [project, notifications] = useOutletContext();
@@ -24,6 +25,7 @@ const ViewProjectLocationSubPage = () => {
     }, [notifications]);
 
     let sections = [
+        <ViewOrUpdateProjectSummaryContent project={project} />,
         <ViewOrUpdateProjectProviderContent project={project} />,
         <ViewOrUpdateProjectLinkedLocalitiesContent project={project} />,
         <ViewOrUpdateProjectInfrastructureContent project={project} />,
@@ -39,4 +41,4 @@ const ViewProjectLocationSubPage = () => {
     return project && <EntityViewSubPage sections={sections} />;
 };
 
-export default ViewProjectLocationSubPage;
+export default ViewProjectGeneralInfoSubPage;

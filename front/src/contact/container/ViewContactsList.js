@@ -24,6 +24,7 @@ const ViewContactsList = ({
     entityId,
     entityName,
     filter = null,
+    area = null,
     hideActions = false,
 }) => {
     const [selectedElement, setSelectedElement] = useState(null);
@@ -43,7 +44,11 @@ const ViewContactsList = ({
 
     const handleEditElement = elementId => {
         setSelectedElement(elementId);
-        navigate(`${basePath}edit/${elementId}`);
+        navigate(
+            area
+                ? `${basePath}${area}/edit/${elementId}`
+                : `${basePath}edit/${elementId}`
+        );
     };
 
     const handleSelectElement = elementId => {
@@ -88,7 +93,15 @@ const ViewContactsList = ({
             {!hideActions && (
                 <AuthAction roles={[ROLES.EDIT, ROLES.MANAGEMENT, ROLES.SUPERVISION]}>
                     <Grid item container xs={12} mt={3} justifyContent="center">
-                        <EntityAddButtonGroup basePath={basePath} />
+                        <EntityAddButtonGroup
+                            basePath={
+                                basePath && area
+                                    ? `${basePath}/${area}`
+                                    : !area
+                                    ? basePath
+                                    : `${area}/`
+                            }
+                        />
                     </Grid>
                 </AuthAction>
             )}

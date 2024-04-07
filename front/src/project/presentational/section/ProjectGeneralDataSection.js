@@ -17,14 +17,8 @@ const closedProjectTagStyle = {
 };
 
 const ProjectGeneralDataSection = ({project, basicDataComponent}) => {
-    const isProjectClosed = project?.closed;
-
     return (
-        <Grid
-            container
-            columnSpacing={4}
-            sx={{marginTop: isProjectClosed ? 0 : "-48px"}}
-        >
+        <Grid container columnSpacing={4}>
             <Grid item sm={3} md={4}>
                 <div style={{position: "relative"}}>
                     <ImagePreview

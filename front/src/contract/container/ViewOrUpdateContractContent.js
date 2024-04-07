@@ -29,7 +29,13 @@ import {FormContainer} from "base/form/components";
 
 import EditIcon from "@mui/icons-material/Edit";
 
-const ViewOrUpdateContractContent = ({contract, section, label, services = null}) => {
+const ViewOrUpdateContractContent = ({
+    contract,
+    section,
+    label,
+    services = null,
+    edit = true,
+}) => {
     const navigate = useNavigateWithReload();
     const location = useLocation();
     const basePath = location.pathname.substring(0, location.pathname.lastIndexOf("/"));
@@ -132,7 +138,7 @@ const ViewOrUpdateContractContent = ({contract, section, label, services = null}
     ];
 
     return (
-        <SectionCard title={label} secondaryActions={actions}>
+        <SectionCard title={label} secondaryActions={edit ? actions : null}>
             {getComponent(mode)}
         </SectionCard>
     );

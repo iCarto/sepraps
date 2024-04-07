@@ -15,6 +15,7 @@ const ContractContactsSection = ({
     return (
         <SectionCard title={title}>
             <ViewContactsList
+                area={area}
                 service={ContractContactService}
                 basePath={""}
                 entityId={contractId}

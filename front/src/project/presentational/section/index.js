@@ -10,3 +10,4 @@ export {default as ProjectContactsSection} from "./ProjectContactsSection";
 export {default as ProjectSectionFields} from "./ProjectSectionFields";
 export {default as ProjectBasicDataFields} from "./ProjectBasicDataFields";
 export {default as ProjectProgressSection} from "./ProjectProgressSection";
+export {default as ProjectGeneralInfoSection} from "./ProjectGeneralInfoSection";

@@ -61,3 +61,6 @@ export {
 export {
     default as ViewContractCertificationsAnalysisSubPage,
 } from "./ViewContractCertificationsAnalysisSubPage";
+export {
+    default as ViewContractGeneralInforSubPage,
+} from "./ViewContractGeneralInforSubPage";

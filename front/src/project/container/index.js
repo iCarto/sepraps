@@ -29,7 +29,9 @@ export {default as ViewProjectDocumentsSubPage} from "./ViewProjectDocumentsSubP
 export {
     default as ViewProjectFieldReportSubPage,
 } from "./ViewProjectFieldReportSubPage";
-export {default as ViewProjectLocationSubPage} from "./ViewProjectLocationSubPage";
+export {
+    default as ViewProjectGeneralInfoSubPage,
+} from "./ViewProjectGeneralInfoSubPage";
 export {default as ViewProjectMilestonesSubPage} from "./ViewProjectMilestonesSubPage";
 export {default as ViewProjectPage} from "./ViewProjectPage";
 export {default as ViewProjectPanel} from "./ViewProjectPanel";
@@ -67,3 +69,4 @@ export {
 export {
     default as ViewProjectCertificationsAnalysisContent,
 } from "./ViewProjectCertificationsAnalysisContent";
+export {default as ViewProjectSummaryContent} from "./ViewProjectSummaryContent";

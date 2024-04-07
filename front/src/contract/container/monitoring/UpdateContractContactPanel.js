@@ -1,11 +1,13 @@
-import {useOutletContext} from "react-router-dom";
+import {useOutletContext, useParams} from "react-router-dom";
 
 import {ContractContactService} from "contract/service";
 import {UpdateContactPanel} from "contact/container";
 
-const UpdateContractContactPanel = ({area}) => {
+const UpdateContractContactPanel = () => {
     let contract;
     [contract] = useOutletContext();
+
+    const {area} = useParams();
 
     const getAllowedPosts = contract => {
         const supervisionArea = contract?.supervision_areas.find(
@@ -17,7 +19,7 @@ const UpdateContractContactPanel = ({area}) => {
     return (
         <UpdateContactPanel
             service={ContractContactService}
-            basePath={`/contracts/list/${contract.id}/${area}_staff`}
+            basePath={`/contracts/list/${contract.id}/contacts`}
             allowedPosts={getAllowedPosts(contract)}
             entityId={contract.id}
         />

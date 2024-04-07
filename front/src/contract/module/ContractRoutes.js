@@ -26,6 +26,7 @@ import {
     ViewContractPaymentsAnalysisContent,
     ViewContractCertificationsAnalysisContent,
     ViewContractCertificationsAnalysisSubPage,
+    ViewContractGeneralInforSubPage,
 } from "contract/container";
 import {
     UpdateContractContactPanel,
@@ -38,7 +39,6 @@ import {
 import {
     ViewPaymentContent,
     CreatePaymentContent,
-    ViewPaymentsAnalysisContent,
     ViewPaymentContractOverview,
 } from "payment/container";
 import {ViewDocumentPanel} from "base/file/components";
@@ -52,6 +52,11 @@ const contractRoutes = [
                 key="contract-summary"
                 path="summary"
                 element={<ViewContractSummarySubPage />}
+            />
+            <Route
+                key="contract-info"
+                path="info"
+                element={<ViewContractGeneralInforSubPage />}
             />
             <Route
                 key="contract-budget"
@@ -150,8 +155,8 @@ const contractRoutes = [
             </Route>
             <Route
                 key="contract-building"
-                path="building_staff"
-                element={<ViewContractStaffSubPage area={SUPERVISION_AREAS.BUILDING} />}
+                path="contacts"
+                element={<ViewContractStaffSubPage />}
             >
                 <Route
                     key="contract-building-view-contact"
@@ -160,10 +165,8 @@ const contractRoutes = [
                 />
                 <Route
                     key="contract-building-manage-contact"
-                    path=":action/:contactId"
-                    element={
-                        <UpdateContractContactPanel area={SUPERVISION_AREAS.BUILDING} />
-                    }
+                    path=":area/:action/:contactId"
+                    element={<UpdateContractContactPanel />}
                 />
             </Route>
             <Route
@@ -191,24 +194,6 @@ const contractRoutes = [
                     key="contract-project-certifications-overview"
                     path="analysis"
                     element={<ViewContractCertificationsAnalysisContent />}
-                />
-            </Route>
-            <Route
-                key="contract-social"
-                path="social_staff"
-                element={<ViewContractStaffSubPage area={SUPERVISION_AREAS.SOCIAL} />}
-            >
-                <Route
-                    key="contract-social-view-contact"
-                    path="info/:contactId"
-                    element={<ViewContractContactPanel />}
-                />
-                <Route
-                    key="contract-social-manage-contact"
-                    path=":action/:contactId"
-                    element={
-                        <UpdateContractContactPanel area={SUPERVISION_AREAS.SOCIAL} />
-                    }
                 />
             </Route>
             <Route
