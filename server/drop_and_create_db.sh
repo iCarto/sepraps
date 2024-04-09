@@ -83,3 +83,4 @@ fi
 
 # TODO: Cuando crear la extensión hay que pensarlo mejor.
 ${PSQL} -h localhost -p "${PG_PORT}" -U postgres -d "${DBNAME}" -c "CREATE EXTENSION IF NOT EXISTS postgis;"
+${PSQL} -h localhost -p "${PG_PORT}" -U postgres -d "${DBNAME}" -c "CREATE EXTENSION IF NOT EXISTS unaccent;"

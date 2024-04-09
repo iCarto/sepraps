@@ -76,9 +76,11 @@ class ProjectFilter(filters.FilterSet):
 
     def filter_by_search_text(self, queryset, name, search_text):  # noqa: ARG002
         return queryset.filter(
-            Q(linked_localities__name__icontains=search_text)
-            | Q(linked_localities__district__name__icontains=search_text)
-            | Q(linked_localities__district__department__name__icontains=search_text)
+            Q(linked_localities__name__unaccent__icontains=search_text)
+            | Q(linked_localities__district__name__unaccent__icontains=search_text)
+            | Q(
+                linked_localities__district__department__name__unaccent__icontains=search_text
+            )
             | Q(code__icontains=search_text)
         ).distinct()
 
