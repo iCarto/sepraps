@@ -72,7 +72,9 @@ const DateUtil = {
         }
     },
     addMonths(date, months) {
-        return add(new Date(date), {months});
+        // TODO: Fix https://github.com/date-fns/date-fns/issues/571
+        const dateValue = add(new Date(date), {months});
+        return add(dateValue, {days: 1});
     },
     getToday() {
         const now = new Date(Date.now());
