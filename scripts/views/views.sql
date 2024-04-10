@@ -6,7 +6,7 @@ select
  bcm.paid_amount as paid_amount,
  case
         when COUNT(bcm.expected_amount) over (partition by bcm.project_id) = COUNT(bcm.id) over (partition by bcm.project_id)
-        then ROUND(bcm.expected_amount / SUM(bcm.expected_amount) over (partition by bcm.project_id), 2)
+        then bcm.expected_amount / SUM(bcm.expected_amount) over (partition by bcm.project_id) * 100
         else null
     end as financial_weight,
  ROUND((bcm.paid_amount / NULLIF(bcm.expected_amount, 0)) * 100, 2) as financial_progress_percentage,
@@ -17,8 +17,8 @@ where bcm.active = True;
 CREATE OR REPLACE VIEW project_progress AS
 WITH bcmp AS (
 	SELECT
-		ROUND(financial_weight * financial_progress_percentage, 2) as financial_progress,
-		ROUND(financial_weight * physical_progress_percentage, 2) as physical_progress,
+		ROUND((financial_weight / 100) * financial_progress_percentage, 2) as financial_progress,
+		ROUND((financial_weight / 100) * physical_progress_percentage, 2) as physical_progress,
 		project_id
 	FROM bcm_progress
 	WHERE financial_weight is not null
@@ -37,7 +37,7 @@ sctp AS (
 		SUM(sct.number_of_women + sct.number_of_men) as number_of_participants,
 		ROUND((SUM(sct.number_of_women)::decimal / SUM(sct.number_of_women + sct.number_of_men)::decimal) * 100, 2) as percentage_of_women
 	FROM social_component_training sct
-	LEFT JOIN social_component_monitoring scm ON sct.social_component_monitoring_id = scm.id
+	LEFT JOIN social_component_monitoring scm ON sct.social_component_monitoring_id = scm.id AND scm.active = True
 	GROUP BY scm.project_id
 )
 SELECT
