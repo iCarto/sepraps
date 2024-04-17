@@ -111,11 +111,11 @@ def get_certifications_inconsistent_with_components_notifications(filter_params,
                 (
                     SELECT COALESCE(SUM(c.approved_amount), 0)
                     FROM certification c
-                    WHERE c.project_id = p.id
+                    WHERE c.project_id = p.id and c.active = True
                 ) != (
                     SELECT COALESCE(SUM(bcm.paid_amount), 0)
                     FROM building_component_monitoring bcm
-                    WHERE bcm.project_id = p.id
+                    WHERE bcm.project_id = p.id and bcm.active = True
                 )
             {filter_conditions}
             """
