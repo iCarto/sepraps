@@ -98,7 +98,11 @@ const DateUtil = {
         );
     },
     getDateAfterDays(date, amountOfDays) {
-        return addDays(this.parseDateFromApi(date), amountOfDays);
+        const dateValue = this.parseDateFromApi(date);
+        if (!isValidDate(dateValue)) {
+            return null;
+        }
+        return addDays(dateValue, amountOfDays);
     },
     getMonths(firstDate, lastDate) {
         return differenceInCalendarMonths(new Date(lastDate), new Date(firstDate));
@@ -111,6 +115,9 @@ const DateUtil = {
     formatYearAndMonth(date) {
         const month = `${new Date(date).getMonth() + 1}`.padStart(2, "0");
         return `${month}-${new Date(date).getFullYear()}`;
+    },
+    isValidDate(d) {
+        return d instanceof Date && !isNaN(d);
     },
 };
 
