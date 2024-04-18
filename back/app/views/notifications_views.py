@@ -157,8 +157,9 @@ def get_certifications_inconsistent_with_contract_payment_notifications(
                     cc.number AS contract_number,
                     COALESCE(SUM(cert.approved_amount), 0) AS projects_total_approved_amount
                 FROM payment pay
-                JOIN certification cert ON cert.payment_id = pay.id
+                JOIN certification cert ON cert.payment_id = pay.id and cert.active = True
                 JOIN construction_contract cc ON cc.id = pay.contract_id
+                WHERE pay.active = True
                 GROUP BY pay.id, pay.contract_id, cc.number
                 HAVING pay.paid_total_amount != COALESCE(SUM(cert.approved_amount), 0)
                 {filter_conditions}
