@@ -25,8 +25,7 @@ case "${1}" in
         usage
         ;;
     -f | --front)
-        # https://coderrocketfuel.com/article/stop-create-react-app-from-opening-a-browser-window-on-start
-        (cd front && BROWSER=none REACT_APP_API_BASE_URL=http://localhost:8000 npm run start)
+        (cd front && REACT_APP_API_BASE_URL=http://localhost:8000 npm run dev)
         ;;
     -b | --back)
         # if ! command -v deactivate ; then
