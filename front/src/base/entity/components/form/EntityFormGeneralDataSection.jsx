@@ -1,4 +1,4 @@
-import {EntityFormLocationFields, FormSection} from "base/form/components";
+import {FormSection} from "base/form/components";
 
 const EntityFormGeneralDataSection = ({fields = null}) => {
     return (

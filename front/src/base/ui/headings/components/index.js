@@ -1,1 +1,1 @@
-export {default as LightHeading} from "./LightHeading.js";
+export {default as LightHeading} from "./LightHeading";

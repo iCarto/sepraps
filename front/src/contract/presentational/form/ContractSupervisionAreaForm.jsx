@@ -1,5 +1,5 @@
 import {FormProvider, useForm} from "react-hook-form";
-import {ContractSupervisionAreaFormFields, ProductFormDataFields} from ".";
+import {ContractSupervisionAreaFormFields} from ".";
 
 import {FormUtil} from "base/form/utilities";
 import {EntityForm} from "base/entity/components/form";

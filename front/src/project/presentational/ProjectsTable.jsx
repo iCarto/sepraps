@@ -4,7 +4,7 @@ import {useSort} from "base/table/hooks";
 import {NumberUtil} from "base/format/utilities";
 import {ProgressBarSmall} from "base/progress/components";
 import {TableSortingHead} from "base/table/components";
-import {ProjectTypeClassChips, ProjectTypeIcon} from ".";
+import {ProjectTypeClassChips} from ".";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
