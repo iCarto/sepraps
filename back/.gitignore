@@ -1,8 +1,0 @@
-# Python
-static
-media
-front_build
-back/static
-monitoring/static
-
-**/migrations/0*.py

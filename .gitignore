@@ -29,3 +29,10 @@ ubuntu-*-cloudimg-console.log
 # Project
 .env
 private
+back/static
+back/media
+back/back/front_build
+back/back/static
+back/monitoring/static
+
+back/**/migrations/0*.py
