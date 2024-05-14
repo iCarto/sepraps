@@ -63,21 +63,24 @@ const TransferList = ({
                         const labelId = `transfer-list-all-item-${item}-label`;
 
                         return (
-                            <ListItem
-                                key={item.id}
-                                onClick={handleToggle(item)}
-                                secondaryAction={
-                                    <Checkbox
-                                        edge="end"
-                                        onChange={handleToggle(item)}
-                                        checked={checkedItems.indexOf(item) !== -1}
-                                        inputProps={{"aria-labelledby": labelId}}
-                                    />
-                                }
-                                disablePadding
-                            >
-                                <ListItemComponent item={item} />
-                            </ListItem>
+                            <>
+                                <ListItem
+                                    key={item.id}
+                                    onClick={handleToggle(item)}
+                                    secondaryAction={
+                                        <Checkbox
+                                            edge="end"
+                                            onChange={handleToggle(item)}
+                                            checked={checkedItems.indexOf(item) !== -1}
+                                            inputProps={{"aria-labelledby": labelId}}
+                                        />
+                                    }
+                                    disablePadding
+                                >
+                                    <ListItemComponent item={item} />
+                                </ListItem>
+                                <Divider />
+                            </>
                         );
                     })
                 )}
