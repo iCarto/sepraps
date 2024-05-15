@@ -2,7 +2,7 @@ import {FormDatePicker, FormTextArea} from "base/form/components";
 import ProjectFormProjectWorks from "./ProjectFormProjectWorks";
 import Grid from "@mui/material/Grid";
 
-const ProjectFormGeneralDataFields = ({layout = "row"}) => {
+const ProjectFormGeneralDataFields = ({showCreateComponents = false}) => {
     return (
         <>
             <Grid container spacing={2} sx={{mb: 2}}>
@@ -21,7 +21,10 @@ const ProjectFormGeneralDataFields = ({layout = "row"}) => {
                     />
                 </Grid>
             </Grid>
-            <ProjectFormProjectWorks name="project_works" itemName="Tipo de trabajo" />
+            <ProjectFormProjectWorks
+                name="project_works"
+                showCreateComponents={showCreateComponents}
+            />
         </>
     );
 };

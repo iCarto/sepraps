@@ -1,6 +1,6 @@
-import {useFieldArray, useFormContext} from "react-hook-form";
+import {useFieldArray, useFormContext, useWatch} from "react-hook-form";
 import {AddNewFullWidthButton} from "base/shared/components";
-import {FormSelect} from "base/form/components";
+import {FormCheckbox, FormSelect} from "base/form/components";
 import {useDomain} from "sepraps/domain/provider";
 
 import Grid from "@mui/material/Grid";
@@ -11,8 +11,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import {SectionBox} from "base/ui/section/components";
 
-const ProjectFormProjectWorks = ({name: propsName, itemName}) => {
-    const {control} = useFormContext();
+const ProjectFormProjectWorks = ({name: propsName, showCreateComponents = false}) => {
+    const {control, reset, getValues} = useFormContext();
     const {fields, append, remove} = useFieldArray({
         control,
         name: propsName,
@@ -26,7 +26,21 @@ const ProjectFormProjectWorks = ({name: propsName, itemName}) => {
         append({
             work_type: "",
             work_class: "",
+            create_components: false,
         });
+    };
+
+    const onChangeWorkClass = (value, index) => {
+        console.log({value}, {index});
+        // TODO (egago): Remove this constant dependency
+        if (value === "nueva_construccion") {
+            const values = getValues();
+            console.log({values});
+            values[propsName][index].create_components = true;
+            reset({
+                ...values,
+            });
+        }
     };
 
     return (
@@ -39,8 +53,9 @@ const ProjectFormProjectWorks = ({name: propsName, itemName}) => {
                             item
                             xs={moreThanOneField ? 11 : 12}
                             spacing={2}
+                            alignItems="center"
                         >
-                            <Grid item xs={6}>
+                            <Grid item xs={showCreateComponents ? 4 : 6}>
                                 <FormSelect
                                     name={`${propsName}.${index}.work_type`}
                                     label="Tipo de trabajo"
@@ -48,14 +63,25 @@ const ProjectFormProjectWorks = ({name: propsName, itemName}) => {
                                     options={projectTypes}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={showCreateComponents ? 4 : 6}>
                                 <FormSelect
                                     name={`${propsName}.${index}.work_class`}
                                     label="Clase de trabajo"
                                     rules={{required: "El campo es obligatorio"}}
                                     options={projectClasses}
+                                    onChangeHandler={value =>
+                                        onChangeWorkClass(value, index)
+                                    }
                                 />
                             </Grid>
+                            {showCreateComponents && (
+                                <Grid item xs={4}>
+                                    <FormCheckbox
+                                        name={`${propsName}.${index}.create_components`}
+                                        label="Crear componentes"
+                                    />
+                                </Grid>
+                            )}
                         </Grid>
                         {moreThanOneField && (
                             <Grid item container justifyContent="center" xs={1}>

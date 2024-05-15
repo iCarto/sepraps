@@ -10,7 +10,7 @@ const ProjectCreationFormFields = () => {
     return (
         <Stack spacing={1}>
             <FormSection title="Información general">
-                <ProjectFormGeneralDataFields />
+                <ProjectFormGeneralDataFields showCreateComponents={true} />
             </FormSection>
             <FormSection title="Localidad">
                 <ProjectFormLinkedLocalitiesList name="linked_localities" />

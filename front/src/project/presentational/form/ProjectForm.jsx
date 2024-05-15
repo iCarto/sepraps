@@ -24,12 +24,14 @@ const ProjectForm = ({
                   return {
                       work_type: project_work.work_type,
                       work_class: project_work.work_class,
+                      create_components: project_work.create_components,
                   };
               })
             : [
                   {
                       work_type: "",
                       work_class: "",
+                      create_components: false,
                   },
               ],
         description: project?.description || "",
