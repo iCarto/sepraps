@@ -35,6 +35,7 @@ const SocialComponentMonitoringFormDataFields = () => {
                         name="execution_status"
                         label="Estado de ejecución"
                         options={executionStatusTypes}
+                        showEmptyOption={true}
                     />
                 </Grid>
                 {displayMonitoringFields ? (

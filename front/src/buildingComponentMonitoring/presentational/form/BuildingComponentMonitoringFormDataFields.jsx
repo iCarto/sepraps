@@ -84,6 +84,7 @@ const BuildingComponentMonitoringFormDataFields = () => {
                         name="execution_status"
                         label="Estado de ejecución"
                         options={executionStatusTypes}
+                        showEmptyOption={true}
                     />
                 </Grid>
                 {execution_status === COMPONENT_EXECUTION_STATUS_COMPLETED ? (
