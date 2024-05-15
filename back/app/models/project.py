@@ -140,11 +140,8 @@ class Project(models.Model):
 
             create_project_milestones(self, data.get("milestones", []))
 
-    def create_components_data(self, work_class, data):
-        if work_class == "nueva_construccion":
-            create_project_building_components(
-                self, data.get("building_components", {})
-            )
+    def create_components_data(self, data):
+        create_project_building_components(self, data.get("building_components", {}))
         create_project_social_components(self, data.get("social_components", {}))
 
     def __str__(self):

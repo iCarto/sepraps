@@ -8,7 +8,9 @@ from domains.models import DomainCategoryChoices
 class ProjectWorkSerializer(BaseDomainMixin, serializers.ModelSerializer):
     class Meta(object):
         model = ProjectWork
-        fields = ("work_type", "work_class")
+        fields = ("work_type", "work_class", "create_components")
+
+    create_components = serializers.BooleanField(write_only=True, required=False)
 
     domain_fields = (
         BaseDomainField("work_type", DomainCategoryChoices.project_type),
