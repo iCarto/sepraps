@@ -3,7 +3,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-const SectionBox = ({label = "", children}) => {
+const SectionBox = ({label = "", sx = {}, children}) => {
     return (
         <Grid
             container
@@ -11,6 +11,7 @@ const SectionBox = ({label = "", children}) => {
                 border: 0,
                 borderRadius: 2,
                 borderColor: "grey.200",
+                ...sx,
             }}
         >
             <Grid item xs>

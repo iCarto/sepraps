@@ -38,3 +38,20 @@ class BuildingComponentMonitoringViewSet(ModelListAuditViewSet):
 
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        methods=["GET"],
+        detail=True,
+        url_path="history",
+        url_name="building_component_monitoring_history",
+    )
+    def get_building_component_monitoring_history(self, request, pk):
+        bc_monitoring = self.get_object()
+        return Response(
+            BuildingComponentMonitoringSerializer(
+                BuildingComponentMonitoring.objects.exclude(pk=pk)
+                .filter(building_component=bc_monitoring.building_component)
+                .order_by("id"),
+                many=True,
+            ).data
+        )

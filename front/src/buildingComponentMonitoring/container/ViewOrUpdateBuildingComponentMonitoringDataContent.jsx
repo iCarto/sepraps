@@ -9,6 +9,8 @@ import {BuildingComponentMonitoringData} from "buildingComponentMonitoring/prese
 import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/presentational/form";
 
 import EditIcon from "@mui/icons-material/Edit";
+import {ViewBuildingComponentsHistoricTable} from ".";
+import Box from "@mui/material/Box";
 
 const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
     const navigate = useNavigateWithReload();
@@ -51,7 +53,14 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
 
     const getComponent = mode => {
         if (mode === "view") {
-            return <BuildingComponentMonitoringData bcMonitoring={bcMonitoring} />;
+            return (
+                <>
+                    <BuildingComponentMonitoringData bcMonitoring={bcMonitoring} />
+                    <ViewBuildingComponentsHistoricTable
+                        buildingComponentId={bcMonitoring.id}
+                    />
+                </>
+            );
         }
         if (mode === "edit") {
             return (

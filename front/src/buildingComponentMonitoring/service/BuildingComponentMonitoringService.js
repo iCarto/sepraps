@@ -49,6 +49,16 @@ const BuildingComponentMonitoringService = {
             return createComment(comment_api_adapter(response));
         });
     },
+
+    getBuildingComponentHistoric(buildingComponentId) {
+        return AuthApiService.get(`${basePath}/${buildingComponentId}/history`).then(
+            response => {
+                return createBuildingComponentMonitorings(
+                    building_component_monitorings_api_adapter(response)
+                );
+            }
+        );
+    },
 };
 
 export default BuildingComponentMonitoringService;
