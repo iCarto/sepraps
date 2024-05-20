@@ -61,3 +61,5 @@ if [[ -f ${this_dir}/../back/manage.py ]]; then
     # At this point static assets are collected
     python "${this_dir}/../back/manage.py" collectstatic --no-input --clear
 fi
+
+python "${this_dir}/../back/manage.py" create_medianodes

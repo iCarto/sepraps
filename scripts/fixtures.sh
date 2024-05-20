@@ -29,6 +29,7 @@ python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contr
 python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contrato_2019_99.json"
 python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contrato_2020_08.json"
 python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_contrato_2020_10.json"
+python "${this_dir}/../back/manage.py" loaddata "${this_dir}/data/fixtures_building_components.json"
 python "${this_dir}/../back/manage.py" shell < "${this_dir}/data/set_featured_images.py"
 python "${this_dir}/../back/manage.py" shell < "${this_dir}/data/import_domains.py"
 python "${this_dir}/../back/manage.py" shell < "${this_dir}/data/set_activity_images.py"
