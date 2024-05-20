@@ -281,6 +281,7 @@ def get_social_component_trainings_sum_stats(request, format=None):  # noqa: ARG
             SELECT
                 sct.id,
                 cp.contract_number,
+                cp.project_id,
                 cp.project_code,
                 (SELECT string_agg(l.name, ' - ') FROM locality l INNER JOIN project_linked_localities pll ON l.code = pll.locality_id WHERE pll.project_id = cp.project_id) as project_name,
                 sct.name,
@@ -358,6 +359,7 @@ def get_social_component_trainings_sum_stats(request, format=None):  # noqa: ARG
         result_df = result_df.astype(
             {
                 "id": "Int64",
+                "project_id": "Int64",
                 "start_date": "datetime64[ns]",
                 "end_date": "datetime64[ns]",
                 "social_component_monitoring_id": "Int64",

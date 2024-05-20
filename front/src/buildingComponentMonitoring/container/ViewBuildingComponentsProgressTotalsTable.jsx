@@ -52,12 +52,6 @@ const ViewBuildingComponentsProgressTotalsTable = ({
         <>
             <AlertError error={error} />
             <Stack alignItems="flex-end" spacing={3}>
-                {/* <SocialComponentsTrainingsTableFilterForm
-                    trainingData={bcProgressData}
-                    filter={tableFilter}
-                    onChangeFilter={handleTableFilter}
-                    isContractTable={isContractTable}
-                /> */}
                 {isLoading ? (
                     <Spinner />
                 ) : (

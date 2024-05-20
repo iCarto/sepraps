@@ -21,7 +21,6 @@ const ViewSocialComponentsTrainingsTotalsTable = ({
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const isContractTable = Object.keys(filter).includes("contract");
     const {tableColumns} = useTrainingTotalsTable(showProject, showContract);
 
     useEffect(() => {
@@ -61,7 +60,7 @@ const ViewSocialComponentsTrainingsTotalsTable = ({
                     trainingData={trainingData}
                     filter={tableFilter}
                     onChangeFilter={handleTableFilter}
-                    isContractTable={isContractTable}
+                    showProject={showProject}
                 />
                 {isLoading ? (
                     <Spinner />
