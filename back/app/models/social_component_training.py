@@ -17,6 +17,7 @@ class SocialComponentTraining(BaseDocumentModel, BaseEntityModelMixin):
 
     objects = ActiveManager()
 
+    name = models.CharField("Nombre", max_length=255)
     start_date = models.DateField("Fecha de inicio", null=True)
     end_date = models.DateField("Fecha de finalización", null=True)
 

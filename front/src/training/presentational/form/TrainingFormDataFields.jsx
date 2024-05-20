@@ -5,6 +5,7 @@ import {
     FormBox,
     FormDatePicker,
     FormInputInteger,
+    FormInputText,
     FormSelect,
 } from "base/form/components";
 
@@ -69,6 +70,13 @@ const TrainingFormDataFields = ({}) => {
 
     return (
         <Grid container columnSpacing={2}>
+            <Grid item xs={12}>
+                <FormInputText
+                    name="name"
+                    label="Nombre"
+                    rules={{required: "Este campo es obligatorio"}}
+                />
+            </Grid>
             <Grid item xs={6}>
                 <FormSelect
                     name="contract"

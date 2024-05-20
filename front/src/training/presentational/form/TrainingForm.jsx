@@ -10,6 +10,7 @@ import {FormContainer} from "base/form/components";
 const TrainingForm = ({training = null, onSubmit, onCancel = null, error = null}) => {
     const defaultFormValues = {
         id: FormUtil.getFormValue(training?.id),
+        name: FormUtil.getFormValue(training?.name),
         start_date: FormUtil.getFormValue(training?.start_date),
         end_date: FormUtil.getFormValue(training?.end_date),
         target_population: FormUtil.getFormValue(training?.target_population, []),
@@ -38,6 +39,7 @@ const TrainingForm = ({training = null, onSubmit, onCancel = null, error = null}
     const onFormSubmit = data => {
         onSubmit({
             id: FormUtil.getDataValue(data.id),
+            name: FormUtil.getDataValue(data.name),
             start_date: FormUtil.getDataValue(data.start_date),
             end_date: FormUtil.getDataValue(data.end_date),
             target_population: FormUtil.getDataValue(data.target_population),

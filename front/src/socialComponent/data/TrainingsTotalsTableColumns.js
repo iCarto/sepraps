@@ -5,7 +5,7 @@ export function useTrainingTotalsTable(showProject, showContract) {
         {
             id: "social_component_monitoring_name",
             label: "Servicio",
-            width: 20,
+            width: 15,
         },
         {
             id: "training_contract_number",
@@ -16,6 +16,11 @@ export function useTrainingTotalsTable(showProject, showContract) {
             id: "training_contractor_name",
             label: "Consultora",
             width: 10,
+        },
+        {
+            id: "name",
+            label: "Nombre",
+            width: 15,
         },
         {
             id: "start_date",

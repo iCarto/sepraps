@@ -1,5 +1,3 @@
-from domains.mixins import BaseDomainField, BaseDomainMixin
-from domains.models import DomainCategoryChoices
 from rest_framework import serializers
 
 from app.base.serializers.base_serializers import BaseModelSerializer
@@ -10,12 +8,16 @@ from app.serializers.construction_contract_serializer import (
     ConstructionContractShortSerializer,
 )
 from app.serializers.contractor_serializer import ContractorSummarySerializer
+from domains.mixins import BaseDomainField, BaseDomainMixin
+from domains.models import DomainCategoryChoices
 
 
 class SocialComponentTrainingSerializer(BaseDomainMixin, BaseModelSerializer):
     class Meta(BaseModelSerializer.Meta):
         model = SocialComponentTraining
-        fields = BaseModelSerializer.Meta.fields + (
+        fields = (
+            *BaseModelSerializer.Meta.fields,
+            "name",
             "start_date",
             "end_date",
             "target_population",
@@ -34,12 +36,12 @@ class SocialComponentTrainingSerializer(BaseDomainMixin, BaseModelSerializer):
 
     target_population = serializers.ListField(child=serializers.CharField())
 
-    domain_fields = [
+    domain_fields = (
         BaseDomainField(
             "target_population", DomainCategoryChoices.target_population_type, many=True
         ),
         BaseDomainField("method", DomainCategoryChoices.training_method_type),
-    ]
+    )
 
     contract = serializers.PrimaryKeyRelatedField(
         required=False, allow_null=True, queryset=ConstructionContract.objects.all()

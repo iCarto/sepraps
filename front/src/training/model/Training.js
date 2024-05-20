@@ -25,6 +25,7 @@ const createTrainings = (data = []) => {
 
 const createTraining = ({
     id = null,
+    name = "",
     start_date = null,
     end_date = null,
     target_population = [],
@@ -47,6 +48,7 @@ const createTraining = ({
 } = {}) => {
     const publicApi = {
         id,
+        name,
         start_date,
         end_date,
         target_population,
