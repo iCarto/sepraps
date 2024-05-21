@@ -28,17 +28,19 @@ def building_component_post_save(sender, instance, created, *args, **kwargs):
         technical_properties = instance.technical_properties
         validation_properties = instance.validation_properties
 
-        for technical_property in technical_properties:
-            building_component_value = BuildingComponentValue(
-                code=technical_property, value=None, building_component=instance
-            )
-            building_component_value.save()
+        if technical_properties:
+            for technical_property in technical_properties:
+                building_component_value = BuildingComponentValue(
+                    code=technical_property, value=None, building_component=instance
+                )
+                building_component_value.save()
 
-        for validation_property in validation_properties:
-            building_component_value = BuildingComponentValue(
-                code=validation_property, value=None, building_component=instance
-            )
-            building_component_value.save()
+        if validation_properties:
+            for validation_property in validation_properties:
+                building_component_value = BuildingComponentValue(
+                    code=validation_property, value=None, building_component=instance
+                )
+                building_component_value.save()
 
 
 def create_project_building_components(project, components):

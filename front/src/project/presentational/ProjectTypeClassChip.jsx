@@ -8,13 +8,21 @@ export const PROJECT_TYPE_ICONS = {
     default: "https://cdn-icons-png.flaticon.com/512/57/57108.png",
 };
 
+const getAvatarText = workTypeLabel => {
+    return workTypeLabel.split(/\s/).reduce(function (accumulator, word) {
+        return accumulator + word.charAt(0);
+    }, "");
+};
+
 const ProjectTypeClassChip = ({projectWorkData}) => {
     return (
         <GenericChip
             iconSrc={
-                PROJECT_TYPE_ICONS[projectWorkData.work_type] ||
-                PROJECT_TYPE_ICONS.default
+                PROJECT_TYPE_ICONS[projectWorkData.work_type]
+                    ? PROJECT_TYPE_ICONS[projectWorkData.work_type]
+                    : null
             }
+            avatarText={getAvatarText(projectWorkData.work_type_label)}
             tooltipText={projectWorkData.work_type_label}
             label={projectWorkData.work_class_label}
         />
