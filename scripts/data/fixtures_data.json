@@ -597,5 +597,37 @@
             "short_name": "Fondos locales",
             "name": "Fondos locales de SENASA"
         }
+    },
+    {
+        "model": "app.projectworktype",
+        "fields": {
+            "key": "agua",
+            "value": "Agua potable",
+            "config_file": "customization/agua.json"
+        }
+    },
+    {
+        "model": "app.projectworktype",
+        "fields": {
+            "key": "agua_lluvia",
+            "value": "Agua - Chaco",
+            "config_file": "customization/agua_lluvia.json"
+        }
+    },
+    {
+        "model": "app.projectworktype",
+        "fields": {
+            "key": "alcantarillado",
+            "value": "Alcantarillado",
+            "config_file": "customization/alcantarillado.json"
+        }
+    },
+    {
+        "model": "app.projectworktype",
+        "fields": {
+            "key": "sanitarios",
+            "value": "Unidades de saneamiento básico (USB)",
+            "config_file": "customization/sanitarios.json"
+        }
     }
 ]

@@ -4,6 +4,7 @@ from django.contrib import admin
 from app.admin.contact_admin import ContactAdmin
 from app.admin.financing_fund_admin import FinancingFundAdmin
 from app.admin.financing_program import FinancingProgramAdmin
+from app.admin.project_work_type_admin import ProjectWorkTypeAdmin
 from app.models.comment import Comment
 from app.models.contact import Contact
 from app.models.contract_service import ContractService
@@ -17,6 +18,7 @@ from app.models.location import Department, District, Locality
 from app.models.payment import Payment
 from app.models.project import Project
 from app.models.project_work import ProjectWork
+from app.models.project_work_type import ProjectWorkType
 from app.models.provider import Provider
 
 
@@ -46,3 +48,6 @@ admin.site.register(Locality)
 # Only for fixtures (remove when endoints are implemented)
 admin.site.register(FieldReportProject)
 admin.site.register(FieldReportProjectActivity)
+
+# Customization
+admin.site.register(ProjectWorkType, ProjectWorkTypeAdmin)
