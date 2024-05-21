@@ -10,6 +10,7 @@ class ProjectWorkType(models.Model):
 
     key = models.CharField("Clave", max_length=50, primary_key=True, unique=True)
     value = models.CharField("Valor", max_length=100)
+    color = models.CharField("Color", max_length=7)
     config_file = models.FileField(
         "Archivo de configuración",
         upload_to="customization",

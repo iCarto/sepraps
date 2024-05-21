@@ -2,7 +2,7 @@ from django.contrib import admin
 
 
 class ProjectWorkTypeAdmin(admin.ModelAdmin):
-    fields = ("key", "value", "config_file")
+    fields = ("key", "value", "color", "config_file")
     list_display = ("key", "value")
     list_display_links = ("key",)
 

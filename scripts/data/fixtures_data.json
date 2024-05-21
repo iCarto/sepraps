@@ -567,6 +567,7 @@
         "fields": {
             "key": "agua",
             "value": "Agua potable",
+            "color": "#5383cf",
             "config_file": "customization/agua.json"
         }
     },
@@ -575,6 +576,7 @@
         "fields": {
             "key": "agua_lluvia",
             "value": "Agua - Chaco",
+            "color": "#3A6E91",
             "config_file": "customization/agua_lluvia.json"
         }
     },
@@ -583,6 +585,7 @@
         "fields": {
             "key": "alcantarillado",
             "value": "Alcantarillado",
+            "color": "#cf9f53",
             "config_file": "customization/alcantarillado.json"
         }
     },
@@ -591,6 +594,7 @@
         "fields": {
             "key": "sanitarios",
             "value": "Unidades de saneamiento básico (USB)",
+            "color": "#36ad57",
             "config_file": "customization/sanitarios.json"
         }
     }

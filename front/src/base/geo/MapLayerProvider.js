@@ -162,7 +162,7 @@ export function useMapLayerProvider(service, layer, options = null) {
             loadTableData,
             downloadShapefile,
             layer,
-            useProvider: function() {
+            useProvider: function () {
                 useEffect(() => {
                     console.log("repainting");
                     if (visible && included) {

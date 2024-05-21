@@ -157,10 +157,12 @@ class LegendDiscriminatorEntry {
     }
 
     setFeatureHideFilterFns(addFeatureHideFilterFn, removeFeatureHideFilterFn) {
-        this.#toggleFn = visible =>
-            visible
+        this.#toggleFn = visible => {
+            console.log({visible});
+            return visible
                 ? removeFeatureHideFilterFn(this.#filterFn)
                 : addFeatureHideFilterFn(this.#filterFn);
+        };
     }
 }
 
@@ -565,6 +567,7 @@ export class Layer {
             geojson,
             this.#addCustomLayerOptions({
                 onEachFeature: (feature, layer) => {
+                    console.log({feature});
                     if (
                         this.#bindTooltip &&
                         this.#getTooltip &&
@@ -639,7 +642,8 @@ export class Layer {
                         );
                     }
                 },
-                filter: function(feature) {
+                filter: function (feature) {
+                    console.log({featureHideFilters});
                     if (featureHideFilters) {
                         for (let hideFilterFn of featureHideFilters) {
                             if (hideFilterFn(feature)) {
