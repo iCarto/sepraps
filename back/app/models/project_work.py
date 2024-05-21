@@ -1,10 +1,9 @@
 import json
-from pathlib import Path
 
-from django.conf import settings
 from django.db import models
 
 from app.base.models.base_models import BaseModel
+from app.models.project_work_type import ProjectWorkType
 
 
 class ProjectWork(BaseModel):
@@ -22,9 +21,7 @@ class ProjectWork(BaseModel):
 
 
 def get_project_work_data(work_type):
-    data_path = (
-        Path(settings.BASE_DIR) / "app" / "data" / "project" / f"{work_type}.json"
-    )
-
-    with Path.open(data_path) as f:
-        return json.load(f)
+    try:
+        return json.load(ProjectWorkType.objects.get(pk=work_type).config_file)
+    except ProjectWorkType.DoesNotExist:
+        return {}
