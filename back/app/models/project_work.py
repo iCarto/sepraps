@@ -12,7 +12,9 @@ class ProjectWork(BaseModel):
         verbose_name = "Obra del proyecto"
         verbose_name_plural = "Obras del proyecto"
 
-    work_type = models.CharField("Tipo de obra", max_length=50, null=True)
+    work_type = models.ForeignKey(
+        ProjectWorkType, db_column="work_type", on_delete=models.DO_NOTHING
+    )
     work_class = models.CharField("Clase de obra", max_length=50, null=True)
 
     project = models.ForeignKey(
@@ -20,7 +22,7 @@ class ProjectWork(BaseModel):
     )
 
 
-def get_project_work_data(work_type):
+def get_project_work_config(work_type):
     try:
         return json.load(ProjectWorkType.objects.get(pk=work_type).config_file)
     except ProjectWorkType.DoesNotExist:

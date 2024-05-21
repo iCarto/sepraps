@@ -1,6 +1,6 @@
+import {ProjectWorkTypeService} from "project/service";
 import {useState, useEffect, createContext, useContext} from "react";
 import {DomainService} from "sepraps/domain/service";
-import {FinancingService} from "financingprogram/service";
 
 let DomainContext = createContext(null);
 
@@ -39,74 +39,76 @@ export default function DomainProvider({children}) {
     // <-------------------------------------
 
     useEffect(() => {
-        Promise.all([
-            DomainService.getDomain(),
-            FinancingService.getFinancingFunds(),
-            FinancingService.getFinancingPrograms(),
-        ]).then(([domain]) => {
-            const {
-                dominiosino,
-                gender,
-                etapas,
-                project_type,
-                project_class,
-                cargo_contacto,
-                contractor_type,
-                area_prestador,
-                tipo_prestador,
-                estado_producto,
-                estado_entregable,
-                tipo_servicio,
-                tipo_monto,
-                frecuencia_producto,
-                criterio_pago,
-                estado_cualitativo,
-                estado_ejecucion,
-                poblacion_meta,
-                modalidad_capacitacion,
-                amendment_type,
-                material_letrinas,
-                tipo_aljibe,
-                tipo_laguna,
-                tipo_tanque,
-                sistema_disposicion,
-                tipo_caseta,
-                tipo_canheria,
-                material_caseta,
-                tipo_energia,
-                ubicacion_aljibe,
-            } = domain;
-            setYesNoDomain(dominiosino);
-            setGenderDomain(gender);
-            setPhasesDomain(etapas);
-            setProjectTypes(project_type);
-            setProjectClasses(project_class);
-            setProviderAreas(area_prestador);
-            setProviderTypes(tipo_prestador);
-            setProductStatus(estado_producto);
-            setDeliverableStatus(estado_entregable);
-            setContactPosts(cargo_contacto);
-            setContractorTypes(contractor_type);
-            setServiceTypes(tipo_servicio);
-            setTotalAmountTypes(tipo_monto);
-            setProductFrequencyTypes(frecuencia_producto);
-            setPaymentCriteriaTypes(criterio_pago);
-            setQualityStatusTypes(estado_cualitativo);
-            setExecutionStatusTypes(estado_ejecucion);
-            setTargetPopulationTypes(poblacion_meta);
-            setTrainingMethodTypes(modalidad_capacitacion);
-            setAmendmentTypes(amendment_type);
-            setToiletMaterialType(material_letrinas);
-            setCisternType(tipo_aljibe);
-            setPondType(tipo_laguna);
-            setTankType(tipo_tanque);
-            setDisposalSystemType(sistema_disposicion);
-            setBoothType(tipo_caseta);
-            setPipeType(tipo_canheria);
-            setBoothMaterialType(material_caseta);
-            setEnergyType(tipo_energia);
-            setCisternLocation(ubicacion_aljibe);
-        });
+        Promise.all([DomainService.getDomain(), ProjectWorkTypeService.getList()]).then(
+            ([domain, proyectWorkTypes]) => {
+                const {
+                    dominiosino,
+                    gender,
+                    etapas,
+                    project_class,
+                    cargo_contacto,
+                    contractor_type,
+                    area_prestador,
+                    tipo_prestador,
+                    estado_producto,
+                    estado_entregable,
+                    tipo_servicio,
+                    tipo_monto,
+                    frecuencia_producto,
+                    criterio_pago,
+                    estado_cualitativo,
+                    estado_ejecucion,
+                    poblacion_meta,
+                    modalidad_capacitacion,
+                    amendment_type,
+                    material_letrinas,
+                    tipo_aljibe,
+                    tipo_laguna,
+                    tipo_tanque,
+                    sistema_disposicion,
+                    tipo_caseta,
+                    tipo_canheria,
+                    material_caseta,
+                    tipo_energia,
+                    ubicacion_aljibe,
+                } = domain;
+                setYesNoDomain(dominiosino);
+                setGenderDomain(gender);
+                setPhasesDomain(etapas);
+                setProjectClasses(project_class);
+                setProviderAreas(area_prestador);
+                setProviderTypes(tipo_prestador);
+                setProductStatus(estado_producto);
+                setDeliverableStatus(estado_entregable);
+                setContactPosts(cargo_contacto);
+                setContractorTypes(contractor_type);
+                setServiceTypes(tipo_servicio);
+                setTotalAmountTypes(tipo_monto);
+                setProductFrequencyTypes(frecuencia_producto);
+                setPaymentCriteriaTypes(criterio_pago);
+                setQualityStatusTypes(estado_cualitativo);
+                setExecutionStatusTypes(estado_ejecucion);
+                setTargetPopulationTypes(poblacion_meta);
+                setTrainingMethodTypes(modalidad_capacitacion);
+                setAmendmentTypes(amendment_type);
+                setToiletMaterialType(material_letrinas);
+                setCisternType(tipo_aljibe);
+                setPondType(tipo_laguna);
+                setTankType(tipo_tanque);
+                setDisposalSystemType(sistema_disposicion);
+                setBoothType(tipo_caseta);
+                setPipeType(tipo_canheria);
+                setBoothMaterialType(material_caseta);
+                setEnergyType(tipo_energia);
+                setCisternLocation(ubicacion_aljibe);
+
+                // source from model
+                setProjectTypes(proyectWorkTypes);
+
+                console.log({proyectWorkTypes});
+                console.log({project_class});
+            }
+        );
     }, []);
 
     let value = {

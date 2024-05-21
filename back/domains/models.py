@@ -2,7 +2,6 @@ from django.db import models
 
 
 class DomainCategoryChoices(models.TextChoices):
-    project_type = ("project_type", "Tipo de proyecto")
     project_class = ("project_class", "Clase de proyecto")
     contact_post = ("cargo_contacto", "Cargo del contacto")
     contractor_type = ("contractor_type", "Tipo de contratista")

@@ -41,6 +41,7 @@ from app.views.milestone_viewset import MilestoneViewSet
 from app.views.payment_viewset import PaymentViewSet
 from app.views.product_viewset import ProductViewSet
 from app.views.project_viewset import ProjectViewSet
+from app.views.project_work_type_viewset import ProjectWorkTypeViewSet
 from app.views.provider_viewset import ProviderViewSet
 from app.views.social_component_monitoring_viewset import (
     SocialComponentMonitoringViewSet,
@@ -81,6 +82,7 @@ router.register("socialcomponenttrainings", SocialComponentTrainingViewSet)
 router.register("connections", ConnectionViewSet)
 router.register("amendments", AmendmentViewSet)
 router.register("certifications", CertificationViewSet)
+router.register("projectworktypes", ProjectWorkTypeViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

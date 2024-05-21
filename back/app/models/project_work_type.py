@@ -8,9 +8,7 @@ class ProjectWorkType(models.Model):
         verbose_name = "Tipo de proyecto"
         verbose_name_plural = "Tipos de proyecto"
 
-    key = models.CharField(
-        "Clave", max_length=50, primary_key=True, unique=True, editable=False
-    )
+    key = models.CharField("Clave", max_length=50, primary_key=True, unique=True)
     value = models.CharField("Valor", max_length=100)
     config_file = models.FileField(
         "Archivo de configuración",

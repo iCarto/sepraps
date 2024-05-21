@@ -9,7 +9,7 @@ from app.models.building_component_monitoring import BuildingComponentMonitoring
 from app.models.infrastructure import Infrastructure
 from app.models.milestone import Milestone
 from app.models.project import Project, get_code_for_new_project
-from app.models.project_work import ProjectWork, get_project_work_data
+from app.models.project_work import ProjectWork, get_project_work_config
 from app.models.provider import Provider
 from app.serializers.construction_contract_serializer import (
     ConstructionContractSummarySerializer,
@@ -172,7 +172,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             project_work = ProjectWork.objects.create(project=project, **pw_data)
             project_works.append(project_work)
 
-            data = get_project_work_data(project_work.work_type)
+            data = get_project_work_config(project_work.work_type)
             project.create_structure_data(data)
 
             if create_components:

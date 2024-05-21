@@ -1,7 +1,3 @@
-import json
-import os
-
-from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
 from django.db.models import Q
@@ -21,7 +17,7 @@ from app.models.connection import Connection
 from app.models.milestone import Milestone
 from app.models.project import Project
 from app.models.project_questionnaire_instance import ProjectQuestionnaireInstance
-from app.models.project_work import ProjectWork
+from app.models.project_work import ProjectWork, get_project_work_config
 from app.models.social_component_monitoring import SocialComponentMonitoring
 from app.serializers.building_component_monitoring_serializer import (
     BuildingComponentMonitoringSerializer,
@@ -455,32 +451,14 @@ class ProjectViewSet(ModelListViewSet):
 
 
 def get_building_components_config(project):
-    project_works = ProjectWork.objects.filter(project=project)
-
-    if not project_works:
-        return {}
-
-    data = {}
-
-    for project_work in project_works:
-        data_path = os.path.join(
-            settings.BASE_DIR,
-            "app",
-            "data",
-            "project",
-            f"{project_work.work_type}.json",
-        )
-
-        with open(data_path) as f:
-            work_data = json.load(f)
-
-        building_components = work_data.get("building_components", {})
-        data.update(building_components)
-
-    return data
+    return get_components_config(project, "building_components")
 
 
 def get_social_components_config(project):
+    return get_components_config(project, "social_components")
+
+
+def get_components_config(project, config_attribute):
     project_works = ProjectWork.objects.filter(project=project)
 
     if not project_works:
@@ -489,18 +467,9 @@ def get_social_components_config(project):
     data = {}
 
     for project_work in project_works:
-        data_path = os.path.join(
-            settings.BASE_DIR,
-            "app",
-            "data",
-            "project",
-            f"{project_work.work_type}.json",
-        )
+        work_data = get_project_work_config(project_work.work_type.key)
 
-        with open(data_path) as f:
-            work_data = json.load(f)
-
-        building_components = work_data.get("social_components", {})
-        data.update(building_components)
+        components = work_data.get(config_attribute, {})
+        data.update(components)
 
     return data

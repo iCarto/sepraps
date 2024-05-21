@@ -93,42 +93,6 @@
         "model": "domains.domainentry",
         "pk": null,
         "fields": {
-            "category": "project_type",
-            "key": "agua",
-            "value": "Agua Potable"
-        }
-    },
-    {
-        "model": "domains.domainentry",
-        "pk": null,
-        "fields": {
-            "category": "project_type",
-            "key": "agua_lluvia",
-            "value": "Agua - Chaco"
-        }
-    },
-    {
-        "model": "domains.domainentry",
-        "pk": null,
-        "fields": {
-            "category": "project_type",
-            "key": "alcantarillado",
-            "value": "Alcantarillado"
-        }
-    },
-    {
-        "model": "domains.domainentry",
-        "pk": null,
-        "fields": {
-            "category": "project_type",
-            "key": "sanitarios",
-            "value": "Unidades de saneamiento básico (USB)"
-        }
-    },
-    {
-        "model": "domains.domainentry",
-        "pk": null,
-        "fields": {
             "category": "project_class",
             "key": "nueva_construccion",
             "value": "Nueva construcción"
