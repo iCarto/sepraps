@@ -139,7 +139,7 @@ workon "${PROJECT_NAME}"
 cd back; python manage.py runserver_plus
 
 # Lauch front
-cd front; npm start
+cd front; npm run dev
 ```
 
 # Deployment
