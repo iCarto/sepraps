@@ -14,13 +14,23 @@ export {es as USED_LOCALE} from "date-fns/locale";
 // Number formats
 
 export const DECIMAL_SEPARATOR = ",";
-export const CURRENCY_SYMBOL = "Gs.";
-export const localCurrencyFormatter = new Intl.NumberFormat("es-PY", {
-    style: "currency",
-    currency: "PYG",
-});
-export const localIntegerFormatter = new Intl.NumberFormat("es-PY");
-export const localDecimalFormatter = new Intl.NumberFormat("es-PY", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-});
+export const localCurrencyFormatter = new Intl.NumberFormat(
+    __CUSTOM_LOCALE__ || "es-PY",
+    {
+        style: "currency",
+        currency: __CUSTOM_CURRENCY__ || "PYG",
+    }
+);
+export const localIntegerFormatter = new Intl.NumberFormat(
+    __CUSTOM_LOCALE__ || "es-PY"
+);
+export const localDecimalFormatter = new Intl.NumberFormat(
+    __CUSTOM_LOCALE__ || "es-PY",
+    {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }
+);
+export const CURRENCY_SYMBOL = localCurrencyFormatter
+    .formatToParts(1)
+    .find(x => x.type === "currency").value;

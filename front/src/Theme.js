@@ -28,7 +28,7 @@ const customHeadingsStyle = {fontFamily: CUSTOM_FONT_FAMILY, fontWeight: "bold"}
 
 // We are defining colors in a global variable so that we can use them in files other than React components (like hooks). If this was not needed, we would just define the colors inside the palette object.
 export const CUSTOM_COLORS = {
-    primary: {
+    primary: __CUSTOM_THEME__?.primary || {
         main: "#025eaa",
         light: "#538bdc",
         lighter: "#ddebff",
@@ -36,7 +36,7 @@ export const CUSTOM_COLORS = {
         contrastText: "#fff",
         hover: "#f5f9fc",
     },
-    secondary: {
+    secondary: __CUSTOM_THEME__?.secondary || {
         dark: "#002b4a",
         main: "#7FBCE1",
         light: "#BFDDF0",
