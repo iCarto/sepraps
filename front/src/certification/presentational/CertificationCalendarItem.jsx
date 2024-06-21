@@ -4,10 +4,20 @@ import {getStatusIcon} from "payment/presentational";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {TextLink} from "base/navigation/components";
 
+import {msg} from "@lingui/macro";
+import {useLingui} from "@lingui/react";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
 const CertificationCalendarItem = ({item: certification}) => {
+    const {_} = useLingui();
+
+    const statusMessages = {
+        ["aprobado"]: msg`Aprobado`,
+        ["pendiente"]: msg`Pendiente`,
+    };
+
     const paymentDate = certification.itemDate;
     const day = DateUtil.getDayInDate(paymentDate);
 
@@ -39,7 +49,10 @@ const CertificationCalendarItem = ({item: certification}) => {
                 text={NumberUtil.formatCurrency(certification.approved_amount)}
                 textStyle={{fontWeight: "bold"}}
             />
-            {getStatusIcon(certification.payment.status)}
+            {getStatusIcon(
+                certification.payment.status,
+                _(statusMessages[certification.payment.status])
+            )}
         </Stack>
     );
 };

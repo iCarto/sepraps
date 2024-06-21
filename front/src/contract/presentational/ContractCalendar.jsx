@@ -2,6 +2,9 @@ import {ContractCalendarYear} from "./";
 import {ContainerGridWithBorder} from "base/ui/section/components";
 import {LightHeading} from "base/ui/headings/components";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import {Plural} from "@lingui/macro";
+import Stack from "@mui/material/Stack";
 
 const ContractCalendar = ({years, items, itemsLabel, itemComponent}) => {
     const findItemsForYear = (items, year) => {
@@ -15,7 +18,17 @@ const ContractCalendar = ({years, items, itemsLabel, itemComponent}) => {
 
     return (
         <ContainerGridWithBorder p={4}>
-            <LightHeading>Calendario de {itemsLabel}</LightHeading>
+            <Stack>
+                <LightHeading>Calendario de {itemsLabel}</LightHeading>
+                <Typography variant="caption">
+                    <Plural
+                        value={items.length}
+                        _0="No se han creado certificaciones"
+                        one="Existe <strong>#</strong> certificación creada"
+                        other="Existen <strong>#</strong> certificaciones creadas"
+                    />
+                </Typography>
+            </Stack>
             <Box mt={2}>
                 {years.map(year => {
                     return (

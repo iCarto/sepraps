@@ -36,3 +36,4 @@ back/back/static
 back/monitoring/static
 
 back/**/migrations/0*.py
+/front/src/locales/**.js

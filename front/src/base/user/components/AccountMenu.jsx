@@ -12,6 +12,7 @@ import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Logout from "@mui/icons-material/Logout";
+import {Trans} from "@lingui/macro";
 
 const AccountMenu = () => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -104,7 +105,7 @@ const AccountMenu = () => {
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
-                    Cerrar sesión
+                    <Trans>Cerrar sesión</Trans>
                 </MenuItem>
             </Menu>
         </>

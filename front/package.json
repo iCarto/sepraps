@@ -7,11 +7,15 @@
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "test": "jest",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "messages:extract": "lingui extract",
+        "messages:compile": "lingui compile"
     },
     "dependencies": {
         "@emotion/react": "^11.10.4",
         "@emotion/styled": "^11.10.4",
+        "@lingui/macro": "^4.11.1",
+        "@lingui/react": "^4.11.1",
         "@mui/icons-material": "^5.10.6",
         "@mui/lab": "^5.0.0-alpha.127",
         "@mui/material": "^5.10.6",
@@ -47,12 +51,15 @@
         "autoprefixer": "10.4.5"
     },
     "devDependencies": {
+        "@lingui/cli": "^4.11.1",
+        "@lingui/vite-plugin": "^4.11.1",
         "@testing-library/jest-dom": "^5.17.0",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
         "@types/react": "^18.2.66",
         "@types/react-dom": "^18.2.22",
         "@vitejs/plugin-react": "^4.2.1",
+        "babel-plugin-macros": "^3.1.0",
         "eslint": "^8.57.0",
         "eslint-plugin-react": "^7.34.1",
         "eslint-plugin-react-hooks": "^4.6.0",

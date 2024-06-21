@@ -2,30 +2,35 @@ import {AppMenu} from "base/ui/app/components";
 import {AccountMenu} from "base/user/components";
 import MenuItem from "@mui/material/MenuItem";
 
+import {msg} from "@lingui/macro";
+import {useLingui} from "@lingui/react";
+
 const SeprapsMenu = () => {
+    const {_} = useLingui();
+
     const menuItems = [
         {
-            name: "Proyectos",
+            name: _(msg`Proyectos`),
             to: "projects",
             pathname: "projects",
         },
         {
-            name: "Contratos",
+            name: _(msg`Contratos`),
             to: "contracts",
             pathname: "contracts",
         },
         {
-            name: "Programas",
+            name: _(msg`Programas`),
             to: "financingprograms",
             pathname: "financingprograms",
         },
         {
-            name: "Prestadores de servicios",
+            name: _(msg`Prestadores de servicios`),
             to: "providers",
             pathname: "providers",
         },
         {
-            name: "Informes de viaje",
+            name: _(msg`Informes de viaje`),
             to: "field-reports",
             pathname: "field-reports",
         },

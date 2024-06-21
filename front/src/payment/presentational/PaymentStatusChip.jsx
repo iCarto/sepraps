@@ -4,6 +4,7 @@ import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import PaidIcon from "@mui/icons-material/Paid";
 import {cloneElement} from "react";
 import {PRODUCT_STATUS_REJECTED, PRODUCT_STATUS_PAID} from "payment/model";
+import Tooltip from "@mui/material/Tooltip";
 
 const getStatusColor = value => {
     if (value === PRODUCT_STATUS_REJECTED) {
@@ -14,7 +15,7 @@ const getStatusColor = value => {
     return "default";
 };
 
-const getStatusIcon = (value, outlined = false) => {
+const getStatusIcon = (value, label = null, outlined = false) => {
     let color = "grey.400";
     if (value === PRODUCT_STATUS_REJECTED) {
         color = "error.main";
@@ -22,7 +23,15 @@ const getStatusIcon = (value, outlined = false) => {
     if (value === PRODUCT_STATUS_PAID) {
         color = "success.main";
     }
-    const icon = outlined ? <PaidOutlinedIcon /> : <PaidIcon />;
+    const icon = outlined ? (
+        <Tooltip title={label}>
+            <PaidOutlinedIcon />
+        </Tooltip>
+    ) : (
+        <Tooltip title={label}>
+            <PaidIcon />
+        </Tooltip>
+    );
 
     return cloneElement(icon, {
         sx: {color},
