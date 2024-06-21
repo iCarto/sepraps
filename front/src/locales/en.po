@@ -6,18 +6,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
-#: src/contract/presentational/ContractCalendar.jsx:24
+#: src/contract/presentational/ContractCalendar.jsx:26
 msgid "{0, plural, =0 {No se han creado certificaciones} one {Existe <strong>#</strong> certificación creada} other {Existen <strong>#</strong> certificaciones creadas}}"
 msgstr "{0, plural, =0 {No certifications} one {<strong>#</strong> certification} other {<strong>#</strong> certifications}}"
+
+#: src/project/container/ViewProjectCertificationsSubPage.jsx:64
+msgid "Análisis"
+msgstr "Analysis"
 
 #: src/certification/presentational/CertificationCalendarItem.jsx:17
 msgid "Aprobado"
 msgstr "Approved"
 
+#: src/contract/presentational/ContractCalendar.jsx:23
+msgid "Calendario de certificaciones"
+msgstr "Certifications calendar"
+
 #: src/base/user/components/AccountMenu.jsx:108
 msgid "Cerrar sesión"
 msgstr "Close session"
+
+#: src/certification/container/ViewCertificationsOverview.jsx:51
+msgid "certificaciones"
+msgstr "certifications"
+
+#: src/project/container/ViewProjectCertificationsSubPage.jsx:59
+msgid "Certificaciones"
+msgstr "Certifications"
 
 #: src/sepraps/ui/SeprapsMenu.jsx:18
 msgid "Contratos"
@@ -26,6 +48,10 @@ msgstr "Contracts"
 #: src/sepraps/ui/SeprapsMenu.jsx:33
 msgid "Informes de viaje"
 msgstr "Field reports"
+
+#: src/certification/presentational/CertificationsSummaryBox.jsx:34
+msgid "Monto aprobado del proyecto <0/> vs. contrato"
+msgstr "Project approved amount <0/> vs. contract"
 
 #: src/certification/presentational/CertificationCalendarItem.jsx:18
 msgid "Pendiente"
@@ -46,3 +72,7 @@ msgstr "Projects"
 #: src/sepraps/ui/SeprapsHeaderHero.jsx:17
 msgid "Seguimiento de programas de agua potable y saneamiento"
 msgstr "Monitoring of drinking water and sanitation programs"
+
+#: src/project/container/ViewProjectCertificationsSubPage.jsx:54
+msgid "Vista general"
+msgstr "Summary"

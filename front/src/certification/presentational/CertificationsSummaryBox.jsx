@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import {PRODUCT_STATUS_PAID} from "payment/model";
+import {Trans} from "@lingui/macro";
 
 const getTotal = (items, totalColumn) => {
     return items
@@ -30,7 +31,9 @@ const CertificationsSummaryBox = ({certifications, contract}) => {
         <ContainerGridWithBorder>
             <Grid item xs={9} pl="1rem">
                 <LightHeading>
-                    Monto aprobado del proyecto <br /> vs. contrato
+                    <Trans>
+                        Monto aprobado del proyecto <br /> vs. contrato
+                    </Trans>
                 </LightHeading>
                 <Stack direction="row" alignItems="baseline">
                     <Typography component="span" fontSize={34}>

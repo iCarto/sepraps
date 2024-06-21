@@ -7,7 +7,11 @@ import {RouterUtil} from "base/navigation/utilities";
 import {TabContainer} from "base/ui/tab/components";
 import Box from "@mui/material/Box";
 
+import {msg} from "@lingui/macro";
+import {useLingui} from "@lingui/react";
+
 const ViewProjectCertificationsSubPage = () => {
+    const {_} = useLingui();
     const {id: projectId} = useParams();
 
     const location = useLocation();
@@ -47,17 +51,17 @@ const ViewProjectCertificationsSubPage = () => {
 
     const tabs = [
         {
-            label: "Vista general",
+            label: _(msg`Vista general`),
             path: "overview",
             content: <Outlet context={contextForOutlet} />,
         },
         {
-            label: "Certificaciones",
+            label: _(msg`Certificaciones`),
             path: "list",
             content: <Outlet context={contextForOutlet} />,
         },
         {
-            label: "Análisis",
+            label: _(msg`Análisis`),
             path: "analysis",
             content: <Outlet context={contextForOutlet} />,
         },

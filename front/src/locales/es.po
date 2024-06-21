@@ -13,17 +13,33 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/contract/presentational/ContractCalendar.jsx:24
+#: src/contract/presentational/ContractCalendar.jsx:26
 msgid "{0, plural, =0 {No se han creado certificaciones} one {Existe <strong>#</strong> certificación creada} other {Existen <strong>#</strong> certificaciones creadas}}"
+msgstr ""
+
+#: src/project/container/ViewProjectCertificationsSubPage.jsx:64
+msgid "Análisis"
 msgstr ""
 
 #: src/certification/presentational/CertificationCalendarItem.jsx:17
 msgid "Aprobado"
 msgstr "Aprobado"
 
+#: src/contract/presentational/ContractCalendar.jsx:23
+msgid "Calendario de certificaciones"
+msgstr ""
+
 #: src/base/user/components/AccountMenu.jsx:108
 msgid "Cerrar sesión"
 msgstr "Cerrar sesión"
+
+#: src/certification/container/ViewCertificationsOverview.jsx:51
+msgid "certificaciones"
+msgstr ""
+
+#: src/project/container/ViewProjectCertificationsSubPage.jsx:59
+msgid "Certificaciones"
+msgstr ""
 
 #: src/sepraps/ui/SeprapsMenu.jsx:18
 msgid "Contratos"
@@ -31,6 +47,10 @@ msgstr ""
 
 #: src/sepraps/ui/SeprapsMenu.jsx:33
 msgid "Informes de viaje"
+msgstr ""
+
+#: src/certification/presentational/CertificationsSummaryBox.jsx:34
+msgid "Monto aprobado del proyecto <0/> vs. contrato"
 msgstr ""
 
 #: src/certification/presentational/CertificationCalendarItem.jsx:18
@@ -52,3 +72,7 @@ msgstr ""
 #: src/sepraps/ui/SeprapsHeaderHero.jsx:17
 msgid "Seguimiento de programas de agua potable y saneamiento"
 msgstr "Seguimiento de programas de agua potable y saneamiento"
+
+#: src/project/container/ViewProjectCertificationsSubPage.jsx:54
+msgid "Vista general"
+msgstr ""

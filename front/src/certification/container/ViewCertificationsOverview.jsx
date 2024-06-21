@@ -10,7 +10,12 @@ import {PaperComponent} from "base/shared/components";
 import Grid from "@mui/material/Grid";
 import {NotificationsWidget} from "notification/presentational";
 
+import {msg} from "@lingui/macro";
+import {useLingui} from "@lingui/react";
+
 const ViewCertificationsOverview = () => {
+    const {_} = useLingui();
+
     const {project, certifications, certifNotifications} = useOutletContext();
     const {contractYears, contractItemsWithDate} = useContractCalendar(
         project?.construction_contract,
@@ -43,7 +48,7 @@ const ViewCertificationsOverview = () => {
                             <ContractCalendar
                                 years={contractYears}
                                 items={contractItemsWithDate}
-                                itemsLabel="certificaciones"
+                                itemsLabel={_(msg`certificaciones`)}
                                 itemComponent={CertificationCalendarItem}
                             />
                         </PaperComponent>

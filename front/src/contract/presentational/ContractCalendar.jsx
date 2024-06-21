@@ -3,7 +3,7 @@ import {ContainerGridWithBorder} from "base/ui/section/components";
 import {LightHeading} from "base/ui/headings/components";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {Plural} from "@lingui/macro";
+import {Plural, Trans} from "@lingui/macro";
 import Stack from "@mui/material/Stack";
 
 const ContractCalendar = ({years, items, itemsLabel, itemComponent}) => {
@@ -19,7 +19,9 @@ const ContractCalendar = ({years, items, itemsLabel, itemComponent}) => {
     return (
         <ContainerGridWithBorder p={4}>
             <Stack>
-                <LightHeading>Calendario de {itemsLabel}</LightHeading>
+                <LightHeading>
+                    <Trans>Calendario de certificaciones</Trans>
+                </LightHeading>
                 <Typography variant="caption">
                     <Plural
                         value={items.length}
