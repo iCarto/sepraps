@@ -1,6 +1,6 @@
 export const availableLocales = [
     {value: "es", label: "Castellano"},
-    {value: "gl", label: "Galego"},
+    {value: "en", label: "English"},
 ];
 
-export const defaultLocale = "gl";
+export const defaultLocale = "es";
