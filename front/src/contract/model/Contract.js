@@ -36,10 +36,7 @@ const contract_api_adapter = contract => {
     contract["expected_execution_period_in_months"] = contract[
         "expected_execution_period"
     ]
-        ? DateUtil.getMonths(
-              contract["execution_start_date"],
-              contract["expected_execution_end_date"]
-          ) + 1
+        ? DateUtil.getRoundedMonths(contract["expected_execution_period"])
         : null;
 
     contract["amended_expected_execution_end_date"] =
@@ -51,10 +48,12 @@ const contract_api_adapter = contract => {
             : null;
     contract["total_expected_execution_period_in_months"] =
         contract["total_expected_execution_period"] && contract["execution_start_date"]
-            ? DateUtil.getMonths(
-                  contract["execution_start_date"],
-                  contract["amended_expected_execution_end_date"]
-              ) + 1
+            ? DateUtil.getRoundedMonths(
+                  DateUtil.getDays(
+                      contract["execution_start_date"],
+                      contract["amended_expected_execution_end_date"]
+                  )
+              )
             : null;
     if (contract["awarding_budget"] || contract["total_awarding_budget"])
         contract["is_awarding_budget_amended"] =

@@ -1,6 +1,13 @@
-import {format, parse, add, addDays, differenceInCalendarMonths} from "date-fns";
+import {
+    format,
+    parse,
+    add,
+    addDays,
+    differenceInCalendarMonths,
+    differenceInCalendarDays,
+} from "date-fns";
 
-import {TextUtil} from "base/format/utilities";
+import {NumberUtil, TextUtil} from "base/format/utilities";
 import {DATE_FORMATS, USED_LOCALE} from "base/format/config/i18n";
 
 function isValidDate(d) {
@@ -107,6 +114,9 @@ const DateUtil = {
     getMonths(firstDate, lastDate) {
         return differenceInCalendarMonths(new Date(lastDate), new Date(firstDate));
     },
+    getDays(firstDate, lastDate) {
+        return differenceInCalendarDays(new Date(lastDate), new Date(firstDate));
+    },
     getFirstDayOfCurrentMonth() {
         const today = this.getToday();
         today.setDate(1);
@@ -118,6 +128,9 @@ const DateUtil = {
     },
     isValidDate(d) {
         return d instanceof Date && !isNaN(d);
+    },
+    getRoundedMonths(numberOfDays) {
+        return NumberUtil.formatDecimal(numberOfDays / 30, 0);
     },
 };
 
