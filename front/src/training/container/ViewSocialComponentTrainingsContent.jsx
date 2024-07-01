@@ -10,6 +10,7 @@ const ViewSocialComponentTrainingsContent = ({socialComponent, trainings}) => {
                     {trainings?.map(training => {
                         return (
                             <ViewOrUpdateTrainingDataContent
+                                socialComponentId={socialComponent.id}
                                 key={training.id}
                                 training={training}
                             />

@@ -2,7 +2,6 @@ import {useState} from "react";
 import {TrainingService} from "training/service";
 import {training_view_adapter} from "training/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
-import {DateUtil} from "base/format/utilities";
 import {
     SectionCardHeaderAction,
     SubSectionCardHeader,
@@ -11,21 +10,45 @@ import {DeleteItemDialog} from "base/delete/components";
 import {TrainingData, TrainingForm} from "training/presentational/form";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LocalLibraryOutlinedIcon from "@mui/icons-material/LocalLibraryOutlined";
+import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
+import {SocialComponentMonitoringService} from "socialComponentMonitoring/service";
+import {DuplicateTrainingDialog} from "training/presentational";
 
-const ViewOrUpdateTrainingDataContent = ({training}) => {
+const ViewOrUpdateTrainingDataContent = ({socialComponentId, training}) => {
     const navigate = useNavigateWithReload();
 
     const [mode, setMode] = useState("view");
     const [error, setError] = useState(null);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isDuplicateDialogOpen, setIsDuplicateDialogOpen] = useState(false);
 
     const handleDelete = () => {
         TrainingService.delete(training.id).then(() => {
             navigate("", true);
         });
+    };
+
+    const handleDuplicate = () => {
+        SocialComponentMonitoringService.createTraining(
+            socialComponentId,
+            training_view_adapter({
+                ...training,
+                id: null,
+                name: `${training.name} (copia)`,
+            })
+        )
+            .then(() => {
+                setMode("view");
+                navigate("", true);
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error);
+            });
     };
 
     const handleFormSubmit = training => {
@@ -48,6 +71,15 @@ const ViewOrUpdateTrainingDataContent = ({training}) => {
             icon={<EditIcon />}
             onClick={() => {
                 setMode("edit");
+            }}
+        />,
+        <SectionCardHeaderAction
+            key="duplicate"
+            name="duplicate"
+            text="Duplicar"
+            icon={<ContentCopyOutlinedIcon />}
+            onClick={() => {
+                setIsDuplicateDialogOpen(true);
             }}
         />,
         <SectionCardHeaderAction
@@ -92,6 +124,12 @@ const ViewOrUpdateTrainingDataContent = ({training}) => {
                 isDialogOpen={isDeleteDialogOpen}
                 setIsDialogOpen={setIsDeleteDialogOpen}
                 onDelete={handleDelete}
+            />
+            <DuplicateTrainingDialog
+                isDialogOpen={isDuplicateDialogOpen}
+                setIsDialogOpen={setIsDuplicateDialogOpen}
+                onDelete={handleDuplicate}
+                trainingName={training.name}
             />
         </Card>
     );

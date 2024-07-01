@@ -5,6 +5,13 @@ const training_api_adapter = fieldReport => {
 };
 
 const training_view_adapter = training => {
+    training["contract"] = !!training["contract"]
+        ? training["contract"].id || training["contract"]
+        : null;
+    training["contractor"] = !!training["contractor"]
+        ? training["contractor"].id || training["contractor"]
+        : null;
+
     delete training["folder"];
     delete training["created_by"];
     delete training["created_at"];
