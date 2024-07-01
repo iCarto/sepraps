@@ -42,7 +42,9 @@ def building_component_post_save(sender, instance, created, *args, **kwargs):
 
 
 def create_project_building_components(project, components):
-    for component_code, component_config in components.items():
+    for index, component_code in enumerate(components):
+        component_config = components[component_code]
+        print(index, component_code, component_config)
         component = BuildingComponent(
             code=component_code,
             code_label=component_config.get("name"),
@@ -57,6 +59,7 @@ def create_project_building_components(project, components):
         monitoring = BuildingComponentMonitoring(
             building_component=component,
             project=project,
+            project_order=index + 1,
             created_by=project.creation_user,
             updated_by=project.creation_user,
         )

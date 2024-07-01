@@ -325,11 +325,39 @@ class ProjectViewSet(ModelListViewSet):
         if request.method == "GET":
             bc_monitorings = BuildingComponentMonitoring.objects.filter(
                 project=pk
-            ).order_by("id")
+            ).order_by("project_order", "id")
             serializer = BuildingComponentMonitoringSummarySerializer(
                 bc_monitorings, many=True
             )
             return Response(serializer.data)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(
+        methods=["POST"],
+        detail=True,
+        url_path="buildingcomponentmonitorings/order",
+        url_name="building_component_monitorings_order",
+    )
+    def order_project_building_component_monitorings(self, request, pk):
+        if request.method == "POST":
+            project = self.get_object()
+            if project:
+                order_data = request.data
+                for bc_monitoring_order in order_data:
+                    print(bc_monitoring_order)
+                    bc_monitoring_id = bc_monitoring_order.get("id")
+                    bc_monitoring_project_order = bc_monitoring_order.get(
+                        "project_order"
+                    )
+                    try:
+                        bc_monitoring = BuildingComponentMonitoring.objects.get(
+                            pk=bc_monitoring_id
+                        )
+                    except BuildingComponentMonitoring.DoesNotExist:
+                        return Response(status=status.HTTP_400_BAD_REQUEST)
+                    bc_monitoring.project_order = bc_monitoring_project_order
+                    bc_monitoring.save()
+                return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
     @action(

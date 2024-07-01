@@ -140,6 +140,13 @@ const ProjectService = {
         });
     },
 
+    orderProjectBuildingComponentMonitoring(projectId, componentsOrder) {
+        return AuthApiService.post(
+            `${basePath}/${projectId}/buildingcomponentmonitorings/order`,
+            componentsOrder
+        );
+    },
+
     getProjectSocialComponentTypes(projectId) {
         return AuthApiService.get(`${basePath}/${projectId}/socialcomponenttypes`).then(
             response => {

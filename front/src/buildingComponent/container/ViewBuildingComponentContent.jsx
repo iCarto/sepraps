@@ -31,6 +31,7 @@ import {AlertError} from "base/error/components";
 import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {BuildingComponentListMenu} from "buildingComponent/presentational";
 
 const ViewBuildingComponentContent = () => {
     const {project, bcMonitorings} = useOutletContext();
@@ -123,6 +124,12 @@ const ViewBuildingComponentContent = () => {
                             }
                         />
                     )}
+                    secondaryAction={
+                        <BuildingComponentListMenu
+                            projectId={project?.id}
+                            bcMonitorings={bcMonitorings}
+                        />
+                    }
                 />
             }
             noItems={bcMonitorings?.length === 0}

@@ -17,6 +17,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import InputIcon from "@mui/icons-material/Input";
+import Stack from "@mui/material/Stack";
 
 const ListSelector = ({
     title,
@@ -25,6 +26,7 @@ const ListSelector = ({
     basePath = null,
     showAddButton = true,
     onClickMenuButton = null,
+    secondaryAction = null,
 }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -57,64 +59,67 @@ const ListSelector = ({
                 <Typography color="primary.main" sx={{textTransform: "uppercase"}}>
                     {title}
                 </Typography>
-                {showAddButton && !onClickMenuButton ? (
-                    <IconButton
-                        aria-label="add-new-button"
-                        color="primary"
-                        size="large"
-                        onClick={() => {
-                            navigate(`${basePath}/new`);
-                        }}
-                    >
-                        <Tooltip id="add-new-button-tooltip" title="Añadir nuevo">
-                            <AddCircleOutlineOutlinedIcon color="primary" />
-                        </Tooltip>
-                    </IconButton>
-                ) : null}
-                {onClickMenuButton ? (
-                    <div>
-                        <Tooltip title="Nuevo componente" placement="bottom-end">
-                            <IconButton
-                                aria-label="new-component"
-                                onClick={handleOpenMenu}
-                            >
-                                <AddCircleOutlineOutlinedIcon color="primary" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={openMenu}
-                            onClose={handleCloseMenu}
-                            MenuListProps={{
-                                "aria-labelledby": "basic-button",
+                <Stack direction="row">
+                    {showAddButton && !onClickMenuButton ? (
+                        <IconButton
+                            aria-label="add-new-button"
+                            color="primary"
+                            size="large"
+                            onClick={() => {
+                                navigate(`${basePath}/new`);
                             }}
                         >
-                            <MenuItem
-                                onClick={() => {
-                                    handleCloseMenu();
-                                    onClickMenuButton("create");
+                            <Tooltip id="add-new-button-tooltip" title="Añadir nuevo">
+                                <AddCircleOutlineOutlinedIcon color="primary" />
+                            </Tooltip>
+                        </IconButton>
+                    ) : null}
+                    {onClickMenuButton ? (
+                        <div>
+                            <Tooltip title="Nuevo componente" placement="bottom-end">
+                                <IconButton
+                                    aria-label="new-component"
+                                    onClick={handleOpenMenu}
+                                >
+                                    <AddCircleOutlineOutlinedIcon color="primary" />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={openMenu}
+                                onClose={handleCloseMenu}
+                                MenuListProps={{
+                                    "aria-labelledby": "basic-button",
                                 }}
                             >
-                                <ListItemIcon>
-                                    <AddIcon />
-                                </ListItemIcon>
-                                <ListItemText>Crear nuevo</ListItemText>
-                            </MenuItem>
-                            <MenuItem
-                                onClick={() => {
-                                    handleCloseMenu();
-                                    onClickMenuButton("import");
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <InputIcon />
-                                </ListItemIcon>
-                                <ListItemText>Importar existente</ListItemText>
-                            </MenuItem>
-                        </Menu>
-                    </div>
-                ) : null}
+                                <MenuItem
+                                    onClick={() => {
+                                        handleCloseMenu();
+                                        onClickMenuButton("create");
+                                    }}
+                                >
+                                    <ListItemIcon>
+                                        <AddIcon />
+                                    </ListItemIcon>
+                                    <ListItemText>Crear nuevo</ListItemText>
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => {
+                                        handleCloseMenu();
+                                        onClickMenuButton("import");
+                                    }}
+                                >
+                                    <ListItemIcon>
+                                        <InputIcon />
+                                    </ListItemIcon>
+                                    <ListItemText>Importar existente</ListItemText>
+                                </MenuItem>
+                            </Menu>
+                        </div>
+                    ) : null}
+                    {secondaryAction}
+                </Stack>
             </Grid>
             <List
                 sx={{

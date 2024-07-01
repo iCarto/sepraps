@@ -43,6 +43,7 @@ class BuildingComponentMonitoring(BaseDocumentModel, BaseEntityModelMixin):
     project = models.ForeignKey(
         "Project", on_delete=models.CASCADE, related_name="project_building_monitorings"
     )
+    project_order = models.IntegerField("Orden")
     comments = models.ManyToManyField(Comment)
 
     @property

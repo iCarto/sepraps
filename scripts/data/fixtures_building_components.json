@@ -7655,6 +7655,7 @@
             "physical_progress_percentage": "100.00",
             "building_component": 1,
             "project": 1,
+            "project_order": 1,
             "comments": [1, 2]
         }
     },
@@ -7679,6 +7680,7 @@
             "physical_progress_percentage": "70.00",
             "building_component": 2,
             "project": 1,
+            "project_order": 2,
             "comments": []
         }
     },
@@ -7703,6 +7705,7 @@
             "physical_progress_percentage": "18.00",
             "building_component": 3,
             "project": 1,
+            "project_order": 3,
             "comments": []
         }
     },
@@ -7727,6 +7730,7 @@
             "physical_progress_percentage": "100.00",
             "building_component": 4,
             "project": 1,
+            "project_order": 4,
             "comments": []
         }
     },
@@ -7751,6 +7755,7 @@
             "physical_progress_percentage": "50.00",
             "building_component": 5,
             "project": 1,
+            "project_order": 5,
             "comments": []
         }
     },
@@ -7775,6 +7780,7 @@
             "physical_progress_percentage": "100.00",
             "building_component": 6,
             "project": 1,
+            "project_order": 6,
             "comments": []
         }
     },
@@ -7799,6 +7805,7 @@
             "physical_progress_percentage": "65.00",
             "building_component": 7,
             "project": 1,
+            "project_order": 7,
             "comments": []
         }
     },
@@ -7823,6 +7830,7 @@
             "physical_progress_percentage": "100.00",
             "building_component": 8,
             "project": 2,
+            "project_order": 1,
             "comments": [1, 2]
         }
     },
@@ -7847,6 +7855,7 @@
             "physical_progress_percentage": "100.00",
             "building_component": 9,
             "project": 2,
+            "project_order": 2,
             "comments": []
         }
     },
@@ -7871,6 +7880,7 @@
             "physical_progress_percentage": "18.00",
             "building_component": 10,
             "project": 2,
+            "project_order": 3,
             "comments": []
         }
     },
@@ -7895,6 +7905,7 @@
             "physical_progress_percentage": "60.00",
             "building_component": 11,
             "project": 2,
+            "project_order": 4,
             "comments": []
         }
     },
@@ -7919,6 +7930,7 @@
             "physical_progress_percentage": "50.00",
             "building_component": 12,
             "project": 2,
+            "project_order": 5,
             "comments": []
         }
     },
@@ -7943,6 +7955,7 @@
             "physical_progress_percentage": "50.00",
             "building_component": 13,
             "project": 2,
+            "project_order": 6,
             "comments": []
         }
     },
@@ -7967,6 +7980,7 @@
             "physical_progress_percentage": "65.00",
             "building_component": 14,
             "project": 2,
+            "project_order": 7,
             "comments": []
         }
     },
@@ -7991,6 +8005,7 @@
             "physical_progress_percentage": "80.00",
             "building_component": 15,
             "project": 3,
+            "project_order": 1,
             "comments": []
         }
     },
@@ -8015,6 +8030,7 @@
             "physical_progress_percentage": "25.00",
             "building_component": 16,
             "project": 3,
+            "project_order": 2,
             "comments": []
         }
     },
@@ -8039,6 +8055,7 @@
             "physical_progress_percentage": "65.00",
             "building_component": 17,
             "project": 3,
+            "project_order": 3,
             "comments": []
         }
     },
@@ -8063,6 +8080,7 @@
             "physical_progress_percentage": "65.00",
             "building_component": 18,
             "project": 4,
+            "project_order": 1,
             "comments": []
         }
     },
@@ -8087,6 +8105,7 @@
             "physical_progress_percentage": 100,
             "building_component": 82,
             "project": 18,
+            "project_order": 1,
             "comments": []
         }
     },
@@ -8111,6 +8130,7 @@
             "physical_progress_percentage": 100,
             "building_component": 83,
             "project": 18,
+            "project_order": 2,
             "comments": []
         }
     },
@@ -8135,6 +8155,7 @@
             "physical_progress_percentage": 95,
             "building_component": 84,
             "project": 18,
+            "project_order": 3,
             "comments": []
         }
     },
@@ -8159,6 +8180,7 @@
             "physical_progress_percentage": 100,
             "building_component": 85,
             "project": 18,
+            "project_order": 4,
             "comments": [8]
         }
     },
@@ -8183,6 +8205,7 @@
             "physical_progress_percentage": 100,
             "building_component": 86,
             "project": 18,
+            "project_order": 5,
             "comments": []
         }
     },
@@ -8207,6 +8230,7 @@
             "physical_progress_percentage": 0,
             "building_component": 87,
             "project": 18,
+            "project_order": 6,
             "comments": [6]
         }
     },
@@ -8231,6 +8255,7 @@
             "physical_progress_percentage": 0,
             "building_component": 88,
             "project": 18,
+            "project_order": 7,
             "comments": [7]
         }
     },
@@ -8465,6 +8490,7 @@
             "physical_progress_percentage": "65.00",
             "building_component": 131,
             "project": 27,
+            "project_order": 1,
             "comments": []
         }
     },
@@ -8489,6 +8515,7 @@
             "physical_progress_percentage": "81.00",
             "building_component": 132,
             "project": 27,
+            "project_order": 2,
             "comments": []
         }
     },
@@ -8513,6 +8540,7 @@
             "physical_progress_percentage": "20.00",
             "building_component": 133,
             "project": 27,
+            "project_order": 3,
             "comments": []
         }
     },
@@ -8537,6 +8565,7 @@
             "physical_progress_percentage": "30.00",
             "building_component": 134,
             "project": 27,
+            "project_order": 4,
             "comments": []
         }
     },
@@ -8561,6 +8590,7 @@
             "physical_progress_percentage": "90.00",
             "building_component": 135,
             "project": 28,
+            "project_order": 1,
             "comments": []
         }
     },
@@ -8585,6 +8615,7 @@
             "physical_progress_percentage": "95.00",
             "building_component": 136,
             "project": 28,
+            "project_order": 2,
             "comments": []
         }
     },
@@ -8609,6 +8640,7 @@
             "physical_progress_percentage": "50.00",
             "building_component": 137,
             "project": 28,
+            "project_order": 3,
             "comments": []
         }
     },
@@ -8633,6 +8665,7 @@
             "physical_progress_percentage": "50.00",
             "building_component": 138,
             "project": 28,
+            "project_order": 4,
             "comments": []
         }
     },
@@ -8657,6 +8690,7 @@
             "physical_progress_percentage": "20.00",
             "building_component": 139,
             "project": 28,
+            "project_order": 5,
             "comments": []
         }
     },
@@ -8681,6 +8715,7 @@
             "physical_progress_percentage": "50.00",
             "building_component": 127,
             "project": 25,
+            "project_order": 1,
             "comments": []
         }
     },
@@ -8705,6 +8740,7 @@
             "physical_progress_percentage": "50.00",
             "building_component": 128,
             "project": 25,
+            "project_order": 2,
             "comments": []
         }
     },
@@ -8729,6 +8765,7 @@
             "physical_progress_percentage": "40.00",
             "building_component": 129,
             "project": 26,
+            "project_order": 1,
             "comments": []
         }
     },
@@ -8753,6 +8790,7 @@
             "physical_progress_percentage": "80.00",
             "building_component": 130,
             "project": 26,
+            "project_order": 2,
             "comments": []
         }
     }
