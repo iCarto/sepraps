@@ -261,10 +261,10 @@ def get_pending_payment_notifications(filter_params, user):
                 cc.number AS contract_number
             FROM payment pay
             JOIN construction_contract cc ON cc.id = pay.contract_id
-            WHERE EXISTS (
+            WHERE pay.active = True AND EXISTS (
                 SELECT 1
                 FROM payment prev_pay
-                WHERE prev_pay.contract_id = pay.contract_id
+                WHERE prev_pay.contract_id = pay.contract_id and prev_pay.active = True
                 AND (
                     (prev_pay.approval_date IS NULL AND prev_pay.status = 'pendiente' AND pay.approval_date IS NOT NULL) AND
                     (prev_pay.expected_approval_date IS NOT NULL AND prev_pay.expected_approval_date < pay.approval_date)
