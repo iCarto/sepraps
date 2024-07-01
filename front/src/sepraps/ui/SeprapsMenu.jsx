@@ -1,6 +1,7 @@
 import {AppMenu} from "base/ui/app/components";
 import {AccountMenu} from "base/user/components";
 import MenuItem from "@mui/material/MenuItem";
+import {SeprapsHelp} from ".";
 
 const SeprapsMenu = () => {
     const menuItems = [
@@ -36,6 +37,7 @@ const SeprapsMenu = () => {
             <MenuItem sx={{marginLeft: "auto"}}>
                 <AccountMenu />
             </MenuItem>
+            <SeprapsHelp />
         </AppMenu>
     );
 };

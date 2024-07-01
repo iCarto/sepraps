@@ -16,19 +16,38 @@ const AppMenu = ({children = null, menuItems = []}) => {
     ));
 
     return (
-        <Grid component="nav" container height={`${NAVBAR_HEIGHT}px`}>
-            <MenuList
-                sx={{
-                    display: "flex",
-                    direction: "row",
-                    width: "100%",
-                    p: 0,
-                    borderTop: "1px solid #fff",
-                }}
+        <Grid
+            component="nav"
+            container
+            alignItems="center"
+            sx={{
+                borderTop: "1px solid #fff",
+                minHeight: `${NAVBAR_HEIGHT}px`,
+            }}
+        >
+            <Grid item xs={12} md={6}>
+                <MenuList
+                    sx={{
+                        display: "flex",
+                        direction: "row",
+                        height: `100%`,
+                        p: 0,
+                        minHeight: `${NAVBAR_HEIGHT}px`,
+                    }}
+                >
+                    {leftSideItems}
+                </MenuList>
+            </Grid>
+            <Grid
+                item
+                container
+                xs={12}
+                md={6}
+                justifyContent="flex-end"
+                alignItems="center"
             >
-                {leftSideItems}
                 {children}
-            </MenuList>
+            </Grid>
         </Grid>
     );
 };
