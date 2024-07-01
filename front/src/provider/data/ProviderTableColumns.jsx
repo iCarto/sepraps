@@ -1,9 +1,18 @@
+import {TextLink} from "base/navigation/components";
+
 export function useProviderTableColumns() {
     const tableColumns = [
         {
             id: "name",
             label: "Nombre",
             width: 45,
+            formatFunction: item => (
+                <TextLink
+                    text={item.name}
+                    to={`/providers/list/${item.id}`}
+                    textStyle={{fontSize: "1em"}}
+                />
+            ),
         },
         {
             id: "area_label",

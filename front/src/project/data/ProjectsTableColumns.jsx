@@ -2,6 +2,7 @@ import {NumberUtil} from "base/format/utilities";
 import {ProgressBarSmall} from "base/progress/components";
 import {ProjectTypeClassChips} from "project/presentational";
 import Box from "@mui/material/Box";
+import {TextLink} from "base/navigation/components";
 
 //TODO: avoid duplicated constant.
 const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
@@ -12,11 +13,25 @@ export function useProjectTable() {
             id: "name",
             label: "Localidad",
             width: 15,
+            formatFunction: item => (
+                <TextLink
+                    text={item.name}
+                    to={`/projects/list/${item.id}`}
+                    textStyle={{fontSize: "1em"}}
+                />
+            ),
         },
         {
             id: "code",
             label: "Código",
             width: 10,
+            formatFunction: item => (
+                <TextLink
+                    text={item.code}
+                    to={`/projects/list/${item.id}`}
+                    textStyle={{fontSize: "1em"}}
+                />
+            ),
         },
         {
             id: "location",

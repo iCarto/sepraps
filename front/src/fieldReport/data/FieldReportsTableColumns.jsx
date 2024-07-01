@@ -23,6 +23,13 @@ export function useFieldReportsTableColumns() {
             id: "code",
             label: "Número de memorándum",
             width: 10,
+            formatFunction: item => (
+                <TextLink
+                    text={item.code}
+                    to={`/field-reports/list/${item.id}`}
+                    textStyle={{fontSize: "1em"}}
+                />
+            ),
         },
         {
             id: "date",

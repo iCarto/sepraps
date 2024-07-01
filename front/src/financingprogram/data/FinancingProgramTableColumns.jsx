@@ -1,9 +1,18 @@
+import {TextLink} from "base/navigation/components";
+
 export function useFinancingProgramTableColumns() {
     const tableColumns = [
         {
             id: "short_name",
             label: "Nombre corto",
             width: 15,
+            formatFunction: item => (
+                <TextLink
+                    text={item.short_name}
+                    to={`/financingprograms/list/${item.id}`}
+                    textStyle={{fontSize: "1em"}}
+                />
+            ),
         },
         {
             id: "name",

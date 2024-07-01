@@ -20,7 +20,15 @@ const TextLink = ({text, to, textStyle = {}}) => {
     };
 
     return (
-        <Link component={HashLink} to={to} smooth style={{...textLinkStyle}}>
+        <Link
+            component={HashLink}
+            to={to}
+            smooth
+            style={{...textLinkStyle}}
+            onClick={event => {
+                event.stopPropagation();
+            }}
+        >
             <Typography sx={{...textLinkHoverStyle, ...textStyle}}>{text}</Typography>
         </Link>
     );

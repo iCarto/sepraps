@@ -12,7 +12,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
+import {TextLink} from "base/navigation/components";
 
 //TODO: avoid duplicated code in project progress bars & type icons.
 const NO_BCM_DATA_MESSAGE = "No hay datos suficientes para mostrar el avance";
@@ -113,10 +113,18 @@ const ProjectsTable = ({projects, selectedElement = null, onSelectElement = null
                                     scope="row"
                                     sx={project.closed && {color: "grey.500"}}
                                 >
-                                    {project.name}
+                                    <TextLink
+                                        text={project.name}
+                                        to={`/projects/list/${project.id}`}
+                                        textStyle={{fontSize: "1em"}}
+                                    />
                                 </TableCell>
                                 <TableCell sx={project.closed && {color: "grey.500"}}>
-                                    {project.code}
+                                    <TextLink
+                                        text={project.code}
+                                        to={`/projects/list/${project.id}`}
+                                        textStyle={{fontSize: "1em"}}
+                                    />
                                 </TableCell>
                                 <TableCell sx={project.closed && {color: "grey.500"}}>
                                     {project.location}

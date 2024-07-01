@@ -22,6 +22,13 @@ export function useContractTable(display = "regular") {
             id: "number",
             label: "Número",
             width: 8,
+            formatFunction: item => (
+                <TextLink
+                    text={item.number}
+                    to={`/contracts/list/${item.id}`}
+                    textStyle={{fontSize: "1em"}}
+                />
+            ),
         },
         {
             id: "financing_program.short_name",

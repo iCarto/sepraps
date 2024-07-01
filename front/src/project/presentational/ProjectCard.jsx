@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import {DateUtil, NumberUtil} from "base/format/utilities";
 import {ClosedProjectTag, ProjectTypeClassChips} from "project/presentational";
 import {ProgressBarSmall} from "base/progress/components";
@@ -84,7 +85,15 @@ const ProjectCard = ({entity: project, onClick = null}) => {
                 </Box>
             </div>
             <CardContent sx={{pb: 1}}>
-                <Typography variant="h5" color="primary">
+                <Typography
+                    variant="h6"
+                    color="primary"
+                    component={Link}
+                    to={`/projects/list/${project.id}`}
+                    onClick={event => {
+                        event.stopPropagation();
+                    }}
+                >
                     {project.name}
                 </Typography>
                 <Stack

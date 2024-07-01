@@ -1,17 +1,21 @@
+import {Link} from "react-router-dom";
+
+import {DateUtil, NumberUtil} from "base/format/utilities";
 import {ContractServiceChips} from ".";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
-import {DateUtil, NumberUtil} from "base/format/utilities";
+import Box from "@mui/material/Box";
+import Badge from "@mui/material/Badge";
 
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import AccountBalanceOutlinedIcon from "@mui/icons-material/AccountBalanceOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import Badge from "@mui/material/Badge";
 
 const ContractCard = ({entity: contract, onClick = null}) => {
     const getExecutionPeriod = element => {
@@ -55,11 +59,22 @@ const ContractCard = ({entity: contract, onClick = null}) => {
             elevation={3}
         >
             <CardContent>
-                <Typography variant="h5" gutterBottom color="primary">
+                <Typography
+                    variant="h6"
+                    gutterBottom
+                    color="primary"
+                    component={Link}
+                    to={`/contracts/list/${contract.id}`}
+                    onClick={event => {
+                        event.stopPropagation();
+                    }}
+                >
                     {contract.number}
                 </Typography>
-                <ContractServiceChips serviceLabels={contract.services_label} />
-                <Typography variant="body2">{contract.comments}</Typography>
+                <Box sx={{mt: 1}}>
+                    <ContractServiceChips serviceLabels={contract.services_label} />
+                    <Typography variant="body2">{contract.comments}</Typography>
+                </Box>
             </CardContent>
             <CardContent sx={{bgcolor: "grey.100"}}>
                 <Stack spacing={1}>
