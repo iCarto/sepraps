@@ -299,22 +299,30 @@ class ProjectViewSet(ModelListViewSet):
                     )
                 else:
                     serializer = BuildingComponentSerializer(data=request.data)
-                    if serializer.is_valid():
-                        bc_config = get_building_components_config(project)
-                        building_component = serializer.save(
-                            technical_properties=bc_config.get(
-                                serializer.validated_data.get("code"), {}
-                            ).get("technical_properties", {}),
-                            validation_properties=bc_config.get(
-                                serializer.validated_data.get("code"), {}
-                            ).get("validation_properties", {}),
-                            created_by=request.user,
-                            updated_by=request.user,
+                    if not serializer.is_valid():
+                        return Response(
+                            serializer.errors, status=status.HTTP_400_BAD_REQUEST
                         )
 
+                    bc_config = get_building_components_config(project)
+                    building_component = serializer.save(
+                        technical_properties=bc_config.get(
+                            serializer.validated_data.get("code"), {}
+                        ).get("technical_properties", {}),
+                        validation_properties=bc_config.get(
+                            serializer.validated_data.get("code"), {}
+                        ).get("validation_properties", {}),
+                        created_by=request.user,
+                        updated_by=request.user,
+                    )
+
+                project_order = (
+                    BuildingComponentMonitoring.objects.filter(project=pk).count() + 1
+                )
                 monitoring = BuildingComponentMonitoring(
                     building_component=building_component,
                     project=project,
+                    project_order=project_order,
                     created_by=request.user,
                     updated_by=request.user,
                 )
@@ -344,7 +352,6 @@ class ProjectViewSet(ModelListViewSet):
             if project:
                 order_data = request.data
                 for bc_monitoring_order in order_data:
-                    print(bc_monitoring_order)
                     bc_monitoring_id = bc_monitoring_order.get("id")
                     bc_monitoring_project_order = bc_monitoring_order.get(
                         "project_order"
