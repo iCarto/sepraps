@@ -18,6 +18,7 @@ const SocialComponentFormDataFields = ({projectId}) => {
                     name="expected_end_date"
                     label="Fecha de finalización prevista"
                     rules={{required: "Este campo es obligatorio"}}
+                    showCalculator={true}
                 />
             </Grid>
             <Grid item xs={4}>

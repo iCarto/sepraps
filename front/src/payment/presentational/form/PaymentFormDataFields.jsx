@@ -168,6 +168,7 @@ const PaymentFormDataFields = ({contract}) => {
                         name="expected_approval_date"
                         label="Fecha de aprobación prevista"
                         rules={{required: "Este campo es obligatorio"}}
+                        showCalculator={true}
                     />
                     <ExpectedAmountFormFields contract={contract} />
                 </FormBox>

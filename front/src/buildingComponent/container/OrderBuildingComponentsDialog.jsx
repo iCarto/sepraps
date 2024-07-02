@@ -2,27 +2,23 @@ import {useEffect, useState} from "react";
 
 import {theme} from "Theme";
 import {ProjectService} from "project/service";
-import {building_component_view_adapter} from "buildingComponent/model";
 import {useNavigateWithReload} from "base/navigation/hooks";
 
-import {BuildingComponentListItemButton} from "buildingComponent/presentational";
-import {ProjectSearchAutocomplete} from "project/presentational/form";
-import {SelectAllTransferList} from "base/list/components";
 import {DialogLayout} from "base/dialog/components";
 import {AlertError} from "base/error/components";
+import {ImagePreview} from "base/image/components";
 
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
-import {ImagePreview} from "base/image/components";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
+import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
 
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import Divider from "@mui/material/Divider";
-import Box from "@mui/material/Box";
 
 const arraymove = (arr, fromIndex, toIndex) => {
     var element = arr[fromIndex];

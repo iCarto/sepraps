@@ -78,11 +78,6 @@ const DateUtil = {
             return null;
         }
     },
-    addMonths(date, months) {
-        // TODO: Fix https://github.com/date-fns/date-fns/issues/571
-        const dateValue = add(new Date(date), {months});
-        return add(dateValue, {days: 1});
-    },
     getToday() {
         const now = new Date(Date.now());
         now.setHours(0, 0, 0, 0);
@@ -131,6 +126,17 @@ const DateUtil = {
     },
     getRoundedMonths(numberOfDays) {
         return NumberUtil.formatDecimal(numberOfDays / 30, 0);
+    },
+    addDays(date, days) {
+        return add(new Date(date), {days});
+    },
+    addMonths(date, months) {
+        // TODO: Fix https://github.com/date-fns/date-fns/issues/571
+        const dateValue = add(new Date(date), {months});
+        return add(dateValue, {days: 1});
+    },
+    addYears(date, years) {
+        return add(new Date(date), {years});
     },
 };
 
