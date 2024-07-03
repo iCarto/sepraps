@@ -20,3 +20,5 @@ export {default as ListSelectorItem} from "./ListSelectorItem";
 export {default as GenericChip} from "./GenericChip";
 export {default as DateHelperDialog} from "./DateHelperDialog";
 export {default as DateHelperDialogWidget} from "./DateHelperDialogWidget";
+export {default as NumberHelperDialog} from "./NumberHelperDialog";
+export {default as NumberHelperDialogWidget} from "./NumberHelperDialogWidget";

@@ -36,6 +36,8 @@ const DateHelperDialog = ({isDialogOpen, onAcceptDialog, onCloseDialog}) => {
                     ? DateUtil.addMonths(selectedDate, quantity)
                     : DateUtil.addDays(selectedDate, quantity);
             setFinalDate(resultDate);
+        } else {
+            setFinalDate(null);
         }
     }, [selectedDate, quantityType, quantity]);
 
@@ -104,7 +106,7 @@ const DateHelperDialog = ({isDialogOpen, onAcceptDialog, onCloseDialog}) => {
                                     Fecha resultante:
                                 </Typography>
                                 <Typography variant="h5">
-                                    {finalDate && DateUtil.formatDate(finalDate)}
+                                    {finalDate ? DateUtil.formatDate(finalDate) : "-"}
                                 </Typography>
                             </Stack>
                         </Stack>

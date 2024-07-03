@@ -7,6 +7,8 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Tooltip from "@mui/material/Tooltip";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import Stack from "@mui/material/Stack";
+import {NumberHelperDialogWidget} from "base/shared/components";
 
 const WAIT_INTERVAL = 500;
 let timerID;
@@ -22,6 +24,8 @@ const FormInputInteger = ({
     maxLength = null,
     disabled = false,
     rules = {},
+    showCalculator = false,
+    calculatorOptions = [],
 }) => {
     const {control, trigger} = useFormContext();
 
@@ -95,6 +99,29 @@ const FormInputInteger = ({
                         <InputAdornment position="end">{endAdornment}</InputAdornment>
                     )}
                 </>
+            ),
+        };
+    }
+
+    const handleChangeCalculator = value => {
+        const formattedValue = NumberUtil.formatInteger(value);
+        setValue(formattedValue);
+        debounceFieldChange(value);
+    };
+
+    if (showCalculator) {
+        inputProps = {
+            ...inputProps,
+            endAdornment: (
+                <Stack direction="row" alignItems="center">
+                    {inputProps.endAdornment}
+                    <InputAdornment position="end">
+                        <NumberHelperDialogWidget
+                            onSelectNumber={handleChangeCalculator}
+                            calculatorOptions={calculatorOptions}
+                        />
+                    </InputAdornment>
+                </Stack>
             ),
         };
     }

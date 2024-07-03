@@ -31,7 +31,7 @@ const FormDatePicker = ({
 
     const inputLabel = rules && rules["required"] ? `${label} *` : label;
 
-    const onChange = value => {
+    const handleChange = value => {
         const formattedDate = DateUtil.formatDateForAPI(value);
         field.onChange(formattedDate); // data sent back to hook form
         if (onChangeHandler) {
@@ -42,7 +42,7 @@ const FormDatePicker = ({
     return (
         <Stack direction="row" alignItems="center">
             <DatePicker
-                onChange={onChange}
+                onChange={handleChange}
                 inputRef={field.ref}
                 label={inputLabel}
                 views={views}
@@ -69,7 +69,7 @@ const FormDatePicker = ({
                                     {showCalculator && (
                                         <InputAdornment position="end">
                                             <DateHelperDialogWidget
-                                                onSelectDate={onChange}
+                                                onSelectDate={handleChange}
                                             />
                                         </InputAdornment>
                                     )}

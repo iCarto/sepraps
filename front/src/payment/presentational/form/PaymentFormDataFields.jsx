@@ -79,6 +79,14 @@ const PaidAmountFormFields = ({contract}) => {
 };
 
 const ExpectedAmountFormFields = ({contract}) => {
+    const calculatorOptions = [
+        {
+            optionLabel: "Monto adjudicado",
+            optionValue: "awarding_budget",
+            value: contract.awarding_budget,
+        },
+    ];
+
     const [expectedTotalAmount, setExpectedTotalAmount] = useState("");
 
     const expectedFixedAmount = useWatch({
@@ -137,6 +145,8 @@ const ExpectedAmountFormFields = ({contract}) => {
             label="Monto previsto"
             endAdornment={CURRENCY_SYMBOL}
             rules={{required: "Este campo es obligatorio"}}
+            showCalculator={true}
+            calculatorOptions={calculatorOptions}
         />
     );
 };
