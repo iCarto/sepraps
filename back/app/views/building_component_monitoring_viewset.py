@@ -53,5 +53,6 @@ class BuildingComponentMonitoringViewSet(ModelListAuditViewSet):
                 .filter(building_component=bc_monitoring.building_component)
                 .order_by("id"),
                 many=True,
+                context={"request": request},
             ).data
         )
