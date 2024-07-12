@@ -1,4 +1,6 @@
-import pandas as pd
+import json
+
+import numpy as np
 from rest_framework import renderers
 
 from app.base.views.renderers.utilities import (
@@ -16,5 +18,6 @@ class DataFrameJSONRenderer(renderers.BaseRenderer):
         response_df = get_df_from_response(response)
         response_df = format_float_columns(response_df)
         response_df = format_date_columns(response_df)
+        response_df = response_df.replace({np.nan: None})
 
-        return pd.io.json.dumps(response_df.to_dict(orient="list"))
+        return json.dumps(response_df.to_dict(orient="list"))
