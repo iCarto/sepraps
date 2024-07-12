@@ -3,52 +3,52 @@ from documents.models import MediaNode
 
 
 activity = FieldReportProjectActivity.objects.get(pk=2)
-document = MediaNode.objects.get(pk=179)
+document = MediaNode.objects.get(pk=269)
 activity.image1 = document
-document = MediaNode.objects.get(pk=180)
+document = MediaNode.objects.get(pk=270)
 activity.image2 = document
-document = MediaNode.objects.get(pk=181)
+document = MediaNode.objects.get(pk=271)
 activity.image3 = document
-document = MediaNode.objects.get(pk=182)
+document = MediaNode.objects.get(pk=272)
 activity.image4 = document
 activity.save()
 
 activity = FieldReportProjectActivity.objects.get(pk=3)
-document = MediaNode.objects.get(pk=183)
+document = MediaNode.objects.get(pk=273)
 activity.image1 = document
-document = MediaNode.objects.get(pk=184)
+document = MediaNode.objects.get(pk=274)
 activity.image2 = document
 activity.save()
 
 activity = FieldReportProjectActivity.objects.get(pk=5)
-document = MediaNode.objects.get(pk=189)
+document = MediaNode.objects.get(pk=279)
 activity.image1 = document
-document = MediaNode.objects.get(pk=190)
+document = MediaNode.objects.get(pk=280)
 activity.image2 = document
-document = MediaNode.objects.get(pk=191)
+document = MediaNode.objects.get(pk=281)
 activity.image3 = document
-document = MediaNode.objects.get(pk=192)
+document = MediaNode.objects.get(pk=282)
 activity.image4 = document
 activity.save()
 
 activity = FieldReportProjectActivity.objects.get(pk=6)
-document = MediaNode.objects.get(pk=193)
+document = MediaNode.objects.get(pk=283)
 activity.image1 = document
-document = MediaNode.objects.get(pk=194)
+document = MediaNode.objects.get(pk=284)
 activity.image2 = document
-document = MediaNode.objects.get(pk=195)
+document = MediaNode.objects.get(pk=285)
 activity.image3 = document
-document = MediaNode.objects.get(pk=196)
+document = MediaNode.objects.get(pk=286)
 activity.image4 = document
 activity.save()
 
 activity = FieldReportProjectActivity.objects.get(pk=7)
-document = MediaNode.objects.get(pk=203)
+document = MediaNode.objects.get(pk=293)
 activity.image1 = document
-document = MediaNode.objects.get(pk=204)
+document = MediaNode.objects.get(pk=294)
 activity.image2 = document
-document = MediaNode.objects.get(pk=205)
+document = MediaNode.objects.get(pk=295)
 activity.image3 = document
-document = MediaNode.objects.get(pk=206)
+document = MediaNode.objects.get(pk=296)
 activity.image4 = document
 activity.save()

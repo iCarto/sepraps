@@ -172,10 +172,8 @@ class ProjectSerializer(serializers.ModelSerializer):
             project_work = ProjectWork.objects.create(project=project, **pw_data)
             project_works.append(project_work)
 
-            data = get_project_work_data(project_work.work_type)
-            project.create_structure_data(data)
-
             if create_components:
+                data = get_project_work_data(project_work.work_type)
                 project.create_components_data(data)
 
         project.project_works.set(project_works)

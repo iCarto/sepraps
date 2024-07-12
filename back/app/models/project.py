@@ -127,15 +127,6 @@ class Project(models.Model):
             )
             self.folder = root_folder
 
-            self.questionnaires.set(
-                Questionnaire.objects.filter(
-                    code__in=[
-                        questionnaire.get("code")
-                        for questionnaire in data.get("questionnaires", [])
-                    ]
-                )
-            )
-
             self.save()
 
             create_project_milestones(self, data.get("milestones", []))
