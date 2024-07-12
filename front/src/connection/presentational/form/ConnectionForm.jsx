@@ -20,18 +20,16 @@ const ConnectionForm = ({
     const defaultFormValues = {
         id: FormUtil.getFormValue(connection?.id),
         number_of_households: FormUtil.getFormValue(connection?.number_of_households),
-        population: connection?.population
-            ? NumberUtil.formatInteger(connection.population)
-            : "",
-        number_of_existing_connections: connection?.number_of_existing_connections
-            ? NumberUtil.formatInteger(connection.number_of_existing_connections)
-            : "",
-        number_of_planned_connections: connection?.number_of_planned_connections
-            ? NumberUtil.formatInteger(connection.number_of_planned_connections)
-            : "",
-        number_of_actual_connections: connection?.number_of_actual_connections
-            ? NumberUtil.formatInteger(connection.number_of_actual_connections)
-            : "",
+        population: FormUtil.getFormValue(connection?.population),
+        number_of_existing_connections: FormUtil.getFormValue(
+            connection?.number_of_existing_connections
+        ),
+        number_of_planned_connections: FormUtil.getFormValue(
+            connection?.number_of_planned_connections
+        ),
+        number_of_actual_connections: FormUtil.getFormValue(
+            connection?.number_of_actual_connections
+        ),
     };
 
     const formMethods = useForm({
