@@ -99,10 +99,6 @@ const ProjectSubPageMenu = ({project}) => {
                 text="Documentos"
                 icon={<FolderOpenIconOutlined />}
             />
-            <QuestionnairesMenu
-                questionnaires={project?.questionnaires}
-                basePath={`/projects/list/${project?.id}`}
-            />
         </SubPageMenu>
     );
 };

@@ -87,8 +87,7 @@ const SubPageMenuListGroup = ({
             {headerTitle ? (
                 <SubmenuAccordion
                     accordionTitle={<SubmenuTitle />}
-                    //expanded={showChildren} Always show expanded until users are familir with it
-                    expanded={true}
+                    expanded={showChildren}
                     defaultExpanded={defaultExpanded}
                     handleClick={onClickHeader}
                 >

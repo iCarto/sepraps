@@ -39,6 +39,7 @@ const SubmenuAccordion = ({
                 "&:before": {
                     display: "none",
                 },
+                borderBottom: "1px solid #ddd",
             }}
         >
             <AccordionSummary
