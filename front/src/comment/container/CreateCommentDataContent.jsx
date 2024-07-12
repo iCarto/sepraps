@@ -11,7 +11,7 @@ const CreateCommentDataContent = ({createService}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = comment => {
-        createService(comment_view_adapter({...comment}))
+        return createService(comment_view_adapter({...comment}))
             .then(createdComment => {
                 setMode("button");
                 navigate("", true);

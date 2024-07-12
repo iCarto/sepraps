@@ -10,7 +10,6 @@ import {BuildingComponentMonitoringForm} from "buildingComponentMonitoring/prese
 
 import EditIcon from "@mui/icons-material/Edit";
 import {ViewBuildingComponentsHistoricTable} from ".";
-import Box from "@mui/material/Box";
 
 const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
     const navigate = useNavigateWithReload();
@@ -19,7 +18,7 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
     const [error, setError] = useState(null);
 
     const handleBcMonitoringFormSubmit = updatedBcMonitoring => {
-        updateEntity(
+        return updateEntity(
             {...updatedBcMonitoring},
             BuildingComponentMonitoringService,
             building_component_monitoring_view_adapter
@@ -27,7 +26,7 @@ const ViewOrUpdateBuildingComponentMonitoringDataContent = ({bcMonitoring}) => {
     };
 
     const updateEntity = (formData, updateService, dataAdapter) => {
-        updateService
+        return updateService
             .update(dataAdapter(formData))
             .then(updatedData => {
                 setMode("view");

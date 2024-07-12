@@ -34,7 +34,7 @@ const BuildingComponentForm = ({
             FormUtil.getDataValue(data.code_label) ||
             bcTypes.find(type => type.value === data.code).label;
 
-        onSubmit({
+        return onSubmit({
             name: FormUtil.getDataValue(data.name),
             code: FormUtil.getDataValue(data.code),
             code_label: codeLabel,

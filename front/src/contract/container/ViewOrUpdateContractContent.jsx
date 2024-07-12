@@ -44,7 +44,7 @@ const ViewOrUpdateContractContent = ({
     const [error, setError] = useState(null);
 
     const handleFormSubmit = contract => {
-        ContractService.update(contract_view_adapter({...contract}))
+        return ContractService.update(contract_view_adapter({...contract}))
             .then(updatedContract => {
                 setMode("view");
                 navigate("", true);

@@ -26,7 +26,7 @@ const ProductForm = ({
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             status: FormUtil.getDataValue(data.status),

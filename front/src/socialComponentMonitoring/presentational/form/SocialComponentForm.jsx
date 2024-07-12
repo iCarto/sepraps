@@ -27,7 +27,7 @@ const BuildingComponentForm = ({
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             name: FormUtil.getDataValue(data.name),
             code: "otro",
             expected_end_date: FormUtil.getDataValue(data.expected_end_date),

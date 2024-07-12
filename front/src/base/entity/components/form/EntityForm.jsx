@@ -2,8 +2,20 @@ import {EntityFormSubmitButton} from ".";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import {useState} from "react";
 
-const EntityForm = ({children, onSubmit, onCancel = null, isSubmitting = false}) => {
+const EntityForm = ({children, onSubmit, onCancel = null}) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = () => {
+        setIsSubmitting(true);
+        console.log("START submitting");
+        onSubmit().finally(response => {
+            setIsSubmitting(false);
+            console.log("END submitting");
+            return response;
+        });
+    };
     return (
         <Box component="form" width="100%">
             {children}
@@ -22,7 +34,7 @@ const EntityForm = ({children, onSubmit, onCancel = null, isSubmitting = false})
                 <Grid item>
                     <EntityFormSubmitButton
                         isSubmitting={isSubmitting}
-                        onSubmit={onSubmit}
+                        onSubmit={handleSubmit}
                     />
                 </Grid>
             </Grid>

@@ -50,7 +50,7 @@ const ViewOrUpdateCommentDataContent = ({comment}) => {
     };
 
     const handleFormSubmit = comment => {
-        CommentService.update(payment_view_adapter({...comment}))
+        return CommentService.update(payment_view_adapter({...comment}))
             .then(updatedComment => {
                 setMode("view");
                 navigate("", true);

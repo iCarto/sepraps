@@ -15,7 +15,7 @@ const CreateFieldReportPage = () => {
     const [error, setError] = useState("");
 
     const handleFormSubmit = fieldReport => {
-        FieldReportService.create(fieldReport_view_adapter({...fieldReport}))
+        return FieldReportService.create(fieldReport_view_adapter({...fieldReport}))
             .then(createdFieldReport => {
                 navigate(`${basePath}/list/${createdFieldReport.id}/summary`);
             })

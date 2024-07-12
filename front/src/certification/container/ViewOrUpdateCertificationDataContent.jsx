@@ -16,7 +16,9 @@ const ViewOrUpdateCertificationDataContent = ({project, certification}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = certification => {
-        CertificationService.update(certification_view_adapter({...certification}))
+        return CertificationService.update(
+            certification_view_adapter({...certification})
+        )
             .then(updatedCertification => {
                 closeForm();
                 navigate("", true);

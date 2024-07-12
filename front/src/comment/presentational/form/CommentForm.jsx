@@ -17,7 +17,7 @@ const CommentForm = ({comment = null, onSubmit, onCancel = null, error = null}) 
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             text: FormUtil.getDataValue(data.text),
         });

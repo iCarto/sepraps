@@ -42,7 +42,7 @@ const BuildingComponentMonitoringForm = ({
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             execution_status: FormUtil.getDataValue(data.execution_status),
             quality_status: FormUtil.getDataValue(data.quality_status),

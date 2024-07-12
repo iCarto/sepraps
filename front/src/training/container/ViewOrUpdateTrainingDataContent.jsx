@@ -52,7 +52,7 @@ const ViewOrUpdateTrainingDataContent = ({socialComponentId, training}) => {
     };
 
     const handleFormSubmit = training => {
-        TrainingService.update(training_view_adapter({...training}))
+        return TrainingService.update(training_view_adapter({...training}))
             .then(() => {
                 setMode("view");
                 navigate("", true);

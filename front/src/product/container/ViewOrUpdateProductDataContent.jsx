@@ -34,7 +34,7 @@ const ViewOrUpdateProductDataContent = ({paymentId, product}) => {
     };
 
     const handleFormSubmit = payment => {
-        ProductService.update(payment_view_adapter({...payment}))
+        return ProductService.update(payment_view_adapter({...payment}))
             .then(updatedProduct => {
                 setMode("view");
                 navigate("", true);

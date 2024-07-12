@@ -17,7 +17,7 @@ const ViewOrUpdatePaymentDataContent = ({contract, payment}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = payment => {
-        PaymentService.update(payment_view_adapter({...payment}))
+        return PaymentService.update(payment_view_adapter({...payment}))
             .then(updatedPayment => {
                 setMode("view");
                 navigate("", true);

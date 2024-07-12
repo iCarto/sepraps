@@ -12,7 +12,7 @@ const CreateTrainingDataContent = ({socialComponentId}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = training => {
-        SocialComponentMonitoringService.createTraining(
+        return SocialComponentMonitoringService.createTraining(
             socialComponentId,
             training_view_adapter({...training})
         )

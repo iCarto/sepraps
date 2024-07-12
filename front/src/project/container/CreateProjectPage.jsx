@@ -15,7 +15,7 @@ const CreateProjectPage = () => {
     const [error, setError] = useState("");
 
     const handleFormSubmit = project => {
-        ProjectService.create(project_view_adapter({...project}))
+        return ProjectService.create(project_view_adapter({...project}))
             .then(createdProject => {
                 navigate(`/projects/list/${createdProject.id}/summary`);
             })

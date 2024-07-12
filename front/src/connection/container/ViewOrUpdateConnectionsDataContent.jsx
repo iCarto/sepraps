@@ -18,7 +18,7 @@ const ViewOrUpdateConnectionsDataContent = ({connection, project}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = data => {
-        ConnectionService.update(connection_view_adapter({...data}))
+        return ConnectionService.update(connection_view_adapter({...data}))
             .then(updatedConnection => {
                 setMode("view");
                 navigate("", true);

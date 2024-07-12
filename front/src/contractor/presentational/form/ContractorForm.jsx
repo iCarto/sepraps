@@ -48,7 +48,7 @@ const ContractorForm = ({
             comments: data.comments,
             contacts: contractor ? [...contractor.contacts] : [],
         });
-        onSubmit(updatedContractor);
+        return onSubmit(updatedContractor);
     };
 
     return (

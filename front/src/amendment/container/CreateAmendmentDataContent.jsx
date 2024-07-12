@@ -14,7 +14,7 @@ const CreateAmendmentDataContent = ({contractId}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = amendment => {
-        AmendmentService.create(amendment_view_adapter(amendment))
+        return AmendmentService.create(amendment_view_adapter(amendment))
             .then(createdAmendment => {
                 setMode("button");
                 navigate("", true);

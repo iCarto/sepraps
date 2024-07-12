@@ -31,7 +31,7 @@ const ViewOrUpdateContractContractorContent = ({contract}) => {
     const [error, setError] = useState(null);
 
     const handleCreateFormSubmit = contractor => {
-        ContractService.createContractor(
+        return ContractService.createContractor(
             contract.id,
             contractor_view_adapter({...contractor})
         )
@@ -46,7 +46,7 @@ const ViewOrUpdateContractContractorContent = ({contract}) => {
     };
 
     const handleEditFormSubmit = contractor => {
-        ContractorService.update(contractor_view_adapter({...contractor}))
+        return ContractorService.update(contractor_view_adapter({...contractor}))
             .then(updatedContractor => {
                 setMode("view");
                 navigate("", true);
@@ -58,7 +58,7 @@ const ViewOrUpdateContractContractorContent = ({contract}) => {
     };
 
     const handleChangeContractor = contractor => {
-        ContractService.update(
+        return ContractService.update(
             contract_view_adapter({...contract, contractor: contractor})
         ).then(() => {
             navigate("", true);

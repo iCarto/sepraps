@@ -32,7 +32,7 @@ const AmendmentForm = ({
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             signature_date: FormUtil.getDataValue(data.signature_date),
             amendment_type: FormUtil.getDataValue(data.amendment_type),

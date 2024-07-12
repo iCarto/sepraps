@@ -102,7 +102,7 @@ const ProjectForm = ({
             construction_contract: data.construction_contract,
             closed: data.closed,
         });
-        onSubmit(updatedProject);
+        return onSubmit(updatedProject);
     };
 
     return (

@@ -17,7 +17,7 @@ const CreateBuildingComponentDialog = ({isDialogOpen, onCloseDialog}) => {
     const basePath = `/projects/list/${projectId}/buildingcomponents/list`;
 
     const handleFormSubmit = data => {
-        ProjectService.createProjectBuildingComponentMonitoring(
+        return ProjectService.createProjectBuildingComponentMonitoring(
             projectId,
             building_component_view_adapter(data)
         )

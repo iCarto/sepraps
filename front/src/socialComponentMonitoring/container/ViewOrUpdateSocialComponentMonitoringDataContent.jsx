@@ -17,7 +17,7 @@ const ViewOrUpdateSocialComponentMonitoringDataContent = ({socialComponent}) => 
     const [error, setError] = useState(null);
 
     const handleFormSubmit = socialComponentMonitoring => {
-        SocialComponentMonitoringService.update(
+        return SocialComponentMonitoringService.update(
             social_component_monitoring_view_adapter({
                 ...socialComponent,
                 ...socialComponentMonitoring,

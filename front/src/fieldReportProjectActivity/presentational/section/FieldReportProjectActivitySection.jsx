@@ -73,7 +73,7 @@ const FieldReportProjectActivitySection = ({
             }
             return Promise.resolve();
         });
-        Promise.all(imagesUploadPromises)
+        return Promise.all(imagesUploadPromises)
             .then(result => {
                 [1, 2, 3, 4].forEach(imageIndex => {
                     const image = updatedActivity["image" + imageIndex];
@@ -89,7 +89,7 @@ const FieldReportProjectActivitySection = ({
                         updatedActivity["image" + imageIndex] = storedImageId;
                     }
                 });
-                FieldReportProjectActivityService.update(
+                return FieldReportProjectActivityService.update(
                     fieldReportProjectActivity_view_adapter({
                         ...updatedActivity,
                         field_report_project: parseInt(fieldReportProjectId),

@@ -38,7 +38,7 @@ const ConnectionForm = ({
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             number_of_households: FormUtil.getDataValue(data.number_of_households),
             number_of_existing_connections: FormUtil.getDataValue(

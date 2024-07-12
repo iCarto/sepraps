@@ -21,7 +21,7 @@ const CreateProviderPage = () => {
     const [error, setError] = useState("");
 
     const handleFormSubmit = provider => {
-        ProviderService.create(provider_view_adapter({...provider}))
+        return ProviderService.create(provider_view_adapter({...provider}))
             .then(createdProvider => {
                 navigate(`${basePath}/list/${createdProvider.id}/summary`);
             })

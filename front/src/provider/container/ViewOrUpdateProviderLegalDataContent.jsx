@@ -17,7 +17,7 @@ const ViewOrUpdateProviderLegalDataContent = ({provider}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = provider => {
-        ProviderService.update(provider_view_adapter({...provider}))
+        return ProviderService.update(provider_view_adapter({...provider}))
             .then(updatedProvider => {
                 setMode("view");
                 navigate("", true);

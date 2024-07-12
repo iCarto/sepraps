@@ -17,7 +17,7 @@ const CreateSocialComponentContent = () => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = data => {
-        ProjectService.createProjectSocialComponent(
+        return ProjectService.createProjectSocialComponent(
             projectId,
             social_component_monitoring_view_adapter({...data})
         )

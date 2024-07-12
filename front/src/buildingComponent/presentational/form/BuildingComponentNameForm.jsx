@@ -25,14 +25,14 @@ const BuildingComponentNameForm = ({buildingComponent = null, onCloseForm = null
     });
 
     const onFormSubmit = data => {
-        handleFormSubmit({
+        return handleFormSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
         });
     };
 
     const updateEntity = (formData, updateService, dataAdapter) => {
-        updateService
+        return updateService
             .update(dataAdapter(formData))
             .then(updatedData => {
                 onCloseForm();
@@ -45,7 +45,7 @@ const BuildingComponentNameForm = ({buildingComponent = null, onCloseForm = null
     };
 
     const handleFormSubmit = updatedBuildingComponent => {
-        updateEntity(
+        return updateEntity(
             {
                 ...buildingComponent,
                 ...updatedBuildingComponent,

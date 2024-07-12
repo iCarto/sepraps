@@ -18,7 +18,7 @@ const ViewOrUpdateSupervisionServiceContent = ({contractService}) => {
 
     const handleFormSubmit = contractService => {
         console.log({contractService});
-        ContractServiceService.update(
+        return ContractServiceService.update(
             contract_service_view_adapter({...contractService})
         )
             .then(updatedContractService => {

@@ -17,7 +17,9 @@ const CreateCertificationContent = () => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = certification => {
-        CertificationService.create(certification_view_adapter({...certification}))
+        return CertificationService.create(
+            certification_view_adapter({...certification})
+        )
             .then(createdCertification => {
                 navigate(
                     location.pathname.replace("/new", `/${createdCertification.id}`),

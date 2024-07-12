@@ -33,7 +33,7 @@ const BuildingComponentTechnicalDataForm = ({
             ...DynamicFormUtil.getDataValues(buildingComponent[propertiesKey], data),
         };
 
-        onSubmit(formData);
+        return onSubmit(formData);
     };
 
     return (

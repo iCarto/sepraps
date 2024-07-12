@@ -25,8 +25,7 @@ const ContractServiceForm = ({
     });
 
     const onFormSubmit = data => {
-        console.log({data});
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             properties: {
                 ...DynamicFormUtil.getDataValues(contractService.properties, data),

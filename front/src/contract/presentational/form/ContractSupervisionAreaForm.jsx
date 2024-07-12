@@ -31,8 +31,7 @@ const ContractSupervisionAreaForm = ({
     });
 
     const onFormSubmit = data => {
-        console.log({data});
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             supervisor: FormUtil.getDataValue(data.supervisor),
             supervision_contract: FormUtil.getDataValue(data.supervision_contract),

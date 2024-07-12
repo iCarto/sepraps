@@ -19,7 +19,7 @@ const ViewOrUpdateBuildingComponentDataContent = ({
     const [error, setError] = useState(null);
 
     const handleFormSubmit = updatedData => {
-        BuildingComponentService.update(
+        return BuildingComponentService.update(
             building_component_view_adapter({...buildingComponent, ...updatedData})
         )
             .then(updatedBuildingComponent => {

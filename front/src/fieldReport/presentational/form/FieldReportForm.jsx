@@ -39,7 +39,7 @@ const FieldReportForm = ({
     });
 
     const handleFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             code: FormUtil.getDataValue(data.code),

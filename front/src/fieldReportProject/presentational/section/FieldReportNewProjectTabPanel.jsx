@@ -20,7 +20,7 @@ const FieldReportNewProjectTabPanel = ({index, activeTabId}) => {
 
     const handleSubmit = fieldReportProject => {
         console.log(fieldReportProject);
-        FieldReportProjectService.create(
+        return FieldReportProjectService.create(
             fieldReportProject_view_adapter({
                 ...fieldReportProject,
                 field_report: fieldReport.id,

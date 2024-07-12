@@ -34,7 +34,7 @@ const ViewOrUpdateAmendmentDataContent = ({contract, amendment}) => {
     };
 
     const handleFormSubmit = amendment => {
-        AmendmentService.update(amendment_view_adapter(amendment))
+        return AmendmentService.update(amendment_view_adapter(amendment))
             .then(updatedAmendment => {
                 setMode("view");
                 navigate("", true);

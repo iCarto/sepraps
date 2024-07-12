@@ -8,8 +8,6 @@ import {AddNewInlineItemFormBox} from "base/shared/components";
 import {FieldReportProjectActivityFormFields} from ".";
 
 const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
     const defaultFormValues = {
         id: FormUtil.getFormValue(activity?.id),
         text: FormUtil.getFormValue(activity?.text),
@@ -43,7 +41,6 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
     };
 
     const onFormSubmit = data => {
-        setIsSubmitting(true);
         const updatedActivity = {
             id: FormUtil.getDataValue(data.id),
             text: FormUtil.getDataValue(data.text),
@@ -55,9 +52,7 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
             image3: FormUtil.getDataValue(data.image3),
             image4: FormUtil.getDataValue(data.image4),
         };
-        onSubmit(updatedActivity, success => {
-            setIsSubmitting(false);
-        });
+        return onSubmit(updatedActivity);
     };
 
     return (
@@ -66,7 +61,6 @@ const FieldReportProjectActivityForm = ({activity = null, onSubmit, onCancel}) =
                 label={activity ? "Editar actividad" : "Añadir actividad"}
             >
                 <EntityForm
-                    isSubmitting={isSubmitting}
                     onSubmit={formMethods.handleSubmit(onFormSubmit)}
                     onCancel={handleCancel}
                 >

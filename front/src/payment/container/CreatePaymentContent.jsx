@@ -17,7 +17,7 @@ const CreatePaymentContent = () => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = payment => {
-        PaymentService.create(payment_view_adapter({...payment}))
+        return PaymentService.create(payment_view_adapter({...payment}))
             .then(createdPayment => {
                 navigate(
                     location.pathname.replace("/new", `/${createdPayment.id}`),

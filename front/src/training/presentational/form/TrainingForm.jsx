@@ -37,7 +37,7 @@ const TrainingForm = ({training = null, onSubmit, onCancel = null, error = null}
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             start_date: FormUtil.getDataValue(data.start_date),

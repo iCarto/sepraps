@@ -109,7 +109,7 @@ const ContractForm = ({
             warranty_end_date: data.warranty_end_date,
             projects: contract ? contract.projects : [],
         });
-        onSubmit(updatedContract);
+        return onSubmit(updatedContract);
     };
 
     return (

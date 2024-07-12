@@ -36,7 +36,7 @@ const ProviderForm = ({
     });
 
     const handleFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             area: FormUtil.getDataValue(data.area),

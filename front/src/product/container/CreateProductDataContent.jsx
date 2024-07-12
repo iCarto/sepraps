@@ -12,7 +12,7 @@ const CreateProductDataContent = ({paymentId}) => {
     const [error, setError] = useState(null);
 
     const handleFormSubmit = payment => {
-        ProductService.create(payment_view_adapter({...payment}))
+        return ProductService.create(payment_view_adapter({...payment}))
             .then(createdProduct => {
                 setMode("button");
                 navigate("", true);

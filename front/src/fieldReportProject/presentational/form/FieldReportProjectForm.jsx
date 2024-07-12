@@ -30,7 +30,7 @@ const FieldReportProjectForm = ({
             history: FormUtil.getDataValue(data.history),
             agreements: FormUtil.getDataValue(data.agreements),
         };
-        onSubmit(updatedFieldReportProject);
+        return onSubmit(updatedFieldReportProject);
     };
 
     return (

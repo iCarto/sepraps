@@ -34,7 +34,7 @@ const CertificationForm = ({
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             expected_amount: FormUtil.getDataValue(data.expected_amount),
             approved_amount: FormUtil.getDataValue(data.approved_amount),

@@ -56,7 +56,7 @@ const FieldReportProjectActivitiesSection = ({
 
     const handleSubmit = (createdActivity, callback = null) => {
         console.log({createdActivity});
-        FieldReportProjectActivityService.create(
+        return FieldReportProjectActivityService.create(
             fieldReportProjectActivity_view_adapter({
                 ...createdActivity,
                 field_report_project: parseInt(fieldReportProjectId),
@@ -90,7 +90,7 @@ const FieldReportProjectActivitiesSection = ({
                 }
                 return Promise.resolve();
             });
-            Promise.all(imagesUploadPromises)
+            return Promise.all(imagesUploadPromises)
                 .then(result => {
                     let activityImages = {};
                     [1, 2, 3, 4].forEach(imageIndex => {

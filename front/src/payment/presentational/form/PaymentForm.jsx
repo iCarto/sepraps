@@ -48,7 +48,7 @@ const PaymentForm = ({
     });
 
     const onFormSubmit = data => {
-        onSubmit({
+        return onSubmit({
             id: FormUtil.getDataValue(data.id),
             name: FormUtil.getDataValue(data.name),
             expected_fixed_amount: FormUtil.getDataValue(data.expected_fixed_amount),
