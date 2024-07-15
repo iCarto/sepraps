@@ -478,7 +478,7 @@ def get_connections_total_stats(request, format=None):  # noqa: ARG001
 
         if not result:
             result_df = pd.DataFrame(
-                [["total", 0, 0, 0, 0, 0, 0, 0]],
+                [["total", 0, 0, 0, 0, 0, 0, 0, 0]],
                 columns=[
                     "id",
                     "project_code",
