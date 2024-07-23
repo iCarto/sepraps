@@ -10,7 +10,6 @@ function useContractCalendar(contract, items) {
             let contractEndDate =
                 contract.amended_expected_execution_end_date ||
                 contract.expected_execution_end_date;
-
             if (contractStartDate && contractEndDate) {
                 let calendarStartDate = new Date(contractStartDate);
                 let calendarEndDate = new Date(contractEndDate);
@@ -21,10 +20,10 @@ function useContractCalendar(contract, items) {
                     const earliestItemDate = getEarliestItemDate(updatedItems);
                     const latestItemDate = getLatestItemDate(updatedItems);
 
-                    if (earliestItemDate < calendarStartDate) {
+                    if (earliestItemDate && earliestItemDate < calendarStartDate) {
                         calendarStartDate = earliestItemDate;
                     }
-                    if (latestItemDate > calendarEndDate) {
+                    if (latestItemDate && latestItemDate > calendarEndDate) {
                         calendarEndDate = latestItemDate;
                     }
                 }
@@ -60,7 +59,7 @@ function useContractCalendar(contract, items) {
     const getLatestItemDate = items => {
         return items.reduce((latest, current) => {
             if (!latest) return current.itemDate;
-            if (current.itemDate > latest) return current.itemDate;
+            if (current.itemDate && current.itemDate > latest) return current.itemDate;
             else return latest;
         }, null);
     };
@@ -68,8 +67,9 @@ function useContractCalendar(contract, items) {
     const getEarliestItemDate = items => {
         return items.reduce((earliest, current) => {
             if (!earliest) return current.itemDate;
-            if (current.itemDate < earliest) return current.itemDate;
-            else return earliest;
+            if (current.itemDate && current.itemDate < earliest) {
+                return current.itemDate;
+            } else return earliest;
         }, null);
     };
 
